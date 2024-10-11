@@ -17,6 +17,7 @@ Future<void> multiDropFieldHelper({
     textFieldKey: textFieldKey,
     fieldIndex: fieldIndex,
     itemTextWidget: itemTextWidget,
+    hasMultiChoice: true,
   );
 
   await tester.tap(

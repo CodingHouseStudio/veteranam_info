@@ -6,10 +6,12 @@ import 'package:flutter/material.dart'
         BoxDecoration,
         BoxShadow,
         BoxShape,
+        Colors,
         EdgeInsets,
         FloatingLabelBehavior,
         InputDecoration,
         MenuStyle,
+        Offset,
         OutlineInputBorder,
         RoundedRectangleBorder,
         VisualDensity,
@@ -171,7 +173,7 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const boxDecorationTooltip = BoxDecoration(
-    color: AppColors.materialThemeBlackOpacity,
+    color: AppColors.materialThemeBlackOpacity88,
     borderRadius: KBorderRadius.kBorderRadius32,
   );
 
@@ -231,8 +233,37 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsPrimary,
   );
-  static const boxShadow =
-      BoxShadow(color: AppColors.materialThemeBlackShadow, blurRadius: 12);
+  static const boxShadow = [
+    BoxShadow(color: AppColors.materialThemeBlackOpacity20, blurRadius: 12),
+  ];
+
+  static const dropMenuboxShadow = [
+    BoxShadow(
+      color: Colors.transparent,
+      blurRadius: 49,
+      offset: Offset(0, 149),
+    ),
+    BoxShadow(
+      color: AppColors.materialThemeBlackOpacity1,
+      blurRadius: 38,
+      offset: Offset(0, 95),
+    ),
+    BoxShadow(
+      color: AppColors.materialThemeBlackOpacity2,
+      blurRadius: 32,
+      offset: Offset(0, 54),
+    ),
+    BoxShadow(
+      color: AppColors.materialThemeBlackOpacity4,
+      blurRadius: 24,
+      offset: Offset(0, 24),
+    ),
+    BoxShadow(
+      color: AppColors.materialThemeBlackOpacity4,
+      blurRadius: 13,
+      offset: Offset(0, 6),
+    ),
+  ];
 
   static const boxDecorationBorderBlack = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,

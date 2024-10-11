@@ -66,6 +66,7 @@ class DropListFieldWidget extends StatelessWidget {
       onSelectedItem: (String value) => value,
       onSelected: onChanged, textFieldKey: textFieldKey,
       description: description,
+      isLoading: dropDownList.isEmpty,
     );
   }
 }
@@ -80,6 +81,7 @@ class DropListFieldImplementationWidget<T extends Object>
     required this.onChanged,
     required this.onSelected,
     required this.textFieldKey,
+    required this.isLoading,
     this.onSelectedItem,
     super.key,
     this.showErrorText,
@@ -90,13 +92,10 @@ class DropListFieldImplementationWidget<T extends Object>
     this.unfocusSufixIcon,
     // this.initialValue,
     this.suffixIconPadding,
-    this.fieldParentWidget,
     this.errorMaxLines,
     this.description,
-    this.lines,
     this.textStyle,
     this.unenabledList = const [],
-    this.allElemts,
   });
 
   final void Function(String text)? onChanged;
@@ -114,17 +113,12 @@ class DropListFieldImplementationWidget<T extends Object>
   final String Function(T value)? onSelectedItem;
   // final String? initialValue;
   final double? suffixIconPadding;
-  final Widget Function({
-    required Widget textField,
-    required Widget suffixIcon,
-  })? fieldParentWidget;
   final Key textFieldKey;
   final int? errorMaxLines;
   final String? description;
-  final int? lines;
   final TextStyle? textStyle;
   final List<T>? unenabledList;
-  final T? allElemts;
+  final bool isLoading;
 
   @override
   State<DropListFieldImplementationWidget<T>> createState() =>
@@ -134,19 +128,37 @@ class DropListFieldImplementationWidget<T extends Object>
 class _DropListFieldImplementationWidgetState<T extends Object>
     extends State<DropListFieldImplementationWidget<T>> {
   late GlobalKey _anchorKey;
+  late GlobalKey _menuKey;
   late TextEditingController controller;
   late FocusNode focusNode;
   late bool showActiveIcon;
+  late double? menuHeight;
 
   @override
   void initState() {
     super.initState();
+    _initializeController();
+    showActiveIcon = false;
+    menuHeight = null;
+
+    _anchorKey = GlobalKey();
+    _menuKey = GlobalKey();
+  }
+
+  @override
+  void didUpdateWidget(
+    covariant DropListFieldImplementationWidget<T> oldWidget,
+  ) {
+    if (widget.isDesk != oldWidget.isDesk) {
+      menuHeight = null;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _initializeController() {
     controller = widget.controller ?? TextEditingController();
     focusNode = widget.focusNode ?? FocusNode();
     focusNode.addListener(_changeIcon);
-    showActiveIcon = false;
-
-    _anchorKey = GlobalKey(debugLabel: widget.labelText);
   }
 
   double get getWidth {
@@ -171,7 +183,21 @@ class _DropListFieldImplementationWidgetState<T extends Object>
         showActiveIcon = focusNode.hasFocus;
       });
 
-  double get menuHeight =>
+  void setMenuHeight() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = _menuKey.currentContext;
+      if (context != null) {
+        final box = context.findRenderObject()! as RenderBox;
+        if (box.hasSize) {
+          setState(() {
+            menuHeight = box.size.height;
+          });
+        }
+      }
+    });
+  }
+
+  double get menuMaxHeight =>
       widget.isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220;
 
   OptionsViewOpenDirection get optionsViewOpenDirection {
@@ -182,28 +208,25 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     final renderBox = context.findRenderObject()! as RenderBox;
     final screenHeight = MediaQuery.of(context).size.height;
     final availableHeight =
-        (screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight)) +
-            (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
-    return availableHeight > menuHeight
+        screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
+    // +
+    //     (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
+    return availableHeight > (menuHeight ?? menuMaxHeight)
         ? OptionsViewOpenDirection.down
         : OptionsViewOpenDirection.up;
   }
 
-  // @override
-  // void didUpdateWidget(
-  //   covariant DropListFieldImplementationWidget<T> oldWidget,
-  // ) {
-  //   if (widget.lines != null &&
-  //       widget.controller != null &&
-  //       widget.controller!.text.length < 30 &&
-  //       (oldWidget.lines ?? 0) > widget.lines!) {
-  //     final value = controller.text;
-  //     controller
-  //       ..text = '$value '
-  //       ..text = value;
-  //   }
-  //   super.didUpdateWidget(oldWidget);
-  // }
+  bool buttonEnabled(T option) {
+    if (widget.unenabledList == null) {
+      return false;
+    } else if (widget.unenabledList != null) {
+      if (widget.unenabledList!.isNotEmpty &&
+          widget.unenabledList!.contains(option)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,20 +239,26 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       textEditingController: controller,
       optionsViewOpenDirection: optionsViewOpenDirection,
       optionsViewBuilder: (context, onSelected, options) {
+        if (!widget.isLoading && menuHeight == null) setMenuHeight();
+
         return Align(
           alignment: optionsViewOpenDirection == OptionsViewOpenDirection.down
               ? Alignment.topLeft
               : Alignment.bottomLeft,
           child: Container(
+            key: _menuKey,
             constraints: BoxConstraints(
-              maxHeight: menuHeight,
+              maxHeight: menuMaxHeight,
               maxWidth: getWidth,
             ),
             margin: const EdgeInsets.only(
               top: KPadding.kPaddingSize4,
               bottom: KPadding.kPaddingSize8,
             ),
-            decoration: KWidgetTheme.boxDecorationCard,
+            decoration: KWidgetTheme.boxDecorationCard.copyWith(
+              boxShadow: KWidgetTheme.dropMenuboxShadow,
+            ),
+            clipBehavior: Clip.hardEdge,
             child: ListView.builder(
               key: KWidgetkeys.widget.dropListField.list,
               shrinkWrap: true,
@@ -251,15 +280,12 @@ class _DropListFieldImplementationWidgetState<T extends Object>
                       : const EdgeInsets.only(top: KPadding.kPaddingSize8),
                   child: TextButton(
                     key: KWidgetkeys.widget.dropListField.item,
-                    onPressed: widget.unenabledList == null ||
-                            (widget.unenabledList != null &&
-                                (widget.unenabledList!.isNotEmpty &&
-                                    widget.unenabledList!.contains(option)))
-                        ? null
-                        : () {
+                    onPressed: buttonEnabled(option)
+                        ? () {
                             focusNode.unfocus();
                             onSelected(option);
-                          },
+                          }
+                        : null,
                     style: KButtonStyles.dropListButtonStyle,
                     child: widget.items(options.elementAt(index)),
                   ),
@@ -276,110 +302,27 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       displayStringForOption:
           widget.onSelectedItem ?? RawAutocomplete.defaultStringForOption,
       fieldViewBuilder:
-          (context, textEditingController, focusNode, onFieldSubmitted) {
-        if (widget.fieldParentWidget != null) {
-          final suffixHorizontalIconPadding =
-              widget.suffixIconPadding ?? KPadding.kPaddingSize4;
-          return InkWell(
-            mouseCursor: widget.isButton ?? false
-                ? SystemMouseCursors.click
-                : SystemMouseCursors.text,
-            hoverColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            onTap: () => focusNode.requestFocus(),
-            child: widget.fieldParentWidget!(
-              textField: _textField(
-                showSuffixIcon: false,
-                suffixHorizontalIconPadding: (suffixHorizontalIconPadding * 2) +
-                    (widget.isDesk
-                        ? KPadding.kPaddingSize4
-                        : KPadding.kPaddingSize10),
-                lines: widget.lines,
-              ),
-              suffixIcon: _suffixIcon,
-            ),
-          );
-        }
-        return _textField(showSuffixIcon: true);
-      },
-    );
-    // return DropdownMenu<String>(
-    //   key: KWidgetkeys.widget.dropListField.widget,
-    //   controller: controller,
-    //   label: Text(
-    //     labelText,
-    //     key: KWidgetkeys.widget.dropListField.field,
-    //   ),
-    //   enableFilter: true,
-    //   requestFocusOnTap: true,
-    //   searchCallback: searchCallback,
-    //   trailingIcon: _getElementWidget(
-    //     KIcon.trailing.copyWith(
-    //       key: KWidgetkeys.widget.dropListField.trailing,
-    //     ),
-    //   ),
-    //   selectedTrailingIcon: KIcon.close.copyWith(
-    //     key: KWidgetkeys.widget.dropListField.closeIcon,
-    //   ),
-    //   onSelected: (value) => onChanged?.call(value ?? ''),
-    //   enabled: enabled ?? true,
-    //   dropdownMenuEntries: List.generate(
-    //     dropDownList.length,
-    //     (int index) => DropdownMenuEntry<String>(
-    //       // key: KWidgetkeys.widget.dropListField.item,
-    //       value: dropDownList.elementAt(index),
-    //       label: dropDownList.elementAt(index),
-    //       style: KButtonStyles.dropFieldButtonStyle,
-    //     ),
-    //   ),
-    //   menuHeight: KMinMaxSize.maxHeight220,
-    //   menuStyle: KWidgetTheme.dropTextMenuStyle,
-    //   expandedInsets: EdgeInsets.zero,
-    //   inputDecorationTheme: KWidgetTheme.inputDecorationTheme.copyWith(
-    //     contentPadding: (isDesk
-    //         ? const EdgeInsets.symmetric(
-    //             horizontal: KPadding.kPaddingSize32,
-    //             vertical: KPadding.kPaddingSize16,
-    //           )
-    //         : const EdgeInsets.all(KPadding.kPaddingSize16)),
-    //     floatingLabelBehavior: (elementList?.isEmpty ?? true)
-    //         ? null
-    //         : FloatingLabelBehavior.always,
-    //   ),
-    //   errorText: showErrorText ?? true ? errorText : null,
-    //   focusNode: focusNode,
-    // );
-  }
-
-  Widget _textField({
-    required bool showSuffixIcon,
-    double? suffixHorizontalIconPadding,
-    int? lines,
-  }) =>
-      TextFieldWidget(
+          (context, textEditingController, focusNode, onFieldSubmitted) =>
+              TextFieldWidget(
         key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
         widgetKey: widget.textFieldKey,
-        controller: controller, maxLines: lines, minLines: lines,
+        controller: controller,
         focusNode: focusNode,
-        suffixIcon: showSuffixIcon ? _suffixIcon : null,
-        suffixIconPadding: suffixHorizontalIconPadding,
+        suffixIcon: _suffixIcon,
         onChanged: widget.onChanged,
         labelText: widget.labelText,
         showErrorText: widget.showErrorText,
         errorText: widget.errorText,
+        suffixIconPadding: widget.suffixIconPadding,
         disposeFocusNode: false,
         isDesk: widget.isDesk, textStyle: widget.textStyle,
         readOnly: widget.isButton,
         cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
         disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
-        borderHoverColor:
-            showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
-        floatingLabelBehavior:
-            showSuffixIcon ? null : FloatingLabelBehavior.always,
         errorMaxLines: widget.errorMaxLines, description: widget.description,
-      );
+      ),
+    );
+  }
 
   Widget get _suffixIcon => showActiveIcon
       ? IconButton(

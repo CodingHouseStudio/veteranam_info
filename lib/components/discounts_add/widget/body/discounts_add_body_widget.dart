@@ -15,7 +15,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   // late TextEditingController discountsController;
   late TextEditingController titleController;
   late TextEditingController linkController;
-  late TextEditingController categoryController;
+  // late TextEditingController categoryController;
   // late TextEditingController cityController;
   late TextEditingController periodController;
   late TextEditingController exclusionController;
@@ -26,7 +26,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     // discountsController = TextEditingController();
     titleController = TextEditingController();
     linkController = TextEditingController();
-    categoryController = TextEditingController();
+    // categoryController = TextEditingController();
     // cityController = TextEditingController();
     periodController = TextEditingController();
     exclusionController = TextEditingController();
@@ -52,16 +52,10 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
         }
       },
       // Add because without it we have small lag when fast write some fields
-      buildWhen: (previous, current) =>
-          previous.formState != current.formState ||
-          previous.categoryList != current.categoryList ||
-          previous.citiesList != current.citiesList ||
-          previous.failure != current.failure ||
-          previous.period != current.period ||
-          previous.isIndefinitely != current.isIndefinitely ||
-          previous.discounts != current.discounts ||
-          previous.city != current.city ||
-          previous.eligibility != current.eligibility,
+      buildWhen: (previous, current) => !(previous.link != current.link ||
+          previous.title != current.title ||
+          previous.description != current.description ||
+          previous.exclusions != current.exclusions),
       builder: (context, _) => ScaffoldWidget(
         titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
           precent: KDimensions.fifteenPercent,
@@ -91,17 +85,22 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           ),
           KSizedBox.kHeightSizedBox40,
           if (_.formState.isDetail)
-            DropListFieldWidget(
+            MultiDropFieldWidget(
               textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
-              controller: categoryController,
+              // controller: categoryController,
+              description: context.l10n.categoryDescription,
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.categoryUpdate(text)),
+                  .add(DiscountsAddEvent.categoryAdd(text)),
               labelText: context.l10n.category,
               dropDownList: _.categoryList,
               isDesk: isDesk,
               showErrorText: _.formState.hasError,
               errorText: _.category.error.value(context),
+              removeEvent: (text) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.categoryRemove(text)),
+              values: _.category.value,
             )
           else if (_.formState.isMain)
             TextFieldWidget(
@@ -128,6 +127,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               labelText: context.l10n.description,
               showErrorText: _.formState.hasError,
               errorText: _.description.error.value(context),
+              maxLength: KMinMaxSize.descriptionMaxLength,
             ),
           KSizedBox.kHeightSizedBox32,
           if (_.formState.isDetail)
@@ -166,10 +166,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.discountAddItem(text)),
               values: _.discounts.value,
-              removeEvent: (String value) =>
-                  context.read<DiscountsAddBloc>().add(
-                        DiscountsAddEvent.discountRemoveItem(value),
-                      ),
+              removeEvent: (value) => context.read<DiscountsAddBloc>().add(
+                    DiscountsAddEvent.discountRemoveItem(value),
+                  ),
               errorMaxLines: 3,
               description: context.l10n.discountDescription,
             )
@@ -212,10 +211,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.eligibilityAddItem(text)),
               values: _.eligibility?.value,
-              removeEvent: (String value) =>
-                  context.read<DiscountsAddBloc>().add(
-                        DiscountsAddEvent.eligibilityRemoveItem(value),
-                      ),
+              removeEvent: (value) => context.read<DiscountsAddBloc>().add(
+                    DiscountsAddEvent.eligibilityRemoveItem(value),
+                  ),
               description: context.l10n.eligibilityDescription,
             ),
           ],
@@ -405,7 +403,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     // discountsController.dispose();
     titleController.dispose();
     linkController.dispose();
-    categoryController.dispose();
+    // categoryController.dispose();
     // cityController.dispose();
     periodController.dispose();
     exclusionController.dispose();

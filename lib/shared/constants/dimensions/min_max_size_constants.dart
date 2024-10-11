@@ -21,6 +21,7 @@ abstract class KMinMaxSize {
   static const messageMinLines = 3;
   static const textMaxLineOne = 1;
   static const messageMaxLength = 256;
+  static const descriptionMaxLength = 500;
 
   static const titleMaxLength = 100;
   static const subtitleMaxLength = 255;

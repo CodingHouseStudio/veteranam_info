@@ -1427,6 +1427,10 @@
     "examples": "Text for the button on the MyDiscount page.",
     "description": "The button is used to go to the cabinet"
   },
+  "categoryDescription": "Select one or more categories. If the desired category is not in the list, please write it in.",
+  "@categoryDescription": {
+    "examples": "Text on the Discount Add page for the categories field (description)"
+  },
   "descriptionForRejectedStatus": "Your ad could not be published due to some errors.\nPlease contact our email: hello@veteranam.info for details",
   "@descriptionForRejectedStatus": {
     "examples": "Text to describe the rejected discount status on the MyDiscount page."
