@@ -25,6 +25,8 @@ Future<void> pwResetEmailInitialHelper(
         findsOneWidget,
       );
 
+      expect(find.text(KTestText.userEmailIncorrect), findsOneWidget);
+
       expect(
         find.byKey(KWidgetkeys.screen.pwResetEmail.sendButton),
         findsOneWidget,

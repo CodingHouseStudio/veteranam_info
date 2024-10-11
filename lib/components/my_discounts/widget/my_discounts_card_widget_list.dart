@@ -1,6 +1,6 @@
 part of 'body/my_discounts_body_widget.dart';
 
-List<Widget> _discountsboxWidgetList({
+List<Widget> _myDiscountsCardWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) =>

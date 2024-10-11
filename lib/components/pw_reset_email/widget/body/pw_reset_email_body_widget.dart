@@ -4,7 +4,8 @@ import 'package:veteranam/components/pw_reset_email/pw_reset_email.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class PwResetEmailBodyWidget extends StatelessWidget {
-  const PwResetEmailBodyWidget({super.key});
+  const PwResetEmailBodyWidget({required this.email, super.key});
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +83,9 @@ class PwResetEmailBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox80
             else
               KSizedBox.kHeightSizedBox40,
-            PwResetEmailButtonsWidget(
+            PwResetEmailFormWidget(
               isDesk: isDesk,
+              email: email,
             ),
             SendingTextWidget(
               textKey: KWidgetkeys.screen.pwResetEmail.submitingText,

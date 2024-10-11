@@ -156,7 +156,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           context.goNamed(
                             Config.isUser
                                 ? KRoute.home.name
-                                : KRoute.businessDashboard.name,
+                                : KRoute.myDiscounts
+                                    .name, //KRoute.businessDashboard.name,
                           );
                         }
                       },
