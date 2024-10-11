@@ -84,11 +84,6 @@ void main() {
             const DiscountsAddEvent.indefinitelyUpdate(),
           )
           ..add(
-            DiscountsAddEvent.categoryUpdate(
-              KAppText.discountsCategories.first,
-            ),
-          )
-          ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
             ),
@@ -99,9 +94,9 @@ void main() {
             predicate<DiscountsAddState>(
               (state) => state.isIndefinitely == false,
             ),
-            predicate<DiscountsAddState>(
-              (state) => state.category.isValid,
-            ),
+            // predicate<DiscountsAddState>(
+            //   (state) => state.category.isValid,
+            // ),
             predicate<DiscountsAddState>(
               (state) => state.period.isValid,
             ),
@@ -181,6 +176,36 @@ void main() {
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.last,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.categoryRemove(
+              KAppText.discountsCategories.last,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.categoryRemove(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
             DiscountsAddEvent.cityAdd(
               KTestText.sendDiscountModel.location!.first,
             ),
@@ -228,7 +253,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: MessageFieldModel.pure(),
+          category: ListFieldModel.pure(),
           city: ListFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
@@ -244,7 +269,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const MessageFieldModel.pure(),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
@@ -259,7 +284,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
-          category: const MessageFieldModel.pure(),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
@@ -274,26 +299,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
-          city: const ListFieldModel.pure(),
-          period: const DateFieldModel.pure(),
-          title: const MessageFieldModel.pure(),
-          discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
-          description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
-          formState: DiscountsAddEnum.detailInProgress,
-        ),
-        DiscountsAddState(
-          eligibility: const ListFieldModel.pure(),
-          categoryList: KAppText.discountsCategories,
-          citiesList: KTestText.cityModelItems,
-          isIndefinitely: false,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -378,6 +384,36 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
+              state.category.isValid &&
+              state.category.value.length == 1 &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isValid &&
+              state.category.value.length == 2 &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isValid &&
+              state.category.value.length == 1 &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isNotValid &&
+              state.category.value.isEmpty &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isValid &&
+              state.category.value.length == 1 &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
               state.city.isValid &&
               state.city.value.length == 1 &&
               state.formState == DiscountsAddEnum.detailInProgress,
@@ -448,11 +484,6 @@ void main() {
         bloc
           ..add(const DiscountsAddEvent.send())
           ..add(
-            DiscountsAddEvent.categoryUpdate(
-              KAppText.discountsCategories.first,
-            ),
-          )
-          ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
             ),
@@ -463,9 +494,9 @@ void main() {
             predicate<DiscountsAddState>(
               (state) => state.formState == DiscountsAddEnum.invalidData,
             ),
-            predicate<DiscountsAddState>(
-              (state) => state.category.isValid,
-            ),
+            // predicate<DiscountsAddState>(
+            //   (state) => state.category.isValid,
+            // ),
             predicate<DiscountsAddState>(
               (state) => state.period.isValid,
             ),
@@ -496,6 +527,11 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send())
           ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
             DiscountsAddEvent.cityAdd(
               KTestText.sendDiscountModel.location!.first,
             ),
@@ -521,7 +557,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: MessageFieldModel.pure(),
+          category: ListFieldModel.pure(),
           city: ListFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
@@ -536,7 +572,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const MessageFieldModel.pure(),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
@@ -551,7 +587,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const MessageFieldModel.pure(),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
@@ -566,26 +602,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
-          city: const ListFieldModel.pure(),
-          period: const DateFieldModel.pure(),
-          title: const MessageFieldModel.pure(),
-          discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
-          description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
-          formState: DiscountsAddEnum.detailInProgress,
-        ),
-        DiscountsAddState(
-          eligibility: const ListFieldModel.pure(),
-          categoryList: KAppText.discountsCategories,
-          citiesList: KTestText.cityModelItems,
-          isIndefinitely: true,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
           period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
@@ -620,6 +637,11 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.detailInvalidData,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isValid &&
+              state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
@@ -688,11 +710,6 @@ void main() {
             const DiscountsAddEvent.indefinitelyUpdate(),
           )
           ..add(
-            DiscountsAddEvent.categoryUpdate(
-              KAppText.discountsCategories.first,
-            ),
-          )
-          ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
             ),
@@ -703,9 +720,9 @@ void main() {
             predicate<DiscountsAddState>(
               (state) => state.isIndefinitely == false,
             ),
-            predicate<DiscountsAddState>(
-              (state) => state.category.isValid,
-            ),
+            // predicate<DiscountsAddState>(
+            //   (state) => state.category.isValid,
+            // ),
             predicate<DiscountsAddState>(
               (state) => state.period.isValid,
             ),
@@ -755,6 +772,11 @@ void main() {
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
+            DiscountsAddEvent.categoryAdd(
+              KAppText.discountsCategories.first,
+            ),
+          )
+          ..add(
             DiscountsAddEvent.cityAdd(
               KTestText.sendDiscountModel.location!.first,
             ),
@@ -778,7 +800,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: MessageFieldModel.pure(),
+          category: ListFieldModel.pure(),
           city: ListFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
@@ -793,7 +815,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: MessageFieldModel.pure(),
+          category: ListFieldModel.pure(),
           city: ListFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
@@ -809,7 +831,7 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,
-          category: MessageFieldModel.pure(),
+          category: ListFieldModel.pure(),
           city: ListFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
@@ -824,30 +846,9 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
+          category: const ListFieldModel.pure(),
           city: const ListFieldModel.pure(),
-          period: const DateFieldModel.pure(),
-          title: const MessageFieldModel.pure(),
-          discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
-          description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
-          formState: DiscountsAddEnum.detailInProgress,
-        ),
-        DiscountsAddState(
-          eligibility: const ListFieldModel.pure(),
-          categoryList: KAppText.discountsCategories,
-          citiesList: [],
-          isIndefinitely: false,
-          category: MessageFieldModel.dirty(
-            KAppText.discountsCategories.first,
-          ),
-          city: const ListFieldModel.pure(),
-          period: DateFieldModel.dirty(
-            KTestText.dateTime,
-          ),
+          period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
@@ -898,6 +899,11 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.detail,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.category.isValid &&
+              state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>

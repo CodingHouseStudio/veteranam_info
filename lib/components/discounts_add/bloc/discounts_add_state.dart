@@ -24,7 +24,7 @@ class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
     required List<String> categoryList,
     required List<CityModel> citiesList,
-    required MessageFieldModel category,
+    required ListFieldModel category,
     required ListFieldModel city,
     required DateFieldModel period,
     required MessageFieldModel title,
