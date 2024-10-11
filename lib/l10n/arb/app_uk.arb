@@ -1227,7 +1227,7 @@
     "examples": "Текст для кнопки на сторінці Discount Add.",
     "description": "Кнопка використовується для певернення на попередні етапи форми."
   },
-  "myDiscounts": "Мої Знижки",
+  "myDiscounts": "Мої знижки",
   "@myDiscounts": {
     "examples": "Текст для кнопки яка появляється на Profile page та є заголовком My publications page.",
     "description": "Кнопка використовується для переходу на My Publications page."

@@ -6,7 +6,7 @@ import 'package:veteranam/components/my_discounts/my_discounts.dart';
 import 'package:veteranam/components/my_discounts/widget/my_discount_page_with_an_empty_profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
-part '../my_discounts_box_widget_list.dart';
+part '../my_discounts_card_widget_list.dart';
 
 class MyDiscountsBodyWidget extends StatelessWidget {
   const MyDiscountsBodyWidget({super.key});
@@ -47,7 +47,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox40,
           if (context.read<AuthenticationBloc>().state.user.isFullProfile)
-            ..._discountsboxWidgetList(
+            ..._myDiscountsCardWidgetList(
               context: context,
               isDesk: isDesk,
             )

@@ -23,7 +23,8 @@ void main() {
     });
 
     blocTest<PwResetEmailBloc, PwResetEmailState>(
-      'emits [PwResetEmailState] when email are changed, submited and valid',
+      'emits [PwResetEmailState] when started with correct email '
+      'and email are changed, submited and valid',
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
@@ -34,6 +35,7 @@ void main() {
           (realInvocation) async => const Right(true),
         );
         bloc
+          ..add(const PwResetEmailEvent.started(KTestText.userEmail))
           ..add(const PwResetEmailEvent.emailUpdated(KTestText.userEmail))
           ..add(const PwResetEmailEvent.sendResetCode())
           ..add(const PwResetEmailEvent.sendResetCode());
@@ -67,7 +69,8 @@ void main() {
       ],
     );
     blocTest<PwResetEmailBloc, PwResetEmailState>(
-      'emits [PwResetEmailState] when email are changed invalid, submited',
+      'emits [PwResetEmailState] when started with email null '
+      'and email are changed invalid, submited',
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
@@ -78,6 +81,7 @@ void main() {
           (realInvocation) async => const Right(true),
         );
         bloc
+          ..add(const PwResetEmailEvent.started(null))
           ..add(
             const PwResetEmailEvent.emailUpdated(
               KTestText.userEmailIncorrect,
