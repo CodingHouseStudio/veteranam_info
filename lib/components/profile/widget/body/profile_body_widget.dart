@@ -70,10 +70,10 @@ class ProfileBodyWidget extends StatelessWidget {
                           .userSetting
                           .nickname,
                     ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox48
-                    else
-                      KSizedBox.kHeightSizedBox16,
+                    // if (isDesk)
+                    //   KSizedBox.kHeightSizedBox48
+                    // else
+                    //   KSizedBox.kHeightSizedBox16,
                   ],
                 ),
               ),
