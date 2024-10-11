@@ -130,7 +130,10 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                 child: TextButton(
                   key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
                   style: KButtonStyles.withoutStyle,
-                  onPressed: () => context.goNamed(KRoute.pwResetEmail.name),
+                  onPressed: () => context.goNamed(
+                    KRoute.pwResetEmail.name,
+                    queryParameters: {UrlParameters.email: widget.email},
+                  ),
                   child: Text(
                     context.l10n.dontRememberPassword,
                     style: AppTextStyle.materialThemeTitleMedium.copyWith(

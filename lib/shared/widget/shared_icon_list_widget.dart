@@ -16,6 +16,7 @@ abstract class SharedIconListWidget {
     required String? share,
     bool complaint = true,
     Color background = AppColors.materialThemeWhite,
+    bool? useSiteUrl,
   }) {
     return [
       if (link != null) ...[
@@ -32,8 +33,12 @@ abstract class SharedIconListWidget {
       _cardIconWidget(
         label: context.l10n.share,
         context,
-        onPressed:
-            share != null ? () => context.read<UrlCubit>().share(share) : null,
+        onPressed: share != null
+            ? () => context.read<UrlCubit>().share(
+                  share,
+                  useSiteUrl: useSiteUrl,
+                )
+            : null,
         icon: KIcon.share,
         background: background,
         key: shareKey,

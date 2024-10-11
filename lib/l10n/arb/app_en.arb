@@ -103,7 +103,7 @@
     "examples": "Text for the button that appears on the Profile page and the title for the Saves page.",
     "description": "The button used to navigate to the Saves page."
   },
-  "myDiscounts": "My Discounts",
+  "myDiscounts": "My discounts",
   "@myDiscounts": {
     "examples": "Text for the button that appears on the Profile page and the title for the My publications page.",
     "description": "The button used to navigate to the My Publications page."
