@@ -1435,6 +1435,10 @@
     "examples": "Текст для кнопки на сторінці MyDiscount.",
     "description": "Кнопка використовується для переходу в кабнет"
   },
+  "categoryDescription": "Виберіть одну або декілька категорій. Якщо потрібної немає у списку то напишіть її",
+  "@categoryDescription": {
+    "examples": "Текст на сторінці Discount Add для поля з категоріями(опис)"
+  },
   "descriptionForRejectedStatus": "Ваше оголошення не може бути опубліковане через деякі помилки.\nБудь ласка, зверніться за деталями на наш емайл: hello@veteranam.info",
   "@descriptionForRejectedStatus": {
     "examples": "Текст для опису відхиленного статусу знижки на сторінці MyDiscount."

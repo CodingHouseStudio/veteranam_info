@@ -9,6 +9,7 @@ Future<void> dropListFieldItemHelper({
   required Key textFieldKey,
   String? Function()? itemTextWidget,
   int fieldIndex = 0,
+  bool hasMultiChoice = false,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.dropListField.widget),
@@ -125,11 +126,13 @@ Future<void> dropListFieldItemHelper({
     findsNothing,
   );
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-      matching: find.text(text ?? ''),
-    ),
-    findsOneWidget,
-  );
+  if (!hasMultiChoice) {
+    expect(
+      find.descendant(
+        of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+        matching: find.text(text ?? ''),
+      ),
+      findsOneWidget,
+    );
+  }
 }

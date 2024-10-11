@@ -157,7 +157,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               child: Stack(
                 children: [
                   Scaffold(
-                    resizeToAvoidBottomInset: !Config.isWeb,
+                    resizeToAvoidBottomInset: true,
                     bottomNavigationBar: Config.isWeb
                         ? null
                         : MobNavigationWidget(
