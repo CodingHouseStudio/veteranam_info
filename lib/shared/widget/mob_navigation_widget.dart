@@ -16,7 +16,7 @@ class MobNavigationWidget extends StatelessWidget {
 
     return DecoratedBox(
       decoration: const BoxDecoration(
-        boxShadow: [KWidgetTheme.boxShadow],
+        boxShadow: KWidgetTheme.boxShadow,
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
