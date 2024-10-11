@@ -4,9 +4,14 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/pw_reset_email/pw_reset_email.dart';
 
 class PwResetEmailBlocprovider extends StatelessWidget {
-  const PwResetEmailBlocprovider({required this.childWidget, super.key});
+  const PwResetEmailBlocprovider({
+    required this.childWidget,
+    required this.email,
+    super.key,
+  });
 
   final Widget childWidget;
+  final String? email;
 
   @override
   Widget build(BuildContext context) {

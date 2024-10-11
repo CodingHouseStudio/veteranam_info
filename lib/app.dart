@@ -103,7 +103,7 @@ class AppWidget extends StatelessWidget {
 
   Widget body(Locale localeValue) => MaterialApp.router(
         key: KWidgetkeys.screen.app.screen,
-        theme: themeData,
+        theme: themeData, restorationScopeId: 'app',
         // scrollBehavior: CustomScrollBehavior(),
         localizationsDelegates: locale,
         locale: localeValue,
