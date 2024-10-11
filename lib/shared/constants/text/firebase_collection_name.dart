@@ -14,5 +14,6 @@ abstract class FirebaseCollectionName {
   static const report = 'report';
   static const respond = 'respond';
   static const cities = 'cities';
+  static const companies = 'companies';
   static const user = 'user';
 }

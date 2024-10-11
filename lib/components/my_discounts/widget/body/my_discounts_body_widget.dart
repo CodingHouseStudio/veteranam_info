@@ -27,15 +27,16 @@ class MyDiscountsBodyWidget extends StatelessWidget {
         ),
         loadingButtonText: context.l10n.moreDiscounts,
         loadingStatus: _.loadingStatus,
+        showLoadingWidget: !context.read<CompanyBloc>().state.company.isEmpty,
         cardListIsEmpty: _.loadedDiscountsModelItems.isEmpty,
         loadFunction: () => context
             .read<MyDiscountsWatcherBloc>()
             .add(const MyDiscountsWatcherEvent.loadNextItems()),
-        emptyWidget: context.read<AuthenticationBloc>().state.user.isFullProfile
-            ? ({required isDesk}) {
+        emptyWidget: context.read<CompanyBloc>().state.company.isEmpty
+            ? null
+            : ({required isDesk}) {
                 return MyDiscountEmptyWidget(isDesk: isDesk);
-              }
-            : null,
+              },
         mainChildWidgetsFunction: ({required isDesk}) => [
           LineTitleIconButtonWidget(
             title: context.l10n.myPublications,
@@ -46,13 +47,13 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             onPressed: () => context.goNamed(KRoute.discountsAdd.name),
           ),
           KSizedBox.kHeightSizedBox40,
-          if (context.read<AuthenticationBloc>().state.user.isFullProfile)
+          if (context.read<CompanyBloc>().state.company.isEmpty)
+            MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk)
+          else
             ..._myDiscountsCardWidgetList(
               context: context,
               isDesk: isDesk,
-            )
-          else
-            MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk),
+            ),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else

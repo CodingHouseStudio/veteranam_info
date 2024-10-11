@@ -1431,6 +1431,25 @@
   "@categoryDescription": {
     "examples": "Text on the Discount Add page for the categories field (description)"
   },
+  "companyName": "Company Name",
+  "@companyName": {
+    "examples": "Text on the Company page for the company name field",
+    "description": "This field is used for entering the company name for business accounts."
+  },
+  "companyCode": "Company registration code or Tax ID for individual entrepreneurs",
+  "@companyCode": {
+    "examples": "Text on the Company page for the company code field.",
+    "description": "This field is used for entering the company code for business accounts."
+  },
+  "linkOnWebsite": "Website link",
+  "@linkOnWebsite": {
+    "examples": "Text on the Company page for the website link field",
+    "description": "This field is used for entering the website link for business accounts."
+  },
+  "myCompany": "My company",
+  "@myCompany": {
+    "examples": "Text on the Company page"
+  },
   "descriptionForRejectedStatus": "Your ad could not be published due to some errors.\nPlease contact our email: hello@veteranam.info for details",
   "@descriptionForRejectedStatus": {
     "examples": "Text to describe the rejected discount status on the MyDiscount page."

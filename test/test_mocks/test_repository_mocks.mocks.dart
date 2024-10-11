@@ -761,6 +761,16 @@ class _FakeLoginResult_66 extends _i1.SmartFake implements _i27.LoginResult {
         );
 }
 
+class _FakeCompanyModel_67 extends _i1.SmartFake implements _i3.CompanyModel {
+  _FakeCompanyModel_67(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [IFaqRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1176,6 +1186,38 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Stream<_i3.UserSetting>.empty(),
         returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
       ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
+  _i8.Stream<_i3.CompanyModel> getUserCompany(String? email) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserCompany,
+          [email],
+        ),
+        returnValue: _i8.Stream<_i3.CompanyModel>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.CompanyModel>.empty(),
+      ) as _i8.Stream<_i3.CompanyModel>);
+
+  @override
+  _i8.Future<void> updateCompany(_i3.CompanyModel? company) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateCompany,
+          [company],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> deleteCompany(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteCompany,
+          [id],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
   _i8.Future<void> deleteUserSetting(String? userId) => (super.noSuchMethod(
@@ -13101,4 +13143,92 @@ class MockICitiesRepository extends _i1.Mock implements _i3.ICitiesRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>);
+}
+
+/// A class which mocks [ICompanyRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockICompanyRepository extends _i1.Mock
+    implements _i3.ICompanyRepository {
+  @override
+  _i8.Stream<_i3.CompanyModel> get company => (super.noSuchMethod(
+        Invocation.getter(#company),
+        returnValue: _i8.Stream<_i3.CompanyModel>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.CompanyModel>.empty(),
+      ) as _i8.Stream<_i3.CompanyModel>);
+
+  @override
+  _i3.CompanyModel get currentUserCompany => (super.noSuchMethod(
+        Invocation.getter(#currentUserCompany),
+        returnValue: _FakeCompanyModel_67(
+          this,
+          Invocation.getter(#currentUserCompany),
+        ),
+        returnValueForMissingStub: _FakeCompanyModel_67(
+          this,
+          Invocation.getter(#currentUserCompany),
+        ),
+      ) as _i3.CompanyModel);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateCompany(
+          _i3.CompanyModel? company) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateCompany,
+          [company],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateCompany,
+            [company],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateCompany,
+            [company],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteCompany() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteCompany,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deleteCompany,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deleteCompany,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

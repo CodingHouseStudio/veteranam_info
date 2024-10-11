@@ -346,9 +346,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   if (!isFocused || widget.isTablet)
                     UserPhotoWidget(
                       key: KWidgetkeys.widget.nawbar.loginIcon,
-                      onPressed: () => context.goNamed(KRoute.profile.name),
-                      imageUrl:
-                          context.read<AuthenticationBloc>().state.user.photo,
+                      onPressed: () => context.goNamed(profilePath),
+                      imageUrl: profileImage,
                     ),
               ],
             )
@@ -386,6 +385,13 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 ),
     );
   }
+
+  String get profilePath =>
+      Config.isBusiness ? KRoute.company.name : KRoute.profile.name;
+
+  String? get profileImage => Config.isBusiness
+      ? context.read<CompanyBloc>().state.company.image?.downloadURL
+      : context.read<AuthenticationBloc>().state.user.photo;
 
   Widget pageName({
     required bool showBackButton,

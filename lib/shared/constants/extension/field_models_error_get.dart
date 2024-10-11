@@ -20,11 +20,25 @@ extension EmailFieldModelValidationErrorEmpl
 extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      // case LinkFieldModelValidationError.empty:
-      //   return context.l10n.fieldCannotBeEmpty;
+      case LinkFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
       case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case LinkFieldModelValidationError.invalidLength:
+        return '${context.l10n.link} ${context.l10n.tooshort}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension LinkNullableFieldModelValidationErrorEmpl
+    on LinkNullableFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case LinkNullableFieldModelValidationError.invalidLink:
+        return context.l10n.invalidLink;
+      case LinkNullableFieldModelValidationError.invalidLength:
         return '${context.l10n.link} ${context.l10n.tooshort}';
       case null:
         return null;
@@ -164,6 +178,34 @@ extension NicknameFieldModelValidationErrorEmpl
     switch (this) {
       case NicknameFieldModelValidationError.wrong:
         return '${KAppText.nickname} ${context.l10n.isWrong}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension CompanyNameFieldModelValidationErrorEmpl
+    on CompanyNameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case CompanyNameFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case CompanyNameFieldModelValidationError.invalidLength:
+        return '${context.l10n.companyName} ${context.l10n.tooshort}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension CompanyCodeFieldModelValidationErrorEmpl
+    on CompanyCodeFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case CompanyCodeFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case CompanyCodeFieldModelValidationError.wrong:
+        return '${context.l10n.companyCode} ${context.l10n.isWrongEmail}';
       case null:
         return null;
     }

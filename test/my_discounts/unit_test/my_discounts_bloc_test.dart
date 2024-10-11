@@ -22,17 +22,21 @@ void main() {
   group('${KScreenBlocName.myDiscounts} ${KGroupText.bloc}', () {
     late MyDiscountsWatcherBloc myDiscountsWatcherBloc;
     late IDiscountRepository mockDiscountRepository;
-    late IAppAuthenticationRepository mockAuthRepository;
+    late ICompanyRepository mockCompanyRepository;
     late StreamController<List<DiscountModel>> discountsStreamController;
 
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
-      mockAuthRepository = MockIAppAuthenticationRepository();
+      mockCompanyRepository = MockICompanyRepository();
       discountsStreamController = StreamController<List<DiscountModel>>()
         ..add(KTestText.discountModelItems);
 
-      when(mockAuthRepository.currentUser)
-          .thenAnswer((invocation) => KTestText.profileUser);
+      when(
+        mockCompanyRepository.currentUserCompany,
+      ).thenAnswer(
+        (_) => const CompanyModel(id: '1', userEmails: []),
+      );
+
       when(
         mockDiscountRepository.getDiscountsByUserId(KTestText.profileUser.id),
       ).thenAnswer((_) => discountsStreamController.stream);
@@ -60,7 +64,7 @@ void main() {
 
       myDiscountsWatcherBloc = MyDiscountsWatcherBloc(
         discountRepository: mockDiscountRepository,
-        iAppAuthenticationRepository: mockAuthRepository,
+        companyRepository: mockCompanyRepository,
       );
     });
     blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(

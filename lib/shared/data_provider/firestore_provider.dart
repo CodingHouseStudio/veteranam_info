@@ -265,6 +265,38 @@ class FirestoreService {
         },
       );
 
+  Stream<CompanyModel> getUserCompany(String email) => _db
+          .collection(FirebaseCollectionName.companies)
+          .where(CompanyModelJsonField.userEmails, arrayContains: email)
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
+          .map(
+        (snapshot) {
+          if (snapshot.docs.isNotEmpty) {
+            // ignore: unused_local_variable
+            final source = (snapshot.metadata.isFromCache)
+                ? KAppText.cache
+                : KAppText.server;
+            // debugPrint('Data fetched from $source}');
+            return CompanyModel.fromJson(snapshot.docs.first.data());
+          } else {
+            return CompanyModel.empty;
+          }
+        },
+      );
+
+  Future<void> updateCompany(CompanyModel company) {
+    return _db.collection(FirebaseCollectionName.companies).doc(company.id).set(
+          company.toJson(),
+          setMergeOptions,
+        );
+  }
+
+  Future<void> deleteCompany(String id) {
+    return _db.collection(FirebaseCollectionName.companies).doc(id).delete();
+  }
+
   Future<void> deleteUserSetting(
     String userId,
   ) {

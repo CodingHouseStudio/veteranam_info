@@ -18,7 +18,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discountsAdd} ', () {
     late IDiscountRepository mockDiscountRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late ICompanyRepository mockCompanyRepository;
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
       ExtendedDateTime.id = KTestText.discountModelItems.first.id;
@@ -26,7 +26,7 @@ void main() {
       DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;
       ContextExtensions.textPieckerData = KTestText.dateTime;
       mockDiscountRepository = MockIDiscountRepository();
-      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
 
       when(
@@ -45,14 +45,16 @@ void main() {
       );
 
       when(
-        mockAppAuthenticationRepository.currentUser,
-      ).thenAnswer((invocation) => KTestText.user);
+        mockCompanyRepository.currentUserCompany,
+      ).thenAnswer(
+        (_) => const CompanyModel(id: '1', userEmails: []),
+      );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await discountsAddPumpAppHelper(
         tester: tester,
         mockDiscountRepository: mockDiscountRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockCompanyRepository: mockCompanyRepository,
         mockCitiesRepository: mockCitiesRepository,
       );
 
@@ -65,7 +67,7 @@ void main() {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -76,7 +78,7 @@ void main() {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -90,7 +92,7 @@ void main() {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
           mockGoRouter: mockGoRouter,
         );

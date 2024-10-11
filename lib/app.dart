@@ -56,6 +56,11 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
           ),
         ],
+        if (Config.isBusiness)
+          BlocProvider(
+            create: (context) =>
+                GetIt.I.get<CompanyBloc>()..add(const CompanyEvent.started()),
+          ),
       ],
       child: const AppWidget(),
     );
@@ -82,24 +87,30 @@ class AppWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final localeValue = state.userSetting.locale.value;
-        return kIsWeb
-            ? body(localeValue)
-            : BetterFeedback(
-                localizationsDelegates: locale,
-                localeOverride: localeValue,
-                themeMode: ThemeMode.light,
-                mode: FeedbackMode.navigate,
-                feedbackBuilder: (context, onSubmit, scrollController) =>
-                    MobFeedbackWidget(onSubmit: onSubmit),
-                child: BlocBuilder<MobOfflineModeCubit, MobMode>(
-                  builder: (context, _) {
-                    return body(localeValue);
-                  },
-                ),
-              );
+        return Config.isBusiness
+            ? BlocBuilder<CompanyBloc, CompanyState>(
+                builder: (context, state) => betterFeedbackBody(localeValue),
+              )
+            : betterFeedbackBody(localeValue);
       },
     );
   }
+
+  Widget betterFeedbackBody(Locale localeValue) => kIsWeb
+      ? body(localeValue)
+      : BetterFeedback(
+          localizationsDelegates: locale,
+          localeOverride: localeValue,
+          themeMode: ThemeMode.light,
+          mode: FeedbackMode.navigate,
+          feedbackBuilder: (context, onSubmit, scrollController) =>
+              MobFeedbackWidget(onSubmit: onSubmit),
+          child: BlocBuilder<MobOfflineModeCubit, MobMode>(
+            builder: (context, _) {
+              return body(localeValue);
+            },
+          ),
+        );
 
   Widget body(Locale localeValue) => MaterialApp.router(
         key: KWidgetkeys.screen.app.screen,

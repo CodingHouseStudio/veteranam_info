@@ -87,9 +87,15 @@ class _DialogsWidget {
               ButtonWidget(
                 key: KWidgetkeys.widget.dialogs.confirmButton,
                 onPressed: () {
-                  context.read<AuthenticationBloc>().add(
-                        AuthenticationDeleteRequested(),
-                      );
+                  if (Config.isBusiness) {
+                    context.read<CompanyBloc>().add(
+                          const CompanyEvent.deleteCompany(),
+                        );
+                  } else {
+                    context.read<AuthenticationBloc>().add(
+                          AuthenticationDeleteRequested(),
+                        );
+                  }
                   context.pop();
                 },
                 text: context.l10n.yes,

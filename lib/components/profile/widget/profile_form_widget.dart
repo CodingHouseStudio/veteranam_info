@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ProfileFormWidget extends StatefulWidget {
@@ -32,7 +32,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
   late TextEditingController nameController;
   late TextEditingController surnameController;
   late TextEditingController emailController;
-  late TextEditingController nicknameController;
+  // late TextEditingController nicknameController;
   late Timer timer;
 
   @override
@@ -40,35 +40,36 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     nameController = TextEditingController(text: widget.initialName);
     surnameController = TextEditingController(text: widget.initialSurname);
     emailController = TextEditingController(text: widget.initialEmail);
-    nicknameController = TextEditingController(text: widget.initialNickname);
+    // nicknameController = TextEditingController(text: widget.initialNickname);
 
     super.initState();
-    nickname();
+    // nickname();
   }
 
-  void nickname() {
-    var counter = 0;
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (Timer timer) {
-        if (counter < 5 &&
-            (context
-                    .read<AuthenticationBloc>()
-                    .state
-                    .userSetting
-                    .nickname
-                    ?.isEmpty ??
-                true)) {
-          counter++;
-        } else {
-          nicknameController.text =
-              context.read<AuthenticationBloc>().state.userSetting.nickname ??
-                  '';
-          timer.cancel();
-        }
-      },
-    );
-  }
+  // void nickname() {
+  //   var counter = 0;
+  //   timer = Timer.periodic(
+  //     const Duration(seconds: 1),
+  //     (Timer timer) {
+  //       if (counter < 5 &&
+  //           (context
+  //                   .read<AuthenticationBloc>()
+  //                   .state
+  //                   .userSetting
+  //                   .nickname
+  //                   ?.isEmpty ??
+  //               true)) {
+  //         counter++;
+  //       } else {
+  //         nicknameController.text =
+  //             context.read<AuthenticationBloc>().state.userSetting.nickname
+  // ??
+  //                 '';
+  //         timer.cancel();
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -152,12 +153,22 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
         //   isDesk: widget.isDesk,
         // ),
         KSizedBox.kHeightSizedBox16,
-        if (context.read<ProfileBloc>().state.formState.showMessage)
-          Text(
-            key: KWidgetkeys.screen.profile.message,
-            context.read<ProfileBloc>().state.formState.loadingMessage(context),
-            style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-          ),
+        SendingTextWidget(
+          textKey: KWidgetkeys.screen.login.submitingText,
+          failureText:
+              context.read<ProfileBloc>().state.failure?.value(context),
+          sendingText: context.l10n.dataSendInProgress,
+          successText:
+              context.read<ProfileBloc>().state.formState == ProfileEnum.success
+                  ? context.l10n.dataIsUpdatedSuccess
+                  : context.l10n.dataUnmodified,
+          showSuccessText: context.read<ProfileBloc>().state.formState ==
+                  ProfileEnum.success ||
+              context.read<ProfileBloc>().state.formState ==
+                  ProfileEnum.succesesUnmodified,
+          showSendingText: context.read<ProfileBloc>().state.formState ==
+              ProfileEnum.sendInProgress,
+        ),
         KSizedBox.kHeightSizedBox16,
         DoubleButtonWidget(
           widgetKey: KWidgetkeys.screen.profile.saveButton,
@@ -212,7 +223,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     nameController.dispose();
     surnameController.dispose();
     emailController.dispose();
-    nicknameController.dispose();
+    // nicknameController.dispose();
     timer.cancel();
     super.dispose();
   }

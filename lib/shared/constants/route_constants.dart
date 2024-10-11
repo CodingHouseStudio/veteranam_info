@@ -34,6 +34,10 @@ abstract class KRoute {
     path: 'profile',
     name: 'Profile',
   );
+  static const _RouteItem company = _RouteItem(
+    path: 'company',
+    name: 'Company',
+  );
   static const _RouteItem support = _RouteItem(
     path: 'support',
     name: 'Support',

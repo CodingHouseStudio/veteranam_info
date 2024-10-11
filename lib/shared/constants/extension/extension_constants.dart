@@ -603,33 +603,7 @@ extension DiscountStateExtention on DiscountState {
 }
 
 extension UserExtensions on User? {
-  bool get isFullProfile {
-    if (this == null ||
-        this!.email == null ||
-        this!.name == null ||
-        (this!.photo == null && !KTest.isTest)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   String? get firstName => this?.name?.split(' ').first;
 
   String? get lastName => this?.name?.split(' ').last;
-}
-
-extension ProfileEnumExtensions on ProfileEnum {
-  String loadingMessage(BuildContext context) {
-    if (this == ProfileEnum.success) {
-      return context.l10n.dataIsUpdatedSuccess;
-    }
-    if (this == ProfileEnum.sendInProgress) {
-      return context.l10n.dataSendInProgress;
-    }
-    if (this == ProfileEnum.succesesUnmodified) {
-      return context.l10n.dataUnmodified;
-    }
-    return '';
-  }
 }

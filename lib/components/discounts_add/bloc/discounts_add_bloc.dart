@@ -12,10 +12,10 @@ part 'discounts_add_state.dart';
 class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   DiscountsAddBloc({
     required IDiscountRepository discountRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    required ICompanyRepository companyRepository,
     required ICitiesRepository citiesRepository,
   })  : _discountRepository = discountRepository,
-        _appAuthenticationReporsitory = appAuthenticationRepository,
+        _companyRepository = companyRepository,
         _citiesRepository = citiesRepository,
         super(
           const _Initial(
@@ -26,7 +26,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
             eligibility: ListFieldModel.pure(),
-            link: LinkFieldModel.pure(),
+            link: LinkNullableFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
@@ -53,7 +53,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_Back>(_onBack);
   }
   final IDiscountRepository _discountRepository;
-  final IAppAuthenticationRepository _appAuthenticationReporsitory;
+  final ICompanyRepository _companyRepository;
   final ICitiesRepository _citiesRepository;
 
   @visibleForTesting
@@ -287,7 +287,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _LinkUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final linkFieldModel = LinkFieldModel.dirty(event.link);
+    final linkFieldModel = LinkNullableFieldModel.dirty(event.link);
 
     emit(
       state.copyWith(
@@ -391,7 +391,6 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         requirementsEN: null,
         territory: null,
         territoryEN: null,
-        // TODO(Profile): Add Link from profile
         link: '',
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
@@ -399,8 +398,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         expirationEN: _getExpiration(Language.english),
         dateVerified: ExtendedDateTime.current,
         directLink: state.link.value,
-        userId: _appAuthenticationReporsitory.currentUser.id,
-        userName: _appAuthenticationReporsitory.currentUser.name,
+        userId: _companyRepository.currentUserCompany.id,
+        userName: _companyRepository.currentUserCompany.companyName,
       );
       final result =
           await _discountRepository.addDiscount(sendDiscountModel ?? discount);
