@@ -16,7 +16,8 @@ class PwResetEmailBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.I.get<PwResetEmailBloc>(),
+      create: (context) => GetIt.I.get<PwResetEmailBloc>()
+        ..add(PwResetEmailEvent.started(email)),
       child: childWidget,
     );
   }
