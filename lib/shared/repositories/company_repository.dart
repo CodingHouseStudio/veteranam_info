@@ -108,10 +108,10 @@ class CompanyRepository implements ICompanyRepository {
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
     required CompanyModel company,
-    required ImagePickerItem? image,
+    required ImagePickerItem? imageItem,
   }) async {
     try {
-      if (company == currentUserCompany && image == null) {
+      if (company == currentUserCompany && imageItem == null) {
         return const Right(false);
       }
       late var methodCompanyModel = company;
@@ -122,15 +122,15 @@ class CompanyRepository implements ICompanyRepository {
             ..add(iAppAuthenticationRepository.currentUser.email!),
         );
       }
-      if (image != null) {
-        final imageModel = await _storageService.saveImage(
-          imageItem: image,
+      if (imageItem != null) {
+        final downloadURL = await _storageService.saveFile(
+          imagePickerItem: imageItem,
           id: company.id,
           collecltionName: FirebaseCollectionName.companies,
         );
-        if (imageModel != null) {
+        if (downloadURL != null && downloadURL.isNotEmpty) {
           methodCompanyModel = methodCompanyModel.copyWith(
-            image: imageModel,
+            image: imageItem.image(downloadURL),
           );
         }
       }

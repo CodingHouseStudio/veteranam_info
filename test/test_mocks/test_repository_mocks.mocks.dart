@@ -6462,7 +6462,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> addStory({
     required _i3.StoryModel? storyModel,
-    required _i3.ImagePickerItem? image,
+    required _i3.ImagePickerItem? imageItem,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6470,7 +6470,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
           [],
           {
             #storyModel: storyModel,
-            #image: image,
+            #imageItem: imageItem,
           },
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
@@ -6481,7 +6481,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
             [],
             {
               #storyModel: storyModel,
-              #image: image,
+              #imageItem: imageItem,
             },
           ),
         )),
@@ -6494,7 +6494,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
             [],
             {
               #storyModel: storyModel,
-              #image: image,
+              #imageItem: imageItem,
             },
           ),
         )),
@@ -6733,42 +6733,24 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
       ) as _i10.FirebaseStorage);
 
   @override
-  _i8.Future<_i3.ImageModel?> saveImage({
-    required _i3.ImagePickerItem? imageItem,
+  _i8.Future<String?> saveFile({
+    required _i3.ImagePickerItem? imagePickerItem,
     required String? id,
     required String? collecltionName,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveImage,
+          #saveFile,
           [],
           {
-            #imageItem: imageItem,
+            #imagePickerItem: imagePickerItem,
             #id: id,
             #collecltionName: collecltionName,
           },
         ),
-        returnValue: _i8.Future<_i3.ImageModel?>.value(),
-        returnValueForMissingStub: _i8.Future<_i3.ImageModel?>.value(),
-      ) as _i8.Future<_i3.ImageModel?>);
-
-  @override
-  _i8.Future<_i3.ResumeModel?> saveRespond({
-    required _i3.ImagePickerItem? resumeItem,
-    required String? respondId,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #saveRespond,
-          [],
-          {
-            #resumeItem: resumeItem,
-            #respondId: respondId,
-          },
-        ),
-        returnValue: _i8.Future<_i3.ResumeModel?>.value(),
-        returnValueForMissingStub: _i8.Future<_i3.ResumeModel?>.value(),
-      ) as _i8.Future<_i3.ResumeModel?>);
+        returnValue: _i8.Future<String?>.value(),
+        returnValueForMissingStub: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
 }
 
 /// A class which mocks [ImagePicker].
@@ -13137,7 +13119,7 @@ class MockICompanyRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateCompany({
     required _i3.CompanyModel? company,
-    required _i3.ImagePickerItem? image,
+    required _i3.ImagePickerItem? imageItem,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -13145,7 +13127,7 @@ class MockICompanyRepository extends _i1.Mock
           [],
           {
             #company: company,
-            #image: image,
+            #imageItem: imageItem,
           },
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
@@ -13156,7 +13138,7 @@ class MockICompanyRepository extends _i1.Mock
             [],
             {
               #company: company,
-              #image: image,
+              #imageItem: imageItem,
             },
           ),
         )),
@@ -13169,7 +13151,7 @@ class MockICompanyRepository extends _i1.Mock
             [],
             {
               #company: company,
-              #image: image,
+              #imageItem: imageItem,
             },
           ),
         )),

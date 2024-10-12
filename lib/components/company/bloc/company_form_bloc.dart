@@ -160,7 +160,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
           code: state.code.value,
           link: state.link.value,
         ),
-        image: state.image.value,
+        imageItem: state.image.value,
       );
 
       result.fold(

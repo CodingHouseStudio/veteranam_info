@@ -11,52 +11,48 @@ class StorageService {
   @visibleForTesting
   static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
-  Future<ImageModel?> saveImage({
-    required ImagePickerItem imageItem,
+  Future<String?> saveFile({
+    required ImagePickerItem imagePickerItem,
     required String id,
     required String collecltionName,
   }) async {
-    if (imageItem.bytes.isEmpty) return null;
+    if (imagePickerItem.bytes.isEmpty) return null;
     final value = storage
         .ref(
           StoragePath.getImagePath(
             collection: collecltionName,
             modelId: id,
             // imageName: imageItem.name,
-            imageExtension: imageItem.extension,
+            imageExtension: imagePickerItem.extension,
           ),
         )
-        .putData(imageItem.bytes);
+        .putData(imagePickerItem.bytes);
     final snapshot = await value;
 
-    final downloadUrl = await snapshot.ref.getDownloadURL();
-
-    if (downloadUrl.isEmpty) return null;
-
-    return imageItem.image(downloadUrl);
+    return snapshot.ref.getDownloadURL();
   }
 
-  Future<ResumeModel?> saveRespond({
-    required ImagePickerItem resumeItem,
-    required String respondId,
-  }) async {
-    if (resumeItem.bytes.isEmpty) return null;
-    final value = storage
-        .ref(
-          StoragePath.getResumePath(
-            collection: FirebaseCollectionName.respond,
-            modelId: respondId,
-            // resumeName: resumeItem.name,
-            fileExtension: resumeItem.extension,
-          ),
-        )
-        .putData(resumeItem.bytes);
+  // Future<ResumeModel?> saveRespond({
+  //   required ImagePickerItem resumeItem,
+  //   required String respondId,
+  // }) async {
+  //   if (resumeItem.bytes.isEmpty) return null;
+  //   final value = storage
+  //       .ref(
+  //         StoragePath.getResumePath(
+  //           collection: FirebaseCollectionName.respond,
+  //           modelId: respondId,
+  //           // resumeName: resumeItem.name,
+  //           fileExtension: resumeItem.extension,
+  //         ),
+  //       )
+  //       .putData(resumeItem.bytes);
 
-    final snapshot = value.snapshot;
-    final downloadUrl = await snapshot.ref.getDownloadURL();
+  //   final snapshot = value.snapshot;
+  //   final downloadUrl = await snapshot.ref.getDownloadURL();
 
-    if (downloadUrl.isEmpty) return null;
+  //   if (downloadUrl.isEmpty) return null;
 
-    return resumeItem.resume(downloadUrl);
-  }
+  //   return resumeItem.resume(downloadUrl);
+  // }
 }

@@ -103,7 +103,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
             : null,
         userId: _iAppAuthenticationRepository.currentUser.id,
       ),
-      image: state.image.value,
+      imageItem: state.image.value,
     );
     result.fold(
       (l) => emit(state.copyWith(failure: l._toStoryAdd())),

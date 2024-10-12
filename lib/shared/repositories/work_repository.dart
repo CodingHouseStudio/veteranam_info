@@ -35,13 +35,20 @@ class WorkRepository implements IWorkRepository {
     required ImagePickerItem? file,
   }) async {
     try {
+      late var methodRespond = respond;
       if (file != null) {
-        await _storageService.saveRespond(
-          resumeItem: file,
-          respondId: respond.id,
+        final downloadURL = await _storageService.saveFile(
+          imagePickerItem: file,
+          id: respond.id,
+          collecltionName: FirebaseCollectionName.respond,
         );
+        if (downloadURL != null && downloadURL.isNotEmpty) {
+          methodRespond = methodRespond.copyWith(
+            resume: file.resume(downloadURL),
+          );
+        }
       }
-      await _firestoreService.sendRespond(respond);
+      await _firestoreService.sendRespond(methodRespond);
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {

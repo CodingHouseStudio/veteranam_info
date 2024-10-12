@@ -539,12 +539,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required ImagePickerItem image,
     required String userId,
   }) async {
-    final imageModel = await _storageService.saveImage(
-      imageItem: image,
+    final downloadURL = await _storageService.saveFile(
+      imagePickerItem: image,
       id: userId,
       collecltionName: FirebaseCollectionName.user,
     );
-    return imageModel?.downloadURL;
+    return downloadURL;
   }
 }
 

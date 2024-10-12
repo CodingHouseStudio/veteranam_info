@@ -39,7 +39,7 @@ void main() {
       mockStoryRepository = MockIStoryRepository();
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imagePickerItem,
+          imageItem: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
             id: KTestText.storyModelItems.last.id,

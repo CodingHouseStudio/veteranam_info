@@ -34,7 +34,7 @@ void main() {
 
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imagePickerItem,
+          imageItem: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first,
         ),
       ).thenAnswer(
@@ -48,7 +48,7 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imagePickerItem,
+            imageItem: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -70,7 +70,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imagePickerItem,
+            imageItem: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -88,7 +88,7 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imagePickerItem,
+            imageItem: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
