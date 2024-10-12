@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'discounts_add_bloc.freezed.dart';
@@ -369,7 +370,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       }
       return;
     }
-    if (Formz.validate([state.description, state.exclusions])) {
+    if (Formz.validate([state.description])) {
+      //state.exclusions
       final discount = DiscountModel(
         id: ExtendedDateTime.id,
         discount: state.discounts.getValue
@@ -391,7 +393,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         requirementsEN: null,
         territory: null,
         territoryEN: null,
-        link: '',
+        link: _companyRepository.currentUserCompany.link!,
+        company: _companyRepository.currentUserCompany.companyName,
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
@@ -399,6 +402,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         dateVerified: ExtendedDateTime.current,
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
+        userPhoto: _companyRepository.currentUserCompany.image,
         userName: _companyRepository.currentUserCompany.companyName,
       );
       final result =

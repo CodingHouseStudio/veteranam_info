@@ -179,8 +179,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               isDesk: isDesk,
               labelText: context.l10n.getYouNeed,
               description: context.l10n.getYouNeedDescription,
-              showErrorText: _.formState.hasError,
-              errorText: _.exclusions.error.value(context),
+              // showErrorText: _.formState.hasError,
+              // errorText: _.exclusions.error.value(context),
               changeMessage: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.exclusionsUpdate(text)),

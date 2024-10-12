@@ -13,7 +13,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CompanyBloc, CompanyState>(
+    return BlocConsumer<CompanyWatcherBloc, CompanyWatcherState>(
       listener: (context, state) => context
           .read<MyDiscountsWatcherBloc>()
           .add(const MyDiscountsWatcherEvent.started()),

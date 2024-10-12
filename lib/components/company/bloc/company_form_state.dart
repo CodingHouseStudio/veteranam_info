@@ -29,9 +29,4 @@ enum CompanyFormEnum {
   success,
   succesesUnmodified,
   sendInProgress;
-
-  bool get showMessage =>
-      this == CompanyFormEnum.success ||
-      this == CompanyFormEnum.sendInProgress ||
-      this == CompanyFormEnum.succesesUnmodified;
 }

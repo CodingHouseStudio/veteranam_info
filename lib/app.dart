@@ -58,8 +58,8 @@ class App extends StatelessWidget {
         ],
         if (Config.isBusiness)
           BlocProvider(
-            create: (context) =>
-                GetIt.I.get<CompanyBloc>()..add(const CompanyEvent.started()),
+            create: (context) => GetIt.I.get<CompanyWatcherBloc>()
+              ..add(const CompanyWatcherEvent.started()),
           ),
       ],
       child: const AppWidget(),
@@ -88,7 +88,7 @@ class AppWidget extends StatelessWidget {
         }
         final localeValue = state.userSetting.locale.value;
         return Config.isBusiness
-            ? BlocBuilder<CompanyBloc, CompanyState>(
+            ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
                 builder: (context, state) => betterFeedbackBody(localeValue),
               )
             : betterFeedbackBody(localeValue);

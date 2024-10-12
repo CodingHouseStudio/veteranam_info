@@ -55,8 +55,8 @@ class ProfileBodyWidget extends StatelessWidget {
                       ),
                 child: ProfileFormWidget(
                   isDesk: isDesk,
-                  photoURL: state.image.value?.path ??
-                      context.read<AuthenticationBloc>().state.user.photo,
+                  photoURL: context.read<AuthenticationBloc>().state.user.photo,
+                  imageBytes: state.image.value,
                   initialName:
                       context.read<AuthenticationBloc>().state.user.firstName,
                   initialEmail:
@@ -150,6 +150,9 @@ class ProfileBodyWidget extends StatelessWidget {
         text: context.l10n.deleteAccount,
         onPressed: () => context.dialog.showDeleteConfirmationDialog(
           isDesk: isDesk,
+          deleteEvent: () => context.read<AuthenticationBloc>().add(
+                AuthenticationDeleteRequested(),
+              ),
         ),
       );
 }

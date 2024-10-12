@@ -102,19 +102,19 @@ class CompanyBodyWidget extends StatelessWidget {
   }) =>
       CompanyFormWidget(
         isDesk: isDesk,
-        photoURL: context.read<CompanyFormBloc>().state.image.value?.path ??
-            context
-                .read<CompanyBloc>()
-                .state
-                .company
-                .image
-                ?.downloadURL
-                .getImageUrl,
+        photoURL: context
+            .read<CompanyWatcherBloc>()
+            .state
+            .company
+            .image
+            ?.downloadURL
+            .getImageUrl,
+        imageBytes: context.read<CompanyFormBloc>().state.image.value,
         initialCompanyName:
-            context.read<CompanyBloc>().state.company.companyName,
+            context.read<CompanyWatcherBloc>().state.company.companyName,
         initialEmail: context.read<AuthenticationBloc>().state.user.email,
-        initialCode: context.read<CompanyBloc>().state.company.code,
-        initialLink: context.read<CompanyBloc>().state.company.link,
+        initialCode: context.read<CompanyWatcherBloc>().state.company.code,
+        initialLink: context.read<CompanyWatcherBloc>().state.company.link,
       );
 
   void myDiscountTap(

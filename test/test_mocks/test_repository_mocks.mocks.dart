@@ -1934,7 +1934,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
-    required _i3.ImageModel? image,
+    required _i28.Uint8List? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2462,7 +2462,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
-    required _i3.ImageModel? image,
+    required _i28.Uint8List? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2890,8 +2890,8 @@ class MockAuthenticationRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
     required _i3.User? user,
-    required _i3.ImageModel? image,
     required String? nickname,
+    required _i28.Uint8List? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2899,8 +2899,8 @@ class MockAuthenticationRepository extends _i1.Mock
           [],
           {
             #user: user,
-            #image: image,
             #nickname: nickname,
+            #image: image,
           },
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
@@ -2911,8 +2911,8 @@ class MockAuthenticationRepository extends _i1.Mock
             [],
             {
               #user: user,
-              #image: image,
               #nickname: nickname,
+              #image: image,
             },
           ),
         )),
@@ -2925,8 +2925,8 @@ class MockAuthenticationRepository extends _i1.Mock
             [],
             {
               #user: user,
-              #image: image,
               #nickname: nickname,
+              #image: image,
             },
           ),
         )),
@@ -6444,19 +6444,29 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
       ) as _i8.Stream<List<_i3.StoryModel>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> addStory(
-          _i3.StoryModel? storyModel) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> addStory({
+    required _i3.StoryModel? storyModel,
+    required _i28.Uint8List? image,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #addStory,
-          [storyModel],
+          [],
+          {
+            #storyModel: storyModel,
+            #image: image,
+          },
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #addStory,
-            [storyModel],
+            [],
+            {
+              #storyModel: storyModel,
+              #image: image,
+            },
           ),
         )),
         returnValueForMissingStub:
@@ -6465,7 +6475,11 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
           this,
           Invocation.method(
             #addStory,
-            [storyModel],
+            [],
+            {
+              #storyModel: storyModel,
+              #image: image,
+            },
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -6703,8 +6717,8 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
       ) as _i10.FirebaseStorage);
 
   @override
-  _i8.Future<String> saveImage({
-    required _i3.ImageModel? imageModel,
+  _i8.Future<_i3.ImageModel?> saveImage({
+    required _i28.Uint8List? image,
     required String? id,
     required String? collecltionName,
   }) =>
@@ -6713,37 +6727,14 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           #saveImage,
           [],
           {
-            #imageModel: imageModel,
+            #image: image,
             #id: id,
             #collecltionName: collecltionName,
           },
         ),
-        returnValue: _i8.Future<String>.value(_i29.dummyValue<String>(
-          this,
-          Invocation.method(
-            #saveImage,
-            [],
-            {
-              #imageModel: imageModel,
-              #id: id,
-              #collecltionName: collecltionName,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<String>.value(_i29.dummyValue<String>(
-          this,
-          Invocation.method(
-            #saveImage,
-            [],
-            {
-              #imageModel: imageModel,
-              #id: id,
-              #collecltionName: collecltionName,
-            },
-          ),
-        )),
-      ) as _i8.Future<String>);
+        returnValue: _i8.Future<_i3.ImageModel?>.value(),
+        returnValueForMissingStub: _i8.Future<_i3.ImageModel?>.value(),
+      ) as _i8.Future<_i3.ImageModel?>);
 
   @override
   _i8.Future<String> saveUseUint8ListImage({
@@ -13171,19 +13162,29 @@ class MockICompanyRepository extends _i1.Mock
       ) as _i3.CompanyModel);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateCompany(
-          _i3.CompanyModel? company) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateCompany({
+    required _i3.CompanyModel? company,
+    required _i28.Uint8List? image,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateCompany,
-          [company],
+          [],
+          {
+            #company: company,
+            #image: image,
+          },
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #updateCompany,
-            [company],
+            [],
+            {
+              #company: company,
+              #image: image,
+            },
           ),
         )),
         returnValueForMissingStub:
@@ -13192,7 +13193,11 @@ class MockICompanyRepository extends _i1.Mock
           this,
           Invocation.method(
             #updateCompany,
-            [company],
+            [],
+            {
+              #company: company,
+              #image: image,
+            },
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

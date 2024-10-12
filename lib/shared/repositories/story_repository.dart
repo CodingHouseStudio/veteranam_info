@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data' show Uint8List;
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
@@ -15,18 +16,21 @@ class StoryRepository implements IStoryRepository {
   Stream<List<StoryModel>> getStoryItems() => _firestoreService.getStories();
 
   @override
-  Future<Either<SomeFailure, bool>> addStory(StoryModel storyModel) async {
+  Future<Either<SomeFailure, bool>> addStory({
+    required StoryModel storyModel,
+    required Uint8List? image,
+  }) async {
     try {
       late var methodStoryModel = storyModel;
-      if (methodStoryModel.image != null) {
-        final downloadURL = await _storageService.saveImage(
-          imageModel: methodStoryModel.image!,
+      if (image != null) {
+        final imageModel = await _storageService.saveImage(
+          image: image,
           id: storyModel.id,
           collecltionName: FirebaseCollectionName.stroies,
         );
-        if (downloadURL.isNotEmpty) {
+        if (imageModel != null) {
           methodStoryModel = methodStoryModel.copyWith(
-            image: methodStoryModel.image!.copyWith(downloadURL: downloadURL),
+            image: imageModel,
           );
         }
       }

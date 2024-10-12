@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data' show Uint8List;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
@@ -106,19 +107,31 @@ class CompanyRepository implements ICompanyRepository {
   // }
 
   @override
-  Future<Either<SomeFailure, bool>> updateCompany(CompanyModel company) async {
+  Future<Either<SomeFailure, bool>> updateCompany({
+    required CompanyModel company,
+    required Uint8List? image,
+  }) async {
     try {
-      if (company == currentUserCompany) return const Right(false);
+      if (company == currentUserCompany && image == null) {
+        return const Right(false);
+      }
       late var methodCompanyModel = company;
-      if (methodCompanyModel.image != null) {
-        final downloadURL = await _storageService.saveImage(
-          imageModel: methodCompanyModel.image!,
+      if (!company.userEmails
+          .contains(iAppAuthenticationRepository.currentUser.email)) {
+        methodCompanyModel = methodCompanyModel.copyWith(
+          userEmails: List.from(methodCompanyModel.userEmails)
+            ..add(iAppAuthenticationRepository.currentUser.email!),
+        );
+      }
+      if (image != null) {
+        final imageModel = await _storageService.saveImage(
+          image: image,
           id: company.id,
           collecltionName: FirebaseCollectionName.companies,
         );
-        if (downloadURL.isNotEmpty) {
+        if (imageModel != null) {
           methodCompanyModel = methodCompanyModel.copyWith(
-            image: methodCompanyModel.image!.copyWith(downloadURL: downloadURL),
+            image: imageModel,
           );
         }
       }

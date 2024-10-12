@@ -19,6 +19,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i806;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
+import 'package:image_picker/image_picker.dart' as _i183;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart'
     as _i174;
@@ -78,7 +79,8 @@ import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart'
     as _i570;
 import 'package:veteranam/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i209;
-import 'package:veteranam/shared/bloc/company/company_bloc.dart' as _i434;
+import 'package:veteranam/shared/bloc/company/company_watcher_bloc.dart'
+    as _i86;
 import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart'
     as _i872;
 import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.dart'
@@ -109,6 +111,9 @@ import 'package:veteranam/shared/repositories/authentication_repository.dart'
     as _i208;
 import 'package:veteranam/shared/repositories/cities_repository.dart' as _i751;
 import 'package:veteranam/shared/repositories/company_repository.dart' as _i115;
+import 'package:veteranam/shared/repositories/data_picker_module.dart' as _i567;
+import 'package:veteranam/shared/repositories/data_picker_repository.dart'
+    as _i290;
 import 'package:veteranam/shared/repositories/device_repository.dart' as _i712;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
     as _i452;
@@ -154,6 +159,7 @@ extension GetItInjectableX on _i174.GetIt {
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
+    final dataPickerModule = _$DataPickerModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
     gh.singleton<_i141.FirebaseCrashlytics>(
@@ -181,6 +187,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
+    gh.singleton<_i183.ImagePicker>(() => dataPickerModule.firebaseAuth);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i806.FacebookAuth>(() => firebaseModule.firebaseSignIn);
@@ -240,6 +247,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i522.HomeWatcherBloc>(
       () => _i522.HomeWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
       registerFor: {_user},
+    );
+    gh.singleton<_i290.DataPickerRepository>(
+      () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()),
+      registerFor: {
+        _business,
+        _development,
+      },
     );
     gh.singleton<_i1001.IWorkRepository>(
       () => _i76.WorkRepository(),
@@ -307,13 +321,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_mobile},
     );
-    gh.factory<_i716.StoryAddBloc>(
-      () => _i716.StoryAddBloc(
-        storyRepository: gh<_i1001.IStoryRepository>(),
-        iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
-      ),
-      registerFor: {_development},
-    );
     gh.factory<_i765.ReportBloc>(
       () => _i765.ReportBloc(
         reportRepository: gh<_i1001.IReportRepository>(),
@@ -370,13 +377,18 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_business},
     );
-    gh.factory<_i174.CompanyFormBloc>(
-      () => _i174.CompanyFormBloc(
-        companyRepository: gh<_i1001.ICompanyRepository>(),
-        appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
+    gh.factory<_i716.StoryAddBloc>(
+      () => _i716.StoryAddBloc(
+        storyRepository: gh<_i1001.IStoryRepository>(),
+        iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
+        dataPickerRepository: gh<_i1001.DataPickerRepository>(),
       ),
-      registerFor: {_business},
+      registerFor: {_development},
     );
+    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
+          authenticationRepository: gh<_i1001.AuthenticationRepository>(),
+          dataPickerRepository: gh<_i1001.DataPickerRepository>(),
+        ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -393,8 +405,6 @@ extension GetItInjectableX on _i174.GetIt {
             authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i335.PasswordResetBloc>(() => _i335.PasswordResetBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
-    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
-        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i361.PwResetEmailBloc>(() => _i361.PwResetEmailBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
@@ -404,14 +414,21 @@ extension GetItInjectableX on _i174.GetIt {
             authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i174.CompanyFormBloc>(
+      () => _i174.CompanyFormBloc(
+        companyRepository: gh<_i1001.ICompanyRepository>(),
+        dataPickerRepository: gh<_i1001.DataPickerRepository>(),
+      ),
+      registerFor: {_business},
+    );
     gh.singleton<_i777.FirebaseAnalyticsService>(
         () => _i777.FirebaseAnalyticsService(
               gh<_i398.FirebaseAnalytics>(),
               gh<_i1001.AuthenticationRepository>(),
             ));
-    gh.factory<_i434.CompanyBloc>(
-      () =>
-          _i434.CompanyBloc(companyRepository: gh<_i1001.ICompanyRepository>()),
+    gh.factory<_i86.CompanyWatcherBloc>(
+      () => _i86.CompanyWatcherBloc(
+          companyRepository: gh<_i1001.ICompanyRepository>()),
       registerFor: {_business},
     );
     gh.factory<_i441.DiscountUserEmailFormBloc>(
@@ -435,6 +452,8 @@ class _$MessagingModule extends _i967.MessagingModule {}
 class _$AnalytucsModule extends _i606.AnalytucsModule {}
 
 class _$RemoteConfigModule extends _i769.RemoteConfigModule {}
+
+class _$DataPickerModule extends _i567.DataPickerModule {}
 
 class _$FirebaseModule extends _i926.FirebaseModule {}
 

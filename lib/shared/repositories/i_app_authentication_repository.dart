@@ -1,3 +1,5 @@
+import 'dart:typed_data' show Uint8List;
+
 import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -54,6 +56,6 @@ abstract class IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required ImageModel? image,
+    required Uint8List? image,
   });
 }

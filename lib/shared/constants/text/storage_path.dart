@@ -2,14 +2,14 @@ import 'package:veteranam/shared/shared.dart';
 
 abstract class StoragePath {
   static const _image = 'image';
-  static const _standartImageFileExtension = 'png';
+  static const standartImageFileExtension = 'png';
   static const _resume = 'resume';
   static String getImagePath({
     required String collection,
     required String modelId,
     String? imageName,
   }) =>
-      '$collection/$modelId/$_image/${imageName ?? '${ExtendedDateTime.id}.$_standartImageFileExtension'}';
+      '$collection/$modelId/$_image/${imageName ?? '${ExtendedDateTime.id}.$standartImageFileExtension'}';
 
   static String getResumePath({
     required String collection,

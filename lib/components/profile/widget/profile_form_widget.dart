@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,6 +16,7 @@ class ProfileFormWidget extends StatefulWidget {
     required this.initialEmail,
     required this.photoURL,
     super.key,
+    this.imageBytes,
   });
 
   final bool isDesk;
@@ -23,6 +25,7 @@ class ProfileFormWidget extends StatefulWidget {
   final String? initialEmail;
   final String? initialSurname;
   final String? initialNickname;
+  final Uint8List? imageBytes;
 
   @override
   State<ProfileFormWidget> createState() => _ProfileFormWidgetState();
@@ -89,6 +92,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               icon: KIcon.personEdit,
               background: AppColors.materialThemeKeyColorsPrimary,
               iconColor: AppColors.materialThemeBlack,
+              imageBytes: widget.imageBytes,
             ),
             KSizedBox.kWidthSizedBox32,
             if (widget.isDesk)

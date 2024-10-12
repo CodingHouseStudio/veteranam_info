@@ -1,4 +1,9 @@
 import 'package:flutter/widgets.dart' show BuildContext;
+import 'package:veteranam/components/components.dart'
+    show
+        CompanyCodeFieldModelValidationError,
+        CompanyNameFieldModelValidationError,
+        LinkNullableFieldModelValidationError;
 import 'package:veteranam/shared/shared.dart';
 
 extension EmailFieldModelValidationErrorEmpl

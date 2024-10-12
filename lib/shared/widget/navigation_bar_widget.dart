@@ -390,7 +390,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
       Config.isBusiness ? KRoute.company.name : KRoute.profile.name;
 
   String? get profileImage => Config.isBusiness
-      ? context.read<CompanyBloc>().state.company.image?.downloadURL
+      ? context.read<CompanyWatcherBloc>().state.company.image?.downloadURL
       : context.read<AuthenticationBloc>().state.user.photo;
 
   Widget pageName({

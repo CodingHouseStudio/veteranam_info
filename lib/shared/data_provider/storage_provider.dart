@@ -17,24 +17,33 @@ class StorageService {
   Future<Uint8List> _xFile(String ref) async =>
       uint8List ?? XFile(ref).readAsBytes();
 
-  Future<String> saveImage({
-    required ImageModel imageModel,
+  Future<ImageModel?> saveImage({
+    required Uint8List image,
     required String id,
     required String collecltionName,
   }) async {
-    if (imageModel.ref == null || imageModel.ref!.isEmpty) return '';
+    if (image.isEmpty) return null;
+    final imageName = ExtendedDateTime.id;
     final value = storage
         .ref(
           StoragePath.getImagePath(
             collection: collecltionName,
             modelId: id,
-            imageName: imageModel.name,
+            imageName: imageName,
           ),
         )
-        .putBlob(await _xFile(imageModel.ref!));
+        .putBlob(image);
     final snapshot = await value.getTaskSnapshot();
 
-    return snapshot.ref.getDownloadURL();
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+
+    if (downloadUrl.isEmpty) return null;
+
+    return ImageModel(
+      downloadURL: downloadUrl,
+      name: imageName,
+      type: StoragePath.standartImageFileExtension,
+    );
   }
 
   Future<String> saveUseUint8ListImage({

@@ -65,6 +65,7 @@ class _DialogsWidget {
 
   void showDeleteConfirmationDialog({
     required bool isDesk,
+    required void Function() deleteEvent,
   }) {
     showDialog<void>(
       context: context,
@@ -87,15 +88,7 @@ class _DialogsWidget {
               ButtonWidget(
                 key: KWidgetkeys.widget.dialogs.confirmButton,
                 onPressed: () {
-                  if (Config.isBusiness) {
-                    context.read<CompanyFormBloc>().add(
-                          const CompanyFormEvent.deleteCompany(),
-                        );
-                  } else {
-                    context.read<AuthenticationBloc>().add(
-                          AuthenticationDeleteRequested(),
-                        );
-                  }
+                  deleteEvent();
                   context.pop();
                 },
                 text: context.l10n.yes,

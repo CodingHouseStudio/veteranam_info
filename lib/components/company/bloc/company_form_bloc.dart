@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'company_form_bloc.freezed.dart';
@@ -16,9 +16,9 @@ part 'company_form_state.dart';
 class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
   CompanyFormBloc({
     required ICompanyRepository companyRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    required DataPickerRepository dataPickerRepository,
   })  : _companyRepository = companyRepository,
-        _appAuthenticationRepository = appAuthenticationRepository,
+        _dataPickerRepository = dataPickerRepository,
         super(
           const CompanyFormState(
             companyName: CompanyNameFieldModel.pure(),
@@ -29,6 +29,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
             formState: CompanyFormEnum.initial,
           ),
         ) {
+    on<_Started>(_onStarted);
     on<_CompanyNameUpdated>(_onCompanyNameUpdated);
     on<_CodeUpdated>(_onCodeUpdated);
     on<_ImageUpdated>(_onImageUpdated);
@@ -37,11 +38,25 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     on<_Save>(_onSave);
   }
 
-  final IAppAuthenticationRepository _appAuthenticationRepository;
   final ICompanyRepository _companyRepository;
-  //final imagePicker = imagePickerValue;
-  @visibleForTesting
-  static ImagePicker imagePickerValue = ImagePicker();
+  final DataPickerRepository _dataPickerRepository;
+
+  Future<void> _onStarted(
+    _Started event,
+    Emitter<CompanyFormState> emit,
+  ) async {
+    final company = _companyRepository.currentUserCompany;
+    emit(
+      CompanyFormState(
+        companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
+        code: CompanyCodeFieldModel.dirty(company.code ?? ''),
+        image: const ImageFieldModel.pure(),
+        link: LinkFieldModel.dirty(company.link ?? ''),
+        failure: null,
+        formState: CompanyFormEnum.initial,
+      ),
+    );
+  }
 
   Future<void> _onCompanyNameUpdated(
     _CompanyNameUpdated event,
@@ -76,10 +91,9 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _ImageUpdated event,
     Emitter<CompanyFormState> emit,
   ) async {
-    final imageFieldModel = ImageFieldModel.dirty(
-      await imagePickerValue.pickImage(source: ImageSource.gallery),
-    );
-    if (imageFieldModel.value == null) return;
+    final imageBytes = await _dataPickerRepository.getImage;
+    if (imageBytes == null || imageBytes.isEmpty) return;
+    final imageFieldModel = ImageFieldModel.dirty(imageBytes);
 
     emit(
       state.copyWith(
@@ -114,59 +128,26 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _Save event,
     Emitter<CompanyFormState> emit,
   ) async {
-    final companyName = state.companyName.isPure
-        ? CompanyNameFieldModel.dirty(
-            _companyRepository.currentUserCompany.companyName ?? '',
-          )
-        : state.companyName;
-    final companyLink = state.link.isPure
-        ? LinkFieldModel.dirty(
-            _companyRepository.currentUserCompany.link ?? '',
-          )
-        : state.link;
-    final companyCode = state.code.isPure
-        ? CompanyCodeFieldModel.dirty(
-            _companyRepository.currentUserCompany.code ?? '',
-          )
-        : state.code;
     if (Formz.validate(
       [
-        companyName,
-        companyCode,
-        companyLink,
-        state.image,
+        state.companyName,
+        state.code,
+        state.link,
+        // state.image,
       ],
     )) {
       emit(state.copyWith(formState: CompanyFormEnum.sendInProgress));
 
       final result = await _companyRepository.updateCompany(
-        _companyRepository.currentUserCompany.id.isEmpty
-            ? CompanyModel(
-                id: ExtendedDateTime.id,
-                companyName: state.companyName.value,
-                userEmails: [_appAuthenticationRepository.currentUser.email!],
-                image: state.image.value != null
-                    ? ImageModel(
-                        downloadURL: state.image.value!.path,
-                        name: state.image.value!.name,
-                        ref: state.image.value!.path,
-                      )
-                    : _companyRepository.currentUserCompany.image,
-                code: state.code.value,
-                link: state.link.value,
-              )
-            : _companyRepository.currentUserCompany.copyWith(
-                companyName: state.companyName.value,
-                image: state.image.value != null
-                    ? ImageModel(
-                        downloadURL: state.image.value!.path,
-                        name: state.image.value!.name,
-                        ref: state.image.value!.path,
-                      )
-                    : _companyRepository.currentUserCompany.image,
-                code: state.code.value,
-                link: state.link.value,
-              ),
+        company: _companyRepository.currentUserCompany.copyWith(
+          id: _companyRepository.currentUserCompany.id.isEmpty
+              ? ExtendedDateTime.id
+              : _companyRepository.currentUserCompany.id,
+          companyName: state.companyName.value,
+          code: state.code.value,
+          link: state.link.value,
+        ),
+        image: state.image.value,
       );
 
       result.fold(
