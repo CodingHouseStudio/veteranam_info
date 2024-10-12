@@ -100,6 +100,36 @@ void main() {
           mockGoRouter: mockGoRouter,
         );
       });
+
+      testWidgets('Cancel dialog unconfirm button pop', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
+
+        await discountsAddUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: false,
+        );
+      });
+      testWidgets('Cancel dialog cancel icon pop', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
+        await discountsAddUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: true,
+        );
+      });
     });
   });
 }
