@@ -456,9 +456,9 @@ class _FakeReference_37 extends _i1.SmartFake implements _i10.Reference {
         );
 }
 
-class _FakeFirebaseStorage_38 extends _i1.SmartFake
-    implements _i10.FirebaseStorage {
-  _FakeFirebaseStorage_38(
+class _FakeLostDataResponse_38 extends _i1.SmartFake
+    implements _i11.LostDataResponse {
+  _FakeLostDataResponse_38(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -467,9 +467,9 @@ class _FakeFirebaseStorage_38 extends _i1.SmartFake
         );
 }
 
-class _FakeLostDataResponse_39 extends _i1.SmartFake
-    implements _i11.LostDataResponse {
-  _FakeLostDataResponse_39(
+class _FakeFirebaseStorage_39 extends _i1.SmartFake
+    implements _i10.FirebaseStorage {
+  _FakeFirebaseStorage_39(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -6720,23 +6720,12 @@ class MockFirebaseStorage extends _i1.Mock implements _i10.FirebaseStorage {
 /// See the documentation for Mockito's code generation for more information.
 class MockStorageService extends _i1.Mock implements _i3.StorageService {
   @override
-  _i10.FirebaseStorage get storage => (super.noSuchMethod(
-        Invocation.getter(#storage),
-        returnValue: _FakeFirebaseStorage_38(
-          this,
-          Invocation.getter(#storage),
-        ),
-        returnValueForMissingStub: _FakeFirebaseStorage_38(
-          this,
-          Invocation.getter(#storage),
-        ),
-      ) as _i10.FirebaseStorage);
-
-  @override
   _i8.Future<String?> saveFile({
     required _i3.ImagePickerItem? imagePickerItem,
     required String? id,
     required String? collecltionName,
+    String? file = r'image',
+    String? standartFileExtension = r'.png',
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6746,6 +6735,8 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
             #imagePickerItem: imagePickerItem,
             #id: id,
             #collecltionName: collecltionName,
+            #file: file,
+            #standartFileExtension: standartFileExtension,
           },
         ),
         returnValue: _i8.Future<String?>.value(),
@@ -6882,7 +6873,7 @@ class MockImagePicker extends _i1.Mock implements _i30.ImagePicker {
           [],
         ),
         returnValue:
-            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_39(
+            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_38(
           this,
           Invocation.method(
             #retrieveLostData,
@@ -6890,7 +6881,7 @@ class MockImagePicker extends _i1.Mock implements _i30.ImagePicker {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_39(
+            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_38(
           this,
           Invocation.method(
             #retrieveLostData,
@@ -6917,11 +6908,11 @@ class MockReference extends _i1.Mock implements _i10.Reference {
   @override
   _i10.FirebaseStorage get storage => (super.noSuchMethod(
         Invocation.getter(#storage),
-        returnValue: _FakeFirebaseStorage_38(
+        returnValue: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),
-        returnValueForMissingStub: _FakeFirebaseStorage_38(
+        returnValueForMissingStub: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),
@@ -7314,11 +7305,11 @@ class MockUploadTask extends _i1.Mock implements _i10.UploadTask {
   @override
   _i10.FirebaseStorage get storage => (super.noSuchMethod(
         Invocation.getter(#storage),
-        returnValue: _FakeFirebaseStorage_38(
+        returnValue: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),
-        returnValueForMissingStub: _FakeFirebaseStorage_38(
+        returnValueForMissingStub: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),
@@ -7528,11 +7519,11 @@ class MockTaskSnapshot extends _i1.Mock implements _i10.TaskSnapshot {
   @override
   _i10.FirebaseStorage get storage => (super.noSuchMethod(
         Invocation.getter(#storage),
-        returnValue: _FakeFirebaseStorage_38(
+        returnValue: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),
-        returnValueForMissingStub: _FakeFirebaseStorage_38(
+        returnValueForMissingStub: _FakeFirebaseStorage_39(
           this,
           Invocation.getter(#storage),
         ),

@@ -41,6 +41,8 @@ class WorkRepository implements IWorkRepository {
           imagePickerItem: file,
           id: respond.id,
           collecltionName: FirebaseCollectionName.respond,
+          file: StoragePath.resume,
+          standartFileExtension: StoragePath.standartFileExtension,
         );
         if (downloadURL != null && downloadURL.isNotEmpty) {
           methodRespond = methodRespond.copyWith(

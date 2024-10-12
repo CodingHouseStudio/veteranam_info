@@ -17,6 +17,7 @@ enum MobMode {
 class FirestoreService {
   FirestoreService(
     // this.appNetworkRepository,
+    this._db,
     this._cache,
   ) {
     // Initialization logic can't use await directly in constructor
@@ -27,15 +28,13 @@ class FirestoreService {
   //   Connectivity(),
   //   CacheClient(),
   // );
-  final FirebaseFirestore _db = firebaseFirestore;
+  final FirebaseFirestore _db;
   final CacheClient _cache;
   late var _offlineMode = MobMode.offline;
 
   MobMode get offlineMode =>
       _cache.read<MobMode>(key: offlineModeCacheKey) ?? _offlineMode;
 
-  @visibleForTesting
-  static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   @visibleForTesting
   static const getOptions = GetOptions();
   @visibleForTesting

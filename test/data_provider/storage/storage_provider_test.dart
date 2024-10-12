@@ -16,57 +16,36 @@ void main() {
     late Reference mockReference;
     late UploadTask mockUploadTask;
     late TaskSnapshot mockTaskSnapshot;
-    // late Uint8List uint8List;
     setUp(() async {
       mockReference = MockReference();
       mockFirebaseStorage = MockFirebaseStorage();
       mockUploadTask = MockUploadTask();
       mockTaskSnapshot = MockTaskSnapshot();
-      // uint8List = Uint8List(1);
       ExtendedDateTime.id = KTestText.id;
       StorageService.firebaseStorage = mockFirebaseStorage;
-      // StorageService.uint8List = Future.value(uint8List);
       when(
         mockFirebaseStorage.ref(
-          StoragePath.getImagePath(
+          StoragePath.getFilePath(
             collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            imageExtension: null,
-            // imageName: KTestText.storyModelItems.last.image!.name,
-          ),
-        ),
-      ).thenAnswer((realInvocation) => mockReference);
-      when(
-        mockFirebaseStorage.ref(
-          StoragePath.getResumePath(
-            collection: FirebaseCollectionName.respond,
-            modelId: KTestText.employeeRespondModel.id,
-            // resumeName: KTestText.employeeRespondModel.resume!.name,
             fileExtension: null,
+            file: StoragePath.image,
+            standartFileExtension: StoragePath.standartImageFileExtension,
           ),
         ),
       ).thenAnswer((realInvocation) => mockReference);
-      // when(
-      //   mockReference.putBlob(uint8List),
-      // ).thenAnswer(
-      //   (realInvocation) {
-      //     // UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
-      //     return mockUploadTask;
-      //   },
-      // );
       when(
         mockReference.putData(KTestText.imagePickerItem.bytes),
       ).thenAnswer(
         (realInvocation) {
-          // UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
           return mockUploadTask;
         },
       );
-      // when(
-      //   mockUploadTask.getTaskSnapshot(),
-      // ).thenAnswer(
-      //   (realInvocation) async => mockTaskSnapshot,
-      // );
+      when(
+        await mockUploadTask,
+      ).thenAnswer(
+        (realInvocation) => mockTaskSnapshot,
+      );
       when(
         mockTaskSnapshot.ref,
       ).thenAnswer((realInvocation) => mockReference);
@@ -110,16 +89,17 @@ void main() {
 
     test('save empty story image', () async {
       await storageService.saveFile(
-        imagePickerItem: KTestText.imagePickerItem,
+        imagePickerItem: KTestText.imagePickerItemEmpty,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyNeverMethod(
-        StoragePath.getImagePath(
+        StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageExtension: null,
+          fileExtension: null, file: StoragePath.image,
+          standartFileExtension: StoragePath.standartImageFileExtension,
           // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
@@ -132,10 +112,11 @@ void main() {
       );
 
       verifyMethod(
-        StoragePath.getImagePath(
+        StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageExtension: null,
+          fileExtension: null, file: StoragePath.image,
+          standartFileExtension: StoragePath.standartImageFileExtension,
           // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );

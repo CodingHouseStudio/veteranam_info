@@ -182,6 +182,9 @@ abstract class KTestText {
   static final imagePickerItem =
       ImagePickerItem(bytes: Uint8List(1), name: image, ref: image);
 
+  static final imagePickerItemEmpty =
+      ImagePickerItem(bytes: Uint8List(0), name: image, ref: image);
+
   static final imagePickerItemFeedback =
       ImagePickerItem(bytes: Uint8List(1), name: null, ref: null);
 

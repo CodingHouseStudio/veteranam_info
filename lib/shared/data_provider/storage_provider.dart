@@ -1,33 +1,36 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in storage
-@singleton
+@Singleton(order: -1)
 class StorageService {
-  final FirebaseStorage storage = firebaseStorage;
-
-  @visibleForTesting
-  static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+  StorageService(
+    this._storage,
+  );
+  final FirebaseStorage _storage;
 
   Future<String?> saveFile({
     required ImagePickerItem imagePickerItem,
     required String id,
     required String collecltionName,
+    String file = StoragePath.image,
+    String standartFileExtension = StoragePath.standartImageFileExtension,
   }) async {
     if (imagePickerItem.bytes.isEmpty) return null;
-    final value = storage
+    final uploadTask = _storage
         .ref(
-          StoragePath.getImagePath(
+          StoragePath.getFilePath(
             collection: collecltionName,
             modelId: id,
             // imageName: imageItem.name,
-            imageExtension: imagePickerItem.extension,
+            fileExtension: imagePickerItem.extension, file: file,
+            standartFileExtension: standartFileExtension,
           ),
         )
         .putData(imagePickerItem.bytes);
-    final snapshot = await value;
+
+    final snapshot = await uploadTask;
 
     return snapshot.ref.getDownloadURL();
   }

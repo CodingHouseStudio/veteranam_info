@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:device_info_plus/device_info_plus.dart' as _i833;
 import 'package:dio/dio.dart' as _i361;
@@ -16,6 +17,7 @@ import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i141;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
+import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i806;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -94,12 +96,14 @@ import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
     as _i777;
 import 'package:veteranam/shared/data_provider/firebase_remote_config_provider.dart'
     as _i187;
+import 'package:veteranam/shared/data_provider/firestore_module.dart' as _i718;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
 import 'package:veteranam/shared/data_provider/image_load_helper.dart' as _i369;
 import 'package:veteranam/shared/data_provider/image_load_module.dart' as _i163;
 import 'package:veteranam/shared/data_provider/remote_config_module.dart'
     as _i769;
+import 'package:veteranam/shared/data_provider/storage_module.dart' as _i812;
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
     as _i99;
@@ -155,7 +159,9 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final failureModule = _$FailureModule();
+    final firstoreModule = _$FirstoreModule();
     final artifactModule = _$ArtifactModule();
+    final storageModule = _$StorageModule();
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
@@ -165,7 +171,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i141.FirebaseCrashlytics>(
         () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.dio);
     gh.singleton<_i361.Dio>(() => artifactModule.dio);
+    gh.singleton<_i457.FirebaseStorage>(() => storageModule.dio);
     gh.singleton<_i1008.AppInfoRepository>(() => _i1008.AppInfoRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
@@ -173,10 +181,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => messagingModule.deviceInfoPlugin);
     gh.lazySingleton<_i960.FailureRepository>(
         () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
+    gh.singleton<_i99.StorageService>(
+        () => _i99.StorageService(gh<_i457.FirebaseStorage>()));
     gh.singleton<_i369.ArtifactDownloadHelper>(
         () => _i369.ArtifactDownloadHelper(gh<_i361.Dio>()));
-    gh.singleton<_i1033.FirestoreService>(
-        () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
+    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService(
+          gh<_i974.FirebaseFirestore>(),
+          gh<_i1001.CacheClient>(),
+        ));
     gh.singleton<_i1001.IDeviceRepository>(() => _i712.DeviceRepository(
           gh<_i892.FirebaseMessaging>(),
           gh<_i833.DeviceInfoPlugin>(),
@@ -186,7 +198,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => analytucsModule.firebaseAnalytics);
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
-    gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i183.ImagePicker>(() => dataPickerModule.firebaseAuth);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
@@ -447,7 +458,11 @@ extension GetItInjectableX on _i174.GetIt {
 
 class _$FailureModule extends _i531.FailureModule {}
 
+class _$FirstoreModule extends _i718.FirstoreModule {}
+
 class _$ArtifactModule extends _i163.ArtifactModule {}
+
+class _$StorageModule extends _i812.StorageModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 
