@@ -119,19 +119,30 @@ void main() {
         await profileInitialHelper(tester);
       });
 
-      testWidgets('Log out dialog unconfirm button pop', (tester) async {
+      testWidgets('Log out desk dialog unconfirm button pop', (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+        await logOutUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: false,
+          deskOpen: true,
+        );
+      });
+      testWidgets('Log out mob dialog cancel icon pop', (tester) async {
         await profilePumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
-        await changeWindowSizeHelper(
+        await logOutUnconfirmButtonlHelper(
           tester: tester,
-          test: () async => logOutUnconfirmButtonlHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          ),
+          mockGoRouter: mockGoRouter,
+          icon: true,
         );
       });
 
@@ -148,19 +159,33 @@ void main() {
         );
       });
 
-      testWidgets('Delete account dialog unconfirm button pop', (tester) async {
+      testWidgets('Delete account desk dialog unconfirm button pop',
+          (tester) async {
         await profilePumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
-        await changeWindowSizeHelper(
+        await deleteAccountUnconfirmButtonlHelper(
           tester: tester,
-          test: () async => deleteAccountUnconfirmButtonlHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          ),
+          mockGoRouter: mockGoRouter,
+          icon: false,
+          deskOpen: true,
+        );
+      });
+
+      testWidgets('Delete account dialog cancel icon pop', (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await deleteAccountUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: true,
         );
       });
 

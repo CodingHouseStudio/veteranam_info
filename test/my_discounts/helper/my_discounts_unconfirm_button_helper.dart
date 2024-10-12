@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../test_dependency.dart';
+import '../../test_dependency.dart';
+import 'helper.dart';
 
-Future<void> deleteAccountUnconfirmButtonlHelper({
+Future<void> myDiscountUnconfirmButtonlHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
   required bool icon,
@@ -11,10 +12,10 @@ Future<void> deleteAccountUnconfirmButtonlHelper({
   if (deskOpen) {
     await changeWindowSizeHelper(
       tester: tester,
-      test: () async => profileCardDeleteAccountHelper(tester),
+      test: () async => myDiscountDialogHelper(tester),
     );
   } else {
-    await profileCardDeleteAccountHelper(tester);
+    await myDiscountDialogHelper(tester);
   }
 
   await changeWindowSizeHelper(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -70,10 +71,6 @@ class ProfileBodyWidget extends StatelessWidget {
                           .userSetting
                           .nickname,
                     ),
-                    // if (isDesk)
-                    //   KSizedBox.kHeightSizedBox48
-                    // else
-                    //   KSizedBox.kHeightSizedBox16,
                   ],
                 ),
               ),
@@ -124,8 +121,18 @@ class ProfileBodyWidget extends StatelessWidget {
         text: context.l10n.logOut,
         picture: KIcon.logOut,
         align: Alignment.center,
-        onPressed: () => context.dialog.showLogoutConfirmationDialog(
-          isDesk: true,
+        onPressed: () => context.dialog.showConfirmationDialog(
+          isDesk: isDesk,
+          title: context.l10n.logOutFromProfile,
+          subtitle: context.l10n.logOutQuestion,
+          confirmText: context.l10n.logOut,
+          background: AppColors.materialThemeKeyColorsSecondary,
+          onPressed: () {
+            context.read<AuthenticationBloc>().add(
+                  AuthenticationDeleteRequested(),
+                );
+            context.pop();
+          },
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.only(
@@ -156,8 +163,18 @@ class ProfileBodyWidget extends StatelessWidget {
           vertical: KPadding.kPaddingSize16,
         ),
         text: context.l10n.deleteAccount,
-        onPressed: () => context.dialog.showDeleteConfirmationDialog(
+        onPressed: () => context.dialog.showConfirmationDialog(
           isDesk: isDesk,
+          title: context.l10n.deleteProfile,
+          subtitle: context.l10n.deleteAccountQuestion,
+          confirmText: context.l10n.delete,
+          background: AppColors.materialThemeRefErrorError60,
+          onPressed: () {
+            context.read<AuthenticationBloc>().add(
+                  AuthenticationLogoutRequested(),
+                );
+            context.pop();
+          },
         ),
       );
 }
