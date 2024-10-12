@@ -87,30 +87,24 @@ class AppWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final localeValue = state.userSetting.locale.value;
-        return Config.isBusiness
-            ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
-                builder: (context, state) => betterFeedbackBody(localeValue),
-              )
-            : betterFeedbackBody(localeValue);
+        return kIsWeb
+            ? body(localeValue)
+            : BetterFeedback(
+                localizationsDelegates: locale,
+                localeOverride: localeValue,
+                themeMode: ThemeMode.light,
+                mode: FeedbackMode.navigate,
+                feedbackBuilder: (context, onSubmit, scrollController) =>
+                    MobFeedbackWidget(onSubmit: onSubmit),
+                child: BlocBuilder<MobOfflineModeCubit, MobMode>(
+                  builder: (context, _) {
+                    return body(localeValue);
+                  },
+                ),
+              );
       },
     );
   }
-
-  Widget betterFeedbackBody(Locale localeValue) => kIsWeb
-      ? body(localeValue)
-      : BetterFeedback(
-          localizationsDelegates: locale,
-          localeOverride: localeValue,
-          themeMode: ThemeMode.light,
-          mode: FeedbackMode.navigate,
-          feedbackBuilder: (context, onSubmit, scrollController) =>
-              MobFeedbackWidget(onSubmit: onSubmit),
-          child: BlocBuilder<MobOfflineModeCubit, MobMode>(
-            builder: (context, _) {
-              return body(localeValue);
-            },
-          ),
-        );
 
   Widget body(Locale localeValue) => MaterialApp.router(
         key: KWidgetkeys.screen.app.screen,

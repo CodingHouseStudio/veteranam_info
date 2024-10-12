@@ -176,6 +176,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     } catch (e) {
       date = null;
     }
+    if (date == null) return;
     final periodFieldModel = DateFieldModel.dirty(date);
 
     emit(

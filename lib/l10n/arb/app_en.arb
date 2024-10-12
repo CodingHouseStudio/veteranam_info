@@ -1474,11 +1474,6 @@
     "examples": "Text for button on Discount add page.",
     "description": "The button is used to return to the previous page."
   },
-  "cancelChangesQuestion": "Cancel Changes",
-  "@cancelChanges": {
-    "examples": "Text for button on Discount add page.",
-    "description": "The button is used to return to the previous page."
-  },
   "cancelChangesQuestion": "Are you sure you want to cancel the changes? All new data will be deleted",
   "@cancelChangesQuestion": {
     "examples": "Text on the Discount add page."
@@ -1491,6 +1486,10 @@
   "deleteDiscount": "Delete discount",
   "@deleteDiscount": {
     "examples": "Text for a button on the My Discount page."
+  },
+  "linkDiscountAdd": "Direct discount link",
+  "@linkDiscountAdd": {
+    "examples": "Text on the Discount Add Page for field direct link."
   },
   "deleteDiscountQuestion": "Are you sure you want to delete the discount? All data will be deleted",
   "@deleteDiscountQuestion": {

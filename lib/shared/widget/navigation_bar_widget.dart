@@ -343,12 +343,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (context.read<AuthenticationBloc>().state.status ==
                         AuthenticationStatus.authenticated &&
                     (Config.isDevelopment || Config.isBusiness))
-                  if (!isFocused || widget.isTablet)
-                    UserPhotoWidget(
-                      key: KWidgetkeys.widget.nawbar.loginIcon,
-                      onPressed: () => context.goNamed(profilePath),
-                      imageUrl: profileImage,
-                    ),
+                  if (!isFocused || widget.isTablet) getImageWidget,
               ],
             )
           : widget.showBackButton ?? false
@@ -389,9 +384,26 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   String get profilePath =>
       Config.isBusiness ? KRoute.company.name : KRoute.profile.name;
 
-  String? get profileImage => Config.isBusiness
-      ? context.read<CompanyWatcherBloc>().state.company.image?.downloadURL
-      : context.read<AuthenticationBloc>().state.user.photo;
+  Widget get getImageWidget => Config.isBusiness
+      ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+          builder: (context, state) {
+            return UserPhotoWidget(
+              key: KWidgetkeys.widget.nawbar.loginIcon,
+              onPressed: () => context.goNamed(profilePath),
+              imageUrl: context
+                  .read<CompanyWatcherBloc>()
+                  .state
+                  .company
+                  .image
+                  ?.downloadURL,
+            );
+          },
+        )
+      : UserPhotoWidget(
+          key: KWidgetkeys.widget.nawbar.loginIcon,
+          onPressed: () => context.goNamed(profilePath),
+          imageUrl: context.read<AuthenticationBloc>().state.user.photo,
+        );
 
   Widget pageName({
     required bool showBackButton,
