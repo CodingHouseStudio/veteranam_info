@@ -24,6 +24,7 @@ class CompanyModel with _$CompanyModel {
   static const empty = CompanyModel(id: '', userEmails: []);
 
   bool get isEmpty =>
+      id.isEmpty ||
       companyName == null ||
       companyName!.isEmpty ||
       code == null ||
