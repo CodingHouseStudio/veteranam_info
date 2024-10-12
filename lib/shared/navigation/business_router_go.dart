@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart'
     show
         BusinessDashboardScreen,
+        CompanyScreen,
         DiscountCardDialog,
         DiscountsAddScreen,
         ErrorScreen,
@@ -168,34 +169,33 @@ GoRouter businessRouter = GoRouter(
         //     builder: (_) => const PrivacyPolicyDialog(),
         //   ),
         // ),
-        if (Config.isDevelopment || Config.isBusiness)
-          GoRoute(
-            name: KRoute.profile.name,
-            path: KRoute.profile.path,
-            pageBuilder: (context, state) => NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              restorationId: state.pageKey.value,
-              child: const ProfileScreen(),
-            ),
-            // routes: [
-            //   GoRoute(
-            //     name: KRoute.profileMyStory.name,
-            //     path: KRoute.profileMyStory.path,
-            //     pageBuilder: (context, state) => NoTransitionPage(
-            //       key: state.pageKey,
-            //       name: state.name,
-            // restorationId: state.pageKey.value,
-            //       child: const ProfileMyStoryScreen(),
-            //     ),
-            //   ),
-            // ],
-            redirect: (context, state) =>
-                context.read<AuthenticationBloc>().state.status !=
-                        AuthenticationStatus.authenticated
-                    ? KRoute.home.path
-                    : null,
+        GoRoute(
+          name: KRoute.company.name,
+          path: KRoute.company.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            child: const CompanyScreen(),
           ),
+          // routes: [
+          //   GoRoute(
+          //     name: KRoute.profileMyStory.name,
+          //     path: KRoute.profileMyStory.path,
+          //     pageBuilder: (context, state) => NoTransitionPage(
+          //       key: state.pageKey,
+          //       name: state.name,
+          // restorationId: state.pageKey.value,
+          //       child: const ProfileMyStoryScreen(),
+          //     ),
+          //   ),
+          // ],
+          redirect: (context, state) =>
+              context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated
+                  ? KRoute.home.path
+                  : null,
+        ),
 
         // GoRoute(
         //   name: KRoute.myDiscounts.name,

@@ -16,6 +16,7 @@ class ButtonAdditionalWidget extends StatefulWidget {
     this.deskPadding,
     this.iconPadding,
     this.borderColor,
+    this.rightWidget,
     super.key,
     this.align,
   });
@@ -31,6 +32,7 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final double? iconPadding;
   final Alignment? align;
   final Color? borderColor;
+  final Widget? rightWidget;
 
   @override
   State<ButtonAdditionalWidget> createState() =>
@@ -53,12 +55,14 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
         key: KWidgetkeys.widget.buttonAdditional.desk,
         onHover: (value) => setState(() => isHover = value),
         style: KButtonStyles.additionalButtonStyle.copyWith(
-          maximumSize: const WidgetStatePropertyAll(
-            Size(
-              KMinMaxSize.maxWidth328,
-              double.infinity,
-            ),
-          ),
+          maximumSize: widget.isDesk
+              ? null
+              : const WidgetStatePropertyAll(
+                  Size(
+                    KMinMaxSize.maxWidth328,
+                    double.infinity,
+                  ),
+                ),
           backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
           side: WidgetStatePropertyAll(
             isHover
@@ -82,16 +86,7 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
             if (widget.isDesk)
               if (widget.expanded)
                 Expanded(
-                  child: Padding(
-                    padding: widget.deskPadding ??
-                        const EdgeInsets.only(
-                          top: KPadding.kPaddingSize12,
-                          bottom: KPadding.kPaddingSize12,
-                          left: KPadding.kPaddingSize5,
-                          right: KPadding.kPaddingSize16,
-                        ),
-                    child: text,
-                  ),
+                  child: Center(child: text),
                 )
               else
                 Padding(
@@ -111,6 +106,7 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
                   child: Center(child: text),
                 ),
               ),
+            if (widget.rightWidget != null) widget.rightWidget!,
           ],
         ),
       ),

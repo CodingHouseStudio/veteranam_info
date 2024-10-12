@@ -7,7 +7,7 @@ import 'package:veteranam/shared/shared.dart';
 part 'advanced_filter_mob_state.dart';
 part 'advanced_filter_mob_cubit.freezed.dart';
 
-@injectable
+@Injectable(env: [Config.user])
 class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
   AdvancedFilterMobCubit()
       : super(

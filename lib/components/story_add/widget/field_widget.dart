@@ -10,8 +10,9 @@ Widget _imageWidget(BuildContext context) {
         decoration: KWidgetTheme.boxDecorationImage,
         child: NetworkImageWidget(
           key: KWidgetkeys.widget.cardAddImage.widget,
-          imageUrl: context.read<StoryAddBloc>().state.image.value!.path,
+          imageBytes: context.read<StoryAddBloc>().state.image.value?.bytes,
           fit: BoxFit.cover,
+          imageUrl: null,
         ),
       ),
     );

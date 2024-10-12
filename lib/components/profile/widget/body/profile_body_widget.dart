@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class ProfileBodyWidget extends StatelessWidget {
         return ScaffoldWidget(
           mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
             precent: KDimensions.thirtyPercent,
-            verticalPadding: KPadding.kPaddingSize48,
+            // verticalPadding: KPadding.kPaddingSize48,
           ),
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
@@ -30,6 +30,13 @@ class ProfileBodyWidget extends StatelessWidget {
               isDesk: isDesk,
               icon: KIcon.arrowDownRight,
               firstIcon: !isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox32
+            else
+              KSizedBox.kHeightSizedBox24,
+            const Divider(
+              color: AppColors.materialThemeKeyColorsNeutral,
             ),
           ],
           isForm: true,
@@ -47,31 +54,21 @@ class ProfileBodyWidget extends StatelessWidget {
                     : const EdgeInsets.all(
                         KPadding.kPaddingSize16,
                       ),
-                child: Column(
-                  children: [
-                    ProfileFormWidget(
-                      isDesk: isDesk,
-                      photoURL: state.image.value?.path ??
-                          context.read<AuthenticationBloc>().state.user.photo,
-                      initialName: context
-                          .read<AuthenticationBloc>()
-                          .state
-                          .user
-                          .firstName,
-                      initialEmail:
-                          context.read<AuthenticationBloc>().state.user.email,
-                      initialSurname: context
-                          .read<AuthenticationBloc>()
-                          .state
-                          .user
-                          .lastName,
-                      initialNickname: context
-                          .read<AuthenticationBloc>()
-                          .state
-                          .userSetting
-                          .nickname,
-                    ),
-                  ],
+                child: ProfileFormWidget(
+                  isDesk: isDesk,
+                  photoURL: context.read<AuthenticationBloc>().state.user.photo,
+                  imageBytes: state.image.value?.bytes,
+                  initialName:
+                      context.read<AuthenticationBloc>().state.user.firstName,
+                  initialEmail:
+                      context.read<AuthenticationBloc>().state.user.email,
+                  initialSurname:
+                      context.read<AuthenticationBloc>().state.user.lastName,
+                  initialNickname: context
+                      .read<AuthenticationBloc>()
+                      .state
+                      .userSetting
+                      .nickname,
                 ),
               ),
             ),
@@ -131,14 +128,12 @@ class ProfileBodyWidget extends StatelessWidget {
             context.read<AuthenticationBloc>().add(
                   AuthenticationDeleteRequested(),
                 );
-            context.pop();
+            context.goNamed(KRoute.home.name);
           },
         ),
         isDesk: isDesk,
-        deskPadding: const EdgeInsets.only(
-          top: KPadding.kPaddingSize16,
-          bottom: KPadding.kPaddingSize16,
-          left: KPadding.kPaddingSize60,
+        deskPadding: const EdgeInsets.symmetric(
+          vertical: KPadding.kPaddingSize16,
         ),
         expanded: true,
         borderColor: AppColors.materialThemeRefNeutralNeutral80,
@@ -148,6 +143,7 @@ class ProfileBodyWidget extends StatelessWidget {
           right: KPadding.kPaddingSize40,
         ),
         iconPadding: KPadding.kPaddingSize16,
+        rightWidget: isDesk ? KSizedBox.kWidthSizedBox58 : null,
       );
 
   Widget deleteButton({
@@ -173,7 +169,7 @@ class ProfileBodyWidget extends StatelessWidget {
             context.read<AuthenticationBloc>().add(
                   AuthenticationLogoutRequested(),
                 );
-            context.pop();
+            context.goNamed(KRoute.home.name);
           },
         ),
       );

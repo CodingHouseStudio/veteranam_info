@@ -10,7 +10,7 @@ part 'discount_user_email_form_event.dart';
 part 'discount_user_email_form_state.dart';
 part 'discount_user_email_form_bloc.freezed.dart';
 
-@Injectable()
+@Injectable(env: [Config.user])
 class DiscountUserEmailFormBloc
     extends Bloc<DiscountUserEmailFormEvent, DiscountUserEmailFormState> {
   DiscountUserEmailFormBloc({

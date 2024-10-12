@@ -1,5 +1,6 @@
 export 'about_us/about_us.dart';
 export 'business_dashboard/business_dashboard.dart';
+export 'company/company.dart';
 export 'consultation/consultation.dart';
 export 'contact/contact.dart';
 export 'discount_card/discount_card.dart';

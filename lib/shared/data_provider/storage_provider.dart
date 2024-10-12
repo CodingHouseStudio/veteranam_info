@@ -1,87 +1,61 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in storage
-@singleton
+@Singleton(order: -1)
 class StorageService {
-  final FirebaseStorage storage = firebaseStorage;
+  StorageService(
+    this._storage,
+  );
+  final FirebaseStorage _storage;
 
-  @visibleForTesting
-  static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-
-  @visibleForTesting
-  static Future<Uint8List>? uint8List;
-  Future<Uint8List> _xFile(String ref) async =>
-      uint8List ?? XFile(ref).readAsBytes();
-
-  Future<String> saveImage({
-    required ImageModel imageModel,
+  Future<String?> saveFile({
+    required ImagePickerItem imagePickerItem,
     required String id,
     required String collecltionName,
+    String file = StoragePath.image,
+    String standartFileExtension = StoragePath.standartImageFileExtension,
   }) async {
-    if (imageModel.ref == null || imageModel.ref!.isEmpty) return '';
-    final value = storage
+    if (imagePickerItem.bytes.isEmpty) return null;
+    final uploadTask = _storage
         .ref(
-          StoragePath.getImagePath(
+          StoragePath.getFilePath(
             collection: collecltionName,
             modelId: id,
-            imageName: imageModel.name,
+            // imageName: imageItem.name,
+            fileExtension: imagePickerItem.extension, file: file,
+            standartFileExtension: standartFileExtension,
           ),
         )
-        .putBlob(await _xFile(imageModel.ref!));
-    final snapshot = await value.getTaskSnapshot();
+        .putData(imagePickerItem.bytes);
+
+    final snapshot = await uploadTask;
 
     return snapshot.ref.getDownloadURL();
   }
 
-  Future<String> saveUseUint8ListImage({
-    required Uint8List image,
-    required String id,
-    required String collecltionName,
-  }) async {
-    final value = storage
-        .ref(
-          StoragePath.getImagePath(
-            collection: collecltionName,
-            modelId: id,
-          ),
-        )
-        .putImage(image);
-    final snapshot = await value.getTaskSnapshot();
+  // Future<ResumeModel?> saveRespond({
+  //   required ImagePickerItem resumeItem,
+  //   required String respondId,
+  // }) async {
+  //   if (resumeItem.bytes.isEmpty) return null;
+  //   final value = storage
+  //       .ref(
+  //         StoragePath.getResumePath(
+  //           collection: FirebaseCollectionName.respond,
+  //           modelId: respondId,
+  //           // resumeName: resumeItem.name,
+  //           fileExtension: resumeItem.extension,
+  //         ),
+  //       )
+  //       .putData(resumeItem.bytes);
 
-    return snapshot.ref.getDownloadURL();
-  }
+  //   final snapshot = value.snapshot;
+  //   final downloadUrl = await snapshot.ref.getDownloadURL();
 
-  Future<String?> saveRespond({
-    required ResumeModel resumeModel,
-    required String respondId,
-  }) async {
-    if (resumeModel.ref == null && resumeModel.name == null) return null;
-    final value = storage
-        .ref(
-          StoragePath.getResumePath(
-            collection: FirebaseCollectionName.respond,
-            modelId: respondId,
-            resumeName: resumeModel.name,
-            fileExtension: resumeModel.name!.substring(
-              resumeModel.name!.lastIndexOf('.'),
-            ),
-          ),
-        )
-        .putImage(await _xFile(resumeModel.ref!));
+  //   if (downloadUrl.isEmpty) return null;
 
-    final snapshot = await value.getTaskSnapshot();
-    return snapshot.ref.getDownloadURL();
-  }
-}
-
-extension UploadTaskExtention on UploadTask {
-  @visibleForTesting
-  static Future<TaskSnapshot>? taskSnapshot;
-  Future<TaskSnapshot> getTaskSnapshot() {
-    return taskSnapshot ?? this;
-  }
+  //   return resumeItem.resume(downloadUrl);
+  // }
 }
