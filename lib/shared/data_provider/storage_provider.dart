@@ -1,6 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -12,85 +11,52 @@ class StorageService {
   @visibleForTesting
   static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
-  @visibleForTesting
-  static Future<Uint8List>? uint8List;
-  Future<Uint8List> _xFile(String ref) async =>
-      uint8List ?? XFile(ref).readAsBytes();
-
   Future<ImageModel?> saveImage({
-    required Uint8List image,
+    required ImagePickerItem imageItem,
     required String id,
     required String collecltionName,
   }) async {
-    if (image.isEmpty) return null;
-    final imageName = ExtendedDateTime.id;
+    if (imageItem.bytes.isEmpty) return null;
     final value = storage
         .ref(
           StoragePath.getImagePath(
             collection: collecltionName,
             modelId: id,
-            imageName: imageName,
+            // imageName: imageItem.name,
+            imageExtension: imageItem.extension,
           ),
         )
-        .putBlob(image);
-    final snapshot = await value.getTaskSnapshot();
+        .putData(imageItem.bytes);
+    final snapshot = await value;
 
     final downloadUrl = await snapshot.ref.getDownloadURL();
 
     if (downloadUrl.isEmpty) return null;
 
-    return ImageModel(
-      downloadURL: downloadUrl,
-      name: imageName,
-      type: StoragePath.standartImageFileExtension,
-    );
+    return imageItem.image(downloadUrl);
   }
 
-  Future<String> saveUseUint8ListImage({
-    required Uint8List image,
-    required String id,
-    required String collecltionName,
-  }) async {
-    final value = storage
-        .ref(
-          StoragePath.getImagePath(
-            collection: collecltionName,
-            modelId: id,
-          ),
-        )
-        .putImage(image);
-    final snapshot = await value.getTaskSnapshot();
-
-    return snapshot.ref.getDownloadURL();
-  }
-
-  Future<String?> saveRespond({
-    required ResumeModel resumeModel,
+  Future<ResumeModel?> saveRespond({
+    required ImagePickerItem resumeItem,
     required String respondId,
   }) async {
-    if (resumeModel.ref == null && resumeModel.name == null) return null;
+    if (resumeItem.bytes.isEmpty) return null;
     final value = storage
         .ref(
           StoragePath.getResumePath(
             collection: FirebaseCollectionName.respond,
             modelId: respondId,
-            resumeName: resumeModel.name,
-            fileExtension: resumeModel.name!.substring(
-              resumeModel.name!.lastIndexOf('.'),
-            ),
+            // resumeName: resumeItem.name,
+            fileExtension: resumeItem.extension,
           ),
         )
-        .putImage(await _xFile(resumeModel.ref!));
+        .putData(resumeItem.bytes);
 
-    final snapshot = await value.getTaskSnapshot();
-    return snapshot.ref.getDownloadURL();
-  }
-}
+    final snapshot = value.snapshot;
+    final downloadUrl = await snapshot.ref.getDownloadURL();
 
-extension UploadTaskExtention on UploadTask {
-  @visibleForTesting
-  static Future<TaskSnapshot>? taskSnapshot;
-  Future<TaskSnapshot> getTaskSnapshot() {
-    return taskSnapshot ?? this;
+    if (downloadUrl.isEmpty) return null;
+
+    return resumeItem.resume(downloadUrl);
   }
 }

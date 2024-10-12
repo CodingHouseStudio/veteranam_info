@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data' show Uint8List;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -513,7 +512,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required Uint8List? image,
+    required ImagePickerItem? image,
   }) async {
     try {
       late var userPhoto = user.photo;
@@ -537,11 +536,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<String?> _updatePhoto({
-    required Uint8List image,
+    required ImagePickerItem image,
     required String userId,
   }) async {
     final imageModel = await _storageService.saveImage(
-      image: image,
+      imageItem: image,
       id: userId,
       collecltionName: FirebaseCollectionName.user,
     );

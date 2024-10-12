@@ -65,7 +65,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
@@ -113,7 +113,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),
@@ -161,7 +161,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),

@@ -25,14 +25,16 @@ void main() {
       mockUploadTask = MockUploadTask();
       mockTaskSnapshot = MockTaskSnapshot();
       uint8List = Uint8List(1);
+      ExtendedDateTime.id = KTestText.id;
       StorageService.firebaseStorage = mockFirebaseStorage;
-      StorageService.uint8List = Future.value(uint8List);
+      // StorageService.uint8List = Future.value(uint8List);
       when(
         mockFirebaseStorage.ref(
           StoragePath.getImagePath(
             collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            imageName: KTestText.storyModelItems.last.image!.name,
+            imageExtension: null,
+            // imageName: KTestText.storyModelItems.last.image!.name,
           ),
         ),
       ).thenAnswer((realInvocation) => mockReference);
@@ -41,7 +43,7 @@ void main() {
           StoragePath.getResumePath(
             collection: FirebaseCollectionName.respond,
             modelId: KTestText.employeeRespondModel.id,
-            resumeName: KTestText.employeeRespondModel.resume!.name,
+            // resumeName: KTestText.employeeRespondModel.resume!.name,
             fileExtension:
                 KTestText.employeeRespondModel.resume!.name!.substring(
               KTestText.employeeRespondModel.resume!.name!.lastIndexOf('.'),
@@ -53,7 +55,7 @@ void main() {
         mockReference.putBlob(uint8List),
       ).thenAnswer(
         (realInvocation) {
-          UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
+          // UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
           return mockUploadTask;
         },
       );
@@ -61,7 +63,7 @@ void main() {
         mockReference.putData(uint8List),
       ).thenAnswer(
         (realInvocation) {
-          UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
+          // UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
           return mockUploadTask;
         },
       );
@@ -113,7 +115,7 @@ void main() {
 
     test('save empty story image', () async {
       await storageService.saveImage(
-        image: KTestText.imageBytes,
+        imageItem: KTestText.imagePickerItem,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
@@ -122,13 +124,14 @@ void main() {
         StoragePath.getImagePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageName: KTestText.storyModelItems.last.image!.name,
+          imageExtension: null,
+          // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
     });
     test('save story image', () async {
       await storageService.saveImage(
-        image: KTestText.imageBytes,
+        imageItem: KTestText.imagePickerItem,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
@@ -137,14 +140,16 @@ void main() {
         StoragePath.getImagePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageName: KTestText.storyModelItems.last.image!.name,
+          imageExtension: null,
+          // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
     });
     test('save resume', () async {
       await storageService.saveRespond(
         respondId: KTestText.employeeRespondModel.id,
-        resumeModel: KTestText.employeeRespondModel.resume!,
+
+        resumeItem: KTestText.imagePickerItem,
         // collecltionName: FirebaseCollectionName.stroies,
       );
 
@@ -152,7 +157,8 @@ void main() {
       StoragePath.getImagePath(
         collection: FirebaseCollectionName.stroies,
         modelId: KTestText.storyModelItems.last.id,
-        imageName: KTestText.storyModelItems.last.image!.name,
+        imageExtension: null,
+        // imageName: KTestText.storyModelItems.last.image!.name,
       );
       // );
     });

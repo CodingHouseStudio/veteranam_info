@@ -18,23 +18,23 @@ void main() {
   group('${KScreenBlocName.storyAdd} ', () {
     late IStoryRepository mockStoryRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late DataPickerRepository mockDataPickerRepository;
+    late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.storyModelItems.first.date;
       ExtendedDateTime.id = KTestText.storyModelItems.first.id;
       mockStoryRepository = MockIStoryRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockDataPickerRepository = MockDataPickerRepository();
+      mockDataPickerRepository = MockIDataPickerRepository();
 
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imageBytes,
+        (realInvocation) async => KTestText.imagePickerItem,
       );
 
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imageBytes,
+          image: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first,
         ),
       ).thenAnswer(
@@ -48,7 +48,7 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -70,7 +70,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -88,7 +88,7 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            image: KTestText.imageBytes,
+            image: KTestText.imagePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(

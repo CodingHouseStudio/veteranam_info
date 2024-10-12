@@ -16,7 +16,7 @@ part 'company_form_state.dart';
 class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
   CompanyFormBloc({
     required ICompanyRepository companyRepository,
-    required DataPickerRepository dataPickerRepository,
+    required IDataPickerRepository dataPickerRepository,
   })  : _companyRepository = companyRepository,
         _dataPickerRepository = dataPickerRepository,
         super(
@@ -39,7 +39,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
   }
 
   final ICompanyRepository _companyRepository;
-  final DataPickerRepository _dataPickerRepository;
+  final IDataPickerRepository _dataPickerRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -91,9 +91,9 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _ImageUpdated event,
     Emitter<CompanyFormState> emit,
   ) async {
-    final imageBytes = await _dataPickerRepository.getImage;
-    if (imageBytes == null || imageBytes.isEmpty) return;
-    final imageFieldModel = ImageFieldModel.dirty(imageBytes);
+    final image = await _dataPickerRepository.getImage;
+    if (image == null || image.bytes.isEmpty) return;
+    final imageFieldModel = ImageFieldModel.dirty(image);
 
     emit(
       state.copyWith(
@@ -121,7 +121,20 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _DeleteCompany event,
     Emitter<CompanyFormState> emit,
   ) async {
-    await _companyRepository.deleteCompany();
+    final result = await _companyRepository.deleteCompany();
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: l._toCompanyError(),
+        ),
+      ),
+      (r) => emit(
+        state.copyWith(
+          formState: CompanyFormEnum.delete,
+          failure: null,
+        ),
+      ),
+    );
   }
 
   Future<void> _onSave(

@@ -13,7 +13,7 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
     required AuthenticationRepository authenticationRepository,
-    required DataPickerRepository dataPickerRepository,
+    required IDataPickerRepository dataPickerRepository,
   })  : _authenticationRepository = authenticationRepository,
         _dataPickerRepository = dataPickerRepository,
         super(
@@ -35,7 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   final AuthenticationRepository _authenticationRepository;
-  final DataPickerRepository _dataPickerRepository;
+  final IDataPickerRepository _dataPickerRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -93,7 +93,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     final imageBytes = await _dataPickerRepository.getImage;
-    if (imageBytes == null || imageBytes.isEmpty) return;
+    if (imageBytes == null || imageBytes.bytes.isEmpty) return;
     final imageFieldModel = ImageFieldModel.dirty(
       imageBytes,
     );

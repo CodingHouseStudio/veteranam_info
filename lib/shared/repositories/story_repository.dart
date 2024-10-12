@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data' show Uint8List;
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
@@ -18,13 +17,13 @@ class StoryRepository implements IStoryRepository {
   @override
   Future<Either<SomeFailure, bool>> addStory({
     required StoryModel storyModel,
-    required Uint8List? image,
+    required ImagePickerItem? image,
   }) async {
     try {
       late var methodStoryModel = storyModel;
       if (image != null) {
         final imageModel = await _storageService.saveImage(
-          image: image,
+          imageItem: image,
           id: storyModel.id,
           collecltionName: FirebaseCollectionName.stroies,
         );

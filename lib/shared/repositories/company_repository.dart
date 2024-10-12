@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data' show Uint8List;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
@@ -109,7 +108,7 @@ class CompanyRepository implements ICompanyRepository {
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
     required CompanyModel company,
-    required Uint8List? image,
+    required ImagePickerItem? image,
   }) async {
     try {
       if (company == currentUserCompany && image == null) {
@@ -125,7 +124,7 @@ class CompanyRepository implements ICompanyRepository {
       }
       if (image != null) {
         final imageModel = await _storageService.saveImage(
-          image: image,
+          imageItem: image,
           id: company.id,
           collecltionName: FirebaseCollectionName.companies,
         );
@@ -152,8 +151,11 @@ class CompanyRepository implements ICompanyRepository {
         await _firestoreService.deleteCompany(currentUserCompany.id);
         _userCompanyController.add(CompanyModel.empty);
         _onUserStreamCancel();
+      }
+      if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
         await iAppAuthenticationRepository.deleteUser();
       }
+
       return const Right(true);
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);

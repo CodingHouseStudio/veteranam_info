@@ -140,8 +140,8 @@ import 'package:veteranam/shared/shared.dart' as _i1001;
 
 const String _user = 'user';
 const String _mobile = 'mobile';
-const String _development = 'development';
 const String _business = 'business';
+const String _development = 'development';
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -216,6 +216,13 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i895.Connectivity>(),
           gh<_i1001.CacheClient>(),
         ));
+    gh.singleton<_i1001.IDataPickerRepository>(
+      () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()),
+      registerFor: {
+        _business,
+        _development,
+      },
+    );
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.singleton<_i1001.IReportRepository>(
@@ -247,13 +254,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i522.HomeWatcherBloc>(
       () => _i522.HomeWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
       registerFor: {_user},
-    );
-    gh.singleton<_i290.DataPickerRepository>(
-      () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()),
-      registerFor: {
-        _business,
-        _development,
-      },
     );
     gh.singleton<_i1001.IWorkRepository>(
       () => _i76.WorkRepository(),
@@ -347,8 +347,17 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i675.EmployeeRespondBloc>(
       () => _i675.EmployeeRespondBloc(
-          employeeRespondRepository: gh<_i1001.IWorkRepository>()),
+        employeeRespondRepository: gh<_i1001.IWorkRepository>(),
+        dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
+      ),
       registerFor: {_development},
+    );
+    gh.factory<_i174.CompanyFormBloc>(
+      () => _i174.CompanyFormBloc(
+        companyRepository: gh<_i1001.ICompanyRepository>(),
+        dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
+      ),
+      registerFor: {_business},
     );
     gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
@@ -381,14 +390,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i716.StoryAddBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
         iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
-        dataPickerRepository: gh<_i1001.DataPickerRepository>(),
+        dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
       ),
       registerFor: {_development},
     );
-    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
-          authenticationRepository: gh<_i1001.AuthenticationRepository>(),
-          dataPickerRepository: gh<_i1001.DataPickerRepository>(),
-        ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -414,13 +419,6 @@ extension GetItInjectableX on _i174.GetIt {
             authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
-    gh.factory<_i174.CompanyFormBloc>(
-      () => _i174.CompanyFormBloc(
-        companyRepository: gh<_i1001.ICompanyRepository>(),
-        dataPickerRepository: gh<_i1001.DataPickerRepository>(),
-      ),
-      registerFor: {_business},
-    );
     gh.singleton<_i777.FirebaseAnalyticsService>(
         () => _i777.FirebaseAnalyticsService(
               gh<_i398.FirebaseAnalytics>(),
@@ -431,6 +429,10 @@ extension GetItInjectableX on _i174.GetIt {
           companyRepository: gh<_i1001.ICompanyRepository>()),
       registerFor: {_business},
     );
+    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
+          authenticationRepository: gh<_i1001.AuthenticationRepository>(),
+          dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
+        ));
     gh.factory<_i441.DiscountUserEmailFormBloc>(
       () => _i441.DiscountUserEmailFormBloc(
         discountRepository: gh<_i1001.IDiscountRepository>(),

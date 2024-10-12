@@ -9,7 +9,7 @@ Future<void> storyAddPumpAppHelper({
   required IStoryRepository mockStoryRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
-  required DataPickerRepository mockDataPickerRepository,
+  required IDataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerStoryAddBloc(
@@ -30,7 +30,7 @@ Future<void> storyAddPumpAppHelper({
 void _registerStoryAddBloc({
   required IStoryRepository mockStoryRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required DataPickerRepository mockDataPickerRepository,
+  required IDataPickerRepository mockDataPickerRepository,
 }) {
   final storyAddBloc = StoryAddBloc(
     storyRepository: mockStoryRepository,

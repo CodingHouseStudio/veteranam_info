@@ -179,7 +179,14 @@ abstract class KTestText {
 
   static const image = 'test';
 
-  static final imageBytes = Uint8List(1);
+  static final imagePickerItem =
+      ImagePickerItem(bytes: Uint8List(1), name: image, ref: image);
+
+  static final imagePickerItemFeedback =
+      ImagePickerItem(bytes: Uint8List(1), name: null, ref: null);
+
+  static final imagePickerItemFeedbackWrong =
+      ImagePickerItem(bytes: Uint8List(2), name: null, ref: null);
 
   static const userWithoutPhoto = User(
     id: '1',

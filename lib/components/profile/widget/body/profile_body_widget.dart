@@ -57,7 +57,7 @@ class ProfileBodyWidget extends StatelessWidget {
                 child: ProfileFormWidget(
                   isDesk: isDesk,
                   photoURL: context.read<AuthenticationBloc>().state.user.photo,
-                  imageBytes: state.image.value,
+                  imageBytes: state.image.value?.bytes,
                   initialName:
                       context.read<AuthenticationBloc>().state.user.firstName,
                   initialEmail:
@@ -128,7 +128,7 @@ class ProfileBodyWidget extends StatelessWidget {
             context.read<AuthenticationBloc>().add(
                   AuthenticationDeleteRequested(),
                 );
-            context.pop();
+            context.goNamed(KRoute.home.name);
           },
         ),
         isDesk: isDesk,
@@ -169,7 +169,7 @@ class ProfileBodyWidget extends StatelessWidget {
             context.read<AuthenticationBloc>().add(
                   AuthenticationLogoutRequested(),
                 );
-            context.pop();
+            context.goNamed(KRoute.home.name);
           },
         ),
       );

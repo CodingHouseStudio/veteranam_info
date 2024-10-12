@@ -8,7 +8,7 @@ import '../../test_dependency.dart';
 Future<void> profilePumpAppHelper({
   required WidgetTester tester,
   required AuthenticationRepository mockAuthenticationRepository,
-  required DataPickerRepository mockDataPickerRepository,
+  required IDataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
@@ -42,7 +42,7 @@ void _registerAuthenticationBloc(
 
 void _registerProfileBloc({
   required AuthenticationRepository mockAuthenticationRepository,
-  required DataPickerRepository mockDataPickerRepository,
+  required IDataPickerRepository mockDataPickerRepository,
 }) {
   final profileBloc = ProfileBloc(
     authenticationRepository: mockAuthenticationRepository,

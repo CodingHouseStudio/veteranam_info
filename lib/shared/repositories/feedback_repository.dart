@@ -68,16 +68,18 @@ class FeedbackRepository implements IFeedbackRepository {
     required Uint8List image,
     required FeedbackModel feedback,
   }) async {
-    final downloadURL = await _storageService.saveUseUint8ListImage(
-      image: image,
+    final imageModel = await _storageService.saveImage(
+      imageItem: ImagePickerItem(
+        bytes: image,
+        name: null,
+        ref: null,
+      ),
       id: feedback.id,
       collecltionName: FirebaseCollectionName.mobFeedback,
     );
-    if (downloadURL.isNotEmpty) {
+    if (imageModel != null) {
       return feedback.copyWith(
-        image: ImageModel(
-          downloadURL: downloadURL,
-        ),
+        image: imageModel,
       );
     }
 

@@ -13,7 +13,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   StoryAddBloc({
     required IStoryRepository storyRepository,
     required IAppAuthenticationRepository iAppAuthenticationRepository,
-    required DataPickerRepository dataPickerRepository,
+    required IDataPickerRepository dataPickerRepository,
   })  : _storyRepository = storyRepository,
         _iAppAuthenticationRepository = iAppAuthenticationRepository,
         _dataPickerRepository = dataPickerRepository,
@@ -33,7 +33,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   }
   final IStoryRepository _storyRepository;
   final IAppAuthenticationRepository _iAppAuthenticationRepository;
-  final DataPickerRepository _dataPickerRepository;
+  final IDataPickerRepository _dataPickerRepository;
   void _onStoryUpdated(
     _StoryUpdated event,
     Emitter<StoryAddState> emit,
@@ -64,7 +64,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     Emitter<StoryAddState> emit,
   ) async {
     final imageBytes = await _dataPickerRepository.getImage;
-    if (imageBytes == null || imageBytes.isEmpty) return;
+    if (imageBytes == null || imageBytes.bytes.isEmpty) return;
     final imageFieldModel = ImageFieldModel.dirty(
       imageBytes,
     );

@@ -17,11 +17,11 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.profile} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    late DataPickerRepository mockDataPickerRepository;
+    late IDataPickerRepository mockDataPickerRepository;
     // late XFile image;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
-      mockDataPickerRepository = MockDataPickerRepository();
+      mockDataPickerRepository = MockIDataPickerRepository();
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
@@ -47,7 +47,7 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imageBytes,
+        (realInvocation) async => KTestText.imagePickerItem,
       );
 
       when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(

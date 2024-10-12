@@ -23,23 +23,23 @@ void main() {
     late StoryAddBloc storyAddBloc;
     late IStoryRepository mockStoryRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late DataPickerRepository mockDataPickerRepository;
+    late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
       ExtendedDateTime.id = KTestText.storyModelItems.last.id;
       ExtendedDateTime.current = KTestText.dateTime;
-      mockDataPickerRepository = MockDataPickerRepository();
+      mockDataPickerRepository = MockIDataPickerRepository();
 
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imageBytes,
+        (realInvocation) async => KTestText.imagePickerItem,
       );
 
       mockStoryRepository = MockIStoryRepository();
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imageBytes,
+          image: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.last,
         ),
       ).thenAnswer(
@@ -47,7 +47,7 @@ void main() {
       );
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imageBytes,
+          image: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.last
               .copyWith(userName: null, userPhoto: null),
         ),
@@ -56,7 +56,7 @@ void main() {
       );
       when(
         mockStoryRepository.addStory(
-          image: KTestText.imageBytes,
+          image: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
             id: KTestText.storyModelItems.last.id,

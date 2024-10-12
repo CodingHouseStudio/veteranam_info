@@ -9,7 +9,12 @@ class CompanyBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompanyFormBloc, CompanyFormState>(
+    return BlocConsumer<CompanyFormBloc, CompanyFormState>(
+      listener: (context, state) {
+        if (state.formState == CompanyFormEnum.delete) {
+          context.goNamed(KRoute.myDiscounts.name);
+        }
+      },
       buildWhen: (previous, current) =>
           previous.formState != current.formState ||
           previous.image != current.image,
@@ -109,7 +114,7 @@ class CompanyBodyWidget extends StatelessWidget {
             .image
             ?.downloadURL
             .getImageUrl,
-        imageBytes: context.read<CompanyFormBloc>().state.image.value,
+        imageBytes: context.read<CompanyFormBloc>().state.image.value?.bytes,
         initialCompanyName:
             context.read<CompanyWatcherBloc>().state.company.companyName,
         initialEmail: context.read<AuthenticationBloc>().state.user.email,

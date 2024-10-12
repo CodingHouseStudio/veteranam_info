@@ -30,13 +30,14 @@ class WorkRepository implements IWorkRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> sendRespond(
-    EmployeeRespondModel respond,
-  ) async {
+  Future<Either<SomeFailure, bool>> sendRespond({
+    required EmployeeRespondModel respond,
+    required ImagePickerItem? file,
+  }) async {
     try {
-      if (respond.resume != null) {
+      if (file != null) {
         await _storageService.saveRespond(
-          resumeModel: respond.resume!,
+          resumeItem: file,
           respondId: respond.id,
         );
       }

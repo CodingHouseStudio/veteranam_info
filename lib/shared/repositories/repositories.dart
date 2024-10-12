@@ -17,6 +17,7 @@ export 'i_app_authentication_repository.dart';
 export 'i_app_network_repository.dart';
 export 'i_cities_repository.dart';
 export 'i_company_respository.dart';
+export 'i_data_picker_repository.dart';
 export 'i_device_repository.dart';
 export 'i_discount_repository.dart';
 export 'i_faq_repository.dart';

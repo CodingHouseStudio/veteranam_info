@@ -97,10 +97,10 @@ void main() {
         ).thenThrow(Exception(KGroupText.failureGet));
 
         when(
-          mockStorageService.saveUseUint8ListImage(
+          mockStorageService.saveImage(
             id: KTestText.feedbackModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            image: wrongImage,
+            imageItem: KTestText.imagePickerItem,
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         mockFeedbackRepository = FeedbackRepository();
@@ -190,10 +190,10 @@ void main() {
         ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
         when(
-          mockStorageService.saveUseUint8ListImage(
+          mockStorageService.saveImage(
             id: KTestText.feedbackModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            image: wrongImage,
+            imageItem: KTestText.imagePickerItemFeedbackWrong,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         mockFeedbackRepository = FeedbackRepository();

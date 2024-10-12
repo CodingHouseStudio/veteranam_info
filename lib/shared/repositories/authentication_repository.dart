@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data' show Uint8List;
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -348,7 +347,7 @@ class AuthenticationRepository {
   Future<Either<SomeFailure, bool>> updateUserData({
     required User user,
     required String? nickname,
-    required Uint8List? image,
+    required ImagePickerItem? image,
   }) async {
     SomeFailure? failureValue;
     bool? right;
