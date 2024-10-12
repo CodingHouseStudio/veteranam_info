@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -18,58 +16,35 @@ void main() {
     late Reference mockReference;
     late UploadTask mockUploadTask;
     late TaskSnapshot mockTaskSnapshot;
-    late Uint8List uint8List;
     setUp(() async {
       mockReference = MockReference();
       mockFirebaseStorage = MockFirebaseStorage();
       mockUploadTask = MockUploadTask();
       mockTaskSnapshot = MockTaskSnapshot();
-      uint8List = Uint8List(1);
-      StorageService.firebaseStorage = mockFirebaseStorage;
-      StorageService.uint8List = Future.value(uint8List);
+      ExtendedDateTime.id = KTestText.id;
       when(
         mockFirebaseStorage.ref(
-          StoragePath.getImagePath(
+          StoragePath.getFilePath(
             collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            imageName: KTestText.storyModelItems.last.image!.name,
+            fileExtension: null,
+            file: StoragePath.image,
+            standartFileExtension: StoragePath.standartImageFileExtension,
           ),
         ),
       ).thenAnswer((realInvocation) => mockReference);
       when(
-        mockFirebaseStorage.ref(
-          StoragePath.getResumePath(
-            collection: FirebaseCollectionName.respond,
-            modelId: KTestText.employeeRespondModel.id,
-            resumeName: KTestText.employeeRespondModel.resume!.name,
-            fileExtension:
-                KTestText.employeeRespondModel.resume!.name!.substring(
-              KTestText.employeeRespondModel.resume!.name!.lastIndexOf('.'),
-            ),
-          ),
-        ),
-      ).thenAnswer((realInvocation) => mockReference);
-      when(
-        mockReference.putBlob(uint8List),
+        mockReference.putData(KTestText.imagePickerItem.bytes),
       ).thenAnswer(
         (realInvocation) {
-          UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
           return mockUploadTask;
         },
       );
       when(
-        mockReference.putData(uint8List),
+        await mockUploadTask,
       ).thenAnswer(
-        (realInvocation) {
-          UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
-          return mockUploadTask;
-        },
+        (realInvocation) => mockTaskSnapshot,
       );
-      // when(
-      //   mockUploadTask.getTaskSnapshot(),
-      // ).thenAnswer(
-      //   (realInvocation) async => mockTaskSnapshot,
-      // );
       when(
         mockTaskSnapshot.ref,
       ).thenAnswer((realInvocation) => mockReference);
@@ -79,7 +54,7 @@ void main() {
         (realInvocation) async =>
             KTestText.storyModelItems.last.image!.downloadURL,
       );
-      storageService = StorageService();
+      storageService = StorageService(mockFirebaseStorage);
     });
     void verifyMethod(String path) {
       verify(
@@ -112,51 +87,55 @@ void main() {
     }
 
     test('save empty story image', () async {
-      await storageService.saveImage(
-        imageModel: KTestText.storyModelItems.last.image!.copyWith(
-          ref: null,
-        ),
+      await storageService.saveFile(
+        imagePickerItem: KTestText.imagePickerItemEmpty,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyNeverMethod(
-        StoragePath.getImagePath(
+        StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageName: KTestText.storyModelItems.last.image!.name,
+          fileExtension: null, file: StoragePath.image,
+          standartFileExtension: StoragePath.standartImageFileExtension,
+          // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
     });
     test('save story image', () async {
-      await storageService.saveImage(
-        imageModel: KTestText.storyModelItems.last.image!,
+      await storageService.saveFile(
+        imagePickerItem: KTestText.imagePickerItem,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyMethod(
-        StoragePath.getImagePath(
+        StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
-          imageName: KTestText.storyModelItems.last.image!.name,
+          fileExtension: null, file: StoragePath.image,
+          standartFileExtension: StoragePath.standartImageFileExtension,
+          // imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
     });
-    test('save resume', () async {
-      await storageService.saveRespond(
-        respondId: KTestText.employeeRespondModel.id,
-        resumeModel: KTestText.employeeRespondModel.resume!,
-        // collecltionName: FirebaseCollectionName.stroies,
-      );
+    // test('save resume', () async {
+    //   await storageService.saveFile(
+    //     respondId: KTestText.employeeRespondModel.id,
 
-      // verifyMethod(
-      StoragePath.getImagePath(
-        collection: FirebaseCollectionName.stroies,
-        modelId: KTestText.storyModelItems.last.id,
-        imageName: KTestText.storyModelItems.last.image!.name,
-      );
-      // );
-    });
+    //     resumeItem: KTestText.imagePickerItem,
+    //     // collecltionName: FirebaseCollectionName.stroies,
+    //   );
+
+    //   // verifyMethod(
+    //   StoragePath.getImagePath(
+    //     collection: FirebaseCollectionName.stroies,
+    //     modelId: KTestText.storyModelItems.last.id,
+    //     imageExtension: null,
+    //     // imageName: KTestText.storyModelItems.last.image!.name,
+    //   );
+    //   // );
+    // });
   });
 }

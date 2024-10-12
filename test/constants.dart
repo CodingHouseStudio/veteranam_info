@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -177,6 +178,18 @@ abstract class KTestText {
   );
 
   static const image = 'test';
+
+  static final imagePickerItem =
+      ImagePickerItem(bytes: Uint8List(1), name: image, ref: image);
+
+  static final imagePickerItemEmpty =
+      ImagePickerItem(bytes: Uint8List(0), name: image, ref: image);
+
+  static final imagePickerItemFeedback =
+      ImagePickerItem(bytes: Uint8List(1), name: null, ref: null);
+
+  static final imagePickerItemFeedbackWrong =
+      ImagePickerItem(bytes: Uint8List(2), name: null, ref: null);
 
   static const userWithoutPhoto = User(
     id: '1',

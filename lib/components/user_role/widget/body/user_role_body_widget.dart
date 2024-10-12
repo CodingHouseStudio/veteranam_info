@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -46,7 +47,9 @@ class UserRoleBodyWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.screen.userRole.signUpBusinessButton,
                   text: context.l10n.signUpBusiness,
                   isDesk: isDesk,
-                  onPressed: null,
+                  onPressed: () => context.read<UrlCubit>().launchUrl(
+                        url: '${KAppText.businessSite}${KRoute.signUp.path}',
+                      ),
                   color: AppColors.materialThemeKeyColorsPrimary,
                   textColor: AppColors.materialThemeKeyColorsSecondary,
                   mobHorizontalTextPadding: KPadding.kPaddingSize40,
@@ -107,7 +110,9 @@ class UserRoleBodyWidget extends StatelessWidget {
               items: [
                 DropDownItem(
                   text: context.l10n.asBusiness,
-                  action: null,
+                  action: () => context.read<UrlCubit>().launchUrl(
+                        url: '${KAppText.businessSite}${KRoute.login.path}',
+                      ),
                   key: KWidgetkeys.screen.userRole.loginBusinessButton,
                 ),
                 DropDownItem(

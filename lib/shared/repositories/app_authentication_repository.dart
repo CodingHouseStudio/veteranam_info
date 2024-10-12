@@ -436,6 +436,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
       await _firestoreService.deleteUserSetting(currentUser.id);
+      // final credential = firebase_auth.EmailAuthProvider.credential(
+      //   email: currentUser.email,
+      //   password: _firebaseAuth.currentUser.password,
+      // );
+      // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
+      // l);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       unawaited(logInAnonymously());
@@ -512,7 +518,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required ImageModel? image,
+    required ImagePickerItem? image,
   }) async {
     try {
       late var userPhoto = user.photo;
@@ -536,11 +542,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<String?> _updatePhoto({
-    required ImageModel image,
+    required ImagePickerItem image,
     required String userId,
   }) async {
-    final downloadURL = await _storageService.saveImage(
-      imageModel: image,
+    final downloadURL = await _storageService.saveFile(
+      imagePickerItem: image,
       id: userId,
       collecltionName: FirebaseCollectionName.user,
     );

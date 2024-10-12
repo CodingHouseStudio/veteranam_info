@@ -12,7 +12,7 @@ part 'discount_watcher_bloc.freezed.dart';
 part 'discount_watcher_event.dart';
 part 'discount_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.user])
 class DiscountWatcherBloc
     extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
   DiscountWatcherBloc({
