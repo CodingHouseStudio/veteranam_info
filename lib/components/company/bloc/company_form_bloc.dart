@@ -91,6 +91,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _ImageUpdated event,
     Emitter<CompanyFormState> emit,
   ) async {
+    // Not need to check error. If we have error we don't show image for user
     final image = await _dataPickerRepository.getImage;
     if (image == null || image.bytes.isEmpty) return;
     final imageFieldModel = ImageFieldModel.dirty(image);
