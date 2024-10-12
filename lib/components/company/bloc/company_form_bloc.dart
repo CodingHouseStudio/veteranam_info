@@ -121,20 +121,20 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _DeleteCompany event,
     Emitter<CompanyFormState> emit,
   ) async {
-    await _companyRepository.deleteCompany();
-    // result.fold(
-    //   (l) => emit(
-    //     state.copyWith(
-    //       failure: l._toCompanyError(),
-    //     ),
-    //   ),
-    //   (r) => emit(
-    //     state.copyWith(
-    //       formState: CompanyFormEnum.delete,
-    //       failure: null,
-    //     ),
-    //   ),
-    // );
+    final result = await _companyRepository.deleteCompany();
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: l._toCompanyError(),
+        ),
+      ),
+      (r) => emit(
+        state.copyWith(
+          formState: CompanyFormEnum.delete,
+          failure: null,
+        ),
+      ),
+    );
   }
 
   Future<void> _onSave(
