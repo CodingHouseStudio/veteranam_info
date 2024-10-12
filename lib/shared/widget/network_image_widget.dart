@@ -16,14 +16,16 @@ class NetworkImageWidget extends StatefulWidget {
     this.size,
     this.highQuality,
     this.imageName,
+    this.imageBytes,
     // this.skeletonizerLoading = true,
     // this.loadingIndicatorColor,
   });
-  final String imageUrl;
+  final String? imageUrl;
   final BoxFit? fit;
   final double? size;
   final bool? highQuality;
   final String? imageName;
+  final Uint8List? imageBytes;
   // final bool skeletonizerLoading;
 
   @override
@@ -31,23 +33,26 @@ class NetworkImageWidget extends StatefulWidget {
 }
 
 class _NetworkImageWidgetState extends State<NetworkImageWidget> {
-  late Uint8List? bytes;
+  Uint8List? bytes;
 
   @override
   void initState() {
     super.initState();
-    bytes = ArtifactDownloadHelper.getBytestExist(
-      widget.imageName ?? widget.imageUrl,
-    );
+    if (imageHasUrl) {
+      bytes = ArtifactDownloadHelper.getBytestExist(
+        widget.imageName ?? widget.imageUrl!,
+      );
+    }
   }
 
   @override
   void didChangeDependencies() {
-    if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+    if ((kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
+        imageHasUrl) {
       precacheImage(
         bytes == null
             ? CachedNetworkImageProvider(
-                widget.imageUrl.getImageUrl, // widget.imageUrl,
+                widget.imageUrl!.getImageUrl, // widget.imageUrl,
                 headers: const {
                   'Cache-Control': 'max-age=3600',
                 },
@@ -64,10 +69,10 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
-    if (bytes == null) {
+    if (bytes == null && imageHasUrl) {
       if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
         return CachedNetworkImage(
-          imageUrl: widget.imageUrl.getImageUrl, // widget.imageUrl,
+          imageUrl: widget.imageUrl!.getImageUrl, // widget.imageUrl,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
@@ -93,7 +98,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         );
       } else {
         return Image.network(
-          widget.imageUrl,
+          widget.imageUrl!,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
@@ -112,18 +117,21 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         );
       }
     } else {
-      return Image.memory(
-        bytes!,
-        fit: widget.fit,
-        height: widget.size,
-        width: widget.size,
-        errorBuilder: (context, url, error) => KIcon.error,
-        cacheHeight: KMinMaxSize.kImageMaxSize,
-        cacheWidth: KMinMaxSize.kImageMaxSize,
-        filterQuality: widget.highQuality ?? false
-            ? FilterQuality.high
-            : FilterQuality.medium,
-      );
+      if (bytes != null || widget.imageBytes != null) {
+        return Image.memory(
+          bytes ?? widget.imageBytes!,
+          fit: widget.fit,
+          height: widget.size,
+          width: widget.size,
+          errorBuilder: (context, url, error) => KIcon.error,
+          cacheHeight: KMinMaxSize.kImageMaxSize,
+          cacheWidth: KMinMaxSize.kImageMaxSize,
+          filterQuality: widget.highQuality ?? false
+              ? FilterQuality.high
+              : FilterQuality.medium,
+        );
+      }
+      return const SizedBox.shrink();
     }
     // if (Config.isWeb) {
     //   return _NetworkWebImageWidget(
@@ -142,6 +150,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     //   // loadingIndicatorColor: loadingIndicatorColor,
     // );
   }
+
+  bool get imageHasUrl => widget.imageBytes == null && widget.imageUrl != null;
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {

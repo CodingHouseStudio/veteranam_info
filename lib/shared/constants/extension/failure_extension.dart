@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' show BuildContext;
 import 'package:veteranam/components/components.dart'
     show
+        CompanyFormFailure,
         DiscountFailure,
         FeedbackFailure,
         HomeFailure,
@@ -11,6 +12,7 @@ import 'package:veteranam/components/components.dart'
         MyDiscountFailure,
         MyStoryFailure,
         PasswordResetFailure,
+        ProfileFailure,
         PwResetEmailFailure,
         SignUpError,
         StoryAddFailure,
@@ -98,6 +100,32 @@ extension StoryFailureValue on StoryFailure {
     switch (this) {
       case StoryFailure.error:
         return context.l10n.error;
+    }
+  }
+}
+
+extension CompanyFormFailureValue on CompanyFormFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case CompanyFormFailure.error:
+        return context.l10n.error;
+      case CompanyFormFailure.send:
+        return context.l10n.sendFailure;
+      case CompanyFormFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
+}
+
+extension ProfleFormFailureValue on ProfileFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case ProfileFailure.error:
+        return context.l10n.error;
+      case ProfileFailure.send:
+        return context.l10n.sendFailure;
+      case ProfileFailure.network:
+        return context.l10n.networkFailure;
     }
   }
 }

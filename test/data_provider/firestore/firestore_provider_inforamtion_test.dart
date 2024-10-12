@@ -110,8 +110,8 @@ void main() {
         (_) => false,
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('add information', () async {
       await firestoreService

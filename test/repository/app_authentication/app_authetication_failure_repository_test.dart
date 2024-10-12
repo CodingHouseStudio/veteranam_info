@@ -354,7 +354,7 @@ void main() {
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
         user: KTestText.profileUser,
-        image: KTestText.imageModels,
+        image: KTestText.imagePickerItem,
       );
       expect(
         result,

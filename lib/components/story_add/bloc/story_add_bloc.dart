@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -14,8 +13,10 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   StoryAddBloc({
     required IStoryRepository storyRepository,
     required IAppAuthenticationRepository iAppAuthenticationRepository,
+    required IDataPickerRepository dataPickerRepository,
   })  : _storyRepository = storyRepository,
         _iAppAuthenticationRepository = iAppAuthenticationRepository,
+        _dataPickerRepository = dataPickerRepository,
         super(
           const _Initial(
             story: MessageFieldModel.pure(),
@@ -32,9 +33,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   }
   final IStoryRepository _storyRepository;
   final IAppAuthenticationRepository _iAppAuthenticationRepository;
-  final imagePicker = imagePickerValue;
-  @visibleForTesting
-  static ImagePicker imagePickerValue = ImagePicker();
+  final IDataPickerRepository _dataPickerRepository;
   void _onStoryUpdated(
     _StoryUpdated event,
     Emitter<StoryAddState> emit,
@@ -64,10 +63,11 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     _ImageUpdated event,
     Emitter<StoryAddState> emit,
   ) async {
+    final imageBytes = await _dataPickerRepository.getImage;
+    if (imageBytes == null || imageBytes.bytes.isEmpty) return;
     final imageFieldModel = ImageFieldModel.dirty(
-      await imagePicker.pickImage(source: ImageSource.gallery),
+      imageBytes,
     );
-    if (imageFieldModel.value == null) return;
 
     emit(
       state.copyWith(
@@ -88,20 +88,13 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
       return;
     }
     final result = await _storyRepository.addStory(
-      StoryModel(
+      storyModel: StoryModel(
         id: ExtendedDateTime.id,
         date: ExtendedDateTime.current,
         story: state.story.value,
         userName: state.isAnonymously
             ? null
             : _iAppAuthenticationRepository.currentUser.name,
-        image: state.image.value != null
-            ? ImageModel(
-                downloadURL: state.image.value!.path,
-                name: state.image.value!.name,
-                ref: state.image.value!.path,
-              )
-            : null,
         userPhoto: _iAppAuthenticationRepository.currentUser.photo != null &&
                 !state.isAnonymously
             ? ImageModel(
@@ -110,6 +103,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
             : null,
         userId: _iAppAuthenticationRepository.currentUser.id,
       ),
+      imageItem: state.image.value,
     );
     result.fold(
       (l) => emit(state.copyWith(failure: l._toStoryAdd())),

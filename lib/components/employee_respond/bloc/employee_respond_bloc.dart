@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -14,7 +13,9 @@ class EmployeeRespondBloc
     extends Bloc<EmployeeRespondEvent, EmployeeRespondState> {
   EmployeeRespondBloc({
     required IWorkRepository employeeRespondRepository,
+    required IDataPickerRepository dataPickerRepository,
   })  : _employeeRespondRepository = employeeRespondRepository,
+        _dataPickerRepository = dataPickerRepository,
         super(
           const EmployeeRespondState(
             email: EmailFieldModel.pure(),
@@ -33,9 +34,7 @@ class EmployeeRespondBloc
   }
 
   final IWorkRepository _employeeRespondRepository;
-  final filePicker = filePickerValue;
-  @visibleForTesting
-  static ImagePicker filePickerValue = ImagePicker();
+  final IDataPickerRepository _dataPickerRepository;
 
   void _onEmailUpdated(
     _EmailUpdated event,
@@ -75,19 +74,13 @@ class EmployeeRespondBloc
         ) &&
         (state.noResume || state.resume.isValid)) {
       final result = await _employeeRespondRepository.sendRespond(
-        EmployeeRespondModel(
+        respond: EmployeeRespondModel(
           id: ExtendedDateTime.id,
           email: state.email.value,
-          resume: state.noResume
-              ? null
-              : ResumeModel(
-                  downloadURL: state.resume.value!.path,
-                  name: state.resume.value!.name,
-                  ref: state.resume.value!.path,
-                ),
           noResume: state.noResume,
           phoneNumber: state.phoneNumber.value,
         ),
+        file: state.noResume ? null : state.resume.value,
       );
       result.fold(
         (l) => emit(
@@ -127,8 +120,10 @@ class EmployeeRespondBloc
     _LoadResumeClicked event,
     Emitter<EmployeeRespondState> emit,
   ) async {
+    final file = await _dataPickerRepository.getFile;
+    if (file == null || file.bytes.isEmpty) return;
     final resumeFieldModel = ResumeFieldModel.dirty(
-      await filePicker.pickMedia(),
+      file,
     );
     if (resumeFieldModel.value == null) return;
     emit(

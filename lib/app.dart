@@ -56,6 +56,11 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
           ),
         ],
+        if (Config.isBusiness)
+          BlocProvider(
+            create: (context) => GetIt.I.get<CompanyWatcherBloc>()
+              ..add(const CompanyWatcherEvent.started()),
+          ),
       ],
       child: const AppWidget(),
     );

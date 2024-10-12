@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -18,9 +19,11 @@ void main() {
     late MobOfflineModeCubit mobOfflineModeCubit;
     late FirestoreService mockFirestoreService;
     late CacheClient mockCache;
+    late FirebaseFirestore mockFirebaseFirestore;
 
     setUp(() {
       mockCache = MockCacheClient();
+      mockFirebaseFirestore = MockFirebaseFirestore();
       when(
         mockCache.write(
           key: FirestoreService.offlineModeCacheKey,
@@ -37,7 +40,7 @@ void main() {
       ).thenAnswer(
         (_) {},
       );
-      mockFirestoreService = FirestoreService(mockCache);
+      mockFirestoreService = FirestoreService(mockFirebaseFirestore, mockCache);
       mobOfflineModeCubit = MobOfflineModeCubit(
         firestoreService: mockFirestoreService,
       );

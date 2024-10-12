@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
@@ -42,7 +43,7 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<Connectivity>(Connectivity());
   GetIt.I.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
   GetIt.I.registerSingleton<FirestoreService>(
-    FirestoreService(CacheClient()),
+    FirestoreService(GetIt.I.get<FirebaseFirestore>(), CacheClient()),
   );
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(

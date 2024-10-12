@@ -46,13 +46,11 @@ class DiscountLinkFormBloc
         formState: LinkEnum.success,
       ),
     );
-    if (state.link.value != null &&
-        state.link.value!.isNotEmpty &&
-        state.link.isValid) {
+    if (state.link.isValid) {
       final discountLinkFormModel = LinkModel(
         id: ExtendedDateTime.id,
         userId: _appAuthenticationRepository.currentUser.id,
-        link: state.link.value!,
+        link: state.link.value,
         date: ExtendedDateTime.current,
       );
 

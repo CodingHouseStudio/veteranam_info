@@ -131,8 +131,7 @@ void main() {
         (_) async {},
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCache);
+      firestoreService = FirestoreService(mockFirebaseFirestore, mockCache);
     });
 
     test('get discounts', () async {
