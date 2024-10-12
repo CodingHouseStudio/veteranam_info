@@ -436,6 +436,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
       await _firestoreService.deleteUserSetting(currentUser.id);
+      // final credential = firebase_auth.EmailAuthProvider.credential(
+      //   email: currentUser.email,
+      //   password: _firebaseAuth.currentUser.password,
+      // );
+      // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
+      // l);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       unawaited(logInAnonymously());

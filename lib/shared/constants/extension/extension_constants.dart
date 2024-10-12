@@ -542,8 +542,8 @@ extension DiscountStateExtention on DiscountState {
         return 'isNew';
       case DiscountState.underReview:
         return 'underReview';
-      case DiscountState.overdue:
-        return 'overdue';
+      // case DiscountState.overdue:
+      //   return 'overdue';
       case DiscountState.rejected:
         return 'rejected';
       case DiscountState.published:
@@ -558,8 +558,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return context.l10n.underReview;
-      case DiscountState.overdue:
-        return context.l10n.overdue;
+      // case DiscountState.overdue:
+      //   return context.l10n.overdue;
       case DiscountState.rejected:
         return context.l10n.rejected;
       case DiscountState.published:
@@ -574,8 +574,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return AppColors.materialThemeRefNeutralNeutral99;
-      case DiscountState.overdue:
-        return AppColors.materialThemeRefTertiaryTertiary98;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary98;
       case DiscountState.rejected:
         return AppColors.materialThemeRefErrorError98;
       case DiscountState.published:
@@ -590,8 +590,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return AppColors.materialThemeSysLightTertiary;
-      case DiscountState.overdue:
-        return AppColors.materialThemeRefTertiaryTertiary60;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary60;
       case DiscountState.rejected:
         return AppColors.materialThemeRefErrorError40;
       case DiscountState.published:

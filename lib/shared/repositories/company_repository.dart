@@ -111,9 +111,6 @@ class CompanyRepository implements ICompanyRepository {
     required ImagePickerItem? imageItem,
   }) async {
     try {
-      if (company == currentUserCompany && imageItem == null) {
-        return const Right(false);
-      }
       late var methodCompanyModel = company;
       if (!company.userEmails
           .contains(iAppAuthenticationRepository.currentUser.email)) {
@@ -152,9 +149,9 @@ class CompanyRepository implements ICompanyRepository {
         _userCompanyController.add(CompanyModel.empty);
         _onUserStreamCancel();
       }
-      if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
-        await iAppAuthenticationRepository.deleteUser();
-      }
+      // if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
+      //   await iAppAuthenticationRepository.deleteUser();
+      // }
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {

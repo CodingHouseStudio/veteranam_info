@@ -9,12 +9,12 @@ class CompanyBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CompanyFormBloc, CompanyFormState>(
-      listener: (context, state) {
-        if (state.formState == CompanyFormEnum.delete) {
-          context.goNamed(KRoute.myDiscounts.name);
-        }
-      },
+    return BlocBuilder<CompanyFormBloc, CompanyFormState>(
+      // listener: (context, state) {
+      //   if (state.formState == CompanyFormEnum.delete) {
+      //     context.goNamed(KRoute.myDiscounts.name);
+      //   }
+      // },
       buildWhen: (previous, current) =>
           previous.formState != current.formState ||
           previous.image != current.image,

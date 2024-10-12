@@ -121,20 +121,20 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     _DeleteCompany event,
     Emitter<CompanyFormState> emit,
   ) async {
-    final result = await _companyRepository.deleteCompany();
-    result.fold(
-      (l) => emit(
-        state.copyWith(
-          failure: l._toCompanyError(),
-        ),
-      ),
-      (r) => emit(
-        state.copyWith(
-          formState: CompanyFormEnum.delete,
-          failure: null,
-        ),
-      ),
-    );
+    await _companyRepository.deleteCompany();
+    // result.fold(
+    //   (l) => emit(
+    //     state.copyWith(
+    //       failure: l._toCompanyError(),
+    //     ),
+    //   ),
+    //   (r) => emit(
+    //     state.copyWith(
+    //       formState: CompanyFormEnum.delete,
+    //       failure: null,
+    //     ),
+    //   ),
+    // );
   }
 
   Future<void> _onSave(
@@ -151,35 +151,52 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     )) {
       emit(state.copyWith(formState: CompanyFormEnum.sendInProgress));
 
-      final result = await _companyRepository.updateCompany(
-        company: _companyRepository.currentUserCompany.copyWith(
-          id: _companyRepository.currentUserCompany.id.isEmpty
-              ? ExtendedDateTime.id
-              : _companyRepository.currentUserCompany.id,
-          companyName: state.companyName.value,
-          code: state.code.value,
-          link: state.link.value,
-        ),
-        imageItem: state.image.value,
+      final company = _companyRepository.currentUserCompany.copyWith(
+        id: _companyRepository.currentUserCompany.id.isEmpty
+            ? ExtendedDateTime.id
+            : _companyRepository.currentUserCompany.id,
+        companyName: state.companyName.value,
+        code: state.code.value,
+        link: state.link.value,
       );
 
-      result.fold(
-        (l) => emit(
-          state.copyWith(
-            failure: l._toCompanyError(),
-            formState: CompanyFormEnum.initial,
+      if (company != _companyRepository.currentUserCompany ||
+          state.image.value != null) {
+        final result = await _companyRepository.updateCompany(
+          company: _companyRepository.currentUserCompany.copyWith(
+            id: _companyRepository.currentUserCompany.id.isEmpty
+                ? ExtendedDateTime.id
+                : _companyRepository.currentUserCompany.id,
+            companyName: state.companyName.value,
+            code: state.code.value,
+            link: state.link.value,
           ),
-        ),
-        (r) => emit(
+          imageItem: state.image.value,
+        );
+
+        result.fold(
+          (l) => emit(
+            state.copyWith(
+              failure: l._toCompanyError(),
+              formState: CompanyFormEnum.initial,
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              failure: null,
+              image: const ImageFieldModel.pure(),
+              formState: CompanyFormEnum.success,
+            ),
+          ),
+        );
+      } else {
+        emit(
           state.copyWith(
             failure: null,
-            image: const ImageFieldModel.pure(),
-            formState: r
-                ? CompanyFormEnum.success
-                : CompanyFormEnum.succesesUnmodified,
+            formState: CompanyFormEnum.succesesUnmodified,
           ),
-        ),
-      );
+        );
+      }
     } else {
       emit(state.copyWith(formState: CompanyFormEnum.invalidData));
     }
