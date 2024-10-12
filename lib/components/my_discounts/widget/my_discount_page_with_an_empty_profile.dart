@@ -33,7 +33,7 @@ class MyDiscountPageWithEmptyProfileWidget extends StatelessWidget {
             isDesk: isDesk,
             color: AppColors.materialThemeKeyColorsSecondary,
             textColor: AppColors.materialThemeWhite,
-            onPressed: () => context.goNamed(KRoute.profile.name),
+            onPressed: () => context.goNamed(KRoute.company.name),
             icon: KIcon.person.copyWith(color: AppColors.materialThemeWhite),
             deskPadding: const EdgeInsets.symmetric(
               vertical: KPadding.kPaddingSize16,

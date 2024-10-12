@@ -22,13 +22,13 @@ void main() {
     Future<DateTime> period() async => KTestText.dateTime;
     late DiscountsAddBloc discountsAddBloc;
     late IDiscountRepository mockDiscountsRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late ICompanyRepository mockCompanyRepository;
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
       ExtendedDateTime.id = KTestText.sendDiscountModel.id;
       ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
       mockDiscountsRepository = MockIDiscountRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
       DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;
 
@@ -45,9 +45,9 @@ void main() {
       );
 
       when(
-        mockAppAuthenticationRepository.currentUser,
+        mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => const CompanyModel(id: '1', userEmails: []),
       );
       when(
         mockDiscountsRepository.addDiscount(KTestText.sendDiscountModel),
@@ -57,7 +57,7 @@ void main() {
 
       discountsAddBloc = DiscountsAddBloc(
         discountRepository: mockDiscountsRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        companyRepository: mockCompanyRepository,
         citiesRepository: mockCitiesRepository,
       );
     });
@@ -258,7 +258,7 @@ void main() {
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
-          link: LinkFieldModel.pure(),
+          link: LinkNullableFieldModel.pure(),
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -274,7 +274,7 @@ void main() {
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -289,7 +289,7 @@ void main() {
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
@@ -303,7 +303,7 @@ void main() {
           city: const ListFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
@@ -562,7 +562,7 @@ void main() {
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
-          link: LinkFieldModel.pure(),
+          link: LinkNullableFieldModel.pure(),
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -577,7 +577,7 @@ void main() {
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -592,7 +592,7 @@ void main() {
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.invalidData,
@@ -607,7 +607,7 @@ void main() {
           period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
@@ -805,7 +805,7 @@ void main() {
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
-          link: LinkFieldModel.pure(),
+          link: LinkNullableFieldModel.pure(),
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -820,7 +820,7 @@ void main() {
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
-          link: LinkFieldModel.pure(),
+          link: LinkNullableFieldModel.pure(),
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
@@ -836,7 +836,7 @@ void main() {
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
-          link: LinkFieldModel.pure(),
+          link: LinkNullableFieldModel.pure(),
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
@@ -851,7 +851,7 @@ void main() {
           period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
-          link: const LinkFieldModel.pure(),
+          link: const LinkNullableFieldModel.pure(),
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,

@@ -48,6 +48,7 @@ class _DialogsWidget {
                     title: title,
                     subtitle: subtitle,
                     confirmText: confirmText,
+                    unconfirmText: unconfirmText,
                     background: background,
                     onPressed: onPressed,
                   ),

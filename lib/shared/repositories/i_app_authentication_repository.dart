@@ -54,6 +54,6 @@ abstract class IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required ImageModel? image,
+    required ImagePickerItem? image,
   });
 }

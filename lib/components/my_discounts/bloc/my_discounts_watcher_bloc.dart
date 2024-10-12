@@ -14,9 +14,9 @@ class MyDiscountsWatcherBloc
     extends Bloc<MyDiscountsWatcherEvent, MyDiscountsWatcherState> {
   MyDiscountsWatcherBloc({
     required IDiscountRepository discountRepository,
-    required IAppAuthenticationRepository iAppAuthenticationRepository,
+    required ICompanyRepository companyRepository,
   })  : _discountRepository = discountRepository,
-        _iAppAuthenticationRepository = iAppAuthenticationRepository,
+        _companyRepository = companyRepository,
         super(
           const MyDiscountsWatcherState(
             discountsModelItems: [],
@@ -36,7 +36,7 @@ class MyDiscountsWatcherBloc
 
   final IDiscountRepository _discountRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
-  final IAppAuthenticationRepository _iAppAuthenticationRepository;
+  final ICompanyRepository _companyRepository;
   // Timer? _debounceTimer;
 
   // Future<void> _onStarted(
@@ -85,24 +85,26 @@ class MyDiscountsWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    await _discountItemsSubscription?.cancel();
-    _discountItemsSubscription = _discountRepository
-        .getDiscountsByUserId(
-      _iAppAuthenticationRepository.currentUser.id,
-    )
-        .listen(
-      (discount) {
-        add(
-          MyDiscountsWatcherEvent.updated(
-            discount,
-          ),
-        );
-      },
-      onError: (dynamic error, StackTrace stack) {
-        // debugPrint('error is $error');
-        add(MyDiscountsWatcherEvent.failure(error: error, stack: stack));
-      },
-    );
+    if (_companyRepository.currentUserCompany.id.isNotEmpty) {
+      await _discountItemsSubscription?.cancel();
+      _discountItemsSubscription = _discountRepository
+          .getDiscountsByUserId(
+        _companyRepository.currentUserCompany.id,
+      )
+          .listen(
+        (discount) {
+          add(
+            MyDiscountsWatcherEvent.updated(
+              discount,
+            ),
+          );
+        },
+        onError: (dynamic error, StackTrace stack) {
+          // debugPrint('error is $error');
+          add(MyDiscountsWatcherEvent.failure(error: error, stack: stack));
+        },
+      );
+    }
   }
 
   Future<void> _onUpdated(

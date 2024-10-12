@@ -24,13 +24,15 @@ class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
     required List<String> categoryList,
     required List<CityModel> citiesList,
+    // TODO(max): category max 2
     required ListFieldModel category,
+    // TODO(max): city max 30
     required ListFieldModel city,
     required DateFieldModel period,
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
     required ListFieldModel? eligibility,
-    required LinkFieldModel link,
+    required LinkNullableFieldModel link,
     required MessageFieldModel description,
     required MessageFieldModel exclusions,
     required DiscountsAddEnum formState,

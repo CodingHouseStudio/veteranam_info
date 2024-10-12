@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'discounts_add_bloc.freezed.dart';
@@ -12,10 +13,10 @@ part 'discounts_add_state.dart';
 class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   DiscountsAddBloc({
     required IDiscountRepository discountRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    required ICompanyRepository companyRepository,
     required ICitiesRepository citiesRepository,
   })  : _discountRepository = discountRepository,
-        _appAuthenticationReporsitory = appAuthenticationRepository,
+        _companyRepository = companyRepository,
         _citiesRepository = citiesRepository,
         super(
           const _Initial(
@@ -26,7 +27,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
             eligibility: ListFieldModel.pure(),
-            link: LinkFieldModel.pure(),
+            link: LinkNullableFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
@@ -53,7 +54,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_Back>(_onBack);
   }
   final IDiscountRepository _discountRepository;
-  final IAppAuthenticationRepository _appAuthenticationReporsitory;
+  final ICompanyRepository _companyRepository;
   final ICitiesRepository _citiesRepository;
 
   @visibleForTesting
@@ -175,6 +176,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     } catch (e) {
       date = null;
     }
+    if (date == null) return;
     final periodFieldModel = DateFieldModel.dirty(date);
 
     emit(
@@ -287,7 +289,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _LinkUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final linkFieldModel = LinkFieldModel.dirty(event.link);
+    final linkFieldModel = LinkNullableFieldModel.dirty(event.link);
 
     emit(
       state.copyWith(
@@ -369,7 +371,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       }
       return;
     }
-    if (Formz.validate([state.description, state.exclusions])) {
+    if (Formz.validate([state.description])) {
+      //state.exclusions
       final discount = DiscountModel(
         id: ExtendedDateTime.id,
         discount: state.discounts.getValue
@@ -391,16 +394,17 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         requirementsEN: null,
         territory: null,
         territoryEN: null,
-        // TODO(Profile): Add Link from profile
-        link: '',
+        link: _companyRepository.currentUserCompany.link!,
+        company: _companyRepository.currentUserCompany.companyName,
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
         dateVerified: ExtendedDateTime.current,
         directLink: state.link.value,
-        userId: _appAuthenticationReporsitory.currentUser.id,
-        userName: _appAuthenticationReporsitory.currentUser.name,
+        userId: _companyRepository.currentUserCompany.id,
+        userPhoto: _companyRepository.currentUserCompany.image,
+        userName: _companyRepository.currentUserCompany.companyName,
       );
       final result =
           await _discountRepository.addDiscount(sendDiscountModel ?? discount);

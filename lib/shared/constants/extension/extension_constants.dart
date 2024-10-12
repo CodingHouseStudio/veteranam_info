@@ -542,8 +542,8 @@ extension DiscountStateExtention on DiscountState {
         return 'isNew';
       case DiscountState.underReview:
         return 'underReview';
-      case DiscountState.overdue:
-        return 'overdue';
+      // case DiscountState.overdue:
+      //   return 'overdue';
       case DiscountState.rejected:
         return 'rejected';
       case DiscountState.published:
@@ -558,8 +558,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return context.l10n.underReview;
-      case DiscountState.overdue:
-        return context.l10n.overdue;
+      // case DiscountState.overdue:
+      //   return context.l10n.overdue;
       case DiscountState.rejected:
         return context.l10n.rejected;
       case DiscountState.published:
@@ -574,8 +574,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return AppColors.materialThemeRefNeutralNeutral99;
-      case DiscountState.overdue:
-        return AppColors.materialThemeRefTertiaryTertiary98;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary98;
       case DiscountState.rejected:
         return AppColors.materialThemeRefErrorError98;
       case DiscountState.published:
@@ -590,8 +590,8 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.isNew:
       case DiscountState.underReview:
         return AppColors.materialThemeSysLightTertiary;
-      case DiscountState.overdue:
-        return AppColors.materialThemeRefTertiaryTertiary60;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary60;
       case DiscountState.rejected:
         return AppColors.materialThemeRefErrorError40;
       case DiscountState.published:
@@ -603,33 +603,7 @@ extension DiscountStateExtention on DiscountState {
 }
 
 extension UserExtensions on User? {
-  bool get isFullProfile {
-    if (this == null ||
-        this!.email == null ||
-        this!.name == null ||
-        (this!.photo == null && !KTest.isTest)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   String? get firstName => this?.name?.split(' ').first;
 
   String? get lastName => this?.name?.split(' ').last;
-}
-
-extension ProfileEnumExtensions on ProfileEnum {
-  String loadingMessage(BuildContext context) {
-    if (this == ProfileEnum.success) {
-      return context.l10n.dataIsUpdatedSuccess;
-    }
-    if (this == ProfileEnum.sendInProgress) {
-      return context.l10n.dataSendInProgress;
-    }
-    if (this == ProfileEnum.succesesUnmodified) {
-      return context.l10n.dataUnmodified;
-    }
-    return '';
-  }
 }

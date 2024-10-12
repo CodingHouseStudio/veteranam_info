@@ -43,8 +43,8 @@ void main() {
           (realInvocation) async {},
         );
         when(
-          mockStorageService.saveImage(
-            imageModel: KTestText.storyModelItems.last.image!,
+          mockStorageService.saveFile(
+            imagePickerItem: KTestText.imagePickerItem,
             id: KTestText.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
@@ -64,7 +64,10 @@ void main() {
       });
       test('Add Story(has image)', () async {
         expect(
-          await mockStoryRepository.addStory(KTestText.storyModelItems.last),
+          await mockStoryRepository.addStory(
+            imageItem: KTestText.imagePickerItem,
+            storyModel: KTestText.storyModelItems.last,
+          ),
           isA<Right<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
@@ -74,7 +77,10 @@ void main() {
       });
       test('Add Story(without image)', () async {
         expect(
-          await mockStoryRepository.addStory(KTestText.storyModelItems.first),
+          await mockStoryRepository.addStory(
+            imageItem: KTestText.imagePickerItem,
+            storyModel: KTestText.storyModelItems.first,
+          ),
           isA<Right<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
@@ -98,8 +104,8 @@ void main() {
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
-          mockStorageService.saveImage(
-            imageModel: KTestText.storyModelItems.last.image!,
+          mockStorageService.saveFile(
+            imagePickerItem: KTestText.imagePickerItem,
             id: KTestText.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
@@ -117,7 +123,10 @@ void main() {
       });
       test('Add Story(has image)', () async {
         expect(
-          await mockStoryRepository.addStory(KTestText.storyModelItems.last),
+          await mockStoryRepository.addStory(
+            imageItem: KTestText.imagePickerItem,
+            storyModel: KTestText.storyModelItems.last,
+          ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -128,7 +137,10 @@ void main() {
       });
       test('Add Story(without image)', () async {
         expect(
-          await mockStoryRepository.addStory(KTestText.storyModelItems.first),
+          await mockStoryRepository.addStory(
+            imageItem: KTestText.imagePickerItem,
+            storyModel: KTestText.storyModelItems.last,
+          ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,

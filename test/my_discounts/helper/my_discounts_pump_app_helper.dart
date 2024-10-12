@@ -7,14 +7,14 @@ import '../../test_dependency.dart';
 
 Future<void> myDiscountsPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required ICompanyRepository mockCompanyRepository,
   required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerMyDiscountsBloc(
     mockDiscountRepository: mockDiscountRepository,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockCompanyRepository: mockCompanyRepository,
   );
 
   _registerAuthenticationBloc(
@@ -36,11 +36,11 @@ Future<void> myDiscountsPumpAppHelper({
 
 void _registerMyDiscountsBloc({
   required IDiscountRepository mockDiscountRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required ICompanyRepository mockCompanyRepository,
 }) {
   final myDiscountsWatcherBloc = MyDiscountsWatcherBloc(
     discountRepository: mockDiscountRepository,
-    iAppAuthenticationRepository: mockAppAuthenticationRepository,
+    companyRepository: mockCompanyRepository,
   );
   if (GetIt.I.isRegistered<MyDiscountsWatcherBloc>()) {
     GetIt.I.unregister<MyDiscountsWatcherBloc>();

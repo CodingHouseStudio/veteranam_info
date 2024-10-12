@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -34,5 +35,8 @@ void userSetting() {
   ).thenAnswer(
     (_) => false,
   );
-  FirestoreService.firebaseFirestore = mockFirebaseFirestore;
+  if (GetIt.I.isRegistered<FirebaseFirestore>()) {
+    GetIt.I.unregister<FirebaseFirestore>();
+  }
+  GetIt.I.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);
 }
