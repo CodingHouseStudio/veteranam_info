@@ -22,6 +22,7 @@ export 'cities_drop_field_widget.dart';
 export 'city_list_widget.dart';
 export 'closel_button_widget.dart';
 export 'complaint_widget.dart';
+export 'confirm_dialog.dart';
 export 'dialogs_widget.dart';
 export 'dilog_page_widget.dart';
 export 'discount_card_widget.dart';

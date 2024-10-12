@@ -365,9 +365,19 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
       SecondaryButtonWidget(
         widgetKey: KWidgetkeys.screen.discountsAdd.cancelButton,
         align: Alignment.center,
-        onPressed: () => context.read<DiscountsAddBloc>().state.formState.isMain
-            ? context.pop()
-            : context.read<DiscountsAddBloc>().add(
+        onPressed: context.read<DiscountsAddBloc>().state.formState.isMain
+            ? () => context.dialog.showConfirmationDialog(
+                  isDesk: isDesk,
+                  title: context.l10n.cancelChanges,
+                  subtitle: context.l10n.cancelChangesQuestion,
+                  confirmText: context.l10n.cancel,
+                  unconfirmText: context.l10n.continueWorking,
+                  background: AppColors.materialThemeKeyColorsSecondary,
+                  onPressed: () {
+                    context.goNamed(KRoute.myDiscounts.name);
+                  },
+                )
+            : () => context.read<DiscountsAddBloc>().add(
                   const DiscountsAddEvent.back(),
                 ),
         text: context.read<DiscountsAddBloc>().state.formState.isMain

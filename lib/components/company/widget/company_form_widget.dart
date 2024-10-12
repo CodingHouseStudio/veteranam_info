@@ -3,6 +3,7 @@ import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -305,8 +306,18 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         text: context.l10n.logOut,
         picture: KIcon.logOut,
         align: Alignment.center,
-        onPressed: () => context.dialog.showLogoutConfirmationDialog(
-          isDesk: true,
+        onPressed: () => context.dialog.showConfirmationDialog(
+          isDesk: isDesk,
+          title: context.l10n.deleteProfile,
+          subtitle: context.l10n.deleteAccountQuestion,
+          confirmText: context.l10n.delete,
+          background: AppColors.materialThemeRefErrorError60,
+          onPressed: () {
+            context.read<AuthenticationBloc>().add(
+                  AuthenticationLogoutRequested(),
+                );
+            context.pop();
+          },
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.only(
@@ -337,11 +348,18 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           vertical: KPadding.kPaddingSize16,
         ),
         text: context.l10n.deleteAccount,
-        onPressed: () => context.dialog.showDeleteConfirmationDialog(
+        onPressed: () => context.dialog.showConfirmationDialog(
           isDesk: isDesk,
-          deleteEvent: () => context.read<CompanyFormBloc>().add(
-                const CompanyFormEvent.deleteCompany(),
-              ),
+          title: context.l10n.logOutFromProfile,
+          subtitle: context.l10n.logOutQuestion,
+          confirmText: context.l10n.logOut,
+          background: AppColors.materialThemeKeyColorsSecondary,
+          onPressed: () {
+            context.read<CompanyFormBloc>().add(
+                  const CompanyFormEvent.deleteCompany(),
+                );
+            context.pop();
+          },
         ),
       );
 

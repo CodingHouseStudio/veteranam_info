@@ -32,12 +32,15 @@ void main() {
 
       when(mockAuthenticationRepository.currentUserSetting)
           .thenAnswer((invocation) => KTestText.userSetting);
-      when(
-        mockDiscountRepository
-            .deleteDiscountsById(KTestText.userDiscountModelItems.first.id),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
+      for (var i = 0; i < 3; i++) {
+        when(
+          mockDiscountRepository.deleteDiscountsById(
+            KTestText.userDiscountModelItems.elementAt(i).id,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+      }
     });
     group('${KGroupText.failure} ', () {
       setUp(
@@ -264,6 +267,56 @@ void main() {
               await addDiscountsNavigationHelper(
                 tester: tester,
                 mockGoRouter: mockGoRouter,
+              );
+            });
+            testWidgets('Delete discount dialog confirm button pop',
+                (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await myDiscountConfirmButtonlHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+            testWidgets('Delete discount desk dialog unconfirm button pop',
+                (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+              await myDiscountUnconfirmButtonlHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                icon: false,
+                deskOpen: true,
+              );
+            });
+            testWidgets('Delete discount mob dialog cancel icon pop',
+                (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await myDiscountUnconfirmButtonlHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                icon: true,
               );
             });
           },

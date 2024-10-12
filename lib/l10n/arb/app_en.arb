@@ -1453,5 +1453,47 @@
   "descriptionForRejectedStatus": "Your ad could not be published due to some errors.\nPlease contact our email: hello@veteranam.info for details",
   "@descriptionForRejectedStatus": {
     "examples": "Text to describe the rejected discount status on the MyDiscount page."
+  },
+  "logOutFromProfile": "Log Out From Profile",
+  "@logOutFromProfile": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to log out of the account."
+  },
+  "deleteProfile": "Delete Profile",
+  "@deleteProfile": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to delete an account."
+  },
+  "delete": "Delete",
+  "@delete": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to delete an account."
+  },
+  "cancelChanges": "Cancel Changes",
+  "@cancelChanges": {
+    "examples": "Text for button on Discount add page.",
+    "description": "The button is used to return to the previous page."
+  },
+  "cancelChangesQuestion": "Cancel Changes",
+  "@cancelChanges": {
+    "examples": "Text for button on Discount add page.",
+    "description": "The button is used to return to the previous page."
+  },
+  "cancelChangesQuestion": "Are you sure you want to cancel the changes? All new data will be deleted",
+  "@cancelChangesQuestion": {
+    "examples": "Text on the Discount add page."
+  },
+  "continueWorking": "Continue Working",
+  "@continueWorking": {
+    "examples": "Text for button on Discount add page.",
+    "description": "The button is used to stay on the page."
+  },
+  "deleteDiscount": "Delete discount",
+  "@deleteDiscount": {
+    "examples": "Text for a button on the My Discount page."
+  },
+  "deleteDiscountQuestion": "Are you sure you want to delete the discount? All data will be deleted",
+  "@deleteDiscountQuestion": {
+    "examples": "Text on the My Discount page."
   }
 }

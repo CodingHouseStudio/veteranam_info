@@ -52,10 +52,10 @@ Future<void> myDiscountsInitialHelper(
         itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
       );
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
+      // await tester
+      //     .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
 
-      await tester.pumpAndSettle();
+      // await tester.pumpAndSettle();
 
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),

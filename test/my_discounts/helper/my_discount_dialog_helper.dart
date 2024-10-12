@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../../test_dependency.dart';
+import '../../test_dependency.dart';
 
-Future<void> profileCardLogOutHelper(
+Future<void> myDiscountDialogHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(
@@ -12,16 +12,16 @@ Future<void> profileCardLogOutHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.logOutButton),
-    findsOneWidget,
+    find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
+    findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.logOutButton,
+    itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.logOutButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
 
   await tester.pumpAndSettle();
 

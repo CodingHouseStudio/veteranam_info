@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,99 +17,76 @@ class _DialogsWidget {
   _DialogsWidget.of(this.context);
   final BuildContext context;
 
-  void showLogoutConfirmationDialog({
+  void showConfirmationDialog({
     required bool isDesk,
+    required String title,
+    required String subtitle,
+    required String confirmText,
+    required void Function()? onPressed,
+    required Color background,
+    String? unconfirmText,
   }) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          key: KWidgetkeys.widget.dialogs.logOut,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-          scrollable: true,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                context.l10n.logOutQuestion,
-                key: KWidgetkeys.widget.dialogs.profileText,
-                style: isDesk ? AppTextStyle.text48 : AppTextStyle.text24,
-              ),
-              KSizedBox.kHeightSizedBox10,
-              ButtonWidget(
-                key: KWidgetkeys.widget.dialogs.confirmButton,
-                onPressed: () {
-                  context.read<AuthenticationBloc>().add(
-                        AuthenticationLogoutRequested(),
-                      );
-                  context.pop();
-                },
-                text: context.l10n.yes,
-                textStyle: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
-                isDesk: isDesk,
-              ),
-              KSizedBox.kHeightSizedBox10,
-              ButtonWidget(
-                key: KWidgetkeys.widget.dialogs.unconfirmButton,
-                onPressed: () => context.pop(),
-                text: context.l10n.no,
-                textStyle: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
-                isDesk: isDesk,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  void showDeleteConfirmationDialog({
-    required bool isDesk,
-    required void Function() deleteEvent,
-  }) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          key: KWidgetkeys.widget.dialogs.deleteAccount,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-          scrollable: true,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                context.l10n.deleteAccountQuestion,
-                key: KWidgetkeys.widget.dialogs.profileText,
-                style: isDesk ? AppTextStyle.text48 : AppTextStyle.text24,
-              ),
-              KSizedBox.kHeightSizedBox10,
-              ButtonWidget(
-                key: KWidgetkeys.widget.dialogs.confirmButton,
-                onPressed: () {
-                  deleteEvent();
-                  context.pop();
-                },
-                text: context.l10n.yes,
-                textStyle: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
-                isDesk: isDesk,
-              ),
-              KSizedBox.kHeightSizedBox10,
-              ButtonWidget(
-                key: KWidgetkeys.widget.dialogs.unconfirmButton,
-                onPressed: () => context.pop(),
-                text: context.l10n.no,
-                textStyle: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
-                isDesk: isDesk,
-              ),
-            ],
-          ),
-        );
-      },
-    );
+    if (isDesk) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final isDeskValue = constraints.maxWidth >
+                  KPlatformConstants.minWidthThresholdTablet;
+              return BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                child: AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+                  scrollable: true,
+                  content: ConfirmDialog(
+                    isDeskValue: isDeskValue,
+                    isDesk: isDesk,
+                    title: title,
+                    subtitle: subtitle,
+                    confirmText: confirmText,
+                    background: background,
+                    onPressed: onPressed,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      );
+    } else {
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        barrierColor: AppColors.materialThemeBlackOpacity88,
+        backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+        builder: (BuildContext context) {
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final isDeskValue = constraints.maxWidth >
+                  KPlatformConstants.minWidthThresholdTablet;
+              return Padding(
+                padding: const EdgeInsets.all(
+                  KPadding.kPaddingSize16,
+                ),
+                child: ConfirmDialog(
+                  isDeskValue: isDeskValue,
+                  isDesk: isDesk,
+                  title: title,
+                  subtitle: subtitle,
+                  confirmText: confirmText,
+                  background: background,
+                  onPressed: onPressed,
+                ),
+              );
+            },
+          );
+        },
+      );
+    }
   }
 
   void showReportDialog({
