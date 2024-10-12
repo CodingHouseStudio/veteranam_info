@@ -4,5 +4,5 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class StorageModule {
   @Singleton(order: -2)
-  FirebaseStorage get dio => FirebaseStorage.instance;
+  FirebaseStorage get storage => FirebaseStorage.instance;
 }

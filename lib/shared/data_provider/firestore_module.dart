@@ -4,5 +4,5 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class FirstoreModule {
   @Singleton(order: -2)
-  FirebaseFirestore get dio => FirebaseFirestore.instance;
+  FirebaseFirestore get firestore => FirebaseFirestore.instance;
 }
