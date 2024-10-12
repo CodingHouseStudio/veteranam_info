@@ -119,8 +119,8 @@ void main() {
       //   (_) async {},
       // );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('get user setting', () async {
       await expectLater(

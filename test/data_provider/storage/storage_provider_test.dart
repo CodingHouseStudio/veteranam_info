@@ -22,7 +22,6 @@ void main() {
       mockUploadTask = MockUploadTask();
       mockTaskSnapshot = MockTaskSnapshot();
       ExtendedDateTime.id = KTestText.id;
-      StorageService.firebaseStorage = mockFirebaseStorage;
       when(
         mockFirebaseStorage.ref(
           StoragePath.getFilePath(
@@ -55,7 +54,7 @@ void main() {
         (realInvocation) async =>
             KTestText.storyModelItems.last.image!.downloadURL,
       );
-      storageService = StorageService();
+      storageService = StorageService(mockFirebaseStorage);
     });
     void verifyMethod(String path) {
       verify(
