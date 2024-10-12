@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
@@ -18,12 +16,12 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.profile} ', () {
-    late ImagePicker imagePickerValue;
     late AuthenticationRepository mockAuthenticationRepository;
+    late DataPickerRepository mockDataPickerRepository;
     // late XFile image;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
-      imagePickerValue = MockImagePicker();
+      mockDataPickerRepository = MockDataPickerRepository();
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
@@ -45,16 +43,11 @@ void main() {
       // thenAnswer(
       //   (realInvocation) async => image,
       // );
-      ProfileBloc.imagePickerValue = imagePickerValue;
 
       when(
-        mockAuthenticationRepository.updateUserData(
-          user: KTestText.profileUserWithoutPhoto,
-          image: null,
-          nickname: KTestText.nicknameCorrect,
-        ),
+        mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => const Right(true),
+        (realInvocation) async => KTestText.imageBytes,
       );
 
       when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
@@ -65,6 +58,7 @@ void main() {
       await profilePumpAppHelper(
         tester: tester,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await profileInitialHelper(tester);
@@ -81,6 +75,7 @@ void main() {
           await profilePumpAppHelper(
             tester: tester,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockDataPickerRepository: mockDataPickerRepository,
           );
 
           await profileInitialHelper(tester);
@@ -92,6 +87,7 @@ void main() {
       await profilePumpAppHelper(
         tester: tester,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await profileCardLogOutHelper(tester);
@@ -101,6 +97,7 @@ void main() {
       await profilePumpAppHelper(
         tester: tester,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await profileCardDeleteAccountHelper(tester);
@@ -114,6 +111,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await profileInitialHelper(tester);
@@ -124,6 +122,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
         await logOutUnconfirmButtonlHelper(
           tester: tester,
@@ -137,6 +136,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await logOutUnconfirmButtonlHelper(
@@ -150,6 +150,7 @@ void main() {
         await profilePumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
+          mockDataPickerRepository: mockDataPickerRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
@@ -165,6 +166,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -180,6 +182,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -194,6 +197,7 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await deleteAccountConfirmButtonlHelper(
@@ -207,6 +211,7 @@ void main() {
           tester: tester,
           //mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await profileFormsCorrectSaveHelper(
@@ -222,6 +227,7 @@ void main() {
           tester: tester,
           //mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await profileFormsIncorrectSaveHelper(

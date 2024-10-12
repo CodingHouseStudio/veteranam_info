@@ -274,8 +274,7 @@ void main() {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
-                mockAppAuthenticationRepository:
-                    mockAppAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -290,8 +289,7 @@ void main() {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
-                mockAppAuthenticationRepository:
-                    mockAppAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -307,8 +305,7 @@ void main() {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
-                mockAppAuthenticationRepository:
-                    mockAppAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );

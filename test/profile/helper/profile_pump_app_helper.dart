@@ -8,12 +8,14 @@ import '../../test_dependency.dart';
 Future<void> profilePumpAppHelper({
   required WidgetTester tester,
   required AuthenticationRepository mockAuthenticationRepository,
+  required DataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
 
   _registerProfileBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
+    mockDataPickerRepository: mockDataPickerRepository,
   );
 
   await tester.pumpApp(const ProfileScreen(), mockGoRouter: mockGoRouter);
@@ -40,9 +42,11 @@ void _registerAuthenticationBloc(
 
 void _registerProfileBloc({
   required AuthenticationRepository mockAuthenticationRepository,
+  required DataPickerRepository mockDataPickerRepository,
 }) {
   final profileBloc = ProfileBloc(
     authenticationRepository: mockAuthenticationRepository,
+    dataPickerRepository: mockDataPickerRepository,
   );
   if (GetIt.I.isRegistered<ProfileBloc>()) {
     GetIt.I.unregister<ProfileBloc>();

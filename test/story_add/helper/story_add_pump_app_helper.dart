@@ -9,11 +9,13 @@ Future<void> storyAddPumpAppHelper({
   required IStoryRepository mockStoryRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
+  required DataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerStoryAddBloc(
     mockStoryRepository: mockStoryRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockDataPickerRepository: mockDataPickerRepository,
   );
   await tester.pumpApp(const StoryAddScreen(), mockGoRouter: mockGoRouter);
 
@@ -28,10 +30,12 @@ Future<void> storyAddPumpAppHelper({
 void _registerStoryAddBloc({
   required IStoryRepository mockStoryRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required DataPickerRepository mockDataPickerRepository,
 }) {
   final storyAddBloc = StoryAddBloc(
     storyRepository: mockStoryRepository,
     iAppAuthenticationRepository: mockAppAuthenticationRepository,
+    dataPickerRepository: mockDataPickerRepository,
   );
   if (GetIt.I.isRegistered<StoryAddBloc>()) {
     GetIt.I.unregister<StoryAddBloc>();

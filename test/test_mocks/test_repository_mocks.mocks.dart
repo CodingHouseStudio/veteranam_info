@@ -13237,3 +13237,16 @@ class MockICompanyRepository extends _i1.Mock
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [DataPickerRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDataPickerRepository extends _i1.Mock
+    implements _i3.DataPickerRepository {
+  @override
+  _i8.Future<_i28.Uint8List?> get getImage => (super.noSuchMethod(
+        Invocation.getter(#getImage),
+        returnValue: _i8.Future<_i28.Uint8List?>.value(),
+        returnValueForMissingStub: _i8.Future<_i28.Uint8List?>.value(),
+      ) as _i8.Future<_i28.Uint8List?>);
+}

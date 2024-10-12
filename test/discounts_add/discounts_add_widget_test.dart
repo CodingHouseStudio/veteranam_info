@@ -107,7 +107,7 @@ void main() {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -122,7 +122,7 @@ void main() {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
           mockGoRouter: mockGoRouter,
         );

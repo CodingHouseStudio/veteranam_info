@@ -18,13 +18,26 @@ void main() {
   group('${KScreenBlocName.storyAdd} ', () {
     late IStoryRepository mockStoryRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late DataPickerRepository mockDataPickerRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.storyModelItems.first.date;
       ExtendedDateTime.id = KTestText.storyModelItems.first.id;
       mockStoryRepository = MockIStoryRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
-          .thenAnswer(
+      mockDataPickerRepository = MockDataPickerRepository();
+
+      when(
+        mockDataPickerRepository.getImage,
+      ).thenAnswer(
+        (realInvocation) async => KTestText.imageBytes,
+      );
+
+      when(
+        mockStoryRepository.addStory(
+          image: KTestText.imageBytes,
+          storyModel: KTestText.storyModelItems.first,
+        ),
+      ).thenAnswer(
         (invocation) async => const Right(true),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
@@ -33,8 +46,12 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
-        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
-            .thenAnswer(
+        when(
+          mockStoryRepository.addStory(
+            image: KTestText.imageBytes,
+            storyModel: KTestText.storyModelItems.first,
+          ),
+        ).thenAnswer(
           (invocation) async => Left(
             SomeFailure.serverError(
               error: null,
@@ -45,32 +62,43 @@ void main() {
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await storyAddFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
-        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
-            .thenAnswer(
+        when(
+          mockStoryRepository.addStory(
+            image: KTestText.imageBytes,
+            storyModel: KTestText.storyModelItems.first,
+          ),
+        ).thenAnswer(
           (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await storyAddPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await storyAddFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureSend} ', (tester) async {
-        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
-            .thenAnswer(
+        when(
+          mockStoryRepository.addStory(
+            image: KTestText.imageBytes,
+            storyModel: KTestText.storyModelItems.first,
+          ),
+        ).thenAnswer(
           (invocation) async => Left(SomeFailure.send(error: null)),
         );
         await storyAddPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await storyAddFailureHelper(tester);
@@ -81,6 +109,7 @@ void main() {
         tester: tester,
         mockStoryRepository: mockStoryRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await storyAddInitialHelper(tester);
@@ -94,6 +123,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await storyAddInitialHelper(tester);
@@ -103,6 +133,7 @@ void main() {
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
           mockGoRouter: mockGoRouter,
         );
 
@@ -116,6 +147,7 @@ void main() {
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
           mockGoRouter: mockGoRouter,
         );
 

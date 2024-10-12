@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -177,6 +178,8 @@ abstract class KTestText {
   );
 
   static const image = 'test';
+
+  static final imageBytes = Uint8List(1);
 
   static const userWithoutPhoto = User(
     id: '1',

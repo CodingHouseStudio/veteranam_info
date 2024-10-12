@@ -80,6 +80,7 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<firebase_auth.FacebookAuthProvider>(),
     MockSpec<ICitiesRepository>(),
     MockSpec<ICompanyRepository>(),
+    MockSpec<DataPickerRepository>(),
   ],
 )
 void load() => debugPrint('loaded');

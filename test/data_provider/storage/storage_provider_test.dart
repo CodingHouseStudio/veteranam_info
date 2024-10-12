@@ -113,9 +113,7 @@ void main() {
 
     test('save empty story image', () async {
       await storageService.saveImage(
-        imageModel: KTestText.storyModelItems.last.image!.copyWith(
-          ref: null,
-        ),
+        image: KTestText.imageBytes,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
@@ -130,7 +128,7 @@ void main() {
     });
     test('save story image', () async {
       await storageService.saveImage(
-        imageModel: KTestText.storyModelItems.last.image!,
+        image: KTestText.imageBytes,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
