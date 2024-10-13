@@ -206,7 +206,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     }
 
     final renderBox = context.findRenderObject()! as RenderBox;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.sizeOf(context).height;
     final availableHeight =
         screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
     // +

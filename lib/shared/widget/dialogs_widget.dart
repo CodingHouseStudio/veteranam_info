@@ -167,7 +167,7 @@ class _DialogsWidget {
                     constraints.maxWidth >= KMinMaxSize.maxWidth600;
                 return Padding(
                   padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                    bottom: MediaQuery.viewInsetsOf(context).bottom,
                   ), // padding if mobile keyboard open
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
