@@ -171,9 +171,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i141.FirebaseCrashlytics>(
         () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
-    gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.dio);
+    gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.firestore);
     gh.singleton<_i361.Dio>(() => artifactModule.dio);
-    gh.singleton<_i457.FirebaseStorage>(() => storageModule.dio);
+    gh.singleton<_i457.FirebaseStorage>(() => storageModule.storage);
     gh.singleton<_i1008.AppInfoRepository>(() => _i1008.AppInfoRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
