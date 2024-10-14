@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BorderRadius, Radius;
 import 'package:veteranam/shared/shared.dart';
 
 abstract class KBorderRadius {

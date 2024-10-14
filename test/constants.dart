@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -86,6 +87,7 @@ abstract class KTestText {
   static const passwordIncorrectNumber = 'test_Password';
   static const shortPassword = 'Pas1';
   static const token = 'test_token';
+  static const code = 'test_code';
 
   static const userEmail = 'example@gmail.com';
   static const useremailWrong = 'examplewrong@gmail.com';
@@ -176,6 +178,18 @@ abstract class KTestText {
   );
 
   static const image = 'test';
+
+  static final imagePickerItem =
+      ImagePickerItem(bytes: Uint8List(1), name: image, ref: image);
+
+  static final imagePickerItemEmpty =
+      ImagePickerItem(bytes: Uint8List(0), name: image, ref: image);
+
+  static final imagePickerItemFeedback =
+      ImagePickerItem(bytes: Uint8List(1), name: null, ref: null);
+
+  static final imagePickerItemFeedbackWrong =
+      ImagePickerItem(bytes: Uint8List(2), name: null, ref: null);
 
   static const userWithoutPhoto = User(
     id: '1',
@@ -334,11 +348,21 @@ abstract class KTestText {
   );
 
   static final userDiscountModelItems = <DiscountModel>[
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 30; i++)
       KMockText.discountModel.copyWith(
         id: i.toString(),
         userId: userWithoutPhoto.id,
         dateVerified: dateTime,
+      ),
+  ];
+
+  static final userDiscountModelItemsWidget = <DiscountModel>[
+    for (var i = 0; i < 30; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+        status: i == 0 ? DiscountState.rejected : DiscountState.published,
       ),
   ];
 
@@ -604,6 +628,8 @@ abstract class KScreenBlocName {
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
   static const businessDashboard = 'Business Dashboard Screen';
+  static const pwResetEmail = 'Password Reset Email Screen';
+  static const passwordReset = 'Password Reset Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

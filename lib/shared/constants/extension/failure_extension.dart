@@ -1,15 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:veteranam/components/components.dart'
     show
+        CompanyFormFailure,
         DiscountFailure,
         FeedbackFailure,
         HomeFailure,
         InformationFailure,
         InvestorsFailure,
-        LoginError,
+        LoginFailure,
         MobFAQFailure,
         MyDiscountFailure,
         MyStoryFailure,
+        PasswordResetFailure,
+        ProfileFailure,
+        PwResetEmailFailure,
         SignUpError,
         StoryAddFailure,
         StoryFailure,
@@ -61,16 +65,16 @@ extension InvestorsFailureValue on InvestorsFailure {
   }
 }
 
-extension LoginFailureValue on LoginError {
+extension LoginFailureValue on LoginFailure {
   String value(BuildContext context) {
     switch (this) {
-      case LoginError.error:
+      case LoginFailure.error:
         return context.l10n.error;
-      case LoginError.send:
+      case LoginFailure.send:
         return context.l10n.sendFailure;
-      case LoginError.network:
+      case LoginFailure.network:
         return context.l10n.networkFailure;
-      case LoginError.notFound:
+      case LoginFailure.notFound:
         return context.l10n.notFoundFailure;
     }
   }
@@ -96,6 +100,32 @@ extension StoryFailureValue on StoryFailure {
     switch (this) {
       case StoryFailure.error:
         return context.l10n.error;
+    }
+  }
+}
+
+extension CompanyFormFailureValue on CompanyFormFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case CompanyFormFailure.error:
+        return context.l10n.error;
+      case CompanyFormFailure.send:
+        return context.l10n.sendFailure;
+      case CompanyFormFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
+}
+
+extension ProfleFormFailureValue on ProfileFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case ProfileFailure.error:
+        return context.l10n.error;
+      case ProfileFailure.send:
+        return context.l10n.sendFailure;
+      case ProfileFailure.network:
+        return context.l10n.networkFailure;
     }
   }
 }
@@ -185,6 +215,34 @@ extension UrlFailureExtension on SomeFailure {
         return UrlEnum.copyError;
       default:
         return UrlEnum.error;
+    }
+  }
+}
+
+extension PwResetEmailFailureValue on PwResetEmailFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case PwResetEmailFailure.error:
+        return context.l10n.error;
+      case PwResetEmailFailure.send:
+        return context.l10n.sendFailure;
+      case PwResetEmailFailure.network:
+        return context.l10n.networkFailure;
+      case PwResetEmailFailure.notFound:
+        return context.l10n.notFoundFailure;
+    }
+  }
+}
+
+extension PasswordResetFailureValue on PasswordResetFailure {
+  String? value(BuildContext context) {
+    switch (this) {
+      case PasswordResetFailure.error:
+        return context.l10n.error;
+      case PasswordResetFailure.send:
+        return context.l10n.sendFailure;
+      case PasswordResetFailure.network:
+        return context.l10n.networkFailure;
     }
   }
 }

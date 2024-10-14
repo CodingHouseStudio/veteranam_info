@@ -555,14 +555,6 @@
   "@storyAddSubtitle": {
     "examples": "Текст для опису сторінки AddStory."
   },
-  "logOutQuestion": "Ви впевнені, що бажаєте вийти з вашого облікового запису?",
-  "@logOutQuestion": {
-    "examples": "Текст для діалогу виходу з облікового запису на сторінці Profile."
-  },
-  "deleteAccountQuestion": "Ви впевнені, що хочете видалити ваш обліковий запис?",
-  "@deleteAccountQuestion": {
-    "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
-  },
   "yes": "Так",
   "@yes": {
     "examples": "Текст для кнопки для діологів видалення та виходу з облікового запису на сторінці Profile.",
@@ -980,6 +972,10 @@
   "@link": {
     "examples": "Текст на сторінці Discount, карточка додавання посилання."
   },
+  "linkDiscountAdd": "Пряме посилання на знижку",
+  "@linkDiscountAdd": {
+    "examples": "Текст на сторінці Discount Add для поля з посиланням на знижку."
+  },
   "linkLimitMessage": "Сьогодні ви вже надіслали максимальну кількість посилань. Будь ласка, спробуйте знову завтра.",
   "@linkLimitMessage": {
     "examples": "Текст помилки для поля посилання, якщо користувач надіслав максимальну кількість посилань в день."
@@ -1205,7 +1201,7 @@
   "@discountDescription": {
     "examples": "Текст на сторінці Discount Add для поля з заголовку(опис)"
   },
-  "linkDescription": "Вставте посилання на сторінку, де можна дізнатися детальніше про знижку. Це допоможе пришвидшити перевірку, і ми можемо зв’язатися з вами для уточнення деталей, якщо виникнуть додаткові питання щодо введеної інформації.",
+  "linkDescription": "Вставте посилання на сторінку, де можна дізнатися більше про знижку. Ми звернемося до вас, якщо виникнуть питання.",
   "@linkDescription": {
     "examples": "Текст на сторінці Discount Add для поля з посиланням(опис)"
   },
@@ -1227,7 +1223,7 @@
     "examples": "Текст для кнопки на сторінці Discount Add.",
     "description": "Кнопка використовується для певернення на попередні етапи форми."
   },
-  "myDiscounts": "Мої Знижки",
+  "myDiscounts": "Мої знижки",
   "@myDiscounts": {
     "examples": "Текст для кнопки яка появляється на Profile page та є заголовком My publications page.",
     "description": "Кнопка використовується для переходу на My Publications page."
@@ -1307,8 +1303,220 @@
   "@dataSendInProgress": {
     "examples": "Повідомлення під час збереження змін."
   },
+  "passwordReset": "Відновлення паролю",
+  "@passwordReset": {
+    "examples": "Текст на сторінці Password Reset Email"
+  },
+  "passwordResetDescription": "Введіть е-маіл, вказаний при реєстрації, і ми надішлемо код для відновлення паролю.",
+  "@passwordResetDescription": {
+    "examples": "Текст на сторінці Password Reset Email"
+  },
+  "passwordResetCodeSending": "Ми надсилаємо вам лист для відновлення пароля. Це може зайняти кілька секунд.",
+  "@passwordResetCodeSending": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті."
+  },
+  "passwordResetCodeSendFirst": "Ми надіслали інформацію на",
+  "@passwordResetCodeSend": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Перша частина."
+  },
+  "passwordResetCodeSendSecond": "\nСлідуйте інструкціям вказаним в листі.",
+  "@passwordResetCodeSendSecond": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Друга частина."
+  },
+  "passwordResetCodeSendThirty": "\nПеревірте папки Спам і Пропозиції.",
+  "@passwordResetCodeSendThirty": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Третя частина."
+  },
+  "confirmPassword": "Підтвердити пароль",
+  "@confirmPassword": {
+    "examples": "Текст на сторінці Password Reset для поля підтвердження пароля",
+    "description": "В полі користувач повинен написати щераз пароль"
+  },
+  "successfully": "Успішно!",
+  "@successfully": {
+    "examples": "Текст на сторінці Password Reset"
+  },
+  "successfullyDescruption": "Ви успішно підтвердили свій доступ. Тепер придумайте новий пароль",
+  "@successfullyDescruption": {
+    "examples": "Текст на сторінці Password Reset"
+  },
+  "confirm": "Підтвердити",
+  "@confirm": {
+    "examples": "Текст для кнопки на сторінці Password Reset",
+    "description": "Кнопка використовується для підтвердження зміни пароля."
+  },
+  "changePasswordWaiting": "Змінюємо ваш пароль. Зачекайте трохи.",
+  "@changePasswordWaiting": {
+    "examples": "Текст на сторінці Password Reset, з'являється коли користувач натиснув на кнопку підтвердити і очікує зміни пароля"
+  },
+  "changedPassword": "Пароль змінено! Тепер ви можете увійти.",
+  "@changedPassword": {
+    "examples": "Текст на сторінці Password Reset, з'являється коли користувач натиснув на кнопку підтвердити і пароль змінився"
+  },
+  "passwordMismatch": "Паролі не збігаються. Переконайтеся, що обидва паролі однакові.",
+  "@passwordMismatch": {
+    "examples": "Повідомлення, яке відображається, коли користувач вводить різні паролі в полях пароля та підтвердження пароля."
+  },
+  "passwordResetWaiting": "Зачекайте, ми перевіряємо вашу інформацію.",
+  "@passwordResetWaiting": {
+    "examples": "Текст на сторінці Reset Password, появляється під час перевірки правильності коду"
+  },
+  "passwordResetWrongDescriptionFirst": "Термін дії цього посилання закінчився або посилання не дійсне.\n Спробуйте ",
+  "@passwordResetWrongDescriptionFirst": {
+    "examples": "Текст на сторінці Reset Password, появляється якщо код в посиланні не вірний. Перша частина"
+  },
+  "passwordResetWrongDescriptionSecond": "надіслати посилання ще раз",
+  "@passwordResetWrongDescriptionSecond": {
+    "examples": "Текст на сторінці Reset Password, появляється якщо код в посиланні не вірний. Друга частина"
+  },
+  "sendAgain": "Надіслати ще раз",
+  "@sendAgain": {
+    "examples": "Текст для кнопки на сторінці Reset Password, появляється якщо код веріфікації не вірний.",
+    "description": "Кнопка використовується для переходу на сторінку Password Reset Email."
+  },
+  "notReceiveLetter": "Не отримали лист?",
+  "@notReceiveLetter": {
+    "examples": "Текст для кнопки на сторінці Reset Password Email, появляється після того як користувач ввів email і йому прийшов лист."
+  },
+  "resendWait": "Ви зможете надіслати лист ще раз через {remainingSeconds} секунд.",
+  "@resendWait": {
+    "placeholders": {
+      "remainingSeconds": {}
+    },
+    "examples": "Текст на сторінці Password Reset Email, зявляється коли користувач натиснув надіслати, і очікує хвилину перед наступною відправкою"
+  },
   "dataUnmodified": "Зміни не збережено, бо дані не відрізняються.",
   "@dataUnmodified": {
     "examples": "Повідомлення, коли дані не були змінені."
+  },
+  "publishDiscount": "Опублікуйте Вашу першу знижку",
+  "@publishDiscount": {
+    "examples": "Текст про відсутність знижок на сторінці MyDiscounts"
+  },
+  "addDiscount": "Додати знижку",
+  "@addDiscount": {
+    "examples": "Текст для кнопки на сторінці MyDiscount.",
+    "description": "Кнопка використовується для додавання знижки"
+  },
+  "thatEndOfMyDiscounts": "Це кінець списку! Сподіваємось ви знайшли те, що шукали.",
+  "@thatEndOfMyDiscounts": {
+    "examples": "Текст в кінці списку знижок на сторінці MyDiscounts"
+  },
+  "profileNotFilledOut": "Щоб додати знижку, заповніть, будь ласка, інформацію про компанію в особистому кабінеті",
+  "@profileNotFilledOut": {
+    "examples": "Текст на сторінці MyDiscounts, коли не заповнений профіль"
+  },
+  "underReview": "Перевіряється",
+  "@underReview": {
+    "examples": "Текст для статуса знижки"
+  },
+  "overdue": "Протерміновано",
+  "@overdue": {
+    "examples": "Текст для статуса знижки"
+  },
+  "rejected": "Відхилено",
+  "@rejected": {
+    "examples": "Текст для статуса знижки"
+  },
+  "published": "Опубліковано",
+  "@published": {
+    "examples": "Текст для статуса знижки"
+  },
+  "deactivated": "Деактивовано",
+  "@deactivated": {
+    "examples": "Текст для статуса знижки"
+  },
+  "toProfile": "До кабінету",
+  "@toProfile": {
+    "examples": "Текст для кнопки на сторінці MyDiscount.",
+    "description": "Кнопка використовується для переходу в кабнет"
+  },
+  "categoryDescription": "Виберіть одну або декілька категорій. Якщо потрібної немає у списку то напишіть її",
+  "@categoryDescription": {
+    "examples": "Текст на сторінці Discount Add для поля з категоріями(опис)"
+  },
+  "companyName": "Назва компанії",
+  "@copmanyName": {
+    "examples": "Текст на сторінці Company для поля з назвою компанії",
+    "description": "Поле використовується для вводу назви компанії для бізнес акаунтів."
+  },
+  "companyCode": "Код ЄДРПОУ або ІПН для ФОП",
+  "@copmanyCode": {
+    "examples": "Текст на сторінці Company для поля з кодом компанії.",
+    "description": "Поле використовується для вводу назви коду компанії для бізнес акаунтів."
+  },
+  "linkOnWebsite": "Посилання на веб-сайт",
+  "@linkOnWesite": {
+    "examples": "Текст на сторінці Company для поля з посиланням на сайт компанії",
+    "description": "Поле використовується для вводу посилання для бізнес акаунтів."
+  },
+  "myCompany": "Моя компанія",
+  "@myCompany": {
+    "examples": "Текст на сторінці Company"
+  },
+  "descriptionForRejectedStatus": "Ваше оголошення не може бути опубліковане через деякі помилки.\nБудь ласка, зверніться за деталями на наш емайл: hello@veteranam.info",
+  "@descriptionForRejectedStatus": {
+    "examples": "Текст для опису відхиленного статусу знижки на сторінці MyDiscount."
+  },
+  "logOutFromProfile": "Вийти з профілю?",
+  "@logOutFromProfile": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для виходу з облікового запису."
+  },
+  "deleteProfile": "Видалити профіль?",
+  "@deleteProfile": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для видалення облікового запису."
+  },
+  "delete": "Видалити",
+  "@delete": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для видалення облікового запису."
+  },
+  "cancelChanges": "Скасувати зміни?",
+  "@cancelChanges": {
+    "examples": "Текст для кнопки на сторінці Discount add.",
+    "description": "Кнопка використовується для повернення на попередню сторінку."
+  },
+  "cancelChangesQuestion": "Ви впевнені, що хочете скасувати зміни? Всі нові дані будуть втрачені",
+  "@cancelChangesQuestion": {
+    "examples": "Текст на сторінці Discount add."
+  },
+  "continueWorking": "Продовжити роботу",
+  "@continueWorking": {
+    "examples": "Текст для кнопки на сторінці Discount add.",
+    "description": "Кнопка використовується щоб залишитись на сторінці."
+  },
+  "deleteDiscount": "Видалити знижку?",
+  "@deleteDiscount": {
+    "examples": "Текст для кнопки на сторінці My Discount."
+  },
+  "discountLimitMessage": "Для однієї знижки максимальна кількість",
+  "@discountLimitMessage": {
+    "examples": "Текст помилки для полів категорій та міст, якщо значення занадто багато."
+  },
+  "citiesLimit": "міст 30.",
+  "@cities": {
+    "examples": "Текст помилки для поля міст, якщо значення перевищує 30 міст."
+  },
+  "categoriesLimit": "категорій 2.",
+  "@categories": {
+    "examples": "Текст помилки для поля категорій, якщо значення перевищує 2 категорії."
+  },
+  "discountWrongRange": "Знижка повинна бути не більше 100% та не менше 1%",
+  "@discountWrongRange": {
+    "examples": "Текст помилки для поля знижки, якщо значення відсотків більші за 100% або менші за 1%."
+  },
+  "deleteDiscountQuestion": "Ви впевнені, що хочете видалити цю знижку? Всі дані будуть втарчені",
+  "@deleteDiscountQuestion": {
+    "examples": "Текст на сторінці My Discount."
+  },
+  "logOutProfileQuestion": "Ви впевнені, що хочете вийти з Вашого профілю?",
+  "@logOutProfileQuestion": {
+    "examples": "Текст для діалогу виходу з облікового запису на сторінці Profile."
+  },
+  "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
+  "@deleteProfileQuestion": {
+    "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
   }
 }

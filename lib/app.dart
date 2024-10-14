@@ -56,6 +56,11 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
           ),
         ],
+        if (Config.isBusiness)
+          BlocProvider(
+            create: (context) => GetIt.I.get<CompanyWatcherBloc>()
+              ..add(const CompanyWatcherEvent.started()),
+          ),
       ],
       child: const AppWidget(),
     );
@@ -104,6 +109,7 @@ class AppWidget extends StatelessWidget {
   Widget body(Locale localeValue) => MaterialApp.router(
         key: KWidgetkeys.screen.app.screen,
         theme: themeData,
+        restorationScopeId: KAppText.logo,
         // scrollBehavior: CustomScrollBehavior(),
         localizationsDelegates: locale,
         locale: localeValue,

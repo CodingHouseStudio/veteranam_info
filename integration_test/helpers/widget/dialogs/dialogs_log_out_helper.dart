@@ -6,7 +6,7 @@ Future<void> dialogLogOutHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.widget.dialogs.logOut), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.dialogs.profileText), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.dialogs.profileTitle), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.dialogs.confirmButton), findsOneWidget);
 

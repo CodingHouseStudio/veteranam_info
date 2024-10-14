@@ -30,17 +30,27 @@ class WorkRepository implements IWorkRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> sendRespond(
-    EmployeeRespondModel respond,
-  ) async {
+  Future<Either<SomeFailure, bool>> sendRespond({
+    required EmployeeRespondModel respond,
+    required ImagePickerItem? file,
+  }) async {
     try {
-      if (respond.resume != null) {
-        await _storageService.saveRespond(
-          resumeModel: respond.resume!,
-          respondId: respond.id,
+      late var methodRespond = respond;
+      if (file != null) {
+        final downloadURL = await _storageService.saveFile(
+          imagePickerItem: file,
+          id: respond.id,
+          collecltionName: FirebaseCollectionName.respond,
+          file: StoragePath.resume,
+          standartFileExtension: StoragePath.standartFileExtension,
         );
+        if (downloadURL != null && downloadURL.isNotEmpty) {
+          methodRespond = methodRespond.copyWith(
+            resume: file.resume(downloadURL),
+          );
+        }
       }
-      await _firestoreService.sendRespond(respond);
+      await _firestoreService.sendRespond(methodRespond);
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {

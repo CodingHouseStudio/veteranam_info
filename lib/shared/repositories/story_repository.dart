@@ -15,18 +15,21 @@ class StoryRepository implements IStoryRepository {
   Stream<List<StoryModel>> getStoryItems() => _firestoreService.getStories();
 
   @override
-  Future<Either<SomeFailure, bool>> addStory(StoryModel storyModel) async {
+  Future<Either<SomeFailure, bool>> addStory({
+    required StoryModel storyModel,
+    required ImagePickerItem? imageItem,
+  }) async {
     try {
       late var methodStoryModel = storyModel;
-      if (methodStoryModel.image != null) {
-        final downloadURL = await _storageService.saveImage(
-          imageModel: methodStoryModel.image!,
+      if (imageItem != null) {
+        final downloadURL = await _storageService.saveFile(
+          imagePickerItem: imageItem,
           id: storyModel.id,
           collecltionName: FirebaseCollectionName.stroies,
         );
-        if (downloadURL.isNotEmpty) {
+        if (downloadURL != null && downloadURL.isNotEmpty) {
           methodStoryModel = methodStoryModel.copyWith(
-            image: methodStoryModel.image!.copyWith(downloadURL: downloadURL),
+            image: imageItem.image(downloadURL),
           );
         }
       }

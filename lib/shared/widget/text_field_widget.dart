@@ -43,6 +43,7 @@ class TextFieldWidget extends StatefulWidget {
     this.floatingLabelBehavior,
     this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
     this.description,
+    this.textInputAction,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -83,6 +84,7 @@ class TextFieldWidget extends StatefulWidget {
   final FloatingLabelBehavior? floatingLabelBehavior;
   final Color? borderHoverColor;
   final String? description;
+  final TextInputAction? textInputAction;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -127,7 +129,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         minLines: widget.expands ? null : widget.minLines ?? 1,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
-        textInputAction: TextInputAction.done,
+        textInputAction: widget.textInputAction ?? TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
         style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,

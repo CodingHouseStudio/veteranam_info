@@ -26,7 +26,7 @@ Future<void> nawbarBusinessNavigationHelper({
 
   verify(
     () => mockGoRouter.goNamed(
-      KRoute.businessDashboard.name,
+      KRoute.myDiscounts.name, //KRoute.businessDashboard.name,
     ),
   ).called(1);
 

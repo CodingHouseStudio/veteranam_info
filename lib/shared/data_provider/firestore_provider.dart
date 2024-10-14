@@ -17,6 +17,7 @@ enum MobMode {
 class FirestoreService {
   FirestoreService(
     // this.appNetworkRepository,
+    this._db,
     this._cache,
   ) {
     // Initialization logic can't use await directly in constructor
@@ -27,15 +28,13 @@ class FirestoreService {
   //   Connectivity(),
   //   CacheClient(),
   // );
-  final FirebaseFirestore _db = firebaseFirestore;
+  final FirebaseFirestore _db;
   final CacheClient _cache;
   late var _offlineMode = MobMode.offline;
 
   MobMode get offlineMode =>
       _cache.read<MobMode>(key: offlineModeCacheKey) ?? _offlineMode;
 
-  @visibleForTesting
-  static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   @visibleForTesting
   static const getOptions = GetOptions();
   @visibleForTesting
@@ -265,6 +264,38 @@ class FirestoreService {
         },
       );
 
+  Stream<CompanyModel> getUserCompany(String email) => _db
+          .collection(FirebaseCollectionName.companies)
+          .where(CompanyModelJsonField.userEmails, arrayContains: email)
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
+          .map(
+        (snapshot) {
+          if (snapshot.docs.isNotEmpty) {
+            // ignore: unused_local_variable
+            final source = (snapshot.metadata.isFromCache)
+                ? KAppText.cache
+                : KAppText.server;
+            // debugPrint('Data fetched from $source}');
+            return CompanyModel.fromJson(snapshot.docs.first.data());
+          } else {
+            return CompanyModel.empty;
+          }
+        },
+      );
+
+  Future<void> updateCompany(CompanyModel company) {
+    return _db.collection(FirebaseCollectionName.companies).doc(company.id).set(
+          company.toJson(),
+          setMergeOptions,
+        );
+  }
+
+  Future<void> deleteCompany(String id) {
+    return _db.collection(FirebaseCollectionName.companies).doc(id).delete();
+  }
+
   Future<void> deleteUserSetting(
     String userId,
   ) {
@@ -355,11 +386,18 @@ class FirestoreService {
 
   Stream<List<DiscountModel>> getDiscounts(
       // List<String>? reportIdItems,
-      ) {
+      {
+    String? userId,
+  }) {
     var query = _db
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true);
-    if (Config.isProduction) {
+    if (userId != null) {
+      query = query.where(
+        DiscountModelJsonField.userId,
+        isEqualTo: userId,
+      );
+    } else if (Config.isProduction) {
       query = query.where(
         DiscountModelJsonField.status,
         isEqualTo: DiscountState.published.enumString,
@@ -403,10 +441,23 @@ class FirestoreService {
         await _db.collection(FirebaseCollectionName.discount).doc(id).get();
 
     if (docSnapshot.exists) {
-      return DiscountModel.fromJson(docSnapshot.data()!);
-    } else {
-      throw FirebaseException(code: 'not-found', plugin: 'not-found');
+      final discount = docSnapshot.data();
+      if (Config.isDevelopment ||
+          (discount != null &&
+              discount['status'] == DiscountState.published.enumString)) {
+        return DiscountModel.fromJson(docSnapshot.data()!);
+      }
     }
+    throw FirebaseException(code: 'not-found', plugin: 'not-found');
+  }
+
+  Future<void> updateDiscountModel(
+    DiscountModel discountModel,
+  ) async {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discountModel.id)
+        .update(discountModel.toJson());
   }
 
   Future<void> sendLink(
@@ -484,16 +535,16 @@ class FirestoreService {
   //       .set(tags.toJson());
   // }
 
-  Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
-    final querySnapshot = await _db
-        .collection(FirebaseCollectionName.discount)
-        .where(DiscountModelJsonField.userId, isEqualTo: userId)
-        .get();
+  // Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
+  //   final querySnapshot = await _db
+  //       .collection(FirebaseCollectionName.discount)
+  //       .where(DiscountModelJsonField.userId, isEqualTo: userId)
+  //       .get();
 
-    return querySnapshot.docs
-        .map((doc) => DiscountModel.fromJson(doc.data()))
-        .toList();
-  }
+  //   return querySnapshot.docs
+  //       .map((doc) => DiscountModel.fromJson(doc.data()))
+  //       .toList();
+  // }
 
   Future<void> deleteDiscountById(String discountId) {
     return _db

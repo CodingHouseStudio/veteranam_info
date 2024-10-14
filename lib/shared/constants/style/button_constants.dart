@@ -1,4 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        BorderSide,
+        ButtonStyle,
+        Colors,
+        EdgeInsets,
+        LinearBorder,
+        LinearBorderEdge,
+        RoundedRectangleBorder,
+        Size,
+        WidgetStatePropertyAll;
 import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
@@ -70,6 +81,12 @@ abstract class KButtonStyles {
     ),
   );
   static const withoutStyle = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     shape: WidgetStatePropertyAll(LinearBorder.none),
@@ -276,6 +293,15 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const circularBorderBlackButtonStyle = ButtonStyle(
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius48,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
   static const borderGrayButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
@@ -339,6 +365,21 @@ abstract class KButtonStyles {
     textStyle: WidgetStatePropertyAll(AppTextStyle.materialThemeBodyLarge),
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+    ),
+  );
+
+  static const borderNeutralButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+      ),
     ),
   );
 

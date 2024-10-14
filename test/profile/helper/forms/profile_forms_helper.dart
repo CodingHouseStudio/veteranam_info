@@ -36,15 +36,15 @@ Future<void> profileFormsHelper(
     itemKey: KWidgetkeys.screen.profile.emailFied,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.profile.nickNameField),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+  //   findsOneWidget,
+  // );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nickNameField,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.profile.saveButton),

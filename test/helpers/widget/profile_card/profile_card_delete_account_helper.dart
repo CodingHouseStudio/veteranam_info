@@ -25,5 +25,5 @@ Future<void> profileCardDeleteAccountHelper(
 
   await tester.pumpAndSettle();
 
-  await dialogDeleteAccountHelper(tester);
+  await dialogConfirmChangesHelper(tester);
 }

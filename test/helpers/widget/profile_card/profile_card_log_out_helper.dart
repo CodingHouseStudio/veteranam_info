@@ -25,5 +25,5 @@ Future<void> profileCardLogOutHelper(
 
   await tester.pumpAndSettle();
 
-  await dialogLogOutHelper(tester);
+  await dialogConfirmChangesHelper(tester);
 }

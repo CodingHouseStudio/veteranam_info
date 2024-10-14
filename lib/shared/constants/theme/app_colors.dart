@@ -1,15 +1,21 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color;
 
 abstract class AppColors {
   static const Color materialThemeWhite = Color(0xffffffff);
 
   static const Color materialThemeBlack = Color(0xff000000);
 
-  static const Color materialThemeBlackOpacity = Color(0x88000000);
+  static const Color materialThemeBlackOpacity88 = Color(0x88000000);
 
-  static const Color materialThemeBlackShadow = Color(0x20000000);
+  static const Color materialThemeBlackOpacity20 = Color(0x20000000);
+
+  static const Color materialThemeBlackOpacity1 = Color(0x03000000);
+
+  static const Color materialThemeBlackOpacity2 = Color(0x05000000);
+
+  static const Color materialThemeBlackOpacity4 = Color(0x0A000000);
 
   static const Color materialThemeRefPrimaryPrimary100 = Color(0xffffffff);
 

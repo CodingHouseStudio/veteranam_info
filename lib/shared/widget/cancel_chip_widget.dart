@@ -10,6 +10,7 @@ class CancelChipWidget extends StatelessWidget {
     super.key,
     this.style,
     this.textStyle,
+    this.padding,
   });
   final Key widgetKey;
   final bool isDesk;
@@ -17,12 +18,15 @@ class CancelChipWidget extends StatelessWidget {
   final void Function() onPressed;
   final ButtonStyle? style;
   final TextStyle? textStyle;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       key: widgetKey,
-      style: style ?? KButtonStyles.advancedFilterButtonStyle,
+      style: (style ?? KButtonStyles.advancedFilterButtonStyle).copyWith(
+        padding: padding == null ? null : WidgetStatePropertyAll(padding),
+      ),
       icon: KIcon.close,
       clipBehavior: Clip.hardEdge,
       label: Text(

@@ -1,14 +1,36 @@
-import 'dart:async';
-import 'dart:math';
+import 'dart:math' show max, min;
 
-import 'package:collection/collection.dart';
-import 'package:feedback/feedback.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
-import 'package:flutter/material.dart';
+import 'package:collection/collection.dart' show IterableExtension;
+import 'package:feedback/feedback.dart' show UserFeedback;
+import 'package:firebase_storage/firebase_storage.dart'
+    show Reference, SettableMetadata, UploadTask;
+import 'package:flutter/foundation.dart'
+    show Key, Uint8List, kIsWeb, kReleaseMode, visibleForTesting;
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BoxFit,
+        BuildContext,
+        ClipRRect,
+        Color,
+        EdgeInsets,
+        EdgeInsetsGeometry,
+        Expanded,
+        Spacer,
+        TextDirection,
+        TextPainter,
+        TextSpan,
+        TextStyle,
+        Widget,
+        showDatePicker;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/components.dart'
+    show
+        DiscountEnum,
+        DiscountUserEmailFormBloc,
+        DiscountUserEmailFormEvent,
+        ProfileEnum;
 import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
@@ -124,6 +146,18 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
+  DateTime toLocaleDate({
+    required String locale,
+    bool showDay = false,
+  }) {
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).parse(this);
+    } else {
+      return DateFormat.yMMMM(locale).parse(this);
+    }
+  }
+
   String customSubstring(int start, [int? end]) {
     return substring(start, end != null ? min(end, length) : null);
   }
@@ -321,12 +355,16 @@ extension ContextExtensions on BuildContext {
   @visibleForTesting
   static DateTime? textPieckerData;
 
-  Future<DateTime?> get getDate async =>
+  Future<DateTime?> getDate({DateTime? currecntDate}) async =>
       textPieckerData ??
       showDatePicker(
         context: this,
-        initialDate: ExtendedDateTime.current,
-        firstDate: ExtendedDateTime.current,
+        initialDate: currecntDate ??
+            ExtendedDateTime.current.add(
+              const Duration(days: KDimensions.minAmountTimeDiscountDays),
+            ),
+        firstDate: ExtendedDateTime.current
+            .add(const Duration(days: KDimensions.minAmountTimeDiscountDays)),
         lastDate: DateTime(2026),
       );
 }
@@ -520,8 +558,8 @@ extension DiscountStateExtention on DiscountState {
         return 'isNew';
       case DiscountState.underReview:
         return 'underReview';
-      case DiscountState.overdue:
-        return 'overdue';
+      // case DiscountState.overdue:
+      //   return 'overdue';
       case DiscountState.rejected:
         return 'rejected';
       case DiscountState.published:
@@ -530,25 +568,58 @@ extension DiscountStateExtention on DiscountState {
         return 'deactivated';
     }
   }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return context.l10n.underReview;
+      // case DiscountState.overdue:
+      //   return context.l10n.overdue;
+      case DiscountState.rejected:
+        return context.l10n.rejected;
+      case DiscountState.published:
+        return context.l10n.published;
+      case DiscountState.deactivated:
+        return context.l10n.deactivated;
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeRefNeutralNeutral99;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary98;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError98;
+      case DiscountState.published:
+        return AppColors.materialThemeRefSecondarySecondary99;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary90;
+    }
+  }
+
+  Color get pointColor {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeSysLightTertiary;
+      // case DiscountState.overdue:
+      //   return AppColors.materialThemeRefTertiaryTertiary60;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError40;
+      case DiscountState.published:
+        return AppColors.materialThemeRefPrimaryPrimary80;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary70;
+    }
+  }
 }
 
 extension UserExtensions on User? {
   String? get firstName => this?.name?.split(' ').first;
 
   String? get lastName => this?.name?.split(' ').last;
-}
-
-extension ProfileEnumExtensions on ProfileEnum {
-  String loadingMessage(BuildContext context) {
-    if (this == ProfileEnum.success) {
-      return context.l10n.dataIsUpdatedSuccess;
-    }
-    if (this == ProfileEnum.sendInProgress) {
-      return context.l10n.dataSendInProgress;
-    }
-    if (this == ProfileEnum.succesesUnmodified) {
-      return context.l10n.dataUnmodified;
-    }
-    return '';
-  }
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data' show Uint8List;
+
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -11,6 +13,7 @@ class UserPhotoWidget extends StatelessWidget {
     this.perimeter,
     this.background,
     this.iconColor,
+    this.imageBytes,
   });
   final String? imageUrl;
   final VoidCallback? onPressed;
@@ -19,6 +22,7 @@ class UserPhotoWidget extends StatelessWidget {
   final double? perimeter;
   final Color? background;
   final Color? iconColor;
+  final Uint8List? imageBytes;
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +45,12 @@ class UserPhotoWidget extends StatelessWidget {
     }
   }
 
-  Widget get _body => imageUrl != null
+  Widget get _body => imageUrl != null || imageBytes != null
       ? ClipRRect(
           borderRadius: BorderRadius.circular(perimeter ?? KSize.kUserPhoto),
           child: NetworkImageWidget(
-            imageUrl: imageUrl!,
+            imageUrl: imageUrl,
+            imageBytes: imageBytes,
             fit: BoxFit.contain,
             size: perimeter ?? KSize.kUserPhoto,
             highQuality: true,
