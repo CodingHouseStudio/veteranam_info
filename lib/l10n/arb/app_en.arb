@@ -568,11 +568,11 @@
   "@storyAddSubtitle": {
     "examples": "Text to subtitle the AddStory page."
   },
-  "logOutQuestion": "Are you sure you want to log out of your account?",
+  "logOutQuestion": "Are you sure you want to log out of your profile?",
   "@logOutQuestion": {
     "examples": "The text for the logout diologue on the Profile page."
   },
-  "deleteAccountQuestion": "Are you sure you want to delete your account?",
+  "deleteAccountQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteAccountQuestion": {
     "examples": "Text for the account deletion dialog on the Profile page."
   },
@@ -1435,12 +1435,12 @@
   "@descriptionForRejectedStatus": {
     "examples": "Text to describe the rejected discount status on the MyDiscount page."
   },
-  "logOutFromProfile": "Log Out From Profile",
+  "logOutFromProfile": "Log Out?",
   "@logOutFromProfile": {
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to log out of the account."
   },
-  "deleteProfile": "Delete Profile",
+  "deleteProfile": "Delete profile?",
   "@deleteProfile": {
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to delete an account."
@@ -1450,12 +1450,7 @@
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to delete an account."
   },
-  "cancelChanges": "Cancel Changes",
-  "@cancelChanges": {
-    "examples": "Text for button on Discount add page.",
-    "description": "The button is used to return to the previous page."
-  },
-  "cancelChangesQuestion": "Cancel Changes",
+  "cancelChanges": "Cancel changes?",
   "@cancelChanges": {
     "examples": "Text for button on Discount add page.",
     "description": "The button is used to return to the previous page."
@@ -1469,7 +1464,7 @@
     "examples": "Text for button on Discount add page.",
     "description": "The button is used to stay on the page."
   },
-  "deleteDiscount": "Delete discount",
+  "deleteDiscount": "Delete discount?",
   "@deleteDiscount": {
     "examples": "Text for a button on the My Discount page."
   },

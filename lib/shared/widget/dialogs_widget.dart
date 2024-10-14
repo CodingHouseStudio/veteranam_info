@@ -50,6 +50,7 @@ class _DialogsWidget {
                     confirmText: confirmText,
                     background: background,
                     onPressed: onPressed,
+                    unconfirmText: unconfirmText,
                   ),
                 ),
               );
@@ -80,6 +81,7 @@ class _DialogsWidget {
                   confirmText: confirmText,
                   background: background,
                   onPressed: onPressed,
+                  unconfirmText: unconfirmText,
                 ),
               );
             },
