@@ -80,30 +80,30 @@ class PwResetEmailBodyWidget extends StatelessWidget {
                       textAlign: isDesk ? TextAlign.center : TextAlign.start,
                     ),
             ),
-            if (_.formState.isSended)
+            if (_.formState.isSended) ...[
+              KSizedBox.kHeightSizedBox16,
               Align(
                 alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-                  child: TextButton(
-                    key: KWidgetkeys.screen.pwResetEmail.cancelButton,
-                    onPressed: () => context
-                        .read<PwResetEmailBloc>()
-                        .add(const PwResetEmailEvent.resetStatus()),
-                    style: KButtonStyles.borderBlackButtonStyle,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                child: TextButton(
+                  key: KWidgetkeys.screen.pwResetEmail.cancelButton,
+                  onPressed: () => context
+                      .read<PwResetEmailBloc>()
+                      .add(const PwResetEmailEvent.resetStatus()),
+                  style: KButtonStyles.borderBlackButtonStyle.copyWith(
+                    padding: const WidgetStatePropertyAll(
+                      EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize4,
                         horizontal: KPadding.kPaddingSize10,
                       ),
-                      child: Text(
-                        context.l10n.back,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                      ),
                     ),
+                  ),
+                  child: Text(
+                    context.l10n.back,
+                    style: AppTextStyle.materialThemeTitleMedium,
                   ),
                 ),
               ),
+            ],
             if (_.formState.isSended)
               KSizedBox.kHeightSizedBox80
             else
