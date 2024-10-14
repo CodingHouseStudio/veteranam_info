@@ -1499,6 +1499,18 @@
   "@deleteDiscount": {
     "examples": "Текст для кнопки на сторінці My Discount."
   },
+  "discountLimitMessage": "Для однієї знижки максимальна кількість",
+  "@discountLimitMessage": {
+    "examples": "Текст помилки для полів категорій та міст, якщо значення занадто багато."
+  },
+  "citiesLimit": "міст 30.",
+  "@cities": {
+    "examples": "Текст помилки для поля міст, якщо значення перевищує 30 міст."
+  },
+  "categoriesLimit": "категорій 2.",
+  "@categories": {
+    "examples": "Текст помилки для поля категорій, якщо значення перевищує 2 категорії."
+  },
   "deleteDiscountQuestion": "Ви впевнені, що хочете видалити знижку? Всі дані будуть втарчені",
   "@deleteDiscountQuestion": {
     "examples": "Текст на сторінці My Discount."

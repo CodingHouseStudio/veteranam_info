@@ -1491,6 +1491,18 @@
   "@linkDiscountAdd": {
     "examples": "Text on the Discount Add Page for field direct link."
   },
+  "discountLimitMessage": "The maximum number for one discount is",
+  "@discountLimitMessage": {
+    "examples": "Error message for category and city fields if the value is too large."
+  },
+  "citiesLimit": "cities 30.",
+  "@cities": {
+    "examples": "Error message for the city field if the value exceeds 30 cities."
+  },
+  "categoriesLimit": "categories 2.",
+  "@categories": {
+    "examples": "Error message for the category field if the value exceeds 2 categories."
+  },
   "deleteDiscountQuestion": "Are you sure you want to delete the discount? All data will be deleted",
   "@deleteDiscountQuestion": {
     "examples": "Text on the My Discount page."
