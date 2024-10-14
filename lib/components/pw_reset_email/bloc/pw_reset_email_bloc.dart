@@ -21,6 +21,7 @@ class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
     on<_Started>(_onStarted);
     on<_EmailUpdated>(_onEmailUpdated);
     on<_SendResetCode>(_onSendResetCode);
+    on<_ResetStatus>(_onResetStatus);
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -35,6 +36,17 @@ class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
         emit: emit,
       );
     }
+  }
+
+  void _onResetStatus(
+    _ResetStatus event,
+    Emitter<PwResetEmailState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        formState: PwResetEmailEnum.inProgress,
+      ),
+    );
   }
 
   void _onEmailUpdated(

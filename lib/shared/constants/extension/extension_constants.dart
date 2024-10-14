@@ -146,6 +146,18 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
+  DateTime toLocaleDate({
+    required String locale,
+    bool showDay = false,
+  }) {
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).parse(this);
+    } else {
+      return DateFormat.yMMMM(locale).parse(this);
+    }
+  }
+
   String customSubstring(int start, [int? end]) {
     return substring(start, end != null ? min(end, length) : null);
   }
@@ -343,12 +355,16 @@ extension ContextExtensions on BuildContext {
   @visibleForTesting
   static DateTime? textPieckerData;
 
-  Future<DateTime?> get getDate async =>
+  Future<DateTime?> getDate({DateTime? currecntDate}) async =>
       textPieckerData ??
       showDatePicker(
         context: this,
-        initialDate: ExtendedDateTime.current,
-        firstDate: ExtendedDateTime.current,
+        initialDate: currecntDate ??
+            ExtendedDateTime.current.add(
+              const Duration(days: KDimensions.minAmountTimeDiscountDays),
+            ),
+        firstDate: ExtendedDateTime.current
+            .add(const Duration(days: KDimensions.minAmountTimeDiscountDays)),
         lastDate: DateTime(2026),
       );
 }

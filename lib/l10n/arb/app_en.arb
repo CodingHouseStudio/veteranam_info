@@ -568,14 +568,6 @@
   "@storyAddSubtitle": {
     "examples": "Text to subtitle the AddStory page."
   },
-  "logOutQuestion": "Are you sure you want to log out of your account?",
-  "@logOutQuestion": {
-    "examples": "The text for the logout diologue on the Profile page."
-  },
-  "deleteAccountQuestion": "Are you sure you want to delete your account?",
-  "@deleteAccountQuestion": {
-    "examples": "Text for the account deletion dialog on the Profile page."
-  },
   "yes": "Yes",
   "@yes": {
     "examples": "Text for the button for deleting and logging out of an account on the Profile page.",
@@ -1210,7 +1202,7 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where more information about the discount can be found.Providing link to the webpage with discount will increase speed verification of your discount. We may be reaching out to you with additional questions to confirm entered information is accurate.",
+  "linkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
   "@linkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
@@ -1454,12 +1446,12 @@
   "@descriptionForRejectedStatus": {
     "examples": "Text to describe the rejected discount status on the MyDiscount page."
   },
-  "logOutFromProfile": "Log Out From Profile",
+  "logOutFromProfile": "Log out?",
   "@logOutFromProfile": {
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to log out of the account."
   },
-  "deleteProfile": "Delete Profile",
+  "deleteProfile": "Delete profile?",
   "@deleteProfile": {
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to delete an account."
@@ -1469,7 +1461,7 @@
     "examples": "Text for the button on the Profile page.",
     "description": "The button is used to delete an account."
   },
-  "cancelChanges": "Cancel Changes",
+  "cancelChanges": "Cancel changes?",
   "@cancelChanges": {
     "examples": "Text for button on Discount add page.",
     "description": "The button is used to return to the previous page."
@@ -1483,7 +1475,7 @@
     "examples": "Text for button on Discount add page.",
     "description": "The button is used to stay on the page."
   },
-  "deleteDiscount": "Delete discount",
+  "deleteDiscount": "Delete discount?",
   "@deleteDiscount": {
     "examples": "Text for a button on the My Discount page."
   },
@@ -1491,8 +1483,31 @@
   "@linkDiscountAdd": {
     "examples": "Text on the Discount Add Page for field direct link."
   },
-  "deleteDiscountQuestion": "Are you sure you want to delete the discount? All data will be deleted",
+  "discountLimitMessage": "The maximum number for one discount is",
+  "@discountLimitMessage": {
+    "examples": "Error message for category and city fields if the value is too large."
+  },
+  "citiesLimit": "cities 30.",
+  "@cities": {
+    "examples": "Error message for the city field if the value exceeds 30 cities."
+  },
+  "categoriesLimit": "categories 2.",
+  "@categories": {
+    "examples": "Error message for the category field if the value exceeds 2 categories."
+  "discountWrongRange": "The discount must be no more than 100% and no less than 1%",
+  "@discountWrongRange": {
+    "examples": "Error message for the discount field if the percentage value is greater than 100% or less than 1%."
+  },
+  "deleteDiscountQuestion": "Are you sure you want to delete this discount? All data will be deleted",
   "@deleteDiscountQuestion": {
     "examples": "Text on the My Discount page."
+  },
+  "logOutProfileQuestion": "Are you sure you want to log out of your profile?",
+  "@logOutProfileQuestion": {
+    "examples": "Text for the logout dialog on the Profile page."
+  },
+  "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
+  "@deleteProfileQuestion": {
+    "examples": "Text for the delete account dialog on the Profile page."
   }
 }

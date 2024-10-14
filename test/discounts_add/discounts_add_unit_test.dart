@@ -66,7 +66,7 @@ void main() {
       ' when update fields correct and save',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -174,7 +174,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -235,7 +235,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -246,15 +246,15 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send());
+          ..add(const DiscountsAddEvent.send(null));
       },
       expect: () async => [
         const DiscountsAddState(
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: ListFieldModel.pure(),
-          city: ListFieldModel.pure(),
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
@@ -269,8 +269,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -284,8 +284,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -299,8 +299,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkNullableFieldModel.pure(),
@@ -468,7 +468,7 @@ void main() {
       ' when update fields incorrect, save and back',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -482,7 +482,7 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
@@ -524,8 +524,8 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -536,8 +536,8 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -557,8 +557,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: ListFieldModel.pure(),
-          city: ListFieldModel.pure(),
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
@@ -572,8 +572,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -587,8 +587,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -602,8 +602,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -692,7 +692,7 @@ void main() {
               Left(SomeFailure.serverError(error: KGroupText.failureGet)),
         );
 
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -770,7 +770,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -781,7 +781,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -792,7 +792,7 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send());
+          ..add(const DiscountsAddEvent.send(null));
       },
       expect: () async => [
         const DiscountsAddState(
@@ -800,8 +800,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: ListFieldModel.pure(),
-          city: ListFieldModel.pure(),
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
@@ -815,8 +815,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
-          category: ListFieldModel.pure(),
-          city: ListFieldModel.pure(),
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
@@ -831,8 +831,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,
-          category: ListFieldModel.pure(),
-          city: ListFieldModel.pure(),
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
           period: DateFieldModel.pure(),
           title: MessageFieldModel.pure(),
           discounts: DiscountsFieldModel.pure(),
@@ -846,8 +846,8 @@ void main() {
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,
-          category: const ListFieldModel.pure(),
-          city: const ListFieldModel.pure(),
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
           period: DateFieldModel.dirty(KTestText.dateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),

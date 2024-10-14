@@ -24,10 +24,8 @@ class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
     required List<String> categoryList,
     required List<CityModel> citiesList,
-    // TODO(max): category max 2
-    required ListFieldModel category,
-    // TODO(max): city max 30
-    required ListFieldModel city,
+    required CategoriesFieldModel category,
+    required CitiesFieldModel city,
     required DateFieldModel period,
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
@@ -44,6 +42,7 @@ class DiscountsAddState with _$DiscountsAddState {
 enum DiscountsAddEnum {
   initial,
   inProgress,
+  // unmodified,
   success,
   invalidData,
   detail,
