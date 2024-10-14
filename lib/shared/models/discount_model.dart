@@ -57,7 +57,6 @@ enum SubLocation { all, allStoresOfChain, online }
 enum DiscountState {
   isNew,
   underReview,
-  overdue,
   rejected,
   published,
   deactivated;

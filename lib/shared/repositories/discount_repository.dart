@@ -41,20 +41,10 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsByUserId(
+  Stream<List<DiscountModel>> getDiscountsByUserId(
     String userId,
-  ) async {
-    try {
-      final userDiscountsItems =
-          await _firestoreService.getDiscountsByUserId(userId);
-
-      return Right(userDiscountsItems);
-    } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
-    } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
-    }
-  }
+  ) =>
+      _firestoreService.getDiscounts(userId: userId);
 
   @override
   Future<Either<SomeFailure, bool>> deleteDiscountsById(
@@ -164,6 +154,26 @@ class DiscountRepository implements IDiscountRepository {
     try {
       await _firestoreService.addDiscount(discount);
 
+      return const Right(true);
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> deactivateDiscount({
+    required DiscountModel discountModel,
+  }) async {
+    try {
+      await _firestoreService.updateDiscountModel(
+        discountModel.copyWith(
+          status: discountModel.status == DiscountState.deactivated
+              ? DiscountState.published
+              : DiscountState.deactivated,
+        ),
+      );
       return const Right(true);
     } on FirebaseException catch (e, stack) {
       return Left(SendFailure.fromCode(error: e, stack: stack).status);

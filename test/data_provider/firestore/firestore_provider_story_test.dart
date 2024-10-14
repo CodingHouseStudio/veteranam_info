@@ -109,8 +109,8 @@ void main() {
         (_) async => mockQuerySnapshot,
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('add story', () async {
       await firestoreService.addStory(KTestText.storyModelItems.first);

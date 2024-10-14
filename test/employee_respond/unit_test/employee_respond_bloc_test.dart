@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
@@ -22,20 +21,19 @@ void main() {
   group('${KScreenBlocName.employeeRespond} ${KGroupText.bloc}', () {
     late EmployeeRespondBloc employeeRespondBloc;
     late IWorkRepository mockWorkRepository;
-    late ImagePicker mockImagePicker;
-    final xFile = XFile(
-      KTestText.downloadURL,
-    );
+    late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
       ExtendedDateTime.id = KTestText.employeeRespondModel.id;
-      mockImagePicker = MockImagePicker();
-      when(mockImagePicker.pickMedia()).thenAnswer(
-        (realInvocation) async => xFile,
+      mockDataPickerRepository = MockIDataPickerRepository();
+
+      when(mockDataPickerRepository.getFile).thenAnswer(
+        (realInvocation) async => KTestText.imagePickerItem,
       );
-      EmployeeRespondBloc.filePickerValue = mockImagePicker;
+
       mockWorkRepository = MockIWorkRepository();
       employeeRespondBloc = EmployeeRespondBloc(
         employeeRespondRepository: mockWorkRepository,
+        dataPickerRepository: mockDataPickerRepository,
       );
     });
     blocTest<EmployeeRespondBloc, EmployeeRespondState>(
@@ -43,8 +41,12 @@ void main() {
       ' when update email, phone, load resume and save',
       build: () => employeeRespondBloc,
       act: (bloc) async {
-        when(mockWorkRepository.sendRespond(KTestText.employeeRespondModel))
-            .thenAnswer(
+        when(
+          mockWorkRepository.sendRespond(
+            file: KTestText.imagePickerItem,
+            respond: KTestText.employeeRespondModel,
+          ),
+        ).thenAnswer(
           (_) async => const Right(true),
         );
         bloc
@@ -107,7 +109,7 @@ void main() {
             KTestText.employeeRespondModel.phoneNumber,
           ),
           resume: ResumeFieldModel.dirty(
-            xFile,
+            KTestText.imagePickerItem,
           ),
           noResume: false,
           formState: EmployeeRespondEnum.inProgress,
@@ -130,7 +132,8 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            KTestText.employeeRespondWithoudResumeModel,
+            respond: KTestText.employeeRespondWithoudResumeModel,
+            file: KTestText.imagePickerItem,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
@@ -201,7 +204,8 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            KTestText.employeeRespondWithoudResumeModel,
+            respond: KTestText.employeeRespondWithoudResumeModel,
+            file: KTestText.imagePickerItem,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),

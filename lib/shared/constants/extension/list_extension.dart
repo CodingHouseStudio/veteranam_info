@@ -1,6 +1,7 @@
-import 'package:collection/collection.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
+import 'package:collection/collection.dart' show groupBy;
+import 'package:connectivity_plus/connectivity_plus.dart'
+    show ConnectivityResult;
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:veteranam/shared/shared.dart';
 
 /// Extension for filtering FilterItem list items.

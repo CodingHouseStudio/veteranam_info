@@ -103,7 +103,7 @@
     "examples": "Text for the button that appears on the Profile page and the title for the Saves page.",
     "description": "The button used to navigate to the Saves page."
   },
-  "myDiscounts": "My Discounts",
+  "myDiscounts": "My discounts",
   "@myDiscounts": {
     "examples": "Text for the button that appears on the Profile page and the title for the My publications page.",
     "description": "The button used to navigate to the My Publications page."
@@ -567,14 +567,6 @@
   "storyAddSubtitle": "Share your story and we will publish it on our website. All stories are moderated and will be published after review.",
   "@storyAddSubtitle": {
     "examples": "Text to subtitle the AddStory page."
-  },
-  "logOutQuestion": "Are you sure you want to log out of your account?",
-  "@logOutQuestion": {
-    "examples": "The text for the logout diologue on the Profile page."
-  },
-  "deleteAccountQuestion": "Are you sure you want to delete your account?",
-  "@deleteAccountQuestion": {
-    "examples": "Text for the account deletion dialog on the Profile page."
   },
   "yes": "Yes",
   "@yes": {
@@ -1210,7 +1202,7 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where more information about the discount can be found.Providing link to the webpage with discount will increase speed verification of your discount. We may be reaching out to you with additional questions to confirm entered information is accurate.",
+  "linkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
   "@linkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
@@ -1299,8 +1291,224 @@
   "@dataSendInProgress": {
     "examples": "Message while changes are being saved."
   },
+  "passwordReset": "Password Reset",
+  "@passwordReset": {
+    "examples": "Text on the Password Reset Email page"
+  },
+  "passwordResetDescription": "Enter the email address you registered with, and we will send a code to reset your password.",
+  "@passwordResetDescription": {
+    "examples": "Text on the Password Reset Email page"
+  },
+  "passwordResetCodeSending": "We are sending you an email to reset your password. This might take a few seconds.",
+  "@passwordResetCodeSending": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user about waiting for the email."
+  },
+  "passwordResetCodeSendFirst": "We’ve sent the information to",
+  "@passwordResetCodeSendFirst": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to expect an email. First part."
+  },
+  "passwordResetCodeSendSecond": "\nFollow the instructions in the email.",
+  "@passwordResetCodeSendSecond": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to follow the instructions in the email. Second part."
+  },
+  "passwordResetCodeSendThirty": "\nCheck your Spam and Promotions folders.",
+  "@passwordResetCodeSendThirty": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to check spam and promotions folders. Third part."
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "examples": "Text on the Password Reset page for the password confirmation field",
+    "description": "In this field, the user needs to re-enter their password"
+  },
+  "successfully": "Successfully!",
+  "@successfully": {
+    "examples": "Text on the Password Reset page"
+  },
+  "successfullyDescruption": "You have successfully confirmed your access. Now, create a new password.",
+  "@successfullyDescruption": {
+    "examples": "Text on the Password Reset page"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "examples": "Text for the button on the Password Reset page",
+    "description": "The button is used to confirm the password change."
+  },
+  "changePasswordWaiting": "Changing your password. Please wait a moment.",
+  "@changePasswordWaiting": {
+    "examples": "Text on the Password Reset page, appears when the user has clicked the confirm button and is waiting for the password to be changed."
+  },
+  "changedPassword": "Your password has been changed! You can now log in.",
+  "@changedPassword": {
+    "examples": "Text on the Password Reset page, appears when the user has clicked the confirm button and the password has been successfully changed."
+  },
+  "passwordMismatch": "The passwords do not match. Please make sure both passwords are the same.",
+  "@passwordMismatch": {
+    "examples": "Message shown when the user enters different passwords in the password and confirm password fields."
+  },
+  "passwordResetWaiting": "Please wait, we are verifying your information.",
+  "@passwordResetWaiting": {
+    "examples": "Text on the Reset Password page, appears during the verification of the code."
+  },
+  "passwordResetWrongDescriptionFirst": "The link has expired or is invalid.\n Please try ",
+  "@passwordResetWrongDescriptionFirst": {
+    "examples": "Text on the Reset Password page, displayed if the code in the link is incorrect. First part."
+  },
+  "passwordResetWrongDescriptionSecond": "to send the link again.",
+  "@passwordResetWrongDescriptionSecond": {
+    "examples": "Text on the Reset Password page, displayed if the code in the link is incorrect. Second part."
+  },
+  "sendAgain": "Send Again",
+  "@sendAgain": {
+    "examples": "Text for the button on the Reset Password page, appears if the verification code is incorrect.",
+    "description": "The button is used to navigate to the Password Reset Email page."
+  },
+  "notReceiveLetter": "Didn't receive the email?",
+  "@notReceiveLetter": {
+    "examples": "Text for the button on the Reset Password Email page, appears after the user has entered their email and the email has been sent."
+  },
+  "resendWait": "You can resend the email in {remainingSeconds} seconds.",
+  "@resendWait": {
+    "placeholders": {
+      "remainingSeconds": {}
+    },
+    "examples": "Text on the Password Reset Email page, appears when the user has clicked send and is waiting for a minute before the next send."
+  },
   "dataUnmodified": "No changes were made because the data is identical.",
   "@dataUnmodified": {
     "examples": "Message when no changes were made to the data."
+  },
+  "publishDiscount": "Publish your first discount",
+  "@publishDiscount": {
+    "examples": "Text about no discounts on the MyDiscounts page"
+  },
+  "addDiscount": "Add discount",
+  "@addDiscount": {
+    "examples": "Text for the button on the MyDiscount page.",
+    "description": "The button is used to add a discount"
+  },
+  "thatEndOfMyDiscounts": "This is the end of the list! We hope you found what you were looking for.",
+  "@thatEndOfMyDiscounts": {
+    "examples": "Text at the end of the discount list on the MyDiscounts page"
+  },
+  "profileNotFilledOut": "To add a discount, please fill in the company information in your personal account",
+  "@profileNotFilledOut": {
+    "examples": "Text on the MyDiscounts page when the profile is not filled in"
+  },
+  "underReview": "Under Review",
+  "@underReview": {
+    "examples": "Text for discount status"
+  },
+  "overdue": "Overdue",
+  "@overdue": {
+    "examples": "Text for discount status"
+  },
+  "rejected": "Rejected",
+  "@rejected": {
+    "examples": "Text for discount status"
+  },
+  "published": "Published",
+  "@published": {
+    "examples": "Text for discount status"
+  },
+  "deactivated": "Deactivated",
+  "@deactivated": {
+    "examples": "Text for discount status"
+  },
+  "toProfile": "To profile",
+  "@toProfile": {
+    "examples": "Text for the button on the MyDiscount page.",
+    "description": "The button is used to go to the cabinet"
+  },
+  "categoryDescription": "Select one or more categories. If the desired category is not in the list, please write it in.",
+  "@categoryDescription": {
+    "examples": "Text on the Discount Add page for the categories field (description)"
+  },
+  "companyName": "Company Name",
+  "@companyName": {
+    "examples": "Text on the Company page for the company name field",
+    "description": "This field is used for entering the company name for business accounts."
+  },
+  "companyCode": "Company registration code or Tax ID for individual entrepreneurs",
+  "@companyCode": {
+    "examples": "Text on the Company page for the company code field.",
+    "description": "This field is used for entering the company code for business accounts."
+  },
+  "linkOnWebsite": "Website link",
+  "@linkOnWebsite": {
+    "examples": "Text on the Company page for the website link field",
+    "description": "This field is used for entering the website link for business accounts."
+  },
+  "myCompany": "My company",
+  "@myCompany": {
+    "examples": "Text on the Company page"
+  },
+  "descriptionForRejectedStatus": "Your ad could not be published due to some errors.\nPlease contact our email: hello@veteranam.info for details",
+  "@descriptionForRejectedStatus": {
+    "examples": "Text to describe the rejected discount status on the MyDiscount page."
+  },
+  "logOutFromProfile": "Log out?",
+  "@logOutFromProfile": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to log out of the account."
+  },
+  "deleteProfile": "Delete profile?",
+  "@deleteProfile": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to delete an account."
+  },
+  "delete": "Delete",
+  "@delete": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to delete an account."
+  },
+  "cancelChanges": "Cancel changes?",
+  "@cancelChanges": {
+    "examples": "Text for button on Discount add page.",
+    "description": "The button is used to return to the previous page."
+  },
+  "cancelChangesQuestion": "Are you sure you want to cancel the changes? All new data will be deleted",
+  "@cancelChangesQuestion": {
+    "examples": "Text on the Discount add page."
+  },
+  "continueWorking": "Continue Working",
+  "@continueWorking": {
+    "examples": "Text for button on Discount add page.",
+    "description": "The button is used to stay on the page."
+  },
+  "deleteDiscount": "Delete discount?",
+  "@deleteDiscount": {
+    "examples": "Text for a button on the My Discount page."
+  },
+  "linkDiscountAdd": "Direct discount link",
+  "@linkDiscountAdd": {
+    "examples": "Text on the Discount Add Page for field direct link."
+  },
+  "discountLimitMessage": "The maximum number for one discount is",
+  "@discountLimitMessage": {
+    "examples": "Error message for category and city fields if the value is too large."
+  },
+  "citiesLimit": "cities 30.",
+  "@cities": {
+    "examples": "Error message for the city field if the value exceeds 30 cities."
+  },
+  "categoriesLimit": "categories 2.",
+  "@categories": {
+    "examples": "Error message for the category field if the value exceeds 2 categories."
+  },
+  "discountWrongRange": "The discount must be no more than 100% and no less than 1%",
+  "@discountWrongRange": {
+    "examples": "Error message for the discount field if the percentage value is greater than 100% or less than 1%."
+  },
+  "deleteDiscountQuestion": "Are you sure you want to delete this discount? All data will be deleted",
+  "@deleteDiscountQuestion": {
+    "examples": "Text on the My Discount page."
+  },
+  "logOutProfileQuestion": "Are you sure you want to log out of your profile?",
+  "@logOutProfileQuestion": {
+    "examples": "Text for the logout dialog on the Profile page."
+  },
+  "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
+  "@deleteProfileQuestion": {
+    "examples": "Text for the delete account dialog on the Profile page."
   }
 }

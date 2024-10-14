@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
@@ -19,24 +17,27 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.employeeRespond} ', () {
     late IWorkRepository mockWorkRepository;
-    late ImagePicker mockImagePicker;
+    late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
       ExtendedDateTime.id = KTestText.employeeRespondModel.id;
       mockWorkRepository = MockIWorkRepository();
-      mockImagePicker = MockImagePicker();
-      when(mockImagePicker.pickMedia()).thenAnswer(
-        (realInvocation) async => XFile(
-          KTestText.downloadURL,
-        ),
+      mockDataPickerRepository = MockIDataPickerRepository();
+      when(mockDataPickerRepository.getFile).thenAnswer(
+        (realInvocation) async => KTestText.imagePickerItem,
       );
-      EmployeeRespondBloc.filePickerValue = mockImagePicker;
-
-      when(mockWorkRepository.sendRespond(KTestText.employeeRespondModel))
-          .thenAnswer((invocation) async => const Right(true));
+      // EmployeeRespondBloc.filePickerValue = mockImagePicker;
 
       when(
         mockWorkRepository.sendRespond(
-          KTestText.employeeRespondWithoudResumeModel,
+          respond: KTestText.employeeRespondModel,
+          file: KTestText.imagePickerItem,
+        ),
+      ).thenAnswer((invocation) async => const Right(true));
+
+      when(
+        mockWorkRepository.sendRespond(
+          respond: KTestText.employeeRespondWithoudResumeModel,
+          file: KTestText.imagePickerItem,
         ),
       ).thenAnswer((invocation) async => const Right(true));
     });
@@ -44,6 +45,7 @@ void main() {
       await employeeRespondPumpAppHelper(
         tester: tester,
         mockWorkRepository: mockWorkRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await employeeRespondInitialHelper(tester);
@@ -52,6 +54,7 @@ void main() {
       await employeeRespondPumpAppHelper(
         tester: tester,
         mockWorkRepository: mockWorkRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await formIncorrectSendHelper(tester);
@@ -60,6 +63,7 @@ void main() {
       await employeeRespondPumpAppHelper(
         tester: tester,
         mockWorkRepository: mockWorkRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await formCorrectSendHelper(tester);
@@ -68,6 +72,7 @@ void main() {
       await employeeRespondPumpAppHelper(
         tester: tester,
         mockWorkRepository: mockWorkRepository,
+        mockDataPickerRepository: mockDataPickerRepository,
       );
 
       await formWithoundResumeSendHelper(tester);
@@ -80,7 +85,9 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockWorkRepository: mockWorkRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
         );
+
         await employeeRespondInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
@@ -89,6 +96,7 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockWorkRepository: mockWorkRepository,
+            mockDataPickerRepository: mockDataPickerRepository,
           );
           await cancelHelper(mockGoRouter: mockGoRouter, tester: tester);
         });

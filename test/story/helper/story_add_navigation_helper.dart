@@ -13,6 +13,11 @@ Future<void> storyAddNavigationHelper({
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.story.seccondaryButton,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.screen.story.seccondaryButton));
 
   verify(

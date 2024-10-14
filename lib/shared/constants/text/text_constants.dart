@@ -163,7 +163,8 @@ abstract class KMockText {
     exclusionsEN:
         '- when ordering tests and paying for them online on the Esculab website;',
     expirationEN: 'It works all the time',
-    locationEN: ['Kyiv'], status: DiscountState.published,
+    locationEN: ['Kyiv'],
+    status: DiscountState.published,
     eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
@@ -224,20 +225,34 @@ abstract class KAppText {
   static const String cache = 'local cache';
   static const String server = 'server';
   static const String site = 'https://app.veteranam.info';
+  static const String businessSite = 'https://business.veteranam.info';
   static const String unknown = 'Unknown';
-  static const String eligibilityAll = 'Усім нище перечисленим';
-  static const String eligibilityAllEN = 'To all of the below-mentioned';
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
   static const String nickname = 'Nickname';
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';
   static const String _mobAppId = 'info.veteranam';
   static const String androidPackageName = 'com.veteranam.package';
+  static const String eligibilityAll = 'Усім нище перечисленим';
+  static const String eligibilityAllEN = 'To all of the below-mentioned';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,
         KRoute.settings.name,
       ];
+  static const discountsCategories = [
+    'Автосервіс',
+    'Військторг',
+    'Відпочинок',
+    'Житло',
+    'Магазини',
+    'Медицина',
+    'Освіта',
+    'Перевезення',
+    'Ресторани',
+    'Салони краси',
+    'Спорт',
+  ];
   static const ukrainianAlphabet = [
     'а',
     'б',

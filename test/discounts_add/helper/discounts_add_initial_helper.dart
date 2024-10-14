@@ -39,13 +39,14 @@ Future<void> discountsAddInitialHelper(
         tester: tester,
         textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
         fieldIndex: 2,
+        hasMultiChoice: true,
       );
 
       await multiDropFieldRemoveHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),
-        findsOneWidget,
+        find.byKey(KWidgetkeys.widget.dropListField.list),
+        findsNothing,
       );
 
       expect(

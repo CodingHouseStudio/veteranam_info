@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/profile/profile.dart';
 
 class ProfileBlocprovider extends StatelessWidget {
   const ProfileBlocprovider({required this.childWidget, super.key});

@@ -38,9 +38,4 @@ enum ProfileEnum {
   success,
   succesesUnmodified,
   sendInProgress;
-
-  bool get showMessage =>
-      this == ProfileEnum.success ||
-      this == ProfileEnum.sendInProgress ||
-      this == ProfileEnum.succesesUnmodified;
 }

@@ -8,10 +8,10 @@ class CitiesDropFieldWidget extends StatelessWidget {
     required this.onChanged,
     required this.removeCity,
     required this.textFieldKey,
+    required this.selectedCities,
     super.key,
     this.showErrorText,
     this.errorText,
-    this.selectedCities,
     // this.controller,
   });
   final void Function(String text)? onChanged;
@@ -20,7 +20,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
   final bool? showErrorText;
   final String? errorText;
   final void Function(String value) removeCity;
-  final List<String>? selectedCities;
+  final List<String> selectedCities;
   // final TextEditingController? controller;
   final Key textFieldKey;
 

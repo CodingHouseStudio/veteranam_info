@@ -1,4 +1,5 @@
 export 'city_model.dart';
+export 'company_model.dart';
 export 'convertors/convertors.dart';
 export 'device_info_model.dart';
 export 'discount_model.dart';

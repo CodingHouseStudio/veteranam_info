@@ -15,6 +15,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.loadDataAgain,
     this.showMobNawbarBackButton,
     this.titleDeskPadding,
+    this.isForm = false,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -32,6 +33,7 @@ class ScaffoldWidget extends StatelessWidget {
   final bool? showMobBottomNavigation;
   final void Function()? loadDataAgain;
   final bool? showMobNawbarBackButton;
+  final bool isForm;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class ScaffoldWidget extends StatelessWidget {
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
-                resizeToAvoidBottomInset: !Config.isWeb,
+                resizeToAvoidBottomInset: true,
                 bottomNavigationBar:
                     Config.isWeb || !(showMobBottomNavigation ?? true)
                         ? null
@@ -131,11 +133,21 @@ class ScaffoldWidget extends StatelessWidget {
                         ),
                       ),
                     SliverPadding(
-                      padding: isTablet && mainDeskPadding != null
+                      padding: (isForm ? isDesk : isTablet) &&
+                              mainDeskPadding != null
                           ? mainDeskPadding!(
                               maxWidth: constraints.maxWidth,
                             )
-                          : padding,
+                          : isForm &&
+                                  !isDesk &&
+                                  KMinMaxSize.formMobileMaxWidth <
+                                      constraints.maxWidth
+                              ? EdgeInsets.symmetric(
+                                  horizontal: (constraints.maxWidth -
+                                          KMinMaxSize.formMobileMaxWidth) /
+                                      2,
+                                )
+                              : padding,
                       sliver: SliverList.builder(
                         addAutomaticKeepAlives: false,
                         addRepaintBoundaries: false,

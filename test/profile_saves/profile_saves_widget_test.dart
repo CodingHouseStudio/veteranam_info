@@ -2,8 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
 import '../test_dependency.dart';
-import 'helper/profile_saves_initial_helper.dart';
-import 'helper/profile_saves_pump_and_helper.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);

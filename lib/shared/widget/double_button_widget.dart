@@ -23,6 +23,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.deskIconPadding,
     this.deskTextWidth,
     this.icon,
+    this.angle,
   });
   final String text;
   final Color? color;
@@ -41,6 +42,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final EdgeInsets? deskPadding;
   final double? deskIconPadding;
   final Icon? icon;
+  final double? angle;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class DoubleButtonWidget extends StatelessWidget {
           iconPadding: deskIconPadding,
           textWidth: deskTextWidth,
           icon: icon,
+          angle: angle,
         )
       : _DoubleButtonWidgetMob(
           text: text,
@@ -94,6 +97,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
     this.iconPadding,
     this.textWidth,
     this.icon,
+    this.angle,
   });
   final String text;
   final Color? color;
@@ -105,6 +109,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
   final double? iconPadding;
   final double? textWidth;
   final Icon? icon;
+  final double? angle;
 
   @override
   State<_DoubleButtonWidgetDesk> createState() =>
@@ -167,7 +172,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0,
-              end: isHovering ? pi / 4 : 0,
+              end: isHovering ? widget.angle ?? (pi / 4) : 0,
             ),
             duration: const Duration(
               milliseconds: KDimensions.doubleButtonAnimationDuration,

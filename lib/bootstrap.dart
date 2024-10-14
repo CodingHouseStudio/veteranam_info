@@ -1,10 +1,11 @@
-import 'dart:async';
-import 'dart:developer';
+import 'dart:async' show FutureOr;
+import 'dart:developer' show log;
+import 'dart:io' show Platform;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show Colors, Widget, runApp;
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:intl/date_symbol_data_local.dart';
@@ -31,8 +32,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
   if (!kIsWeb) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: AppColors.materialThemeWhite,
+      SystemUiOverlayStyle(
+        statusBarColor:
+            Platform.isIOS ? Colors.transparent : AppColors.materialThemeWhite,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: AppColors.materialThemeKeyColorsNeutral,

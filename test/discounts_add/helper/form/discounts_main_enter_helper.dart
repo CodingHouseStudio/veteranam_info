@@ -64,6 +64,7 @@ Future<void> discountsAddMainEnterHelper({
     await dropListFieldItemHelper(
       tester: tester,
       textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+      hasMultiChoice: true,
     );
   }
 

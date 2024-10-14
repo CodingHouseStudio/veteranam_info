@@ -99,18 +99,4 @@ Future<void> discountsAddUncorectHelper({
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
   await discountsAddMainHelper(tester: tester);
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cancelButton,
-    offset: KTestConstants.scrollingDown,
-  );
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton));
-
-  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
-
-  verifyNever(
-    () => mockGoRouter.goNamed(KRoute.myDiscounts.name),
-  );
 }

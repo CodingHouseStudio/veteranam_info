@@ -1,16 +1,52 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-// import 'package:flutter/foundation.dart' deferred as foundation;
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/components.dart'
+    show
+        AboutUsScreen,
+        ConsultationScreen,
+        DiscountCardDialog,
+        DiscountsScreen,
+        EmployeeRespondScreen,
+        ErrorScreen,
+        FeedbackScreen,
+        HomeScreen,
+        InformationScreen,
+        InvestorsScreen,
+        LoginScreen,
+        MobFaqScreen,
+        MobSettingsScreen,
+        NewsCardDialog,
+        PasswordResetScreen,
+        PrivacyPolicyDialog,
+        ProfileMyStoryScreen,
+        ProfileSavesScreen,
+        ProfileScreen,
+        PwResetEmailScreen,
+        QuestionsFormScreen,
+        SignUpScreen,
+        StoryAddScreen,
+        StoryScreen,
+        ThanksScreen,
+        UserRoleScreen,
+        WorkEmployeeScreen,
+        WorkEmployerScreen,
+        WorkScreen;
 import 'package:veteranam/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// COMMENT: Variable for navigation in App
+/// restorationId - Saves the screen state. This is useful for our mobile
+/// applications.
+/// For example, if a user opens our app and navigates through three screens,
+/// then switches to another app, when they return to our app,
+/// it opens on the last screen they accessed. This provides a seamless
+/// and convenient user experience.
+
 GoRouter router = GoRouter(
   routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
@@ -51,6 +87,7 @@ GoRouter router = GoRouter(
         pageBuilder: (context, state) => NoTransitionPage(
           key: state.pageKey,
           name: state.name,
+          restorationId: state.pageKey.value,
           child: const UserRoleScreen(),
         ),
         routes: [
@@ -60,8 +97,38 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const LoginScreen(),
             ),
+            routes: [
+              GoRoute(
+                name: KRoute.passwordReset.name,
+                path: KRoute.passwordReset.path,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  key: state.pageKey,
+                  name: state.name,
+                  restorationId: state.pageKey.value,
+                  child: PasswordResetScreen(
+                    code: state
+                        .uri.queryParameters[UrlParameters.verificationCode],
+                  ),
+                ),
+                routes: [
+                  GoRoute(
+                    name: KRoute.pwResetEmail.name,
+                    path: KRoute.pwResetEmail.path,
+                    pageBuilder: (context, state) => NoTransitionPage(
+                      key: state.pageKey,
+                      name: state.name,
+                      restorationId: state.pageKey.value,
+                      child: PwResetEmailScreen(
+                        email: state.uri.queryParameters[UrlParameters.email],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           GoRoute(
             name: KRoute.signUp.name,
@@ -69,6 +136,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const SignUpScreen(),
             ),
           ),
@@ -86,6 +154,7 @@ GoRouter router = GoRouter(
         pageBuilder: (context, state) => NoTransitionPage(
           key: state.pageKey,
           name: state.name,
+          restorationId: state.pageKey.value,
           child: const QuestionsFormScreen(),
         ),
       ),
@@ -96,6 +165,7 @@ GoRouter router = GoRouter(
         pageBuilder: (context, state) => NoTransitionPage(
           key: state.pageKey,
           name: state.name,
+          restorationId: state.pageKey.value,
           child: const ThanksScreen(),
         ),
       ),
@@ -105,6 +175,7 @@ GoRouter router = GoRouter(
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
+        restorationId: state.pageKey.value,
         child: kIsWeb ? const HomeScreen() : const MobSettingsScreen(),
       ),
       routes: [
@@ -114,6 +185,7 @@ GoRouter router = GoRouter(
           pageBuilder: (context, state) => DialogPage(
             key: state.pageKey,
             name: state.name,
+            restorationId: state.pageKey.value,
             builder: (_) => const PrivacyPolicyDialog(),
           ),
         ),
@@ -124,17 +196,19 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const InformationScreen(),
             ),
             routes: [
               GoRoute(
                 name: KRoute.newsCard.name,
-                path: ':cardId',
+                path: ':${UrlParameters.cardId}',
                 pageBuilder: (context, state) => DialogPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   builder: (_) => NewsCardDialog(
-                    id: state.pathParameters['cardId'],
+                    id: state.pathParameters[UrlParameters.cardId],
                   ),
                 ),
               ),
@@ -146,6 +220,7 @@ GoRouter router = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
+            restorationId: state.pageKey.value,
             child: const DiscountsScreen(),
           ),
           routes: [
@@ -156,17 +231,19 @@ GoRouter router = GoRouter(
             //     pageBuilder: (context, state) => NoTransitionPage(
             //       key: state.pageKey,
             //       name: state.name,
+            // restorationId: state.pageKey.value,
             //       child: const MyDiscountsScreen(),
             //     ),
             //   ),
             GoRoute(
               name: KRoute.discountCard.name,
-              path: ':cardId',
+              path: ':${UrlParameters.cardId}',
               pageBuilder: (context, state) => DialogPage(
                 key: state.pageKey,
                 name: state.name,
+                restorationId: state.pageKey.value,
                 builder: (_) => DiscountCardDialog(
-                  id: state.pathParameters['cardId'],
+                  id: state.pathParameters[UrlParameters.cardId],
                 ),
               ),
             ),
@@ -179,6 +256,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const StoryScreen(),
             ),
             routes: [
@@ -188,6 +266,7 @@ GoRouter router = GoRouter(
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   child: const StoryAddScreen(),
                 ),
               ),
@@ -200,6 +279,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const WorkScreen(),
             ),
             routes: [
@@ -209,6 +289,7 @@ GoRouter router = GoRouter(
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   child: const WorkEmployerScreen(),
                 ),
               ),
@@ -218,6 +299,7 @@ GoRouter router = GoRouter(
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   child: const WorkEmployeeScreen(),
                 ),
                 routes: [
@@ -226,6 +308,7 @@ GoRouter router = GoRouter(
                     path: KRoute.employeeRespond.path,
                     pageBuilder: (context, state) => NoTransitionPage(
                       name: state.name,
+                      restorationId: state.pageKey.value,
                       key: state.pageKey,
                       child: const EmployeeRespondScreen(),
                     ),
@@ -241,6 +324,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const ProfileScreen(),
             ),
             routes: [
@@ -250,6 +334,7 @@ GoRouter router = GoRouter(
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   child: const ProfileMyStoryScreen(),
                 ),
               ),
@@ -259,6 +344,7 @@ GoRouter router = GoRouter(
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
                   name: state.name,
+                  restorationId: state.pageKey.value,
                   child: const ProfileSavesScreen(),
                 ),
               ),
@@ -275,6 +361,7 @@ GoRouter router = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
+            restorationId: state.pageKey.value,
             child: const InvestorsScreen(),
           ),
         ),
@@ -285,6 +372,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const AboutUsScreen(),
             ),
           ),
@@ -295,6 +383,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const ConsultationScreen(),
             ),
           ),
@@ -304,6 +393,7 @@ GoRouter router = GoRouter(
         //   pageBuilder: (context, state) => NoTransitionPage(
         //     key: state.pageKey,
         //     name: state.name,
+        // restorationId: state.pageKey.value,
         //     child: const ContactScreen(),
         //   ),
         // ),
@@ -313,6 +403,7 @@ GoRouter router = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
+            restorationId: state.pageKey.value,
             child: const FeedbackScreen(),
           ),
         ),
@@ -323,6 +414,7 @@ GoRouter router = GoRouter(
             pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
               name: state.name,
+              restorationId: state.pageKey.value,
               child: const MobFaqScreen(),
             ),
           ),

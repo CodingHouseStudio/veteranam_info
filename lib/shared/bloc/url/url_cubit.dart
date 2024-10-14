@@ -10,14 +10,13 @@ class UrlCubit extends Cubit<UrlEnum?> {
         super(null);
   final IUrlRepository _urlRepository;
 
-  Future<void> share(
-    String? url,
-  ) async {
+  Future<void> share(String? url, {bool? useSiteUrl}) async {
     if (url == null) {
       return;
     }
     final result = await _urlRepository.share(
       url,
+      useSiteUrl: useSiteUrl,
     );
     result.fold(
       // (l) => emit(UrlEnum.copyEmailSucceed),

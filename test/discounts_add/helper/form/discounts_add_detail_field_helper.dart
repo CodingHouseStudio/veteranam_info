@@ -22,6 +22,14 @@ Future<void> discountsAddDetailHelper({
     matcher,
   );
 
+  if (hasField && checkHelper) {
+    await multiDropFieldHelper(
+      tester: tester,
+      text: KTestText.field,
+      textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
+    );
+  }
+
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
     matcher,

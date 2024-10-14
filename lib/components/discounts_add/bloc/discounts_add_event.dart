@@ -2,9 +2,10 @@ part of 'discounts_add_bloc.dart';
 
 @freezed
 class DiscountsAddEvent with _$DiscountsAddEvent {
-  const factory DiscountsAddEvent.started() = _Started;
-  const factory DiscountsAddEvent.categoryUpdate(String category) =
-      _CategoryUpdate;
+  const factory DiscountsAddEvent.started(DiscountModel? discount) = _Started;
+  const factory DiscountsAddEvent.categoryAdd(String category) = _CategoryAdd;
+  const factory DiscountsAddEvent.categoryRemove(String category) =
+      _CategoryRemove;
   const factory DiscountsAddEvent.cityAdd(String city) = _CityAdd;
   const factory DiscountsAddEvent.cityRemove(String city) = _CityRemove;
   const factory DiscountsAddEvent.periodUpdate(Future<DateTime?> period) =
@@ -25,5 +26,5 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.exclusionsUpdate(String exclusions) =
       _ExclusionsUpdate;
   const factory DiscountsAddEvent.back() = _Back;
-  const factory DiscountsAddEvent.send() = _Send;
+  const factory DiscountsAddEvent.send(DiscountModel? discount) = _Send;
 }

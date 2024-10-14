@@ -67,8 +67,8 @@ void main() {
             KTestText.questionModelItems.map((e) => e.toJson()).toList().first,
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('add question', () async {
       await firestoreService.addQuestion(KTestText.questionModelItems.first);

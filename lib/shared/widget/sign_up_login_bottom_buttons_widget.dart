@@ -14,113 +14,110 @@ class SignUpLoginServiceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
-      // return Column(
-      //   crossAxisAlignment:
-      //       isDesk ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-      //   //key: KWidgetkeys.widget.signUpBottomButtons.desk,
-      //   children: [
-      // Row(
-      //   children: [
-      //     const Expanded(
-      //       child: Divider(
-      //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
-      //           ),
-      //     ),
-      //     KSizedBox.kWidthSizedBox32,
-      //     Text(
-      //       context.l10n.or,
-      //       key: KWidgetkeys.widget.signUpBottomButtons.or,
-      //       style: AppTextStyle.hint14,
-      //     ),
-      //     KSizedBox.kWidthSizedBox32,
-      //     const Expanded(
-      //       child: Divider(
-      //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
-      //           ),
-      //     ),
-      //   ],
-      // ),
-      // KSizedBox.kHeightSizedBox40,
-      // Text(
-      //   title,
-      //   key: KWidgetkeys.widget.signUpBottomButtons.title,
-      //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-      // ),
-      // KSizedBox.kHeightSizedBox16,
-      return
-          // Row(
-          //   children: [
-          googleButton(context: context, isDesk: true);
-      // KSizedBox.kWidthSizedBox16,
-      // facebookButton(
-      //   context: context,
-      //   isDesk: true,
-      // ),
-      // KSizedBox.kWidthSizedBox16,
-      // Expanded(
-      //   child: buildBottomButton(
-      //     key: KWidgetkeys.widget.signUpBottomButtons.apple,
-      //     text: context.l10n.apple,
-      //     icon: KImage.apple(),
-      //   ),
-      // ),
-      //   ],
-      // );
-      //   ],
-      // );
-    } else {
-      return Column(
-        // key: KWidgetkeys.widget.signUpBottomButtons.mob,
-        children: [
-          // Text(
-          //   context.l10n.or,
-          //   key: KWidgetkeys.widget.signUpBottomButtons.or,
-          //   style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-          // ),
-          // KSizedBox.kHeightSizedBox16,
-          // Text(
-          //   context.l10n.signUpWith,
-          //   key: KWidgetkeys.widget.signUpBottomButtons.title,
-          //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-          // ),
-          // KSizedBox.kHeightSizedBox16,
-          googleButton(
-            context: context,
-            isDesk: false,
-          ),
-          // KSizedBox.kHeightSizedBox16,
-          // facebookButton(
-          //   context: context,
-          //   isDesk: false,
-          // ),
-          // KSizedBox.kHeightSizedBox16,
-          // buildBottomButton(
-          //   key: KWidgetkeys.widget.signUpBottomButtons.apple,
-          //   text: context.l10n.apple,
-          //   icon: KImage.apple(),
-          // ),
-        ],
-      );
-    }
+    // if (isDesk) {
+    // return Column(
+    //   crossAxisAlignment:
+    //       isDesk ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+    //   //key: KWidgetkeys.widget.signUpBottomButtons.desk,
+    //   children: [
+    // Row(
+    //   children: [
+    //     const Expanded(
+    //       child: Divider(
+    //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+    //           ),
+    //     ),
+    //     KSizedBox.kWidthSizedBox32,
+    //     Text(
+    //       context.l10n.or,
+    //       key: KWidgetkeys.widget.signUpBottomButtons.or,
+    //       style: AppTextStyle.hint14,
+    //     ),
+    //     KSizedBox.kWidthSizedBox32,
+    //     const Expanded(
+    //       child: Divider(
+    //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+    //           ),
+    //     ),
+    //   ],
+    // ),
+    // KSizedBox.kHeightSizedBox40,
+    // Text(
+    //   title,
+    //   key: KWidgetkeys.widget.signUpBottomButtons.title,
+    //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+    // ),
+    // KSizedBox.kHeightSizedBox16,
+    return
+        // Row(
+        //   children: [
+        googleButton(context: context, isDesk: isDesk);
+    // KSizedBox.kWidthSizedBox16,
+    // facebookButton(
+    //   context: context,
+    //   isDesk: true,
+    // ),
+    // KSizedBox.kWidthSizedBox16,
+    // Expanded(
+    //   child: buildBottomButton(
+    //     key: KWidgetkeys.widget.signUpBottomButtons.apple,
+    //     text: context.l10n.apple,
+    //     icon: KImage.apple(),
+    //   ),
+    // ),
+    //   ],
+    // );
+    //   ],
+    // );
+    // } else {
+    //   return Column(
+    // key: KWidgetkeys.widget.signUpBottomButtons.mob,
+    // children: [
+    // Text(
+    //   context.l10n.or,
+    //   key: KWidgetkeys.widget.signUpBottomButtons.or,
+    //   style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+    // ),
+    // KSizedBox.kHeightSizedBox16,
+    // Text(
+    //   context.l10n.signUpWith,
+    //   key: KWidgetkeys.widget.signUpBottomButtons.title,
+    //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+    // ),
+    // KSizedBox.kHeightSizedBox16,
+    // googleButton(
+    //   context: context,
+    //   isDesk: false,
+    // ),
+    // KSizedBox.kHeightSizedBox16,
+    // facebookButton(
+    //   context: context,
+    //   isDesk: false,
+    // ),
+    // KSizedBox.kHeightSizedBox16,
+    // buildBottomButton(
+    //   key: KWidgetkeys.widget.signUpBottomButtons.apple,
+    //   text: context.l10n.apple,
+    //   icon: KImage.apple(),
+    // ),
+    //   ],
+    // );
+    // }
   }
 
   Widget googleButton({
     required BuildContext context,
     required bool isDesk,
   }) =>
-      Align(
-        alignment: Alignment.bottomLeft,
-        child: _button(
-          key: KWidgetkeys.widget.signUpBottomButtons.google,
-          context: context,
-          isDesk: isDesk,
-          text: context.l10n.google,
-          icon: KImage.google(),
-          onPressed: () => context
-              .read<AuthenticationServicesCubit>()
-              .authenticationUseGoogle(),
-        ),
+      _button(
+        key: KWidgetkeys.widget.signUpBottomButtons.google,
+        context: context,
+        isDesk: isDesk,
+        text: context.l10n.google,
+        icon: KImage.google(),
+        onPressed: () => context
+            .read<AuthenticationServicesCubit>()
+            .authenticationUseGoogle(),
       );
 
   // Widget facebookButton({

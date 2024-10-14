@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -17,22 +16,26 @@ void main() {
   group('ProfileBloc Tests', () {
     late ProfileBloc profileBloc;
     late AuthenticationRepository mockAuthenticationRepository;
-    late ImagePicker mockImagePicker;
-    late XFile image;
+    late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
-      mockImagePicker = MockImagePicker();
-      image = XFile(KTestText.imageModels.downloadURL);
+      mockDataPickerRepository = MockIDataPickerRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
 
       when(
+        mockDataPickerRepository.getImage,
+      ).thenAnswer(
+        (realInvocation) async => KTestText.imagePickerItem,
+      );
+
+      when(
         mockAuthenticationRepository.updateUserData(
           user: KTestText.profileUser,
-          image: KTestText.imageModels,
+          image: KTestText.imagePickerItem,
           nickname: KTestText.nicknameCorrect,
         ),
       ).thenAnswer(
@@ -43,13 +46,9 @@ void main() {
         (realInvocation) => KTestText.userSettingModel,
       );
 
-      when(mockImagePicker.pickImage(source: ImageSource.gallery)).thenAnswer(
-        (realInvocation) async => image,
-      );
-      ProfileBloc.imagePickerValue = mockImagePicker;
-
       profileBloc = ProfileBloc(
         authenticationRepository: mockAuthenticationRepository,
+        dataPickerRepository: mockDataPickerRepository,
       )..add(const ProfileEvent.started());
     });
 
@@ -143,7 +142,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -151,7 +150,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
@@ -204,7 +203,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameIncorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -212,7 +211,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameIncorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.invalidData,
@@ -278,7 +277,7 @@ void main() {
         when(
           mockAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imageModels,
+            image: KTestText.imagePickerItem,
             nickname: KTestText.nicknameCorrect,
           ),
         ).thenAnswer(
@@ -324,7 +323,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -332,7 +331,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
@@ -340,7 +339,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
+          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: ProfileFailure.error,
           formState: ProfileEnum.initial,

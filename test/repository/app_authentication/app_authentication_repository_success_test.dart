@@ -224,6 +224,20 @@ void main() {
         (_) async {},
       );
 
+      when(
+        mockFirebaseAuth.verifyPasswordResetCode(KTestText.code),
+      ).thenAnswer(
+        (_) async => KTestText.userEmail,
+      );
+      when(
+        mockFirebaseAuth.confirmPasswordReset(
+          code: KTestText.code,
+          newPassword: KTestText.passwordCorrect,
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
+
       // when(
       //   mockFirebaseAuth.currentUser?.updateDisplayName(
       //     KTestText.profileUser.name,
@@ -467,10 +481,29 @@ void main() {
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
         user: KTestText.profileUser,
-        image: KTestText.imageModels,
+        image: KTestText.imagePickerItem,
       );
       expect(
         result,
+        isA<Right<SomeFailure, User>>(),
+        // .having((e) => e.value, 'value', KTestText.profileUser),
+      );
+    });
+
+    test('Check verification code', () async {
+      expect(
+        await appAuthenticationRepository.checkVerificationCode(
+          KTestText.code,
+        ),
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Reset password use code', () async {
+      expect(
+        await appAuthenticationRepository.resetPasswordUseCode(
+          code: KTestText.code,
+          newPassword: KTestText.passwordCorrect,
+        ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });

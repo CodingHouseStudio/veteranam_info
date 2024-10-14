@@ -370,7 +370,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String email,
   }) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      await _firebaseAuth.sendPasswordResetEmail(
+        email: email,
+        // actionCodeSettings: firebase_auth.ActionCodeSettings(
+        //   url: '${Uri.base.origin}/${KRoute.login.path}',
+        //   handleCodeInApp: true,
+        // ),
+      );
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Sendig error: ${e.message}');
@@ -382,9 +388,60 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
+  Future<Either<SomeFailure, bool>> checkVerificationCode(
+    String? code,
+  ) async {
+    try {
+      if (code == null) {
+        return Left(SomeFailure.wrongVerifyCode());
+      }
+      final email = await _firebaseAuth.verifyPasswordResetCode(
+        code,
+        // actionCodeSettings: firebase_auth.ActionCodeSettings(
+        //   url: '${Uri.base.origin}/${KRoute.login.path}',
+        //   handleCodeInApp: true,
+        // ),
+      );
+      return Right(email.isNotEmpty);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      // debugPrint('Sendig error: ${e.message}');
+      return Left(VerifyCodeFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      // debugPrint('Unknown error: $e');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> resetPasswordUseCode({
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      await _firebaseAuth.confirmPasswordReset(
+        code: code,
+        newPassword: newPassword,
+      );
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      // debugPrint('Sendig error: ${e.message}');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    } catch (e, stack) {
+      // debugPrint('Unknown error: $e');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
       await _firestoreService.deleteUserSetting(currentUser.id);
+      // final credential = firebase_auth.EmailAuthProvider.credential(
+      //   email: currentUser.email,
+      //   password: _firebaseAuth.currentUser.password,
+      // );
+      // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
+      // l);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       unawaited(logInAnonymously());
@@ -459,19 +516,28 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> updateUserData({
+  Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required ImageModel? image,
+    required ImagePickerItem? image,
   }) async {
     try {
+      late var userPhoto = user.photo;
       await _firebaseAuth.currentUser?.updateDisplayName(user.name);
 
       if (image != null) {
-        final userPhoto = await _updatePhoto(image: image, userId: user.id);
-        await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
+        userPhoto = await _updatePhoto(image: image, userId: user.id);
+        if (userPhoto != null && userPhoto.isNotEmpty) {
+          try {
+            unawaited(_storageService.removeFile(currentUser.photo));
+            // User can save own photo in another service
+            // ignore: empty_catches
+          } catch (e) {}
+
+          await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
+        }
       }
 
-      return const Right(true);
+      return Right(user.copyWith(photo: userPhoto));
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(SomeFailure.serverError(error: e, stack: stack));
@@ -484,11 +550,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<String?> _updatePhoto({
-    required ImageModel image,
+    required ImagePickerItem image,
     required String userId,
   }) async {
-    final downloadURL = await _storageService.saveImage(
-      imageModel: image,
+    final downloadURL = await _storageService.saveFile(
+      imagePickerItem: image,
       id: userId,
       collecltionName: FirebaseCollectionName.user,
     );
