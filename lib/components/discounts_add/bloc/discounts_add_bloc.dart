@@ -20,6 +20,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         _citiesRepository = citiesRepository,
         super(
           const _Initial(
+            discount: null,
             categoryList: [],
             category: CategoriesFieldModel.pure(),
             city: CitiesFieldModel.pure(),
@@ -36,6 +37,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           ),
         ) {
     on<_Started>(_onStarted);
+    on<_LoadedDiscount>(_onLoadedDiscount);
     on<_CategoryAdd>(_onCategoryAdd);
     on<_CategoryRemove>(_onCategoryRemove);
     on<_CityAdd>(_onCityAdd);
@@ -63,47 +65,6 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _Started event,
     Emitter<DiscountsAddState> emit,
   ) async {
-    if (event.discount != null) {
-      emit(
-        _Initial(
-          categoryList: [],
-          category: CategoriesFieldModel.dirty(event.discount!.category),
-          city: event.discount!.location == null
-              ? const CitiesFieldModel.pure()
-              : CitiesFieldModel.dirty(event.discount!.location!),
-          period: DateFieldModel.dirty(
-            event.discount!.expiration?.toLocaleDate(
-              locale: Language.ukrain.value.languageCode,
-              showDay: true,
-            ),
-          ),
-          title: MessageFieldModel.dirty(event.discount!.title),
-          discounts: DiscountsFieldModel.dirty(
-            event.discount!.discount
-                .map(
-                  (e) => e.toString(),
-                )
-                .toList(),
-          ),
-          eligibility: event.discount!.eligibility == null
-              ? null
-              : ListFieldModel.dirty(event.discount!.eligibility!),
-          link: LinkNullableFieldModel.dirty(event.discount!.directLink),
-          description: MessageFieldModel.dirty(event.discount!.description),
-          exclusions: event.discount!.exclusions == null
-              ? const MessageFieldModel.pure()
-              : MessageFieldModel.dirty(event.discount!.exclusions!),
-          formState: DiscountsAddEnum.initial,
-          citiesList: [],
-          isIndefinitely: true,
-        ),
-      );
-    }
-    // final discounts = await _discountRepository.getDiscountItems().first;
-
-    // final uniqueCategories =
-    //     discounts.expand((discount) => discount.category).toSet().toList();
-
     // TODO(firebase): add categories spreadsheet, remove hardcode categories
     emit(
       state.copyWith(
@@ -117,6 +78,63 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
       (r) => emit(state.copyWith(citiesList: r)),
     );
+  }
+
+  Future<void> _onLoadedDiscount(
+    _LoadedDiscount event,
+    Emitter<DiscountsAddState> emit,
+  ) async {
+    DiscountModel? discount;
+    if (event.discount != null) {
+      discount = event.discount;
+    } else if (event.discountId != null) {
+      if (_companyRepository.currentUserCompany.isNotEmpty) {
+        final result = await _discountRepository.getCopanyDiscount(
+          companyId: _companyRepository.currentUserCompany.id,
+          id: event.discountId!,
+        );
+        result.fold(
+          (l) => emit(state.copyWith(failure: DiscountsAddFailure.linkWrong)),
+          (r) => discount = r,
+        );
+      }
+    }
+
+    if (discount != null) {
+      emit(
+        state.copyWith(
+          discount: discount,
+          category: CategoriesFieldModel.dirty(discount!.category),
+          city: discount!.location == null
+              ? const CitiesFieldModel.pure()
+              : CitiesFieldModel.dirty(discount!.location!),
+          period: DateFieldModel.dirty(
+            discount!.expiration?.toLocaleDate(
+              locale: Language.ukrain.value.languageCode,
+              showDay: true,
+            ),
+          ),
+          title: MessageFieldModel.dirty(discount!.title),
+          discounts: DiscountsFieldModel.dirty(
+            discount!.discount
+                .map(
+                  (e) => e.toString(),
+                )
+                .toList(),
+          ),
+          eligibility: discount!.eligibility == null
+              ? null
+              : ListFieldModel.dirty(discount!.eligibility!),
+          link: LinkNullableFieldModel.dirty(discount!.directLink),
+          description: MessageFieldModel.dirty(discount!.description),
+          exclusions: discount!.exclusions == null
+              ? const MessageFieldModel.pure()
+              : MessageFieldModel.dirty(discount!.exclusions!),
+          formState: DiscountsAddEnum.initial,
+          isIndefinitely: true,
+        ),
+      );
+    }
   }
 
   void _onCategoryAdd(
@@ -409,7 +427,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     }
     if (Formz.validate([state.description])) {
       //state.exclusions
-      final discount = (event.discount ?? discountModel).copyWith(
+      final discount = (state.discount ?? discountModel).copyWith(
         discount: state.discounts.getValue
             .where(
               (element) => element != null,
@@ -426,13 +444,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
-        dateVerified: event.discount?.dateVerified ?? ExtendedDateTime.current,
+        dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
         userName: _companyRepository.currentUserCompany.companyName,
       );
-      if (event.discount == discount) {
+      if (state.discount == discount) {
         emit(
           state.copyWith(
             formState: DiscountsAddEnum.success,
