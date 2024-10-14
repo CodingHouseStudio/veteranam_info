@@ -162,20 +162,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
         key: KWidgetkeys.screen.myDiscounts.iconEdit,
         onPressed: () => context.goNamed(
           KRoute.discountsAdd.name,
-          queryParameters:
-              //   UrlParameters.discount: Uri.encodeComponent(
-              //     jsonEncode(
-              //       widget.discountModel.toJson(),
-              //     ),
-              //   ),
-              //   // UrlParameters.userPhoto: Uri.encodeComponent(
-              //   //   jsonEncode(
-              //   //     widget.discountModel.copyWith(userPhoto: null).toJson(),
-              //   //   ),
-              //   // ),
-              // },
-
-              DiscountURLConverter.toJson(widget.discountModel),
+          queryParameters: DiscountURLConverter.toJson(widget.discountModel),
         ),
         icon: KIcon.edit,
         buttonStyle: KButtonStyles.circularBorderBlackButtonStyle,
@@ -189,7 +176,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
         subtitle: context.l10n.deleteDiscountQuestion,
         confirmText: context.l10n.delete,
         unconfirmText: context.l10n.continueWorking,
-        background: AppColors.materialThemeKeyColorsSecondary,
+        confirmButtonBackground: AppColors.materialThemeKeyColorsSecondary,
         onPressed: () {
           context.read<MyDiscountsWatcherBloc>().add(
                 MyDiscountsWatcherEvent.deleteDiscount(

@@ -8,7 +8,7 @@ class ConfirmDialog extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.confirmText,
-    required this.background,
+    required this.confirmButtonBackground,
     this.unconfirmText,
     this.onPressed,
     super.key,
@@ -18,7 +18,7 @@ class ConfirmDialog extends StatelessWidget {
   final String subtitle;
   final String confirmText;
   final void Function()? onPressed;
-  final Color background;
+  final Color confirmButtonBackground;
   final String? unconfirmText;
 
   @override
@@ -86,7 +86,7 @@ class ConfirmDialog extends StatelessWidget {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.dialogs.confirmButton,
       text: confirmText,
-      color: background,
+      color: confirmButtonBackground,
       textColor: AppColors.materialThemeWhite,
       isDesk: isDesk,
       deskPadding: const EdgeInsets.symmetric(

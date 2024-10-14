@@ -18,7 +18,10 @@ class _DialogsWidget {
   final BuildContext context;
 
   void _doubleDialog({
-    required Widget Function({required bool isDeskValue}) childWidget,
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
     required bool isDesk,
     Widget Function({required Widget layoutBuilder})? preLayoutWidget,
     bool isScollable = true,
@@ -88,7 +91,10 @@ class _DialogsWidget {
   }
 
   Widget _deskDoubleDialogWidget({
-    required Widget Function({required bool isDeskValue}) childWidget,
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
     required bool isScollable,
     required Color? backgroundColor,
     required EdgeInsets? insetPadding,
@@ -113,20 +119,30 @@ class _DialogsWidget {
             actionsOverflowAlignment: actionsOverflowAlignment,
             contentPadding: contentPadding?.call(isDeskValue: isDeskValue),
             scrollable: isScollable,
-            content: childWidget(isDeskValue: isDeskValue),
+            content: childWidget(
+              isDeskValue: isDeskValue,
+              context: context,
+            ),
           );
         },
       );
 
   Widget _mobDoubleDialogWidget({
-    required Widget Function({required bool isDeskValue}) childWidget,
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
     required double? maxWidth,
   }) =>
       LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDeskValue = constraints.maxWidth >
               (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
-          return childWidget(isDeskValue: isDeskValue);
+
+          return childWidget(
+            isDeskValue: isDeskValue,
+            context: context,
+          );
         },
       );
 
@@ -136,17 +152,31 @@ class _DialogsWidget {
     required String subtitle,
     required String confirmText,
     required void Function()? onPressed,
-    required Color background,
+    required Color confirmButtonBackground,
     String? unconfirmText,
   }) =>
       _doubleDialog(
-        childWidget: ({required isDeskValue}) => ConfirmDialog(
+        childWidget: ({required isDeskValue, required context}) =>
+            ConfirmDialog(
           isDesk: isDeskValue,
           title: title,
           subtitle: subtitle,
           confirmText: confirmText,
           unconfirmText: unconfirmText,
-          background: background,
+          confirmButtonBackground: confirmButtonBackground,
+          onPressed: onPressed,
+        ),
+        isDesk: isDesk,
+      );
+
+  void showConfirmationPublishDiscountDialog({
+    required bool isDesk,
+    required void Function()? onPressed,
+  }) =>
+      _doubleDialog(
+        childWidget: ({required isDeskValue, required context}) =>
+            ConfirmPublishDiscountDialog(
+          isDesk: isDeskValue,
           onPressed: onPressed,
         ),
         isDesk: isDesk,
@@ -159,18 +189,12 @@ class _DialogsWidget {
     required String cardId,
   }) {
     _doubleDialog(
-      preLayoutWidget: ({required layoutBuilder}) => isDesk
-          ? BlocProvider(
-              create: (context) =>
-                  GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-              child: layoutBuilder,
-            )
-          : BlocProvider(
-              create: (context) =>
-                  GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-              child: layoutBuilder,
-            ),
-      childWidget: ({required isDeskValue}) => isDesk
+      preLayoutWidget: ({required layoutBuilder}) => BlocProvider(
+        create: (context) =>
+            GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
+        child: layoutBuilder,
+      ),
+      childWidget: ({required isDeskValue, required context}) => isDesk
           ? ReportDialogWidget(
               isDesk: isDeskValue,
               cardEnum: cardEnum,

@@ -377,7 +377,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   subtitle: context.l10n.cancelChangesQuestion,
                   confirmText: context.l10n.cancel,
                   unconfirmText: context.l10n.continueWorking,
-                  background: AppColors.materialThemeKeyColorsSecondary,
+                  confirmButtonBackground:
+                      AppColors.materialThemeKeyColorsSecondary,
                   onPressed: () {
                     context.goNamed(KRoute.myDiscounts.name);
                   },
@@ -401,19 +402,34 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             ? context.l10n.publish
             : context.l10n.next,
         isDesk: isDesk,
-        onPressed: () => context.read<DiscountsAddBloc>().add(
-              DiscountsAddEvent.send(
-                context.read<DiscountsAddBloc>().state.formState.isDescription
-                    ? widget.discount
-                    : null,
-              ),
-            ),
+        onPressed: () {
+          if (context.read<DiscountsAddBloc>().state.formState.isDescription) {
+            context.dialog.showConfirmationPublishDiscountDialog(
+              isDesk: isDesk,
+              title: '',
+              subtitle: '',
+              confirmText: '',
+              onPressed: () => _sendEvent(context),
+              background: Colors.black,
+            );
+          } else {
+            _sendEvent(context);
+          }
+        },
         mobTextWidth: double.infinity,
         widgetKey: const Key(''),
         deskTextWidth: double.infinity,
         darkMode: true,
         mobVerticalTextPadding: KPadding.kPaddingSize16,
         mobIconPadding: KPadding.kPaddingSize16,
+      );
+
+  void _sendEvent(BuildContext context) => context.read<DiscountsAddBloc>().add(
+        DiscountsAddEvent.send(
+          context.read<DiscountsAddBloc>().state.formState.isDescription
+              ? widget.discount
+              : null,
+        ),
       );
 
   @override
