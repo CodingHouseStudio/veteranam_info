@@ -1494,6 +1494,7 @@
   "categoriesLimit": "categories 2.",
   "@categories": {
     "examples": "Error message for the category field if the value exceeds 2 categories."
+  },
   "discountWrongRange": "The discount must be no more than 100% and no less than 1%",
   "@discountWrongRange": {
     "examples": "Error message for the discount field if the percentage value is greater than 100% or less than 1%."

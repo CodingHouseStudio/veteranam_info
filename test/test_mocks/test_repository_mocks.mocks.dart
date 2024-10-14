@@ -6742,6 +6742,16 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
         returnValue: _i8.Future<String?>.value(),
         returnValueForMissingStub: _i8.Future<String?>.value(),
       ) as _i8.Future<String?>);
+
+  @override
+  _i8.Future<void> removeFile(String? url) => (super.noSuchMethod(
+        Invocation.method(
+          #removeFile,
+          [url],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [ImagePicker].
