@@ -1,6 +1,5 @@
 import 'dart:convert' show jsonDecode, jsonEncode;
 
-import 'package:flutter/widgets.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountURLConverter {
