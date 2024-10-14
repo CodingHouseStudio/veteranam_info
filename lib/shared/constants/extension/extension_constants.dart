@@ -146,6 +146,18 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
+  DateTime toLocaleDate({
+    required String locale,
+    bool showDay = false,
+  }) {
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).parse(this);
+    } else {
+      return DateFormat.yMMMM(locale).parse(this);
+    }
+  }
+
   String customSubstring(int start, [int? end]) {
     return substring(start, end != null ? min(end, length) : null);
   }
