@@ -210,12 +210,19 @@ GoRouter businessRouter = GoRouter(
         GoRoute(
           name: KRoute.discountsAdd.name,
           path: KRoute.discountsAdd.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const DiscountsAddScreen(),
-          ),
+          pageBuilder: (context, state) {
+            final discountModel =
+                DiscountURLConverter.fromJson(state.uri.queryParameters);
+
+            return NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              restorationId: state.pageKey.value,
+              child: DiscountsAddScreen(
+                discount: discountModel,
+              ),
+            );
+          },
         ),
         // GoRoute(
         //   name: KRoute.discountCard.name,

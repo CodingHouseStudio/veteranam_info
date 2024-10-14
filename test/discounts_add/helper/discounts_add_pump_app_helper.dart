@@ -18,7 +18,9 @@ Future<void> discountsAddPumpAppHelper({
     mockCitiesRepository: mockCitiesRepository,
   );
   await tester.pumpApp(
-    const DiscountsAddScreen(),
+    const DiscountsAddScreen(
+      discount: null,
+    ),
     mockGoRouter: mockGoRouter,
   );
 
