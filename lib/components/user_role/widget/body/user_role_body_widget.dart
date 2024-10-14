@@ -48,7 +48,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   text: context.l10n.signUpBusiness,
                   isDesk: isDesk,
                   onPressed: () => context.read<UrlCubit>().launchUrl(
-                        url: '${KAppText.businessSite}${KRoute.signUp.path}',
+                        url: '${KAppText.businessSite}/${KRoute.signUp.path}',
                       ),
                   color: AppColors.materialThemeKeyColorsPrimary,
                   textColor: AppColors.materialThemeKeyColorsSecondary,
@@ -58,7 +58,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   deskIconPadding: KPadding.kPaddingSize16,
                   deskPadding: const EdgeInsets.symmetric(
                     vertical: KPadding.kPaddingSize16,
-                    horizontal: KPadding.kPaddingSize56,
+                    horizontal: KPadding.kPaddingSize52,
                   ),
                 ),
                 KSizedBox.kHeightSizedBox24,
@@ -111,7 +111,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                 DropDownItem(
                   text: context.l10n.asBusiness,
                   action: () => context.read<UrlCubit>().launchUrl(
-                        url: '${KAppText.businessSite}${KRoute.login.path}',
+                        url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
                   key: KWidgetkeys.screen.userRole.loginBusinessButton,
                 ),
