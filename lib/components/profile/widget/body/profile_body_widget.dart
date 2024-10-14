@@ -121,7 +121,7 @@ class ProfileBodyWidget extends StatelessWidget {
         onPressed: () => context.dialog.showConfirmationDialog(
           isDesk: isDesk,
           title: context.l10n.logOutFromProfile,
-          subtitle: context.l10n.logOutQuestion,
+          subtitle: context.l10n.logOutProfileQuestion,
           confirmText: context.l10n.logOut,
           background: AppColors.materialThemeKeyColorsSecondary,
           onPressed: () {
@@ -162,7 +162,7 @@ class ProfileBodyWidget extends StatelessWidget {
         onPressed: () => context.dialog.showConfirmationDialog(
           isDesk: isDesk,
           title: context.l10n.deleteProfile,
-          subtitle: context.l10n.deleteAccountQuestion,
+          subtitle: context.l10n.deleteProfileQuestion,
           confirmText: context.l10n.delete,
           background: AppColors.materialThemeRefErrorError60,
           onPressed: () {
