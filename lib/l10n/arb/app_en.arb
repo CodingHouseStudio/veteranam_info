@@ -568,14 +568,6 @@
   "@storyAddSubtitle": {
     "examples": "Text to subtitle the AddStory page."
   },
-  "logOutQuestion": "Are you sure you want to log out of your account?",
-  "@logOutQuestion": {
-    "examples": "The text for the logout diologue on the Profile page."
-  },
-  "deleteAccountQuestion": "Are you sure you want to delete your account?",
-  "@deleteAccountQuestion": {
-    "examples": "Text for the account deletion dialog on the Profile page."
-  },
   "yes": "Yes",
   "@yes": {
     "examples": "Text for the button for deleting and logging out of an account on the Profile page.",
