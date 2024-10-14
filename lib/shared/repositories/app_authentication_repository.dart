@@ -526,7 +526,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
       if (image != null) {
         userPhoto = await _updatePhoto(image: image, userId: user.id);
-        await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
+        if (userPhoto != null && userPhoto.isNotEmpty) {
+          try {
+            unawaited(_storageService.removeFile(currentUser.photo));
+            // User can save own photo in another service
+            // ignore: empty_catches
+          } catch (e) {}
+
+          await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
+        }
       }
 
       return Right(user.copyWith(photo: userPhoto));

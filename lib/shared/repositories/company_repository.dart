@@ -126,6 +126,9 @@ class CompanyRepository implements ICompanyRepository {
           collecltionName: FirebaseCollectionName.companies,
         );
         if (downloadURL != null && downloadURL.isNotEmpty) {
+          // We will now have a problem if we delete the company's photo
+          // because we don't change it at the same time on discounts.
+          // unawaited(_storageService.removeFile(company.image?.downloadURL));
           methodCompanyModel = methodCompanyModel.copyWith(
             image: imageItem.image(downloadURL),
           );
