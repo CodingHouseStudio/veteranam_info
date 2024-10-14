@@ -8,16 +8,24 @@ class DiscountsAddBlocprovider extends StatelessWidget {
   const DiscountsAddBlocprovider({
     required this.childWidget,
     required this.discount,
+    required this.discountId,
     super.key,
   });
   final Widget childWidget;
   final DiscountModel? discount;
+  final String? discountId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GetIt.I.get<DiscountsAddBloc>()
-        ..add(DiscountsAddEvent.started(discount)),
+        ..add(const DiscountsAddEvent.started())
+        ..add(
+          DiscountsAddEvent.loadedDiscount(
+            discount: discount,
+            discountId: discountId,
+          ),
+        ),
       child: childWidget,
     );
   }

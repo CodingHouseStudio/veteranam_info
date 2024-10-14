@@ -65,7 +65,7 @@ class DiscountRepository implements IDiscountRepository {
     String id,
   ) async {
     try {
-      final discountModel = await _firestoreService.getDiscount(id);
+      final discountModel = await _firestoreService.getDiscount(id: id);
       return Right(discountModel);
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
@@ -177,6 +177,24 @@ class DiscountRepository implements IDiscountRepository {
       return const Right(true);
     } on FirebaseException catch (e, stack) {
       return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, DiscountModel>> getCopanyDiscount({
+    required String id,
+    required String companyId,
+  }) async {
+    try {
+      final discountModel = await _firestoreService.getDiscount(
+        id: id,
+        companyId: companyId,
+      );
+      return Right(discountModel);
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
       return Left(SomeFailure.serverError(error: e, stack: stack));
     }

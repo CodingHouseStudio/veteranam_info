@@ -142,4 +142,8 @@ abstract class KRoute {
     path: 'add',
     name: 'Discounts Add',
   );
+  static const _RouteItem discountsEdit = _RouteItem(
+    path: 'edit',
+    name: 'Discounts Edit',
+  );
 }

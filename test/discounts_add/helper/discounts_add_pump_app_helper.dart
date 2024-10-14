@@ -20,6 +20,7 @@ Future<void> discountsAddPumpAppHelper({
   await tester.pumpApp(
     const DiscountsAddScreen(
       discount: null,
+      discountId: null,
     ),
     mockGoRouter: mockGoRouter,
   );
