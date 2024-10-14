@@ -1,3 +1,5 @@
+import 'dart:convert' show jsonEncode;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -59,12 +61,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                 children: [
                   trashButton(context),
                   KSizedBox.kWidthSizedBox8,
-                  IconWidget(
-                    key: KWidgetkeys.screen.myDiscounts.iconEdit,
-                    padding: KPadding.kPaddingSize12,
-                    icon: KIcon.edit,
-                    decoration: KWidgetTheme.boxDecorationBorderBlack,
-                  ),
+                  editButton,
                   if (widget.discountModel.status != DiscountState.rejected)
                     Padding(
                       padding:
@@ -146,12 +143,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                 children: [
                   trashButton(context),
                   KSizedBox.kWidthSizedBox8,
-                  IconWidget(
-                    key: KWidgetkeys.screen.myDiscounts.iconEdit,
-                    padding: KPadding.kPaddingSize12,
-                    icon: KIcon.edit,
-                    decoration: KWidgetTheme.boxDecorationBorderBlack,
-                  ),
+                  editButton,
                 ],
               ),
             ],
@@ -160,6 +152,29 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
       ],
     );
   }
+
+  Widget get editButton => IconButtonWidget(
+        key: KWidgetkeys.screen.myDiscounts.iconEdit,
+        onPressed: () => context.goNamed(
+          KRoute.discountsAdd.name,
+          queryParameters:
+              //   UrlParameters.discount: Uri.encodeComponent(
+              //     jsonEncode(
+              //       widget.discountModel.toJson(),
+              //     ),
+              //   ),
+              //   // UrlParameters.userPhoto: Uri.encodeComponent(
+              //   //   jsonEncode(
+              //   //     widget.discountModel.copyWith(userPhoto: null).toJson(),
+              //   //   ),
+              //   // ),
+              // },
+
+              DiscountURLConverter.toJson(widget.discountModel),
+        ),
+        icon: KIcon.edit,
+        buttonStyle: KButtonStyles.circularBorderBlackButtonStyle,
+      );
 
   Widget trashButton(BuildContext context) {
     return IconButtonWidget(

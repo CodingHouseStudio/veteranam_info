@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
@@ -210,12 +212,19 @@ GoRouter businessRouter = GoRouter(
         GoRoute(
           name: KRoute.discountsAdd.name,
           path: KRoute.discountsAdd.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const DiscountsAddScreen(),
-          ),
+          pageBuilder: (context, state) {
+            final discountModel =
+                DiscountURLConverter.fromJson(state.uri.queryParameters);
+
+            return NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              restorationId: state.pageKey.value,
+              child: DiscountsAddScreen(
+                discount: discountModel,
+              ),
+            );
+          },
         ),
         // GoRoute(
         //   name: KRoute.discountCard.name,

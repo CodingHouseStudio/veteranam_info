@@ -5,7 +5,8 @@ import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountsAddBodyWidget extends StatefulWidget {
-  const DiscountsAddBodyWidget({super.key});
+  const DiscountsAddBodyWidget({required this.discount, super.key});
+  final DiscountModel? discount;
 
   @override
   State<DiscountsAddBodyWidget> createState() => _DiscountsAddBodyWidgetState();
@@ -24,13 +25,15 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   @override
   void initState() {
     // discountsController = TextEditingController();
-    titleController = TextEditingController();
-    linkController = TextEditingController();
+    titleController = TextEditingController(text: widget.discount?.title);
+    linkController = TextEditingController(text: widget.discount?.link);
     // categoryController = TextEditingController();
     // cityController = TextEditingController();
-    periodController = TextEditingController();
-    exclusionController = TextEditingController();
-    descriptionController = TextEditingController();
+    periodController = TextEditingController(text: widget.discount?.expiration);
+    exclusionController =
+        TextEditingController(text: widget.discount?.exclusions);
+    descriptionController =
+        TextEditingController(text: widget.discount?.description);
     // eligibilityController = TextEditingController();
     super.initState();
   }
@@ -397,7 +400,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             : context.l10n.next,
         isDesk: isDesk,
         onPressed: () => context.read<DiscountsAddBloc>().add(
-              const DiscountsAddEvent.send(),
+              DiscountsAddEvent.send(widget.discount),
             ),
         mobTextWidth: double.infinity,
         widgetKey: const Key(''),

@@ -293,6 +293,15 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const circularBorderBlackButtonStyle = ButtonStyle(
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius48,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
   static const borderGrayButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
