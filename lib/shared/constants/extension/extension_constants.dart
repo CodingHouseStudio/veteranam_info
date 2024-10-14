@@ -343,12 +343,16 @@ extension ContextExtensions on BuildContext {
   @visibleForTesting
   static DateTime? textPieckerData;
 
-  Future<DateTime?> get getDate async =>
+  Future<DateTime?> getDate({DateTime? currecntDate}) async =>
       textPieckerData ??
       showDatePicker(
         context: this,
-        initialDate: ExtendedDateTime.current,
-        firstDate: ExtendedDateTime.current,
+        initialDate: currecntDate ??
+            ExtendedDateTime.current.add(
+              const Duration(days: KDimensions.minAmountTimeDiscountDays),
+            ),
+        firstDate: ExtendedDateTime.current
+            .add(const Duration(days: KDimensions.minAmountTimeDiscountDays)),
         lastDate: DateTime(2026),
       );
 }
