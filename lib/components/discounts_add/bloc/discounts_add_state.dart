@@ -44,7 +44,7 @@ class DiscountsAddState with _$DiscountsAddState {
 enum DiscountsAddEnum {
   initial,
   inProgress,
-  unmodified,
+  // unmodified,
   success,
   invalidData,
   detail,

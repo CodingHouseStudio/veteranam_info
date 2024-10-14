@@ -66,7 +66,7 @@ void main() {
       ' when update fields correct and save',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -174,7 +174,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -235,7 +235,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -246,7 +246,7 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send());
+          ..add(const DiscountsAddEvent.send(null));
       },
       expect: () async => [
         const DiscountsAddState(
@@ -468,7 +468,7 @@ void main() {
       ' when update fields incorrect, save and back',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -482,7 +482,7 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
@@ -524,8 +524,8 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -536,8 +536,8 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -692,7 +692,7 @@ void main() {
               Left(SomeFailure.serverError(error: KGroupText.failureGet)),
         );
 
-        bloc.add(const DiscountsAddEvent.started());
+        bloc.add(const DiscountsAddEvent.started(null));
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -770,7 +770,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -781,7 +781,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send(null))
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -792,7 +792,7 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send());
+          ..add(const DiscountsAddEvent.send(null));
       },
       expect: () async => [
         const DiscountsAddState(

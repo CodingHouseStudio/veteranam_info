@@ -7,14 +7,8 @@ class DiscountURLConverter {
     DiscountModel? discountModel;
 
     if (json.isNotEmpty) {
-      final queryParams = json.map((key, value) {
-        late String text;
-        try {
-          text = Uri.decodeComponent(value);
-        } catch (e) {
-          text = value;
-        }
-        if (text == UrlParameters.whenParametIsNull) {
+      final jsonValue = json.map((key, value) {
+        if (value == UrlParameters.whenParametIsNull) {
           return MapEntry(key, null);
         }
         // Handle lists separated by ","
@@ -30,7 +24,7 @@ class DiscountURLConverter {
         ].contains(key)) {
           return MapEntry(
             key,
-            text
+            value
                 .replaceAll('[', '')
                 .replaceAll(']', '')
                 .split(','), // Split lists
@@ -40,39 +34,38 @@ class DiscountURLConverter {
         if (key == DiscountModelJsonField.subLocation) {
           return MapEntry(
             key,
-            text,
+            value,
           );
         }
-
         if (key == DiscountModelJsonField.discount) {
           return MapEntry(
             key,
-            text.split(',').map((e) => int.tryParse(e) ?? 0).toList(),
+            value.split(',').map((e) => int.tryParse(e) ?? 0).toList(),
           );
         }
 
         if (key == DiscountModelJsonField.userPhoto) {
           late dynamic photo;
           try {
-            photo = jsonDecode(value);
+            photo = [jsonDecode(value)];
           } catch (e) {
-            photo = value;
+            photo = null;
           }
           // Decode the JSON string into a Map
           return MapEntry(
             key,
-            [photo],
+            photo,
             // Decode the JSON string correctly
           );
         }
 
-        return MapEntry(key, text);
+        return MapEntry(key, value);
       });
 
       // Create DiscountModel from JSON if query parameters exist
-      if (queryParams.isNotEmpty) {
+      if (jsonValue.isNotEmpty) {
         try {
-          discountModel = DiscountModel.fromJson(queryParams);
+          discountModel = DiscountModel.fromJson(jsonValue);
           // ignore: empty_catches
         } catch (e) {}
       }
@@ -83,13 +76,13 @@ class DiscountURLConverter {
 
   static Map<String, dynamic> toJson(DiscountModel discount) {
     return discount.toJson().map((key, value) {
-      var text = '';
       if (value is List<int>) {
-        text = value.map((e) => e.toString()).join(',');
+        return MapEntry(
+          key,
+          value.map((e) => e.toString()).join(','),
+        );
       }
-      if (value is List<dynamic> &&
-          value.first is Map<String, dynamic> &&
-          text.isEmpty) {
+      if (value is List<dynamic> && value.first is Map<String, dynamic>) {
         final json = value.first as Map<String, dynamic>;
         late String jsonString;
         try {
@@ -99,26 +92,23 @@ class DiscountURLConverter {
         } catch (e) {
           jsonString = json.toString();
         }
-        text = jsonString;
+        return MapEntry(
+          key,
+          jsonString,
+        );
       }
 
-      if (value is DateTime && text.isEmpty) {
-        text = value.toIso8601String();
-      }
-      if (text.isEmpty) {
-        text = value?.toString() ?? UrlParameters.whenParametIsNull;
-      }
-      try {
+      if (value is DateTime) {
         return MapEntry(
           key,
-          Uri.encodeComponent(text),
-        );
-      } catch (e) {
-        return MapEntry(
-          key,
-          text,
+          value.toIso8601String(),
         );
       }
+
+      return MapEntry(
+        key,
+        value?.toString() ?? UrlParameters.whenParametIsNull,
+      );
     });
   }
 }

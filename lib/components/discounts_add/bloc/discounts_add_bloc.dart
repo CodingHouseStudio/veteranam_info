@@ -64,45 +64,40 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) async {
     if (event.discount != null) {
-      try {
-        emit(
-          _Initial(
-            categoryList: [],
-            category: ListFieldModel.dirty(event.discount!.category),
-            city: event.discount!.location == null
-                ? const ListFieldModel.pure()
-                : ListFieldModel.dirty(event.discount!.location!),
-            period: DateFieldModel.dirty(
-              event.discount!.expiration?.toLocaleDate(
-                locale: Language.ukrain.value.languageCode,
-                showDay: true,
-              ),
+      emit(
+        _Initial(
+          categoryList: [],
+          category: ListFieldModel.dirty(event.discount!.category),
+          city: event.discount!.location == null
+              ? const ListFieldModel.pure()
+              : ListFieldModel.dirty(event.discount!.location!),
+          period: DateFieldModel.dirty(
+            event.discount!.expiration?.toLocaleDate(
+              locale: Language.ukrain.value.languageCode,
+              showDay: true,
             ),
-            title: MessageFieldModel.dirty(event.discount!.title),
-            discounts: DiscountsFieldModel.dirty(
-              event.discount!.discount
-                  .map(
-                    (e) => e.toString(),
-                  )
-                  .toList(),
-            ),
-            eligibility: event.discount!.eligibility == null
-                ? null
-                : ListFieldModel.dirty(event.discount!.eligibility!),
-            link: LinkNullableFieldModel.dirty(event.discount!.directLink),
-            description: MessageFieldModel.dirty(event.discount!.description),
-            exclusions: event.discount!.exclusions == null
-                ? const MessageFieldModel.pure()
-                : MessageFieldModel.dirty(event.discount!.exclusions!),
-            formState: DiscountsAddEnum.initial,
-            citiesList: [],
-            isIndefinitely: true,
           ),
-        );
-      } catch (e) {
-        final value = e;
-        final value2 = e;
-      }
+          title: MessageFieldModel.dirty(event.discount!.title),
+          discounts: DiscountsFieldModel.dirty(
+            event.discount!.discount
+                .map(
+                  (e) => e.toString(),
+                )
+                .toList(),
+          ),
+          eligibility: event.discount!.eligibility == null
+              ? null
+              : ListFieldModel.dirty(event.discount!.eligibility!),
+          link: LinkNullableFieldModel.dirty(event.discount!.directLink),
+          description: MessageFieldModel.dirty(event.discount!.description),
+          exclusions: event.discount!.exclusions == null
+              ? const MessageFieldModel.pure()
+              : MessageFieldModel.dirty(event.discount!.exclusions!),
+          formState: DiscountsAddEnum.initial,
+          citiesList: [],
+          isIndefinitely: true,
+        ),
+      );
     }
     // final discounts = await _discountRepository.getDiscountItems().first;
 
@@ -431,8 +426,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
-        // TODO(DATE): need to change when edit
-        // dateVerified: event.discount?.dateVerified ?? ExtendedDateTime.current,
+        dateVerified: event.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
@@ -441,13 +435,15 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       if (event.discount == discount) {
         emit(
           state.copyWith(
-            formState: DiscountsAddEnum.unmodified,
+            formState: DiscountsAddEnum.success,
           ),
         );
         return;
       }
-      final result =
-          await _discountRepository.addDiscount(sendDiscountModel ?? discount);
+      final result = await _discountRepository.addDiscount(
+        sendDiscountModel ??
+            discount.copyWith(dateVerified: ExtendedDateTime.current),
+      );
       result.fold(
         (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
         (r) => emit(

@@ -400,7 +400,11 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             : context.l10n.next,
         isDesk: isDesk,
         onPressed: () => context.read<DiscountsAddBloc>().add(
-              DiscountsAddEvent.send(widget.discount),
+              DiscountsAddEvent.send(
+                context.read<DiscountsAddBloc>().state.formState.isDescription
+                    ? widget.discount
+                    : null,
+              ),
             ),
         mobTextWidth: double.infinity,
         widgetKey: const Key(''),
