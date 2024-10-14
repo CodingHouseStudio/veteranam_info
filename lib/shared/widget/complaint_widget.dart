@@ -9,26 +9,22 @@ class ComplaintWidget extends StatelessWidget {
     required this.cardId,
     super.key,
     this.background,
-    this.canTap,
   });
   final bool isDesk;
   final CardEnum cardEnum;
   // final void Function()? afterEvent;
   final String cardId;
   final Color? background;
-  final bool? canTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: canTap ?? true
-          ? () => context.dialog.showReportDialog(
-                isDesk: isDesk,
-                cardEnum: cardEnum,
-                // afterEvent: afterEvent,
-                cardId: cardId,
-              )
-          : null,
+      onTap: () => context.dialog.showReportDialog(
+        isDesk: isDesk,
+        cardEnum: cardEnum,
+        // afterEvent: afterEvent,
+        cardId: cardId,
+      ),
       child: Column(
         children: [
           IconWidget(
