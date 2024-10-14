@@ -56,4 +56,6 @@ abstract class KDimensions {
   static const sixtyPercent = 0.6;
 
   static const sendingDelay = 60;
+
+  static const minAmountTimeDiscountDays = 14;
 }
