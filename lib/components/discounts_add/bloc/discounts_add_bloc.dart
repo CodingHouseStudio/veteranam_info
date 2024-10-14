@@ -67,10 +67,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       emit(
         _Initial(
           categoryList: [],
-          category: ListFieldModel.dirty(event.discount!.category),
+          category: CategoriesFieldModel.dirty(event.discount!.category),
           city: event.discount!.location == null
-              ? const ListFieldModel.pure()
-              : ListFieldModel.dirty(event.discount!.location!),
+              ? const CitiesFieldModel.pure()
+              : CitiesFieldModel.dirty(event.discount!.location!),
           period: DateFieldModel.dirty(
             event.discount!.expiration?.toLocaleDate(
               locale: Language.ukrain.value.languageCode,
