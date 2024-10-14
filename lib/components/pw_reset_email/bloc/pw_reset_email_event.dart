@@ -7,4 +7,6 @@ class PwResetEmailEvent with _$PwResetEmailEvent {
   const factory PwResetEmailEvent.emailUpdated(String email) = _EmailUpdated;
 
   const factory PwResetEmailEvent.sendResetCode() = _SendResetCode;
+
+  const factory PwResetEmailEvent.resetStatus() = _ResetStatus;
 }
