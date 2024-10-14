@@ -141,8 +141,7 @@ class _DialogsWidget {
   }) =>
       _doubleDialog(
         childWidget: ({required isDeskValue}) => ConfirmDialog(
-          isDeskValue: isDeskValue,
-          isDesk: isDesk,
+          isDesk: isDeskValue,
           title: title,
           subtitle: subtitle,
           confirmText: confirmText,

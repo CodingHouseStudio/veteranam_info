@@ -4,7 +4,6 @@ import 'package:veteranam/shared/shared.dart';
 
 class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({
-    required this.isDeskValue,
     required this.isDesk,
     required this.title,
     required this.subtitle,
@@ -14,8 +13,6 @@ class ConfirmDialog extends StatelessWidget {
     this.onPressed,
     super.key,
   });
-
-  final bool isDeskValue;
   final bool isDesk;
   final String title;
   final String subtitle;
@@ -64,7 +61,7 @@ class ConfirmDialog extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox24,
-        if (isDesk && isDeskValue)
+        if (isDesk)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
