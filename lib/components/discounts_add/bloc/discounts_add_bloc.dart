@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/components/discounts_add/discounts_add.dart';
+import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'discounts_add_bloc.freezed.dart';
@@ -21,8 +21,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         super(
           const _Initial(
             categoryList: [],
-            category: ListFieldModel.pure(),
-            city: ListFieldModel.pure(),
+            category: CategoriesFieldModel.pure(),
+            city: CitiesFieldModel.pure(),
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
@@ -87,7 +87,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CategoryAdd event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final categoryFieldModel = ListFieldModel.dirty(
+    final categoryFieldModel = CategoriesFieldModel.dirty(
       state.category.value.addFieldModel(event.category),
     );
 
@@ -107,8 +107,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     final categotiesList =
         state.category.value.removeFieldModel(event.category);
     final categoryFieldModel = categotiesList.isEmpty
-        ? const ListFieldModel.pure()
-        : ListFieldModel.dirty(categotiesList);
+        ? const CategoriesFieldModel.pure()
+        : CategoriesFieldModel.dirty(categotiesList);
 
     emit(
       state.copyWith(
@@ -124,7 +124,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     final cityFieldModel =
-        ListFieldModel.dirty(state.city.value.addFieldModel(event.city));
+        CitiesFieldModel.dirty(state.city.value.addFieldModel(event.city));
 
     emit(
       state.copyWith(
@@ -141,8 +141,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) {
     final citiesList = state.city.value.removeFieldModel(event.city);
     final cityFieldModel = citiesList.isEmpty
-        ? const ListFieldModel.pure()
-        : ListFieldModel.dirty(citiesList);
+        ? const CitiesFieldModel.pure()
+        : CitiesFieldModel.dirty(citiesList);
 
     emit(
       state.copyWith(
