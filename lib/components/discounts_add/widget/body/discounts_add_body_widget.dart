@@ -225,9 +225,11 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             TextButton(
               onPressed: _.isIndefinitely
                   ? null
-                  : () => context
-                      .read<DiscountsAddBloc>()
-                      .add(DiscountsAddEvent.periodUpdate(context.getDate)),
+                  : () => context.read<DiscountsAddBloc>().add(
+                        DiscountsAddEvent.periodUpdate(
+                          context.getDate(currecntDate: _.period.value),
+                        ),
+                      ),
               style: KButtonStyles.footerButtonTransparent.copyWith(
                 padding: const WidgetStatePropertyAll(
                   EdgeInsets.zero,
