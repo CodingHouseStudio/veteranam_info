@@ -93,8 +93,8 @@ void main() {
         (_) => true,
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('add work', () async {
       await firestoreService.addWork(KTestText.workModelItems.first);

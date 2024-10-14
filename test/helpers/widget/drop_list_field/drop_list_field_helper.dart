@@ -9,6 +9,7 @@ Future<void> dropListFieldHelper({
   required String text,
   required Key textFieldKey,
   String? Function()? itemTextWidget,
+  bool hasMultiChoice = false,
   int fieldIndex = 0,
 }) async {
   await dropListFieldItemHelper(
@@ -16,6 +17,7 @@ Future<void> dropListFieldHelper({
     textFieldKey: textFieldKey,
     itemTextWidget: itemTextWidget,
     fieldIndex: fieldIndex,
+    hasMultiChoice: hasMultiChoice,
   );
 
   await tester.tap(

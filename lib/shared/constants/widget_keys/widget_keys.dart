@@ -1,6 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Key;
 
 part 'screen/about_us.dart';
 part 'screen/app.dart';
@@ -27,6 +27,8 @@ part 'screen/privacy_policy_dialog.dart';
 part 'screen/profile.dart';
 part 'screen/profile_saves.dart';
 part 'screen/questions_form.dart';
+part 'screen/pw_reset_email.dart';
+part 'screen/password_reset.dart';
 
 /// COMMENT: Add a part here when you add a new file for keys
 // SCREEN

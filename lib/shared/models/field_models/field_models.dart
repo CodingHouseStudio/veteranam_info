@@ -1,5 +1,4 @@
 export 'date_field_model.dart';
-export 'discounts_field_model.dart';
 export 'email_field_model.dart';
 export 'image_field_model.dart';
 export 'link_field_model.dart';

@@ -8,9 +8,13 @@ import '../../test_dependency.dart';
 Future<void> employeeRespondPumpAppHelper({
   required IWorkRepository mockWorkRepository,
   required WidgetTester tester,
+  required IDataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerEmployeeRespondBloc(mockWorkRepository: mockWorkRepository);
+  _registerEmployeeRespondBloc(
+    mockWorkRepository: mockWorkRepository,
+    mockDataPickerRepository: mockDataPickerRepository,
+  );
   await tester.pumpApp(
     const EmployeeRespondScreen(),
     mockGoRouter: mockGoRouter,
@@ -26,9 +30,11 @@ Future<void> employeeRespondPumpAppHelper({
 
 void _registerEmployeeRespondBloc({
   required IWorkRepository mockWorkRepository,
+  required IDataPickerRepository mockDataPickerRepository,
 }) {
   final employeeRespondBloc = EmployeeRespondBloc(
     employeeRespondRepository: mockWorkRepository,
+    dataPickerRepository: mockDataPickerRepository,
   );
   if (GetIt.I.isRegistered<EmployeeRespondBloc>()) {
     GetIt.I.unregister<EmployeeRespondBloc>();

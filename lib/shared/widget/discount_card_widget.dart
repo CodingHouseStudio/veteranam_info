@@ -11,6 +11,8 @@ class DiscountCardWidget extends StatelessWidget {
     super.key,
     this.closeWidget,
     this.descriptionMethod,
+    this.isBusiness = false,
+    this.useSiteUrl,
   });
 
   final DiscountModel discountItem;
@@ -20,6 +22,8 @@ class DiscountCardWidget extends StatelessWidget {
   final String? share;
   final bool isLoading;
   final String Function(String)? descriptionMethod;
+  final bool isBusiness;
+  final bool? useSiteUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +198,7 @@ class DiscountCardWidget extends StatelessWidget {
                     // if this is iOS and medical services, do not offer
                     // pointing to the website
                     link: discountItem.getLink,
-
+                    useSiteUrl: useSiteUrl,
                     cardEnum: CardEnum.discount,
                     // afterEvent: reportEvent,
                     cardId: discountItem.id,
@@ -202,6 +206,9 @@ class DiscountCardWidget extends StatelessWidget {
                     complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
                     shareKey: KWidgetkeys.widget.discountCard.iconShare,
                     webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
+                    showComplaint: !isBusiness,
+                    showShare: !isBusiness ||
+                        discountItem.status == DiscountState.published,
                   ),
                 ),
                 KSizedBox.kHeightSizedBox16,

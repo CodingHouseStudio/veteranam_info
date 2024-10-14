@@ -6,7 +6,7 @@ import 'package:veteranam/shared/shared.dart';
 
 part 'discount_config_state.dart';
 
-@injectable
+@Injectable(env: [Config.user])
 class DiscountConfigCubit extends Cubit<DiscountConfigState> {
   DiscountConfigCubit({
     required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,

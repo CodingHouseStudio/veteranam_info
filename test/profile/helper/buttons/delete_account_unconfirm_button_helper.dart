@@ -1,23 +1,37 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
 Future<void> deleteAccountUnconfirmButtonlHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  required bool icon,
+  bool deskOpen = false,
 }) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
-    findsOneWidget,
-  );
+  if (deskOpen) {
+    await changeWindowSizeHelper(
+      tester: tester,
+      test: () async => profileCardDeleteAccountHelper(tester),
+    );
+  } else {
+    await profileCardDeleteAccountHelper(tester);
+  }
 
-  await tester.pumpAndSettle();
-
-  await profileCardDeleteAccountHelper(tester);
-
-  await dialogUnconfirmHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    mockGoRouter: mockGoRouter,
+    windowsTest: true,
+    test: () async {
+      if (icon) {
+        await dialogCancelIconHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
+      } else {
+        await dialogUnconfirmHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
+      }
+    },
   );
 }

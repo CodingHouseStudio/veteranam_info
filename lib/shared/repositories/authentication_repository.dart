@@ -292,6 +292,41 @@ class AuthenticationRepository {
     return result;
   }
 
+  Future<Either<SomeFailure, bool>> checkVerificationCode(
+    String? code,
+  ) async {
+    final result =
+        await iAppAuthenticationRepository.checkVerificationCode(code);
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $email');
+    //   },
+    // );
+    return result;
+  }
+
+  Future<Either<SomeFailure, bool>> resetPasswordUseCode({
+    required String code,
+    required String newPassword,
+  }) async {
+    final result = await iAppAuthenticationRepository.resetPasswordUseCode(
+      code: code,
+      newPassword: newPassword,
+    );
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $email');
+    //   },
+    // );
+    return result;
+  }
+
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,
   }) async {
@@ -311,8 +346,8 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> updateUserData({
     required User user,
-    required ImageModel? image,
     required String? nickname,
+    required ImagePickerItem? image,
   }) async {
     SomeFailure? failureValue;
     bool? right;
@@ -329,7 +364,7 @@ class AuthenticationRepository {
           // debugPrint('Sending error: $failure');
         },
         (success) {
-          _userController.add(user);
+          _userController.add(success);
           right = true;
           // debugPrint('Sending succeses $userSetting');
         },

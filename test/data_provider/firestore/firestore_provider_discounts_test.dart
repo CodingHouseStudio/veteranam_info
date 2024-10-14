@@ -131,35 +131,9 @@ void main() {
         (_) async {},
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCache);
+      firestoreService = FirestoreService(mockFirebaseFirestore, mockCache);
     });
 
-    test('Get User Discount', () async {
-      expect(
-        await firestoreService.getDiscountsByUserId(KTestText.user.id),
-        [KTestText.discountModelItems.last],
-      );
-
-      verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
-      ).called(1);
-      verify(
-        mockCollectionReference.where(
-          DiscountModelJsonField.userId,
-          isEqualTo: KTestText.user.id,
-        ),
-      ).called(1);
-      verify(
-        mockQuery.get(),
-      ).called(1);
-      verify(
-        mockQuerySnapshot.docs,
-      ).called(1);
-      verify(
-        mockQueryDocumentSnapshot.last.data(),
-      ).called(1);
-    });
     test('get discounts', () async {
       await expectLater(
         firestoreService.getDiscounts(//null

@@ -1,5 +1,6 @@
 export 'about_us/about_us.dart';
 export 'business_dashboard/business_dashboard.dart';
+export 'company/company.dart';
 export 'consultation/consultation.dart';
 export 'contact/contact.dart';
 export 'discount_card/discount_card.dart';
@@ -17,9 +18,11 @@ export 'mob_settings/mob_settings.dart';
 export 'my_discounts/my_discounts.dart';
 export 'my_story/my_story.dart';
 export 'news_card/news_card.dart';
+export 'password_reset/password_reset.dart';
 export 'privacy_policy/privacy_policy.dart';
 export 'profile/profile.dart';
 export 'profile_saves/profile_saves.dart';
+export 'pw_reset_email/pw_reset_email.dart';
 export 'questions_form/questions_form.dart';
 export 'sign_up/sign_up.dart';
 export 'story/story.dart';

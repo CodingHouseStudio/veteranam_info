@@ -1,0 +1,29 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/shared.dart';
+
+import '../../test_dependency.dart';
+
+Future<void> myDiscountDialogHelper(
+  WidgetTester tester,
+) async {
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
+    findsWidgets,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
+  );
+
+  await tester.tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
+
+  await tester.pumpAndSettle();
+
+  await dialogConfirmChangesHelper(tester);
+}

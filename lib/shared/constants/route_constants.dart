@@ -34,6 +34,10 @@ abstract class KRoute {
     path: 'profile',
     name: 'Profile',
   );
+  static const _RouteItem company = _RouteItem(
+    path: 'company',
+    name: 'Company',
+  );
   static const _RouteItem support = _RouteItem(
     path: 'support',
     name: 'Support',
@@ -57,6 +61,14 @@ abstract class KRoute {
   static const _RouteItem signUp = _RouteItem(
     path: 'sign-up',
     name: 'SignUp',
+  );
+  static const _RouteItem pwResetEmail = _RouteItem(
+    path: 'email',
+    name: 'PasswordResetEmail',
+  );
+  static const _RouteItem passwordReset = _RouteItem(
+    path: 'password-reset',
+    name: 'PasswordReset',
   );
   static const _RouteItem thanks = _RouteItem(
     path: '/thanks',

@@ -14,7 +14,10 @@ abstract class SharedIconListWidget {
     required Key shareKey,
     required Key complaintKey,
     required String? share,
+    bool showComplaint = true,
+    bool showShare = true,
     Color background = AppColors.materialThemeWhite,
+    bool? useSiteUrl,
   }) {
     return [
       if (link != null) ...[
@@ -28,24 +31,31 @@ abstract class SharedIconListWidget {
         ),
         if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox4,
       ],
-      _cardIconWidget(
-        label: context.l10n.share,
-        context,
-        onPressed:
-            share != null ? () => context.read<UrlCubit>().share(share) : null,
-        icon: KIcon.share,
-        background: background,
-        key: shareKey,
-      ),
-      if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
-      ComplaintWidget(
-        key: complaintKey,
-        isDesk: isDesk,
-        cardEnum: cardEnum,
-        // afterEvent: afterEvent,
-        cardId: cardId,
-        background: background,
-      ),
+      if (showShare)
+        _cardIconWidget(
+          label: context.l10n.share,
+          context,
+          onPressed: share != null
+              ? () => context.read<UrlCubit>().share(
+                    share,
+                    useSiteUrl: useSiteUrl,
+                  )
+              : null,
+          icon: KIcon.share,
+          background: background,
+          key: shareKey,
+        ),
+      if (showComplaint) ...[
+        if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
+        ComplaintWidget(
+          key: complaintKey,
+          isDesk: isDesk,
+          cardEnum: cardEnum,
+          // afterEvent: afterEvent,
+          cardId: cardId,
+          background: background,
+        ),
+      ],
     ];
   }
 

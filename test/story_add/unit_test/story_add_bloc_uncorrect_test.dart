@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formz/formz.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -22,22 +21,26 @@ void main() {
       '${KScreenBlocName.storyAdd} ${KGroupText.bloc} ${KGroupText.uncorrect}',
       () {
     late StoryAddBloc storyAddBloc;
-    late ImagePicker mockImagePicker;
     late IStoryRepository mockStoryRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
       ExtendedDateTime.id = KTestText.storyModelItems.last.id;
       ExtendedDateTime.current = KTestText.dateTime;
-      mockImagePicker = MockImagePicker();
-      when(mockImagePicker.pickImage(source: ImageSource.gallery)).thenAnswer(
-        (realInvocation) async => XFile(KTestText.fieldEmpty),
+      mockDataPickerRepository = MockIDataPickerRepository();
+
+      when(
+        mockDataPickerRepository.getImage,
+      ).thenAnswer(
+        (realInvocation) async => KTestText.imagePickerItem,
       );
-      StoryAddBloc.imagePickerValue = mockImagePicker;
+
       mockStoryRepository = MockIStoryRepository();
       when(
         mockStoryRepository.addStory(
-          KTestText.storyModelItems.first.copyWith(
+          imageItem: KTestText.imagePickerItem,
+          storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
             id: KTestText.storyModelItems.last.id,
           ),
@@ -56,6 +59,7 @@ void main() {
       storyAddBloc = StoryAddBloc(
         storyRepository: mockStoryRepository,
         iAppAuthenticationRepository: mockAppAuthenticationRepository,
+        dataPickerRepository: mockDataPickerRepository,
       );
     });
 

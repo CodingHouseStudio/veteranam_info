@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -12,8 +11,11 @@ part 'profile_state.dart';
 
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc({required AuthenticationRepository authenticationRepository})
-      : _authenticationRepository = authenticationRepository,
+  ProfileBloc({
+    required AuthenticationRepository authenticationRepository,
+    required IDataPickerRepository dataPickerRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        _dataPickerRepository = dataPickerRepository,
         super(
           const ProfileState(
             name: NameFieldModel.pure(),
@@ -33,9 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   final AuthenticationRepository _authenticationRepository;
-  //final imagePicker = imagePickerValue;
-  @visibleForTesting
-  static ImagePicker imagePickerValue = ImagePicker();
+  final IDataPickerRepository _dataPickerRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -92,10 +92,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _ImageUpdated event,
     Emitter<ProfileState> emit,
   ) async {
+    final imageBytes = await _dataPickerRepository.getImage;
+    if (imageBytes == null || imageBytes.bytes.isEmpty) return;
     final imageFieldModel = ImageFieldModel.dirty(
-      await imagePickerValue.pickImage(source: ImageSource.gallery),
+      imageBytes,
     );
-    if (imageFieldModel.value == null) return;
 
     emit(
       state.copyWith(
@@ -136,16 +137,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         user: _authenticationRepository.currentUser.copyWith(
           name: '${state.name.value} ${state.surname.value}',
         ),
-        image: state.image.value != null
-            ? ImageModel(
-                downloadURL: state.image.value!.path,
-                name: state.image.value!.name,
-                ref: state.image.value!.path,
-              )
-            : null,
         nickname: state.nickname.isPure
             ? _authenticationRepository.currentUserSetting.nickname
             : state.nickname.value,
+        image: state.image.value,
       );
 
       result.fold(
