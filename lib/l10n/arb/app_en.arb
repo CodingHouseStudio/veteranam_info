@@ -1483,6 +1483,17 @@
   "@linkDiscountAdd": {
     "examples": "Text on the Discount Add Page for field direct link."
   },
+  "discountLimitMessage": "The maximum number for one discount is",
+  "@discountLimitMessage": {
+    "examples": "Error message for category and city fields if the value is too large."
+  },
+  "citiesLimit": "cities 30.",
+  "@cities": {
+    "examples": "Error message for the city field if the value exceeds 30 cities."
+  },
+  "categoriesLimit": "categories 2.",
+  "@categories": {
+    "examples": "Error message for the category field if the value exceeds 2 categories."
   "discountWrongRange": "The discount must be no more than 100% and no less than 1%",
   "@discountWrongRange": {
     "examples": "Error message for the discount field if the percentage value is greater than 100% or less than 1%."

@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart' show BuildContext;
 import 'package:veteranam/components/components.dart'
     show
+        CategoriesFieldModelValidationError,
+        CitiesFieldModelValidationError,
         CompanyCodeFieldModelValidationError,
         CompanyNameFieldModelValidationError,
         DiscountsFieldModelValidationError,
@@ -214,6 +216,36 @@ extension CompanyCodeFieldModelValidationErrorEmpl
         return context.l10n.fieldCannotBeEmpty;
       case CompanyCodeFieldModelValidationError.wrong:
         return '${context.l10n.companyCode} ${context.l10n.isWrongEmail}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension CitiesFieldModelValidationErrorEmpl
+    on CitiesFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case CitiesFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case CitiesFieldModelValidationError.limit:
+        return '${context.l10n.discountLimitMessage}'
+            ' ${context.l10n.citiesLimit}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension CategoriesFieldModelValidationErrorEmpl
+    on CategoriesFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case CategoriesFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case CategoriesFieldModelValidationError.limit:
+        return '${context.l10n.discountLimitMessage}'
+            ' ${context.l10n.categoriesLimit}';
       case null:
         return null;
     }
