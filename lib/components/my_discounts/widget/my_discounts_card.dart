@@ -162,20 +162,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
         key: KWidgetkeys.screen.myDiscounts.iconEdit,
         onPressed: () => context.goNamed(
           KRoute.discountsAdd.name,
-          queryParameters:
-              //   UrlParameters.discount: Uri.encodeComponent(
-              //     jsonEncode(
-              //       widget.discountModel.toJson(),
-              //     ),
-              //   ),
-              //   // UrlParameters.userPhoto: Uri.encodeComponent(
-              //   //   jsonEncode(
-              //   //     widget.discountModel.copyWith(userPhoto: null).toJson(),
-              //   //   ),
-              //   // ),
-              // },
-
-              DiscountURLConverter.toJson(widget.discountModel),
+          queryParameters: DiscountURLConverter.toJson(widget.discountModel),
         ),
         icon: KIcon.edit,
         buttonStyle: KButtonStyles.circularBorderBlackButtonStyle,
