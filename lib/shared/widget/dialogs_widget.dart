@@ -25,7 +25,7 @@ class _DialogsWidget {
     Color? mobileBarierColor,
     Color? backgroundColor,
     EdgeInsets? deskInsetPadding,
-    Widget? deskIcon,
+    Widget Function(BuildContext context)? deskIcon,
     EdgeInsets? deskIconPadding,
     OverflowBarAlignment? deskActionsOverflowAlignment,
     EdgeInsets Function({required bool isDeskValue})? deskContentPadding,
@@ -92,7 +92,7 @@ class _DialogsWidget {
     required bool isScollable,
     required Color? backgroundColor,
     required EdgeInsets? insetPadding,
-    required Widget? icon,
+    required Widget Function(BuildContext context)? icon,
     required EdgeInsets? iconPadding,
     required OverflowBarAlignment? actionsOverflowAlignment,
     EdgeInsets Function({required bool isDeskValue})? contentPadding,
@@ -105,7 +105,7 @@ class _DialogsWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
             ),
-            icon: icon,
+            icon: icon?.call(context),
             insetPadding: insetPadding,
             backgroundColor:
                 backgroundColor ?? AppColors.materialThemeKeyColorsNeutral,
@@ -200,13 +200,9 @@ class _DialogsWidget {
             ),
       isDesk: isDesk,
       deskInsetPadding: EdgeInsets.zero,
-      deskIcon: Container(
-        color: Colors.black,
-        padding: EdgeInsets.all(20),
-        child: CancelWidget(
-          widgetKey: KWidgetkeys.widget.reportDialog.cancel,
-          onPressed: context.pop,
-        ),
+      deskIcon: (context) => CancelWidget(
+        widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+        onPressed: context.pop,
       ),
       deskActionsOverflowAlignment: OverflowBarAlignment.center,
       deskContentPadding: ({required isDeskValue}) => isDeskValue
