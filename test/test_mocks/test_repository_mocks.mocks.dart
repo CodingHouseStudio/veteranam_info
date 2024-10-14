@@ -1296,16 +1296,28 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Stream<List<_i3.DiscountModel>>);
 
   @override
-  _i8.Future<_i3.DiscountModel> getDiscount(String? id) => (super.noSuchMethod(
+  _i8.Future<_i3.DiscountModel> getDiscount({
+    required String? id,
+    String? companyId,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getDiscount,
-          [id],
+          [],
+          {
+            #id: id,
+            #companyId: companyId,
+          },
         ),
         returnValue: _i8.Future<_i3.DiscountModel>.value(_FakeDiscountModel_2(
           this,
           Invocation.method(
             #getDiscount,
-            [id],
+            [],
+            {
+              #id: id,
+              #companyId: companyId,
+            },
           ),
         )),
         returnValueForMissingStub:
@@ -1313,7 +1325,11 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
           this,
           Invocation.method(
             #getDiscount,
-            [id],
+            [],
+            {
+              #id: id,
+              #companyId: companyId,
+            },
           ),
         )),
       ) as _i8.Future<_i3.DiscountModel>);
@@ -7742,6 +7758,48 @@ class MockIDiscountRepository extends _i1.Mock
           Invocation.method(
             #getDiscount,
             [id],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>> getCopanyDiscount({
+    required String? id,
+    required String? companyId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCopanyDiscount,
+          [],
+          {
+            #id: id,
+            #companyId: companyId,
+          },
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.DiscountModel>(
+          this,
+          Invocation.method(
+            #getCopanyDiscount,
+            [],
+            {
+              #id: id,
+              #companyId: companyId,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.DiscountModel>(
+          this,
+          Invocation.method(
+            #getCopanyDiscount,
+            [],
+            {
+              #id: id,
+              #companyId: companyId,
+            },
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>);
