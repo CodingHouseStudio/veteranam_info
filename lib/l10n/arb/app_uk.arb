@@ -1466,12 +1466,12 @@
   "@descriptionForRejectedStatus": {
     "examples": "Текст для опису відхиленного статусу знижки на сторінці MyDiscount."
   },
-  "logOutFromProfile": "Вийти з профілю",
+  "logOutFromProfile": "Вийти з профілю?",
   "@logOutFromProfile": {
     "examples": "Текст для кнопки на сторінці Profile.",
     "description": "Кнопка використовується для виходу з облікового запису."
   },
-  "deleteProfile": "Видалити профіль",
+  "deleteProfile": "Видалити профіль?",
   "@deleteProfile": {
     "examples": "Текст для кнопки на сторінці Profile.",
     "description": "Кнопка використовується для видалення облікового запису."
@@ -1481,7 +1481,7 @@
     "examples": "Текст для кнопки на сторінці Profile.",
     "description": "Кнопка використовується для видалення облікового запису."
   },
-  "cancelChanges": "Скасувати зміни",
+  "cancelChanges": "Скасувати зміни?",
   "@cancelChanges": {
     "examples": "Текст для кнопки на сторінці Discount add.",
     "description": "Кнопка використовується для повернення на попередню сторінку."
@@ -1495,12 +1495,20 @@
     "examples": "Текст для кнопки на сторінці Discount add.",
     "description": "Кнопка використовується щоб залишитись на сторінці."
   },
-  "deleteDiscount": "Видалити знижку",
+  "deleteDiscount": "Видалити знижку?",
   "@deleteDiscount": {
     "examples": "Текст для кнопки на сторінці My Discount."
   },
-  "deleteDiscountQuestion": "Ви впевнені, що хочете видалити знижку? Всі дані будуть втарчені",
+  "deleteDiscountQuestion": "Ви впевнені, що хочете видалити цю знижку? Всі дані будуть втарчені",
   "@deleteDiscountQuestion": {
     "examples": "Текст на сторінці My Discount."
+  },
+  "logOutProfileQuestion": "Ви впевнені, що хочете вийти з Вашого профілю?",
+  "@logOutProfileQuestion": {
+    "examples": "Текст для діалогу виходу з облікового запису на сторінці Profile."
+  },
+  "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
+  "@deleteProfileQuestion": {
+    "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
   }
 }
