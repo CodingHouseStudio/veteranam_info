@@ -3,13 +3,17 @@ import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountsAddScreen extends StatelessWidget {
-  const DiscountsAddScreen({super.key});
+  const DiscountsAddScreen({required this.discount, super.key});
+  final DiscountModel? discount;
 
   @override
   Widget build(BuildContext context) {
     return DiscountsAddBlocprovider(
       key: KWidgetkeys.screen.discountsAdd.screen,
-      childWidget: const DiscountsAddBodyWidget(),
+      childWidget: DiscountsAddBodyWidget(
+        discount: discount,
+      ),
+      discount: discount,
     );
   }
 }

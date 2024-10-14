@@ -264,15 +264,6 @@ abstract class KWidgetTheme {
       offset: Offset(0, 6),
     ),
   ];
-
-  static const boxDecorationBorderBlack = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadius32,
-    border: Border.fromBorderSide(
-      BorderSide(
-        color: AppColors.materialThemeKeyColorsSecondary,
-      ),
-    ),
-  );
   static const dropTextMenuStyle = MenuStyle(
     backgroundColor:
         WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
