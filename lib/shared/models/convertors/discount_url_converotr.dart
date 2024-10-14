@@ -1,5 +1,6 @@
 import 'dart:convert' show jsonDecode, jsonEncode;
 
+import 'package:flutter/widgets.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountURLConverter {
@@ -82,7 +83,9 @@ class DiscountURLConverter {
           value.map((e) => e.toString()).join(','),
         );
       }
-      if (value is List<dynamic> && value.first is Map<String, dynamic>) {
+      if (value is List<dynamic> &&
+          value.isNotEmpty &&
+          value.first is Map<String, dynamic>) {
         final json = value.first as Map<String, dynamic>;
         late String jsonString;
         try {
