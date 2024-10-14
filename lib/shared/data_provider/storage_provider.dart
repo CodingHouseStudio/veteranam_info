@@ -35,6 +35,15 @@ class StorageService {
     return snapshot.ref.getDownloadURL();
   }
 
+  Future<void> removeFile(
+    String? url,
+  ) async {
+    if (url == null || url.isEmpty) return;
+    // We set Try Catch only in the repositories and call it also
+    // in the repositories
+    await _storage.ref(url).delete();
+  }
+
   // Future<ResumeModel?> saveRespond({
   //   required ImagePickerItem resumeItem,
   //   required String respondId,
