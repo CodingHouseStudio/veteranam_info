@@ -63,7 +63,7 @@ class InvestorsWatcherBloc
             loadingStatus: r.length > KDimensions.investorsLoadItems
                 ? LoadingStatus.loaded
                 : LoadingStatus.listLoadedFull,
-            loadingFundItems: _filter(
+            loadingFundItems: _loading(
               itemsLoaded: state.itemsLoaded,
               loadItems: KDimensions.investorsLoadItems,
               // reportItems: reportItems,
@@ -88,7 +88,7 @@ class InvestorsWatcherBloc
     }
 
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final filterItems = _filter(
+    final filterItems = _loading(
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.investorsLoadItems,
     );
@@ -143,7 +143,7 @@ class InvestorsWatcherBloc
   //   );
   // }
 
-  List<FundModel> _filter({
+  List<FundModel> _loading({
     required int itemsLoaded,
     required int? loadItems,
     List<FundModel>? list,

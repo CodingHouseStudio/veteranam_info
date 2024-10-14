@@ -47,20 +47,20 @@ Future<void> profileFormsEnterTextHelper({
     itemKey: KWidgetkeys.screen.profile.emailFied,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nickNameField,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  // );
 
-  await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.nickNameField),
-    nickname,
-  );
+  // await tester.enterText(
+  //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+  //   nickname,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nickNameField,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  // );
 }

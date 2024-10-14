@@ -14,17 +14,16 @@ class SignUpBodyWidget extends StatelessWidget {
       //   state.failure?.value(context),
       // ),
       builder: (context, _) {
-        return ScaffoldDecorationWidget(
+        return ScaffoldWidget(
           key: KWidgetkeys.screen.signUp.card,
-          mainPadding: ({required isDesk, required maxWidth}) =>
-              maxWidth.screenPadding(
-            precent:
-                isDesk ? KDimensions.thirtyPercent : KDimensions.fifteenPercent,
-            verticalPadding:
-                isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
+          mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
+            precent: KDimensions.thirtyPercent,
+            verticalPadding: KPadding.kPaddingSize80,
             notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          isForm: true,
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+            if (!isDesk) KSizedBox.kHeightSizedBox24,
             ShortTitleIconWidget(
               title: context.l10n.signUp,
               titleKey: KWidgetkeys.screen.signUp.title,
@@ -54,50 +53,55 @@ class SignUpBodyWidget extends StatelessWidget {
               isLogin: false,
               showErrorText: _.formState == SignUpEnum.invalidData ||
                   _.formState == SignUpEnum.passwordInvalidData,
-              bottomError: _.failure?.value(context),
-              bottomTextKey: KWidgetkeys.screen.signUp.errorText,
+              // bottomError: _.failure?.value(context),
+              // bottomTextKey: KWidgetkeys.screen.signUp.errorText,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            Align(
-              alignment: Alignment.centerLeft,
-              child: DoubleButtonWidget(
-                widgetKey: KWidgetkeys.screen.signUp.button,
-                text: showPassword(_.formState)
-                    ? context.l10n.register
-                    : context.l10n.next,
-                onPressed: () => context.read<SignUpBloc>().add(
-                      const SignUpEvent.signUpSubmitted(),
-                    ),
-                isDesk: isDesk,
-                color: AppColors.materialThemeKeyColorsSecondary,
-                textColor: AppColors.materialThemeWhite,
-                deskPadding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize64,
-                  vertical: KPadding.kPaddingSize12,
-                ),
-                mobTextWidth: double.infinity,
-                mobHorizontalTextPadding: KPadding.kPaddingSize60,
-                mobVerticalTextPadding: KPadding.kPaddingSize12,
-                mobIconPadding: KPadding.kPaddingSize12,
-                darkMode: true,
+            DoubleButtonWidget(
+              widgetKey: KWidgetkeys.screen.signUp.button,
+              text: showPassword(_.formState)
+                  ? context.l10n.register
+                  : context.l10n.next,
+              onPressed: () => context.read<SignUpBloc>().add(
+                    const SignUpEvent.signUpSubmitted(),
+                  ),
+              isDesk: isDesk,
+              color: AppColors.materialThemeKeyColorsSecondary,
+              textColor: AppColors.materialThemeWhite,
+              deskPadding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize64,
+                vertical: KPadding.kPaddingSize12,
               ),
+              mobTextWidth: double.infinity,
+              mobHorizontalTextPadding: KPadding.kPaddingSize60,
+              mobVerticalTextPadding: KPadding.kPaddingSize12,
+              mobIconPadding: KPadding.kPaddingSize12,
+              darkMode: true,
             ),
-            if (_.formState == SignUpEnum.success) ...[
-              KSizedBox.kHeightSizedBox16,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.loggingInWait,
-                  key: KWidgetkeys.screen.signUp.loadingText,
-                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                ),
-              ),
-            ],
+            SendingTextWidget(
+              textKey: KWidgetkeys.screen.signUp.submitingText,
+              failureText: _.failure?.value(context),
+              sendingText: context.l10n.loggingInWait,
+              successText: null,
+              showSendingText: _.formState == SignUpEnum.success,
+            ),
+            // if (_.formState == SignUpEnum.success) ...[
+            //   KSizedBox.kHeightSizedBox16,
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: KPadding.kPaddingSize16,
+            //     ),
+            //     child: Text(
+            //       context.l10n.loggingInWait,
+            //       key: KWidgetkeys.screen.signUp.loadingText,
+            //       style:
+            // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+            //     ),
+            //   ),
+            // ],
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
@@ -164,6 +168,7 @@ class SignUpBodyWidget extends StatelessWidget {
               isDesk: isDesk,
             ),
             // ),
+            if (!isDesk) KSizedBox.kHeightSizedBox24,
           ],
         );
       },

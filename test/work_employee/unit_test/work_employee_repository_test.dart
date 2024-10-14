@@ -68,7 +68,8 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModel,
+            file: KTestText.imagePickerItem,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -106,7 +107,8 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModel,
+            file: KTestText.imagePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -138,7 +140,8 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModel,
+            file: KTestText.imagePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

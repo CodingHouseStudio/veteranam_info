@@ -95,7 +95,22 @@ void main() {
         when(
           mockAppAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imageModels,
+            image: KTestText.imagePickerItem,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(KTestText.profileUser),
+        );
+        when(
+          mockAppAuthenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        when(
+          mockAppAuthenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
@@ -202,7 +217,7 @@ void main() {
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imageModels,
+            image: KTestText.imagePickerItem,
             nickname: KTestText.nicknameCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
@@ -228,6 +243,27 @@ void main() {
         expect(
           await authenticationRepository.updateUserSetting(
             userSetting: KTestText.userSetting,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+
+      test('Check verification code', () async {
+        expect(
+          await authenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+
+      test('Reset password use code', () async {
+        expect(
+          await authenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -293,7 +329,22 @@ void main() {
         when(
           mockAppAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imageModels,
+            image: KTestText.imagePickerItem,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(
+          mockAppAuthenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(
+          mockAppAuthenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -401,8 +452,27 @@ void main() {
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imageModels,
+            image: KTestText.imagePickerItem,
             nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
+
+      test('Check verification code', () async {
+        expect(
+          await authenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
+
+      test('Reset password use code', () async {
+        expect(
+          await authenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

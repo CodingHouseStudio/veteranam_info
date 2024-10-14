@@ -77,8 +77,8 @@ void main() {
         (_) => [KTestText.feedbackModel].map((e) => e.toJson()).toList().first,
       );
 
-      FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockCacheClient);
+      firestoreService =
+          FirestoreService(mockFirebaseFirestore, mockCacheClient);
     });
     test('Add Feedback', () async {
       await firestoreService.addFeedback(KTestText.feedbackModel);

@@ -162,6 +162,20 @@ void main() {
         Exception(KGroupText.failure),
       );
 
+      when(
+        mockFirebaseAuth.verifyPasswordResetCode(KTestText.code),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+      when(
+        mockFirebaseAuth.confirmPasswordReset(
+          code: KTestText.code,
+          newPassword: KTestText.passwordCorrect,
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
@@ -340,10 +354,28 @@ void main() {
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
         user: KTestText.profileUser,
-        image: KTestText.imageModels,
+        image: KTestText.imagePickerItem,
       );
       expect(
         result,
+        isA<Left<SomeFailure, User>>(),
+      );
+    });
+
+    test('Check verification code', () async {
+      expect(
+        await appAuthenticationRepository.checkVerificationCode(
+          KTestText.code,
+        ),
+        isA<Left<SomeFailure, bool>>(),
+      );
+    });
+    test('Reset password use code', () async {
+      expect(
+        await appAuthenticationRepository.resetPasswordUseCode(
+          code: KTestText.code,
+          newPassword: KTestText.passwordCorrect,
+        ),
         isA<Left<SomeFailure, bool>>(),
       );
     });

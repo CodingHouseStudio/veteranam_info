@@ -67,30 +67,32 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  key: KWidgetkeys.widget.cardTextDetail.button,
-                  onPressed: isSmallText
-                      ? null
-                      : () => setState(() {
-                            fullText = !fullText;
-                          }),
-                  style: widget.buttonStyle ??
-                      KButtonStyles.borderBlackButtonStyle,
-                  child: Text(
-                    fullText
-                        ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
-                        : widget.buttonText?.elementAt(0) ?? context.l10n.more,
-                    key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                    style: widget.isDesk
-                        ? AppTextStyle.materialThemeTitleMedium
-                        : AppTextStyle.materialThemeTitleSmall,
+            if (isSmallText)
+              const Spacer()
+            else
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    key: KWidgetkeys.widget.cardTextDetail.button,
+                    onPressed: () => setState(() {
+                      fullText = !fullText;
+                    }),
+                    style: widget.buttonStyle ??
+                        KButtonStyles.borderBlackButtonStyle,
+                    child: Text(
+                      fullText
+                          ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
+                          : widget.buttonText?.elementAt(0) ??
+                              context.l10n.more,
+                      key: KWidgetkeys.widget.cardTextDetail.buttonText,
+                      style: widget.isDesk
+                          ? AppTextStyle.materialThemeTitleMedium
+                          : AppTextStyle.materialThemeTitleSmall,
+                    ),
                   ),
                 ),
               ),
-            ),
             if (widget.isDesk)
               KSizedBox.kHeightSizedBox24
             else

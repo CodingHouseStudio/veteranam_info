@@ -52,7 +52,7 @@ class StoryBodyWidget extends StatelessWidget {
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             SecondaryButtonWidget(
-              key: KWidgetkeys.screen.story.seccondaryButton,
+              widgetKey: KWidgetkeys.screen.story.seccondaryButton,
               isDesk: isDesk,
               text: context.l10n.addYourStory,
               onPressed: context.read<AuthenticationBloc>().state.status ==

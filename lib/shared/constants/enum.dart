@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BuildContext, Key, VoidCallback;
 import 'package:veteranam/shared/shared.dart';
 
 enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }

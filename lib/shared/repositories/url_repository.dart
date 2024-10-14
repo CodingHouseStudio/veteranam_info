@@ -9,8 +9,11 @@ import 'package:veteranam/shared/shared.dart';
 @LazySingleton(as: IUrlRepository)
 class UrlRepository extends IUrlRepository {
   @override
-  Future<Either<SomeFailure, bool>> share(String url) async {
-    final baseUrl = kIsWeb ? Uri.base.origin : KAppText.site;
+  Future<Either<SomeFailure, bool>> share(
+    String url, {
+    bool? useSiteUrl,
+  }) async {
+    final baseUrl = (useSiteUrl ?? !kIsWeb) ? KAppText.site : Uri.base.origin;
     try {
       // if (Config.isWeb) {
       await Share.shareUri(
