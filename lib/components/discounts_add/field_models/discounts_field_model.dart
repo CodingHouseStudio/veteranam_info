@@ -1,6 +1,10 @@
 import 'package:formz/formz.dart';
 
-enum DiscountsFieldModelValidationError { empty, wrongFormat }
+enum DiscountsFieldModelValidationError {
+  empty,
+  wrongFormat,
+  wrongRange,
+}
 
 class DiscountsFieldModel
     extends FormzInput<List<String>, DiscountsFieldModelValidationError> {
@@ -36,6 +40,11 @@ class DiscountsFieldModel
           (element) => element == null,
         )) {
       return DiscountsFieldModelValidationError.wrongFormat;
+    }
+    if (listValue.any(
+      (element) => element == null || element > 100 || element < 1,
+    )) {
+      return DiscountsFieldModelValidationError.wrongRange;
     }
     return null;
   }

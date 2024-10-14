@@ -5,6 +5,7 @@ import 'package:veteranam/components/components.dart'
         CitiesFieldModelValidationError,
         CompanyCodeFieldModelValidationError,
         CompanyNameFieldModelValidationError,
+        DiscountsFieldModelValidationError,
         LinkNullableFieldModelValidationError;
 import 'package:veteranam/shared/shared.dart';
 
@@ -148,6 +149,8 @@ extension DiscountsFieldModelValidationErrorEmpl
         return context.l10n.fieldCannotBeEmpty;
       case DiscountsFieldModelValidationError.wrongFormat:
         return context.l10n.discountsWrongFormat;
+      case DiscountsFieldModelValidationError.wrongRange:
+        return context.l10n.discountWrongRange;
       case null:
         return null;
     }
