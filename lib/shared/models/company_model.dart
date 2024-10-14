@@ -36,6 +36,7 @@ class CompanyModel with _$CompanyModel {
       // image == null ||
       // image!.downloadURL.isEmpty
       ;
+  bool get isNotEmpty => !isEmpty;
 }
 
 abstract class CompanyModelJsonField {

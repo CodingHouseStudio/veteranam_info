@@ -436,16 +436,23 @@ class FirestoreService {
     );
   }
 
-  Future<DiscountModel> getDiscount(String id) async {
+  Future<DiscountModel> getDiscount({
+    required String id,
+    String? companyId,
+  }) async {
     final docSnapshot =
         await _db.collection(FirebaseCollectionName.discount).doc(id).get();
 
     if (docSnapshot.exists) {
       final discount = docSnapshot.data();
-      if (Config.isDevelopment ||
-          (discount != null &&
+      if (discount != null &&
+          (Config.isDevelopment ||
+              Config.isBusiness ||
               discount['status'] == DiscountState.published.enumString)) {
-        return DiscountModel.fromJson(docSnapshot.data()!);
+        if (companyId == null ||
+            discount[DiscountModelJsonField.userId] == companyId) {
+          return DiscountModel.fromJson(docSnapshot.data()!);
+        }
       }
     }
     throw FirebaseException(code: 'not-found', plugin: 'not-found');

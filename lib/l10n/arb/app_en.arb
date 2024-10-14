@@ -1136,9 +1136,13 @@
   "@signingUpWait": {
     "examples": "Text indicating that the sign-up process is in progress, and the user needs to wait on the Sign up page"
   },
-  "cardNotFoundText": "Unfortunately, the link was not found. Please check the accuracy of the input or try another link.",
-  "@cardNotFoundText": {
+  "cardNotFoundCardLink": "Unfortunately, the link was not found. Please check the accuracy of the input or try another link.",
+  "@cardNotFoundCardLink": {
     "examples": "Text for a dialog that notifies that a card with the specified ID was not found."
+  },
+  "discountEditNotFound": "Unfortunately, the link is incorrect or you do not have the required permissions to access this discount. Please verify the link or try another one.",
+  "@discountEditNotFound": {
+    "examples": "This message appears on the Discount Edit page when a user enters an invalid discount ID or lacks access rights."
   },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {

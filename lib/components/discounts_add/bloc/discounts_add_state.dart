@@ -4,6 +4,11 @@ enum DiscountsAddFailure {
   error,
   network,
   send,
+  linkWrong;
+}
+
+extension DiscountsAddFailureGetter on DiscountsAddFailure? {
+  bool get linkIsWrong => this == DiscountsAddFailure.linkWrong;
 }
 
 extension DiscountsAddFailureExtension on SomeFailure {
@@ -22,6 +27,7 @@ extension DiscountsAddFailureExtension on SomeFailure {
 @freezed
 class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
+    required DiscountModel? discount,
     required List<String> categoryList,
     required List<CityModel> citiesList,
     required CategoriesFieldModel category,
