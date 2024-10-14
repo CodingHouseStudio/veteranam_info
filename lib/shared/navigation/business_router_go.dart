@@ -211,15 +211,32 @@ GoRouter businessRouter = GoRouter(
           name: KRoute.discountsAdd.name,
           path: KRoute.discountsAdd.path,
           pageBuilder: (context, state) {
-            final discountModel =
-                DiscountURLConverter.fromJson(state.uri.queryParameters);
-
+            return NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              restorationId: state.pageKey.value,
+              child: const DiscountsAddScreen(
+                discount: null,
+                discountId: null,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          name: KRoute.discountsEdit.name,
+          path: '${KRoute.discountsEdit.path}/:${UrlParameters.cardId}',
+          pageBuilder: (context, state) {
+            DiscountModel? discountModel;
+            if (state.extra is DiscountModel) {
+              discountModel = state.extra as DiscountModel?;
+            }
             return NoTransitionPage(
               key: state.pageKey,
               name: state.name,
               restorationId: state.pageKey.value,
               child: DiscountsAddScreen(
                 discount: discountModel,
+                discountId: state.pathParameters[UrlParameters.cardId],
               ),
             );
           },

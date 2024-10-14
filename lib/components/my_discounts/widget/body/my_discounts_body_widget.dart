@@ -35,7 +35,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             ),
             loadingButtonText: context.l10n.moreDiscounts,
             loadingStatus: _.loadingStatus,
-            showLoadingWidget: !companyState.company.isEmpty,
+            showLoadingWidget: companyState.company.isNotEmpty,
             cardListIsEmpty: _.loadedDiscountsModelItems.isEmpty,
             loadFunction: () => context
                 .read<MyDiscountsWatcherBloc>()
