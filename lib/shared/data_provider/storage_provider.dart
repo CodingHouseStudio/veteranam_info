@@ -39,6 +39,8 @@ class StorageService {
     String? url,
   ) async {
     if (url == null || url.isEmpty) return;
+    // We set Try Catch only in the repositories and call it also
+    // in the repositories
     await _storage.ref(url).delete();
   }
 
