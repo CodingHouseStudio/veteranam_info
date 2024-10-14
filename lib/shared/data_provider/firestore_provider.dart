@@ -441,10 +441,14 @@ class FirestoreService {
         await _db.collection(FirebaseCollectionName.discount).doc(id).get();
 
     if (docSnapshot.exists) {
-      return DiscountModel.fromJson(docSnapshot.data()!);
-    } else {
-      throw FirebaseException(code: 'not-found', plugin: 'not-found');
+      final discount = docSnapshot.data();
+      if (Config.isDevelopment ||
+          (discount != null &&
+              discount['status'] == DiscountState.published.enumString)) {
+        return DiscountModel.fromJson(docSnapshot.data()!);
+      }
     }
+    throw FirebaseException(code: 'not-found', plugin: 'not-found');
   }
 
   Future<void> updateDiscountModel(

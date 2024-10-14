@@ -38,7 +38,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           // () => context
           //     .read<DiscountWatcherBloc>()
           //     .add(const DiscountWatcherEvent.getReport()),
-          complaint: false,
+          isBusiness: true,
         ),
         if (widget.isDesk)
           KSizedBox.kHeightSizedBox24
