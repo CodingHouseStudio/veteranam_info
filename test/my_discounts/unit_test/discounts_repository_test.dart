@@ -66,7 +66,7 @@ void main() {
       test('Get by user ID', () async {
         expect(
           mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
           emits(KTestText.discountModelItems),
         );
       });
@@ -134,7 +134,7 @@ void main() {
       test('Get by user ID Failure', () async {
         expect(
           mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
           emitsError(KGroupText.failureGet),
           // .having(
           //   (e) => e.value,

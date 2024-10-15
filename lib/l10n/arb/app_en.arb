@@ -1536,6 +1536,14 @@
   "@agreeTermsConditions": {
     "examples": "Text for the discount submission dialog on the Discount Add page."
   },
+  "deleteCompanyMessage": "You can only delete the company account if it has no discounts. If you still wish to delete the account, please remove all existing discounts associated with the company.",
+  "@deleteCompanyMessage": {
+    "examples": "Text on the Company page under the delete button, appears if the company has any discounts."
+  },
+  "deleteCompanyLoadingMessage": "Checking for active company discounts...",
+  "@deleteCompanyLoadingMessage": {
+    "examples": "Text on the Company page under the delete button, appears when checking if the company has any existing discounts."
+  },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."

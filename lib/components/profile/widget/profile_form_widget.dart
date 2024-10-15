@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,7 +14,6 @@ class ProfileFormWidget extends StatefulWidget {
     required this.initialNickname,
     required this.initialEmail,
     super.key,
-    this.imageBytes,
   });
 
   final bool isDesk;
@@ -23,7 +21,6 @@ class ProfileFormWidget extends StatefulWidget {
   final String? initialEmail;
   final String? initialSurname;
   final String? initialNickname;
-  final Uint8List? imageBytes;
 
   @override
   State<ProfileFormWidget> createState() => _ProfileFormWidgetState();
@@ -74,123 +71,130 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      buildWhen: (previous, current) =>
+          previous.formState != current.formState ||
+          previous.image != current.image,
+      builder: (context, _) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserPhotoWidget(
-              key: KWidgetkeys.screen.profile.photo,
-              onPressed: () => context
-                  .read<ProfileBloc>()
-                  .add(const ProfileEvent.imageUpdated()),
-              imageUrl: context.read<AuthenticationBloc>().state.user.photo,
-              // perimeter: KSize.kPixel72,
-              icon: KIcon.personEdit,
-              // background: AppColors.materialThemeKeyColorsPrimary,
-              // iconColor: AppColors.materialThemeBlack,
-              imageBytes: widget.imageBytes,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                UserPhotoWidget(
+                  key: KWidgetkeys.screen.profile.photo,
+                  onPressed: () => context
+                      .read<ProfileBloc>()
+                      .add(const ProfileEvent.imageUpdated()),
+                  imageUrl: context.read<AuthenticationBloc>().state.user.photo,
+                  // perimeter: KSize.kPixel72,
+                  icon: KIcon.personEdit,
+                  // background: AppColors.materialThemeKeyColorsPrimary,
+                  // iconColor: AppColors.materialThemeBlack,
+                  imageBytes: _.image.value?.bytes,
+                ),
+                KSizedBox.kWidthSizedBox32,
+                if (widget.isDesk)
+                  Expanded(
+                    child: Text(
+                      context.l10n.dataEditing,
+                      key: KWidgetkeys.widget.profileCard.editText,
+                      style: widget.isDesk
+                          ? AppTextStyle.materialThemeHeadlineLarge
+                          : AppTextStyle.materialThemeHeadlineSmall,
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: Text(
+                      context.l10n.dataEditing,
+                      key: KWidgetkeys.widget.profileCard.editText,
+                      style: widget.isDesk
+                          ? AppTextStyle.materialThemeHeadlineLarge
+                          : AppTextStyle.materialThemeHeadlineSmall,
+                    ),
+                  ),
+                KSizedBox.kWidthSizedBox8,
+                KIcon.edit,
+              ],
             ),
-            KSizedBox.kWidthSizedBox32,
-            if (widget.isDesk)
-              Expanded(
-                child: Text(
-                  context.l10n.dataEditing,
-                  key: KWidgetkeys.widget.profileCard.editText,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeHeadlineLarge
-                      : AppTextStyle.materialThemeHeadlineSmall,
-                ),
-              )
-            else
-              Expanded(
-                child: Text(
-                  context.l10n.dataEditing,
-                  key: KWidgetkeys.widget.profileCard.editText,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeHeadlineLarge
-                      : AppTextStyle.materialThemeHeadlineSmall,
-                ),
-              ),
-            KSizedBox.kWidthSizedBox8,
-            KIcon.edit,
-          ],
-        ),
-        KSizedBox.kHeightSizedBox32,
-        _textField(
-          fieldKey: KWidgetkeys.screen.profile.nameField,
-          controller: nameController,
-          hint: context.l10n.writeYouName,
-          onChanged: (text) =>
-              context.read<ProfileBloc>().add(ProfileEvent.nameUpdated(text)),
-          isDesk: widget.isDesk,
-        ),
-        KSizedBox.kHeightSizedBox32,
-        _textField(
-          fieldKey: KWidgetkeys.screen.profile.lastNameField,
-          controller: surnameController,
-          hint: context.l10n.writeYouLastName,
-          onChanged: (text) => context
-              .read<ProfileBloc>()
-              .add(ProfileEvent.surnameUpdated(text)),
-          isDesk: widget.isDesk,
-        ),
-        KSizedBox.kHeightSizedBox32,
-        _textField(
-          fieldKey: KWidgetkeys.screen.profile.emailFied,
-          controller: emailController,
-          hint: KMockText.email,
-          enabled: false,
-          isDesk: widget.isDesk,
-        ),
-        // KSizedBox.kHeightSizedBox32,
-        // _textField(
-        //   fieldKey: KWidgetkeys.screen.profile.nickNameField,
-        //   hint: KAppText.nickname,
-        //   controller: nicknameController,
-        //   onChanged: (text) => context
-        //       .read<ProfileBloc>()
-        //       .add(ProfileEvent.nicknameUpdated(text)),
-        //   isDesk: widget.isDesk,
-        // ),
-        KSizedBox.kHeightSizedBox16,
-        SendingTextWidget(
-          textKey: KWidgetkeys.screen.login.submitingText,
-          failureText:
-              context.read<ProfileBloc>().state.failure?.value(context),
-          sendingText: context.l10n.dataSendInProgress,
-          successText:
-              context.read<ProfileBloc>().state.formState == ProfileEnum.success
+            KSizedBox.kHeightSizedBox32,
+            _textField(
+              fieldKey: KWidgetkeys.screen.profile.nameField,
+              controller: nameController,
+              hint: context.l10n.writeYouName,
+              onChanged: (text) => context
+                  .read<ProfileBloc>()
+                  .add(ProfileEvent.nameUpdated(text)),
+              isDesk: widget.isDesk,
+              errorText: _.name.error.value(context),
+            ),
+            KSizedBox.kHeightSizedBox32,
+            _textField(
+              fieldKey: KWidgetkeys.screen.profile.lastNameField,
+              controller: surnameController,
+              hint: context.l10n.writeYouLastName,
+              onChanged: (text) => context
+                  .read<ProfileBloc>()
+                  .add(ProfileEvent.surnameUpdated(text)),
+              isDesk: widget.isDesk,
+              errorText: _.surname.error.value(context),
+            ),
+            KSizedBox.kHeightSizedBox32,
+            _textField(
+              fieldKey: KWidgetkeys.screen.profile.emailFied,
+              controller: emailController,
+              hint: KMockText.email,
+              enabled: false,
+              isDesk: widget.isDesk,
+              errorText: null,
+              showErrorText: false,
+            ),
+            // KSizedBox.kHeightSizedBox32,
+            // _textField(
+            //   fieldKey: KWidgetkeys.screen.profile.nickNameField,
+            //   hint: KAppText.nickname,
+            //   controller: nicknameController,
+            //   onChanged: (text) => context
+            //       .read<ProfileBloc>()
+            //       .add(ProfileEvent.nicknameUpdated(text)),
+            //   isDesk: widget.isDesk,
+            // ),
+            KSizedBox.kHeightSizedBox16,
+            SendingTextWidget(
+              textKey: KWidgetkeys.screen.login.submitingText,
+              failureText: _.failure?.value(context),
+              sendingText: context.l10n.dataSendInProgress,
+              successText: _.formState == ProfileEnum.success
                   ? context.l10n.dataIsUpdatedSuccess
                   : context.l10n.dataUnmodified,
-          showSuccessText: context.read<ProfileBloc>().state.formState ==
-                  ProfileEnum.success ||
-              context.read<ProfileBloc>().state.formState ==
-                  ProfileEnum.succesesUnmodified,
-          showSendingText: context.read<ProfileBloc>().state.formState ==
-              ProfileEnum.sendInProgress,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.screen.profile.saveButton,
-          text: context.l10n.saveChangesProfile,
-          color: AppColors.materialThemeKeyColorsSecondary,
-          textColor: AppColors.materialThemeWhite,
-          icon: KIcon.check.copyWith(color: AppColors.materialThemeWhite),
-          deskPadding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize12,
-            horizontal: KPadding.kPaddingSize32,
-          ),
-          deskIconPadding: KPadding.kPaddingSize12,
-          onPressed: () =>
-              context.read<ProfileBloc>().add(const ProfileEvent.save()),
-          isDesk: widget.isDesk,
-          mobTextWidth: double.infinity,
-          mobVerticalTextPadding: KPadding.kPaddingSize16,
-          mobIconPadding: KPadding.kPaddingSize16,
-        ),
-      ],
+              showSuccessText: _.formState == ProfileEnum.success ||
+                  _.formState == ProfileEnum.succesesUnmodified,
+              showSendingText: _.formState == ProfileEnum.sendInProgress,
+            ),
+            KSizedBox.kHeightSizedBox16,
+            DoubleButtonWidget(
+              widgetKey: KWidgetkeys.screen.profile.saveButton,
+              text: context.l10n.saveChangesProfile,
+              color: AppColors.materialThemeKeyColorsSecondary,
+              textColor: AppColors.materialThemeWhite,
+              icon: KIcon.check.copyWith(color: AppColors.materialThemeWhite),
+              deskPadding: const EdgeInsets.symmetric(
+                vertical: KPadding.kPaddingSize12,
+                horizontal: KPadding.kPaddingSize32,
+              ),
+              deskIconPadding: KPadding.kPaddingSize12,
+              onPressed: () =>
+                  context.read<ProfileBloc>().add(const ProfileEvent.save()),
+              isDesk: widget.isDesk,
+              mobTextWidth: double.infinity,
+              mobVerticalTextPadding: KPadding.kPaddingSize16,
+              mobIconPadding: KPadding.kPaddingSize16,
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -199,8 +203,10 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     required Key fieldKey,
     required TextEditingController controller,
     required bool isDesk,
+    required String? errorText,
     void Function(String text)? onChanged,
     bool enabled = true,
+    bool? showErrorText,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
@@ -215,6 +221,10 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
         vertical: KPadding.kPaddingSize16,
         horizontal: KPadding.kPaddingSize32,
       ),
+      errorText: errorText,
+      showErrorText: showErrorText ??
+          context.read<ProfileBloc>().state.formState ==
+              ProfileEnum.invalidData,
       isDesk: isDesk,
       onChanged: onChanged,
     );

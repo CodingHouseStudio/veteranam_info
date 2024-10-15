@@ -3,6 +3,7 @@ import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -61,212 +62,220 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         }
       },
       listenWhen: (previous, current) => previous.company != current.company,
-      child: Column(
-        children: [
-          DecoratedBox(
-            decoration: KWidgetTheme.boxDecorationHome
-                .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
-            child: Padding(
-              padding: widget.isDesk
-                  ? const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize48,
-                      horizontal: KPadding.kPaddingSize64,
-                    )
-                  : const EdgeInsets.all(
-                      KPadding.kPaddingSize16,
-                    ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      UserPhotoWidget(
-                        key: KWidgetkeys.screen.profile.photo,
-                        imageBytes: widget.imageBytes,
-                        onPressed: () => context
-                            .read<CompanyFormBloc>()
-                            .add(const CompanyFormEvent.imageUpdated()),
-                        imageUrl: context
-                            .read<CompanyWatcherBloc>()
-                            .state
-                            .company
-                            .image
-                            ?.downloadURL
-                            .getImageUrl,
-                        // perimeter: KSize.kPixel72,
-                        icon: KIcon.personEdit,
-                        // background: AppColors.materialThemeKeyColorsPrimary,
-                        // iconColor: AppColors.materialThemeBlack,
-                      ),
-                      KSizedBox.kWidthSizedBox32,
-                      if (widget.isDesk)
-                        Expanded(
-                          child: Text(
-                            context.l10n.dataEditing,
-                            key: KWidgetkeys.widget.profileCard.editText,
-                            style: widget.isDesk
-                                ? AppTextStyle.materialThemeHeadlineLarge
-                                : AppTextStyle.materialThemeHeadlineSmall,
-                          ),
+      child: BlocConsumer<CompanyFormBloc, CompanyFormState>(
+        listener: (context, _) {
+          if (_.formState == CompanyFormEnum.delete) {
+            context.goNamed(KRoute.myDiscounts.name);
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.formState != current.formState ||
+            previous.image != current.image ||
+            previous.deleteIsPossible != current.deleteIsPossible,
+        builder: (context, _) {
+          return Column(
+            children: [
+              DecoratedBox(
+                decoration: KWidgetTheme.boxDecorationHome
+                    .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
+                child: Padding(
+                  padding: widget.isDesk
+                      ? const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize48,
+                          horizontal: KPadding.kPaddingSize64,
                         )
-                      else
-                        Expanded(
-                          child: Text(
-                            context.l10n.dataEditing,
-                            key: KWidgetkeys.widget.profileCard.editText,
-                            style: widget.isDesk
-                                ? AppTextStyle.materialThemeHeadlineLarge
-                                : AppTextStyle.materialThemeHeadlineSmall,
-                          ),
+                      : const EdgeInsets.all(
+                          KPadding.kPaddingSize16,
                         ),
-                      KSizedBox.kWidthSizedBox8,
-                      KIcon.edit,
-                    ],
-                  ),
-                  KSizedBox.kHeightSizedBox32,
-                  _textField(
-                    fieldKey: KWidgetkeys.screen.profile.nameField,
-                    controller: companyNameController,
-                    hint: context.l10n.companyName,
-                    onChanged: (text) => context
-                        .read<CompanyFormBloc>()
-                        .add(CompanyFormEvent.companyNameUpdated(text)),
-                    isDesk: widget.isDesk,
-                    errorText: context
-                        .read<CompanyFormBloc>()
-                        .state
-                        .companyName
-                        .error
-                        .value(context),
-                    showErrorText:
-                        context.read<CompanyFormBloc>().state.formState ==
-                            CompanyFormEnum.invalidData,
-                  ),
-                  KSizedBox.kHeightSizedBox32,
-                  _textField(
-                    fieldKey: KWidgetkeys.screen.profile.lastNameField,
-                    controller: codeController,
-                    hint: context.l10n.companyCode,
-                    onChanged: (text) => context
-                        .read<CompanyFormBloc>()
-                        .add(CompanyFormEvent.codeUpdated(text)),
-                    isDesk: widget.isDesk,
-                    errorText: context
-                        .read<CompanyFormBloc>()
-                        .state
-                        .code
-                        .error
-                        .value(context),
-                    showErrorText:
-                        context.read<CompanyFormBloc>().state.formState ==
-                            CompanyFormEnum.invalidData,
-                  ),
-                  KSizedBox.kHeightSizedBox32,
-                  _textField(
-                    fieldKey: KWidgetkeys.screen.profile.emailFied,
-                    controller: emailController,
-                    hint: KMockText.email,
-                    enabled: false,
-                    isDesk: widget.isDesk,
-                    errorText: null,
-                    showErrorText: false,
-                  ),
-                  KSizedBox.kHeightSizedBox32,
-                  _textField(
-                    fieldKey: const Key(''),
-                    controller: linkController,
-                    hint: context.l10n.linkOnWebsite,
-                    onChanged: (text) => context
-                        .read<CompanyFormBloc>()
-                        .add(CompanyFormEvent.linkUpdated(text)),
-                    isDesk: widget.isDesk,
-                    errorText: context
-                        .read<CompanyFormBloc>()
-                        .state
-                        .link
-                        .error
-                        .value(context),
-                    showErrorText:
-                        context.read<CompanyFormBloc>().state.formState ==
-                            CompanyFormEnum.invalidData,
-                  ),
-                  KSizedBox.kHeightSizedBox16,
-                  SendingTextWidget(
-                    textKey: KWidgetkeys.screen.login.submitingText,
-                    failureText: context
-                        .read<CompanyFormBloc>()
-                        .state
-                        .failure
-                        ?.value(context),
-                    sendingText: context.l10n.dataSendInProgress,
-                    successText:
-                        context.read<CompanyFormBloc>().state.formState ==
-                                CompanyFormEnum.success
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          UserPhotoWidget(
+                            key: KWidgetkeys.screen.profile.photo,
+                            imageBytes: widget.imageBytes,
+                            onPressed: () => context
+                                .read<CompanyFormBloc>()
+                                .add(const CompanyFormEvent.imageUpdated()),
+                            imageUrl: context
+                                .read<CompanyWatcherBloc>()
+                                .state
+                                .company
+                                .image
+                                ?.downloadURL
+                                .getImageUrl,
+                            // perimeter: KSize.kPixel72,
+                            icon: KIcon.personEdit,
+                            // background: AppColors.
+                            // materialThemeKeyColorsPrimary,
+                            // iconColor: AppColors.materialThemeBlack,
+                          ),
+                          KSizedBox.kWidthSizedBox32,
+                          if (widget.isDesk)
+                            Expanded(
+                              child: Text(
+                                context.l10n.dataEditing,
+                                key: KWidgetkeys.widget.profileCard.editText,
+                                style: widget.isDesk
+                                    ? AppTextStyle.materialThemeHeadlineLarge
+                                    : AppTextStyle.materialThemeHeadlineSmall,
+                              ),
+                            )
+                          else
+                            Expanded(
+                              child: Text(
+                                context.l10n.dataEditing,
+                                key: KWidgetkeys.widget.profileCard.editText,
+                                style: widget.isDesk
+                                    ? AppTextStyle.materialThemeHeadlineLarge
+                                    : AppTextStyle.materialThemeHeadlineSmall,
+                              ),
+                            ),
+                          KSizedBox.kWidthSizedBox8,
+                          KIcon.edit,
+                        ],
+                      ),
+                      KSizedBox.kHeightSizedBox32,
+                      _textField(
+                        fieldKey: KWidgetkeys.screen.profile.nameField,
+                        controller: companyNameController,
+                        hint: context.l10n.companyName,
+                        onChanged: (text) => context
+                            .read<CompanyFormBloc>()
+                            .add(CompanyFormEvent.companyNameUpdated(text)),
+                        isDesk: widget.isDesk,
+                        errorText: context
+                            .read<CompanyFormBloc>()
+                            .state
+                            .companyName
+                            .error
+                            .value(context),
+                      ),
+                      KSizedBox.kHeightSizedBox32,
+                      _textField(
+                        fieldKey: KWidgetkeys.screen.profile.lastNameField,
+                        controller: codeController,
+                        hint: context.l10n.companyCode,
+                        onChanged: (text) => context
+                            .read<CompanyFormBloc>()
+                            .add(CompanyFormEvent.codeUpdated(text)),
+                        isDesk: widget.isDesk,
+                        errorText: context
+                            .read<CompanyFormBloc>()
+                            .state
+                            .code
+                            .error
+                            .value(context),
+                      ),
+                      KSizedBox.kHeightSizedBox32,
+                      _textField(
+                        fieldKey: KWidgetkeys.screen.profile.emailFied,
+                        controller: emailController,
+                        hint: KMockText.email,
+                        enabled: false,
+                        isDesk: widget.isDesk,
+                        errorText: null,
+                        showErrorText: false,
+                      ),
+                      KSizedBox.kHeightSizedBox32,
+                      _textField(
+                        fieldKey: const Key(''),
+                        controller: linkController,
+                        hint: context.l10n.linkOnWebsite,
+                        onChanged: (text) => context
+                            .read<CompanyFormBloc>()
+                            .add(CompanyFormEvent.linkUpdated(text)),
+                        isDesk: widget.isDesk,
+                        errorText: context
+                            .read<CompanyFormBloc>()
+                            .state
+                            .link
+                            .error
+                            .value(context),
+                      ),
+                      KSizedBox.kHeightSizedBox16,
+                      SendingTextWidget(
+                        textKey: KWidgetkeys.screen.login.submitingText,
+                        failureText: _.failure?.value(context),
+                        sendingText: context.l10n.dataSendInProgress,
+                        successText: _.formState == CompanyFormEnum.success
                             ? context.l10n.dataIsUpdatedSuccess
                             : context.l10n.dataUnmodified,
-                    showSuccessText:
-                        context.read<CompanyFormBloc>().state.formState ==
+                        showSuccessText: _.formState ==
                                 CompanyFormEnum.success ||
-                            context.read<CompanyFormBloc>().state.formState ==
-                                CompanyFormEnum.succesesUnmodified,
-                    showSendingText:
-                        context.read<CompanyFormBloc>().state.formState ==
-                            CompanyFormEnum.sendInProgress,
-                  ),
-                  KSizedBox.kHeightSizedBox16,
-                  DoubleButtonWidget(
-                    widgetKey: KWidgetkeys.screen.profile.saveButton,
-                    text: context.l10n.saveChangesProfile,
-                    color: AppColors.materialThemeKeyColorsSecondary,
-                    textColor: AppColors.materialThemeWhite,
-                    icon: KIcon.check
-                        .copyWith(color: AppColors.materialThemeWhite),
-                    deskPadding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize12,
-                      horizontal: KPadding.kPaddingSize32,
-                    ),
-                    deskIconPadding: KPadding.kPaddingSize12,
-                    onPressed: () => context
-                        .read<CompanyFormBloc>()
-                        .add(const CompanyFormEvent.save()),
-                    isDesk: widget.isDesk,
-                    mobTextWidth: double.infinity,
-                    mobVerticalTextPadding: KPadding.kPaddingSize16,
-                    mobIconPadding: KPadding.kPaddingSize16,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (widget.isDesk)
-            KSizedBox.kHeightSizedBox32
-          else
-            KSizedBox.kHeightSizedBox48,
-          if (widget.isDesk)
-            Row(
-              children: [
-                Expanded(
-                  child: logoutButton(
-                    context: context,
-                    isDesk: widget.isDesk,
+                            _.formState == CompanyFormEnum.succesesUnmodified,
+                        showSendingText:
+                            _.formState == CompanyFormEnum.sendInProgress,
+                      ),
+                      KSizedBox.kHeightSizedBox16,
+                      DoubleButtonWidget(
+                        widgetKey: KWidgetkeys.screen.profile.saveButton,
+                        text: context.l10n.saveChangesProfile,
+                        color: AppColors.materialThemeKeyColorsSecondary,
+                        textColor: AppColors.materialThemeWhite,
+                        icon: KIcon.check
+                            .copyWith(color: AppColors.materialThemeWhite),
+                        deskPadding: const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize12,
+                          horizontal: KPadding.kPaddingSize32,
+                        ),
+                        deskIconPadding: KPadding.kPaddingSize12,
+                        onPressed: () => context
+                            .read<CompanyFormBloc>()
+                            .add(const CompanyFormEvent.save()),
+                        isDesk: widget.isDesk,
+                        mobTextWidth: double.infinity,
+                        mobVerticalTextPadding: KPadding.kPaddingSize16,
+                        mobIconPadding: KPadding.kPaddingSize16,
+                      ),
+                    ],
                   ),
                 ),
-                KSizedBox.kWidthSizedBox40,
-                Expanded(
-                  child: deleteButton(
-                    context: context,
-                    isDesk: widget.isDesk,
-                  ),
+              ),
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox48,
+              if (widget.isDesk)
+                Row(
+                  children: [
+                    Expanded(
+                      child: logoutButton(
+                        context: context,
+                        isDesk: widget.isDesk,
+                      ),
+                    ),
+                    KSizedBox.kWidthSizedBox40,
+                    Expanded(
+                      child: deleteButton(
+                        context: context,
+                        isDesk: widget.isDesk,
+                      ),
+                    ),
+                  ],
+                )
+              else ...[
+                logoutButton(context: context, isDesk: widget.isDesk),
+                KSizedBox.kHeightSizedBox16,
+                deleteButton(context: context, isDesk: widget.isDesk),
+              ],
+              if (!(_.deleteIsPossible ?? false)) ...[
+                KSizedBox.kHeightSizedBox8,
+                Text(
+                  _.deleteIsPossible == null
+                      ? context.l10n.deleteCompanyLoadingMessage
+                      : context.l10n.deleteCompanyMessage,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+                  textAlign: _.deleteIsPossible == null
+                      ? TextAlign.center
+                      : TextAlign.start,
                 ),
               ],
-            )
-          else ...[
-            logoutButton(context: context, isDesk: widget.isDesk),
-            KSizedBox.kHeightSizedBox16,
-            deleteButton(context: context, isDesk: widget.isDesk),
-          ],
-        ],
+            ],
+          );
+        },
       ),
     );
   }
@@ -277,7 +286,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     required TextEditingController controller,
     required bool isDesk,
     required String? errorText,
-    required bool showErrorText,
+    bool? showErrorText,
     void Function(String text)? onChanged,
     bool enabled = true,
   }) {
@@ -294,7 +303,10 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         vertical: KPadding.kPaddingSize16,
         horizontal: KPadding.kPaddingSize32,
       ),
-      errorText: errorText, showErrorText: showErrorText,
+      errorText: errorText,
+      showErrorText: showErrorText ??
+          context.read<CompanyFormBloc>().state.formState ==
+              CompanyFormEnum.invalidData,
       isDesk: isDesk,
       onChanged: onChanged,
     );
@@ -341,30 +353,41 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   Widget deleteButton({
     required BuildContext context,
     required bool isDesk,
-  }) =>
-      SecondaryButtonWidget(
-        widgetKey: KWidgetkeys.screen.profile.deleteButton,
-        isDesk: isDesk,
-        align: Alignment.center,
-        style: KButtonStyles.borderNeutralButtonStyle,
-        padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize16,
-        ),
-        text: context.l10n.deleteAccount,
-        onPressed: () => context.dialog.showConfirmationDialog(
-          isDesk: isDesk,
-          title: context.l10n.deleteProfile,
-          subtitle: context.l10n.deleteProfileQuestion,
-          confirmText: context.l10n.delete,
-          confirmButtonBackground: AppColors.materialThemeRefErrorError60,
-          onPressed: () {
-            context.read<CompanyFormBloc>().add(
-                  const CompanyFormEvent.deleteCompany(),
-                );
-            // context.goNamed(KRoute.myDiscounts.name);
-          },
-        ),
-      );
+  }) {
+    final enabled =
+        context.read<CompanyFormBloc>().state.deleteIsPossible ?? false;
+    return SecondaryButtonWidget(
+      widgetKey: KWidgetkeys.screen.profile.deleteButton,
+      isDesk: isDesk,
+      align: Alignment.center,
+      style: KButtonStyles.borderNeutralButtonStyle.copyWith(
+        backgroundColor: enabled
+            ? null
+            : const WidgetStatePropertyAll(
+                AppColors.materialThemeKeyColorsNeutral,
+              ),
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize16,
+      ),
+      text: context.l10n.deleteAccount,
+      onPressed: enabled
+          ? () => context.dialog.showConfirmationDialog(
+                isDesk: isDesk,
+                title: context.l10n.deleteProfile,
+                subtitle: context.l10n.deleteProfileQuestion,
+                confirmText: context.l10n.delete,
+                confirmButtonBackground: AppColors.materialThemeRefErrorError60,
+                onPressed: () {
+                  context.read<CompanyFormBloc>().add(
+                        const CompanyFormEvent.deleteCompany(),
+                      );
+                  // context.goNamed(KRoute.myDiscounts.name);
+                },
+              )
+          : null,
+    );
+  }
 
   @override
   void dispose() {

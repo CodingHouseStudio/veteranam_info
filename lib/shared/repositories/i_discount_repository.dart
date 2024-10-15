@@ -8,15 +8,19 @@ abstract class IDiscountRepository {
 
   Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
 
-  Future<Either<SomeFailure, DiscountModel>> getCopanyDiscount({
+  Future<Either<SomeFailure, DiscountModel>> getCompanyDiscount({
     required String id,
     required String companyId,
   });
 
+  Future<bool> companyHasDiscount(
+    String companyId,
+  );
+
   void addMockDiscountItems();
 
-  Stream<List<DiscountModel>> getDiscountsByUserId(
-    String userId,
+  Stream<List<DiscountModel>> getDiscountsByCompanyId(
+    String companyId,
   );
 
   Future<Either<SomeFailure, bool>> deleteDiscountsById(

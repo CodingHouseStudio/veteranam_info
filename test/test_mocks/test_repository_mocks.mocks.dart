@@ -1335,6 +1335,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<_i3.DiscountModel>);
 
   @override
+  _i8.Future<bool> companyHasDiscounts(String? companyId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #companyHasDiscounts,
+          [companyId],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
   _i8.Future<void> updateDiscountModel(_i3.DiscountModel? discountModel) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -7763,13 +7774,14 @@ class MockIDiscountRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>> getCopanyDiscount({
+  _i8.Future<
+      _i2.Either<_i3.SomeFailure, _i3.DiscountModel>> getCompanyDiscount({
     required String? id,
     required String? companyId,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getCopanyDiscount,
+          #getCompanyDiscount,
           [],
           {
             #id: id,
@@ -7781,7 +7793,7 @@ class MockIDiscountRepository extends _i1.Mock
                 _FakeEither_0<_i3.SomeFailure, _i3.DiscountModel>(
           this,
           Invocation.method(
-            #getCopanyDiscount,
+            #getCompanyDiscount,
             [],
             {
               #id: id,
@@ -7794,7 +7806,7 @@ class MockIDiscountRepository extends _i1.Mock
                 _FakeEither_0<_i3.SomeFailure, _i3.DiscountModel>(
           this,
           Invocation.method(
-            #getCopanyDiscount,
+            #getCompanyDiscount,
             [],
             {
               #id: id,
@@ -7803,6 +7815,16 @@ class MockIDiscountRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.DiscountModel>>);
+
+  @override
+  _i8.Future<bool> companyHasDiscount(String? companyId) => (super.noSuchMethod(
+        Invocation.method(
+          #companyHasDiscount,
+          [companyId],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
   void addMockDiscountItems() => super.noSuchMethod(
@@ -7814,11 +7836,12 @@ class MockIDiscountRepository extends _i1.Mock
       );
 
   @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscountsByUserId(String? userId) =>
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountsByCompanyId(
+          String? companyId) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getDiscountsByUserId,
-          [userId],
+          #getDiscountsByCompanyId,
+          [companyId],
         ),
         returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
         returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),

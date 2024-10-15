@@ -91,7 +91,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       discount = event.discount;
     } else if (event.discountId != null) {
       if (_companyRepository.currentUserCompany.isNotEmpty) {
-        final result = await _discountRepository.getCopanyDiscount(
+        final result = await _discountRepository.getCompanyDiscount(
           companyId: _companyRepository.currentUserCompany.id,
           id: event.discountId!,
         );

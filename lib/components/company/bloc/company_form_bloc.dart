@@ -17,8 +17,10 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
   CompanyFormBloc({
     required ICompanyRepository companyRepository,
     required IDataPickerRepository dataPickerRepository,
+    required IDiscountRepository discountRepository,
   })  : _companyRepository = companyRepository,
         _dataPickerRepository = dataPickerRepository,
+        _discountRepository = discountRepository,
         super(
           const CompanyFormState(
             companyName: CompanyNameFieldModel.pure(),
@@ -27,6 +29,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
             link: LinkFieldModel.pure(),
             failure: null,
             formState: CompanyFormEnum.initial,
+            deleteIsPossible: null,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -40,6 +43,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
 
   final ICompanyRepository _companyRepository;
   final IDataPickerRepository _dataPickerRepository;
+  final IDiscountRepository _discountRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -54,6 +58,14 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         link: LinkFieldModel.dirty(company.link ?? ''),
         failure: null,
         formState: CompanyFormEnum.initial,
+        deleteIsPossible: null,
+      ),
+    );
+    final companyHasDiscount = await _discountRepository
+        .companyHasDiscount(_companyRepository.currentUserCompany.id);
+    emit(
+      state.copyWith(
+        deleteIsPossible: !companyHasDiscount,
       ),
     );
   }
