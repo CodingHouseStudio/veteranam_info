@@ -28,7 +28,7 @@ enum CompanyFormEnum {
   initial,
   inProgress,
   invalidData,
-  delete,
+  // delete,
   success,
   succesesUnmodified,
   sendInProgress;

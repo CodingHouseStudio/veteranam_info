@@ -1568,9 +1568,18 @@
   "@deleteCompanyMessage": {
     "examples": "Текст на сторінці Company під кнопкою видалення, з'являється якщо компанія має будь які знижки."
   },
-  "deleteCompanyLoadingMessage": "Перевірка наявності знижок у компанії...",
+  "deleteCompanyLoadingMessage": "Данні про компанію завантажуються, будьласка почекайте.",
   "@deleteCompanyLoadingMessage": {
     "examples": "Текст на сторінці Company під кнопкою видалення, з'являється коли перевіряються чи в компанії є наявні знижки."
+  },
+  "deleteCompanyEmptyMessage": "Перш ніж видалити акаунт компанії його потрібно створити.",
+  "@deleteCompanyEmptyMessage": {
+    "examples": "Текст на сторінці Company під кнопкою видалення, з'являється якщо компанія ще не створена."
+  },
+  "create": "Створити",
+  "@create": {
+    "examples": "Текст на сторінці Company для кнопки.",
+    "description": "Кнопка використовується для Створення бізнес акаунта."
   },
   "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
   "@deleteProfileQuestion": {

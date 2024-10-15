@@ -1560,9 +1560,18 @@
   "@deleteCompanyMessage": {
     "examples": "Text on the Company page under the delete button, appears if the company has any discounts."
   },
-  "deleteCompanyLoadingMessage": "Checking for active company discounts...",
+  "deleteCompanyLoadingMessage": "Company data is loading, please be patient.",
   "@deleteCompanyLoadingMessage": {
     "examples": "Text on the Company page under the delete button, appears when checking if the company has any existing discounts."
+  },
+  "deleteCompanyEmptyMessage": "Before deleting the company account, it needs to be created first.",
+  "@deleteCompanyEmptyMessage": {
+    "examples": "Text on the Company page under the delete button, appears if the company has not been created yet."
+  },
+  "create": "Create",
+  "@create": {
+    "examples": "Text on the Company page for the button.",
+    "description": "The button is used to create a business account."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {

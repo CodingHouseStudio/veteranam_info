@@ -160,7 +160,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
       ),
       (r) => emit(
         state.copyWith(
-          formState: CompanyFormEnum.delete,
+          // formState: CompanyFormEnum.delete,
           failure: null,
         ),
       ),

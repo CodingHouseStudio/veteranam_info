@@ -3,7 +3,6 @@ import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -67,12 +66,12 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         }
       },
       listenWhen: (previous, current) => previous.company != current.company,
-      child: BlocConsumer<CompanyFormBloc, CompanyFormState>(
-        listener: (context, _) {
-          if (_.formState == CompanyFormEnum.delete) {
-            context.goNamed(KRoute.myDiscounts.name);
-          }
-        },
+      child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
+        // listener: (context, _) {
+        //   if (_.formState == CompanyFormEnum.delete) {
+        //     context.goNamed(KRoute.myDiscounts.name);
+        //   }
+        // },
         buildWhen: (previous, current) =>
             previous.formState != current.formState ||
             previous.image != current.image ||
@@ -277,18 +276,23 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                 KSizedBox.kHeightSizedBox16,
                 deleteButton(context: context, isDesk: widget.isDesk),
               ],
-              if (!(_.deleteIsPossible ?? false)) ...[
-                KSizedBox.kHeightSizedBox8,
+              KSizedBox.kHeightSizedBox8,
+              if (context.read<CompanyWatcherBloc>().state.company.isEmpty)
                 Text(
-                  _.deleteIsPossible == null
-                      ? context.l10n.deleteCompanyLoadingMessage
-                      : context.l10n.deleteCompanyMessage,
+                  context.l10n.deleteCompanyEmptyMessage,
                   style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                  textAlign: _.deleteIsPossible == null
-                      ? TextAlign.center
-                      : TextAlign.start,
+                )
+              else if (_.deleteIsPossible == null)
+                Text(
+                  context.l10n.deleteCompanyLoadingMessage,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+                  textAlign: TextAlign.center,
+                )
+              else if (!_.deleteIsPossible!)
+                Text(
+                  context.l10n.deleteCompanyMessage,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
                 ),
-              ],
             ],
           );
         },
@@ -375,7 +379,8 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     required bool isDesk,
   }) {
     final enabled =
-        context.read<CompanyFormBloc>().state.deleteIsPossible ?? false;
+        (context.read<CompanyFormBloc>().state.deleteIsPossible ?? false) &&
+            context.read<CompanyWatcherBloc>().state.company.isNotEmpty;
     return SecondaryButtonWidget(
       widgetKey: KWidgetkeys.screen.profile.deleteButton,
       isDesk: isDesk,
