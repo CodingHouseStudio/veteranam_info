@@ -17,79 +17,194 @@ class _DialogsWidget {
   _DialogsWidget.of(this.context);
   final BuildContext context;
 
-  void showConfirmationDialog({
+  void _doubleDialog({
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
     required bool isDesk,
-    required String title,
-    required String subtitle,
-    required String confirmText,
-    required void Function()? onPressed,
-    required Color background,
-    String? unconfirmText,
+    Widget Function({required Widget layoutBuilder})? preLayoutWidget,
+    bool isScollable = true,
+    Color? mobileBarierColor,
+    Color? backgroundColor,
+    EdgeInsets? deskInsetPadding,
+    Widget Function(BuildContext context)? deskIcon,
+    EdgeInsets? deskIconPadding,
+    OverflowBarAlignment? deskActionsOverflowAlignment,
+    EdgeInsets Function({required bool isDeskValue})? deskContentPadding,
+    EdgeInsets Function({required bool isDeskValue})? mobPadding,
+    double? deskMaxWidth,
+    double? mobMaxWidth,
   }) {
     if (isDesk) {
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              final isDeskValue = constraints.maxWidth >
-                  KPlatformConstants.minWidthThresholdTablet;
-              return BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                child: AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: preLayoutWidget?.call(
+                  layoutBuilder: _deskDoubleDialogWidget(
+                    childWidget: childWidget,
+                    isScollable: isScollable,
+                    backgroundColor: backgroundColor,
+                    insetPadding: deskInsetPadding,
+                    icon: deskIcon,
+                    iconPadding: deskIconPadding,
+                    actionsOverflowAlignment: deskActionsOverflowAlignment,
+                    contentPadding: deskContentPadding,
+                    maxWidth: deskMaxWidth,
                   ),
-                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-                  scrollable: true,
-                  content: ConfirmDialog(
-                    isDeskValue: isDeskValue,
-                    isDesk: isDesk,
-                    title: title,
-                    subtitle: subtitle,
-                    confirmText: confirmText,
-                    unconfirmText: unconfirmText,
-                    background: background,
-                    onPressed: onPressed,
-                  ),
+                ) ??
+                _deskDoubleDialogWidget(
+                  childWidget: childWidget,
+                  isScollable: isScollable,
+                  backgroundColor: backgroundColor,
+                  insetPadding: deskInsetPadding,
+                  icon: deskIcon,
+                  iconPadding: deskIconPadding,
+                  actionsOverflowAlignment: deskActionsOverflowAlignment,
+                  contentPadding: deskContentPadding,
+                  maxWidth: deskMaxWidth,
                 ),
-              );
-            },
           );
         },
       );
     } else {
       showModalBottomSheet<void>(
         context: context,
-        isScrollControlled: true,
-        barrierColor: AppColors.materialThemeBlackOpacity88,
-        backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+        isScrollControlled: isScollable,
+        useSafeArea: !Config.isWeb,
+        barrierColor:
+            mobileBarierColor ?? AppColors.materialThemeBlackOpacity88,
+        backgroundColor:
+            backgroundColor ?? AppColors.materialThemeKeyColorsNeutral,
         builder: (BuildContext context) {
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              final isDeskValue = constraints.maxWidth >
-                  KPlatformConstants.minWidthThresholdTablet;
-              return Padding(
-                padding: const EdgeInsets.all(
-                  KPadding.kPaddingSize16,
+          return preLayoutWidget?.call(
+                layoutBuilder: _mobDoubleDialogWidget(
+                  childWidget: childWidget,
+                  padding: mobPadding,
+                  maxWidth: mobMaxWidth,
                 ),
-                child: ConfirmDialog(
-                  isDeskValue: isDeskValue,
-                  isDesk: isDesk,
-                  title: title,
-                  subtitle: subtitle,
-                  confirmText: confirmText,
-                  unconfirmText: unconfirmText,
-                  background: background,
-                  onPressed: onPressed,
-                ),
+              ) ??
+              _mobDoubleDialogWidget(
+                childWidget: childWidget,
+                padding: mobPadding,
+                maxWidth: mobMaxWidth,
               );
-            },
-          );
         },
       );
     }
   }
+
+  Widget _deskDoubleDialogWidget({
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
+    required bool isScollable,
+    required Color? backgroundColor,
+    required EdgeInsets? insetPadding,
+    required Widget Function(BuildContext context)? icon,
+    required EdgeInsets? iconPadding,
+    required OverflowBarAlignment? actionsOverflowAlignment,
+    required double? maxWidth,
+    required EdgeInsets Function({required bool isDeskValue})? contentPadding,
+  }) =>
+      LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final isDeskValue = constraints.maxWidth >
+              (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
+            ),
+            icon: icon?.call(context),
+            insetPadding: insetPadding,
+            backgroundColor:
+                backgroundColor ?? AppColors.materialThemeKeyColorsNeutral,
+            iconPadding: iconPadding,
+            actionsOverflowAlignment: actionsOverflowAlignment,
+            contentPadding: contentPadding?.call(isDeskValue: isDeskValue),
+            scrollable: isScollable,
+            content: childWidget(
+              isDeskValue: isDeskValue,
+              context: context,
+            ),
+          );
+        },
+      );
+
+  Widget _mobDoubleDialogWidget({
+    required Widget Function({
+      required bool isDeskValue,
+      required BuildContext context,
+    }) childWidget,
+    required EdgeInsets Function({
+      required bool isDeskValue,
+    })? padding,
+    required double? maxWidth,
+  }) =>
+      LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final isDeskValue =
+              constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
+          if (padding != null) {
+            return Padding(
+              padding: padding(isDeskValue: isDeskValue),
+              child: childWidget(
+                isDeskValue: isDeskValue,
+                context: context,
+              ),
+            );
+          } else {
+            return childWidget(
+              isDeskValue: isDeskValue,
+              context: context,
+            );
+          }
+        },
+      );
+
+  void showConfirmationDialog({
+    required bool isDesk,
+    required String title,
+    required String subtitle,
+    required String confirmText,
+    required void Function()? onPressed,
+    required Color confirmButtonBackground,
+    String? unconfirmText,
+  }) =>
+      _doubleDialog(
+        childWidget: ({required isDeskValue, required context}) =>
+            ConfirmDialog(
+          isDesk: isDeskValue,
+          title: title,
+          subtitle: subtitle,
+          confirmText: confirmText,
+          unconfirmText: unconfirmText,
+          confirmButtonBackground: confirmButtonBackground,
+          onPressed: onPressed,
+        ),
+        isDesk: isDesk,
+        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+        mobMaxWidth: KSize.kPixel500,
+        deskMaxWidth: KSize.kPixel500,
+      );
+
+  void showConfirmationPublishDiscountDialog({
+    required bool isDesk,
+    required void Function()? onPressed,
+  }) =>
+      _doubleDialog(
+        childWidget: ({required isDeskValue, required context}) =>
+            ConfirmPublishDiscountDialog(
+          isDesk: isDeskValue,
+          onPressed: onPressed,
+        ),
+        isDesk: isDesk,
+        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+        deskMaxWidth: KSize.kPixel680,
+      );
 
   void showReportDialog({
     required bool isDesk,
@@ -97,102 +212,155 @@ class _DialogsWidget {
     // required void Function()? afterEvent,
     required String cardId,
   }) {
-    if (isDesk) {
-      showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return BlocProvider(
-            create: (context) =>
-                GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                final isDeskValue = constraints.maxWidth >
-                    KPlatformConstants.minWidthThresholdTablet;
-                return AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(KSize.kRadius32),
-                  ),
-                  scrollable: true,
-                  insetPadding: EdgeInsets.zero,
-                  icon: CancelWidget(
-                    widgetKey: KWidgetkeys.widget.reportDialog.cancel,
-                    onPressed: () => context.pop(),
-                  ),
-                  iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
-                      .copyWith(bottom: 0),
-                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-                  actionsOverflowAlignment: OverflowBarAlignment.center,
-                  contentPadding: isDeskValue
-                      ? const EdgeInsets.only(
-                          left: KPadding.kPaddingSize160,
-                          right: KPadding.kPaddingSize160,
-                          bottom: KPadding.kPaddingSize40,
-                        )
-                      : const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize16,
-                          vertical: KPadding.kPaddingSize32,
-                        ),
-                  content: ReportDialogWidget(
-                    isDesk: isDeskValue,
-                    cardEnum: cardEnum,
-                    // afterEvent: afterEvent,
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      );
-    } else {
-      showModalBottomSheet<void>(
-        context: context,
-        isScrollControlled: true,
-        barrierColor:
-            AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
-        shape: const RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
-        ),
-        showDragHandle: true,
-        backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-        useSafeArea: true,
-        enableDrag: false,
-        builder: (context) => BlocProvider(
-          create: (context) =>
-              GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-          child: FractionallySizedBox(
-            heightFactor: KDimensions.bottomDialogHeightFactor,
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                final isDeskValue =
-                    constraints.maxWidth >= KMinMaxSize.maxWidth600;
-                return Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.viewInsetsOf(context).bottom,
-                  ), // padding if mobile keyboard open
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize16,
-                      vertical: KPadding.kPaddingSize32,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: SingleChildScrollView(
-                        child: ReportDialogWidget(
-                          isDesk: isDeskValue,
-                          cardEnum: cardEnum,
-                          // afterEvent: afterEvent,
-                        ),
-                      ),
+    _doubleDialog(
+      preLayoutWidget: ({required layoutBuilder}) => BlocProvider(
+        create: (context) =>
+            GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
+        child: layoutBuilder,
+      ),
+      childWidget: ({required isDeskValue, required context}) => isDesk
+          ? ReportDialogWidget(
+              isDesk: isDeskValue,
+              cardEnum: cardEnum,
+              // afterEvent: afterEvent,
+            )
+          : Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.viewInsetsOf(context).bottom,
+              ), // padding if mobile keyboard open
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize32,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    child: ReportDialogWidget(
+                      isDesk: isDeskValue,
+                      cardEnum: cardEnum,
+                      // afterEvent: afterEvent,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-    }
+      isDesk: isDesk,
+      deskInsetPadding: EdgeInsets.zero,
+      deskIcon: (context) => CancelWidget(
+        widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+        onPressed: context.pop,
+      ),
+      deskActionsOverflowAlignment: OverflowBarAlignment.center,
+      deskContentPadding: ({required isDeskValue}) => isDeskValue
+          ? const EdgeInsets.only(
+              left: KPadding.kPaddingSize160,
+              right: KPadding.kPaddingSize160,
+              bottom: KPadding.kPaddingSize40,
+            )
+          : const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize16,
+              vertical: KPadding.kPaddingSize32,
+            ),
+      deskIconPadding:
+          const EdgeInsets.all(KPadding.kPaddingSize16).copyWith(bottom: 0),
+    );
+    // if (isDesk) {
+    //   showDialog<void>(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return BlocProvider(
+    //         create: (context) =>
+    //             GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
+    //         child: LayoutBuilder(
+    //           builder: (BuildContext context, BoxConstraints constraints) {
+    //             final isDeskValue = constraints.maxWidth >
+    //                 KPlatformConstants.minWidthThresholdTablet;
+    //             return AlertDialog(
+    //               shape: RoundedRectangleBorder(
+    //                 borderRadius: BorderRadius.circular(KSize.kRadius32),
+    //               ),
+    //               scrollable: true,
+    //               insetPadding: EdgeInsets.zero,
+    //               icon: CancelWidget(
+    //                 widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+    //                 onPressed: () => context.pop(),
+    //               ),
+    //               iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
+    //                   .copyWith(bottom: 0),
+    //               backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+    //               actionsOverflowAlignment: OverflowBarAlignment.center,
+    //               contentPadding: isDeskValue
+    //                   ? const EdgeInsets.only(
+    //                       left: KPadding.kPaddingSize160,
+    //                       right: KPadding.kPaddingSize160,
+    //                       bottom: KPadding.kPaddingSize40,
+    //                     )
+    //                   : const EdgeInsets.symmetric(
+    //                       horizontal: KPadding.kPaddingSize16,
+    //                       vertical: KPadding.kPaddingSize32,
+    //                     ),
+    //               content: ReportDialogWidget(
+    //                 isDesk: isDeskValue,
+    //                 cardEnum: cardEnum,
+    //                 // afterEvent: afterEvent,
+    //               ),
+    //             );
+    //           },
+    //         ),
+    //       );
+    //     },
+    //   );
+    // } else {
+    //   showModalBottomSheet<void>(
+    //     context: context,
+    //     isScrollControlled: true,
+    //     barrierColor:
+    //         AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+    //     shape: const RoundedRectangleBorder(
+    //       borderRadius:
+    //           BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
+    //     ),
+    //     showDragHandle: true,
+    //     backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+    //     useSafeArea: true,
+    //     enableDrag: false,
+    //     builder: (context) => BlocProvider(
+    //       create: (context) =>
+    //           GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
+    //       child: FractionallySizedBox(
+    //         heightFactor: KDimensions.bottomDialogHeightFactor,
+    //         child: LayoutBuilder(
+    //           builder: (BuildContext context, BoxConstraints constraints) {
+    //             final isDeskValue =
+    //                 constraints.maxWidth >= KMinMaxSize.maxWidth600;
+    //             return Padding(
+    //               padding: EdgeInsets.only(
+    //                 bottom: MediaQuery.viewInsetsOf(context).bottom,
+    //               ), // padding if mobile keyboard open
+    //               child: Padding(
+    //                 padding: const EdgeInsets.symmetric(
+    //                   horizontal: KPadding.kPaddingSize16,
+    //                   vertical: KPadding.kPaddingSize32,
+    //                 ),
+    //                 child: SizedBox(
+    //                   width: double.infinity,
+    //                   child: SingleChildScrollView(
+    //                     child: ReportDialogWidget(
+    //                       isDesk: isDeskValue,
+    //                       cardEnum: cardEnum,
+    //                       // afterEvent: afterEvent,
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+    //             );
+    //           },
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 
   void showMobileMenuDialog() {

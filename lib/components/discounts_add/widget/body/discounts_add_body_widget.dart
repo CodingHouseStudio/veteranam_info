@@ -120,7 +120,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
                   ),
                   KSizedBox.kHeightSizedBox16,
-                  Center(
+                  Align(
+                    alignment: isDesk ? Alignment.center : Alignment.centerLeft,
                     child: TextButton(
                       onPressed: () => context.goNamed(KRoute.myDiscounts.name),
                       style: KButtonStyles.borderBlackButtonStyle.copyWith(
@@ -434,7 +435,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   subtitle: context.l10n.cancelChangesQuestion,
                   confirmText: context.l10n.cancel,
                   unconfirmText: context.l10n.continueWorking,
-                  background: AppColors.materialThemeKeyColorsSecondary,
+                  confirmButtonBackground:
+                      AppColors.materialThemeKeyColorsSecondary,
                   onPressed: () {
                     context.goNamed(KRoute.myDiscounts.name);
                   },
@@ -458,15 +460,27 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             ? context.l10n.publish
             : context.l10n.next,
         isDesk: isDesk,
-        onPressed: () => context.read<DiscountsAddBloc>().add(
-              const DiscountsAddEvent.send(),
-            ),
+        onPressed: () {
+          if (context.read<DiscountsAddBloc>().state.discount == null &&
+              context.read<DiscountsAddBloc>().state.formState.isDescription) {
+            context.dialog.showConfirmationPublishDiscountDialog(
+              isDesk: isDesk,
+              onPressed: () => _sendEvent(context),
+            );
+          } else {
+            _sendEvent(context);
+          }
+        },
         mobTextWidth: double.infinity,
         widgetKey: const Key(''),
         deskTextWidth: double.infinity,
         darkMode: true,
         mobVerticalTextPadding: KPadding.kPaddingSize16,
         mobIconPadding: KPadding.kPaddingSize16,
+      );
+
+  void _sendEvent(BuildContext context) => context.read<DiscountsAddBloc>().add(
+        const DiscountsAddEvent.send(),
       );
 
   @override

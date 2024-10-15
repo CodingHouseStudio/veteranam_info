@@ -15,6 +15,7 @@ import 'package:veteranam/components/components.dart'
         LoginScreen,
         MyDiscountsScreen,
         PasswordResetScreen,
+        PrivacyPolicyDialog,
         ProfileScreen,
         PwResetEmailScreen,
         SignUpScreen;
@@ -221,6 +222,18 @@ GoRouter businessRouter = GoRouter(
               ),
             );
           },
+          routes: [
+            GoRoute(
+              name: KRoute.privacyPolicy.name,
+              path: KRoute.privacyPolicy.path,
+              pageBuilder: (context, state) => DialogPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                builder: (_) => const PrivacyPolicyDialog(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.discountsEdit.name,
