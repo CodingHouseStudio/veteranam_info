@@ -43,6 +43,7 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
               onChanged: (text) => context
                   .read<PwResetEmailBloc>()
                   .add(PwResetEmailEvent.emailUpdated(text)),
+              isRequired: true,
               errorText: context
                   .read<PwResetEmailBloc>()
                   .state

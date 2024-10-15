@@ -14,6 +14,7 @@ extension CompanyFormFailureExtension on SomeFailure {
 class CompanyFormState with _$CompanyFormState {
   const factory CompanyFormState({
     required CompanyNameFieldModel companyName,
+    required PublicNameFieldModel publicName,
     required CompanyCodeFieldModel code,
     required ImageFieldModel image,
     required LinkFieldModel link,

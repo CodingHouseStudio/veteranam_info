@@ -17,6 +17,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.errorMaxLines,
     this.description,
     this.maxLength,
+    this.isRequired,
   });
   final void Function(String text)? changeMessage;
   final String? hintText;
@@ -31,12 +32,13 @@ class MessageFieldWidget extends StatelessWidget {
   final int? errorMaxLines;
   final String? description;
   final int? maxLength;
+  final bool? isRequired;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
       widgetKey: KWidgetkeys.widget.messageField.widget,
-      focusNode: focusNode,
+      focusNode: focusNode, isRequired: isRequired,
       disposeFocusNode: disposeFocusNode,
       errorText: errorText,
       controller: controller,

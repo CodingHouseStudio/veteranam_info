@@ -53,6 +53,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                   style: isDesk
                       ? AppTextStyle.materialThemeDisplayLarge
                       : AppTextStyle.materialThemeDisplaySmall,
+                  textAlign: isDesk ? TextAlign.center : TextAlign.start,
                 )
               else
                 LineTitleIconButtonWidget(

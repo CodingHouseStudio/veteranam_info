@@ -14,6 +14,7 @@ class CompanyFormWidget extends StatefulWidget {
     required this.initialCode,
     required this.initialLink,
     required this.initialEmail,
+    required this.initialPublicName,
     super.key,
     this.imageBytes,
   });
@@ -21,6 +22,7 @@ class CompanyFormWidget extends StatefulWidget {
   final bool isDesk;
   final Uint8List? imageBytes;
   final String? initialCompanyName;
+  final String? initialPublicName;
   final String? initialEmail;
   final String? initialCode;
   final String? initialLink;
@@ -31,6 +33,7 @@ class CompanyFormWidget extends StatefulWidget {
 
 class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   late TextEditingController companyNameController;
+  late TextEditingController publicNameController;
   late TextEditingController codeController;
   late TextEditingController emailController;
   late TextEditingController linkController;
@@ -39,6 +42,8 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   void initState() {
     companyNameController =
         TextEditingController(text: widget.initialCompanyName);
+    publicNameController =
+        TextEditingController(text: widget.initialPublicName);
     codeController = TextEditingController(text: widget.initialCode);
     emailController = TextEditingController(text: widget.initialEmail);
     linkController = TextEditingController(text: widget.initialLink);
@@ -139,41 +144,55 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
+                        fieldKey: const Key(''),
+                        controller: publicNameController,
+                        labelText: context.l10n.brandName,
+                        isRequired: true,
+                        description: context.l10n.brandNameDescription,
+                        onChanged: (text) => context
+                            .read<CompanyFormBloc>()
+                            .add(CompanyFormEvent.publicNameUpdated(text)),
+                        isDesk: widget.isDesk,
+                        errorText: _.publicName.error.value(context),
+                        showErrorText:
+                            _.formState == CompanyFormEnum.invalidData,
+                      ),
+                      KSizedBox.kHeightSizedBox32,
+                      _textField(
                         fieldKey: KWidgetkeys.screen.profile.nameField,
                         controller: companyNameController,
-                        hint: context.l10n.companyName,
+                        isRequired: true,
+                        description: context.l10n.companyNameDescription,
+                        labelText: context.l10n.companyName,
                         onChanged: (text) => context
                             .read<CompanyFormBloc>()
                             .add(CompanyFormEvent.companyNameUpdated(text)),
                         isDesk: widget.isDesk,
-                        errorText: context
-                            .read<CompanyFormBloc>()
-                            .state
-                            .companyName
-                            .error
-                            .value(context),
+                        errorText: _.companyName.error.value(context),
+                        showErrorText:
+                            _.formState == CompanyFormEnum.invalidData,
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: KWidgetkeys.screen.profile.lastNameField,
                         controller: codeController,
-                        hint: context.l10n.companyCode,
+                        isRequired: true,
+                        labelText: context.l10n.companyCode,
+                        description: context.l10n.companyCodeDescription,
                         onChanged: (text) => context
                             .read<CompanyFormBloc>()
                             .add(CompanyFormEvent.codeUpdated(text)),
                         isDesk: widget.isDesk,
-                        errorText: context
-                            .read<CompanyFormBloc>()
-                            .state
-                            .code
-                            .error
-                            .value(context),
+                        errorText: _.code.error.value(context),
+                        showErrorText:
+                            _.formState == CompanyFormEnum.invalidData,
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: KWidgetkeys.screen.profile.emailFied,
                         controller: emailController,
-                        hint: KMockText.email,
+                        isRequired: true,
+                        labelText: KMockText.email,
                         enabled: false,
                         isDesk: widget.isDesk,
                         errorText: null,
@@ -183,17 +202,14 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       _textField(
                         fieldKey: const Key(''),
                         controller: linkController,
-                        hint: context.l10n.linkOnWebsite,
+                        labelText: context.l10n.linkOnWebsite,
                         onChanged: (text) => context
                             .read<CompanyFormBloc>()
                             .add(CompanyFormEvent.linkUpdated(text)),
                         isDesk: widget.isDesk,
-                        errorText: context
-                            .read<CompanyFormBloc>()
-                            .state
-                            .link
-                            .error
-                            .value(context),
+                        errorText: _.link.error.value(context),
+                        showErrorText:
+                            _.formState == CompanyFormEnum.invalidData,
                       ),
                       KSizedBox.kHeightSizedBox16,
                       SendingTextWidget(
@@ -281,20 +297,24 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   }
 
   Widget _textField({
-    required String hint,
+    required String labelText,
     required Key fieldKey,
     required TextEditingController controller,
     required bool isDesk,
     required String? errorText,
     bool? showErrorText,
+    bool? isRequired,
+    String? description,
     void Function(String text)? onChanged,
     bool enabled = true,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
+      isRequired: isRequired,
       enabled: enabled,
       controller: controller,
-      labelText: hint,
+      labelText: labelText,
+      description: description,
       hintStyle: isDesk
           ? AppTextStyle.materialThemeTitleMedium
           : AppTextStyle.materialThemeTitleSmall,

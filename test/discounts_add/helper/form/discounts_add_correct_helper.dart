@@ -12,7 +12,7 @@ Future<void> discountsAddCorectHelper({
   await discountsAddMainEnterHelper(
     tester: tester,
     titleText: KTestText.sendDiscountModel.title,
-    linkText: KTestText.sendDiscountModel.link,
+    linkText: KTestText.sendDiscountModel.link!,
     discountsText: KTestText.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true,
     // periodText: KTestText.sendDiscountModel.expiration!,

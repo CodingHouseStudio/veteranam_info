@@ -188,6 +188,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
       TextFieldWidget(
         widgetKey: KWidgetkeys.widget.userEmailDialog.field,
         onChanged: widget.onChanged,
+        isRequired: true,
         isDesk: widget.isDesk,
         labelText: context.l10n.email,
         errorText: context
