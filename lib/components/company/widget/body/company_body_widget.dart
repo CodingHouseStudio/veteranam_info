@@ -9,95 +9,83 @@ class CompanyBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CompanyFormBloc, CompanyFormState>(
-      listener: (context, state) {
-        if (state.formState == CompanyFormEnum.delete) {
-          context.goNamed(KRoute.myDiscounts.name);
-        }
-      },
-      buildWhen: (previous, current) =>
-          previous.formState != current.formState ||
-          previous.image != current.image,
-      builder: (context, state) {
-        return ScaffoldWidget(
-          mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
-            precent: KDimensions.tenPercent,
+    return ScaffoldWidget(
+      mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
+        precent: KDimensions.tenPercent,
+      ),
+      titleChildWidgetsFunction: ({required isDesk}) => [
+        if (isDesk)
+          KSizedBox.kHeightSizedBox40
+        else
+          KSizedBox.kHeightSizedBox24,
+        ShortTitleIconWidget(
+          title: context.l10n.myCompany,
+          titleKey: KWidgetkeys.screen.profile.title,
+          isDesk: isDesk,
+          icon: KIcon.arrowDownRight,
+          firstIcon: !isDesk,
+        ),
+        if (isDesk) ...[
+          KSizedBox.kHeightSizedBox32,
+          const Divider(
+            color: AppColors.materialThemeKeyColorsNeutral,
           ),
-          titleChildWidgetsFunction: ({required isDesk}) => [
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox24,
-            ShortTitleIconWidget(
-              title: context.l10n.myCompany,
-              titleKey: KWidgetkeys.screen.profile.title,
-              isDesk: isDesk,
-              icon: KIcon.arrowDownRight,
-              firstIcon: !isDesk,
-            ),
-            if (isDesk) ...[
-              KSizedBox.kHeightSizedBox32,
-              const Divider(
-                color: AppColors.materialThemeKeyColorsNeutral,
-              ),
-            ] else ...[
-              KSizedBox.kHeightSizedBox24,
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () => myDiscountTap(context),
-                  child: Column(
-                    children: [
-                      const IconWidget(
-                        icon: KIcon.tag,
-                        background: AppColors.materialThemeKeyColorsNeutral,
-                      ),
-                      KSizedBox.kHeightSizedBox4,
-                      Text(
-                        context.l10n.myDiscounts,
-                        style: AppTextStyle.materialThemeLabelSmall,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              KSizedBox.kHeightSizedBox24,
-              const Divider(
-                color: AppColors.materialThemeKeyColorsNeutral,
-              ),
-            ],
-          ],
-          isForm: true,
-          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-            KSizedBox.kHeightSizedBox48,
-            if (isDesk)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        ] else ...[
+          KSizedBox.kHeightSizedBox24,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: () => myDiscountTap(context),
+              child: Column(
                 children: [
-                  Expanded(
-                    flex: 3,
-                    child: _form(isDesk: isDesk, context: context),
+                  const IconWidget(
+                    icon: KIcon.tag,
+                    background: AppColors.materialThemeKeyColorsNeutral,
                   ),
-                  KSizedBox.kWidthSizedBox32,
-                  Expanded(
-                    flex: 2,
-                    child: BoxWidget(
-                      text: context.l10n.myDiscounts,
-                      onTap: () => myDiscountTap(context),
-                      isDesk: isDesk,
-                    ),
+                  KSizedBox.kHeightSizedBox4,
+                  Text(
+                    context.l10n.myDiscounts,
+                    style: AppTextStyle.materialThemeLabelSmall,
                   ),
                 ],
-              )
-            else
-              _form(isDesk: isDesk, context: context),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox48
-            else
-              KSizedBox.kHeightSizedBox16,
-          ],
-        );
-      },
+              ),
+            ),
+          ),
+          KSizedBox.kHeightSizedBox24,
+          const Divider(
+            color: AppColors.materialThemeKeyColorsNeutral,
+          ),
+        ],
+      ],
+      isForm: true,
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+        KSizedBox.kHeightSizedBox48,
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: _form(isDesk: isDesk, context: context),
+              ),
+              KSizedBox.kWidthSizedBox32,
+              Expanded(
+                flex: 2,
+                child: BoxWidget(
+                  text: context.l10n.myDiscounts,
+                  onTap: () => myDiscountTap(context),
+                  isDesk: isDesk,
+                ),
+              ),
+            ],
+          )
+        else
+          _form(isDesk: isDesk, context: context),
+        if (isDesk)
+          KSizedBox.kHeightSizedBox48
+        else
+          KSizedBox.kHeightSizedBox16,
+      ],
     );
   }
 

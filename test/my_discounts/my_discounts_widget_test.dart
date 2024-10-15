@@ -49,7 +49,7 @@ void main() {
               .thenAnswer((invocation) => KTestText.userWithoutPhoto);
           when(
             mockDiscountRepository
-                .getDiscountsByUserId(KTestText.profileUser.id),
+                .getDiscountsByCompanyId(KTestText.profileUser.id),
           ).thenAnswer(
             (invocation) => Stream.error(KGroupText.failureGet),
           );
@@ -72,7 +72,7 @@ void main() {
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userAnonymous);
         when(
-          mockDiscountRepository.getDiscountsByUserId(
+          mockDiscountRepository.getDiscountsByCompanyId(
             KTestText.profileUser.id,
           ),
         ).thenAnswer(
@@ -137,7 +137,7 @@ void main() {
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
 
         when(
-          mockDiscountRepository.getDiscountsByUserId(
+          mockDiscountRepository.getDiscountsByCompanyId(
             KTestText.profileUser.id,
           ),
         ).thenAnswer(
@@ -202,7 +202,8 @@ void main() {
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
         when(
-          mockDiscountRepository.getDiscountsByUserId(KTestText.profileUser.id),
+          mockDiscountRepository
+              .getDiscountsByCompanyId(KTestText.profileUser.id),
         ).thenAnswer(
           (invocation) => Stream.value(KTestText.userDiscountModelItemsWidget),
         );
