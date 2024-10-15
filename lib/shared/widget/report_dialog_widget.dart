@@ -92,6 +92,7 @@ class ReportDialogWidget extends StatelessWidget {
                 changeMessage: (text) => context
                     .read<ReportBloc>()
                     .add(ReportEvent.messageUpdated(text)),
+                isRequired: _.reasonComplaint == ReasonComplaint.other,
                 isDesk: isDesk,
                 labelText: context.l10n.writeYourMessage,
                 errorText: _.message.error.value(context),

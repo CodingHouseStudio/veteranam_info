@@ -134,6 +134,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                     fieldKey: const Key(''),
                     controller: publicNameController,
                     labelText: context.l10n.brandName,
+                    isRequired: true,
                     description: context.l10n.brandNameDescription,
                     onChanged: (text) => context
                         .read<CompanyFormBloc>()
@@ -153,6 +154,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                   _textField(
                     fieldKey: KWidgetkeys.screen.profile.nameField,
                     controller: companyNameController,
+                    isRequired: true,
                     description: context.l10n.companyNameDescription,
                     labelText: context.l10n.companyName,
                     onChanged: (text) => context
@@ -173,6 +175,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                   _textField(
                     fieldKey: KWidgetkeys.screen.profile.lastNameField,
                     controller: codeController,
+                    isRequired: true,
                     labelText: context.l10n.companyCode,
                     description: context.l10n.companyCodeDescription,
                     onChanged: (text) => context
@@ -193,6 +196,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                   _textField(
                     fieldKey: KWidgetkeys.screen.profile.emailFied,
                     controller: emailController,
+                    isRequired: true,
                     labelText: KMockText.email,
                     enabled: false,
                     isDesk: widget.isDesk,
@@ -305,12 +309,14 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     required bool isDesk,
     required String? errorText,
     required bool showErrorText,
+    bool? isRequired,
     String? description,
     void Function(String text)? onChanged,
     bool enabled = true,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
+      isRequired: isRequired,
       enabled: enabled,
       controller: controller,
       labelText: labelText,

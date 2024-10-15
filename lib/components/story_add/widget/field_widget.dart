@@ -33,6 +33,7 @@ Widget _message({
 }) =>
     MessageFieldWidget(
       key: KWidgetkeys.screen.storyAdd.storyField,
+      isRequired: true,
       changeMessage: (text) => context.read<StoryAddBloc>().add(
             StoryAddEvent.storyUpdated(text),
           ),
