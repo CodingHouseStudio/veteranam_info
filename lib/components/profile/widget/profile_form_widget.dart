@@ -14,13 +14,11 @@ class ProfileFormWidget extends StatefulWidget {
     required this.initialSurname,
     required this.initialNickname,
     required this.initialEmail,
-    required this.photoURL,
     super.key,
     this.imageBytes,
   });
 
   final bool isDesk;
-  final String? photoURL;
   final String? initialName;
   final String? initialEmail;
   final String? initialSurname;
@@ -87,11 +85,11 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               onPressed: () => context
                   .read<ProfileBloc>()
                   .add(const ProfileEvent.imageUpdated()),
-              imageUrl: widget.photoURL,
-              perimeter: KSize.kPixel72,
+              imageUrl: context.read<AuthenticationBloc>().state.user.photo,
+              // perimeter: KSize.kPixel72,
               icon: KIcon.personEdit,
-              background: AppColors.materialThemeKeyColorsPrimary,
-              iconColor: AppColors.materialThemeBlack,
+              // background: AppColors.materialThemeKeyColorsPrimary,
+              // iconColor: AppColors.materialThemeBlack,
               imageBytes: widget.imageBytes,
             ),
             KSizedBox.kWidthSizedBox32,
