@@ -404,17 +404,12 @@ class TextTitleButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Text(
       key: titleKey,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: isDesk
-              ? AppTextStyle.materialThemeDisplayLarge
-              : AppTextStyle.materialThemeDisplaySmall,
-        ),
-      ],
+      title,
+      style: isDesk
+          ? AppTextStyle.materialThemeDisplayLarge
+          : AppTextStyle.materialThemeDisplaySmall,
     );
   }
 }
