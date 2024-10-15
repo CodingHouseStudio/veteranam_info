@@ -197,7 +197,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       maxLength: KMinMaxSize.descriptionMaxLength,
                     ),
                   KSizedBox.kHeightSizedBox32,
-                  if (_.formState.isDetail)
+                  if (_.formState.isDetail) ...[
                     CitiesDropFieldWidget(
                       textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
                       removeCity: (value) => context
@@ -212,8 +212,27 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       showErrorText: _.formState.hasError,
                       errorText: _.city.error.value(context),
                       selectedCities: _.city.value,
-                    )
-                  else if (_.formState.isMain)
+                    ),
+                    Row(
+                      children: [
+                        SwitchWidget(
+                          key: KWidgetkeys
+                              .screen.discountsAdd.indefinitelySwitcher,
+                          onChanged: () => context.read<DiscountsAddBloc>().add(
+                                const DiscountsAddEvent.onlineSwitch(),
+                              ),
+                          isSelected: _.isOnline,
+                        ),
+                        KSizedBox.kWidthSizedBox16,
+                        Expanded(
+                          child: Text(
+                            context.l10n.online,
+                            style: AppTextStyle.materialThemeBodyLarge,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else if (_.formState.isMain)
                     MultiDropFieldWidget(
                       textFieldKey:
                           KWidgetkeys.screen.discountsAdd.discountsField,
@@ -264,7 +283,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       labelText: context.l10n.eligibility,
                       isButton: true,
                       dropDownList: [
-                        context.l10n.allOfBelowMentioned,
+                        context.l10n.allOfListed,
                         context.l10n.veterans,
                         context.l10n.combatantsEligibility,
                         context.l10n.militaryEligibility,
@@ -274,7 +293,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                         context.l10n.policeEligibility,
                         context.l10n.idpEligibility,
                       ],
-                      allElemts: context.l10n.allOfBelowMentioned,
+                      allElemts: context.l10n.allOfListed,
                       showErrorText: _.formState.hasError,
                       errorText: _.eligibility?.error.value(context),
                       onChanged: (text) => context
@@ -289,7 +308,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     ),
                   ],
                   KSizedBox.kHeightSizedBox32,
-                  if (_.formState.isDetail)
+                  if (_.formState.isDetail) ...[
                     TextButton(
                       onPressed: _.isIndefinitely
                           ? null
@@ -333,60 +352,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                             ? AppTextStyle
                                 .materialThemeTitleMediumNeutralVariant70
                             : null,
-                        // text: _.period.value?.toLocalDateString(
-                        //   context: context,
-                        //   showDay: true,
-                        // ),
                       ),
-                      // [
-                      //   Text(
-                      //     context.l10n.period,
-                      //     style: _.isIndefinitely
-                      //         ? AppTextStyle.
-                      // materialThemeTitleMediumNeutralVariant70
-                      //         : AppTextStyle.materialThemeTitleMedium,
-                      //   ),
-                      //   Text(
-                      //     _.period.value?.toLocalDateString(
-                      //           context: context,
-                      //           showDay: true,
-                      //         ) ??
-                      //         '',
-                      //     style: _.isIndefinitely
-                      //         ? AppTextStyle.
-                      // materialThemeTitleMediumNeutralVariant70
-                      //         : AppTextStyle.materialThemeTitleMedium,
-                      //     textAlign: TextAlign.center,
-                      //   ),
-                      //   KIcon.calendarClock,
-                      // ],
-                    )
-                  // child: TextFieldWidget(
-                  //   widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
-                  //   controller: periodController,
-                  //   labelText: context.l10n.period,
-                  //   onChanged: (value) {},
-                  //   isDesk: isDesk,
-                  //   suffixIcon: KIcon.calendarClock,
-                  //   enabled: _.period != null,
-                  //   showErrorText: _.formState.hasError,
-                  //   errorText: _.period?.error.value(context),
-                  // ),
-
-                  else if (_.formState.isMain)
-                    TextFieldWidget(
-                      widgetKey: KWidgetkeys.screen.discountsAdd.linkField,
-                      controller: linkController,
-                      isDesk: isDesk,
-                      labelText: context.l10n.link,
-                      description: context.l10n.linkDescription,
-                      showErrorText: _.formState.hasError,
-                      errorText: _.link.error.value(context),
-                      onChanged: (text) => context
-                          .read<DiscountsAddBloc>()
-                          .add(DiscountsAddEvent.linkUpdate(text)),
                     ),
-                  if (_.formState.isDetail) ...[
                     Row(
                       children: [
                         SwitchWidget(
@@ -409,7 +376,19 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       ],
                     ),
                     KSizedBox.kHeightSizedBox8,
-                  ],
+                  ] else if (_.formState.isMain)
+                    TextFieldWidget(
+                      widgetKey: KWidgetkeys.screen.discountsAdd.linkField,
+                      controller: linkController,
+                      isDesk: isDesk,
+                      labelText: context.l10n.link,
+                      description: context.l10n.linkDescription,
+                      showErrorText: _.formState.hasError,
+                      errorText: _.link.error.value(context),
+                      onChanged: (text) => context
+                          .read<DiscountsAddBloc>()
+                          .add(DiscountsAddEvent.linkUpdate(text)),
+                    ),
                   if (!_.formState.isDescription) KSizedBox.kHeightSizedBox40,
                   if (isDesk)
                     Row(

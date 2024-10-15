@@ -52,7 +52,13 @@ class DiscountModel with _$DiscountModel {
       _$DiscountModelFromJson(json);
 }
 
-enum SubLocation { all, allStoresOfChain, online }
+enum SubLocation {
+  all,
+  allStoresOfChain,
+  online;
+
+  bool get isOnline => this == SubLocation.online;
+}
 
 enum DiscountState {
   isNew,
@@ -77,11 +83,11 @@ extension SubLocationString on SubLocation {
   List<String> getCardList(BuildContext context) {
     switch (this) {
       case SubLocation.all:
-        return [context.l10n.allStoresOfChain, context.l10n.online];
+        return [context.l10n.allStoresOfChain, context.l10n.allUkrainOnline];
       case SubLocation.allStoresOfChain:
         return [context.l10n.allStoresOfChain];
       case SubLocation.online:
-        return [context.l10n.online];
+        return [context.l10n.allUkrainOnline];
     }
   }
 }

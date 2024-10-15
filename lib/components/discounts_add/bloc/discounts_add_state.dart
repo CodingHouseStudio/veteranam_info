@@ -32,6 +32,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required List<CityModel> citiesList,
     required CategoriesFieldModel category,
     required CitiesFieldModel city,
+    required bool isOnline,
     required DateFieldModel period,
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
