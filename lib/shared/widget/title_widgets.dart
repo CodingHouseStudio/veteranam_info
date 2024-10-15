@@ -390,26 +390,3 @@ class LineTitleIconButtonWidget extends StatelessWidget {
     );
   }
 }
-
-class TextTitleButtonWidget extends StatelessWidget {
-  const TextTitleButtonWidget({
-    required this.title,
-    required this.titleKey,
-    required this.isDesk,
-    super.key,
-  });
-  final String title;
-  final Key titleKey;
-  final bool isDesk;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      key: titleKey,
-      title,
-      style: isDesk
-          ? AppTextStyle.materialThemeDisplayLarge
-          : AppTextStyle.materialThemeDisplaySmall,
-    );
-  }
-}

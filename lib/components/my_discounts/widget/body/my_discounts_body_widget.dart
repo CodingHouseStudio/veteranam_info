@@ -47,10 +47,12 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                   },
             mainChildWidgetsFunction: ({required isDesk}) => [
               if (companyState.company.isEmpty)
-                TextTitleButtonWidget(
-                  title: context.l10n.myPublications,
-                  titleKey: KWidgetkeys.screen.myDiscounts.title,
-                  isDesk: isDesk,
+                Text(
+                  key: KWidgetkeys.screen.myDiscounts.title,
+                  context.l10n.myPublications,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeDisplayLarge
+                      : AppTextStyle.materialThemeDisplaySmall,
                 )
               else
                 LineTitleIconButtonWidget(
