@@ -10,18 +10,18 @@ class UserPhotoWidget extends StatelessWidget {
     super.key,
     this.imageName,
     this.icon,
-    this.perimeter,
-    this.background,
-    this.iconColor,
+    // this.perimeter,
+    // this.background,
+    // this.iconColor,
     this.imageBytes,
   });
   final String? imageUrl;
   final VoidCallback? onPressed;
   final String? imageName;
   final Icon? icon;
-  final double? perimeter;
-  final Color? background;
-  final Color? iconColor;
+  // final double? perimeter;
+  // final Color? background;
+  // final Color? iconColor;
   final Uint8List? imageBytes;
 
   @override
@@ -31,34 +31,35 @@ class UserPhotoWidget extends StatelessWidget {
         // decoration: KWidgetTheme.boxDecorationCircular
         //     .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
         // padding: EdgeInsets.all(_padding),
-        radius: (perimeter ?? KSize.kUserPhoto) / 2,
-        backgroundColor: background,
+        radius: KSize.kUserPhoto / 2,
+        backgroundColor: AppColors.materialThemeKeyColorsPrimary,
         child: _body,
       );
     } else {
-      return IconButtonWidget(
-        icon: _body,
-        onPressed: onPressed,
-        background: background ?? AppColors.materialThemeKeyColorsSecondary,
-        padding: _padding,
+      return InkWell(
+        onTap: onPressed,
+        child: CircleAvatar(
+          radius: KSize.kUserPhoto / 2,
+          backgroundColor: AppColors.materialThemeKeyColorsPrimary,
+          child: _body,
+        ),
       );
     }
   }
 
   Widget get _body => imageUrl != null || imageBytes != null
       ? ClipRRect(
-          borderRadius: BorderRadius.circular(perimeter ?? KSize.kUserPhoto),
+          borderRadius: BorderRadius.circular(KSize.kUserPhoto),
           child: NetworkImageWidget(
             imageUrl: imageUrl,
             imageBytes: imageBytes,
             fit: BoxFit.contain,
-            size: perimeter ?? KSize.kUserPhoto,
+            size: KSize.kUserPhoto,
             highQuality: true,
             imageName: imageName,
             // skeletonizerLoading: false,
           ),
         )
       : (icon ?? KIcon.user)
-          .copyWith(color: iconColor ?? AppColors.materialThemeWhite);
-  double get _padding => imageUrl != null ? 0 : KPadding.kPaddingSize12;
+          .copyWith(color: AppColors.materialThemeKeyColorsSecondary);
 }
