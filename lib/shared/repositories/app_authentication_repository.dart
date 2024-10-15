@@ -442,6 +442,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       // );
       // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
       // l);
+      if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
+        try {
+          unawaited(_storageService.removeFile(currentUser.photo));
+          // User can save own photo in another service
+          // ignore: empty_catches
+        } catch (e) {}
+      }
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       unawaited(logInAnonymously());
