@@ -34,6 +34,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             formState: DiscountsAddEnum.initial,
             citiesList: [],
             isIndefinitely: true,
+            isOnline: false,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -42,6 +43,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_CategoryRemove>(_onCategoryRemove);
     on<_CityAdd>(_onCityAdd);
     on<_CityRemove>(_onCityRemove);
+    on<_OnlineSwitch>(_onOnlineSwitch);
     on<_PeriodUpdate>(_onPeriodUpdated);
     on<_IndefinitelyUpdate>(_onIndefinitelyUpdate);
     on<_TitleUpdate>(_onTitleUpdated);
@@ -132,6 +134,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
               : MessageFieldModel.dirty(discount!.exclusions!),
           formState: DiscountsAddEnum.initial,
           isIndefinitely: true,
+          isOnline: discount!.subLocation?.isOnline ?? false,
         ),
       );
     }
@@ -201,6 +204,19 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         city: cityFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.detailInProgress,
+      ),
+    );
+  }
+
+  void _onOnlineSwitch(
+    _OnlineSwitch event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        isOnline: !state.isOnline,
         failure: null,
         formState: DiscountsAddEnum.detailInProgress,
       ),
@@ -449,6 +465,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
         userName: _companyRepository.currentUserCompany.companyName,
+        subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {
         emit(

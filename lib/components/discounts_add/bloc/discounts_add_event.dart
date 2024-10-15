@@ -12,6 +12,7 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
       _CategoryRemove;
   const factory DiscountsAddEvent.cityAdd(String city) = _CityAdd;
   const factory DiscountsAddEvent.cityRemove(String city) = _CityRemove;
+  const factory DiscountsAddEvent.onlineSwitch() = _OnlineSwitch;
   const factory DiscountsAddEvent.periodUpdate(Future<DateTime?> period) =
       _PeriodUpdate;
   const factory DiscountsAddEvent.indefinitelyUpdate() = _IndefinitelyUpdate;
