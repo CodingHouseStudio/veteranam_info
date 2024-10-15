@@ -20,6 +20,7 @@ class CompanyFormState with _$CompanyFormState {
     required LinkFieldModel link,
     required CompanyFormFailure? failure,
     required CompanyFormEnum formState,
+    required bool? deleteIsPossible,
   }) = _CompanyFormState;
 }
 
@@ -27,7 +28,7 @@ enum CompanyFormEnum {
   initial,
   inProgress,
   invalidData,
-  delete,
+  // delete,
   success,
   succesesUnmodified,
   sendInProgress;

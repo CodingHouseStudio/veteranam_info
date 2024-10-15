@@ -1556,6 +1556,23 @@
     "examples": "Text for the field on the Company page for the company code (description).",
     "description": "The field is used to input the company code for business accounts."
   },
+  "deleteCompanyMessage": "You can only delete the company account if it has no discounts. If you still wish to delete the account, please remove all existing discounts associated with the company.",
+  "@deleteCompanyMessage": {
+    "examples": "Text on the Company page under the delete button, appears if the company has any discounts."
+  },
+  "deleteCompanyLoadingMessage": "Company data is loading, please be patient.",
+  "@deleteCompanyLoadingMessage": {
+    "examples": "Text on the Company page under the delete button, appears when checking if the company has any existing discounts."
+  },
+  "deleteCompanyEmptyMessage": "Before deleting the company account, it needs to be created first.",
+  "@deleteCompanyEmptyMessage": {
+    "examples": "Text on the Company page under the delete button, appears if the company has not been created yet."
+  },
+  "create": "Create",
+  "@create": {
+    "examples": "Text on the Company page for the button.",
+    "description": "The button is used to create a business account."
+  },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."
