@@ -368,13 +368,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
-    gh.factory<_i174.CompanyFormBloc>(
-      () => _i174.CompanyFormBloc(
-        companyRepository: gh<_i1001.ICompanyRepository>(),
-        dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
-      ),
-      registerFor: {_business},
-    );
     gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
           appAuthenticationRepository:
@@ -416,6 +409,14 @@ extension GetItInjectableX on _i174.GetIt {
         appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
       ),
       registerFor: {_development},
+    );
+    gh.factory<_i174.CompanyFormBloc>(
+      () => _i174.CompanyFormBloc(
+        companyRepository: gh<_i1001.ICompanyRepository>(),
+        dataPickerRepository: gh<_i1001.IDataPickerRepository>(),
+        discountRepository: gh<_i1001.IDiscountRepository>(),
+      ),
+      registerFor: {_business},
     );
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));

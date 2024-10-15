@@ -38,7 +38,8 @@ void main() {
       );
 
       when(
-        mockDiscountRepository.getDiscountsByUserId(KTestText.profileUser.id),
+        mockDiscountRepository
+            .getDiscountsByCompanyId(KTestText.profileUser.id),
       ).thenAnswer((_) => discountsStreamController.stream);
 
       when(
@@ -87,7 +88,7 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
         );
@@ -160,7 +161,7 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (_) => Stream.value([KTestText.discountModelItems.first]),
         );
@@ -283,7 +284,7 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (_) => Stream.value([KTestText.discountModelItems.first]),
         );
