@@ -1524,6 +1524,26 @@
     "examples": "Текст на сторінці Discount Add для перемикача.",
     "description": "Перемикач використовується для того щоб додати до знижки тег онлайн, який показує що її можна використоувати онлайн."
   },
+  "verification": "на перевірку",
+  "@verification": {
+    "examples": "Текст для діалогу публікації знижки на сторінці Discount Add."
+  },
+  "publishVerificationSubtitleFirst": "Після натискання кнопки",
+  "@publishVerificationSubtitleFirst": {
+    "examples": "Підзаголовок для діалогу публікації знижки на сторінці Discount Add(перша частина)."
+  },
+  "publishVerificationSubtitleSecond": "ми одразу почнемо обробляти вашу заявку на знижку. Якщо знижку буде успішно підтверджено, ви отримаєте повідомлення на електронну пошту, і знижка з’явиться на сайті. У разі відхилення знижки, зв'яжіться з нашою командою за адресою",
+  "@publishVerificationSubtitleSecond": {
+    "examples": "Підзаголовок для діалогу публікації знижки на сторінці Discount Add(друга частина)."
+  },
+  "publishVerificationSubtitleThird": "для вирішення питання.",
+  "@publishVerificationSubtitleThird": {
+    "examples": "Підзаголовок для діалогу публікації знижки на сторінці Discount Add(третя частина)."
+  },
+  "agreeTermsConditions": "Я погоджуюсь з умовами",
+  "@agreeTermsConditions": {
+    "examples": "Текст для діалогу публікації знижки на сторінці Discount Add."
+  },
   "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
   "@deleteProfileQuestion": {
     "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
