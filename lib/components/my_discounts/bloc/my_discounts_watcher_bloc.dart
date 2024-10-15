@@ -88,7 +88,7 @@ class MyDiscountsWatcherBloc
     if (_companyRepository.currentUserCompany.id.isNotEmpty) {
       await _discountItemsSubscription?.cancel();
       _discountItemsSubscription = _discountRepository
-          .getDiscountsByUserId(
+          .getDiscountsByCompanyId(
         _companyRepository.currentUserCompany.id,
       )
           .listen(

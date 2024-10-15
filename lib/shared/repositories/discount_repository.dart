@@ -41,10 +41,10 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Stream<List<DiscountModel>> getDiscountsByUserId(
-    String userId,
+  Stream<List<DiscountModel>> getDiscountsByCompanyId(
+    String companyId,
   ) =>
-      _firestoreService.getDiscounts(userId: userId);
+      _firestoreService.getDiscounts(userId: companyId);
 
   @override
   Future<Either<SomeFailure, bool>> deleteDiscountsById(
@@ -183,7 +183,7 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, DiscountModel>> getCopanyDiscount({
+  Future<Either<SomeFailure, DiscountModel>> getCompanyDiscount({
     required String id,
     required String companyId,
   }) async {
@@ -197,6 +197,20 @@ class DiscountRepository implements IDiscountRepository {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
       return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<bool> companyHasDiscount(
+    String companyId,
+  ) async {
+    try {
+      return await _firestoreService.companyHasDiscounts(
+        companyId,
+      );
+    } catch (e, stack) {
+      SomeFailure.serverError(error: e, stack: stack);
+      return true;
     }
   }
 }

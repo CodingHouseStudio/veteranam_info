@@ -458,6 +458,17 @@ class FirestoreService {
     throw FirebaseException(code: 'not-found', plugin: 'not-found');
   }
 
+  Future<bool> companyHasDiscounts(
+    String companyId,
+  ) async {
+    final docSnapshot = await _db
+        .collection(FirebaseCollectionName.discount)
+        .where(DiscountModelJsonField.userId, isEqualTo: companyId)
+        .get();
+
+    return docSnapshot.docs.isNotEmpty;
+  }
+
   Future<void> updateDiscountModel(
     DiscountModel discountModel,
   ) async {
