@@ -12,6 +12,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
     super.key,
     this.showErrorText,
     this.errorText,
+    this.isRequired,
     // this.controller,
   });
   final void Function(String text)? onChanged;
@@ -23,13 +24,14 @@ class CitiesDropFieldWidget extends StatelessWidget {
   final List<String> selectedCities;
   // final TextEditingController? controller;
   final Key textFieldKey;
+  final bool? isRequired;
 
   @override
   Widget build(BuildContext context) {
     return MultiDropFieldImplementationWidget<CityModel>(
       key: KWidgetkeys.widget.citiesDropField.widget,
       textFieldKey: textFieldKey,
-      labelText: context.l10n.city,
+      labelText: context.l10n.city, isRequired: isRequired,
       dropDownList: citiesList,
       isDesk: isDesk,
       errorText: errorText,

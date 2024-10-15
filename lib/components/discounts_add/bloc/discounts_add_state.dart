@@ -37,7 +37,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
     required ListFieldModel? eligibility,
-    required LinkNullableFieldModel link,
+    required LinkFieldModel link,
     required MessageFieldModel description,
     required MessageFieldModel exclusions,
     required DiscountsAddEnum formState,

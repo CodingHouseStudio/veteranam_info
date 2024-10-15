@@ -28,7 +28,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
             eligibility: ListFieldModel.pure(),
-            link: LinkNullableFieldModel.pure(),
+            link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
@@ -127,7 +127,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           eligibility: discount!.eligibility == null
               ? null
               : ListFieldModel.dirty(discount!.eligibility!),
-          link: LinkNullableFieldModel.dirty(discount!.directLink),
+          link: LinkFieldModel.dirty(discount!.directLink),
           description: MessageFieldModel.dirty(discount!.description),
           exclusions: discount!.exclusions == null
               ? const MessageFieldModel.pure()
@@ -359,7 +359,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _LinkUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final linkFieldModel = LinkNullableFieldModel.dirty(event.link);
+    final linkFieldModel = LinkFieldModel.dirty(event.link);
 
     emit(
       state.copyWith(
@@ -454,7 +454,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         category: state.category.value,
         location: state.city.value,
         description: state.description.value,
-        link: _companyRepository.currentUserCompany.link!,
+        link: _companyRepository.currentUserCompany.link,
         company: _companyRepository.currentUserCompany.companyName,
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
@@ -464,7 +464,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.companyName,
+        userName: _companyRepository.currentUserCompany.publicName,
         subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {

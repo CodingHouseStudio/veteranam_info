@@ -10,6 +10,7 @@ class CompanyModel with _$CompanyModel {
     required String id,
     required List<String> userEmails,
     String? companyName,
+    String? publicName,
     String? code,
     String? link,
     @ImageConverter() ImageModel? image,
@@ -27,11 +28,14 @@ class CompanyModel with _$CompanyModel {
       id.isEmpty ||
       companyName == null ||
       companyName!.isEmpty ||
+      publicName == null ||
+      publicName!.isEmpty ||
       code == null ||
       code!.isEmpty ||
-      userEmails.isEmpty ||
-      link == null ||
-      link!.isEmpty
+      userEmails.isEmpty
+      // ||
+      // link == null ||
+      // link!.isEmpty
       // ||
       // image == null ||
       // image!.downloadURL.isEmpty

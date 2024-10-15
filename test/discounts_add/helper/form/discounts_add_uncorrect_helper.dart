@@ -13,7 +13,7 @@ Future<void> discountsAddUncorectHelper({
     tester: tester,
     titleText: KTestText.fieldEmpty,
     linkText: KTestText.sendDiscountModel.discount.first.toString(),
-    discountsText: KTestText.sendDiscountModel.link,
+    discountsText: KTestText.sendDiscountModel.link!,
     eligibilityTap: false,
   );
 
@@ -24,7 +24,7 @@ Future<void> discountsAddUncorectHelper({
   await discountsAddMainEnterHelper(
     tester: tester,
     titleText: KTestText.sendDiscountModel.title,
-    linkText: KTestText.sendDiscountModel.link,
+    linkText: KTestText.sendDiscountModel.link!,
     discountsText: KTestText.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true,
     // periodText: KTestText.sendDiscountModel.expiration!,

@@ -20,6 +20,7 @@ List<Widget> _fieldWidgetList({
                     .name
                     .error
                     .value(context),
+                isRequired: true,
                 showErrorText: context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.invalidData,
                 controller: nameController,
@@ -36,6 +37,7 @@ List<Widget> _fieldWidgetList({
                 widgetKey: KWidgetkeys.screen.feedback.emailField,
                 showErrorText: context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.invalidData,
+                isRequired: true,
                 errorText: context
                     .read<FeedbackBloc>()
                     .state
@@ -59,6 +61,7 @@ List<Widget> _fieldWidgetList({
               FeedbackEnum.invalidData,
           errorText:
               context.read<FeedbackBloc>().state.name.error.value(context),
+          isRequired: true,
           controller: nameController,
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.nameUpdated(value),
@@ -73,6 +76,7 @@ List<Widget> _fieldWidgetList({
               FeedbackEnum.invalidData,
           errorText:
               context.read<FeedbackBloc>().state.email.error.value(context),
+          isRequired: true,
           controller: emailController,
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.emailUpdated(value),

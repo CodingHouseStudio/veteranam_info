@@ -69,7 +69,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           if (state.formState == DiscountsAddEnum.initial &&
               state.discount != null) {
             titleController.text = state.discount!.title;
-            linkController.text = state.discount!.link;
+            linkController.text = state.discount!.link ?? linkController.text;
             // categoryController = TextEditingController();
             // cityController = TextEditingController();
             periodController.text =
@@ -160,6 +160,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       onChanged: (text) => context
                           .read<DiscountsAddBloc>()
                           .add(DiscountsAddEvent.categoryAdd(text)),
+                      isRequired: true,
                       labelText: context.l10n.category,
                       dropDownList: _.categoryList,
                       isDesk: isDesk,
@@ -174,6 +175,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     TextFieldWidget(
                       widgetKey: KWidgetkeys.screen.discountsAdd.titleField,
                       controller: titleController,
+                      isRequired: true,
                       isDesk: isDesk,
                       description: context.l10n.titleExample,
                       labelText: context.l10n.title,
@@ -192,6 +194,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .read<DiscountsAddBloc>()
                           .add(DiscountsAddEvent.descriptionUpdate(text)),
                       isDesk: isDesk,
+                      isRequired: true,
                       labelText: context.l10n.description,
                       showErrorText: _.formState.hasError,
                       errorText: _.description.error.value(context),
@@ -208,7 +211,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       onChanged: (value) => context
                           .read<DiscountsAddBloc>()
                           .add(DiscountsAddEvent.cityAdd(value)),
-                      isDesk: isDesk,
+                      isDesk: isDesk, isRequired: true,
                       citiesList: _.citiesList,
                       showErrorText: _.formState.hasError,
                       errorText: _.city.error.value(context),
@@ -248,6 +251,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                         '20%',
                         '50%',
                       ],
+                      isRequired: true,
                       showErrorText: _.formState.hasError,
                       errorText: _.discounts.error.value(context),
                       onChanged: (text) => context
@@ -281,7 +285,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           KWidgetkeys.screen.discountsAdd.eligibilityField,
                       // controller: eligibilityController,
                       isDesk: isDesk,
-                      labelText: context.l10n.eligibility,
+                      labelText: context.l10n.eligibility, isRequired: true,
                       isButton: true,
                       dropDownList: [
                         context.l10n.allOfListed,
