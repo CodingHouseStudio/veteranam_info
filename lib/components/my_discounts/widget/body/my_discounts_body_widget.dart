@@ -46,14 +46,23 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                     return MyDiscountEmptyWidget(isDesk: isDesk);
                   },
             mainChildWidgetsFunction: ({required isDesk}) => [
-              LineTitleIconButtonWidget(
-                title: context.l10n.myPublications,
-                titleKey: KWidgetkeys.screen.myDiscounts.title,
-                icon: KIcon.plus,
-                iconButtonKey: KWidgetkeys.screen.myDiscounts.iconAdd,
-                isDesk: isDesk,
-                onPressed: () => context.goNamed(KRoute.discountsAdd.name),
-              ),
+              if (companyState.company.isEmpty)
+                Text(
+                  key: KWidgetkeys.screen.myDiscounts.title,
+                  context.l10n.myPublications,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeDisplayLarge
+                      : AppTextStyle.materialThemeDisplaySmall,
+                )
+              else
+                LineTitleIconButtonWidget(
+                  title: context.l10n.myPublications,
+                  titleKey: KWidgetkeys.screen.myDiscounts.title,
+                  icon: KIcon.plus,
+                  iconButtonKey: KWidgetkeys.screen.myDiscounts.iconAdd,
+                  isDesk: isDesk,
+                  onPressed: () => context.goNamed(KRoute.discountsAdd.name),
+                ),
               KSizedBox.kHeightSizedBox40,
               if (companyState.company.isEmpty)
                 MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk)
