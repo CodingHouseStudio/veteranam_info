@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -76,27 +75,31 @@ class ProfileBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox48,
             if (isDesk)
-              Row(
-                children: [
-                  Expanded(
-                    child: logoutButton(
-                      context: context,
-                      isDesk: isDesk,
-                    ),
-                  ),
-                  KSizedBox.kWidthSizedBox40,
-                  Expanded(
-                    child: deleteButton(
-                      context: context,
-                      isDesk: isDesk,
-                    ),
-                  ),
-                ],
+              logoutButton(
+                context: context,
+                isDesk: false,
               )
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: logoutButton(
+            //         context: context,
+            //         isDesk: isDesk,
+            //       ),
+            //     ),
+            //     KSizedBox.kWidthSizedBox40,
+            //     Expanded(
+            //       child: deleteButton(
+            //         context: context,
+            //         isDesk: isDesk,
+            //       ),
+            //     ),
+            //   ],
+            // )
             else ...[
               logoutButton(context: context, isDesk: isDesk),
-              KSizedBox.kHeightSizedBox16,
-              deleteButton(context: context, isDesk: isDesk),
+              // KSizedBox.kHeightSizedBox16,
+              // deleteButton(context: context, isDesk: isDesk),
             ],
             if (isDesk)
               KSizedBox.kHeightSizedBox48
@@ -125,9 +128,8 @@ class ProfileBodyWidget extends StatelessWidget {
           background: AppColors.materialThemeKeyColorsSecondary,
           onPressed: () {
             context.read<AuthenticationBloc>().add(
-                  AuthenticationDeleteRequested(),
+                  AuthenticationLogoutRequested(),
                 );
-            context.goNamed(KRoute.home.name);
           },
         ),
         isDesk: isDesk,
@@ -166,9 +168,8 @@ class ProfileBodyWidget extends StatelessWidget {
           background: AppColors.materialThemeRefErrorError60,
           onPressed: () {
             context.read<AuthenticationBloc>().add(
-                  AuthenticationLogoutRequested(),
+                  AuthenticationDeleteRequested(),
                 );
-            context.goNamed(KRoute.home.name);
           },
         ),
       );
