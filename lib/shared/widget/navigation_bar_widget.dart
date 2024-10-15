@@ -177,13 +177,13 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     child: TextFieldWidget(
                       key: _formKey,
                       widgetKey: KWidgetkeys.widget.nawbar.field,
-                      hintStyle: widget.isDesk
+                      labelTextStyle: widget.isDesk
                           ? AppTextStyle.text24
                           : AppTextStyle.text16,
                       focusNode: focusNode,
                       prefixIcon: KIcon.search,
                       onChanged: (text) {},
-                      hintText: context.l10n.search,
+                      labelText: context.l10n.search,
                       // suffixIcon: widget.isDesk || !widget.hasMicrophone
                       //     ? null
                       //     : KIcon.mic.setIconKey(

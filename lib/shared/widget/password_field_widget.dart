@@ -45,6 +45,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
       widgetKey: widget.widgetKey,
       onChanged: widget.onChanged,
       errorText: widget.errorText,
+      isRequired: true,
       labelText: widget.labelText,
       isDesk: widget.isDesk,
       enabled: widget.enabled,

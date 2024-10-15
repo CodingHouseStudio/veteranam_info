@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/discounts/field_model/field_model.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'discount_link_form_bloc.freezed.dart';
@@ -19,7 +20,7 @@ class DiscountLinkFormBloc
         _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const _Initial(
-            link: LinkFieldModel.pure(),
+            link: DiscountLinkFieldModel.pure(),
             formState: LinkEnum.initial,
           ),
         ) {
@@ -33,8 +34,13 @@ class DiscountLinkFormBloc
     _UpdateLink event,
     Emitter<DiscountLinkFormState> emit,
   ) {
-    final linkFieldModel = LinkFieldModel.dirty(event.link);
-    emit(state.copyWith(link: linkFieldModel, formState: LinkEnum.inProgress));
+    final discountLinkFieldModel = DiscountLinkFieldModel.dirty(event.link);
+    emit(
+      state.copyWith(
+        link: discountLinkFieldModel,
+        formState: LinkEnum.inProgress,
+      ),
+    );
   }
 
   void _onSendLink(
@@ -56,14 +62,14 @@ class DiscountLinkFormBloc
 
       emit(
         const _Initial(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       );
       // emit(
       //   state.copyWith(
       //     formState: LinkEnum.sending,
-      //     link: const LinkFieldModel.pure(),
+      //     link: const DiscountLinkFieldModel.pure(),
       //   ),
       // );
       // final result =
@@ -78,7 +84,7 @@ class DiscountLinkFormBloc
       //   (r) {
       //     emit(
       //       const _Initial(
-      //         link: LinkFieldModel.pure(),
+      //         link: DiscountLinkFieldModel.pure(),
       //         formState: LinkEnum.success,
       //       ),
       //     );

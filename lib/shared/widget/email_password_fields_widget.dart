@@ -147,6 +147,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
             onChanged: widget.onChangedEmail,
+            isRequired: true,
             errorText: widget.errorTextEmail,
             labelText: context.l10n.email,
             isDesk: widget.isDesk,

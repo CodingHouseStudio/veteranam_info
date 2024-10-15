@@ -54,19 +54,19 @@ void main() {
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         // const DiscountLinkFormState(
-        //   link: LinkFieldModel.pure(),
+        //   link: DiscountLinkFieldModel.pure(),
         //   formState: LinkEnum.sending,
         // ),
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],
@@ -83,36 +83,36 @@ void main() {
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         const DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.field),
+          link: DiscountLinkFieldModel.dirty(KTestText.field),
           formState: LinkEnum.inProgress,
         ),
         // const DiscountLinkFormState(
-        //   link: LinkFieldModel.dirty(KTestText.field),
+        //   link: DiscountLinkFieldModel.dirty(KTestText.field),
         //   formState: LinkEnum.invalidData,
         // ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.field),
+          link: DiscountLinkFieldModel.dirty(KTestText.field),
           formState: LinkEnum.success,
         ),
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModelWrong.link),
           formState: LinkEnum.inProgress,
         ),
 
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModelWrong.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
         // const DiscountLinkFormState(
-        //   link: LinkFieldModel.pure(),
+        //   link: DiscountLinkFieldModel.pure(),
         //   formState: LinkEnum.sending,
         // ),
         // const DiscountLinkFormState(
-        //   link: LinkFieldModel.pure(),
+        //   link: DiscountLinkFieldModel.pure(),
         //   formState: LinkEnum.initial,
         //   failure: DiscountLinkFormFailure.error,
         // ),
@@ -128,15 +128,15 @@ void main() {
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],
@@ -151,15 +151,15 @@ void main() {
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],
@@ -174,16 +174,16 @@ void main() {
           const DiscountLinkFormEvent.sendLink(),
         ),
       seed: () => DiscountLinkFormState(
-        link: LinkFieldModel.dirty(KTestText.linkModel.link),
+        link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
         formState: LinkEnum.inProgress,
       ),
       expect: () async => [
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],
@@ -203,7 +203,7 @@ void main() {
         return discountLinkFormBloc;
       },
       seed: () => DiscountLinkFormState(
-        link: LinkFieldModel.dirty(KTestText.linkModel.link),
+        link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
         formState: LinkEnum.inProgress,
       ),
       act: (bloc) async {
@@ -212,11 +212,11 @@ void main() {
       },
       expect: () async => [
         DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
+          link: DiscountLinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],

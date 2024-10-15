@@ -6,6 +6,8 @@ class TextFieldWidget extends StatefulWidget {
     required this.widgetKey,
     required this.onChanged,
     required this.isDesk,
+    required this.labelText,
+    this.isRequired,
     this.hintText,
     this.textAlign,
     super.key,
@@ -30,7 +32,6 @@ class TextFieldWidget extends StatefulWidget {
     this.readOnly,
     this.disposeFocusNode = true,
     this.expands = false,
-    this.labelText,
     this.minLines,
     this.hintStyle,
     // this.text,
@@ -85,6 +86,7 @@ class TextFieldWidget extends StatefulWidget {
   final Color? borderHoverColor;
   final String? description;
   final TextInputAction? textInputAction;
+  final bool? isRequired;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -143,7 +145,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                       vertical: KPadding.kPaddingSize16,
                     )
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
-          labelText: widget.labelText,
+          labelText: labelText,
           border: widget.border,
           enabledBorder: widget.enabledBorder ??
               KWidgetTheme.outlineInputBorderEnabled.copyWith(
@@ -175,6 +177,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       ),
     );
   }
+
+  String? get labelText =>
+      (widget.isRequired ?? false) ? '${widget.labelText}*' : widget.labelText;
 
   @override
   void dispose() {

@@ -32,7 +32,7 @@ class MobFeedbackWidget extends StatelessWidget {
             TextFieldWidget(
               widgetKey: KWidgetkeys.widget.mobFeedback.field,
               // controller: controller,
-              labelText: context.l10n.writeMessage,
+              labelText: context.l10n.writeMessage, isRequired: true,
               // textInputAction: TextInputAction.done,
               onChanged: (text) => context.read<MobFeedbackBloc>().add(
                     MobFeedbackEvent.messageUpdated(text),

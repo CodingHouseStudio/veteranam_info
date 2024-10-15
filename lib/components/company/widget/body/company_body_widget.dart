@@ -113,6 +113,8 @@ class CompanyBodyWidget extends StatelessWidget {
         initialEmail: context.read<AuthenticationBloc>().state.user.email,
         initialCode: context.read<CompanyWatcherBloc>().state.company.code,
         initialLink: context.read<CompanyWatcherBloc>().state.company.link,
+        initialPublicName:
+            context.read<CompanyWatcherBloc>().state.company.publicName,
       );
 
   void myDiscountTap(

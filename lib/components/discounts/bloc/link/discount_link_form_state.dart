@@ -22,7 +22,7 @@ enum DiscountLinkFormFailure {
 @freezed
 class DiscountLinkFormState with _$DiscountLinkFormState {
   const factory DiscountLinkFormState({
-    required LinkFieldModel link,
+    required DiscountLinkFieldModel link,
     required LinkEnum formState,
     DiscountLinkFormFailure? failure,
   }) = _Initial;
