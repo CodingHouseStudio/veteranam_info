@@ -757,8 +757,8 @@
   "@companyIsHidden": {
     "examples": "Text on the Discount page if the company is hidden in the discount"
   },
-  "online": "All of Ukraine (online)",
-  "@online": {
+  "allUkrainOnline": "All of Ukraine (online)",
+  "@allUkrainOnline": {
     "examples": "Text on the Discount page for advanced filters"
   },
   "moreFunds": "More funds",
@@ -1265,8 +1265,8 @@
   "@idpEligibility": {
     "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
   },
-  "allOfBelowMentioned": "To all of the below-mentioned",
-  "@allOfBelowMentioned": {
+  "allOfListed": "All of the listed",
+  "@allOfListed": {
     "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
   },
   "asBusiness": "as a BUSINESS user",
@@ -1510,6 +1510,11 @@
   "logOutProfileQuestion": "Are you sure you want to log out of your profile?",
   "@logOutProfileQuestion": {
     "examples": "Text for the logout dialog on the Profile page."
+  },
+  "online": "Online",
+  "@online": {
+    "examples": "Text for the switch on the Discount Add page.",
+    "description": "The switch is used to add an 'online' tag to the discount, indicating that it can be used online."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
