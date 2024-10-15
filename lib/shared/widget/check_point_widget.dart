@@ -9,12 +9,14 @@ class CheckPointWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.textStyle,
+    this.textWidget,
   });
   final void Function()? onChanged;
   final bool isCheck;
-  final String text;
+  final String? text;
   final TextStyle? textStyle;
   final bool isDesk;
+  final Widget? textWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +49,16 @@ class CheckPointWidget extends StatelessWidget {
                   ),
           ),
         ),
-        label: Text(
-          text,
-          key: KWidgetkeys.widget.checkPoint.text,
-          maxLines: 3,
-          style: textStyle ??
-              (isDesk
-                  ? AppTextStyle.materialThemeBodyLarge
-                  : AppTextStyle.materialThemeBodyMedium),
-        ),
+        label: textWidget ??
+            Text(
+              text ?? '',
+              key: KWidgetkeys.widget.checkPoint.text,
+              maxLines: 3,
+              style: textStyle ??
+                  (isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium),
+            ),
       ),
     );
   }

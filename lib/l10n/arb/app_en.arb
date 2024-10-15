@@ -1516,6 +1516,26 @@
     "examples": "Text for the switch on the Discount Add page.",
     "description": "The switch is used to add an 'online' tag to the discount, indicating that it can be used online."
   },
+  "verification": "for verification?",
+  "@verification": {
+    "examples": "Text for the discount submission dialog on the Discount Add page."
+  },
+  "publishVerificationSubtitleFirst": "Once you click the",
+  "@publishVerificationSubtitleFirst": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (first part)."
+  },
+  "publishVerificationSubtitleSecond": "we will begin processing your discount request. If the discount is successfully approved, you will receive an email notification, and the discount will appear on the site. If the discount is rejected, please contact our team at",
+  "@publishVerificationSubtitleSecond": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (second part)."
+  },
+  "publishVerificationSubtitleThird": "for assistance.",
+  "@publishVerificationSubtitleThird": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (third part)."
+  },
+  "agreeTermsConditions": "I agree to the terms and conditions",
+  "@agreeTermsConditions": {
+    "examples": "Text for the discount submission dialog on the Discount Add page."
+  },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."
