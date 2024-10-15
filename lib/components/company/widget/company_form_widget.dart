@@ -227,7 +227,13 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox16,
                       DoubleButtonWidget(
                         widgetKey: KWidgetkeys.screen.profile.saveButton,
-                        text: context.l10n.saveChangesProfile,
+                        text: context
+                                .read<CompanyWatcherBloc>()
+                                .state
+                                .company
+                                .isEmpty
+                            ? context.l10n.createAccount
+                            : context.l10n.saveChangesProfile,
                         color: AppColors.materialThemeKeyColorsSecondary,
                         textColor: AppColors.materialThemeWhite,
                         icon: KIcon.check
