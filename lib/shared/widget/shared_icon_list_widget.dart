@@ -20,7 +20,7 @@ abstract class SharedIconListWidget {
     bool? useSiteUrl,
   }) {
     return [
-      if (link != null) ...[
+      if (link != null && link.isUrlValid) ...[
         _cardIconWidget(
           label: context.l10n.webSite,
           context,

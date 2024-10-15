@@ -742,7 +742,7 @@
   },
   "companyIsHidden": "Компанію приховано",
   "@companyIsHidden": {
-    "examples": "Текст на сторінці Discount, якщо в знижзці компанія прихована"
+    "examples": "Текст на сторінці Discount, якщо в знижці компанія прихована"
   },
   "allUkrainOnline": "Вся Україна (онлайн)",
   "@allUkrainOnline": {
@@ -1440,12 +1440,12 @@
     "examples": "Текст на сторінці Discount Add для поля з категоріями(опис)"
   },
   "companyName": "Назва компанії",
-  "@copmanyName": {
+  "@companyName": {
     "examples": "Текст на сторінці Company для поля з назвою компанії",
     "description": "Поле використовується для вводу назви компанії для бізнес акаунтів."
   },
-  "companyCode": "Код ЄДРПОУ або ІПН для ФОП",
-  "@copmanyCode": {
+  "companyCode": "Код ЄДРПОУ/РНОКПП",
+  "@companyCode": {
     "examples": "Текст на сторінці Company для поля з кодом компанії.",
     "description": "Поле використовується для вводу назви коду компанії для бізнес акаунтів."
   },
@@ -1543,6 +1543,26 @@
   "agreeTermsConditions": "Я погоджуюсь з умовами",
   "@agreeTermsConditions": {
     "examples": "Текст для діалогу публікації знижки на сторінці Discount Add."
+  },
+  "brandName": "Назва бренду",
+  "@brandName": {
+    "examples": "Текст для поля на сторінці Company.",
+    "description": "Поле використовується для вводу назви бренду компації."
+  },
+  "brandNameDescription": "Цю назву буде вказано в оголощенні про знижку",
+  "@brandNameDescription": {
+    "examples": "Текст для поля на сторінці Company(опис).",
+    "description": "Поле використовується для вводу назви бренду компації."
+  },
+  "companyNameDescription": "Наприклад \"ТОВ Іванов і партнери\"",
+  "@companyNameDescription": {
+    "examples": "Текст на сторінці Company для поля з назвою компанії(опис).",
+    "description": "Поле використовується для вводу назви компанії для бізнес акаунтів."
+  },
+  "companyCodeDescription": "Має містити 8-10 цифр",
+  "@companyCodeDescription": {
+    "examples": "Текст на сторінці Company для поля з кодом компанії(опис).",
+    "description": "Поле використовується для вводу назви коду компанії для бізнес акаунтів."
   },
   "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
   "@deleteProfileQuestion": {

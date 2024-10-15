@@ -19,7 +19,7 @@ List<Widget> _textFieldWidgetList({
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
         widgetKey: KWidgetkeys.screen.employer.fieldPosition,
-        hintText: context.l10n.writeProposedPosition,
+        labelText: context.l10n.writeProposedPosition,
         onChanged: null,
         isDesk: isDesk,
       ),
@@ -38,7 +38,7 @@ List<Widget> _textFieldWidgetList({
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
         widgetKey: KWidgetkeys.screen.employer.fieldWage,
-        hintText: context.l10n.writeTheWage,
+        labelText: context.l10n.writeTheWage,
         onChanged: null,
         isDesk: isDesk,
       ),
@@ -100,7 +100,7 @@ List<Widget> _textFieldWidgetList({
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
         widgetKey: KWidgetkeys.screen.employer.fieldContact,
-        hintText: context.l10n.howToContactYou,
+        labelText: context.l10n.howToContactYou,
         onChanged: null,
         isDesk: isDesk,
       ),

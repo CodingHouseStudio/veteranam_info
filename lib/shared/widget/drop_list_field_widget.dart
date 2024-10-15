@@ -18,6 +18,7 @@ class DropListFieldWidget extends StatelessWidget {
     this.focusNode,
     this.isButton,
     this.description,
+    this.isRequired,
   });
 
   final void Function(String text)? onChanged;
@@ -32,6 +33,7 @@ class DropListFieldWidget extends StatelessWidget {
   final Key textFieldKey;
   final bool? isButton;
   final String? description;
+  final bool? isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class DropListFieldWidget extends StatelessWidget {
       labelText: labelText,
       isDesk: isDesk,
       controller: controller,
-      errorText: errorText,
+      errorText: errorText, isRequired: isRequired,
       onChanged: onChanged,
       showErrorText: showErrorText,
       isButton: isButton,
@@ -82,6 +84,7 @@ class DropListFieldImplementationWidget<T extends Object>
     required this.onSelected,
     required this.textFieldKey,
     required this.isLoading,
+    this.isRequired,
     this.onSelectedItem,
     super.key,
     this.showErrorText,
@@ -119,6 +122,7 @@ class DropListFieldImplementationWidget<T extends Object>
   final TextStyle? textStyle;
   final List<T>? unenabledList;
   final bool isLoading;
+  final bool? isRequired;
 
   @override
   State<DropListFieldImplementationWidget<T>> createState() =>
@@ -306,6 +310,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
               TextFieldWidget(
         key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
         widgetKey: widget.textFieldKey,
+        isRequired: widget.isRequired,
         controller: controller,
         focusNode: focusNode,
         suffixIcon: _suffixIcon,
