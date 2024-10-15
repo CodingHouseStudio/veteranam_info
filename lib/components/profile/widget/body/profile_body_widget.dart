@@ -56,7 +56,6 @@ class ProfileBodyWidget extends StatelessWidget {
                       ),
                 child: ProfileFormWidget(
                   isDesk: isDesk,
-                  photoURL: context.read<AuthenticationBloc>().state.user.photo,
                   imageBytes: state.image.value?.bytes,
                   initialName:
                       context.read<AuthenticationBloc>().state.user.firstName,

@@ -744,8 +744,8 @@
   "@companyIsHidden": {
     "examples": "Текст на сторінці Discount, якщо в знижзці компанія прихована"
   },
-  "online": "Вся Україна (онлайн)",
-  "@online": {
+  "allUkrainOnline": "Вся Україна (онлайн)",
+  "@allUkrainOnline": {
     "examples": "Текст на сторінці Discount для додаткових фільтрів"
   },
   "moreFunds": "Більше фондів",
@@ -1185,7 +1185,7 @@
   "indefinitely": "Безстроково",
   "@indefinitely": {
     "examples": "Текст для текстового поля, яке знаходиться на сторінці Discounts add",
-    "description": "Перемикач використовується для роблення знижки безстроковою або ні"
+    "description": "Перемикач використовується для змінення стану знижки на безстроковою або ні"
   },
   "period": "Термін дії",
   "@period": {
@@ -1277,9 +1277,9 @@
   "@idpEligibility": {
     "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
   },
-  "allOfBelowMentioned": "Усім нище перечисленим",
-  "@allOfBelowMentioned": {
-    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  "allOfListed": "Всі перелічені",
+  "@allOfListed": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надаєтьс."
   },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
@@ -1518,6 +1518,11 @@
   "logOutProfileQuestion": "Ви впевнені, що хочете вийти з Вашого профілю?",
   "@logOutProfileQuestion": {
     "examples": "Текст для діалогу виходу з облікового запису на сторінці Profile."
+  },
+  "online": "Онлайн",
+  "@online": {
+    "examples": "Текст на сторінці Discount Add для перемикача.",
+    "description": "Перемикач використовується для того щоб додати до знижки тег онлайн, який показує що її можна використоувати онлайн."
   },
   "verification": "на перевірку",
   "@verification": {

@@ -13,13 +13,11 @@ class CompanyFormWidget extends StatefulWidget {
     required this.initialCode,
     required this.initialLink,
     required this.initialEmail,
-    required this.photoURL,
     super.key,
     this.imageBytes,
   });
 
   final bool isDesk;
-  final String? photoURL;
   final Uint8List? imageBytes;
   final String? initialCompanyName;
   final String? initialEmail;
@@ -89,11 +87,17 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                         onPressed: () => context
                             .read<CompanyFormBloc>()
                             .add(const CompanyFormEvent.imageUpdated()),
-                        imageUrl: widget.photoURL,
-                        perimeter: KSize.kPixel72,
+                        imageUrl: context
+                            .read<CompanyWatcherBloc>()
+                            .state
+                            .company
+                            .image
+                            ?.downloadURL
+                            .getImageUrl,
+                        // perimeter: KSize.kPixel72,
                         icon: KIcon.personEdit,
-                        background: AppColors.materialThemeKeyColorsPrimary,
-                        iconColor: AppColors.materialThemeBlack,
+                        // background: AppColors.materialThemeKeyColorsPrimary,
+                        // iconColor: AppColors.materialThemeBlack,
                       ),
                       KSizedBox.kWidthSizedBox32,
                       if (widget.isDesk)
