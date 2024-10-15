@@ -1576,8 +1576,8 @@
   "@deleteCompanyEmptyMessage": {
     "examples": "Текст на сторінці Company під кнопкою видалення, з'являється якщо компанія ще не створена."
   },
-  "create": "Створити",
-  "@create": {
+  "createAccount": "Створити акаунт",
+  "@createAccount": {
     "examples": "Текст на сторінці Company для кнопки.",
     "description": "Кнопка використовується для Створення бізнес акаунта."
   },
