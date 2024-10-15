@@ -270,6 +270,13 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   );
+  static const TextStyle materialThemeBodyMediumBold = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+  );
   static const TextStyle materialThemeBodyMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,

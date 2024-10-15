@@ -302,6 +302,15 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const circularButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize12)),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius48,
+      ),
+    ),
+  );
+
   static const borderGrayButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(

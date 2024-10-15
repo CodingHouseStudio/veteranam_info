@@ -352,6 +352,10 @@ extension ContextExtensions on BuildContext {
     }
   }
 
+  void copyEmail() => read<UrlCubit>().copy(
+        KAppText.email,
+      );
+
   @visibleForTesting
   static DateTime? textPieckerData;
 

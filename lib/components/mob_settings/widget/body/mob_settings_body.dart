@@ -87,9 +87,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize8,
           ),
           child: TextButton(
-            onPressed: () => context.read<UrlCubit>().copy(
-                  KAppText.email,
-                ),
+            onPressed: context.copyEmail,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
