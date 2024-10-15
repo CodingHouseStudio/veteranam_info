@@ -252,6 +252,7 @@ void main() {
       },
       expect: () async => [
         const DiscountsAddState(
+          isOnline: false,
           discount: null,
           categoryList: KAppText.discountsCategories,
           citiesList: [],
@@ -268,6 +269,7 @@ void main() {
           eligibility: ListFieldModel.pure(),
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -284,6 +286,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -300,6 +303,7 @@ void main() {
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -561,6 +565,7 @@ void main() {
       },
       expect: () async => [
         const DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -577,6 +582,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -593,6 +599,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -609,6 +616,7 @@ void main() {
           formState: DiscountsAddEnum.invalidData,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -810,6 +818,7 @@ void main() {
       },
       expect: () async => [
         const DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -826,6 +835,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         const DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -843,6 +853,7 @@ void main() {
           failure: DiscountsAddFailure.error,
         ),
         const DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
@@ -859,6 +870,7 @@ void main() {
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
+          isOnline: false,
           discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
