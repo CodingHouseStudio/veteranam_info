@@ -32,7 +32,9 @@ class _DialogsWidget {
     EdgeInsets? deskIconPadding,
     OverflowBarAlignment? deskActionsOverflowAlignment,
     EdgeInsets Function({required bool isDeskValue})? deskContentPadding,
-    double? mobileMaxWidth,
+    EdgeInsets Function({required bool isDeskValue})? mobPadding,
+    double? deskMaxWidth,
+    double? mobMaxWidth,
   }) {
     if (isDesk) {
       showDialog<void>(
@@ -50,6 +52,7 @@ class _DialogsWidget {
                     iconPadding: deskIconPadding,
                     actionsOverflowAlignment: deskActionsOverflowAlignment,
                     contentPadding: deskContentPadding,
+                    maxWidth: deskMaxWidth,
                   ),
                 ) ??
                 _deskDoubleDialogWidget(
@@ -61,6 +64,7 @@ class _DialogsWidget {
                   iconPadding: deskIconPadding,
                   actionsOverflowAlignment: deskActionsOverflowAlignment,
                   contentPadding: deskContentPadding,
+                  maxWidth: deskMaxWidth,
                 ),
           );
         },
@@ -78,12 +82,14 @@ class _DialogsWidget {
           return preLayoutWidget?.call(
                 layoutBuilder: _mobDoubleDialogWidget(
                   childWidget: childWidget,
-                  maxWidth: mobileMaxWidth,
+                  padding: mobPadding,
+                  maxWidth: mobMaxWidth,
                 ),
               ) ??
               _mobDoubleDialogWidget(
                 childWidget: childWidget,
-                maxWidth: mobileMaxWidth,
+                padding: mobPadding,
+                maxWidth: mobMaxWidth,
               );
         },
       );
@@ -101,12 +107,13 @@ class _DialogsWidget {
     required Widget Function(BuildContext context)? icon,
     required EdgeInsets? iconPadding,
     required OverflowBarAlignment? actionsOverflowAlignment,
-    EdgeInsets Function({required bool isDeskValue})? contentPadding,
+    required double? maxWidth,
+    required EdgeInsets Function({required bool isDeskValue})? contentPadding,
   }) =>
       LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          final isDeskValue =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+          final isDeskValue = constraints.maxWidth >
+              (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
           return AlertDialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
@@ -132,17 +139,29 @@ class _DialogsWidget {
       required bool isDeskValue,
       required BuildContext context,
     }) childWidget,
+    required EdgeInsets Function({
+      required bool isDeskValue,
+    })? padding,
     required double? maxWidth,
   }) =>
       LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          final isDeskValue = constraints.maxWidth >
-              (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
-
-          return childWidget(
-            isDeskValue: isDeskValue,
-            context: context,
-          );
+          final isDeskValue =
+              constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
+          if (padding != null) {
+            return Padding(
+              padding: padding(isDeskValue: isDeskValue),
+              child: childWidget(
+                isDeskValue: isDeskValue,
+                context: context,
+              ),
+            );
+          } else {
+            return childWidget(
+              isDeskValue: isDeskValue,
+              context: context,
+            );
+          }
         },
       );
 
@@ -167,6 +186,9 @@ class _DialogsWidget {
           onPressed: onPressed,
         ),
         isDesk: isDesk,
+        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+        mobMaxWidth: KSize.kPixel500,
+        deskMaxWidth: KSize.kPixel500,
       );
 
   void showConfirmationPublishDiscountDialog({
@@ -180,6 +202,8 @@ class _DialogsWidget {
           onPressed: onPressed,
         ),
         isDesk: isDesk,
+        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+        deskMaxWidth: KSize.kPixel680,
       );
 
   void showReportDialog({
@@ -240,7 +264,6 @@ class _DialogsWidget {
             ),
       deskIconPadding:
           const EdgeInsets.all(KPadding.kPaddingSize16).copyWith(bottom: 0),
-      mobileMaxWidth: KMinMaxSize.maxWidth600,
     );
     // if (isDesk) {
     //   showDialog<void>(

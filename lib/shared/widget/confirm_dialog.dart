@@ -23,62 +23,75 @@ class ConfirmDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                key: KWidgetkeys.widget.dialogs.profileTitle,
-                style: isDesk
-                    ? AppTextStyle.materialThemeHeadlineLarge
-                    : AppTextStyle.materialThemeHeadlineSmall,
-              ),
-            ),
-            IconButtonWidget(
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: KMinMaxSize.minHeight640),
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+            child: IconButton(
+              style: KButtonStyles.circularButtonStyle,
+              onPressed: context.pop,
               icon: KIcon.close,
-              key: KWidgetkeys.widget.dialogs.icon,
-              onPressed: () => context.pop(),
-              padding: 0,
-              color: AppColors.materialThemeKeyColorsNeutralVariant,
-              background: AppColors.materialThemeWhite,
             ),
-          ],
-        ),
-        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
-        Text(
-          subtitle,
-          key: KWidgetkeys.widget.dialogs.profileSubtitle,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLarge
-              : AppTextStyle.materialThemeBodyMedium,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox32
-        else
-          KSizedBox.kHeightSizedBox24,
-        if (isDesk)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              confirmButton(),
-              KSizedBox.kWidthSizedBox24,
-              unconfirmButton(context),
-            ],
-          )
-        else
-          Column(
-            children: [
-              confirmButton(),
-              KSizedBox.kHeightSizedBox16,
-              unconfirmButton(context),
-            ],
           ),
-      ],
+          Padding(
+            padding: isDesk
+                ? const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize40,
+                    vertical: KPadding.kPaddingSize32,
+                  )
+                : const EdgeInsets.all(KPadding.kPaddingSize16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  key: KWidgetkeys.widget.dialogs.profileTitle,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeHeadlineLarge
+                      : AppTextStyle.materialThemeHeadlineSmall,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox16
+                else
+                  KSizedBox.kHeightSizedBox8,
+                Text(
+                  subtitle,
+                  key: KWidgetkeys.widget.dialogs.profileSubtitle,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox32
+                else
+                  KSizedBox.kHeightSizedBox24,
+                if (isDesk)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      unconfirmButton(context),
+                      KSizedBox.kWidthSizedBox24,
+                      confirmButton(),
+                    ],
+                  )
+                else
+                  Column(
+                    children: [
+                      confirmButton(),
+                      KSizedBox.kHeightSizedBox16,
+                      unconfirmButton(context),
+                    ],
+                  ),
+                if (!isDesk) KSizedBox.kHeightSizedBox16,
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -100,27 +113,17 @@ class ConfirmDialog extends StatelessWidget {
     );
   }
 
-  TextButton unconfirmButton(BuildContext context) {
-    return TextButton(
-      key: KWidgetkeys.widget.dialogs.unconfirmButton,
-      onPressed: () => context.pop(),
-      style: isDesk
-          ? KButtonStyles.borderBlackButtonStyle
-          : KButtonStyles.borderBlackButtonStyle.copyWith(
-              minimumSize: const WidgetStatePropertyAll(
-                Size(double.infinity, 0),
-              ),
-            ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize12,
-          horizontal: KPadding.kPaddingSize12,
-        ),
-        child: Text(
-          unconfirmText ?? context.l10n.cancel,
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
+  Widget unconfirmButton(BuildContext context) {
+    return SecondaryButtonWidget(
+      widgetKey: KWidgetkeys.widget.dialogs.unconfirmButton,
+      onPressed: context.pop,
+      padding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize12,
+        horizontal: KPadding.kPaddingSize12,
       ),
+      expanded: !isDesk,
+      isDesk: isDesk,
+      text: unconfirmText ?? context.l10n.cancel,
     );
   }
 }

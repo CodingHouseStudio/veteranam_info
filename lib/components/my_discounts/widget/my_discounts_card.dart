@@ -160,10 +160,15 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
 
   Widget get editButton => IconButtonWidget(
         key: KWidgetkeys.screen.myDiscounts.iconEdit,
-        onPressed: () => context.goNamed(
-          KRoute.discountsAdd.name,
-          queryParameters: DiscountURLConverter.toJson(widget.discountModel),
-        ),
+        onPressed: () {
+          context.goNamed(
+            KRoute.discountsEdit.name,
+            pathParameters: {
+              UrlParameters.cardId: widget.discountModel.id,
+            },
+            extra: widget.discountModel,
+          );
+        },
         icon: KIcon.edit,
         buttonStyle: KButtonStyles.circularBorderBlackButtonStyle,
       );

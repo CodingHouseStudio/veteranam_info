@@ -8,6 +8,11 @@ abstract class IDiscountRepository {
 
   Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
 
+  Future<Either<SomeFailure, DiscountModel>> getCopanyDiscount({
+    required String id,
+    required String companyId,
+  });
+
   void addMockDiscountItems();
 
   Stream<List<DiscountModel>> getDiscountsByUserId(

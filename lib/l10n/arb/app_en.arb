@@ -1136,9 +1136,13 @@
   "@signingUpWait": {
     "examples": "Text indicating that the sign-up process is in progress, and the user needs to wait on the Sign up page"
   },
-  "cardNotFoundText": "Unfortunately, the link was not found. Please check the accuracy of the input or try another link.",
-  "@cardNotFoundText": {
+  "cardNotFoundCardLink": "Unfortunately, the link was not found. Please check the accuracy of the input or try another link.",
+  "@cardNotFoundCardLink": {
     "examples": "Text for a dialog that notifies that a card with the specified ID was not found."
+  },
+  "discountEditNotFound": "Unfortunately, the link is incorrect or you do not have the required permissions to access this discount. Please verify the link or try another one.",
+  "@discountEditNotFound": {
+    "examples": "This message appears on the Discount Edit page when a user enters an invalid discount ID or lacks access rights."
   },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
@@ -1506,6 +1510,26 @@
   "logOutProfileQuestion": "Are you sure you want to log out of your profile?",
   "@logOutProfileQuestion": {
     "examples": "Text for the logout dialog on the Profile page."
+  },
+  "verification": "for verification?",
+  "@verification": {
+    "examples": "Text for the discount submission dialog on the Discount Add page."
+  },
+  "publishVerificationSubtitleFirst": "Once you click the",
+  "@publishVerificationSubtitleFirst": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (first part)."
+  },
+  "publishVerificationSubtitleSecond": "we will begin processing your discount request. If the discount is successfully approved, you will receive an email notification, and the discount will appear on the site. If the discount is rejected, please contact our team at",
+  "@publishVerificationSubtitleSecond": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (second part)."
+  },
+  "publishVerificationSubtitleThird": "for assistance.",
+  "@publishVerificationSubtitleThird": {
+    "examples": "Subtitle for the discount submission dialog on the Discount Add page (third part)."
+  },
+  "agreeTermsConditions": "I agree to the terms and conditions",
+  "@agreeTermsConditions": {
+    "examples": "Text for the discount submission dialog on the Discount Add page."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {

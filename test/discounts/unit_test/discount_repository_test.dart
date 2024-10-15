@@ -55,7 +55,7 @@ void main() {
         );
         when(
           mockFirestoreService.getDiscount(
-            KTestText.discountModelItems.first.id,
+            id: KTestText.discountModelItems.first.id,
           ),
         ).thenAnswer(
           (realInvocation) async => KTestText.discountModelItems.first,
@@ -217,7 +217,7 @@ void main() {
         );
         when(
           mockFirestoreService.getDiscount(
-            KTestText.discountModelItems.first.id,
+            id: KTestText.discountModelItems.first.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
@@ -386,7 +386,7 @@ void main() {
         );
         when(
           mockFirestoreService.getDiscount(
-            KTestText.discountModelItems.first.id,
+            id: KTestText.discountModelItems.first.id,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),

@@ -43,7 +43,7 @@ class CardEmptyWidget extends StatelessWidget {
                   children: [
                     KImage.found(key: KWidgetkeys.widget.cardEmpty.image),
                     Text(
-                      context.l10n.cardNotFoundText,
+                      context.l10n.cardNotFoundCardLink,
                       key: KWidgetkeys.widget.cardEmpty.text,
                       style: AppTextStyle.materialThemeTitleMedium,
                       textAlign: TextAlign.center,

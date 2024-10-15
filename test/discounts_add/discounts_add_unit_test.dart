@@ -66,7 +66,9 @@ void main() {
       ' when update fields correct and save',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started(null));
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -174,7 +176,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -235,7 +237,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -246,10 +248,11 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null));
+          ..add(const DiscountsAddEvent.send());
       },
       expect: () async => [
         const DiscountsAddState(
+          discount: null,
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -265,6 +268,7 @@ void main() {
           eligibility: ListFieldModel.pure(),
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -280,6 +284,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -295,6 +300,7 @@ void main() {
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -468,7 +474,9 @@ void main() {
       ' when update fields incorrect, save and back',
       build: () => discountsAddBloc,
       act: (bloc) async {
-        bloc.add(const DiscountsAddEvent.started(null));
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -482,7 +490,7 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.periodUpdate(
               period(),
@@ -524,8 +532,8 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -536,8 +544,8 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -553,6 +561,7 @@ void main() {
       },
       expect: () async => [
         const DiscountsAddState(
+          discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
@@ -568,6 +577,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -583,6 +593,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -598,6 +609,7 @@ void main() {
           formState: DiscountsAddEnum.invalidData,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
@@ -692,7 +704,9 @@ void main() {
               Left(SomeFailure.serverError(error: KGroupText.failureGet)),
         );
 
-        bloc.add(const DiscountsAddEvent.started(null));
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -770,7 +784,7 @@ void main() {
               KTestText.sendDiscountModel.link,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
               KAppText.discountsCategories.first,
@@ -781,7 +795,7 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null))
+          ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
               KTestText.sendDiscountModel.description,
@@ -792,10 +806,11 @@ void main() {
               KTestText.sendDiscountModel.exclusions!,
             ),
           )
-          ..add(const DiscountsAddEvent.send(null));
+          ..add(const DiscountsAddEvent.send());
       },
       expect: () async => [
         const DiscountsAddState(
+          discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
@@ -811,6 +826,7 @@ void main() {
           formState: DiscountsAddEnum.initial,
         ),
         const DiscountsAddState(
+          discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
@@ -827,6 +843,7 @@ void main() {
           failure: DiscountsAddFailure.error,
         ),
         const DiscountsAddState(
+          discount: null,
           eligibility: ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
@@ -842,6 +859,7 @@ void main() {
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
+          discount: null,
           eligibility: const ListFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
