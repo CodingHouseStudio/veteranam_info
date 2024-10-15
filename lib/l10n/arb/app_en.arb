@@ -1568,8 +1568,8 @@
   "@deleteCompanyEmptyMessage": {
     "examples": "Text on the Company page under the delete button, appears if the company has not been created yet."
   },
-  "create": "Create",
-  "@create": {
+  "createAccount": "Create account",
+  "@createAccount": {
     "examples": "Text on the Company page for the button.",
     "description": "The button is used to create a business account."
   },
