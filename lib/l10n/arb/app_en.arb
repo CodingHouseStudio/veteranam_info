@@ -1432,7 +1432,7 @@
     "examples": "Text on the Company page for the company name field",
     "description": "This field is used for entering the company name for business accounts."
   },
-  "companyCode": "Company registration code or Tax ID for individual entrepreneurs",
+  "companyCode": "EDRPOU/RNOKPP code",
   "@companyCode": {
     "examples": "Text on the Company page for the company code field.",
     "description": "This field is used for entering the company code for business accounts."
@@ -1535,6 +1535,26 @@
   "agreeTermsConditions": "I agree to the terms and conditions",
   "@agreeTermsConditions": {
     "examples": "Text for the discount submission dialog on the Discount Add page."
+  },
+  "brandName": "Brand Name",
+  "@brandName": {
+    "examples": "Text for the field on the Company page.",
+    "description": "The field is used to input the company's brand name."
+  },
+  "brandNameDescription": "This name will be indicated in the discount announcement",
+  "@brandNameDescription": {
+    "examples": "Text for the field on the Company page (description).",
+    "description": "The field is used to input the company's brand name."
+  },
+  "companyNameDescription": "For example, \"Ivanov and Partners LLC\"",
+  "@companyNameDescription": {
+    "examples": "Text for the field on the Company page with the company name (description).",
+    "description": "The field is used to input the company name for business accounts."
+  },
+  "companyCodeDescription": "Must contain 8-10 digits",
+  "@companyCodeDescription": {
+    "examples": "Text for the field on the Company page for the company code (description).",
+    "description": "The field is used to input the company code for business accounts."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {

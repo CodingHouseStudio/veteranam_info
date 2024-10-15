@@ -24,7 +24,7 @@ class DiscountModel with _$DiscountModel {
     required String? territory,
     required String? territoryEN,
     required DateTime dateVerified,
-    required String link,
+    required String? link,
     List<String>? eligibility,
     List<String>? eligibilityEN,
     String? exclusions,

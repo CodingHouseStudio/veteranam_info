@@ -69,7 +69,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           if (state.formState == DiscountsAddEnum.initial &&
               state.discount != null) {
             titleController.text = state.discount!.title;
-            linkController.text = state.discount!.link;
+            linkController.text = state.discount!.link ?? linkController.text;
             // categoryController = TextEditingController();
             // cityController = TextEditingController();
             periodController.text =

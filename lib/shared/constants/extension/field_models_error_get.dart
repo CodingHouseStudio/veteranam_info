@@ -5,8 +5,9 @@ import 'package:veteranam/components/components.dart'
         CitiesFieldModelValidationError,
         CompanyCodeFieldModelValidationError,
         CompanyNameFieldModelValidationError,
+        DiscountLinkFieldModelValidationError,
         DiscountsFieldModelValidationError,
-        LinkNullableFieldModelValidationError;
+        PublicNameFieldModelValidationError;
 import 'package:veteranam/shared/shared.dart';
 
 extension EmailFieldModelValidationErrorEmpl
@@ -25,14 +26,15 @@ extension EmailFieldModelValidationErrorEmpl
   }
 }
 
-extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
+extension DiscountLinkFieldModelValidationErrorEmpl
+    on DiscountLinkFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case LinkFieldModelValidationError.empty:
+      case DiscountLinkFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
-      case LinkFieldModelValidationError.invalidLink:
+      case DiscountLinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
-      case LinkFieldModelValidationError.invalidLength:
+      case DiscountLinkFieldModelValidationError.invalidLength:
         return '${context.l10n.link} ${context.l10n.tooshort}';
       case null:
         return null;
@@ -40,13 +42,12 @@ extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
   }
 }
 
-extension LinkNullableFieldModelValidationErrorEmpl
-    on LinkNullableFieldModelValidationError? {
+extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case LinkNullableFieldModelValidationError.invalidLink:
+      case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
-      case LinkNullableFieldModelValidationError.invalidLength:
+      case LinkFieldModelValidationError.invalidLength:
         return '${context.l10n.link} ${context.l10n.tooshort}';
       case null:
         return null;
@@ -202,6 +203,18 @@ extension CompanyNameFieldModelValidationErrorEmpl
         return context.l10n.fieldCannotBeEmpty;
       case CompanyNameFieldModelValidationError.invalidLength:
         return '${context.l10n.companyName} ${context.l10n.tooshort}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension PublicNameFieldModelValidationErrorEmpl
+    on PublicNameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case PublicNameFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
       case null:
         return null;
     }
