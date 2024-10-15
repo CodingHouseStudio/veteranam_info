@@ -8,6 +8,10 @@ class CompanyFormEvent with _$CompanyFormEvent {
     String companyName,
   ) = _CompanyNameUpdated;
 
+  const factory CompanyFormEvent.publicNameUpdated(
+    String publicName,
+  ) = _PublicNameUpdated;
+
   const factory CompanyFormEvent.codeUpdated(
     String code,
   ) = _CodeUpdated;

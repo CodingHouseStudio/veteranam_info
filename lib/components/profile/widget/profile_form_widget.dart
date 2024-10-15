@@ -205,6 +205,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     return TextFieldWidget(
       widgetKey: fieldKey,
       enabled: enabled,
+      isRequired: true,
       controller: controller,
       labelText: hint,
       hintStyle: isDesk

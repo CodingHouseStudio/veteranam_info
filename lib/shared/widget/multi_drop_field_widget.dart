@@ -21,6 +21,7 @@ class MultiDropFieldWidget extends StatelessWidget {
     this.isButton,
     this.description,
     this.allElemts,
+    this.isRequired,
   });
 
   final void Function(String text)? onChanged;
@@ -37,6 +38,7 @@ class MultiDropFieldWidget extends StatelessWidget {
   final bool? isButton;
   final String? description;
   final String? allElemts;
+  final bool? isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class MultiDropFieldWidget extends StatelessWidget {
       dropDownList: dropDownList,
       allElemts: allElemts,
       isDesk: isDesk,
+      isRequired: isRequired,
       values: values,
       // controller: controller,
       removeEvent: removeEvent,
@@ -93,6 +96,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
     required this.optionsBuilder,
     required this.getItemText,
     required this.textFieldKey,
+    this.isRequired,
     // this.controller,
     super.key,
     this.tralingList,
@@ -131,6 +135,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   final int? errorMaxLines;
   final String? description;
   final T? allElemts;
+  final bool? isRequired;
 
   @override
   State<MultiDropFieldImplementationWidget<T>> createState() =>
@@ -192,6 +197,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DropListFieldImplementationWidget<T>(
+          isRequired: widget.isRequired,
           textFieldKey: widget.textFieldKey,
           labelText: widget.labelText,
           isDesk: widget.isDesk,

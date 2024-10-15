@@ -22,6 +22,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         super(
           const CompanyFormState(
             companyName: CompanyNameFieldModel.pure(),
+            publicName: PublicNameFieldModel.pure(),
             code: CompanyCodeFieldModel.pure(),
             image: ImageFieldModel.pure(),
             link: LinkFieldModel.pure(),
@@ -31,6 +32,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         ) {
     on<_Started>(_onStarted);
     on<_CompanyNameUpdated>(_onCompanyNameUpdated);
+    on<_PublicNameUpdated>(_onPublicNameUpdated);
     on<_CodeUpdated>(_onCodeUpdated);
     on<_ImageUpdated>(_onImageUpdated);
     on<_LinkUpdated>(_onLinkUpdated);
@@ -49,6 +51,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     emit(
       CompanyFormState(
         companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
+        publicName: PublicNameFieldModel.dirty(company.publicName ?? ''),
         code: CompanyCodeFieldModel.dirty(company.code ?? ''),
         image: const ImageFieldModel.pure(),
         link: LinkFieldModel.dirty(company.link ?? ''),
@@ -67,6 +70,20 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     emit(
       state.copyWith(
         companyName: companyNameFieldModel,
+        formState: CompanyFormEnum.inProgress,
+        failure: null,
+      ),
+    );
+  }
+
+  Future<void> _onPublicNameUpdated(
+    _PublicNameUpdated event,
+    Emitter<CompanyFormState> emit,
+  ) async {
+    final publicNameFieldModel = PublicNameFieldModel.dirty(event.publicName);
+    emit(
+      state.copyWith(
+        publicName: publicNameFieldModel,
         formState: CompanyFormEnum.inProgress,
         failure: null,
       ),
@@ -147,6 +164,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         state.companyName,
         state.code,
         state.link,
+        state.publicName,
         // state.image,
       ],
     )) {
@@ -159,19 +177,13 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         companyName: state.companyName.value,
         code: state.code.value,
         link: state.link.value,
+        publicName: state.publicName.value,
       );
 
       if (company != _companyRepository.currentUserCompany ||
           state.image.value != null) {
         final result = await _companyRepository.updateCompany(
-          company: _companyRepository.currentUserCompany.copyWith(
-            id: _companyRepository.currentUserCompany.id.isEmpty
-                ? ExtendedDateTime.id
-                : _companyRepository.currentUserCompany.id,
-            companyName: state.companyName.value,
-            code: state.code.value,
-            link: state.link.value,
-          ),
+          company: company,
           imageItem: state.image.value,
         );
 
