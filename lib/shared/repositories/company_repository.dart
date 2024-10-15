@@ -14,7 +14,7 @@ import 'package:veteranam/shared/shared.dart';
 )
 class CompanyRepository implements ICompanyRepository {
   CompanyRepository(
-    this.iAppAuthenticationRepository,
+    this._iAppAuthenticationRepository,
     this._cache,
   ) {
     // Listen to currentUser changes and emit auth status
@@ -29,7 +29,7 @@ class CompanyRepository implements ICompanyRepository {
     );
   }
 
-  final IAppAuthenticationRepository iAppAuthenticationRepository;
+  final IAppAuthenticationRepository _iAppAuthenticationRepository;
   late StreamController<CompanyModel> _userCompanyController;
   StreamSubscription<CompanyModel>? _userCompanySubscription;
   StreamSubscription<User>? _userSubscription;
@@ -42,7 +42,7 @@ class CompanyRepository implements ICompanyRepository {
 
   void _onUserStreamListen() {
     _userSubscription ??=
-        iAppAuthenticationRepository.user.listen((currentUser) {
+        _iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
         if (!currentUserCompany.userEmails.contains(currentUser.email) &&
             _userCompanySubscription != null) {
@@ -78,6 +78,8 @@ class CompanyRepository implements ICompanyRepository {
 
   void _onUserStreamCancel() {
     _userSubscription?.cancel();
+    _userCompanySubscription?.cancel();
+    _userCompanySubscription = null;
     _userSubscription = null;
   }
 
@@ -113,10 +115,10 @@ class CompanyRepository implements ICompanyRepository {
     try {
       late var methodCompanyModel = company;
       if (!company.userEmails
-          .contains(iAppAuthenticationRepository.currentUser.email)) {
+          .contains(_iAppAuthenticationRepository.currentUser.email)) {
         methodCompanyModel = methodCompanyModel.copyWith(
           userEmails: List.from(methodCompanyModel.userEmails)
-            ..add(iAppAuthenticationRepository.currentUser.email!),
+            ..add(_iAppAuthenticationRepository.currentUser.email!),
         );
       }
       if (imageItem != null) {
@@ -150,7 +152,7 @@ class CompanyRepository implements ICompanyRepository {
       if (currentUserCompany.id.isNotEmpty) {
         await _firestoreService.deleteCompany(currentUserCompany.id);
         _userCompanyController.add(CompanyModel.empty);
-        _onUserStreamCancel();
+        await _iAppAuthenticationRepository.logOut();
       }
       // if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
       //   await iAppAuthenticationRepository.deleteUser();
@@ -168,6 +170,7 @@ class CompanyRepository implements ICompanyRepository {
   @override
   void dispose() {
     _userSubscription?.cancel();
+    _userCompanySubscription?.cancel();
 
     _userCompanyController.close();
   }
