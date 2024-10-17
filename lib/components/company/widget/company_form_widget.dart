@@ -358,6 +358,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                 );
             // context.goNamed(KRoute.myDiscounts.name);
           },
+          timer: false,
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.only(
@@ -410,6 +411,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       );
                   // context.goNamed(KRoute.myDiscounts.name);
                 },
+                timer: false,
               )
           : null,
     );
