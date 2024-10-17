@@ -21,7 +21,7 @@ class ReportFieldModel
     if (text.isEmpty) {
       return ReportFieldModelValidationError.empty;
     }
-    if (text.length <= 15) {
+    if (text.length < 16) {
       return ReportFieldModelValidationError.invalidLength;
     }
     // if (value.contains(RegExp(r'[^a-zA-Z0-9\s]')) ||

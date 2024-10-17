@@ -52,25 +52,27 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     Emitter<CompanyFormState> emit,
   ) async {
     final company = _companyRepository.currentUserCompany;
-    emit(
-      CompanyFormState(
-        companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
-        publicName: PublicNameFieldModel.dirty(company.publicName ?? ''),
-        code: CompanyCodeFieldModel.dirty(company.code ?? ''),
-        image: const ImageFieldModel.pure(),
-        link: LinkFieldModel.dirty(company.link ?? ''),
-        failure: null,
-        formState: CompanyFormEnum.initial,
-        deleteIsPossible: null,
-      ),
-    );
-    final companyHasDiscount = await _discountRepository
-        .companyHasDiscount(_companyRepository.currentUserCompany.id);
-    emit(
-      state.copyWith(
-        deleteIsPossible: !companyHasDiscount,
-      ),
-    );
+    if (company.isNotEmpty) {
+      emit(
+        CompanyFormState(
+          companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
+          publicName: PublicNameFieldModel.dirty(company.publicName ?? ''),
+          code: CompanyCodeFieldModel.dirty(company.code ?? ''),
+          image: const ImageFieldModel.pure(),
+          link: LinkFieldModel.dirty(company.link ?? ''),
+          failure: null,
+          formState: CompanyFormEnum.initial,
+          deleteIsPossible: null,
+        ),
+      );
+      final companyHasDiscount = await _discountRepository
+          .companyHasDiscount(_companyRepository.currentUserCompany.id);
+      emit(
+        state.copyWith(
+          deleteIsPossible: !companyHasDiscount,
+        ),
+      );
+    }
   }
 
   Future<void> _onCompanyNameUpdated(

@@ -18,11 +18,11 @@ class DiscountLinkFieldModel
     if (value == null || value.trim().isEmpty) {
       return DiscountLinkFieldModelValidationError.empty;
     }
-    if (value.length <= 12) {
-      return DiscountLinkFieldModelValidationError.invalidLength;
-    }
     if (!value.isUrlValid) {
       return DiscountLinkFieldModelValidationError.invalidLink;
+    }
+    if (value.length < 12) {
+      return DiscountLinkFieldModelValidationError.invalidLength;
     }
     return null;
   }

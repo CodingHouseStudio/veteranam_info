@@ -8,14 +8,12 @@ class SurnameFieldModel
 
   const SurnameFieldModel.dirty([super.value = '']) : super.dirty();
 
-  static final _surnameRegExp = RegExp(r"^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s'-]+$");
-
   @override
   SurnameFieldModelValidationError? validator(String? value) {
     if (value == null || value.isEmpty) {
       return SurnameFieldModelValidationError.empty;
     }
-    if (!_surnameRegExp.hasMatch(value)) {
+    if (!RegExp(r"^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s'-]+$").hasMatch(value)) {
       return SurnameFieldModelValidationError.wrong;
     }
     return null;

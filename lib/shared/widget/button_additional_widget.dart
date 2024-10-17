@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
-class ButtonAdditionalWidget extends StatefulWidget {
+class ButtonAdditionalWidget extends StatelessWidget {
   const ButtonAdditionalWidget({
     required this.picture,
     required this.text,
@@ -35,27 +35,13 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final Widget? rightWidget;
 
   @override
-  State<ButtonAdditionalWidget> createState() =>
-      _ButtonAdditionalDeskWidgetState();
-}
-
-class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
-  late bool isHover;
-  @override
-  void initState() {
-    isHover = false;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: widget.align ?? Alignment.centerLeft,
+      alignment: align ?? Alignment.centerLeft,
       child: TextButton(
         key: KWidgetkeys.widget.buttonAdditional.desk,
-        onHover: (value) => setState(() => isHover = value),
         style: KButtonStyles.additionalButtonStyle.copyWith(
-          maximumSize: widget.isDesk
+          maximumSize: isDesk
               ? null
               : const WidgetStatePropertyAll(
                   Size(
@@ -63,59 +49,59 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
                     double.infinity,
                   ),
                 ),
-          backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
-          side: WidgetStatePropertyAll(
-            isHover
+          backgroundColor: WidgetStatePropertyAll(backgroundColor),
+          side: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.hovered)
                 ? const BorderSide()
                 : BorderSide(
-                    color: widget.borderColor ??
+                    color: borderColor ??
                         AppColors.materialThemeRefSecondarySecondary70,
                   ),
           ),
         ),
-        onPressed: widget.onPressed,
+        onPressed: onPressed,
         child: Row(
-          mainAxisSize: widget.isDesk ? MainAxisSize.min : MainAxisSize.max,
+          mainAxisSize: isDesk ? MainAxisSize.min : MainAxisSize.max,
           children: [
             IconWidget(
               key: KWidgetkeys.widget.buttonAdditional.icon,
-              icon: widget.picture,
-              padding: widget.iconPadding ?? KPadding.kPaddingSize12,
+              icon: picture,
+              padding: iconPadding ?? KPadding.kPaddingSize12,
               background: AppColors.materialThemeKeyColorsSecondary,
             ),
-            if (widget.isDesk)
-              if (widget.expanded)
+            if (isDesk)
+              if (expanded)
                 Expanded(
-                  child: Center(child: text),
+                  child: Center(child: textWidget),
                 )
               else
                 Padding(
-                  padding: widget.deskPadding ??
+                  padding: deskPadding ??
                       const EdgeInsets.only(
                         top: KPadding.kPaddingSize12,
                         bottom: KPadding.kPaddingSize12,
                         left: KPadding.kPaddingSize5,
                         right: KPadding.kPaddingSize16,
                       ),
-                  child: text,
+                  child: textWidget,
                 )
             else
               Expanded(
                 child: Padding(
-                  padding: widget.mobPadding ?? EdgeInsets.zero,
-                  child: Center(child: text),
+                  padding: mobPadding ?? EdgeInsets.zero,
+                  child: Center(child: textWidget),
                 ),
               ),
-            if (widget.rightWidget != null) widget.rightWidget!,
+            if (rightWidget != null) rightWidget!,
           ],
         ),
       ),
     );
   }
 
-  Text get text {
+  Text get textWidget {
     return Text(
-      widget.text,
+      text,
       key: KWidgetkeys.widget.buttonAdditional.text,
       style: AppTextStyle.materialThemeTitleMedium,
       //textAlign: TextAlign.center,
