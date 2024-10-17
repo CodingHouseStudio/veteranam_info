@@ -1585,5 +1585,13 @@
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."
+  },
+  "enableButton": "Button will be active after",
+  "@enableButton": {
+    "examples": "The text of the countdown to the activation of the button on the My discounts page."
+  },
+  "seconds": "seconds",
+  "@seconds": {
+    "examples": "Text for the delete account dialog on the Profile page."
   }
 }
