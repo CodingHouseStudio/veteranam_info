@@ -172,6 +172,7 @@ class _DialogsWidget {
     required String confirmText,
     required void Function()? onPressed,
     required Color confirmButtonBackground,
+    required bool timer,
     String? unconfirmText,
   }) =>
       _doubleDialog(
@@ -184,6 +185,7 @@ class _DialogsWidget {
           unconfirmText: unconfirmText,
           confirmButtonBackground: confirmButtonBackground,
           onPressed: onPressed,
+          timer: timer,
         ),
         isDesk: isDesk,
         deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
