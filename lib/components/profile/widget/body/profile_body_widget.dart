@@ -119,6 +119,7 @@ class ProfileBodyWidget extends StatelessWidget {
                   AuthenticationLogoutRequested(),
                 );
           },
+          timer: false,
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.symmetric(
@@ -159,6 +160,7 @@ class ProfileBodyWidget extends StatelessWidget {
                   AuthenticationDeleteRequested(),
                 );
           },
+          timer: false,
         ),
       );
 }
