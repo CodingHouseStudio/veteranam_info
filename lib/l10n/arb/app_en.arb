@@ -1037,9 +1037,13 @@
     },
     "examples": "Text on the Discount page, description in the skating rink"
   },
-  "privacyPolicyStartText": "# Privacy Policy for Veteranam.info\n\n",
-  "@privacyPolicyText": {
-    "examples": "The text on the PrivacyPolicy page when the markdown text isn't loaded"
+  "privacyPolicyStart": "Privacy Policy for Veteranam.info",
+  "@privacyPolicyStart": {
+    "examples": "Text on the Privacy Policy page."
+  },
+  "termsConditionsStart": "Terms and Conditions for Adding Discounts to the Site",
+  "@termsConditionsStart": {
+    "examples": "Text on the Terms and Conditions page."
   },
   "general": "General",
   "@general": {
@@ -1532,8 +1536,8 @@
   "@publishVerificationSubtitleThird": {
     "examples": "Subtitle for the discount submission dialog on the Discount Add page (third part)."
   },
-  "agreeTermsConditions": "I agree to the terms and conditions",
-  "@agreeTermsConditions": {
+  "iAgreeWith": "I agree to the",
+  "@iAgreeWith": {
     "examples": "Text for the discount submission dialog on the Discount Add page."
   },
   "brandName": "Brand Name",
@@ -1572,6 +1576,11 @@
   "@createAccount": {
     "examples": "Text on the Company page for the button.",
     "description": "The button is used to create a business account."
+  },
+  "termsAndConditions": "Terms and Conditions",
+  "@termsAndConditions": {
+    "examples": "Text on the Discount Add page in the dialog for the button.",
+    "description": "The button is used to navigate to the Terms and Conditions page."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {

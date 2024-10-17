@@ -18,6 +18,7 @@ class NewsCardDialog extends StatelessWidget {
           insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           contentPadding: EdgeInsets.zero,
+          clipBehavior: Clip.hardEdge,
           scrollable: true,
           content: NewsCardBlocprovider(
             childWidget: NewsCardBody(

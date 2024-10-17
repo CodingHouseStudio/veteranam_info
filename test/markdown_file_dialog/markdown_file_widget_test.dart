@@ -29,29 +29,29 @@ void main() {
       },
     );
     testWidgets('${KGroupText.initial} ', (tester) async {
-      await privacyPolicyPumpAppHelper(
+      await markdownFileDialogPumpAppHelper(
         tester: tester,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
-      await privacyPolicyInitialHelper(tester);
+      await markdownFileDialogInitialHelper(tester);
     });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
-        await privacyPolicyPumpAppHelper(
+        await markdownFileDialogPumpAppHelper(
           tester: tester,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
 
-        await privacyPolicyInitialHelper(tester);
+        await markdownFileDialogInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
         testWidgets('${KRoute.home.name} ', (tester) async {
-          await privacyPolicyPumpAppHelper(
+          await markdownFileDialogPumpAppHelper(
             tester: tester,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
