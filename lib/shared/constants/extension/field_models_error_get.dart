@@ -17,7 +17,7 @@ extension EmailFieldModelValidationErrorEmpl
       case EmailFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case EmailFieldModelValidationError.invalidLength:
-        return '${context.l10n.email} ${context.l10n.tooShortEmailPassword}';
+        return '${context.l10n.email} ${context.l10n.tooShortEmailPassword(6)}';
       case EmailFieldModelValidationError.wrong:
         return '${context.l10n.email} ${context.l10n.isWrongEmail}';
       case null:
@@ -35,7 +35,7 @@ extension DiscountLinkFieldModelValidationErrorEmpl
       case DiscountLinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case DiscountLinkFieldModelValidationError.invalidLength:
-        return '${context.l10n.link} ${context.l10n.tooshort}';
+        return '${context.l10n.link} ${context.l10n.tooshort(12)}';
       case null:
         return null;
     }
@@ -48,7 +48,7 @@ extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
       case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case LinkFieldModelValidationError.invalidLength:
-        return '${context.l10n.link} ${context.l10n.tooshort}';
+        return '${context.l10n.link} ${context.l10n.tooshort(12)}';
       case null:
         return null;
     }
@@ -74,8 +74,8 @@ extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
         return context.l10n.fieldCannotBeEmpty;
       case NameFieldModelValidationError.wrong:
         return '${context.l10n.name} ${context.l10n.isWrong}';
-      case NameFieldModelValidationError.tooShort:
-        return '${context.l10n.name} ${context.l10n.tooshort}';
+      case NameFieldModelValidationError.invalidLength:
+        return '${context.l10n.name} ${context.l10n.tooshort(2)}';
       case null:
         return null;
     }
@@ -89,7 +89,8 @@ extension PasswordFieldModelValidationErrorEmpl
       case PasswordFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case PasswordFieldModelValidationError.invalidLength:
-        return '${context.l10n.password} ${context.l10n.tooShortEmailPassword}';
+        return '${context.l10n.password} '
+            '${context.l10n.tooShortEmailPassword(8)}';
       case null:
         return null;
       case PasswordFieldModelValidationError.capitalLetter:
@@ -123,7 +124,7 @@ extension ReportFieldModelValidationErrorEmpl
       // case ReportFieldModelValidationError.invalid:
       //   return context.l10n.isWrongReport;
       case ReportFieldModelValidationError.invalidLength:
-        return '${context.l10n.message} ${context.l10n.tooshort}.'
+        return '${context.l10n.message} ${context.l10n.tooshort(16)}.'
             ' ${context.l10n.contain15Charcters}';
       case null:
         return null;
@@ -202,7 +203,7 @@ extension CompanyNameFieldModelValidationErrorEmpl
       case CompanyNameFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case CompanyNameFieldModelValidationError.invalidLength:
-        return '${context.l10n.companyName} ${context.l10n.tooshort}';
+        return '${context.l10n.companyName} ${context.l10n.tooshort(2)}';
       case null:
         return null;
     }

@@ -13,6 +13,21 @@ class EmailFieldModel
 
   const EmailFieldModel.dirty([super.value = '']) : super.dirty();
 
+  static const _invalidCharacters = [
+    '&',
+    '=',
+    '_',
+    "'",
+    '-',
+    '+',
+    '<',
+    '>',
+    '}',
+    '{',
+    '/',
+    '*',
+  ];
+
   @override
   EmailFieldModelValidationError? validator(String value) {
     final text = value.trim();
@@ -28,21 +43,7 @@ class EmailFieldModel
     if (!EmailValidator.validate(text)) {
       return EmailFieldModelValidationError.wrong;
     }
-    final invalidCharacters = [
-      '&',
-      '=',
-      '_',
-      "'",
-      '-',
-      '+',
-      '<',
-      '>',
-      '}',
-      '{',
-      '/',
-      '*',
-    ];
-    if (invalidCharacters.any(text.contains)) {
+    if (_invalidCharacters.any(text.contains)) {
       return EmailFieldModelValidationError.wrong;
     }
 

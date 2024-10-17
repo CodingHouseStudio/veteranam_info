@@ -9,10 +9,16 @@ import 'package:flutter/material.dart'
         ColorScheme,
         Colors,
         IconButtonThemeData,
+        MouseCursor,
+        SystemMouseCursors,
+        TextButtonThemeData,
         TextTheme,
         ThemeData,
         TooltipThemeData,
-        WidgetStatePropertyAll;
+        WidgetState,
+        WidgetStateProperty,
+        WidgetStatePropertyAll,
+        debugPrint;
 import 'package:veteranam/shared/shared.dart';
 
 ThemeData themeData = ThemeData(
@@ -41,13 +47,19 @@ ThemeData themeData = ThemeData(
     backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
     elevation: 0,
   ),
-  iconButtonTheme: const IconButtonThemeData(
+  textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll<Color>(Colors.transparent),
-      foregroundColor: WidgetStatePropertyAll<Color>(
+      mouseCursor: _buttonMouseCurson,
+    ),
+  ),
+  iconButtonTheme: IconButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+      foregroundColor: const WidgetStatePropertyAll<Color>(
         AppColors.materialThemeKeyColorsSecondary,
       ),
-      overlayColor: WidgetStatePropertyAll<Color>(Colors.transparent),
+      overlayColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+      mouseCursor: _buttonMouseCurson,
     ),
   ),
   textTheme: const TextTheme()
@@ -62,3 +74,11 @@ ThemeData themeData = ThemeData(
     ),
   ),
 );
+
+WidgetStateProperty<MouseCursor?> get _buttonMouseCurson =>
+    WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return SystemMouseCursors.forbidden;
+      }
+      return SystemMouseCursors.click;
+    });
