@@ -5,7 +5,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
-Future<void> privacyPolicyPumpAppHelper({
+Future<void> markdownFileDialogPumpAppHelper({
   required WidgetTester tester,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   MockGoRouter? mockGoRouter,
@@ -13,7 +13,14 @@ Future<void> privacyPolicyPumpAppHelper({
   _registerPrivacyPolicyMarkdownCubit(
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  await tester.pumpApp(const PrivacyPolicyDialog(), mockGoRouter: mockGoRouter);
+  await tester.pumpApp(
+    const MarkdownFileDialog(
+      ukFilePath: KAppText.ukPrivacyPolicyPath,
+      enFilePath: KAppText.enPrivacyPolicyPath,
+      startText: KTestText.field,
+    ),
+    mockGoRouter: mockGoRouter,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.privacyPolicy.dialog),
@@ -26,13 +33,13 @@ Future<void> privacyPolicyPumpAppHelper({
 void _registerPrivacyPolicyMarkdownCubit({
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
-  final privacyPolicyMarkdownCubit = PrivacyPolicyMarkdownCubit(
+  final privacyPolicyMarkdownCubit = MarkdownFileCubit(
     appAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  if (GetIt.I.isRegistered<PrivacyPolicyMarkdownCubit>()) {
-    GetIt.I.unregister<PrivacyPolicyMarkdownCubit>();
+  if (GetIt.I.isRegistered<MarkdownFileCubit>()) {
+    GetIt.I.unregister<MarkdownFileCubit>();
   }
-  GetIt.I.registerSingleton<PrivacyPolicyMarkdownCubit>(
+  GetIt.I.registerSingleton<MarkdownFileCubit>(
     privacyPolicyMarkdownCubit,
   );
 }

@@ -63,7 +63,7 @@ import 'package:veteranam/components/password_reset/bloc/check_code/check_verifi
     as _i846;
 import 'package:veteranam/components/password_reset/bloc/form/password_reset_bloc.dart'
     as _i335;
-import 'package:veteranam/components/privacy_policy/bloc/privacy_policy_markdown_cubit.dart'
+import 'package:veteranam/components/markdown_file_dialog/bloc/markdown_file_cubit.dart'
     as _i686;
 import 'package:veteranam/components/profile/bloc/profile_bloc.dart' as _i492;
 import 'package:veteranam/components/pw_reset_email/bloc/pw_reset_email_bloc.dart'
@@ -384,10 +384,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i208.AuthenticationRepository>(() =>
         _i208.AuthenticationRepository(
             gh<_i1001.IAppAuthenticationRepository>()));
-    gh.factory<_i686.PrivacyPolicyMarkdownCubit>(() =>
-        _i686.PrivacyPolicyMarkdownCubit(
-            appAuthenticationRepository:
-                gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i686.MarkdownFileCubit>(() => _i686.MarkdownFileCubit(
+        appAuthenticationRepository:
+            gh<_i1001.IAppAuthenticationRepository>()));
     gh.factory<_i1032.MyDiscountsWatcherBloc>(
       () => _i1032.MyDiscountsWatcherBloc(
         discountRepository: gh<_i1001.IDiscountRepository>(),

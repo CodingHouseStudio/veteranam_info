@@ -126,6 +126,7 @@ class _DialogsWidget {
             actionsOverflowAlignment: actionsOverflowAlignment,
             contentPadding: contentPadding?.call(isDeskValue: isDeskValue),
             scrollable: isScollable,
+            clipBehavior: Clip.hardEdge,
             content: childWidget(
               isDeskValue: isDeskValue,
               context: context,
@@ -450,6 +451,7 @@ class _DialogsWidget {
                 backgroundColor: AppColors.materialThemeKeyColorsNeutral,
                 contentPadding: EdgeInsets.zero,
                 scrollable: true,
+                clipBehavior: Clip.hardEdge,
                 content: UserEmailDialog(
                   key: KWidgetkeys.screen.discounts.userEmailDialog,
                   isDesk: isTablet,
@@ -511,6 +513,7 @@ class _DialogsWidget {
             backgroundColor: AppColors.materialThemeKeyColorsSecondary,
             contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
             scrollable: true,
+            clipBehavior: Clip.hardEdge,
             content: const MobUpdateDialog(),
           );
         },
