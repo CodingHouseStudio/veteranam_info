@@ -3,7 +3,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
-Future<void> privacyPolicyInitialHelper(
+Future<void> markdownFileDialogInitialHelper(
   WidgetTester tester,
 ) async {
   await changeWindowSizeHelper(

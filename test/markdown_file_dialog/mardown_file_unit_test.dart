@@ -16,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.privacyPolicy} ${KGroupText.cubit}', () {
-    late PrivacyPolicyMarkdownCubit privacyPolicyMarkdownCubit;
+    late MarkdownFileCubit privacyPolicyMarkdownCubit;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
 
     setUp(() {
@@ -24,16 +24,19 @@ void main() {
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (invocation) => KTestText.userSetting,
       );
-      privacyPolicyMarkdownCubit = PrivacyPolicyMarkdownCubit(
+      privacyPolicyMarkdownCubit = MarkdownFileCubit(
         appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
-    blocTest<PrivacyPolicyMarkdownCubit, String?>(
+    blocTest<MarkdownFileCubit, String?>(
       'emits [discountWatcherState()]'
       ' when load discountModel list',
       build: () => privacyPolicyMarkdownCubit,
-      act: (bloc) async => bloc.init(),
+      act: (bloc) async => bloc.init(
+        ukFilePath: KAppText.ukPrivacyPolicyPath,
+        enFilePath: KAppText.enPrivacyPolicyPath,
+      ),
       expect: () async => [
         predicate<String?>(
           (state) => state != null,

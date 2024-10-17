@@ -4,17 +4,21 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Injectable()
-class PrivacyPolicyMarkdownCubit extends Cubit<String?> {
-  PrivacyPolicyMarkdownCubit({
+class MarkdownFileCubit extends Cubit<String?> {
+  MarkdownFileCubit({
     required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
         super(null);
   final IAppAuthenticationRepository _appAuthenticationRepository;
-  Future<void> init() async {
-    final language = _appAuthenticationRepository
-        .currentUserSetting.locale.value.languageCode;
+  Future<void> init({
+    required String ukFilePath,
+    required String? enFilePath,
+  }) async {
+    final language = _appAuthenticationRepository.currentUserSetting.locale;
     final data = await rootBundle.loadString(
-      'assets/markdown/privacy_policy_$language.md',
+      language == Language.english && enFilePath != null
+          ? enFilePath
+          : ukFilePath,
       cache: KTest.cashe,
     );
     emit(data);
