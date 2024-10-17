@@ -104,8 +104,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                 .state
                                 .company
                                 .image
-                                ?.downloadURL
-                                .getImageUrl,
+                                ?.downloadURL,
                             // perimeter: KSize.kPixel72,
                             icon: KIcon.personEdit,
                             // background: AppColors.
