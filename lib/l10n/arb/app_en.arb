@@ -189,13 +189,19 @@
   "@fieldCannotBeEmpty": {
     "examples": "Error text for the field if its value is empty."
   },
-  "tooshort": "too short",
+  "tooshort": "too short, it must contain {number} characters",
   "@tooshort": {
-    "examples": "Error text for the field if its value is too short."
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Error text for a field when its value at least is too short."
   },
-  "tooShortEmailPassword": "too short",
+  "tooShortEmailPassword": "Too short, it must contain at least {number} characters",
   "@tooShortEmailPassword": {
-    "examples": "Error text for the email and password fields if the value is too short."
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Error text for email and password fields when their value is too short."
   },
   "isWrong": "has errors",
   "@isWrong": {
@@ -977,7 +983,7 @@
   "@discountLinkTitle": {
     "examples": "Text on the Discount page"
   },
-  "invalidLink": "Invalid link",
+  "invalidLink": "Invalid link. It should start with http:// or https://.",
   "@invalidLink": {
     "examples": "Error text for the link field if the value is invalid."
   },
@@ -1206,8 +1212,8 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
-  "@linkDescription": {
+  "discountLinkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
+  "@discountLinkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
   "getYouNeed": "To receive, you need",

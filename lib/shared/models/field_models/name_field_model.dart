@@ -1,15 +1,11 @@
 import 'package:formz/formz.dart';
 
-enum NameFieldModelValidationError { empty, wrong, tooShort }
+enum NameFieldModelValidationError { empty, wrong, invalidLength }
 
 class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
   const NameFieldModel.pure() : super.pure('');
 
   const NameFieldModel.dirty([super.value = '']) : super.dirty();
-
-  static final _nameRegExp = RegExp(r"^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s'-]+$");
-
-  static const int minLength = 2;
 
   @override
   NameFieldModelValidationError? validator(String? value) {
@@ -18,10 +14,10 @@ class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
     if (text == null || text.isEmpty) {
       return NameFieldModelValidationError.empty;
     }
-    if (text.length < minLength) {
-      return NameFieldModelValidationError.tooShort;
+    if (text.length < 2) {
+      return NameFieldModelValidationError.invalidLength;
     }
-    if (!_nameRegExp.hasMatch(text)) {
+    if (!RegExp(r"^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s'-]+$").hasMatch(text)) {
       return NameFieldModelValidationError.wrong;
     }
     return null;

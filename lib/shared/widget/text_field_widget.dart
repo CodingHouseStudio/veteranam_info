@@ -28,7 +28,7 @@ class TextFieldWidget extends StatefulWidget {
     this.focusNode,
     this.enabledBorder,
     this.focusedBorder,
-    this.errorMaxLines,
+    this.errorMaxLines = 3,
     this.readOnly,
     this.disposeFocusNode = true,
     this.expands = false,
@@ -94,86 +94,86 @@ class TextFieldWidget extends StatefulWidget {
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   // TextEditingController? controller;
-  late bool isHovered;
+  late WidgetStatesController statesController;
+  late bool _isHovered;
 
   @override
   void initState() {
-    isHovered = false;
+    _isHovered = false;
+    statesController = WidgetStatesController()..addListener(_hover);
+    //..addListener(_hover);
     super.initState();
+  }
+
+  void _hover() {
+    if (statesController.value.contains(WidgetState.hovered) != _isHovered) {
+      setState(() {
+        _isHovered = statesController.value.contains(WidgetState.hovered);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: TextField(
-        key: widget.widgetKey,
-        expands: widget.expands,
-        focusNode: widget.focusNode,
-        enabled: widget.enabled,
-        readOnly: widget.readOnly ?? false,
-        onSubmitted: widget.onSubmitted,
-        onEditingComplete: widget.onEditingCompleted,
-        obscureText: widget.obscureText,
-        autocorrect: !widget.obscureText,
-        controller: //controller ??
-            widget.controller,
-        maxLines: widget.expands ? null : widget.maxLines ?? 1,
-        minLines: widget.expands ? null : widget.minLines ?? 1,
-        maxLength: widget.maxLength,
-        keyboardType: widget.keyboardType ?? TextInputType.text,
-        textInputAction: widget.textInputAction ?? TextInputAction.done,
-        textAlign: widget.textAlign ?? TextAlign.start,
-        style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
-        // context.theme.textTheme.headlineSmall,
-        onChanged: widget.onChanged, mouseCursor: widget.cursor,
-        decoration: KWidgetTheme.inputDecoration.copyWith(
-          hintStyle: widget.hintStyle,
-          contentPadding: widget.contentPadding ??
-              (widget.isDesk
-                  ? const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize32,
-                      vertical: KPadding.kPaddingSize16,
+    return TextField(
+      key: widget.widgetKey,
+      expands: widget.expands,
+      focusNode: widget.focusNode,
+      enabled: widget.enabled,
+      readOnly: widget.readOnly ?? false,
+      onSubmitted: widget.onSubmitted,
+      onEditingComplete: widget.onEditingCompleted,
+      obscureText: widget.obscureText,
+      autocorrect: !widget.obscureText,
+      controller: //controller ??
+          widget.controller,
+      statesController: statesController,
+      maxLines: widget.expands ? null : widget.maxLines ?? 1,
+      minLines: widget.expands ? null : widget.minLines ?? 1,
+      maxLength: widget.maxLength,
+      keyboardType: widget.keyboardType ?? TextInputType.text,
+      textInputAction: widget.textInputAction ?? TextInputAction.done,
+      textAlign: widget.textAlign ?? TextAlign.start,
+      style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
+      // context.theme.textTheme.headlineSmall,
+      onChanged: widget.onChanged, mouseCursor: widget.cursor,
+      decoration: KWidgetTheme.inputDecoration.copyWith(
+        hintStyle: widget.hintStyle,
+        contentPadding: widget.contentPadding ??
+            (widget.isDesk
+                ? const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize32,
+                    vertical: KPadding.kPaddingSize16,
+                  )
+                : const EdgeInsets.all(KPadding.kPaddingSize16)),
+        labelText: labelText,
+        border: widget.border,
+        enabledBorder: widget.enabledBorder ??
+            KWidgetTheme.outlineInputBorderEnabled.copyWith(
+              borderSide: _isHovered && widget.borderHoverColor != null
+                  ? BorderSide(
+                      color: widget.borderHoverColor!,
                     )
-                  : const EdgeInsets.all(KPadding.kPaddingSize16)),
-          labelText: labelText,
-          border: widget.border,
-          enabledBorder: widget.enabledBorder ??
-              KWidgetTheme.outlineInputBorderEnabled.copyWith(
-                borderSide: isHovered && widget.borderHoverColor != null
-                    ? BorderSide(
-                        color: widget.borderHoverColor!,
-                      )
-                    : null,
-              ),
-          focusedErrorBorder: widget.border,
-          fillColor: widget.fillColor,
-          hintText: widget.hintText,
-          errorText: widget.showErrorText ?? true ? widget.errorText : null,
-          suffixIcon: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
+                  : null,
             ),
-            child: widget.suffixIcon,
+        focusedErrorBorder: widget.border,
+        fillColor: widget.fillColor,
+        hintText: widget.hintText,
+        errorText: widget.showErrorText ?? true ? widget.errorText : null,
+        suffixIcon: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
           ),
-          prefixIcon: widget.prefixIcon,
-          errorMaxLines: widget.errorMaxLines,
-          labelStyle: widget.labelTextStyle,
-          disabledBorder: widget.disabledBorder,
-          floatingLabelBehavior: widget.floatingLabelBehavior,
-          helperText: widget.description,
-          helperStyle: AppTextStyle.materialThemeBodySmall,
-          helperMaxLines: KMinMaxSize.messageMinLines,
+          child: widget.suffixIcon,
         ),
+        prefixIcon: widget.prefixIcon,
+        errorMaxLines: widget.errorMaxLines,
+        labelStyle: widget.labelTextStyle,
+        disabledBorder: widget.disabledBorder,
+        floatingLabelBehavior: widget.floatingLabelBehavior,
+        helperText: widget.description,
+        helperStyle: AppTextStyle.materialThemeBodySmall,
+        helperMaxLines: KMinMaxSize.messageMinLines,
       ),
     );
   }
@@ -186,6 +186,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     if (widget.disposeFocusNode) {
       widget.focusNode?.dispose();
     }
+    statesController
+      ..removeListener(_hover)
+      ..dispose();
     super.dispose();
   }
 }
