@@ -16,11 +16,11 @@ class LinkFieldModel
   @override
   LinkFieldModelValidationError? validator(String? value) {
     if (value == null || value.trim().isEmpty) return null;
-    if (value.length <= 12) {
-      return LinkFieldModelValidationError.invalidLength;
-    }
     if (!value.isUrlValid) {
       return LinkFieldModelValidationError.invalidLink;
+    }
+    if (value.length < 12) {
+      return LinkFieldModelValidationError.invalidLength;
     }
     return null;
   }
