@@ -192,6 +192,12 @@ abstract class AppTextStyle {
     height: 1.29,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle materialThemeHeadlineMediumBold = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 28,
+    height: 1.29,
+    fontWeight: FontWeight.bold,
+  );
 
   /// materialThemeHeadlineSmall figma properties
   /// fontFamily: Gilroy
@@ -436,6 +442,12 @@ abstract class AppTextStyle {
     fontSize: 22,
     height: 1.27,
     fontWeight: FontWeight.w400,
+  );
+  static const TextStyle materialThemeTitleLargeBold = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 22,
+    height: 1.27,
+    fontWeight: FontWeight.bold,
   );
 
   static const TextStyle materialThemeTitleLargeNeutral80 = TextStyle(

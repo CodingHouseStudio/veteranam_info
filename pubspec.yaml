@@ -120,8 +120,8 @@ flutter:
         # - asset: assets/fonts/Gilroy-Semibold.woff
         #   weight: 600
         #   style: normal
-        # - asset: assets/fonts/Gilroy-Bold.woff
-        #   weight: 700
+        - asset: assets/fonts/Gilroy-Bold.woff
+          weight: 700
         #   style: normal
         # - asset: assets/fonts/Gilroy-Extrabold.woff
         #   weight: 800

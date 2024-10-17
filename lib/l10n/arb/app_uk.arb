@@ -1028,9 +1028,13 @@
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
   },
-  "privacyPolicyStartText": "# Політика конфіденційності для Veteranam.info\n\n",
-  "@privacyPolicyText": {
-    "examples": "Текст на сторінці PrivacyPolicy, коли не завантажений markdown текст"
+  "privacyPolicyStart": "Політика конфіденційності для Veteranam.info",
+  "@privacyPolicyStart": {
+    "examples": "Текст на сторінці PrivacyPolicy."
+  },
+  "termsConditionsStart": "Умови та положення для додавання знижок до сайту",
+  "@termsConditionsStart": {
+    "examples": "Текст на сторінці Terms and Conditions."
   },
   "general": "Загальне",
   "@general": {
@@ -1540,8 +1544,8 @@
   "@publishVerificationSubtitleThird": {
     "examples": "Підзаголовок для діалогу публікації знижки на сторінці Discount Add(третя частина)."
   },
-  "agreeTermsConditions": "Я погоджуюсь з умовами",
-  "@agreeTermsConditions": {
+  "iAgreeWith": "Я погоджуюсь з",
+  "@iAgreeWith": {
     "examples": "Текст для діалогу публікації знижки на сторінці Discount Add."
   },
   "brandName": "Назва бренду",
@@ -1580,6 +1584,11 @@
   "@createAccount": {
     "examples": "Текст на сторінці Company для кнопки.",
     "description": "Кнопка використовується для Створення бізнес акаунта."
+  },
+  "termsAndConditions": "Умовами і Положеннями",
+  "@termsAndConditions": {
+    "examples": "Текст на сторінці Discount Add в діалозі для кнопки.",
+    "description": "Кнопка використовується для переходу на сторінку Terms And Conditions."
   },
   "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
   "@deleteProfileQuestion": {

@@ -113,7 +113,7 @@ class _ConfirmPublishDiscountDialogState
                           privacyPolicyAgree = !privacyPolicyAgree;
                         }),
                         isCheck: privacyPolicyAgree,
-                        text: context.l10n.agreeTermsConditions,
+                        text: null,
                         isDesk: widget.isDesk,
                         textWidget: Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
@@ -121,7 +121,7 @@ class _ConfirmPublishDiscountDialogState
                           spacing: KPadding.kPaddingSize8,
                           children: [
                             Text(
-                              context.l10n.agreeTermsConditions,
+                              context.l10n.iAgreeWith,
                               key: KWidgetkeys.widget.checkPoint.text,
                               maxLines: 3,
                               style: widget.isDesk
@@ -129,18 +129,24 @@ class _ConfirmPublishDiscountDialogState
                                   : AppTextStyle.materialThemeBodyMedium,
                             ),
                             InkWell(
-                              onTap: () =>
-                                  context.goNamed(KRoute.privacyPolicy.name),
+                              onTap: () => context
+                                  .goNamed(KRoute.termsAndConditions.name),
                               overlayColor: const WidgetStatePropertyAll(
                                 Colors.transparent,
                               ),
                               hoverColor: Colors.transparent,
                               focusColor: Colors.transparent,
-                              child: Text(
-                                context.l10n.privacyPolicy,
-                                style: widget.isDesk
-                                    ? AppTextStyle.materialThemeBodyLargeBold
-                                    : AppTextStyle.materialThemeBodyMediumBold,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: KPadding.kPaddingSize8,
+                                ),
+                                child: Text(
+                                  context.l10n.termsAndConditions,
+                                  style: widget.isDesk
+                                      ? AppTextStyle.materialThemeBodyLargeBold
+                                      : AppTextStyle
+                                          .materialThemeBodyMediumBold,
+                                ),
                               ),
                             ),
                           ],
@@ -182,7 +188,7 @@ class _ConfirmPublishDiscountDialogState
   DoubleButtonWidget confirmButton(BuildContext context) {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.dialogs.confirmButton,
-      text: '${context.l10n.send}${context.l10n.verification}',
+      text: '${context.l10n.send} ${context.l10n.verification}',
       // color: background,
       isDesk: widget.isDesk,
       deskPadding: const EdgeInsets.symmetric(
