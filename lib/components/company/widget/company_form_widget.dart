@@ -1,5 +1,3 @@
-import 'dart:typed_data' show Uint8List;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +13,9 @@ class CompanyFormWidget extends StatefulWidget {
     required this.initialEmail,
     required this.initialPublicName,
     super.key,
-    this.imageBytes,
   });
 
   final bool isDesk;
-  final Uint8List? imageBytes;
   final String? initialCompanyName;
   final String? initialPublicName;
   final String? initialEmail;
@@ -99,7 +95,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                         children: [
                           UserPhotoWidget(
                             key: KWidgetkeys.screen.profile.photo,
-                            imageBytes: widget.imageBytes,
+                            imageBytes: _.image.value?.bytes,
                             onPressed: () => context
                                 .read<CompanyFormBloc>()
                                 .add(const CompanyFormEvent.imageUpdated()),
@@ -108,8 +104,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                 .state
                                 .company
                                 .image
-                                ?.downloadURL
-                                .getImageUrl,
+                                ?.downloadURL,
                             // perimeter: KSize.kPixel72,
                             icon: KIcon.personEdit,
                             // background: AppColors.

@@ -95,7 +95,6 @@ class CompanyBodyWidget extends StatelessWidget {
   }) =>
       CompanyFormWidget(
         isDesk: isDesk,
-        imageBytes: context.read<CompanyFormBloc>().state.image.value?.bytes,
         initialCompanyName:
             context.read<CompanyWatcherBloc>().state.company.companyName,
         initialEmail: context.read<AuthenticationBloc>().state.user.email,
