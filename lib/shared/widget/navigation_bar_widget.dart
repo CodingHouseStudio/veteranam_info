@@ -318,10 +318,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         context.dialog.showMobileMenuDialog(),
                   ),
                 if (context.read<AuthenticationBloc>().state.status !=
-                        AuthenticationStatus.authenticated
-                    //     &&
-                    // (Config.isDevelopment || Config.isBusiness)
-                    ) ...[
+                        AuthenticationStatus.authenticated &&
+                    (Config.isDevelopment || Config.isBusiness)) ...[
                   if (widget.isDesk) ...[
                     KSizedBox.kWidthSizedBox16,
                     DoubleButtonWidget(
@@ -341,16 +339,15 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       background: AppColors.materialThemeKeyColorsSecondary,
                     ),
                   ],
-                ]
-                // if (context.read<AuthenticationBloc>().state.status ==
-                //         AuthenticationStatus.authenticated
-                //     &&
-                // (Config.isDevelopment || Config.isBusiness)
-                // )
-                else if (!isFocused || widget.isTablet) ...[
-                  KSizedBox.kWidthSizedBox8,
-                  getImageWidget,
                 ],
+                if (context.read<AuthenticationBloc>().state.status ==
+                        AuthenticationStatus.authenticated &&
+                    (Config.isDevelopment || Config.isBusiness))
+                  // else
+                  if (!isFocused || widget.isTablet) ...[
+                    KSizedBox.kWidthSizedBox8,
+                    getImageWidget,
+                  ],
               ],
             )
           : widget.showBackButton ?? false
