@@ -341,13 +341,16 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       background: AppColors.materialThemeKeyColorsSecondary,
                     ),
                   ],
+                ]
+                // if (context.read<AuthenticationBloc>().state.status ==
+                //         AuthenticationStatus.authenticated
+                //     &&
+                // (Config.isDevelopment || Config.isBusiness)
+                // )
+                else if (!isFocused || widget.isTablet) ...[
+                  KSizedBox.kWidthSizedBox8,
+                  getImageWidget,
                 ],
-                if (context.read<AuthenticationBloc>().state.status ==
-                        AuthenticationStatus.authenticated
-                    //     &&
-                    // (Config.isDevelopment || Config.isBusiness)
-                    )
-                  if (!isFocused || widget.isTablet) getImageWidget,
               ],
             )
           : widget.showBackButton ?? false
