@@ -317,37 +317,46 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     onPressed: () async =>
                         context.dialog.showMobileMenuDialog(),
                   ),
-                if (context.read<AuthenticationBloc>().state.status !=
-                        AuthenticationStatus.authenticated &&
-                    (Config.isDevelopment || Config.isBusiness)) ...[
-                  if (widget.isDesk) ...[
-                    KSizedBox.kWidthSizedBox16,
-                    DoubleButtonWidget(
-                      widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                      onPressed: () => userRoleNavigation(context),
-                      text: context.l10n.login,
-                      isDesk: true,
-                      darkMode: true,
-                    ),
-                  ] else if (!isFocused) ...[
-                    KSizedBox.kWidthSizedBox4,
-                    IconButtonWidget(
-                      key: KWidgetkeys.widget.nawbar.loginIcon,
-                      onPressed: () => userRoleNavigation(context),
-                      icon: KIcon.person
-                          .copyWith(color: AppColors.materialThemeWhite),
-                      background: AppColors.materialThemeKeyColorsSecondary,
-                    ),
-                  ],
-                ],
-                if (context.read<AuthenticationBloc>().state.status ==
-                        AuthenticationStatus.authenticated &&
-                    (Config.isDevelopment || Config.isBusiness))
-                  // else
-                  if (!isFocused || widget.isTablet) ...[
-                    KSizedBox.kWidthSizedBox8,
-                    getImageWidget,
-                  ],
+                BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    return Row(
+                      children: [
+                        if (context.read<AuthenticationBloc>().state.status !=
+                                AuthenticationStatus.authenticated &&
+                            (Config.isDevelopment || Config.isBusiness)) ...[
+                          if (widget.isDesk) ...[
+                            KSizedBox.kWidthSizedBox16,
+                            DoubleButtonWidget(
+                              widgetKey: KWidgetkeys.widget.nawbar.loginButton,
+                              onPressed: () => userRoleNavigation(context),
+                              text: context.l10n.login,
+                              isDesk: true,
+                              darkMode: true,
+                            ),
+                          ] else if (!isFocused) ...[
+                            KSizedBox.kWidthSizedBox4,
+                            IconButtonWidget(
+                              key: KWidgetkeys.widget.nawbar.loginIcon,
+                              onPressed: () => userRoleNavigation(context),
+                              icon: KIcon.person.copyWith(
+                                  color: AppColors.materialThemeWhite),
+                              background:
+                                  AppColors.materialThemeKeyColorsSecondary,
+                            ),
+                          ],
+                        ],
+                        if (context.read<AuthenticationBloc>().state.status ==
+                                AuthenticationStatus.authenticated &&
+                            (Config.isDevelopment || Config.isBusiness))
+                          // else
+                          if (!isFocused || widget.isTablet) ...[
+                            KSizedBox.kWidthSizedBox8,
+                            getImageWidget,
+                          ],
+                      ],
+                    );
+                  },
+                ),
               ],
             )
           : widget.showBackButton ?? false
