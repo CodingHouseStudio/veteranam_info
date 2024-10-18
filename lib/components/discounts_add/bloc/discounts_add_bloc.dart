@@ -455,7 +455,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         location: state.city.value,
         description: state.description.value,
         link: _companyRepository.currentUserCompany.link,
-        company: _companyRepository.currentUserCompany.companyName,
+        company: _companyRepository.currentUserCompany.publicName,
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
@@ -464,7 +464,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.publicName,
+        userName: _companyRepository.currentUserCompany.companyName,
         subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {
