@@ -146,6 +146,12 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
+  DateTime getDateDiscountString(
+    String locale,
+  ) =>
+      replaceAll('Up to ', '')
+          .replaceAll('До ', '')
+          .toLocaleDate(locale: locale, showDay: true);
   DateTime toLocaleDate({
     required String locale,
     bool showDay = false,

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -103,40 +104,43 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     }
 
     if (discount != null) {
-      emit(
-        state.copyWith(
-          discount: discount,
-          category: CategoriesFieldModel.dirty(discount!.category),
-          city: discount!.location == null
-              ? const CitiesFieldModel.pure()
-              : CitiesFieldModel.dirty(discount!.location!),
-          period: DateFieldModel.dirty(
-            discount!.expiration?.toLocaleDate(
-              locale: Language.ukrain.value.languageCode,
-              showDay: true,
+      try {
+        emit(
+          state.copyWith(
+            discount: discount,
+            category: CategoriesFieldModel.dirty(discount!.category),
+            city: discount!.location == null
+                ? const CitiesFieldModel.pure()
+                : CitiesFieldModel.dirty(discount!.location!),
+            period: DateFieldModel.dirty(
+              discount!.expiration?.getDateDiscountString(
+                Language.ukrain.value.languageCode,
+              ),
             ),
+            title: MessageFieldModel.dirty(discount!.title),
+            discounts: DiscountsFieldModel.dirty(
+              discount!.discount
+                  .map(
+                    (e) => e.toString(),
+                  )
+                  .toList(),
+            ),
+            eligibility: discount!.eligibility == null
+                ? null
+                : ListFieldModel.dirty(discount!.eligibility!),
+            link: LinkFieldModel.dirty(discount!.directLink),
+            description: MessageFieldModel.dirty(discount!.description),
+            exclusions: discount!.exclusions == null
+                ? const MessageFieldModel.pure()
+                : MessageFieldModel.dirty(discount!.exclusions!),
+            formState: DiscountsAddEnum.initial,
+            isIndefinitely: true,
+            isOnline: discount!.subLocation?.isOnline ?? false,
           ),
-          title: MessageFieldModel.dirty(discount!.title),
-          discounts: DiscountsFieldModel.dirty(
-            discount!.discount
-                .map(
-                  (e) => e.toString(),
-                )
-                .toList(),
-          ),
-          eligibility: discount!.eligibility == null
-              ? null
-              : ListFieldModel.dirty(discount!.eligibility!),
-          link: LinkFieldModel.dirty(discount!.directLink),
-          description: MessageFieldModel.dirty(discount!.description),
-          exclusions: discount!.exclusions == null
-              ? const MessageFieldModel.pure()
-              : MessageFieldModel.dirty(discount!.exclusions!),
-          formState: DiscountsAddEnum.initial,
-          isIndefinitely: true,
-          isOnline: discount!.subLocation?.isOnline ?? false,
-        ),
-      );
+        );
+      } catch (e) {
+        debugPrint('EXCEPTION $e');
+      }
     }
   }
 
