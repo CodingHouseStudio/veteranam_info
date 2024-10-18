@@ -339,7 +339,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               key: KWidgetkeys.widget.nawbar.loginIcon,
                               onPressed: () => userRoleNavigation(context),
                               icon: KIcon.person.copyWith(
-                                  color: AppColors.materialThemeWhite),
+                                color: AppColors.materialThemeWhite,
+                              ),
                               background:
                                   AppColors.materialThemeKeyColorsSecondary,
                             ),
