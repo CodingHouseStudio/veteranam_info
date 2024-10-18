@@ -189,13 +189,19 @@
   "@fieldCannotBeEmpty": {
     "examples": "Error text for the field if its value is empty."
   },
-  "tooshort": "too short",
+  "tooshort": "too short, it must contain {number} characters",
   "@tooshort": {
-    "examples": "Error text for the field if its value is too short."
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Error text for a field when its value at least is too short."
   },
-  "tooShortEmailPassword": "too short",
+  "tooShortEmailPassword": "Too short, it must contain at least {number} characters",
   "@tooShortEmailPassword": {
-    "examples": "Error text for the email and password fields if the value is too short."
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Error text for email and password fields when their value is too short."
   },
   "isWrong": "has errors",
   "@isWrong": {
@@ -977,7 +983,7 @@
   "@discountLinkTitle": {
     "examples": "Text on the Discount page"
   },
-  "invalidLink": "Invalid link",
+  "invalidLink": "Invalid link. It should start with http:// or https://.",
   "@invalidLink": {
     "examples": "Error text for the link field if the value is invalid."
   },
@@ -1037,9 +1043,13 @@
     },
     "examples": "Text on the Discount page, description in the skating rink"
   },
-  "privacyPolicyStartText": "# Privacy Policy for Veteranam.info\n\n",
-  "@privacyPolicyText": {
-    "examples": "The text on the PrivacyPolicy page when the markdown text isn't loaded"
+  "privacyPolicyStart": "Privacy Policy for Veteranam.info",
+  "@privacyPolicyStart": {
+    "examples": "Text on the Privacy Policy page."
+  },
+  "termsConditionsStart": "Terms and Conditions for Adding Discounts to the Site",
+  "@termsConditionsStart": {
+    "examples": "Text on the Terms and Conditions page."
   },
   "general": "General",
   "@general": {
@@ -1206,8 +1216,8 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
-  "@linkDescription": {
+  "discountLinkDescription": "Insert a link to the page where you can learn more about the discount. We will contact you if you have any questions.",
+  "@discountLinkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
   "getYouNeed": "To receive, you need",
@@ -1532,8 +1542,8 @@
   "@publishVerificationSubtitleThird": {
     "examples": "Subtitle for the discount submission dialog on the Discount Add page (third part)."
   },
-  "agreeTermsConditions": "I agree to the terms and conditions",
-  "@agreeTermsConditions": {
+  "iAgreeWith": "I agree to the",
+  "@iAgreeWith": {
     "examples": "Text for the discount submission dialog on the Discount Add page."
   },
   "brandName": "Brand Name",
@@ -1573,12 +1583,25 @@
     "examples": "Text on the Company page for the button.",
     "description": "The button is used to create a business account."
   },
-  "changesNotSaved": "Changes have\nnot been saved yet*",
+  "termsAndConditions": "Terms and Conditions",
+  "@termsAndConditions": {
+    "examples": "Text on the Discount Add page in the dialog for the button.",
+    "description": "The button is used to navigate to the Terms and Conditions page."
+  },
+  "changesNotSaved": "Changes\n are not saved*",
   "@changesNotSaved": {
     "examples": "Text on the Company and Profile pages below the image when it is selected but changes are not saved."
   },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
+    "examples": "Text for the delete account dialog on the Profile page."
+  },
+  "enableButton": "Button will be active after",
+  "@enableButton": {
+    "examples": "The text of the countdown to the activation of the button on the My discounts page."
+  },
+  "seconds": "seconds",
+  "@seconds": {
     "examples": "Text for the delete account dialog on the Profile page."
   }
 }

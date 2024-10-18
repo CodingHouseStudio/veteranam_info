@@ -1,5 +1,3 @@
-import 'dart:typed_data' show Uint8List;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +13,9 @@ class CompanyFormWidget extends StatefulWidget {
     required this.initialEmail,
     required this.initialPublicName,
     super.key,
-    this.imageBytes,
   });
 
   final bool isDesk;
-  final Uint8List? imageBytes;
   final String? initialCompanyName;
   final String? initialPublicName;
   final String? initialEmail;
@@ -97,28 +93,44 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (_.image.value != null)
-                            Column(
-                              children: [
-                                _userPhoto,
-                                Text(
-                                  context.l10n.changesNotSaved,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyle
-                                      .materialThemeBodyMediumNeutralVariant60,
-                                ),
-                              ],
+                          Padding(
+                            padding: _.image.value == null
+                                ? EdgeInsets.zero
+                                : const EdgeInsets.only(
+                                    left: KPadding.kPaddingSize24,
+                                  ),
+                            child: UserPhotoWidget(
+                              key: KWidgetkeys.screen.profile.photo,
+                              imageBytes: _.image.value?.bytes,
+                              onPressed: () => context
+                                  .read<CompanyFormBloc>()
+                                  .add(const CompanyFormEvent.imageUpdated()),
+                              imageUrl: context
+                                  .read<CompanyWatcherBloc>()
+                                  .state
+                                  .company
+                                  .image
+                                  ?.downloadURL,
+                              // perimeter: KSize.kPixel72,
+                              icon: KIcon.personEdit,
+                              // background: AppColors.
+                              // materialThemeKeyColorsPrimary,
+                              // iconColor: AppColors.materialThemeBlack,
+                            ),
+                          ),
+                          KSizedBox.kWidthSizedBox32,
+                          if (widget.isDesk)
+                            Expanded(
+                              child: Text(
+                                context.l10n.dataEditing,
+                                key: KWidgetkeys.widget.profileCard.editText,
+                                style: widget.isDesk
+                                    ? AppTextStyle.materialThemeHeadlineLarge
+                                    : AppTextStyle.materialThemeHeadlineSmall,
+                              ),
                             )
                           else
-                            _userPhoto,
-                          KSizedBox.kWidthSizedBox32,
-                          Padding(
-                            padding: _.image.value != null
-                                ? const EdgeInsets.only(
-                                    bottom: KPadding.kPaddingSize42,
-                                  )
-                                : EdgeInsets.zero,
-                            child: Expanded(
+                            Expanded(
                               child: Text(
                                 context.l10n.dataEditing,
                                 key: KWidgetkeys.widget.profileCard.editText,
@@ -127,18 +139,17 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                     : AppTextStyle.materialThemeHeadlineSmall,
                               ),
                             ),
-                          ),
                           KSizedBox.kWidthSizedBox8,
-                          Padding(
-                            padding: _.image.value != null
-                                ? const EdgeInsets.only(
-                                    bottom: KPadding.kPaddingSize42,
-                                  )
-                                : EdgeInsets.zero,
-                            child: KIcon.edit,
-                          ),
+                          KIcon.edit,
                         ],
                       ),
+                      if (_.image.value != null)
+                        Text(
+                          context.l10n.changesNotSaved,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle
+                              .materialThemeBodyMediumNeutralVariant60,
+                        ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: const Key(''),
@@ -361,6 +372,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                 );
             // context.goNamed(KRoute.myDiscounts.name);
           },
+          timer: false,
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.only(
@@ -413,30 +425,11 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       );
                   // context.goNamed(KRoute.myDiscounts.name);
                 },
+                timer: false,
               )
           : null,
     );
   }
-
-  Widget get _userPhoto => UserPhotoWidget(
-        key: KWidgetkeys.screen.profile.photo,
-        imageBytes: widget.imageBytes,
-        onPressed: () => context
-            .read<CompanyFormBloc>()
-            .add(const CompanyFormEvent.imageUpdated()),
-        imageUrl: context
-            .read<CompanyWatcherBloc>()
-            .state
-            .company
-            .image
-            ?.downloadURL
-            .getImageUrl,
-        // perimeter: KSize.kPixel72,
-        icon: KIcon.personEdit,
-        // background: AppColors.
-        // materialThemeKeyColorsPrimary,
-        // iconColor: AppColors.materialThemeBlack,
-      );
 
   @override
   void dispose() {

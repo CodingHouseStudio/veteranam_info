@@ -8,12 +8,12 @@ class NicknameFieldModel
 
   const NicknameFieldModel.dirty([super.value = '']) : super.dirty();
 
-  static final _nicknameRegExp = RegExp(r'^[a-zA-Z0-9._а-яА-ЯіІїЇєЄґҐ]+$');
-
   @override
   NicknameFieldModelValidationError? validator(String? value) {
     final text = value?.trim();
-    if (text != null && text.isNotEmpty && !_nicknameRegExp.hasMatch(text)) {
+    if (text != null &&
+        text.isNotEmpty &&
+        !RegExp(r'^[a-zA-Z0-9._а-яА-ЯіІїЇєЄґҐ]+$').hasMatch(text)) {
       return NicknameFieldModelValidationError.wrong;
     }
     return null;

@@ -15,6 +15,7 @@ class DiscountCardDialog extends StatelessWidget {
         return AlertDialog(
           key: KWidgetkeys.screen.discountCard.dialog,
           shape: KWidgetTheme.outlineBorder,
+          clipBehavior: Clip.hardEdge,
           insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           contentPadding: EdgeInsets.zero,

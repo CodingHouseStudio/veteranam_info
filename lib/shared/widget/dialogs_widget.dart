@@ -126,6 +126,7 @@ class _DialogsWidget {
             actionsOverflowAlignment: actionsOverflowAlignment,
             contentPadding: contentPadding?.call(isDeskValue: isDeskValue),
             scrollable: isScollable,
+            clipBehavior: Clip.hardEdge,
             content: childWidget(
               isDeskValue: isDeskValue,
               context: context,
@@ -172,6 +173,7 @@ class _DialogsWidget {
     required String confirmText,
     required void Function()? onPressed,
     required Color confirmButtonBackground,
+    required bool timer,
     String? unconfirmText,
   }) =>
       _doubleDialog(
@@ -184,6 +186,7 @@ class _DialogsWidget {
           unconfirmText: unconfirmText,
           confirmButtonBackground: confirmButtonBackground,
           onPressed: onPressed,
+          timer: timer,
         ),
         isDesk: isDesk,
         deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
@@ -450,6 +453,7 @@ class _DialogsWidget {
                 backgroundColor: AppColors.materialThemeKeyColorsNeutral,
                 contentPadding: EdgeInsets.zero,
                 scrollable: true,
+                clipBehavior: Clip.hardEdge,
                 content: UserEmailDialog(
                   key: KWidgetkeys.screen.discounts.userEmailDialog,
                   isDesk: isTablet,
@@ -511,6 +515,7 @@ class _DialogsWidget {
             backgroundColor: AppColors.materialThemeKeyColorsSecondary,
             contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
             scrollable: true,
+            clipBehavior: Clip.hardEdge,
             content: const MobUpdateDialog(),
           );
         },

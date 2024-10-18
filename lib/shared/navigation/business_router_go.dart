@@ -13,9 +13,9 @@ import 'package:veteranam/components/components.dart'
         ErrorScreen,
         FeedbackScreen,
         LoginScreen,
+        MarkdownFileDialog,
         MyDiscountsScreen,
         PasswordResetScreen,
-        PrivacyPolicyDialog,
         ProfileScreen,
         PwResetEmailScreen,
         SignUpScreen;
@@ -160,16 +160,6 @@ GoRouter businessRouter = GoRouter(
       // ),
       redirect: businessRedirect,
       routes: [
-        // GoRoute(
-        //   name: KRoute.privacyPolicy.name,
-        //   path: KRoute.privacyPolicy.path,
-        //   pageBuilder: (context, state) => DialogPage(
-        //     key: state.pageKey,
-        //     name: state.name,
-        // restorationId: state.pageKey.value,
-        //     builder: (_) => const PrivacyPolicyDialog(),
-        //   ),
-        // ),
         GoRoute(
           name: KRoute.company.name,
           path: KRoute.company.path,
@@ -224,13 +214,17 @@ GoRouter businessRouter = GoRouter(
           },
           routes: [
             GoRoute(
-              name: KRoute.privacyPolicy.name,
-              path: KRoute.privacyPolicy.path,
+              name: KRoute.termsAndConditions.name,
+              path: KRoute.termsAndConditions.path,
               pageBuilder: (context, state) => DialogPage(
                 key: state.pageKey,
                 name: state.name,
                 restorationId: state.pageKey.value,
-                builder: (_) => const PrivacyPolicyDialog(),
+                builder: (_) => MarkdownFileDialog(
+                  startText: context.l10n.termsConditionsStart,
+                  ukFilePath: KAppText.ukTermsConditions,
+                  enFilePath: null,
+                ),
               ),
             ),
           ],

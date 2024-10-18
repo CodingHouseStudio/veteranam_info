@@ -184,12 +184,18 @@
   "@fieldCannotBeEmpty": {
     "examples": "Текст помилки для поля, якщо його значення порожнє."
   },
-  "tooshort": "Занадто коротке",
+  "tooshort": "занадто коротке, воно повинно містити не менше {number} символів",
   "@tooshort": {
+    "placeholders": {
+      "number": {}
+    },
     "examples": "Текст помилки для поля, якщо його значення занадто коротке."
   },
-  "tooShortEmailPassword": "Занадто короткий",
+  "tooShortEmailPassword": "Занадто короткий, він повинен містити не менше {number} символів",
   "@tooShortEmailPassword": {
+    "placeholders": {
+      "number": {}
+    },
     "examples": "Текст помилки для полів електронної адреси та паролю, якщо їх значення занадто коротке."
   },
   "isWrong": "Неправильне",
@@ -964,7 +970,7 @@
   "@discountLinkTitle": {
     "examples": "Текст на сторінці Discount,"
   },
-  "invalidLink": "Невірне посилання",
+  "invalidLink": "Неправильне посилання. Почніть його з http:// або https://.",
   "@invalidLink": {
     "examples": "Текст помилки для поля посилання, якщо значення неправильне."
   },
@@ -1028,9 +1034,13 @@
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
   },
-  "privacyPolicyStartText": "# Політика конфіденційності для Veteranam.info\n\n",
-  "@privacyPolicyText": {
-    "examples": "Текст на сторінці PrivacyPolicy, коли не завантажений markdown текст"
+  "privacyPolicyStart": "Політика конфіденційності для Veteranam.info",
+  "@privacyPolicyStart": {
+    "examples": "Текст на сторінці PrivacyPolicy."
+  },
+  "termsConditionsStart": "Умови та положення для додавання знижок до сайту",
+  "@termsConditionsStart": {
+    "examples": "Текст на сторінці Terms and Conditions."
   },
   "general": "Загальне",
   "@general": {
@@ -1205,8 +1215,8 @@
   "@discountDescription": {
     "examples": "Текст на сторінці Discount Add для поля з заголовку(опис)"
   },
-  "linkDescription": "Вставте посилання на сторінку, де можна дізнатися більше про знижку. Ми звернемося до вас, якщо виникнуть питання.",
-  "@linkDescription": {
+  "discountLinkDescription": "Вставте посилання на сторінку, де можна дізнатися більше про знижку. Ми звернемося до вас, якщо виникнуть питання.",
+  "@discountLinkDescription": {
     "examples": "Текст на сторінці Discount Add для поля з посиланням(опис)"
   },
   "getYouNeed": "Щоб отримати потрібно",
@@ -1540,8 +1550,8 @@
   "@publishVerificationSubtitleThird": {
     "examples": "Підзаголовок для діалогу публікації знижки на сторінці Discount Add(третя частина)."
   },
-  "agreeTermsConditions": "Я погоджуюсь з умовами",
-  "@agreeTermsConditions": {
+  "iAgreeWith": "Я погоджуюсь з",
+  "@iAgreeWith": {
     "examples": "Текст для діалогу публікації знижки на сторінці Discount Add."
   },
   "brandName": "Назва бренду",
@@ -1581,12 +1591,25 @@
     "examples": "Текст на сторінці Company для кнопки.",
     "description": "Кнопка використовується для Створення бізнес акаунта."
   },
-  "changesNotSaved": "Зміни ще\nне збережені*",
+  "changesNotSaved": "Зміни\nне збережені*",
   "@changesNotSaved": {
     "examples": "Текст на сторінці Company та Profile підкартинкою, коли вона вибрана, але зміни не збережені"
   },
+  "termsAndConditions": "Умовами і Положеннями",
+  "@termsAndConditions": {
+    "examples": "Текст на сторінці Discount Add в діалозі для кнопки.",
+    "description": "Кнопка використовується для переходу на сторінку Terms And Conditions."
+  },
   "deleteProfileQuestion": "Ви впевнені, що хочете видалити Ваш профіль? Всі дані будуть втрачені",
   "@deleteProfileQuestion": {
+    "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
+  },
+  "enableButton": "Кнопка буде активна через",
+  "@enableButton": {
+    "examples": "Текст відліку до активації кнопки на сторінці My discounts."
+  },
+  "seconds": "секунд",
+  "@seconds": {
     "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
   }
 }

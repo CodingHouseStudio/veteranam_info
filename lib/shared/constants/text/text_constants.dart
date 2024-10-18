@@ -227,11 +227,22 @@ abstract class KAppText {
   static const String site = 'https://app.veteranam.info';
   static const String businessSite = 'https://business.veteranam.info';
   static const String unknown = 'Unknown';
+
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
-  static const String nickname = 'Nickname';
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';
   static const String _mobAppId = 'info.veteranam';
+
+  static const String nickname = 'Nickname';
+
+  static const String ukPrivacyPolicyPath =
+      '${_markdownStartPath}privacy_policy_uk.md';
+  static const String enPrivacyPolicyPath =
+      '${_markdownStartPath}privacy_policy_en.md';
+  static const String ukTermsConditions =
+      '${_markdownStartPath}terms_conditions_uk.md';
+  static const String _markdownStartPath = 'assets/markdown/';
+
   static const String androidPackageName = 'com.veteranam.package';
   static const String eligibilityAll = 'Усім нище перечисленим';
   static const String eligibilityAllEN = 'To all of the below-mentioned';

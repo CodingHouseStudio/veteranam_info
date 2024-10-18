@@ -18,7 +18,7 @@ class CompanyNameFieldModel
       return CompanyNameFieldModelValidationError.empty;
     }
     // Check for minimum and maximum length
-    if (text.length <= 2) {
+    if (text.length < 2) {
       return CompanyNameFieldModelValidationError.invalidLength;
     }
 

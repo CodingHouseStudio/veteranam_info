@@ -1,5 +1,4 @@
-# Privacy Policy for Coding House Studio LLC
-
+<!-- # Privacy Policy for Coding House Studio LLC -->
 **EFFECTIVE DATE: Jul 11, 2024**
 
 At Coding House Studio LLC, we value your privacy and take it seriously. This privacy policy explains how we handle your personal information when you use our website and services. If you disagree with any part of this policy, please stop using our site and services immediately.

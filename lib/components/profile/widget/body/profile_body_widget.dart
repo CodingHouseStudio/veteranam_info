@@ -10,7 +10,7 @@ class ProfileBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
-        precent: KDimensions.thirtyPercent,
+        precent: KDimensions.twentyEightPercent,
         // verticalPadding: KPadding.kPaddingSize48,
       ),
       titleChildWidgetsFunction: ({required isDesk}) => [
@@ -119,6 +119,7 @@ class ProfileBodyWidget extends StatelessWidget {
                   AuthenticationLogoutRequested(),
                 );
           },
+          timer: false,
         ),
         isDesk: isDesk,
         deskPadding: const EdgeInsets.symmetric(
@@ -159,6 +160,7 @@ class ProfileBodyWidget extends StatelessWidget {
                   AuthenticationDeleteRequested(),
                 );
           },
+          timer: false,
         ),
       );
 }

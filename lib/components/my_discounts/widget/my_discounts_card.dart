@@ -190,6 +190,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
               );
           context.pop();
         },
+        timer: true,
       ),
       key: KWidgetkeys.screen.myDiscounts.iconTrash,
       padding: KPadding.kPaddingSize12,

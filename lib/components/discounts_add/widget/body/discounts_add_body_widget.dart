@@ -262,7 +262,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           context.read<DiscountsAddBloc>().add(
                                 DiscountsAddEvent.discountRemoveItem(value),
                               ),
-                      errorMaxLines: 3,
                       description: context.l10n.discountDescription,
                     )
                   else
@@ -387,7 +386,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       controller: linkController,
                       isDesk: isDesk,
                       labelText: context.l10n.link,
-                      description: context.l10n.linkDescription,
+                      description: context.l10n.discountLinkDescription,
                       showErrorText: _.formState.hasError,
                       errorText: _.link.error.value(context),
                       onChanged: (text) => context
@@ -444,6 +443,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   onPressed: () {
                     context.goNamed(KRoute.myDiscounts.name);
                   },
+                  timer: false,
                 )
             : () => context.read<DiscountsAddBloc>().add(
                   const DiscountsAddEvent.back(),
