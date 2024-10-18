@@ -1596,6 +1596,10 @@
   "@enableButton": {
     "examples": "The text of the countdown to the activation of the button on the My discounts page."
   },
+  "onlyEnglishLetter": "must contain only English letters or symbols",
+  "@onlyEnglishLetter": {
+    "examples": "Error message text for the password field if it contains anything other than symbols or Ukrainian letters."
+  },
   "seconds": "seconds",
   "@seconds": {
     "examples": "Text for the delete account dialog on the Profile page."
