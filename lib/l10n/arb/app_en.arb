@@ -1573,6 +1573,10 @@
     "examples": "Text on the Company page for the button.",
     "description": "The button is used to create a business account."
   },
+  "changesNotSaved": "Changes have\nnot been saved yet*",
+  "@changesNotSaved": {
+    "examples": "Text on the Company and Profile pages below the image when it is selected but changes are not saved."
+  },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."

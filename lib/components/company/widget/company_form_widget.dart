@@ -97,38 +97,28 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          UserPhotoWidget(
-                            key: KWidgetkeys.screen.profile.photo,
-                            imageBytes: widget.imageBytes,
-                            onPressed: () => context
-                                .read<CompanyFormBloc>()
-                                .add(const CompanyFormEvent.imageUpdated()),
-                            imageUrl: context
-                                .read<CompanyWatcherBloc>()
-                                .state
-                                .company
-                                .image
-                                ?.downloadURL
-                                .getImageUrl,
-                            // perimeter: KSize.kPixel72,
-                            icon: KIcon.personEdit,
-                            // background: AppColors.
-                            // materialThemeKeyColorsPrimary,
-                            // iconColor: AppColors.materialThemeBlack,
-                          ),
-                          KSizedBox.kWidthSizedBox32,
-                          if (widget.isDesk)
-                            Expanded(
-                              child: Text(
-                                context.l10n.dataEditing,
-                                key: KWidgetkeys.widget.profileCard.editText,
-                                style: widget.isDesk
-                                    ? AppTextStyle.materialThemeHeadlineLarge
-                                    : AppTextStyle.materialThemeHeadlineSmall,
-                              ),
+                          if (_.image.value != null)
+                            Column(
+                              children: [
+                                _userPhoto,
+                                Text(
+                                  context.l10n.changesNotSaved,
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyle
+                                      .materialThemeBodyMediumNeutralVariant60,
+                                ),
+                              ],
                             )
                           else
-                            Expanded(
+                            _userPhoto,
+                          KSizedBox.kWidthSizedBox32,
+                          Padding(
+                            padding: _.image.value != null
+                                ? const EdgeInsets.only(
+                                    bottom: KPadding.kPaddingSize42,
+                                  )
+                                : EdgeInsets.zero,
+                            child: Expanded(
                               child: Text(
                                 context.l10n.dataEditing,
                                 key: KWidgetkeys.widget.profileCard.editText,
@@ -137,8 +127,16 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                     : AppTextStyle.materialThemeHeadlineSmall,
                               ),
                             ),
+                          ),
                           KSizedBox.kWidthSizedBox8,
-                          KIcon.edit,
+                          Padding(
+                            padding: _.image.value != null
+                                ? const EdgeInsets.only(
+                                    bottom: KPadding.kPaddingSize42,
+                                  )
+                                : EdgeInsets.zero,
+                            child: KIcon.edit,
+                          ),
                         ],
                       ),
                       KSizedBox.kHeightSizedBox32,
@@ -419,6 +417,26 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           : null,
     );
   }
+
+  Widget get _userPhoto => UserPhotoWidget(
+        key: KWidgetkeys.screen.profile.photo,
+        imageBytes: widget.imageBytes,
+        onPressed: () => context
+            .read<CompanyFormBloc>()
+            .add(const CompanyFormEvent.imageUpdated()),
+        imageUrl: context
+            .read<CompanyWatcherBloc>()
+            .state
+            .company
+            .image
+            ?.downloadURL
+            .getImageUrl,
+        // perimeter: KSize.kPixel72,
+        icon: KIcon.personEdit,
+        // background: AppColors.
+        // materialThemeKeyColorsPrimary,
+        // iconColor: AppColors.materialThemeBlack,
+      );
 
   @override
   void dispose() {
