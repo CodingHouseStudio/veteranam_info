@@ -466,7 +466,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
         isDesk: isDesk,
         onPressed: () {
           if (context.read<DiscountsAddBloc>().state.discount == null &&
-              context.read<DiscountsAddBloc>().state.formState.isDescription) {
+              context.read<DiscountsAddBloc>().state.formState.isDescription &&
+              context.read<DiscountsAddBloc>().state.description.isValid) {
             context.dialog.showConfirmationPublishDiscountDialog(
               isDesk: isDesk,
               onPressed: () => _sendEvent(context),

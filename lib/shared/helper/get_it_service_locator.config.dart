@@ -51,6 +51,8 @@ import 'package:veteranam/components/information/bloc/information_watcher_bloc.d
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart'
     as _i609;
 import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i1025;
+import 'package:veteranam/components/markdown_file_dialog/bloc/markdown_file_cubit.dart'
+    as _i908;
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart'
     as _i687;
 import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart'
@@ -63,8 +65,6 @@ import 'package:veteranam/components/password_reset/bloc/check_code/check_verifi
     as _i846;
 import 'package:veteranam/components/password_reset/bloc/form/password_reset_bloc.dart'
     as _i335;
-import 'package:veteranam/components/markdown_file_dialog/bloc/markdown_file_cubit.dart'
-    as _i686;
 import 'package:veteranam/components/profile/bloc/profile_bloc.dart' as _i492;
 import 'package:veteranam/components/pw_reset_email/bloc/pw_reset_email_bloc.dart'
     as _i361;
@@ -144,8 +144,8 @@ import 'package:veteranam/shared/shared.dart' as _i1001;
 
 const String _user = 'user';
 const String _mobile = 'mobile';
-const String _business = 'business';
 const String _development = 'development';
+const String _business = 'business';
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -219,6 +219,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i687.MobFaqWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
       registerFor: {_mobile},
     );
+    gh.singleton<_i1001.IDataPickerRepository>(
+        () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()));
     gh.singleton<_i1001.IInvestorsRepository>(
       () => _i994.InvestorsRepository(),
       registerFor: {_user},
@@ -227,13 +229,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i895.Connectivity>(),
           gh<_i1001.CacheClient>(),
         ));
-    gh.singleton<_i1001.IDataPickerRepository>(
-      () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()),
-      registerFor: {
-        _business,
-        _development,
-      },
-    );
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.singleton<_i1001.IReportRepository>(
@@ -384,7 +379,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i208.AuthenticationRepository>(() =>
         _i208.AuthenticationRepository(
             gh<_i1001.IAppAuthenticationRepository>()));
-    gh.factory<_i686.MarkdownFileCubit>(() => _i686.MarkdownFileCubit(
+    gh.factory<_i908.MarkdownFileCubit>(() => _i908.MarkdownFileCubit(
         appAuthenticationRepository:
             gh<_i1001.IAppAuthenticationRepository>()));
     gh.factory<_i1032.MyDiscountsWatcherBloc>(

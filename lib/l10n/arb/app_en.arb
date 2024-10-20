@@ -1566,7 +1566,7 @@
     "examples": "Text for the field on the Company page for the company code (description).",
     "description": "The field is used to input the company code for business accounts."
   },
-  "deleteCompanyMessage": "You can only delete the company account if it has no discounts. If you still wish to delete the account, please remove all existing discounts associated with the company.",
+  "deleteCompanyMessage": "Deleting a company account is only possible after deleting all published discounts. Please first delete all discounts associated with your account if you want to deactivate it.",
   "@deleteCompanyMessage": {
     "examples": "Text on the Company page under the delete button, appears if the company has any discounts."
   },
@@ -1595,6 +1595,10 @@
   "enableButton": "Button will be active after",
   "@enableButton": {
     "examples": "The text of the countdown to the activation of the button on the My discounts page."
+  },
+  "onlyEnglishLetter": "must contain only English letters or symbols",
+  "@onlyEnglishLetter": {
+    "examples": "Error message text for the password field if it contains anything other than symbols or Ukrainian letters."
   },
   "seconds": "seconds",
   "@seconds": {

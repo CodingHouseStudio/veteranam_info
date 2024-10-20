@@ -111,9 +111,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
               ? const CitiesFieldModel.pure()
               : CitiesFieldModel.dirty(discount!.location!),
           period: DateFieldModel.dirty(
-            discount!.expiration?.toLocaleDate(
-              locale: Language.ukrain.value.languageCode,
-              showDay: true,
+            discount!.expiration?.getDateDiscountString(
+              Language.ukrain.value.languageCode,
             ),
           ),
           title: MessageFieldModel.dirty(discount!.title),
@@ -455,7 +454,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         location: state.city.value,
         description: state.description.value,
         link: _companyRepository.currentUserCompany.link,
-        company: _companyRepository.currentUserCompany.companyName,
+        company: _companyRepository.currentUserCompany.publicName,
         eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
@@ -464,7 +463,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.publicName,
+        userName: _companyRepository.currentUserCompany.companyName,
         subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {
@@ -497,21 +496,21 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
 
   DiscountModel get discountModel => DiscountModel(
         id: ExtendedDateTime.id,
-        discount: [],
+        discount: const [],
         title: '',
-        titleEN: '',
-        category: [],
-        categoryEN: [],
-        subcategory: [],
-        subcategoryEN: [],
+        titleEN: null,
+        category: const [],
+        categoryEN: null,
+        subcategory: null,
+        subcategoryEN: null,
         description: '',
-        descriptionEN: '',
-        requirements: '',
-        requirementsEN: '',
-        territory: '',
-        territoryEN: '',
+        descriptionEN: null,
+        requirements: null,
+        requirementsEN: null,
+        territory: null,
+        territoryEN: null,
         dateVerified: ExtendedDateTime.current,
-        link: '',
+        link: null,
       );
 
   String? _getExpiration(
