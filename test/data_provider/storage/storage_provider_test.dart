@@ -27,7 +27,7 @@ void main() {
           StoragePath.getFilePath(
             collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            fileExtension: null,
+            fileExtension: KTestText.imagePickerItem.extension,
             file: StoragePath.image,
             standartFileExtension: StoragePath.standartImageFileExtension,
           ),
@@ -41,9 +41,9 @@ void main() {
         },
       );
       when(
-        await mockUploadTask,
+        mockUploadTask.catchError(StorageService.error),
       ).thenAnswer(
-        (realInvocation) => mockTaskSnapshot,
+        (realInvocation) async => mockTaskSnapshot,
       );
       when(
         mockTaskSnapshot.ref,

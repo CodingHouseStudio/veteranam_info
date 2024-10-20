@@ -100,6 +100,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
   GetIt.I.registerSingleton<IReportRepository>(ReportRepository());
   GetIt.I.registerSingleton<IUrlRepository>(UrlRepository());
+  GetIt.I.registerSingleton<ICompanyRepository>(
+    CompanyRepository(
+      GetIt.I.get<IAppAuthenticationRepository>(),
+      CacheClient(),
+    ),
+  );
   GetIt.I.registerSingleton<NetworkRepository>(
     NetworkRepository(
       GetIt.I.get<IAppNetworkRepository>(),
@@ -131,6 +137,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<MobOfflineModeCubit>(
     MobOfflineModeCubit(
       firestoreService: GetIt.I.get<FirestoreService>(),
+    ),
+  );
+  GetIt.I.registerSingleton<CompanyWatcherBloc>(
+    CompanyWatcherBloc(
+      companyRepository: GetIt.I.get<ICompanyRepository>(),
     ),
   );
   // GetIt.I.registerSingleton<LoginBloc>(

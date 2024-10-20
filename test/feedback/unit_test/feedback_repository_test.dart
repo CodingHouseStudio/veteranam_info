@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,13 +16,10 @@ void main() {
     late IFeedbackRepository mockFeedbackRepository;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
-    late Uint8List image;
-    late Uint8List wrongImage;
     setUp(() {
       mockFirestoreService = MockFirestoreService();
       mockStorageService = MockStorageService();
-      image = Uint8List(1);
-      wrongImage = Uint8List(2);
+      Uint8ListExtension.imagePickerItem = KTestText.imagePickerItemFeedback;
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
@@ -41,6 +36,17 @@ void main() {
             .thenAnswer(
           (_) async {},
         );
+
+        when(
+          mockStorageService.saveFile(
+            id: KTestText.feedbackImageModel.id,
+            collecltionName: FirebaseCollectionName.mobFeedback,
+            imagePickerItem: KTestText.imagePickerItemFeedback,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.feedbackImageModel.image!.downloadURL,
+        );
+
         when(mockFirestoreService.addMobFeedback(KTestText.feedbackImageModel))
             .thenAnswer(
           (_) async {},
@@ -63,7 +69,7 @@ void main() {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
             feedback: KTestText.feedbackImageModel,
-            image: image,
+            image: KTestText.imagePickerItemFeedback.bytes,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -98,9 +104,9 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            id: KTestText.feedbackModel.id,
+            id: KTestText.feedbackImageModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            imagePickerItem: KTestText.imagePickerItem,
+            imagePickerItem: KTestText.imagePickerItemFeedback,
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         mockFeedbackRepository = FeedbackRepository();
@@ -121,7 +127,7 @@ void main() {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
             feedback: KTestText.feedbackImageModel,
-            image: wrongImage,
+            image: KTestText.imagePickerItemFeedbackWrong.bytes,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -193,7 +199,7 @@ void main() {
           mockStorageService.saveFile(
             id: KTestText.feedbackModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            imagePickerItem: KTestText.imagePickerItemFeedbackWrong,
+            imagePickerItem: KTestText.imagePickerItemFeedback,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         mockFeedbackRepository = FeedbackRepository();
@@ -214,7 +220,7 @@ void main() {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
             feedback: KTestText.feedbackImageModel,
-            image: wrongImage,
+            image: KTestText.imagePickerItemFeedbackWrong.bytes,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

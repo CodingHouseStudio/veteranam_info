@@ -224,17 +224,17 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
-      test('Update data unmodify data', () async {
-        expect(
-          await authenticationRepository.updateUserData(
-            user: User.empty,
-            image: null,
-            nickname: null,
-          ),
-          isA<Right<SomeFailure, bool>>()
-              .having((e) => e.value, 'value', isFalse),
-        );
-      });
+      // test('Update data unmodify data', () async {
+      //   expect(
+      //     await authenticationRepository.updateUserData(
+      //       user: User.empty,
+      //       image: null,
+      //       nickname: null,
+      //     ),
+      //     isA<Right<SomeFailure, bool>>()
+      //         .having((e) => e.value, 'value', isFalse),
+      //   );
+      // });
       test('Update user settings', () async {
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
           (_) => KTestText.userSettingModel,

@@ -36,6 +36,7 @@ class _ConfirmPublishDiscountDialogState
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
+              // key: KWidgetkeys.widget.dialogs.icon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -159,23 +160,21 @@ class _ConfirmPublishDiscountDialogState
                   KSizedBox.kHeightSizedBox32
                 else
                   KSizedBox.kHeightSizedBox24,
-                if (widget.isDesk)
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      confirmButton(context),
-                      KSizedBox.kWidthSizedBox24,
-                      unconfirmButton(context),
-                    ],
-                  )
-                else
-                  Column(
-                    children: [
-                      confirmButton(context),
-                      KSizedBox.kHeightSizedBox16,
-                      unconfirmButton(context),
-                    ],
-                  ),
+                // if (widget.isDesk)
+                Wrap(
+                  spacing: KPadding.kPaddingSize24,
+                  runSpacing: KPadding.kPaddingSize16,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: buttonList,
+                ),
+                // else
+                //   Column(
+                //     children: [
+                //       confirmButton(context),
+                //       KSizedBox.kHeightSizedBox16,
+                //       unconfirmButton(context),
+                //     ],
+                //   ),
                 if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
               ],
             ),
@@ -185,7 +184,20 @@ class _ConfirmPublishDiscountDialogState
     );
   }
 
-  DoubleButtonWidget confirmButton(BuildContext context) {
+  List<Widget> get buttonList {
+    final buttons = [
+      unconfirmButton,
+      // KSizedBox.kWidthSizedBox24,
+      confirmButton,
+    ];
+    if (widget.isDesk) {
+      return buttons;
+    } else {
+      return buttons.reversed.toList();
+    }
+  }
+
+  DoubleButtonWidget get confirmButton {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.dialogs.confirmButton,
       text: '${context.l10n.send} ${context.l10n.verification}',
@@ -195,6 +207,7 @@ class _ConfirmPublishDiscountDialogState
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize30,
       ),
+      align: widget.isDesk ? null : Alignment.center,
       mobTextWidth: double.infinity,
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
@@ -205,12 +218,14 @@ class _ConfirmPublishDiscountDialogState
           ? null
           : AppColors.materialThemeRefSecondarySecondary50,
       onPressed: privacyPolicyAgree ? widget.onPressed : null,
+      hasAlign: !widget.isDesk,
     );
   }
 
-  Widget unconfirmButton(BuildContext context) {
+  Widget get unconfirmButton {
     return SecondaryButtonWidget(
       widgetKey: KWidgetkeys.widget.dialogs.unconfirmButton,
+      align: widget.isDesk ? null : Alignment.center,
       onPressed: () => context.pop(),
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,
@@ -219,6 +234,7 @@ class _ConfirmPublishDiscountDialogState
       expanded: !widget.isDesk,
       isDesk: widget.isDesk,
       text: context.l10n.continueWorking,
+      hasAlign: !widget.isDesk,
     );
   }
 }

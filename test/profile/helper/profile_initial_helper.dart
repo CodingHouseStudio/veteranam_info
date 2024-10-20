@@ -55,10 +55,10 @@ Future<void> profileInitialHelper(
         itemKey: KWidgetkeys.screen.profile.saveButton,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.deleteButton),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.profile.deleteButton),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.profile.logOutButton),

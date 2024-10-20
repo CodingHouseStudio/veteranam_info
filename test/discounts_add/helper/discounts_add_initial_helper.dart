@@ -12,6 +12,21 @@ Future<void> discountsAddInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
+        find.byKey(KWidgetkeys.screen.discountsAdd.textWrongLink),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.discountsAdd.imageWrongLink),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.discountsAdd.buttonWrongLink),
+        findsNothing,
+      );
+
+      expect(
         find.byKey(KWidgetkeys.screen.discountsAdd.title),
         findsOneWidget,
       );
