@@ -96,23 +96,30 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          UserPhotoWidget(
-                            key: KWidgetkeys.screen.profile.photo,
-                            imageBytes: _.image.value?.bytes,
-                            onPressed: () => context
-                                .read<CompanyFormBloc>()
-                                .add(const CompanyFormEvent.imageUpdated()),
-                            imageUrl: context
-                                .read<CompanyWatcherBloc>()
-                                .state
-                                .company
-                                .image
-                                ?.downloadURL,
-                            // perimeter: KSize.kPixel72,
-                            icon: KIcon.personEdit,
-                            // background: AppColors.
-                            // materialThemeKeyColorsPrimary,
-                            // iconColor: AppColors.materialThemeBlack,
+                          Padding(
+                            padding: _.image.value == null
+                                ? EdgeInsets.zero
+                                : const EdgeInsets.only(
+                                    left: KPadding.kPaddingSize24,
+                                  ),
+                            child: UserPhotoWidget(
+                              key: KWidgetkeys.screen.profile.photo,
+                              imageBytes: _.image.value?.bytes,
+                              onPressed: () => context
+                                  .read<CompanyFormBloc>()
+                                  .add(const CompanyFormEvent.imageUpdated()),
+                              imageUrl: context
+                                  .read<CompanyWatcherBloc>()
+                                  .state
+                                  .company
+                                  .image
+                                  ?.downloadURL,
+                              // perimeter: KSize.kPixel72,
+                              icon: KIcon.personEdit,
+                              // background: AppColors.
+                              // materialThemeKeyColorsPrimary,
+                              // iconColor: AppColors.materialThemeBlack,
+                            ),
                           ),
                           KSizedBox.kWidthSizedBox32,
                           if (widget.isDesk)
@@ -139,6 +146,13 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                           KIcon.edit,
                         ],
                       ),
+                      if (_.image.value != null)
+                        Text(
+                          context.l10n.changesNotSaved,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle
+                              .materialThemeBodyMediumNeutralVariant60,
+                        ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: const Key(''),
