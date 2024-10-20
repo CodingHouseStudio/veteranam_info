@@ -67,37 +67,36 @@ Future<void> nawbarHelper({
       );
     }
   }
-  final isTablet =
-      find.byKey(KWidgetkeys.widget.nawbar.loginButton).evaluate().isEmpty &&
-          language.isNotEmpty;
   expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
+
+  if (language.isEmpty ||
+      find.byKey(KWidgetkeys.widget.nawbar.loginButton).evaluate().isEmpty) {
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.loginButton),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+      findsOneWidget,
+    );
+  } else {
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.loginButton),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+      findsNothing,
+    );
+  }
 
   // expect(
   //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
   //   hasMic ? findsOneWidget : findsNothing,
   // );
   if (Config.isDevelopment) {
-    if (language.isEmpty || isTablet) {
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.loginButton),
-        findsNothing,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
-        findsOneWidget,
-      );
-    } else {
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.loginButton),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
-        findsNothing,
-      );
-    }
     await tester.enterText(
       find.byKey(KWidgetkeys.widget.nawbar.field),
       searchText,
