@@ -69,11 +69,7 @@ class FeedbackRepository implements IFeedbackRepository {
     required FeedbackModel feedback,
   }) async {
     final downloadURL = await _storageService.saveFile(
-      imagePickerItem: ImagePickerItem(
-        bytes: image,
-        name: null,
-        ref: null,
-      ),
+      imagePickerItem: image.parseToImagePickerItem,
       id: feedback.id,
       collecltionName: FirebaseCollectionName.mobFeedback,
     );

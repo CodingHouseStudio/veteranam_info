@@ -112,10 +112,12 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     KSizedBox.kHeightSizedBox80
                   else
                     KSizedBox.kHeightSizedBox24,
-                  KImage.found(key: KWidgetkeys.widget.cardEmpty.image),
+                  KImage.found(
+                    key: KWidgetkeys.screen.discountsAdd.imageWrongLink,
+                  ),
                   Text(
                     context.l10n.discountEditNotFound,
-                    key: KWidgetkeys.widget.cardEmpty.text,
+                    key: KWidgetkeys.screen.discountsAdd.textWrongLink,
                     style: AppTextStyle.materialThemeTitleMedium,
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
                   ),
@@ -123,6 +125,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   Align(
                     alignment: isDesk ? Alignment.center : Alignment.centerLeft,
                     child: TextButton(
+                      key: KWidgetkeys.screen.discountsAdd.buttonWrongLink,
                       onPressed: () => context.goNamed(KRoute.myDiscounts.name),
                       style: KButtonStyles.borderBlackButtonStyle.copyWith(
                         padding: const WidgetStatePropertyAll(
@@ -220,8 +223,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     Row(
                       children: [
                         SwitchWidget(
-                          key: KWidgetkeys
-                              .screen.discountsAdd.indefinitelySwitcher,
+                          key: KWidgetkeys.screen.discountsAdd.onlineSwitcher,
                           onChanged: () => context.read<DiscountsAddBloc>().add(
                                 const DiscountsAddEvent.onlineSwitch(),
                               ),
@@ -231,6 +233,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                         Expanded(
                           child: Text(
                             context.l10n.online,
+                            key: KWidgetkeys.screen.discountsAdd.onlineText,
                             style: AppTextStyle.materialThemeBodyLarge,
                           ),
                         ),
@@ -466,7 +469,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
         isDesk: isDesk,
         onPressed: () {
           if (context.read<DiscountsAddBloc>().state.discount == null &&
-              context.read<DiscountsAddBloc>().state.formState.isDescription) {
+              context.read<DiscountsAddBloc>().state.formState.isDescription &&
+              context.read<DiscountsAddBloc>().state.description.isValid) {
             context.dialog.showConfirmationPublishDiscountDialog(
               isDesk: isDesk,
               onPressed: () => _sendEvent(context),

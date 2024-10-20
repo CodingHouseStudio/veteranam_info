@@ -31,7 +31,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
   late TextEditingController surnameController;
   late TextEditingController emailController;
   // late TextEditingController nicknameController;
-  late Timer timer;
+  Timer? timer;
 
   @override
   void initState() {
@@ -163,7 +163,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
             // ),
             KSizedBox.kHeightSizedBox16,
             SendingTextWidget(
-              textKey: KWidgetkeys.screen.login.submitingText,
+              textKey: KWidgetkeys.screen.profile.submitingText,
               failureText: _.failure?.value(context),
               sendingText: context.l10n.dataSendInProgress,
               successText: _.formState == ProfileEnum.success
@@ -237,7 +237,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     surnameController.dispose();
     emailController.dispose();
     // nicknameController.dispose();
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 }

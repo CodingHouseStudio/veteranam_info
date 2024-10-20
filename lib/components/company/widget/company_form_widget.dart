@@ -384,7 +384,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         (context.read<CompanyFormBloc>().state.deleteIsPossible ?? false) &&
             context.read<CompanyWatcherBloc>().state.company.isNotEmpty;
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.screen.profile.deleteButton,
+      widgetKey: const Key('value12'),
       isDesk: isDesk,
       align: Alignment.center,
       style: KButtonStyles.borderNeutralButtonStyle.copyWith(

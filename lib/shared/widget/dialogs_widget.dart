@@ -84,12 +84,14 @@ class _DialogsWidget {
                   childWidget: childWidget,
                   padding: mobPadding,
                   maxWidth: mobMaxWidth,
+                  isScollable: isScollable,
                 ),
               ) ??
               _mobDoubleDialogWidget(
                 childWidget: childWidget,
                 padding: mobPadding,
                 maxWidth: mobMaxWidth,
+                isScollable: isScollable,
               );
         },
       );
@@ -144,24 +146,30 @@ class _DialogsWidget {
       required bool isDeskValue,
     })? padding,
     required double? maxWidth,
+    required bool isScollable,
   }) =>
       LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDeskValue =
               constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
-          if (padding != null) {
-            return Padding(
-              padding: padding(isDeskValue: isDeskValue),
-              child: childWidget(
-                isDeskValue: isDeskValue,
-                context: context,
-              ),
+          final paddingWidget = padding != null
+              ? Padding(
+                  padding: padding(isDeskValue: isDeskValue),
+                  child: childWidget(
+                    isDeskValue: isDeskValue,
+                    context: context,
+                  ),
+                )
+              : childWidget(
+                  isDeskValue: isDeskValue,
+                  context: context,
+                );
+          if (isScollable) {
+            return SingleChildScrollView(
+              child: paddingWidget,
             );
           } else {
-            return childWidget(
-              isDeskValue: isDeskValue,
-              context: context,
-            );
+            return paddingWidget;
           }
         },
       );
@@ -238,12 +246,10 @@ class _DialogsWidget {
                 ),
                 child: SizedBox(
                   width: double.infinity,
-                  child: SingleChildScrollView(
-                    child: ReportDialogWidget(
-                      isDesk: isDeskValue,
-                      cardEnum: cardEnum,
-                      // afterEvent: afterEvent,
-                    ),
+                  child: ReportDialogWidget(
+                    isDesk: isDeskValue,
+                    cardEnum: cardEnum,
+                    // afterEvent: afterEvent,
                   ),
                 ),
               ),

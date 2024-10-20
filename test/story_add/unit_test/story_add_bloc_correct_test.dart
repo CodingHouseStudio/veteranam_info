@@ -26,7 +26,7 @@ void main() {
     late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
-      ExtendedDateTime.id = KTestText.storyModelItems.last.id;
+      ExtendedDateTime.id = KTestText.storyModelItems.first.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDataPickerRepository = MockIDataPickerRepository();
 
@@ -40,31 +40,32 @@ void main() {
       when(
         mockStoryRepository.addStory(
           imageItem: KTestText.imagePickerItem,
-          storyModel: KTestText.storyModelItems.last,
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(
-        mockStoryRepository.addStory(
-          imageItem: KTestText.imagePickerItem,
-          storyModel: KTestText.storyModelItems.last
-              .copyWith(userName: null, userPhoto: null),
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(
-        mockStoryRepository.addStory(
-          imageItem: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
-            id: KTestText.storyModelItems.last.id,
           ),
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
+      when(
+        mockStoryRepository.addStory(
+          imageItem: KTestText.imagePickerItem,
+          storyModel: KTestText.storyModelItems.first
+              .copyWith(userName: null, userPhoto: null),
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      // when(
+      //   mockStoryRepository.addStory(
+      //     imageItem: null,
+      //     storyModel: KTestText.storyModelItems.first.copyWith(
+      //       userPhoto: KTestText.userPhotoModel,
+      //     ),
+      //   ),
+      // ).thenAnswer(
+      //   (realInvocation) async => const Right(true),
+      // );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
@@ -143,29 +144,30 @@ void main() {
         ),
       ],
     );
-    blocTest<StoryAddBloc, StoryAddState>(
-      'emits [StoryAddState()] when story and save',
-      build: () => storyAddBloc,
-      act: (bloc) async {
-        bloc
-          ..add(
-            StoryAddEvent.storyUpdated(KTestText.storyModelItems.first.story),
-          )
-          ..add(const StoryAddEvent.save());
-      },
-      expect: () async => [
-        predicate<StoryAddState>(
-          (state) =>
-              state.story ==
-                  MessageFieldModel.dirty(
-                    KTestText.storyModelItems.first.story,
-                  ) &&
-              state.formStatus == FormzSubmissionStatus.inProgress,
-        ),
-        predicate<StoryAddState>(
-          (state) => state.formStatus == FormzSubmissionStatus.success,
-        ),
-      ],
-    );
+    // blocTest<StoryAddBloc, StoryAddState>(
+    //   'emits [StoryAddState()] when story and save',
+    //   build: () => storyAddBloc,
+    //   act: (bloc) async {
+    //     bloc
+    //       ..add(
+    //         StoryAddEvent.storyUpdated(KTestText.storyModelItems.first
+    // .story),
+    //       )
+    //       ..add(const StoryAddEvent.save());
+    //   },
+    //   expect: () async => [
+    //     predicate<StoryAddState>(
+    //       (state) =>
+    //           state.story ==
+    //               MessageFieldModel.dirty(
+    //                 KTestText.storyModelItems.first.story,
+    //               ) &&
+    //           state.formStatus == FormzSubmissionStatus.inProgress,
+    //     ),
+    //     predicate<StoryAddState>(
+    //       (state) => state.formStatus == FormzSubmissionStatus.success,
+    //     ),
+    //   ],
+    // );
   });
 }

@@ -19,7 +19,7 @@ void main() {
     late IWorkRepository mockWorkRepository;
     late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
-      ExtendedDateTime.id = KTestText.employeeRespondModel.id;
+      ExtendedDateTime.id = KTestText.employeeRespondModelModel.id;
       mockWorkRepository = MockIWorkRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
       when(mockDataPickerRepository.getFile).thenAnswer(
@@ -37,7 +37,7 @@ void main() {
       when(
         mockWorkRepository.sendRespond(
           respond: KTestText.employeeRespondWithoudResumeModel,
-          file: KTestText.imagePickerItem,
+          file: null,
         ),
       ).thenAnswer((invocation) async => const Right(true));
     });

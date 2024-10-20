@@ -7,6 +7,7 @@ import '../../../test_dependency.dart';
 Future<void> dialogConfirmHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  bool isPop = true,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.dialogs.confirmButton),
@@ -17,5 +18,7 @@ Future<void> dialogConfirmHelper({
 
   await tester.pumpAndSettle();
 
-  verify(() => mockGoRouter.pop()).called(1);
+  if (isPop) {
+    verify(() => mockGoRouter.pop()).called(1);
+  }
 }

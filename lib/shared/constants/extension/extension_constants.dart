@@ -393,6 +393,18 @@ extension CategoryEnumExtensions on CategoryEnum {
   }
 }
 
+extension Uint8ListExtension on Uint8List {
+  @visibleForTesting
+  static ImagePickerItem? imagePickerItem;
+  ImagePickerItem get parseToImagePickerItem =>
+      imagePickerItem ??
+      ImagePickerItem(
+        bytes: this,
+        name: null,
+        ref: null,
+      );
+}
+
 extension ReferenceExtension on Reference {
   UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
     if (Config.isWeb) {

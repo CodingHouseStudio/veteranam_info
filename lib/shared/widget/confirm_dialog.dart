@@ -69,6 +69,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
+              key: KWidgetkeys.widget.dialogs.icon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -85,12 +86,16 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  widget.title,
-                  key: KWidgetkeys.widget.dialogs.profileTitle,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeHeadlineLarge
-                      : AppTextStyle.materialThemeHeadlineSmall,
+                Padding(
+                  padding:
+                      const EdgeInsets.only(right: KPadding.kPaddingSize24),
+                  child: Text(
+                    widget.title,
+                    key: KWidgetkeys.widget.dialogs.profileTitle,
+                    style: widget.isDesk
+                        ? AppTextStyle.materialThemeHeadlineLarge
+                        : AppTextStyle.materialThemeHeadlineSmall,
+                  ),
                 ),
                 if (widget.isDesk)
                   KSizedBox.kHeightSizedBox16
@@ -107,30 +112,39 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                   KSizedBox.kHeightSizedBox32
                 else
                   KSizedBox.kHeightSizedBox24,
-                if (widget.isDesk)
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      confirmButton(),
-                      KSizedBox.kWidthSizedBox24,
-                      unconfirmButton(context),
+                // if (widget.isDesk)
+                Wrap(
+                  spacing: KPadding.kPaddingSize24,
+                  runSpacing: KPadding.kPaddingSize16,
+                  children: [
+                    confirmButton(),
+                    if (!widget.isDesk &&
+                        widget.timer &&
+                        !_isButtonEnabled) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      Text(
+                        '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+                        style: AppTextStyle.materialThemeBodySmall,
+                      ),
                     ],
-                  )
-                else
-                  Column(
-                    children: [
-                      confirmButton(),
-                      if (widget.timer && !_isButtonEnabled) ...[
-                        KSizedBox.kHeightSizedBox8,
-                        Text(
-                          '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
-                          style: AppTextStyle.materialThemeBodySmall,
-                        ),
-                      ],
-                      KSizedBox.kHeightSizedBox16,
-                      unconfirmButton(context),
-                    ],
-                  ),
+                    unconfirmButton(context),
+                  ],
+                ),
+                // else
+                //   Column(
+                //     children: [
+                //       confirmButton(),
+                //       if (widget.timer && !_isButtonEnabled) ...[
+                //         KSizedBox.kHeightSizedBox8,
+                //         Text(
+                //           '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+                //           style: AppTextStyle.materialThemeBodySmall,
+                //         ),
+                //       ],
+                //       KSizedBox.kHeightSizedBox16,
+                //       unconfirmButton(context),
+                //     ],
+                //   ),
                 if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
                 if (widget.timer && !_isButtonEnabled) ...[
                   KSizedBox.kHeightSizedBox8,
@@ -164,6 +178,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
       onPressed: _isButtonEnabled ? widget.onPressed : null,
+      hasAlign: !widget.isDesk,
     );
   }
 
@@ -178,6 +193,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
       expanded: !widget.isDesk,
       isDesk: widget.isDesk,
       text: widget.unconfirmText ?? context.l10n.cancel,
+      hasAlign: !widget.isDesk,
     );
   }
 

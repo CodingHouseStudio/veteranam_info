@@ -55,7 +55,7 @@ Future<void> discountsInitialHelper(
         findsWidgets,
       );
 
-      await discountCardHelper(tester);
+      await discountCardHelper(tester: tester);
 
       await scrollingHelper(
         tester: tester,

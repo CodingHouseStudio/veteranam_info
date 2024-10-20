@@ -132,6 +132,20 @@ abstract class KTestText {
     token: 1,
   );
 
+  static const pureCompanyModel = CompanyModel(
+    id: id,
+    userEmails: [userEmail],
+  );
+
+  static const fullCompanyModel = CompanyModel(
+    id: id,
+    userEmails: [userEmail],
+    code: '12345678',
+    companyName: companyName,
+    publicName: companyName,
+  );
+  static const companyName = 'test';
+
   static const oAuthCredential = firebase_auth.OAuthCredential(
     providerId: '1',
     signInMethod: 'test_method',
@@ -277,7 +291,7 @@ abstract class KTestText {
     email: null,
     timestamp: dateTime,
     message: field,
-    image: imageModel,
+    image: const ImageModel(downloadURL: image),
   );
   static final dateTime = DateTime(2024, 4, 12);
   static final previousDateTime = DateTime(2024, 3, 12);
@@ -523,6 +537,12 @@ abstract class KTestText {
     cardId: id,
   );
   static const employeeRespondModel = EmployeeRespondModel(
+    id: id,
+    email: userEmail,
+    phoneNumber: phoneNumber,
+    noResume: false,
+  );
+  static const employeeRespondModelModel = EmployeeRespondModel(
     id: id,
     email: userEmail,
     phoneNumber: phoneNumber,

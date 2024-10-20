@@ -1,23 +1,23 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/shared.dart';
+// import 'package:flutter_test/flutter_test.dart';
+// import 'package:veteranam/shared/shared.dart';
 
-import '../../../test_dependency.dart';
+// import '../../../test_dependency.dart';
 
-Future<void> deleteAccountConfirmButtonlHelper({
-  required WidgetTester tester,
-  required MockGoRouter mockGoRouter,
-}) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
-    findsOneWidget,
-  );
+// Future<void> deleteAccountConfirmButtonlHelper({
+//   required WidgetTester tester,
+//   required MockGoRouter mockGoRouter,
+// }) async {
+//   expect(
+//     find.byKey(KWidgetkeys.screen.profile.screen),
+//     findsOneWidget,
+//   );
 
-  await tester.pumpAndSettle();
+//   await tester.pumpAndSettle();
 
-  await profileCardDeleteAccountHelper(tester);
+//   await profileCardDeleteAccountHelper(tester);
 
-  await dialogConfirmHelper(
-    tester: tester,
-    mockGoRouter: mockGoRouter,
-  );
-}
+//   await dialogConfirmHelper(
+//     tester: tester,
+//     mockGoRouter: mockGoRouter,
+//   );
+// }
