@@ -116,7 +116,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
             showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
-          if (widget.isLogin)
+          if (widget.isLogin && Config.isBusiness)
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

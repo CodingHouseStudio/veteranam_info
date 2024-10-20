@@ -87,7 +87,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         result.fold(
           (l) => state.copyWith(
             failure: l._toSignUpError(),
-            formState: SignUpEnum.initial,
+            formState: SignUpEnum.inProgress,
           ),
           (r) => const SignUpState(
             email: EmailFieldModel.pure(),
