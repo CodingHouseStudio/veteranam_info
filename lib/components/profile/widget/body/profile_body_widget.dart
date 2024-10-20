@@ -10,7 +10,7 @@ class ProfileBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
-        precent: KDimensions.thirtyPercent,
+        precent: KDimensions.twentyEightPercent,
         // verticalPadding: KPadding.kPaddingSize48,
       ),
       titleChildWidgetsFunction: ({required isDesk}) => [
