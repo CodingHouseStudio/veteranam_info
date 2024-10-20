@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockGoRouter extends Mock implements GoRouter {}
+class MockGoRouter extends Mock implements GoRouter {
+  static bool canPopValue = true;
+  @override
+  bool canPop() => canPopValue;
+}
 
 class MockGoRouterState extends Mock implements GoRouterState {
   MockGoRouterState({required this.fullPath});

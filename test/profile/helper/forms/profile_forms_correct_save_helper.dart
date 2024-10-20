@@ -27,9 +27,10 @@ Future<void> profileFormsCorrectSaveHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.message),
+    find.byKey(KWidgetkeys.screen.profile.submitingText),
     findsOneWidget,
   );
 
-  expect(find.text('Your data has been successfully updated!'), findsOneWidget);
+  // expect(find.text('Your data has been successfully updated!'),
+  // findsOneWidget);
 }

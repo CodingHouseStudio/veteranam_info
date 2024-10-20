@@ -30,7 +30,10 @@ Future<void> myDiscountsInitialHelper(
         findsWidgets,
       );
 
-      await discountCardHelper(tester);
+      await discountCardHelper(
+        tester: tester,
+        containComplaintIcon: false,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.status),

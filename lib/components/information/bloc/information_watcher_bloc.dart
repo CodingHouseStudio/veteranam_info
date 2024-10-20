@@ -330,7 +330,7 @@ class InformationWatcherBloc
   Future<void> close() {
     _informationItemsSubscription?.cancel();
     _debounceTimer?.cancel();
-    _debounceTimer = null;
+    // _debounceTimer = null;
     return super.close();
   }
 }

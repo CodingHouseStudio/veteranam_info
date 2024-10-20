@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:ui';
 
-import 'package:another_flushbar/flushbar.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,12 +84,14 @@ class _DialogsWidget {
                   childWidget: childWidget,
                   padding: mobPadding,
                   maxWidth: mobMaxWidth,
+                  isScollable: isScollable,
                 ),
               ) ??
               _mobDoubleDialogWidget(
                 childWidget: childWidget,
                 padding: mobPadding,
                 maxWidth: mobMaxWidth,
+                isScollable: isScollable,
               );
         },
       );
@@ -146,24 +146,30 @@ class _DialogsWidget {
       required bool isDeskValue,
     })? padding,
     required double? maxWidth,
+    required bool isScollable,
   }) =>
       LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDeskValue =
               constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
-          if (padding != null) {
-            return Padding(
-              padding: padding(isDeskValue: isDeskValue),
-              child: childWidget(
-                isDeskValue: isDeskValue,
-                context: context,
-              ),
+          final paddingWidget = padding != null
+              ? Padding(
+                  padding: padding(isDeskValue: isDeskValue),
+                  child: childWidget(
+                    isDeskValue: isDeskValue,
+                    context: context,
+                  ),
+                )
+              : childWidget(
+                  isDeskValue: isDeskValue,
+                  context: context,
+                );
+          if (isScollable) {
+            return SingleChildScrollView(
+              child: paddingWidget,
             );
           } else {
-            return childWidget(
-              isDeskValue: isDeskValue,
-              context: context,
-            );
+            return paddingWidget;
           }
         },
       );
@@ -240,12 +246,10 @@ class _DialogsWidget {
                 ),
                 child: SizedBox(
                   width: double.infinity,
-                  child: SingleChildScrollView(
-                    child: ReportDialogWidget(
-                      isDesk: isDeskValue,
-                      cardEnum: cardEnum,
-                      // afterEvent: afterEvent,
-                    ),
+                  child: ReportDialogWidget(
+                    isDesk: isDeskValue,
+                    cardEnum: cardEnum,
+                    // afterEvent: afterEvent,
                   ),
                 ),
               ),
@@ -396,13 +400,13 @@ class _DialogsWidget {
     required void Function()? onPressed,
   }) {
     if (error != null) {
-      unawaited(
-        Flushbar<String>(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           key: KWidgetkeys.widget.dialogs.failure,
           backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-          messageText: GetErrorDialogWidget(onPressed: onPressed, error: error),
+          content: GetErrorDialogWidget(onPressed: onPressed, error: error),
           duration: const Duration(minutes: 1),
-        ).show(context),
+        ),
       );
     }
   }
@@ -412,17 +416,17 @@ class _DialogsWidget {
     Duration duration = const Duration(minutes: 1),
   }) {
     if (text != null) {
-      unawaited(
-        Flushbar<String>(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           backgroundColor: AppColors.materialThemeKeyColorsSecondary,
           // key: KWidgetkeys.widget.dialogs.failure,
-          messageText: Text(
+          content: Text(
             text,
             key: KWidgetkeys.widget.dialogs.snackBarText,
             style: AppTextStyle.materialThemeBodyLargeNeutral,
           ),
           duration: duration,
-        ).show(context),
+        ),
       );
     }
   }

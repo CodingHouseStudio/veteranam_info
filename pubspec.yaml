@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   animated_text_kit: ^4.2.2
-  another_flushbar: ^1.12.30
   app_tracking_transparency: ^2.0.6
   bloc: ^8.1.4
   cached_network_image: ^3.4.0

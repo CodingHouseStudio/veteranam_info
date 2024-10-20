@@ -12,6 +12,7 @@ class SecondaryButtonWidget extends StatelessWidget {
     this.style,
     super.key,
     this.expanded = true,
+    this.hasAlign = true,
   });
   final Key widgetKey;
   final bool isDesk;
@@ -21,12 +22,21 @@ class SecondaryButtonWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final ButtonStyle? style;
   final bool expanded;
+  final bool hasAlign;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: align ?? Alignment.centerLeft,
-      child: TextButton(
+    if (hasAlign) {
+      return Align(
+        alignment: align ?? Alignment.centerLeft,
+        child: _button,
+      );
+    } else {
+      return _button;
+    }
+  }
+
+  Widget get _button => TextButton(
         key: widgetKey,
         style: (style ?? KButtonStyles.borderSecondaryButtonStyle).copyWith(
           minimumSize: expanded
@@ -49,7 +59,5 @@ class SecondaryButtonWidget extends StatelessWidget {
             style: AppTextStyle.materialThemeTitleMedium,
           ),
         ),
-      ),
-    );
-  }
+      );
 }
