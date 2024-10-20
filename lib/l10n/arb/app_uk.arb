@@ -1591,6 +1591,10 @@
     "examples": "Текст на сторінці Company для кнопки.",
     "description": "Кнопка використовується для Створення бізнес акаунта."
   },
+  "changesNotSaved": "Зміни\nне збережені*",
+  "@changesNotSaved": {
+    "examples": "Текст на сторінці Company та Profile підкартинкою, коли вона вибрана, але зміни не збережені"
+  },
   "termsAndConditions": "Умовами і Положеннями",
   "@termsAndConditions": {
     "examples": "Текст на сторінці Discount Add в діалозі для кнопки.",
