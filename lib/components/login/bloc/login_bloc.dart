@@ -87,7 +87,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         (l) => emit(
           state.copyWith(
             failure: l._toLogInError(),
-            formState: LoginEnum.initial,
+            formState: LoginEnum.inProgress,
           ),
         ),
         (r) => emit(

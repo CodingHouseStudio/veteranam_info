@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +29,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
   late TextEditingController surnameController;
   late TextEditingController emailController;
   // late TextEditingController nicknameController;
-  Timer? timer;
+  // Timer? timer;
 
   @override
   void initState() {
@@ -82,17 +80,23 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                UserPhotoWidget(
-                  key: KWidgetkeys.screen.profile.photo,
-                  onPressed: () => context
-                      .read<ProfileBloc>()
-                      .add(const ProfileEvent.imageUpdated()),
-                  imageUrl: context.read<AuthenticationBloc>().state.user.photo,
-                  // perimeter: KSize.kPixel72,
-                  icon: KIcon.personEdit,
-                  // background: AppColors.materialThemeKeyColorsPrimary,
-                  // iconColor: AppColors.materialThemeBlack,
-                  imageBytes: _.image.value?.bytes,
+                Padding(
+                  padding: _.image.value == null
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.only(left: KPadding.kPaddingSize24),
+                  child: UserPhotoWidget(
+                    key: KWidgetkeys.screen.profile.photo,
+                    onPressed: () => context
+                        .read<ProfileBloc>()
+                        .add(const ProfileEvent.imageUpdated()),
+                    imageUrl:
+                        context.read<AuthenticationBloc>().state.user.photo,
+                    // perimeter: KSize.kPixel72,
+                    icon: KIcon.personEdit,
+                    // background: AppColors.materialThemeKeyColorsPrimary,
+                    // iconColor: AppColors.materialThemeBlack,
+                    imageBytes: _.image.value?.bytes,
+                  ),
                 ),
                 KSizedBox.kWidthSizedBox32,
                 if (widget.isDesk)
@@ -119,6 +123,12 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                 KIcon.edit,
               ],
             ),
+            if (_.image.value != null)
+              Text(
+                context.l10n.changesNotSaved,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+              ),
             KSizedBox.kHeightSizedBox32,
             _textField(
               fieldKey: KWidgetkeys.screen.profile.nameField,
@@ -237,7 +247,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     surnameController.dispose();
     emailController.dispose();
     // nicknameController.dispose();
-    timer?.cancel();
+    // timer?.cancel();
     super.dispose();
   }
 }

@@ -94,9 +94,14 @@ extension PasswordFieldModelValidationErrorEmpl
       case null:
         return null;
       case PasswordFieldModelValidationError.capitalLetter:
-        return context.l10n.capitalLetter;
+        return '${context.l10n.password} '
+            '${context.l10n.capitalLetter}';
       case PasswordFieldModelValidationError.oneNumber:
-        return context.l10n.oneNumber;
+        return '${context.l10n.password} '
+            '${context.l10n.oneNumber}';
+      case PasswordFieldModelValidationError.onlyEnglishLetter:
+        return '${context.l10n.password} '
+            '${context.l10n.onlyEnglishLetter}';
     }
   }
 }

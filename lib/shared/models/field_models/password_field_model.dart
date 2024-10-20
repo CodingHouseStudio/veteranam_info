@@ -3,6 +3,7 @@ import 'package:formz/formz.dart';
 enum PasswordFieldModelValidationError {
   empty,
   invalidLength,
+  onlyEnglishLetter,
   capitalLetter,
   oneNumber
 }
@@ -24,6 +25,12 @@ class PasswordFieldModel
     if (text.length < 8) {
       return PasswordFieldModelValidationError.invalidLength;
     }
+
+    if (!RegExp(r'^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?`~ ]+$')
+        .hasMatch(text)) {
+      return PasswordFieldModelValidationError.onlyEnglishLetter;
+    }
+
     if (!RegExp('[A-Z]').hasMatch(text)) {
       return PasswordFieldModelValidationError.capitalLetter;
     }

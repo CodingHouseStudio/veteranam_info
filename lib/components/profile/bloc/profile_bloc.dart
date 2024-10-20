@@ -132,10 +132,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ],
     )) {
       emit(state.copyWith(formState: ProfileEnum.sendInProgress));
+      final name = '${state.name.value} ${state.surname.value}';
 
+      if (name == _authenticationRepository.currentUser.name &&
+          // state.nickname.value ==
+          //     _authenticationRepository.currentUserSetting.nickname &&
+          state.image.value == null) {
+        emit(
+          state.copyWith(
+            formState: ProfileEnum.succesesUnmodified,
+          ),
+        );
+        return;
+      }
       final result = await _authenticationRepository.updateUserData(
         user: _authenticationRepository.currentUser.copyWith(
-          name: '${state.name.value} ${state.surname.value}',
+          name: name,
         ),
         nickname: state.nickname.isPure
             ? _authenticationRepository.currentUserSetting.nickname
@@ -154,7 +166,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           state.copyWith(
             failure: null,
             image: const ImageFieldModel.pure(),
-            formState: r ? ProfileEnum.success : ProfileEnum.succesesUnmodified,
+            formState: ProfileEnum.success,
           ),
         ),
       );

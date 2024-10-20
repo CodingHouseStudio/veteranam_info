@@ -146,7 +146,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                 //     ],
                 //   ),
                 if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
-                if (widget.timer && !_isButtonEnabled) ...[
+                if (widget.timer && !_isButtonEnabled && widget.isDesk) ...[
                   KSizedBox.kHeightSizedBox8,
                   Text(
                     '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',

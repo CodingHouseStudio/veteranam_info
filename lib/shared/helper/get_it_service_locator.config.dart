@@ -144,8 +144,8 @@ import 'package:veteranam/shared/shared.dart' as _i1001;
 
 const String _user = 'user';
 const String _mobile = 'mobile';
-const String _business = 'business';
 const String _development = 'development';
+const String _business = 'business';
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -219,6 +219,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i687.MobFaqWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
       registerFor: {_mobile},
     );
+    gh.singleton<_i1001.IDataPickerRepository>(
+        () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()));
     gh.singleton<_i1001.IInvestorsRepository>(
       () => _i994.InvestorsRepository(),
       registerFor: {_user},
@@ -227,13 +229,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i895.Connectivity>(),
           gh<_i1001.CacheClient>(),
         ));
-    gh.singleton<_i1001.IDataPickerRepository>(
-      () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()),
-      registerFor: {
-        _business,
-        _development,
-      },
-    );
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.singleton<_i1001.IReportRepository>(

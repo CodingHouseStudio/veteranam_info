@@ -10,7 +10,7 @@ class ProfileBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
-        precent: KDimensions.thirtyPercent,
+        precent: KDimensions.twentyEightPercent,
         // verticalPadding: KPadding.kPaddingSize48,
       ),
       titleChildWidgetsFunction: ({required isDesk}) => [
@@ -67,7 +67,7 @@ class ProfileBodyWidget extends StatelessWidget {
         if (isDesk)
           logoutButton(
             context: context,
-            isDesk: false,
+            isDesk: true,
           )
         // Row(
         //   children: [
@@ -86,11 +86,11 @@ class ProfileBodyWidget extends StatelessWidget {
         //     ),
         //   ],
         // )
-        else ...[
-          logoutButton(context: context, isDesk: isDesk),
-          // KSizedBox.kHeightSizedBox16,
-          // deleteButton(context: context, isDesk: isDesk),
-        ],
+        else //...[
+          logoutButton(context: context, isDesk: false),
+        // KSizedBox.kHeightSizedBox16,
+        // deleteButton(context: context, isDesk: isDesk),
+        //],
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else
@@ -122,10 +122,16 @@ class ProfileBodyWidget extends StatelessWidget {
           timer: false,
         ),
         isDesk: isDesk,
-        deskPadding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize16,
+        deskPadding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize16,
+          bottom: KPadding.kPaddingSize16,
+          right: KPadding.kPaddingSize40,
+          left: KPadding.kPaddingSize80,
         ),
-        expanded: true,
+        //  const EdgeInsets.symmetric(
+        //   vertical: KPadding.kPaddingSize16,
+        // ),
+        expanded: false,
         borderColor: AppColors.materialThemeRefNeutralNeutral80,
         mobPadding: const EdgeInsets.only(
           top: KPadding.kPaddingSize16,
