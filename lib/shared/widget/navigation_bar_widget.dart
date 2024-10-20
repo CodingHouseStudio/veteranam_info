@@ -322,8 +322,10 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     return Row(
                       children: [
                         if (context.read<AuthenticationBloc>().state.status !=
-                                AuthenticationStatus.authenticated &&
-                            (Config.isDevelopment || Config.isBusiness)) ...[
+                                AuthenticationStatus.authenticated
+                            //      &&
+                            // (Config.isDevelopment || Config.isBusiness)
+                            ) ...[
                           if (widget.isDesk) ...[
                             KSizedBox.kWidthSizedBox16,
                             DoubleButtonWidget(
@@ -345,15 +347,15 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                                   AppColors.materialThemeKeyColorsSecondary,
                             ),
                           ],
+                        ]
+                        // if (context.read<AuthenticationBloc>()
+                        //.state.status ==
+                        //         AuthenticationStatus.authenticated &&
+                        //     (Config.isDevelopment || Config.isBusiness))
+                        else if (!isFocused || widget.isTablet) ...[
+                          KSizedBox.kWidthSizedBox8,
+                          getImageWidget,
                         ],
-                        if (context.read<AuthenticationBloc>().state.status ==
-                                AuthenticationStatus.authenticated &&
-                            (Config.isDevelopment || Config.isBusiness))
-                          // else
-                          if (!isFocused || widget.isTablet) ...[
-                            KSizedBox.kWidthSizedBox8,
-                            getImageWidget,
-                          ],
                       ],
                     );
                   },
