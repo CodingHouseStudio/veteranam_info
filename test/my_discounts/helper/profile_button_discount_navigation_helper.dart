@@ -23,6 +23,6 @@ Future<void> profileButtonDiscountsNavigationHelper({
   await tester.pumpAndSettle();
 
   verify(
-    () => mockGoRouter.goNamed(KRoute.profile.name),
+    () => mockGoRouter.goNamed(KRoute.company.name),
   ).called(1);
 }

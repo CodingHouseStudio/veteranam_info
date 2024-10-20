@@ -8,10 +8,11 @@ Future<void> switchHelper({
   required WidgetTester tester,
   bool enabled = true,
   bool isActive = false,
+  int elementIndex = 0,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.switchKeys.widget),
-    findsOneWidget,
+    findsWidgets,
   );
 
   // expect(
@@ -26,7 +27,9 @@ Future<void> switchHelper({
 
   expect(
     tester
-        .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+        .widget<Switch>(
+          find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+        )
         .value,
     isActive ? isTrue : isFalse,
   );
@@ -42,24 +45,30 @@ Future<void> switchHelper({
       itemKey: KWidgetkeys.widget.switchKeys.widget,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+    await tester
+        .tap(find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex));
 
     await tester.pumpAndSettle();
 
     expect(
       tester
-          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+          .widget<Switch>(
+            find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+          )
           .value,
       isActive ? isFalse : isTrue,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+    await tester
+        .tap(find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex));
 
     await tester.pumpAndSettle();
 
     expect(
       tester
-          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+          .widget<Switch>(
+            find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+          )
           .value,
       isActive ? isTrue : isFalse,
     );

@@ -20,15 +20,10 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late ICompanyRepository mockCompanyRepository;
     setUp(() {
+      Config.roleValue = Config.business;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
-
-      when(
-        mockCompanyRepository.currentUserCompany,
-      ).thenAnswer(
-        (_) => const CompanyModel(id: '1', userEmails: []),
-      );
 
       when(mockAuthenticationRepository.currentUserSetting)
           .thenAnswer((invocation) => KTestText.userSetting);
@@ -45,6 +40,11 @@ void main() {
     group('${KGroupText.failure} ', () {
       setUp(
         () {
+          when(
+            mockCompanyRepository.currentUserCompany,
+          ).thenAnswer(
+            (_) => KTestText.fullCompanyModel,
+          );
           when(mockAuthenticationRepository.currentUser)
               .thenAnswer((invocation) => KTestText.userWithoutPhoto);
           when(
@@ -69,6 +69,11 @@ void main() {
 
     group('${KGroupText.getEmptyList} with empty profile', () {
       setUp(() {
+        when(
+          mockCompanyRepository.currentUserCompany,
+        ).thenAnswer(
+          (_) => KTestText.pureCompanyModel,
+        );
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userAnonymous);
         when(
@@ -109,30 +114,32 @@ void main() {
           );
           await myDiscountsEmptyProfilePageHelper(tester);
         });
-        group(
-          '${KGroupText.goTo} ',
-          () {
-            testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
-              await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              );
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.profile.name} ', (tester) async {
+            await myDiscountsPumpAppHelper(
+              mockDiscountRepository: mockDiscountRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockCompanyRepository: mockCompanyRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
 
-              await profileButtonDiscountsNavigationHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              );
-            });
-          },
-        );
+            await profileButtonDiscountsNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+        });
       });
     });
 
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
+        when(
+          mockCompanyRepository.currentUserCompany,
+        ).thenAnswer(
+          (_) => KTestText.fullCompanyModel,
+        );
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
 
@@ -199,6 +206,11 @@ void main() {
 
     group('${KGroupText.getList} ', () {
       setUp(() {
+        when(
+          mockCompanyRepository.currentUserCompany,
+        ).thenAnswer(
+          (_) => KTestText.fullCompanyModel,
+        );
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
         when(

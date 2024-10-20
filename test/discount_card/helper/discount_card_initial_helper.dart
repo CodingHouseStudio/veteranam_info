@@ -27,7 +27,7 @@ Future<void> discountCardInitialHelper({
       if (cardIsEmpty) {
         await cardEmptyHelper(tester);
       } else {
-        await discountCardHelper(tester);
+        await discountCardHelper(tester: tester);
       }
     },
   );

@@ -25,7 +25,7 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockStorageService = MockStorageService();
     });
-    group('${KGroupText.successfulGet} ', () {
+    group('${KGroupText.successful} ', () {
       setUp(() {
         when(mockFirestoreService.getStories()).thenAnswer(
           (_) => Stream.value(KTestText.storyModelItems),
@@ -37,6 +37,15 @@ void main() {
         when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
             .thenAnswer(
           (_) async => KTestText.storyModelItems,
+        );
+        when(
+          mockStorageService.saveFile(
+            imagePickerItem: KTestText.imagePickerItem,
+            collecltionName: FirebaseCollectionName.stroies,
+            id: KTestText.storyModelItems.first.id,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.storyModelItems.first.image!.downloadURL,
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -72,12 +81,21 @@ void main() {
         );
       });
     });
-    group('${KGroupText.failureGet} ', () {
+    group('${KGroupText.failure} ', () {
       setUp(() {
         when(mockFirestoreService.getStories()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),
+        );
+        when(
+          mockStorageService.saveFile(
+            imagePickerItem: KTestText.imagePickerItem,
+            collecltionName: FirebaseCollectionName.stroies,
+            id: KTestText.storyModelItems.first.id,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureSend),
         );
         when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
             .thenThrow(
@@ -114,7 +132,7 @@ void main() {
         expect(
           await mockStoryRepository.addStory(
             imageItem: KTestText.imagePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            storyModel: KTestText.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
         );
@@ -126,6 +144,15 @@ void main() {
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),
+        );
+        when(
+          mockStorageService.saveFile(
+            imagePickerItem: KTestText.imagePickerItem,
+            collecltionName: FirebaseCollectionName.stroies,
+            id: KTestText.storyModelItems.first.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureSend),
         );
         when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
             .thenThrow(
@@ -162,7 +189,7 @@ void main() {
         expect(
           await mockStoryRepository.addStory(
             imageItem: KTestText.imagePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            storyModel: KTestText.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

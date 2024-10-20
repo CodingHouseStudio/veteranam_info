@@ -21,6 +21,7 @@ void main() {
     late ICompanyRepository mockCompanyRepository;
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
+      Config.roleValue = Config.business;
       ExtendedDateTime.id = KTestText.discountModelItems.first.id;
       ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
       DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;

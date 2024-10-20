@@ -73,7 +73,7 @@ class AppVersionCubit extends Cubit<AppVersionState> {
   @override
   Future<void> close() {
     _delay?.cancel();
-    _delay = null;
+    // _delay = null;
     return super.close();
   }
 }
