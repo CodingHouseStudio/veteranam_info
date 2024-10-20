@@ -1,6 +1,6 @@
 abstract class UrlParameters {
-  static const email = 'image';
+  static const email = 'email';
   static const verificationCode = 'oobCode';
-  static const cardId = 'card_id';
-  static const whenParametIsNull = 'NULL';
+  static const cardId = 'card-id';
+  // static const whenParametIsNull = 'NULL';
 }

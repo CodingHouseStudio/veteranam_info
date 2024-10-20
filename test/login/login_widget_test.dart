@@ -185,6 +185,7 @@ void main() {
           );
         });
         testWidgets('${KRoute.pwResetEmail.name} ', (tester) async {
+          Config.roleValue = Config.business;
           await loginPumpAppHelper(
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,

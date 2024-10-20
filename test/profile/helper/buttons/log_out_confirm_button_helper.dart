@@ -19,5 +19,6 @@ Future<void> logOutConfirmButtonlHelper({
   await dialogConfirmHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
+    isPop: false,
   );
 }

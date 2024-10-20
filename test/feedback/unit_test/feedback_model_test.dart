@@ -20,7 +20,7 @@ void main() {
       FeedbackModelJsonField.status:
           _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
       FeedbackModelJsonField.image: [
-        KTestText.feedbackImageModel.image!.toJson(),
+        KTestText.imageModel.toJson(),
       ],
     };
     final nullableJson = {
@@ -54,7 +54,7 @@ void main() {
         );
         expect(
           feedbackModel.image,
-          KTestText.feedbackImageModel.image,
+          KTestText.imageModel,
         );
       });
       test('${KGroupText.nullable} ', () {

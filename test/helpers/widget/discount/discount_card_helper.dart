@@ -3,9 +3,10 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> discountCardHelper(
-  WidgetTester tester,
-) async {
+Future<void> discountCardHelper({
+  required WidgetTester tester,
+  bool containComplaintIcon = true,
+}) async {
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.service),
     findsWidgets,
@@ -57,7 +58,7 @@ Future<void> discountCardHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
-    findsWidgets,
+    containComplaintIcon ? findsWidgets : findsNothing,
   );
 
   expect(
@@ -72,7 +73,7 @@ Future<void> discountCardHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
-    findsWidgets,
+    containComplaintIcon ? findsWidgets : findsNothing,
   );
 
   expect(
@@ -85,8 +86,10 @@ Future<void> discountCardHelper(
     warnIfMissed: false,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
-  );
+  if (containComplaintIcon) {
+    await scrollingHelper(
+      tester: tester,
+      itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
+    );
+  }
 }

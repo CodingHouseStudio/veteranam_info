@@ -183,7 +183,7 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: SignUpError.error,
-          formState: SignUpEnum.initial,
+          formState: SignUpEnum.inProgress,
         ),
       ],
     );

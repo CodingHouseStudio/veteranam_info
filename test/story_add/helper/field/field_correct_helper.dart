@@ -18,6 +18,8 @@ Future<void> fieldCorrectHelper(
     itemKey: KWidgetkeys.screen.storyAdd.photoButton,
   );
 
+  await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.photoButton));
+
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.storyAdd.button,

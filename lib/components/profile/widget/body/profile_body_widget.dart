@@ -142,31 +142,31 @@ class ProfileBodyWidget extends StatelessWidget {
         rightWidget: isDesk ? KSizedBox.kWidthSizedBox58 : null,
       );
 
-  Widget deleteButton({
-    required BuildContext context,
-    required bool isDesk,
-  }) =>
-      SecondaryButtonWidget(
-        widgetKey: KWidgetkeys.screen.profile.deleteButton,
-        isDesk: isDesk,
-        align: Alignment.center,
-        style: KButtonStyles.borderNeutralButtonStyle,
-        padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize16,
-        ),
-        text: context.l10n.deleteAccount,
-        onPressed: () => context.dialog.showConfirmationDialog(
-          isDesk: isDesk,
-          title: context.l10n.deleteProfile,
-          subtitle: context.l10n.deleteProfileQuestion,
-          confirmText: context.l10n.delete,
-          confirmButtonBackground: AppColors.materialThemeRefErrorError60,
-          onPressed: () {
-            context.read<AuthenticationBloc>().add(
-                  AuthenticationDeleteRequested(),
-                );
-          },
-          timer: false,
-        ),
-      );
+  // Widget deleteButton({
+  //   required BuildContext context,
+  //   required bool isDesk,
+  // }) =>
+  //     SecondaryButtonWidget(
+  //       widgetKey: KWidgetkeys.screen.profile.deleteButton,
+  //       isDesk: isDesk,
+  //       align: Alignment.center,
+  //       style: KButtonStyles.borderNeutralButtonStyle,
+  //       padding: const EdgeInsets.symmetric(
+  //         vertical: KPadding.kPaddingSize16,
+  //       ),
+  //       text: context.l10n.deleteAccount,
+  //       onPressed: () => context.dialog.showConfirmationDialog(
+  //         isDesk: isDesk,
+  //         title: context.l10n.deleteProfile,
+  //         subtitle: context.l10n.deleteProfileQuestion,
+  //         confirmText: context.l10n.delete,
+  //         confirmButtonBackground: AppColors.materialThemeRefErrorError60,
+  //         onPressed: () {
+  //           context.read<AuthenticationBloc>().add(
+  //                 AuthenticationDeleteRequested(),
+  //               );
+  //         },
+  //         timer: false,
+  //       ),
+  //     );
 }

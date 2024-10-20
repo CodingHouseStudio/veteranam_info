@@ -21,6 +21,8 @@ Future<void> myDiscountsPumpAppHelper({
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
 
+  _registerCompanyWatcherBloc(mockCompanyRepository: mockCompanyRepository);
+
   await tester.pumpApp(
     const MyDiscountsScreen(),
     mockGoRouter: mockGoRouter,
@@ -60,4 +62,16 @@ void _registerAuthenticationBloc({
     GetIt.I.unregister<AuthenticationBloc>();
   }
   GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+}
+
+void _registerCompanyWatcherBloc({
+  required ICompanyRepository mockCompanyRepository,
+}) {
+  final companyWatcherBloc = CompanyWatcherBloc(
+    companyRepository: mockCompanyRepository,
+  );
+  if (GetIt.I.isRegistered<CompanyWatcherBloc>()) {
+    GetIt.I.unregister<CompanyWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<CompanyWatcherBloc>(companyWatcherBloc);
 }
