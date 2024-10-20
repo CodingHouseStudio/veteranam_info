@@ -348,14 +348,14 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                             ),
                           ],
                         ]
-                        // if (context.read<AuthenticationBloc>().state.status ==
+                        // if (context.read<AuthenticationBloc>()
+                        //.state.status ==
                         //         AuthenticationStatus.authenticated &&
                         //     (Config.isDevelopment || Config.isBusiness))
-                          else
-                          if (!isFocused || widget.isTablet) ...[
-                            KSizedBox.kWidthSizedBox8,
-                            getImageWidget,
-                          ],
+                        else if (!isFocused || widget.isTablet) ...[
+                          KSizedBox.kWidthSizedBox8,
+                          getImageWidget,
+                        ],
                       ],
                     );
                   },
