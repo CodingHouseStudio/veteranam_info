@@ -219,7 +219,10 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryItems,
       locationList: state.locationDiscountModelItems,
-      itemsLoaded: state.itemsLoaded,
+      itemsLoaded: state.itemsLoaded.getLoaded(
+        list: categoryItems,
+        loadItems: getItemsLoading,
+      ),
     );
 
     // final (:list, :loadingStatus) = _filterLocation(

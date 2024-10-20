@@ -350,7 +350,6 @@ class AuthenticationRepository {
     required ImagePickerItem? image,
   }) async {
     SomeFailure? failureValue;
-    bool? right;
 
     if (image != null || user.name != currentUser.name) {
       final result = await iAppAuthenticationRepository.updateUserData(
@@ -365,7 +364,6 @@ class AuthenticationRepository {
         },
         (success) {
           _userController.add(success);
-          right = true;
           // debugPrint('Sending succeses $userSetting');
         },
       );
@@ -381,7 +379,6 @@ class AuthenticationRepository {
           // debugPrint('Sending error: $failure');
         },
         (success) {
-          right = true;
           // debugPrint('Sending succeses $userSetting');
         },
       );
@@ -390,7 +387,7 @@ class AuthenticationRepository {
     if (failureValue != null) {
       return Left(failureValue!);
     } else {
-      return Right(right ?? false);
+      return const Right(true);
     }
   }
 

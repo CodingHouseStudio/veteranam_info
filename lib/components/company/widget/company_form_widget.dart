@@ -54,6 +54,9 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           companyNameController.text = state.company.companyName ?? '';
           context.read<CompanyFormBloc>().add(const CompanyFormEvent.started());
         }
+        if (publicNameController.text.isEmpty) {
+          publicNameController.text = state.company.publicName ?? '';
+        }
         if (codeController.text.isEmpty) {
           codeController.text = state.company.code ?? '';
         }

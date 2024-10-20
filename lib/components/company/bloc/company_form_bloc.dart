@@ -52,7 +52,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     Emitter<CompanyFormState> emit,
   ) async {
     final company = _companyRepository.currentUserCompany;
-    if (company.isNotEmpty) {
+    if (company.id.isNotEmpty) {
       emit(
         CompanyFormState(
           companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
