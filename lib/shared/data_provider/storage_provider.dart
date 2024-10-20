@@ -1,4 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -9,6 +10,9 @@ class StorageService {
     this._storage,
   );
   final FirebaseStorage _storage;
+
+  @visibleForTesting
+  static void error(Object error) => throw error;
 
   Future<String?> saveFile({
     required ImagePickerItem imagePickerItem,
@@ -30,7 +34,8 @@ class StorageService {
         )
         .putData(imagePickerItem.bytes);
 
-    final snapshot = await uploadTask;
+    // catchError special for test
+    final snapshot = await uploadTask.catchError(error);
 
     return snapshot.ref.getDownloadURL();
   }

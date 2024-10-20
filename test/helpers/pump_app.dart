@@ -39,6 +39,11 @@ extension PumpApp on WidgetTester {
             create: (context) =>
                 GetIt.I.get<NetworkCubit>()..networkInitialized(),
           ),
+          if (Config.isBusiness)
+            BlocProvider(
+              create: (context) => GetIt.I.get<CompanyWatcherBloc>()
+                ..add(const CompanyWatcherEvent.started()),
+            ),
           if (!Config.isWeb) ...[
             BlocProvider(
               create: (context) => GetIt.I.get<MobFeedbackBloc>(),

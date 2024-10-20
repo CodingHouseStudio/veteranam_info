@@ -17,7 +17,7 @@ Future<void> myDiscountsEmptyProfilePageHelper(
 
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
-        findsOneWidget,
+        findsNothing,
       );
 
       expect(

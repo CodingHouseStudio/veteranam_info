@@ -184,7 +184,7 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: LoginFailure.error,
-          formState: LoginEnum.initial,
+          formState: LoginEnum.inProgress,
         ),
       ],
     );

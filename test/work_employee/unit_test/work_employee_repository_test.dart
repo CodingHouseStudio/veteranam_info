@@ -36,7 +36,7 @@ void main() {
           (realInvocation) async {},
         );
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
         ).thenAnswer(
           (realInvocation) async {},
         );
@@ -68,7 +68,7 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModelModel,
             file: KTestText.imagePickerItem,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
@@ -83,7 +83,7 @@ void main() {
           ),
         );
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
         ).thenThrow(
           Exception(KGroupText.failure),
         );
@@ -107,7 +107,7 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModelModel,
             file: KTestText.imagePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
@@ -122,7 +122,7 @@ void main() {
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
         );
@@ -140,7 +140,7 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModel,
+            respond: KTestText.employeeRespondModelModel,
             file: KTestText.imagePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),

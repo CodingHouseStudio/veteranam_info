@@ -60,6 +60,6 @@ Future<void> discountsAddDetailHelper({
       findsOneWidget,
     );
 
-    await switchHelper(tester: tester, isActive: true);
+    await switchHelper(tester: tester, isActive: true, elementIndex: 1);
   }
 }

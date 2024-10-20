@@ -24,7 +24,7 @@ class KeyboardScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<UrlCubit, UrlEnum?>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state != null) {
           context.dialog.showSnackBardTextDialog(
             state.value(context),

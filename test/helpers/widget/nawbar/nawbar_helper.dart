@@ -98,7 +98,6 @@ Future<void> nawbarHelper({
         findsNothing,
       );
     }
-
     await tester.enterText(
       find.byKey(KWidgetkeys.widget.nawbar.field),
       searchText,

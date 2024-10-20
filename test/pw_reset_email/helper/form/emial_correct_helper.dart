@@ -41,9 +41,24 @@ Future<void> emailCorrectHelper(
     findsNothing,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.pwResetEmail.cancelButton,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton));
 
   await tester.pumpAndSettle();
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.pwResetEmail.cancelButton,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    findsNothing,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),

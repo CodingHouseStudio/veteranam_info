@@ -26,15 +26,9 @@ void main() {
     late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
-      ExtendedDateTime.id = KTestText.storyModelItems.last.id;
+      ExtendedDateTime.id = KTestText.storyModelItems.first.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDataPickerRepository = MockIDataPickerRepository();
-
-      when(
-        mockDataPickerRepository.getImage,
-      ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
-      );
 
       mockStoryRepository = MockIStoryRepository();
       when(
@@ -42,19 +36,20 @@ void main() {
           imageItem: KTestText.imagePickerItem,
           storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
-            id: KTestText.storyModelItems.last.id,
           ),
         ),
       ).thenAnswer(
-        (realInvocation) async => Left(
-          SomeFailure.serverError(
-            error: null,
-          ),
-        ),
+        (realInvocation) async => Left(SomeFailure.serverError(error: null)),
       );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
+      );
+
+      when(
+        mockDataPickerRepository.getImage,
+      ).thenAnswer(
+        (realInvocation) async => KTestText.imagePickerItem,
       );
       storyAddBloc = StoryAddBloc(
         storyRepository: mockStoryRepository,
@@ -116,6 +111,11 @@ void main() {
       'emits [StoryAddState()] when story, empty photo updated and save',
       build: () => storyAddBloc,
       act: (bloc) async {
+        when(
+          mockDataPickerRepository.getImage,
+        ).thenAnswer(
+          (realInvocation) async => null,
+        );
         bloc
           ..add(
             StoryAddEvent.storyUpdated(KTestText.storyModelItems.last.story),
@@ -132,11 +132,11 @@ void main() {
                   ) &&
               state.formStatus == FormzSubmissionStatus.inProgress,
         ),
-        predicate<StoryAddState>(
-          (state) =>
-              state.image != const ImageFieldModel.pure() &&
-              state.formStatus == FormzSubmissionStatus.inProgress,
-        ),
+        // predicate<StoryAddState>(
+        //   (state) =>
+        //       state.image != const ImageFieldModel.pure() &&
+        //       state.formStatus == FormzSubmissionStatus.inProgress,
+        // ),
         predicate<StoryAddState>(
           (state) => state.formStatus == FormzSubmissionStatus.failure,
         ),
@@ -151,6 +151,7 @@ void main() {
           ..add(
             StoryAddEvent.storyUpdated(KTestText.storyModelItems.first.story),
           )
+          ..add(const StoryAddEvent.imageUpdated())
           ..add(const StoryAddEvent.save());
       },
       expect: () async => [
@@ -160,6 +161,11 @@ void main() {
                   MessageFieldModel.dirty(
                     KTestText.storyModelItems.first.story,
                   ) &&
+              state.formStatus == FormzSubmissionStatus.inProgress,
+        ),
+        predicate<StoryAddState>(
+          (state) =>
+              state.image != const ImageFieldModel.pure() &&
               state.formStatus == FormzSubmissionStatus.inProgress,
         ),
         predicate<StoryAddState>(
