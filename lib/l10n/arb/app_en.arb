@@ -1588,6 +1588,10 @@
     "examples": "Text on the Discount Add page in the dialog for the button.",
     "description": "The button is used to navigate to the Terms and Conditions page."
   },
+  "changesNotSaved": "Changes\n are not saved*",
+  "@changesNotSaved": {
+    "examples": "Text on the Company and Profile pages below the image when it is selected but changes are not saved."
+  },
   "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
   "@deleteProfileQuestion": {
     "examples": "Text for the delete account dialog on the Profile page."
