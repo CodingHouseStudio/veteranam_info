@@ -42,7 +42,7 @@ class ImagePickerItem {
 }
 
 @Singleton(
-  env: [Config.business, Config.development],
+  // env: [Config.business, Config.development],
   as: IDataPickerRepository,
 )
 class DataPickerRepository implements IDataPickerRepository {

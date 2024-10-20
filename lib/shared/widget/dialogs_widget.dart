@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:ui';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -394,13 +396,13 @@ class _DialogsWidget {
     required void Function()? onPressed,
   }) {
     if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      unawaited(
+        Flushbar<String>(
           key: KWidgetkeys.widget.dialogs.failure,
           backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-          content: GetErrorDialogWidget(onPressed: onPressed, error: error),
+          messageText: GetErrorDialogWidget(onPressed: onPressed, error: error),
           duration: const Duration(minutes: 1),
-        ),
+        ).show(context),
       );
     }
   }
@@ -410,17 +412,17 @@ class _DialogsWidget {
     Duration duration = const Duration(minutes: 1),
   }) {
     if (text != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      unawaited(
+        Flushbar<String>(
           backgroundColor: AppColors.materialThemeKeyColorsSecondary,
           // key: KWidgetkeys.widget.dialogs.failure,
-          content: Text(
+          messageText: Text(
             text,
             key: KWidgetkeys.widget.dialogs.snackBarText,
             style: AppTextStyle.materialThemeBodyLargeNeutral,
           ),
           duration: duration,
-        ),
+        ).show(context),
       );
     }
   }
