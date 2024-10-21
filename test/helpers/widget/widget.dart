@@ -27,7 +27,6 @@ export 'nawbar/nawbar.dart';
 export 'news_card_helper.dart';
 export 'notification_link/notification_link.dart';
 export 'pagination_helper.dart';
-export 'profile_card/profile_card.dart';
 export 'question_helper.dart';
 export 'rate_helper.dart';
 export 'report_dialog/report_dialog.dart';

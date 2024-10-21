@@ -9,7 +9,7 @@ class CompanyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CompanyBlocprovider(
       childWidget: CompanyBodyWidget(
-        key: KWidgetkeys.screen.profile.screen,
+        key: KWidgetkeys.screen.company.screen,
       ),
     );
   }

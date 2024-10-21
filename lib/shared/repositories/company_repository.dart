@@ -43,10 +43,12 @@ class CompanyRepository implements ICompanyRepository {
   void _onUserStreamListen() {
     _userSubscription ??=
         _iAppAuthenticationRepository.user.listen((currentUser) {
-      if (currentUser.isNotEmpty) {
+      if (currentUser.isNotEmpty &&
+          !_iAppAuthenticationRepository.isAnonymously) {
         if (!currentUserCompany.userEmails.contains(currentUser.email) &&
             _userCompanySubscription != null) {
-          _onUserStreamCancel();
+          _userCompanySubscription?.cancel();
+          _userCompanySubscription = null;
         }
         _userCompanySubscription ??=
             _firestoreService.getUserCompany(currentUser.email!).listen(
@@ -57,15 +59,6 @@ class CompanyRepository implements ICompanyRepository {
             );
           },
         );
-        // if (isAnonymously()) {
-        //   _authenticationStatuscontroller.add(
-        //     AuthenticationStatus.anonymous,
-        //   );
-        //   return;
-        // }
-        // _authenticationStatuscontroller.add(
-        //   AuthenticationStatus.authenticated,
-        // );
 
         return;
       }

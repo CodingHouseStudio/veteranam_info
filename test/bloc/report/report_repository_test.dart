@@ -13,7 +13,7 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.report} ${KGroupText.repository} ', () {
-    late IReportRepository mockReportRepository;
+    late IReportRepository reportRepository;
     late FirestoreService mockFirestoreService;
     setUp(() {
       mockFirestoreService = MockFirestoreService();
@@ -35,18 +35,18 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        mockReportRepository = ReportRepository();
+        reportRepository = ReportRepository();
       });
       test('${KGroupText.successfulSet} ', () async {
         expect(
-          await mockReportRepository.sendReport(KTestText.reportModel),
+          await reportRepository.sendReport(KTestText.reportModel),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
       });
       test('${KGroupText.successfulGet} ', () async {
         expect(
-          await mockReportRepository.getCardReportById(
+          await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),
@@ -71,11 +71,11 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        mockReportRepository = ReportRepository();
+        reportRepository = ReportRepository();
       });
       test('${KGroupText.failureSend} ', () async {
         expect(
-          await mockReportRepository.sendReport(KTestText.reportModelIncorect),
+          await reportRepository.sendReport(KTestText.reportModelIncorect),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -86,7 +86,7 @@ void main() {
       });
       test('${KGroupText.failureGet} ', () async {
         expect(
-          await mockReportRepository.getCardReportById(
+          await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),
@@ -119,11 +119,11 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        mockReportRepository = ReportRepository();
+        reportRepository = ReportRepository();
       });
       test('${KGroupText.failureSend} ', () async {
         expect(
-          await mockReportRepository.sendReport(
+          await reportRepository.sendReport(
             KTestText.reportModelIncorect.copyWith(
               message: KTestText.fieldEmpty,
               reasonComplaint: ReasonComplaint.other,
@@ -139,7 +139,7 @@ void main() {
       });
       test('${KGroupText.failureGet} ', () async {
         expect(
-          await mockReportRepository.getCardReportById(
+          await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),

@@ -10,6 +10,7 @@ class SendingTextWidget extends StatelessWidget {
     this.showSendingText = false,
     this.showSuccessText = false,
     super.key,
+    this.successTextAlign,
   });
   final String? failureText;
   final String? sendingText;
@@ -17,6 +18,7 @@ class SendingTextWidget extends StatelessWidget {
   final String? successText;
   final bool showSuccessText;
   final Key textKey;
+  final TextAlign? successTextAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,9 @@ class SendingTextWidget extends StatelessWidget {
             child: Text(
               (failureText ?? sendingTextValue ?? successTextValue)!,
               key: textKey,
-              textAlign: TextAlign.center,
+              textAlign: showSuccessText
+                  ? successTextAlign ?? TextAlign.center
+                  : TextAlign.center,
               style: failureText != null
                   ? AppTextStyle.materialThemeBodyMediumError
                   : AppTextStyle.materialThemeBodyMediumNeutralVariant60,

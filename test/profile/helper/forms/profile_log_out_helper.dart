@@ -3,7 +3,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> profileCardLogOutHelper(
+Future<void> profileLogOutHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(

@@ -1,22 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
+import '../../../test_dependency.dart';
 import '../helper.dart';
 
 Future<void> profileFormsIncorrectSaveHelper({
   required WidgetTester tester,
-  required String name,
-  required String surname,
-  required String nickname,
 }) async {
   await profileFormsEnterTextHelper(
     tester: tester,
-    name: name,
-    surname: surname,
-    nickname: nickname,
+    name: KTestText.fieldEmpty,
+    surname: KTestText.fieldEmpty,
+    nickname: KTestText.fieldEmpty,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
 
   await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.screen.profile.submitingText),
+    findsNothing,
+  );
 }
