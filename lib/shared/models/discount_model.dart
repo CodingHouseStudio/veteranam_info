@@ -66,6 +66,11 @@ enum DiscountState {
   rejected,
   published,
   deactivated;
+
+  bool get showDeactivateButton =>
+      this == DiscountState.published || this == DiscountState.deactivated;
+
+  bool get isPublished => this == DiscountState.published;
 }
 
 extension SubLocationString on SubLocation {
