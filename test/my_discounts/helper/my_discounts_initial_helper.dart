@@ -80,6 +80,11 @@ Future<void> myDiscountsInitialHelper(
 
       await tester.pumpAndSettle();
 
+      await tester
+          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.deactivate).first);
+
+      await tester.pumpAndSettle();
+
       await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
     },
   );

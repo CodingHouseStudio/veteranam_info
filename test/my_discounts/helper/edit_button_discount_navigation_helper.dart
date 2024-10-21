@@ -8,22 +8,33 @@ Future<void> editButtonDiscountsNavigationHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
-    findsWidgets,
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
+        findsWidgets,
+      );
+
+      await tester
+          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit).first);
+
+      await tester.pumpAndSettle();
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.discountsEdit.name,
+          pathParameters: {
+            UrlParameters.cardId:
+                KTestText.userDiscountModelItemsWidget.first.id,
+          },
+          extra: KTestText.userDiscountModelItemsWidget.first,
+        ),
+      ).called(1);
+    },
   );
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit).first);
-
-  await tester.pumpAndSettle();
-
-  verify(
-    () => mockGoRouter.goNamed(
-      KRoute.discountsEdit.name,
-      pathParameters: {
-        UrlParameters.cardId: KTestText.discountModelItems.first.id,
-      },
-      extra: KTestText.discountModelItems.first,
-    ),
-  ).called(1);
 }
