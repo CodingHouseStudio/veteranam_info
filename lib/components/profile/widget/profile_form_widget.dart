@@ -99,26 +99,15 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                   ),
                 ),
                 KSizedBox.kWidthSizedBox32,
-                if (widget.isDesk)
-                  Expanded(
-                    child: Text(
-                      context.l10n.dataEditing,
-                      key: KWidgetkeys.widget.profileCard.editText,
-                      style: widget.isDesk
-                          ? AppTextStyle.materialThemeHeadlineLarge
-                          : AppTextStyle.materialThemeHeadlineSmall,
-                    ),
-                  )
-                else
-                  Expanded(
-                    child: Text(
-                      context.l10n.dataEditing,
-                      key: KWidgetkeys.widget.profileCard.editText,
-                      style: widget.isDesk
-                          ? AppTextStyle.materialThemeHeadlineLarge
-                          : AppTextStyle.materialThemeHeadlineSmall,
-                    ),
+                Expanded(
+                  child: Text(
+                    context.l10n.dataEditing,
+                    key: KWidgetkeys.screen.profile.editText,
+                    style: widget.isDesk
+                        ? AppTextStyle.materialThemeHeadlineLarge
+                        : AppTextStyle.materialThemeHeadlineSmall,
                   ),
+                ),
                 KSizedBox.kWidthSizedBox8,
                 KIcon.edit,
               ],

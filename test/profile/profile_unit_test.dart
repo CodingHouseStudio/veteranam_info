@@ -6,14 +6,14 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../test_dependency.dart';
 
 void main() {
   setUp(configureFailureDependenciesTest);
 
   tearDown(GetIt.I.reset);
 
-  group('ProfileBloc Tests', () {
+  group('${KScreenBlocName.profile} ${KGroupText.bloc}', () {
     late ProfileBloc profileBloc;
     late AuthenticationRepository mockAuthenticationRepository;
     late IDataPickerRepository mockDataPickerRepository;
