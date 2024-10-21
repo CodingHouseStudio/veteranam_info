@@ -28,7 +28,7 @@ class MyDiscountsWatcherBloc
     on<_Started>(_onStarted);
     on<_DeleteDiscount>(_onDeleteDiscount);
     on<_LoadNextItems>(_onLoadNextItems);
-    on<_Deactivate>(_onDeactivate);
+    // on<_Deactivate>(_onDeactivate);
     on<_ChangeDeactivate>(_onChangeDeactivate);
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
@@ -204,33 +204,33 @@ class MyDiscountsWatcherBloc
     );
   }
 
-  Future<void> _onDeactivate(
-    _Deactivate event,
-    Emitter<MyDiscountsWatcherState> emit,
-  ) async {
-    add(
-      MyDiscountsWatcherEvent.changeDeactivate(
-        discountModel: event.discountModel,
-        isDeactivate: event.isDeactivate,
-      ),
-    );
-    // if (_debounceTimer?.isActive ?? false) {
-    //   _debounceTimer?.cancel();
-    //   _debounceTimer = null;
-    //   return;
-    // }
-    // if (!(_debounceTimer?.isActive ?? false)) {
-    //   _debounceTimer = Timer(Duration(seconds: KTest.isTest ? 0 : 5),
-    //() async {
-    //     add(
-    //       MyDiscountsWatcherEvent.changeDeactivate(
-    //         discountModel: event.discountModel,
-    //         isDeactivate: event.isDeactivate,
-    //       ),
-    //     );
-    //   });
-    // }
-  }
+  // Future<void> _onDeactivate(
+  //   _Deactivate event,
+  //   Emitter<MyDiscountsWatcherState> emit,
+  // ) async {
+  //   add(
+  //     MyDiscountsWatcherEvent.changeDeactivate(
+  //       discountModel: event.discountModel,
+  //       isDeactivate: event.isDeactivate,
+  //     ),
+  //   );
+  // if (_debounceTimer?.isActive ?? false) {
+  //   _debounceTimer?.cancel();
+  //   _debounceTimer = null;
+  //   return;
+  // }
+  // if (!(_debounceTimer?.isActive ?? false)) {
+  //   _debounceTimer = Timer(Duration(seconds: KTest.isTest ? 0 : 5),
+  //() async {
+  //     add(
+  //       MyDiscountsWatcherEvent.changeDeactivate(
+  //         discountModel: event.discountModel,
+  //         isDeactivate: event.isDeactivate,
+  //       ),
+  //     );
+  //   });
+  // }
+  // }
 
   Future<void> _onChangeDeactivate(
     _ChangeDeactivate event,

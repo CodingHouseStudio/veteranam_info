@@ -17,9 +17,8 @@ List<Widget> _myDiscountsCardWidgetList({
         isLoading: isLoading,
         onDeactivate: ({required deactivate}) =>
             context.read<MyDiscountsWatcherBloc>().add(
-                  MyDiscountsWatcherEvent.deactivate(
-                    discountModel: modelItem,
-                    isDeactivate: deactivate,
+                  MyDiscountsWatcherEvent.changeDeactivate(
+                    modelItem,
                   ),
                 ),
         // reportEvent: null,
