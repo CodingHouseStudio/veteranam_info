@@ -94,7 +94,7 @@ void main() {
           companyStreamController = StreamController<CompanyModel>()
             ..add(KTestText.fullCompanyModel);
           userStreamController.add(
-            KTestText.profileUserWithoutPhoto.copyWith(id: '102'),
+            KTestText.profileUserWithoutPhoto,
           );
         });
       });
