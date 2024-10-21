@@ -65,10 +65,20 @@ Future<void> myDiscountsInitialHelper(
         findsWidgets,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.myDiscounts.deactivate,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.deactivate),
         findsWidgets,
       );
+
+      await tester
+          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.deactivate).first);
+
+      await tester.pumpAndSettle();
 
       await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
     },

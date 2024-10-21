@@ -35,6 +35,13 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Right(true),
         );
+        when(
+          mockDiscountRepository.deactivateDiscount(
+            discountModel: KTestText.userDiscountModelItems.elementAt(i),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
       }
     });
     group('${KGroupText.failure} ', () {
@@ -278,6 +285,20 @@ void main() {
               );
 
               await addDiscountsNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+            testWidgets('Edit discount ', (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await editButtonDiscountsNavigationHelper(
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
