@@ -12,10 +12,10 @@ Future<void> logOutUnconfirmButtonlHelper({
   if (deskOpen) {
     await changeWindowSizeHelper(
       tester: tester,
-      test: () async => profileLogOutHelper(tester),
+      test: () async => companyLogOutHelper(tester),
     );
   } else {
-    await profileLogOutHelper(tester);
+    await companyLogOutHelper(tester);
   }
 
   await changeWindowSizeHelper(
