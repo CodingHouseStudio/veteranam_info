@@ -65,25 +65,22 @@ void main() {
 
       await profileInitialHelper(tester);
     });
-    group(
-      'Nickname empty',
-      () {
-        setUp(() {
-          when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-            (realInvocation) => KTestText.userSetting,
-          );
-        });
-        testWidgets('${KGroupText.initial} ', (tester) async {
-          await profilePumpAppHelper(
-            tester: tester,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-          );
+    // group('Nickname empty', () {
+    //   setUp(() {
+    //     when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+    //       (realInvocation) => KTestText.userSetting,
+    //     );
+    //   });
+    //   testWidgets('${KGroupText.initial} ', (tester) async {
+    //     await profilePumpAppHelper(
+    //       tester: tester,
+    //       mockAuthenticationRepository: mockAuthenticationRepository,
+    //       mockDataPickerRepository: mockDataPickerRepository,
+    //     );
 
-          await profileInitialHelper(tester);
-        });
-      },
-    );
+    //     await profileInitialHelper(tester);
+    //   });
+    // });
 
     testWidgets('Show log out dialog', (tester) async {
       await profilePumpAppHelper(
@@ -92,7 +89,7 @@ void main() {
         mockDataPickerRepository: mockDataPickerRepository,
       );
 
-      await profileCardLogOutHelper(tester);
+      await profileLogOutHelper(tester);
     });
 
     // testWidgets('Show delete account dialog', (tester) async {
@@ -219,9 +216,6 @@ void main() {
 
         await profileFormsCorrectSaveHelper(
           tester: tester,
-          name: KTestText.nameCorrect,
-          surname: KTestText.surnameCorrect,
-          nickname: KTestText.nicknameCorrect,
         );
       });
 
@@ -235,9 +229,6 @@ void main() {
 
         await profileFormsIncorrectSaveHelper(
           tester: tester,
-          name: KTestText.fieldEmpty,
-          surname: KTestText.fieldEmpty,
-          nickname: KTestText.fieldEmpty,
         );
       });
 

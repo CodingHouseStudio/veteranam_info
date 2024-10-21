@@ -55,11 +55,19 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     if (company.id.isNotEmpty) {
       emit(
         CompanyFormState(
-          companyName: CompanyNameFieldModel.dirty(company.companyName ?? ''),
-          publicName: PublicNameFieldModel.dirty(company.publicName ?? ''),
-          code: CompanyCodeFieldModel.dirty(company.code ?? ''),
+          companyName: company.companyName == null
+              ? const CompanyNameFieldModel.pure()
+              : CompanyNameFieldModel.dirty(company.companyName!),
+          publicName: company.publicName == null
+              ? const PublicNameFieldModel.pure()
+              : PublicNameFieldModel.dirty(company.publicName!),
+          code: company.code == null
+              ? const CompanyCodeFieldModel.pure()
+              : CompanyCodeFieldModel.dirty(company.code!),
           image: const ImageFieldModel.pure(),
-          link: LinkFieldModel.dirty(company.link ?? ''),
+          link: company.link == null
+              ? const LinkFieldModel.pure()
+              : LinkFieldModel.dirty(company.link),
           failure: null,
           formState: CompanyFormEnum.initial,
           deleteIsPossible: null,

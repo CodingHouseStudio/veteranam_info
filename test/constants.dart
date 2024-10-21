@@ -134,17 +134,22 @@ abstract class KTestText {
 
   static const pureCompanyModel = CompanyModel(
     id: id,
-    userEmails: [userEmail],
+    userEmails: userEmailList,
   );
 
   static const fullCompanyModel = CompanyModel(
     id: id,
-    userEmails: [userEmail],
-    code: '12345678',
+    userEmails: userEmailList,
+    code: companyCode,
     companyName: companyName,
     publicName: companyName,
+    link: link,
   );
   static const companyName = 'test';
+  static const companyCode = '12345678';
+  static const companyWrongCode = '123456';
+  static const companyWrongName = 't';
+  static const userEmailList = [userEmail];
 
   static const oAuthCredential = firebase_auth.OAuthCredential(
     providerId: '1',
@@ -574,15 +579,16 @@ abstract class KTestText {
   static final linkModel = LinkModel(
     id: id,
     userId: user.id,
-    link: 'https://veteranam.info/',
+    link: link,
     date: dateTime,
   );
   static final linkModelWrong = LinkModel(
     id: id,
     userId: user.id,
-    link: 'https://veteranam.info/$field',
+    link: '$link$field',
     date: dateTime,
   );
+  static const link = 'https://veteranam.info/';
   static final emailModel = EmailModel(
     id: id,
     userId: user.id,
@@ -650,6 +656,7 @@ abstract class KScreenBlocName {
   static const businessDashboard = 'Business Dashboard Screen';
   static const pwResetEmail = 'Password Reset Email Screen';
   static const passwordReset = 'Password Reset Screen';
+  static const company = 'Company Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

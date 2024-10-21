@@ -20,21 +20,19 @@ class CompanyBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         ShortTitleIconWidget(
           title: context.l10n.myCompany,
-          titleKey: KWidgetkeys.screen.profile.title,
+          titleKey: KWidgetkeys.screen.company.title,
           isDesk: isDesk,
           icon: KIcon.arrowDownRight,
           firstIcon: !isDesk,
         ),
-        if (isDesk) ...[
-          KSizedBox.kHeightSizedBox32,
-          const Divider(
-            color: AppColors.materialThemeKeyColorsNeutral,
-          ),
-        ] else ...[
+        if (isDesk)
+          KSizedBox.kHeightSizedBox32
+        else ...[
           KSizedBox.kHeightSizedBox24,
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
+              key: KWidgetkeys.screen.company.boxMyDiscounts,
               onPressed: () => myDiscountTap(context),
               child: Column(
                 children: [
@@ -52,10 +50,10 @@ class CompanyBodyWidget extends StatelessWidget {
             ),
           ),
           KSizedBox.kHeightSizedBox24,
-          const Divider(
-            color: AppColors.materialThemeKeyColorsNeutral,
-          ),
         ],
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
       ],
       isForm: true,
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
@@ -72,6 +70,7 @@ class CompanyBodyWidget extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: BoxWidget(
+                  key: KWidgetkeys.screen.company.boxMyDiscounts,
                   text: context.l10n.myDiscounts,
                   onTap: () => myDiscountTap(context),
                   isDesk: isDesk,
