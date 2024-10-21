@@ -29,6 +29,7 @@ part 'screen/profile_saves.dart';
 part 'screen/questions_form.dart';
 part 'screen/pw_reset_email.dart';
 part 'screen/password_reset.dart';
+part 'screen/company.dart';
 
 /// COMMENT: Add a part here when you add a new file for keys
 // SCREEN
@@ -83,7 +84,6 @@ part 'widget/network_banner.dart';
 part 'widget/news_card.dart';
 part 'widget/notification_link.dart';
 part 'widget/pagination.dart';
-part 'widget/profile_card.dart';
 part 'widget/question.dart';
 part 'widget/rate.dart';
 part 'widget/report_dialog.dart';

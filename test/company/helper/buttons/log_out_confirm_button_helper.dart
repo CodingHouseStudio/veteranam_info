@@ -9,7 +9,7 @@ Future<void> logOutConfirmButtonlHelper({
 }) async {
   await tester.pumpAndSettle();
 
-  await profileLogOutHelper(tester);
+  await companyLogOutHelper(tester);
 
   await dialogConfirmHelper(
     tester: tester,
