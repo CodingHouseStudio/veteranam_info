@@ -332,19 +332,11 @@ void main() {
           ]),
           reason: 'Wait loading data',
         );
-        bloc
-          ..add(
-            MyDiscountsWatcherEvent.deactivate(
-              discountModel: KTestText.discountModelItems.first,
-              isDeactivate: true,
-            ),
-          )
-          ..add(
-            MyDiscountsWatcherEvent.deactivate(
-              discountModel: KTestText.discountModelItems.first,
-              isDeactivate: false,
-            ),
-          );
+        bloc.add(
+          MyDiscountsWatcherEvent.changeDeactivate(
+            KTestText.discountModelItems.first,
+          ),
+        );
       },
       expect: () => [
         predicate<MyDiscountsWatcherState>(
@@ -376,8 +368,7 @@ void main() {
         );
         bloc.add(
           MyDiscountsWatcherEvent.changeDeactivate(
-            discountModel: KTestText.discountModelItems.first,
-            isDeactivate: true,
+            KTestText.discountModelItems.first,
           ),
         );
       },
@@ -419,8 +410,7 @@ void main() {
         );
         bloc.add(
           MyDiscountsWatcherEvent.changeDeactivate(
-            discountModel: KTestText.discountModelItems.first,
-            isDeactivate: true,
+            KTestText.discountModelItems.first,
           ),
         );
       },
