@@ -46,7 +46,9 @@ class CompanyModel with _$CompanyModel {
 abstract class CompanyModelJsonField {
   static const id = 'id';
   static const companyName = 'companyName';
+  static const publicName = 'publicName';
   static const userEmails = 'userEmails';
   static const link = 'link';
   static const code = 'code';
+  static const image = 'image';
 }
