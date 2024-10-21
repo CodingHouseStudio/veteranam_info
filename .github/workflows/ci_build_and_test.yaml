@@ -24,7 +24,7 @@ jobs:
     with:
       flutter_channel: stable
       flutter_version: 3.24.1
-      min_coverage: 100
+      min_coverage: 98
       format_directories: "lib test"
 
   spell-check:

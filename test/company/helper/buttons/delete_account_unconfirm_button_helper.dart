@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../test_dependency.dart';
 import '../helper.dart';
 
-Future<void> logOutUnconfirmButtonlHelper({
+Future<void> deleteAccountUnconfirmButtonlHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
   required bool icon,
@@ -12,10 +12,10 @@ Future<void> logOutUnconfirmButtonlHelper({
   if (deskOpen) {
     await changeWindowSizeHelper(
       tester: tester,
-      test: () async => profileLogOutHelper(tester),
+      test: () async => deleteAccountDialoglHelper(tester),
     );
   } else {
-    await profileLogOutHelper(tester);
+    await deleteAccountDialoglHelper(tester);
   }
 
   await changeWindowSizeHelper(

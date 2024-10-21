@@ -15,6 +15,7 @@ class _ProfileKeys {
   final boxSaves = const Key('profile_box_saves');
   final boxStory = const Key('profile_box_story');
   final boxFeedback = const Key('profile_box_feedback');
-  final boxMyDiscounts = const Key('profile_box_discounts');
+  // final boxMyDiscounts = const Key('profile_box_discounts');
   final submitingText = const Key('profile_card_submiting_text');
+  final editText = const Key('profile_edit_text');
 }

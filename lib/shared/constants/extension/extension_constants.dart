@@ -141,8 +141,11 @@ extension DiscountModelLocation on DiscountModel {
   String? get getLink => PlatformEnum.getPlatform.isIOS
       ? category.contains('Медицина')
           ? null
-          : directLink ?? link
-      : directLink ?? link;
+          : _getLink
+      : _getLink;
+
+  String? get _getLink =>
+      directLink != null && directLink!.isUrlValid ? directLink : link;
 }
 
 extension StringExtension on String {
@@ -640,8 +643,12 @@ extension DiscountStateExtention on DiscountState {
   }
 }
 
-extension UserExtensions on User? {
-  String? get firstName => this?.name?.split(' ').first;
+extension UserExtensions on User {
+  String? get firstName => name?.split(' ').first;
 
-  String? get lastName => this?.name?.split(' ').last;
+  String? get lastName => name?.split(' ').last;
+}
+
+extension CompanyModelExtensions on CompanyModel {
+  String? get imageUrl => image?.downloadURL;
 }
