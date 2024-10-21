@@ -6,14 +6,13 @@ class MyDiscountsWatcherEvent with _$MyDiscountsWatcherEvent {
   const factory MyDiscountsWatcherEvent.loadNextItems() = _LoadNextItems;
   const factory MyDiscountsWatcherEvent.deleteDiscount(String discountId) =
       _DeleteDiscount;
-  const factory MyDiscountsWatcherEvent.deactivate({
-    required DiscountModel discountModel,
-    required bool isDeactivate,
-  }) = _Deactivate;
-  const factory MyDiscountsWatcherEvent.changeDeactivate({
-    required DiscountModel discountModel,
-    required bool isDeactivate,
-  }) = _ChangeDeactivate;
+  // const factory MyDiscountsWatcherEvent.deactivate({
+  //   required DiscountModel discountModel,
+  //   required bool isDeactivate,
+  // }) = _Deactivate;
+  const factory MyDiscountsWatcherEvent.changeDeactivate(
+    DiscountModel discountModel,
+  ) = _ChangeDeactivate;
   const factory MyDiscountsWatcherEvent.updated(
     List<DiscountModel> discountItemsModel,
   ) = _Updated;
