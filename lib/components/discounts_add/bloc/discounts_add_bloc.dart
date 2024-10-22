@@ -113,7 +113,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           period: discount!.expiration == null ||
                   discount!.expiration!.isEmpty ||
                   discount!.expiration!.toLowerCase() ==
-                      'до кінця воєнного стану'
+                      'до кінця воєнного стану' ||
+                  discount!.expiration!.toLowerCase() == 'Щомісяця оновлюється'
               ? const DateFieldModel.pure()
               : DateFieldModel.dirty(
                   discount!.expiration?.getDateDiscountString(
