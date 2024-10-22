@@ -290,7 +290,9 @@ class DiscountCardWidget extends StatelessWidget {
                 right: KPadding.kPaddingSize4,
               ),
               child: Text(
-                expiration ?? context.l10n.itIsValidAllTime,
+                expiration == null || expiration.isEmpty
+                    ? context.l10n.itIsValidAllTime
+                    : expiration,
                 key: KWidgetkeys.widget.discountCard.expiration,
                 style: AppTextStyle.materialThemeLabelLarge,
               ),

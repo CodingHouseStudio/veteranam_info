@@ -69,6 +69,47 @@ void main() {
       ],
     );
     blocTest<PwResetEmailBloc, PwResetEmailState>(
+      'emits [PwResetEmailState] when started with correct email '
+      'and prassed back button',
+      build: () => pwResetEmailBloc,
+      act: (bloc) {
+        when(
+          mockAuthenticationRepository.sendVerificationCodeToEmail(
+            email: KTestText.userEmail,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => const Right(true),
+        );
+        bloc
+          ..add(const PwResetEmailEvent.started(KTestText.userEmail))
+          ..add(const PwResetEmailEvent.emailUpdated(KTestText.userEmail))
+          ..add(const PwResetEmailEvent.sendResetCode())
+          ..add(const PwResetEmailEvent.resetStatus());
+      },
+      expect: () => [
+        const PwResetEmailState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          failure: null,
+          formState: PwResetEmailEnum.inProgress,
+        ),
+        const PwResetEmailState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          failure: null,
+          formState: PwResetEmailEnum.sending,
+        ),
+        const PwResetEmailState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          failure: null,
+          formState: PwResetEmailEnum.success,
+        ),
+        const PwResetEmailState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          failure: null,
+          formState: PwResetEmailEnum.inProgress,
+        ),
+      ],
+    );
+    blocTest<PwResetEmailBloc, PwResetEmailState>(
       'emits [PwResetEmailState] when started with email null '
       'and email are changed invalid, submited',
       build: () => pwResetEmailBloc,

@@ -93,6 +93,18 @@ void main() {
 
           await pwResetEmailInitialHelper(tester);
         });
+        testWidgets('Back button ', (tester) async {
+          await pwResetEmailPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+          );
+
+          await backButtonResetEmailNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

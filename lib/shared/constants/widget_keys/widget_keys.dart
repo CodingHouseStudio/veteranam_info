@@ -99,6 +99,7 @@ part 'widget/widget.dart';
 part 'widget/work_card.dart';
 part 'widget/work_request_card.dart';
 part 'widget/confirm_publish_discount.dart';
+part 'widget/confirm_dialog.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

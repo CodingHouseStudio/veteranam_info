@@ -110,11 +110,17 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           city: discount!.location == null
               ? const CitiesFieldModel.pure()
               : CitiesFieldModel.dirty(discount!.location!),
-          period: DateFieldModel.dirty(
-            discount!.expiration?.getDateDiscountString(
-              Language.ukrain.value.languageCode,
-            ),
-          ),
+          period: discount!.expiration == null ||
+                  discount!.expiration!.isEmpty ||
+                  discount!.expiration!.toLowerCase() ==
+                      'до кінця воєнного стану' ||
+                  discount!.expiration!.toLowerCase() == 'Щомісяця оновлюється'
+              ? const DateFieldModel.pure()
+              : DateFieldModel.dirty(
+                  discount!.expiration?.getDateDiscountString(
+                    Language.ukrain.value.languageCode,
+                  ),
+                ),
           title: MessageFieldModel.dirty(discount!.title),
           discounts: DiscountsFieldModel.dirty(
             discount!.discount

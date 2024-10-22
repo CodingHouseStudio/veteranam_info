@@ -381,7 +381,11 @@ abstract class KTestText {
         id: i.toString(),
         userId: userWithoutPhoto.id,
         dateVerified: dateTime,
-        status: i == 0 ? DiscountState.rejected : DiscountState.published,
+        status: i == 0
+            ? DiscountState.rejected
+            : i == 4
+                ? DiscountState.deactivated
+                : DiscountState.published,
       ),
   ];
 

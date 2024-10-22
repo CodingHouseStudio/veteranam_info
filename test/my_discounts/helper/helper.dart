@@ -1,6 +1,7 @@
 export 'add_button_discount_navigation_helper.dart';
 export 'add_discounts_navigation_helper.dart';
 export 'delete_discount_helper.dart';
+export 'edit_button_discount_navigation_helper.dart';
 export 'my_discount_confirm_button_helper.dart';
 export 'my_discount_dialog_helper.dart';
 export 'my_discount_empty_profile_page.dart';
