@@ -10,11 +10,11 @@ Future<void> dialogConfirmHelper({
   bool isPop = true,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.dialogs.confirmButton),
+    find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.dialogs.confirmButton));
+  await tester.tap(find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton));
 
   await tester.pumpAndSettle();
 
