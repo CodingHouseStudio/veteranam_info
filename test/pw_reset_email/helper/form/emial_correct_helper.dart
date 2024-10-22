@@ -15,6 +15,11 @@ Future<void> emailCorrectHelper(
   );
 
   expect(
+    find.byKey(KWidgetkeys.screen.pwResetEmail.cancelButton),
+    findsOneWidget,
+  );
+
+  expect(
     find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
     findsOneWidget,
   );
