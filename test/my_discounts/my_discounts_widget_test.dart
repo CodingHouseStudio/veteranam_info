@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -19,11 +21,13 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late ICompanyRepository mockCompanyRepository;
+    late StreamController<CompanyModel> companyStream;
     setUp(() {
       Config.roleValue = Config.business;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
+      companyStream = StreamController();
 
       when(mockAuthenticationRepository.currentUserSetting)
           .thenAnswer((invocation) => KTestText.userSetting);
@@ -35,7 +39,17 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Right(true),
         );
+        when(
+          mockDiscountRepository.deactivateDiscount(
+            discountModel: KTestText.userDiscountModelItems.elementAt(i),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
       }
+      when(mockCompanyRepository.company).thenAnswer(
+        (realInvocation) => companyStream.stream,
+      );
     });
     group('${KGroupText.failure} ', () {
       setUp(
@@ -45,11 +59,13 @@ void main() {
           ).thenAnswer(
             (_) => KTestText.fullCompanyModel,
           );
+          companyStream.add(KTestText.fullCompanyModel);
+
           when(mockAuthenticationRepository.currentUser)
               .thenAnswer((invocation) => KTestText.userWithoutPhoto);
           when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.profileUser.id),
+                .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
           ).thenAnswer(
             (invocation) => Stream.error(KGroupText.failureGet),
           );
@@ -74,11 +90,12 @@ void main() {
         ).thenAnswer(
           (_) => KTestText.pureCompanyModel,
         );
+        companyStream.add(KTestText.pureCompanyModel);
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userAnonymous);
         when(
           mockDiscountRepository.getDiscountsByCompanyId(
-            KTestText.profileUser.id,
+            KTestText.pureCompanyModel.id,
           ),
         ).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItems),
@@ -140,12 +157,13 @@ void main() {
         ).thenAnswer(
           (_) => KTestText.fullCompanyModel,
         );
+        companyStream.add(KTestText.fullCompanyModel);
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
 
         when(
           mockDiscountRepository.getDiscountsByCompanyId(
-            KTestText.profileUser.id,
+            KTestText.fullCompanyModel.id,
           ),
         ).thenAnswer(
           (invocation) => Stream.value([]),
@@ -211,11 +229,12 @@ void main() {
         ).thenAnswer(
           (_) => KTestText.fullCompanyModel,
         );
+        companyStream.add(KTestText.fullCompanyModel);
         when(mockAuthenticationRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
         when(
           mockDiscountRepository
-              .getDiscountsByCompanyId(KTestText.profileUser.id),
+              .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
         ).thenAnswer(
           (invocation) => Stream.value(KTestText.userDiscountModelItemsWidget),
         );
@@ -277,7 +296,23 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
 
+              companyStream.add(KTestText.fullCompanyModel.copyWith(id: '2'));
+
               await addDiscountsNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+            testWidgets('Edit discount ', (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await editButtonDiscountsNavigationHelper(
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
