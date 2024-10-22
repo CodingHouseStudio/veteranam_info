@@ -91,7 +91,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     widget.title,
-                    key: KWidgetkeys.widget.dialogs.profileTitle,
+                    key: KWidgetkeys.widget.dialogs.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
@@ -103,7 +103,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                   KSizedBox.kHeightSizedBox8,
                 Text(
                   widget.subtitle,
-                  key: KWidgetkeys.widget.dialogs.profileSubtitle,
+                  key: KWidgetkeys.widget.dialogs.subtitle,
                   style: widget.isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,

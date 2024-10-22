@@ -6,10 +6,10 @@ Future<void> dialogConfirmChangesHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.widget.dialogs.icon), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.dialogs.profileTitle), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.dialogs.title), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.widget.dialogs.profileSubtitle),
+    find.byKey(KWidgetkeys.widget.dialogs.subtitle),
     findsOneWidget,
   );
 

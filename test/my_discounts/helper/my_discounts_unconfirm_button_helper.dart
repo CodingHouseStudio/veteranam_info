@@ -23,10 +23,7 @@ Future<void> myDiscountUnconfirmButtonlHelper({
     tester: tester,
     windowsTest: true,
     test: () async {
-      if (find
-          .byKey(KWidgetkeys.widget.dialogs.profileTitle)
-          .evaluate()
-          .isEmpty) {
+      if (find.byKey(KWidgetkeys.widget.dialogs.title).evaluate().isEmpty) {
         await myDiscountDialogHelper(tester);
       }
 

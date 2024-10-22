@@ -58,7 +58,7 @@ class _ConfirmPublishDiscountDialogState
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     '${context.l10n.send} ${context.l10n.verification}?',
-                    key: KWidgetkeys.widget.dialogs.profileTitle,
+                    key: KWidgetkeys.widget.dialogs.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,

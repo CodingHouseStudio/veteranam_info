@@ -1,11 +1,11 @@
 part of '../widget_keys.dart';
 
 class _DialogsKeys {
-  final logOut = const Key('dialogs_logout');
-  final deleteAccount = const Key('dialogs_delete_account');
-  final profileTitle = const Key('dialogs_profile_title');
-  final profileSubtitle = const Key('dialogs_profile_subtitle');
-  final icon = const Key('dialogs_profile_icon');
+  // final logOut = const Key('dialogs_logout');
+  // final deleteAccount = const Key('dialogs_delete_account');
+  final title = const Key('dialogs_title');
+  final subtitle = const Key('dialogs_subtitle');
+  final icon = const Key('dialogs_icon');
   final confirmButton = const Key('dialogs_confirm_button');
   final unconfirmButton = const Key('dialogs_unconfirm_button');
   final failure = const Key('dialogs_failure');
