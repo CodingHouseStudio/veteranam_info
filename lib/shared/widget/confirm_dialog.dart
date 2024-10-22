@@ -69,7 +69,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
-              key: KWidgetkeys.widget.dialogs.icon,
+              key: KWidgetkeys.widget.confirmDialog.icon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -91,7 +91,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     widget.title,
-                    key: KWidgetkeys.widget.dialogs.title,
+                    key: KWidgetkeys.widget.confirmDialog.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
@@ -103,7 +103,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                   KSizedBox.kHeightSizedBox8,
                 Text(
                   widget.subtitle,
-                  key: KWidgetkeys.widget.dialogs.subtitle,
+                  key: KWidgetkeys.widget.confirmDialog.subtitle,
                   style: widget.isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
@@ -163,7 +163,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
 
   DoubleButtonWidget confirmButton() {
     return DoubleButtonWidget(
-      widgetKey: KWidgetkeys.widget.dialogs.confirmButton,
+      widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
       text: widget.confirmText,
       color: _isButtonEnabled
           ? widget.confirmButtonBackground
@@ -184,7 +184,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
 
   Widget unconfirmButton(BuildContext context) {
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.widget.dialogs.unconfirmButton,
+      widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
       onPressed: context.pop,
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,

@@ -25,7 +25,10 @@ Future<void> discountsAddUnconfirmButtonlHelper({
     tester: tester,
     windowsTest: true,
     test: () async {
-      if (find.byKey(KWidgetkeys.widget.dialogs.title).evaluate().isEmpty) {
+      if (find
+          .byKey(KWidgetkeys.widget.confirmDialog.title)
+          .evaluate()
+          .isEmpty) {
         await discountsAddDialogHelper(tester);
       }
 
@@ -36,11 +39,12 @@ Future<void> discountsAddUnconfirmButtonlHelper({
         );
       } else {
         expect(
-          find.byKey(KWidgetkeys.widget.dialogs.confirmButton),
+          find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton),
           findsOneWidget,
         );
 
-        await tester.tap(find.byKey(KWidgetkeys.widget.dialogs.confirmButton));
+        await tester
+            .tap(find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton));
 
         await tester.pumpAndSettle();
 
