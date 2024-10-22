@@ -57,13 +57,24 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
-        testWidgets('Drop down buttons', (tester) async {
+        testWidgets('Drop down button for user login', (tester) async {
           await userRolePumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
-          await dropDownButtonNavigationHelper(
+          await dropDownLoginUserNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Drop down button for business login', (tester) async {
+          await userRolePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await dropDownLoginBusinessNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
