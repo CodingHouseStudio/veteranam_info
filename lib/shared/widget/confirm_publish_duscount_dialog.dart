@@ -58,7 +58,7 @@ class _ConfirmPublishDiscountDialogState
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     '${context.l10n.send} ${context.l10n.verification}?',
-                    key: KWidgetkeys.widget.dialogs.profileTitle,
+                    key: KWidgetkeys.widget.confirmDialog.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
@@ -199,7 +199,7 @@ class _ConfirmPublishDiscountDialogState
 
   DoubleButtonWidget get confirmButton {
     return DoubleButtonWidget(
-      widgetKey: KWidgetkeys.widget.dialogs.confirmButton,
+      widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
       text: '${context.l10n.send} ${context.l10n.verification}',
       // color: background,
       isDesk: widget.isDesk,
@@ -224,7 +224,7 @@ class _ConfirmPublishDiscountDialogState
 
   Widget get unconfirmButton {
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.widget.dialogs.unconfirmButton,
+      widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
       align: widget.isDesk ? null : Alignment.center,
       onPressed: () => context.pop(),
       padding: const EdgeInsets.symmetric(
