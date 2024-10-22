@@ -117,6 +117,7 @@ class _DialogsWidget {
           final isDeskValue = constraints.maxWidth >
               (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
           return AlertDialog(
+            key: KWidgetkeys.widget.dialogs.scroll,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
             ),
@@ -166,6 +167,7 @@ class _DialogsWidget {
                 );
           if (isScollable) {
             return SingleChildScrollView(
+              key: KWidgetkeys.widget.dialogs.scroll,
               child: paddingWidget,
             );
           } else {

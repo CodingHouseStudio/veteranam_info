@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart' show Key;
 
+/// COMMENT: Add a part here when you add a new file for keys
+// SCREEN
 part 'screen/about_us.dart';
 part 'screen/app.dart';
 part 'screen/business_dashboard.dart';
@@ -30,9 +32,6 @@ part 'screen/questions_form.dart';
 part 'screen/pw_reset_email.dart';
 part 'screen/password_reset.dart';
 part 'screen/company.dart';
-
-/// COMMENT: Add a part here when you add a new file for keys
-// SCREEN
 part 'screen/screen.dart';
 part 'screen/sign_up.dart';
 part 'screen/story.dart';
@@ -42,6 +41,8 @@ part 'screen/under_construction.dart';
 part 'screen/user_role.dart';
 part 'screen/work.dart';
 part 'screen/work_employee.dart';
+
+//WIDGET
 part 'widget/box.dart';
 part 'widget/button_additional.dart';
 part 'widget/button_bottom_line.dart';
@@ -94,10 +95,10 @@ part 'widget/story_card.dart';
 part 'widget/switch.dart';
 part 'widget/switch_offline.dart';
 part 'widget/user_email_dialog.dart';
-//WIDGET
 part 'widget/widget.dart';
 part 'widget/work_card.dart';
 part 'widget/work_request_card.dart';
+part 'widget/confirm_publish_discount.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

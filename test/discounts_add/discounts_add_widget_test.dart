@@ -25,7 +25,7 @@ void main() {
       ExtendedDateTime.id = KTestText.discountModelItems.first.id;
       ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
       DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;
-      ContextExtensions.textPieckerData = KTestText.dateTime;
+      ContextExtensions.pickerDate = KTestText.dateTime;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();

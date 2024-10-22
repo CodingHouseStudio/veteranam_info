@@ -366,10 +366,10 @@ extension ContextExtensions on BuildContext {
       );
 
   @visibleForTesting
-  static DateTime? textPieckerData;
+  static DateTime? pickerDate;
 
   Future<DateTime?> getDate({DateTime? currecntDate}) async =>
-      textPieckerData ??
+      pickerDate ??
       showDatePicker(
         context: this,
         initialDate: currecntDate ??

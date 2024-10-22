@@ -432,7 +432,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       return;
     }
     if (state.formState.isDetail) {
-      if (Formz.validate([state.category, state.city]) &&
+      if (state.category.isValid &&
+          (state.city.isValid || state.isOnline) &&
           (state.period.isValid || state.isIndefinitely)) {
         emit(state.copyWith(formState: DiscountsAddEnum.description));
       } else {

@@ -10,6 +10,8 @@ Future<void> discountsAddPumpAppHelper({
   required ICompanyRepository mockCompanyRepository,
   required ICitiesRepository mockCitiesRepository,
   required WidgetTester tester,
+  DiscountModel? discount,
+  String? discountId,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerDiscountsAddBloc(
@@ -18,9 +20,9 @@ Future<void> discountsAddPumpAppHelper({
     mockCitiesRepository: mockCitiesRepository,
   );
   await tester.pumpApp(
-    const DiscountsAddScreen(
-      discount: null,
-      discountId: null,
+    DiscountsAddScreen(
+      discount: discount,
+      discountId: discountId,
     ),
     mockGoRouter: mockGoRouter,
   );

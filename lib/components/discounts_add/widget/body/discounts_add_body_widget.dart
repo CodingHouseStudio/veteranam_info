@@ -216,7 +216,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .add(DiscountsAddEvent.cityAdd(value)),
                       isDesk: isDesk, isRequired: true,
                       citiesList: _.citiesList,
-                      showErrorText: _.formState.hasError,
+                      showErrorText: _.formState.hasError && !_.isOnline,
                       errorText: _.city.error.value(context),
                       selectedCities: _.city.value,
                     ),
