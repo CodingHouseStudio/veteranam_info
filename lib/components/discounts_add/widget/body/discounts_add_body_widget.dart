@@ -87,14 +87,16 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 previous.exclusions != current.exclusions) ||
             (current.discount != previous.discount),
         builder: (context, _) => ScaffoldWidget(
-          titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
-            precent: KDimensions.fifteenPercent,
-          ),
+          titleDeskPadding: _.failure.linkIsWrong
+              ? null
+              : ({required maxWidth}) => maxWidth.screenPadding(
+                    precent: KDimensions.fifteenPercent,
+                  ),
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ShortTitleIconWidget(
               title: _.failure.linkIsWrong
-                  ? context.l10n.invalidLink
+                  ? context.l10n.invalidLinkTitle
                   : context.l10n.offerDiscount,
               titleKey: KWidgetkeys.screen.discountsAdd.title,
               isDesk: isDesk,
@@ -216,7 +218,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .add(DiscountsAddEvent.cityAdd(value)),
                       isDesk: isDesk, isRequired: true,
                       citiesList: _.citiesList,
-                      showErrorText: _.formState.hasError,
+                      showErrorText: _.formState.hasError && !_.isOnline,
                       errorText: _.city.error.value(context),
                       selectedCities: _.city.value,
                     ),

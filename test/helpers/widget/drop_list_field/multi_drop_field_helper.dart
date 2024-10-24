@@ -10,6 +10,7 @@ Future<void> multiDropFieldHelper({
   required Key textFieldKey,
   String? Function()? itemTextWidget,
   int fieldIndex = 0,
+  bool hasItem = false,
 }) async {
   await dropListFieldHelper(
     tester: tester,
@@ -18,6 +19,7 @@ Future<void> multiDropFieldHelper({
     fieldIndex: fieldIndex,
     itemTextWidget: itemTextWidget,
     hasMultiChoice: true,
+    hasValue: hasItem,
   );
 
   await tester.tap(
@@ -33,7 +35,10 @@ Future<void> multiDropFieldHelper({
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.multiDropField.chips),
+    hasItem ? findsWidgets : findsOneWidget,
+  );
 
   await tester.tap(
     find.byKey(textFieldKey),
@@ -48,8 +53,10 @@ Future<void> multiDropFieldHelper({
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
-
+  expect(
+    find.byKey(KWidgetkeys.widget.multiDropField.chips),
+    hasItem ? findsWidgets : findsOneWidget,
+  );
   await tester.tap(
     find.byKey(textFieldKey),
     warnIfMissed: false,
@@ -69,11 +76,17 @@ Future<void> multiDropFieldHelper({
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.multiDropField.chips),
+    hasItem ? findsWidgets : findsOneWidget,
+  );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.multiDropField.chips).first);
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsNothing);
+  expect(
+    find.byKey(KWidgetkeys.widget.multiDropField.chips),
+    hasItem ? findsWidgets : findsNothing,
+  );
 }

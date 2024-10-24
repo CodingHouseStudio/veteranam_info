@@ -1608,6 +1608,10 @@
   "@seconds": {
     "examples": "Text for the delete account dialog on the Profile page."
   },
+  "invalidLinkTitle": "Invalid link",
+  "@invalidLinkTitle": {
+    "examples": "Error text for the link on the page."
+  },
   "activate": "Activate",
   "@activate": {
     "examples": "Text for a button on the MyDiscount page.",

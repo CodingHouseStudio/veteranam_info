@@ -12,10 +12,8 @@ Future<void> networkMobHelper({
   required Future<void> Function() pumpApp,
 }) async {
   final NetworkRepository mcokNetworkdRepository = MockNetworkRepository();
-  final networkStream = StreamController<NetworkStatus>()
-    ..add(NetworkStatus.offline);
   when(mcokNetworkdRepository.status).thenAnswer(
-    (invocation) => networkStream.stream,
+    (invocation) => Stream.value(NetworkStatus.offline),
   );
   final networkCubit = NetworkCubit(networkRepository: mcokNetworkdRepository);
 

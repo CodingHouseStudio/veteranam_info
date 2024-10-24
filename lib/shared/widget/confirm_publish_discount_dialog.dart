@@ -19,16 +19,17 @@ class ConfirmPublishDiscountDialog extends StatefulWidget {
 
 class _ConfirmPublishDiscountDialogState
     extends State<ConfirmPublishDiscountDialog> {
-  late bool privacyPolicyAgree;
+  late bool termsAndConditionsAgree;
   @override
   void initState() {
-    privacyPolicyAgree = false;
+    termsAndConditionsAgree = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
+      key: KWidgetkeys.widget.confirmPublishDiscount.dialog,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.minHeight640),
       child: Stack(
         alignment: Alignment.topRight,
@@ -36,7 +37,7 @@ class _ConfirmPublishDiscountDialogState
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
-              // key: KWidgetkeys.widget.dialogs.icon,
+              key: KWidgetkeys.widget.confirmPublishDiscount.closeIcon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -58,7 +59,7 @@ class _ConfirmPublishDiscountDialogState
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     '${context.l10n.send} ${context.l10n.verification}?',
-                    key: KWidgetkeys.widget.confirmDialog.title,
+                    key: KWidgetkeys.widget.confirmPublishDiscount.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
@@ -69,6 +70,7 @@ class _ConfirmPublishDiscountDialogState
                 else
                   KSizedBox.kHeightSizedBox8,
                 RichText(
+                  key: KWidgetkeys.widget.confirmPublishDiscount.description,
                   text: TextSpan(
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeBodyLarge
@@ -110,10 +112,12 @@ class _ConfirmPublishDiscountDialogState
                   children: [
                     Expanded(
                       child: CheckPointWidget(
+                        key: KWidgetkeys.widget.confirmPublishDiscount
+                            .termsAndConditionsSwitcher,
                         onChanged: () => setState(() {
-                          privacyPolicyAgree = !privacyPolicyAgree;
+                          termsAndConditionsAgree = !termsAndConditionsAgree;
                         }),
-                        isCheck: privacyPolicyAgree,
+                        isCheck: termsAndConditionsAgree,
                         text: null,
                         isDesk: widget.isDesk,
                         textWidget: Wrap(
@@ -123,13 +127,16 @@ class _ConfirmPublishDiscountDialogState
                           children: [
                             Text(
                               context.l10n.iAgreeWith,
-                              key: KWidgetkeys.widget.checkPoint.text,
+                              key: KWidgetkeys.widget.confirmPublishDiscount
+                                  .termsAndConditionsText,
                               maxLines: 3,
                               style: widget.isDesk
                                   ? AppTextStyle.materialThemeBodyLarge
                                   : AppTextStyle.materialThemeBodyMedium,
                             ),
                             InkWell(
+                              key: KWidgetkeys.widget.confirmPublishDiscount
+                                  .termsAndConditionsButton,
                               onTap: () => context
                                   .goNamed(KRoute.termsAndConditions.name),
                               overlayColor: const WidgetStatePropertyAll(
@@ -199,7 +206,7 @@ class _ConfirmPublishDiscountDialogState
 
   DoubleButtonWidget get confirmButton {
     return DoubleButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
+      widgetKey: KWidgetkeys.widget.confirmPublishDiscount.sendButton,
       text: '${context.l10n.send} ${context.l10n.verification}',
       // color: background,
       isDesk: widget.isDesk,
@@ -211,20 +218,20 @@ class _ConfirmPublishDiscountDialogState
       mobTextWidth: double.infinity,
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
-      color: privacyPolicyAgree
+      color: termsAndConditionsAgree
           ? null
           : AppColors.materialThemeRefSecondarySecondary98,
-      textColor: privacyPolicyAgree
+      textColor: termsAndConditionsAgree
           ? null
           : AppColors.materialThemeRefSecondarySecondary50,
-      onPressed: privacyPolicyAgree ? widget.onPressed : null,
+      onPressed: termsAndConditionsAgree ? widget.onPressed : null,
       hasAlign: !widget.isDesk,
     );
   }
 
   Widget get unconfirmButton {
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
+      widgetKey: KWidgetkeys.widget.confirmPublishDiscount.continueButton,
       align: widget.isDesk ? null : Alignment.center,
       onPressed: () => context.pop(),
       padding: const EdgeInsets.symmetric(
