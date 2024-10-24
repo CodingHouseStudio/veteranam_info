@@ -29,7 +29,7 @@ void main() {
 
     blocTest<DiscountCardWatcherBloc, DiscountCardWatcherState>(
       'emits [DiscountCardWatcherState()]'
-      ' when load discountModel wuth wrong id and correct',
+      ' when load discountModel with wrong id and correct',
       build: () => discountCardWatcherBloc,
       act: (bloc) async {
         when(

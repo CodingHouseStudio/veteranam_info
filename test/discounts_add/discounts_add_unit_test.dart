@@ -19,18 +19,22 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.discountsAdd} ${KGroupText.bloc}', () {
-    Future<DateTime> period() async => KTestText.dateTime;
+    Future<DateTime> period() async => KTestText.nextDateTime;
     late DiscountsAddBloc discountsAddBloc;
     late IDiscountRepository mockDiscountsRepository;
     late ICompanyRepository mockCompanyRepository;
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
+      LocalizedDateTime.enDateString =
+          KTestText.sendDiscountModel.expirationEN!.replaceAll('Up to ', '');
+      LocalizedDateTime.ukDateString =
+          KTestText.sendDiscountModel.expiration!.replaceAll('До ', '');
+      StringExtension.date = KTestText.nextDateTime;
       ExtendedDateTime.id = KTestText.sendDiscountModel.id;
-      ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
+      ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountsRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
-      DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;
 
       when(
         mockDiscountsRepository.getDiscountItems(),
@@ -47,7 +51,7 @@ void main() {
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => const CompanyModel(id: '1', userEmails: []),
+        (_) => KTestText.fullCompanyModel,
       );
       when(
         mockDiscountsRepository.addDiscount(KTestText.sendDiscountModel),
@@ -173,7 +177,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.link!,
+              KTestText.sendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -204,7 +208,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KAppText.discountsCategories.first,
+              KTestText.sendDiscountModel.category.first,
             ),
           )
           ..add(
@@ -317,7 +321,7 @@ void main() {
           description: const MessageFieldModel.pure(),
           exclusions: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
-          period: DateFieldModel.dirty(KTestText.dateTime),
+          period: DateFieldModel.dirty(KTestText.nextDateTime),
         ),
         predicate<DiscountsAddState>(
           (state) =>
@@ -533,7 +537,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.link!,
+              KTestText.sendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -624,7 +628,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
-          period: DateFieldModel.dirty(KTestText.dateTime),
+          period: DateFieldModel.dirty(KTestText.nextDateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
@@ -689,6 +693,311 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.inProgress,
+        ),
+      ],
+    );
+    blocTest<DiscountsAddBloc, DiscountsAddState>(
+      'emits [DiscountsAddState.initial(), DiscountsAddState.success()]'
+      ' when started with discount id, update fields correct and save'
+      ' unmodified',
+      build: () => discountsAddBloc,
+      act: (bloc) async {
+        when(
+          mockDiscountsRepository.getCompanyDiscount(
+            id: KTestText.sendDiscountModel.id,
+            companyId: KTestText.fullCompanyModel.id,
+          ),
+        ).thenAnswer(
+          (_) async => Right(KTestText.sendDiscountModel),
+        );
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountsAddState>(
+              (state) => state.categoryList.isNotEmpty,
+            ),
+            predicate<DiscountsAddState>(
+              (state) => state.citiesList.isNotEmpty,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc.add(
+          DiscountsAddEvent.loadedDiscount(
+            discount: null,
+            discountId: KTestText.sendDiscountModel.id,
+          ),
+        );
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountsAddState>(
+              (state) => state.discount != null,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc
+          ..add(
+            DiscountsAddEvent.titleUpdate(
+              KTestText.sendDiscountModel.title,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.linkUpdate(
+              KTestText.sendDiscountModel.directLink!,
+            ),
+          )
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send())
+          ..add(
+            DiscountsAddEvent.descriptionUpdate(
+              KTestText.sendDiscountModel.description,
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.exclusionsUpdate(
+              KTestText.sendDiscountModel.exclusions!,
+            ),
+          )
+          ..add(const DiscountsAddEvent.send());
+      },
+      expect: () async => [
+        const DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: [],
+          isIndefinitely: true,
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
+          period: DateFieldModel.pure(),
+          title: MessageFieldModel.pure(),
+          discounts: DiscountsFieldModel.pure(),
+          link: LinkFieldModel.pure(),
+          description: MessageFieldModel.pure(),
+          exclusions: MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: const ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: KTestText.cityModelItems,
+          isIndefinitely: true,
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
+          period: const DateFieldModel.pure(),
+          title: const MessageFieldModel.pure(),
+          discounts: const DiscountsFieldModel.pure(),
+          link: const LinkFieldModel.pure(),
+          description: const MessageFieldModel.pure(),
+          exclusions: const MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.discount != null &&
+              state.formState == DiscountsAddEnum.initial,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.title.isValid &&
+              state.formState == DiscountsAddEnum.inProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.detail,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.description,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.exclusions.isValid &&
+              state.formState == DiscountsAddEnum.descriptionInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.success,
+        ),
+      ],
+    );
+
+    blocTest<DiscountsAddBloc, DiscountsAddState>(
+      'emits [DiscountsAddState.initial(), DiscountsAddState.success()]'
+      ' when started with discount and save unmodified',
+      build: () => discountsAddBloc,
+      act: (bloc) async {
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountsAddState>(
+              (state) => state.categoryList.isNotEmpty,
+            ),
+            predicate<DiscountsAddState>(
+              (state) => state.citiesList.isNotEmpty,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc
+          ..add(
+            DiscountsAddEvent.loadedDiscount(
+              discount: KTestText.sendDiscountModel,
+              discountId: KTestText.sendDiscountModel.id,
+            ),
+          )
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.send());
+      },
+      expect: () async => [
+        const DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: [],
+          isIndefinitely: true,
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
+          period: DateFieldModel.pure(),
+          title: MessageFieldModel.pure(),
+          discounts: DiscountsFieldModel.pure(),
+          link: LinkFieldModel.pure(),
+          description: MessageFieldModel.pure(),
+          exclusions: MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: const ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: KTestText.cityModelItems,
+          isIndefinitely: true,
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
+          period: const DateFieldModel.pure(),
+          title: const MessageFieldModel.pure(),
+          discounts: const DiscountsFieldModel.pure(),
+          link: const LinkFieldModel.pure(),
+          description: const MessageFieldModel.pure(),
+          exclusions: const MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.discount != null &&
+              state.formState == DiscountsAddEnum.initial,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.detail,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.description,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.success,
+        ),
+      ],
+    );
+
+    blocTest<DiscountsAddBloc, DiscountsAddState>(
+      'emits [DiscountsAddState.initial(), DiscountsAddState.success()]'
+      ' when started with discount id failure',
+      build: () => discountsAddBloc,
+      act: (bloc) async {
+        when(
+          mockDiscountsRepository.getCompanyDiscount(
+            id: KTestText.sendDiscountModel.id,
+            companyId: KTestText.fullCompanyModel.id,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        bloc.add(
+          const DiscountsAddEvent.started(),
+        );
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountsAddState>(
+              (state) => state.categoryList.isNotEmpty,
+            ),
+            predicate<DiscountsAddState>(
+              (state) => state.citiesList.isNotEmpty,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc.add(
+          DiscountsAddEvent.loadedDiscount(
+            discount: null,
+            discountId: KTestText.sendDiscountModel.id,
+          ),
+        );
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountsAddState>(
+              (state) => state.failure == DiscountsAddFailure.linkWrong,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc.add(const DiscountsAddEvent.send());
+      },
+      expect: () async => [
+        const DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: [],
+          isIndefinitely: true,
+          category: CategoriesFieldModel.pure(),
+          city: CitiesFieldModel.pure(),
+          period: DateFieldModel.pure(),
+          title: MessageFieldModel.pure(),
+          discounts: DiscountsFieldModel.pure(),
+          link: LinkFieldModel.pure(),
+          description: MessageFieldModel.pure(),
+          exclusions: MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        DiscountsAddState(
+          isOnline: false,
+          discount: null,
+          eligibility: const ListFieldModel.pure(),
+          categoryList: KAppText.discountsCategories,
+          citiesList: KTestText.cityModelItems,
+          isIndefinitely: true,
+          category: const CategoriesFieldModel.pure(),
+          city: const CitiesFieldModel.pure(),
+          period: const DateFieldModel.pure(),
+          title: const MessageFieldModel.pure(),
+          discounts: const DiscountsFieldModel.pure(),
+          link: const LinkFieldModel.pure(),
+          description: const MessageFieldModel.pure(),
+          exclusions: const MessageFieldModel.pure(),
+          formState: DiscountsAddEnum.initial,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.discount == null &&
+              state.formState == DiscountsAddEnum.initial &&
+              state.failure == DiscountsAddFailure.linkWrong,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.invalidData,
         ),
       ],
     );
@@ -789,13 +1098,13 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.link!,
+              KTestText.sendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KAppText.discountsCategories.first,
+              KTestText.sendDiscountModel.category.first,
             ),
           )
           ..add(
@@ -878,7 +1187,7 @@ void main() {
           isIndefinitely: false,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
-          period: DateFieldModel.dirty(KTestText.dateTime),
+          period: DateFieldModel.dirty(KTestText.nextDateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),

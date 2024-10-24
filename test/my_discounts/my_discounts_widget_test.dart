@@ -296,7 +296,9 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
 
-              companyStream.add(KTestText.fullCompanyModel.copyWith(id: '2'));
+              companyStream.add(
+                KTestText.fullCompanyModel.copyWith(id: KTestText.secondId),
+              );
 
               await addDiscountsNavigationHelper(
                 tester: tester,
@@ -368,5 +370,6 @@ void main() {
         );
       });
     });
+    tearDown(() async => companyStream.close());
   });
 }

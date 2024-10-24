@@ -64,6 +64,11 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
+  @visibleForTesting
+  static String? ukDateString;
+  @visibleForTesting
+  static String? enDateString;
+
   String toLocalDateString({
     required BuildContext? context,
     String? localeValue,
@@ -77,8 +82,14 @@ extension LocalizedDateTime on DateTime {
             .value
             .languageCode ??
         localeValue ??
-        Language.ukrain;
+        Language.ukrain.value.languageCode;
     // initializeDateFormatting(locale);
+    if (ukDateString != null && enDateString != null) {
+      if (locale == Language.ukrain.value.languageCode) {
+        return ukDateString!;
+      }
+      return enDateString!;
+    }
     if (showDay) {
       return DateFormat.yMMMMd(locale).format(toLocal());
     } else {
@@ -149,21 +160,31 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
-  DateTime getDateDiscountString(
+  @visibleForTesting
+  static DateTime? date;
+  DateTime? getDateDiscountString(
     String locale,
   ) =>
-      replaceAll('Up to ', '')
+      trim()
+          .replaceAll('Up to ', '')
           .replaceAll('До ', '')
           .toLocaleDate(locale: locale, showDay: true);
-  DateTime toLocaleDate({
+  DateTime? toLocaleDate({
     required String locale,
     bool showDay = false,
   }) {
-    // initializeDateFormatting(locale);
-    if (showDay) {
-      return DateFormat.yMMMMd(locale).parse(this);
-    } else {
-      return DateFormat.yMMMM(locale).parse(this);
+    if (date != null) {
+      return date;
+    }
+    try {
+      if (showDay) {
+        return DateFormat.yMMMMd(locale).parse(this);
+      } else {
+        return DateFormat.yMMMM(locale).parse(this);
+      }
+    } catch (e) {
+      // If DateFormat change format or our prevous discount had another format
+      return null;
     }
   }
 
@@ -366,10 +387,10 @@ extension ContextExtensions on BuildContext {
       );
 
   @visibleForTesting
-  static DateTime? textPieckerData;
+  static DateTime? pickerDate;
 
   Future<DateTime?> getDate({DateTime? currecntDate}) async =>
-      textPieckerData ??
+      pickerDate ??
       showDatePicker(
         context: this,
         initialDate: currecntDate ??
@@ -378,7 +399,9 @@ extension ContextExtensions on BuildContext {
             ),
         firstDate: ExtendedDateTime.current
             .add(const Duration(days: KDimensions.minAmountTimeDiscountDays)),
-        lastDate: DateTime(2026),
+        lastDate: ExtendedDateTime.current.add(
+          const Duration(days: 365 * 4),
+        ),
       );
 }
 

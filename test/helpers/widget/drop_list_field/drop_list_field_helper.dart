@@ -11,6 +11,7 @@ Future<void> dropListFieldHelper({
   String? Function()? itemTextWidget,
   bool hasMultiChoice = false,
   int fieldIndex = 0,
+  bool hasValue = false,
 }) async {
   await dropListFieldItemHelper(
     tester: tester,
@@ -18,6 +19,7 @@ Future<void> dropListFieldHelper({
     itemTextWidget: itemTextWidget,
     fieldIndex: fieldIndex,
     hasMultiChoice: hasMultiChoice,
+    hasValue: hasValue,
   );
 
   await tester.tap(
@@ -51,6 +53,8 @@ Future<void> dropListFieldHelper({
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropListField.activeIcon).first,
   );
+
+  await tester.pumpAndSettle();
 
   // expect(
   //   find.byKey(KWidgetkeys.widget.dropListField.item),

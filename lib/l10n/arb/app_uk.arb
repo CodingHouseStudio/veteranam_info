@@ -1616,6 +1616,10 @@
   "@seconds": {
     "examples": "Текст для діалогу видалення облікового запису на сторінці Profile."
   },
+  "invalidLinkTitle": "Неправильне посилання",
+  "@invalidLinkTitle": {
+    "examples": "Текст помилки при посиланні на невірну сторінку."
+  },
   "activate": "Активувати",
   "@activate": {
     "examples": "Текст для кнопки на сторінці MyDiscount.",

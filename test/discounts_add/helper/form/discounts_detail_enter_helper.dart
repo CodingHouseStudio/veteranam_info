@@ -48,6 +48,25 @@ Future<void> discountsAddDetailEnterHelper({
 
   await tester.pumpAndSettle();
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.discountsAdd.onlineSwitcher,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discountsAdd.onlineSwitcher),
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle();
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discountsAdd.onlineSwitcher),
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle();
+
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
     findsOneWidget,

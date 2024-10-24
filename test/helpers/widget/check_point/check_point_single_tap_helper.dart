@@ -6,6 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> chekPointSignleTapHelper({
   required WidgetTester tester,
   bool hasAmount = false,
+  bool customText = false,
   int index = 0,
 }) async {
   await scrollingHelper(
@@ -18,10 +19,12 @@ Future<void> chekPointSignleTapHelper({
     findsWidgets,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.text),
-    findsWidgets,
-  );
+  if (!customText) {
+    expect(
+      find.byKey(KWidgetkeys.widget.checkPoint.text),
+      findsWidgets,
+    );
+  }
 
   expect(
     find.byKey(KWidgetkeys.widget.checkPoint.ammount),
@@ -31,7 +34,7 @@ Future<void> chekPointSignleTapHelper({
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
-    itemIndex: 3,
+    itemIndex: index,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).at(index));
