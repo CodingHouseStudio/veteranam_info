@@ -308,10 +308,23 @@ class ShortTitleIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    if (expanded) {
+      return Row(
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: _getList,
+      );
+    } else {
+      return Wrap(
+        alignment: mainAxisAlignment == MainAxisAlignment.center
+            ? WrapAlignment.center
+            : WrapAlignment.start,
+        children: _getList,
+      );
+    }
+  }
+
+  List<Widget> get _getList => [
         if (firstIcon) ...[
           iconWidget,
           if (!expanded) spacerGet,
@@ -319,9 +332,7 @@ class ShortTitleIconWidget extends StatelessWidget {
         if (expanded) Expanded(child: text) else text,
         if (!expanded) spacerGet,
         if (!firstIcon) iconWidget,
-      ],
-    );
-  }
+      ];
 
   Widget get spacerGet {
     if (isDesk) {

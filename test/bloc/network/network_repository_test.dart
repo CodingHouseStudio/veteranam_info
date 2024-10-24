@@ -79,9 +79,7 @@ void main() {
         });
       });
 
-      tearDown(() async {
-        await connectivityResultsStreamController.close();
-      });
+      tearDown(() async => connectivityResultsStreamController.close());
     });
 
     test('Current Network', () {

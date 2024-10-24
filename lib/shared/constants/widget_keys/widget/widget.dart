@@ -56,5 +56,6 @@ class _WidgetKeys {
   final switchOffline = _SwitchOfflineKeys();
   final multiDropField = _MultiDropFieldKeys();
   final citiesDropField = _CitiesDropFieldKeys();
+  final confirmPublishDiscount = _ConfirmPublishDiscountKeys();
   final confirmDialog = _ConfirmDialogKeys();
 }

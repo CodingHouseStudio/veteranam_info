@@ -130,7 +130,7 @@ abstract class KMockText {
     userId: '',
     company: 'Ескулаб',
     companyEN: 'Ecsculab',
-    link: 'https://esculab.com/',
+    link: 'https://veteranam.info/',
     discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
@@ -145,7 +145,7 @@ abstract class KMockText {
         'Військовим - наявність документу, що підтверджує  професійну',
     territory: 'Всі відділення лабораторії.',
     location: ['Київ'],
-    expiration: 'Діє постійно',
+    expiration: 'До 24 жовтня 2026 р.',
     exclusions:
         '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
     phoneNumber: '+380 800 503 680',
@@ -162,10 +162,10 @@ abstract class KMockText {
     territoryEN: 'All branches of the laboratory.',
     exclusionsEN:
         '- when ordering tests and paying for them online on the Esculab website;',
-    expirationEN: 'It works all the time',
+    expirationEN: 'Up to October 24, 2026',
     locationEN: ['Kyiv'],
     status: DiscountState.published,
-    eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
+    eligibility: ['Всі перелічені'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
     id: '',

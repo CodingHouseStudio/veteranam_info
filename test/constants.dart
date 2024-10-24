@@ -145,6 +145,10 @@ abstract class KTestText {
     publicName: companyName,
     link: link,
   );
+  static const idCompanyModel = CompanyModel(
+    id: id,
+    userEmails: [],
+  );
   static const companyName = 'test';
   static const companyCode = '12345678';
   static const companyWrongCode = '123456';
@@ -299,10 +303,12 @@ abstract class KTestText {
     image: const ImageModel(downloadURL: image),
   );
   static final dateTime = DateTime(2024, 4, 12);
+  static final nextDateTime = DateTime(2026, 10, 24);
   static final previousDateTime = DateTime(2024, 3, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
   static const downloadURL = 'test_URL.test';
   static const id = '1';
+  static const secondId = '2';
 
   static final discountModelItems = <DiscountModel>[
     for (var i = 0; i < _items; i++)
@@ -339,22 +345,20 @@ abstract class KTestText {
   ];
 
   static final sendDiscountModel = discountModelItems.first.copyWith(
-    directLink: null,
     additionalDetails: null,
     // html: null,
-    userId: user.id,
-    userName: user.name,
-    company: null,
+    territory: null,
+    userId: fullCompanyModel.id,
+    userName: fullCompanyModel.companyName,
+    company: fullCompanyModel.publicName,
     subLocation: null,
     userPhoto: null,
     locationEN: null,
-    expirationEN: null,
     additionalDetailsEN: null,
     companyEN: null,
-    exclusions: DateFieldModel.dirty(dateTime).getString(Language.ukrain),
-    exclusionsEN: DateFieldModel.dirty(dateTime).getString(Language.english),
+    exclusionsEN: null,
     phoneNumber: null,
-    categoryEN: null,
+    categoryEN: null, eligibilityEN: null,
     descriptionEN: null,
     requirementsEN: null,
     requirements: null,
@@ -363,7 +367,7 @@ abstract class KTestText {
     status: DiscountState.isNew,
     subcategory: null,
     subcategoryEN: null,
-    dateVerified: previousDateTime,
+    dateVerified: dateTime,
   );
 
   static final userDiscountModelItems = <DiscountModel>[
@@ -657,6 +661,7 @@ abstract class KScreenBlocName {
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
+  static const discountsEdit = 'Discounts Edit Screen';
   static const businessDashboard = 'Business Dashboard Screen';
   static const pwResetEmail = 'Password Reset Email Screen';
   static const passwordReset = 'Password Reset Screen';
