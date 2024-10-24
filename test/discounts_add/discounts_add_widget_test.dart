@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
@@ -24,8 +23,7 @@ void main() {
       Config.roleValue = Config.business;
       ExtendedDateTime.id = KTestText.discountModelItems.first.id;
       ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
-      DiscountsAddBloc.sendDiscountModel = KTestText.sendDiscountModel;
-      ContextExtensions.pickerDate = KTestText.dateTime;
+      ContextExtensions.pickerDate = KTestText.nextDateTime;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
@@ -48,7 +46,7 @@ void main() {
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => const CompanyModel(id: '1', userEmails: []),
+        (_) => KTestText.fullCompanyModel,
       );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
@@ -59,7 +57,7 @@ void main() {
         mockCitiesRepository: mockCitiesRepository,
       );
 
-      await discountsAddInitialHelper(tester);
+      await discountsAddInitialHelper(tester: tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -73,7 +71,7 @@ void main() {
           mockGoRouter: mockGoRouter,
         );
 
-        await discountsAddInitialHelper(tester);
+        await discountsAddInitialHelper(tester: tester);
       });
       testWidgets('Discount enter correct', (tester) async {
         await discountsAddPumpAppHelper(

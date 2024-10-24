@@ -1,3 +1,4 @@
+export 'discount_edit_form_helper.dart';
 export 'discounts_add_correct_helper.dart';
 export 'discounts_add_description_field_helper.dart';
 export 'discounts_add_detail_field_helper.dart';

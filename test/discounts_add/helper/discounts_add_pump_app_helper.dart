@@ -19,6 +19,9 @@ Future<void> discountsAddPumpAppHelper({
     mockCompanyRepository: mockCompanyRepository,
     mockCitiesRepository: mockCitiesRepository,
   );
+
+  _registerCompanyWatcherBloc(mockCompanyRepository);
+
   await tester.pumpApp(
     DiscountsAddScreen(
       discount: discount,
@@ -49,4 +52,16 @@ void _registerDiscountsAddBloc({
     GetIt.I.unregister<DiscountsAddBloc>();
   }
   GetIt.I.registerSingleton<DiscountsAddBloc>(discountsAddBloc);
+}
+
+void _registerCompanyWatcherBloc(
+  ICompanyRepository mockCompanyRepository,
+) {
+  final companyWatcherBloc = CompanyWatcherBloc(
+    companyRepository: mockCompanyRepository,
+  );
+  if (GetIt.I.isRegistered<CompanyWatcherBloc>()) {
+    GetIt.I.unregister<CompanyWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<CompanyWatcherBloc>(companyWatcherBloc);
 }

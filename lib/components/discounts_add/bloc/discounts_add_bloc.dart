@@ -61,8 +61,6 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   final ICompanyRepository _companyRepository;
   final ICitiesRepository _citiesRepository;
 
-  @visibleForTesting
-  static DiscountModel? sendDiscountModel;
   Future<void> _onStarted(
     _Started event,
     Emitter<DiscountsAddState> emit,
@@ -103,6 +101,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     }
 
     if (discount != null) {
+      final periodIsNull = discount!.expiration == null ||
+          discount!.expiration!.isEmpty ||
+          discount!.expiration!.toLowerCase() == 'до кінця воєнного стану' ||
+          discount!.expiration!.toLowerCase() == 'Щомісяця оновлюється';
       emit(
         state.copyWith(
           discount: discount,
@@ -110,11 +112,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           city: discount!.location == null
               ? const CitiesFieldModel.pure()
               : CitiesFieldModel.dirty(discount!.location!),
-          period: discount!.expiration == null ||
-                  discount!.expiration!.isEmpty ||
-                  discount!.expiration!.toLowerCase() ==
-                      'до кінця воєнного стану' ||
-                  discount!.expiration!.toLowerCase() == 'Щомісяця оновлюється'
+          period: periodIsNull
               ? const DateFieldModel.pure()
               : DateFieldModel.dirty(
                   discount!.expiration?.getDateDiscountString(
@@ -125,7 +123,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           discounts: DiscountsFieldModel.dirty(
             discount!.discount
                 .map(
-                  (e) => e.toString(),
+                  (e) => '$e%',
                 )
                 .toList(),
           ),
@@ -138,7 +136,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
               ? const MessageFieldModel.pure()
               : MessageFieldModel.dirty(discount!.exclusions!),
           formState: DiscountsAddEnum.initial,
-          isIndefinitely: true,
+          isIndefinitely: periodIsNull,
           isOnline: discount!.subLocation?.isOnline ?? false,
         ),
       );
@@ -482,8 +480,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         return;
       }
       final result = await _discountRepository.addDiscount(
-        sendDiscountModel ??
-            discount.copyWith(dateVerified: ExtendedDateTime.current),
+        discount.copyWith(dateVerified: ExtendedDateTime.current),
       );
       result.fold(
         (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),

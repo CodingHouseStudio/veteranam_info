@@ -10,6 +10,7 @@ Future<void> dropListFieldItemHelper({
   String? Function()? itemTextWidget,
   int fieldIndex = 0,
   bool hasMultiChoice = false,
+  bool hasValue = false,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.dropListField.widget),
@@ -59,80 +60,82 @@ Future<void> dropListFieldItemHelper({
     itemKey: KWidgetkeys.widget.dropListField.widget,
   );
 
-  await tester.tap(
-    find.byKey(textFieldKey),
-    warnIfMissed: false,
-  );
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.list),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
-    findsWidgets,
-  );
-
-  if (itemTextWidget == null) {
-    expect(
-      find.byKey(KWidgetkeys.widget.dropListField.itemText),
-      findsWidgets,
+  if (!hasValue) {
+    await tester.tap(
+      find.byKey(textFieldKey),
+      warnIfMissed: false,
     );
-  }
 
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
-    findsOneWidget,
-  );
+    await tester.pumpAndSettle();
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.item),
-  //   findsWidgets,
-  // );
-
-  final text = itemTextWidget?.call() ??
-      tester
-          .widget<Text>(
-            find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
-          )
-          .data;
-
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.item).first,
-  );
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
-    findsNothing,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
-    findsNothing,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.list),
-    findsNothing,
-  );
-
-  if (!hasMultiChoice) {
     expect(
-      find.descendant(
-        of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-        matching: find.text(text ?? ''),
-      ),
+      find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
       findsOneWidget,
     );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.list),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.item),
+      findsWidgets,
+    );
+
+    if (itemTextWidget == null) {
+      expect(
+        find.byKey(KWidgetkeys.widget.dropListField.itemText),
+        findsWidgets,
+      );
+    }
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
+      findsOneWidget,
+    );
+
+    // expect(
+    //   find.byKey(KWidgetkeys.widget.dropListField.item),
+    //   findsWidgets,
+    // );
+
+    final text = itemTextWidget?.call() ??
+        tester
+            .widget<Text>(
+              find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
+            )
+            .data;
+
+    await tester.tap(
+      find.byKey(KWidgetkeys.widget.dropListField.item).first,
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.item),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.list),
+      findsNothing,
+    );
+
+    if (!hasMultiChoice) {
+      expect(
+        find.descendant(
+          of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+          matching: find.text(text ?? ''),
+        ),
+        findsOneWidget,
+      );
+    }
   }
 }

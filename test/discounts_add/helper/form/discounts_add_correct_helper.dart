@@ -8,13 +8,14 @@ import '../helper.dart';
 Future<void> discountsAddCorectHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  bool isEdit = false,
 }) async {
   await discountsAddMainEnterHelper(
     tester: tester,
     titleText: KTestText.sendDiscountModel.title,
-    linkText: KTestText.sendDiscountModel.link!,
+    linkText: KTestText.sendDiscountModel.directLink!,
     discountsText: KTestText.sendDiscountModel.discount.first.toString(),
-    eligibilityTap: true,
+    eligibilityTap: true, isEdit: isEdit,
     // periodText: KTestText.sendDiscountModel.expiration!,
   );
 
@@ -24,7 +25,7 @@ Future<void> discountsAddCorectHelper({
     tester: tester,
     categoryText: KTestText.sendDiscountModel.category.first,
     cityText: KTestText.sendDiscountModel.location!.first,
-    tapIndefinitely: true,
+    tapIndefinitely: !isEdit,
   );
 
   await discountsAddDetailHelper(tester: tester, hasField: false);
@@ -35,10 +36,12 @@ Future<void> discountsAddCorectHelper({
     exclusionsText: KTestText.sendDiscountModel.exclusions!,
   );
 
-  await confirmPublishDiscountDialogNavHelper(
-    tester: tester,
-    mockGoRouter: mockGoRouter,
-  );
+  if (!isEdit) {
+    await confirmPublishDiscountDialogNavHelper(
+      tester: tester,
+      mockGoRouter: mockGoRouter,
+    );
+  }
 
   verify(
     () => mockGoRouter.goNamed(KRoute.myDiscounts.name),
