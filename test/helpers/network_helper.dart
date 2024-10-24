@@ -29,4 +29,6 @@ Future<void> networkHelper({
   networkStream.add(NetworkStatus.network);
 
   await tester.pumpAndSettle();
+
+  await networkStream.close();
 }

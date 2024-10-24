@@ -10,6 +10,8 @@ Future<void> discountsAddPumpAppHelper({
   required ICompanyRepository mockCompanyRepository,
   required ICitiesRepository mockCitiesRepository,
   required WidgetTester tester,
+  DiscountModel? discount,
+  String? discountId,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerDiscountsAddBloc(
@@ -17,10 +19,13 @@ Future<void> discountsAddPumpAppHelper({
     mockCompanyRepository: mockCompanyRepository,
     mockCitiesRepository: mockCitiesRepository,
   );
+
+  _registerCompanyWatcherBloc(mockCompanyRepository);
+
   await tester.pumpApp(
-    const DiscountsAddScreen(
-      discount: null,
-      discountId: null,
+    DiscountsAddScreen(
+      discount: discount,
+      discountId: discountId,
     ),
     mockGoRouter: mockGoRouter,
   );
@@ -47,4 +52,16 @@ void _registerDiscountsAddBloc({
     GetIt.I.unregister<DiscountsAddBloc>();
   }
   GetIt.I.registerSingleton<DiscountsAddBloc>(discountsAddBloc);
+}
+
+void _registerCompanyWatcherBloc(
+  ICompanyRepository mockCompanyRepository,
+) {
+  final companyWatcherBloc = CompanyWatcherBloc(
+    companyRepository: mockCompanyRepository,
+  );
+  if (GetIt.I.isRegistered<CompanyWatcherBloc>()) {
+    GetIt.I.unregister<CompanyWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<CompanyWatcherBloc>(companyWatcherBloc);
 }

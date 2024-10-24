@@ -295,5 +295,6 @@ void main() {
         });
       });
     });
+    tearDown(() async => companyStream.close());
   });
 }

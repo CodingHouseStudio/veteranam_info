@@ -11,6 +11,7 @@ Future<void> discountsAddMainEnterHelper({
   required String linkText,
   required String discountsText,
   required bool eligibilityTap,
+  bool isEdit = false,
 }) async {
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.titleField),
@@ -65,6 +66,7 @@ Future<void> discountsAddMainEnterHelper({
       tester: tester,
       textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
       hasMultiChoice: true,
+      hasValue: isEdit,
     );
   }
 

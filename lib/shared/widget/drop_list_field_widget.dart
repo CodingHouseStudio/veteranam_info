@@ -331,9 +331,8 @@ class _DropListFieldImplementationWidgetState<T extends Object>
 
   Widget get _suffixIcon => showActiveIcon
       ? IconButton(
-          icon: KIcon.close.copyWith(
-            key: KWidgetkeys.widget.dropListField.activeIcon,
-          ),
+          key: KWidgetkeys.widget.dropListField.activeIcon,
+          icon: KIcon.close,
           onPressed: focusNode.unfocus,
         )
       : (widget.unfocusSufixIcon ?? KIcon.trailing).copyWith(

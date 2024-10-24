@@ -1,12 +1,14 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 import 'helper.dart';
 
-Future<void> discountsAddInitialHelper(
-  WidgetTester tester,
-) async {
+Future<void> discountsAddInitialHelper({
+  required WidgetTester tester,
+  bool isEdit = false,
+}) async {
   await changeWindowSizeHelper(
     tester: tester,
     windowsTest: true,
@@ -48,14 +50,20 @@ Future<void> discountsAddInitialHelper(
         text: KTestText.field,
         textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
         fieldIndex: 1,
+        hasItem: isEdit,
       );
 
       await dropListFieldItemHelper(
         tester: tester,
         textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
-        fieldIndex: 2,
+        fieldIndex: isEdit ? 4 : 2,
         hasMultiChoice: true,
+        hasValue: isEdit,
       );
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+
+      await tester.pumpAndSettle();
 
       await multiDropFieldRemoveHelper(tester);
 
