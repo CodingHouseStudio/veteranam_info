@@ -32,13 +32,13 @@ class WorkRepository implements IWorkRepository {
   @override
   Future<Either<SomeFailure, bool>> sendRespond({
     required EmployeeRespondModel respond,
-    required ImagePickerItem? file,
+    required FilePickerItem? file,
   }) async {
     try {
       late var methodRespond = respond;
       if (file != null) {
         final downloadURL = await _storageService.saveFile(
-          imagePickerItem: file,
+          filePickerItem: file,
           id: respond.id,
           collecltionName: FirebaseCollectionName.respond,
           file: StoragePath.resume,

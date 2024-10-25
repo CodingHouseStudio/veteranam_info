@@ -41,6 +41,18 @@ void main() {
           (realInvocation) async {},
         );
 
+        when(
+          mockStorageService.saveFile(
+            filePickerItem: KTestText.filePickerItem,
+            collecltionName: FirebaseCollectionName.respond,
+            id: KTestText.employeeRespondModelModel.id,
+            file: StoragePath.resume,
+            standartFileExtension: StoragePath.standartFileExtension,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => KTestText.downloadURL,
+        );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -69,7 +81,7 @@ void main() {
         expect(
           await mockWorkRepository.sendRespond(
             respond: KTestText.employeeRespondModelModel,
-            file: KTestText.imagePickerItem,
+            file: KTestText.filePickerItem,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -108,7 +120,7 @@ void main() {
         expect(
           await mockWorkRepository.sendRespond(
             respond: KTestText.employeeRespondModelModel,
-            file: KTestText.imagePickerItem,
+            file: KTestText.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -141,7 +153,7 @@ void main() {
         expect(
           await mockWorkRepository.sendRespond(
             respond: KTestText.employeeRespondModelModel,
-            file: KTestText.imagePickerItem,
+            file: KTestText.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

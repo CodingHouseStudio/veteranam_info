@@ -6,6 +6,6 @@ abstract class IWorkRepository {
   void addMockWorks();
   Future<Either<SomeFailure, bool>> sendRespond({
     required EmployeeRespondModel respond,
-    required ImagePickerItem? file,
+    required FilePickerItem? file,
   });
 }

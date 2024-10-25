@@ -40,7 +40,7 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
             id: KTestText.storyModelItems.first.id,
           ),
@@ -74,7 +74,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
@@ -90,7 +90,7 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
             id: KTestText.storyModelItems.first.id,
           ),
@@ -131,7 +131,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
@@ -147,7 +147,7 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
             id: KTestText.storyModelItems.first.id,
           ),
@@ -188,7 +188,7 @@ void main() {
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),

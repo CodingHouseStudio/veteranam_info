@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show Dio;
 import 'package:injectable/injectable.dart';
 
 @module

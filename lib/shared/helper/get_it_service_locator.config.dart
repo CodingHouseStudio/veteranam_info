@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:device_info_plus/device_info_plus.dart' as _i833;
 import 'package:dio/dio.dart' as _i361;
+import 'package:file_picker/file_picker.dart' as _i388;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i141;
@@ -198,7 +199,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => analytucsModule.firebaseAnalytics);
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
-    gh.singleton<_i183.ImagePicker>(() => dataPickerModule.firebaseAuth);
+    gh.singleton<_i183.ImagePicker>(() => dataPickerModule.imagePicker);
+    gh.singleton<_i388.FilePicker>(() => dataPickerModule.filePicker);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i806.FacebookAuth>(() => firebaseModule.firebaseSignIn);
@@ -206,6 +208,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
     gh.singleton<_i1001.ICitiesRepository>(() => _i751.CitiesRepository());
+    gh.singleton<_i1001.IDataPickerRepository>(() => _i290.DataPickerRepository(
+          gh<_i183.ImagePicker>(),
+          gh<_i388.FilePicker>(),
+        ));
     gh.lazySingleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.singleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IFaqRepository>(
@@ -219,8 +225,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i687.MobFaqWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
       registerFor: {_mobile},
     );
-    gh.singleton<_i1001.IDataPickerRepository>(
-        () => _i290.DataPickerRepository(gh<_i183.ImagePicker>()));
     gh.singleton<_i1001.IInvestorsRepository>(
       () => _i994.InvestorsRepository(),
       registerFor: {_user},

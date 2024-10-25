@@ -1,6 +1,6 @@
 import 'package:veteranam/shared/shared.dart';
 
 abstract class IDataPickerRepository {
-  Future<ImagePickerItem?> get getImage;
-  Future<ImagePickerItem?> get getFile;
+  Future<FilePickerItem?> get getImage;
+  Future<FilePickerItem?> get getFile;
 }
