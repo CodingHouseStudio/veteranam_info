@@ -427,10 +427,10 @@ extension CategoryEnumExtensions on CategoryEnum {
 
 extension Uint8ListExtension on Uint8List {
   @visibleForTesting
-  static ImagePickerItem? imagePickerItem;
-  ImagePickerItem get parseToImagePickerItem =>
+  static FilePickerItem? imagePickerItem;
+  FilePickerItem get parseToImagePickerItem =>
       imagePickerItem ??
-      ImagePickerItem(
+      FilePickerItem(
         bytes: this,
         name: null,
         ref: null,

@@ -241,7 +241,7 @@ void main() {
       when(
         mockStorageService.saveFile(
           collecltionName: FirebaseCollectionName.user,
-          imagePickerItem: KTestText.imagePickerItem,
+          filePickerItem: KTestText.filePickerItem,
           id: KTestText.profileUser.id,
         ),
       ).thenAnswer(
@@ -491,7 +491,7 @@ void main() {
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
         user: KTestText.profileUser,
-        image: KTestText.imagePickerItem,
+        image: KTestText.filePickerItem,
       );
       expect(
         result,

@@ -95,7 +95,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imagePickerItem,
+            image: KTestText.filePickerItem,
           ),
         ).thenAnswer(
           (_) async => const Right(KTestText.profileUser),
@@ -225,7 +225,7 @@ void main() {
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imagePickerItem,
+            image: KTestText.filePickerItem,
             nickname: KTestText.nicknameCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
@@ -359,7 +359,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imagePickerItem,
+            image: KTestText.filePickerItem,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -482,7 +482,7 @@ void main() {
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imagePickerItem,
+            image: KTestText.filePickerItem,
             nickname: KTestText.nicknameCorrect,
           ),
           isA<Left<SomeFailure, bool>>(),

@@ -27,13 +27,13 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       when(
         mockCompanyRepository.updateCompany(
           company: KTestText.fullCompanyModel,
-          imageItem: KTestText.imagePickerItem,
+          imageItem: KTestText.filePickerItem,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -227,7 +227,7 @@ void main() {
           CompanyFormState(
             companyName: const CompanyNameFieldModel.pure(),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -238,7 +238,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -249,7 +249,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -260,7 +260,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -271,7 +271,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestText.link),
@@ -282,7 +282,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestText.link),
@@ -395,7 +395,7 @@ void main() {
           when(
             mockCompanyRepository.updateCompany(
               company: KTestText.fullCompanyModel,
-              imageItem: KTestText.imagePickerItem,
+              imageItem: KTestText.filePickerItem,
             ),
           ).thenAnswer(
             (realInvocation) async => Left(SomeFailure(error: null)),
@@ -425,7 +425,7 @@ void main() {
           CompanyFormState(
             companyName: const CompanyNameFieldModel.pure(),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -436,7 +436,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -447,7 +447,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -458,7 +458,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -469,7 +469,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestText.link),
@@ -480,7 +480,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestText.link),
@@ -491,7 +491,7 @@ void main() {
             companyName:
                 const CompanyNameFieldModel.dirty(KTestText.companyName),
             publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+            image: ImageFieldModel.dirty(KTestText.filePickerItem),
             code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestText.link),

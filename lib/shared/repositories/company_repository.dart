@@ -103,7 +103,7 @@ class CompanyRepository implements ICompanyRepository {
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
     required CompanyModel company,
-    required ImagePickerItem? imageItem,
+    required FilePickerItem? imageItem,
   }) async {
     try {
       late var methodCompanyModel = company;
@@ -116,7 +116,7 @@ class CompanyRepository implements ICompanyRepository {
       }
       if (imageItem != null) {
         final downloadURL = await _storageService.saveFile(
-          imagePickerItem: imageItem,
+          filePickerItem: imageItem,
           id: company.id,
           collecltionName: FirebaseCollectionName.companies,
         );

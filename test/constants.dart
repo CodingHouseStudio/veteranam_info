@@ -202,17 +202,26 @@ abstract class KTestText {
 
   static const image = 'test';
 
-  static final imagePickerItem =
-      ImagePickerItem(bytes: Uint8List(1), name: image, ref: image);
+  static const imagePath = '.png';
 
-  static final imagePickerItemEmpty =
-      ImagePickerItem(bytes: Uint8List(0), name: image, ref: image);
+  static final filePickerPathItem = FilePickerItem(
+    bytes: Uint8List(1),
+    name: '$image$imagePath',
+    ref: image,
+    extension: imagePath,
+  );
 
-  static final imagePickerItemFeedback =
-      ImagePickerItem(bytes: Uint8List(1), name: null, ref: null);
+  static final filePickerItem =
+      FilePickerItem(bytes: Uint8List(1), name: image, ref: image);
 
-  static final imagePickerItemFeedbackWrong =
-      ImagePickerItem(bytes: Uint8List(2), name: null, ref: null);
+  static final filePickerItemEmpty =
+      FilePickerItem(bytes: Uint8List(0), name: image, ref: image);
+
+  static final filePickerItemFeedback =
+      FilePickerItem(bytes: Uint8List(1), name: null, ref: null);
+
+  static final filePickerItemFeedbackWrong =
+      FilePickerItem(bytes: Uint8List(2), name: null, ref: null);
 
   static const userWithoutPhoto = User(
     id: '1',
@@ -680,6 +689,7 @@ abstract class KScreenBlocName {
   static const url = 'URL';
   static const build = 'Build';
   static const device = 'Device';
+  static const dataPicker = 'Data Picker';
 
   static const report = 'Report Dialog';
   static const privacyPolicy = 'Privacy Policy Dialog';

@@ -7,7 +7,7 @@ abstract class ICompanyRepository {
 
   Future<Either<SomeFailure, bool>> updateCompany({
     required CompanyModel company,
-    required ImagePickerItem? imageItem,
+    required FilePickerItem? imageItem,
   });
 
   Future<Either<SomeFailure, bool>> deleteCompany();
