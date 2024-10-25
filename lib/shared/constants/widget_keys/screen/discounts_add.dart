@@ -23,4 +23,5 @@ class _DiscountsAddKeys {
   final linkField = const Key('discounts_add_screen_link_field');
   final descriptionField = const Key('discounts_add_screen_description_field');
   final exclusionField = const Key('discounts_add_screen_exclusion_field');
+  final submitingText = const Key('discounts_add_screen_submiting_text');
 }

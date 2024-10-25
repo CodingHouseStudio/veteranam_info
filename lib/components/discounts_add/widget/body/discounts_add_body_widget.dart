@@ -398,6 +398,15 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .read<DiscountsAddBloc>()
                           .add(DiscountsAddEvent.linkUpdate(text)),
                     ),
+                  SendingTextWidget(
+                    textKey: KWidgetkeys.screen.discountsAdd.submitingText,
+                    failureText: _.failure?.value(context),
+                    sendingText: context.l10n.dataSendInProgress,
+                    showSuccessText: _.formState == DiscountsAddEnum.success,
+                    successText: context.l10n.dataIsSavedSuccess,
+                    showSendingText:
+                        _.formState == DiscountsAddEnum.sendInProgress,
+                  ),
                   if (!_.formState.isDescription) KSizedBox.kHeightSizedBox40,
                   if (isDesk)
                     Row(
@@ -469,18 +478,28 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             ? context.l10n.publish
             : context.l10n.next,
         isDesk: isDesk,
-        onPressed: () {
-          if (context.read<DiscountsAddBloc>().state.discount == null &&
-              context.read<DiscountsAddBloc>().state.formState.isDescription &&
-              context.read<DiscountsAddBloc>().state.description.isValid) {
-            context.dialog.showConfirmationPublishDiscountDialog(
-              isDesk: isDesk,
-              onPressed: () => _sendEvent(context),
-            );
-          } else {
-            _sendEvent(context);
-          }
-        },
+        onPressed: context.read<DiscountsAddBloc>().state.formState.isLoading
+            ? null
+            : () {
+                if (context.read<DiscountsAddBloc>().state.discount == null &&
+                    context
+                        .read<DiscountsAddBloc>()
+                        .state
+                        .formState
+                        .isDescription &&
+                    context
+                        .read<DiscountsAddBloc>()
+                        .state
+                        .description
+                        .isValid) {
+                  context.dialog.showConfirmationPublishDiscountDialog(
+                    isDesk: isDesk,
+                    onPressed: () => _sendEvent(context),
+                  );
+                } else {
+                  _sendEvent(context);
+                }
+              },
         mobTextWidth: double.infinity,
         widgetKey: const Key(''),
         deskTextWidth: double.infinity,

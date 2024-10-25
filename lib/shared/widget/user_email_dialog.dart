@@ -205,7 +205,10 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,
         isDesk: widget.isDesk,
-        onPressed: widget.sendOnPressed,
+        onPressed: context.read<DiscountUserEmailFormBloc>().state.formState ==
+                EmailEnum.success
+            ? null
+            : widget.sendOnPressed,
         widgetKey: KWidgetkeys.widget.userEmailDialog.button,
         darkMode: true,
         hasAlign: widget.isDesk,

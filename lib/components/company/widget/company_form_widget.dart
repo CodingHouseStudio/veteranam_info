@@ -207,7 +207,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       SendingTextWidget(
                         textKey: KWidgetkeys.screen.company.submitingText,
                         failureText: _.failure?.value(context),
-                        sendingText: context.l10n.dataSendInProgress,
+                        sendingText: context.l10n.changesSendInProgress,
                         successText: _.formState == CompanyFormEnum.success
                             ? context.l10n.dataIsUpdatedSuccess
                             : context.l10n.dataUnmodified,
