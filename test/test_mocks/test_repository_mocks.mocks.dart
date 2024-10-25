@@ -6772,7 +6772,7 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           #saveFile,
           [],
           {
-            #imagePickerItem: filePickerItem,
+            #filePickerItem: filePickerItem,
             #id: id,
             #collecltionName: collecltionName,
             #file: file,
