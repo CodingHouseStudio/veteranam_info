@@ -1,5 +1,6 @@
 export 'nawbar_back_button_helper.dart';
 export 'nawbar_business_navigation_helper.dart';
+export 'nawbar_business_profile_navigation_helper.dart';
 export 'nawbar_helper.dart';
 export 'nawbar_login_navigation_helper.dart';
 export 'nawbar_menu_helper.dart';
