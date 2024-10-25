@@ -60,44 +60,44 @@ void main() {
 
           await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
         });
-      });
-      group('${KGroupText.goTo} discount add ', () {
-        setUp(
-          () {
-            MockGoRouter.canPopValue = false;
-            Config.roleValue = Config.business;
-          },
-        );
-        testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
-          await markdownFileDialogPumpAppHelper(
-            tester: tester,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockGoRouter: mockGoRouter,
+        group('${KRoute.discountsAdd.name} ', () {
+          setUp(
+            () {
+              MockGoRouter.canPopValue = false;
+              Config.roleValue = Config.business;
+            },
           );
+          testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
+            await markdownFileDialogPumpAppHelper(
+              tester: tester,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockGoRouter: mockGoRouter,
+            );
 
-          await cancelCanNotPopHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            business: true,
-          );
+            await cancelCanNotPopHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              business: true,
+            );
+          });
         });
-      });
-      group('${KGroupText.goTo} home ', () {
-        setUp(
-          () => MockGoRouter.canPopValue = false,
-        );
-        testWidgets('${KRoute.home.name} ', (tester) async {
-          await markdownFileDialogPumpAppHelper(
-            tester: tester,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockGoRouter: mockGoRouter,
+        group('${KRoute.home.name} ', () {
+          setUp(
+            () => MockGoRouter.canPopValue = false,
           );
+          testWidgets('${KRoute.home.name} ', (tester) async {
+            await markdownFileDialogPumpAppHelper(
+              tester: tester,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockGoRouter: mockGoRouter,
+            );
 
-          await cancelCanNotPopHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            business: false,
-          );
+            await cancelCanNotPopHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              business: false,
+            );
+          });
         });
       });
     });
