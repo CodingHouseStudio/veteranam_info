@@ -238,6 +238,16 @@ void main() {
         (_) async {},
       );
 
+      when(
+        mockStorageService.saveFile(
+          collecltionName: FirebaseCollectionName.user,
+          imagePickerItem: KTestText.imagePickerItem,
+          id: KTestText.profileUser.id,
+        ),
+      ).thenAnswer(
+        (_) async => KTestText.profileUser.photo,
+      );
+
       // when(
       //   mockFirebaseAuth.currentUser?.updateDisplayName(
       //     KTestText.profileUser.name,
@@ -507,22 +517,5 @@ void main() {
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
-    //   // Перевірка, що методи були викликані з правильними аргументами
-    //   verify(
-    //     mockUser.updateDisplayName(KTestText.profileUser.name),
-    //   ).called(1);
-
-    //   verify(
-    //     mockStorageService.saveImage(
-    //       imageModel: KTestText.imageModel,
-    //       id: KTestText.profileUser.id,
-    //       collecltionName: FirebaseCollectionName.user,
-    //     ),
-    //   ).called(1);
-
-    //   verify(
-    //     mockUser.updatePhotoURL(KTestText.downloadURL),
-    //   ).called(1);
-    // });
   });
 }

@@ -101,6 +101,14 @@ void main() {
           (_) async => const Right(KTestText.profileUser),
         );
         when(
+          mockAppAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: null,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(KTestText.profileUser),
+        );
+        when(
           mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
@@ -218,6 +226,28 @@ void main() {
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
             image: KTestText.imagePickerItem,
+            nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+
+      test('Update user data', () async {
+        when(
+          mockAppAuthenticationRepository.updateUserSetting(
+            const UserSetting(
+              id: KTestText.field,
+              nickname: KTestText.nicknameCorrect,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        expect(
+          await authenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: null,
             nickname: KTestText.nicknameCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
