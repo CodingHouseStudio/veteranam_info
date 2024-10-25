@@ -33,13 +33,13 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       mockStoryRepository = MockIStoryRepository();
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.imagePickerItem,
+          imageItem: KTestText.filePickerItem,
           storyModel: KTestText.storyModelItems.first.copyWith(
             userPhoto: KTestText.userPhotoModel,
           ),
@@ -49,7 +49,7 @@ void main() {
       );
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.imagePickerItem,
+          imageItem: KTestText.filePickerItem,
           storyModel: KTestText.storyModelItems.first
               .copyWith(userName: null, userPhoto: null),
         ),

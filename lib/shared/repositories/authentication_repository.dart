@@ -347,7 +347,7 @@ class AuthenticationRepository {
   Future<Either<SomeFailure, bool>> updateUserData({
     required User user,
     required String? nickname,
-    required ImagePickerItem? image,
+    required FilePickerItem? image,
   }) async {
     SomeFailure? failureValue;
 

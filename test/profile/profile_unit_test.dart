@@ -29,13 +29,13 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       when(
         mockAuthenticationRepository.updateUserData(
           user: KTestText.profileUser,
-          image: KTestText.imagePickerItem,
+          image: KTestText.filePickerItem,
           nickname: KTestText.nicknameCorrect,
         ),
       ).thenAnswer(
@@ -142,7 +142,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -150,7 +150,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
@@ -203,7 +203,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameIncorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -211,7 +211,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameIncorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.invalidData,
@@ -277,7 +277,7 @@ void main() {
         when(
           mockAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
-            image: KTestText.imagePickerItem,
+            image: KTestText.filePickerItem,
             nickname: KTestText.nicknameCorrect,
           ),
         ).thenAnswer(
@@ -323,7 +323,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
@@ -331,7 +331,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
@@ -339,7 +339,7 @@ void main() {
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
           surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.imagePickerItem),
+          image: ImageFieldModel.dirty(KTestText.filePickerItem),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: ProfileFailure.error,
           formState: ProfileEnum.initial,

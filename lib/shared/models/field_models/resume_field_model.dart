@@ -6,13 +6,13 @@ enum ResumeFieldModelValidationError {
 }
 
 class ResumeFieldModel
-    extends FormzInput<ImagePickerItem?, ResumeFieldModelValidationError> {
+    extends FormzInput<FilePickerItem?, ResumeFieldModelValidationError> {
   const ResumeFieldModel.pure() : super.pure(null);
 
   const ResumeFieldModel.dirty(super.value) : super.dirty();
 
   @override
-  ResumeFieldModelValidationError? validator(ImagePickerItem? value) {
+  ResumeFieldModelValidationError? validator(FilePickerItem? value) {
     if (value == null || value.bytes.isEmpty) {
       return ResumeFieldModelValidationError.empty;
     }

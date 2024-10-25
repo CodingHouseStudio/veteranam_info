@@ -1,7 +1,9 @@
-import 'dart:async';
+import 'dart:async' show unawaited;
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart'
+    show AppTrackingTransparency, TrackingStatus;
+import 'package:firebase_analytics/firebase_analytics.dart'
+    show AnalyticsCallOptions, FirebaseAnalytics;
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
