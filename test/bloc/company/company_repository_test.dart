@@ -61,7 +61,7 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             id: KTestText.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
@@ -86,7 +86,7 @@ void main() {
         expect(
           await companyRepository.updateCompany(
             company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -121,7 +121,7 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             id: KTestText.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
@@ -144,7 +144,7 @@ void main() {
         expect(
           await companyRepository.updateCompany(
             company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
         );
@@ -177,7 +177,7 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             id: KTestText.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
@@ -200,7 +200,7 @@ void main() {
         expect(
           await companyRepository.updateCompany(
             company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

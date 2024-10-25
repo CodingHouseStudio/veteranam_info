@@ -525,7 +525,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
-    required ImagePickerItem? image,
+    required FilePickerItem? image,
   }) async {
     try {
       late var userPhoto = user.photo;
@@ -557,11 +557,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<String?> _updatePhoto({
-    required ImagePickerItem image,
+    required FilePickerItem image,
     required String userId,
   }) async {
     final downloadURL = await _storageService.saveFile(
-      imagePickerItem: image,
+      filePickerItem: image,
       id: userId,
       collecltionName: FirebaseCollectionName.user,
     );

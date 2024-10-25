@@ -50,7 +50,7 @@ void main() {
       when(
         mockCompanyRepository.updateCompany(
           company: KTestText.fullCompanyModel,
-          imageItem: KTestText.imagePickerItem,
+          imageItem: KTestText.filePickerItem,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -75,7 +75,7 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(

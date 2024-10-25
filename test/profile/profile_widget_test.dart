@@ -34,7 +34,7 @@ void main() {
       when(
         mockAuthenticationRepository.updateUserData(
           nickname: KTestText.nicknameCorrect,
-          image: KTestText.imagePickerItem,
+          image: KTestText.filePickerItem,
           user: KTestText.profileUserWithoutPhoto,
         ),
       ).thenAnswer(
@@ -49,7 +49,7 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
