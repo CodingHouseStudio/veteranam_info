@@ -27,14 +27,14 @@ void main() {
           StoragePath.getFilePath(
             collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            fileExtension: KTestText.imagePickerItem.extension,
+            fileExtension: KTestText.filePickerItem.extension,
             file: StoragePath.image,
             standartFileExtension: StoragePath.standartImageFileExtension,
           ),
         ),
       ).thenAnswer((realInvocation) => mockReference);
       when(
-        mockReference.putData(KTestText.imagePickerItem.bytes),
+        mockReference.putData(KTestText.filePickerItem.bytes),
       ).thenAnswer(
         (realInvocation) {
           return mockUploadTask;
@@ -88,7 +88,7 @@ void main() {
 
     test('save empty story image', () async {
       await storageService.saveFile(
-        imagePickerItem: KTestText.imagePickerItemEmpty,
+        filePickerItem: KTestText.filePickerItemEmpty,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
@@ -105,7 +105,7 @@ void main() {
     });
     test('save story image', () async {
       await storageService.saveFile(
-        imagePickerItem: KTestText.imagePickerItem,
+        filePickerItem: KTestText.filePickerItem,
         id: KTestText.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );

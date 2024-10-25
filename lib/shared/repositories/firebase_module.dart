@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart'
+    show FacebookAuth;
+import 'package:google_sign_in/google_sign_in.dart' show GoogleSignIn;
 import 'package:injectable/injectable.dart';
 
 @module

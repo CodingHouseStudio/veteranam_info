@@ -44,7 +44,7 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             id: KTestText.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
@@ -65,7 +65,7 @@ void main() {
       test('Add Story(has image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Right<SomeFailure, bool>>().having(
@@ -78,7 +78,7 @@ void main() {
       test('Add Story(without image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
           isA<Right<SomeFailure, bool>>().having(
@@ -105,7 +105,7 @@ void main() {
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
           mockStorageService.saveFile(
-            imagePickerItem: KTestText.imagePickerItem,
+            filePickerItem: KTestText.filePickerItem,
             id: KTestText.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
@@ -124,7 +124,7 @@ void main() {
       test('Add Story(has image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),
@@ -138,7 +138,7 @@ void main() {
       test('Add Story(without image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),

@@ -17,13 +17,13 @@ class StoryRepository implements IStoryRepository {
   @override
   Future<Either<SomeFailure, bool>> addStory({
     required StoryModel storyModel,
-    required ImagePickerItem? imageItem,
+    required FilePickerItem? imageItem,
   }) async {
     try {
       late var methodStoryModel = storyModel;
       if (imageItem != null) {
         final downloadURL = await _storageService.saveFile(
-          imagePickerItem: imageItem,
+          filePickerItem: imageItem,
           id: storyModel.id,
           collecltionName: FirebaseCollectionName.stroies,
         );

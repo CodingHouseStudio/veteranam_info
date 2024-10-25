@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -81,6 +82,9 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<ICitiesRepository>(),
     MockSpec<ICompanyRepository>(),
     MockSpec<IDataPickerRepository>(),
+    MockSpec<FilePicker>(),
+    MockSpec<FilePickerResult>(),
+    MockSpec<PlatformFile>(),
   ],
 )
 void load() => debugPrint('loaded');

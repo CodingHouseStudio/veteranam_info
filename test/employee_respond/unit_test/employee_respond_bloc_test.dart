@@ -27,7 +27,7 @@ void main() {
       mockDataPickerRepository = MockIDataPickerRepository();
 
       when(mockDataPickerRepository.getFile).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       mockWorkRepository = MockIWorkRepository();
@@ -43,7 +43,7 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            file: KTestText.imagePickerItem,
+            file: KTestText.filePickerItem,
             respond: KTestText.employeeRespondModel,
           ),
         ).thenAnswer(
@@ -109,7 +109,7 @@ void main() {
             KTestText.employeeRespondModelModel.phoneNumber,
           ),
           resume: ResumeFieldModel.dirty(
-            KTestText.imagePickerItem,
+            KTestText.filePickerItem,
           ),
           noResume: false,
           formState: EmployeeRespondEnum.inProgress,

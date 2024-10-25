@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart' show Connectivity;
 import 'package:injectable/injectable.dart';
 
 @module

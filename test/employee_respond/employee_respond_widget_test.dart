@@ -23,14 +23,14 @@ void main() {
       mockWorkRepository = MockIWorkRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
       when(mockDataPickerRepository.getFile).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
       // EmployeeRespondBloc.filePickerValue = mockImagePicker;
 
       when(
         mockWorkRepository.sendRespond(
           respond: KTestText.employeeRespondModel,
-          file: KTestText.imagePickerItem,
+          file: KTestText.filePickerItem,
         ),
       ).thenAnswer((invocation) async => const Right(true));
 

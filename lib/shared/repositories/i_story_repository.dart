@@ -5,7 +5,7 @@ abstract class IStoryRepository {
   Stream<List<StoryModel>> getStoryItems();
   Future<Either<SomeFailure, bool>> addStory({
     required StoryModel storyModel,
-    required ImagePickerItem? imageItem,
+    required FilePickerItem? imageItem,
   });
   Future<Either<SomeFailure, List<StoryModel>>> getStoriesByUserId(
     String userId,

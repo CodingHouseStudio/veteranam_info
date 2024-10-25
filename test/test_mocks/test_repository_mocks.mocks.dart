@@ -20,6 +20,9 @@ import 'package:device_info_plus/src/model/web_browser_info.dart' as _i22;
 import 'package:device_info_plus/src/model/windows_device_info.dart' as _i24;
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart'
     as _i25;
+import 'package:file_picker/src/file_picker.dart' as _i35;
+import 'package:file_picker/src/file_picker_result.dart' as _i36;
+import 'package:file_picker/src/platform_file.dart' as _i37;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i32;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i6;
@@ -765,6 +768,16 @@ class _FakeLoginResult_66 extends _i1.SmartFake implements _i27.LoginResult {
 
 class _FakeCompanyModel_67 extends _i1.SmartFake implements _i3.CompanyModel {
   _FakeCompanyModel_67(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeXFile_68 extends _i1.SmartFake implements _i11.XFile {
+  _FakeXFile_68(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1963,7 +1976,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
-    required _i3.ImagePickerItem? image,
+    required _i3.FilePickerItem? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2491,7 +2504,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
-    required _i3.ImagePickerItem? image,
+    required _i3.FilePickerItem? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2920,7 +2933,7 @@ class MockAuthenticationRepository extends _i1.Mock
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
     required _i3.User? user,
     required String? nickname,
-    required _i3.ImagePickerItem? image,
+    required _i3.FilePickerItem? image,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3837,7 +3850,7 @@ class MockIWorkRepository extends _i1.Mock implements _i3.IWorkRepository {
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendRespond({
     required _i3.EmployeeRespondModel? respond,
-    required _i3.ImagePickerItem? file,
+    required _i3.FilePickerItem? file,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6489,7 +6502,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> addStory({
     required _i3.StoryModel? storyModel,
-    required _i3.ImagePickerItem? imageItem,
+    required _i3.FilePickerItem? imageItem,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6748,7 +6761,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i10.FirebaseStorage {
 class MockStorageService extends _i1.Mock implements _i3.StorageService {
   @override
   _i8.Future<String?> saveFile({
-    required _i3.ImagePickerItem? imagePickerItem,
+    required _i3.FilePickerItem? filePickerItem,
     required String? id,
     required String? collecltionName,
     String? file = r'image',
@@ -6759,7 +6772,7 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           #saveFile,
           [],
           {
-            #imagePickerItem: imagePickerItem,
+            #imagePickerItem: filePickerItem,
             #id: id,
             #collecltionName: collecltionName,
             #file: file,
@@ -13201,7 +13214,7 @@ class MockICompanyRepository extends _i1.Mock
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateCompany({
     required _i3.CompanyModel? company,
-    required _i3.ImagePickerItem? imageItem,
+    required _i3.FilePickerItem? imageItem,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -13281,16 +13294,202 @@ class MockICompanyRepository extends _i1.Mock
 class MockIDataPickerRepository extends _i1.Mock
     implements _i3.IDataPickerRepository {
   @override
-  _i8.Future<_i3.ImagePickerItem?> get getImage => (super.noSuchMethod(
+  _i8.Future<_i3.FilePickerItem?> get getImage => (super.noSuchMethod(
         Invocation.getter(#getImage),
-        returnValue: _i8.Future<_i3.ImagePickerItem?>.value(),
-        returnValueForMissingStub: _i8.Future<_i3.ImagePickerItem?>.value(),
-      ) as _i8.Future<_i3.ImagePickerItem?>);
+        returnValue: _i8.Future<_i3.FilePickerItem?>.value(),
+        returnValueForMissingStub: _i8.Future<_i3.FilePickerItem?>.value(),
+      ) as _i8.Future<_i3.FilePickerItem?>);
 
   @override
-  _i8.Future<_i3.ImagePickerItem?> get getFile => (super.noSuchMethod(
+  _i8.Future<_i3.FilePickerItem?> get getFile => (super.noSuchMethod(
         Invocation.getter(#getFile),
-        returnValue: _i8.Future<_i3.ImagePickerItem?>.value(),
-        returnValueForMissingStub: _i8.Future<_i3.ImagePickerItem?>.value(),
-      ) as _i8.Future<_i3.ImagePickerItem?>);
+        returnValue: _i8.Future<_i3.FilePickerItem?>.value(),
+        returnValueForMissingStub: _i8.Future<_i3.FilePickerItem?>.value(),
+      ) as _i8.Future<_i3.FilePickerItem?>);
+}
+
+/// A class which mocks [FilePicker].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFilePicker extends _i1.Mock implements _i35.FilePicker {
+  @override
+  _i8.Future<_i36.FilePickerResult?> pickFiles({
+    String? dialogTitle,
+    String? initialDirectory,
+    _i35.FileType? type = _i35.FileType.any,
+    List<String>? allowedExtensions,
+    dynamic Function(_i35.FilePickerStatus)? onFileLoading,
+    bool? allowCompression = true,
+    int? compressionQuality = 30,
+    bool? allowMultiple = false,
+    bool? withData = false,
+    bool? withReadStream = false,
+    bool? lockParentWindow = false,
+    bool? readSequential = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickFiles,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #onFileLoading: onFileLoading,
+            #allowCompression: allowCompression,
+            #compressionQuality: compressionQuality,
+            #allowMultiple: allowMultiple,
+            #withData: withData,
+            #withReadStream: withReadStream,
+            #lockParentWindow: lockParentWindow,
+            #readSequential: readSequential,
+          },
+        ),
+        returnValue: _i8.Future<_i36.FilePickerResult?>.value(),
+        returnValueForMissingStub: _i8.Future<_i36.FilePickerResult?>.value(),
+      ) as _i8.Future<_i36.FilePickerResult?>);
+
+  @override
+  _i8.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
+        Invocation.method(
+          #clearTemporaryFiles,
+          [],
+        ),
+        returnValue: _i8.Future<bool?>.value(),
+        returnValueForMissingStub: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
+
+  @override
+  _i8.Future<String?> getDirectoryPath({
+    String? dialogTitle,
+    bool? lockParentWindow = false,
+    String? initialDirectory,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDirectoryPath,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #lockParentWindow: lockParentWindow,
+            #initialDirectory: initialDirectory,
+          },
+        ),
+        returnValue: _i8.Future<String?>.value(),
+        returnValueForMissingStub: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
+
+  @override
+  _i8.Future<String?> saveFile({
+    String? dialogTitle,
+    String? fileName,
+    String? initialDirectory,
+    _i35.FileType? type = _i35.FileType.any,
+    List<String>? allowedExtensions,
+    _i28.Uint8List? bytes,
+    bool? lockParentWindow = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveFile,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #fileName: fileName,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #bytes: bytes,
+            #lockParentWindow: lockParentWindow,
+          },
+        ),
+        returnValue: _i8.Future<String?>.value(),
+        returnValueForMissingStub: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
+}
+
+/// A class which mocks [FilePickerResult].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFilePickerResult extends _i1.Mock implements _i36.FilePickerResult {
+  @override
+  List<_i37.PlatformFile> get files => (super.noSuchMethod(
+        Invocation.getter(#files),
+        returnValue: <_i37.PlatformFile>[],
+        returnValueForMissingStub: <_i37.PlatformFile>[],
+      ) as List<_i37.PlatformFile>);
+
+  @override
+  bool get isSinglePick => (super.noSuchMethod(
+        Invocation.getter(#isSinglePick),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  int get count => (super.noSuchMethod(
+        Invocation.getter(#count),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  List<String?> get paths => (super.noSuchMethod(
+        Invocation.getter(#paths),
+        returnValue: <String?>[],
+        returnValueForMissingStub: <String?>[],
+      ) as List<String?>);
+
+  @override
+  List<String?> get names => (super.noSuchMethod(
+        Invocation.getter(#names),
+        returnValue: <String?>[],
+        returnValueForMissingStub: <String?>[],
+      ) as List<String?>);
+
+  @override
+  List<_i11.XFile> get xFiles => (super.noSuchMethod(
+        Invocation.getter(#xFiles),
+        returnValue: <_i11.XFile>[],
+        returnValueForMissingStub: <_i11.XFile>[],
+      ) as List<_i11.XFile>);
+}
+
+/// A class which mocks [PlatformFile].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPlatformFile extends _i1.Mock implements _i37.PlatformFile {
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: _i29.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+        returnValueForMissingStub: _i29.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+      ) as String);
+
+  @override
+  int get size => (super.noSuchMethod(
+        Invocation.getter(#size),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i11.XFile get xFile => (super.noSuchMethod(
+        Invocation.getter(#xFile),
+        returnValue: _FakeXFile_68(
+          this,
+          Invocation.getter(#xFile),
+        ),
+        returnValueForMissingStub: _FakeXFile_68(
+          this,
+          Invocation.getter(#xFile),
+        ),
+      ) as _i11.XFile);
 }

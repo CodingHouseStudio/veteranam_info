@@ -29,12 +29,12 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.imagePickerItem,
+        (realInvocation) async => KTestText.filePickerItem,
       );
 
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.imagePickerItem,
+          imageItem: KTestText.filePickerItem,
           storyModel: KTestText.storyModelItems.first,
         ),
       ).thenAnswer(
@@ -48,7 +48,7 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -70,7 +70,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
@@ -88,7 +88,7 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.imagePickerItem,
+            imageItem: KTestText.filePickerItem,
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(

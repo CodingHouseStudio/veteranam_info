@@ -41,6 +41,7 @@ exclude_patterns = [
     r'lib/shared/repositories/failure_repository.dart',
     r'lib/shared/repositories/failure_module.dart',
     r'lib/shared/repositories/app_info_repository.dart',
+    r'lib/shared/repositories/data_picker_module.dart',
     r'lib/shared/widget/popup_menu_item_widget.dart'
 ]
 
