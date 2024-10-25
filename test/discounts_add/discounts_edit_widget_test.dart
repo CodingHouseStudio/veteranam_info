@@ -248,7 +248,8 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockCitiesRepository: mockCitiesRepository,
             mockGoRouter: mockGoRouter,
-            discount: KTestText.sendDiscountModel.copyWith(link: ''),
+            discount: KTestText.sendDiscountModel
+                .copyWith(subLocation: SubLocation.online),
             discountId: KTestText.sendDiscountModel.id,
           );
 

@@ -213,11 +213,6 @@ void main() {
             formState: EmailEnum.success,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          const DiscountUserEmailFormState(
-            email: EmailFieldModel.pure(),
-            formState: EmailEnum.initial,
-            emailEnum: UserEmailEnum.discountEmailAbandon,
-          ),
         ],
       );
 
@@ -287,11 +282,6 @@ void main() {
           const DiscountUserEmailFormState(
             email: EmailFieldModel.pure(),
             formState: EmailEnum.success,
-            emailEnum: UserEmailEnum.discountEmailAbandon,
-          ),
-          const DiscountUserEmailFormState(
-            email: EmailFieldModel.pure(),
-            formState: EmailEnum.initial,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
         ],

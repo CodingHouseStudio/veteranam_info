@@ -98,13 +98,13 @@ class DiscountUserEmailFormBloc
 
       _firebaseAnalyticsService.addEvent(name: 'discount_email_acquire');
 
-      emit(
-        _Initial(
-          email: const EmailFieldModel.pure(),
-          formState: EmailEnum.initial,
-          emailEnum: state.emailEnum,
-        ),
-      );
+      // emit(
+      //   _Initial(
+      //     email: const EmailFieldModel.pure(),
+      //     formState: EmailEnum.initial,
+      //     emailEnum: state.emailEnum,
+      //   ),
+      // );
     } else {
       emit(state.copyWith(formState: EmailEnum.invalidData));
     }

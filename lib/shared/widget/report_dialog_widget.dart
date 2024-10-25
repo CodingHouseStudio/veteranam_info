@@ -144,8 +144,11 @@ class ReportDialogWidget extends StatelessWidget {
               widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
               text: _.formState.isNext ? context.l10n.send : context.l10n.next,
               isDesk: isDesk,
-              onPressed: () =>
-                  context.read<ReportBloc>().add(ReportEvent.send(cardEnum)),
+              onPressed: _.formState == ReportEnum.success
+                  ? null
+                  : () => context
+                      .read<ReportBloc>()
+                      .add(ReportEvent.send(cardEnum)),
               darkMode: true,
               hasAlign: isDesk,
               mobTextWidth: double.infinity,

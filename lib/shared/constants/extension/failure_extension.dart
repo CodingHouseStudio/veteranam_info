@@ -3,6 +3,7 @@ import 'package:veteranam/components/components.dart'
     show
         CompanyFormFailure,
         DiscountFailure,
+        DiscountsAddFailure,
         FeedbackFailure,
         HomeFailure,
         InformationFailure,
@@ -243,6 +244,21 @@ extension PasswordResetFailureValue on PasswordResetFailure {
         return context.l10n.sendFailure;
       case PasswordResetFailure.network:
         return context.l10n.networkFailure;
+    }
+  }
+}
+
+extension DiscountsAddFailureValue on DiscountsAddFailure {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DiscountsAddFailure.error:
+        return context.l10n.error;
+      case DiscountsAddFailure.send:
+        return context.l10n.sendFailure;
+      case DiscountsAddFailure.network:
+        return context.l10n.networkFailure;
+      case DiscountsAddFailure.linkWrong:
+        return null;
     }
   }
 }
