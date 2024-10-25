@@ -1,6 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show
+        DocumentChangeType,
+        FirebaseException,
+        FirebaseFirestore,
+        GetOptions,
+        QuerySnapshot,
+        SetOptions,
+        Settings,
+        Source;
 import 'package:flutter/foundation.dart' show visibleForTesting;
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 

@@ -1,12 +1,12 @@
-import 'dart:async';
 import 'dart:io' as io; // Use io for platform-agnostic file operations
-import 'dart:typed_data';
+import 'dart:typed_data' show Uint8List;
 
 // import 'package:dio/browser.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show Dio, Options, ResponseType;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart'; // For mobile file handling
+import 'package:path_provider/path_provider.dart'
+    show getApplicationDocumentsDirectory; // For mobile file handling
 import 'package:veteranam/shared/shared.dart';
 
 @Singleton(order: -1)

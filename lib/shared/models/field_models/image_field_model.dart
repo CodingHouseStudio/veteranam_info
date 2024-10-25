@@ -6,13 +6,13 @@ enum ImageFieldModelValidationError {
 }
 
 class ImageFieldModel
-    extends FormzInput<ImagePickerItem?, ImageFieldModelValidationError> {
+    extends FormzInput<FilePickerItem?, ImageFieldModelValidationError> {
   const ImageFieldModel.pure() : super.pure(null);
 
   const ImageFieldModel.dirty([super.value]) : super.dirty();
 
   @override
-  ImageFieldModelValidationError? validator(ImagePickerItem? value) {
+  ImageFieldModelValidationError? validator(FilePickerItem? value) {
     if (value == null || value.bytes.isEmpty) {
       return ImageFieldModelValidationError.empty;
     }
