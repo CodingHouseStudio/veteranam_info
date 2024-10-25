@@ -24,6 +24,7 @@ void main() {
     late IDiscountRepository mockDiscountsRepository;
     late ICompanyRepository mockCompanyRepository;
     late ICitiesRepository mockCitiesRepository;
+
     setUp(() {
       LocalizedDateTime.enDateString =
           KTestText.sendDiscountModel.expirationEN!.replaceAll('Up to ', '');
