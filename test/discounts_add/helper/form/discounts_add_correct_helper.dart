@@ -42,7 +42,6 @@ Future<void> discountsAddCorectHelper({
       mockGoRouter: mockGoRouter,
     );
   }
-
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
     findsOneWidget,

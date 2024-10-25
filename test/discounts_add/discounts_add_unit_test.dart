@@ -844,9 +844,6 @@ void main() {
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
-          (state) => state.formState == DiscountsAddEnum.sendInProgress,
-        ),
-        predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.success,
         ),
       ],
@@ -928,9 +925,6 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.description,
-        ),
-        predicate<DiscountsAddState>(
-          (state) => state.formState == DiscountsAddEnum.sendInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.success,
