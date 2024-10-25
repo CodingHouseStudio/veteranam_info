@@ -8,55 +8,64 @@ Future<void> confirmPublishDiscountDialogNavHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  expect(
-    find.byKey(KWidgetkeys.widget.confirmPublishDiscount.title),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.dialogs.scroll,
-    itemKey: KWidgetkeys.widget.confirmPublishDiscount.closeIcon,
-  );
+    scrollUp: false,
+    windowsTest: true,
+    size: KTestConstants.windowSmallSize,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.title),
+        findsOneWidget,
+      );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon));
+      expect(
+        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon),
+        findsOneWidget,
+      );
 
-  await tester.pumpAndSettle();
+      await scrollingHelper(
+        tester: tester,
+        scrollKey: KWidgetkeys.widget.dialogs.scroll,
+        itemKey: KWidgetkeys.widget.confirmPublishDiscount.closeIcon,
+      );
 
-  verify(
-    () => mockGoRouter.pop(),
-  ).called(1);
+      await tester.tap(
+        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon),
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.confirmPublishDiscount.description),
-    findsOneWidget,
-  );
+      await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsSwitcher,
-    ),
-    findsOneWidget,
-  );
+      verify(
+        () => mockGoRouter.pop(),
+      ).called(1);
 
-  expect(
-    find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsText,
-    ),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.description),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsButton,
-    ),
-    findsOneWidget,
+      expect(
+        find.byKey(
+          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsSwitcher,
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(
+          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsText,
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(
+          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsButton,
+        ),
+        findsOneWidget,
+      );
+    },
   );
 
   await scrollingHelper(

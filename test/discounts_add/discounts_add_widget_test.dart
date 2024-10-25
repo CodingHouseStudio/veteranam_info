@@ -30,7 +30,7 @@ void main() {
 
       when(
         mockDiscountRepository.addDiscount(
-          KTestText.sendDiscountModel,
+          KTestText.widgetSendDiscountModel,
         ),
       ).thenAnswer((invocation) async => const Right(true));
 
@@ -73,7 +73,7 @@ void main() {
 
         await discountsAddInitialHelper(tester: tester);
       });
-      testWidgets('Discount enter correct', (tester) async {
+      testWidgets('Discount enter correct(Mobile)', (tester) async {
         await discountsAddPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
@@ -85,6 +85,23 @@ void main() {
         await discountsAddCorectHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
+        );
+      });
+      testWidgets('Discount enter correct(Desk)', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockCompanyRepository: mockCompanyRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
+
+        await changeWindowSizeHelper(
+          tester: tester,
+          test: () async => discountsAddCorectHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          ),
         );
       });
       testWidgets('Discount enter uncorrect', (tester) async {
