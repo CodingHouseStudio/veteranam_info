@@ -50,42 +50,44 @@ class DiscountCardWidget extends StatelessWidget {
                   imageName: discountItem.userPhoto?.name,
                 ),
                 KSizedBox.kWidthSizedBox16,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      key: KWidgetkeys.widget.discountCard.service,
-                      discountItem.company.getTrnslation(
-                            context: context,
-                            en: discountItem.companyEN,
-                          ) ??
-                          context.l10n.companyIsHidden,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.left,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          key: KWidgetkeys.widget.discountCard.userName,
-                          discountItem.userName ?? KAppText.veteranamName,
-                          style: AppTextStyle.materialThemeLabelSmall,
-                        ),
-                        KSizedBox.kWidthSizedBox8,
-                        Text(
-                          key: KWidgetkeys.widget.discountCard.date,
-                          discountItem.dateVerified
-                              .toLocalDateString(context: context),
-                          style: AppTextStyle.materialThemeLabelSmall,
-                          overflow: TextOverflow.clip,
-                        ),
-                      ],
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        key: KWidgetkeys.widget.discountCard.service,
+                        discountItem.company.getTrnslation(
+                              context: context,
+                              en: discountItem.companyEN,
+                            ) ??
+                            context.l10n.companyIsHidden,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            key: KWidgetkeys.widget.discountCard.userName,
+                            discountItem.userName ?? KAppText.veteranamName,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                          KSizedBox.kWidthSizedBox8,
+                          Text(
+                            key: KWidgetkeys.widget.discountCard.date,
+                            discountItem.dateVerified
+                                .toLocalDateString(context: context),
+                            style: AppTextStyle.materialThemeLabelSmall,
+                            overflow: TextOverflow.clip,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 if (isDesk) ...[
                   KSizedBox.kWidthSizedBox16,
-                  Expanded(child: _category(context: context, isDesk: true)),
+                  _category(context: context, isDesk: true),
                 ],
               ],
             ),
