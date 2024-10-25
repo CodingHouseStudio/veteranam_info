@@ -26,12 +26,13 @@ void main() {
     late ICitiesRepository mockCitiesRepository;
 
     setUp(() {
-      LocalizedDateTime.enDateString =
-          KTestText.sendDiscountModel.expirationEN!.replaceAll('Up to ', '');
+      LocalizedDateTime.enDateString = KTestText
+          .blocSendDiscountModel.expirationEN!
+          .replaceAll('Up to ', '');
       LocalizedDateTime.ukDateString =
-          KTestText.sendDiscountModel.expiration!.replaceAll('До ', '');
+          KTestText.blocSendDiscountModel.expiration!.replaceAll('До ', '');
       StringExtension.date = KTestText.nextDateTime;
-      ExtendedDateTime.id = KTestText.sendDiscountModel.id;
+      ExtendedDateTime.id = KTestText.blocSendDiscountModel.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountsRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
@@ -40,7 +41,7 @@ void main() {
       when(
         mockDiscountsRepository.getDiscountItems(),
       ).thenAnswer(
-        (_) => Stream.value([KTestText.sendDiscountModel]),
+        (_) => Stream.value([KTestText.blocSendDiscountModel]),
       );
 
       when(
@@ -55,7 +56,7 @@ void main() {
         (_) => KTestText.fullCompanyModel,
       );
       when(
-        mockDiscountsRepository.addDiscount(KTestText.sendDiscountModel),
+        mockDiscountsRepository.addDiscount(KTestText.blocSendDiscountModel),
       ).thenAnswer(
         (_) async => const Right(true),
       );
@@ -113,17 +114,17 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.sendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title,
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
@@ -138,22 +139,22 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.discountRemoveItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
@@ -168,17 +169,17 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityRemoveItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.directLink!,
+              KTestText.blocSendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -209,17 +210,17 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KTestText.sendDiscountModel.category.first,
+              KTestText.blocSendDiscountModel.category.first,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(
@@ -234,12 +235,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityRemove(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(
@@ -251,12 +252,12 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.sendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.sendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -544,22 +545,22 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.sendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title,
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.directLink!,
+              KTestText.blocSendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -571,19 +572,19 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.sendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.sendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!,
             ),
           )
           ..add(const DiscountsAddEvent.back())
@@ -726,11 +727,11 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountsRepository.getCompanyDiscount(
-            id: KTestText.sendDiscountModel.id,
+            id: KTestText.blocSendDiscountModel.id,
             companyId: KTestText.fullCompanyModel.id,
           ),
         ).thenAnswer(
-          (_) async => Right(KTestText.sendDiscountModel),
+          (_) async => Right(KTestText.blocSendDiscountModel),
         );
         bloc.add(
           const DiscountsAddEvent.started(),
@@ -750,7 +751,7 @@ void main() {
         bloc.add(
           DiscountsAddEvent.loadedDiscount(
             discount: null,
-            discountId: KTestText.sendDiscountModel.id,
+            discountId: KTestText.blocSendDiscountModel.id,
           ),
         );
         await expectLater(
@@ -765,24 +766,24 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.sendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title,
             ),
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.directLink!,
+              KTestText.blocSendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.sendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.sendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -875,8 +876,8 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.loadedDiscount(
-              discount: KTestText.sendDiscountModel,
-              discountId: KTestText.sendDiscountModel.id,
+              discount: KTestText.blocSendDiscountModel,
+              discountId: KTestText.blocSendDiscountModel.id,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -945,7 +946,7 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountsRepository.getCompanyDiscount(
-            id: KTestText.sendDiscountModel.id,
+            id: KTestText.blocSendDiscountModel.id,
             companyId: KTestText.fullCompanyModel.id,
           ),
         ).thenAnswer(
@@ -969,7 +970,7 @@ void main() {
         bloc.add(
           DiscountsAddEvent.loadedDiscount(
             discount: null,
-            discountId: KTestText.sendDiscountModel.id,
+            discountId: KTestText.blocSendDiscountModel.id,
           ),
         );
         await expectLater(
@@ -1036,7 +1037,7 @@ void main() {
       build: () => discountsAddBloc,
       act: (bloc) async {
         when(
-          mockDiscountsRepository.addDiscount(KTestText.sendDiscountModel),
+          mockDiscountsRepository.addDiscount(KTestText.blocSendDiscountModel),
         ).thenAnswer(
           (_) async =>
               Left(SomeFailure.serverError(error: KGroupText.failureSend)),
@@ -1091,17 +1092,17 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.sendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title,
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestText.sendDiscountModel.discount.first.toString(),
+              KTestText.blocSendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
@@ -1121,34 +1122,34 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.sendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first,
             ),
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestText.sendDiscountModel.directLink!,
+              KTestText.blocSendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KTestText.sendDiscountModel.category.first,
+              KTestText.blocSendDiscountModel.category.first,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.sendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.sendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.sendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!,
             ),
           )
           ..add(const DiscountsAddEvent.send());

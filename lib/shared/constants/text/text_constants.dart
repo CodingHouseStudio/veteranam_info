@@ -244,8 +244,8 @@ abstract class KAppText {
   static const String _markdownStartPath = 'assets/markdown/';
 
   static const String androidPackageName = 'com.veteranam.package';
-  static const String eligibilityAll = 'Усім нище перечисленим';
-  static const String eligibilityAllEN = 'To all of the below-mentioned';
+  static const String eligibilityAll = 'Всі перелічені';
+  static const String eligibilityAllEN = 'All of the listed';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,
