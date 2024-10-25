@@ -32,7 +32,7 @@ class _DialogsWidget {
     EdgeInsets? deskIconPadding,
     OverflowBarAlignment? deskActionsOverflowAlignment,
     EdgeInsets Function({required bool isDeskValue})? deskContentPadding,
-    EdgeInsets Function({required bool isDeskValue})? mobPadding,
+    // EdgeInsets Function({required bool isDeskValue})? mobPadding,
     double? deskMaxWidth,
     double? mobMaxWidth,
   }) {
@@ -82,14 +82,14 @@ class _DialogsWidget {
           return preLayoutWidget?.call(
                 layoutBuilder: _mobDoubleDialogWidget(
                   childWidget: childWidget,
-                  padding: mobPadding,
+                  // padding: mobPadding,
                   maxWidth: mobMaxWidth,
                   isScollable: isScollable,
                 ),
               ) ??
               _mobDoubleDialogWidget(
                 childWidget: childWidget,
-                padding: mobPadding,
+                // padding: mobPadding,
                 maxWidth: mobMaxWidth,
                 isScollable: isScollable,
               );
@@ -143,9 +143,9 @@ class _DialogsWidget {
       required bool isDeskValue,
       required BuildContext context,
     }) childWidget,
-    required EdgeInsets Function({
-      required bool isDeskValue,
-    })? padding,
+    // required EdgeInsets Function({
+    //   required bool isDeskValue,
+    // })? padding,
     required double? maxWidth,
     required bool isScollable,
   }) =>
@@ -153,18 +153,20 @@ class _DialogsWidget {
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDeskValue =
               constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
-          final paddingWidget = padding != null
-              ? Padding(
-                  padding: padding(isDeskValue: isDeskValue),
-                  child: childWidget(
-                    isDeskValue: isDeskValue,
-                    context: context,
-                  ),
-                )
-              : childWidget(
-                  isDeskValue: isDeskValue,
-                  context: context,
-                );
+          final paddingWidget =
+              //  padding != null
+              //     ? Padding(
+              //         padding: padding(isDeskValue: isDeskValue),
+              //         child: childWidget(
+              //           isDeskValue: isDeskValue,
+              //           context: context,
+              //         ),
+              //       )
+              //     :
+              childWidget(
+            isDeskValue: isDeskValue,
+            context: context,
+          );
           if (isScollable) {
             return SingleChildScrollView(
               key: KWidgetkeys.widget.dialogs.scroll,

@@ -353,6 +353,14 @@ abstract class KTestText {
       ),
   ];
 
+  static final widgetSendDiscountModel = sendDiscountModel.copyWith(
+    eligibility: null,
+  );
+
+  static final blocSendDiscountModel = sendDiscountModel.copyWith(
+    eligibility: [KTestText.field],
+  );
+
   static final sendDiscountModel = discountModelItems.first.copyWith(
     additionalDetails: null,
     // html: null,
@@ -634,6 +642,7 @@ abstract class KTestConstants {
   static const windowDeskSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
   static const windowSmallSize = Size(500, 500);
+  static const windowVerySmallSize = Size(460, 460);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;

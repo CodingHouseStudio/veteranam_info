@@ -32,7 +32,7 @@ void main() {
 
       when(
         mockDiscountRepository.addDiscount(
-          KTestText.sendDiscountModel,
+          KTestText.widgetSendDiscountModel,
         ),
       ).thenAnswer((invocation) async => const Right(true));
 
@@ -232,7 +232,7 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockCitiesRepository: mockCitiesRepository,
             mockGoRouter: mockGoRouter,
-            discount: KTestText.sendDiscountModel.copyWith(link: ''),
+            discount: KTestText.widgetSendDiscountModel,
             discountId: KTestText.sendDiscountModel.id,
           );
 
