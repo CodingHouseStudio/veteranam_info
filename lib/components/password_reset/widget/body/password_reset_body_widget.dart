@@ -108,6 +108,14 @@ class PasswordResetBodyWidget extends StatelessWidget {
                             _.formState == PasswordResetEnum.passwordMismatch,
                   ),
                 ],
+                SendingTextWidget(
+                  textKey: KWidgetkeys.screen.passwordReset.submitingText,
+                  failureText: _.failure?.value(context),
+                  sendingText: context.l10n.changePasswordWaiting,
+                  successText: context.l10n.changedPassword,
+                  showSendingText: _.formState == PasswordResetEnum.sending,
+                  showSuccessText: _.formState == PasswordResetEnum.success,
+                ),
                 if (isDesk) ...[
                   if (!(codeIsValid ?? true)) KSizedBox.kHeightSizedBox40,
                   KSizedBox.kHeightSizedBox24,
@@ -124,9 +132,11 @@ class PasswordResetBodyWidget extends StatelessWidget {
                           ? context.l10n.confirm
                           : context.l10n.sendAgain,
                       onPressed: codeIsValid
-                          ? () => context.read<PasswordResetBloc>().add(
-                                PasswordResetEvent.passwordReset(code),
-                              )
+                          ? _.formState.isLoading
+                              ? null
+                              : () => context.read<PasswordResetBloc>().add(
+                                    PasswordResetEvent.passwordReset(code),
+                                  )
                           : () => context.goNamed(KRoute.pwResetEmail.name),
                       isDesk: isDesk,
                       color: AppColors.materialThemeKeyColorsSecondary,
@@ -150,14 +160,6 @@ class PasswordResetBodyWidget extends StatelessWidget {
                       color: AppColors.materialThemeKeyColorsNeutralVariant,
                     ),
                   ),
-                SendingTextWidget(
-                  textKey: KWidgetkeys.screen.passwordReset.submitingText,
-                  failureText: _.failure?.value(context),
-                  sendingText: context.l10n.changePasswordWaiting,
-                  successText: context.l10n.changedPassword,
-                  showSendingText: _.formState == PasswordResetEnum.sending,
-                  showSuccessText: _.formState == PasswordResetEnum.success,
-                ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox80
                 else

@@ -43,6 +43,11 @@ Future<void> discountsAddCorectHelper({
     );
   }
 
+  expect(
+    find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
+    findsOneWidget,
+  );
+
   verify(
     () => mockGoRouter.goNamed(KRoute.myDiscounts.name),
   ).called(1);

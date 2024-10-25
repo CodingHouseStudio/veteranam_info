@@ -241,6 +241,12 @@ void main() {
               KTestText.sendDiscountModel.location!.first,
             ),
           )
+          ..add(
+            const DiscountsAddEvent.onlineSwitch(),
+          )
+          ..add(
+            const DiscountsAddEvent.onlineSwitch(),
+          )
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
@@ -457,6 +463,16 @@ void main() {
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
+          (state) =>
+              state.isOnline &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              !state.isOnline &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.description,
         ),
         predicate<DiscountsAddState>(
@@ -468,6 +484,11 @@ void main() {
           (state) =>
               state.exclusions.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.formState == DiscountsAddEnum.sendInProgress &&
+              state.failure == null,
         ),
         predicate<DiscountsAddState>(
           (state) =>
@@ -822,6 +843,9 @@ void main() {
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.sendInProgress,
+        ),
+        predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.success,
         ),
       ],
@@ -903,6 +927,9 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.description,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.sendInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.success,
@@ -1261,6 +1288,9 @@ void main() {
           (state) =>
               state.exclusions.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.sendInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) => state.failure != null,

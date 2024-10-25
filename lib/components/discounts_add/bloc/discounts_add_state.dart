@@ -50,6 +50,7 @@ enum DiscountsAddEnum {
   initial,
   inProgress,
   // unmodified,
+  sendInProgress,
   success,
   invalidData,
   detail,
@@ -58,6 +59,17 @@ enum DiscountsAddEnum {
   description,
   descriptionInProgress,
   descriptionInvalidData;
+
+  bool get isLoading {
+    switch (this) {
+      case DiscountsAddEnum.success:
+      case DiscountsAddEnum.sendInProgress:
+        return true;
+      // ignore: no_default_cases
+      default:
+        return false;
+    }
+  }
 
   bool get isMain {
     switch (this) {

@@ -19,6 +19,11 @@ Future<void> discountsEditFormHelper({
 
   await discountsAddSendHelper(tester);
 
+  expect(
+    find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
+    findsOneWidget,
+  );
+
   verify(
     () => mockGoRouter.goNamed(KRoute.myDiscounts.name),
   ).called(1);

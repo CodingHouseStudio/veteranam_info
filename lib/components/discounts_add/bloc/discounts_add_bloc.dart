@@ -446,6 +446,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       return;
     }
     if (Formz.validate([state.description])) {
+      emit(
+        state.copyWith(
+          formState: DiscountsAddEnum.sendInProgress,
+        ),
+      );
       //state.exclusions
       final discount = (state.discount ?? discountModel).copyWith(
         discount: state.discounts.getValue
