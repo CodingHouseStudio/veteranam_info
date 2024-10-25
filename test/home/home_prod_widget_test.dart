@@ -142,6 +142,25 @@ void main() {
               ),
             );
           });
+          testWidgets('${KRoute.company.name} ', (tester) async {
+            await homePumpAppHelper(
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockFaqRepository: mockFaqRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockBuildRepository: mockBuildRepository, tester: tester,
+              mockFirebaseRemoteConfigProvider:
+                  mockFirebaseRemoteConfigProvider,
+              mockGoRouter: mockGoRouter,
+              mockUrlRepository: mockUrlRepository,
+              // mockAppAuthenticationRepository:
+              // mockAppAuthenticationRepository,
+            );
+
+            await nawbarBusinessProfileNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

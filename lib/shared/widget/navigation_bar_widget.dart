@@ -406,12 +406,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
               onPressed: () => context.goNamed(profilePath),
-              imageUrl: context
-                  .read<CompanyWatcherBloc>()
-                  .state
-                  .company
-                  .image
-                  ?.downloadURL,
+              imageUrl: state.company.imageUrl,
             );
           },
         )
