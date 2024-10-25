@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
+import 'helper/cancel_cant_pop_helper.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -58,6 +59,45 @@ void main() {
           );
 
           await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
+        });
+        group('${KRoute.discountsAdd.name} ', () {
+          setUp(
+            () {
+              MockGoRouter.canPopValue = false;
+              Config.roleValue = Config.business;
+            },
+          );
+          testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
+            await markdownFileDialogPumpAppHelper(
+              tester: tester,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await cancelCanNotPopHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              business: true,
+            );
+          });
+        });
+        group('${KRoute.home.name} ', () {
+          setUp(
+            () => MockGoRouter.canPopValue = false,
+          );
+          testWidgets('${KRoute.home.name} ', (tester) async {
+            await markdownFileDialogPumpAppHelper(
+              tester: tester,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await cancelCanNotPopHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              business: false,
+            );
+          });
         });
       });
     });
