@@ -7,6 +7,9 @@ Future<void> markdownFileDialogInitialHelper(
   WidgetTester tester,
 ) async {
   await changeWindowSizeHelper(
+    size: KTestConstants.windowSmallSize,
+    windowsTest: true,
+    scrollUp: false,
     tester: tester,
     test: () async {
       expect(

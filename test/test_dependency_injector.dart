@@ -28,6 +28,7 @@ void configureDependenciesTest() {
   Config.roleValue = Config.user;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
+  MockGoRouter.canPopValue = true;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
