@@ -35,5 +35,8 @@ enum PasswordResetEnum {
   invalidData,
   sending,
   success,
-  passwordMismatch,
+  passwordMismatch;
+
+  bool get isLoading =>
+      this == PasswordResetEnum.success || this == PasswordResetEnum.sending;
 }

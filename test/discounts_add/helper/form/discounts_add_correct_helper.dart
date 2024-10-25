@@ -42,6 +42,10 @@ Future<void> discountsAddCorectHelper({
       mockGoRouter: mockGoRouter,
     );
   }
+  expect(
+    find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
+    findsOneWidget,
+  );
 
   verify(
     () => mockGoRouter.goNamed(KRoute.myDiscounts.name),

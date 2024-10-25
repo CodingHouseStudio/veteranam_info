@@ -1301,8 +1301,8 @@
   "@dataIsUpdatedSuccess": {
     "examples": "Message after the user has successfully updated their data."
   },
-  "dataSendInProgress": "Changes are being saved, please wait...",
-  "@dataSendInProgress": {
+  "changesSendInProgress": "Changes are being saved, please wait...",
+  "@changesSendInProgress": {
     "examples": "Message while changes are being saved."
   },
   "passwordReset": "Password Reset",
@@ -1611,6 +1611,14 @@
   "invalidLinkTitle": "Invalid link",
   "@invalidLinkTitle": {
     "examples": "Error text for the link on the page."
+  },
+  "dataSendInProgress": "Data are being saved, please wait...",
+  "@dataSendInProgress": {
+    "examples": "Message while data are being saved."
+  },
+  "dataIsSavedSuccess": "Your data has been successfully saved!",
+  "@dataIsSavedSuccess": {
+    "examples": "Message after the user has successfully saved their data."
   },
   "activate": "Activate",
   "@activate": {

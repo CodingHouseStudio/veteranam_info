@@ -164,7 +164,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
             SendingTextWidget(
               textKey: KWidgetkeys.screen.profile.submitingText,
               failureText: _.failure?.value(context),
-              sendingText: context.l10n.dataSendInProgress,
+              sendingText: context.l10n.changesSendInProgress,
               successText: _.formState == ProfileEnum.success
                   ? context.l10n.dataIsUpdatedSuccess
                   : context.l10n.dataUnmodified,
