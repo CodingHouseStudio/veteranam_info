@@ -156,12 +156,9 @@ void main() {
               // mockAppAuthenticationRepository,
             );
 
-            await homeChangeWindowSizeHelper(
+            await nawbarBusinessProfileNavigationHelper(
               tester: tester,
-              test: () async => nawbarBusinessProfileNavigationHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
+              mockGoRouter: mockGoRouter,
             );
           });
         });
