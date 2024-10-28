@@ -1,0 +1,26 @@
+import 'package:dartz/dartz.dart';
+import 'package:in_app_review/in_app_review.dart' show InAppReview;
+import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/shared.dart';
+
+@Singleton(as: IReportRepository, env: [Config.mobile])
+class MobileRatingRepository {
+  MobileRatingRepository(
+    this._inAppReview,
+  );
+  final InAppReview _inAppReview;
+  Future<Either<SomeFailure, bool>> showRatingDialog() async {
+    try {
+      if (await _inAppReview.isAvailable()) {
+        await _inAppReview.requestReview();
+      } else {
+        await _inAppReview.openStoreListing(
+          appStoreId: KSecurityKeys.appStoreId,
+        );
+      }
+      return const Right(true);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+}

@@ -10,4 +10,5 @@ abstract class KSecurityKeys {
   static const firebaseAppCheckProd =
       '6LcHRzkqAAAAACJhOV9aPEb3tcA8wAzS-a5Qww_J';
   static const firebaseAppCheckDev = '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG';
+  static const appStoreId = '6584519009';
 }
