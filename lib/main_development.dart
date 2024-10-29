@@ -11,7 +11,6 @@ import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
-import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: DEV main file
 void main() async {

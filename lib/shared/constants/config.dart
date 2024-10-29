@@ -37,15 +37,13 @@ abstract class Config {
 
   static String get platform {
     try {
-      // ignore: unnecessary_statements
-      Platform.isAndroid;
+      // ignore: unused_local_variable
+      final value = Platform.isAndroid;
       return Config.mobile;
     } catch (e) {
       return Config.web;
     }
   }
-
-  //TODO: CHECK KISWEB AND RELEASE MODE
 
   static bool? _kIsWeb;
   static bool get isWeb => _kIsWeb ?? platform == Config.web;
