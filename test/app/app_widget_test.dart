@@ -24,6 +24,7 @@ void main() {
     // late IReportRepository mockReportRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
+    late MobileRatingRepository mockMobileRatingRepository;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDiscountRepository = MockIDiscountRepository();
@@ -32,6 +33,7 @@ void main() {
       mockInvestorsReportisory = MockIInvestorsRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
+      mockMobileRatingRepository = MockMobileRatingRepository();
 
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(KTestText.userSetting),
@@ -50,6 +52,9 @@ void main() {
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
+      );
+      when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
+        (realInvocation) async => const Right(true),
       );
 
       // mockReportRepository = MockIReportRepository();
@@ -100,6 +105,7 @@ void main() {
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         );
       });
     });
@@ -117,6 +123,7 @@ void main() {
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         );
       });
     });

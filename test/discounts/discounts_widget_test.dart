@@ -88,6 +88,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
         );
 
         await loadingFailureHelper(
@@ -124,6 +125,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
         );
 
         await mockButtonHelper(
@@ -159,6 +161,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
         );
 
         await discountsInitialHelper(tester);
@@ -174,6 +177,7 @@ void main() {
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: null,
         ),
         // lastCard: KWidgetkeys.screen.discounts.cardLast,
       );
@@ -188,6 +192,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
         );
 
         await reportDialogCheckFailureHelper(tester);
@@ -202,6 +207,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
         );
 
         await discountsScrollHelper(
@@ -246,6 +252,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
             await discountsScrollHelper(
               tester: tester,
@@ -273,6 +280,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockMobileRatingRepository: null,
           );
 
           await discountsInitialHelper(tester);
@@ -288,6 +296,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockMobileRatingRepository: null,
           );
 
           await advancedFilterResetMobHelper(
@@ -306,6 +315,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
           );
 
           await reportDialogIncorrectSendHelper(
@@ -329,6 +339,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
           );
 
           await reportDialogIncorrectSendHelper(
@@ -348,6 +359,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
           );
 
           await reportDialogIncorrectSendHelper(
@@ -374,6 +386,7 @@ void main() {
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
                 mockAuthenticationRepository: mockAuthenticationRepository,
+                mockMobileRatingRepository: null,
               );
 
               await myDiscountHelper(
@@ -395,6 +408,7 @@ void main() {
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
                 mockAuthenticationRepository: mockAuthenticationRepository,
+                mockMobileRatingRepository: null,
               );
 
               await advancedFilterAppliedHelper(
@@ -427,6 +441,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
 
             await discountsScrollHelper(
@@ -450,6 +465,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
 
             await discountsScrollHelper(
@@ -473,6 +489,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
 
             await discountsScrollHelper(
@@ -493,6 +510,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
 
             await discountsScrollHelper(
@@ -532,6 +550,7 @@ void main() {
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
                 mockAuthenticationRepository: mockAuthenticationRepository,
+                mockMobileRatingRepository: null,
               );
 
               await discountsScrollHelper(
@@ -567,6 +586,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockMobileRatingRepository: null,
             );
 
             await discountsScrollHelper(
