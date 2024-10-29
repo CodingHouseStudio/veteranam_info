@@ -1,11 +1,5 @@
 part of 'profile_bloc.dart';
 
-enum ProfileFailure {
-  error,
-  network,
-  send,
-}
-
 extension ProfileFailureExtension on SomeFailure {
   ProfileFailure _toProfileError() {
     switch (this) {

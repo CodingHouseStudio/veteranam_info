@@ -1,13 +1,11 @@
 import 'package:flutter/widgets.dart' show BuildContext;
-import 'package:veteranam/components/components.dart'
-    show
-        CategoriesFieldModelValidationError,
-        CitiesFieldModelValidationError,
-        CompanyCodeFieldModelValidationError,
-        CompanyNameFieldModelValidationError,
-        DiscountLinkFieldModelValidationError,
-        DiscountsFieldModelValidationError,
-        PublicNameFieldModelValidationError;
+import 'package:veteranam/components/company/field_models/company_code_field_model.dart';
+import 'package:veteranam/components/company/field_models/company_name_field_model.dart';
+import 'package:veteranam/components/company/field_models/piblic_name_field_model.dart';
+import 'package:veteranam/components/discounts/field_model/discount_link_field_model.dart';
+import 'package:veteranam/components/discounts_add/field_models/categories_field_model.dart';
+import 'package:veteranam/components/discounts_add/field_models/cities_field_model.dart';
+import 'package:veteranam/components/discounts_add/field_models/discounts_field_model.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 extension EmailFieldModelValidationErrorEmpl

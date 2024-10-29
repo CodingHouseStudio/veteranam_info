@@ -492,6 +492,7 @@ class _DialogsWidget {
         );
       },
     ).then(
+      //TODO CHECK WORKING
       context.emailDialogCloseEvent,
       //   (value) {
       //   if (!context.mounted) return;

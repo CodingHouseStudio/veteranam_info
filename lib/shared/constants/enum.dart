@@ -64,3 +64,8 @@ enum PlatformEnum {
     }
   }
 }
+
+enum DiscountEnum {
+  largestSmallest,
+  free,
+}

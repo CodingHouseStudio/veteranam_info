@@ -1,9 +1,5 @@
 part of 'information_watcher_bloc.dart';
 
-enum InformationFailure {
-  error,
-}
-
 extension InformationFailureExtension on SomeFailure {
   InformationFailure _toInformation() {
     return InformationFailure.error;

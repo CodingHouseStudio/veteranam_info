@@ -1,11 +1,5 @@
 part of 'my_discounts_watcher_bloc.dart';
 
-enum MyDiscountFailure {
-  error,
-  get,
-  network,
-}
-
 extension MyDiscountFailureExtension on SomeFailure {
   MyDiscountFailure _toMyDiscount() {
     switch (this) {

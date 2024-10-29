@@ -1,9 +1,5 @@
 part of 'work_employee_watcher_bloc.dart';
 
-enum WorkFailure {
-  error,
-}
-
 extension WorkFailureExtension on SomeFailure {
   WorkFailure _toWork() {
     return WorkFailure.error;

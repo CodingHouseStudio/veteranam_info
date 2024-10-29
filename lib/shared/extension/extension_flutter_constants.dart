@@ -25,7 +25,7 @@ import 'package:flutter/material.dart'
         visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 extension LocalizedDateTime on DateTime {
