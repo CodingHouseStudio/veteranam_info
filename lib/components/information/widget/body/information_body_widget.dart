@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/information/information.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart';
+import 'package:veteranam/shared/repositories/i_information_repository.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../news_widget_list.dart';
 

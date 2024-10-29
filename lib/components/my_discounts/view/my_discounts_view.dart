@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/my_discounts/my_discounts.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class MyDiscountsScreen extends StatelessWidget {
   const MyDiscountsScreen({super.key});
