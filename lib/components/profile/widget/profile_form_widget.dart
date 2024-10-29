@@ -71,9 +71,8 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
   Widget build(BuildContext context) {
     return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) {
-        if (state.formState == ProfileEnum.invalidData) {
+        if (state.formState == ProfileEnum.initial) {
           nameController.text = state.name.value;
-          context.read<ProfileBloc>().add(const ProfileEvent.started());
           surnameController.text = state.surname.value;
         }
       },
