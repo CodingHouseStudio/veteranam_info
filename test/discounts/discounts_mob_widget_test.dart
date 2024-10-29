@@ -23,6 +23,7 @@ void main() {
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
+    late MobileRatingRepository mockMobileRatingRepository;
     setUp(() {
       Config.isWeb = false;
       PlatformEnum.isWebDesktop = true;
@@ -36,9 +37,13 @@ void main() {
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockBuildRepository = MockAppInfoRepository();
+      mockMobileRatingRepository = MockMobileRatingRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
+      );
+      when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
+        (realInvocation) async => const Right(true),
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
@@ -104,6 +109,7 @@ void main() {
         mockAuthenticationRepository: mockAuthenticationRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         mockBuildRepository: mockBuildRepository,
+        mockMobileRatingRepository: mockMobileRatingRepository,
       );
 
       await discountsInitialHelper(tester);
@@ -121,6 +127,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         ),
       );
     });
@@ -139,6 +146,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         );
 
         await discountsInitialHelper(tester);
@@ -163,6 +171,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );
 
@@ -183,6 +192,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );
 

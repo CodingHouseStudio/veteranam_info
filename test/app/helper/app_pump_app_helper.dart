@@ -14,6 +14,7 @@ Future<void> appPumpAppHelper({
   required IInvestorsRepository mockInvestorsReportisory,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
+  required MobileRatingRepository mockMobileRatingRepository,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
   _registerHomeBloc(mockFaqRepository);
@@ -40,6 +41,7 @@ Future<void> appPumpAppHelper({
   );
   _registerMobFaqBloc(mockFaqRepository);
   _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
+  _registerMobileRatingCubit(mockMobileRatingRepository);
   await tester.pumpWidget(const App());
 
   await tester.pumpAndSettle();
@@ -156,4 +158,16 @@ void _registerDiscountConfigCubit(
     GetIt.I.unregister<DiscountConfigCubit>();
   }
   GetIt.I.registerSingleton<DiscountConfigCubit>(discountConfigCubit);
+}
+
+void _registerMobileRatingCubit(
+  MobileRatingRepository mockMobileRatingRepository,
+) {
+  final mobileRatingCubit = MobileRatingCubit(
+    mobileRatingRepository: mockMobileRatingRepository,
+  );
+  if (GetIt.I.isRegistered<MobileRatingCubit>()) {
+    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+  }
+  GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }

@@ -36,15 +36,19 @@ class DiscountBodyWidget extends StatelessWidget {
                         //     .add(const DiscountWatcherEvent.started()),
                       );
                     }
-                    if (state.itemsLoaded ==
-                            (config.loadingItems *
-                                (config.emailScrollCount + 1)) &&
-                        emailState.emailEnum.show) {
-                      context.dialog.showUserEmailDialog(
-                        config.emailCloseDelay,
-                        // userEmailEnum: emailState.value,
-                        // count: emailState.count,
-                      );
+                    if (Config.isWeb) {
+                      if (state.itemsLoaded ==
+                              (config.loadingItems *
+                                  (config.emailScrollCount + 1)) &&
+                          emailState.emailEnum.show) {
+                        context.dialog.showUserEmailDialog(
+                          config.emailCloseDelay,
+                          // userEmailEnum: emailState.value,
+                          // count: emailState.count,
+                        );
+                      }
+                    } else {
+                      context.read<MobileRatingCubit>().showDialog();
                     }
                   },
                   listenWhen: (previous, current) =>
