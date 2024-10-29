@@ -48,6 +48,7 @@ dependencies:
   go_router: ^14.2.7 # Decoupled routing  package which is a must for any app
   google_sign_in: ^6.2.1
   image_picker: ^1.1.2
+  in_app_review: ^2.0.9
   injectable: ^2.4.4 # Used for dependency injection
   intl: ^0.19.0
   json_serializable: ^6.8.0

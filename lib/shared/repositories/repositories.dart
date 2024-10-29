@@ -33,6 +33,8 @@ export 'i_work_repository.dart';
 export 'information_repository.dart';
 export 'investors_repository.dart';
 export 'messaging_module.dart';
+export 'mobile_rating_module.dart';
+export 'mobile_rating_repository.dart';
 export 'network_module.dart';
 export 'network_repository.dart';
 export 'report_repository.dart';
