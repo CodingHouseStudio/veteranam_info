@@ -73,6 +73,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
       listener: (context, state) {
         if (state.formState == ProfileEnum.invalidData) {
           nameController.text = state.name.value;
+          context.read<ProfileBloc>().add(const ProfileEvent.started());
           surnameController.text = state.surname.value;
         }
       },

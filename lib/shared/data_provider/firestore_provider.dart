@@ -400,7 +400,6 @@ class FirestoreService {
   }) {
     var query = _db
         .collection(FirebaseCollectionName.discount)
-        .limit(1)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true);
     if (userId != null) {
       query = query.where(
