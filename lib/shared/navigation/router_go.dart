@@ -35,7 +35,7 @@ import 'package:veteranam/components/components.dart'
         WorkEmployeeScreen,
         WorkEmployerScreen,
         WorkScreen;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 

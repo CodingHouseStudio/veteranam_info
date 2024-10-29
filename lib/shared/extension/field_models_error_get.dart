@@ -8,7 +8,7 @@ import 'package:veteranam/components/components.dart'
         DiscountLinkFieldModelValidationError,
         DiscountsFieldModelValidationError,
         PublicNameFieldModelValidationError;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 extension EmailFieldModelValidationErrorEmpl
     on EmailFieldModelValidationError? {

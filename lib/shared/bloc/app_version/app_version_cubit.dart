@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 part 'app_version_state.dart';
 
@@ -49,7 +49,7 @@ class AppVersionCubit extends Cubit<AppVersionState> {
     required PackageInfo buildInfo,
   }) {
     var mobHasNewBuild = false;
-    if (KTest.testReleaseMode) {
+    if (Config.kReleaseMode) {
       try {
         final configVersion = _parseVersionToInt(mobAppVersion);
         final currentVersion = _parseVersionToInt(buildInfo.version);

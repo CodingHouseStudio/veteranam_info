@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart' show groupBy;
 import 'package:flutter/material.dart' show BuildContext;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {

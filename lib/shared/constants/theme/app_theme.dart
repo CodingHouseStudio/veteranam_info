@@ -19,7 +19,7 @@ import 'package:flutter/material.dart'
         WidgetStateProperty,
         WidgetStatePropertyAll,
         debugPrint;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 ThemeData themeData = ThemeData(
   colorScheme: const ColorScheme(

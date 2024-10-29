@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart'
     show ConnectivityResult;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 extension ListReportModelExtensions on List<ReportModel> {
   List<String> get getIdCard => map(

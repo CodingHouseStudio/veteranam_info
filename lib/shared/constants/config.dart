@@ -1,11 +1,12 @@
-import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
+import 'dart:io' show Platform;
+
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 
 abstract class Config {
   static const flavour =
       String.fromEnvironment('FLAVOUR', defaultValue: development);
   static const role = String.fromEnvironment('ROLE', defaultValue: user);
-  static const platform = kIsWeb ? web : mobile;
-
   @visibleForTesting
   static String? falvourValue;
 
@@ -29,12 +30,30 @@ abstract class Config {
   // @visibleForTesting
   static const business = 'business';
 
-  static bool? _kIsWeb;
-  static bool get isWeb => _kIsWeb ?? platform == web;
-  @visibleForTesting
-  static set isWeb(bool isWeb) => _kIsWeb = isWeb;
   // @visibleForTesting
   static const web = 'web';
   // @visibleForTesting
   static const mobile = 'mobile';
+
+  static String get platform {
+    try {
+      // ignore: unnecessary_statements
+      Platform.isAndroid;
+      return Config.mobile;
+    } catch (e) {
+      return Config.web;
+    }
+  }
+
+  //TODO: CHECK KISWEB AND RELEASE MODE
+
+  static bool? _kIsWeb;
+  static bool get isWeb => _kIsWeb ?? platform == Config.web;
+  @visibleForTesting
+  static set isWeb(bool isWeb) => _kIsWeb = isWeb;
+
+  static bool _kReleaseMode = const bool.fromEnvironment('dart.vm.product');
+  static bool get kReleaseMode => _kReleaseMode;
+  @visibleForTesting
+  static set kReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
 }

@@ -4,25 +4,7 @@ import 'dart:typed_data' show Uint8List;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/shared/shared.dart';
-
-extension ExtendedDateTime on DateTime {
-  static DateTime? _customTime;
-  static String? _id;
-
-  static DateTime get current => _customTime ?? DateTime.now().toUtc();
-
-  static String get id =>
-      _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
-
-  @visibleForTesting
-  static set current(DateTime? customTime) => _customTime = customTime;
-
-  @visibleForTesting
-  static set id(String? customId) => _id = customId;
-
-  String get localeTime => toLocal().toString().split(' ')[0];
-}
+import 'package:veteranam/shared/shared_dart.dart';
 
 // Extension for handling item loading logic on int
 extension ItemLoadedExtensions on int {
@@ -103,26 +85,6 @@ extension StringDartExtension on String {
     }
   }
 
-  int compareUkrain(String b) {
-    final minLength = length < b.length ? length : b.length;
-
-    for (var i = 0; i < minLength; i++) {
-      final aChar = this[i].toLowerCase();
-      final bChar = b[i].toLowerCase();
-
-      final aIndex = aChar._ukraineIndex;
-      final bIndex = bChar._ukraineIndex;
-
-      if (aIndex != bIndex) {
-        return aIndex - bIndex;
-      }
-    }
-
-    return length - b.length;
-  }
-
-  int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
-
   String? get getUserPlatform {
     final startIndex = indexOf('(');
     final endIndex = indexOf(')');
@@ -199,6 +161,30 @@ extension DiscountStateExtention on DiscountState {
         return 'published';
       case DiscountState.deactivated:
         return 'deactivated';
+    }
+  }
+}
+
+extension DateFieldModelDart on DateFieldModel {
+  String getString(Language language) =>
+      '${language.isEnglish ? 'Up to' : 'До'}'
+      ' ${value?.toLocalDateString(
+        localeValue: language.value.languageCode,
+        showDay: true,
+      )}';
+}
+
+extension UrlFailureExtension on SomeFailure {
+  UrlEnum toUrl() {
+    switch (this) {
+      case FailureShare():
+        return UrlEnum.shareError;
+      case FailureLink():
+        return UrlEnum.linkError;
+      case FailureCopy():
+        return UrlEnum.copyError;
+      default:
+        return UrlEnum.error;
     }
   }
 }

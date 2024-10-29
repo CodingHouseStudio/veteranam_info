@@ -1,6 +1,9 @@
+import 'dart:io' show Platform;
+
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:feedback/feedback.dart';
-import 'package:flutter/foundation.dart' show Key, kIsWeb, kReleaseMode;
+import 'package:flutter/foundation.dart'
+    show Key, defaultTargetPlatform, kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart'
     show
         BorderRadius,
@@ -12,6 +15,7 @@ import 'package:flutter/material.dart'
         EdgeInsetsGeometry,
         Expanded,
         Spacer,
+        TargetPlatform,
         TextDirection,
         TextPainter,
         TextSpan,
@@ -22,7 +26,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 extension LocalizedDateTime on DateTime {
   @visibleForTesting
@@ -80,9 +84,9 @@ extension DiscountModelLocation on DiscountModel {
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
-      ' ${PlatformEnum.isWebDesktop ? '***' : '['}'
+      ' ${PlatformEnumFlutter.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
-      '${PlatformEnum.isWebDesktop ? '***' : '](tel:'
+      '${PlatformEnumFlutter.isWebDesktop ? '***' : '](tel:'
           '${phoneNumber!.replaceAll('(', '').replaceAll(
                 ')',
                 '',
@@ -484,4 +488,58 @@ extension DiscountStateExtention on DiscountState {
 
 extension CompanyModelExtensions on CompanyModel {
   String? get imageUrl => image?.downloadURL;
+}
+
+extension PlatformEnumFlutter on PlatformEnum {
+  static bool get isWebDesktop => _isWebDesktop;
+  @visibleForTesting
+  static set isWebDesktop(bool isWebDesktop) => _isWebDesktop = isWebDesktop;
+
+  // static bool _isWebMobile = kIsWeb &&
+  //     (defaultTargetPlatform == TargetPlatform.android ||
+  //         defaultTargetPlatform == TargetPlatform.iOS);
+  static bool _isWebDesktop = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.fuchsia ||
+          defaultTargetPlatform == TargetPlatform.linux ||
+          defaultTargetPlatform == TargetPlatform.macOS ||
+          defaultTargetPlatform == TargetPlatform.windows);
+}
+
+extension ReasonComplaintFlutter on ReasonComplaint {
+  String toText(BuildContext context) {
+    switch (this) {
+      case ReasonComplaint.fakeNewsOrDisinformation:
+        return context.l10n.fakeNewsOrDisinformation;
+      case ReasonComplaint.fraudOrSpam:
+        return context.l10n.fraudOrSpam;
+      case ReasonComplaint.offensiveOrHatefulContent:
+        return context.l10n.offensiveOrHatefulContent;
+      case ReasonComplaint.other:
+        return context.l10n.other;
+    }
+  }
+}
+
+extension SubLocationString on SubLocation {
+  List<String> getList(BuildContext context) {
+    switch (this) {
+      // case null:
+      //   return [];
+      case SubLocation.all:
+      case SubLocation.allStoresOfChain:
+      case SubLocation.online:
+        return [context.l10n.allUkraine];
+    }
+  }
+
+  List<String> getCardList(BuildContext context) {
+    switch (this) {
+      case SubLocation.all:
+        return [context.l10n.allStoresOfChain, context.l10n.allUkrainOnline];
+      case SubLocation.allStoresOfChain:
+        return [context.l10n.allStoresOfChain];
+      case SubLocation.online:
+        return [context.l10n.allUkrainOnline];
+    }
+  }
 }

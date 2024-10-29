@@ -4,13 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-enum NetworkStatus {
-  network,
-  offline;
-
-  bool get isOffline => this == NetworkStatus.offline;
-}
-
 @singleton
 class NetworkRepository {
   NetworkRepository(

@@ -6,7 +6,7 @@ import 'package:firebase_analytics/firebase_analytics.dart'
     show AnalyticsCallOptions, FirebaseAnalytics;
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class FirebaseAnalyticsService {

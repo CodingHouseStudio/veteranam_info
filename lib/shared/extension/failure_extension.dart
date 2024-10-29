@@ -19,7 +19,7 @@ import 'package:veteranam/components/components.dart'
         StoryAddFailure,
         StoryFailure,
         WorkFailure;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {
@@ -201,21 +201,6 @@ extension MyStoryFailureValue on MyStoryFailure {
         return context.l10n.getFailure;
       case MyStoryFailure.network:
         return context.l10n.networkFailure;
-    }
-  }
-}
-
-extension UrlFailureExtension on SomeFailure {
-  UrlEnum toUrl() {
-    switch (this) {
-      case FailureShare():
-        return UrlEnum.shareError;
-      case FailureLink():
-        return UrlEnum.linkError;
-      case FailureCopy():
-        return UrlEnum.copyError;
-      default:
-        return UrlEnum.error;
     }
   }
 }

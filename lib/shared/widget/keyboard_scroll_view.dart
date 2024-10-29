@@ -33,7 +33,7 @@ class KeyboardScrollView extends StatelessWidget {
           context.read<UrlCubit>().reset();
         }
       },
-      child: PlatformEnum.isWebDesktop
+      child: PlatformEnumFlutter.isWebDesktop
           ? _KeyboardScrollViewWebDesk(
               widgetKey: widgetKey,
               slivers: slivers,
