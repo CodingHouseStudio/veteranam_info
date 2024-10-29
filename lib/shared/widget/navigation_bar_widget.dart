@@ -233,7 +233,13 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                             //     ? KSize.kPixel72
                             //     : KSize.kPixel56,
                           ),
-                        if (Config.isUser) ...[
+                        if (Config.isUser ||
+                            (Config.isBusiness &&
+                                context
+                                        .read<AuthenticationBloc>()
+                                        .state
+                                        .status ==
+                                    AuthenticationStatus.authenticated)) ...[
                           if (widget.isDesk)
                             KSizedBox.kWidthSizedBox32
                           else
