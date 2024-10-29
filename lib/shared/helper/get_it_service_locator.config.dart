@@ -23,6 +23,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i806;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:image_picker/image_picker.dart' as _i183;
+import 'package:in_app_review/in_app_review.dart' as _i553;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart'
     as _i174;
@@ -88,6 +89,8 @@ import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart'
     as _i872;
 import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.dart'
     as _i43;
+import 'package:veteranam/shared/bloc/mobile_rating/mobile_rating_cubit.dart'
+    as _i728;
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
@@ -133,6 +136,10 @@ import 'package:veteranam/shared/repositories/information_repository.dart'
 import 'package:veteranam/shared/repositories/investors_repository.dart'
     as _i994;
 import 'package:veteranam/shared/repositories/messaging_module.dart' as _i967;
+import 'package:veteranam/shared/repositories/mobile_rating_module.dart'
+    as _i220;
+import 'package:veteranam/shared/repositories/mobile_rating_repository.dart'
+    as _i192;
 import 'package:veteranam/shared/repositories/network_module.dart' as _i385;
 import 'package:veteranam/shared/repositories/network_repository.dart' as _i997;
 import 'package:veteranam/shared/repositories/report_repository.dart' as _i205;
@@ -143,8 +150,8 @@ import 'package:veteranam/shared/repositories/url_repository.dart' as _i929;
 import 'package:veteranam/shared/repositories/work_repository.dart' as _i76;
 import 'package:veteranam/shared/shared.dart' as _i1001;
 
-const String _user = 'user';
 const String _mobile = 'mobile';
+const String _user = 'user';
 const String _development = 'development';
 const String _business = 'business';
 
@@ -169,6 +176,7 @@ extension GetItInjectableX on _i174.GetIt {
     final dataPickerModule = _$DataPickerModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
+    final mobileRatingModule = _$MobileRatingModule();
     gh.singleton<_i141.FirebaseCrashlytics>(
         () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
@@ -213,6 +221,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i388.FilePicker>(),
         ));
     gh.lazySingleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
+    gh.singleton<_i553.InAppReview>(
+      () => mobileRatingModule.inAppReview,
+      registerFor: {_mobile},
+    );
     gh.singleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IFaqRepository>(
       () => _i1007.FaqRepository(),
@@ -278,6 +290,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i609.InvestorsWatcherBloc(
           investorsRepository: gh<_i1001.IInvestorsRepository>()),
       registerFor: {_user},
+    );
+    gh.singleton<_i192.MobileRatingRepository>(
+      () => _i192.MobileRatingRepository(gh<_i553.InAppReview>()),
+      registerFor: {_mobile},
     );
     gh.factory<_i408.InformationWatcherBloc>(
       () => _i408.InformationWatcherBloc(
@@ -386,6 +402,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i908.MarkdownFileCubit>(() => _i908.MarkdownFileCubit(
         appAuthenticationRepository:
             gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i728.MobileRatingCubit>(
+      () => _i728.MobileRatingCubit(
+          mobileRatingRepository: gh<_i1001.MobileRatingRepository>()),
+      registerFor: {_mobile},
+    );
     gh.factory<_i1032.MyDiscountsWatcherBloc>(
       () => _i1032.MyDiscountsWatcherBloc(
         discountRepository: gh<_i1001.IDiscountRepository>(),
@@ -474,3 +495,5 @@ class _$DataPickerModule extends _i567.DataPickerModule {}
 class _$FirebaseModule extends _i926.FirebaseModule {}
 
 class _$NetworkModule extends _i385.NetworkModule {}
+
+class _$MobileRatingModule extends _i220.MobileRatingModule {}

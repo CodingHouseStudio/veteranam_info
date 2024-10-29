@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton()
+@Injectable(env: [Config.mobile])
 class MobileRatingCubit extends Cubit<void> {
   MobileRatingCubit({
     required MobileRatingRepository mobileRatingRepository,
@@ -11,7 +11,7 @@ class MobileRatingCubit extends Cubit<void> {
 
   final MobileRatingRepository _mobileRatingRepository;
 
-  void started() {
-    _mobileRatingRepository.showRatingDialog();
+  Future<void> showDialog() async {
+    await _mobileRatingRepository.showRatingDialog();
   }
 }
