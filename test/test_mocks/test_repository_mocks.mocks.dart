@@ -1896,18 +1896,18 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser(String? password) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
-          [],
+          [password],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
         returnValueForMissingStub:
@@ -1916,7 +1916,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -2424,18 +2424,18 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser(String? password) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
-          [],
+          [password],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
         returnValueForMissingStub:
@@ -2444,7 +2444,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -2618,18 +2618,18 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as bool);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser(String? password) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
-          [],
+          [password],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
         returnValueForMissingStub:
@@ -2638,7 +2638,7 @@ class MockAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #deleteUser,
-            [],
+            [password],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

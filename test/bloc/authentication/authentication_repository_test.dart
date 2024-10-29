@@ -75,7 +75,7 @@ void main() {
           (_) async => const Right(true),
         );
         when(
-          mockAppAuthenticationRepository.deleteUser(),
+          mockAppAuthenticationRepository.deleteUser(null),
         ).thenAnswer(
           (_) async => const Right(true),
         );
@@ -194,7 +194,7 @@ void main() {
       });
       test('Delete User', () async {
         expect(
-          await authenticationRepository.deleteUser(),
+          await authenticationRepository.deleteUser(null),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -349,7 +349,7 @@ void main() {
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
-          mockAppAuthenticationRepository.deleteUser(),
+          mockAppAuthenticationRepository.deleteUser(null),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
@@ -459,7 +459,7 @@ void main() {
       });
       test('Delete User', () async {
         expect(
-          await authenticationRepository.deleteUser(),
+          await authenticationRepository.deleteUser(null),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,

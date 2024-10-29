@@ -301,9 +301,9 @@ class FirestoreService {
         );
   }
 
-  Future<void> deleteCompany(String id) {
-    return _db.collection(FirebaseCollectionName.companies).doc(id).delete();
-  }
+  // Future<void> deleteCompany(String id) {
+  //   return _db.collection(FirebaseCollectionName.companies).doc(id).delete();
+  // }
 
   Future<void> deleteUserSetting(
     String userId,

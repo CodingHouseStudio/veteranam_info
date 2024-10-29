@@ -48,4 +48,7 @@ final class AppUserRoleChanged extends AuthenticationEvent {
   List<Object> get props => [userRole];
 }
 
-class AuthenticationDeleteRequested extends AuthenticationEvent {}
+class AuthenticationDeleteRequested extends AuthenticationEvent {
+  const AuthenticationDeleteRequested(this.password);
+  final String? password;
+}

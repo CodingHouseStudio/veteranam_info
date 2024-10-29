@@ -44,7 +44,7 @@ abstract class IAppAuthenticationRepository {
     required String newPassword,
   });
 
-  Future<Either<SomeFailure, bool>> deleteUser();
+  Future<Either<SomeFailure, bool>> deleteUser(String? password);
 
   Future<Either<SomeFailure, bool>> updateUserSetting(
     UserSetting userSetting,

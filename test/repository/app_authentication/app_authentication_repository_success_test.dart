@@ -358,7 +358,7 @@ void main() {
     });
     test('Delete user', () async {
       expect(
-        await appAuthenticationRepository.deleteUser(),
+        await appAuthenticationRepository.deleteUser(null),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });

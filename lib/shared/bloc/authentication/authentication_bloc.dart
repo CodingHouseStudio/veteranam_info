@@ -91,7 +91,7 @@ class AuthenticationBloc
     AuthenticationDeleteRequested event,
     Emitter<AuthenticationState> emit,
   ) async {
-    await _authenticationRepository.deleteUser();
+    await _authenticationRepository.deleteUser(event.password);
   }
 
   void _onAuthenticationInitialized(

@@ -433,26 +433,37 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> deleteUser() async {
+  Future<Either<SomeFailure, bool>> deleteUser(String? password) async {
     try {
-      await _firestoreService.deleteUserSetting(currentUser.id);
-      // final credential = firebase_auth.EmailAuthProvider.credential(
-      //   email: currentUser.email,
-      //   password: _firebaseAuth.currentUser.password,
-      // );
-      // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
-      // l);
-      if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
-        try {
-          unawaited(_storageService.removeFile(currentUser.photo));
-          // User can save own photo in another service
-          // ignore: empty_catches
-        } catch (e) {}
+      if (_firebaseAuth.currentUser?.email != null) {
+        await _firestoreService.deleteUserSetting(currentUser.id);
+        // final credential = firebase_auth.EmailAuthProvider.credential(
+        //   email: currentUser.email,
+        //   password: _firebaseAuth.currentUser.password,
+        // );
+        // await _firebaseAuth.currentUser?.reauthenticateWithCredential
+        // (credential);
+        if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
+          try {
+            unawaited(_storageService.removeFile(currentUser.photo));
+            // User can save own photo in another service
+            // ignore: empty_catches
+          } catch (e) {}
+        }
+        if (password != null) {
+          final credential = firebase_auth.EmailAuthProvider.credential(
+            email: _firebaseAuth.currentUser!.email!,
+            password: password,
+          );
+          await _firebaseAuth.currentUser
+              ?.reauthenticateWithCredential(credential);
+        }
+        await _firebaseAuth.currentUser?.delete();
+        _cache.clear(); // Clear the cache after user deletion
+        unawaited(logInAnonymously());
+        return const Right(true);
       }
-      await _firebaseAuth.currentUser?.delete();
-      _cache.clear(); // Clear the cache after user deletion
-      unawaited(logInAnonymously());
-      return const Right(true);
+      return const Right(false);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(SomeFailure.serverError(error: e, stack: stack));

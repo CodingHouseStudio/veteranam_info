@@ -41,7 +41,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       when(
-        mockAuthenticationRepository.deleteUser(),
+        mockAuthenticationRepository.deleteUser(null),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
@@ -156,7 +156,7 @@ void main() {
         build: () => authenticationBloc,
         act: (bloc) async {
           bloc.add(
-            AuthenticationDeleteRequested(),
+            const AuthenticationDeleteRequested(null),
           );
         },
         expect: () => [

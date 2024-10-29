@@ -111,8 +111,8 @@ class AuthenticationRepository {
     return iAppAuthenticationRepository.currentUser;
   }
 
-  Future<Either<SomeFailure, bool>> deleteUser() async {
-    final result = await iAppAuthenticationRepository.deleteUser();
+  Future<Either<SomeFailure, bool>> deleteUser(String? password) async {
+    final result = await iAppAuthenticationRepository.deleteUser(password);
     return result.fold(
       (l) {
         return Left(l); // debugPrint(l.toString())

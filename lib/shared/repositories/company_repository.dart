@@ -143,7 +143,7 @@ class CompanyRepository implements ICompanyRepository {
   Future<Either<SomeFailure, bool>> deleteCompany() async {
     try {
       if (currentUserCompany.id.isNotEmpty) {
-        await _firestoreService.deleteCompany(currentUserCompany.id);
+        await _firestoreService.updateCompany(currentUserCompany.copyWith());
         _userCompanyController.add(CompanyModel.empty);
         await _iAppAuthenticationRepository.logOut();
       }
