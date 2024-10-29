@@ -50,6 +50,121 @@
       width: 100 vw;
     }
 
+    .progress {
+      position: absolute;
+      height: 10px;
+      top: 0%;
+      display: flex;
+      width: 100%;
+      background-color: #DCEB8D;
+      border-radius: 2px;
+      background-clip: padding-box;
+      /*margin: 0.5rem 0 1rem 0;*/
+      overflow: hidden;
+    }
+
+    .progress .indeterminate {
+      background-color: black;
+    }
+
+    .progress .indeterminate:before {
+      content: '';
+      position: absolute;
+      background-color: #AAAE8E;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      will-change: left, right;
+      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+      animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    }
+
+    .progress .indeterminate:after {
+      content: '';
+      position: absolute;
+      background-color: #AAAE8E;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      will-change: left, right;
+      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      -webkit-animation-delay: 1.15s;
+      animation-delay: 1.15s;
+    }
+
+    @-webkit-keyframes indeterminate {
+      0% {
+        left: -35%;
+        right: 100%;
+      }
+
+      60% {
+        left: 100%;
+        right: -90%;
+      }
+
+      100% {
+        left: 100%;
+        right: -90%;
+      }
+    }
+
+    @keyframes indeterminate {
+      0% {
+        left: -35%;
+        right: 100%;
+      }
+
+      60% {
+        left: 100%;
+        right: -90%;
+      }
+
+      100% {
+        left: 100%;
+        right: -90%;
+      }
+    }
+
+    @-webkit-keyframes indeterminate-short {
+      0% {
+        left: -200%;
+        right: 100%;
+      }
+
+      60% {
+        left: 107%;
+        right: -8%;
+      }
+
+      100% {
+        left: 107%;
+        right: -8%;
+      }
+    }
+
+    @keyframes indeterminate-short {
+      0% {
+        left: -200%;
+        right: 100%;
+      }
+
+      60% {
+        left: 107%;
+        right: -8%;
+      }
+
+      100% {
+        left: 107%;
+        right: -8%;
+      }
+    }
+
+    .column {
+      flex-direction: column;
+    }
+
     .splash {
       align-items: center;
       display: flex;
@@ -60,13 +175,16 @@
       width: 25vw;
       /* Set width to 25% of the viewport width */
       color: grey;
-      mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
-      -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
+      /* mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
+      -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%; */
       background-repeat: no-repeat;
-      animation: splash 4.0s infinite;
+      /* animation: splash 4.0s infinite; */
+
+      min-width: 300px;
+      min-height: 300px;
     }
 
-    @keyframes splash {
+    /* @keyframes splash {
       0% {
         -webkit-mask-position: 85%;
       }
@@ -74,7 +192,7 @@
       100% {
         -webkit-mask-position: 0%;
       }
-    }
+    } */
 
     #splash img {
       /* New animation for disappearing */
@@ -84,11 +202,14 @@
       /* Increase image size to 25% of viewport width */
       height: 25vh;
       /* Increase image size to 25% of viewport height */
+
+      min-width: 300px;
+      min-height: 300px;
     }
 
     .image-container {
-      width: 200px;
-      height: 200px;
+      width: 300px;
+      height: 300px;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -125,39 +246,56 @@
     } */
 
     .button {
-      display: none;
       position: absolute;
-      top: 75%;
+      display: none;
+      justify-content: center;
       left: 50%;
       transform: translateX(-50%);
       background-color: white;
       color: black;
       border: 1px solid grey;
-      padding: 12px 20px;
+      text-align: center;
+      padding: 1vh 4vw;
+      margin-top: 10vh;
       cursor: pointer;
-      font-size: 32px;
+      bottom: 15vh;
+      font-size: 3vh;
       border-radius: 32px;
-      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, top 0.5s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, bottom 0.5s ease;
     }
 
     .button.loading {
+      transform: translate(-50%, -50%);
+      display: flex;
+      /* bottom: 40vh; */
       background-color: #d3d3d3;
+      margin-top: 0vh;
       color: #7a7a7a;
       border: 1px solid #b0b0b0;
       cursor: wait;
-      top: 50%;
     }
 
     .button.loading::after {
-      content: "";
-      display: inline-block;
       width: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 16px;
       margin-left: 8px;
       border: 2px solid #7a7a7a;
       border-radius: 50%;
       border-top-color: transparent;
-      animation: spin 2s linear infinite;
+    }
+
+    .loading-circle {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #7a7a7a;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
     }
 
     @keyframes spin {
@@ -169,21 +307,158 @@
         transform: rotate(360deg);
       }
     }
+
+    /*Loader Style*/
+    .loader {
+      text-align: center;
+      vertical-align: middle;
+      position: absolute;
+      display: flex;
+      margin-top: 3vh;
+      justify-content: center;
+      left: 50%;
+      transform: translateX(-50%);
+
+    }
+
+    .loader span {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: #EFEFEF;
+      border-radius: 50%;
+      margin: 0 5px;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .loader span:nth-child(2) {
+      background: #BABBB1;
+    }
+
+    .loader span:nth-child(3) {
+      background: #090C00;
+    }
+
+    .loader span:nth-child(4) {
+      background: #DCF264;
+    }
+
+    .loader span:not(:last-child) {
+      animation: animate 1.5s linear infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(30px);
+      }
+    }
+
+    .loader span:last-child {
+      animation: jump 1.5s ease-in-out infinite;
+    }
+
+    @keyframes jump {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      10% {
+        transform: translate(10px, -10px);
+      }
+
+      20% {
+        transform: translate(20px, 10px);
+      }
+
+      30% {
+        transform: translate(30px, -50px);
+      }
+
+      70% {
+        transform: translate(-150px, -50px);
+      }
+
+      80% {
+        transform: translate(-140px, 10px);
+      }
+
+      90% {
+        transform: translate(-130px, -10px);
+      }
+
+      100% {
+        transform: translate(-120px, 0);
+      }
+    }
   </style>
 
 </head>
 
 <body style="font-family: Tahoma, Verdana, sans-serif">
-  <div class="splash">
-    <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
+  <div class='progress' id='pre-loader-bar'>
+    <div class='indeterminate'></div>
   </div>
 
+  <div class="column" id="column-loading">
+    <div class="splash">
+      <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
+    </div>
+    <div class="loader" id="loader-component">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <button id="retry-button" class="button">
+      Перезавантажити
+      <span class="loading-circle"></span>
+    </button>
+  </div>
+  <script>
+    const progressLine = document.getElementById("pre-loader-bar");
+    const loadingComponent = document.getElementById("column-loading");
+    var retryButton = document.getElementById('retry-button');
+
+    // function removeSplashFromWeb() {
+    //   document.getElementById("splash")?.remove();
+    //   document.getElementById("splash-branding")?.remove();
+    //   document.body.style.background = "transparent";
+    // }
+    // progressLine.style.display = "block";
+    // loadingComponent.style.display = "block";
+    // retryButton.style.display = "none";
+
+    window.addEventListener("flutter-first-frame", function () {
+      setTimeout(() => {
+        progressLine.remove();
+        loadingComponent.remove();
+      }, 4000);
+    });
+    setTimeout(() => {
+      retryButton.style.display = "flex";
+    }, 8000);
+
+    retryButton.addEventListener('click', function () {
+      location.reload();
+      retryButton.classList.add('loading'); // Add a loading class
+      document.querySelector('.loading-circle').style.display = 'inline-block';
+      document.getElementById("splash-image").style.display = "none";
+      document.getElementById("loader-component").style.display = "none";
+      console.log("Reloading...");
+    });
+  </script>
   <!-- <script>
     self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   </script> -->
   <script src="flutter_bootstrap.js" async>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
+
         console.log("Firebase messaging initialized.");
         navigator.serviceWorker.register('firebase-messaging-sw.js', {
           scope: '/firebase-cloud-messaging-push-scope',
@@ -228,44 +503,6 @@
   <script
     type="text/javascript">(function (w, s) { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js"; var x = document.getElementsByTagName("script")[0]; x.parentNode.insertBefore(e, x); })(window, "script");</script>
 
-  <button id="retry-button" class="button">Перезавантажити</button>
-
-  <script>
-    var retryButton = document.getElementById('retry-button');
-
-    // function removeSplashFromWeb() {
-    //   document.getElementById("splash")?.remove();
-    //   document.getElementById("splash-branding")?.remove();
-    //   document.body.style.background = "transparent";
-    // }
-    retryButton.style.display = "none";
-    setTimeout(() => {
-      retryButton.style.display = "block";
-    }, 8000);
-
-    retryButton.addEventListener('click', function () {
-      retryButton.classList.add('loading'); // Add a loading class
-      document.getElementById("splash-image").style.display = "none";
-      console.log("Reloading...");
-      location.reload();
-    });
-
-    // window.addEventListener('offline', function () {
-    //   retryButton.style.display = 'block';
-    // });
-
-    // window.addEventListener('online', function () {
-    //   location.reload()
-    //   retryButton.style.display = 'none';
-    // });
-
-    // window.addEventListener('error', function () {
-    //   // if (retryButton.style.display != 'block') {
-    //   //   location.reload()
-    //   // }
-    //   retryButton.style.display = 'block';
-    // });
-  </script>
 </body>
 
 </html>
