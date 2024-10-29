@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @LazySingleton(as: IUrlRepository)
 class UrlRepository extends IUrlRepository {

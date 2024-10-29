@@ -5,7 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 // import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IDeviceRepository, order: -1)
 class DeviceRepository implements IDeviceRepository {

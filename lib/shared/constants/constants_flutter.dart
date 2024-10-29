@@ -4,6 +4,7 @@ export 'enum.dart';
 export 'models.dart';
 export 'models_flutter.dart';
 export 'platform_constants.dart';
+export 'route_constants.dart';
 export 'scroll_behavior.dart';
 export 'style/style.dart';
 export 'test_constants.dart';

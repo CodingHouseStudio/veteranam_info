@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
 import 'package:flutter/foundation.dart' show visibleForTesting; //debugPrint
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(
   as: ICompanyRepository,

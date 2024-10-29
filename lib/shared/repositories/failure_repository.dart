@@ -2,7 +2,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @LazySingleton(order: -2)
 class FailureRepository {

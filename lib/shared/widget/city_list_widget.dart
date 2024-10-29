@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class CityListWidget extends StatelessWidget {
   const CityListWidget({

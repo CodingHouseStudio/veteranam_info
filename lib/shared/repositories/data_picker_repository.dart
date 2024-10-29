@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart' show Uint8List, visibleForTesting;
 import 'package:image_picker/image_picker.dart'
     show ImagePicker, ImageSource, XFile;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 class FilePickerItem {
   FilePickerItem({

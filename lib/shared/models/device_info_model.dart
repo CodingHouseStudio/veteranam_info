@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/platform_constants.dart';
 
 part 'device_info_model.freezed.dart';
 part 'device_info_model.g.dart';

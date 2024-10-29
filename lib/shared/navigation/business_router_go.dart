@@ -19,7 +19,7 @@ import 'package:veteranam/components/components.dart'
         ProfileScreen,
         PwResetEmailScreen,
         SignUpScreen;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 

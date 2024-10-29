@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class ConfirmDialog extends StatefulWidget {
   const ConfirmDialog({
