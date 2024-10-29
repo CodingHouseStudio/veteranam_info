@@ -1,11 +1,6 @@
-import 'dart:math' show max, min;
-
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:feedback/feedback.dart' show UserFeedback;
-import 'package:firebase_storage/firebase_storage.dart'
-    show Reference, SettableMetadata, UploadTask;
-import 'package:flutter/foundation.dart'
-    show Key, Uint8List, kIsWeb, kReleaseMode, visibleForTesting;
+import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart' show Key, kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart'
     show
         BorderRadius,
@@ -22,46 +17,12 @@ import 'package:flutter/material.dart'
         TextSpan,
         TextStyle,
         Widget,
-        showDatePicker;
+        showDatePicker,
+        visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/components/components.dart'
-    show
-        DiscountEnum,
-        DiscountUserEmailFormBloc,
-        DiscountUserEmailFormEvent,
-        ProfileEnum;
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
-
-extension ExtendedDateTime on DateTime {
-  static DateTime? _customTime;
-  static String? _id;
-
-  static DateTime get current => _customTime ?? DateTime.now().toUtc();
-
-  static String get id =>
-      _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
-
-  @visibleForTesting
-  static set current(DateTime? customTime) => _customTime = customTime;
-
-  @visibleForTesting
-  static set id(String? customId) => _id = customId;
-
-  String get localeTime => toLocal().toString().split(' ')[0];
-}
-
-// Extension for handling item loading logic on int
-extension ItemLoadedExtensions on int {
-  // Get the number of loaded items
-  int getLoaded({required List<dynamic> list, int? loadItems}) => min(
-        list.length,
-        max(this, (loadItems == 0 ? null : loadItems) ?? KDimensions.loadItems),
-      );
-
-  // Check if loading more items is possible
-  bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
-}
 
 extension LocalizedDateTime on DateTime {
   @visibleForTesting
@@ -71,7 +32,6 @@ extension LocalizedDateTime on DateTime {
 
   String toLocalDateString({
     required BuildContext? context,
-    String? localeValue,
     bool showDay = false,
   }) {
     final locale = context
@@ -81,7 +41,6 @@ extension LocalizedDateTime on DateTime {
             .locale
             .value
             .languageCode ??
-        localeValue ??
         Language.ukrain.value.languageCode;
     // initializeDateFormatting(locale);
     if (ukDateString != null && enDateString != null) {
@@ -159,48 +118,7 @@ extension DiscountModelLocation on DiscountModel {
       directLink != null && directLink!.isUrlValid ? directLink : link;
 }
 
-extension StringExtension on String {
-  @visibleForTesting
-  static DateTime? date;
-  DateTime? getDateDiscountString(
-    String locale,
-  ) =>
-      trim()
-          .replaceAll('Up to ', '')
-          .replaceAll('До ', '')
-          .toLocaleDate(locale: locale, showDay: true);
-  DateTime? toLocaleDate({
-    required String locale,
-    bool showDay = false,
-  }) {
-    if (date != null) {
-      return date;
-    }
-    try {
-      if (showDay) {
-        return DateFormat.yMMMMd(locale).parse(this);
-      } else {
-        return DateFormat.yMMMM(locale).parse(this);
-      }
-    } catch (e) {
-      // If DateFormat change format or our prevous discount had another format
-      return null;
-    }
-  }
-
-  String customSubstring(int start, [int? end]) {
-    return substring(start, end != null ? min(end, length) : null);
-  }
-
-  bool get isUrlValid {
-    const urlPattern = r'(https?://[^\s]+)';
-    final regex = RegExp(
-      urlPattern,
-      caseSensitive: false,
-    );
-    return regex.hasMatch(this);
-  }
-
+extension StringFllutterExtension on String {
   String markdownCard({required bool isDesk, required bool fullText}) {
     if (fullText) {
       return this;
@@ -261,14 +179,6 @@ extension StringExtension on String {
             : substringValue;
   }
 
-  String setStringLength(int maxLength) {
-    if (length > maxLength) {
-      return substring(0, maxLength);
-    } else {
-      return this;
-    }
-  }
-
   SubLocation? getSublocation(BuildContext context) {
     if (this == SubLocation.all.getList(context).first) {
       return SubLocation.all;
@@ -279,26 +189,6 @@ extension StringExtension on String {
     return null;
   }
 
-  int compareUkrain(String b) {
-    final minLength = length < b.length ? length : b.length;
-
-    for (var i = 0; i < minLength; i++) {
-      final aChar = this[i].toLowerCase();
-      final bChar = b[i].toLowerCase();
-
-      final aIndex = aChar._ukraineIndex;
-      final bIndex = bChar._ukraineIndex;
-
-      if (aIndex != bIndex) {
-        return aIndex - bIndex;
-      }
-    }
-
-    return length - b.length;
-  }
-
-  int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
-
   double getTextWidth({
     required TextStyle textStyle,
   }) {
@@ -306,17 +196,6 @@ extension StringExtension on String {
       text: TextSpan(text: this, style: textStyle),
       textDirection: TextDirection.ltr,
     );
-  }
-
-  String? get getUserPlatform {
-    final startIndex = indexOf('(');
-    final endIndex = indexOf(')');
-
-    if (startIndex == -1 || endIndex == -1 || startIndex > endIndex) {
-      return null;
-    }
-
-    return substring(startIndex + 1, endIndex);
   }
 
   String get getImageUrl //({bool? highQuality})
@@ -339,18 +218,6 @@ extension StringExtension on String {
   }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
-}
-
-extension InformationModelExtension on InformationModel {
-  int? getLike({required bool isLiked}) {
-    if (isLiked) {
-      return likes ?? 1;
-    } else if (likes != null && likes! > 1) {
-      return likes! - 1;
-    } else {
-      return null;
-    }
-  }
 }
 
 extension GenericsExtensions<T> on T {
@@ -425,28 +292,6 @@ extension CategoryEnumExtensions on CategoryEnum {
   }
 }
 
-extension Uint8ListExtension on Uint8List {
-  @visibleForTesting
-  static FilePickerItem? imagePickerItem;
-  FilePickerItem get parseToImagePickerItem =>
-      imagePickerItem ??
-      FilePickerItem(
-        bytes: this,
-        name: null,
-        ref: null,
-      );
-}
-
-extension ReferenceExtension on Reference {
-  UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
-    if (Config.isWeb) {
-      return putBlob(data, metadata);
-    } else {
-      return putData(data, metadata);
-    }
-  }
-}
-
 extension UrlEnumExtension on UrlEnum {
   String value(BuildContext context) {
     switch (this) {
@@ -481,6 +326,9 @@ extension FilterItemExtension on FilterItem {
       return value.toString().compareUkrain(b.value.toString());
     }
   }
+
+  String getString(BuildContext context) =>
+      (context.isEnglish && valueEN != null ? valueEN : value).toString();
 }
 
 extension UserRoleExtensions on UserRole {
@@ -584,39 +432,7 @@ extension DoubleExtensions on double {
 //   }
 // }
 
-extension CardEnumExtention on CardEnum {
-  String get getValue {
-    switch (this) {
-      case CardEnum.funds:
-        return 'funds';
-      case CardEnum.discount:
-        return 'discount';
-      case CardEnum.information:
-        return 'information';
-      case CardEnum.story:
-        return 'story';
-    }
-  }
-}
-
 extension DiscountStateExtention on DiscountState {
-  String get enumString {
-    switch (this) {
-      case DiscountState.isNew:
-        return 'isNew';
-      case DiscountState.underReview:
-        return 'underReview';
-      // case DiscountState.overdue:
-      //   return 'overdue';
-      case DiscountState.rejected:
-        return 'rejected';
-      case DiscountState.published:
-        return 'published';
-      case DiscountState.deactivated:
-        return 'deactivated';
-    }
-  }
-
   String text(BuildContext context) {
     switch (this) {
       case DiscountState.isNew:
@@ -664,12 +480,6 @@ extension DiscountStateExtention on DiscountState {
         return AppColors.materialThemeRefTertiaryTertiary70;
     }
   }
-}
-
-extension UserExtensions on User {
-  String? get firstName => name?.split(' ').first;
-
-  String? get lastName => name?.split(' ').last;
 }
 
 extension CompanyModelExtensions on CompanyModel {

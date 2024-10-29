@@ -9,7 +9,8 @@ import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/helper/helper.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();

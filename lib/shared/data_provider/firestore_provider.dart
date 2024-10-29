@@ -13,14 +13,6 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-enum MobMode {
-  online,
-  offline;
-
-  bool get isOffline => this == MobMode.offline;
-  MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;
-}
-
 /// COMMENT: Class to get, update, delete or set values in firebase
 @Singleton(order: -1)
 class FirestoreService {

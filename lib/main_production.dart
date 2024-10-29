@@ -14,7 +14,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
 
 /// COMMENT: PROD main file
 Future<void> main() async {

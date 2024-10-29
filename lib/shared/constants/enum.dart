@@ -1,20 +1,6 @@
-import 'package:flutter/material.dart' show BuildContext, Key, VoidCallback;
-import 'package:veteranam/shared/shared.dart';
-
 enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
 
 //enum EvaluationEnum { like, dislike, smile, none }
-
-class FilterItem {
-  FilterItem(this.value, {this.number = 1, this.valueEN});
-
-  final dynamic value;
-  final dynamic valueEN;
-  final int number;
-
-  String getString(BuildContext context) =>
-      (context.isEnglish && valueEN != null ? valueEN : value).toString();
-}
 
 enum UrlEnum {
   shareError,
@@ -27,14 +13,16 @@ enum UrlEnum {
 
 enum CategoryEnum { all }
 
-class DropDownItem {
-  DropDownItem({
-    required this.text,
-    required this.action,
-    required this.key,
-  });
+enum AuthenticationStatus {
+  unknown,
+  anonymous,
+  authenticated,
+} //unauthenticated
 
-  final String text;
-  final VoidCallback? action;
-  final Key key;
+enum MobMode {
+  online,
+  offline;
+
+  bool get isOffline => this == MobMode.offline;
+  MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;
 }
