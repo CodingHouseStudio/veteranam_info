@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_dart.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
   FlutterError.onError = (details) {
@@ -17,7 +18,7 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   };
 
   Bloc.observer = const AppBlocObserver();
-  if (kIsWeb != null) {
+  if (Config.isWeb) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
@@ -13,7 +12,8 @@ class UrlRepository extends IUrlRepository {
     String url, {
     bool? useSiteUrl,
   }) async {
-    final baseUrl = (useSiteUrl ?? !kIsWeb) ? KAppText.site : Uri.base.origin;
+    final baseUrl =
+        (useSiteUrl ?? !Config.isWeb) ? KAppText.site : Uri.base.origin;
     try {
       // if (Config.isWeb) {
       await Share.shareUri(
@@ -76,6 +76,7 @@ class UrlRepository extends IUrlRepository {
     }
   }
 
+  //TODO(flutter): this repository use flutter impory, impory should be remove
   @override
   Future<Either<SomeFailure, bool>> copy(String text) async {
     try {

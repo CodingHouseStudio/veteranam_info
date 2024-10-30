@@ -1,5 +1,4 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -52,9 +51,10 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: kIsWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
+  initialLocation:
+      Config.isWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
   observers: [
-    if (Config.isProduction && kReleaseMode)
+    if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
         analytics: FirebaseAnalytics.instance,
         // We have in the if kReleaseMode
@@ -170,13 +170,13 @@ GoRouter router = GoRouter(
         ),
       ),
     GoRoute(
-      name: kIsWeb ? KRoute.home.name : KRoute.settings.name,
+      name: Config.isWeb ? KRoute.home.name : KRoute.settings.name,
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
         restorationId: state.pageKey.value,
-        child: kIsWeb ? const HomeScreen() : const MobSettingsScreen(),
+        child: Config.isWeb ? const HomeScreen() : const MobSettingsScreen(),
       ),
       routes: [
         GoRoute(
@@ -412,7 +412,7 @@ GoRouter router = GoRouter(
             child: const FeedbackScreen(),
           ),
         ),
-        if (!kIsWeb)
+        if (!Config.isWeb)
           GoRoute(
             name: KRoute.mobFAQ.name,
             path: KRoute.mobFAQ.path,

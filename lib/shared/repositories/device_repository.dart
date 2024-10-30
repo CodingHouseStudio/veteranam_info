@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
-// import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -27,7 +26,7 @@ class DeviceRepository implements IDeviceRepository {
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
     List<DeviceInfoModel>? initialList,
   }) async {
-    if (Config.kReleaseMode) {
+    if (Config.isReleaseMode) {
       var id = '';
       SomeFailure? failure;
       String? fcm;

@@ -31,7 +31,7 @@ class AppBlocObserver extends BlocObserver {
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
-  if (!kIsWeb) {
+  if (!Config.isWeb) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor:
@@ -51,7 +51,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await initializeDateFormatting();
 
   // Add cross-flavor configuration here
-  if (kIsWeb) {
+  if (Config.isWeb) {
     usePathUrlStrategy();
   }
 

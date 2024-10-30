@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';
 // const String passwordCorrectIntegrationTest = 'qwerty';
@@ -19,10 +19,10 @@ Future<void> setUpGlobalIntegration() async {
     options: Config.isDevelopment
         ? dev.DefaultFirebaseOptions.currentPlatform
         : prod.DefaultFirebaseOptions.currentPlatform,
-    name: kIsWeb ? null : 'TEST',
+    name: Config.isWeb ? null : 'TEST',
   );
 
-  if (kIsWeb) {
+  if (Config.isWeb) {
     usePathUrlStrategy();
   }
 

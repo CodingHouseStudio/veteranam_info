@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 
@@ -35,23 +33,15 @@ abstract class Config {
   // @visibleForTesting
   static const mobile = 'mobile';
 
-  static String get platform {
-    try {
-      // ignore: unused_local_variable
-      final value = Platform.isAndroid;
-      return Config.mobile;
-    } catch (e) {
-      return Config.web;
-    }
-  }
+  static const String platform =
+      bool.fromEnvironment('dart.library.js_util') ? Config.mobile : Config.web;
 
-  static bool? _kIsWeb;
-  static bool get isWeb => _kIsWeb ?? platform == Config.web;
+  static bool get isWeb => testIsWeb ?? platform == Config.web;
   @visibleForTesting
-  static set isWeb(bool isWeb) => _kIsWeb = isWeb;
+  static bool? testIsWeb;
 
   static bool _kReleaseMode = const bool.fromEnvironment('dart.vm.product');
-  static bool get kReleaseMode => _kReleaseMode;
+  static bool get isReleaseMode => _kReleaseMode;
   @visibleForTesting
-  static set kReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
+  static set isReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
 }

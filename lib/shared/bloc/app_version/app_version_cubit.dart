@@ -49,7 +49,7 @@ class AppVersionCubit extends Cubit<AppVersionState> {
     required PackageInfo buildInfo,
   }) {
     var mobHasNewBuild = false;
-    if (Config.kReleaseMode) {
+    if (Config.isReleaseMode) {
       try {
         final configVersion = _parseVersionToInt(mobAppVersion);
         final currentVersion = _parseVersionToInt(buildInfo.version);

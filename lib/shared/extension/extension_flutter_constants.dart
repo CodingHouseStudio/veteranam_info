@@ -1,9 +1,6 @@
-import 'dart:io' show Platform;
-
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:feedback/feedback.dart';
-import 'package:flutter/foundation.dart'
-    show Key, defaultTargetPlatform, kIsWeb, kReleaseMode;
+import 'package:flutter/foundation.dart' show Key, defaultTargetPlatform;
 import 'package:flutter/material.dart'
     show
         BorderRadius,
@@ -204,8 +201,8 @@ extension StringFllutterExtension on String {
 
   String get getImageUrl //({bool? highQuality})
   {
-    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
-      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
+    if ((Config.isProduction && Config.isReleaseMode) || !Config.isWeb) {
+      final url = Config.isWeb ? Uri.base.origin : 'https://veteranam.info';
       return '$url$_urlPrefix$this';
     } else {
       return this;
@@ -220,7 +217,7 @@ extension StringFllutterExtension on String {
     const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
     return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
-  // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
+  // : '/cdn-cgi/image/${Config.isWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
@@ -424,7 +421,7 @@ extension DoubleExtensions on double {
 //     Map<String, Object>? parameters,
 //     AnalyticsCallOptions? callOptions,
 //   }) {
-//     if (kReleaseMode && Config.isProduction) {
+//     if (Config.isReleaseMode && Config.isProduction) {
 //       unawaited(
 //         logEvent(
 //           name: name,
@@ -495,10 +492,10 @@ extension PlatformEnumFlutter on PlatformEnum {
   @visibleForTesting
   static set isWebDesktop(bool isWebDesktop) => _isWebDesktop = isWebDesktop;
 
-  // static bool _isWebMobile = kIsWeb &&
+  // static bool _isWebMobile = Config.isWeb &&
   //     (defaultTargetPlatform == TargetPlatform.android ||
   //         defaultTargetPlatform == TargetPlatform.iOS);
-  static bool _isWebDesktop = kIsWeb &&
+  static bool _isWebDesktop = Config.isWeb &&
       (defaultTargetPlatform == TargetPlatform.fuchsia ||
           defaultTargetPlatform == TargetPlatform.linux ||
           defaultTargetPlatform == TargetPlatform.macOS ||
