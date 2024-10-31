@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-// TODO(MARIA): MOVE TO DiscountUserEmailSCREEn
+// TODO(MARIA): MOVE discount user email form bloc to shared and rename
 
 class UserEmailDialog extends StatefulWidget {
   const UserEmailDialog({
