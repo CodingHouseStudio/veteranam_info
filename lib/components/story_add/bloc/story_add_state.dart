@@ -1,11 +1,5 @@
 part of 'story_add_bloc.dart';
 
-enum StoryAddFailure {
-  error,
-  network,
-  send,
-}
-
 extension StoryAddFailureExtension on SomeFailure {
   StoryAddFailure _toStoryAdd() {
     switch (this) {

@@ -8,18 +8,11 @@ import 'package:cloud_firestore/cloud_firestore.dart'
         SetOptions,
         Settings,
         Source;
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 // import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
-
-enum MobMode {
-  online,
-  offline;
-
-  bool get isOffline => this == MobMode.offline;
-  MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;
-}
+import 'package:veteranam/shared/shared_dart.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
 @Singleton(order: -1)
@@ -65,7 +58,6 @@ class FirestoreService {
         persistenceEnabled: _offlineMode.isOffline,
       );
     }
-    // await appNetworkRepository.updateCacheConnectivityResults();
   }
 
   MobMode get switchOfflineMode {

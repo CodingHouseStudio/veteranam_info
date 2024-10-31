@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/components/company/company.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/company/field_models/field_models.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 part 'company_form_bloc.freezed.dart';
 part 'company_form_event.dart';

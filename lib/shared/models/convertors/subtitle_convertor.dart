@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/dimensions/min_max_size_constants.dart';
+import 'package:veteranam/shared/extension/extension_dart.dart';
 
 class SubtitleConverter implements JsonConverter<String, String> {
   const SubtitleConverter();

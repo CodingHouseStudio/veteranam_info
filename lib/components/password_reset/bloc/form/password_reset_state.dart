@@ -1,11 +1,5 @@
 part of 'password_reset_bloc.dart';
 
-enum PasswordResetFailure {
-  error,
-  network,
-  send,
-}
-
 extension AuthFailureToPasswordResetFailure on SomeFailure {
   PasswordResetFailure _toPasswordResetError() {
     switch (this) {

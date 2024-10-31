@@ -1,12 +1,5 @@
 part of 'discounts_add_bloc.dart';
 
-enum DiscountsAddFailure {
-  error,
-  network,
-  send,
-  linkWrong;
-}
-
 extension DiscountsAddFailureGetter on DiscountsAddFailure? {
   bool get linkIsWrong => this == DiscountsAddFailure.linkWrong;
 }

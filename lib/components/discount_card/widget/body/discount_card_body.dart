@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/discount_card/discount_card.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountCardBody extends StatelessWidget {
   const DiscountCardBody({required this.isDesk, super.key});

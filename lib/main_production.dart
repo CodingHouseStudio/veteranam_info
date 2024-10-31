@@ -6,15 +6,15 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
-import 'package:flutter/foundation.dart'
-    show PlatformDispatcher, kIsWeb, kReleaseMode;
+import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
 
 /// COMMENT: PROD main file
 Future<void> main() async {
@@ -23,8 +23,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (kReleaseMode) {
-    if (kIsWeb) {
+  if (Config.isReleaseMode) {
+    if (Config.isWeb) {
       await SentryFlutter.init(
         (options) {
           options
@@ -58,9 +58,9 @@ Future<void> main() async {
     }
 
     // try {
-    if (kIsWeb) {
+    if (Config.isWeb) {
       await FirebasePerformance.instanceFor(app: app)
-          .setPerformanceCollectionEnabled(kReleaseMode);
+          .setPerformanceCollectionEnabled(Config.isReleaseMode);
 
       //   final temp = await FirebasePerformance.instanceFor(app: app)
       //       .isPerformanceCollectionEnabled();
@@ -78,37 +78,41 @@ Future<void> main() async {
       //   }
     } else {
       await FirebasePerformance.instance
-          .setPerformanceCollectionEnabled(kReleaseMode);
+          .setPerformanceCollectionEnabled(Config.isReleaseMode);
     }
     // } catch (e, stack) {}
   }
   try {
-    // if (!kIsWeb)
+    // if (!Config.isWeb)
     // {
     await FirebaseAppCheck.instanceFor(app: app).activate(
       webProvider: ReCaptchaV3Provider(
         KSecurityKeys.firebaseAppCheckProd,
       ),
-      androidProvider:
-          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-      appleProvider:
-          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
     );
     await FirebaseAppCheck.instance.activate(
       webProvider: ReCaptchaV3Provider(
         KSecurityKeys.firebaseAppCheckProd,
       ),
-      androidProvider:
-          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-      appleProvider:
-          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
     );
   } catch (e) {}
 
   // Non-async exceptions
   FlutterError.onError = (details) {
-    if (kReleaseMode) {
-      if (kIsWeb) {
+    if (Config.isReleaseMode) {
+      if (Config.isWeb) {
         Sentry.captureException(
           details.exceptionAsString(),
           stackTrace: details.stack,
@@ -121,8 +125,8 @@ Future<void> main() async {
   };
   // Async exceptions
   PlatformDispatcher.instance.onError = (error, stack) {
-    if (kReleaseMode) {
-      if (kIsWeb) {
+    if (Config.isReleaseMode) {
+      if (Config.isWeb) {
         Sentry.captureException(
           error,
           stackTrace: stack,
@@ -136,7 +140,7 @@ Future<void> main() async {
     return true;
   };
 
-  // if (kIsWeb) {
+  // if (Config.isWeb) {
   // initialize the facebook javascript SDK
   // TODO(appId): set value
   // await FacebookAuth.i.webAndDesktopInitialize(

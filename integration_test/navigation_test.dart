@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/helper/helper.dart';
 
 import 'constants.dart';
 import 'helpers/helpers.dart';

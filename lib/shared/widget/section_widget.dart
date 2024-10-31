@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 abstract class SectionWidget {
   static List<Widget> get({

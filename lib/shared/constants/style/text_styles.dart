@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'
     show FontStyle, FontWeight, TextDecoration, TextStyle;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 /// Text Styles
 

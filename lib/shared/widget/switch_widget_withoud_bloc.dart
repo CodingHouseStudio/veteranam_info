@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class SwitchWidgetWithoutBloc extends StatefulWidget {
   const SwitchWidgetWithoutBloc({super.key, this.onSelected});

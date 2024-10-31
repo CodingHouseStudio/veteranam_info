@@ -1,9 +1,5 @@
 part of 'story_watcher_bloc.dart';
 
-enum StoryFailure {
-  error,
-}
-
 extension StoryFailureExtension on SomeFailure {
   StoryFailure _toStory() {
     return StoryFailure.error;

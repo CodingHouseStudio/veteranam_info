@@ -5,7 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
 
@@ -79,7 +80,8 @@ void main() {
     late DeviceInfoPlugin mockDeviceInfoPlugin;
     late AppInfoRepository mockBuildRepository;
     setUp(() {
-      KTest.testReleaseMode = true;
+      Config.isReleaseMode = true;
+      Config.testIsWeb = false;
       ExtendedDateTime.current = KTestText.dateTime;
 
       mockFirebaseMessaging = MockFirebaseMessaging();
@@ -198,7 +200,7 @@ void main() {
       //   );
       // });
       test('Get device whne is not release mode', () async {
-        KTest.testReleaseMode = false;
+        Config.isReleaseMode = false;
         expect(
           await deviceRepository.getDevice(),
           isA<Right<SomeFailure, DeviceInfoModel?>>().having(

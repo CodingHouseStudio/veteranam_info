@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/l10n/l10n.dart';
 
 part 'report_model.freezed.dart';
 part 'report_model.g.dart';
@@ -17,19 +15,6 @@ enum ReasonComplaint {
   fakeNewsOrDisinformation,
   offensiveOrHatefulContent,
   other;
-
-  String toText(BuildContext context) {
-    switch (this) {
-      case ReasonComplaint.fakeNewsOrDisinformation:
-        return context.l10n.fakeNewsOrDisinformation;
-      case ReasonComplaint.fraudOrSpam:
-        return context.l10n.fraudOrSpam;
-      case ReasonComplaint.offensiveOrHatefulContent:
-        return context.l10n.offensiveOrHatefulContent;
-      case ReasonComplaint.other:
-        return context.l10n.other;
-    }
-  }
 }
 
 enum CardEnum {

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 abstract class IInformationRepository {
   Stream<List<InformationModel>> getInformationItems({
