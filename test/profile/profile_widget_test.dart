@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -18,10 +19,12 @@ void main() {
   group('${KScreenBlocName.profile} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IDataPickerRepository mockDataPickerRepository;
+    late StreamController<User> profileStream;
     // late XFile image;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
+      profileStream = StreamController()..add(KTestText.pureUser);
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
@@ -104,7 +107,15 @@ void main() {
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+      // setUp(() => mockGoRouter = MockGoRouter());
+      setUp(() {
+        mockGoRouter = MockGoRouter();
+        profileStream.add(KTestText.userWithoutPhoto);
+
+        when(mockAuthenticationRepository.currentUser).thenAnswer(
+          (realInvocation) => KTestText.userWithoutPhoto,
+        );
+      });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await profilePumpAppHelper(
           tester: tester,
