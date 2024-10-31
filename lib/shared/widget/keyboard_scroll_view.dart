@@ -35,50 +35,43 @@ class KeyboardScrollView extends StatelessWidget {
       },
       child: PlatformEnumFlutter.isWebDesktop
           ? _KeyboardScrollViewWebDesk(
-              widgetKey: widgetKey,
-              slivers: slivers,
-              semanticChildCount: semanticChildCount,
-              physics: physics,
+              scrollWidget: _body,
               scrollController: scrollController,
               maxHeight: maxHeight,
             )
           : Config.isWeb
-              ? _body
+              ? _body(scrollController)
               : BlocListener<AppVersionCubit, AppVersionState>(
                   listener: (context, state) =>
                       context.dialog.showMobUpdateAppDialog(
                     hasNewVersion: state.mobHasNewBuild,
                   ),
-                  child: _body,
+                  child: _body(scrollController),
                 ),
     );
   }
 
-  Widget get _body => CustomScrollView(
+  Widget _body(ScrollController? controller) => CustomScrollView(
         key: widgetKey,
-        controller: scrollController,
+        // cacheExtent: 1000,
+        controller: controller,
         slivers: slivers,
         physics: physics,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         semanticChildCount: semanticChildCount,
       );
 }
 
 class _KeyboardScrollViewWebDesk extends StatefulWidget {
   const _KeyboardScrollViewWebDesk({
-    required this.slivers,
-    required this.semanticChildCount,
-    required this.widgetKey,
     required this.maxHeight,
-    this.physics,
+    required this.scrollWidget,
     this.scrollController,
   });
 
-  final List<Widget> slivers;
-  final int semanticChildCount;
-  final ScrollPhysics? physics;
   final ScrollController? scrollController;
-  final Key widgetKey;
   final double maxHeight;
+  final Widget Function(ScrollController scrollController) scrollWidget;
 
   @override
   State<_KeyboardScrollViewWebDesk> createState() =>
@@ -226,11 +219,8 @@ class _KeyboardScrollViewWebDeskState
             },
           ),
         },
-        child: CustomScrollView(
-          key: widget.widgetKey,
-          controller: _controller,
-          physics: widget.physics,
-          slivers: widget.slivers,
+        child: widget.scrollWidget(
+          _controller,
         ),
       ),
     );

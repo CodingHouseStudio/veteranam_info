@@ -33,7 +33,7 @@ List<Widget> discountsWidgetList({
             context.read<DiscountConfigCubit>().state.loadingItems ==
         i + 1) {
       finalList.add(
-        DiscountNotificationWidget(key: ValueKey(i), isDesk: isDesk),
+        DiscountNotificationWidget(isDesk: isDesk),
       );
     }
   }
