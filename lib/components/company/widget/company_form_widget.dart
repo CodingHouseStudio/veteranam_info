@@ -61,11 +61,11 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
       builder: (context, _) {
         return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
           listener: (context, state) {
+            context
+                .read<CompanyFormBloc>()
+                .add(const CompanyFormEvent.started());
             if (companyNameController.text.isEmpty) {
               companyNameController.text = state.company.companyName ?? '';
-              context
-                  .read<CompanyFormBloc>()
-                  .add(const CompanyFormEvent.started());
             }
             if (publicNameController.text.isEmpty) {
               publicNameController.text = state.company.publicName ?? '';
