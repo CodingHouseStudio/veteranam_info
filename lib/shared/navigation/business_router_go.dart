@@ -7,6 +7,7 @@ import 'package:veteranam/components/company/view/company_view.dart';
 import 'package:veteranam/components/discounts_add/view/discounts_add_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
 import 'package:veteranam/components/feedback/view/feedback_view.dart';
+import 'package:veteranam/components/investors/view/investors_view.dart';
 import 'package:veteranam/components/login/view/login_view.dart';
 import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
 import 'package:veteranam/components/my_discounts/view/my_discounts_view.dart';
@@ -120,6 +121,16 @@ GoRouter businessRouter = GoRouter(
         name: state.name,
         restorationId: state.pageKey.value,
         child: const FeedbackScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.support.name,
+      path: '/${KRoute.support.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const InvestorsScreen(),
       ),
     ),
     //   ],
