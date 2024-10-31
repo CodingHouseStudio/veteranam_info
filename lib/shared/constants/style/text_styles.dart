@@ -412,6 +412,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
+  static const TextStyle materialThemeLabelSmallBlack = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 11,
+    height: 1.45,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeBlack,
+  );
   static const TextStyle materialThemeLabelSmallNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 11,

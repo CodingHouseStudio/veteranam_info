@@ -154,61 +154,59 @@ class _CardTextDetailEvaluateWidgetState
                       KSizedBox.kWidthSizedBox8,
                     ],
                   ),
-                  Row(
-                    children: SharedIconListWidget.get(
-                      context: context,
-                      isDesk: widget.isDesk,
-                      link: widget.link,
-                      cardEnum: widget.cardEnum,
-                      // afterEvent: widget.afterEvent,
-                      cardId: widget.cardId,
-                      background: AppColors.materialThemeKeyColorsNeutral,
-                      share: widget.share,
-                      complaintKey: KWidgetkeys
-                          .widget.cardTextDetailEvaluate.iconComplaint,
-                      shareKey:
-                          KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
-                      webSiteKey:
-                          KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
-                    ),
-                    // [
-                    //   if (widget.link != null)
-                    //     buildIcon(
-                    //       icon: KIcon.website.copyWith(
-                    // key:
-                    // KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
-                    //       ),
-                    //       text: context.l10n.website,
-                    //       onPressed: null,
-                    //     ),
-                    //   if (widget.isDesk)
-                    //     KSizedBox.kWidthSizedBox24
-                    //   else
-                    //     KSizedBox.kWidthSizedBox8,
-                    //   buildIcon(
-                    //     icon: KIcon.share.copyWith(
-                    //       key: KWidgetkeys
-                    //           .widget.cardTextDetailEvaluate.iconShare,
-                    //     ),
-                    //     text: context.l10n.share,
-                    //     onPressed: widget.onShare,
-                    //   ),
-                    //   if (Config.isDevelopment)
-                    //     if (widget.isDesk)
-                    //       KSizedBox.kWidthSizedBox24
-                    //     else
-                    //       KSizedBox.kWidthSizedBox8,
-                    //   if (Config.isDevelopment)
-                    //     buildIcon(
-                    //       icon: KIcon.safe.copyWith(
-                    //         key: KWidgetkeys
-                    //             .widget.cardTextDetailEvaluate.iconSave,
-                    //       ),
-                    //       text: context.l10n.save,
-                    //       onPressed: null,
-                    //     ),
-                    // ],
+                  SharedIconListWidget(
+                    context: context,
+                    isDesk: widget.isDesk,
+                    link: widget.link,
+                    cardEnum: widget.cardEnum,
+                    // afterEvent: widget.afterEvent,
+                    cardId: widget.cardId,
+                    background: AppColors.materialThemeKeyColorsNeutral,
+                    share: widget.share,
+                    complaintKey:
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconComplaint,
+                    shareKey:
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                    webSiteKey:
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
                   ),
+                  // [
+                  //   if (widget.link != null)
+                  //     buildIcon(
+                  //       icon: KIcon.website.copyWith(
+                  // key:
+                  // KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
+                  //       ),
+                  //       text: context.l10n.website,
+                  //       onPressed: null,
+                  //     ),
+                  //   if (widget.isDesk)
+                  //     KSizedBox.kWidthSizedBox24
+                  //   else
+                  //     KSizedBox.kWidthSizedBox8,
+                  //   buildIcon(
+                  //     icon: KIcon.share.copyWith(
+                  //       key: KWidgetkeys
+                  //           .widget.cardTextDetailEvaluate.iconShare,
+                  //     ),
+                  //     text: context.l10n.share,
+                  //     onPressed: widget.onShare,
+                  //   ),
+                  //   if (Config.isDevelopment)
+                  //     if (widget.isDesk)
+                  //       KSizedBox.kWidthSizedBox24
+                  //     else
+                  //       KSizedBox.kWidthSizedBox8,
+                  //   if (Config.isDevelopment)
+                  //     buildIcon(
+                  //       icon: KIcon.safe.copyWith(
+                  //         key: KWidgetkeys
+                  //             .widget.cardTextDetailEvaluate.iconSave,
+                  //       ),
+                  //       text: context.l10n.save,
+                  //       onPressed: null,
+                  //     ),
+                  // ],
                 ],
               ),
               if (widget.isDesk)

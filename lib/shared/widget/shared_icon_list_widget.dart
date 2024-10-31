@@ -2,71 +2,95 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
-abstract class SharedIconListWidget {
-  static List<Widget> get({
-    required BuildContext context,
-    required bool isDesk,
-    required String? link,
-    required CardEnum cardEnum,
-    // required void Function()? afterEvent,
-    required String cardId,
-    required Key? webSiteKey,
-    required Key shareKey,
-    required Key complaintKey,
-    required String? share,
-    bool showComplaint = true,
-    bool showShare = true,
-    Color background = AppColors.materialThemeWhite,
-    bool? useSiteUrl,
-  }) {
-    return [
-      if (link != null && link.isUrlValid) ...[
-        _cardIconWidget(
-          label: context.l10n.webSite,
-          context,
-          onPressed: () => context..read<UrlCubit>().launchUrl(url: link),
-          icon: KIcon.captivePortal,
-          background: background,
-          key: webSiteKey,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox4,
-      ],
-      if (showShare)
-        _cardIconWidget(
-          label: context.l10n.share,
-          context,
-          onPressed: share != null
-              ? () => context.read<UrlCubit>().share(
-                    share,
-                    useSiteUrl: useSiteUrl,
-                  )
-              : null,
-          icon: KIcon.share,
-          background: background,
-          key: shareKey,
-        ),
-      if (showComplaint) ...[
-        if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
-        ComplaintWidget(
-          key: complaintKey,
-          isDesk: isDesk,
-          cardEnum: cardEnum,
-          // afterEvent: afterEvent,
-          cardId: cardId,
-          background: background,
-        ),
-      ],
-    ];
-  }
+class SharedIconListWidget extends StatelessWidget {
+  const SharedIconListWidget({
+    required this.context,
+    required this.isDesk,
+    required this.cardEnum,
+    required this.cardId,
+    required this.shareKey,
+    required this.complaintKey,
+    super.key,
+    this.link,
+    this.webSiteKey,
+    this.share,
+    this.useSiteUrl,
+    this.showComplaint = true,
+    this.showShare = true,
+    this.background = AppColors.materialThemeWhite,
+  });
+  final BuildContext context;
+  final bool isDesk;
+  final String? link;
+  final CardEnum cardEnum;
+  final String cardId;
+  final Key? webSiteKey;
+  final Key shareKey;
+  final Key complaintKey;
+  final String? share;
+  final bool showComplaint;
+  final bool showShare;
+  final Color background;
+  final bool? useSiteUrl;
 
-  static Widget _cardIconWidget(
-    BuildContext context, {
-    required VoidCallback? onPressed,
-    required Icon icon,
-    required String label,
-    required Color background,
-    required Key? key,
-  }) {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        if (link != null && link!.isUrlValid) ...[
+          _CardIconWidget(
+            label: context.l10n.webSite,
+            onPressed: () => context..read<UrlCubit>().launchUrl(url: link),
+            icon: KIcon.captivePortal,
+            background: background,
+            key: webSiteKey,
+          ),
+          if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox4,
+        ],
+        if (showShare)
+          _CardIconWidget(
+            label: context.l10n.share,
+            onPressed: share != null
+                ? () => context.read<UrlCubit>().share(
+                      share,
+                      useSiteUrl: useSiteUrl,
+                    )
+                : null,
+            icon: KIcon.share,
+            background: background,
+            key: shareKey,
+          ),
+        if (showComplaint) ...[
+          if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
+          ComplaintWidget(
+            key: complaintKey,
+            isDesk: isDesk,
+            cardEnum: cardEnum,
+            // afterEvent: afterEvent,
+            cardId: cardId,
+            background: background,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _CardIconWidget extends StatelessWidget {
+  const _CardIconWidget({
+    required this.icon,
+    required this.label,
+    required this.background,
+    super.key,
+    this.onPressed,
+  });
+  final VoidCallback? onPressed;
+  final Icon icon;
+  final String label;
+  final Color background;
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       key: key,
       onTap: onPressed,
@@ -80,9 +104,7 @@ abstract class SharedIconListWidget {
           KSizedBox.kHeightSizedBox6,
           Text(
             label,
-            style: AppTextStyle.materialThemeLabelSmall.copyWith(
-              color: AppColors.materialThemeBlack,
-            ),
+            style: AppTextStyle.materialThemeLabelSmallBlack,
           ),
         ],
       ),

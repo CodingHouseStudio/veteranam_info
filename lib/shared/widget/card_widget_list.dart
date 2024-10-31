@@ -20,7 +20,7 @@ List<Widget> cardWidgetList<T>({
   final fullList = [
     if (isNotFailure) ...[
       ...modelItems,
-      if (isLoading)
+      if (isLoading && (isDesk || modelItems.isEmpty))
         ...List.generate(
           shimmerItemsNumber,
           (index) => shimmerItem,
@@ -34,13 +34,20 @@ List<Widget> cardWidgetList<T>({
               top: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: SkeletonizerWidget(
-        isLoading: fullList.length - index <= shimmerItemsNumber && isLoading,
-        child: cardWidget(
-          modelItem: fullList.elementAt(index),
-          isLoading: isLoading,
-        ),
-      ),
+      child: (isDesk || modelItems.isEmpty) &&
+              fullList.length - index <= shimmerItemsNumber &&
+              isLoading
+          ? SkeletonizerWidget(
+              isLoading: true,
+              child: cardWidget(
+                modelItem: fullList.elementAt(index),
+                isLoading: isLoading,
+              ),
+            )
+          : cardWidget(
+              modelItem: fullList.elementAt(index),
+              isLoading: isLoading,
+            ),
     );
   });
 }
