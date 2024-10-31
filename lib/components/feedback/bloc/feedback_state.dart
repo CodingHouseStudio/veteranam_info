@@ -1,11 +1,5 @@
 part of 'feedback_bloc.dart';
 
-enum FeedbackFailure {
-  error,
-  network,
-  send,
-}
-
 extension FeedbackFailureExtension on SomeFailure {
   FeedbackFailure _toFeedback() {
     switch (this) {

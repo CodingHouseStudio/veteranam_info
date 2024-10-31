@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
-import 'package:flutter/foundation.dart' show visibleForTesting; //debugPrint
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(
   as: ICompanyRepository,

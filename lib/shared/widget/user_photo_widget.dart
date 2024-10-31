@@ -1,7 +1,7 @@
 import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class UserPhotoWidget extends StatelessWidget {
   const UserPhotoWidget({

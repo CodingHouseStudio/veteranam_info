@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/repositories/failure_repository.dart';
 
 part 'some_failure_model.freezed.dart';
 

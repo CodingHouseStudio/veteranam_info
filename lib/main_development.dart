@@ -4,13 +4,14 @@ import 'dart:developer' show log;
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart' show PlatformDispatcher, kReleaseMode;
-// import 'package:flutter/foundation.dart' show kReleaseMode;
+import 'package:flutter/foundation.dart' show PlatformDispatcher;
+// import 'package:flutter/foundation.dart' show Config.isReleaseMode;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
 
 /// COMMENT: DEV main file
 void main() async {
@@ -25,19 +26,23 @@ void main() async {
       webProvider: ReCaptchaV3Provider(
         KSecurityKeys.firebaseAppCheckDev,
       ),
-      androidProvider:
-          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-      appleProvider:
-          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
     );
     await FirebaseAppCheck.instance.activate(
       webProvider: ReCaptchaV3Provider(
         KSecurityKeys.firebaseAppCheckDev,
       ),
-      androidProvider:
-          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-      appleProvider:
-          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
     );
   } catch (e) {}
 
@@ -54,31 +59,31 @@ void main() async {
   // }
 
   // try {
-  // if (kIsWeb) {
+  // if (Config.isWeb) {
   //   await FirebasePerformance.instanceFor(app: app)
-  //       .setPerformanceCollectionEnabled(kReleaseMode);
+  //       .setPerformanceCollectionEnabled(Config.isReleaseMode);
   // } else {
   //   await FirebasePerformance.instance
-  //       .setPerformanceCollectionEnabled(kReleaseMode);
+  //       .setPerformanceCollectionEnabled(Config.isReleaseMode);
   // }
   // } catch (e, stack) {
   //   print('firebase performance issue');
   //   print(e);
   // }
   // try {
-  // if (!kIsWeb) {
+  // if (!Config.isWeb) {
   //   // {
   //   //   final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
-  //   //     webProvider: ReCaptchaV3Provider(kReleaseMode
+  //   //     webProvider: ReCaptchaV3Provider(Config.isReleaseMode
   //   //         ? '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG'
   //   //         : '4A104621-0F8F-4D82-A07F-008910737512'),
   //   //   );
   //   // } else {
   //   await FirebaseAppCheck.instance.activate(
   //     androidProvider:
-  //         kReleaseMode ? AndroidProvider.playIntegrity :
+  //         Config.isReleaseMode ? AndroidProvider.playIntegrity :
   // AndroidProvider.debug,
-  //     appleProvider: kReleaseMode
+  //     appleProvider: Config.isReleaseMode
   //         ? AppleProvider.appAttestWithDeviceCheckFallback
   //         : AppleProvider.debug,
   //   );
@@ -90,7 +95,7 @@ void main() async {
 
   // Non-async exceptions
   // FlutterError.onError = (details) {
-  //   if (kIsWeb) {
+  //   if (Config.isWeb) {
   //     Sentry.captureException(
   //       details.exceptionAsString(),
   //       stackTrace: details.stack,
@@ -102,7 +107,7 @@ void main() async {
   // };
   // Async exceptions
   // PlatformDispatcher.instance.onError = (error, stack) {
-  //   if (kIsWeb) {
+  //   if (Config.isWeb) {
   //     Sentry.captureException(
   //       error,
   //       stackTrace: stack,

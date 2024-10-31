@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/password_reset/password_reset.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/password_reset/bloc/bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class PasswordResetBodyWidget extends StatelessWidget {
   const PasswordResetBodyWidget({super.key, this.code});

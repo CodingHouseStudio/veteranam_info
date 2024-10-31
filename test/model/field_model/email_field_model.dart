@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/models/field_models/field_models.dart';
 
 import '../../test_dependency.dart';
 

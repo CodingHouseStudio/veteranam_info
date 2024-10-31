@@ -2,10 +2,11 @@ import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
-// import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IDeviceRepository, order: -1)
 class DeviceRepository implements IDeviceRepository {
@@ -26,7 +27,7 @@ class DeviceRepository implements IDeviceRepository {
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
     List<DeviceInfoModel>? initialList,
   }) async {
-    if (KTest.testReleaseMode) {
+    if (Config.isReleaseMode) {
       var id = '';
       SomeFailure? failure;
       String? fcm;
