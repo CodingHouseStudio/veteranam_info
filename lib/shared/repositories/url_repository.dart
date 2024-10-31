@@ -12,8 +12,9 @@ class UrlRepository extends IUrlRepository {
     String url, {
     bool? useSiteUrl,
   }) async {
-    final baseUrl =
-        (useSiteUrl ?? !Config.isWeb) ? KAppText.site : Uri.base.origin;
+    final baseUrl = (useSiteUrl ?? !Config.isWeb || KTest.isTest)
+        ? KAppText.site
+        : Uri.base.origin;
     try {
       // if (Config.isWeb) {
       await Share.shareUri(
@@ -76,7 +77,7 @@ class UrlRepository extends IUrlRepository {
     }
   }
 
-  //TODO(flutter): this repository use flutter impory, impory should be remove
+  // TODO(flutter): this repository use flutter import, import should be remove
   @override
   Future<Either<SomeFailure, bool>> copy(String text) async {
     try {

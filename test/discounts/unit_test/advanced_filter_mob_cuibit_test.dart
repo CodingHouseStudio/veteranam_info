@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/bloc.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
 

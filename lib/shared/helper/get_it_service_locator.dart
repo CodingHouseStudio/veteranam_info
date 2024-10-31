@@ -9,7 +9,7 @@ final getIt = GetIt.instance;
 @InjectableInit()
 void configureDependencies() => getIt.init(
       // environment: Config.flavour,
-      environmentFilter: NoEnvOrContainsAny(
+      environmentFilter: const NoEnvOrContainsAny(
         {Config.flavour, Config.role, Config.platform},
       ),
     );

@@ -8,7 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart'
         SetOptions,
         Settings,
         Source;
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 // import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -47,17 +48,16 @@ class FirestoreService {
 
   void _initFirestoreSettings() {
     // Set settings for persistence based on platform
-    // if (Config.isWeb) {
-    _db.settings = const Settings(
-      persistenceEnabled: true,
-    );
-    // } else {
-    //   _offlineMode = offlineMode;
-    //   _db.settings = Settings(
-    //     persistenceEnabled: _offlineMode.isOffline,
-    //   );
-    // }
-    // await appNetworkRepository.updateCacheConnectivityResults();
+    if (Config.isWeb) {
+      _db.settings = const Settings(
+        persistenceEnabled: true,
+      );
+    } else {
+      _offlineMode = offlineMode;
+      _db.settings = Settings(
+        persistenceEnabled: _offlineMode.isOffline,
+      );
+    }
   }
 
   MobMode get switchOfflineMode {

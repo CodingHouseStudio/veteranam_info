@@ -33,8 +33,9 @@ abstract class Config {
   // @visibleForTesting
   static const mobile = 'mobile';
 
-  static const String platform =
-      bool.fromEnvironment('dart.library.js_util') ? Config.mobile : Config.web;
+  static const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
+
+  static const String platform = kIsWeb ? Config.web : Config.mobile;
 
   static bool get isWeb => testIsWeb ?? platform == Config.web;
   @visibleForTesting

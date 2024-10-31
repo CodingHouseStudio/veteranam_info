@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:flutter/foundation.dart' show visibleForTesting; //debugPrint
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
-import 'package:universal_io/io.dart' as io;
 
 @Singleton(as: IAppAuthenticationRepository)
 class AppAuthenticationRepository implements IAppAuthenticationRepository {
@@ -138,7 +138,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredential() async {
-    if (io.Platform.isAndroid) {
+    if (Config.isWeb) {
       return _getGoogleAuthCredentialWeb();
     } else {
       return _getGoogleAuthCredentialMobile();

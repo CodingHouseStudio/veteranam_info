@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart'
     show FilePicker, FilePickerResult, FileType;
-import 'package:flutter/foundation.dart' show Uint8List, visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:image_picker/image_picker.dart'
     show ImagePicker, ImageSource, XFile;
 import 'package:injectable/injectable.dart';

@@ -4,12 +4,12 @@ targets:
       - $package$
       - lib/$lib$
       - lib/**.dart
-      # - test/**.dart
+      - test/**.dart
     builders:
-      # mockito|mockBuilder:
-      #   enabled: true
-      #   generate_for:
-      #     - test/test_mocks/test_repository_mocks.dart
+      mockito|mockBuilder:
+        enabled: true
+        generate_for:
+          - test/test_mocks/test_repository_mocks.dart
       json_serializable|json_serializable:
         generate_for:
           - lib/shared/models/**.dart

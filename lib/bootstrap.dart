@@ -3,7 +3,6 @@ import 'dart:developer' show log;
 import 'dart:io' show Platform;
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Colors, Widget, runApp;
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
@@ -31,7 +30,7 @@ class AppBlocObserver extends BlocObserver {
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
-  if (!Config.isWeb) {
+  if (!Config.kIsWeb) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor:
@@ -51,7 +50,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await initializeDateFormatting();
 
   // Add cross-flavor configuration here
-  if (Config.isWeb) {
+  if (Config.kIsWeb) {
     usePathUrlStrategy();
   }
 

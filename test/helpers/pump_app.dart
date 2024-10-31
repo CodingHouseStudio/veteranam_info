@@ -3,8 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
+import 'package:veteranam/l10n/l10n.dart';
+import 'package:veteranam/shared/bloc/app_version/app_version_cubit.dart';
+import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart';
+import 'package:veteranam/shared/bloc/company/company_watcher_bloc.dart';
+import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart';
+import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.dart';
+import 'package:veteranam/shared/bloc/network/network_cubit.dart';
+import 'package:veteranam/shared/bloc/url/url_cubit.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/widget/mob_feedback_widget.dart';
 
 import '../test_mocks/test_mocks.dart';
 

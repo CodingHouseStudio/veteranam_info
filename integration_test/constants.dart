@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
+import 'package:veteranam/shared/helper/helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';

@@ -1,5 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseStorage;
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
