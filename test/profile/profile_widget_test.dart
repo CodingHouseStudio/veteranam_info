@@ -34,6 +34,9 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestText.userSettingModel,
       );
+      when(mockAuthenticationRepository.user).thenAnswer(
+        (realInvocation) => profileStream.stream,
+      );
       when(
         mockAuthenticationRepository.updateUserData(
           nickname: KTestText.nicknameCorrect,
@@ -104,18 +107,9 @@ void main() {
 
     //   await profileCardDeleteAccountHelper(tester);
     // });
-
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
-      // setUp(() => mockGoRouter = MockGoRouter());
-      setUp(() {
-        mockGoRouter = MockGoRouter();
-        profileStream.add(KTestText.userWithoutPhoto);
-
-        when(mockAuthenticationRepository.currentUser).thenAnswer(
-          (realInvocation) => KTestText.userWithoutPhoto,
-        );
-      });
+      setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
         await profilePumpAppHelper(
           tester: tester,
@@ -230,17 +224,30 @@ void main() {
         );
       });
 
-      testWidgets('Send incorrect profile data', (tester) async {
-        await profilePumpAppHelper(
-          tester: tester,
-          //mockGoRouter: mockGoRouter,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+      group('Current user empty ', () {
+        setUp(
+          () => when(mockAuthenticationRepository.currentUser).thenAnswer(
+            (realInvocation) => KTestText.pureUser,
+          ),
         );
+        testWidgets('Send incorrect profile data', (tester) async {
+          await profilePumpAppHelper(
+            tester: tester,
+            //mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockDataPickerRepository: mockDataPickerRepository,
+          );
+          profileStream.add(
+            KTestText.profileUserWithoutPhoto.copyWith(
+              id: 'none',
+              email: null,
+            ),
+          );
 
-        await profileFormsIncorrectSaveHelper(
-          tester: tester,
-        );
+          await profileFormsIncorrectSaveHelper(
+            tester: tester,
+          );
+        });
       });
 
       // group('${KGroupText.goTo} ', () {
@@ -277,5 +284,6 @@ void main() {
       //     });
       //   });
     });
+    tearDown(() async => profileStream.close());
   });
 }

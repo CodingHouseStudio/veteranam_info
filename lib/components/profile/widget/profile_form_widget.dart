@@ -69,23 +69,30 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        if (state.formState == ProfileEnum.initial) {
-          nameController.text = state.name.value;
-          surnameController.text = state.surname.value;
-        }
-      },
-      listenWhen: (previous, current) =>
-          previous.name != current.name ||
-          previous.surname != current.surname ||
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      buildWhen: (previous, current) =>
+          previous.formState != current.formState ||
           previous.image != current.image,
-      child: BlocBuilder<ProfileBloc, ProfileState>(
-        buildWhen: (previous, current) =>
-            previous.formState != current.formState ||
-            previous.image != current.image,
-        builder: (context, _) {
-          return Column(
+      builder: (context, _) {
+        return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            context.read<ProfileBloc>().add(const ProfileEvent.started());
+            if (nameController.text.isEmpty) {
+              nameController.text = state.user.firstName ?? '';
+            }
+            if (surnameController.text.isEmpty) {
+              surnameController.text = state.user.lastName ?? '';
+            }
+            if (emailController.text.isEmpty) {
+              emailController.text = state.user.email ?? '';
+            }
+          },
+          listenWhen: (previous, current) =>
+              _.formState == ProfileEnum.initial &&
+              (previous.user.name != current.user.name ||
+                  previous.user.email != current.user.email) &&
+              previous.user.id != current.user.id,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -203,9 +210,9 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                 mobIconPadding: KPadding.kPaddingSize16,
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
