@@ -1,11 +1,5 @@
 part of 'home_watcher_bloc.dart';
 
-enum HomeFailure {
-  error,
-  get,
-  network,
-}
-
 extension HomeFailureExtension on SomeFailure {
   HomeFailure _toHome() {
     switch (this) {

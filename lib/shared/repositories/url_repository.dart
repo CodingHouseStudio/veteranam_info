@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @LazySingleton(as: IUrlRepository)
 class UrlRepository extends IUrlRepository {
@@ -13,7 +12,9 @@ class UrlRepository extends IUrlRepository {
     String url, {
     bool? useSiteUrl,
   }) async {
-    final baseUrl = (useSiteUrl ?? !kIsWeb) ? KAppText.site : Uri.base.origin;
+    final baseUrl = (useSiteUrl ?? !Config.isWeb || KTest.isTest)
+        ? KAppText.site
+        : Uri.base.origin;
     try {
       // if (Config.isWeb) {
       await Share.shareUri(
@@ -76,6 +77,7 @@ class UrlRepository extends IUrlRepository {
     }
   }
 
+  // TODO(flutter): this repository use flutter import, import should be remove
   @override
   Future<Either<SomeFailure, bool>> copy(String text) async {
     try {

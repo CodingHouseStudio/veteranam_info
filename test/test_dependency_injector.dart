@@ -11,8 +11,11 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import 'test_dependency.dart';
 
@@ -23,11 +26,11 @@ void configureDependenciesTest() {
   initializeDateFormatting(Language.ukrain.value.languageCode);
   userSetting();
   mobBuild();
-  Config.isWeb = true;
+  Config.testIsWeb = true;
   Config.falvourValue = Config.development;
   Config.roleValue = Config.user;
   KTest.isTest = true;
-  KTest.testReleaseMode = true;
+  Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
   // KTest.scroll = null;
   // Services
@@ -219,10 +222,10 @@ void configureFailureDependenciesTest() {
   userSetting();
   initializeDateFormatting(Language.english.value.languageCode);
   initializeDateFormatting(Language.ukrain.value.languageCode);
-  Config.isWeb = true;
+  Config.testIsWeb = true;
   Config.falvourValue = Config.development;
   KTest.isTest = true;
-  KTest.testReleaseMode = true;
+  Config.isReleaseMode = true;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<Dio>(Dio());

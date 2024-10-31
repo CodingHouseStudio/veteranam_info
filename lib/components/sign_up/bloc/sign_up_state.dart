@@ -1,12 +1,5 @@
 part of 'sign_up_bloc.dart';
 
-enum SignUpError {
-  duplicate,
-  error,
-  network,
-  send,
-}
-
 extension AuthFailureToSignUpError on SomeFailure {
   SignUpError _toSignUpError() {
     switch (this) {

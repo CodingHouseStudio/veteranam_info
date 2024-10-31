@@ -1,4 +1,4 @@
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/extension/extension_constants.dart';
 
 abstract class StoragePath {
   static const image = 'image';

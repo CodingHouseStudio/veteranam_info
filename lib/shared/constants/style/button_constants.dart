@@ -10,7 +10,7 @@ import 'package:flutter/material.dart'
         RoundedRectangleBorder,
         Size,
         WidgetStatePropertyAll;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(

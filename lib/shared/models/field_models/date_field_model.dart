@@ -1,5 +1,6 @@
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
+
+import 'package:veteranam/shared/extension/extension_constants.dart';
 
 enum DateFieldModelValidationError { empty }
 
@@ -23,12 +24,4 @@ class DateFieldModel
     }
     return null;
   }
-
-  String getString(Language language) =>
-      '${language.isEnglish ? 'Up to' : 'До'}'
-      ' ${value?.toLocalDateString(
-        context: null,
-        localeValue: language.value.languageCode,
-        showDay: true,
-      )}';
 }

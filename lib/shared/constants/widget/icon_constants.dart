@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart'
     show Color, Icon, IconData, Key, Shadow, TextDirection;
 import 'package:material_symbols_icons/symbols.dart' show Symbols;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 class _KIcon extends Icon {
   const _KIcon(

@@ -1,11 +1,5 @@
 part of 'my_story_watcher_bloc.dart';
 
-enum MyStoryFailure {
-  error,
-  get,
-  network,
-}
-
 extension MyStoryFailureExtension on SomeFailure {
   MyStoryFailure _toMyStory() {
     switch (this) {
