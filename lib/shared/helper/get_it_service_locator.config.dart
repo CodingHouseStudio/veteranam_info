@@ -217,6 +217,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i895.Connectivity>(),
           gh<_i1026.CacheClient>(),
         ));
+    gh.singleton<_i1026.IInvestorsRepository>(
+        () => _i994.InvestorsRepository());
     gh.lazySingleton<_i1026.IUrlRepository>(() => _i929.UrlRepository());
     gh.singleton<_i1026.IDataPickerRepository>(() => _i290.DataPickerRepository(
           gh<_i183.ImagePicker>(),
@@ -282,10 +284,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i76.WorkRepository(),
       registerFor: {_development},
     );
-    gh.singleton<_i1026.IInvestorsRepository>(
-      () => _i994.InvestorsRepository(),
-      registerFor: {_user},
-    );
     gh.singleton<_i1026.IInformationRepository>(
       () => _i154.InformationRepository(),
       registerFor: {_development},
@@ -297,6 +295,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
+    gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
+        investorsRepository: gh<_i1026.IInvestorsRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
@@ -336,11 +336,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i763.StoryWatcherBloc(
           storyRepository: gh<_i1026.IStoryRepository>()),
       registerFor: {_development},
-    );
-    gh.factory<_i609.InvestorsWatcherBloc>(
-      () => _i609.InvestorsWatcherBloc(
-          investorsRepository: gh<_i1026.IInvestorsRepository>()),
-      registerFor: {_user},
     );
     gh.singleton<_i192.MobileRatingRepository>(
       () => _i192.MobileRatingRepository(gh<_i553.InAppReview>()),
