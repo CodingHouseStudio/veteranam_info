@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class KeyboardScrollView extends StatelessWidget {
   const KeyboardScrollView({
@@ -33,7 +33,7 @@ class KeyboardScrollView extends StatelessWidget {
           context.read<UrlCubit>().reset();
         }
       },
-      child: PlatformEnum.isWebDesktop
+      child: PlatformEnumFlutter.isWebDesktop
           ? _KeyboardScrollViewWebDesk(
               scrollWidget: _body,
               scrollController: scrollController,

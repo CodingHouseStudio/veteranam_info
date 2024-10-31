@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/story_add/story_add.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/story_add/bloc/story_add_bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../buttons_widget_list.dart';
 part '../field_widget.dart';

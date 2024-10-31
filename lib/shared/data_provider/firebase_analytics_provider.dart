@@ -4,9 +4,8 @@ import 'package:app_tracking_transparency/app_tracking_transparency.dart'
     show AppTrackingTransparency, TrackingStatus;
 import 'package:firebase_analytics/firebase_analytics.dart'
     show AnalyticsCallOptions, FirebaseAnalytics;
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class FirebaseAnalyticsService {
@@ -23,10 +22,10 @@ class FirebaseAnalyticsService {
 
   Future<void> _initUserId() async {
     // Add user properties when we'll add login and sign up page
-    if (kReleaseMode && Config.isProduction) {
+    if (Config.isReleaseMode && Config.isProduction) {
       // Check if platform is iOS and request
       // app tracking transparency permission
-      if (!kIsWeb) {
+      if (!Config.isWeb) {
         if (PlatformEnum.getPlatform.isIOS) {
           // Check if user has granted consent
           final trackingStatus =
@@ -80,7 +79,7 @@ class FirebaseAnalyticsService {
     Map<String, Object>? parameters,
     AnalyticsCallOptions? callOptions,
   }) {
-    if (kReleaseMode &&
+    if (Config.isReleaseMode &&
         Config.isProduction &&
         name != null &&
         _userConsentGranted) {

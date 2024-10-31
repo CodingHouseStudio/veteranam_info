@@ -1,6 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 part 'discount_model.freezed.dart';
 part 'discount_model.g.dart';
@@ -71,30 +70,6 @@ enum DiscountState {
       this == DiscountState.published || this == DiscountState.deactivated;
 
   bool get isPublished => this == DiscountState.published;
-}
-
-extension SubLocationString on SubLocation {
-  List<String> getList(BuildContext context) {
-    switch (this) {
-      // case null:
-      //   return [];
-      case SubLocation.all:
-      case SubLocation.allStoresOfChain:
-      case SubLocation.online:
-        return [context.l10n.allUkraine];
-    }
-  }
-
-  List<String> getCardList(BuildContext context) {
-    switch (this) {
-      case SubLocation.all:
-        return [context.l10n.allStoresOfChain, context.l10n.allUkrainOnline];
-      case SubLocation.allStoresOfChain:
-        return [context.l10n.allStoresOfChain];
-      case SubLocation.online:
-        return [context.l10n.allUkrainOnline];
-    }
-  }
 }
 
 abstract class DiscountModelJsonField {

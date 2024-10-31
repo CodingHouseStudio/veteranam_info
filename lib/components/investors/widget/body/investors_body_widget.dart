@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/investors/investors.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/repositories/i_investors_repository.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../funds_widget_list.dart';
 part '../investors_image_widget_list.dart';

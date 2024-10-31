@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart';
 import 'package:veteranam/components/my_discounts/my_discounts.dart';
 import 'package:veteranam/components/my_discounts/widget/my_discount_page_with_an_empty_profile.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../my_discounts_card_widget_list.dart';
 

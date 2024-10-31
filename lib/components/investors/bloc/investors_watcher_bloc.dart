@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 part 'investors_watcher_bloc.freezed.dart';
 part 'investors_watcher_event.dart';
 part 'investors_watcher_state.dart';
 
-@Injectable(env: [Config.user])
+@Injectable()
 class InvestorsWatcherBloc
     extends Bloc<InvestorsWatcherEvent, InvestorsWatcherState> {
   InvestorsWatcherBloc({

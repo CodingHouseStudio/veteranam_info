@@ -1,7 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/password_reset/bloc/check_code/check_verification_code_cubit.dart';
+import 'package:veteranam/components/password_reset/bloc/form/password_reset_bloc.dart';
+import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/mob_faq/mob_faq.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
+import 'package:veteranam/shared/repositories/i_faq_repository.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobFaqBodyWidget extends StatelessWidget {
   const MobFaqBodyWidget({super.key});

@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 // class NawbarWidget extends SliverPersistentHeaderDelegate {
 //   const NawbarWidget({
@@ -233,7 +233,13 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                             //     ? KSize.kPixel72
                             //     : KSize.kPixel56,
                           ),
-                        if (Config.isUser) ...[
+                        if (Config.isUser ||
+                            (Config.isBusiness &&
+                                context
+                                        .read<AuthenticationBloc>()
+                                        .state
+                                        .status ==
+                                    AuthenticationStatus.authenticated)) ...[
                           if (widget.isDesk)
                             KSizedBox.kWidthSizedBox32
                           else

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Injectable(env: [Config.user])
 class DiscountLinkCubit extends Cubit<bool> {

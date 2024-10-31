@@ -1,5 +1,6 @@
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
+
+import 'package:veteranam/shared/constants/models.dart';
 
 enum ImageFieldModelValidationError {
   empty,

@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
-@Singleton(
-  as: IInvestorsRepository, env: [Config.user],
-  // signalsReady: true,
-)
+@Singleton(as: IInvestorsRepository)
 class InvestorsRepository implements IInvestorsRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   @override

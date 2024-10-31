@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/data_provider/image_load_helper.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
 class NetworkImageWidget extends StatefulWidget {
@@ -70,7 +70,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
     if (bytes == null && imageHasUrl) {
-      if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+      if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
         return CachedNetworkImage(
           imageUrl: widget.imageUrl!.getImageUrl, // widget.imageUrl,
           fit: widget.fit,

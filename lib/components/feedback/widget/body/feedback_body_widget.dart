@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart';
 import 'package:veteranam/components/feedback/feedback.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../feedback_box_widget.dart';
 part '../field_widget_list.dart';

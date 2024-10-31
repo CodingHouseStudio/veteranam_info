@@ -1,25 +1,20 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart'
-    show
-        BusinessDashboardScreen,
-        CompanyScreen,
-        DiscountCardDialog,
-        DiscountsAddScreen,
-        ErrorScreen,
-        FeedbackScreen,
-        LoginScreen,
-        MarkdownFileDialog,
-        MyDiscountsScreen,
-        PasswordResetScreen,
-        ProfileScreen,
-        PwResetEmailScreen,
-        SignUpScreen;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/company/view/company_view.dart';
+import 'package:veteranam/components/discounts_add/view/discounts_add_view.dart';
+import 'package:veteranam/components/error/view/error_view.dart';
+import 'package:veteranam/components/feedback/view/feedback_view.dart';
+import 'package:veteranam/components/investors/view/investors_view.dart';
+import 'package:veteranam/components/login/view/login_view.dart';
+import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
+import 'package:veteranam/components/my_discounts/view/my_discounts_view.dart';
+import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
+import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
+import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -40,7 +35,7 @@ GoRouter businessRouter = GoRouter(
   initialLocation:
       '/${KRoute.myDiscounts.path}', // KRoute.businessDashboard.path,
   observers: [
-    if (Config.isProduction && kReleaseMode)
+    if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
         analytics: FirebaseAnalytics.instance,
         // onError: (_) => foundation.kDebugMode
@@ -126,6 +121,16 @@ GoRouter businessRouter = GoRouter(
         name: state.name,
         restorationId: state.pageKey.value,
         child: const FeedbackScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.support.name,
+      path: '/${KRoute.support.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const InvestorsScreen(),
       ),
     ),
     //   ],

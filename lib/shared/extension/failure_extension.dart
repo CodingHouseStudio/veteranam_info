@@ -1,25 +1,6 @@
 import 'package:flutter/material.dart' show BuildContext;
-import 'package:veteranam/components/components.dart'
-    show
-        CompanyFormFailure,
-        DiscountFailure,
-        DiscountsAddFailure,
-        FeedbackFailure,
-        HomeFailure,
-        InformationFailure,
-        InvestorsFailure,
-        LoginFailure,
-        MobFAQFailure,
-        MyDiscountFailure,
-        MyStoryFailure,
-        PasswordResetFailure,
-        ProfileFailure,
-        PwResetEmailFailure,
-        SignUpError,
-        StoryAddFailure,
-        StoryFailure,
-        WorkFailure;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {
@@ -201,21 +182,6 @@ extension MyStoryFailureValue on MyStoryFailure {
         return context.l10n.getFailure;
       case MyStoryFailure.network:
         return context.l10n.networkFailure;
-    }
-  }
-}
-
-extension UrlFailureExtension on SomeFailure {
-  UrlEnum toUrl() {
-    switch (this) {
-      case FailureShare():
-        return UrlEnum.shareError;
-      case FailureLink():
-        return UrlEnum.linkError;
-      case FailureCopy():
-        return UrlEnum.copyError;
-      default:
-        return UrlEnum.error;
     }
   }
 }

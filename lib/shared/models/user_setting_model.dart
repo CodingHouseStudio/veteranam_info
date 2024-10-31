@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 part 'user_setting_model.freezed.dart';
 part 'user_setting_model.g.dart';
@@ -27,12 +27,11 @@ class UserSetting with _$UserSetting {
   static const empty = UserSetting(id: '');
 
   /// Convenience getter to determine whether the current user setting is empty.
-  bool get isEmpty => this == UserSetting.empty.copyWith(locale: this.locale);
+  bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);
 
   /// Convenience getter to determine whether the current user setting is
   /// not empty.
-  bool get isNotEmpty =>
-      this != UserSetting.empty.copyWith(locale: this.locale);
+  bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isDeviceEmpty =>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/company/company.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class CompanyFormWidget extends StatefulWidget {
   const CompanyFormWidget({
