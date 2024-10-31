@@ -28,7 +28,7 @@ class DiscountCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      key: ValueKey(discountItem.id),
+      key: Key(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
       child: Padding(
         padding: const EdgeInsets.only(
