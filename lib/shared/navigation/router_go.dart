@@ -1,41 +1,38 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart'
-    show
-        AboutUsScreen,
-        ConsultationScreen,
-        DiscountCardDialog,
-        DiscountsScreen,
-        EmployeeRespondScreen,
-        ErrorScreen,
-        FeedbackScreen,
-        HomeScreen,
-        InformationScreen,
-        InvestorsScreen,
-        LoginScreen,
-        MarkdownFileDialog,
-        MobFaqScreen,
-        MobSettingsScreen,
-        NewsCardDialog,
-        PasswordResetScreen,
-        ProfileMyStoryScreen,
-        ProfileSavesScreen,
-        ProfileScreen,
-        PwResetEmailScreen,
-        QuestionsFormScreen,
-        SignUpScreen,
-        StoryAddScreen,
-        StoryScreen,
-        ThanksScreen,
-        UserRoleScreen,
-        WorkEmployeeScreen,
-        WorkEmployerScreen,
-        WorkScreen;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/about_us/view/about_us_view.dart';
+import 'package:veteranam/components/consultation/view/consultation_view.dart';
+import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
+import 'package:veteranam/components/discounts/view/discounts_view.dart';
+import 'package:veteranam/components/employee_respond/view/employee_respond_view.dart';
+import 'package:veteranam/components/error/view/error_view.dart';
+import 'package:veteranam/components/feedback/view/feedback_view.dart';
+import 'package:veteranam/components/home/view/home_view.dart';
+import 'package:veteranam/components/information/view/information_view.dart';
+import 'package:veteranam/components/investors/view/investors_view.dart';
+import 'package:veteranam/components/login/view/login_view.dart';
+import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
+import 'package:veteranam/components/mob_faq/view/mob_faq_view.dart';
+import 'package:veteranam/components/mob_settings/view/mob_settings_view.dart';
+import 'package:veteranam/components/my_story/view/my_story_view.dart';
+import 'package:veteranam/components/news_card/view/news_card_view.dart';
+import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
+import 'package:veteranam/components/profile/view/profile_view.dart';
+import 'package:veteranam/components/profile_saves/view/profile_saves_view.dart';
+import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
+import 'package:veteranam/components/questions_form/view/questions_form_view.dart';
+import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
+import 'package:veteranam/components/story/view/story_view.dart';
+import 'package:veteranam/components/story_add/view/story_add_view.dart';
+import 'package:veteranam/components/thanks/view/thanks_view.dart';
+import 'package:veteranam/components/user_role/view/user_role_view.dart';
+import 'package:veteranam/components/work/view/work_view.dart';
+import 'package:veteranam/components/work_employee/view/work_employee_view.dart';
+import 'package:veteranam/components/work_employer/view/employer_view.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -54,9 +51,10 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: kIsWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
+  initialLocation:
+      Config.isWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
   observers: [
-    if (Config.isProduction && kReleaseMode)
+    if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
         analytics: FirebaseAnalytics.instance,
         // We have in the if kReleaseMode
@@ -172,13 +170,13 @@ GoRouter router = GoRouter(
         ),
       ),
     GoRoute(
-      name: kIsWeb ? KRoute.home.name : KRoute.settings.name,
+      name: Config.isWeb ? KRoute.home.name : KRoute.settings.name,
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
         restorationId: state.pageKey.value,
-        child: kIsWeb ? const HomeScreen() : const MobSettingsScreen(),
+        child: Config.isWeb ? const HomeScreen() : const MobSettingsScreen(),
       ),
       routes: [
         GoRoute(
@@ -414,7 +412,7 @@ GoRouter router = GoRouter(
             child: const FeedbackScreen(),
           ),
         ),
-        if (!kIsWeb)
+        if (!Config.isWeb)
           GoRoute(
             name: KRoute.mobFAQ.name,
             path: KRoute.mobFAQ.path,

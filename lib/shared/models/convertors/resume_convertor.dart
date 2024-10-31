@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 class ResumeConverter implements JsonConverter<ResumeModel?, List<dynamic>?> {
   const ResumeConverter();

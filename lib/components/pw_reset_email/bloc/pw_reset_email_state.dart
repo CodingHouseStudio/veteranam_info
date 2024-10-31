@@ -1,12 +1,5 @@
 part of 'pw_reset_email_bloc.dart';
 
-enum PwResetEmailFailure {
-  error,
-  notFound,
-  network,
-  send,
-}
-
 extension AuthFailureToPwResetEmailFailure on SomeFailure {
   PwResetEmailFailure _toPwResetEmailError() {
     switch (this) {

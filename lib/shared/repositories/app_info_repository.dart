@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(order: -2)
 class AppInfoRepository {
@@ -17,7 +16,7 @@ class AppInfoRepository {
   Future<PackageInfo> getBuildInfo() async {
     try {
       return PackageInfo.fromPlatform(
-        baseUrl: kIsWeb ? '${Uri.base.origin}/' : null,
+        baseUrl: Config.isWeb ? '${Uri.base.origin}/' : null,
       );
     } catch (e) {
       return defaultValue;

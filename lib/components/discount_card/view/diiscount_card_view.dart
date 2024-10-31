@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/discount_card/discount_card.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountCardDialog extends StatelessWidget {
   const DiscountCardDialog({required this.id, super.key});

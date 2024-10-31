@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -93,7 +93,7 @@ void main() {
     });
 
     group('Mobile', () {
-      setUp(() => Config.isWeb = false);
+      setUp(() => Config.testIsWeb = false);
       testWidgets('${KGroupText.initial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
@@ -111,7 +111,7 @@ void main() {
     });
 
     group('Web', () {
-      setUp(() => Config.isWeb = true);
+      setUp(() => Config.testIsWeb = true);
       testWidgets('${KGroupText.initial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart' show BoxFit, Key;
 import 'package:flutter_svg/svg.dart';
 // import 'package:flutter_svg/svg.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 // extension SvgPictureExtension on SvgPicture {
 //   SvgPicture copyWith({

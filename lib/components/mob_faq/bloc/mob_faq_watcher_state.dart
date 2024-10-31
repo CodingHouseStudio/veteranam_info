@@ -1,11 +1,5 @@
 part of 'mob_faq_watcher_bloc.dart';
 
-enum MobFAQFailure {
-  error,
-  get,
-  network,
-}
-
 extension MobFaqFailureExtension on SomeFailure {
   MobFAQFailure _toMobFAQ() {
     switch (this) {

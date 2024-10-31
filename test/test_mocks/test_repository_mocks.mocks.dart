@@ -45,7 +45,7 @@ import 'package:in_app_review/in_app_review.dart' as _i38;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i29;
 import 'package:package_info_plus/package_info_plus.dart' as _i18;
-import 'package:veteranam/shared/shared.dart' as _i3;
+import 'package:veteranam/shared/shared_dart.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

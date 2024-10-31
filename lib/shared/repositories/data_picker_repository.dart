@@ -1,72 +1,11 @@
 import 'package:file_picker/file_picker.dart'
     show FilePicker, FilePickerResult, FileType;
-import 'package:flutter/foundation.dart' show Uint8List, visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:image_picker/image_picker.dart'
     show ImagePicker, ImageSource, XFile;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
-
-class FilePickerItem {
-  FilePickerItem({
-    required this.bytes,
-    required this.name,
-    required this.ref,
-    this.extension,
-  });
-
-  final Uint8List bytes;
-  final String? extension;
-  final String? name;
-  final String? ref;
-
-  static Future<FilePickerItem?> getFromImage(XFile? image) async {
-    if (image == null) return null;
-    final hasExtension = image.name.contains('.');
-    return FilePickerItem(
-      bytes: await image.readAsBytes(),
-      extension: hasExtension
-          ? image.name.substring(
-              image.name.lastIndexOf('.'),
-            )
-          : null,
-      name: image.name,
-      ref: image.path,
-    );
-  }
-
-  static Future<FilePickerItem?> getFromFile(
-    FilePickerResult? fileResult,
-  ) async {
-    if (fileResult == null) return null;
-    final file = fileResult.files.first;
-    if (file.bytes == null) return null;
-    final hasExtension = file.name.contains('.');
-    return FilePickerItem(
-      bytes: file.bytes!,
-      extension: hasExtension
-          ? file.name.substring(
-              file.name.lastIndexOf('.'),
-            )
-          : null,
-      name: file.name,
-      ref: file.path,
-    );
-  }
-
-  ImageModel image(String downloadURL) => ImageModel(
-        downloadURL: downloadURL,
-        name: name,
-        ref: ref,
-        type: extension,
-      );
-
-  ResumeModel resume(String downloadURL) => ResumeModel(
-        downloadURL: downloadURL,
-        name: name,
-        ref: ref,
-        type: extension,
-      );
-}
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(
   // env: [Config.business, Config.development],

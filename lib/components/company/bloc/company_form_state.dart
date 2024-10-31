@@ -1,11 +1,5 @@
 part of 'company_form_bloc.dart';
 
-enum CompanyFormFailure {
-  error,
-  network,
-  send,
-}
-
 extension CompanyFormFailureExtension on SomeFailure {
   CompanyFormFailure _toCompanyError() => CompanyFormFailure.error;
 }
