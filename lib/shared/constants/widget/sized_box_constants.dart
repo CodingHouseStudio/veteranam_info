@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' show SizedBox;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 abstract class KSizedBox {
   static const SizedBox kHeightSizedBox160 = SizedBox(

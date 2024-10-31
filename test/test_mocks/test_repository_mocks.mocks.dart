@@ -41,10 +41,11 @@ import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i30;
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart'
     as _i11;
+import 'package:in_app_review/in_app_review.dart' as _i38;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i29;
 import 'package:package_info_plus/package_info_plus.dart' as _i18;
-import 'package:veteranam/shared/shared.dart' as _i3;
+import 'package:veteranam/shared/shared_dart.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -13492,4 +13493,79 @@ class MockPlatformFile extends _i1.Mock implements _i37.PlatformFile {
           Invocation.getter(#xFile),
         ),
       ) as _i11.XFile);
+}
+
+/// A class which mocks [MobileRatingRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMobileRatingRepository extends _i1.Mock
+    implements _i3.MobileRatingRepository {
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> showRatingDialog() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #showRatingDialog,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #showRatingDialog,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #showRatingDialog,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+}
+
+/// A class which mocks [InAppReview].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockInAppReview extends _i1.Mock implements _i38.InAppReview {
+  @override
+  _i8.Future<bool> isAvailable() => (super.noSuchMethod(
+        Invocation.method(
+          #isAvailable,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<void> requestReview() => (super.noSuchMethod(
+        Invocation.method(
+          #requestReview,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> openStoreListing({
+    String? appStoreId,
+    String? microsoftStoreId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openStoreListing,
+          [],
+          {
+            #appStoreId: appStoreId,
+            #microsoftStoreId: microsoftStoreId,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }

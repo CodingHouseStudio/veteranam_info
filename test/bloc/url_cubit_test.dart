@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 
@@ -16,12 +16,12 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.url} ', () {
-    late UrlCubit mockUrlCubit;
+    late UrlCubit urlCubit;
     late IUrlRepository mockUrlRepository;
 
     setUp(() {
       mockUrlRepository = MockIUrlRepository();
-      mockUrlCubit = UrlCubit(
+      urlCubit = UrlCubit(
         urlRepository: mockUrlRepository,
       );
     });
@@ -42,7 +42,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
         expect: () async => [
           null,
@@ -51,7 +51,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
           null,
@@ -60,7 +60,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when copy email',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.copy(KAppText.email),
         expect: () async => [
           UrlEnum.copyEmailSucceed,
@@ -69,7 +69,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when email was copied',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.reset(),
         expect: () async => [
           null,
@@ -89,7 +89,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
           UrlEnum.copyLinkSucceed,
@@ -113,7 +113,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
         expect: () async => [
           UrlEnum.linkError,
@@ -122,7 +122,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
           null,
@@ -132,7 +132,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when copy email',
-        build: () => mockUrlCubit,
+        build: () => urlCubit,
         act: (bloc) async => bloc.copy(KAppText.email),
         expect: () async => [
           UrlEnum.copyError,

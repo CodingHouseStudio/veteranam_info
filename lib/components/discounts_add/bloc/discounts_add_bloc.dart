@@ -3,7 +3,7 @@ import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 part 'discounts_add_bloc.freezed.dart';
 part 'discounts_add_event.dart';

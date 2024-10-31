@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/markdown_file_dialog/markdown_file_dialog.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class MarkdownFileDialog extends StatelessWidget {
   const MarkdownFileDialog({

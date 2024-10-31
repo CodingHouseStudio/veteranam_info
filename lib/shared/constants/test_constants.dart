@@ -1,16 +1,11 @@
-import 'package:flutter/foundation.dart'
-    show kIsWeb, kReleaseMode, visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 
 class KTest {
   static bool _cashe = true;
   static bool get cashe => _cashe;
   @visibleForTesting
   static set cashe(bool casheValue) => _cashe = casheValue;
-
-  static bool _kReleaseMode = kReleaseMode;
-  static bool get testReleaseMode => _kReleaseMode;
-  @visibleForTesting
-  static set testReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
 
   static bool _isTest = false;
   static bool get isTest => _isTest;

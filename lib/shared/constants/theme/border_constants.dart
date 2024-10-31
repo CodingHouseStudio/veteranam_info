@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' show OutlineInputBorder;
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 abstract class KBorder {
   static const outlineInputLightGray = OutlineInputBorder(

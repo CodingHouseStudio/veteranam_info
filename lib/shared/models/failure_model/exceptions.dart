@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:veteranam/shared/shared.dart';
+
+import 'package:veteranam/shared/models/failure_model/some_failure_model.dart';
 
 /// COMMENT: Error handling classes
 class SendFailure {

@@ -3,11 +3,10 @@ import 'dart:typed_data' show Uint8List;
 
 // import 'package:dio/browser.dart';
 import 'package:dio/dio.dart' show Dio, Options, ResponseType;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory; // For mobile file handling
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(order: -1)
 class ArtifactDownloadHelper {
@@ -51,12 +50,12 @@ class ArtifactDownloadHelper {
 
   Future<Uint8List?> _downloadImage(ImageModel image) async {
     // Handle differently for web vs mobile
-    if (kIsWeb) {
+    if (Config.isWeb) {
       // _dio.httpClientAdapter = BrowserHttpClientAdapter
       // (withCredentials: true);
 
       final response = await _dio.get<Uint8List>(
-        image.downloadURL.getImageUrl,
+        image.downloadURL,
         options: _options,
       );
       if (response.data == null ||
@@ -78,7 +77,7 @@ class ArtifactDownloadHelper {
 
       // Download the image
       final response = await _dio.get<Uint8List>(
-        image.downloadURL.getImageUrl,
+        image.downloadURL,
         options: _options,
       );
       if (response.data == null ||

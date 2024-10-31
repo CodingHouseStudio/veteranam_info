@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/bloc.dart';
+import 'package:veteranam/components/discounts/view/discounts_view.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
 
@@ -14,6 +16,7 @@ Future<void> discountsPumpAppHelper({
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required AppInfoRepository mockBuildRepository,
+  required MobileRatingRepository? mockMobileRatingRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -53,6 +56,9 @@ Future<void> discountsPumpAppHelper({
     mockBuildRepository: mockBuildRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
+  if (mockMobileRatingRepository != null) {
+    _registerMobileRatingCubit(mockMobileRatingRepository);
+  }
 
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
@@ -155,6 +161,18 @@ void _registerDiscountUserEmailFormBloc({
     GetIt.I.unregister<DiscountUserEmailFormBloc>();
   }
   GetIt.I.registerSingleton<DiscountUserEmailFormBloc>(authenticationBloc);
+}
+
+void _registerMobileRatingCubit(
+  MobileRatingRepository mockMobileRatingRepository,
+) {
+  final mobileRatingCubit = MobileRatingCubit(
+    mobileRatingRepository: mockMobileRatingRepository,
+  );
+  if (GetIt.I.isRegistered<MobileRatingCubit>()) {
+    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+  }
+  GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }
 
 // void _registerDiscountUserEmailCubit({

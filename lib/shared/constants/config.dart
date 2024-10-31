@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 
 abstract class Config {
   static const flavour =
       String.fromEnvironment('FLAVOUR', defaultValue: development);
   static const role = String.fromEnvironment('ROLE', defaultValue: user);
-  static const platform = kIsWeb ? web : mobile;
-
   @visibleForTesting
   static String? falvourValue;
 
@@ -29,12 +28,21 @@ abstract class Config {
   // @visibleForTesting
   static const business = 'business';
 
-  static bool? _kIsWeb;
-  static bool get isWeb => _kIsWeb ?? platform == web;
-  @visibleForTesting
-  static set isWeb(bool isWeb) => _kIsWeb = isWeb;
   // @visibleForTesting
   static const web = 'web';
   // @visibleForTesting
   static const mobile = 'mobile';
+
+  static const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
+
+  static const String platform = kIsWeb ? Config.web : Config.mobile;
+
+  static bool get isWeb => testIsWeb ?? platform == Config.web;
+  @visibleForTesting
+  static bool? testIsWeb;
+
+  static bool _kReleaseMode = const bool.fromEnvironment('dart.vm.product');
+  static bool get isReleaseMode => _kReleaseMode;
+  @visibleForTesting
+  static set isReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
 }

@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 part 'discount_config_state.dart';
 

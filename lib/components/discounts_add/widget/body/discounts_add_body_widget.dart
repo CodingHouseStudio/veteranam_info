@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/discounts_add/discounts_add.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsAddBodyWidget extends StatefulWidget {
   const DiscountsAddBodyWidget({required this.discountId, super.key});

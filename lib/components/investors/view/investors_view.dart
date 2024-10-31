@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/investors/investors.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class InvestorsScreen extends StatelessWidget {
   const InvestorsScreen({super.key});

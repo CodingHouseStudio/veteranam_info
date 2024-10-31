@@ -1,11 +1,5 @@
 part of 'investors_watcher_bloc.dart';
 
-enum InvestorsFailure {
-  error,
-  get,
-  network,
-}
-
 extension InvestorsFailureExtension on SomeFailure {
   InvestorsFailure _toInvestors() {
     switch (this) {

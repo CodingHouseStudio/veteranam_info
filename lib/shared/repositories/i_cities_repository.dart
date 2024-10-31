@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 // ignore: one_member_abstracts
 abstract class ICitiesRepository {

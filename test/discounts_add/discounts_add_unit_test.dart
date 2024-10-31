@@ -4,8 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart';
+import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 
@@ -31,7 +32,7 @@ void main() {
           .replaceAll('Up to ', '');
       LocalizedDateTime.ukDateString =
           KTestText.blocSendDiscountModel.expiration!.replaceAll('До ', '');
-      StringExtension.date = KTestText.nextDateTime;
+      StringDartExtension.date = KTestText.nextDateTime;
       ExtendedDateTime.id = KTestText.blocSendDiscountModel.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountsRepository = MockIDiscountRepository();

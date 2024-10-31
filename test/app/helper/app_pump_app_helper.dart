@@ -1,8 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/app.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
+import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart';
+import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 Future<void> appPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
@@ -14,6 +21,7 @@ Future<void> appPumpAppHelper({
   required IInvestorsRepository mockInvestorsReportisory,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
+  required MobileRatingRepository mockMobileRatingRepository,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
   _registerHomeBloc(mockFaqRepository);
@@ -40,6 +48,7 @@ Future<void> appPumpAppHelper({
   );
   _registerMobFaqBloc(mockFaqRepository);
   _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
+  _registerMobileRatingCubit(mockMobileRatingRepository);
   await tester.pumpWidget(const App());
 
   await tester.pumpAndSettle();
@@ -156,4 +165,16 @@ void _registerDiscountConfigCubit(
     GetIt.I.unregister<DiscountConfigCubit>();
   }
   GetIt.I.registerSingleton<DiscountConfigCubit>(discountConfigCubit);
+}
+
+void _registerMobileRatingCubit(
+  MobileRatingRepository mockMobileRatingRepository,
+) {
+  final mobileRatingCubit = MobileRatingCubit(
+    mobileRatingRepository: mockMobileRatingRepository,
+  );
+  if (GetIt.I.isRegistered<MobileRatingCubit>()) {
+    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+  }
+  GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }

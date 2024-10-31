@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
   const ScaffoldAutoLoadingWidget({
@@ -52,7 +52,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     super.initState();
 
     _scrollController = ScrollController();
-    if (!PlatformEnum.isWebDesktop) {
+    if (!PlatformEnumFlutter.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
   }
@@ -86,7 +86,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       else ...[
                         if (widget.loadingStatus !=
                                 LoadingStatus.listLoadedFull &&
-                            PlatformEnum.isWebDesktop &&
+                            PlatformEnumFlutter.isWebDesktop &&
                             !(widget.cardListIsEmpty ?? false) &&
                             widget.loadingStatus != LoadingStatus.loading)
                           LoadingButtonWidget(
@@ -304,7 +304,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   @override
   void dispose() {
-    if (PlatformEnum.isWebDesktop) {
+    if (PlatformEnumFlutter.isWebDesktop) {
       _scrollController.dispose();
     } else {
       _scrollController

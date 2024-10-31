@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -23,10 +24,11 @@ void main() {
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
+    late MobileRatingRepository mockMobileRatingRepository;
     setUp(() {
-      Config.isWeb = false;
-      PlatformEnum.isWebDesktop = true;
-      KTest.testReleaseMode = true;
+      Config.testIsWeb = false;
+      PlatformEnumFlutter.isWebDesktop = true;
+      Config.isReleaseMode = true;
       Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -36,9 +38,13 @@ void main() {
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockBuildRepository = MockAppInfoRepository();
+      mockMobileRatingRepository = MockMobileRatingRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
+      );
+      when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
+        (realInvocation) async => const Right(true),
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
@@ -104,6 +110,7 @@ void main() {
         mockAuthenticationRepository: mockAuthenticationRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         mockBuildRepository: mockBuildRepository,
+        mockMobileRatingRepository: mockMobileRatingRepository,
       );
 
       await discountsInitialHelper(tester);
@@ -121,6 +128,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         ),
       );
     });
@@ -139,13 +147,14 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: mockMobileRatingRepository,
         );
 
         await discountsInitialHelper(tester);
       });
       group('Open Update dialog', () {
         setUp(() {
-          PlatformEnum.isWebDesktop = false;
+          PlatformEnumFlutter.isWebDesktop = false;
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
@@ -163,6 +172,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );
 
@@ -183,6 +193,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );
 
