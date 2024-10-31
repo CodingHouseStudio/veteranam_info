@@ -1,20 +1,10 @@
-import 'package:flutter/material.dart' show BuildContext, Key, VoidCallback;
-import 'package:veteranam/shared/shared.dart';
+import 'dart:io' show Platform;
+
+import 'package:veteranam/shared/constants/config.dart';
 
 enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
 
 //enum EvaluationEnum { like, dislike, smile, none }
-
-class FilterItem {
-  FilterItem(this.value, {this.number = 1, this.valueEN});
-
-  final dynamic value;
-  final dynamic valueEN;
-  final int number;
-
-  String getString(BuildContext context) =>
-      (context.isEnglish && valueEN != null ? valueEN : value).toString();
-}
 
 enum UrlEnum {
   shareError,
@@ -27,14 +17,55 @@ enum UrlEnum {
 
 enum CategoryEnum { all }
 
-class DropDownItem {
-  DropDownItem({
-    required this.text,
-    required this.action,
-    required this.key,
-  });
+enum AuthenticationStatus {
+  unknown,
+  anonymous,
+  authenticated,
+} //unauthenticated
 
-  final String text;
-  final VoidCallback? action;
-  final Key key;
+enum MobMode {
+  online,
+  offline;
+
+  bool get isOffline => this == MobMode.offline;
+  MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;
+}
+
+enum NetworkStatus {
+  network,
+  offline;
+
+  bool get isOffline => this == NetworkStatus.offline;
+}
+
+enum PlatformEnum {
+  android,
+  ios,
+  web,
+  unknown;
+
+  bool get isAndroid => this == PlatformEnum.android;
+  bool get isIOS => this == PlatformEnum.ios;
+  bool get isWeb => this == PlatformEnum.web;
+  bool get isUnkown => this == PlatformEnum.unknown;
+
+  static PlatformEnum get getPlatform {
+    try {
+      if (Config.isWeb) {
+        return PlatformEnum.web;
+      } else if (Platform.isAndroid) {
+        return PlatformEnum.android;
+      } else if (Platform.isIOS) {
+        return PlatformEnum.ios;
+      }
+      return PlatformEnum.unknown;
+    } catch (e) {
+      return PlatformEnum.unknown;
+    }
+  }
+}
+
+enum DiscountEnum {
+  largestSmallest,
+  free,
 }

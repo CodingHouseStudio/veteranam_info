@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 
 import '../../../test_dependency.dart';
 
@@ -9,7 +10,7 @@ void loadingList(
 ) {
   group('Loading List', () {
     testWidgets('Desk', (tester) async {
-      PlatformEnum.isWebDesktop = true;
+      PlatformEnumFlutter.isWebDesktop = true;
       await pumpApp(tester);
 
       await _deskLoadingHelper(
@@ -18,7 +19,7 @@ void loadingList(
       );
     });
     testWidgets('Mobile', (tester) async {
-      PlatformEnum.isWebDesktop = false;
+      PlatformEnumFlutter.isWebDesktop = false;
       await pumpApp(tester);
 
       await _mobileLoadingHelper(

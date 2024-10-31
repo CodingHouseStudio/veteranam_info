@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -25,9 +26,9 @@ void main() {
     late AppInfoRepository mockBuildRepository;
     late MobileRatingRepository mockMobileRatingRepository;
     setUp(() {
-      Config.isWeb = false;
-      PlatformEnum.isWebDesktop = true;
-      KTest.testReleaseMode = true;
+      Config.testIsWeb = false;
+      PlatformEnumFlutter.isWebDesktop = true;
+      Config.isReleaseMode = true;
       Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -153,7 +154,7 @@ void main() {
       });
       group('Open Update dialog', () {
         setUp(() {
-          PlatformEnum.isWebDesktop = false;
+          PlatformEnumFlutter.isWebDesktop = false;
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),

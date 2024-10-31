@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/password_reset/password_reset.dart';
+import 'package:veteranam/components/password_reset/bloc/bloc.dart';
 
 class PasswordResetBlocprovider extends StatelessWidget {
   const PasswordResetBlocprovider({

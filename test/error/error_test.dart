@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -39,7 +39,7 @@ void main() {
           );
         });
         testWidgets('${KScreenBlocName.home} ', (tester) async {
-          Config.isWeb = false;
+          Config.testIsWeb = false;
 
           await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 

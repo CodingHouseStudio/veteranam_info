@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/constants/enum.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 import '../../test_dependency.dart';
 

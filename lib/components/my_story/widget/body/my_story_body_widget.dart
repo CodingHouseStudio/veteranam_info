@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/my_story/my_story.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 part '../stories_widget_list.dart';
 

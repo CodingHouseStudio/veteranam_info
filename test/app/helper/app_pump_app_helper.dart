@@ -1,8 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/app.dart';
-import 'package:veteranam/components/components.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
+import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart';
+import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 Future<void> appPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,

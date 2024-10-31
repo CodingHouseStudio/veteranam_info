@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/information/information.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class InformationScreen extends StatelessWidget {
   const InformationScreen({super.key});

@@ -1,12 +1,5 @@
 part of 'login_bloc.dart';
 
-enum LoginFailure {
-  error,
-  notFound,
-  network,
-  send,
-}
-
 extension AuthFailureToLoginFailure on SomeFailure {
   LoginFailure _toLogInError() {
     switch (this) {
