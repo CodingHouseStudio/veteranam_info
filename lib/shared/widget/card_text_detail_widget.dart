@@ -19,7 +19,7 @@ class CardTextDetailWidget extends StatefulWidget {
 
   final String text;
   final int? maxLines;
-  final List<Widget>? icon;
+  final Widget? icon;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
   final bool isDesk;
@@ -45,6 +45,12 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // The RepaintBoundary widget is used here to optimize the rendering
+    // of each card widget. By wrapping the card widget in a
+    // RepaintBoundary, we ensure that only the part of the widget tree
+    // that changes (in this case, the card itself) is repainted
+    // when there are updates. This can help improve performance,
+    // especially when dealing with long lists or animations.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -80,15 +86,18 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     }),
                     style: widget.buttonStyle ??
                         KButtonStyles.borderBlackButtonStyle,
-                    child: Text(
-                      fullText
-                          ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
-                          : widget.buttonText?.elementAt(0) ??
-                              context.l10n.more,
-                      key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                      style: widget.isDesk
-                          ? AppTextStyle.materialThemeTitleMedium
-                          : AppTextStyle.materialThemeTitleSmall,
+                    child: RepaintBoundary(
+                      child: Text(
+                        fullText
+                            ? widget.buttonText?.elementAt(1) ??
+                                context.l10n.hide
+                            : widget.buttonText?.elementAt(0) ??
+                                context.l10n.more,
+                        key: KWidgetkeys.widget.cardTextDetail.buttonText,
+                        style: widget.isDesk
+                            ? AppTextStyle.materialThemeTitleMedium
+                            : AppTextStyle.materialThemeTitleSmall,
+                      ),
                     ),
                   ),
                 ),
@@ -97,7 +106,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            if (widget.icon != null) ...widget.icon!,
+            if (widget.icon != null) widget.icon!,
           ],
         ),
       ],

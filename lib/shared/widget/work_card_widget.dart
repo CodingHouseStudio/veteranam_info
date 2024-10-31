@@ -56,17 +56,20 @@ class WorkCardWidget extends StatelessWidget {
             CardTextDetailWidget(
               text: workModel.description,
               maxLines: 3,
-              icon: [
-                KIcon.share
-                    .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
-                KSizedBox.kWidthSizedBox16,
-                if (isSaved)
-                  KIcon.safe.copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
-                else
-                  KIcon.saved.copyWith(
-                    key: KWidgetkeys.widget.workCard.iconSafe,
-                  ),
-              ],
+              icon: Row(
+                children: [
+                  KIcon.share
+                      .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
+                  KSizedBox.kWidthSizedBox16,
+                  if (isSaved)
+                    KIcon.safe
+                        .copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
+                  else
+                    KIcon.saved.copyWith(
+                      key: KWidgetkeys.widget.workCard.iconSafe,
+                    ),
+                ],
+              ),
               isDesk: isDesk,
             ),
             KSizedBox.kHeightSizedBox16,
