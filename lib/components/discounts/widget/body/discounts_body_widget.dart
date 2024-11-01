@@ -57,7 +57,7 @@ class DiscountBodyWidget extends StatelessWidget {
                       current.failure != null ||
                       previous.itemsLoaded != current.itemsLoaded,
                   builder: (context, _) {
-                    return ScaffoldAutoLoadingWidget(
+                    return ScaffoldAutoLoadingTestWidget(
                       loadingButtonText: context.l10n.moreDiscounts,
                       loadingStatus: _.loadingStatus,
                       cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
@@ -155,10 +155,10 @@ class DiscountBodyWidget extends StatelessWidget {
                         // loadNextItems()),
                         //   isDesk: isDesk,
                         // ),
-                        if (isDesk)
-                          KSizedBox.kHeightSizedBox40
-                        else
-                          KSizedBox.kHeightSizedBox24,
+                        // if (isDesk)
+                        //   KSizedBox.kHeightSizedBox40
+                        // else
+                        //   KSizedBox.kHeightSizedBox24,
                       ],
                       loadFunction: () => context
                           .read<DiscountWatcherBloc>()
