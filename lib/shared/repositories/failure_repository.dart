@@ -61,8 +61,7 @@ class FailureRepository {
                 // the performance of the app's loading.
                 ..enableTimeToFullDisplayTracing = true
                 ..environment =
-                    'FLAVOUR = ${Config.flavour}, ROLE = ${Config.role} '
-                        '${Config.isWeb ? Uri.base.origin : ''}';
+                    'FLAVOUR = ${Config.flavour}, ROLE = ${Config.role} ';
             },
           );
         }
