@@ -15,11 +15,7 @@ class FailureRepository {
     final error = failure.error;
     final stack = failure.stack;
     if (error != null) {
-      if (Config.isReleaseMode && Config.isProduction) {
-        onError(error: error, stack: stack);
-      } else {
-        // debugPrint('EXCEPTION: $error \n EXCEPTION STACK: $stack');
-      }
+      onError(error: error, stack: stack);
     }
   }
 
@@ -29,67 +25,62 @@ class FailureRepository {
     String? reason,
     Iterable<Object>? information,
   }) async {
-    // if (Config.isReleaseMode) {
-    if (Config.isWeb) {
-      if (!_isCrashlyticsLoaded) {
+    if (Config.isReleaseMode && Config.isProduction) {
+      if (Config.isWeb) {
         await sentry.loadLibrary();
-        _isCrashlyticsLoaded = true;
-      }
-      if (!sentry.Sentry.isEnabled) {
-        await sentry.SentryFlutter.init(
-          (options) {
-            options
-              ..dsn = KSecurityKeys.sentryDSN
-              // Set tracesSampleRate to 1.0 to capture 100% of
-              // transactions for
-              // performance monitoring.
-              // We recommend adjusting this value in production.
-              ..tracesSampleRate = 1.0
-              // The sampling rate for profiling is relative to
-              // tracesSampleRate
-              // Setting to 1.0 will profile 100% of sampled transactions:
-              ..profilesSampleRate = 1.0
-              // ignore package error
-              ..reportPackages = false
-              // add information about threads
-              ..attachThreads = true
-              ..reportSilentFlutterErrors = true
-              // Add screenshot for error
-              ..attachScreenshot = true
-              // Optimization screenshot
-              ..screenshotQuality = sentry.SentryScreenshotQuality.low
-              // Add hierarchy for error report
-              ..attachViewHierarchy = true
-              // Turns on Spotlight functionality, which can help you track
-              // certain events or conditions.
-              ..spotlight = sentry.Spotlight(enabled: true)
-              // Turns on time tracking until full display to help you
-              // understand
-              // the performance of the app's loading.
-              ..enableTimeToFullDisplayTracing = true;
-          },
+        if (!sentry.Sentry.isEnabled) {
+          await sentry.SentryFlutter.init(
+            (options) {
+              options
+                ..dsn = KSecurityKeys.sentryDSN
+                // Set tracesSampleRate to 1.0 to capture 100% of
+                // transactions for
+                // performance monitoring.
+                // We recommend adjusting this value in production.
+                ..tracesSampleRate = 1.0
+                // The sampling rate for profiling is relative to
+                // tracesSampleRate
+                // Setting to 1.0 will profile 100% of sampled transactions:
+                ..profilesSampleRate = 1.0
+                // ignore package error
+                ..reportPackages = false
+                // add information about threads
+                ..attachThreads = true
+                ..reportSilentFlutterErrors = true
+                // Add screenshot for error
+                ..attachScreenshot = true
+                // Optimization screenshot
+                ..screenshotQuality = sentry.SentryScreenshotQuality.low
+                // Add hierarchy for error report
+                ..attachViewHierarchy = true
+                // Turns on Spotlight functionality, which can help you track
+                // certain events or conditions.
+                ..spotlight = sentry.Spotlight(enabled: true)
+                // Turns on time tracking until full display to help you
+                // understand
+                // the performance of the app's loading.
+                ..enableTimeToFullDisplayTracing = true
+                ..environment =
+                    'FLAVOUR = ${Config.flavour}, ROLE = ${Config.role} '
+                        '${Config.isWeb ? Uri.base.origin : ''}';
+            },
+          );
+        }
+        await sentry.Sentry.captureException(
+          error,
+          stackTrace: stack,
+        );
+      } else {
+        await firebase_crashlytics.loadLibrary();
+        await firebase_crashlytics.FirebaseCrashlytics.instance.recordError(
+          error,
+          stack,
+          reason: reason,
+          information: information ?? const [],
+          printDetails: information == null,
         );
       }
-      await sentry.Sentry.captureException(
-        error,
-        stackTrace: stack,
-      );
-    } else {
-      if (_isCrashlyticsLoaded) {
-        await firebase_crashlytics.loadLibrary();
-        _isCrashlyticsLoaded = true;
-      }
-      await firebase_crashlytics.FirebaseCrashlytics.instance.recordError(
-        error,
-        stack,
-        reason: reason,
-        information: information ?? const [],
-        printDetails: information == null,
-      );
     }
-    // }
     log('EXCEPTION: $error', stackTrace: stack);
   }
-
-  static bool _isCrashlyticsLoaded = false;
 }
