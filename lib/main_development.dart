@@ -1,10 +1,11 @@
 // ignore_for_file: empty_catches
 
-import 'dart:developer' show log;
+// import 'dart:developer' show log;
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart' show PlatformDispatcher;
+import 'package:flutter/foundation.dart'
+    show DiagnosticLevel, PlatformDispatcher;
 // import 'package:flutter/foundation.dart' show Config.isReleaseMode;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:veteranam/app.dart';
@@ -12,6 +13,7 @@ import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/repositories/failure_repository.dart';
 
 /// COMMENT: DEV main file
 void main() async {
@@ -48,11 +50,17 @@ void main() async {
 
   // Non-async exceptions
   FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    FailureRepository.onError(
+      error: details,
+      stack: details.stack,
+      information: details.informationCollector?.call(),
+      reason:
+          details.context?.toStringDeep(minLevel: DiagnosticLevel.info).trim(),
+    );
   };
   // Async exceptions
   PlatformDispatcher.instance.onError = (error, stack) {
-    log(error.toString(), stackTrace: stack);
+    FailureRepository.onError(error: error, stack: stack);
 
     return true;
   };

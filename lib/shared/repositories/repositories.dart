@@ -8,7 +8,6 @@ export 'data_picker_module.dart';
 export 'data_picker_repository.dart';
 export 'device_repository.dart';
 export 'discount_repository.dart';
-export 'failure_module.dart';
 export 'failure_repository.dart';
 export 'faq_repository.dart';
 export 'feedback_repository.dart';
