@@ -15,19 +15,15 @@ import 'package:veteranam/components/information/view/information_view.dart';
 import 'package:veteranam/components/investors/view/investors_view.dart';
 import 'package:veteranam/components/login/view/login_view.dart';
 import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
-import 'package:veteranam/components/mob_faq/view/mob_faq_view.dart';
-import 'package:veteranam/components/mob_settings/view/mob_settings_view.dart';
 import 'package:veteranam/components/my_story/view/my_story_view.dart';
 import 'package:veteranam/components/news_card/view/news_card_view.dart';
-import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
+// import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 import 'package:veteranam/components/profile/view/profile_view.dart';
 import 'package:veteranam/components/profile_saves/view/profile_saves_view.dart';
-import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
-import 'package:veteranam/components/questions_form/view/questions_form_view.dart';
+// import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
 import 'package:veteranam/components/story/view/story_view.dart';
 import 'package:veteranam/components/story_add/view/story_add_view.dart';
-import 'package:veteranam/components/thanks/view/thanks_view.dart';
 import 'package:veteranam/components/user_role/view/user_role_view.dart';
 import 'package:veteranam/components/work/view/work_view.dart';
 import 'package:veteranam/components/work_employee/view/work_employee_view.dart';
@@ -51,8 +47,7 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation:
-      Config.isWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
+  initialLocation: KRoute.home.path,
   observers: [
     if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
@@ -100,35 +95,36 @@ GoRouter router = GoRouter(
             restorationId: state.pageKey.value,
             child: const LoginScreen(),
           ),
-          routes: [
-            GoRoute(
-              name: KRoute.passwordReset.name,
-              path: KRoute.passwordReset.path,
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                name: state.name,
-                restorationId: state.pageKey.value,
-                child: PasswordResetScreen(
-                  code:
-                      state.uri.queryParameters[UrlParameters.verificationCode],
-                ),
-              ),
-              routes: [
-                GoRoute(
-                  name: KRoute.pwResetEmail.name,
-                  path: KRoute.pwResetEmail.path,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    key: state.pageKey,
-                    name: state.name,
-                    restorationId: state.pageKey.value,
-                    child: PwResetEmailScreen(
-                      email: state.uri.queryParameters[UrlParameters.email],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+          // routes: [
+          //   GoRoute(
+          //     name: KRoute.passwordReset.name,
+          //     path: KRoute.passwordReset.path,
+          //     pageBuilder: (context, state) => NoTransitionPage(
+          //       key: state.pageKey,
+          //       name: state.name,
+          //       restorationId: state.pageKey.value,
+          //       child: PasswordResetScreen(
+          //         code:
+          //             state.uri.queryParameters[UrlParameters.
+          // verificationCode],
+          //       ),
+          //     ),
+          //     routes: [
+          //       GoRoute(
+          //         name: KRoute.pwResetEmail.name,
+          //         path: KRoute.pwResetEmail.path,
+          //         pageBuilder: (context, state) => NoTransitionPage(
+          //           key: state.pageKey,
+          //           name: state.name,
+          //           restorationId: state.pageKey.value,
+          //           child: PwResetEmailScreen(
+          //             email: state.uri.queryParameters[UrlParameters.email],
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ],
         ),
         GoRoute(
           name: KRoute.signUp.name,
@@ -142,41 +138,41 @@ GoRouter router = GoRouter(
         ),
       ],
     ),
-    if (Config.isDevelopment)
-      GoRoute(
-        name: KRoute.questionsForm.name,
-        path: KRoute.questionsForm.path,
-        redirect: (context, state) =>
-            context.read<AuthenticationBloc>().state.userSetting.userRole ==
-                    null
-                ? null
-                : KRoute.thanks.path,
-        pageBuilder: (context, state) => NoTransitionPage(
-          key: state.pageKey,
-          name: state.name,
-          restorationId: state.pageKey.value,
-          child: const QuestionsFormScreen(),
-        ),
-      ),
-    if (Config.isDevelopment)
-      GoRoute(
-        name: KRoute.thanks.name,
-        path: KRoute.thanks.path,
-        pageBuilder: (context, state) => NoTransitionPage(
-          key: state.pageKey,
-          name: state.name,
-          restorationId: state.pageKey.value,
-          child: const ThanksScreen(),
-        ),
-      ),
+    // if (Config.isDevelopment)
+    //   GoRoute(
+    //     name: KRoute.questionsForm.name,
+    //     path: KRoute.questionsForm.path,
+    //     redirect: (context, state) =>
+    //         context.read<AuthenticationBloc>().state.userSetting.userRole ==
+    //                 null
+    //             ? null
+    //             : KRoute.thanks.path,
+    //     pageBuilder: (context, state) => NoTransitionPage(
+    //       key: state.pageKey,
+    //       name: state.name,
+    //       restorationId: state.pageKey.value,
+    //       child: const QuestionsFormScreen(),
+    //     ),
+    //   ),
+    // if (Config.isDevelopment)
+    //   GoRoute(
+    //     name: KRoute.thanks.name,
+    //     path: KRoute.thanks.path,
+    //     pageBuilder: (context, state) => NoTransitionPage(
+    //       key: state.pageKey,
+    //       name: state.name,
+    //       restorationId: state.pageKey.value,
+    //       child: const ThanksScreen(),
+    //     ),
+    //   ),
     GoRoute(
-      name: Config.isWeb ? KRoute.home.name : KRoute.settings.name,
+      name: KRoute.home.name,
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
         restorationId: state.pageKey.value,
-        child: Config.isWeb ? const HomeScreen() : const MobSettingsScreen(),
+        child: const HomeScreen(),
       ),
       routes: [
         GoRoute(
@@ -218,41 +214,6 @@ GoRouter router = GoRouter(
               ),
             ],
           ),
-        GoRoute(
-          name: KRoute.discounts.name,
-          path: KRoute.discounts.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const DiscountsScreen(),
-          ),
-          routes: [
-            // if (Config.isDevelopment)
-            //   GoRoute(
-            //     name: KRoute.myDiscounts.name,
-            //     path: KRoute.myDiscounts.path,
-            //     pageBuilder: (context, state) => NoTransitionPage(
-            //       key: state.pageKey,
-            //       name: state.name,
-            // restorationId: state.pageKey.value,
-            //       child: const MyDiscountsScreen(),
-            //     ),
-            //   ),
-            GoRoute(
-              name: KRoute.discountCard.name,
-              path: ':${UrlParameters.cardId}',
-              pageBuilder: (context, state) => DialogPage(
-                key: state.pageKey,
-                name: state.name,
-                restorationId: state.pageKey.value,
-                builder: (_) => DiscountCardDialog(
-                  id: state.pathParameters[UrlParameters.cardId],
-                ),
-              ),
-            ),
-          ],
-        ),
         if (Config.isDevelopment)
           GoRoute(
             name: KRoute.stories.name,
@@ -321,6 +282,30 @@ GoRouter router = GoRouter(
               ),
             ],
           ),
+        GoRoute(
+          name: KRoute.discounts.name,
+          path: KRoute.discounts.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            child: const DiscountsScreen(),
+          ),
+          routes: [
+            GoRoute(
+              name: KRoute.discountCard.name,
+              path: ':${UrlParameters.cardId}',
+              pageBuilder: (context, state) => DialogPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                builder: (_) => DiscountCardDialog(
+                  id: state.pathParameters[UrlParameters.cardId],
+                ),
+              ),
+            ),
+          ],
+        ),
         GoRoute(
           name: KRoute.profile.name,
           path: KRoute.profile.path,
@@ -412,17 +397,6 @@ GoRouter router = GoRouter(
             child: const FeedbackScreen(),
           ),
         ),
-        if (!Config.isWeb)
-          GoRoute(
-            name: KRoute.mobFAQ.name,
-            path: KRoute.mobFAQ.path,
-            pageBuilder: (context, state) => NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              restorationId: state.pageKey.value,
-              child: const MobFaqScreen(),
-            ),
-          ),
       ],
     ),
   ],
