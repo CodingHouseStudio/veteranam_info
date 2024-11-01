@@ -11,13 +11,17 @@ import 'package:flutter/material.dart'
         EdgeInsets,
         EdgeInsetsGeometry,
         Expanded,
+        MouseCursor,
         Spacer,
+        SystemMouseCursors,
         TargetPlatform,
         TextDirection,
         TextPainter,
         TextSpan,
         TextStyle,
         Widget,
+        WidgetState,
+        WidgetStateProperty,
         showDatePicker,
         visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -539,4 +543,14 @@ extension SubLocationString on SubLocation {
         return [context.l10n.allUkrainOnline];
     }
   }
+}
+
+extension WidgetStatePropertyExtension on WidgetStateProperty<dynamic> {
+  static WidgetStateProperty<MouseCursor?> get buttonMouseCursor =>
+      WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return SystemMouseCursors.forbidden;
+        }
+        return SystemMouseCursors.click;
+      });
 }
