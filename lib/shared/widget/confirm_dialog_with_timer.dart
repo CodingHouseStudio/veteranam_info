@@ -1,19 +1,20 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class ConfirmDialog extends StatelessWidget {
-  const ConfirmDialog({
+class ConfirmDialogWithTimer extends StatefulWidget {
+  const ConfirmDialogWithTimer({
     required this.isDesk,
     required this.title,
     required this.subtitle,
     required this.confirmText,
     required this.confirmButtonBackground,
-    this.onPressed,
+    required this.timer,
     this.unconfirmText,
+    this.onPressed,
     super.key,
   });
 
@@ -24,6 +25,35 @@ class ConfirmDialog extends StatelessWidget {
   final void Function()? onPressed;
   final Color confirmButtonBackground;
   final String? unconfirmText;
+  final bool timer;
+
+  @override
+  State<ConfirmDialogWithTimer> createState() => _ConfirmDialogWithTimerState();
+}
+
+class _ConfirmDialogWithTimerState extends State<ConfirmDialogWithTimer> {
+  Timer? _timer;
+  int _remainingTime = 10;
+  bool _isButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 1) {
+          _remainingTime--;
+        } else {
+          _isButtonEnabled = true;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +72,7 @@ class ConfirmDialog extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: isDesk
+            padding: widget.isDesk
                 ? const EdgeInsets.symmetric(
                     horizontal: KPadding.kPaddingSize40,
                     vertical: KPadding.kPaddingSize32,
@@ -56,25 +86,25 @@ class ConfirmDialog extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
-                    title,
+                    widget.title,
                     key: KWidgetkeys.widget.confirmDialog.title,
-                    style: isDesk
+                    style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
                   ),
                 ),
-                if (isDesk)
+                if (widget.isDesk)
                   KSizedBox.kHeightSizedBox16
                 else
                   KSizedBox.kHeightSizedBox8,
                 Text(
-                  subtitle,
+                  widget.subtitle,
                   key: KWidgetkeys.widget.confirmDialog.subtitle,
-                  style: isDesk
+                  style: widget.isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
-                if (isDesk)
+                if (widget.isDesk)
                   KSizedBox.kHeightSizedBox32
                 else
                   KSizedBox.kHeightSizedBox24,
@@ -84,6 +114,15 @@ class ConfirmDialog extends StatelessWidget {
                   runSpacing: KPadding.kPaddingSize16,
                   children: [
                     confirmButton(),
+                    if (!widget.isDesk &&
+                        widget.timer &&
+                        !_isButtonEnabled) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      Text(
+                        '${context.l10n.enableButton} {_remainingTime} ${context.l10n.seconds}',
+                        style: AppTextStyle.materialThemeBodySmall,
+                      ),
+                    ],
                     unconfirmButton(context),
                   ],
                 ),
@@ -102,7 +141,14 @@ class ConfirmDialog extends StatelessWidget {
                 //       unconfirmButton(context),
                 //     ],
                 //   ),
-                if (!isDesk) KSizedBox.kHeightSizedBox16,
+                if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
+                if (widget.timer && !_isButtonEnabled && widget.isDesk) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  Text(
+                    '${context.l10n.enableButton} {_remainingTime} ${context.l10n.seconds}',
+                    style: AppTextStyle.materialThemeBodySmall,
+                  ),
+                ],
               ],
             ),
           ),
@@ -114,10 +160,12 @@ class ConfirmDialog extends StatelessWidget {
   DoubleButtonWidget confirmButton() {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
-      text: confirmText,
-      color: confirmButtonBackground,
+      text: widget.confirmText,
+      color: _isButtonEnabled
+          ? widget.confirmButtonBackground
+          : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
       textColor: AppColors.materialThemeWhite,
-      isDesk: isDesk,
+      isDesk: widget.isDesk,
       deskPadding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize30,
@@ -125,8 +173,8 @@ class ConfirmDialog extends StatelessWidget {
       mobTextWidth: double.infinity,
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
-      onPressed: onPressed,
-      hasAlign: !isDesk,
+      onPressed: _isButtonEnabled ? widget.onPressed : null,
+      hasAlign: !widget.isDesk,
     );
   }
 
@@ -138,10 +186,16 @@ class ConfirmDialog extends StatelessWidget {
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize12,
       ),
-      expanded: !isDesk,
-      isDesk: isDesk,
-      text: unconfirmText ?? context.l10n.cancel,
-      hasAlign: !isDesk,
+      expanded: !widget.isDesk,
+      isDesk: widget.isDesk,
+      text: widget.unconfirmText ?? context.l10n.cancel,
+      hasAlign: !widget.isDesk,
     );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

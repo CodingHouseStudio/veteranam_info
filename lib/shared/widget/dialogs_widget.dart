@@ -185,21 +185,30 @@ class _DialogsWidget {
     required String confirmText,
     required void Function()? onPressed,
     required Color confirmButtonBackground,
-    required bool timer,
+    bool? timer,
     String? unconfirmText,
   }) =>
       _doubleDialog(
-        childWidget: ({required isDeskValue, required context}) =>
-            ConfirmDialog(
-          isDesk: isDeskValue,
-          title: title,
-          subtitle: subtitle,
-          confirmText: confirmText,
-          unconfirmText: unconfirmText,
-          confirmButtonBackground: confirmButtonBackground,
-          onPressed: onPressed,
-          timer: timer,
-        ),
+        childWidget: ({required isDeskValue, required context}) => timer == null
+            ? ConfirmDialog(
+                isDesk: isDeskValue,
+                title: title,
+                subtitle: subtitle,
+                confirmText: confirmText,
+                unconfirmText: unconfirmText,
+                confirmButtonBackground: confirmButtonBackground,
+                onPressed: onPressed,
+              )
+            : ConfirmDialogWithTimer(
+                isDesk: isDeskValue,
+                title: title,
+                subtitle: subtitle,
+                confirmText: confirmText,
+                unconfirmText: unconfirmText,
+                confirmButtonBackground: confirmButtonBackground,
+                onPressed: onPressed,
+                timer: timer,
+              ),
         isDesk: isDesk,
         deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
         mobMaxWidth: KSize.kPixel500,
