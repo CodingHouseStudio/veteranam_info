@@ -86,7 +86,7 @@
         --loader-circle-color-2: #babbb1;
         --loader-circle-color-3: #090c00;
         --loader-circle-color-4: #dcf264;
-        --loader-animation-delay: 1.5s;
+        --loader-animation-delay: 3.5s;
       }
 
       body {
@@ -437,7 +437,11 @@
 
         70% {
           transform: translate(
-            calc(-7 * var(--loader-circle-size)),
+            calc(
+              -5 * (var(--loader-circle-size)+var(
+                      --loader-circular-horizontal-margin
+                    ))
+            ),
             calc(-2.5 * var(--loader-circle-size))
           );
         }
@@ -457,7 +461,7 @@
         }
 
         100% {
-          transform: translate(calc(-5 * var(--loader-circle-size)), 0);
+          transform: translate(calc(-4.9 * var(--loader-circle-size)), 0);
         }
       }
     </style>
