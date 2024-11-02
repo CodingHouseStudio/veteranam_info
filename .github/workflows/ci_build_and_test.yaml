@@ -27,7 +27,13 @@ jobs:
       min_coverage: 100
       format_directories: "lib test"
       coverage_excludes: |
-        $(cat coverage_excludes.txt | tr '\n' ' ')
+        const fs = require('fs');
+        try {
+          const data = fs.readFileSync('./coverage_excludes.txt', 'utf8');
+          return data.split('\n').filter(line => line.trim() !== '').join(' '); // Перетворюємо на рядок
+        } catch (error) {
+          core.setFailed(`Error reading coverage_excludes.txt: ${error.message}`);
+        }
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
