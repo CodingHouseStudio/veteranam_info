@@ -47,7 +47,7 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: KRoute.home.path,
+  initialLocation: '/${KRoute.support.path}',
   observers: [
     if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(

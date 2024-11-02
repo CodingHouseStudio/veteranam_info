@@ -19,12 +19,12 @@ class InvestorsWatcherBloc
         // _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const InvestorsWatcherState(
-            fundItems: [],
-            loadingStatus: LoadingStatus.initial,
+            loadingStatus: LoadingStatusInvestors.initial,
+            deskFundItems: [], mobFundItems: [],
             loadingFundItems: [],
             itemsLoaded: 0,
             // reportItems: [],
-            failure: null,
+            failure: null, loadedFull: false,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -32,13 +32,14 @@ class InvestorsWatcherBloc
     // on<_GetReport>(_onGetReport);
   }
   final IInvestorsRepository _investorsRepository;
+  late List<FundModel> fundsList;
   // final IReportRepository _reportRepository;
   // final IAppAuthenticationRepository _appAuthenticationRepository;
   Future<void> _onStarted(
     _Started event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
 
     // final reportItems = await _getReport();
 
@@ -49,7 +50,7 @@ class InvestorsWatcherBloc
       (l) => emit(
         state.copyWith(
           failure: l._toInvestors(),
-          loadingStatus: LoadingStatus.error,
+          loadingStatus: LoadingStatusInvestors.error,
         ),
       ),
       (r) {
@@ -57,12 +58,21 @@ class InvestorsWatcherBloc
         //   checkFunction: (item) => item.id,
         //   reportItems: reportItems,
         // );
+        final deskFundsModelItems = <List<FundModel>>[];
+
+        for (var i = 0; i < r.length; i += KDimensions.donateCardsLine) {
+          if (i + KDimensions.donateCardsLine <= r.length) {
+            deskFundsModelItems
+                .add(r.sublist(i, i + KDimensions.donateCardsLine));
+          } else {
+            deskFundsModelItems.add(r.sublist(i));
+          }
+        }
         emit(
           InvestorsWatcherState(
-            fundItems: r,
-            loadingStatus: r.length > KDimensions.investorsLoadItems
-                ? LoadingStatus.loaded
-                : LoadingStatus.listLoadedFull,
+            mobFundItems: r, deskFundItems: deskFundsModelItems,
+            loadingStatus: LoadingStatusInvestors.loaded,
+            loadedFull: r.length > KDimensions.investorsLoadItems,
             loadingFundItems: _loading(
               itemsLoaded: state.itemsLoaded,
               loadItems: KDimensions.investorsLoadItems,
@@ -82,12 +92,12 @@ class InvestorsWatcherBloc
     _LoadNextItems event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+    if (state.itemsLoaded.checkLoadingPosible(state.mobFundItems)) {
+      emit(state.copyWith(loadedFull: true));
       return;
     }
 
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
     final filterItems = _loading(
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.investorsLoadItems,
@@ -101,9 +111,8 @@ class InvestorsWatcherBloc
           list: filterItems,
           loadItems: KDimensions.investorsLoadItems,
         ),
-        loadingStatus: filterItems.length == state.fundItems.length
-            ? LoadingStatus.listLoadedFull
-            : LoadingStatus.loaded,
+        loadingStatus: LoadingStatusInvestors.loaded,
+        loadedFull: filterItems.length == state.mobFundItems.length,
       ),
     );
   }
@@ -150,7 +159,7 @@ class InvestorsWatcherBloc
     // List<ReportModel>? reportItems,
   }) {
     // final reportItemsValue = reportItems ?? state.reportItems;
-    return (list ?? state.fundItems)
+    return (list ?? state.mobFundItems)
         // .where(
         //   (item) => reportItemsValue.every(
         //     (report) => report.cardId != item.id,
