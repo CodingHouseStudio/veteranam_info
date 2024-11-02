@@ -27,23 +27,34 @@ jobs:
       min_coverage: 100
       format_directories: "lib test"
       coverage_excludes: |
-        const fs = require('fs');
-        try {
-          const data = fs.readFileSync('./coverage_excludes.txt', 'utf8');
-          return data.split('\n').filter(line => line.trim() !== '').join(' ');
-        } catch (error) {
-          core.setFailed(`Error reading coverage_excludes.txt: ${error.message}`);
-        }
-
-    steps:
-      - uses: actions/checkout@v4.1.1
-
-      - name: Read coverage excludes from file
-        id: read_excludes
-        run: |
-          COVERAGE_EXCLUDES=$(cat coverage_excludes.txt | tr '\n' ' ')
-          echo "coverage_excludes=$COVERAGE_EXCLUDES" >> $GITHUB_ENV
-          echo "::set-output name=coverage_excludes::$COVERAGE_EXCLUDES"
+        lib/app.dart
+        lib/firebase_options_development.dart
+        lib/l10n/l10n.dart
+        lib/bootstrap.dart
+        lib/shared/helper/get_it_service_locator.dart
+        lib/shared/constants/**/*.dart
+        lib/shared/extension/**/*.dart
+        *.g.dart
+        *.freezed.dart
+        lib/shared/navigation/*.dart
+        lib/shared/data_provider/*.dart
+        */blocprovider/*.dart
+        lib/shared/widget/*image_widget.dart
+        lib/shared/widget/*photo_widget.dart
+        lib/shared/bloc/authentication/authentication_state.dart
+        lib/shared/bloc/authentication/authentication_event.dart
+        lib/shared/bloc/authentication/listenable.dart
+        lib/shared/repositories/url_repository.dart
+        lib/shared/repositories/*module.dart
+        lib/shared/widget/dilog_page_widget.dart
+        lib/shared/widget/keyboard_scroll_view.dart
+        lib/components/story_add/widget/field_widget.dart
+        lib/shared/models/failure_model/exceptions.dart
+        lib/shared/widget/info_version_widget.dart
+        lib/shared/widget/row_sliver_widget.dart
+        lib/shared/repositories/app_info_repository.dart
+        lib/shared/repositories/failure_repository.dart
+        lib/shared/widget/popup_menu_item_widget.dart
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
