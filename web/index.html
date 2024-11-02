@@ -42,51 +42,128 @@
 
     <style>
       :root {
-        /* COLOR CSS VARIABLES */
-        --c_01: #ff1ead; /* Pink */
-        --c_02: #000; /* Black */
-        --c_03: #fff; /* White */
-        --c_04: #21b4db; /* cyan */
+        /* ----- Image Component ----- */
+        /* Image size for responsive elements; adjust the minimum and maximum limits
+     using clamp() to control how the image scales based on viewport size. */
+        --image-size: clamp(25vh, 25%, 70vw);
 
-        /* SIZE VARIABLES */
-        --image-size: clamp(
-          25vh,
-          35%,
-          70vw
-        ); /* Resize loader by only editing this variable. With vmin unit, loader is automatically responsive. */
-        --progress-bar-height: 10px;
+        /* ----- Progress Bar Component ----- */
+        /* Height of the progress bar; change this value to increase or decrease 
+     the thickness of the progress bar. */
+        --progress-bar-height: clamp(1vh, 10px, 2.5vw);
+
+        /* Background color for the progress bar; set this to any color to change 
+     the progress bar's appearance. */
         --progress-bar-backgound: #dceb8d;
-        --progress-bar-slider-color: #aaae8e;
-        --progress-bar-animation-delay: 1s;
-        /* --image-min-size: 10vh; */
 
+        /* Color of the sliding element within the progress bar; adjust to modify 
+     the slider's color. */
+        --progress-bar-slider-color: #aaae8e;
+
+        /* Delay before the progress bar animation starts; modify this value to 
+     change the timing of the animation. */
+        --progress-bar-animation-time: 2s;
+
+        --progress-bar-animation-delay: 0.3s;
+
+        /* ----- Button Component ----- */
+        /* Background color for buttons; change this to customize the button's 
+     default appearance. */
         --button-background: white;
+
+        /* Text color for button labels; adjust this color to modify the text 
+     displayed on buttons. */
         --button-text-color: black;
+
+        /* Border color for buttons; change this color to adjust the border appearance 
+     of buttons. */
         --button-border-color: grey;
+
+        /* Vertical padding for buttons; modify this value to increase or decrease 
+     the space above and below button text. */
         --button-vertical-padding: 1%;
+
+        /* Horizontal padding for buttons; change this value to control space 
+     to the left and right of button text. */
         --button-horizontal-padding: 4%;
+
+        /* Font size for button text; adjust this to change the size of the text 
+     displayed on buttons. */
         --button-font-size: 3vh;
+
+        /* Border radius for buttons; modify this value to change how rounded 
+     the button corners are. */
         --button-border-radius: 32px;
+
+        /* Bottom margin for buttons; adjust this value to control the space 
+     below the buttons. */
         --button-bottom-margin: 12%;
+
+        /* Background color when the button is in a loading state; change this 
+     to indicate a loading action visually. */
         --button-loading-background: #d3d3d3;
+
+        /* Text color when the button is in a loading state; adjust to modify 
+     the text appearance during loading. */
         --button-loading-text-color: #7a7a7a;
+
+        /* Border color when the button is in a loading state; change this 
+     to adjust the border appearance during loading. */
         --button-loading-border-color: #b0b0b0;
+
+        /* Size of the loading circle within the button; modify this value to 
+     change how large the loading indicator appears. */
         --button-loading-circle-size: 16px;
+
+        /* Line thickness of the loading circle; change this to adjust the 
+     stroke width of the loading indicator. */
         --button-loading-circle-line-size: 2px;
+
+        /* Color of the loading circle; adjust this to change the color of the 
+     loading indicator. */
         --button-loading-circle-color: #7a7a7a;
-        --button-loading-circle-animation-delay: 1s;
+
+        /* Animation delay for the loading circle; modify this value to change 
+     how long the loading indicator waits before animating. */
+        --button-loading-circle-animation-time: 1s;
+
+        /* Left margin for the loading circle within the button; change this 
+     value to adjust the space between the loading circle and button text. */
         --button-loading-circle-left-margin: 10px;
 
+        /* ----- Loader Component ----- */
+        /* Top margin for the loader; adjust this value to change space 
+     above the loader. */
         --loader-margin-top: 3%;
+
+        /* Size of the loader circles; modify this value to control the size of 
+     the loading indicators based on viewport dimensions. */
         --loader-circle-size: clamp(2.5vh, 20px, 5vw);
+
+        /* Border radius for loader circles; change this value to adjust 
+     the roundness of the loader circles. */
         --loader-circle-border-radius: 50%;
+
+        /* Vertical margin for circular loader; modify this value to change 
+     space above and below circular loaders. */
         --loader-circular-vertical-margin: 0;
-        --loader-circular-horizontal-margin: clamp(0.5vh, 5px, 1vw);
+
+        /* Horizontal margin for circular loader; adjust this value to control 
+     the space on the sides of circular loaders. */
+        --loader-circular-horizontal-margin: calc(
+          var(--loader-circle-size) / 4
+        );
+
+        /* Colors for different loader circles; change these values to customize 
+     the colors of each loader circle. */
         --loader-circle-color-1: #efefef;
         --loader-circle-color-2: #babbb1;
         --loader-circle-color-3: #090c00;
         --loader-circle-color-4: #dcf264;
-        --loader-animation-delay: 3.5s;
+
+        /* Animation delay for loader; modify this value to change how long 
+     the loader waits before starting the animation. */
+        --loader-animation-time: 1.5s;
       }
 
       body {
@@ -109,15 +186,15 @@
       }
 
       /* .progress .indeterminate:before {
-        content: "";
-        position: absolute;
-        background-color: var(--progress-bar-slider-color);
-        will-change: left, right;
-        -webkit-animation: indeterminate 2.1s
-          cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-        animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
-          infinite;
-      } */
+          content: "";
+          position: absolute;
+          background-color: var(--progress-bar-slider-color);
+          will-change: left, right;
+          -webkit-animation: indeterminate 2.1s
+            cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+          animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+            infinite;
+        } */
 
       .progress .indeterminate {
         content: "";
@@ -127,10 +204,11 @@
         left: 0;
         bottom: 0;
         will-change: left, right;
-        -webkit-animation: indeterminate-short 2.1s
-          cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-        animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+        -webkit-animation: indeterminate-short
+          var(--progress-bar-animation-time) cubic-bezier(0.165, 0.84, 0.44, 1)
           infinite;
+        animation: indeterminate-short var(--progress-bar-animation-time)
+          cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
         -webkit-animation-delay: var(--progress-bar-animation-delay);
         animation-delay: var(--progress-bar-animation-delay);
       }
@@ -218,23 +296,23 @@
         /* Set width to 25% of the viewport width */
         /* color: grey; */
         /* mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
-      -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%; */
+        -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%; */
         /* background-repeat: no-repeat; */
         /* animation: splash 4.0s infinite; */
 
         /* min-width: var(--image-min-size);
-        min-height: var(--image-min-size); */
+          min-height: var(--image-min-size); */
       }
 
       /* @keyframes splash {
-      0% {
-        -webkit-mask-position: 85%;
-      }
+        0% {
+          -webkit-mask-position: 85%;
+        }
 
-      100% {
-        -webkit-mask-position: 0%;
-      }
-    } */
+        100% {
+          -webkit-mask-position: 0%;
+        }
+      } */
 
       .splash img {
         /* New animation for disappearing */
@@ -245,45 +323,45 @@
         height: var(--image-size);
         /* Increase image size to 25% of viewport height */
         /* min-width: var(--image-min-size);
-        min-height: var(--image-min-size); */
+          min-height: var(--image-min-size); */
       }
 
       /* .image-container {
-        width: 300px;
-        height: 300px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      } */
+          width: 300px;
+          height: 300px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        } */
 
       /* .bouncing-image {
-        width: 100%;
-        height: auto;
-      } */
+          width: 100%;
+          height: auto;
+        } */
 
       /* .image-container:hover .bouncing-image {
-      animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-    }
-
-    @keyframes slowBounce {
-
-      0%,
-      20%,
-      50%,
-      80%,
-      100% {
-        transform: translateY(0);
+        animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
       }
 
-      40% {
-        transform: translateY(-20px);
-      }
+      @keyframes slowBounce {
 
-      60% {
-        transform: translateY(-10px);
-      }
-    } */
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+
+        40% {
+          transform: translateY(-20px);
+        }
+
+        60% {
+          transform: translateY(-10px);
+        }
+      } */
 
       .button {
         position: absolute;
@@ -316,16 +394,16 @@
       }
 
       /* .button.loading::after {
-        width: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 16px;
-        margin-left: 8px;
-        border: 1px solid #7a7a7a;
-        border-radius: 50%;
-        border-top-color: transparent;
-      } */
+          width: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 16px;
+          margin-left: 8px;
+          border: 1px solid #7a7a7a;
+          border-radius: 50%;
+          border-top-color: transparent;
+        } */
 
       .loading-circle {
         display: none;
@@ -336,7 +414,7 @@
         border-radius: 50%;
         margin-left: var(--button-loading-circle-left-margin);
         border-top-color: transparent;
-        animation: spin var(--button-loading-circle-animation-delay) linear
+        animation: spin var(--button-loading-circle-animation-time) linear
           infinite;
       }
 
@@ -387,7 +465,7 @@
       }
 
       .loader span:not(:last-child) {
-        animation: animate var(--loader-animation-delay) linear infinite;
+        animation: animate var(--loader-animation-time) linear infinite;
       }
 
       @keyframes animate {
@@ -398,15 +476,15 @@
         100% {
           transform: translateX(
             calc(
-              1.5 * var(--loader-circle-size) +
-                var(--loader-circular-horizontal-margin)
+              var(--loader-circle-size) +
+                var(--loader-circular-horizontal-margin) * 2
             )
           );
         }
       }
 
       .loader span:last-child {
-        animation: jump var(--loader-animation-delay) ease-in-out infinite;
+        animation: jump var(--loader-animation-time) ease-in-out infinite;
       }
 
       @keyframes jump {
@@ -424,7 +502,7 @@
         20% {
           transform: translate(
             calc(1 * var(--loader-circle-size)),
-            calc(0.25 * var(--loader-circle-size))
+            calc(0.5 * var(--loader-circle-size))
           );
         }
 
@@ -438,9 +516,10 @@
         70% {
           transform: translate(
             calc(
-              -5 * (var(--loader-circle-size)+var(
-                      --loader-circular-horizontal-margin
-                    ))
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) - var(--loader-circular-horizontal-margin)
             ),
             calc(-2.5 * var(--loader-circle-size))
           );
@@ -448,20 +527,38 @@
 
         80% {
           transform: translate(
-            calc(-6.5 * var(--loader-circle-size)),
-            calc(0.25 * var(--loader-circle-size))
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) - var(--loader-circular-horizontal-margin)
+            ),
+            calc(0.5 * var(--loader-circle-size))
           );
         }
 
         90% {
           transform: translate(
-            calc(-5.7 * var(--loader-circle-size)),
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) + 0.5 * var(--loader-circular-horizontal-margin)
+            ),
             calc(-0.5 * var(--loader-circle-size))
           );
         }
 
         100% {
-          transform: translate(calc(-4.9 * var(--loader-circle-size)), 0);
+          transform: translate(
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) + var(--loader-circular-horizontal-margin)
+            ),
+            0
+          );
         }
       }
     </style>
