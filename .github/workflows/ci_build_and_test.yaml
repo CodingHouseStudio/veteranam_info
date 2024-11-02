@@ -25,7 +25,7 @@ jobs:
       - name: Read coverage excludes from file
         id: read_excludes
         run: |
-          COVERAGE_EXCLUDES=$(cat path/to/excludes_file.txt | tr '\n' ' ')
+          COVERAGE_EXCLUDES=$(cat coverage_excludes.txt | tr '\n' ' ')
           echo "COVERAGE_EXCLUDES=$COVERAGE_EXCLUDES" >> $GITHUB_ENV
 
       - name: Build and test
