@@ -16,13 +16,11 @@ jobs:
   semantic-pull-request:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/semantic_pull_request.yml@main
 
-  get_coverage_excludes:
+  build:
     needs:
       - semantic-pull-request
       - spell-check
     runs-on: ubuntu-latest
-    outputs:
-      coverage_excludes: ${{ steps.read_excludes.outputs.coverage_excludes }}
     steps:
       - uses: actions/checkout@v4.1.1
 
@@ -33,18 +31,13 @@ jobs:
           echo "coverage_excludes=$COVERAGE_EXCLUDES" >> $GITHUB_ENV
           echo "::set-output name=coverage_excludes::$COVERAGE_EXCLUDES"
 
-  build:
-    needs:
-      - semantic-pull-request
-      - spell-check
-      - get_coverage_excludes
-    uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
-    with:
-      flutter_channel: stable
-      flutter_version: 3.24.1
-      min_coverage: 100
-      format_directories: "lib test"
-      coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}
+      - uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
+        with:
+          flutter_channel: stable
+          flutter_version: 3.24.1
+          min_coverage: 100
+          format_directories: "lib test"
+          coverage_excludes: ${{ steps.read_excludes.outputs.coverage_excludes }}
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
