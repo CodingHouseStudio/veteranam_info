@@ -26,6 +26,8 @@ jobs:
       flutter_version: 3.24.1
       min_coverage: 100
       format_directories: "lib test"
+      coverage_excludes: |
+        $(cat ../coverage_excludes.txt | tr '\n' ' ')
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
