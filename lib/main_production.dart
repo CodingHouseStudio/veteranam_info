@@ -1,20 +1,18 @@
 // ignore_for_file: empty_catches
 
-import 'dart:developer' show log;
-
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
-import 'package:flutter/foundation.dart' show PlatformDispatcher;
+import 'package:flutter/foundation.dart'
+    show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/repositories/failure_repository.dart';
 
 /// COMMENT: PROD main file
 Future<void> main() async {
@@ -24,38 +22,38 @@ Future<void> main() async {
   );
 
   if (Config.isReleaseMode) {
-    if (Config.isWeb) {
-      await SentryFlutter.init(
-        (options) {
-          options
-            ..dsn = KSecurityKeys.sentryDSN
-            // Set tracesSampleRate to 1.0 to capture 100% of transactions for
-            // performance monitoring.
-            // We recommend adjusting this value in production.
-            ..tracesSampleRate = 1.0
-            // The sampling rate for profiling is relative to tracesSampleRate
-            // Setting to 1.0 will profile 100% of sampled transactions:
-            ..profilesSampleRate = 1.0
-            // ignore package error
-            ..reportPackages = false
-            // add information about threads
-            ..attachThreads = true
-            ..reportSilentFlutterErrors = true
-            // Add screenshot for error
-            ..attachScreenshot = true
-            // Optimization screenshot
-            ..screenshotQuality = SentryScreenshotQuality.low
-            // Add hierarchy for error report
-            ..attachViewHierarchy = true
-            // Turns on Spotlight functionality, which can help you track
-            // certain events or conditions.
-            ..spotlight = Spotlight(enabled: true)
-            // Turns on time tracking until full display to help you understand
-            // the performance of the app's loading.
-            ..enableTimeToFullDisplayTracing = true;
-        },
-      );
-    }
+    // if (Config.isWeb) {
+    //   await SentryFlutter.init(
+    //     (options) {
+    //       options
+    //         ..dsn = KSecurityKeys.sentryDSN
+    //         // Set tracesSampleRate to 1.0 to capture 100% of transactions for
+    //         // performance monitoring.
+    //         // We recommend adjusting this value in production.
+    //         ..tracesSampleRate = 1.0
+    //         // The sampling rate for profiling is relative to tracesSampleRate
+    //         // Setting to 1.0 will profile 100% of sampled transactions:
+    //         ..profilesSampleRate = 1.0
+    //         // ignore package error
+    //         ..reportPackages = false
+    //         // add information about threads
+    //         ..attachThreads = true
+    //         ..reportSilentFlutterErrors = true
+    //         // Add screenshot for error
+    //         ..attachScreenshot = true
+    //         // Optimization screenshot
+    //         ..screenshotQuality = SentryScreenshotQuality.low
+    //         // Add hierarchy for error report
+    //         ..attachViewHierarchy = true
+    //         // Turns on Spotlight functionality, which can help you track
+    //         // certain events or conditions.
+    //         ..spotlight = Spotlight(enabled: true)
+    //         // Turns on time tracking until full display to help you understand
+    //         // the performance of the app's loading.
+    //         ..enableTimeToFullDisplayTracing = true;
+    //     },
+    //   );
+    // }
 
     // try {
     if (Config.isWeb) {
@@ -111,31 +109,17 @@ Future<void> main() async {
 
   // Non-async exceptions
   FlutterError.onError = (details) {
-    if (Config.isReleaseMode) {
-      if (Config.isWeb) {
-        Sentry.captureException(
-          details.exceptionAsString(),
-          stackTrace: details.stack,
-        );
-      } else {
-        FirebaseCrashlytics.instance.recordFlutterError(details);
-      }
-    }
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    FailureRepository.onError(
+      error: details,
+      stack: details.stack,
+      information: details.informationCollector?.call(),
+      reason:
+          details.context?.toStringDeep(minLevel: DiagnosticLevel.info).trim(),
+    );
   };
   // Async exceptions
   PlatformDispatcher.instance.onError = (error, stack) {
-    if (Config.isReleaseMode) {
-      if (Config.isWeb) {
-        Sentry.captureException(
-          error,
-          stackTrace: stack,
-        );
-      } else {
-        FirebaseCrashlytics.instance.recordError(error, stack);
-      }
-    }
-    log(error.toString(), stackTrace: stack);
+    FailureRepository.onError(error: error, stack: stack);
 
     return true;
   };
@@ -153,3 +137,68 @@ Future<void> main() async {
 
   await bootstrap(App.new);
 }
+
+// Future<void> _onError({
+//   required Object error,
+//   required StackTrace? stack,
+// }) async {
+//   if (Config.isReleaseMode) {
+//     if (Config.isWeb) {
+//       if (_isCrashlyticsLoaded) {
+//         await sentry.loadLibrary();
+//         _isCrashlyticsLoaded = true;
+//       }
+//       if (!sentry.Sentry.isEnabled) {
+//         await sentry.SentryFlutter.init(
+//           (options) {
+//             options
+//               ..dsn = KSecurityKeys.sentryDSN
+//               // Set tracesSampleRate to 1.0 to capture 100% of transactions for
+//               // performance monitoring.
+//               // We recommend adjusting this value in production.
+//               ..tracesSampleRate = 1.0
+//               // The sampling rate for profiling is relative to tracesSampleRate
+//               // Setting to 1.0 will profile 100% of sampled transactions:
+//               ..profilesSampleRate = 1.0
+//               // ignore package error
+//               ..reportPackages = false
+//               // add information about threads
+//               ..attachThreads = true
+//               ..reportSilentFlutterErrors = true
+//               // Add screenshot for error
+//               ..attachScreenshot = true
+//               // Optimization screenshot
+//               ..screenshotQuality = sentry.SentryScreenshotQuality.low
+//               // Add hierarchy for error report
+//               ..attachViewHierarchy = true
+//               // Turns on Spotlight functionality, which can help you track
+//               // certain events or conditions.
+//               ..spotlight = sentry.Spotlight(enabled: true)
+//               // Turns on time tracking until full display to help you
+//               // understand
+//               // the performance of the app's loading.
+//               ..enableTimeToFullDisplayTracing = true;
+//           },
+//         );
+//       }
+//       await sentry.Sentry.captureException(
+//         error is FlutterErrorDetails ? error.exceptionAsString() : error,
+//         stackTrace: stack,
+//       );
+//     } else {
+//       if (_isCrashlyticsLoaded) {
+//         await firebase_crashlytics.loadLibrary();
+//         _isCrashlyticsLoaded = true;
+//       }
+//       if (error is FlutterErrorDetails) {
+//         await firebase_crashlytics.FirebaseCrashlytics.instance
+//             .recordFlutterError(error);
+//       } else {
+//         await firebase_crashlytics.FirebaseCrashlytics.instance
+//             .recordError(error, stack);
+//       }
+//     }
+//   }
+// }
+
+// bool _isCrashlyticsLoaded = false;
