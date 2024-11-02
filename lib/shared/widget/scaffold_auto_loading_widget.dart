@@ -8,7 +8,6 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
     required this.loadFunction,
     required this.loadingButtonText,
     required this.loadingStatus,
-    required this.showLoadingWidget,
     super.key,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
@@ -17,6 +16,7 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
     this.loadDataAgain,
     this.pageName,
     this.emptyWidget,
+    this.showLoadingWidget = true,
   });
 
   final List<Widget> Function({required bool isDesk})?
@@ -37,21 +37,21 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
   final bool showLoadingWidget;
   @override
   Widget build(BuildContext context) {
-    if (Config.isProduction) {
-      return ScaffoldAutoLoadingProdWidget(
-        mainChildWidgetsFunction: mainChildWidgetsFunction,
-        loadFunction: loadFunction,
-        loadingButtonText: loadingButtonText,
-        loadingStatus: loadingStatus,
-      );
-    } else {
-      return ScaffoldAutoLoadingTestWidget(
-        mainChildWidgetsFunction: mainChildWidgetsFunction,
-        loadFunction: loadFunction,
-        loadingButtonText: loadingButtonText,
-        loadingStatus: loadingStatus,
-      );
-    }
+    // if (Config.isProduction) {
+    //   return ScaffoldAutoLoadingProdWidget(
+    //     mainChildWidgetsFunction: mainChildWidgetsFunction,
+    //     loadFunction: loadFunction,
+    //     loadingButtonText: loadingButtonText,
+    //     loadingStatus: loadingStatus,
+    //   );
+    // } else {
+    return ScaffoldAutoLoadingTestWidget(
+      mainChildWidgetsFunction: mainChildWidgetsFunction,
+      loadFunction: loadFunction,
+      loadingButtonText: loadingButtonText,
+      loadingStatus: loadingStatus,
+    );
+    // }
   }
 }
 
