@@ -20,7 +20,6 @@ jobs:
     needs:
       - semantic-pull-request
       - spell-check
-      - get_coverage_excludes
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
     with:
       flutter_channel: stable
