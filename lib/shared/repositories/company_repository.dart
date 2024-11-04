@@ -136,7 +136,14 @@ class CompanyRepository implements ICompanyRepository {
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Company(updateCompany)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 
@@ -156,7 +163,14 @@ class CompanyRepository implements ICompanyRepository {
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Company(deleteCompany)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 

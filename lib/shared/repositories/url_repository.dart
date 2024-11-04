@@ -73,7 +73,14 @@ class UrlRepository extends IUrlRepository {
       }
       return const Right(false);
     } catch (e, stack) {
-      return Left(SomeFailure.link(error: e, stack: stack));
+      return Left(
+        SomeFailure.link(
+          error: e,
+          stack: stack,
+          tag: 'Url(launchUrl)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 
@@ -86,7 +93,14 @@ class UrlRepository extends IUrlRepository {
       );
       return const Right(true);
     } catch (e, stack) {
-      return Left(SomeFailure.copy(error: e, stack: stack));
+      return Left(
+        SomeFailure.copy(
+          error: e,
+          stack: stack,
+          tag: 'Url(copy)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 }

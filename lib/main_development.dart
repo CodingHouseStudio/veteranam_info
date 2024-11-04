@@ -12,7 +12,9 @@ import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
 
 /// COMMENT: DEV main file
@@ -49,20 +51,56 @@ void main() async {
   } catch (e) {}
 
   // Non-async exceptions
+  // Non-async exceptions handling
   FlutterError.onError = (details) {
+    // Declare error level variable for classification
+    late ErrorLevelEnum errorLevel;
+
+    // Determine the error level based on exception type or details
+    if (details.exception is AssertionError ||
+        details.exception.toString().contains('OutOfMemoryError')) {
+      // Set as fatal for critical issues
+      errorLevel = ErrorLevelEnum.fatal;
+    } else if (details.stack != null) {
+      // Set as error if stack trace is available
+      errorLevel = ErrorLevelEnum.error;
+    } else if (details.informationCollector != null) {
+      // Set as info if additional information is available
+      errorLevel = ErrorLevelEnum.info;
+    } else {
+      // Set as warning for less severe issues
+      errorLevel = ErrorLevelEnum.warning;
+    }
+
+    // Log the error details to FailureRepository with specified level and tags
     FailureRepository.onError(
       error: details,
       stack: details.stack,
       information: details.informationCollector?.call(),
       reason:
           details.context?.toStringDeep(minLevel: DiagnosticLevel.info).trim(),
+      errorLevel: errorLevel,
+      tag: ErrorText.nonAsync, // Tag to identify non-async exceptions
+      tagKey:
+          ErrorText.mainFileKey, // Key for identifying error location/source
     );
   };
-  // Async exceptions
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FailureRepository.onError(error: error, stack: stack);
 
-    return true;
+// Async exceptions handling
+  PlatformDispatcher.instance.onError = (error, stack) {
+    // Log the error details to FailureRepository with specified level and tags
+    FailureRepository.onError(
+      error: error,
+      stack: stack,
+      reason: null, // No specific reason provided for async errors
+      information: null, // No additional information for async errors
+      tag: ErrorText.async, // Tag to identify async exceptions
+      tagKey:
+          ErrorText.mainFileKey, // Key for identifying error location/source
+      errorLevel: null,
+    );
+
+    return true; // Return true to indicate the error has been handled
   };
   // }
 

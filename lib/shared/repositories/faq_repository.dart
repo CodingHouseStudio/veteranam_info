@@ -16,7 +16,14 @@ class FaqRepository implements IFaqRepository {
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'FAQ(getQuestions)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 

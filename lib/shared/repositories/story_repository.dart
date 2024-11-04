@@ -38,7 +38,14 @@ class StoryRepository implements IStoryRepository {
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Story(addStory)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 
@@ -54,7 +61,14 @@ class StoryRepository implements IStoryRepository {
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Story(getStoriesByUserId)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 }

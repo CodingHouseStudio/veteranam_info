@@ -175,7 +175,10 @@ extension GetItInjectableX on _i174.GetIt {
     final networkModule = _$NetworkModule();
     final mobileRatingModule = _$MobileRatingModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
-    gh.lazySingleton<_i960.FailureRepository>(() => _i960.FailureRepository());
+    gh.lazySingleton<_i960.FailureRepository>(
+      () => _i960.FailureRepository(),
+      dispose: (i) => i.dispose(),
+    );
     gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.firestore);
     gh.singleton<_i361.Dio>(() => artifactModule.dio);
     gh.singleton<_i457.FirebaseStorage>(() => storageModule.storage);
