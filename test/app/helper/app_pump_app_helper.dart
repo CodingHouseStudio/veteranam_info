@@ -34,7 +34,7 @@ Future<void> appPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  _registerDiscountUserEmailFormBloc(
+  _registerUserEmailFormBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -92,12 +92,12 @@ void _registerDiscountLinkCubit({
   GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
 }
 
-void _registerDiscountUserEmailFormBloc({
+void _registerUserEmailFormBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) {
-  final discountUserEmailFormBloc = UserEmailFormBloc(
+  final userEmailFormBloc = UserEmailFormBloc(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -106,7 +106,7 @@ void _registerDiscountUserEmailFormBloc({
   if (GetIt.I.isRegistered<UserEmailFormBloc>()) {
     GetIt.I.unregister<UserEmailFormBloc>();
   }
-  GetIt.I.registerSingleton<UserEmailFormBloc>(discountUserEmailFormBloc);
+  GetIt.I.registerSingleton<UserEmailFormBloc>(userEmailFormBloc);
 }
 
 void _registerDiscountBloc({

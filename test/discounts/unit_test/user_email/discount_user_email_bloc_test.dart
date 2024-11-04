@@ -16,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} UserEmail From ${KGroupText.bloc}', () {
-    late UserEmailFormBloc discountUserEmailFormBloc;
+    late UserEmailFormBloc userEmailFormBloc;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
@@ -53,7 +53,7 @@ void main() {
         (invocation) => KTestText.user,
       );
 
-      discountUserEmailFormBloc = UserEmailFormBloc(
+      userEmailFormBloc = UserEmailFormBloc(
         discountRepository: mockdiscountRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
         firebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -64,9 +64,9 @@ void main() {
       'User email enum',
       () {
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -84,9 +84,9 @@ void main() {
         );
 
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -103,9 +103,9 @@ void main() {
           ],
         );
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -122,9 +122,9 @@ void main() {
           ],
         );
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -141,9 +141,9 @@ void main() {
           ],
         );
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -160,9 +160,9 @@ void main() {
           ],
         );
         blocTest<UserEmailFormBloc, UserEmailFormState>(
-          'emits [UserEmailPropery()] when '
+          'emits [UserEmailFormState()] when '
           'check need to show first time',
-          build: () => discountUserEmailFormBloc,
+          build: () => userEmailFormBloc,
           act: (bloc) async {
             when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
                 .thenAnswer(
@@ -187,12 +187,12 @@ void main() {
             .thenAnswer(
           (_) async => const Right(0),
         );
-        discountUserEmailFormBloc.add(const UserEmailFormEvent.started());
+        userEmailFormBloc.add(const UserEmailFormEvent.started());
       });
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountUserEmailFormBloc,
+        build: () => userEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
@@ -217,7 +217,7 @@ void main() {
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountUserEmailFormBloc,
+        build: () => userEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
@@ -247,7 +247,7 @@ void main() {
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel email',
-        build: () => discountUserEmailFormBloc,
+        build: () => userEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(

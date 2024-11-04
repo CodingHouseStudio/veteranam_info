@@ -40,7 +40,7 @@ Future<void> discountsPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  _registerDiscountUserEmailFormBloc(
+  _registerUserEmailFormBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -147,7 +147,7 @@ void _registerDiscountLinkCubit({
   GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
 }
 
-void _registerDiscountUserEmailFormBloc({
+void _registerUserEmailFormBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
