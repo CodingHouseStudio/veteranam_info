@@ -170,7 +170,7 @@ void _registerMobileRatingCubit(
     mobileRatingRepository: mockMobileRatingRepository,
   );
   if (GetIt.I.isRegistered<MobileRatingCubit>()) {
-    GetIt.I.unregister<UserEmailFormBloc>();
+    GetIt.I.unregister<MobileRatingCubit>();
   }
   GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }
