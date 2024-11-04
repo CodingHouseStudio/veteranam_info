@@ -6,14 +6,13 @@ import 'package:injectable/injectable.dart';
 
 import 'package:veteranam/shared/shared_dart.dart';
 
-part 'discount_user_email_form_event.dart';
-part 'discount_user_email_form_state.dart';
-part 'discount_user_email_form_bloc.freezed.dart';
+part 'user_email_form_event.dart';
+part 'user_email_form_state.dart';
+part 'user_email_form_bloc.freezed.dart';
 
 @Injectable(env: [Config.user])
-class DiscountUserEmailFormBloc
-    extends Bloc<DiscountUserEmailFormEvent, DiscountUserEmailFormState> {
-  DiscountUserEmailFormBloc({
+class UserEmailFormBloc extends Bloc<UserEmailFormEvent, UserEmailFormState> {
+  UserEmailFormBloc({
     required IDiscountRepository discountRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
     required FirebaseAnalyticsService firebaseAnalyticsService,
@@ -41,7 +40,7 @@ class DiscountUserEmailFormBloc
 
   Future<void> _onStarted(
     _Started event,
-    Emitter<DiscountUserEmailFormState> emit,
+    Emitter<UserEmailFormState> emit,
   ) async {
     final result = await _discountRepository
         .userCanSendUserEmail(_appAuthenticationRepository.currentUser.id);
@@ -62,7 +61,7 @@ class DiscountUserEmailFormBloc
 
   void _onUpdatEmail(
     _UpdateEmail event,
-    Emitter<DiscountUserEmailFormState> emit,
+    Emitter<UserEmailFormState> emit,
   ) {
     final emailFieldModel = EmailFieldModel.dirty(event.email);
     emit(
@@ -75,7 +74,7 @@ class DiscountUserEmailFormBloc
 
   void _onSendEmail(
     _SendEmail event,
-    Emitter<DiscountUserEmailFormState> emit,
+    Emitter<UserEmailFormState> emit,
   ) {
     if (state.email.isValid) {
       final discountUserEmailFormModel = EmailModel(
@@ -112,7 +111,7 @@ class DiscountUserEmailFormBloc
 
   void _onSendEmailAfterClose(
     _SendEmailAfterClose event,
-    Emitter<DiscountUserEmailFormState> emit,
+    Emitter<UserEmailFormState> emit,
   ) {
     emit(
       _Initial(

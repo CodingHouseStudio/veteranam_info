@@ -152,15 +152,15 @@ void _registerDiscountUserEmailFormBloc({
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) {
-  final authenticationBloc = DiscountUserEmailFormBloc(
+  final authenticationBloc = UserEmailFormBloc(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseAnalyticsService: mockFirebaseAnalyticsService,
   );
-  if (GetIt.I.isRegistered<DiscountUserEmailFormBloc>()) {
-    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+  if (GetIt.I.isRegistered<UserEmailFormBloc>()) {
+    GetIt.I.unregister<UserEmailFormBloc>();
   }
-  GetIt.I.registerSingleton<DiscountUserEmailFormBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserEmailFormBloc>(authenticationBloc);
 }
 
 void _registerMobileRatingCubit(
@@ -170,7 +170,7 @@ void _registerMobileRatingCubit(
     mobileRatingRepository: mockMobileRatingRepository,
   );
   if (GetIt.I.isRegistered<MobileRatingCubit>()) {
-    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+    GetIt.I.unregister<UserEmailFormBloc>();
   }
   GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }

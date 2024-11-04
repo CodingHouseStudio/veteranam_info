@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../../test_dependency.dart';
@@ -17,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} UserEmail From ${KGroupText.bloc}', () {
-    late DiscountUserEmailFormBloc discountUserEmailFormBloc;
+    late UserEmailFormBloc discountUserEmailFormBloc;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
@@ -54,7 +53,7 @@ void main() {
         (invocation) => KTestText.user,
       );
 
-      discountUserEmailFormBloc = DiscountUserEmailFormBloc(
+      discountUserEmailFormBloc = UserEmailFormBloc(
         discountRepository: mockdiscountRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
         firebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -64,7 +63,7 @@ void main() {
     group(
       'User email enum',
       () {
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -73,10 +72,10 @@ void main() {
                 .thenAnswer(
               (_) async => const Right(0),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailAbandon,
@@ -84,7 +83,7 @@ void main() {
           ],
         );
 
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -93,17 +92,17 @@ void main() {
                 .thenAnswer(
               (_) async => const Right(1),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailAbandonSecondary,
             ),
           ],
         );
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -112,17 +111,17 @@ void main() {
                 .thenAnswer(
               (_) async => const Right(2),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailAbandonRepeat,
             ),
           ],
         );
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -131,17 +130,17 @@ void main() {
                 .thenAnswer(
               (_) async => const Right(5),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailAbandonRepeat,
             ),
           ],
         );
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -150,17 +149,17 @@ void main() {
                 .thenAnswer(
               (_) async => const Right(-1),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailNotShow,
             ),
           ],
         );
-        blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
           'emits [UserEmailPropery()] when '
           'check need to show first time',
           build: () => discountUserEmailFormBloc,
@@ -169,10 +168,10 @@ void main() {
                 .thenAnswer(
               (_) async => Left(SomeFailure.serverError(error: null)),
             );
-            bloc.add(const DiscountUserEmailFormEvent.started());
+            bloc.add(const UserEmailFormEvent.started());
           },
           expect: () async => [
-            const DiscountUserEmailFormState(
+            const UserEmailFormState(
               email: EmailFieldModel.pure(),
               formState: EmailEnum.initial,
               emailEnum: UserEmailEnum.discountEmailNotShow,
@@ -188,27 +187,26 @@ void main() {
             .thenAnswer(
           (_) async => const Right(0),
         );
-        discountUserEmailFormBloc
-            .add(const DiscountUserEmailFormEvent.started());
+        discountUserEmailFormBloc.add(const UserEmailFormEvent.started());
       });
-      blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+      blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountUserEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
-            DiscountUserEmailFormEvent.updatedEmail(
+            UserEmailFormEvent.updatedEmail(
               KTestText.emailModel.email,
             ),
           )
-          ..add(const DiscountUserEmailFormEvent.sendEmail()),
+          ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
-          DiscountUserEmailFormState(
+          UserEmailFormState(
             email: EmailFieldModel.dirty(KTestText.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          const DiscountUserEmailFormState(
+          const UserEmailFormState(
             email: EmailFieldModel.pure(),
             formState: EmailEnum.success,
             emailEnum: UserEmailEnum.discountEmailAbandon,
@@ -216,29 +214,29 @@ void main() {
         ],
       );
 
-      blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+      blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountUserEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
-            DiscountUserEmailFormEvent.updatedEmail(
+            UserEmailFormEvent.updatedEmail(
               KTestText.emailModel.email,
             ),
           )
           ..add(
-            const DiscountUserEmailFormEvent.sendEmailAfterClose(
+            const UserEmailFormEvent.sendEmailAfterClose(
                 // userEmailEnum: UserEmailEnum.discountEmailAbandonRepeat,
                 // count: 5,
                 ),
           ),
         expect: () async => [
-          DiscountUserEmailFormState(
+          UserEmailFormState(
             email: EmailFieldModel.dirty(KTestText.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          const DiscountUserEmailFormState(
+          const UserEmailFormState(
             email: EmailFieldModel.pure(),
             formState: EmailEnum.initial,
             emailEnum: UserEmailEnum.discountEmailAbandon,
@@ -246,40 +244,40 @@ void main() {
         ],
       );
 
-      blocTest<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+      blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
         ' when load discountModel email',
         build: () => discountUserEmailFormBloc,
         act: (bloc) async => bloc
           ..add(
-            DiscountUserEmailFormEvent.updatedEmail(
+            UserEmailFormEvent.updatedEmail(
               KTestText.emailModelWrong.email,
             ),
           )
-          ..add(const DiscountUserEmailFormEvent.sendEmail())
+          ..add(const UserEmailFormEvent.sendEmail())
           ..add(
-            DiscountUserEmailFormEvent.updatedEmail(
+            UserEmailFormEvent.updatedEmail(
               KTestText.emailModel.email,
             ),
           )
-          ..add(const DiscountUserEmailFormEvent.sendEmail()),
+          ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
-          DiscountUserEmailFormState(
+          UserEmailFormState(
             email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          DiscountUserEmailFormState(
+          UserEmailFormState(
             email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
             formState: EmailEnum.invalidData,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          DiscountUserEmailFormState(
+          UserEmailFormState(
             email: EmailFieldModel.dirty(KTestText.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
-          const DiscountUserEmailFormState(
+          const UserEmailFormState(
             email: EmailFieldModel.pure(),
             formState: EmailEnum.success,
             emailEnum: UserEmailEnum.discountEmailAbandon,

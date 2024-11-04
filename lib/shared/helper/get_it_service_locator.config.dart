@@ -36,8 +36,6 @@ import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dar
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
     as _i372;
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart'
-    as _i441;
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
     as _i1006;
 import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart'
@@ -93,6 +91,8 @@ import 'package:veteranam/shared/bloc/mobile_rating/mobile_rating_cubit.dart'
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
+import 'package:veteranam/shared/bloc/user_email_form/user_email_form_bloc.dart'
+    as _i254;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
@@ -445,8 +445,8 @@ extension GetItInjectableX on _i174.GetIt {
           mobileRatingRepository: gh<_i1026.MobileRatingRepository>()),
       registerFor: {_mobile},
     );
-    gh.factory<_i441.DiscountUserEmailFormBloc>(
-      () => _i441.DiscountUserEmailFormBloc(
+    gh.factory<_i254.UserEmailFormBloc>(
+      () => _i254.UserEmailFormBloc(
         discountRepository: gh<_i1026.IDiscountRepository>(),
         appAuthenticationRepository: gh<_i1026.IAppAuthenticationRepository>(),
         firebaseAnalyticsService: gh<_i1026.FirebaseAnalyticsService>(),

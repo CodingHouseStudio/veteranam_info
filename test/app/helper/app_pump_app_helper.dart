@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
 import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart';
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
@@ -98,17 +97,16 @@ void _registerDiscountUserEmailFormBloc({
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) {
-  final discountUserEmailFormBloc = DiscountUserEmailFormBloc(
+  final discountUserEmailFormBloc = UserEmailFormBloc(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseAnalyticsService: mockFirebaseAnalyticsService,
     // firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  if (GetIt.I.isRegistered<DiscountUserEmailFormBloc>()) {
-    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+  if (GetIt.I.isRegistered<UserEmailFormBloc>()) {
+    GetIt.I.unregister<UserEmailFormBloc>();
   }
-  GetIt.I
-      .registerSingleton<DiscountUserEmailFormBloc>(discountUserEmailFormBloc);
+  GetIt.I.registerSingleton<UserEmailFormBloc>(discountUserEmailFormBloc);
 }
 
 void _registerDiscountBloc({
@@ -174,7 +172,7 @@ void _registerMobileRatingCubit(
     mobileRatingRepository: mockMobileRatingRepository,
   );
   if (GetIt.I.isRegistered<MobileRatingCubit>()) {
-    GetIt.I.unregister<DiscountUserEmailFormBloc>();
+    GetIt.I.unregister<UserEmailFormBloc>();
   }
   GetIt.I.registerSingleton<MobileRatingCubit>(mobileRatingCubit);
 }
