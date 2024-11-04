@@ -16,8 +16,7 @@ class DiscountBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocBuilder<DiscountUserEmailFormBloc,
-            DiscountUserEmailFormState>(
+        return BlocBuilder<UserEmailFormBloc, UserEmailFormState>(
           buildWhen: (previous, current) =>
               previous.emailEnum != current.emailEnum,
           builder: (context, emailState) {
