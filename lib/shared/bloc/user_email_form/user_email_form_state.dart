@@ -1,6 +1,6 @@
-part of 'discount_user_email_form_bloc.dart';
+part of 'user_email_form_bloc.dart';
 
-enum DiscountUserEmailFormFailure {
+enum UserEmailFormFailure {
   error,
   send,
   network,
@@ -20,8 +20,8 @@ enum DiscountUserEmailFormFailure {
 // }
 
 @freezed
-class DiscountUserEmailFormState with _$DiscountUserEmailFormState {
-  const factory DiscountUserEmailFormState({
+class UserEmailFormState with _$UserEmailFormState {
+  const factory UserEmailFormState({
     required EmailFieldModel email,
     required EmailEnum formState,
     required UserEmailEnum emailEnum,
