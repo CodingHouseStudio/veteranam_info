@@ -14,6 +14,7 @@ class ConfirmDialog extends StatelessWidget {
     required this.confirmButtonBackground,
     this.onPressed,
     this.unconfirmText,
+    this.timer,
     super.key,
   });
 
@@ -24,6 +25,7 @@ class ConfirmDialog extends StatelessWidget {
   final void Function()? onPressed;
   final Color confirmButtonBackground;
   final String? unconfirmText;
+  final Text? timer;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +86,10 @@ class ConfirmDialog extends StatelessWidget {
                   runSpacing: KPadding.kPaddingSize16,
                   children: [
                     confirmButton(),
+                    if (timer != null && !isDesk) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      timer!,
+                    ],
                     unconfirmButton(context),
                   ],
                 ),
@@ -103,6 +109,10 @@ class ConfirmDialog extends StatelessWidget {
                 //     ],
                 //   ),
                 if (!isDesk) KSizedBox.kHeightSizedBox16,
+                if (timer != null && isDesk) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  timer!,
+                ],
               ],
             ),
           ),
@@ -111,7 +121,7 @@ class ConfirmDialog extends StatelessWidget {
     );
   }
 
-  DoubleButtonWidget confirmButton() {
+  Widget confirmButton() {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
       text: confirmText,

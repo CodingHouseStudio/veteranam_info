@@ -187,33 +187,37 @@ class _DialogsWidget {
     required Color confirmButtonBackground,
     bool? timer,
     String? unconfirmText,
-  }) =>
-      _doubleDialog(
-        childWidget: ({required isDeskValue, required context}) => timer == null
-            ? ConfirmDialog(
-                isDesk: isDeskValue,
-                title: title,
-                subtitle: subtitle,
-                confirmText: confirmText,
-                unconfirmText: unconfirmText,
-                confirmButtonBackground: confirmButtonBackground,
-                onPressed: onPressed,
-              )
-            : ConfirmDialogWithTimer(
-                isDesk: isDeskValue,
-                title: title,
-                subtitle: subtitle,
-                confirmText: confirmText,
-                unconfirmText: unconfirmText,
-                confirmButtonBackground: confirmButtonBackground,
-                onPressed: onPressed,
-                timer: timer,
-              ),
-        isDesk: isDesk,
-        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
-        mobMaxWidth: KSize.kPixel500,
-        deskMaxWidth: KSize.kPixel500,
-      );
+  }) {
+    Widget body({required bool isDeskValue}) => timer == null
+        ? ConfirmDialog(
+            isDesk: isDeskValue,
+            title: title,
+            subtitle: subtitle,
+            confirmText: confirmText,
+            unconfirmText: unconfirmText,
+            confirmButtonBackground: confirmButtonBackground,
+            onPressed: onPressed,
+          )
+        : ConfirmDialogWithTimer(
+            isDesk: isDeskValue,
+            title: title,
+            subtitle: subtitle,
+            confirmText: confirmText,
+            unconfirmText: unconfirmText,
+            confirmButtonBackground: confirmButtonBackground,
+            onPressed: onPressed,
+            timer: timer,
+          );
+
+    _doubleDialog(
+      childWidget: ({required isDeskValue, required context}) =>
+          body(isDeskValue: isDeskValue),
+      isDesk: isDesk,
+      deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+      mobMaxWidth: KSize.kPixel500,
+      deskMaxWidth: KSize.kPixel500,
+    );
+  }
 
   void showConfirmationPublishDiscountDialog({
     required bool isDesk,

@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class ConfirmDialogWithTimer extends StatefulWidget {
@@ -57,139 +56,22 @@ class _ConfirmDialogWithTimerState extends State<ConfirmDialogWithTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: KMinMaxSize.minHeight640),
-      child: Stack(
-        alignment: Alignment.topRight,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-            child: IconButton(
-              key: KWidgetkeys.widget.confirmDialog.icon,
-              style: KButtonStyles.circularButtonStyle,
-              onPressed: context.pop,
-              icon: KIcon.close,
-            ),
-          ),
-          Padding(
-            padding: widget.isDesk
-                ? const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize40,
-                    vertical: KPadding.kPaddingSize32,
-                  )
-                : const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: KPadding.kPaddingSize24),
-                  child: Text(
-                    widget.title,
-                    key: KWidgetkeys.widget.confirmDialog.title,
-                    style: widget.isDesk
-                        ? AppTextStyle.materialThemeHeadlineLarge
-                        : AppTextStyle.materialThemeHeadlineSmall,
-                  ),
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox16
-                else
-                  KSizedBox.kHeightSizedBox8,
-                Text(
-                  widget.subtitle,
-                  key: KWidgetkeys.widget.confirmDialog.subtitle,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeBodyLarge
-                      : AppTextStyle.materialThemeBodyMedium,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox32
-                else
-                  KSizedBox.kHeightSizedBox24,
-                // if (widget.isDesk)
-                Wrap(
-                  spacing: KPadding.kPaddingSize24,
-                  runSpacing: KPadding.kPaddingSize16,
-                  children: [
-                    confirmButton(),
-                    if (!widget.isDesk &&
-                        widget.timer &&
-                        !_isButtonEnabled) ...[
-                      KSizedBox.kHeightSizedBox8,
-                      Text(
-                        '${context.l10n.enableButton} {_remainingTime} ${context.l10n.seconds}',
-                        style: AppTextStyle.materialThemeBodySmall,
-                      ),
-                    ],
-                    unconfirmButton(context),
-                  ],
-                ),
-                // else
-                //   Column(
-                //     children: [
-                //       confirmButton(),
-                //       if (widget.timer && !_isButtonEnabled) ...[
-                //         KSizedBox.kHeightSizedBox8,
-                //         Text(
-                //           '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
-                //           style: AppTextStyle.materialThemeBodySmall,
-                //         ),
-                //       ],
-                //       KSizedBox.kHeightSizedBox16,
-                //       unconfirmButton(context),
-                //     ],
-                //   ),
-                if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
-                if (widget.timer && !_isButtonEnabled && widget.isDesk) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  Text(
-                    '${context.l10n.enableButton} {_remainingTime} ${context.l10n.seconds}',
-                    style: AppTextStyle.materialThemeBodySmall,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  DoubleButtonWidget confirmButton() {
-    return DoubleButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
-      text: widget.confirmText,
-      color: _isButtonEnabled
+    return ConfirmDialog(
+      isDesk: widget.isDesk,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      confirmText: widget.confirmText,
+      confirmButtonBackground: _isButtonEnabled
           ? widget.confirmButtonBackground
           : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
-      textColor: AppColors.materialThemeWhite,
-      isDesk: widget.isDesk,
-      deskPadding: const EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize12,
-        horizontal: KPadding.kPaddingSize30,
-      ),
-      mobTextWidth: double.infinity,
-      mobVerticalTextPadding: KPadding.kPaddingSize16,
-      mobIconPadding: KPadding.kPaddingSize16,
       onPressed: _isButtonEnabled ? widget.onPressed : null,
-      hasAlign: !widget.isDesk,
-    );
-  }
-
-  Widget unconfirmButton(BuildContext context) {
-    return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
-      onPressed: context.pop,
-      padding: const EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize12,
-        horizontal: KPadding.kPaddingSize12,
-      ),
-      expanded: !widget.isDesk,
-      isDesk: widget.isDesk,
-      text: widget.unconfirmText ?? context.l10n.cancel,
-      hasAlign: !widget.isDesk,
+      unconfirmText: widget.unconfirmText,
+      timer: (widget.timer && !_isButtonEnabled)
+          ? Text(
+              '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+              style: AppTextStyle.materialThemeBodySmall,
+            )
+          : null,
     );
   }
 
