@@ -457,7 +457,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   onPressed: () {
                     context.goNamed(KRoute.myDiscounts.name);
                   },
-                  timer: false,
                 )
             : () => context.read<DiscountsAddBloc>().add(
                   const DiscountsAddEvent.back(),

@@ -25,5 +25,8 @@ Future<void> myDiscountDialogHelper(
 
   await tester.pumpAndSettle();
 
-  await dialogConfirmChangesHelper(tester);
+  await dialogConfirmChangesHelper(
+    tester: tester,
+    hasTimer: true,
+  );
 }

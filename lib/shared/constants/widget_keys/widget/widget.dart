@@ -58,4 +58,5 @@ class _WidgetKeys {
   final citiesDropField = _CitiesDropFieldKeys();
   final confirmPublishDiscount = _ConfirmPublishDiscountKeys();
   final confirmDialog = _ConfirmDialogKeys();
+  // final confirmDialogWithTimer = _ConfirmDialogWithTimerKeys();
 }
