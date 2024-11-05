@@ -267,9 +267,10 @@ class _ConfirmDialogWithTimerState extends State<_ConfirmDialogWithTimer> {
           : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
       onPressed: _isButtonEnabled ? widget.onPressed : null,
       unconfirmText: widget.unconfirmText,
-      timer: (!_isButtonEnabled)
+      timer: !_isButtonEnabled
           ? Text(
               '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+              key: KWidgetkeys.widget.confirmDialog.timer,
               style: AppTextStyle.materialThemeBodySmall,
             )
           : null,

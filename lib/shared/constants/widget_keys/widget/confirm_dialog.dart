@@ -6,4 +6,5 @@ class _ConfirmDialogKeys {
   final icon = const Key('confirm_dialog_icon');
   final confirmButton = const Key('confirm_dialog_confirm_button');
   final unconfirmButton = const Key('confirm_dialog_unconfirm_button');
+  final timer = const Key('confirm_dialog_timer');
 }
