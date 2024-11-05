@@ -1,3 +1,4 @@
+import 'dart:developer' show log;
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -38,17 +39,18 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void initState() {
     super.initState();
-    if (imageHasUrl) {
+    if (widget.imageBytes == null) {
       bytes = ArtifactDownloadHelper.getBytestExist(
         widget.imageName ?? widget.imageUrl!,
       );
+    } else {
+      bytes = widget.imageBytes;
     }
   }
 
   @override
   void didChangeDependencies() {
-    if ((Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
-        imageHasUrl) {
+    if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
       precacheImage(
         bytes == null
             ? CachedNetworkImageProvider(
@@ -61,6 +63,14 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
                 bytes!,
               ),
         context,
+        onError: (exception, stackTrace) {
+          log(
+            'Precache Image $exception',
+            error: exception,
+            stackTrace: stackTrace,
+            name: 'Cached Network Image',
+          );
+        },
       );
     }
     super.didChangeDependencies();
@@ -69,14 +79,29 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
-    if (bytes == null && imageHasUrl) {
+    if (bytes == null && widget.imageUrl != null) {
       if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
         return CachedNetworkImage(
           imageUrl: widget.imageUrl!.getImageUrl, // widget.imageUrl,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
-          errorWidget: (context, url, error) => KIcon.error,
+          errorWidget: (context, url, error) {
+            log(
+              'Cached Network Image error with url : $url',
+              error: error,
+              name: 'URL: $url',
+              level: KDimensions.logLevelError,
+            );
+            SomeFailure.serverError(
+              error: error,
+              tag: 'CachedNetworkImage',
+              tagKey: ErrorText.imageKey,
+              errorLevel: ErrorLevelEnum.warning,
+              data: 'URL: $url',
+            );
+            return KIcon.error;
+          },
           httpHeaders: const {
             'Cache-Control': 'max-age=3600',
           },
@@ -102,7 +127,23 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
-          errorBuilder: (context, url, error) => KIcon.error,
+          errorBuilder: (context, error, stack) {
+            log(
+              'Image network error',
+              error: error,
+              stackTrace: stack,
+              level: KDimensions.logLevelError,
+              name: 'URL: ${widget.imageUrl}',
+            );
+            SomeFailure.serverError(
+              error: 'URL: ${widget.imageUrl}, Error: $error',
+              tag: 'Network',
+              tagKey: ErrorText.imageKey,
+              errorLevel: ErrorLevelEnum.warning,
+              data: 'URL: ${widget.imageUrl}',
+            );
+            return KIcon.error;
+          },
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) {
               return child;
@@ -117,13 +158,29 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         );
       }
     } else {
-      if (bytes != null || widget.imageBytes != null) {
+      if (bytes != null) {
         return Image.memory(
-          bytes ?? widget.imageBytes!,
+          bytes!,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
-          errorBuilder: (context, url, error) => KIcon.error,
+          errorBuilder: (context, error, stack) {
+            log(
+              'Image memory error',
+              error: error,
+              stackTrace: stack,
+              level: KDimensions.logLevelError,
+              name: 'Image Length: ${bytes!.length}',
+            );
+            SomeFailure.serverError(
+              error: 'URL: ${widget.imageUrl}, Error: $error',
+              tag: 'Memory',
+              tagKey: ErrorText.imageKey,
+              errorLevel: ErrorLevelEnum.warning,
+              data: 'Image Length: ${bytes!.length}',
+            );
+            return KIcon.error;
+          },
           cacheHeight: KMinMaxSize.kImageMaxSize,
           cacheWidth: KMinMaxSize.kImageMaxSize,
           filterQuality: widget.highQuality ?? false
@@ -151,7 +208,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     // );
   }
 
-  bool get imageHasUrl => widget.imageBytes == null && widget.imageUrl != null;
+  // bool get imageHasUrl => widget.imageBytes == null &&
+  // widget.imageUrl != null;
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
@@ -261,7 +319,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 //         // }
 //       },
 //       errorBuilder: (context, error, stackTrace) {
-//         // debugPrint('Image load error: $error');
 //         return KIcon.error;
 //       },
 //     );
@@ -272,7 +329,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 //     //   placeholder: (context, url) =>
 //     //       const CircularProgressIndicator.adaptive(),
 //     //   errorWidget: (context, url, error) {
-//     //     debugPrint('Image load error: $error');
 //     //     return const Icon(Icons.error);
 //     //   },
 //     //   fit: fit,

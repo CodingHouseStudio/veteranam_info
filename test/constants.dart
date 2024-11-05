@@ -246,6 +246,11 @@ abstract class KTestText {
     userRole: UserRole.civilian,
   );
 
+  static const repositoryUserSetting = UserSetting(
+    id: field,
+    nickname: nicknameCorrect,
+  );
+
   static final userSettingModel = UserSetting(
     id: '1',
     userRole: UserRole.civilian,

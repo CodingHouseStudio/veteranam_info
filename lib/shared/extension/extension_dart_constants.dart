@@ -119,6 +119,8 @@ extension Uint8ListExtension on Uint8List {
         name: null,
         ref: null,
       );
+
+  String get getErrorData => 'Image Length - $length';
 }
 
 // extension ReferenceExtension on Reference {
@@ -187,4 +189,58 @@ extension UrlFailureExtension on SomeFailure {
         return UrlEnum.error;
     }
   }
+}
+
+extension ErrorLevelEnumExtension on ErrorLevelEnum? {
+  String get getString {
+    switch (this) {
+      case ErrorLevelEnum.error:
+        return 'ERROR';
+      case ErrorLevelEnum.fatal:
+        return 'FATAL ERROR';
+      case ErrorLevelEnum.info:
+        return 'info';
+      case ErrorLevelEnum.warning:
+        return 'Warning';
+      case null:
+        return '';
+    }
+  }
+
+  int get getLevel {
+    switch (this) {
+      case ErrorLevelEnum.error:
+        return KDimensions.logLevelError;
+      case ErrorLevelEnum.fatal:
+        return KDimensions.logLevelCriticalError;
+      case ErrorLevelEnum.info:
+        return KDimensions.logLevelInfo;
+      case ErrorLevelEnum.warning:
+        return KDimensions.logLevelWarning;
+      case null:
+        return KDimensions.logLevelWarning;
+    }
+  }
+
+  int get getSequenceNumber {
+    switch (this) {
+      case ErrorLevelEnum.error:
+        return KDimensions.sequenceNumberError;
+      case ErrorLevelEnum.fatal:
+        return KDimensions.sequenceNumberCriticalError;
+      case ErrorLevelEnum.info:
+        return KDimensions.sequenceNumber;
+      case ErrorLevelEnum.warning:
+        return KDimensions.sequenceNumberWarning;
+      case null:
+        return KDimensions.sequenceNumber;
+    }
+  }
+}
+
+extension FilePickerItemExtension on FilePickerItem? {
+  String? get getErrorData => this == null
+      ? null
+      : 'Image/File: name - ${this!.name}, extension - ${this!.extension},'
+          ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
 }

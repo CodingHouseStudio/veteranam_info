@@ -17,9 +17,25 @@ class FeedbackRepository implements IFeedbackRepository {
       await _firestoreService.addFeedback(feedback);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(sendFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Feedback: $feedback',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(sendFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Feedback: $feedback',
+        ),
+      );
     }
   }
 
@@ -36,9 +52,25 @@ class FeedbackRepository implements IFeedbackRepository {
       await _firestoreService.addMobFeedback(feedbackModel);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(sendMobFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Feedback: $feedback| ${image.getErrorData}',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(sendMobFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Feedback: $feedback| ${image.getErrorData}',
+        ),
+      );
     }
   }
 
@@ -58,9 +90,27 @@ class FeedbackRepository implements IFeedbackRepository {
         return const Right(true);
       }
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(checkUserNeedShowFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Feedback(checkUserNeedShowFeedback)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ),
+      );
     }
   }
 

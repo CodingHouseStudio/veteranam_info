@@ -22,7 +22,14 @@ class MobileRatingRepository {
         return const Right(false);
       }
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Mobile Rating(showRatingDialog)',
+          tagKey: ErrorText.repositoryKey,
+        ),
+      );
     }
   }
 }

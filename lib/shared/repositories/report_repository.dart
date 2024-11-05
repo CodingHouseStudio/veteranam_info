@@ -17,9 +17,25 @@ class ReportRepository implements IReportRepository {
       await _firestoreService.addReport(report);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Report(sendReport)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Report Model: $report',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Report(sendReport)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Report Model: $report',
+        ),
+      );
     }
   }
 
@@ -36,9 +52,25 @@ class ReportRepository implements IReportRepository {
 
       return Right(userDiscountsItems);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Report(getCardReportById)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Card Enum ${cardEnum.getValue}| User ID: $userId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Report(getCardReportById)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Card Enum ${cardEnum.getValue}| User ID: $userId',
+        ),
+      );
     }
   }
 }

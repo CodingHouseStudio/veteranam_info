@@ -54,9 +54,25 @@ class DiscountRepository implements IDiscountRepository {
       await _firestoreService.deleteDiscountById(discountId);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(deleteDiscountsById)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount Id: $discountId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(deleteDiscountsById)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount Id: $discountId',
+        ),
+      );
     }
   }
 
@@ -68,9 +84,25 @@ class DiscountRepository implements IDiscountRepository {
       final discountModel = await _firestoreService.getDiscount(id: id);
       return Right(discountModel);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(getDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount ID: $id',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(getDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount ID: $id',
+        ),
+      );
     }
   }
 
@@ -82,9 +114,25 @@ class DiscountRepository implements IDiscountRepository {
       await _firestoreService.sendLink(discountLink);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          data: 'Discount Link: $discountLink',
+          tag: 'Discount(sendLink)',
+          tagKey: ErrorText.repositoryKey,
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(sendLink)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount Link: $discountLink',
+        ),
+      );
     }
   }
 
@@ -103,9 +151,27 @@ class DiscountRepository implements IDiscountRepository {
           .toList();
       return Right(oneDayUserLink.length < KDimensions.maxLinkPerDay);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(userCanSendLink)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(userCanSendLink)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ),
+      );
     }
   }
 
@@ -117,9 +183,25 @@ class DiscountRepository implements IDiscountRepository {
       await _firestoreService.sendEmail(userEmail);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(sendEmail)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'User Email: $userEmail',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(sendEmail)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'User Email: $userEmail',
+        ),
+      );
     }
   }
 
@@ -143,9 +225,27 @@ class DiscountRepository implements IDiscountRepository {
 
       return Right(userEmails.length);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(userCanSendUserEmail)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(userCanSendUserEmail)',
+          tagKey: ErrorText.repositoryKey,
+          user: User(id: userId),
+          data: 'User ID: $userId',
+        ),
+      );
     }
   }
 
@@ -156,9 +256,25 @@ class DiscountRepository implements IDiscountRepository {
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(addDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount: $discount',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(addDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount: $discount',
+        ),
+      );
     }
   }
 
@@ -176,9 +292,25 @@ class DiscountRepository implements IDiscountRepository {
       );
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Discount(deactivateDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount: $discountModel',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Discount(deactivateDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount: $discountModel',
+        ),
+      );
     }
   }
 
@@ -194,9 +326,27 @@ class DiscountRepository implements IDiscountRepository {
       );
       return Right(discountModel);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          user: User(id: companyId),
+          tag: 'Discount(getCompanyDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount ID: $id, Company ID: $companyId',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          user: User(id: companyId),
+          tag: 'Discount(getCompanyDiscount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Discount ID: $id, Company ID: $companyId',
+        ),
+      );
     }
   }
 
@@ -209,7 +359,14 @@ class DiscountRepository implements IDiscountRepository {
         companyId,
       );
     } catch (e, stack) {
-      SomeFailure.serverError(error: e, stack: stack);
+      SomeFailure.serverError(
+        error: e,
+        stack: stack,
+        user: User(id: companyId),
+        tag: 'Discount(companyHasDiscount)',
+        tagKey: ErrorText.repositoryKey,
+        data: 'Company ID: $companyId',
+      );
       return true;
     }
   }

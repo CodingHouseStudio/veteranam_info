@@ -100,7 +100,6 @@ class MyDiscountsWatcherBloc
           );
         },
         onError: (dynamic error, StackTrace stack) {
-          // debugPrint('error is $error');
           add(MyDiscountsWatcherEvent.failure(error: error, stack: stack));
         },
       );
@@ -260,13 +259,19 @@ class MyDiscountsWatcherBloc
     _Failure event,
     Emitter<MyDiscountsWatcherState> emit,
   ) {
-    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
         failure: SomeFailure.serverError(
           error: event.error,
           stack: event.stack,
+          tag: 'My Discount ${ErrorText.watcherBloc}',
+          tagKey: ErrorText.streamBlocKey,
+          user: User(
+            id: _companyRepository.currentUserCompany.id,
+            name: _companyRepository.currentUserCompany.companyName,
+            email: _companyRepository.currentUserCompany.userEmails.first,
+          ),
         )._toMyDiscount(),
       ),
     );
