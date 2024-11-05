@@ -185,29 +185,19 @@ class _DialogsWidget {
     required String confirmText,
     required void Function()? onPressed,
     required Color confirmButtonBackground,
-    bool? timer,
+    bool timer = false,
     String? unconfirmText,
   }) {
-    Widget body({required bool isDeskValue}) => timer == null
-        ? ConfirmDialog(
-            isDesk: isDeskValue,
-            title: title,
-            subtitle: subtitle,
-            confirmText: confirmText,
-            unconfirmText: unconfirmText,
-            confirmButtonBackground: confirmButtonBackground,
-            onPressed: onPressed,
-          )
-        : ConfirmDialogWithTimer(
-            isDesk: isDeskValue,
-            title: title,
-            subtitle: subtitle,
-            confirmText: confirmText,
-            unconfirmText: unconfirmText,
-            confirmButtonBackground: confirmButtonBackground,
-            onPressed: onPressed,
-            timer: timer,
-          );
+    Widget body({required bool isDeskValue}) => ConfirmDialog(
+          isDesk: isDesk,
+          title: title,
+          subtitle: subtitle,
+          confirmText: confirmText,
+          unconfirmText: unconfirmText,
+          confirmButtonBackground: confirmButtonBackground,
+          onPressed: onPressed,
+          timer: timer,
+        );
 
     _doubleDialog(
       childWidget: ({required isDeskValue, required context}) =>

@@ -1,5 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,10 +14,57 @@ class ConfirmDialog extends StatelessWidget {
     required this.subtitle,
     required this.confirmText,
     required this.confirmButtonBackground,
+    required this.timer,
+    this.unconfirmText,
+    this.onPressed,
+    super.key,
+  });
+
+  final bool isDesk;
+  final String title;
+  final String subtitle;
+  final String confirmText;
+  final void Function()? onPressed;
+  final Color confirmButtonBackground;
+  final String? unconfirmText;
+  final bool timer;
+
+  @override
+  Widget build(BuildContext context) {
+    if (timer) {
+      return _ConfirmDialogWithTimer(
+        isDesk: isDesk,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        onPressed: onPressed,
+      );
+    } else {
+      return _CommonConfirmDialog(
+        isDesk: isDesk,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        onPressed: onPressed,
+      );
+    }
+  }
+}
+
+class _CommonConfirmDialog extends StatelessWidget {
+  const _CommonConfirmDialog({
+    required this.isDesk,
+    required this.title,
+    required this.subtitle,
+    required this.confirmText,
+    required this.confirmButtonBackground,
     this.onPressed,
     this.unconfirmText,
     this.timer,
-    super.key,
   });
 
   final bool isDesk;
@@ -153,5 +202,83 @@ class ConfirmDialog extends StatelessWidget {
       text: unconfirmText ?? context.l10n.cancel,
       hasAlign: !isDesk,
     );
+  }
+}
+
+class _ConfirmDialogWithTimer extends StatefulWidget {
+  const _ConfirmDialogWithTimer({
+    required this.isDesk,
+    required this.title,
+    required this.subtitle,
+    required this.confirmText,
+    required this.confirmButtonBackground,
+    this.unconfirmText,
+    this.onPressed,
+  });
+
+  final bool isDesk;
+  final String title;
+  final String subtitle;
+  final String confirmText;
+  final void Function()? onPressed;
+  final Color confirmButtonBackground;
+  final String? unconfirmText;
+
+  @override
+  State<_ConfirmDialogWithTimer> createState() =>
+      _ConfirmDialogWithTimerState();
+}
+
+class _ConfirmDialogWithTimerState extends State<_ConfirmDialogWithTimer> {
+  Timer? _timer;
+  late int _remainingTime;
+  late bool _isButtonEnabled;
+
+  @override
+  void initState() {
+    _remainingTime = KDimensions.confirmdialogTimerDelay;
+    _isButtonEnabled = false;
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 1) {
+          _remainingTime--;
+        } else {
+          _isButtonEnabled = true;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _CommonConfirmDialog(
+      isDesk: widget.isDesk,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      confirmText: widget.confirmText,
+      confirmButtonBackground: _isButtonEnabled
+          ? widget.confirmButtonBackground
+          : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
+      onPressed: _isButtonEnabled ? widget.onPressed : null,
+      unconfirmText: widget.unconfirmText,
+      timer: (!_isButtonEnabled)
+          ? Text(
+              '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+              style: AppTextStyle.materialThemeBodySmall,
+            )
+          : null,
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

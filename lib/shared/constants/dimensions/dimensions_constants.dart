@@ -60,4 +60,6 @@ abstract class KDimensions {
   static const sendingDelay = 60;
 
   static const minAmountTimeDiscountDays = 14;
+
+  static const confirmdialogTimerDelay = 10;
 }
