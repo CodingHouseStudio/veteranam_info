@@ -54,7 +54,15 @@ class WorkRepository implements IWorkRepository {
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Work(sendRespond)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Employee Respond Model: $respond| ${file.getErrorData}',
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -62,6 +70,7 @@ class WorkRepository implements IWorkRepository {
           stack: stack,
           tag: 'Work(sendRespond)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Employee Respond Model: $respond| ${file.getErrorData}',
         ),
       );
     }

@@ -10,6 +10,8 @@ abstract class ErrorText {
   static const mainFileKey = 'MAIN FILE';
   static const async = 'Async exceptions';
   static const nonAsync = 'Non-async exceptions';
+  static const fromCode = 'From Code';
+  static const dataKey = 'DATA';
 
   static const sendError = 'Send';
   static const serverError = 'Unkown';

@@ -136,6 +136,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'signUpWithGoogle(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
     } catch (_, stack) {
@@ -200,6 +202,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'signUpWithFacebook(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
     } catch (_, stack) {
@@ -267,6 +271,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'logInWithEmailAndPassword(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
 
@@ -282,6 +288,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'logInAnonymously(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
 
@@ -318,6 +326,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'signUp(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
 
@@ -352,6 +362,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'logOut(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
     } catch (e, stack) {
@@ -391,17 +403,22 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       final userCredentional = await operation();
       return Right(userCredentional.user?.toUser);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(exception(error: e, stack: stack));
+      return Left(
+        exception(
+          error: e,
+          stack: stack,
+        ),
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
           error: e,
           stack: stack,
-          tag:
-              '_handleAuthOperation operation - $operation(${ErrorText.serverError})',
+          tag: '_handleAuthOperation operation(${ErrorText.serverError})',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'Operation: $operation',
         ),
       );
     } finally {
@@ -448,6 +465,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'Email: $email',
         ),
       );
     } catch (e, stack) {
@@ -459,6 +477,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'Email: $email',
         ),
       );
     }
@@ -487,6 +506,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'checkVerificationCode(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+          data: 'Code: $code',
         ).status,
       );
     } catch (e, stack) {
@@ -498,6 +520,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'Code: $code',
         ),
       );
     }
@@ -616,6 +639,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'updateUserSetting(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+          data: 'User Setting: $userSetting',
         ).status,
       );
     } catch (e, stack) {
@@ -625,6 +651,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'User Setting: $userSetting',
         ),
       );
     } finally {
@@ -695,6 +722,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'User: $user| ${image.getErrorData}',
         ),
       );
     } catch (e, stack) {
@@ -706,6 +734,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'User: $user| ${image.getErrorData}',
         ),
       );
     } finally {

@@ -14,7 +14,14 @@ class FaqRepository implements IFaqRepository {
       final questionItems = await _firestoreService.getQuestions();
       return Right(questionItems);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'FAQ(getQuestions)',
+          tagKey: ErrorText.repositoryKey,
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(

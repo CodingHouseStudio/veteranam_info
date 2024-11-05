@@ -119,6 +119,8 @@ extension Uint8ListExtension on Uint8List {
         name: null,
         ref: null,
       );
+
+  String get getErrorData => 'Image Length - $length';
 }
 
 // extension ReferenceExtension on Reference {
@@ -234,4 +236,11 @@ extension ErrorLevelEnumExtension on ErrorLevelEnum? {
         return KDimensions.sequenceNumber;
     }
   }
+}
+
+extension FilePickerItemExtension on FilePickerItem? {
+  String? get getErrorData => this == null
+      ? null
+      : 'Image/File: name - ${this!.name}, extension - ${this!.extension},'
+          ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
 }

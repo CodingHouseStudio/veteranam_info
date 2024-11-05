@@ -106,6 +106,7 @@ class DeviceRepository implements IDeviceRepository {
           stack: stack,
           tag: 'Device(getDeviceId)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Platform: $platformValue',
         ),
       );
     }
@@ -174,6 +175,7 @@ class DeviceRepository implements IDeviceRepository {
           stack: stack,
           tag: 'Device(getFcm)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Platform: $platformValue',
         ),
       );
     }

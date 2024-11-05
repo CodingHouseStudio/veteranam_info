@@ -134,7 +134,21 @@ class CompanyRepository implements ICompanyRepository {
       _userCompanyController.add(methodCompanyModel);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          user: User(
+            id: currentUserCompany.id,
+            name: currentUserCompany.companyName,
+            email: _iAppAuthenticationRepository.currentUser.email,
+          ),
+          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          tag: 'Company(updateCompany)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Compnay: $company| ${imageItem.getErrorData}',
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -142,6 +156,13 @@ class CompanyRepository implements ICompanyRepository {
           stack: stack,
           tag: 'Company(updateCompany)',
           tagKey: ErrorText.repositoryKey,
+          user: User(
+            id: currentUserCompany.id,
+            name: currentUserCompany.companyName,
+            email: _iAppAuthenticationRepository.currentUser.email,
+          ),
+          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          data: 'Compnay: $company| ${imageItem.getErrorData}',
         ),
       );
     }
@@ -161,7 +182,20 @@ class CompanyRepository implements ICompanyRepository {
 
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          user: User(
+            id: currentUserCompany.id,
+            name: currentUserCompany.companyName,
+            email: _iAppAuthenticationRepository.currentUser.email,
+          ),
+          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          tag: 'Company(deleteCompany)',
+          tagKey: ErrorText.repositoryKey,
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -169,6 +203,12 @@ class CompanyRepository implements ICompanyRepository {
           stack: stack,
           tag: 'Company(deleteCompany)',
           tagKey: ErrorText.repositoryKey,
+          user: User(
+            id: currentUserCompany.id,
+            name: currentUserCompany.companyName,
+            email: _iAppAuthenticationRepository.currentUser.email,
+          ),
+          userSetting: _iAppAuthenticationRepository.currentUserSetting,
         ),
       );
     }

@@ -19,7 +19,14 @@ class InvestorsRepository implements IInvestorsRepository {
           );
       return Right(fundItems);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Investors(getFunds)',
+          tagKey: ErrorText.repositoryKey,
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(

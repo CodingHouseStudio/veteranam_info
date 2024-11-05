@@ -29,6 +29,9 @@ class FailureRepository {
         errorLevel: failure.errorLevel,
         tag: failure.tag,
         tagKey: failure.tagKey,
+        data: failure.data,
+        tag2: failure.tag2,
+        tag2Key: failure.tag2Key,
       );
     }
   }
@@ -41,6 +44,9 @@ class FailureRepository {
     required ErrorLevelEnum? errorLevel,
     required String? tag,
     required String? tagKey,
+    String? tag2,
+    String? tag2Key,
+    String? data,
     User? user,
     UserSetting? userSetting,
   }) async {
@@ -117,9 +123,14 @@ class FailureRepository {
               scope.level = sentry.SentryLevel.warning;
             case null:
           }
-          log('Tag $tag, $tagKey');
           if (tag != null) {
             await scope.setTag(tagKey ?? ErrorText.standartKey, tag);
+          }
+          if (tag2 != null) {
+            await scope.setTag(tag2Key ?? ErrorText.standartKey, tag2);
+          }
+          if (data != null) {
+            await scope.setTag(ErrorText.dataKey, data);
           }
           await scope.setUser(
             sentry.SentryUser(
@@ -143,8 +154,20 @@ class FailureRepository {
       );
       if (tag != null) {
         await firebase_crashlytics.FirebaseCrashlytics.instance.setCustomKey(
-          '$tagKey',
+          tagKey.toString(),
           tag,
+        );
+      }
+      if (tag2 != null) {
+        await firebase_crashlytics.FirebaseCrashlytics.instance.setCustomKey(
+          tag2Key.toString(),
+          tag2,
+        );
+      }
+      if (data != null) {
+        await firebase_crashlytics.FirebaseCrashlytics.instance.setCustomKey(
+          ErrorText.dataKey,
+          data,
         );
       }
     }

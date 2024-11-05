@@ -13,8 +13,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = _SomeFailure;
 
   SomeFailure._() {
@@ -28,8 +31,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureServerError;
 
   factory SomeFailure.get({
@@ -38,8 +44,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureGet;
 
   factory SomeFailure.send({
@@ -48,8 +57,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureSend;
 
   factory SomeFailure.network({
@@ -58,8 +70,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureNetwork;
 
   // authentication
@@ -69,8 +84,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureUnauthorized;
 
   factory SomeFailure.notFound({
@@ -79,8 +97,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureNotFound;
 
   factory SomeFailure.duplicate({
@@ -89,8 +110,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureDuplicate;
 
   factory SomeFailure.tooManyRequests({
@@ -99,8 +123,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureTooManyRequests;
 
   factory SomeFailure.emailSendingFailed({
@@ -109,8 +136,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureEmailSendingFailed;
 
   // Url
@@ -120,8 +150,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureShare;
 
   factory SomeFailure.link({
@@ -130,8 +163,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureLink;
 
   factory SomeFailure.copy({
@@ -140,8 +176,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureCopy;
 
   factory SomeFailure.wrongVerifyCode({
@@ -150,8 +189,11 @@ class SomeFailure with _$SomeFailure {
     ErrorLevelEnum? errorLevel,
     String? tag,
     String? tagKey,
+    String? tag2,
+    String? tag2Key,
     User? user,
     UserSetting? userSetting,
+    String? data,
   }) = FailureWrongVerifyCode;
 
   final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();

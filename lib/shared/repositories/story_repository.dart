@@ -36,7 +36,15 @@ class StoryRepository implements IStoryRepository {
       await _firestoreService.addStory(methodStoryModel);
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Story(addStory)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Story Model: $storyModel| ${imageItem.getErrorData}',
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -44,6 +52,7 @@ class StoryRepository implements IStoryRepository {
           stack: stack,
           tag: 'Story(addStory)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Story Model: $storyModel| ${imageItem.getErrorData}',
         ),
       );
     }
@@ -59,7 +68,16 @@ class StoryRepository implements IStoryRepository {
 
       return Right(userStoriesItems);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Story(getStoriesByUserId)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'User ID: $userId',
+          user: User(id: userId),
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -67,6 +85,8 @@ class StoryRepository implements IStoryRepository {
           stack: stack,
           tag: 'Story(getStoriesByUserId)',
           tagKey: ErrorText.repositoryKey,
+          data: 'User ID: $userId',
+          user: User(id: userId),
         ),
       );
     }

@@ -44,7 +44,15 @@ class InformationRepository implements IInformationRepository {
       );
       return const Right(true);
     } on FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Information(updateLikeCount)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Information Model: $informationModel, Is Liked: $isLiked',
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -52,6 +60,7 @@ class InformationRepository implements IInformationRepository {
           stack: stack,
           tag: 'Information(updateLikeCount)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Information Model: $informationModel, Is Liked: $isLiked',
         ),
       );
     }
@@ -65,7 +74,15 @@ class InformationRepository implements IInformationRepository {
       final informationModel = await _firestoreService.getInformation(id);
       return Right(informationModel);
     } on FirebaseException catch (e, stack) {
-      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+      return Left(
+        GetFailur.fromCode(
+          error: e,
+          stack: stack,
+          tag: 'Information(getInformation)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Information ID: $id',
+        ).status,
+      );
     } catch (e, stack) {
       return Left(
         SomeFailure.serverError(
@@ -73,6 +90,7 @@ class InformationRepository implements IInformationRepository {
           stack: stack,
           tag: 'Information(getInformation)',
           tagKey: ErrorText.repositoryKey,
+          data: 'Information ID: $id',
         ),
       );
     }

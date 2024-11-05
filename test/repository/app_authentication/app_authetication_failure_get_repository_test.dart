@@ -175,8 +175,8 @@ void main() {
       );
       expect(
         result,
-        isA<Right<SomeFailure, bool>>()
-            .having((e) => e.value, 'value', isFalse),
+        isA<Right<SomeFailure, UserSetting>>()
+            .having((e) => e.value, 'value', UserSetting.empty),
       );
     });
     test('Is Anonymously', () async {

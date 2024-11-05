@@ -15,6 +15,9 @@ class SendFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'invalid-argument':
@@ -34,6 +37,9 @@ class SendFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -45,6 +51,9 @@ class SendFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -56,6 +65,9 @@ class SendFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -74,6 +86,9 @@ class GetFailur {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'not-found':
@@ -86,6 +101,9 @@ class GetFailur {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'missing-argument':
@@ -105,6 +123,9 @@ class GetFailur {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -117,6 +138,9 @@ class GetFailur {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -129,6 +153,9 @@ class GetFailur {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -138,6 +165,9 @@ class GetFailur {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     if (error is TypeError) {
       return GetFailur(
@@ -148,6 +178,9 @@ class GetFailur {
           tagKey: ErrorText.exceptionsFolderKey,
           user: user,
           userSetting: userSetting,
+          data: data,
+          tag2: tag,
+          tag2Key: tagKey,
         ),
       );
     } else {
@@ -159,6 +192,9 @@ class GetFailur {
           tagKey: ErrorText.exceptionsFolderKey,
           user: user,
           userSetting: userSetting,
+          data: data,
+          tag2: tag,
+          tag2Key: tagKey,
         ),
       );
     }
@@ -179,6 +215,9 @@ class SignUpWithEmailAndPasswordFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'email-already-in-use':
@@ -191,6 +230,9 @@ class SignUpWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'operation-not-allowed':
@@ -206,6 +248,9 @@ class SignUpWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -218,6 +263,9 @@ class SignUpWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -230,6 +278,9 @@ class SignUpWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -247,6 +298,9 @@ class LogInWithEmailAndPasswordFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'user-disabled':
@@ -263,6 +317,9 @@ class LogInWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -275,6 +332,9 @@ class LogInWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -287,6 +347,9 @@ class LogInWithEmailAndPasswordFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -305,6 +368,9 @@ class LogOutFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'missing-argument':
@@ -323,6 +389,9 @@ class LogOutFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -334,6 +403,9 @@ class LogOutFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -345,6 +417,9 @@ class LogOutFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -361,6 +436,9 @@ class SignUpWithGoogleFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'account-exists-with-different-credential':
@@ -379,6 +457,9 @@ class SignUpWithGoogleFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'operation-not-allowed':
@@ -391,6 +472,9 @@ class SignUpWithGoogleFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -403,6 +487,9 @@ class SignUpWithGoogleFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -415,6 +502,9 @@ class SignUpWithGoogleFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -431,6 +521,9 @@ class SignUpWithFacebookFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'account-exists-with-different-credential':
@@ -449,6 +542,9 @@ class SignUpWithFacebookFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'operation-not-allowed':
@@ -459,6 +555,9 @@ class SignUpWithFacebookFailure {
             tag: '${ErrorText.signUpWithFacebookFailure}'
                 '(${ErrorText.serverError})',
             tagKey: ErrorText.exceptionsFolderKey,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       case 'network-error':
@@ -471,6 +570,9 @@ class SignUpWithFacebookFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -483,6 +585,9 @@ class SignUpWithFacebookFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
@@ -499,6 +604,9 @@ class ShareFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     if (error is Exception) {
       switch (error.toString()) {
@@ -515,6 +623,9 @@ class ShareFailure {
               tagKey: ErrorText.exceptionsFolderKey,
               user: user,
               userSetting: userSetting,
+              data: data,
+              tag2: tag,
+              tag2Key: tagKey,
             ),
           );
       }
@@ -527,6 +638,9 @@ class ShareFailure {
           tagKey: ErrorText.exceptionsFolderKey,
           user: user,
           userSetting: userSetting,
+          data: data,
+          tag2: tag,
+          tag2Key: tagKey,
         ),
       );
     }
@@ -543,6 +657,9 @@ class VerifyCodeFailure {
     StackTrace? stack,
     custom_user.User? user,
     custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
   }) {
     switch (error.code) {
       case 'invalid-action-code':
@@ -555,6 +672,9 @@ class VerifyCodeFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
       default:
@@ -566,6 +686,9 @@ class VerifyCodeFailure {
             tagKey: ErrorText.exceptionsFolderKey,
             user: user,
             userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
           ),
         );
     }
