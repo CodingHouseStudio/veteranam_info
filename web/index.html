@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta name="facebook-domain-verification" content="ktkipqchxo2jmhdrx2r9j9ozfgj5on" />
-  <meta name="google-signin-client_id"
-    content="32851885972-ns3197k0hi2lv14a4ib6s6p3h4e0jler.apps.googleusercontent.com">
-  <!--
+  <head>
+    <meta
+      name="facebook-domain-verification"
+      content="ktkipqchxo2jmhdrx2r9j9ozfgj5on"
+    />
+    <meta
+      name="google-signin-client_id"
+      content="32851885972-ns3197k0hi2lv14a4ib6s6p3h4e0jler.apps.googleusercontent.com"
+    />
+    <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -18,455 +22,601 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="$FLUTTER_BASE_HREF">
+    <base href="$FLUTTER_BASE_HREF" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Veteran UA">
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Veteran UA" />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Veteranam">
-  <link rel="apple-touch-icon" href="icons/logo-192.svg">
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Veteranam" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="icons/logo-192.svg" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg" href="logo.svg" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg" href="logo.svg" />
 
-  <title>Veteranam</title>
-  <link rel="manifest" href="manifest.json">
+    <title>Veteranam</title>
+    <link rel="manifest" href="manifest.json" />
 
-  <style>
-    body {
-      inset: 0;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-      position: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100 vw;
-    }
+    <style>
+      :root {
+        /* ----- Image Component ----- */
+        /* Adjust the image size for responsive elements using clamp() to control
+       the minimum and maximum size based on viewport dimensions. */
+        --image-size: clamp(25vh, 25%, 70vw);
 
-    .progress {
-      position: absolute;
-      height: 10px;
-      top: 0%;
-      display: flex;
-      width: 100%;
-      background-color: #DCEB8D;
-      border-radius: 2px;
-      background-clip: padding-box;
-      /*margin: 0.5rem 0 1rem 0;*/
-      overflow: hidden;
-    }
+        /* ----- Progress Bar Component ----- */
+        /* Modify the height of the progress bar to control its thickness; use 
+       clamp() for responsive adjustments. */
+        --progress-bar-height: clamp(1vh, 10px, 2.5vw);
 
-    .progress .indeterminate {
-      background-color: black;
-    }
+        /* Change the background color of the progress bar to customize its appearance. */
+        --progress-bar-background: #dceb8d;
 
-    .progress .indeterminate:before {
-      content: '';
-      position: absolute;
-      background-color: #AAAE8E;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      will-change: left, right;
-      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-      animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-    }
+        /* Set the color of the sliding element in the progress bar to customize its look. */
+        --progress-bar-slider-color: #aaae8e;
 
-    .progress .indeterminate:after {
-      content: '';
-      position: absolute;
-      background-color: #AAAE8E;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      will-change: left, right;
-      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-      animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-      -webkit-animation-delay: 1.15s;
-      animation-delay: 1.15s;
-    }
+        /* Adjust the duration of the progress bar animation to control speed; 
+       modify this to create faster or slower transitions. */
+        --progress-bar-animation-time: 2s;
 
-    @-webkit-keyframes indeterminate {
-      0% {
-        left: -35%;
-        right: 100%;
+        /* Set a delay before the progress bar animation starts; adjust this for 
+       timing preferences in animations. */
+        --progress-bar-animation-delay: 0.3s;
+
+        /* ----- Button Component ----- */
+        /* Change the background color of buttons to customize their appearance. */
+        --button-background: white;
+
+        /* Modify the text color on buttons to suit your design theme. */
+        --button-text-color: black;
+
+        /* Adjust the border color of buttons for styling purposes. */
+        --button-border-color: grey;
+
+        /* Set vertical padding for buttons to control space above and below the text. */
+        --button-vertical-padding: 1%;
+
+        /* Change horizontal padding for buttons to adjust space on the sides of the text. */
+        --button-horizontal-padding: 4%;
+
+        /* Modify the font size for button text to fit your design specifications. */
+        --button-font-size: 3vh;
+
+        /* Adjust the border radius of buttons to create more or less rounded corners. */
+        --button-border-radius: 32px;
+
+        /* Set the bottom margin for buttons to control the space below them. */
+        --button-bottom-margin: 12%;
+
+        /* Change the background color of buttons when in a loading state for visual feedback. */
+        --button-loading-background: #d3d3d3;
+
+        /* Modify the text color of buttons during the loading state to indicate progress. */
+        --button-loading-text-color: #7a7a7a;
+
+        /* Adjust the border color of buttons during loading to maintain visual consistency. */
+        --button-loading-border-color: #b0b0b0;
+
+        /* Set the size of the loading circle within buttons to fit design requirements. */
+        --button-loading-circle-size: 16px;
+
+        /* Change the line thickness of the loading circle to adjust the appearance of the indicator. */
+        --button-loading-circle-line-size: 2px;
+
+        /* Adjust the color of the loading circle to match the design theme. */
+        --button-loading-circle-color: #7a7a7a;
+
+        /* Modify the animation duration for the loading circle to change its speed. */
+        --button-loading-circle-animation-time: 1s;
+
+        /* Set the left margin for the loading circle to control spacing between it and the button text. */
+        --button-loading-circle-left-margin: 10px;
+
+        /* ----- Loader Component ----- */
+        /* Change the top margin of the loader to control space above it. */
+        --loader-margin-top: 3%;
+
+        /* Modify the size of the loader circles to fit the design and responsiveness needs. */
+        --loader-circle-size: clamp(2.5vh, 20px, 5vw);
+
+        /* Adjust the border radius of loader circles for roundness. */
+        --loader-circle-border-radius: 50%;
+
+        /* Change the vertical margin for circular loaders to control spacing around them. */
+        --loader-circular-vertical-margin: 0;
+
+        /* Set the horizontal margin for circular loaders to adjust spacing on the sides. */
+        --loader-circular-horizontal-margin: calc(
+          var(--loader-circle-size) / 4
+        );
+
+        /* Modify colors for different loader circles to customize their appearance. */
+        --loader-circle-color-1: #efefef;
+        --loader-circle-color-2: #babbb1;
+        --loader-circle-color-3: #090c00;
+        --loader-circle-color-4: #dcf264;
+
+        /* Change the animation duration for the loader to adjust the timing of the loading effect. */
+        --loader-animation-time: 1.5s;
       }
 
-      60% {
-        left: 100%;
-        right: -90%;
+      body {
+        inset: 0;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
-      100% {
-        left: 100%;
-        right: -90%;
-      }
-    }
-
-    @keyframes indeterminate {
-      0% {
-        left: -35%;
-        right: 100%;
+      .progress {
+        position: absolute;
+        height: var(--progress-bar-height);
+        top: 0%;
+        display: flex;
+        width: 100%;
+        background-color: var(--progress-bar-background);
       }
 
-      60% {
-        left: 100%;
-        right: -90%;
+      /* .progress .indeterminate:before {
+          content: "";
+          position: absolute;
+          background-color: var(--progress-bar-slider-color);
+          will-change: left, right;
+          -webkit-animation: indeterminate 2.1s
+            cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+          animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+            infinite;
+        } */
+
+      .progress .indeterminate {
+        content: "";
+        position: absolute;
+        background-color: var(--progress-bar-slider-color);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        will-change: left, right;
+        -webkit-animation: indeterminate-short
+          var(--progress-bar-animation-time) cubic-bezier(0.165, 0.84, 0.44, 1)
+          infinite;
+        animation: indeterminate-short var(--progress-bar-animation-time)
+          cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+        -webkit-animation-delay: var(--progress-bar-animation-delay);
+        animation-delay: var(--progress-bar-animation-delay);
       }
 
-      100% {
-        left: 100%;
-        right: -90%;
-      }
-    }
+      @-webkit-keyframes indeterminate {
+        0% {
+          left: -35%;
+          right: 100%;
+        }
 
-    @-webkit-keyframes indeterminate-short {
-      0% {
-        left: -200%;
-        right: 100%;
-      }
+        60% {
+          left: 100%;
+          right: -90%;
+        }
 
-      60% {
-        left: 107%;
-        right: -8%;
-      }
-
-      100% {
-        left: 107%;
-        right: -8%;
-      }
-    }
-
-    @keyframes indeterminate-short {
-      0% {
-        left: -200%;
-        right: 100%;
+        100% {
+          left: 100%;
+          right: -90%;
+        }
       }
 
-      60% {
-        left: 107%;
-        right: -8%;
+      @keyframes indeterminate {
+        0% {
+          left: -35%;
+          right: 100%;
+        }
+
+        60% {
+          left: 100%;
+          right: -90%;
+        }
+
+        100% {
+          left: 100%;
+          right: -90%;
+        }
       }
 
-      100% {
-        left: 107%;
-        right: -8%;
-      }
-    }
+      @-webkit-keyframes indeterminate-short {
+        0% {
+          left: -200%;
+          right: 100%;
+        }
 
-    .column {
-      flex-direction: column;
-    }
+        60% {
+          left: 107%;
+          right: -8%;
+        }
 
-    .splash {
-      align-items: center;
-      display: flex;
-      /* Center both horizontally and vertically */
-      height: 25vh;
-      /* Set height to 25% of the viewport height */
-      justify-content: center;
-      width: 25vw;
-      /* Set width to 25% of the viewport width */
-      color: grey;
-      /* mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
-      -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%; */
-      background-repeat: no-repeat;
-      /* animation: splash 4.0s infinite; */
-
-      min-width: 300px;
-      min-height: 300px;
-    }
-
-    /* @keyframes splash {
-      0% {
-        -webkit-mask-position: 85%;
+        100% {
+          left: 107%;
+          right: -8%;
+        }
       }
 
-      100% {
-        -webkit-mask-position: 0%;
-      }
-    } */
+      @keyframes indeterminate-short {
+        0% {
+          left: -200%;
+          right: 100%;
+        }
 
-    #splash img {
-      /* New animation for disappearing */
-      opacity: 1;
-      /* Initial opacity set to 1 */
-      width: 25vw;
-      /* Increase image size to 25% of viewport width */
-      height: 25vh;
-      /* Increase image size to 25% of viewport height */
+        60% {
+          left: 107%;
+          right: -8%;
+        }
 
-      min-width: 300px;
-      min-height: 300px;
-    }
-
-    .image-container {
-      width: 300px;
-      height: 300px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .bouncing-image {
-      width: 75%;
-      height: auto;
-      /* animation: bounce 2s infinite; */
-    }
-
-    /* .image-container:hover .bouncing-image {
-      animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-    }
-
-    @keyframes slowBounce {
-
-      0%,
-      20%,
-      50%,
-      80%,
-      100% {
-        transform: translateY(0);
+        100% {
+          left: 107%;
+          right: -8%;
+        }
       }
 
-      40% {
-        transform: translateY(-20px);
+      .column {
+        flex-direction: column;
       }
 
-      60% {
-        transform: translateY(-10px);
-      }
-    } */
+      .splash {
+        align-items: center;
+        display: flex;
+        /* Center both horizontally and vertically */
+        height: auto;
+        /* Set height to 25% of the viewport height */
+        justify-content: center;
+        width: 100vw;
+        /* Set width to 25% of the viewport width */
+        /* color: grey; */
+        /* mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
+        -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%; */
+        /* background-repeat: no-repeat; */
+        /* animation: splash 4.0s infinite; */
 
-    .button {
-      position: absolute;
-      display: none;
-      justify-content: center;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: white;
-      color: black;
-      border: 1px solid grey;
-      text-align: center;
-      padding: 1vh 4vw;
-      margin-top: 10vh;
-      cursor: pointer;
-      bottom: 15vh;
-      font-size: 3vh;
-      border-radius: 32px;
-      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, bottom 0.5s ease;
-    }
-
-    .button.loading {
-      transform: translate(-50%, -50%);
-      display: flex;
-      bottom: 40vh;
-      background-color: #d3d3d3;
-      margin-top: 0vh;
-      color: #7a7a7a;
-      border: 1px solid #b0b0b0;
-      cursor: wait;
-    }
-
-    .button.loading::after {
-      width: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 16px;
-      margin-left: 8px;
-      border: 2px solid #7a7a7a;
-      border-radius: 50%;
-      border-top-color: transparent;
-    }
-
-    .loading-circle {
-      display: none;
-      width: 16px;
-      height: 16px;
-      border: 2px solid #7a7a7a;
-      border-radius: 50%;
-      border-top-color: transparent;
-      animation: spin 0.6s linear infinite;
-      margin-right: 8px;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
+        /* min-width: var(--image-min-size);
+          min-height: var(--image-min-size); */
       }
 
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+      /* @keyframes splash {
+        0% {
+          -webkit-mask-position: 85%;
+        }
 
-    /*Loader Style*/
-    .loader {
-      text-align: center;
-      vertical-align: middle;
-      position: absolute;
-      display: flex;
-      margin-top: 3vh;
-      justify-content: center;
-      left: 50%;
-      transform: translateX(-50%);
+        100% {
+          -webkit-mask-position: 0%;
+        }
+      } */
 
-    }
-
-    .loader span {
-      display: block;
-      width: 20px;
-      height: 20px;
-      background: #EFEFEF;
-      border-radius: 50%;
-      margin: 0 5px;
-      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    .loader span:nth-child(2) {
-      background: #BABBB1;
-    }
-
-    .loader span:nth-child(3) {
-      background: #090C00;
-    }
-
-    .loader span:nth-child(4) {
-      background: #DCF264;
-    }
-
-    .loader span:not(:last-child) {
-      animation: animate 1.5s linear infinite;
-    }
-
-    @keyframes animate {
-      0% {
-        transform: translateX(0);
+      .splash img {
+        /* New animation for disappearing */
+        opacity: 1;
+        /* Initial opacity set to 1 */
+        width: var(--image-size);
+        /* Increase image size to 25% of viewport width */
+        height: var(--image-size);
+        /* Increase image size to 25% of viewport height */
+        /* min-width: var(--image-min-size);
+          min-height: var(--image-min-size); */
       }
 
-      100% {
-        transform: translateX(30px);
-      }
-    }
+      /* .image-container {
+          width: 300px;
+          height: 300px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        } */
 
-    .loader span:last-child {
-      animation: jump 1.5s ease-in-out infinite;
-    }
+      /* .bouncing-image {
+          width: 100%;
+          height: auto;
+        } */
 
-    @keyframes jump {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      10% {
-        transform: translate(10px, -10px);
-      }
-
-      20% {
-        transform: translate(20px, 10px);
+      /* .image-container:hover .bouncing-image {
+        animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
       }
 
-      30% {
-        transform: translate(30px, -50px);
+      @keyframes slowBounce {
+
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+
+        40% {
+          transform: translateY(-20px);
+        }
+
+        60% {
+          transform: translateY(-10px);
+        }
+      } */
+
+      .button {
+        position: absolute;
+        display: none;
+        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--button-background);
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        text-align: center;
+        padding: var(--button-vertical-padding) var(--button-horizontal-padding);
+        cursor: pointer;
+        bottom: var(--button-bottom-margin);
+        font-size: var(--button-font-size);
+        border-radius: var(--button-border-radius);
+        transition: background-color 0.3s ease, color 0.3s ease,
+          border 0.3s ease, bottom 0.5s ease;
       }
 
-      70% {
-        transform: translate(-150px, -50px);
+      .button.loading {
+        transform: translate(-50%, -50%);
+        display: flex;
+        bottom: 40vh;
+        background-color: var(--button-loading-background);
+        margin-top: 0vh;
+        color: var(--button-loading-text-color);
+        border: 1px solid var(--button-loading-border-color);
+        cursor: wait;
       }
 
-      80% {
-        transform: translate(-140px, 10px);
+      /* .button.loading::after {
+          width: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 16px;
+          margin-left: 8px;
+          border: 1px solid #7a7a7a;
+          border-radius: 50%;
+          border-top-color: transparent;
+        } */
+
+      .loading-circle {
+        display: none;
+        width: var(--button-loading-circle-size);
+        height: var(--button-loading-circle-size);
+        border: var(--button-loading-circle-line-size) solid
+          var(--button-loading-circle-color);
+        border-radius: 50%;
+        margin-left: var(--button-loading-circle-left-margin);
+        border-top-color: transparent;
+        animation: spin var(--button-loading-circle-animation-time) linear
+          infinite;
       }
 
-      90% {
-        transform: translate(-130px, -10px);
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
-      100% {
-        transform: translate(-120px, 0);
+      /*Loader Style*/
+      .loader {
+        text-align: center;
+        vertical-align: middle;
+        position: absolute;
+        display: flex;
+        margin-top: var(--loader-margin-top);
+        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0px 40px 60px -20px rgba(0, 0, 0, 0.2);
       }
-    }
-  </style>
 
-</head>
+      .loader span {
+        display: block;
+        width: var(--loader-circle-size);
+        height: var(--loader-circle-size);
+        background: var(--loader-circle-color-1);
+        border-radius: 50%;
+        margin: var(--loader-circular-vertical-margin)
+          var(--loader-circular-horizontal-margin);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+      }
 
-<body style="font-family: Tahoma, Verdana, sans-serif">
-  <div class='progress' id='pre-loader-bar'>
-    <div class='indeterminate'></div>
-  </div>
+      .loader span:nth-child(2) {
+        background: var(--loader-circle-color-2);
+      }
 
-  <div class="column" id="column-loading">
-    <div class="splash">
-      <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
+      .loader span:nth-child(3) {
+        background: var(--loader-circle-color-3);
+      }
+
+      .loader span:nth-child(4) {
+        background: var(--loader-circle-color-4);
+      }
+
+      .loader span:not(:last-child) {
+        animation: animate var(--loader-animation-time) linear infinite;
+      }
+
+      @keyframes animate {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(
+            calc(
+              var(--loader-circle-size) +
+                var(--loader-circular-horizontal-margin) * 2
+            )
+          );
+        }
+      }
+
+      .loader span:last-child {
+        animation: jump var(--loader-animation-time) ease-in-out infinite;
+      }
+
+      @keyframes jump {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        10% {
+          transform: translate(
+            calc(0.5 * var(--loader-circle-size)),
+            calc(-0.5 * var(--loader-circle-size))
+          );
+        }
+
+        20% {
+          transform: translate(
+            calc(1 * var(--loader-circle-size)),
+            calc(0.5 * var(--loader-circle-size))
+          );
+        }
+
+        30% {
+          transform: translate(
+            calc(1.5 * var(--loader-circle-size)),
+            calc(-2.5 * var(--loader-circle-size))
+          );
+        }
+
+        70% {
+          transform: translate(
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) - var(--loader-circular-horizontal-margin)
+            ),
+            calc(-2.5 * var(--loader-circle-size))
+          );
+        }
+
+        80% {
+          transform: translate(
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) - var(--loader-circular-horizontal-margin)
+            ),
+            calc(0.5 * var(--loader-circle-size))
+          );
+        }
+
+        90% {
+          transform: translate(
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) + 0.5 * var(--loader-circular-horizontal-margin)
+            ),
+            calc(-0.5 * var(--loader-circle-size))
+          );
+        }
+
+        100% {
+          transform: translate(
+            calc(
+              -5 * (
+                  var(--loader-circle-size) +
+                    var(--loader-circular-horizontal-margin)
+                ) + var(--loader-circular-horizontal-margin)
+            ),
+            0
+          );
+        }
+      }
+    </style>
+  </head>
+
+  <body style="font-family: Tahoma, Verdana, sans-serif">
+    <div class="progress" id="pre-loader-bar">
+      <div class="indeterminate"></div>
     </div>
-    <div class="loader" id="loader-component">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+
+    <div class="column" id="column-loading">
+      <div class="splash">
+        <img
+          id="splash-image"
+          src="icons/logo-192.svg"
+          alt="Loading indicator..."
+          class="bouncing-image"
+        />
+      </div>
+      <div class="loader" id="loader-component">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <button id="retry-button" class="button">
+        Перезавантажити
+        <span class="loading-circle"></span>
+      </button>
     </div>
-    <button id="retry-button" class="button">
-      Перезавантажити
-      <span class="loading-circle"></span>
-    </button>
-  </div>
-  <script>
-    const progressLine = document.getElementById("pre-loader-bar");
-    const loadingComponent = document.getElementById("column-loading");
-    var retryButton = document.getElementById('retry-button');
+    <script>
+      const progressLine = document.getElementById("pre-loader-bar");
+      const loadingComponent = document.getElementById("column-loading");
+      var retryButton = document.getElementById("retry-button");
 
-    // function removeSplashFromWeb() {
-    //   document.getElementById("splash")?.remove();
-    //   document.getElementById("splash-branding")?.remove();
-    //   document.body.style.background = "transparent";
-    // }
-    // progressLine.style.display = "block";
-    // loadingComponent.style.display = "block";
-    // retryButton.style.display = "none";
+      // function removeSplashFromWeb() {
+      //   document.getElementById("splash")?.remove();
+      //   document.getElementById("splash-branding")?.remove();
+      //   document.body.style.background = "transparent";
+      // }
+      // progressLine.style.display = "block";
+      // loadingComponent.style.display = "block";
+      // retryButton.style.display = "none";
 
-    window.addEventListener("flutter-first-frame", function () {
+      window.addEventListener("flutter-first-frame", function () {
+        setTimeout(() => {
+          progressLine.remove();
+          loadingComponent.remove();
+        }, 20000);
+      });
       setTimeout(() => {
-        progressLine.remove();
-        loadingComponent.remove();
-      }, 20000);
-    });
-    setTimeout(() => {
-      retryButton.style.display = "flex";
-    }, 8000);
+        retryButton.style.display = "flex";
+      }, 8000);
 
-    retryButton.addEventListener('click', function () {
-      location.reload();
-      retryButton.classList.add('loading'); // Add a loading class
-      document.querySelector('.loading-circle').style.display = 'inline-block';
-      document.getElementById("splash-image").style.display = "none";
-      document.getElementById("loader-component").style.display = "none";
-      console.log("Reloading...");
-    });
-  </script>
-  <!-- <script>
+      retryButton.addEventListener("click", function () {
+        location.reload();
+        retryButton.classList.add("loading"); // Add a loading class
+        document.querySelector(".loading-circle").style.display =
+          "inline-block";
+        document.getElementById("splash-image").style.display = "none";
+        document.getElementById("loader-component").style.display = "none";
+        console.log("Reloading...");
+      });
+    </script>
+    <!-- <script>
     self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   </script> -->
-  <script src="flutter_bootstrap.js" async>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
+    <script src="flutter_bootstrap.js" async>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
 
-        console.log("Firebase messaging initialized.");
-        navigator.serviceWorker.register('firebase-messaging-sw.js', {
-          scope: '/firebase-cloud-messaging-push-scope',
+          console.log("Firebase messaging initialized.");
+          navigator.serviceWorker.register('firebase-messaging-sw.js', {
+            scope: '/firebase-cloud-messaging-push-scope',
+          });
         });
-      });
-    }
-  </script>
-  <!-- <script type="module">
+      }
+    </script>
+    <!-- <script type="module">
 
     // Import the functions you need from the SDKs you need
 
@@ -500,9 +650,16 @@
 
   </script> -->
 
-  <script
-    type="text/javascript">(function (w, s) { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js"; var x = document.getElementsByTagName("script")[0]; x.parentNode.insertBefore(e, x); })(window, "script");</script>
-
-</body>
-
+    <script type="text/javascript">
+      (function (w, s) {
+        var e = document.createElement("script");
+        e.type = "text/javascript";
+        e.async = true;
+        e.src =
+          "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js";
+        var x = document.getElementsByTagName("script")[0];
+        x.parentNode.insertBefore(e, x);
+      })(window, "script");
+    </script>
+  </body>
 </html>

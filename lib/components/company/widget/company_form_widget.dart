@@ -48,35 +48,39 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
-      listener: (context, state) {
-        if (companyNameController.text.isEmpty) {
-          companyNameController.text = state.company.companyName ?? '';
-          context.read<CompanyFormBloc>().add(const CompanyFormEvent.started());
-        }
-        if (publicNameController.text.isEmpty) {
-          publicNameController.text = state.company.publicName ?? '';
-        }
-        if (codeController.text.isEmpty) {
-          codeController.text = state.company.code ?? '';
-        }
-        if (linkController.text.isEmpty) {
-          linkController.text = state.company.link ?? '';
-        }
-      },
-      listenWhen: (previous, current) => previous.company != current.company,
-      child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
-        // listener: (context, _) {
-        //   if (_.formState == CompanyFormEnum.delete) {
-        //     context.goNamed(KRoute.myDiscounts.name);
-        //   }
-        // },
-        buildWhen: (previous, current) =>
-            previous.formState != current.formState ||
-            previous.image != current.image ||
-            previous.deleteIsPossible != current.deleteIsPossible,
-        builder: (context, _) {
-          return Column(
+    return BlocBuilder<CompanyFormBloc, CompanyFormState>(
+      // listener: (context, _) {
+      //   if (_.formState == CompanyFormEnum.delete) {
+      //     context.goNamed(KRoute.myDiscounts.name);
+      //   }
+      // },
+      buildWhen: (previous, current) =>
+          previous.formState != current.formState ||
+          previous.image != current.image ||
+          previous.deleteIsPossible != current.deleteIsPossible,
+      builder: (context, _) {
+        return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
+          listener: (context, state) {
+            context
+                .read<CompanyFormBloc>()
+                .add(const CompanyFormEvent.started());
+            if (companyNameController.text.isEmpty) {
+              companyNameController.text = state.company.companyName ?? '';
+            }
+            if (publicNameController.text.isEmpty) {
+              publicNameController.text = state.company.publicName ?? '';
+            }
+            if (codeController.text.isEmpty) {
+              codeController.text = state.company.code ?? '';
+            }
+            if (linkController.text.isEmpty) {
+              linkController.text = state.company.link ?? '';
+            }
+          },
+          listenWhen: (previous, current) =>
+              _.formState == CompanyFormEnum.initial &&
+              previous.company.id != current.company.id,
+          child: Column(
             children: [
               DecoratedBox(
                 decoration: KWidgetTheme.boxDecorationHome
@@ -293,9 +297,9 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                   successTextAlign: TextAlign.start,
                 ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

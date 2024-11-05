@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -59,16 +60,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Stream<User> get user => _firebaseAuth.authStateChanges().map(
         (userCredentional) {
-          // debugPrint('================================================');
+          log('================================================');
           if (userCredentional != null) {
-            // debugPrint('Firebase Auth State Changed: User is authenticated');
-            // debugPrint('Firebase User Details: $userCredentional');
+            log('Firebase Auth State Changed: User is authenticated');
+            log(
+              'Firebase User Details: $userCredentional',
+              name: 'User',
+              sequenceNumber: 1,
+            );
             final user = userCredentional.toUser;
             _cache.write(key: userCacheKey, value: user);
             return user;
           } else {
-            // debugPrint('Firebase Auth State Changed: '
-            //     'User is unauthenticated (User.empty)');
+            log('Firebase Auth State Changed: '
+                'User is unauthenticated (User.empty)');
             return User.empty;
           }
         },
@@ -81,16 +86,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           .map(
         (userCredentionalSetting) {
           if (userCredentionalSetting.isNotEmpty) {
-            // debugPrint('================================================');
-            // debugPrint('Firebase Auth State Changed: User is authenticated');
-            // debugPrint('Firebase User Details: $userCredentionalSetting');
+            log('================================================');
+            log('Firebase User Setting Changed');
+            log('Firebase User Setting: $userCredentionalSetting');
             _cache.write(
               key: userSettingCacheKey,
               value: userCredentionalSetting,
             );
           } else {
-            // debugPrint('Firebase Auth State Changed: '
-            //     'User is unauthenticated (User.empty)');
+            log('Firebase User Settting is empty');
           }
           return userCredentionalSetting;
         },
@@ -127,10 +131,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       return Left(
-        SignUpWithGoogleFailure.fromCode(error: e, stack: stack).status,
+        SignUpWithGoogleFailure.fromCode(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'signUpWithGoogle(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+        ).status,
       );
     } catch (_, stack) {
-      return Left(SomeFailure.serverError(error: _, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: _,
+          stack: stack,
+          tag: 'signUpWithGoogle(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     } finally {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
@@ -177,10 +197,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       return Left(
-        SignUpWithFacebookFailure.fromCode(error: e, stack: stack).status,
+        SignUpWithFacebookFailure.fromCode(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'signUpWithFacebook(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+        ).status,
       );
     } catch (_, stack) {
-      return Left(SomeFailure.serverError(error: _, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: _,
+          stack: stack,
+          tag: 'signUpWithFacebook(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     } finally {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
@@ -233,6 +269,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         ({required error, stack}) => LogInWithEmailAndPasswordFailure.fromCode(
           error: error,
           stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'logInWithEmailAndPassword(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
 
@@ -243,8 +283,14 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, User?>> logInAnonymously() async =>
       _handleAuthOperation(
         () async => _firebaseAuth.signInAnonymously(),
-        ({required error, stack}) =>
-            SendFailure.fromCode(error: error, stack: stack).status,
+        ({required error, stack}) => SendFailure.fromCode(
+          error: error,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'logInAnonymously(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+        ).status,
       );
 
   /// Creates a new user with the provided [email] and [password].
@@ -278,6 +324,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         ({required error, stack}) => SignUpWithEmailAndPasswordFailure.fromCode(
           error: error,
           stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'signUp(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );
 
@@ -306,11 +356,27 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       unawaited(logInAnonymously());
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(LogOutFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        LogOutFailure.fromCode(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'logOut(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+        ).status,
+      );
     } catch (e, stack) {
-      // debugPrint('Logout error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'logOut(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     }
     // finally {
     //   _updateAuthStatusBasedOnCache();
@@ -337,11 +403,24 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       final userCredentional = await operation();
       return Right(userCredentional.user?.toUser);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(exception(error: e, stack: stack));
+      return Left(
+        exception(
+          error: e,
+          stack: stack,
+        ),
+      );
     } catch (e, stack) {
-      // debugPrint('General Auth Error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: '_handleAuthOperation operation(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'Operation: $operation',
+        ),
+      );
     } finally {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
@@ -349,21 +428,19 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   void _updateAuthStatusBasedOnCache() {
-    // debugPrint('Updating auth status based on cache');
-    // ignore: unused_local_variable
+    log('Updating auth status based on cache');
     final user = currentUser.isEmpty;
-    // debugPrint('Current user inside '
-    //     '_updateAuthStatusBasedOnCache : $currentUser');
-    // debugPrint('user is $user');
+    log('Current user inside '
+        '_updateAuthStatusBasedOnCache : $currentUser');
+    log('user is $user', name: 'Cache User', level: 1);
   }
 
   void _updateUserSettingBasedOnCache() {
-    // debugPrint('Updating user setting based on cache');
-    // ignore: unused_local_variable
+    log('Updating user setting based on cache');
     final userSetting = currentUserSetting.isEmpty;
-    // debugPrint('Current user setting inside '
-    //     '_updateAuthStatusBasedOnCache : $currentUserSetting');
-    // debugPrint('userSertting is $userSetting');
+    log('Current user setting inside '
+        '_updateAuthStatusBasedOnCache : $currentUserSetting');
+    log('userSertting is $userSetting', name: 'Cache User Setting', level: 1);
   }
 
   @override
@@ -380,11 +457,29 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       );
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Sendig error: ${e.message}');
-      return Left(SomeFailure.emailSendingFailed(error: e, stack: stack));
+      return Left(
+        SomeFailure.emailSendingFailed(
+          error: e,
+          stack: stack,
+          tag: 'sendVerificationCode(emailSendingFailed)',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'Email: $email',
+        ),
+      );
     } catch (e, stack) {
-      // debugPrint('Unknown error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'sendVerificationCode(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'Email: $email',
+        ),
+      );
     }
   }
 
@@ -405,11 +500,29 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       );
       return Right(email.isNotEmpty);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Sendig error: ${e.message}');
-      return Left(VerifyCodeFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        VerifyCodeFailure.fromCode(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'checkVerificationCode(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+          data: 'Code: $code',
+        ).status,
+      );
     } catch (e, stack) {
-      // debugPrint('Unknown error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'checkVerificationCode(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'Code: $code',
+        ),
+      );
     }
   }
 
@@ -425,11 +538,27 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       );
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Sendig error: ${e.message}');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'resetPasswordUseCode(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     } catch (e, stack) {
-      // debugPrint('Unknown error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'resetPasswordUseCode(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     }
   }
 
@@ -455,11 +584,27 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       unawaited(logInAnonymously());
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'deleteUser(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     } catch (e, stack) {
-      // debugPrint('General Auth Error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'deleteUser(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+        ),
+      );
     }
     // finally {
     //   _updateAuthStatusBasedOnCache();
@@ -468,7 +613,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> updateUserSetting(
+  Future<Either<SomeFailure, UserSetting>> updateUserSetting(
     UserSetting userSetting,
   ) async {
     try {
@@ -484,13 +629,31 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         //     userSetting,
         //   );
         // }
-        return const Right(true);
+        return Right(userSetting);
       }
-      return const Right(false);
+      return Right(userSetting);
     } on firebase_core.FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+      return Left(
+        SendFailure.fromCode(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          tag: 'updateUserSetting(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
+          data: 'User Setting: $userSetting',
+        ).status,
+      );
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'User Setting: $userSetting',
+        ),
+      );
     } finally {
       _updateUserSettingBasedOnCache();
     }
@@ -504,7 +667,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
     return result.fold(
       Left.new,
-      (r) {
+      (r) async {
         if (r == null) {
           return const Right(false);
         }
@@ -518,7 +681,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           id: currentUser.id,
           devicesInfo: devicesInfo,
         );
-        return updateUserSetting(userSetting);
+        final result = await updateUserSetting(userSetting);
+        return result.fold(
+          Left.new,
+          (r) => const Right(true),
+        );
       },
     );
   }
@@ -547,11 +714,29 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
       return Right(user.copyWith(photo: userPhoto));
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'updateUserData(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'User: $user| ${image.getErrorData}',
+        ),
+      );
     } catch (e, stack) {
-      // debugPrint('General Auth Error: $e');
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'updateUserData(${ErrorText.serverError})',
+          tagKey: ErrorText.appAuthenticationKey,
+          user: currentUser,
+          userSetting: currentUserSetting,
+          data: 'User: $user| ${image.getErrorData}',
+        ),
+      );
     } finally {
       _updateAuthStatusBasedOnCache();
     }

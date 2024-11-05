@@ -327,7 +327,7 @@ void main() {
         await appAuthenticationRepository.updateUserSetting(
           KTestText.userSetting,
         ),
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, UserSetting>>(),
         // .having(
         //   (e) => e.value,
         //   'value',

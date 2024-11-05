@@ -100,7 +100,15 @@ class DeviceRepository implements IDeviceRepository {
       }
       return Right(deviceId);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Device(getDeviceId)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Platform: $platformValue',
+        ),
+      );
     }
   }
 
@@ -161,7 +169,15 @@ class DeviceRepository implements IDeviceRepository {
 
       return Right(fcmToken);
     } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
+      return Left(
+        SomeFailure.serverError(
+          error: e,
+          stack: stack,
+          tag: 'Device(getFcm)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Platform: $platformValue',
+        ),
+      );
     }
   }
 

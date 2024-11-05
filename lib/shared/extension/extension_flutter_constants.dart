@@ -11,18 +11,21 @@ import 'package:flutter/material.dart'
         EdgeInsets,
         EdgeInsetsGeometry,
         Expanded,
+        MouseCursor,
         Spacer,
+        SystemMouseCursors,
         TargetPlatform,
         TextDirection,
         TextPainter,
         TextSpan,
         TextStyle,
         Widget,
+        WidgetState,
+        WidgetStateProperty,
         showDatePicker,
         visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 extension LocalizedDateTime on DateTime {
@@ -244,8 +247,8 @@ extension ContextExtensions on BuildContext {
   void emailDialogCloseEvent(bool? value) {
     if (!mounted) return;
     if (!(value ?? false)) {
-      read<DiscountUserEmailFormBloc>().add(
-        const DiscountUserEmailFormEvent.sendEmailAfterClose(),
+      read<UserEmailFormBloc>().add(
+        const UserEmailFormEvent.sendEmailAfterClose(),
       );
     }
   }
@@ -539,4 +542,14 @@ extension SubLocationString on SubLocation {
         return [context.l10n.allUkrainOnline];
     }
   }
+}
+
+extension WidgetStatePropertyExtension on WidgetStateProperty<dynamic> {
+  static WidgetStateProperty<MouseCursor?> get buttonMouseCursor =>
+      WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return SystemMouseCursors.forbidden;
+        }
+        return SystemMouseCursors.click;
+      });
 }

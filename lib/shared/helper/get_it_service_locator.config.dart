@@ -15,7 +15,6 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:file_picker/file_picker.dart' as _i388;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
-import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i141;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:firebase_storage/firebase_storage.dart' as _i457;
@@ -37,8 +36,6 @@ import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dar
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
     as _i372;
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart'
-    as _i441;
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
     as _i1006;
 import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart'
@@ -94,6 +91,8 @@ import 'package:veteranam/shared/bloc/mobile_rating/mobile_rating_cubit.dart'
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
+import 'package:veteranam/shared/bloc/user_email_form/user_email_form_bloc.dart'
+    as _i254;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
@@ -125,7 +124,6 @@ import 'package:veteranam/shared/repositories/data_picker_repository.dart'
 import 'package:veteranam/shared/repositories/device_repository.dart' as _i712;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
     as _i452;
-import 'package:veteranam/shared/repositories/failure_module.dart' as _i531;
 import 'package:veteranam/shared/repositories/failure_repository.dart' as _i960;
 import 'package:veteranam/shared/repositories/faq_repository.dart' as _i1007;
 import 'package:veteranam/shared/repositories/feedback_repository.dart'
@@ -166,7 +164,6 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    final failureModule = _$FailureModule();
     final firstoreModule = _$FirstoreModule();
     final artifactModule = _$ArtifactModule();
     final storageModule = _$StorageModule();
@@ -177,9 +174,11 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
     final mobileRatingModule = _$MobileRatingModule();
-    gh.singleton<_i141.FirebaseCrashlytics>(
-        () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.lazySingleton<_i960.FailureRepository>(
+      () => _i960.FailureRepository(),
+      dispose: (i) => i.dispose(),
+    );
     gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.firestore);
     gh.singleton<_i361.Dio>(() => artifactModule.dio);
     gh.singleton<_i457.FirebaseStorage>(() => storageModule.storage);
@@ -188,8 +187,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => messagingModule.firebaseMessaging);
     gh.singleton<_i833.DeviceInfoPlugin>(
         () => messagingModule.deviceInfoPlugin);
-    gh.lazySingleton<_i960.FailureRepository>(
-        () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
     gh.singleton<_i99.StorageService>(
         () => _i99.StorageService(gh<_i457.FirebaseStorage>()));
     gh.singleton<_i369.ArtifactDownloadHelper>(
@@ -451,8 +448,8 @@ extension GetItInjectableX on _i174.GetIt {
           mobileRatingRepository: gh<_i1026.MobileRatingRepository>()),
       registerFor: {_mobile},
     );
-    gh.factory<_i441.DiscountUserEmailFormBloc>(
-      () => _i441.DiscountUserEmailFormBloc(
+    gh.factory<_i254.UserEmailFormBloc>(
+      () => _i254.UserEmailFormBloc(
         discountRepository: gh<_i1026.IDiscountRepository>(),
         appAuthenticationRepository: gh<_i1026.IAppAuthenticationRepository>(),
         firebaseAnalyticsService: gh<_i1026.FirebaseAnalyticsService>(),
@@ -470,8 +467,6 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
-
-class _$FailureModule extends _i531.FailureModule {}
 
 class _$FirstoreModule extends _i718.FirstoreModule {}
 

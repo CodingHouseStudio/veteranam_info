@@ -176,6 +176,10 @@ abstract class KTestText {
     photo: image,
   );
 
+  static const pureUser = User(
+    id: id,
+  );
+
   static const userAnonymous = User(
     id: '1',
   );
@@ -240,6 +244,11 @@ abstract class KTestText {
   static const userSetting = UserSetting(
     id: '1',
     userRole: UserRole.civilian,
+  );
+
+  static const repositoryUserSetting = UserSetting(
+    id: field,
+    nickname: nicknameCorrect,
   );
 
   static final userSettingModel = UserSetting(

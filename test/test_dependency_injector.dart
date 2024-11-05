@@ -4,7 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -34,7 +34,7 @@ void configureDependenciesTest() {
   MockGoRouter.canPopValue = true;
   // KTest.scroll = null;
   // Services
-  GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
@@ -62,7 +62,7 @@ void configureDependenciesTest() {
 
   // Repositories
   GetIt.I.registerLazySingleton<FailureRepository>(
-    () => FailureRepository(GetIt.I.get<FirebaseCrashlytics>()),
+    FailureRepository.new, //GetIt.I.get<FirebaseCrashlytics>()
   );
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<AppInfoRepository>(AppInfoRepository());
@@ -229,7 +229,7 @@ void configureFailureDependenciesTest() {
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<Dio>(Dio());
-  GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<ArtifactDownloadHelper>(
     ArtifactDownloadHelper(
       GetIt.I.get<Dio>(),
@@ -238,6 +238,6 @@ void configureFailureDependenciesTest() {
 
   // Repositories
   GetIt.I.registerLazySingleton<FailureRepository>(
-    () => FailureRepository(GetIt.I.get<FirebaseCrashlytics>()),
+    FailureRepository.new, //GetIt.I.get<FirebaseCrashlytics>()
   );
 }

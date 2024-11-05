@@ -3,7 +3,6 @@ import 'dart:async' show Timer;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 // TODO(MARIA): MOVE discount user email form bloc to shared and rename
@@ -52,7 +51,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
+    return BlocConsumer<UserEmailFormBloc, UserEmailFormState>(
       listener: (context, state) {
         if (state.formState == EmailEnum.success
             // ||
@@ -193,21 +192,16 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
         isRequired: true,
         isDesk: widget.isDesk,
         labelText: context.l10n.email,
-        errorText: context
-            .read<DiscountUserEmailFormBloc>()
-            .state
-            .email
-            .error
-            .value(context),
-        showErrorText:
-            context.read<DiscountUserEmailFormBloc>().state.formState ==
-                EmailEnum.invalidData,
+        errorText:
+            context.read<UserEmailFormBloc>().state.email.error.value(context),
+        showErrorText: context.read<UserEmailFormBloc>().state.formState ==
+            EmailEnum.invalidData,
       );
 
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,
         isDesk: widget.isDesk,
-        onPressed: context.read<DiscountUserEmailFormBloc>().state.formState ==
+        onPressed: context.read<UserEmailFormBloc>().state.formState ==
                 EmailEnum.success
             ? null
             : widget.sendOnPressed,
