@@ -8,13 +8,13 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 Future<void> appHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
-  log('Loading App...');
+  log('Loading App...', name: 'Integation Tests');
 
   while (find.byKey(KWidgetkeys.screen.app.screen).evaluate().isEmpty) {
     await tester.pumpAndSettle();
   }
 
-  log('App Loaded');
+  log('App Loaded', name: 'Integation Tests');
 
   expect(
     find.byKey(KWidgetkeys.screen.app.screen),

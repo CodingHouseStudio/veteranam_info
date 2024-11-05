@@ -72,7 +72,7 @@ void main() {
             KTestText.userSetting,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.repositoryUserSetting),
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
@@ -214,13 +214,12 @@ void main() {
       test('Update user data', () async {
         when(
           mockAppAuthenticationRepository.updateUserSetting(
-            const UserSetting(
-              id: KTestText.field,
-              nickname: KTestText.nicknameCorrect,
-            ),
+            KTestText.repositoryUserSetting,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(
+            KTestText.repositoryUserSetting,
+          ),
         );
         expect(
           await authenticationRepository.updateUserData(
@@ -242,7 +241,7 @@ void main() {
             ),
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.repositoryUserSetting),
         );
         expect(
           await authenticationRepository.updateUserData(
