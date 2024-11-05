@@ -33,7 +33,13 @@ class UrlRepository extends IUrlRepository {
               ' of share.') {
         return const Right(true);
       }
-      final error = ShareFailure.fromCode(error: e, stack: stack).status;
+      final error = ShareFailure.fromCode(
+        error: e,
+        stack: stack,
+        tag: 'Url(share)',
+        tagKey: ErrorText.repositoryKey,
+        data: 'Url: $url| Used Site Url - $useSiteUrl',
+      ).status;
       if (error == null) {
         final resault = await copy(
           baseUrl + url,
@@ -73,7 +79,15 @@ class UrlRepository extends IUrlRepository {
       }
       return const Right(false);
     } catch (e, stack) {
-      return Left(SomeFailure.link(error: e, stack: stack));
+      return Left(
+        SomeFailure.link(
+          error: e,
+          stack: stack,
+          tag: 'Url(launchUrl)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Url: $url, Schema $scheme',
+        ),
+      );
     }
   }
 
@@ -86,7 +100,15 @@ class UrlRepository extends IUrlRepository {
       );
       return const Right(true);
     } catch (e, stack) {
-      return Left(SomeFailure.copy(error: e, stack: stack));
+      return Left(
+        SomeFailure.copy(
+          error: e,
+          stack: stack,
+          tag: 'Url(copy)',
+          tagKey: ErrorText.repositoryKey,
+          data: 'Text $text',
+        ),
+      );
     }
   }
 }

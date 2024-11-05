@@ -1,3 +1,5 @@
+import 'dart:developer' show log;
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,9 +40,14 @@ GoRouter businessRouter = GoRouter(
     if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
         analytics: FirebaseAnalytics.instance,
-        // onError: (_) => foundation.kDebugMode
-        //     ? debugPrint('FirebaseAnalyticsObserver error $_')
-        //     : null,
+        onError: (_) => log(
+          '${ErrorText.firebaseAnalyticsObserver} ${_.code}',
+          error: 'Message: ${_.message},Detail ${_.details},'
+              ' StackTrace ${_.stacktrace}',
+          name: ErrorText.firebaseAnalyticsObserver,
+          sequenceNumber: KDimensions.logLevelWarning,
+          level: KDimensions.logLevelWarning,
+        ),
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {

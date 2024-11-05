@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -109,11 +110,12 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.deleteUser();
     return result.fold(
       (l) {
-        return Left(l); // debugPrint(l.toString())
+        return Left(l);
       },
       (r) {
         _userController.add(User.empty);
-        return Right(r); //debugPrint('ever reached here?')
+        log('User deleted');
+        return Right(r);
       },
     );
   }
@@ -132,14 +134,13 @@ class AuthenticationRepository {
     );
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(
         //   AuthenticationStatus.anonymous,
         // );
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('authenticated');
         if (r != null) {
           _userController.add(r);
         }
@@ -158,14 +159,13 @@ class AuthenticationRepository {
     );
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(
         //   AuthenticationStatus.anonymous,
         // );
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('authenticated');
         if (r != null) {
           _userController.add(r);
         }
@@ -178,11 +178,10 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.createFcmUserSetting();
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         return Left(l);
       },
       (r) {
-        // debugPrint('created');
+        log('created FCM TOKEN', name: 'FCM Token', level: 1);
         return Right(r);
       },
     );
@@ -193,12 +192,11 @@ class AuthenticationRepository {
     unawaited(_createFcmUserSetting());
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('authenticated');
         if (r != null) {
           _userController.add(r);
         }
@@ -211,14 +209,13 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.signUpWithGoogle();
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(
         //   AuthenticationStatus.anonymous,
         // );
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('authenticated');
         if (r != null) {
           _userController.add(r);
         }
@@ -231,14 +228,13 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.signUpWithFacebook();
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(
         //   AuthenticationStatus.anonymous,
         // );
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('authenticated');
         if (r != null) {
           _userController.add(r);
         }
@@ -251,23 +247,18 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.logOut();
     return result.fold(
       (l) {
-        // debugPrint('error: $l');
         // _authenticationStatuscontroller.add(
         //   AuthenticationStatus.anonymous,
         // );
         return Left(l);
       },
       (r) {
-        // debugPrint('authenticated');
+        log('Log out', name: 'Log Out');
         _userController.add(User.empty);
 
         return Right(r);
       },
     );
-    // resault.fold(
-    //   (l) => debugPrint(l.toString()),
-    //   (r) => debugPrint('ever reached here?'),
-    // );
   }
 
   Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({
@@ -275,15 +266,16 @@ class AuthenticationRepository {
   }) async {
     final result =
         await iAppAuthenticationRepository.sendVerificationCode(email: email);
-    // result.fold(
-    //   (failure) {
-    //     debugPrint('Sending error: $failure');
-    //   },
-    //   (success) {
-    //     debugPrint('Sending succeses $email');
-    //   },
-    // );
-    return result;
+    return result.fold(
+      Left.new,
+      (success) {
+        log(
+          'Sending email letter succeses $email',
+          name: 'Reset Password',
+        );
+        return const Right(true);
+      },
+    );
   }
 
   Future<Either<SomeFailure, bool>> checkVerificationCode(
@@ -291,15 +283,16 @@ class AuthenticationRepository {
   ) async {
     final result =
         await iAppAuthenticationRepository.checkVerificationCode(code);
-    // result.fold(
-    //   (failure) {
-    //     debugPrint('Sending error: $failure');
-    //   },
-    //   (success) {
-    //     debugPrint('Sending succeses $email');
-    //   },
-    // );
-    return result;
+    return result.fold(
+      Left.new,
+      (success) {
+        log(
+          'Reset password verification code is succes',
+          name: 'Reset Password',
+        );
+        return Right(success);
+      },
+    );
   }
 
   Future<Either<SomeFailure, bool>> resetPasswordUseCode({
@@ -310,15 +303,13 @@ class AuthenticationRepository {
       code: code,
       newPassword: newPassword,
     );
-    // result.fold(
-    //   (failure) {
-    //     debugPrint('Sending error: $failure');
-    //   },
-    //   (success) {
-    //     debugPrint('Sending succeses $email');
-    //   },
-    // );
-    return result;
+    return result.fold(
+      Left.new,
+      (success) {
+        log('Password reseted success', name: 'Reset Password');
+        return Right(success);
+      },
+    );
   }
 
   Future<Either<SomeFailure, bool>> updateUserSetting({
@@ -326,16 +317,14 @@ class AuthenticationRepository {
   }) async {
     final result =
         await iAppAuthenticationRepository.updateUserSetting(userSetting);
-    result.fold(
-      (failure) {
-        // debugPrint('Sending error: $failure');
-      },
+    return result.fold(
+      Left.new,
       (success) {
-        _userSettingController.add(userSetting);
-        // debugPrint('Sending succeses $userSetting');
+        _userSettingController.add(success);
+        log('User Setting Updated, new is $success', name: 'User Setting');
+        return const Right(true);
       },
     );
-    return result;
   }
 
   Future<Either<SomeFailure, bool>> updateUserData({
@@ -354,11 +343,10 @@ class AuthenticationRepository {
       result.fold(
         (failure) {
           failureValue = failure;
-          // debugPrint('Sending error: $failure');
         },
         (success) {
           _userController.add(success);
-          // debugPrint('Sending succeses $userSetting');
+          log('Sending succeses $userSetting');
         },
       );
     }
@@ -370,10 +358,9 @@ class AuthenticationRepository {
       result.fold(
         (failure) {
           failureValue = failure;
-          // debugPrint('Sending error: $failure');
         },
         (success) {
-          // debugPrint('Sending succeses $userSetting');
+          log('User Setting Updated, new is $success', name: 'User Setting');
         },
       );
     }

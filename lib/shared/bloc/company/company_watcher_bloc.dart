@@ -44,7 +44,6 @@ class CompanyWatcherBloc
         );
       },
       onError: (dynamic error, StackTrace stack) {
-        // debugPrint('error is $error');
         add(CompanyWatcherEvent.failure(error: error, stack: stack));
       },
     );
@@ -61,13 +60,19 @@ class CompanyWatcherBloc
     _Failure event,
     Emitter<CompanyWatcherState> emit,
   ) {
-    // debugPrint('error is ${event.failure}');
     emit(
       _Initial(
         company: _companyRepository.currentUserCompany,
         failure: SomeFailure.serverError(
           error: event.error,
           stack: event.stack,
+          tag: 'Company ${ErrorText.watcherBloc}',
+          tagKey: ErrorText.streamBlocKey,
+          user: User(
+            id: _companyRepository.currentUserCompany.id,
+            email: _companyRepository.currentUserCompany.userEmails.first,
+            name: _companyRepository.currentUserCompany.companyName,
+          ),
         )._toCompany(),
       ),
     );

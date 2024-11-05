@@ -1910,15 +1910,16 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>> updateUserSetting(
           _i3.UserSetting? userSetting) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUserSetting,
           [userSetting],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.UserSetting>(
           this,
           Invocation.method(
             #updateUserSetting,
@@ -1926,15 +1927,15 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.UserSetting>(
           this,
           Invocation.method(
             #updateUserSetting,
             [userSetting],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createFcmUserSetting() =>
@@ -2438,15 +2439,16 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>> updateUserSetting(
           _i3.UserSetting? userSetting) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUserSetting,
           [userSetting],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.UserSetting>(
           this,
           Invocation.method(
             #updateUserSetting,
@@ -2454,15 +2456,15 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.UserSetting>(
           this,
           Invocation.method(
             #updateUserSetting,
             [userSetting],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createFcmUserSetting() =>
@@ -12684,6 +12686,15 @@ class MockFailureRepository extends _i1.Mock implements _i3.FailureRepository {
         Invocation.method(
           #sendError,
           [failure],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
         ),
         returnValueForMissingStub: null,
       );
