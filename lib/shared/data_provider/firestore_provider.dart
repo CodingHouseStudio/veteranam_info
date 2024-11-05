@@ -1,3 +1,5 @@
+import 'dart:developer' show log;
+
 import 'package:cloud_firestore/cloud_firestore.dart'
     show
         DocumentChangeType,
@@ -200,11 +202,7 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               isFromCache = snapshot.metadata.isFromCache;
-              // ignore: unused_local_variable
-              // final source = (snapshot.metadata.isFromCache)
-              //     ? KAppText.cache
-              //     : KAppText.server;
-              // debugPrint('Data fetched from $source}');
+              log('Data fetched from ${isFromCache._source}}');
             }
           }
           return _tryCatchForCache(
@@ -253,11 +251,8 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.exists) {
-            // ignore: unused_local_variable
-            final source = (snapshot.metadata.isFromCache)
-                ? KAppText.cache
-                : KAppText.server;
-            // debugPrint('Data fetched from $source}');
+            final source = snapshot.metadata.isFromCache._source;
+            log('Data fetched from $source');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
             return UserSetting.empty;
@@ -274,11 +269,8 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.docs.isNotEmpty) {
-            // ignore: unused_local_variable
-            final source = (snapshot.metadata.isFromCache)
-                ? KAppText.cache
-                : KAppText.server;
-            // debugPrint('Data fetched from $source}');
+            final source = snapshot.metadata.isFromCache._source;
+            log('Data fetched from $source');
             return CompanyModel.fromJson(snapshot.docs.first.data());
           } else {
             return CompanyModel.empty;
@@ -317,11 +309,7 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               isFromCache = snapshot.metadata.isFromCache;
-              // ignore: unused_local_variable
-              // final source = (snapshot.metadata.isFromCache)
-              //     ? KAppText.cache
-              //     : KAppText.server;
-              // debugPrint('Data fetched from $source}');
+              log('Data fetched from ${isFromCache._source}}');
             }
           }
           return _tryCatchForCache<WorkModel>(
@@ -351,11 +339,7 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               isFromCache = snapshot.metadata.isFromCache;
-              // ignore: unused_local_variable
-              // final source = (snapshot.metadata.isFromCache)
-              //     ? KAppText.cache
-              //     : KAppText.server;
-              // debugPrint('Data fetched from $source}');
+              log('Data fetched from ${isFromCache._source}}');
             }
           }
           return _tryCatchForCache(
@@ -419,11 +403,7 @@ class FirestoreService {
           if (change.type == DocumentChangeType.added) {
             isFromCache = snapshot.metadata.isFromCache;
 
-            // ignore: unused_local_variable
-            // final source = (snapshot.metadata.isFromCache)
-            //     ? KAppText.cache
-            //     : KAppText.server;
-            // debugPrint('Data fetched from $source');
+            log('Data fetched from ${isFromCache._source}}');
           }
         }
 
@@ -527,43 +507,6 @@ class FirestoreService {
         .doc(discount.id)
         .set(discount.toJson());
   }
-
-  // Stream<List<TagModel>> getTags() => _db
-  //         .collection(FirebaseCollectionName.tags)
-  //         .snapshots(includeMetadataChanges: offlineMode.isOffline) // Enable caching
-  //         .map(
-  //       (snapshot) {
-  //         for (final change in snapshot.docChanges) {
-  //           if (change.type == DocumentChangeType.added) {
-  //             final source =
-  //                 (snapshot.metadata.isFromCache) ? KAppText.cache :
-  // KAppText.server;
-  //             debugPrint('Data fetched from $source}');
-  //           }
-  //         }
-  //         return snapshot.docs
-  //             .map((doc) => TagModel.fromJson(doc.data()))
-  //             .toList();
-  //       },
-  //     );
-
-  // Future<void> addTags(TagModel tags) {
-  //   return _db
-  //       .collection(FirebaseCollectionName.tags)
-  //       .doc(tags.id)
-  //       .set(tags.toJson());
-  // }
-
-  // Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
-  //   final querySnapshot = await _db
-  //       .collection(FirebaseCollectionName.discount)
-  //       .where(DiscountModelJsonField.userId, isEqualTo: userId)
-  //       .get();
-
-  //   return querySnapshot.docs
-  //       .map((doc) => DiscountModel.fromJson(doc.data()))
-  //       .toList();
-  // }
 
   Future<void> deleteDiscountById(String discountId) {
     return _db
@@ -672,4 +615,8 @@ class FirestoreService {
       }
     }
   }
+}
+
+extension _SourceExtension on bool {
+  String get _source => this ? KAppText.cache : KAppText.server;
 }

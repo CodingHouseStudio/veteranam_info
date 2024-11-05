@@ -161,7 +161,8 @@ void main() {
       ).called(1);
       expect(
         result,
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, UserSetting>>()
+            .having((e) => e.value, 'value', UserSetting.empty),
       );
     });
   });
