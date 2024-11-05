@@ -61,6 +61,7 @@ abstract class KDimensions {
 
   static const minAmountTimeDiscountDays = 14;
 
+  static const confirmdialogTimerDelay = 10;
   static const sequenceNumberError = 2;
   static const sequenceNumberCriticalError = 4;
   static const sequenceNumberWarning = 1;
