@@ -9,8 +9,6 @@ Future<void> myDiscountConfirmButtonlHelper({
 }) async {
   await myDiscountDialogHelper(tester);
 
-  await tester.pumpAndSettle(const Duration(seconds: 15));
-
   await dialogConfirmHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
