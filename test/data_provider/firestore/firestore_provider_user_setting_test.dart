@@ -240,24 +240,25 @@ void main() {
     //   ).called(1);
     // });
 
-    test('delete user setting', () async {
-      await firestoreService.deleteUserSetting(
-        KTestText.userSetting,
-      );
+    // test('delete user setting', () async {
+    //   await firestoreService.deleteUserSetting(
+    //     KTestText.userSetting,
+    //   );
 
-      verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
-      ).called(1);
-      verify(
-        mockCollectionReference.doc(KTestText.user.id),
-      ).called(1);
-      verify(
-        mockDocumentReference.update(
-          KTestText.userSetting
-              .copyWith(deletedOn: KTestText.dateTime)
-              .toJson(),
-        ),
-      ).called(1);
-    });
+    //   verify(
+    //     mockFirebaseFirestore.collection(FirebaseCollectionName.
+    // userSettings),
+    //   ).called(1);
+    //   verify(
+    //     mockCollectionReference.doc(KTestText.user.id),
+    //   ).called(1);
+    //   verify(
+    //     mockDocumentReference.update(
+    //       KTestText.userSetting
+    //           .copyWith(deletedOn: KTestText.dateTime)
+    //           .toJson(),
+    //     ),
+    //   ).called(1);
+    // });
   });
 }

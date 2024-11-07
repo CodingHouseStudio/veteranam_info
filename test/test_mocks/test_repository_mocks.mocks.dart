@@ -1214,28 +1214,6 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<void> deleteCompany(_i3.CompanyModel? company) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deleteCompany,
-          [company],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
-  _i8.Future<void> deleteUserSetting(_i3.UserSetting? userSetting) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deleteUserSetting,
-          [userSetting],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
   _i8.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
         Invocation.method(
           #getWorks,

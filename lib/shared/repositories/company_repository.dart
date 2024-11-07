@@ -182,7 +182,11 @@ class CompanyRepository implements ICompanyRepository {
   Future<Either<SomeFailure, bool>> deleteCompany() async {
     try {
       if (currentUserCompany.id.isNotEmpty) {
-        await _firestoreService.deleteCompany(currentUserCompany);
+        /// every thirty days, all documents where KAppText.deletedFieldId
+        /// older than 30 days will be deleted automatically (firebase function)
+        await _firestoreService.updateCompany(
+          currentUserCompany.copyWith(deletedOn: ExtendedDateTime.current),
+        );
         _userCompanyController.add(CompanyModel.empty);
         await _iAppAuthenticationRepository.logOut();
       }

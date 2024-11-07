@@ -285,31 +285,6 @@ class FirestoreService {
         );
   }
 
-  /// every thirty days, all documents where KAppText.deletedFieldId
-  /// older than 30 days will be deleted automatically (firebase function)
-  Future<void> deleteCompany(CompanyModel company) {
-    final companyData = company.toJson();
-    companyData[KAppText.deletedFieldId] =
-        ExtendedDateTime.current.toIso8601String();
-    return _db
-        .collection(FirebaseCollectionName.companies)
-        .doc(company.id)
-        .update(companyData);
-  }
-
-  /// every thirty days, all documents where KAppText.deletedFieldId
-  /// older than 30 days will be deleted automatically and user with the same
-  /// UID (firebase function)
-  Future<void> deleteUserSetting(UserSetting userSetting) {
-    final userSettingData = userSetting.toJson();
-    userSettingData[KAppText.deletedFieldId] =
-        ExtendedDateTime.current.toIso8601String();
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userSetting.id)
-        .update(userSettingData);
-  }
-
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)
           .snapshots(

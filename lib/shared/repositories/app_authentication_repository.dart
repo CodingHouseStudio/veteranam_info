@@ -565,7 +565,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
-      await _firestoreService.deleteUserSetting(currentUserSetting);
+      /// every thirty days, all documents where KAppText.deletedFieldId
+      /// older than 30 days will be deleted automatically and user with the
+      /// same
+      /// UID (firebase function)
+      await _firestoreService.setUserSetting(
+        userSetting:
+            currentUserSetting.copyWith(deletedOn: ExtendedDateTime.current),
+        userId: currentUser.id,
+      );
       final result = await logOut();
       // if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
       //   try {
