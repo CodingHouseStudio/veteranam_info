@@ -54,6 +54,7 @@ class CompanyRepository implements ICompanyRepository {
         _userCompanySubscription ??=
             _firestoreService.getUserCompany(currentUser.email!).listen(
           (currentUserCompany) {
+            _removeDeleteParameter();
             _cache.write(key: userCompanyCacheKey, value: currentUserCompany);
             _userCompanyController.add(
               currentUserCompany,
@@ -100,6 +101,15 @@ class CompanyRepository implements ICompanyRepository {
   // User get currentUser {
   //   return iAppAuthenticationRepository.currentUser;
   // }
+
+  void _removeDeleteParameter() {
+    if (currentUserCompany.deletedOn != null) {
+      updateCompany(
+        company: currentUserCompany.copyWith(deletedOn: null),
+        imageItem: null,
+      );
+    }
+  }
 
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
@@ -172,7 +182,7 @@ class CompanyRepository implements ICompanyRepository {
   Future<Either<SomeFailure, bool>> deleteCompany() async {
     try {
       if (currentUserCompany.id.isNotEmpty) {
-        await _firestoreService.deleteCompany(currentUserCompany.id);
+        await _firestoreService.deleteCompany(currentUserCompany);
         _userCompanyController.add(CompanyModel.empty);
         await _iAppAuthenticationRepository.logOut();
       }

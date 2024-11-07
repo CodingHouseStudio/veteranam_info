@@ -48,7 +48,7 @@ void main() {
           (_) async {},
         );
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel),
         ).thenAnswer(
           (_) async {},
         );
@@ -110,7 +110,7 @@ void main() {
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel),
         ).thenThrow(Exception(KGroupText.failure));
 
         when(
@@ -166,7 +166,7 @@ void main() {
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
 
         when(

@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
 
-Future<void> discountsAddDialogHelper(
+Future<void> profileDeleteButtonHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(
@@ -12,16 +12,16 @@ Future<void> discountsAddDialogHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton),
+    find.byKey(KWidgetkeys.screen.profile.deleteButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cancelButton,
+    itemKey: KWidgetkeys.screen.profile.deleteButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.profile.deleteButton));
 
   await tester.pumpAndSettle();
 

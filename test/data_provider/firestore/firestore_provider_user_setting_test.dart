@@ -24,6 +24,7 @@ void main() {
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
     late CacheClient mockCacheClient;
     setUp(() {
+      ExtendedDateTime.current = KTestText.dateTime;
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
       mockDocumentReference = MockDocumentReference();
@@ -113,11 +114,15 @@ void main() {
         (_) async {},
       );
 
-      // when(
-      //   mockDocumentReference.update(KTestText.userSetting.toJson()),
-      // ).thenAnswer(
-      //   (_) async {},
-      // );
+      when(
+        mockDocumentReference.update(
+          KTestText.userSetting
+              .copyWith(deletedOn: KTestText.dateTime)
+              .toJson(),
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
 
       firestoreService =
           FirestoreService(mockFirebaseFirestore, mockCacheClient);
@@ -237,7 +242,7 @@ void main() {
 
     test('delete user setting', () async {
       await firestoreService.deleteUserSetting(
-        KTestText.user.id,
+        KTestText.userSetting,
       );
 
       verify(
@@ -247,7 +252,11 @@ void main() {
         mockCollectionReference.doc(KTestText.user.id),
       ).called(1);
       verify(
-        mockDocumentReference.delete(),
+        mockDocumentReference.update(
+          KTestText.userSetting
+              .copyWith(deletedOn: KTestText.dateTime)
+              .toJson(),
+        ),
       ).called(1);
     });
   });

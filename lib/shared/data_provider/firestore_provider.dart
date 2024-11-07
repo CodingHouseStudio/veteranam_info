@@ -285,17 +285,24 @@ class FirestoreService {
         );
   }
 
-  Future<void> deleteCompany(String id) {
-    return _db.collection(FirebaseCollectionName.companies).doc(id).delete();
+  Future<void> deleteCompany(CompanyModel company) {
+    final companyData = company.toJson();
+    companyData[KAppText.deletedFieldId] =
+        ExtendedDateTime.current.toIso8601String();
+    return _db
+        .collection(FirebaseCollectionName.companies)
+        .doc(company.id)
+        .update(companyData);
   }
 
-  Future<void> deleteUserSetting(
-    String userId,
-  ) {
+  Future<void> deleteUserSetting(UserSetting userSetting) {
+    final userSettingData = userSetting.toJson();
+    userSettingData[KAppText.deletedFieldId] =
+        ExtendedDateTime.current.toIso8601String();
     return _db
         .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .delete();
+        .doc(userSetting.id)
+        .update(userSettingData);
   }
 
   Stream<List<WorkModel>> getWorks() => _db

@@ -98,15 +98,6 @@ void main() {
       await profileLogOutHelper(tester);
     });
 
-    // testWidgets('Show delete account dialog', (tester) async {
-    //   await profilePumpAppHelper(
-    //     tester: tester,
-    //     mockAuthenticationRepository: mockAuthenticationRepository,
-    //     mockDataPickerRepository: mockDataPickerRepository,
-    //   );
-
-    //   await profileCardDeleteAccountHelper(tester);
-    // });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -164,52 +155,51 @@ void main() {
         );
       });
 
-      // testWidgets('Delete account desk dialog unconfirm button pop',
-      //     (tester) async {
-      //   await profilePumpAppHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     mockDataPickerRepository: mockDataPickerRepository,
-      //   );
+      testWidgets('Delete account desk dialog unconfirm button pop',
+          (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
+        );
 
-      //   await deleteAccountUnconfirmButtonlHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     icon: false,
-      //     deskOpen: true,
-      //   );
-      // });
+        await deleteAccountUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: false,
+          deskOpen: true,
+        );
+      });
 
-      // testWidgets('Delete account dialog cancel icon pop', (tester) async {
-      //   await profilePumpAppHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     mockDataPickerRepository: mockDataPickerRepository,
-      //   );
+      testWidgets('Delete account dialog cancel icon pop', (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
+        );
 
-      //   await deleteAccountUnconfirmButtonlHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     icon: true,
-      //   );
-      // });
+        await deleteAccountUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: true,
+        );
+      });
 
-      // testWidgets('Delete account dialog confirm button pop',
-      // (tester) async {
-      //   await profilePumpAppHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     mockDataPickerRepository: mockDataPickerRepository,
-      //   );
+      testWidgets('Delete account dialog confirm button pop', (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockDataPickerRepository: mockDataPickerRepository,
+        );
 
-      //   await deleteAccountConfirmButtonlHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //   );
-      // });
+        await deleteAccountConfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
+      });
 
       testWidgets('Send correct profile data', (tester) async {
         await profilePumpAppHelper(

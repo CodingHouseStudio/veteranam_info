@@ -137,7 +137,7 @@ void main() {
         Exception(KGroupText.failure),
       );
       when(
-        mockFirestoreService.deleteUserSetting(KTestText.user.id),
+        mockFirestoreService.deleteUserSetting(KTestText.userSetting),
       ).thenAnswer(
         (_) async {},
       );
@@ -336,7 +336,8 @@ void main() {
       );
     });
     test('Create FCM Token for user setting when get device error', () async {
-      final result = await appAuthenticationRepository.createFcmUserSetting();
+      final result = await appAuthenticationRepository
+          .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
           initialList: KTestText.userSetting.devicesInfo,

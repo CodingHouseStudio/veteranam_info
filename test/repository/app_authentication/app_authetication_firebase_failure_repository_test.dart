@@ -158,7 +158,7 @@ void main() {
         ),
       );
       when(
-        mockFirestoreService.deleteUserSetting(KTestText.user.id),
+        mockFirestoreService.deleteUserSetting(KTestText.userSetting),
       ).thenAnswer(
         (_) async {},
       );

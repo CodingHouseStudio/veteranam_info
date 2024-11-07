@@ -208,7 +208,7 @@ void main() {
         (_) => true,
       );
       when(
-        mockFirestoreService.deleteUserSetting(KTestText.user.id),
+        mockFirestoreService.deleteUserSetting(KTestText.userSetting),
       ).thenAnswer(
         (_) async {},
       );
@@ -476,8 +476,34 @@ void main() {
         true,
       );
     });
-    test('Create FCM Token for user setting', () async {
-      final result = await appAuthenticationRepository.createFcmUserSetting();
+    test('Create FCM Token for user setting and user setting not changed',
+        () async {
+      final result = await appAuthenticationRepository
+          .createFcmUserSettingAndRemoveDeletePameter();
+      verify(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSettingModel.devicesInfo,
+        ),
+      ).called(1);
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>()
+            .having((e) => e.value, 'value', isFalse),
+      );
+    });
+    test(
+        'Create FCM Token for user setting and change user setting remove date',
+        () async {
+      when(
+        mockCache.read<UserSetting>(
+          key: AppAuthenticationRepository.userSettingCacheKey,
+        ),
+      ).thenAnswer(
+        (_) =>
+            KTestText.userSettingModel.copyWith(deletedOn: KTestText.dateTime),
+      );
+      final result = await appAuthenticationRepository
+          .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
           initialList: KTestText.userSettingModel.devicesInfo,

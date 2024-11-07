@@ -23,12 +23,12 @@ Future<void> logOutUnconfirmButtonlHelper({
     windowsTest: true,
     test: () async {
       if (icon) {
-        await dialogCancelIconHelper(
+        await confirmDialogCancelIconHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
       } else {
-        await dialogUnconfirmHelper(
+        await confirmDialogUnconfirmHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
