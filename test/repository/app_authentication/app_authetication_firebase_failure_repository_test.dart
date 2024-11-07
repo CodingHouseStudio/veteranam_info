@@ -163,16 +163,10 @@ void main() {
           userSetting:
               KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
         ),
-      ).thenAnswer(
-        (_) async {},
-      );
-      when(
-        mockFirestoreService.setUserSetting(
-          userId: KTestText.userSetting.id,
-          userSetting: KTestText.userSetting,
+      ).thenThrow(
+        firebase_auth.FirebaseAuthException(
+          code: KGroupText.firebaseFailure,
         ),
-      ).thenAnswer(
-        (_) async {},
       );
 
       when(

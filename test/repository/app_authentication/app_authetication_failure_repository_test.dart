@@ -151,8 +151,8 @@ void main() {
           userSetting:
               KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
         ),
-      ).thenAnswer(
-        (_) async {},
+      ).thenThrow(
+        Exception(KGroupText.failure),
       );
       when(
         mockDeviceRepository.getDevice(
