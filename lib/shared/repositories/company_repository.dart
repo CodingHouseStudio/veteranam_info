@@ -54,11 +54,11 @@ class CompanyRepository implements ICompanyRepository {
         _userCompanySubscription ??=
             _firestoreService.getUserCompany(currentUser.email!).listen(
           (currentUserCompany) {
-            _removeDeleteParameter();
             _cache.write(key: userCompanyCacheKey, value: currentUserCompany);
             _userCompanyController.add(
               currentUserCompany,
             );
+            _removeDeleteParameter();
           },
         );
 
@@ -104,9 +104,8 @@ class CompanyRepository implements ICompanyRepository {
 
   void _removeDeleteParameter() {
     if (currentUserCompany.deletedOn != null) {
-      updateCompany(
-        company: currentUserCompany.copyWith(deletedOn: null),
-        imageItem: null,
+      _firestoreService.updateCompany(
+        currentUserCompany.copyWith(deletedOn: null),
       );
     }
   }

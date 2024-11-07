@@ -334,6 +334,25 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
             });
+            testWidgets('Delete discount dialog confirm button pop(Mob)',
+                (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockCompanyRepository: mockCompanyRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await changeWindowSizeHelper(
+                tester: tester,
+                size: KTestConstants.windowVerySmallSize,
+                test: () async => myDiscountConfirmButtonlHelper(
+                  tester: tester,
+                  mockGoRouter: mockGoRouter,
+                ),
+              );
+            });
             testWidgets('Delete discount desk dialog unconfirm button pop',
                 (tester) async {
               await myDiscountsPumpAppHelper(

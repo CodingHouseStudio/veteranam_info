@@ -564,48 +564,28 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    try {
-      /// every thirty days, all documents where KAppText.deletedFieldId
-      /// older than 30 days will be deleted automatically and user with the
-      /// same
-      /// UID (firebase function)
-      await _firestoreService.setUserSetting(
-        userSetting:
-            currentUserSetting.copyWith(deletedOn: ExtendedDateTime.current),
-        userId: currentUser.id,
-      );
-      final result = await logOut();
-      // if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
-      //   try {
-      //     unawaited(_storageService.removeFile(currentUser.photo));
-      //     // User can save own photo in another service
-      //     // ignore: empty_catches
-      //   } catch (e) {}
-      // }
-      return result;
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'deleteUser(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'deleteUser(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    }
+    /// every thirty days, all documents where KAppText.deletedFieldId
+    /// older than 30 days will be deleted automatically and user with the
+    /// same
+    /// UID (firebase function)
+    Left<SomeFailure, bool>? failure;
+    final resultUser = await updateUserSetting(
+      currentUserSetting.copyWith(deletedOn: ExtendedDateTime.current),
+    );
+    resultUser.fold(
+      (l) => failure = Left(l),
+      Right.new,
+    );
+
+    final result = await logOut();
+    // if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
+    //   try {
+    //     unawaited(_storageService.removeFile(currentUser.photo));
+    //     // User can save own photo in another service
+    //     // ignore: empty_catches
+    //   } catch (e) {}
+    // }
+    return failure ?? result;
     // finally {
     //   _updateAuthStatusBasedOnCache();
     //   _updateUserSettingBasedOnCache();

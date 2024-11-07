@@ -41,6 +41,13 @@ void main() {
         (_) => companyStreamController.stream,
       );
       when(
+        mockFirestoreService.updateCompany(
+          KTestText.pureCompanyModel.copyWith(userEmails: []),
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer(
         (_) => KTestText.user,
@@ -90,7 +97,8 @@ void main() {
             key: CompanyRepository.userCompanyCacheKey,
           ),
         ).thenAnswer(
-          (_) => KTestText.pureCompanyModel.copyWith(userEmails: []),
+          (_) => KTestText.pureCompanyModel
+              .copyWith(userEmails: [], deletedOn: KTestText.dateTime),
         );
         Timer(const Duration(milliseconds: 30), () async {
           await companyStreamController.close();

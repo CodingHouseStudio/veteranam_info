@@ -166,6 +166,14 @@ void main() {
       ).thenAnswer(
         (_) async {},
       );
+      when(
+        mockFirestoreService.setUserSetting(
+          userId: KTestText.userSetting.id,
+          userSetting: KTestText.userSetting,
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
 
       when(
         mockUser.updateDisplayName(KTestText.profileUser.name),

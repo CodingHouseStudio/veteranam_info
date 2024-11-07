@@ -125,6 +125,15 @@ void main() {
       ).thenThrow(
         Exception(KGroupText.failure),
       );
+      when(
+        mockFirestoreService.setUserSetting(
+          userSetting:
+              KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
+          userId: KTestText.user.id,
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
 
       when(
         mockFirebaseAuth.currentUser,
