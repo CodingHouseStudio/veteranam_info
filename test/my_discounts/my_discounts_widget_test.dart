@@ -258,11 +258,7 @@ void main() {
           tester: tester,
         );
 
-        await changeWindowSizeHelper(
-          tester: tester,
-          size: KTestConstants.windowVerySmallSize,
-          test: () async => deleteDiscountHelper(tester),
-        );
+        await deleteDiscountHelper(tester);
       });
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
@@ -323,7 +319,22 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
             });
-            testWidgets('Delete discount dialog confirm button pop',
+            // testWidgets('Delete discount dialog confirm button pop',
+            //     (tester) async {
+            //   await myDiscountsPumpAppHelper(
+            //     mockDiscountRepository: mockDiscountRepository,
+            //     mockAuthenticationRepository: mockAuthenticationRepository,
+            //     mockCompanyRepository: mockCompanyRepository,
+            //     tester: tester,
+            //     mockGoRouter: mockGoRouter,
+            //   );
+
+            //   await myDiscountConfirmButtonlHelper(
+            //     tester: tester,
+            //     mockGoRouter: mockGoRouter,
+            //   );
+            // });
+            testWidgets('Delete discount dialog confirm button pop(Mob)',
                 (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
@@ -333,9 +344,13 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
 
-              await myDiscountConfirmButtonlHelper(
+              await changeWindowSizeHelper(
                 tester: tester,
-                mockGoRouter: mockGoRouter,
+                size: KTestConstants.windowVerySmallSize,
+                test: () async => myDiscountConfirmButtonlHelper(
+                  tester: tester,
+                  mockGoRouter: mockGoRouter,
+                ),
               );
             });
             testWidgets('Delete discount desk dialog unconfirm button pop',
