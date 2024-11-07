@@ -69,10 +69,10 @@ Future<void> investorsInitialHelper(
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.investors.buttonMock),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.investors.buttonMock),
+  //   findsNothing,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.investors.card),

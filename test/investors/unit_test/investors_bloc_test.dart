@@ -59,10 +59,10 @@ void main() {
       },
       expect: () async => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
         ),
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loaded,
+          (state) => state.loadingStatus == LoadingStatusInvestors.loaded,
         ),
       ],
     );
@@ -81,10 +81,10 @@ void main() {
       },
       expect: () async => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
         ),
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.error,
+          (state) => state.loadingStatus == LoadingStatusInvestors.error,
         ),
       ],
     );
@@ -98,10 +98,10 @@ void main() {
           bloc.stream,
           emitsInOrder([
             predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.loading,
+              (state) => state.loadingStatus == LoadingStatusInvestors.loading,
             ),
             predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.loaded,
+              (state) => state.loadingStatus == LoadingStatusInvestors.loaded,
             ),
           ]),
           reason: 'Wait loading data',
@@ -123,26 +123,28 @@ void main() {
       },
       expect: () => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
         ),
         predicate<InvestorsWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.loadingFundItems.length == KDimensions.investorsLoadItems &&
+              state.loadingStatus == LoadingStatusInvestors.loaded &&
+              state.loadingMobFundItems.length ==
+                  KDimensions.investorsLoadItems &&
               state.itemsLoaded == KDimensions.investorsLoadItems,
           // &&
           // state.reportItems.isNotEmpty,
         ),
         predicate<InvestorsWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loading &&
-              state.loadingFundItems.length == KDimensions.investorsLoadItems &&
+              state.loadingStatus == LoadingStatusInvestors.loading &&
+              state.loadingMobFundItems.length ==
+                  KDimensions.investorsLoadItems &&
               state.itemsLoaded == KDimensions.investorsLoadItems,
         ),
         predicate<InvestorsWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.loadingFundItems.length ==
+              state.loadingStatus == LoadingStatusInvestors.loaded &&
+              state.loadingMobFundItems.length ==
                   KDimensions.investorsLoadItems * 2 &&
               state.itemsLoaded == KDimensions.investorsLoadItems * 2,
           //  &&
@@ -150,7 +152,7 @@ void main() {
         ),
         // predicate<InvestorsWatcherState>(
         //   (state) =>
-        //       state.loadingStatus == LoadingStatus.loaded &&
+        //       state.loadingStatus == LoadingStatusInvestors.loaded &&
         //       state.loadingFundItems.length ==
         //           KDimensions.investorsLoadItems * 2 &&
         //       state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
@@ -185,10 +187,10 @@ void main() {
           bloc.stream,
           emitsInOrder([
             predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.loading,
+              (state) => state.loadingStatus == LoadingStatusInvestors.loading,
             ),
             predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+              (state) => state.loadedFull,
             ),
           ]),
           reason: 'Wait loading data',
@@ -199,10 +201,10 @@ void main() {
       },
       expect: () => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
         ),
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+          (state) => state.loadedFull,
         ),
       ],
     );

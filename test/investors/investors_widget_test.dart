@@ -137,39 +137,39 @@ void main() {
         await investorsFailureHelper(tester);
       });
     });
-    group('${KGroupText.getEmptyList} ', () {
-      setUp(() {
-        when(
-          mockInvestorsRepository.getFunds(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
-        ).thenAnswer(
-          (invocation) async => const Right([]),
-        );
+    // group('${KGroupText.getEmptyList} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockInvestorsRepository.getFunds(
+    //           // reportIdItems: KTestText.reportItems.getIdCard,
+    //           ),
+    //     ).thenAnswer(
+    //       (invocation) async => const Right([]),
+    //     );
 
-        when(mockInvestorsRepository.addMockFunds()).thenAnswer(
-          (invocation) {},
-        );
-        if (GetIt.I.isRegistered<IInvestorsRepository>()) {
-          GetIt.I.unregister<IInvestorsRepository>();
-        }
-        GetIt.I.registerSingleton<IInvestorsRepository>(
-          mockInvestorsRepository,
-        );
-      });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
-        await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
-        );
+    //     when(mockInvestorsRepository.addMockFunds()).thenAnswer(
+    //       (invocation) {},
+    //     );
+    //     if (GetIt.I.isRegistered<IInvestorsRepository>()) {
+    //       GetIt.I.unregister<IInvestorsRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IInvestorsRepository>(
+    //       mockInvestorsRepository,
+    //     );
+    //   });
+    // testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //   await investorsPumpAppHelper(
+    //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //     mockInvestorsRepository: mockInvestorsRepository,
+    //     mockReportRepository: mockReportRepository,
+    //     mockAuthenticationRepository: mockAuthenticationRepository,
+    //     mockUrlRepository: mockUrlRepository,
+    //     tester: tester,
+    //   );
 
-        await investorsMockButtonHelper(tester);
-      });
-    });
+    //   await investorsMockButtonHelper(tester);
+    // });
+    // });
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(

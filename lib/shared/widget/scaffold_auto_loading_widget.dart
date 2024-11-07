@@ -123,28 +123,10 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         if (widget.loadingStatus ==
                                 LoadingStatus.listLoadedFull &&
                             !(widget.cardListIsEmpty ?? false) &&
-                            widget.showLoadingWidget) ...[
-                          Center(
-                            child: Text(
-                              context.l10n.thatEndOfList,
-                              key: KWidgetkeys.widget.scaffold.endListText,
-                              style: AppTextStyle
-                                  .materialThemeTitleMediumNeutralVariant70,
-                            ),
+                            widget.showLoadingWidget)
+                          ListScrollUpWidget(
+                            scrollController: _scrollController,
                           ),
-                          KSizedBox.kHeightSizedBox24,
-                          Center(
-                            child: TextButton(
-                              key: KWidgetkeys.widget.scaffold.endListButton,
-                              style: KButtonStyles.endListButtonStyle,
-                              onPressed: scrollUp,
-                              child: Text(
-                                context.l10n.returnToTop,
-                                style: AppTextStyle.materialThemeTitleMedium,
-                              ),
-                            ),
-                          ),
-                        ],
                       ],
                       KSizedBox.kHeightSizedBox40,
                     ]

@@ -4,63 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-// class NawbarWidget extends SliverPersistentHeaderDelegate {
-//   const NawbarWidget({
-//     required this.isDesk,
-//     required this.isTablet,
-//     this.widgetKey,
-//     this.childWidget,
-//     this.maxMinHeight,
-//     this.pageName,
-//     // this.showMobileNawbar,
-//     this.showMobBackButton,
-//   });
-//   final bool isDesk;
-//   final bool isTablet;
-//   final Key? widgetKey;
-//   final Widget? childWidget;
-//   final double? maxMinHeight;
-//   final String? pageName;
-//   // final bool? showMobileNawbar;
-//   final bool? showMobBackButton;
-
-//   @override
-//   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
-
-//   @override
-//   double get minExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
-
-//   //Rebuild screen only when isDesk value change
-//   @override
-//   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-//       oldDelegate is NawbarWidget &&
-//       (isDesk != oldDelegate.isDesk || isTablet != oldDelegate.isTablet);
-
-//   @override
-//   Widget build(
-//     BuildContext context,
-//     double shrinkOffset,
-//     bool overlapsContent,
-//   ) {
-//     return
-//     _NawbarWidgetImplematation(
-//       key: widgetKey,
-//       isDesk: isDesk,
-//       childWidget: childWidget,
-//       isTablet: isTablet,
-//       pageName: pageName,
-//       // showMobileNawbar: showMobileNawbar ?? false,
-//       showBackButton: showMobBackButton,
-//     );
-//   }
-// }
-
 class NawbarWidget extends StatefulWidget {
   const NawbarWidget({
     required this.isDesk,
     required this.isTablet,
     // required this.showMobileNawbar,
-    super.key = const Key('nawbar'),
+    super.key,
     // this.childWidget,
     this.pageName,
     this.showBackButton,
@@ -99,22 +48,6 @@ class NawbarWidget extends StatefulWidget {
 }
 
 class _NawbarWidgetState extends State<NawbarWidget> {
-  late FocusNode focusNode;
-  late bool isFocused;
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    isFocused = false;
-    focusNode = FocusNode();
-    focusNode.addListener(
-      () => setState(() {
-        isFocused = focusNode.hasFocus;
-      }),
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -143,59 +76,59 @@ class _NawbarWidgetState extends State<NawbarWidget> {
           ? Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (widget.isTablet || !isFocused)
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () => EasyDebounce.debounce(
-                      KAppText.logo,
-                      Duration.zero,
-                      () {
-                        if (Config.isWeb
-                            // || !widget.showMobileNawbar
-                            ) {
-                          context.goNamed(
-                            Config.isUser
-                                ? KRoute.home.name
-                                : KRoute.myDiscounts
-                                    .name, //KRoute.businessDashboard.name,
-                          );
-                        }
-                      },
-                    ),
-                    icon: KImage.logo(
-                      key: KWidgetkeys.widget.nawbar.logo,
-                      // width: 78,
-                    ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () => EasyDebounce.debounce(
+                    KAppText.logo,
+                    Duration.zero,
+                    () {
+                      if (Config.isWeb
+                          // || !widget.showMobileNawbar
+                          ) {
+                        context.goNamed(
+                          Config.isUser
+                              ? KRoute.home.name
+                              : KRoute.myDiscounts
+                                  .name, //KRoute.businessDashboard.name,
+                        );
+                      }
+                    },
                   ),
-                if (Config.isDevelopment)
-                  if (widget.isDesk)
-                    KSizedBox.kWidthSizedBox40
-                  else
-                    KSizedBox.kWidthSizedBox22,
-                if (Config.isDevelopment)
-                  Expanded(
-                    child: TextFieldWidget(
-                      key: _formKey,
-                      widgetKey: KWidgetkeys.widget.nawbar.field,
-                      labelTextStyle: widget.isDesk
-                          ? AppTextStyle.text24
-                          : AppTextStyle.text16,
-                      focusNode: focusNode,
-                      prefixIcon: KIcon.search,
-                      onChanged: (text) {},
-                      labelText: context.l10n.search,
-                      // suffixIcon: widget.isDesk || !widget.hasMicrophone
-                      //     ? null
-                      //     : KIcon.mic.setIconKey(
-                      //         KWidgetkeys.widget.nawbar.iconMic,
-                      //       ),
-                      isDesk: widget.isDesk,
-                      contentPadding: widget.isDesk
-                          ? EdgeInsets.zero
-                          : const EdgeInsets.all(KPadding.kPaddingSize16),
-                    ),
-                  )
-                else if (widget.isTablet)
+                  icon: KImage.logo(
+                    key: KWidgetkeys.widget.nawbar.logo,
+                    // width: 78,
+                  ),
+                ),
+                // if (Config.isDevelopment)
+                //   if (widget.isDesk)
+                //     KSizedBox.kWidthSizedBox40
+                //   else
+                //     KSizedBox.kWidthSizedBox22,
+                // if (Config.isDevelopment)
+                //   Expanded(
+                //     child: TextFieldWidget(
+                //       key: _formKey,
+                //       widgetKey: KWidgetkeys.widget.nawbar.field,
+                //       labelTextStyle: widget.isDesk
+                //           ? AppTextStyle.text24
+                //           : AppTextStyle.text16,
+                //       focusNode: focusNode,
+                //       prefixIcon: KIcon.search,
+                //       onChanged: (text) {},
+                //       labelText: context.l10n.search,
+                //       // suffixIcon: widget.isDesk || !widget.hasMicrophone
+                //       //     ? null
+                //       //     : KIcon.mic.setIconKey(
+                //       //         KWidgetkeys.widget.nawbar.iconMic,
+                //       //       ),
+                //       isDesk: widget.isDesk,
+                //       contentPadding: widget.isDesk
+                //           ? EdgeInsets.zero
+                //           : const EdgeInsets.all(KPadding.kPaddingSize16),
+                //     ),
+                //   )
+                // else
+                if (widget.isTablet)
                   Expanded(
                     child: Wrap(
                       // mainAxisSize: MainAxisSize.min,
@@ -309,20 +242,21 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 //       icon: KIcon.mic,
                 //     ),
                 //   ),
-                if (widget.isTablet && !Config.isBusiness)
-                  LanguagesSwitcherWidget(
-                    key: KWidgetkeys.widget.nawbar.language,
-                  )
-                else if (!isFocused && !Config.isBusiness)
-                  IconButtonWidget(
-                    key: KWidgetkeys.widget.nawbar.menuButton,
-                    icon: KIcon.menu.copyWith(
-                      color: AppColors.materialThemeWhite,
+                if (!Config.isBusiness)
+                  if (widget.isTablet)
+                    LanguagesSwitcherWidget(
+                      key: KWidgetkeys.widget.nawbar.language,
+                    )
+                  else
+                    IconButtonWidget(
+                      key: KWidgetkeys.widget.nawbar.menuButton,
+                      icon: KIcon.menu.copyWith(
+                        color: AppColors.materialThemeWhite,
+                      ),
+                      background: AppColors.materialThemeKeyColorsSecondary,
+                      onPressed: () async =>
+                          context.dialog.showMobileMenuDialog(),
                     ),
-                    background: AppColors.materialThemeKeyColorsSecondary,
-                    onPressed: () async =>
-                        context.dialog.showMobileMenuDialog(),
-                  ),
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     return Row(
@@ -341,7 +275,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               isDesk: true,
                               darkMode: true,
                             ),
-                          ] else if (!isFocused) ...[
+                          ] else ...[
                             KSizedBox.kWidthSizedBox4,
                             IconButtonWidget(
                               key: KWidgetkeys.widget.nawbar.loginIcon,
@@ -358,7 +292,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         //.state.status ==
                         //         AuthenticationStatus.authenticated &&
                         //     (Config.isDevelopment || Config.isBusiness))
-                        else if (!isFocused || widget.isTablet) ...[
+                        else ...[
                           KSizedBox.kWidthSizedBox8,
                           getImageWidget,
                         ],

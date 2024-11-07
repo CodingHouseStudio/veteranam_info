@@ -7,45 +7,48 @@ part 'investors_watcher_bloc.freezed.dart';
 part 'investors_watcher_event.dart';
 part 'investors_watcher_state.dart';
 
+/// Bloc for handling investors data loading and watching.
+/// Manages the state of investors loading, provides pagination, and separates
+/// data into lists for mobile and desktop layouts.
 @Injectable()
 class InvestorsWatcherBloc
     extends Bloc<InvestorsWatcherEvent, InvestorsWatcherState> {
+  /// Initializes the bloc with required repository and sets the initial state.
   InvestorsWatcherBloc({
     required IInvestorsRepository investorsRepository,
-    // required IReportRepository reportRepository,
-    // required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _investorsRepository = investorsRepository,
-        // _reportRepository = reportRepository,
-        // _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const InvestorsWatcherState(
             loadingStatus: LoadingStatusInvestors.initial,
-            deskFundItems: [], mobFundItems: [],
-            loadingFundItems: [],
+            loadingDeskFundItems: [],
+            fundItems: [],
+            loadingMobFundItems: [],
             itemsLoaded: 0,
-            // reportItems: [],
-            failure: null, loadedFull: false,
+            failure: null,
+            loadedFull: false,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_LoadNextItems>(_loadNextItems);
-    // on<_GetReport>(_onGetReport);
   }
+
+  /// Repository to fetch investors' funds data.
   final IInvestorsRepository _investorsRepository;
+
+  /// List to store fetched funds.
   late List<FundModel> fundsList;
-  // final IReportRepository _reportRepository;
-  // final IAppAuthenticationRepository _appAuthenticationRepository;
+
+  /// Handler for the `_Started` event, which is triggered on the initial load.
+  /// Fetches data from the repository and updates the state based
+  /// on the result.
   Future<void> _onStarted(
     _Started event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
 
-    // final reportItems = await _getReport();
-
-    final result = await _investorsRepository.getFunds(
-        // reportIdItems: reportItems?.getIdCard,
-        );
+    // Fetch funds from the repository
+    final result = await _investorsRepository.getFunds();
     result.fold(
       (l) => emit(
         state.copyWith(
@@ -54,33 +57,20 @@ class InvestorsWatcherBloc
         ),
       ),
       (r) {
-        // final list = r.removeReportItems(
-        //   checkFunction: (item) => item.id,
-        //   reportItems: reportItems,
-        // );
-        final deskFundsModelItems = <List<FundModel>>[];
-
-        for (var i = 0; i < r.length; i += KDimensions.donateCardsLine) {
-          if (i + KDimensions.donateCardsLine <= r.length) {
-            deskFundsModelItems
-                .add(r.sublist(i, i + KDimensions.donateCardsLine));
-          } else {
-            deskFundsModelItems.add(r.sublist(i));
-          }
-        }
+        // Process and split the list for desktop view
+        final loadingItems = _loading(
+          itemsLoaded: state.itemsLoaded,
+          loadItems: KDimensions.investorsLoadItems,
+          list: r,
+        );
         emit(
           InvestorsWatcherState(
-            mobFundItems: r, deskFundItems: deskFundsModelItems,
+            fundItems: r,
+            loadingDeskFundItems: getDeskList(loadingItems),
             loadingStatus: LoadingStatusInvestors.loaded,
-            loadedFull: r.length > KDimensions.investorsLoadItems,
-            loadingFundItems: _loading(
-              itemsLoaded: state.itemsLoaded,
-              loadItems: KDimensions.investorsLoadItems,
-              // reportItems: reportItems,
-              list: r,
-            ),
+            loadedFull: r.length < KDimensions.investorsLoadItems,
+            loadingMobFundItems: loadingItems,
             itemsLoaded: KDimensions.investorsLoadItems,
-            // reportItems: reportItems,
             failure: null,
           ),
         );
@@ -88,16 +78,39 @@ class InvestorsWatcherBloc
     );
   }
 
+  /// Helper function to organize the list of funds into a desktop-friendly
+  /// format.
+  /// Splits the list into sublists based on a predefined number of items per
+  /// row (`donateCardsLine`).
+  List<List<FundModel>> getDeskList(List<FundModel> fundModel) {
+    final deskFundsModelItems = <List<FundModel>>[];
+
+    for (var i = 0; i < fundModel.length; i += KDimensions.donateCardsLine) {
+      if (i + KDimensions.donateCardsLine <= fundModel.length) {
+        deskFundsModelItems
+            .add(fundModel.sublist(i, i + KDimensions.donateCardsLine));
+      } else {
+        deskFundsModelItems.add(fundModel.sublist(i));
+      }
+    }
+    return deskFundsModelItems;
+  }
+
+  /// Handler for the `_LoadNextItems` event, used to load additional items
+  /// as part of pagination.
+  /// Checks if more items are available and updates the state accordingly.
   Future<void> _loadNextItems(
     _LoadNextItems event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    if (state.itemsLoaded.checkLoadingPosible(state.mobFundItems)) {
+    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) {
       emit(state.copyWith(loadedFull: true));
       return;
     }
 
     emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
+
+    // Load more items for pagination
     final filterItems = _loading(
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.investorsLoadItems,
@@ -105,68 +118,24 @@ class InvestorsWatcherBloc
 
     emit(
       state.copyWith(
-        loadingFundItems: filterItems,
-        itemsLoaded:
-            (state.itemsLoaded + KDimensions.investorsLoadItems).getLoaded(
-          list: filterItems,
-          loadItems: KDimensions.investorsLoadItems,
-        ),
+        loadingMobFundItems: filterItems,
+        loadingDeskFundItems: getDeskList(filterItems),
+        itemsLoaded: filterItems.length,
         loadingStatus: LoadingStatusInvestors.loaded,
-        loadedFull: filterItems.length == state.mobFundItems.length,
+        loadedFull: filterItems.length == state.fundItems.length,
       ),
     );
   }
 
-  // Future<void> _onGetReport(
-  //   _GetReport event,
-  //   Emitter<InvestorsWatcherState> emit,
-  // ) async {
-  //   final reportItems = await _getReport();
-  //   final list = state.fundItems.removeReportItems(
-  //     checkFunction: (item) => item.id,
-  //     reportItems: reportItems,
-  //   );
-
-  //   emit(
-  //     state.copyWith(
-  //       reportItems: reportItems,
-  //       loadingFundItems: _filter(
-  //         itemsLoaded: state.itemsLoaded,
-  //         loadItems: null,
-  //         reportItems: reportItems,
-  //         list: list,
-  //       ),
-  //       fundItems: list,
-  //     ),
-  //   );
-  // }
-
-  // Future<List<ReportModel>?> _getReport() async {
-  //   final reportItems = await _reportRepository.getCardReportById(
-  //     cardEnum: CardEnum.funds,
-  //     userId: _appAuthenticationRepository.currentUser.id,
-  //   );
-  //   return reportItems.fold(
-  //     (l) => null,
-  //     (r) => r.isEmpty ? null : r,
-  //   );
-  // }
-
+  /// Internal function to get a sublist of items for loading, based on
+  /// `itemsLoaded` and `loadItems`.
+  /// Useful for pagination to avoid reloading already-loaded items.
   List<FundModel> _loading({
     required int itemsLoaded,
     required int? loadItems,
     List<FundModel>? list,
-    // List<ReportModel>? reportItems,
   }) {
-    // final reportItemsValue = reportItems ?? state.reportItems;
-    return (list ?? state.mobFundItems)
-        // .where(
-        //   (item) => reportItemsValue.every(
-        //     (report) => report.cardId != item.id,
-        //   ),
-        // )
-        // .toList()
-        .loading(
+    return (list ?? state.fundItems).loading(
       itemsLoaded: itemsLoaded,
       loadItems: loadItems,
     );

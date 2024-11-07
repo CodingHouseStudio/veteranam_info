@@ -1,118 +1,195 @@
-part of 'body/investors_body_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/investors/investors.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class FundsWidgetList extends StatelessWidget {
-  const FundsWidgetList({required this.isDesk, Key? key}) : super(key: key);
+  const FundsWidgetList({required this.isDesk, super.key});
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Center(
-        child: Text(
-          context.l10n.provenFunds,
-          key: KWidgetkeys.screen.investors.fundsTitle,
-          style: AppTextStyle.materialThemeDisplayMedium,
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            context.l10n.provenFunds,
+            key: KWidgetkeys.screen.investors.fundsTitle,
+            style: AppTextStyle.materialThemeDisplayMedium,
+          ),
         ),
-      ),
-      if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox24,
-      FundsList(isDesk: isDesk),
-    ]);
+        BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+          builder: (context, _) {
+            switch (_.loadingStatus) {
+              case LoadingStatusInvestors.loaded:
+                if (isDesk) {
+                  return FundsDeskList(
+                    state: _,
+                  );
+                } else {
+                  return FundsMobList(state: _);
+                }
+              case LoadingStatusInvestors.loading:
+              case LoadingStatusInvestors.error:
+              case LoadingStatusInvestors.initial:
+                return const SizedBox.shrink();
+            }
+          },
+        ),
+      ],
+    );
   }
 }
 
-class FundsList extends StatelessWidget {
-  const FundsList({
+class FundsDeskList extends StatefulWidget {
+  const FundsDeskList({
+    required this.state,
     super.key,
-    required this.isDesk,
   });
+  final InvestorsWatcherState state;
 
-  final bool isDesk;
+  @override
+  State<FundsDeskList> createState() => _FundsDeskListState();
+}
+
+class _FundsDeskListState extends State<FundsDeskList> {
+  late ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = ScrollController();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
-      builder: (context, _) {
-        switch (_.loadingStatus) {
-          case LoadingStatusInvestors.loaded:
-            if (_.mobFundItems.isEmpty) {
-              return MockButtonWidget(
-                key: KWidgetkeys.screen.investors.buttonMock,
-                onPressed: () {
-                  GetIt.I.get<IInvestorsRepository>().addMockFunds();
-                  context
-                      .read<InvestorsWatcherBloc>()
-                      .add(const InvestorsWatcherEvent.started());
-                },
-              );
-            } else {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount:
-                    isDesk ? _.deskFundItems.length : _.mobFundItems.length,
-                itemBuilder: (context, index) {
-                  if (isDesk)
-                    return DonatesCardsWidget(
-                      key: KWidgetkeys.screen.investors.cards,
-                      fundItems: _.deskFundItems.elementAt(index),
-                    );
-                  else
-                    return DonateCardWidget(
-                      hasSubtitle: true,
-                      fundModel: _.mobFundItems.elementAt(index),
-                      isDesk: false,
-                    );
-                },
-              );
-            }
-          case LoadingStatusInvestors.loading:
-          case LoadingStatusInvestors.error:
-          case LoadingStatusInvestors.initial:
-            return const SizedBox.shrink();
+    return ListView.builder(
+      shrinkWrap: true,
+      controller: _scrollController,
+      itemCount: widget.state.loadingDeskFundItems.length + 1,
+      itemBuilder: (context, index) {
+        if (widget.state.loadingDeskFundItems.length > index) {
+          return Padding(
+            padding: const EdgeInsets.only(
+              top: KPadding.kPaddingSize48,
+            ),
+            child: DonatesCardsWidget(
+              fundItems: widget.state.loadingDeskFundItems.elementAt(index),
+            ),
+          );
+        } else {
+          if (widget.state.loadedFull) {
+            return ListScrollUpWidget(scrollController: _scrollController);
+          } else {
+            return Padding(
+              padding: const EdgeInsets.only(top: KPadding.kPaddingSize40),
+              child: LoadingButtonWidget(
+                widgetKey: KWidgetkeys.screen.investors.loadingButton,
+                isDesk: true,
+                onPressed: () => context
+                    .read<InvestorsWatcherBloc>()
+                    .add(const InvestorsWatcherEvent.loadNextItems()),
+                text: context.l10n.moreFunds,
+              ),
+            );
+          }
         }
       },
     );
   }
 
-  // UnmodifiableListView<Widget> _fundsWidgetList({
-  //   required List<FundModel> funds,
-  //   required bool isDesk,
-  // }) {
-  // final fundsModel = context.read<InvestorsWatcherBloc>().state.fundItems;
-  // final fundsModelItems = <List<FundModel>>[];
+  void scrollUp() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: (_scrollController.offset / 10).toInt()),
+      curve: Curves.linear,
+    );
+  }
 
-  // for (var i = 0; i < fundsModel.length; i += KDimensions.donateCardsLine) {
-  //   if (i + KDimensions.donateCardsLine <= fundsModel.length) {
-  //     fundsModelItems
-  //         .add(fundsModel.sublist(i, i + KDimensions.donateCardsLine));
-  //   } else {
-  //     fundsModelItems.add(fundsModel.sublist(i));
-  //   }
-  // }
+  @override
+  void dispose() {
+    _scrollController.dispose();
 
-  // DonatesCardsWidget(
-  //   key: KWidgetkeys.screen.investors.cards,
-  //   fundItems: fundsModel.elementAt(index),
-  // );
-  // } else {
-  //   return UnmodifiableListView(cardWidgetList<FundModel>(
-  //     loadingStatus: LoadingStatus.loaded,
-  //     modelItems: fundsModel,
-  //     cardWidget: ({required modelItem, required isLoading}) =>
-  //         DonateCardWidget(
-  //       key: KWidgetkeys.screen.investors.card,
-  //       fundModel: modelItem,
-  //       isDesk: isDesk,
-  //       hasSubtitle: true,
-  //       // reportEvent: null,
-  //       // () => context
-  //       //     .read<InvestorsWatcherBloc>()
-  //       //     .add(const InvestorsWatcherEvent.getReport()),
-  //     ),
-  //     isDesk: isDesk,
-  //     shimmerItemsNumber: KDimensions.shimmerFundsMobItems,
-  //     isNotFailure: isNotFailure,
-  //     shimmerItem: KMockText.fundModel,
-  //   ));
-  // }
-  // }
+    super.dispose();
+  }
+}
+
+class FundsMobList extends StatefulWidget {
+  const FundsMobList({
+    required this.state,
+    super.key,
+  });
+  final InvestorsWatcherState state;
+
+  @override
+  State<FundsMobList> createState() => _FundsMobListState();
+}
+
+class _FundsMobListState extends State<FundsMobList> {
+  late ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = ScrollController()..addListener(_onScroll);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      controller: _scrollController,
+      itemCount:
+          widget.state.fundItems.length + (widget.state.loadedFull ? 1 : 0),
+      itemBuilder: (context, index) {
+        if (widget.state.fundItems.length > index) {
+          return Padding(
+            padding: const EdgeInsets.only(
+              top: KPadding.kPaddingSize48,
+            ),
+            child: DonateCardWidget(
+              hasSubtitle: true,
+              fundModel: widget.state.fundItems.elementAt(index),
+              isDesk: false,
+            ),
+          );
+        } else {
+          return ListScrollUpWidget(scrollController: _scrollController);
+        }
+      },
+    );
+  }
+
+  void _onScroll() {
+    if (_isBottom && !widget.state.loadedFull) {
+      context
+          .read<InvestorsWatcherBloc>()
+          .add(const InvestorsWatcherEvent.loadNextItems());
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
+
+  void scrollUp() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.linear,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+
+    super.dispose();
+  }
 }

@@ -2,7 +2,7 @@ part of '../widget_keys.dart';
 
 class _InvestorsKeys {
   final screen = const Key('investors_screen');
-  final buttonMock = const Key('investors_screen_button_mock');
+  // final buttonMock = const Key('investors_screen_button_mock');
   // final point = const Key('investors_screen_point');
   final title = const Key('investors_screen_title');
   final feedbackTitle = const Key('investors_screen_feedback_title');
@@ -15,5 +15,5 @@ class _InvestorsKeys {
   final card = const Key('investors_screen_card');
   // final cardLast = const Key('investors_screen_card_last');
   final cards = const Key('investors_screen_cards');
-  // final button = const Key('investors_screen_button');
+  final loadingButton = const Key('investors_screen_loading_button');
 }

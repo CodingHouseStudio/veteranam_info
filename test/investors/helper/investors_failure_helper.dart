@@ -24,6 +24,6 @@ Future<void> investorsFailureHelper(
   await loadingFailureHelper(
     tester: tester,
     card: KWidgetkeys.screen.information.card,
-    buttonMock: KWidgetkeys.screen.investors.buttonMock,
+    buttonMock: null,
   );
 }

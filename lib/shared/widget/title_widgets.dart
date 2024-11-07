@@ -173,6 +173,12 @@ class LineTitleIconWidget extends StatelessWidget {
   }
 }
 
+/// A widget that displays a title with an optional second part, aligned icons,
+/// and different layouts based on the screen size.
+/// The widget adapts between a `Column` layout for desktop screens
+/// and a `Row` layout for smaller screens,
+/// with options for customizing text alignment, padding, and icon direction.
+
 class TitlePointWidget extends StatelessWidget {
   const TitlePointWidget({
     required this.title,
@@ -186,16 +192,37 @@ class TitlePointWidget extends StatelessWidget {
     this.iconCrossAxisAlignment = CrossAxisAlignment.start,
     this.textAlign = TextAlign.start,
   });
+
+  /// The primary title text displayed in the widget.
   final String title;
+
+  /// The secondary part of the title displayed in a separate text widget,
+  /// with optional padding.
   final String titleSecondPart;
+
+  /// A unique key for identifying the title widget.
   final Key titleKey;
-  // final String pointText;
-  // final Key pointKey;
+
+  /// A boolean indicating if the widget is displayed on a desktop screen.
+  /// When `true`, a column layout is used; otherwise, a row layout is used.
   final bool isDesk;
+
+  /// Padding for the second part of the title text.
   final EdgeInsets titleSecondPartPadding;
+
+  /// A boolean to determine the direction of the icon.
+  /// When `true`, displays a right-pointing arrow; otherwise,
+  /// a left-pointing arrow.
   final bool isRightArrow;
+
+  /// The alignment for wrapping the secondary title
+  /// and icon in the column layout.
   final WrapAlignment titleAlignment;
+
+  /// Cross-axis alignment for the icon in the row layout.
   final CrossAxisAlignment iconCrossAxisAlignment;
+
+  /// Text alignment for both the primary and secondary title texts.
   final TextAlign textAlign;
 
   @override
@@ -203,22 +230,12 @@ class TitlePointWidget extends StatelessWidget {
     return Column(
       children: [
         if (isDesk)
-          // Row(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Expanded(
-          //       child: TextPointWidget(
-          //         pointText,
-          //         key: pointKey,
-          //       ),
-          //     ),
-          //     Expanded(
-          //       flex: 4,
-          //       child:
           Column(
             key: titleKey,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              /// Displays the main title in the column layout,
+              /// with specified text alignment.
               Text(
                 title,
                 textAlign: textAlign,
@@ -229,14 +246,18 @@ class TitlePointWidget extends StatelessWidget {
                 child: Wrap(
                   alignment: titleAlignment,
                   children: [
+                    /// Displays the second part of the title text
+                    /// in the column layout.
                     Text(
                       titleSecondPart,
                       style: AppTextStyle.materialThemeDisplayLarge,
                       textAlign: textAlign,
                     ),
                     KSizedBox.kWidthSizedBox24,
+
+                    /// Displays an icon based on `isRightArrow`,
+                    /// with the right or left direction.
                     IconWidget(
-                      // key: KWidgetkeys.screen.feedback.titleIcon,
                       icon: isRightArrow
                           ? KIcon.arrowDownRight
                           : KIcon.arrowDownLeft,
@@ -246,15 +267,7 @@ class TitlePointWidget extends StatelessWidget {
               ),
             ],
           )
-        //     ),
-        //   ],
-        // )
         else
-          // TextPointWidget(
-          //   pointText,
-          //   key: pointKey,
-          // ),
-          // KSizedBox.kHeightSizedBox16,
           Row(
             key: titleKey,
             crossAxisAlignment: iconCrossAxisAlignment,
@@ -266,14 +279,18 @@ class TitlePointWidget extends StatelessWidget {
                   style: AppTextStyle.materialThemeDisplaySmall,
                 ),
               ),
+
+              /// Displays the icon next to the title in the row layout, with
+              /// padding based on screen size.
               IconWidget(
-                // key: KWidgetkeys.screen.feedback.titleIcon,
                 icon: isRightArrow ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
                 padding:
                     isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
               ),
             ],
           ),
+
+        /// Spacer and divider below the content to separate the widget visually
         KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,

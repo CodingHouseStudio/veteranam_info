@@ -16,9 +16,9 @@ extension InvestorsFailureExtension on SomeFailure {
 @freezed
 class InvestorsWatcherState with _$InvestorsWatcherState {
   const factory InvestorsWatcherState({
-    required List<FundModel> mobFundItems,
-    required List<List<FundModel>> deskFundItems,
-    required List<FundModel> loadingFundItems,
+    required List<FundModel> fundItems,
+    required List<List<FundModel>> loadingDeskFundItems,
+    required List<FundModel> loadingMobFundItems,
     required LoadingStatusInvestors loadingStatus,
     required bool loadedFull,
     required int itemsLoaded,
