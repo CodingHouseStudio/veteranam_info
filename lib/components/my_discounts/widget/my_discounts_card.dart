@@ -118,7 +118,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
             children: [
-              if (widget.discountModel.status.showDeactivateButton)
+              if (widget.discountModel.status.showDeactivateButton) ...[
                 TextButton.icon(
                   key: KWidgetkeys.screen.myDiscounts.deactivate,
                   onPressed: () {
@@ -146,6 +146,8 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                 ),
+                KSizedBox.kWidthSizedBox8,
+              ],
               Row(
                 children: [
                   trashButton(context),

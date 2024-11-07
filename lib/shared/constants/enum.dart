@@ -69,3 +69,10 @@ enum DiscountEnum {
   largestSmallest,
   free,
 }
+
+enum ErrorLevelEnum {
+  fatal,
+  error,
+  info,
+  warning;
+}

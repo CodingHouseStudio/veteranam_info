@@ -1,20 +1,22 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class ConfirmDialog extends StatefulWidget {
+class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({
     required this.isDesk,
     required this.title,
     required this.subtitle,
     required this.confirmText,
     required this.confirmButtonBackground,
+    required this.timer,
     this.unconfirmText,
     this.onPressed,
-    this.timer = false,
     super.key,
   });
 
@@ -28,36 +30,51 @@ class ConfirmDialog extends StatefulWidget {
   final bool timer;
 
   @override
-  State<ConfirmDialog> createState() => _ConfirmDialogState();
-}
-
-class _ConfirmDialogState extends State<ConfirmDialog> {
-  Timer? _timer;
-  int _remainingTime = 10;
-  bool _isButtonEnabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.timer) {
-      _startTimer();
+  Widget build(BuildContext context) {
+    if (timer) {
+      return _ConfirmDialogWithTimer(
+        isDesk: isDesk,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        onPressed: onPressed,
+      );
     } else {
-      _isButtonEnabled = true;
+      return _CommonConfirmDialog(
+        isDesk: isDesk,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        onPressed: onPressed,
+      );
     }
   }
+}
 
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_remainingTime > 0) {
-          _remainingTime--;
-        } else {
-          _isButtonEnabled = true;
-          _timer?.cancel();
-        }
-      });
-    });
-  }
+class _CommonConfirmDialog extends StatelessWidget {
+  const _CommonConfirmDialog({
+    required this.isDesk,
+    required this.title,
+    required this.subtitle,
+    required this.confirmText,
+    required this.confirmButtonBackground,
+    this.onPressed,
+    this.unconfirmText,
+    this.timer,
+  });
+
+  final bool isDesk;
+  final String title;
+  final String subtitle;
+  final String confirmText;
+  final void Function()? onPressed;
+  final Color confirmButtonBackground;
+  final String? unconfirmText;
+  final Text? timer;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +93,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
             ),
           ),
           Padding(
-            padding: widget.isDesk
+            padding: isDesk
                 ? const EdgeInsets.symmetric(
                     horizontal: KPadding.kPaddingSize40,
                     vertical: KPadding.kPaddingSize32,
@@ -90,25 +107,25 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                   padding:
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
-                    widget.title,
+                    title,
                     key: KWidgetkeys.widget.confirmDialog.title,
-                    style: widget.isDesk
+                    style: isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
                   ),
                 ),
-                if (widget.isDesk)
+                if (isDesk)
                   KSizedBox.kHeightSizedBox16
                 else
                   KSizedBox.kHeightSizedBox8,
                 Text(
-                  widget.subtitle,
+                  subtitle,
                   key: KWidgetkeys.widget.confirmDialog.subtitle,
-                  style: widget.isDesk
+                  style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
-                if (widget.isDesk)
+                if (isDesk)
                   KSizedBox.kHeightSizedBox32
                 else
                   KSizedBox.kHeightSizedBox24,
@@ -118,14 +135,9 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                   runSpacing: KPadding.kPaddingSize16,
                   children: [
                     confirmButton(),
-                    if (!widget.isDesk &&
-                        widget.timer &&
-                        !_isButtonEnabled) ...[
+                    if (timer != null && !isDesk) ...[
                       KSizedBox.kHeightSizedBox8,
-                      Text(
-                        '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
-                        style: AppTextStyle.materialThemeBodySmall,
-                      ),
+                      timer!,
                     ],
                     unconfirmButton(context),
                   ],
@@ -145,13 +157,10 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                 //       unconfirmButton(context),
                 //     ],
                 //   ),
-                if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
-                if (widget.timer && !_isButtonEnabled && widget.isDesk) ...[
+                if (!isDesk) KSizedBox.kHeightSizedBox16,
+                if (timer != null && isDesk) ...[
                   KSizedBox.kHeightSizedBox8,
-                  Text(
-                    '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
-                    style: AppTextStyle.materialThemeBodySmall,
-                  ),
+                  timer!,
                 ],
               ],
             ),
@@ -161,15 +170,13 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
     );
   }
 
-  DoubleButtonWidget confirmButton() {
+  Widget confirmButton() {
     return DoubleButtonWidget(
       widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
-      text: widget.confirmText,
-      color: _isButtonEnabled
-          ? widget.confirmButtonBackground
-          : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
+      text: confirmText,
+      color: confirmButtonBackground,
       textColor: AppColors.materialThemeWhite,
-      isDesk: widget.isDesk,
+      isDesk: isDesk,
       deskPadding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize30,
@@ -177,8 +184,8 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
       mobTextWidth: double.infinity,
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
-      onPressed: _isButtonEnabled ? widget.onPressed : null,
-      hasAlign: !widget.isDesk,
+      onPressed: onPressed,
+      hasAlign: !isDesk,
     );
   }
 
@@ -190,10 +197,83 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize12,
       ),
-      expanded: !widget.isDesk,
+      expanded: !isDesk,
+      isDesk: isDesk,
+      text: unconfirmText ?? context.l10n.cancel,
+      hasAlign: !isDesk,
+    );
+  }
+}
+
+class _ConfirmDialogWithTimer extends StatefulWidget {
+  const _ConfirmDialogWithTimer({
+    required this.isDesk,
+    required this.title,
+    required this.subtitle,
+    required this.confirmText,
+    required this.confirmButtonBackground,
+    this.unconfirmText,
+    this.onPressed,
+  });
+
+  final bool isDesk;
+  final String title;
+  final String subtitle;
+  final String confirmText;
+  final void Function()? onPressed;
+  final Color confirmButtonBackground;
+  final String? unconfirmText;
+
+  @override
+  State<_ConfirmDialogWithTimer> createState() =>
+      _ConfirmDialogWithTimerState();
+}
+
+class _ConfirmDialogWithTimerState extends State<_ConfirmDialogWithTimer> {
+  Timer? _timer;
+  late int _remainingTime;
+  late bool _isButtonEnabled;
+
+  @override
+  void initState() {
+    _remainingTime = KDimensions.confirmdialogTimerDelay;
+    _isButtonEnabled = false;
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 1) {
+          _remainingTime--;
+        } else {
+          _isButtonEnabled = true;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _CommonConfirmDialog(
       isDesk: widget.isDesk,
-      text: widget.unconfirmText ?? context.l10n.cancel,
-      hasAlign: !widget.isDesk,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      confirmText: widget.confirmText,
+      confirmButtonBackground: _isButtonEnabled
+          ? widget.confirmButtonBackground
+          : AppColors.materialThemeRefNeutralVariantNeutralVariant80,
+      onPressed: _isButtonEnabled ? widget.onPressed : null,
+      unconfirmText: widget.unconfirmText,
+      timer: !_isButtonEnabled
+          ? Text(
+              '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+              key: KWidgetkeys.widget.confirmDialog.timer,
+              style: AppTextStyle.materialThemeBodySmall,
+            )
+          : null,
     );
   }
 

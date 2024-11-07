@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 extension DiaglogExtention on BuildContext {
@@ -185,13 +184,11 @@ class _DialogsWidget {
     required String confirmText,
     required void Function()? onPressed,
     required Color confirmButtonBackground,
-    required bool timer,
+    bool timer = false,
     String? unconfirmText,
-  }) =>
-      _doubleDialog(
-        childWidget: ({required isDeskValue, required context}) =>
-            ConfirmDialog(
-          isDesk: isDeskValue,
+  }) {
+    Widget body({required bool isDeskValue}) => ConfirmDialog(
+          isDesk: isDesk,
           title: title,
           subtitle: subtitle,
           confirmText: confirmText,
@@ -199,12 +196,17 @@ class _DialogsWidget {
           confirmButtonBackground: confirmButtonBackground,
           onPressed: onPressed,
           timer: timer,
-        ),
-        isDesk: isDesk,
-        deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
-        mobMaxWidth: KSize.kPixel500,
-        deskMaxWidth: KSize.kPixel500,
-      );
+        );
+
+    _doubleDialog(
+      childWidget: ({required isDeskValue, required context}) =>
+          body(isDeskValue: isDeskValue),
+      isDesk: isDesk,
+      deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
+      mobMaxWidth: KSize.kPixel500,
+      deskMaxWidth: KSize.kPixel500,
+    );
+  }
 
   void showConfirmationPublishDiscountDialog({
     required bool isDesk,
@@ -442,7 +444,7 @@ class _DialogsWidget {
   void showUserEmailDialog(
     int emailCloseDelay,
   ) {
-    final bloc = context.read<DiscountUserEmailFormBloc>();
+    final bloc = context.read<UserEmailFormBloc>();
     showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -467,10 +469,9 @@ class _DialogsWidget {
                 content: UserEmailDialog(
                   key: KWidgetkeys.screen.discounts.userEmailDialog,
                   isDesk: isTablet,
-                  sendOnPressed: () =>
-                      context.read<DiscountUserEmailFormBloc>().add(
-                            const DiscountUserEmailFormEvent.sendEmail(),
-                          ),
+                  sendOnPressed: () => context.read<UserEmailFormBloc>().add(
+                        const UserEmailFormEvent.sendEmail(),
+                      ),
                   // closeOnPressed: () =>
                   //     context.read<DiscountUserEmailFormBloc>().add(
                   //           DiscountUserEmailFormEvent.sendEmailAfterClose(
@@ -478,12 +479,11 @@ class _DialogsWidget {
                   //             count: count,
                   //           ),
                   //         ),
-                  onChanged: (text) =>
-                      context.read<DiscountUserEmailFormBloc>().add(
-                            DiscountUserEmailFormEvent.updatedEmail(text),
-                          ),
+                  onChanged: (text) => context.read<UserEmailFormBloc>().add(
+                        UserEmailFormEvent.updatedEmail(text),
+                      ),
                   userEmailEnum:
-                      context.read<DiscountUserEmailFormBloc>().state.emailEnum,
+                      context.read<UserEmailFormBloc>().state.emailEnum,
                   emailCloseDelay: emailCloseDelay,
                 ),
               );

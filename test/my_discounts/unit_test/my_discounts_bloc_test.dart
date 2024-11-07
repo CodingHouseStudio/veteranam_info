@@ -31,7 +31,7 @@ void main() {
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => const CompanyModel(id: '1', userEmails: []),
+        (_) => KTestText.pureCompanyModel,
       );
 
       when(
@@ -56,7 +56,7 @@ void main() {
         act: (bloc) async {
           when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
+                .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
           ).thenAnswer(
             (_) => Stream.value([KTestText.discountModelItems.first]),
           );
@@ -92,7 +92,7 @@ void main() {
         act: (bloc) async {
           when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
+                .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
           ).thenAnswer(
             (_) => Stream.error(KGroupText.failureGet),
           );

@@ -60,4 +60,17 @@ abstract class KDimensions {
   static const sendingDelay = 60;
 
   static const minAmountTimeDiscountDays = 14;
+
+  static const confirmdialogTimerDelay = 10;
+  static const sequenceNumberError = 2;
+  static const sequenceNumberCriticalError = 4;
+  static const sequenceNumberWarning = 1;
+  static const sequenceNumber = 0;
+  static const sequenceNumberData = -2;
+
+  static const logLevelData = -200;
+  static const logLevelInfo = 1;
+  static const logLevelWarning = 200;
+  static const logLevelError = 500;
+  static const logLevelCriticalError = 1000;
 }
