@@ -32,6 +32,7 @@ void main() {
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
     setUp(() {
+      ExtendedDateTime.current = KTestText.dateTime;
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
       mockGoogleSignIn = MockGoogleSignIn();
@@ -128,7 +129,7 @@ void main() {
       when(
         mockFirestoreService.setUserSetting(
           userSetting:
-              KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
+              UserSetting.empty.copyWith(deletedOn: KTestText.dateTime),
           userId: KTestText.user.id,
         ),
       ).thenThrow(
