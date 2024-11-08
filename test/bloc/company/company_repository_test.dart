@@ -48,7 +48,9 @@ void main() {
           (_) async {},
         );
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.updateCompany(
+            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+          ),
         ).thenAnswer(
           (_) async {},
         );
@@ -110,7 +112,9 @@ void main() {
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.updateCompany(
+            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+          ),
         ).thenThrow(Exception(KGroupText.failure));
 
         when(
@@ -166,7 +170,9 @@ void main() {
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
-          mockFirestoreService.deleteCompany(KTestText.pureCompanyModel.id),
+          mockFirestoreService.updateCompany(
+            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+          ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
 
         when(

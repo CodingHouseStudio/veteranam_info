@@ -11,7 +11,7 @@ Future<void> logOutConfirmButtonlHelper({
 
   await profileLogOutHelper(tester);
 
-  await dialogConfirmHelper(
+  await confirmDialogHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
     isPop: false,

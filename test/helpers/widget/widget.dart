@@ -4,6 +4,7 @@ export 'button_bottom_line_helper.dart';
 export 'card/card.dart';
 export 'chat/chat.dart';
 export 'check_point/check_point.dart';
+export 'confirm_dialog/confirm_dialog.dart';
 export 'dialogs/dialogs.dart';
 export 'discount/discount.dart';
 export 'donate/donate.dart';

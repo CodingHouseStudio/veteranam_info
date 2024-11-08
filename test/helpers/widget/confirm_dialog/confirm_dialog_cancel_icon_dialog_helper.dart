@@ -4,21 +4,18 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> dialogConfirmHelper({
+Future<void> confirmDialogCancelIconHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
-  bool isPop = true,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton),
+    find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton));
+  await tester.tap(find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon));
 
   await tester.pumpAndSettle();
 
-  if (isPop) {
-    verify(() => mockGoRouter.pop()).called(1);
-  }
+  verify(() => mockGoRouter.pop()).called(1);
 }

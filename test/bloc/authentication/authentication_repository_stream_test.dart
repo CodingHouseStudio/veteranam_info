@@ -44,7 +44,10 @@ void main() {
         (_) => userSettingStreamController.stream,
       );
 
-      when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
+      when(
+        mockAppAuthenticationRepository
+            .createFcmUserSettingAndRemoveDeletePameter(),
+      ).thenAnswer(
         (_) async => const Right(true),
       );
 
@@ -123,7 +126,10 @@ void main() {
         when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
           (_) => false,
         );
-        when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
+        when(
+          mockAppAuthenticationRepository
+              .createFcmUserSettingAndRemoveDeletePameter(),
+        ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
       });
