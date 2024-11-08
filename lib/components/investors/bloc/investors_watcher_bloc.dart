@@ -20,16 +20,17 @@ class InvestorsWatcherBloc
         super(
           const InvestorsWatcherState(
             loadingStatus: LoadingStatusInvestors.initial,
-            loadingDeskFundItems: [],
+            // loadingDeskFundItems: [],
             fundItems: [],
-            loadingMobFundItems: [],
-            itemsLoaded: 0,
+            // loadingMobFundItems: [],
+            // itemsLoaded: 0,
             failure: null,
-            loadedFull: false,
+            deskFundItems: [],
+            // loadedFull: false,
           ),
         ) {
     on<_Started>(_onStarted);
-    on<_LoadNextItems>(_loadNextItems);
+    // on<_LoadNextItems>(_loadNextItems);
   }
 
   /// Repository to fetch investors' funds data.
@@ -58,19 +59,19 @@ class InvestorsWatcherBloc
       ),
       (r) {
         // Process and split the list for desktop view
-        final loadingItems = _loading(
-          itemsLoaded: state.itemsLoaded,
-          loadItems: KDimensions.investorsLoadItems,
-          list: r,
-        );
+        // final loadingItems = _loading(
+        //   itemsLoaded: state.itemsLoaded,
+        //   loadItems: KDimensions.investorsLoadItems,
+        //   list: r,
+        // );
         emit(
           InvestorsWatcherState(
             fundItems: r,
-            loadingDeskFundItems: getDeskList(loadingItems),
+            deskFundItems: getDeskList(r),
             loadingStatus: LoadingStatusInvestors.loaded,
-            loadedFull: r.length < KDimensions.investorsLoadItems,
-            loadingMobFundItems: loadingItems,
-            itemsLoaded: KDimensions.investorsLoadItems,
+            // loadedFull: r.length < KDimensions.investorsLoadItems,
+            // loadingMobFundItems: loadingItems,
+            // itemsLoaded: KDimensions.investorsLoadItems,
             failure: null,
           ),
         );
@@ -99,45 +100,45 @@ class InvestorsWatcherBloc
   /// Handler for the `_LoadNextItems` event, used to load additional items
   /// as part of pagination.
   /// Checks if more items are available and updates the state accordingly.
-  Future<void> _loadNextItems(
-    _LoadNextItems event,
-    Emitter<InvestorsWatcherState> emit,
-  ) async {
-    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) {
-      emit(state.copyWith(loadedFull: true));
-      return;
-    }
+  // Future<void> _loadNextItems(
+  //   _LoadNextItems event,
+  //   Emitter<InvestorsWatcherState> emit,
+  // ) async {
+  //   if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) {
+  //     emit(state.copyWith(loadedFull: true));
+  //     return;
+  //   }
 
-    emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
+  //   emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
 
-    // Load more items for pagination
-    final filterItems = _loading(
-      itemsLoaded: state.itemsLoaded,
-      loadItems: KDimensions.investorsLoadItems,
-    );
+  //   // Load more items for pagination
+  //   final filterItems = _loading(
+  //     itemsLoaded: state.itemsLoaded,
+  //     loadItems: KDimensions.investorsLoadItems,
+  //   );
 
-    emit(
-      state.copyWith(
-        loadingMobFundItems: filterItems,
-        loadingDeskFundItems: getDeskList(filterItems),
-        itemsLoaded: filterItems.length,
-        loadingStatus: LoadingStatusInvestors.loaded,
-        loadedFull: filterItems.length == state.fundItems.length,
-      ),
-    );
-  }
+  //   emit(
+  //     state.copyWith(
+  //       loadingMobFundItems: filterItems,
+  //       loadingDeskFundItems: getDeskList(filterItems),
+  //       itemsLoaded: filterItems.length,
+  //       loadingStatus: LoadingStatusInvestors.loaded,
+  //       loadedFull: filterItems.length == state.fundItems.length,
+  //     ),
+  //   );
+  // }
 
   /// Internal function to get a sublist of items for loading, based on
   /// `itemsLoaded` and `loadItems`.
   /// Useful for pagination to avoid reloading already-loaded items.
-  List<FundModel> _loading({
-    required int itemsLoaded,
-    required int? loadItems,
-    List<FundModel>? list,
-  }) {
-    return (list ?? state.fundItems).loading(
-      itemsLoaded: itemsLoaded,
-      loadItems: loadItems,
-    );
-  }
+  // List<FundModel> _loading({
+  //   required int itemsLoaded,
+  //   required int? loadItems,
+  //   List<FundModel>? list,
+  // }) {
+  //   return (list ?? state.fundItems).loading(
+  //     itemsLoaded: itemsLoaded,
+  //     loadItems: loadItems,
+  //   );
+  // }
 }

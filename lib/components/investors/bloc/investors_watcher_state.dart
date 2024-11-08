@@ -17,11 +17,11 @@ extension InvestorsFailureExtension on SomeFailure {
 class InvestorsWatcherState with _$InvestorsWatcherState {
   const factory InvestorsWatcherState({
     required List<FundModel> fundItems,
-    required List<List<FundModel>> loadingDeskFundItems,
-    required List<FundModel> loadingMobFundItems,
+    required List<List<FundModel>> deskFundItems,
+    // required List<FundModel> loadingMobFundItems,
     required LoadingStatusInvestors loadingStatus,
-    required bool loadedFull,
-    required int itemsLoaded,
+    // required bool loadedFull,
+    // required int itemsLoaded,
     // required List<ReportModel> reportItems,
     required InvestorsFailure? failure,
   }) = _Initial;
