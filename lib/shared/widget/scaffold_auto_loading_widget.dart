@@ -59,12 +59,12 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NetworkCubit, NetworkStatus>(
-      listener: (context, state) {
-        if (state == NetworkStatus.network) {
-          widget.loadDataAgain?.call();
-        }
-      },
+    return BlocBuilder<NetworkCubit, NetworkStatus>(
+      // listener: (context, state) {
+      //   if (state == NetworkStatus.network) {
+      //     widget.loadDataAgain?.call();
+      //   }
+      // },
       builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
