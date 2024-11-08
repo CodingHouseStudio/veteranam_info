@@ -253,6 +253,7 @@ abstract class KAppText {
         KRoute.support.name,
         KRoute.settings.name,
       ];
+  static const deletedFieldId = 'deletedOn';
   static const discountsCategories = [
     'Автосервіс',
     'Військторг',
