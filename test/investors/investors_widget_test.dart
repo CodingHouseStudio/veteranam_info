@@ -194,25 +194,25 @@ void main() {
         await investorsInitialHelper(tester);
       });
 
-      // testWidgets('${KGroupText.network} ', (tester) async {
-      //   await networkHelper(
-      //     tester: tester,
-      //     pumpApp: () async => investorsPumpAppHelper(
-      //       mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //       mockInvestorsRepository: mockInvestorsRepository,
-      //       mockReportRepository: mockReportRepository,
-      //       mockAuthenticationRepository: mockAuthenticationRepository,
-      //       mockUrlRepository: mockUrlRepository,
-      //       tester: tester,
-      //     ),
-      //   );
+      testWidgets('${KGroupText.network} ', (tester) async {
+        await networkHelper(
+          tester: tester,
+          pumpApp: () async => investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
+            tester: tester,
+          ),
+        );
 
-      //   verify(
-      //     mockInvestorsRepository.getFunds(
-      //         // reportIdItems: KTestText.reportItems.getIdCard,
-      //         ),
-      //   ).called(2);
-      // });
+        verify(
+          mockInvestorsRepository.getFunds(
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
+        ).called(2);
+      });
 
       // loadingList(
       //   (tester) async => investorsPumpAppHelper(

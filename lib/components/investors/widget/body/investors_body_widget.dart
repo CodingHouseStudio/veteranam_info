@@ -65,19 +65,28 @@ class InvestorsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ];
-        return BlocListener<InvestorsWatcherBloc, InvestorsWatcherState>(
-          listener: (context, state) => context.dialog.showGetErrorDialog(
-            error: state.failure?.value(context),
-            onPressed: () => context
-                .read<InvestorsWatcherBloc>()
-                .add(const InvestorsWatcherEvent.started()),
-          ),
-          child: Scaffold(
-            body: ListView.builder(
-              key: KWidgetkeys.widget.scaffold.scroll,
-              primary: false,
-              itemCount: body.length,
-              itemBuilder: (context, index) => body.elementAt(index),
+        return BlocListener<NetworkCubit, NetworkStatus>(
+          listener: (context, state) {
+            if (state == NetworkStatus.network) {
+              context.read<InvestorsWatcherBloc>().add(
+                    const InvestorsWatcherEvent.started(),
+                  );
+            }
+          },
+          child: BlocListener<InvestorsWatcherBloc, InvestorsWatcherState>(
+            listener: (context, state) => context.dialog.showGetErrorDialog(
+              error: state.failure?.value(context),
+              onPressed: () => context
+                  .read<InvestorsWatcherBloc>()
+                  .add(const InvestorsWatcherEvent.started()),
+            ),
+            child: Scaffold(
+              body: ListView.builder(
+                key: KWidgetkeys.widget.scaffold.scroll,
+                primary: false,
+                itemCount: body.length,
+                itemBuilder: (context, index) => body.elementAt(index),
+              ),
             ),
           ),
         );
