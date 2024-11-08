@@ -82,6 +82,38 @@ void main() {
         await myDiscountFailureHelper(tester);
       });
     });
+    group('Get Small List', () {
+      setUp(
+        () {
+          when(
+            mockCompanyRepository.currentUserCompany,
+          ).thenAnswer(
+            (_) => KTestText.fullCompanyModel,
+          );
+          companyStream.add(KTestText.fullCompanyModel);
+
+          when(mockAuthenticationRepository.currentUser)
+              .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+          when(
+            mockDiscountRepository
+                .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
+          ).thenAnswer(
+            (invocation) =>
+                Stream.value(KTestText.discountModelItems.sublist(0, 3)),
+          );
+        },
+      );
+      testWidgets('End List', (tester) async {
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockCompanyRepository: mockCompanyRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        );
+
+        await myDiscountsEndListHelper(tester);
+      });
+    });
 
     group('${KGroupText.getEmptyList} with empty profile', () {
       setUp(() {

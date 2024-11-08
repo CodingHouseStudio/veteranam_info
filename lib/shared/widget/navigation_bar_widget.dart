@@ -9,7 +9,7 @@ class NawbarWidget extends StatefulWidget {
     required this.isDesk,
     required this.isTablet,
     // required this.showMobileNawbar,
-    super.key,
+    super.key = const ValueKey('naw_bar'),
     // this.childWidget,
     this.pageName,
     this.showBackButton,

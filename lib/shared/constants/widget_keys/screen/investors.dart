@@ -16,4 +16,5 @@ class _InvestorsKeys {
   // final cardLast = const Key('investors_screen_card_last');
   final cards = const Key('investors_screen_cards');
   final loadingButton = const Key('investors_screen_loading_button');
+  final endListText = const Key('investors_screen_end_list_text');
 }

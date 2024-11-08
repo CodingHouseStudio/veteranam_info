@@ -74,7 +74,8 @@ class InvestorsBodyWidget extends StatelessWidget {
           ),
           child: Scaffold(
             body: ListView.builder(
-              primary: true,
+              key: KWidgetkeys.widget.scaffold.scroll,
+              primary: false,
               itemCount: body.length,
               itemBuilder: (context, index) => body.elementAt(index),
             ),

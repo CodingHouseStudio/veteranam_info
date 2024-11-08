@@ -21,7 +21,7 @@ class InvestorsWatcherBloc
           const InvestorsWatcherState(
             loadingStatus: LoadingStatusInvestors.initial,
             // loadingDeskFundItems: [],
-            fundItems: [],
+            mobFundItems: [],
             // loadingMobFundItems: [],
             // itemsLoaded: 0,
             failure: null,
@@ -66,7 +66,7 @@ class InvestorsWatcherBloc
         // );
         emit(
           InvestorsWatcherState(
-            fundItems: r,
+            mobFundItems: r,
             deskFundItems: getDeskList(r),
             loadingStatus: LoadingStatusInvestors.loaded,
             // loadedFull: r.length < KDimensions.investorsLoadItems,

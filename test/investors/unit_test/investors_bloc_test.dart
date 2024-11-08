@@ -51,8 +51,8 @@ void main() {
     });
 
     blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
-      'emits [HomeWatcherState.loading(), HomeWatcherState.success()]'
-      ' when load questionModel list',
+      'emits [InvestorsWatcherState.loading(), InvestorsWatcherState.success()]'
+      ' when load invesorModel list',
       build: () => investorsWatcherBloc,
       act: (bloc) async {
         bloc.add(const InvestorsWatcherEvent.started());
@@ -67,7 +67,7 @@ void main() {
       ],
     );
     blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
-      'emits [HomeWatcherState.faulure()] when error',
+      'emits [InvestorsWatcherState.faulure()] when error',
       build: () => investorsWatcherBloc,
       act: (bloc) async {
         when(
@@ -88,125 +88,128 @@ void main() {
         ),
       ],
     );
-    blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
-      'emits [InvestorsWatcherState()]'
-      ' when load InvestorsModel list and loadNextItems it',
-      build: () => investorsWatcherBloc,
-      act: (bloc) async {
-        bloc.add(const InvestorsWatcherEvent.started());
-        await expectLater(
-          bloc.stream,
-          emitsInOrder([
-            predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatusInvestors.loading,
-            ),
-            predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatusInvestors.loaded,
-            ),
-          ]),
-          reason: 'Wait loading data',
-        );
-        bloc.add(
-          const InvestorsWatcherEvent.loadNextItems(),
-        );
-        // when(
-        //   mockReportRepository.getCardReportById(
-        //     cardEnum: CardEnum.funds,
-        //     userId: KTestText.user.id,
-        //   ),
-        // ).thenAnswer(
-        //   (invocation) async => Right([KTestText.reportItems.first]),
-        // );
-        // bloc.add(
-        //   const InvestorsWatcherEvent.getReport(),
-        // );
-      },
-      expect: () => [
-        predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
-        ),
-        predicate<InvestorsWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatusInvestors.loaded &&
-              state.loadingMobFundItems.length ==
-                  KDimensions.investorsLoadItems &&
-              state.itemsLoaded == KDimensions.investorsLoadItems,
-          // &&
-          // state.reportItems.isNotEmpty,
-        ),
-        predicate<InvestorsWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatusInvestors.loading &&
-              state.loadingMobFundItems.length ==
-                  KDimensions.investorsLoadItems &&
-              state.itemsLoaded == KDimensions.investorsLoadItems,
-        ),
-        predicate<InvestorsWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatusInvestors.loaded &&
-              state.loadingMobFundItems.length ==
-                  KDimensions.investorsLoadItems * 2 &&
-              state.itemsLoaded == KDimensions.investorsLoadItems * 2,
-          //  &&
-          // state.reportItems.length != 1,
-        ),
-        // predicate<InvestorsWatcherState>(
-        //   (state) =>
-        //       state.loadingStatus == LoadingStatusInvestors.loaded &&
-        //       state.loadingFundItems.length ==
-        //           KDimensions.investorsLoadItems * 2 &&
-        //       state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
-        //       state.reportItems.length == 1,
-        // ),
-      ],
-    );
-    blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
-      'emits [InvestorsWatcherState()]'
-      ' when get report failure and load nex with listLoadedFull',
-      build: () => investorsWatcherBloc,
-      act: (bloc) async {
-        // when(
-        //   mockReportRepository.getCardReportById(
-        //     cardEnum: CardEnum.funds,
-        //     userId: KTestText.user.id,
-        //   ),
-        // ).thenAnswer(
-        //   (invocation) async => Left(
-        //     SomeFailure.serverError(
-        //       error: null,
-        //     ),
-        //   ),
-        // );
-        when(
-          mockInvestorsRepository.getFunds(),
-        ).thenAnswer(
-          (_) async => Right([KTestText.fundItems.first]),
-        );
-        bloc.add(const InvestorsWatcherEvent.started());
-        await expectLater(
-          bloc.stream,
-          emitsInOrder([
-            predicate<InvestorsWatcherState>(
-              (state) => state.loadingStatus == LoadingStatusInvestors.loading,
-            ),
-            predicate<InvestorsWatcherState>(
-              (state) => state.loadedFull,
-            ),
-          ]),
-          reason: 'Wait loading data',
-        );
-        bloc.add(
-          const InvestorsWatcherEvent.loadNextItems(),
-        );
-      },
-      expect: () => [
-        predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
-        ),
-        predicate<InvestorsWatcherState>(
-          (state) => state.loadedFull,
-        ),
-      ],
-    );
+    // blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
+    //   'emits [InvestorsWatcherState()]'
+    //   ' when load InvestorsModel list and loadNextItems it',
+    //   build: () => investorsWatcherBloc,
+    //   act: (bloc) async {
+    //     bloc.add(const InvestorsWatcherEvent.started());
+    //     await expectLater(
+    //       bloc.stream,
+    //       emitsInOrder([
+    //         predicate<InvestorsWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    // .loading,
+    //         ),
+    //         predicate<InvestorsWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    // .loaded,
+    //         ),
+    //       ]),
+    //       reason: 'Wait loading data',
+    //     );
+    //     bloc.add(
+    //       const InvestorsWatcherEvent.loadNextItems(),
+    //     );
+    //     // when(
+    //     //   mockReportRepository.getCardReportById(
+    //     //     cardEnum: CardEnum.funds,
+    //     //     userId: KTestText.user.id,
+    //     //   ),
+    //     // ).thenAnswer(
+    //     //   (invocation) async => Right([KTestText.reportItems.first]),
+    //     // );
+    //     // bloc.add(
+    //     //   const InvestorsWatcherEvent.getReport(),
+    //     // );
+    //   },
+    //   expect: () => [
+    //     predicate<InvestorsWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+    //     ),
+    //     predicate<InvestorsWatcherState>(
+    //       (state) =>
+    //           state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //           state.loadingMobFundItems.length ==
+    //               KDimensions.investorsLoadItems &&
+    //           state.itemsLoaded == KDimensions.investorsLoadItems,
+    //       // &&
+    //       // state.reportItems.isNotEmpty,
+    //     ),
+    //     predicate<InvestorsWatcherState>(
+    //       (state) =>
+    //           state.loadingStatus == LoadingStatusInvestors.loading &&
+    //           state.loadingMobFundItems.length ==
+    //               KDimensions.investorsLoadItems &&
+    //           state.itemsLoaded == KDimensions.investorsLoadItems,
+    //     ),
+    //     predicate<InvestorsWatcherState>(
+    //       (state) =>
+    //           state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //           state.loadingMobFundItems.length ==
+    //               KDimensions.investorsLoadItems * 2 &&
+    //           state.itemsLoaded == KDimensions.investorsLoadItems * 2,
+    //       //  &&
+    //       // state.reportItems.length != 1,
+    //     ),
+    //     // predicate<InvestorsWatcherState>(
+    //     //   (state) =>
+    //     //       state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //     //       state.loadingFundItems.length ==
+    //     //           KDimensions.investorsLoadItems * 2 &&
+    //     //       state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
+    //     //       state.reportItems.length == 1,
+    //     // ),
+    //   ],
+    // );
+    // blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
+    //   'emits [InvestorsWatcherState()]'
+    //   ' when get report failure and load nex with listLoadedFull',
+    //   build: () => investorsWatcherBloc,
+    //   act: (bloc) async {
+    //     // when(
+    //     //   mockReportRepository.getCardReportById(
+    //     //     cardEnum: CardEnum.funds,
+    //     //     userId: KTestText.user.id,
+    //     //   ),
+    //     // ).thenAnswer(
+    //     //   (invocation) async => Left(
+    //     //     SomeFailure.serverError(
+    //     //       error: null,
+    //     //     ),
+    //     //   ),
+    //     // );
+    //     when(
+    //       mockInvestorsRepository.getFunds(),
+    //     ).thenAnswer(
+    //       (_) async => Right([KTestText.fundItems.first]),
+    //     );
+    //     bloc.add(const InvestorsWatcherEvent.started());
+    //     await expectLater(
+    //       bloc.stream,
+    //       emitsInOrder([
+    //         predicate<InvestorsWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    // .loading,
+    //         ),
+    //         predicate<InvestorsWatcherState>(
+    //           (state) => state.loadedFull,
+    //         ),
+    //       ]),
+    //       reason: 'Wait loading data',
+    //     );
+    //     bloc.add(
+    //       const InvestorsWatcherEvent.loadNextItems(),
+    //     );
+    //   },
+    //   expect: () => [
+    //     predicate<InvestorsWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+    //     ),
+    //     predicate<InvestorsWatcherState>(
+    //       (state) => state.loadedFull,
+    //     ),
+    //   ],
+    // );
   });
 }

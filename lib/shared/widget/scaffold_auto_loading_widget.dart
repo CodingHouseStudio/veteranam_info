@@ -276,14 +276,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     return currentScroll >= (maxScroll * 0.9);
   }
 
-  void scrollUp() {
-    _scrollController.animateTo(
-      0,
-      duration: Duration(milliseconds: (_scrollController.offset / 10).toInt()),
-      curve: Curves.linear,
-    );
-  }
-
   @override
   void dispose() {
     if (PlatformEnumFlutter.isWebDesktop) {

@@ -11,6 +11,8 @@ Future<void> investorsInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
       if (Config.isWeb) {
         expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
         // expect(find.byKey(KWidgetkeys.screen.investors.point),
@@ -85,10 +87,10 @@ Future<void> investorsInitialHelper(
 
       // await reportDialogInitialHelper(tester);
 
-      // await scrollingHelper(
-      //   tester: tester,
-      //   offset: KTestConstants.scrollingDown,
-      // );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
       // expect(
       //   find.byKey(KWidgetkeys.screen.investors.button),

@@ -19,7 +19,9 @@ class FundsWidgetList extends StatelessWidget {
             style: AppTextStyle.materialThemeDisplayMedium,
           ),
         ),
-        const FundsList(),
+        FundsList(
+          isDesk: isDesk,
+        ),
       ],
     );
   }
@@ -27,8 +29,10 @@ class FundsWidgetList extends StatelessWidget {
 
 class FundsList extends StatelessWidget {
   const FundsList({
+    required this.isDesk,
     super.key,
   });
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +40,42 @@ class FundsList extends StatelessWidget {
       builder: (context, _) {
         switch (_.loadingStatus) {
           case LoadingStatusInvestors.loaded:
+            final listLength =
+                isDesk ? _.deskFundItems.length : _.mobFundItems.length;
             return ListView.builder(
               shrinkWrap: true,
-              itemCount: _.deskFundItems.length + 1,
+              primary: false,
+              itemCount: listLength + 1,
               itemBuilder: (context, index) {
-                if (_.deskFundItems.length > index) {
+                if (index < listLength) {
                   return Padding(
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),
-                    child: DonatesCardsWidget(
-                      fundItems: _.deskFundItems.elementAt(index),
-                    ),
+                    child: isDesk
+                        ? DonatesCardsWidget(
+                            key: KWidgetkeys.screen.investors.cards,
+                            fundItems: _.deskFundItems.elementAt(index),
+                          )
+                        : DonateCardWidget(
+                            key: KWidgetkeys.screen.investors.card,
+                            hasSubtitle: true,
+                            fundModel: _.mobFundItems.elementAt(index),
+                            isDesk: false,
+                          ),
                   );
                 } else {
-                  return Center(
-                    child: Text(
-                      context.l10n.thatEndOfList,
-                      key: KWidgetkeys.widget.scaffold.endListText,
-                      style:
-                          AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize48,
+                    ),
+                    child: Center(
+                      child: Text(
+                        context.l10n.thatEndOfList,
+                        key: KWidgetkeys.screen.investors.endListText,
+                        style: AppTextStyle
+                            .materialThemeTitleMediumNeutralVariant70,
+                      ),
                     ),
                   );
                 }
