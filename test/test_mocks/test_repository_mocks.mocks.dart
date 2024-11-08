@@ -1214,26 +1214,6 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<void> deleteCompany(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteCompany,
-          [id],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
-  _i8.Future<void> deleteUserSetting(String? userId) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteUserSetting,
-          [userId],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
   _i8.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
         Invocation.method(
           #getWorks,
@@ -1938,30 +1918,30 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createFcmUserSetting() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #createFcmUserSetting,
-          [],
-        ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #createFcmUserSetting,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>>
+      createFcmUserSettingAndRemoveDeletePameter() => (super.noSuchMethod(
+            Invocation.method(
+              #createFcmUserSettingAndRemoveDeletePameter,
+              [],
+            ),
+            returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
                 _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #createFcmUserSetting,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+              this,
+              Invocation.method(
+                #createFcmUserSettingAndRemoveDeletePameter,
+                [],
+              ),
+            )),
+            returnValueForMissingStub:
+                _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                    _FakeEither_0<_i3.SomeFailure, bool>(
+              this,
+              Invocation.method(
+                #createFcmUserSettingAndRemoveDeletePameter,
+                [],
+              ),
+            )),
+          ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
@@ -2467,30 +2447,30 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.UserSetting>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createFcmUserSetting() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #createFcmUserSetting,
-          [],
-        ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #createFcmUserSetting,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>>
+      createFcmUserSettingAndRemoveDeletePameter() => (super.noSuchMethod(
+            Invocation.method(
+              #createFcmUserSettingAndRemoveDeletePameter,
+              [],
+            ),
+            returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
                 _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #createFcmUserSetting,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+              this,
+              Invocation.method(
+                #createFcmUserSettingAndRemoveDeletePameter,
+                [],
+              ),
+            )),
+            returnValueForMissingStub:
+                _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                    _FakeEither_0<_i3.SomeFailure, bool>(
+              this,
+              Invocation.method(
+                #createFcmUserSettingAndRemoveDeletePameter,
+                [],
+              ),
+            )),
+          ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({

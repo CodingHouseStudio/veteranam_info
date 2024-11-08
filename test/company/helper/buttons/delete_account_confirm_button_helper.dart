@@ -9,7 +9,7 @@ Future<void> deleteAccountConfirmButtonlHelper({
 }) async {
   await deleteAccountDialoglHelper(tester);
 
-  await dialogConfirmHelper(
+  await confirmDialogHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
     isPop: false,

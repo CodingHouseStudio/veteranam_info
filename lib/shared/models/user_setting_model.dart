@@ -15,6 +15,7 @@ class UserSetting with _$UserSetting {
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
     String? nickname,
+    DateTime? deletedOn,
   }) = _UserSetting;
 
   // Add this private constructor
@@ -99,4 +100,5 @@ abstract class UserSettingModelJsonField {
   static const roleIsConfirmed = 'roleIsConfirmed';
   static const devicesInfo = 'devicesInfo';
   static const nickname = 'nickname';
+  static const deletedOn = 'deletedOn';
 }

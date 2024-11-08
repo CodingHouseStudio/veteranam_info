@@ -52,7 +52,7 @@ class AuthenticationRepository {
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
             if (userSettingIsNew) {
-              unawaited(_createFcmUserSetting());
+              _createFcmUserSettingAndRemoveDeleteParameter();
               userSettingIsNew = false;
             }
             _userSettingController.add(
@@ -174,22 +174,20 @@ class AuthenticationRepository {
     );
   }
 
-  Future<Either<SomeFailure, bool>> _createFcmUserSetting() async {
-    final result = await iAppAuthenticationRepository.createFcmUserSetting();
-    return result.fold(
-      (l) {
-        return Left(l);
-      },
+  Future<void> _createFcmUserSettingAndRemoveDeleteParameter() async {
+    final result = await iAppAuthenticationRepository
+        .createFcmUserSettingAndRemoveDeletePameter();
+    result.fold(
+      (l) {},
       (r) {
         log('created FCM TOKEN', name: 'FCM Token', level: 1);
-        return Right(r);
       },
     );
   }
 
   Future<Either<SomeFailure, bool>> _logInAnonymously() async {
     final result = await iAppAuthenticationRepository.logInAnonymously();
-    unawaited(_createFcmUserSetting());
+    unawaited(_createFcmUserSettingAndRemoveDeleteParameter());
     return result.fold(
       (l) {
         // _authenticationStatuscontroller.add(AuthenticationStatus.unknown);

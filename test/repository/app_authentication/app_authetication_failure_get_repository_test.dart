@@ -196,7 +196,8 @@ void main() {
       );
     });
     test('Create FCM Token for user setting when get null', () async {
-      final result = await appAuthenticationRepository.createFcmUserSetting();
+      final result = await appAuthenticationRepository
+          .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
           initialList: KTestText.userSetting.devicesInfo,

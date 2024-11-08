@@ -17,6 +17,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.firebaseFailure} ', () {
+    ExtendedDateTime.current = KTestText.dateTime;
     late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
@@ -158,9 +159,15 @@ void main() {
         ),
       );
       when(
-        mockFirestoreService.deleteUserSetting(KTestText.user.id),
-      ).thenAnswer(
-        (_) async {},
+        mockFirestoreService.setUserSetting(
+          userId: KTestText.userSetting.id,
+          userSetting:
+              UserSetting.empty.copyWith(deletedOn: KTestText.dateTime),
+        ),
+      ).thenThrow(
+        firebase_auth.FirebaseAuthException(
+          code: KGroupText.firebaseFailure,
+        ),
       );
 
       when(

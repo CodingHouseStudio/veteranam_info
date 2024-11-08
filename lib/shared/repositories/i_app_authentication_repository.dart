@@ -50,7 +50,8 @@ abstract class IAppAuthenticationRepository {
     UserSetting userSetting,
   );
 
-  Future<Either<SomeFailure, bool>> createFcmUserSetting();
+  Future<Either<SomeFailure, bool>>
+      createFcmUserSettingAndRemoveDeletePameter();
 
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,

@@ -3,7 +3,7 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> dialogConfirmChangesHelper({
+Future<void> confirmDialogChangesHelper({
   required WidgetTester tester,
   bool hasTimer = false,
 }) async {
@@ -27,7 +27,7 @@ Future<void> dialogConfirmChangesHelper({
     size: KTestConstants.windowVerySmallSize,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.icon),
+        find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon),
         findsOneWidget,
       );
 

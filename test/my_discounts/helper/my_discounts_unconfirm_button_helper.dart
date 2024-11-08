@@ -31,12 +31,12 @@ Future<void> myDiscountUnconfirmButtonlHelper({
       }
 
       if (icon) {
-        await dialogCancelIconHelper(
+        await confirmDialogCancelIconHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
       } else {
-        await dialogUnconfirmHelper(
+        await confirmDialogUnconfirmHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
