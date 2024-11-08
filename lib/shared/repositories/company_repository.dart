@@ -58,6 +58,7 @@ class CompanyRepository implements ICompanyRepository {
             _userCompanyController.add(
               currentUserCompany,
             );
+            _removeDeleteParameter();
           },
         );
 
@@ -100,6 +101,14 @@ class CompanyRepository implements ICompanyRepository {
   // User get currentUser {
   //   return iAppAuthenticationRepository.currentUser;
   // }
+
+  void _removeDeleteParameter() {
+    if (currentUserCompany.deletedOn != null) {
+      _firestoreService.updateCompany(
+        currentUserCompany.copyWith(deletedOn: null),
+      );
+    }
+  }
 
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
@@ -172,7 +181,11 @@ class CompanyRepository implements ICompanyRepository {
   Future<Either<SomeFailure, bool>> deleteCompany() async {
     try {
       if (currentUserCompany.id.isNotEmpty) {
-        await _firestoreService.deleteCompany(currentUserCompany.id);
+        /// every thirty days, all documents where KAppText.deletedFieldId
+        /// older than 30 days will be deleted automatically (firebase function)
+        await _firestoreService.updateCompany(
+          currentUserCompany.copyWith(deletedOn: ExtendedDateTime.current),
+        );
         _userCompanyController.add(CompanyModel.empty);
         await _iAppAuthenticationRepository.logOut();
       }

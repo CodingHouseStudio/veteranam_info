@@ -1592,9 +1592,9 @@
   "@changesNotSaved": {
     "examples": "Text on the Company and Profile pages below the image when it is selected but changes are not saved."
   },
-  "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost",
+  "deleteProfileQuestion": "Are you sure you want to delete your profile? All data will be lost, but you can restore your profile if you log in within the next 30 days.",
   "@deleteProfileQuestion": {
-    "examples": "Text for the delete account dialog on the Profile page."
+    "examples": "Text for the account deletion dialog on the Profile page."
   },
   "enableButton": "Button will be active after",
   "@enableButton": {

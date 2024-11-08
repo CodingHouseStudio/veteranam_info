@@ -382,13 +382,15 @@ class LineTitleIconButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       key: titleKey,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: isDesk
-              ? AppTextStyle.materialThemeDisplayLarge
-              : AppTextStyle.materialThemeDisplaySmall,
+        Expanded(
+          child: Text(
+            title,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplayLarge
+                : AppTextStyle.materialThemeDisplaySmall,
+          ),
         ),
         IconButtonWidget(
           key: iconButtonKey,

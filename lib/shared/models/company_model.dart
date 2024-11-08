@@ -14,6 +14,7 @@ class CompanyModel with _$CompanyModel {
     String? code,
     String? link,
     @ImageConverter() ImageModel? image,
+    DateTime? deletedOn,
   }) = _CompanyModel;
 
   // Add this private constructor
@@ -51,4 +52,5 @@ abstract class CompanyModelJsonField {
   static const link = 'link';
   static const code = 'code';
   static const image = 'image';
+  static const deletedOn = 'deletedOn';
 }

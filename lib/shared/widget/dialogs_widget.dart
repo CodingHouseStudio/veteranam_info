@@ -188,7 +188,7 @@ class _DialogsWidget {
     String? unconfirmText,
   }) {
     Widget body({required bool isDeskValue}) => ConfirmDialog(
-          isDesk: isDesk,
+          isDesk: isDeskValue,
           title: title,
           subtitle: subtitle,
           confirmText: confirmText,

@@ -564,48 +564,28 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    try {
-      await _firestoreService.deleteUserSetting(currentUser.id);
-      // final credential = firebase_auth.EmailAuthProvider.credential(
-      //   email: currentUser.email,
-      //   password: _firebaseAuth.currentUser.password,
-      // );
-      // await _firebaseAuth.currentUser?.reauthenticateWithCredential(credentia
-      // l);
-      if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
-        try {
-          unawaited(_storageService.removeFile(currentUser.photo));
-          // User can save own photo in another service
-          // ignore: empty_catches
-        } catch (e) {}
-      }
-      await _firebaseAuth.currentUser?.delete();
-      _cache.clear(); // Clear the cache after user deletion
-      unawaited(logInAnonymously());
-      return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'deleteUser(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'deleteUser(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    }
+    /// every thirty days, all documents where KAppText.deletedFieldId
+    /// older than 30 days will be deleted automatically and user with the
+    /// same
+    /// UID (firebase function)
+    Left<SomeFailure, bool>? failure;
+    final resultUser = await updateUserSetting(
+      currentUserSetting.copyWith(deletedOn: ExtendedDateTime.current),
+    );
+    resultUser.fold(
+      (l) => failure = Left(l),
+      Right.new,
+    );
+
+    final result = await logOut();
+    // if (currentUser.photo != null && currentUser.photo!.isNotEmpty) {
+    //   try {
+    //     unawaited(_storageService.removeFile(currentUser.photo));
+    //     // User can save own photo in another service
+    //     // ignore: empty_catches
+    //   } catch (e) {}
+    // }
+    return failure ?? result;
     // finally {
     //   _updateAuthStatusBasedOnCache();
     //   _updateUserSettingBasedOnCache();
@@ -660,7 +640,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> createFcmUserSetting() async {
+  Future<Either<SomeFailure, bool>>
+      createFcmUserSettingAndRemoveDeletePameter() async {
     final result = await _deviceRepository.getDevice(
       initialList: currentUserSetting.devicesInfo,
     );
@@ -668,19 +649,25 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return result.fold(
       Left.new,
       (r) async {
-        if (r == null) {
+        var userSetting = currentUserSetting;
+        if (currentUserSetting.deletedOn != null) {
+          userSetting = userSetting.copyWith(deletedOn: null);
+        }
+        if (r != null) {
+          final devicesInfo =
+              List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
+                ..removeWhere(
+                  (deviceInfo) => deviceInfo.deviceId == r.deviceId,
+                )
+                ..add(r);
+          userSetting = userSetting.copyWith(
+            id: currentUser.id,
+            devicesInfo: devicesInfo,
+          );
+        }
+        if (userSetting == currentUserSetting) {
           return const Right(false);
         }
-        final devicesInfo =
-            List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
-              ..removeWhere(
-                (deviceInfo) => deviceInfo.deviceId == r.deviceId,
-              )
-              ..add(r);
-        final userSetting = currentUserSetting.copyWith(
-          id: currentUser.id,
-          devicesInfo: devicesInfo,
-        );
         final result = await updateUserSetting(userSetting);
         return result.fold(
           Left.new,

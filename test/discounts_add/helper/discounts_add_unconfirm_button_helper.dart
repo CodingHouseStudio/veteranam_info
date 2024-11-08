@@ -34,7 +34,7 @@ Future<void> discountsAddUnconfirmButtonlHelper({
       }
 
       if (icon) {
-        await dialogCancelIconHelper(
+        await confirmDialogCancelIconHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );

@@ -39,6 +39,7 @@ void main() {
       CompanyModelJsonField.code: KTestText.fullCompanyModel.code,
       CompanyModelJsonField.image: [KTestText.imageModel.toJson()],
       CompanyModelJsonField.userEmails: KTestText.fullCompanyModel.userEmails,
+      CompanyModelJsonField.deletedOn: KTestText.dateTime.toIso8601String(),
     };
     final nullableJson = {
       CompanyModelJsonField.id: KTestText.fullCompanyModel.id,
@@ -48,6 +49,7 @@ void main() {
       CompanyModelJsonField.image: null,
       CompanyModelJsonField.code: null,
       CompanyModelJsonField.userEmails: KTestText.fullCompanyModel.userEmails,
+      CompanyModelJsonField.deletedOn: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -72,6 +74,7 @@ void main() {
         );
         expect(fullCompanyModel.link, KTestText.fullCompanyModel.link);
         expect(fullCompanyModel.image, KTestText.imageModel);
+        expect(fullCompanyModel.deletedOn, KTestText.dateTime);
       });
       test('${KGroupText.nullable} ', () {
         final fullCompanyModel = CompanyModel.fromJson(nullableJson);
@@ -91,6 +94,7 @@ void main() {
         expect(fullCompanyModel.link, isNull);
         expect(fullCompanyModel.image, isNull);
         expect(fullCompanyModel.code, isNull);
+        expect(fullCompanyModel.deletedOn, isNull);
       });
 
       test('${KGroupText.failure} ', () {
@@ -116,19 +120,22 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
         final fullCompanyModelModelJson = KTestText.fullCompanyModel
-            .copyWith(image: KTestText.imageModel)
+            .copyWith(
+              image: KTestText.imageModel,
+              deletedOn: KTestText.dateTime,
+            )
             .toJson();
 
         expect(fullCompanyModelModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final fullCompanyModelModelJson = CompanyModel(
+        final pureCompanyModelModelJson = CompanyModel(
           id: KTestText.fullCompanyModel.id,
           userEmails: KTestText.fullCompanyModel.userEmails,
         ).toJson();
 
-        expect(fullCompanyModelModelJson, nullableJson);
+        expect(pureCompanyModelModelJson, nullableJson);
       });
     });
   });
