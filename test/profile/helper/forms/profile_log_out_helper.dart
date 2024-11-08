@@ -25,7 +25,7 @@ Future<void> profileLogOutHelper(
 
   await tester.pumpAndSettle();
 
-  await dialogConfirmChangesHelper(
+  await confirmDialogChangesHelper(
     tester: tester,
   );
 }

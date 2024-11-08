@@ -86,7 +86,7 @@ class _CommonConfirmDialog extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
-              key: KWidgetkeys.widget.confirmDialog.icon,
+              key: KWidgetkeys.widget.confirmDialog.cancelIcon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -185,6 +185,7 @@ class _CommonConfirmDialog extends StatelessWidget {
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
       onPressed: onPressed,
+      align: Alignment.center,
       hasAlign: !isDesk,
     );
   }
@@ -201,6 +202,7 @@ class _CommonConfirmDialog extends StatelessWidget {
       isDesk: isDesk,
       text: unconfirmText ?? context.l10n.cancel,
       hasAlign: !isDesk,
+      align: Alignment.center,
     );
   }
 }

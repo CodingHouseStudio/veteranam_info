@@ -32,6 +32,7 @@ void main() {
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
     setUp(() {
+      ExtendedDateTime.current = KTestText.dateTime;
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
       mockGoogleSignIn = MockGoogleSignIn();
@@ -125,6 +126,15 @@ void main() {
       ).thenThrow(
         Exception(KGroupText.failure),
       );
+      when(
+        mockFirestoreService.setUserSetting(
+          userSetting:
+              UserSetting.empty.copyWith(deletedOn: KTestText.dateTime),
+          userId: KTestText.user.id,
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
 
       when(
         mockFirebaseAuth.currentUser,
@@ -137,9 +147,13 @@ void main() {
         Exception(KGroupText.failure),
       );
       when(
-        mockFirestoreService.deleteUserSetting(KTestText.user.id),
-      ).thenAnswer(
-        (_) async {},
+        mockFirestoreService.setUserSetting(
+          userId: KTestText.userSetting.id,
+          userSetting:
+              KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
       );
       when(
         mockDeviceRepository.getDevice(
@@ -336,7 +350,8 @@ void main() {
       );
     });
     test('Create FCM Token for user setting when get device error', () async {
-      final result = await appAuthenticationRepository.createFcmUserSetting();
+      final result = await appAuthenticationRepository
+          .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
           initialList: KTestText.userSetting.devicesInfo,

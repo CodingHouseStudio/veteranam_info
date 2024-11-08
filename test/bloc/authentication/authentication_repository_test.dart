@@ -85,7 +85,8 @@ void main() {
           (_) => false,
         );
         when(
-          mockAppAuthenticationRepository.createFcmUserSetting(),
+          mockAppAuthenticationRepository
+              .createFcmUserSettingAndRemoveDeletePameter(),
         ).thenAnswer(
           (_) async => const Right(true),
         );

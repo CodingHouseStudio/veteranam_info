@@ -60,6 +60,7 @@ void main() {
         KTestText.userSettingModel.devicesInfo!.first.toJson(),
       ],
       UserSettingModelJsonField.nickname: KTestText.nicknameCorrect,
+      UserSettingModelJsonField.deletedOn: KTestText.dateTime.toIso8601String(),
     };
     final nullableJson = {
       UserSettingModelJsonField.id: KTestText.userSettingModel.id,
@@ -70,6 +71,7 @@ void main() {
           KTestText.userSettingModel.roleIsConfirmed,
       UserSettingModelJsonField.devicesInfo: null,
       UserSettingModelJsonField.nickname: null,
+      UserSettingModelJsonField.deletedOn: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -90,6 +92,10 @@ void main() {
           userSettingModel.nickname,
           KTestText.nicknameCorrect,
         );
+        expect(
+          userSettingModel.deletedOn,
+          KTestText.dateTime,
+        );
       });
       test('${KGroupText.nullable} ', () {
         final userSettingModel = UserSetting.fromJson(nullableJson);
@@ -104,6 +110,10 @@ void main() {
         expect(userSettingModel.devicesInfo, isNull);
         expect(
           userSettingModel.nickname,
+          isNull,
+        );
+        expect(
+          userSettingModel.deletedOn,
           isNull,
         );
       });
@@ -129,7 +139,11 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final userModelJson = KTestText.userSettingModel.toJson();
+        final userModelJson = KTestText.userSettingModel
+            .copyWith(
+              deletedOn: KTestText.dateTime,
+            )
+            .toJson();
 
         expect(userModelJson, fullJson);
       });
