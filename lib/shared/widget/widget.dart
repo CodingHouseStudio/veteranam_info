@@ -46,6 +46,7 @@ export 'info_version_widget.dart';
 export 'keyboard_scroll_view.dart';
 export 'languages_switcher_widget.dart';
 export 'left_card_widget.dart';
+export 'list_scroll_up_widget.dart';
 export 'loading_button_widget.dart';
 export 'markdown_link_widget.dart';
 export 'menu_dialog_widget.dart';
