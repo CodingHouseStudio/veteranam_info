@@ -59,12 +59,12 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NetworkCubit, NetworkStatus>(
-      listener: (context, state) {
-        if (state == NetworkStatus.network) {
-          widget.loadDataAgain?.call();
-        }
-      },
+    return BlocBuilder<NetworkCubit, NetworkStatus>(
+      // listener: (context, state) {
+      //   if (state == NetworkStatus.network) {
+      //     widget.loadDataAgain?.call();
+      //   }
+      // },
       builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
@@ -96,6 +96,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                             widgetKey:
                                 KWidgetkeys.widget.scaffold.loadingButton,
                           ),
+
                         //     ...[
                         //   KSizedBox.kHeightSizedBox100,
                         //   // const Center(child: KImage.emptyList),
@@ -123,28 +124,10 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         if (widget.loadingStatus ==
                                 LoadingStatus.listLoadedFull &&
                             !(widget.cardListIsEmpty ?? false) &&
-                            widget.showLoadingWidget) ...[
-                          Center(
-                            child: Text(
-                              context.l10n.thatEndOfList,
-                              key: KWidgetkeys.widget.scaffold.endListText,
-                              style: AppTextStyle
-                                  .materialThemeTitleMediumNeutralVariant70,
-                            ),
+                            widget.showLoadingWidget)
+                          ListScrollUpWidget(
+                            scrollController: _scrollController,
                           ),
-                          KSizedBox.kHeightSizedBox24,
-                          Center(
-                            child: TextButton(
-                              key: KWidgetkeys.widget.scaffold.endListButton,
-                              style: KButtonStyles.endListButtonStyle,
-                              onPressed: scrollUp,
-                              child: Text(
-                                context.l10n.returnToTop,
-                                style: AppTextStyle.materialThemeTitleMedium,
-                              ),
-                            ),
-                          ),
-                        ],
                       ],
                       KSizedBox.kHeightSizedBox40,
                     ]
@@ -292,14 +275,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
-  }
-
-  void scrollUp() {
-    _scrollController.animateTo(
-      0,
-      duration: Duration(milliseconds: (_scrollController.offset / 10).toInt()),
-      curve: Curves.linear,
-    );
   }
 
   @override

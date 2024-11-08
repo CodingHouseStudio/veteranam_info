@@ -4,7 +4,7 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class DonatesCardsWidget extends StatefulWidget {
   const DonatesCardsWidget({
     required this.fundItems,
-    required this.isLoading,
+    this.isLoading = false,
     super.key,
   });
   final List<FundModel> fundItems;
