@@ -30,5 +30,5 @@ Future<void> networkHelper({
 
   await tester.pumpAndSettle();
 
-  await networkStream.close();
+  // await networkStream.close();
 }

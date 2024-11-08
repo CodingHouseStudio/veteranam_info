@@ -1,60 +1,92 @@
-part of 'body/investors_body_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
+import 'package:veteranam/components/investors/investors.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
-List<Widget> _fundsWidgetList({
-  required BuildContext context,
-  required bool isDesk,
-}) {
-  final fundsModel =
-      context.read<InvestorsWatcherBloc>().state.loadingFundItems;
-  final fundsModelItems = <List<FundModel>>[];
+class FundsWidgetList extends StatelessWidget {
+  const FundsWidgetList({required this.isDesk, super.key});
+  final bool isDesk;
 
-  for (var i = 0; i < fundsModel.length; i += KDimensions.donateCardsLine) {
-    if (i + KDimensions.donateCardsLine <= fundsModel.length) {
-      fundsModelItems
-          .add(fundsModel.sublist(i, i + KDimensions.donateCardsLine));
-    } else {
-      fundsModelItems.add(fundsModel.sublist(i));
-    }
-  }
-  final isNotFailure =
-      context.read<InvestorsWatcherBloc>().state.failure == null;
-  if (isDesk) {
-    return cardWidgetList<List<FundModel>>(
-      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
-      modelItems: fundsModelItems,
-      cardWidget: ({required modelItem, required isLoading}) =>
-          DonatesCardsWidget(
-        key: KWidgetkeys.screen.investors.cards,
-        fundItems: modelItem,
-        isLoading: isLoading,
-      ),
-      isDesk: isDesk,
-      shimmerItemsNumber: KDimensions.shimmerFundsDeskItems,
-      isNotFailure: isNotFailure,
-      shimmerItem: List.generate(
-        KDimensions.donateCardsLine,
-        (index) => KMockText.fundModel,
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            context.l10n.provenFunds,
+            key: KWidgetkeys.screen.investors.fundsTitle,
+            style: AppTextStyle.materialThemeDisplayMedium,
+          ),
+        ),
+        FundsList(
+          isDesk: isDesk,
+        ),
+      ],
     );
-  } else {
-    return cardWidgetList<FundModel>(
-      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
-      modelItems: fundsModel,
-      cardWidget: ({required modelItem, required isLoading}) =>
-          DonateCardWidget(
-        key: KWidgetkeys.screen.investors.card,
-        fundModel: modelItem,
-        isDesk: isDesk,
-        hasSubtitle: true,
-        // reportEvent: null,
-        // () => context
-        //     .read<InvestorsWatcherBloc>()
-        //     .add(const InvestorsWatcherEvent.getReport()),
-      ),
-      isDesk: isDesk,
-      shimmerItemsNumber: KDimensions.shimmerFundsMobItems,
-      isNotFailure: isNotFailure,
-      shimmerItem: KMockText.fundModel,
+  }
+}
+
+class FundsList extends StatelessWidget {
+  const FundsList({
+    required this.isDesk,
+    super.key,
+  });
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+      builder: (context, _) {
+        switch (_.loadingStatus) {
+          case LoadingStatusInvestors.loaded:
+            final listLength =
+                isDesk ? _.deskFundItems.length : _.mobFundItems.length;
+            return ListView.builder(
+              shrinkWrap: true,
+              primary: false,
+              itemCount: listLength + 1,
+              itemBuilder: (context, index) {
+                if (index < listLength) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize48,
+                    ),
+                    child: isDesk
+                        ? DonatesCardsWidget(
+                            key: KWidgetkeys.screen.investors.cards,
+                            fundItems: _.deskFundItems.elementAt(index),
+                          )
+                        : DonateCardWidget(
+                            key: KWidgetkeys.screen.investors.card,
+                            hasSubtitle: true,
+                            fundModel: _.mobFundItems.elementAt(index),
+                            isDesk: false,
+                          ),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize48,
+                    ),
+                    child: Center(
+                      child: Text(
+                        context.l10n.thatEndOfList,
+                        key: KWidgetkeys.screen.investors.endListText,
+                        style: AppTextStyle
+                            .materialThemeTitleMediumNeutralVariant70,
+                      ),
+                    ),
+                  );
+                }
+              },
+            );
+          case LoadingStatusInvestors.loading:
+          case LoadingStatusInvestors.error:
+          case LoadingStatusInvestors.initial:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

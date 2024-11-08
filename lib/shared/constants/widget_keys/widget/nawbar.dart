@@ -3,7 +3,7 @@ part of '../widget_keys.dart';
 class _NawbarKeys {
   final widget = const Key('nawbar');
   final logo = const Key('nawbar_logo');
-  final field = const Key('nawbar_field');
+  // final field = const Key('nawbar_field');
   final language = const Key('nawbar_language');
   // final iconMic = const Key('nawbar_micro_icon');
   final loginButton = const Key('nawbar_login_button');

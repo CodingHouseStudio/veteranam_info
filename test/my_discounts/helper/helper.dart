@@ -7,6 +7,7 @@ export 'my_discount_dialog_helper.dart';
 export 'my_discount_empty_profile_page.dart';
 export 'my_discount_failure_helper.dart';
 export 'my_discounts_empty_page_helper.dart';
+export 'my_discounts_end_list_helper.dart';
 export 'my_discounts_initial_helper.dart';
 export 'my_discounts_pump_app_helper.dart';
 export 'my_discounts_unconfirm_button_helper.dart';

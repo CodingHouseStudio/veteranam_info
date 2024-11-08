@@ -6,17 +6,19 @@ import '../../test_dependency.dart';
 Future<void> loadingFailureHelper({
   required WidgetTester tester,
   required Key card,
-  required Key buttonMock,
+  required Key? buttonMock,
 }) async {
   expect(
     find.byKey(card),
     findsNothing,
   );
 
-  expect(
-    find.byKey(buttonMock),
-    findsNothing,
-  );
+  if (buttonMock != null) {
+    expect(
+      find.byKey(buttonMock),
+      findsNothing,
+    );
+  }
 
   await dialogFailureGetTapHelper(tester: tester);
 }
