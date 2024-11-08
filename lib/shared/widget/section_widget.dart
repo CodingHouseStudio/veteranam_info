@@ -1,7 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-abstract class SectionWidget {
+class SectionWidget extends StatelessWidget {
+  const SectionWidget({
+    required this.isDesk,
+    required this.route,
+    required this.title,
+    required this.subtitle,
+    required this.textButton,
+    required this.titleKey,
+    required this.subtitleKey,
+    required this.buttonKey,
+    super.key,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.bottomWidget,
+  });
+  final bool isDesk;
+  final CrossAxisAlignment crossAxisAlignment;
+  final void Function() route;
+  final String title;
+  final String subtitle;
+  final String textButton;
+  final Key titleKey;
+  final Key subtitleKey;
+  final Key buttonKey;
+  final Widget? bottomWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: crossAxisAlignment,
+      children: get(
+        isTablet: isDesk,
+        // textPoint: null,
+        title: title,
+        subtitle: subtitle,
+        textButton: textButton,
+        route: route,
+        // prefixKey: null,
+        titleKey: titleKey,
+        subtitleKey: subtitleKey,
+        buttonKey: buttonKey,
+        bottomWidget: bottomWidget,
+      ),
+    );
+  }
+
   static List<Widget> get({
     required bool isTablet,
     // required String? textPoint,

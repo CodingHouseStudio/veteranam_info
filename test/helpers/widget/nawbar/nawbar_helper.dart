@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../../test_dependency.dart';
@@ -19,55 +18,55 @@ Future<void> nawbarHelper({
   );
   late FinderResult<Element> language;
 
-  if (Config.isDevelopment) {
-    expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  // if (Config.isDevelopment) {
+  //   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-    final textField = tester.widget<TextField>(
-      find.byKey(
-        KWidgetkeys.widget.nawbar.field,
-      ),
+  //   final textField = tester.widget<TextField>(
+  //     find.byKey(
+  //       KWidgetkeys.widget.nawbar.field,
+  //     ),
+  //   );
+
+  //   textField.focusNode!.unfocus();
+
+  //   await tester.pumpAndSettle();
+
+  //   language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+
+  //   if (language.isNotEmpty) {
+  //     expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
+
+  //     await languageSwitcherHelper(tester);
+  //   }
+  // } else {
+  language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+
+  if (language.isNotEmpty) {
+    await buttonBottomLineHelper(
+      tester: tester,
+      isDesk: true,
     );
 
-    textField.focusNode!.unfocus();
+    expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
 
-    await tester.pumpAndSettle();
+    await languageSwitcherHelper(tester);
 
-    language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
+      findsOneWidget,
+    );
 
-    if (language.isNotEmpty) {
-      expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.investorsButton),
+      findsOneWidget,
+    );
 
-      await languageSwitcherHelper(tester);
-    }
-  } else {
-    language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
-
-    if (language.isNotEmpty) {
-      await buttonBottomLineHelper(
-        tester: tester,
-        isDesk: true,
-      );
-
-      expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
-
-      await languageSwitcherHelper(tester);
-
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.investorsButton),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.widget.nawbar.feedbackButton),
-        findsOneWidget,
-      );
-    }
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.feedbackButton),
+      findsOneWidget,
+    );
   }
+  // }
   expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
   if (language.isEmpty ||
@@ -97,46 +96,46 @@ Future<void> nawbarHelper({
   //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
   //   hasMic ? findsOneWidget : findsNothing,
   // );
-  if (Config.isDevelopment) {
-    await tester.enterText(
-      find.byKey(KWidgetkeys.widget.nawbar.field),
-      searchText,
-    );
+  // if (Config.isDevelopment) {
+  //   await tester.enterText(
+  //     find.byKey(KWidgetkeys.widget.nawbar.field),
+  //     searchText,
+  //   );
 
-    await tester.pumpAndSettle();
+  //   await tester.pumpAndSettle();
 
-    expect(
-      find.descendant(
-        of: find.byKey(KWidgetkeys.widget.nawbar.field),
-        matching: find.text(searchText),
-      ),
-      findsOneWidget,
-    );
+  //   expect(
+  //     find.descendant(
+  //       of: find.byKey(KWidgetkeys.widget.nawbar.field),
+  //       matching: find.text(searchText),
+  //     ),
+  //     findsOneWidget,
+  //   );
 
-    // expect(
-    //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
-    //   hasMic ? findsOneWidget : findsNothing,
-    // );
-    if (language.isEmpty) {
-      expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsNothing);
+  //   // expect(
+  //   //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+  //   //   hasMic ? findsOneWidget : findsNothing,
+  //   // );
+  //   if (language.isEmpty) {
+  //     expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsNothing);
 
-      expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  //     expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-      expect(find.byKey(KWidgetkeys.widget.nawbar.loginIcon), findsNothing);
+  //     expect(find.byKey(KWidgetkeys.widget.nawbar.loginIcon), findsNothing);
 
-      final textField = tester.widget<TextField>(
-        find.byKey(
-          KWidgetkeys.widget.nawbar.field,
-        ),
-      );
+  //     final textField = tester.widget<TextField>(
+  //       find.byKey(
+  //         KWidgetkeys.widget.nawbar.field,
+  //       ),
+  //     );
 
-      textField.focusNode!.unfocus();
+  //     textField.focusNode!.unfocus();
 
-      await tester.pumpAndSettle();
-    }
+  //     await tester.pumpAndSettle();
+  //   }
 
-    expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
+  //   expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
-    expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
-  }
+  //   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  // }
 }

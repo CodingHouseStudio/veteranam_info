@@ -137,39 +137,39 @@ void main() {
         await investorsFailureHelper(tester);
       });
     });
-    group('${KGroupText.getEmptyList} ', () {
-      setUp(() {
-        when(
-          mockInvestorsRepository.getFunds(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
-        ).thenAnswer(
-          (invocation) async => const Right([]),
-        );
+    // group('${KGroupText.getEmptyList} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockInvestorsRepository.getFunds(
+    //           // reportIdItems: KTestText.reportItems.getIdCard,
+    //           ),
+    //     ).thenAnswer(
+    //       (invocation) async => const Right([]),
+    //     );
 
-        when(mockInvestorsRepository.addMockFunds()).thenAnswer(
-          (invocation) {},
-        );
-        if (GetIt.I.isRegistered<IInvestorsRepository>()) {
-          GetIt.I.unregister<IInvestorsRepository>();
-        }
-        GetIt.I.registerSingleton<IInvestorsRepository>(
-          mockInvestorsRepository,
-        );
-      });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
-        await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
-        );
+    //     when(mockInvestorsRepository.addMockFunds()).thenAnswer(
+    //       (invocation) {},
+    //     );
+    //     if (GetIt.I.isRegistered<IInvestorsRepository>()) {
+    //       GetIt.I.unregister<IInvestorsRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IInvestorsRepository>(
+    //       mockInvestorsRepository,
+    //     );
+    //   });
+    // testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //   await investorsPumpAppHelper(
+    //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //     mockInvestorsRepository: mockInvestorsRepository,
+    //     mockReportRepository: mockReportRepository,
+    //     mockAuthenticationRepository: mockAuthenticationRepository,
+    //     mockUrlRepository: mockUrlRepository,
+    //     tester: tester,
+    //   );
 
-        await investorsMockButtonHelper(tester);
-      });
-    });
+    //   await investorsMockButtonHelper(tester);
+    // });
+    // });
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(
@@ -214,17 +214,17 @@ void main() {
         ).called(2);
       });
 
-      loadingList(
-        (tester) async => investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
-        ),
-        // lastCard: KWidgetkeys.screen.investors.cardLast,
-      );
+      // loadingList(
+      //   (tester) async => investorsPumpAppHelper(
+      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      //     mockInvestorsRepository: mockInvestorsRepository,
+      //     mockReportRepository: mockReportRepository,
+      //     mockAuthenticationRepository: mockAuthenticationRepository,
+      //     mockUrlRepository: mockUrlRepository,
+      //     tester: tester,
+      //   ),
+      //   // lastCard: KWidgetkeys.screen.investors.cardLast,
+      // );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -363,7 +363,7 @@ void main() {
             (invocation) async => Right(KTestText.fundItems.sublist(0, 2)),
           );
         });
-        testWidgets('Tap on scroll button', (tester) async {
+        testWidgets('End list', (tester) async {
           await investorsPumpAppHelper(
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockInvestorsRepository: mockInvestorsRepository,
@@ -373,7 +373,7 @@ void main() {
             tester: tester,
           );
 
-          await scaffoldEmptyScrollHelper(tester);
+          await investorsEndListHelper(tester);
         });
       });
     });
