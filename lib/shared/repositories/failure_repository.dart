@@ -173,10 +173,10 @@ class FailureRepository {
       }
     }
     log(
-      'EXCEPTION $tagKey: $tagKey.',
+      'EXCEPTION $tagKey: $tag.',
       stackTrace: stack,
       error: error,
-      name: 'FailureRepository',
+      name: 'ERROR!!!',
       level: errorLevel.getLevel,
       sequenceNumber: errorLevel.getSequenceNumber,
     );
