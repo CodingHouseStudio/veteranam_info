@@ -1,9 +1,8 @@
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart'
+    deferred as tracking_status;
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'
-    show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -19,9 +18,6 @@ class DeviceRepository implements IDeviceRepository {
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
   final AppInfoRepository _buildRepository;
-
-  @visibleForTesting
-  static TrackingStatus? appTrackingTransparency;
 
   @override
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
@@ -122,49 +118,53 @@ class DeviceRepository implements IDeviceRepository {
 
       final notificationSettings =
           await _firebaseMessaging.getNotificationSettings();
-
-      if (notificationSettings.authorizationStatus ==
-          AuthorizationStatus.denied) {
-        if (platform.isAndroid) {
+      switch (notificationSettings.authorizationStatus) {
+        case AuthorizationStatus.denied:
+          if (platform.isAndroid) {
+            await handleRequestPermission(platform);
+          }
+        case AuthorizationStatus.notDetermined:
+          await handleRequestPermission(
+            platform,
+            provisional: true,
+          );
+        case AuthorizationStatus.provisional:
           await handleRequestPermission(platform);
-        }
-      } else if (notificationSettings.authorizationStatus ==
-          AuthorizationStatus.notDetermined) {
-        await handleRequestPermission(
-          platform,
-          provisional: platform.isIOS,
-        );
-      } else if (notificationSettings.authorizationStatus ==
-          AuthorizationStatus.provisional) {
-        await handleRequestPermission(platform);
+        case AuthorizationStatus.authorized:
+          break;
       }
-
-      // You may set the permission requests to "provisional" which allows the
-      // user to choose what type
-      // of notifications they would like to receive once the user receives a
-      // notification.
-      // final notificationSettings = await _firebaseMessaging
-      // .requestPermission(
-      //   provisional: platform.isIOS,
-      // );
-
-      // final notificationSettings =
-      //     await _firebaseMessaging.getNotificationSettings();
-
-      // For apple platforms, ensure the APNS token is available before making
-      // any FCM plugin API calls
-      // final apnsToken = await _firebaseMessaging.getAPNSToken();
 
       if (notificationSettings.authorizationStatus ==
               AuthorizationStatus.authorized ||
           (platform.isIOS &&
               notificationSettings.authorizationStatus ==
                   AuthorizationStatus.provisional)) {
-        fcmToken = await _firebaseMessaging.getToken(
-          vapidKey: Config.isProduction
-              ? KSecurityKeys.firebaseProdVapidKey
-              : KSecurityKeys.firebaseDevVapidKey,
-        );
+        String? apnsToken;
+        // For iOS, retrieve the apnsToken, which is required for FCM to send
+        // messages via APNs.
+        // If the apnsToken is not available (e.g., user hasn't granted
+        // permissions),
+        // FCM won't be able to deliver push notifications to this iOS device.
+        if (platform.isIOS) {
+          /// Message from firebase website - https://firebase.google.com/docs/cloud-messaging/flutter/client#access_the_registration_token
+          // Warning: In iOS SDK 10.4.0 and higher, it is a requirement that
+          // the APNs token is available before making API requests.
+          // The APNs token is not guaranteed to have been received
+          // before making FCM plugin API requests.
+          apnsToken = await _firebaseMessaging.getAPNSToken();
+        }
+        // Proceed with generating the fcmToken only if:
+        // - The platform is not iOS (no apnsToken is needed),
+        // - or the platform is iOS and apnsToken is successfully retrieved.
+        // The fcmToken, combined with apnsToken on iOS, enables proper delivery
+        // of notifications.
+        if (!platform.isIOS || apnsToken != null) {
+          fcmToken = await _firebaseMessaging.getToken(
+            vapidKey: Config.isProduction
+                ? KSecurityKeys.firebaseProdVapidKey
+                : KSecurityKeys.firebaseDevVapidKey,
+          );
+        }
       }
 
       return Right(fcmToken);
@@ -185,29 +185,37 @@ class DeviceRepository implements IDeviceRepository {
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
-    if (platformValue.isIOS) {
-      final trackingAuthorizationStatus =
-          await AppTrackingTransparency.trackingAuthorizationStatus;
-      // see if app tracking transparency is enabled
-      if ((appTrackingTransparency ?? trackingAuthorizationStatus) ==
-          TrackingStatus.notDetermined) {
-        // Request system's tracking authorization dialog
-        try {
-          await AppTrackingTransparency.requestTrackingAuthorization();
-        } catch (e) {
-          // Handle error
+    try {
+      if (platformValue.isIOS) {
+        await tracking_status.loadLibrary();
+        final trackingAuthorizationStatus = await tracking_status
+            .AppTrackingTransparency.trackingAuthorizationStatus;
+        // see if app tracking transparency is enabled
+        if (trackingAuthorizationStatus ==
+                tracking_status.TrackingStatus.notDetermined ||
+            KTest.isTest) {
+          // Request system's tracking authorization dialog
+          try {
+            await tracking_status.AppTrackingTransparency
+                .requestTrackingAuthorization();
+          } catch (e) {
+            // Handle error
+          }
         }
+
         await _firebaseMessaging.requestPermission(
-          provisional: platformValue.isIOS && provisional,
+          provisional: provisional,
         );
       } else {
         await _firebaseMessaging.requestPermission(
-          provisional: platformValue.isIOS && provisional,
+          // All This parameters only for iOS/macOS
+          alert: false,
+          badge: false,
+          sound: false,
         );
       }
-    } else {
-      await _firebaseMessaging.requestPermission();
+    } catch (e) {
+      throw 'Request Permsion Error - $e';
     }
-    {}
   }
 }
