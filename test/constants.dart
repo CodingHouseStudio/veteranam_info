@@ -277,6 +277,7 @@ abstract class KTestText {
   );
   static const deviceId = 'test_device_id';
   static const fcmToken = 'test_fcm_token';
+  static const aPNSToken = 'APNS_token';
   static const imageModel = ImageModel(
     downloadURL: image,
     lastModifiedTS: 1,
