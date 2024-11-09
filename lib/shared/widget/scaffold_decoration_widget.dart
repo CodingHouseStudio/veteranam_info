@@ -69,7 +69,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                 widgetKey: KWidgetkeys.widget.scaffold.scroll,
                 slivers: [
                   SliverPersistentHeader(
-                    delegate: NawbarWidget.getSliverHeader(
+                    delegate: NavbarWidget.getSliverHeader(
                       isDesk: isDesk,
                       isTablet: isTablet,
                     ),

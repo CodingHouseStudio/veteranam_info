@@ -124,10 +124,11 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
-      itemsLoaded: state.itemsLoaded.getLoaded(
-        list: event.discountItemsModel,
-        loadItems: getItemsLoading,
-      ),
+      itemsLoaded: event.discountItemsModel.length,
+      // state.itemsLoaded.getLoaded(
+      //   list: event.discountItemsModel,
+      //   loadItems: getItemsLoading,
+      // ),
     );
     emit(
       _Initial(
@@ -135,10 +136,11 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
         filtersCategories: state.filtersCategories,
-        itemsLoaded: state.itemsLoaded.getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        itemsLoaded: list.length,
+        // state.itemsLoaded.getLoaded(
+        //   list: list,
+        //   loadItems: getItemsLoading,
+        // ),
         failure: null,
         filtersLocation: state.filtersLocation,
         // reportItems: event.reportItems,
@@ -435,7 +437,7 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = categoryList.combiningFilteredLists(
       secondList: locationList,
       itemsLoaded: itemsLoaded,
-      loadItems: loadItems,
+      loadItems: state.discountModelItems.length,
       // sorting: (list) => _sorting(list: list, location: location),
     );
     return (list: list, loadingStatus: loadingStatus);

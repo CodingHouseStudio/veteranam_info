@@ -15,12 +15,16 @@ class VerticalScrollWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: CustomScrollBehavior(),
-      child: SingleChildScrollView(
-        key: scrollKey,
-        scrollDirection: Axis.horizontal,
-        reverse: mainAxisEnd ?? false,
-        child: Row(
-          children: children,
+      child: SizedBox(
+        // TODO(refactor): change it
+        height: 100,
+        child: ListView.builder(
+          key: scrollKey,
+          scrollDirection: Axis.horizontal,
+          reverse: mainAxisEnd ?? false,
+          shrinkWrap: true,
+          itemCount: children.length,
+          itemBuilder: (context, index) => children.elementAt(index),
         ),
       ),
     );

@@ -177,7 +177,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           ),
                         if (Config.isWeb || widget.pageName != null)
                           SliverPersistentHeader(
-                            delegate: NawbarWidget.getSliverHeader(
+                            delegate: NavbarWidget.getSliverHeader(
                               isDesk: isDesk,
                               isTablet: isTablet,
                               pageName: widget.pageName,

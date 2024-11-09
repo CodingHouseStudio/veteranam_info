@@ -52,6 +52,7 @@ class FundsList extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),
+                    // TODO(Refactor): Add value key
                     child: isDesk
                         ? DonatesCardsWidget(
                             key: KWidgetkeys.screen.investors.cards,

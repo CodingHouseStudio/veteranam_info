@@ -8,7 +8,7 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     List<DiscountModel> discountItemsModel,
   ) = _Updated;
 
-  const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
+  // const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
   const factory DiscountWatcherEvent.filterCategory(
     dynamic value,
