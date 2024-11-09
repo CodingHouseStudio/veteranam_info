@@ -1,4 +1,3 @@
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -91,7 +90,11 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(
-          mockFirebaseMessaging.requestPermission(),
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
         ).thenAnswer(
           (_) async => KTestText.notificationSettings(),
         );
@@ -109,6 +112,11 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => KTestText.fcmToken,
+        );
+        when(
+          mockFirebaseMessaging.getAPNSToken(),
+        ).thenAnswer(
+          (_) async => KTestText.aPNSToken,
         );
         when(
           mockFirebaseMessaging.getNotificationSettings(),
@@ -321,27 +329,6 @@ void main() {
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
-        DeviceRepository.appTrackingTransparency = TrackingStatus.denied;
-        expect(
-          await deviceRepository.getFcm(platformValue: PlatformEnum.ios),
-          isA<Right<SomeFailure, String?>>().having(
-            (e) => e.value,
-            'value',
-            null,
-          ),
-        );
-      });
-      test(
-          'Get FCM when permission Not Determined IOS '
-          'and TrackingStatus notDetermined', () async {
-        when(
-          mockFirebaseMessaging.getNotificationSettings(),
-        ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
-            authorizationStatus: AuthorizationStatus.notDetermined,
-          ),
-        );
-        DeviceRepository.appTrackingTransparency = TrackingStatus.notDetermined;
         expect(
           await deviceRepository.getFcm(platformValue: PlatformEnum.ios),
           isA<Right<SomeFailure, String?>>().having(
@@ -386,12 +373,23 @@ void main() {
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.provisional,
+          ),
+        );
+        when(
           mockFirebaseMessaging.setAutoInitEnabled(true),
         ).thenThrow(
           Exception(KGroupText.failure),
         );
         when(
-          mockFirebaseMessaging.requestPermission(),
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
         ).thenThrow(
           Exception(KGroupText.failure),
         );
