@@ -10,57 +10,42 @@ class DiscountsFilterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-      // TODO(refactor): add build when
-      builder: (context, state) {
-        if (isDesk) {
-          return Expanded(
-            child: _Filter(
+        buildWhen: (previous, current) =>
+            previous.loadingStatus != current.loadingStatus ||
+            previous.filterCategory != current.filterCategory ||
+            previous.locationDiscountModelItems !=
+                current.locationDiscountModelItems ||
+            previous.categoryListEmpty != current.categoryListEmpty,
+        builder: (context, state) {
+          if (state.loadingStatus == LoadingStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            final filterWidget = FilterChipBodyWidget(
               isDesk: isDesk,
-              state: state,
-            ),
-          );
-        } else {
-          return Column(
-            children: [
-              _Filter(
-                isDesk: isDesk,
-                state: state,
-              ),
-              KSizedBox.kHeightSizedBox24,
-              AdvancedFilterMob(
-                key: KWidgetkeys.screen.discounts.advancedFilterMob,
-              ),
-            ],
-          );
-        }
-      },
-    );
-  }
-}
+              filtersItems: state.filterCategory,
+              fullLength: state.locationDiscountModelItems.length,
+              filterIsEmpty: state.categoryListEmpty,
+            );
 
-class _Filter extends StatelessWidget {
-  const _Filter({required this.isDesk, super.key, required this.state});
-  final bool isDesk;
-  final DiscountWatcherState state;
+            final childWidget = isDesk
+                ? filterWidget
+                : Column(
+                    children: [
+                      filterWidget,
+                      KSizedBox.kHeightSizedBox24,
+                      AdvancedFilterMob(
+                        key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                      ),
+                    ],
+                  );
 
-  @override
-  Widget build(BuildContext context) {
-    return FiltersChipWidget(
-      key: KWidgetkeys.screen.discounts.filter,
-      filtersItems: state.filterCategory,
-      isDesk: isDesk,
-      // onResetValue: () => context.read<DiscountWatcherBloc>().add(
-      //       const DiscountWatcherEvent.filterReset(),
-      //     ),
-      isSelected: null,
-      // isSelected: (index) => state.filterCategory.elementAt(index),
-      onSelected: (value) => context.read<DiscountWatcherBloc>().add(
-            DiscountWatcherEvent.filterCategory(
-              value,
-            ),
-          ),
-      fullLength: state.locationDiscountModelItems.length,
-      filterIsEmpty: state.categoryListEmpty,
-    );
+            return ShaderWidget(
+              isDesk: isDesk,
+              child: childWidget,
+            );
+          }
+        });
   }
 }

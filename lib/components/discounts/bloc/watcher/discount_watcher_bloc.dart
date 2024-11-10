@@ -87,57 +87,57 @@ class DiscountWatcherBloc
     );
   }
 
+  void logTimestamp(String methodName, {String point = 'start'}) {
+    final DateTime currentTime = DateTime.now();
+    print('$methodName $point at: $currentTime');
+  }
+
   Future<void> _onUpdated(
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    if (event.discountItemsModel.isEmpty && Config.isProduction) return;
-    // final items = event.discountItemsModel.removeReportItems(
-    //   checkFunction: (item) => item.id,
-    //   reportItems: event.reportItems,
-    // );
-    // ..sort(
-    //     (a, b) {
-    //       final dateComparison = b.dateVerified.compareTo(a.dateVerified);
-    //       if (dateComparison == 0) {
-    //         // Attempt int conversion using null-aware operators
-    //         final idA = int.tryParse(a.id);
-    //         final idB = int.tryParse(b.id);
+    logTimestamp('_onUpdated', point: 'start');
 
-    //         if (idA != null && idB != null) {
-    //           return idB.compareTo(idA); // Descending order
-    //         } else {
-    //           return 1;
-    //         }
-    //       }
-    //       return dateComparison;
-    //     },
-    //   );
+    if (event.discountItemsModel.isEmpty && Config.isProduction) {
+      logTimestamp('_onUpdated', point: 'exit early');
+      return;
+    }
+
+    // Track before processing categories
+    logTimestamp('_onUpdated', point: 'before processing categories');
     final categories = event.discountItemsModel.overallItems(
       isEnglish: event.isEnglish,
       getENFilter: (item) => item.categoryEN,
       getUAFilter: (item) => item.category,
       list: event.discountItemsModel,
     );
+
+    logTimestamp('_onUpdated', point: 'after processing categories');
+
     final sortingList = _sorting(list: event.discountItemsModel, sorting: null);
+    logTimestamp('_onUpdated', point: 'after sorting');
+
     final categoryFilter = _filterCategory(
       categories: state.filterCategory,
       list: sortingList,
     );
+    logTimestamp('_onUpdated', point: 'after category filter');
+
     final locationList = _filterLocation(
       location: state.filtersLocation,
       listValue: sortingList,
-      // categiryList: categoryFilter,
     );
+    logTimestamp('_onUpdated', point: 'after location filter');
+
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
       itemsLoaded: event.discountItemsModel.length,
-      // state.itemsLoaded.getLoaded(
-      //   list: event.discountItemsModel,
-      //   loadItems: getItemsLoading,
-      // ),
     );
+    logTimestamp('_onUpdated', point: 'after main filtering');
+
+    // Before emitting state
+    logTimestamp('_onUpdated', point: 'before emit');
     emit(
       _Initial(
         discountModelItems: event.discountItemsModel,
@@ -146,19 +146,15 @@ class DiscountWatcherBloc
         filterCategory: categories,
         itemsLoaded: list.length,
         categoryListEmpty: categories.haveSelectedValue,
-        // filterCategory: categoryList,
-        // state.itemsLoaded.getLoaded(
-        //   list: list,
-        //   loadItems: getItemsLoading,
-        // ),
         failure: null,
         filtersLocation: state.filtersLocation,
-        // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
-        locationDiscountModelItems: locationList, sorting: state.sorting,
+        locationDiscountModelItems: locationList,
+        sorting: state.sorting,
         sortingDiscountModelItems: sortingList,
       ),
     );
+    logTimestamp('_onUpdated', point: 'end');
   }
 
   void _onLoadNextItems(
@@ -550,4 +546,9 @@ class DiscountWatcherBloc
     _discountItemsSubscription?.cancel();
     return super.close();
   }
+}
+
+void logTimestamp(String methodName, {String point = 'start'}) {
+  final DateTime currentTime = DateTime.now();
+  print('$methodName $point at: $currentTime');
 }

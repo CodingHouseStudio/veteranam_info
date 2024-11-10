@@ -65,6 +65,7 @@ class ChipDeskWidgetState extends State<ChipDeskWidget> {
         setState(() => _isHovered = false);
       },
       child: ChipImplementationWidget(
+        key: ValueKey(widget.filter.value),
         filter: widget.filter,
         isSelected: widget.isSelected,
         amountTextColor: widget.isSelected
@@ -90,62 +91,6 @@ class ChipDeskWidgetState extends State<ChipDeskWidget> {
         ),
         widgetKey: widget.widgetKey,
       ),
-      //           FilterChip(
-      //   backgroundColor: AppColors.materialThemeWhite,
-      //   labelPadding: EdgeInsets.zero,
-      //   label: Row(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [
-      //       Padding(
-      //         padding: EdgeInsets.only(
-      //           left: widget.isSelected
-      //               ? KPadding.kPaddingSize8
-      //               : KPadding.kPaddingSize10,
-      //           right: KPadding.kPaddingSize10,
-      //         ),
-      //         child: Text(
-      //           widget.filter.getString(context),
-      //           key: KWidgetkeys.widget.chip.text,
-      //           style: AppTextStyle.materialThemeHeadlineSmall.copyWith(
-      //             color: _isHovered && !widget.isSelected && !filterEmpty
-      //                 ? AppColors.materialThemeKeyColorsNeutralVariant
-      //                 : AppColors.materialThemeBlack,
-      //           ),
-      //         ),
-      //       ),
-      //       if (!filterEmpty)
-      //         AmountWidget(
-      //           key: KWidgetkeys.widget.chip.amount,
-      //           background: widget.isSelected
-      //               ? AppColors.materialThemeBlack
-      //               : AppColors.materialThemeKeyColorsPrimary,
-      //           textColor: widget.isSelected
-      //               ? AppColors.materialThemeWhite
-      //               : (!widget.isSelected && _isHovered
-      //                   ? AppColors.materialThemeKeyColorsNeutralVariant
-      //                   : AppColors.materialThemeBlack),
-      //           number: widget.filter.number,
-      //         ),
-      //     ],
-      //   ),
-      //   shape: const RoundedRectangleBorder(
-      //     borderRadius: KBorderRadius.kBorderRadius32,
-      //   ),
-      //   side: BorderSide(
-      //     color: !widget.isSelected
-      //         ? (_isHovered || filterEmpty
-      //             ? AppColors.materialThemeKeyColorsNeutralVariant
-      //             : AppColors.materialThemeBlack)
-      //         : Colors.transparent,
-      //   ),
-      //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      //   selected: widget.isSelected,
-      //   onSelected: !filterEmpty ? widget.onSelected : null,
-      //   checkmarkColor: AppColors.materialThemeRefSecondarySecondary10,
-      //   selectedColor: _isHovered
-      //       ? AppColors.materialThemeRefPrimaryPrimary90
-      //       : AppColors.materialThemeSourceSeed,
-      // ),
     );
   }
 }

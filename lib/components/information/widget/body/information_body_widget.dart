@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart';
-import 'package:veteranam/shared/extension/extension_dart.dart';
 import 'package:veteranam/shared/repositories/i_information_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -117,37 +116,38 @@ class InformationBodyWidget extends StatelessWidget {
   }
 
   Widget _filter({required bool isDesk, required BuildContext context}) =>
-      FiltersChipWidget(
-        key: KWidgetkeys.screen.information.filter,
-        filtersItems: context
-            .read<InformationWatcherBloc>()
-            .state
-            .informationModelItems
-            .overallItems(
-              isEnglish: context.isEnglish,
-              getENFilter: (item) => item.category,
-              getUAFilter: (item) => item.categoryUA,
-            ),
-        isDesk: isDesk,
-        // onResetValue: () => context.read<InformationWatcherBloc>().add(
-        //       const InformationWatcherEvent.filterReset(),
-        //     ),
-        isSelected: (index) => context
-            .read<InformationWatcherBloc>()
-            .state
-            .filters
-            .contains(index),
-        onSelected: (index) => context.read<InformationWatcherBloc>().add(
-              InformationWatcherEvent.filter(
-                index,
-              ),
-            ),
-        fullLength: context
-            .read<InformationWatcherBloc>()
-            .state
-            .informationModelItems
-            .length,
-        filterIsEmpty:
-            context.read<InformationWatcherBloc>().state.filters.isEmpty,
-      );
+      SizedBox.shrink();
+  // ShaderWidget(
+  //   key: KWidgetkeys.screen.information.filter,
+  //   filtersItems: context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .informationModelItems
+  //       .overallItems(
+  //         isEnglish: context.isEnglish,
+  //         getENFilter: (item) => item.category,
+  //         getUAFilter: (item) => item.categoryUA,
+  //       ),
+  //   isDesk: isDesk,
+  //   // onResetValue: () => context.read<InformationWatcherBloc>().add(
+  //   //       const InformationWatcherEvent.filterReset(),
+  //   //     ),
+  //   isSelected: (index) => context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .filters
+  //       .contains(index),
+  //   onSelected: (index) => context.read<InformationWatcherBloc>().add(
+  //         InformationWatcherEvent.filter(
+  //           index,
+  //         ),
+  //       ),
+  //   fullLength: context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .informationModelItems
+  //       .length,
+  //   filterIsEmpty:
+  //       context.read<InformationWatcherBloc>().state.filters.isEmpty,
+  // );
 }
