@@ -123,6 +123,11 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.notificationSettings(),
         );
+        when(
+          mockFirebaseMessaging.isSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
 
         when(
           mockBuildRepository.getBuildInfo(),
@@ -310,6 +315,17 @@ void main() {
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
+        when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.notDetermined,
+          ),
+        );
         expect(
           await deviceRepository.getFcm(),
           isA<Right<SomeFailure, String?>>().having(
@@ -324,6 +340,13 @@ void main() {
           'and TrackingStatus denied', () async {
         when(
           mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.notDetermined,
+          ),
+        );
+        when(
+          mockFirebaseMessaging.requestPermission(provisional: true),
         ).thenAnswer(
           (_) async => KTestText.notificationSettings(
             authorizationStatus: AuthorizationStatus.notDetermined,
@@ -344,6 +367,17 @@ void main() {
             authorizationStatus: AuthorizationStatus.denied,
           ),
         );
+        when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.denied,
+          ),
+        );
         expect(
           await deviceRepository.getFcm(platformValue: PlatformEnum.android),
           isA<Right<SomeFailure, String?>>().having(
@@ -359,12 +393,32 @@ void main() {
             authorizationStatus: AuthorizationStatus.provisional,
           ),
         );
+        when(
+          mockFirebaseMessaging.requestPermission(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.provisional,
+          ),
+        );
         expect(
           await deviceRepository.getFcm(platformValue: PlatformEnum.ios),
           isA<Right<SomeFailure, String?>>().having(
             (e) => e.value,
             'value',
             KTestText.fcmToken,
+          ),
+        );
+      });
+      test('Get FCM when isSupported false', () async {
+        when(mockFirebaseMessaging.isSupported()).thenAnswer(
+          (_) async => false,
+        );
+        expect(
+          await deviceRepository.getFcm(),
+          isA<Right<SomeFailure, String?>>().having(
+            (e) => e.value,
+            'value',
+            null,
           ),
         );
       });
@@ -399,6 +453,23 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failure),
         );
+        when(
+          mockFirebaseMessaging.getToken(
+            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failure),
+        );
+        when(
+          mockBuildRepository.getBuildInfo(),
+        ).thenAnswer(
+          (_) async => AppInfoRepository.defaultValue,
+        );
+        when(
+          mockFirebaseMessaging.isSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
 
         deviceRepository = DeviceRepository(
           mockFirebaseMessaging,
@@ -418,6 +489,24 @@ void main() {
         );
       });
       test('Get device(get FCM failure)', () async {
+        when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
+        when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
         when(
           mockDeviceInfoPlugin.deviceInfo,
         ).thenAnswer(
@@ -445,6 +534,17 @@ void main() {
         );
       });
       test('Get FCM', () async {
+        expect(
+          await deviceRepository.getFcm(),
+          isA<Left<SomeFailure, String?>>(),
+        );
+      });
+      test('Get FCM(get token error)', () async {
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
         expect(
           await deviceRepository.getFcm(), isA<Left<SomeFailure, String?>>(),
           // .having(

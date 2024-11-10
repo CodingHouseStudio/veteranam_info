@@ -52,8 +52,11 @@ class DeviceRepository implements IDeviceRepository {
       );
       if (failure != null) return Left(failure!);
 
+      // This Method contain try catch. If has error return
+      // AppInfoRepository.defaultValue
+      // This Method contain try catch. If has error return
+      // AppInfoRepository.defaultValue
       final buildInfo = await _buildRepository.getBuildInfo();
-
       return Right(
         DeviceInfoModel(
           deviceId: id,
@@ -113,23 +116,24 @@ class DeviceRepository implements IDeviceRepository {
     PlatformEnum? platformValue,
   }) async {
     try {
+      if (!await _firebaseMessaging.isSupported()) return const Right(null);
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
-      final notificationSettings =
+      var notificationSettings =
           await _firebaseMessaging.getNotificationSettings();
       switch (notificationSettings.authorizationStatus) {
         case AuthorizationStatus.denied:
           if (platform.isAndroid) {
-            await handleRequestPermission(platform);
+            notificationSettings = await handleRequestPermission(platform);
           }
         case AuthorizationStatus.notDetermined:
-          await handleRequestPermission(
+          notificationSettings = await handleRequestPermission(
             platform,
             provisional: true,
           );
         case AuthorizationStatus.provisional:
-          await handleRequestPermission(platform);
+          notificationSettings = await handleRequestPermission(platform);
         case AuthorizationStatus.authorized:
           break;
       }
@@ -181,41 +185,40 @@ class DeviceRepository implements IDeviceRepository {
     }
   }
 
-  Future<void> handleRequestPermission(
+  /// This method should return a value because, on the first run,
+  /// if the user has allowed notifications, we would otherwise receive an
+  /// [AuthorizationStatus.notDetermined].
+  Future<NotificationSettings> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
-    try {
-      if (platformValue.isIOS) {
-        await tracking_status.loadLibrary();
-        final trackingAuthorizationStatus = await tracking_status
-            .AppTrackingTransparency.trackingAuthorizationStatus;
-        // see if app tracking transparency is enabled
-        if (trackingAuthorizationStatus ==
-                tracking_status.TrackingStatus.notDetermined ||
-            KTest.isTest) {
-          // Request system's tracking authorization dialog
-          try {
-            await tracking_status.AppTrackingTransparency
-                .requestTrackingAuthorization();
-          } catch (e) {
-            // Handle error
-          }
+    if (platformValue.isIOS) {
+      await tracking_status.loadLibrary();
+      final trackingAuthorizationStatus = await tracking_status
+          .AppTrackingTransparency.trackingAuthorizationStatus;
+      // see if app tracking transparency is enabled
+      if (trackingAuthorizationStatus ==
+              tracking_status.TrackingStatus.notDetermined ||
+          KTest.isTest) {
+        // Request system's tracking authorization dialog
+        try {
+          await tracking_status.AppTrackingTransparency
+              .requestTrackingAuthorization();
+        } catch (e) {
+          // Handle error
         }
-
-        await _firebaseMessaging.requestPermission(
-          provisional: provisional,
-        );
-      } else {
-        await _firebaseMessaging.requestPermission(
-          // All This parameters only for iOS/macOS
-          alert: false,
-          badge: false,
-          sound: false,
-        );
       }
-    } catch (e) {
-      throw 'Request Permsion Error - $e';
+
+      return _firebaseMessaging.requestPermission(
+        provisional: provisional,
+      );
+    } else {
+      return _firebaseMessaging.requestPermission(
+        // All This parameters only for iOS/macOS
+        alert: false,
+        badge: false,
+        sound: false,
+      );
     }
   }
 }
