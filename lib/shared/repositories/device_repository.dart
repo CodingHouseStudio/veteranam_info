@@ -54,6 +54,8 @@ class DeviceRepository implements IDeviceRepository {
 
       // This Method contain try catch. If has error return
       // AppInfoRepository.defaultValue
+      // This Method contain try catch. If has error return
+      // AppInfoRepository.defaultValue
       final buildInfo = await _buildRepository.getBuildInfo();
       return Right(
         DeviceInfoModel(
@@ -114,23 +116,18 @@ class DeviceRepository implements IDeviceRepository {
     PlatformEnum? platformValue,
   }) async {
     try {
+      if (!await _firebaseMessaging.isSupported()) return const Right(null);
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
-      NotificationSettings? notificationSettings;
-      try {
-        notificationSettings =
-            await _firebaseMessaging.getNotificationSettings();
-      } catch (e) {
-        notificationSettings = null;
-      }
-      switch (notificationSettings?.authorizationStatus) {
+      var notificationSettings =
+          await _firebaseMessaging.getNotificationSettings();
+      switch (notificationSettings.authorizationStatus) {
         case AuthorizationStatus.denied:
           if (platform.isAndroid) {
             notificationSettings = await handleRequestPermission(platform);
           }
         case AuthorizationStatus.notDetermined:
-        case null:
           notificationSettings = await handleRequestPermission(
             platform,
             provisional: true,
@@ -141,12 +138,11 @@ class DeviceRepository implements IDeviceRepository {
           break;
       }
 
-      if (notificationSettings != null &&
-          (notificationSettings.authorizationStatus ==
-                  AuthorizationStatus.authorized ||
-              (platform.isIOS &&
-                  notificationSettings.authorizationStatus ==
-                      AuthorizationStatus.provisional))) {
+      if (notificationSettings.authorizationStatus ==
+              AuthorizationStatus.authorized ||
+          (platform.isIOS &&
+              notificationSettings.authorizationStatus ==
+                  AuthorizationStatus.provisional)) {
         String? apnsToken;
         // For iOS, retrieve the apnsToken, which is required for FCM to send
         // messages via APNs.
@@ -167,15 +163,11 @@ class DeviceRepository implements IDeviceRepository {
         // The fcmToken, combined with apnsToken on iOS, enables proper delivery
         // of notifications.
         if (!platform.isIOS || apnsToken != null) {
-          try {
-            fcmToken = await _firebaseMessaging.getToken(
-              vapidKey: Config.isProduction
-                  ? KSecurityKeys.firebaseProdVapidKey
-                  : KSecurityKeys.firebaseDevVapidKey,
-            );
-          } catch (e) {
-            throw 'Get Token - $e';
-          }
+          fcmToken = await _firebaseMessaging.getToken(
+            vapidKey: Config.isProduction
+                ? KSecurityKeys.firebaseProdVapidKey
+                : KSecurityKeys.firebaseDevVapidKey,
+          );
         }
       }
 
@@ -196,41 +188,37 @@ class DeviceRepository implements IDeviceRepository {
   /// This method should return a value because, on the first run,
   /// if the user has allowed notifications, we would otherwise receive an
   /// [AuthorizationStatus.notDetermined].
-  Future<NotificationSettings?> handleRequestPermission(
+  Future<NotificationSettings> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
-    try {
-      if (platformValue.isIOS) {
-        await tracking_status.loadLibrary();
-        final trackingAuthorizationStatus = await tracking_status
-            .AppTrackingTransparency.trackingAuthorizationStatus;
-        // see if app tracking transparency is enabled
-        if (trackingAuthorizationStatus ==
-                tracking_status.TrackingStatus.notDetermined ||
-            KTest.isTest) {
-          // Request system's tracking authorization dialog
-          try {
-            await tracking_status.AppTrackingTransparency
-                .requestTrackingAuthorization();
-          } catch (e) {
-            // Handle error
-          }
+    if (platformValue.isIOS) {
+      await tracking_status.loadLibrary();
+      final trackingAuthorizationStatus = await tracking_status
+          .AppTrackingTransparency.trackingAuthorizationStatus;
+      // see if app tracking transparency is enabled
+      if (trackingAuthorizationStatus ==
+              tracking_status.TrackingStatus.notDetermined ||
+          KTest.isTest) {
+        // Request system's tracking authorization dialog
+        try {
+          await tracking_status.AppTrackingTransparency
+              .requestTrackingAuthorization();
+        } catch (e) {
+          // Handle error
         }
-
-        return _firebaseMessaging.requestPermission(
-          provisional: provisional,
-        );
-      } else {
-        return _firebaseMessaging.requestPermission(
-          // All This parameters only for iOS/macOS
-          alert: false,
-          badge: false,
-          sound: false,
-        );
       }
-    } catch (e) {
-      return null;
+
+      return _firebaseMessaging.requestPermission(
+        provisional: provisional,
+      );
+    } else {
+      return _firebaseMessaging.requestPermission(
+        // All This parameters only for iOS/macOS
+        alert: false,
+        badge: false,
+        sound: false,
+      );
     }
   }
 }
