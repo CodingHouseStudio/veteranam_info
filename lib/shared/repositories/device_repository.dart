@@ -53,7 +53,6 @@ class DeviceRepository implements IDeviceRepository {
       if (failure != null) return Left(failure!);
 
       final buildInfo = await _buildRepository.getBuildInfo();
-
       return Right(
         DeviceInfoModel(
           deviceId: id,
@@ -116,29 +115,36 @@ class DeviceRepository implements IDeviceRepository {
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
-      final notificationSettings =
-          await _firebaseMessaging.getNotificationSettings();
-      switch (notificationSettings.authorizationStatus) {
+      NotificationSettings? notificationSettings;
+      try {
+        notificationSettings =
+            await _firebaseMessaging.getNotificationSettings();
+      } catch (e) {
+        notificationSettings = null;
+      }
+      switch (notificationSettings?.authorizationStatus) {
         case AuthorizationStatus.denied:
           if (platform.isAndroid) {
-            await handleRequestPermission(platform);
+            notificationSettings = await handleRequestPermission(platform);
           }
         case AuthorizationStatus.notDetermined:
-          await handleRequestPermission(
+        case null:
+          notificationSettings = await handleRequestPermission(
             platform,
             provisional: true,
           );
         case AuthorizationStatus.provisional:
-          await handleRequestPermission(platform);
+          notificationSettings = await handleRequestPermission(platform);
         case AuthorizationStatus.authorized:
           break;
       }
 
-      if (notificationSettings.authorizationStatus ==
-              AuthorizationStatus.authorized ||
-          (platform.isIOS &&
-              notificationSettings.authorizationStatus ==
-                  AuthorizationStatus.provisional)) {
+      if (notificationSettings != null &&
+          (notificationSettings.authorizationStatus ==
+                  AuthorizationStatus.authorized ||
+              (platform.isIOS &&
+                  notificationSettings.authorizationStatus ==
+                      AuthorizationStatus.provisional))) {
         String? apnsToken;
         // For iOS, retrieve the apnsToken, which is required for FCM to send
         // messages via APNs.
@@ -185,7 +191,10 @@ class DeviceRepository implements IDeviceRepository {
     }
   }
 
-  Future<void> handleRequestPermission(
+  /// This method should return a value because, on the first run,
+  /// if the user has allowed notifications, we would otherwise receive an
+  /// [AuthorizationStatus.notDetermined].
+  Future<NotificationSettings> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
@@ -207,11 +216,11 @@ class DeviceRepository implements IDeviceRepository {
           }
         }
 
-        await _firebaseMessaging.requestPermission(
+        return _firebaseMessaging.requestPermission(
           provisional: provisional,
         );
       } else {
-        await _firebaseMessaging.requestPermission(
+        return _firebaseMessaging.requestPermission(
           // All This parameters only for iOS/macOS
           alert: false,
           badge: false,
