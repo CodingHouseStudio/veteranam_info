@@ -52,6 +52,8 @@ class DeviceRepository implements IDeviceRepository {
       );
       if (failure != null) return Left(failure!);
 
+      // This Method contain try catch. If has error return
+      // AppInfoRepository.defaultValue
       final buildInfo = await _buildRepository.getBuildInfo();
       return Right(
         DeviceInfoModel(
