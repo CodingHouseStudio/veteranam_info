@@ -499,6 +499,15 @@ void main() {
           (_) async => KTestText.notificationSettings(),
         );
         when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
+        when(
           mockDeviceInfoPlugin.deviceInfo,
         ).thenAnswer(
           (_) async => webInfo,
