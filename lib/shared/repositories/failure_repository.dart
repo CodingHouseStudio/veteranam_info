@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' show log;
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'
@@ -36,7 +37,7 @@ class FailureRepository {
     }
   }
 
-  static Future<void> onError({
+  static FutureOr<void> onError({
     required Object error,
     required StackTrace? stack,
     required String? reason,
@@ -50,19 +51,30 @@ class FailureRepository {
     User? user,
     UserSetting? userSetting,
   }) async {
-    // Declare error level variable for classification
+    // Define the variable for error level categorization
     var errorLevelValue = errorLevel;
     if (errorLevelValue == null) {
-      // Determine the error level based on exception type or error content
-      if (error is AssertionError ||
-          error.toString().contains('OutOfMemoryError')) {
-        // Set as fatal for critical async issues
+      final errorString = error.toString().toLowerCase();
+
+      // Determine the error level based on the exception type or error content
+      if (error is AssertionError || errorString.contains('outofmemoryerror')) {
+        // Fatal level for critical asynchronous issues that cause crashes
         errorLevelValue = ErrorLevelEnum.fatal;
-      } else if (error.toString().contains('Warning')) {
-        // Set as warning if "Warning" is mentioned in error
+      } else if (errorString.contains('deprecated') ||
+          errorString.contains('slow') ||
+          errorString.contains('performance')) {
+        // Warning level for performance concerns or deprecated code usage
         errorLevelValue = ErrorLevelEnum.warning;
+      } else if (errorString.contains('timeout') ||
+          errorString.contains('connection refused') ||
+          errorString.contains('no internet') ||
+          errorString.contains('network-request') ||
+          errorString.contains('resource limit exceeded') ||
+          errorString.contains('permission-denied')) {
+        // Info level for network-related issues or resource constraints
+        errorLevelValue = ErrorLevelEnum.info;
       } else {
-        // Set as error for general async issues
+        // Default error level for general asynchronous issues
         errorLevelValue = ErrorLevelEnum.error;
       }
     }
