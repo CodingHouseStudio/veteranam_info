@@ -399,6 +399,13 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failure),
         );
+        when(
+          mockFirebaseMessaging.getToken(
+            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failure),
+        );
 
         deviceRepository = DeviceRepository(
           mockFirebaseMessaging,
@@ -445,6 +452,21 @@ void main() {
         );
       });
       test('Get FCM', () async {
+        expect(
+          await deviceRepository.getFcm(), isA<Left<SomeFailure, String?>>(),
+          // .having(
+          //   (e) => e.value,
+          //   'value',
+          //   SomeFailure.serverError(error: null),
+          // ),
+        );
+      });
+      test('Get FCM(get token error)', () async {
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
         expect(
           await deviceRepository.getFcm(), isA<Left<SomeFailure, String?>>(),
           // .having(
