@@ -190,9 +190,10 @@ class DiscountWatcherBloc
   ) {
     emit(
       state.copyWith(
-        filteredDiscountModelItems: state.discountModelItems.loading(
-          itemsLoaded: state.itemsLoaded,
-        ),
+        filteredDiscountModelItems: state.discountModelItems,
+        // .loading(
+        //   itemsLoaded: state.itemsLoaded,
+        // ),
         categoryDiscountModelItems: state.discountModelItems,
         locationDiscountModelItems: state.discountModelItems,
         sortingDiscountModelItems: state.discountModelItems,
@@ -235,10 +236,10 @@ class DiscountWatcherBloc
       state.copyWith(
         filteredDiscountModelItems: list,
         filtersCategories: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        // itemsLoaded: state.itemsLoaded.getLoaded(
+        //   list: list,
+        //   loadItems: getItemsLoading,
+        // ),
         loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
       ),
@@ -269,10 +270,10 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: list,
         locationDiscountModelItems: locationList,
         filtersLocation: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        // itemsLoaded: state.itemsLoaded.getLoaded(
+        //   list: list,
+        //   loadItems: getItemsLoading,
+        // ),
         loadingStatus: loadingStatus,
       ),
     );
@@ -302,10 +303,10 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        itemsLoaded: state.itemsLoaded.getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        // itemsLoaded: state.itemsLoaded.getLoaded(
+        //   list: list,
+        //   loadItems: getItemsLoading,
+        // ),
         // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
@@ -344,10 +345,10 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        itemsLoaded: state.itemsLoaded.getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        // itemsLoaded: state.itemsLoaded.getLoaded(
+        //   list: list,
+        //   loadItems: getItemsLoading,
+        // ),
         // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,

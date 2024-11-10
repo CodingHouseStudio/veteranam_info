@@ -62,7 +62,8 @@ class DiscountsWidgetList extends StatelessWidget {
                 }
                 // cardWidgetList<DiscountModel>(
                 //   loadingStatus:
-                //       context.read<DiscountWatcherBloc>().state.loadingStatus,
+                //       context.read<DiscountWatcherBloc>().state.
+                // loadingStatus,
                 //   modelItems: context
                 //       .read<DiscountWatcherBloc>()
                 //       .state
@@ -84,7 +85,8 @@ class DiscountsWidgetList extends StatelessWidget {
                 //   shimmerItemsNumber:
                 //       context.read<DiscountConfigCubit>().state.loadingItems,
                 //   isNotFailure:
-                //       context.read<DiscountWatcherBloc>().state.failure == null,
+                //       context.read<DiscountWatcherBloc>().
+                //state.failure == null,
                 //   shimmerItem: KMockText.discountModel,
                 // );
 

@@ -122,7 +122,8 @@ class DiscountBodyWidget extends StatelessWidget {
     //       builder: (context, emailState) {
     //         return BlocBuilder<DiscountLinkCubit, bool>(
     //           builder: (context, state) {
-    //             return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
+    //             return BlocConsumer<DiscountWatcherBloc,
+    // DiscountWatcherState>(
     //               listener: (context, state) {
     //                 if (state.failure != null) {
     //                   context.dialog.showGetErrorDialog(
@@ -200,7 +201,8 @@ class DiscountBodyWidget extends StatelessWidget {
     //                               isDesk: isDesk,
     //                             ),
     //                           ),
-    //                           if (Config.isBusiness) _myDiscountButton(context),
+    //                           if (Config.isBusiness)
+    // _myDiscountButton(context),
     //                         ],
     //                       )
     //                     else ...[
@@ -214,7 +216,8 @@ class DiscountBodyWidget extends StatelessWidget {
     //                       ],
     //                       KSizedBox.kHeightSizedBox24,
     //                       AdvancedFilterMob(
-    //                         key: KWidgetkeys.screen.discounts.advancedFilterMob,
+    //                         key: KWidgetkeys.screen.discounts
+    // .advancedFilterMob,
     //                       ),
     //                     ],
     //                     if (isDesk)
@@ -312,7 +315,8 @@ class DiscountBodyWidget extends StatelessWidget {
   //           .locationDiscountModelItems
   //           .length,
   //       filterIsEmpty:
-  //           context.read<DiscountWatcherBloc>().state.filtersCategories.isEmpty,
+  //           context.read<DiscountWatcherBloc>().state
+  // .filtersCategories.isEmpty,
   //     );
 
   // Widget _myDiscountButton(

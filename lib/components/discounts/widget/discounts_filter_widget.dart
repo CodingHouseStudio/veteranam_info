@@ -11,7 +11,7 @@ class DiscountsFilterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-      //TODO(refactor): add build when
+      // TODO(refactor): add build when
       builder: (context, state) {
         if (isDesk) {
           return Row(
@@ -26,20 +26,22 @@ class DiscountsFilterWidget extends StatelessWidget {
             ],
           );
         } else {
-          return Column(children: [
-            _filter(
-              context: context,
-              isDesk: isDesk,
-            ),
-            if (Config.isBusiness) ...[
-              KSizedBox.kHeightSizedBox8,
-              _myDiscountButton(context),
+          return Column(
+            children: [
+              _filter(
+                context: context,
+                isDesk: isDesk,
+              ),
+              if (Config.isBusiness) ...[
+                KSizedBox.kHeightSizedBox8,
+                _myDiscountButton(context),
+              ],
+              KSizedBox.kHeightSizedBox24,
+              AdvancedFilterMob(
+                key: KWidgetkeys.screen.discounts.advancedFilterMob,
+              ),
             ],
-            KSizedBox.kHeightSizedBox24,
-            AdvancedFilterMob(
-              key: KWidgetkeys.screen.discounts.advancedFilterMob,
-            ),
-          ]);
+          );
         }
       },
     );
