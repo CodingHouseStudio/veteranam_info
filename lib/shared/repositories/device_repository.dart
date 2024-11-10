@@ -159,11 +159,15 @@ class DeviceRepository implements IDeviceRepository {
         // The fcmToken, combined with apnsToken on iOS, enables proper delivery
         // of notifications.
         if (!platform.isIOS || apnsToken != null) {
-          fcmToken = await _firebaseMessaging.getToken(
-            vapidKey: Config.isProduction
-                ? KSecurityKeys.firebaseProdVapidKey
-                : KSecurityKeys.firebaseDevVapidKey,
-          );
+          try {
+            fcmToken = await _firebaseMessaging.getToken(
+              vapidKey: Config.isProduction
+                  ? KSecurityKeys.firebaseProdVapidKey
+                  : KSecurityKeys.firebaseDevVapidKey,
+            );
+          } catch (e) {
+            throw 'Get Token - $e';
+          }
         }
       }
 
