@@ -128,7 +128,6 @@ class DeviceRepository implements IDeviceRepository {
             notificationSettings = await handleRequestPermission(platform);
           }
         case AuthorizationStatus.notDetermined:
-        case null:
           notificationSettings = await handleRequestPermission(
             platform,
             provisional: true,
@@ -136,6 +135,7 @@ class DeviceRepository implements IDeviceRepository {
         case AuthorizationStatus.provisional:
           notificationSettings = await handleRequestPermission(platform);
         case AuthorizationStatus.authorized:
+        case null:
           break;
       }
 
