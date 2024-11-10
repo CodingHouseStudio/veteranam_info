@@ -100,6 +100,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     } else {
       if (bytes != null) {
         return Image.memory(
+          key: ValueKey(bytes),
           bytes!,
           fit: widget.fit,
           height: widget.size,
@@ -149,6 +150,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   }
 
   Widget getImageNetwork(String? imageUrl) => Image.network(
+        key: ValueKey(imageUrl),
         imageUrl!,
         fit: widget.fit,
         height: widget.size,
@@ -188,6 +190,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
       );
 
   Widget getCachedNetworkImage(String? imageUrl) => CachedNetworkImage(
+        key: ValueKey(imageUrl),
         imageUrl: imageUrl!, // widget.imageUrl,
         fit: widget.fit,
         height: widget.size,

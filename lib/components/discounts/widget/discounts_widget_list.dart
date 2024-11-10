@@ -32,7 +32,8 @@ class DiscountsWidgetList extends StatelessWidget {
                     shrinkWrap: true,
                     children: [
                       DiscountCardWidget(
-                        key: KWidgetkeys.screen.discounts.card,
+                        key: ValueKey(
+                            state.discountModelItems.elementAt(index).id),
                         discountItem: state.discountModelItems.elementAt(index),
                         isDesk: isDesk,
                         // reportEvent: null,
@@ -48,7 +49,7 @@ class DiscountsWidgetList extends StatelessWidget {
                   );
                 } else {
                   return DiscountCardWidget(
-                    key: KWidgetkeys.screen.discounts.card,
+                    key: ValueKey(state.discountModelItems.elementAt(index).id),
                     discountItem: state.discountModelItems.elementAt(index),
                     isDesk: isDesk,
                     // reportEvent: null,

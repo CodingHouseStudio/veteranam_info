@@ -285,6 +285,7 @@ class _CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox.shrink();
     final categoriesWidget = List.generate(categories.length, (int index) {
       return Container(
         constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
