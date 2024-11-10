@@ -128,6 +128,7 @@ class DeviceRepository implements IDeviceRepository {
             notificationSettings = await handleRequestPermission(platform);
           }
         case AuthorizationStatus.notDetermined:
+        case null:
           notificationSettings = await handleRequestPermission(
             platform,
             provisional: true,
@@ -135,7 +136,6 @@ class DeviceRepository implements IDeviceRepository {
         case AuthorizationStatus.provisional:
           notificationSettings = await handleRequestPermission(platform);
         case AuthorizationStatus.authorized:
-        case null:
           break;
       }
 
@@ -194,7 +194,7 @@ class DeviceRepository implements IDeviceRepository {
   /// This method should return a value because, on the first run,
   /// if the user has allowed notifications, we would otherwise receive an
   /// [AuthorizationStatus.notDetermined].
-  Future<NotificationSettings> handleRequestPermission(
+  Future<NotificationSettings?> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
@@ -228,7 +228,7 @@ class DeviceRepository implements IDeviceRepository {
         );
       }
     } catch (e) {
-      throw 'Request Permsion Error - $e';
+      return null;
     }
   }
 }
