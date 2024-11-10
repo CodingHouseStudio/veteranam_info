@@ -103,6 +103,11 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.notificationSettings(),
         );
+        when(
+          mockFirebaseMessaging.requestPermission(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
         when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
           (_) async => null,
         );
@@ -315,7 +320,7 @@ void main() {
           isA<Right<SomeFailure, String?>>().having(
             (e) => e.value,
             'value',
-            null,
+            KTestText.fcmToken,
           ),
         );
       });
@@ -334,7 +339,7 @@ void main() {
           isA<Right<SomeFailure, String?>>().having(
             (e) => e.value,
             'value',
-            null,
+            KTestText.fcmToken,
           ),
         );
       });
@@ -349,7 +354,7 @@ void main() {
           isA<Right<SomeFailure, String?>>().having(
             (e) => e.value,
             'value',
-            null,
+            KTestText.fcmToken,
           ),
         );
       });
