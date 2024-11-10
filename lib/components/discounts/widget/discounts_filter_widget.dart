@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -14,28 +13,19 @@ class DiscountsFilterWidget extends StatelessWidget {
       // TODO(refactor): add build when
       builder: (context, state) {
         if (isDesk) {
-          return Row(
-            children: [
-              Expanded(
-                child: _filter(
-                  context: context,
-                  isDesk: isDesk,
-                ),
-              ),
-              if (Config.isBusiness) _myDiscountButton(context),
-            ],
+          return Expanded(
+            child: _Filter(
+              isDesk: isDesk,
+              state: state,
+            ),
           );
         } else {
           return Column(
             children: [
-              _filter(
-                context: context,
+              _Filter(
                 isDesk: isDesk,
+                state: state,
               ),
-              if (Config.isBusiness) ...[
-                KSizedBox.kHeightSizedBox8,
-                _myDiscountButton(context),
-              ],
               KSizedBox.kHeightSizedBox24,
               AdvancedFilterMob(
                 key: KWidgetkeys.screen.discounts.advancedFilterMob,
@@ -46,56 +36,31 @@ class DiscountsFilterWidget extends StatelessWidget {
       },
     );
   }
+}
 
-  Widget _filter({
-    required BuildContext context,
-    required bool isDesk,
-  }) =>
-      FiltersChipWidget(
-        key: KWidgetkeys.screen.discounts.filter,
-        filtersItems: context
-            .read<DiscountWatcherBloc>()
-            .state
-            .discountModelItems
-            .overallItems(
-              context: context,
-              getENFilter: (item) => item.categoryEN,
-              getUAFilter: (item) => item.category,
-              numberGetList: context
-                  .read<DiscountWatcherBloc>()
-                  .state
-                  .locationDiscountModelItems,
-            ),
-        isDesk: isDesk,
-        // onResetValue: () => context.read<DiscountWatcherBloc>().add(
-        //       const DiscountWatcherEvent.filterReset(),
-        //     ),
-        isSelected: (index) => context
-            .read<DiscountWatcherBloc>()
-            .state
-            .filtersCategories
-            .contains(index),
-        onSelected: (index) => context.read<DiscountWatcherBloc>().add(
-              DiscountWatcherEvent.filterCategory(
-                index,
-              ),
-            ),
-        fullLength: context
-            .read<DiscountWatcherBloc>()
-            .state
-            .locationDiscountModelItems
-            .length,
-        filterIsEmpty:
-            context.read<DiscountWatcherBloc>().state.filtersCategories.isEmpty,
-      );
+class _Filter extends StatelessWidget {
+  const _Filter({required this.isDesk, super.key, required this.state});
+  final bool isDesk;
+  final DiscountWatcherState state;
 
-  Widget _myDiscountButton(
-    BuildContext context,
-  ) =>
-      TextButton(
-        key: KWidgetkeys.screen.discounts.addDiscountButton,
-        onPressed: () => context.goNamed(KRoute.myDiscounts.name),
-        style: KButtonStyles.whiteButtonStyle,
-        child: Text(context.l10n.offerDiscount),
-      );
+  @override
+  Widget build(BuildContext context) {
+    return FiltersChipWidget(
+      key: KWidgetkeys.screen.discounts.filter,
+      filtersItems: state.filterCategory,
+      isDesk: isDesk,
+      // onResetValue: () => context.read<DiscountWatcherBloc>().add(
+      //       const DiscountWatcherEvent.filterReset(),
+      //     ),
+      isSelected: null,
+      // isSelected: (index) => state.filterCategory.elementAt(index),
+      onSelected: (value) => context.read<DiscountWatcherBloc>().add(
+            DiscountWatcherEvent.filterCategory(
+              value,
+            ),
+          ),
+      fullLength: state.locationDiscountModelItems.length,
+      filterIsEmpty: state.categoryListEmpty,
+    );
+  }
 }

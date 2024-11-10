@@ -52,7 +52,7 @@ class AdvancedFilterContent extends StatelessWidget {
         .read<DiscountWatcherBloc>()
         .state
         .categoryDiscountModelItems
-        .getLocationFilter(context);
+        .getLocationFilter(context: context, isEnglish: context.isEnglish);
     return [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
       // KSizedBox.kHeightSizedBox24,

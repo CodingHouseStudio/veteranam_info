@@ -1,26 +1,11 @@
 import 'package:collection/collection.dart' show groupBy;
 import 'package:flutter/material.dart' show BuildContext;
+//TODO: remove it
+import 'package:veteranam/shared/extension/extension_dart.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {
-  /// Get a list of FilterItem with summarized values.
-  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
-    final grouped = groupBy(this, (FilterItem item) => item.value);
-
-    return grouped.entries.map((entry) {
-      final item = FilterItem(
-        entry.key,
-        valueEN: entry.value.first.valueEN,
-        number:
-            numberGetList?.where((item) => item.value == entry.key).length ??
-                entry.value.length,
-      );
-
-      return item;
-    }).toList();
-  }
-
   /// Method to find indices where differences occur between this list and a new
   ///  list.
   ///
@@ -72,71 +57,6 @@ extension ListStringExtensions on List<String> {
       return '${map(
         (e) => '$e | ',
       ).join()}[${context.l10n.hideExpansion}]()';
-    }
-  }
-}
-
-/// Extension providing utility methods for List<T>.
-extension ListExtensions<T> on List<T> {
-  List<FilterItem> overallItems({
-    required BuildContext? context,
-    required List<dynamic> Function(T) getUAFilter,
-    List<dynamic>? Function(T)? getENFilter,
-    List<T>? fullList,
-    List<T>? numberGetList,
-  }) {
-    try {
-      final allFilters = <FilterItem>[];
-      for (final item in fullList ?? this) {
-        for (var i = 0; i < (getUAFilter(item).length); i++) {
-          allFilters.add(
-            FilterItem(
-              getUAFilter(item).elementAt(i),
-              valueEN: getENFilter == null
-                  ? null
-                  : getENFilter(item)?.elementAtOrNull(i),
-            ),
-          );
-        }
-      }
-      final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
-      if (numberGetList != null) {
-        for (final item in numberGetList) {
-          allNumberFilters!.addAll(
-            getUAFilter(item).map(
-              FilterItem.new,
-            ),
-          );
-        }
-      }
-      final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
-        ..sort((a, b) {
-          final numberSort = b.number.compareTo(a.number);
-          if (numberSort == 0) {
-            return a.alphabeteCompare(
-              b: b,
-              context: context,
-              addEnglish: getENFilter != null,
-            );
-          }
-          return numberSort;
-        });
-
-      final firstFive = allFiltersList.take(5).toList();
-      final remaining = allFiltersList.skip(5).toList()
-        ..sort(
-          (a, b) => a.alphabeteCompare(
-            b: b,
-            context: context,
-            addEnglish: getENFilter != null,
-          ),
-        );
-
-      final sortedList = [...firstFive, ...remaining];
-
-      return sortedList;
-    } catch (e) {
-      return [];
     }
   }
 }
@@ -219,7 +139,10 @@ extension DiscountModelExtensions on List<DiscountModel> {
   ///
   /// Returns:
   /// A list of FilterItem instances representing location filters.
-  List<FilterItem> getLocationFilter(BuildContext context) {
+  List<FilterItem> getLocationFilter({
+    required BuildContext context,
+    required bool isEnglish,
+  }) {
     // Return a list of FilterItem instances
     return [
       // Filter items for overall locations sorted from largest to smallest
@@ -229,7 +152,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
         getUAFilter: (item) => item.subLocation?.getList(context) ?? [],
-        context: context,
+        isEnglish: isEnglish,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()
         //     .state
@@ -239,7 +162,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
       ...overallItems(
         getENFilter: (item) => item.locationEN ?? [],
         getUAFilter: (item) => item.location ?? [],
-        context: context,
+        isEnglish: isEnglish,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()
         //     .state

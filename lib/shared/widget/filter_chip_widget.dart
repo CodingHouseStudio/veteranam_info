@@ -23,21 +23,10 @@ class FiltersChipWidget extends StatelessWidget {
   ) onSelected;
   final bool Function(
     dynamic value,
-  ) isSelected;
+  )? isSelected;
 
   @override
   Widget build(BuildContext context) {
-    // return Row(
-    //   key: KWidgetkeys.widget.filterChip.widget,
-    //   children: [
-    //     FilterPopupMenuWidget(
-    //       key: KWidgetkeys.widget.filterChip.popup,
-    //       onResetValue: onResetValue,
-    //       isDesk: isDesk,
-    //     ),
-    //     KSizedBox.kWidthSizedBox24,
-    //     Expanded(
-    //       child:
     return isDesk
         ? ShaderMask(
             shaderCallback: (Rect bounds) {
@@ -50,42 +39,140 @@ class FiltersChipWidget extends StatelessWidget {
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
-            child: _body(context),
+            child: _FilterChipBodyWidget(
+              filtersItems: filtersItems,
+              fullLength: fullLength,
+              isDesk: isDesk,
+              filterIsEmpty: filterIsEmpty,
+              onSelected: onSelected,
+              isSelected: isSelected,
+            ),
           )
-        : _body(context);
+        : _FilterChipBodyWidget(
+            filtersItems: filtersItems,
+            fullLength: fullLength,
+            isDesk: isDesk,
+            filterIsEmpty: filterIsEmpty,
+            onSelected: onSelected,
+            isSelected: isSelected,
+          );
     //     ),
     //   ],
     // );
   }
+}
 
-  Widget _body(BuildContext context) => VerticalScrollWidget(
-        scrollKey: KWidgetkeys.widget.filterChip.widget,
-        children: List.generate(filtersItems.length + 1, (index) {
-          final i = index - 1;
-          return Padding(
-            padding: EdgeInsets.only(
-              right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
-            ),
-            child: ChipWidget(
-              key: KWidgetkeys.widget.filterChip.chips,
-              filter: i != -1
-                  ? filtersItems.elementAt(i)
-                  : (FilterItem(
-                      CategoryEnum.all.getValue(context),
-                      number: fullLength,
-                    )),
-              onSelected: (isSelected) => onSelected(
-                i != -1 ? filtersItems.elementAt(i).value : CategoryEnum.all,
-              ),
-              isSelected: isSelected(
-                    i != -1
-                        ? filtersItems.elementAt(i).value
-                        : CategoryEnum.all,
-                  ) ||
-                  (i == -1 && filterIsEmpty),
-              isDesk: isDesk,
-            ),
-          );
-        }),
-      );
+class _FilterChipBodyWidget extends StatelessWidget {
+  const _FilterChipBodyWidget({
+    required this.filtersItems,
+    required this.fullLength,
+    required this.isDesk,
+    required this.filterIsEmpty,
+    required this.onSelected,
+    required this.isSelected,
+    Key? key,
+  }) : super(key: key);
+
+  final List<FilterItem> filtersItems;
+  final int fullLength;
+  final bool isDesk;
+  final bool filterIsEmpty;
+  // final void Function() onResetValue;
+  final void Function(
+    dynamic value,
+  ) onSelected;
+  final bool Function(
+    dynamic value,
+  )? isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(
+      behavior: CustomScrollBehavior(),
+      child: SizedBox(
+        height: 100,
+        child: ListView.builder(
+          key: KWidgetkeys.widget.filterChip.widget,
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          primary: true,
+          itemCount: filtersItems.length,
+          itemBuilder: (context, index) {
+            final filterItem = filtersItems.elementAt(index);
+            if (index == 0) {
+              return Row(
+                key: ValueKey(filterItem),
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: isDesk
+                          ? KPadding.kPaddingSize16
+                          : KPadding.kPaddingSize8,
+                    ),
+                    child: ChipWidget(
+                      key: KWidgetkeys.widget.filterChip.chips,
+                      filter: FilterItem(
+                        CategoryEnum.all.getValue(context),
+                        number: fullLength,
+                      ),
+                      onSelected: (isSelected) => onSelected(
+                        CategoryEnum.all,
+                      ),
+                      isSelected: (isSelected?.call(
+                                CategoryEnum.all,
+                              ) ??
+                              false) ||
+                          filterIsEmpty,
+                      isDesk: isDesk,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: isDesk
+                          ? KPadding.kPaddingSize16
+                          : KPadding.kPaddingSize8,
+                    ),
+                    child: ChipWidget(
+                      key: KWidgetkeys.widget.filterChip.chips,
+                      filter: filterItem,
+                      onSelected: (isSelected) => onSelected(
+                        filterItem.value,
+                      ),
+                      isSelected: isSelected?.call(
+                            filterItem.value,
+                          ) ??
+                          //Discount
+                          filterItem.isSelected,
+                      isDesk: isDesk,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Padding(
+                key: ValueKey(filterItem),
+                padding: EdgeInsets.only(
+                  right:
+                      isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+                ),
+                child: ChipWidget(
+                  key: KWidgetkeys.widget.filterChip.chips,
+                  filter: filterItem,
+                  onSelected: (isSelected) => onSelected(
+                    filterItem.value,
+                  ),
+                  isSelected: isSelected?.call(
+                        filtersItems.elementAt(index).value,
+                      ) ??
+                      //Discount
+                      filterItem.isSelected,
+                  isDesk: isDesk,
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
 }

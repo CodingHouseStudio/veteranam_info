@@ -2,11 +2,13 @@ part of 'discount_watcher_bloc.dart';
 
 @freezed
 class DiscountWatcherEvent with _$DiscountWatcherEvent {
-  const factory DiscountWatcherEvent.started() = _Started;
+  const factory DiscountWatcherEvent.started({required bool isEnglish}) =
+      _Started;
 
-  const factory DiscountWatcherEvent.updated(
-    List<DiscountModel> discountItemsModel,
-  ) = _Updated;
+  const factory DiscountWatcherEvent.updated({
+    required List<DiscountModel> discountItemsModel,
+    required bool isEnglish,
+  }) = _Updated;
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 

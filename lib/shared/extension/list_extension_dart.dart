@@ -1,6 +1,31 @@
+import 'package:collection/collection.dart' show groupBy;
 import 'package:connectivity_plus/connectivity_plus.dart'
     show ConnectivityResult;
 import 'package:veteranam/shared/shared_dart.dart';
+
+/// Extension for filtering FilterItem list items.
+extension FilterItems on List<FilterItem> {
+  /// Get a list of FilterItem with summarized values.
+  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
+    final grouped = groupBy(this, (FilterItem item) => item.value);
+
+    return grouped.entries.map((entry) {
+      final item = FilterItem(
+        entry.key,
+        valueEN: entry.value.first.valueEN,
+        number:
+            numberGetList?.where((item) => item.value == entry.key).length ??
+                entry.value.length,
+      );
+
+      return item;
+    }).toList();
+  }
+
+  bool get haveSelectedValue => any(
+        (element) => element.isSelected,
+      );
+}
 
 extension ListReportModelExtensions on List<ReportModel> {
   List<String> get getIdCard => map(
@@ -53,6 +78,68 @@ extension ListExtensions<T> on List<T> {
 
     // Return the first `loadedItemsCount` items of the list
     return take(loadNumber).toList();
+  }
+
+  List<FilterItem> overallItems({
+    required bool? isEnglish,
+    required List<dynamic> Function(T) getUAFilter,
+    List<dynamic>? Function(T)? getENFilter,
+    List<T>? fullList,
+    List<T>? list,
+  }) {
+    try {
+      final allFilters = <FilterItem>[];
+      for (final item in fullList ?? this) {
+        for (var i = 0; i < (getUAFilter(item).length); i++) {
+          allFilters.add(
+            FilterItem(
+              getUAFilter(item).elementAt(i),
+              valueEN: getENFilter == null
+                  ? null
+                  : getENFilter(item)?.elementAtOrNull(i),
+            ),
+          );
+        }
+      }
+      final allNumberFilters = list == null ? null : <FilterItem>[];
+      if (list != null) {
+        for (final item in list) {
+          allNumberFilters!.addAll(
+            getUAFilter(item).map(
+              FilterItem.new,
+            ),
+          );
+        }
+      }
+      final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
+        ..sort((a, b) {
+          final numberSort = b.number.compareTo(a.number);
+          if (numberSort == 0) {
+            return a.alphabeteCompare(
+              b: b,
+              isEnglish: isEnglish,
+              addEnglish: getENFilter != null,
+            );
+          }
+          return numberSort;
+        });
+
+      final firstFive = allFiltersList.take(5).toList();
+      final remaining = allFiltersList.skip(5).toList()
+        ..sort(
+          (a, b) => a.alphabeteCompare(
+            b: b,
+            isEnglish: isEnglish,
+            addEnglish: getENFilter != null,
+          ),
+        );
+
+      final sortedList = [...firstFive, ...remaining];
+
+      return sortedList;
+    } catch (e) {
+      return [];
+    }
   }
 
   /// Method to remove items based on report items.

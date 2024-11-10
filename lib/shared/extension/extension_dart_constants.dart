@@ -109,6 +109,23 @@ extension InformationModelExtension on InformationModel {
   }
 }
 
+extension FilterItemExtension on FilterItem {
+  int alphabeteCompare({
+    required FilterItem b,
+    required bool? isEnglish,
+    required bool addEnglish,
+  }) {
+    if ((isEnglish ?? false) && addEnglish) {
+      return valueEN
+          .toString()
+          .toLowerCase()
+          .compareTo(b.valueEN.toString().toLowerCase());
+    } else {
+      return value.toString().compareUkrain(b.value.toString());
+    }
+  }
+}
+
 extension Uint8ListExtension on Uint8List {
   @visibleForTesting
   static FilePickerItem? imagePickerItem;
