@@ -52,6 +52,8 @@ class DeviceRepository implements IDeviceRepository {
       );
       if (failure != null) return Left(failure!);
 
+      // This Method contain try catch. If has error return
+      // AppInfoRepository.defaultValue
       final buildInfo = await _buildRepository.getBuildInfo();
       return Right(
         DeviceInfoModel(
@@ -194,7 +196,7 @@ class DeviceRepository implements IDeviceRepository {
   /// This method should return a value because, on the first run,
   /// if the user has allowed notifications, we would otherwise receive an
   /// [AuthorizationStatus.notDetermined].
-  Future<NotificationSettings> handleRequestPermission(
+  Future<NotificationSettings?> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
@@ -228,7 +230,7 @@ class DeviceRepository implements IDeviceRepository {
         );
       }
     } catch (e) {
-      throw 'Request Permsion Error - $e';
+      return null;
     }
   }
 }

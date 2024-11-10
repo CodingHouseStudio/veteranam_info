@@ -442,6 +442,11 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failure),
         );
+        when(
+          mockBuildRepository.getBuildInfo(),
+        ).thenAnswer(
+          (_) async => AppInfoRepository.defaultValue,
+        );
 
         deviceRepository = DeviceRepository(
           mockFirebaseMessaging,
@@ -461,6 +466,15 @@ void main() {
         );
       });
       test('Get device(get FCM failure)', () async {
+        when(
+          mockFirebaseMessaging.requestPermission(
+            alert: false,
+            badge: false,
+            sound: false,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
+        );
         when(
           mockDeviceInfoPlugin.deviceInfo,
         ).thenAnswer(
@@ -489,12 +503,12 @@ void main() {
       });
       test('Get FCM', () async {
         expect(
-          await deviceRepository.getFcm(), isA<Left<SomeFailure, String?>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError(error: null),
-          // ),
+          await deviceRepository.getFcm(),
+          isA<Right<SomeFailure, String?>>().having(
+            (e) => e.value,
+            'value',
+            null,
+          ),
         );
       });
       test('Get FCM(get token error)', () async {
