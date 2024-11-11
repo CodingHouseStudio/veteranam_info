@@ -1,22 +1,30 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CityListWidget extends StatelessWidget {
   const CityListWidget({
-    required this.discountModel,
     required this.isDesk,
+    required this.location,
+    required this.locationEN,
+    required this.subLocation,
     super.key,
   });
 
-  final DiscountModel discountModel;
+  final List<String>? location;
+  final List<String>? locationEN;
+  final SubLocation? subLocation;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    final cityList = discountModel.getCityList(context);
+    final cityList = [
+      if (location != null)
+        ...location!.getTrnslation(en: locationEN, context: context),
+      if (subLocation != null) ...subLocation!.getCardList(context),
+    ];
     return Align(
+      key: ValueKey(cityList),
       alignment: isDesk ? Alignment.centerRight : Alignment.centerLeft,
       child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationWhiteMain,

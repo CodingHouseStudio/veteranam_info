@@ -104,14 +104,6 @@ extension DiscountModelLocation on DiscountModel {
   String _getMarkdownToGetIfYouNeed(BuildContext context) =>
       '\n\n***${context.l10n.toGetItYouNeed}***';
 
-  List<String> getCityList(BuildContext context) => [
-        if (context.isEnglish)
-          if (locationEN != null) ...locationEN!,
-        if (!context.isEnglish)
-          if (location != null) ...location!,
-        if (subLocation != null) ...subLocation!.getCardList(context),
-      ];
-
   String? get getLink => PlatformEnum.getPlatform.isIOS
       ? category.contains('Медицина')
           ? null
