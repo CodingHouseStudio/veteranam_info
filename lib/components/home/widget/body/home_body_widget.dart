@@ -4,11 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/home/home.dart';
+import 'package:veteranam/components/home/widget/box_widget_list.dart';
+import 'package:veteranam/components/home/widget/question_widget_list.dart';
 import 'package:veteranam/shared/repositories/i_faq_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-part '../box_widget_list.dart';
-part '../question_widget_list.dart';
 part '../home_section_widget_list.dart';
 
 class HomeBodyWidget extends StatelessWidget {
@@ -34,8 +34,8 @@ class HomeBodyWidget extends StatelessWidget {
             .read<HomeWatcherBloc>()
             .add(const HomeWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-          ..._boxWidgetList(
-            context: context,
+          BoxWidgetList(
+            // context: context,
             isDesk: isDesk,
             isTablet: isTablet,
             aboutProjectKey: aboutProjectKey,
@@ -208,10 +208,12 @@ class HomeBodyWidget extends StatelessWidget {
                           Config.isDevelopment
                       ? mockButton(context)
                       : Column(
-                          children: _questionWidgetList(
-                            context: context,
-                            isDesk: isDesk,
-                          ),
+                          children: [
+                            QuestionWidgetList(
+                              // context: context,
+                              isDesk: isDesk,
+                            ),
+                          ],
                         ),
                 ),
               ],
@@ -228,8 +230,8 @@ class HomeBodyWidget extends StatelessWidget {
                   ? mockButton(context)
                   : const SizedBox.shrink()
             else
-              ..._questionWidgetList(
-                context: context,
+              QuestionWidgetList(
+                // context: context,
                 isDesk: isDesk,
               ),
           ],

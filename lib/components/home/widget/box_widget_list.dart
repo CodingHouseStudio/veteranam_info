@@ -1,171 +1,163 @@
-part of 'body/home_body_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/home/home.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
-List<Widget> _boxWidgetList({
-  required BuildContext context,
-  required bool isDesk,
-  required bool isTablet,
-  required GlobalKey aboutProjectKey,
-}) =>
-    [
-      if (isDesk) KSizedBox.kHeightSizedBox36 else KSizedBox.kHeightSizedBox16,
-      if (isTablet)
-        IntrinsicHeight(
-          child: Row(
-            children: [
-              Expanded(
-                flex: isDesk ? 3 : 2,
-                child: HomeBoxWidget(
-                  aboutProjectKey: aboutProjectKey,
-                  isDesk: isDesk,
-                  isTablet: true,
-                ),
-              ),
-              KSizedBox.kWidthSizedBox24,
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: DiscountBoxwWidget(
-                        key: KWidgetkeys.screen.home.discountsBox,
-                        isTablet: true,
-                      ),
-                      // BoxWidget(
-                      //   key: KWidgetkeys.screen.home.discountsBox,
-                      //   text: context.l10n.discounts,
-                      //   onTap: () => context.goNamed(
-                      //     KRoute.discounts.name,
-                      //   ),
-                      //   isDesk: isDesk,
-                      //   icon: KIcon.tag,
-                      // ),
-                    ),
-                    KSizedBox.kHeightSizedBox16,
-                    Expanded(
-                      flex: 2,
-                      child: doubleBox(
-                        context: context,
-                        textIconPaddingWidget: const Spacer(),
-                        isTablet: isTablet,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        )
-      else ...[
-        HomeBoxWidget(
-          aboutProjectKey: aboutProjectKey,
-          isDesk: false,
-          isTablet: false,
-        ),
-        // if (Config.isDevelopment) ...[
-        //   KSizedBox.kHeightSizedBox16,
-        //   BoxWidget(
-        //     key: KWidgetkeys.screen.home.storyBox,
-        //     text: context.l10n.stories,
-        //     onTap: () => context.goNamed(KRoute.stories.name),
-        //     isDesk: false,
-        //     icon: KIcon.messageSquare,
-        //   ),
-        //   KSizedBox.kHeightSizedBox16,
-        //   BoxWidget(
-        //     key: KWidgetkeys.screen.home.workBox,
-        //     text: context.l10n.work,
-        //     onTap: () => context.goNamed(KRoute.work.name),
-        //     isDesk: false,
-        //     icon: KIcon.briefcase,
-        //   ),
-        // ],
-      ],
-      if (!isTablet) ...[
-        KSizedBox.kHeightSizedBox16,
-        DiscountBoxwWidget(
-          key: KWidgetkeys.screen.home.discountsBox,
-          isTablet: false,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        doubleBox(
-          context: context,
-          isTablet: isTablet,
-        ),
-      ],
-      KSizedBox.kHeightSizedBox16,
-      if (Config.isDevelopment)
+class BoxWidgetList extends StatelessWidget {
+  const BoxWidgetList({
+    required this.isDesk,
+    required this.isTablet,
+    required this.aboutProjectKey,
+    super.key,
+  });
+  final bool isDesk;
+  final bool isTablet;
+  final GlobalKey aboutProjectKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (isDesk)
+          KSizedBox.kHeightSizedBox36
+        else
+          KSizedBox.kHeightSizedBox16,
         if (isTablet)
-          Row(
-            children: [
-              Expanded(
-                child: BoxWidget(
-                  key: KWidgetkeys.screen.home.informationBox,
-                  text: context.l10n.information,
-                  onTap: () => context.goNamed(
-                    KRoute.information.name,
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: isDesk ? 3 : 2,
+                  child: HomeBoxWidget(
+                    aboutProjectKey: aboutProjectKey,
+                    isDesk: isDesk,
+                    isTablet: true,
                   ),
-                  isDesk: true,
-                  icon: KIcon.globe,
                 ),
-              ),
-              KSizedBox.kWidthSizedBox24,
-              Expanded(
-                child: BoxWidget(
-                  key: KWidgetkeys.screen.home.storyBox,
-                  text: context.l10n.stories,
-                  onTap: () => context.goNamed(KRoute.stories.name),
-                  isDesk: true,
-                  icon: KIcon.messageSquare,
+                KSizedBox.kWidthSizedBox24,
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: DiscountBoxwWidget(
+                          key: KWidgetkeys.screen.home.discountsBox,
+                          isTablet: true,
+                        ),
+                      ),
+                      KSizedBox.kHeightSizedBox16,
+                      Expanded(
+                        flex: 2,
+                        child: DoubleBox(
+                          context: context,
+                          textIconPaddingWidget: const Spacer(),
+                          isTablet: isTablet,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              KSizedBox.kWidthSizedBox24,
-              Expanded(
-                child: BoxWidget(
-                  key: KWidgetkeys.screen.home.workBox,
-                  text: context.l10n.work,
-                  onTap: () => context.goNamed(KRoute.work.name),
-                  isDesk: true,
-                  icon: KIcon.briefcase,
-                ),
-              ),
-            ],
+              ],
+            ),
           )
         else ...[
-          BoxWidget(
-            key: KWidgetkeys.screen.home.informationBox,
-            text: context.l10n.information,
-            onTap: () => context.goNamed(
-              KRoute.information.name,
-            ),
+          HomeBoxWidget(
+            aboutProjectKey: aboutProjectKey,
             isDesk: false,
-            icon: KIcon.globe,
+            isTablet: false,
           ),
           KSizedBox.kHeightSizedBox16,
-          BoxWidget(
-            key: KWidgetkeys.screen.home.storyBox,
-            text: context.l10n.stories,
-            onTap: () => context.goNamed(KRoute.stories.name),
-            isDesk: false,
-            icon: KIcon.messageSquare,
+          DiscountBoxwWidget(
+            key: KWidgetkeys.screen.home.discountsBox,
+            isTablet: false,
           ),
           KSizedBox.kHeightSizedBox16,
-          BoxWidget(
-            key: KWidgetkeys.screen.home.workBox,
-            text: context.l10n.work,
-            onTap: () => context.goNamed(KRoute.work.name),
-            isDesk: false,
-            icon: KIcon.briefcase,
+          DoubleBox(
+            context: context,
+            isTablet: isTablet,
           ),
         ],
-    ];
+        KSizedBox.kHeightSizedBox16,
+        if (Config.isDevelopment)
+          if (isTablet)
+            Row(
+              children: [
+                Expanded(
+                  child: BoxWidget(
+                    key: KWidgetkeys.screen.home.informationBox,
+                    text: context.l10n.information,
+                    onTap: () => context.goNamed(KRoute.information.name),
+                    isDesk: true,
+                    icon: KIcon.globe,
+                  ),
+                ),
+                KSizedBox.kWidthSizedBox24,
+                Expanded(
+                  child: BoxWidget(
+                    key: KWidgetkeys.screen.home.storyBox,
+                    text: context.l10n.stories,
+                    onTap: () => context.goNamed(KRoute.stories.name),
+                    isDesk: true,
+                    icon: KIcon.messageSquare,
+                  ),
+                ),
+                KSizedBox.kWidthSizedBox24,
+                Expanded(
+                  child: BoxWidget(
+                    key: KWidgetkeys.screen.home.workBox,
+                    text: context.l10n.work,
+                    onTap: () => context.goNamed(KRoute.work.name),
+                    isDesk: true,
+                    icon: KIcon.briefcase,
+                  ),
+                ),
+              ],
+            )
+          else ...[
+            BoxWidget(
+              key: KWidgetkeys.screen.home.informationBox,
+              text: context.l10n.information,
+              onTap: () => context.goNamed(KRoute.information.name),
+              isDesk: false,
+              icon: KIcon.globe,
+            ),
+            KSizedBox.kHeightSizedBox16,
+            BoxWidget(
+              key: KWidgetkeys.screen.home.storyBox,
+              text: context.l10n.stories,
+              onTap: () => context.goNamed(KRoute.stories.name),
+              isDesk: false,
+              icon: KIcon.messageSquare,
+            ),
+            KSizedBox.kHeightSizedBox16,
+            BoxWidget(
+              key: KWidgetkeys.screen.home.workBox,
+              text: context.l10n.work,
+              onTap: () => context.goNamed(KRoute.work.name),
+              isDesk: false,
+              icon: KIcon.briefcase,
+            ),
+          ],
+      ],
+    );
+  }
+}
 
-Widget doubleBox({
-  required BuildContext context,
-  required bool isTablet,
-  Widget? textIconPaddingWidget,
-}) =>
-    Row(
+class DoubleBox extends StatelessWidget {
+  const DoubleBox({
+    required this.context,
+    required this.isTablet,
+    super.key,
+    this.textIconPaddingWidget,
+  });
+  final BuildContext context;
+  final bool isTablet;
+  final Widget? textIconPaddingWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
         Expanded(
           flex: isTablet ? 5 : 4,
@@ -218,3 +210,5 @@ Widget doubleBox({
         ),
       ],
     );
+  }
+}
