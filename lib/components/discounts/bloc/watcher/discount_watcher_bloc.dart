@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,7 +90,7 @@ class DiscountWatcherBloc
 
   void logTimestamp(String methodName, {String point = 'start'}) {
     final DateTime currentTime = DateTime.now();
-    print('$methodName $point at: $currentTime');
+    dev.log('TIME LINE: $methodName $point at: $currentTime');
   }
 
   Future<void> _onUpdated(
@@ -132,7 +133,10 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
-      itemsLoaded: event.discountItemsModel.length,
+      itemsLoaded: state.itemsLoaded.getLoaded(
+        list: event.discountItemsModel,
+        loadItems: getItemsLoading,
+      ),
     );
     logTimestamp('_onUpdated', point: 'after main filtering');
 
@@ -144,6 +148,8 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
         filterCategory: categories,
+        // itemsLoaded: list.length,
+
         itemsLoaded: list.length,
         categoryListEmpty: categories.haveSelectedValue,
         failure: null,
@@ -215,6 +221,8 @@ class DiscountWatcherBloc
     _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    logTimestamp('_onFilterCategory', point: 'start');
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final selectedFilters = state.filterCategory
         .map(
           (element) => element.value == event.value
@@ -253,6 +261,7 @@ class DiscountWatcherBloc
         categoryDiscountModelItems: categoryItems,
       ),
     );
+    logTimestamp('_onFilterCategory', point: 'end');
   }
 
   void _onFilterLocation(

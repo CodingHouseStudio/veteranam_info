@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -47,6 +48,7 @@ class CityListWidget extends StatelessWidget {
                               style: AppTextStyle.materialThemeLabelLarge,
                             )
                           : CityWidgetListExpanded(
+                              key: ValueKey(cityList),
                               cityList: cityList,
                               isDesk: isDesk,
                             ),
@@ -85,19 +87,52 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
 
   @override
   Widget build(BuildContext context) {
-    return MarkdownBody(
+    return RichText(
       key: isExpanded
           ? KWidgetkeys.widget.cityList.markdownFulllList
           : KWidgetkeys.widget.cityList.markdown,
-      data: widget.cityList
-          .getCityList(showFullText: !isExpanded, context: context),
-      onTapLink: (text, href, title) => setState(() {
-        isExpanded = !isExpanded;
-      }),
-      styleSheet: MarkdownStyleSheet(
-        a: AppTextStyle.materialThemeLabelLargeRef,
-        p: AppTextStyle.materialThemeLabelLarge,
+      text: TextSpan(
+        text: '${widget.cityList.getCityString(
+          showFullText: !isExpanded,
+        )} ',
+        style: AppTextStyle.materialThemeLabelLarge,
+        children: [
+          if (isExpanded)
+            TextSpan(
+              text: context.l10n.hideExpansion,
+              style: AppTextStyle.materialThemeLabelLargeRef,
+              recognizer: _textSpanEvent,
+            )
+          else
+            TextSpan(
+              text: context.l10n.moreCities(
+                widget.cityList.length - 1,
+              ),
+              style: AppTextStyle.materialThemeLabelLargeRef,
+              recognizer: _textSpanEvent,
+            ),
+        ],
       ),
     );
+    // return MarkdownBody(
+    //   key: isExpanded
+    //       ? KWidgetkeys.widget.cityList.markdownFulllList
+    //       : KWidgetkeys.widget.cityList.markdown,
+    //   data: widget.cityList
+    //       .getCityList(showFullText: !isExpanded, context: context),
+    //   onTapLink: (text, href, title) => setState(() {
+    //     isExpanded = !isExpanded;
+    //   }),
+    //   styleSheet: MarkdownStyleSheet(
+    //     a: AppTextStyle.materialThemeLabelLargeRef,
+    //     p: AppTextStyle.materialThemeLabelLarge,
+    //   ),
+    // );
   }
+
+  GestureRecognizer get _textSpanEvent =>
+      TapGestureRecognizer()..onTap = _expandedChangeEvent;
+  void _expandedChangeEvent() => setState(() {
+        isExpanded = !isExpanded;
+      });
 }

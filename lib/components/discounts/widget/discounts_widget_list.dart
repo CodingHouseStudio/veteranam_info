@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
@@ -11,15 +13,27 @@ class DiscountsWidgetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      buildWhen: (previous, current) =>
+          previous.loadingStatus != current.loadingStatus ||
+          previous.filteredDiscountModelItems !=
+              current.filteredDiscountModelItems,
       builder: (context, state) {
+        log('TEDDFSEFS: ${state.loadingStatus}');
         switch (state.loadingStatus) {
           case LoadingStatus.loaded:
           case LoadingStatus.listLoadedFull:
+            final value = state.filteredDiscountModelItems;
+            log('tesfddfsdcsfds${value.length}');
             return ListView.builder(
               primary: false,
               shrinkWrap: true,
-              itemCount: state.discountModelItems.length,
+              itemCount: state.filteredDiscountModelItems.length,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               itemBuilder: (context, index) {
+                final discountItem =
+                    state.filteredDiscountModelItems.elementAt(index);
                 if ((context.read<DiscountConfigCubit>().state.linkScrollCount +
                             1) *
                         context
@@ -32,13 +46,12 @@ class DiscountsWidgetList extends StatelessWidget {
                     shrinkWrap: true,
                     children: [
                       DiscountCardWidget(
-                        key: ValueKey(
-                            state.discountModelItems.elementAt(index).id),
-                        discountItem: state.discountModelItems.elementAt(index),
+                        key: ValueKey(discountItem.id),
+                        discountItem: discountItem,
                         isDesk: isDesk,
                         // reportEvent: null,
                         share:
-                            '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModelItems.elementAt(index).id}',
+                            '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
                         isLoading: false,
                         // () => context
                         //     .read<DiscountWatcherBloc>()
@@ -49,12 +62,12 @@ class DiscountsWidgetList extends StatelessWidget {
                   );
                 } else {
                   return DiscountCardWidget(
-                    key: ValueKey(state.discountModelItems.elementAt(index).id),
-                    discountItem: state.discountModelItems.elementAt(index),
+                    key: ValueKey(discountItem.id),
+                    discountItem: discountItem,
                     isDesk: isDesk,
                     // reportEvent: null,
                     share:
-                        '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModelItems.elementAt(index).id}',
+                        '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
                     isLoading: false,
                     // () => context
                     //     .read<DiscountWatcherBloc>()
@@ -123,42 +136,42 @@ class DiscountsWidgetList extends StatelessWidget {
   }
 }
 
-List<Widget> discountsWidgetList({
-  required BuildContext context,
-  required bool isDesk,
-}) {
-  final items = cardWidgetList<DiscountModel>(
-    loadingStatus: context.read<DiscountWatcherBloc>().state.loadingStatus,
-    modelItems:
-        context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
-    cardWidget: ({required modelItem, required isLoading}) =>
-        DiscountCardWidget(
-      key: KWidgetkeys.screen.discounts.card,
-      discountItem: modelItem,
-      isDesk: isDesk,
-      // reportEvent: null,
-      share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
-      isLoading: isLoading,
-      // () => context
-      //     .read<DiscountWatcherBloc>()
-      //     .add(const DiscountWatcherEvent.getReport()),
-    ),
-    isDesk: isDesk,
-    shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
-    isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
-    shimmerItem: KMockText.discountModel,
-  );
+// List<Widget> discountsWidgetList({
+//   required BuildContext context,
+//   required bool isDesk,
+// }) {
+//   final items = cardWidgetList<DiscountModel>(
+//     loadingStatus: context.read<DiscountWatcherBloc>().state.loadingStatus,
+//     modelItems:
+//         context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
+//     cardWidget: ({required modelItem, required isLoading}) =>
+//         DiscountCardWidget(
+//       key: KWidgetkeys.screen.discounts.card,
+//       discountItem: modelItem,
+//       isDesk: isDesk,
+//       // reportEvent: null,
+//       share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
+//       isLoading: isLoading,
+//       // () => context
+//       //     .read<DiscountWatcherBloc>()
+//       //     .add(const DiscountWatcherEvent.getReport()),
+//     ),
+//     isDesk: isDesk,
+//     shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
+//     isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
+//     shimmerItem: KMockText.discountModel,
+//   );
 
-  final finalList = <Widget>[];
-  for (var i = 0; i < items.length; i++) {
-    finalList.add(items[i]);
-    if ((context.read<DiscountConfigCubit>().state.linkScrollCount + 1) *
-            context.read<DiscountConfigCubit>().state.loadingItems ==
-        i + 1) {
-      finalList.add(
-        DiscountLinkWidget(isDesk: isDesk),
-      );
-    }
-  }
-  return finalList;
-}
+//   final finalList = <Widget>[];
+//   for (var i = 0; i < items.length; i++) {
+//     finalList.add(items[i]);
+//     if ((context.read<DiscountConfigCubit>().state.linkScrollCount + 1) *
+//             context.read<DiscountConfigCubit>().state.loadingItems ==
+//         i + 1) {
+//       finalList.add(
+//         DiscountLinkWidget(isDesk: isDesk),
+//       );
+//     }
+//   }
+//   return finalList;
+// }

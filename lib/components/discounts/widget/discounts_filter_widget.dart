@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
@@ -17,6 +19,7 @@ class DiscountsFilterWidget extends StatelessWidget {
                 current.locationDiscountModelItems ||
             previous.categoryListEmpty != current.categoryListEmpty,
         builder: (context, state) {
+          log('TIME LINE:');
           if (state.loadingStatus == LoadingStatus.loading) {
             return const Center(
               child: CircularProgressIndicator(),

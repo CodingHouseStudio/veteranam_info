@@ -45,18 +45,28 @@ extension FilterItems on List<FilterItem> {
 }
 
 extension ListStringExtensions on List<String> {
-  String getCityList({
+  // String getCityList({
+  //   required bool showFullText,
+  //   required BuildContext context,
+  // }) {
+  //   if (showFullText) {
+  //     return '$first [${context.l10n.moreCities(
+  //       length - 1,
+  //     )}]()';
+  //   } else {
+  //     return '${map(
+  //       (e) => '$e | ',
+  //     ).join()}[${context.l10n.hideExpansion}]()';
+  //   }
+  // }
+  String getCityString({
     required bool showFullText,
-    required BuildContext context,
+    // required BuildContext context,
   }) {
     if (showFullText) {
-      return '$first [${context.l10n.moreCities(
-        length - 1,
-      )}]()';
+      return first;
     } else {
-      return '${map(
-        (e) => '$e | ',
-      ).join()}[${context.l10n.hideExpansion}]()';
+      return toString();
     }
   }
 }

@@ -164,14 +164,14 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    final storageModule = _$StorageModule();
-    final artifactModule = _$ArtifactModule();
     final firstoreModule = _$FirstoreModule();
+    final artifactModule = _$ArtifactModule();
+    final storageModule = _$StorageModule();
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
-    final firebaseModule = _$FirebaseModule();
     final dataPickerModule = _$DataPickerModule();
+    final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
     final mobileRatingModule = _$MobileRatingModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
@@ -179,9 +179,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i960.FailureRepository(),
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i457.FirebaseStorage>(() => storageModule.storage);
-    gh.singleton<_i361.Dio>(() => artifactModule.dio);
     gh.singleton<_i974.FirebaseFirestore>(() => firstoreModule.firestore);
+    gh.singleton<_i361.Dio>(() => artifactModule.dio);
+    gh.singleton<_i457.FirebaseStorage>(() => storageModule.storage);
     gh.singleton<_i1008.AppInfoRepository>(() => _i1008.AppInfoRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
@@ -204,11 +204,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => analytucsModule.firebaseAnalytics);
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
+    gh.singleton<_i183.ImagePicker>(() => dataPickerModule.imagePicker);
+    gh.singleton<_i388.FilePicker>(() => dataPickerModule.filePicker);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i806.FacebookAuth>(() => firebaseModule.firebaseSignIn);
-    gh.singleton<_i183.ImagePicker>(() => dataPickerModule.imagePicker);
-    gh.singleton<_i388.FilePicker>(() => dataPickerModule.filePicker);
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
     gh.singleton<_i1026.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
           gh<_i895.Connectivity>(),
@@ -296,20 +296,20 @@ extension GetItInjectableX on _i174.GetIt {
         investorsRepository: gh<_i1026.IInvestorsRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i209.AuthenticationServicesCubit>(() =>
-        _i209.AuthenticationServicesCubit(
-            authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i361.PwResetEmailBloc>(() => _i361.PwResetEmailBloc(
+    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i846.CheckVerificationCodeCubit>(() =>
         _i846.CheckVerificationCodeCubit(
             authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i335.PasswordResetBloc>(() => _i335.PasswordResetBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i361.PwResetEmailBloc>(() => _i361.PwResetEmailBloc(
+        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i209.AuthenticationServicesCubit>(() =>
+        _i209.AuthenticationServicesCubit(
+            authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.singleton<_i997.NetworkRepository>(
         () => _i997.NetworkRepository(gh<_i1026.IAppNetworkRepository>()));
     gh.factory<_i372.DiscountLinkFormBloc>(() => _i372.DiscountLinkFormBloc(
@@ -468,11 +468,11 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$StorageModule extends _i812.StorageModule {}
+class _$FirstoreModule extends _i718.FirstoreModule {}
 
 class _$ArtifactModule extends _i163.ArtifactModule {}
 
-class _$FirstoreModule extends _i718.FirstoreModule {}
+class _$StorageModule extends _i812.StorageModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 
@@ -480,9 +480,9 @@ class _$AnalytucsModule extends _i606.AnalytucsModule {}
 
 class _$RemoteConfigModule extends _i769.RemoteConfigModule {}
 
-class _$FirebaseModule extends _i926.FirebaseModule {}
-
 class _$DataPickerModule extends _i567.DataPickerModule {}
+
+class _$FirebaseModule extends _i926.FirebaseModule {}
 
 class _$NetworkModule extends _i385.NetworkModule {}
 
