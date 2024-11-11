@@ -265,6 +265,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
                   userName: userName,
                   categoryEN: categoryEN,
                   userPhoto: userPhoto,
+                  mainAxisSize: MainAxisSize.min,
                 ),
                 _CategoryWidget(
                   categories: category,
@@ -280,6 +281,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               userName: userName,
               categoryEN: categoryEN,
               userPhoto: userPhoto,
+              mainAxisSize: MainAxisSize.max,
             ),
     );
   }
@@ -294,6 +296,7 @@ class _CompanyInfoWidget extends StatelessWidget {
     required this.userName,
     required this.categoryEN,
     required this.userPhoto,
+    required this.mainAxisSize,
   });
   final String? company;
   final String? companyEN;
@@ -302,10 +305,11 @@ class _CompanyInfoWidget extends StatelessWidget {
   final List<String> category;
   final List<String>? categoryEN;
   final ImageModel? userPhoto;
+  final MainAxisSize mainAxisSize;
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: mainAxisSize,
       children: [
         UserPhotoWidget(
           imageUrl: userPhoto?.downloadURL,
@@ -313,16 +317,21 @@ class _CompanyInfoWidget extends StatelessWidget {
           imageName: userPhoto?.name,
         ),
         KSizedBox.kWidthSizedBox16,
-        _CompanyInformationWidget(
-          company: company,
-          companyEN: companyEN,
-          userName: userName,
-          dateVerified: dateVerified,
-          mainAxisSize: MainAxisSize.min,
-        ),
+        if (mainAxisSize == MainAxisSize.max)
+          Expanded(child: companyInfo)
+        else
+          companyInfo,
       ],
     );
   }
+
+  Widget get companyInfo => _CompanyInformationWidget(
+        company: company,
+        companyEN: companyEN,
+        userName: userName,
+        dateVerified: dateVerified,
+        mainAxisSize: MainAxisSize.min,
+      );
 }
 
 class _CompanyInformationWidget extends StatelessWidget {

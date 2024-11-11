@@ -37,6 +37,7 @@ class AdvancedFilterContent extends StatelessWidget {
       semanticChildCount: body.length,
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
+      shrinkWrap: isDesk,
     );
   }
 

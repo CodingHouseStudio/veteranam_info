@@ -12,7 +12,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
-    this.mainRightChildWidget,
+    // this.mainRightChildWidget,
     super.key,
     // this.resetFilter,
     this.pageName,
@@ -27,7 +27,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final EdgeInsetsGeometry Function({required double maxWidth})?
       mainDeskPadding;
   final void Function() loadFunction;
-  final Widget? mainRightChildWidget;
+  // final Widget? mainRightChildWidget;
   final String loadingButtonText;
   final bool? cardListIsEmpty;
   final LoadingStatus loadingStatus;
@@ -204,25 +204,27 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                                   ),
                                 )
                               : padding,
-                          sliver: widget.mainRightChildWidget != null && isDesk
-                              ? RowSliver(
-                                  right: mainBody(mainChildWidget),
-                                  left: SliverPersistentHeader(
-                                    pinned: true,
-                                    delegate: SliverHeaderWidget(
-                                      // isDesk: isDesk,
-                                      childWidget: ({
-                                        required overlapsContent,
-                                        required shrinkOffset,
-                                      }) =>
-                                          widget.mainRightChildWidget!,
-                                      maxMinHeight: constraints.maxHeight,
-                                      // isTablet: isTablet,
-                                    ),
-                                  ),
-                                  leftWidthPercent: 0.3,
-                                )
-                              : mainBody(mainChildWidget),
+                          sliver:
+                              // widget.mainRightChildWidget != null && isDesk
+                              //     ? RowSliver(
+                              //         right: mainBody(mainChildWidget),
+                              //         left: SliverPersistentHeader(
+                              //           pinned: true,
+                              //           delegate: SliverHeaderWidget(
+                              //             // isDesk: isDesk,
+                              //             childWidget: ({
+                              //               required overlapsContent,
+                              //               required shrinkOffset,
+                              //             }) =>
+                              //                 widget.mainRightChildWidget!,
+                              //             maxMinHeight: constraints.maxHeight,
+                              //             // isTablet: isTablet,
+                              //           ),
+                              //         ),
+                              //         leftWidthPercent: 0.3,
+                              //       )
+                              //     :
+                              mainBody(mainChildWidget),
                         ),
                       ],
                       semanticChildCount: mainChildWidget.length +

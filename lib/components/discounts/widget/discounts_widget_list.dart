@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
@@ -12,25 +10,42 @@ class DiscountsWidgetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isDesk) {
+      //TODO: FIX
+      return const Row(
+        children: [
+          Expanded(child: AdvancedFilterDesk()),
+          _DiscountsWidgetList(isDesk: true),
+        ],
+      );
+    } else {
+      return const _DiscountsWidgetList(isDesk: false);
+    }
+  }
+}
+
+class _DiscountsWidgetList extends StatelessWidget {
+  const _DiscountsWidgetList({required this.isDesk});
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       buildWhen: (previous, current) =>
           previous.loadingStatus != current.loadingStatus ||
           previous.filteredDiscountModelItems !=
               current.filteredDiscountModelItems,
       builder: (context, state) {
-        log('TEDDFSEFS: ${state.loadingStatus}');
         switch (state.loadingStatus) {
           case LoadingStatus.loaded:
           case LoadingStatus.listLoadedFull:
-            final value = state.filteredDiscountModelItems;
-            log('tesfddfsdcsfds${value.length}');
             return ListView.builder(
               primary: false,
               shrinkWrap: true,
               itemCount: state.filteredDiscountModelItems.length,
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
+              // addAutomaticKeepAlives: false,
+              // addRepaintBoundaries: false,
               itemBuilder: (context, index) {
                 final discountItem =
                     state.filteredDiscountModelItems.elementAt(index);
