@@ -11,13 +11,15 @@ class AdvancedFilterContent extends StatelessWidget {
     required this.sorting,
     required this.onChange,
     required this.onChangeSorting,
-    required this.choosenList,
+    required this.chooseLocationList,
+    required this.chooseSortingList,
     super.key,
   });
   final bool isDesk;
   final List<FilterItem> filterLocationes;
-  final List<FilterItem> choosenList;
-  final List<DiscountEnum> sorting;
+  final List<FilterItem> chooseLocationList;
+  final List<FilterItem> sorting;
+  final List<FilterItem> chooseSortingList;
   final void Function(dynamic) onChange;
   final void Function(DiscountEnum) onChangeSorting;
 
@@ -26,62 +28,62 @@ class AdvancedFilterContent extends StatelessWidget {
     final body = [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
       // KSizedBox.kHeightSizedBox24,
-      if (choosenList.isNotEmpty || sorting.isNotEmpty) ...[
-        if (isDesk)
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  context.l10n.filterApplied,
-                  key: KWidgetkeys.screen.discounts.appliedFilterText,
-                  style: AppTextStyle.materialThemeTitleLarge,
-                ),
-              ),
-              AdvancedFilterResetButton(
-                isDesk: true,
-                resetEvent: () => context
-                    .read<DiscountWatcherBloc>()
-                    .add(const DiscountWatcherEvent.filterReset()),
-              ),
-            ],
-          )
-        else
-          Text(
-            context.l10n.filterApplied,
-            key: KWidgetkeys.screen.discounts.appliedFilterText,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-        ...List.generate(filterLocationes.length + sorting.length, (index) {
-          final filter = sorting.length <= index
-              ? choosenList.elementAt(index - sorting.length)
-              : sorting.elementAt(index);
-          return Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CancelChipWidget(
-                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-                isDesk: isDesk,
-                labelText: filter is SubLocation
-                    ? filter.getList(context).first
-                    : filter is DiscountEnum
-                        ? filter.getValue(context)
-                        : (filter as FilterItem).getString(context),
-                onPressed: () {
-                  if (filter is DiscountEnum) {
-                    onChangeSorting(filter);
-                  } else {
-                    onChange(
-                      filter,
-                    );
-                  }
-                },
-              ),
-            ),
-          );
-        }),
-        KSizedBox.kHeightSizedBox24,
-      ],
+      // if (chooseLocationList.isNotEmpty || sorting.isNotEmpty) ...[
+      //   if (isDesk)
+      //     Row(
+      //       children: [
+      //         Expanded(
+      //           child: Text(
+      //             context.l10n.filterApplied,
+      //             key: KWidgetkeys.screen.discounts.appliedFilterText,
+      //             style: AppTextStyle.materialThemeTitleLarge,
+      //           ),
+      //         ),
+      //         AdvancedFilterResetButton(
+      //           isDesk: true,
+      //           resetEvent: () => context
+      //               .read<DiscountWatcherBloc>()
+      //               .add(const DiscountWatcherEvent.filterReset()),
+      //         ),
+      //       ],
+      //     )
+      //   else
+      //     Text(
+      //       context.l10n.filterApplied,
+      //       key: KWidgetkeys.screen.discounts.appliedFilterText,
+      //       style: AppTextStyle.materialThemeTitleMedium,
+      //     ),
+      //   ...List.generate(filterLocationes.length + sorting.length, (index) {
+      //     final filter = sorting.length <= index
+      //         ? chooseLocationList.elementAt(index - sorting.length)
+      //         : sorting.elementAt(index);
+      //     return Padding(
+      //       padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+      //       child: Align(
+      //         alignment: Alignment.centerLeft,
+      //         child: CancelChipWidget(
+      //           widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+      //           isDesk: isDesk,
+      //           labelText: filter is SubLocation
+      //               ? filter.getList(context).first
+      //               : filter is DiscountEnum
+      //                   ? filter.getValue(context)
+      //                   : (filter as FilterItem).getString(context),
+      //           onPressed: () {
+      //             if (filter is DiscountEnum) {
+      //               onChangeSorting(filter);
+      //             } else {
+      //               onChange(
+      //                 filter,
+      //               );
+      //             }
+      //           },
+      //         ),
+      //       ),
+      //     );
+      //   }),
+      //   KSizedBox.kHeightSizedBox24,
+      // ],
       Text(
         context.l10n.discount,
         key: KWidgetkeys.screen.discounts.discountText,

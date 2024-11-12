@@ -86,7 +86,13 @@ class DiscountBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           Padding(
             padding: padding,
-            child: DiscountsWidgetList(isDesk: isDesk),
+            child: SizedBox(
+              height: constraints.maxHeight,
+              child: DiscountsWidgetList(
+                isDesk: isDesk,
+                maxHeight: constraints.maxHeight,
+              ),
+            ),
           ),
           // LoadingButton(
           //   widgetKey: KWidgetkeys.screen.discounts.button,

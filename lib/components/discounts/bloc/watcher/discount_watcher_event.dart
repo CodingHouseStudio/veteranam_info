@@ -22,7 +22,7 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
 
   const factory DiscountWatcherEvent.setMobFilter({
     required List<FilterItem> filterList,
-    required List<DiscountEnum> sorting,
+    required List<SortingItem> sorting,
   }) = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(

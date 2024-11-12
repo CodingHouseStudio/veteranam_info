@@ -20,7 +20,8 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
         ..started(
           initialFilter: bloc.state.filterLocation,
           initialSorting: bloc.state.sorting,
-          initChoosenLocationList: bloc.state.choosenLocationList,
+          initChooseLocationList: bloc.state.choosenLocationList,
+          initialChooseSorting: bloc.state.choosenSortingnList,
         ),
       child: childWidget,
     );

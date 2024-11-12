@@ -5,19 +5,95 @@ import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsWidgetList extends StatelessWidget {
-  const DiscountsWidgetList({required this.isDesk, super.key});
+  const DiscountsWidgetList(
+      {required this.isDesk, required this.maxHeight, super.key});
   final bool isDesk;
+  final double maxHeight;
 
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
-      return const Row(
-        children: [
-          Expanded(
-            child: AdvancedFilterDesk(),
-          ),
-          Expanded(flex: 3, child: _DiscountsWidgetList(isDesk: true)),
-        ],
+      return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        buildWhen: (previous, current) =>
+            previous.loadingStatus != current.loadingStatus ||
+            previous.filteredDiscountModelItems !=
+                current.filteredDiscountModelItems,
+        builder: (context, state) {
+          switch (state.loadingStatus) {
+            case LoadingStatus.loaded:
+            case LoadingStatus.listLoadedFull:
+              return CustomScrollView(
+                primary: false,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                slivers: [
+                  RowSliver(
+                    right: SliverList.builder(
+                      itemCount: state.filteredDiscountModelItems.length,
+                      itemBuilder: (context, index) {
+                        final discountItem =
+                            state.filteredDiscountModelItems.elementAt(index);
+                        // if ((context
+                        //                 .read<DiscountConfigCubit>()
+                        //                 .state
+                        //                 .linkScrollCount +
+                        //             1) *
+                        //         context
+                        //             .read<DiscountConfigCubit>()
+                        //             .state
+                        //             .loadingItems ==
+                        //     index + 1) {
+                        //   return ListView(
+                        //     primary: false,
+                        //     shrinkWrap: true,
+                        //     children: [
+                        //       DiscountCardWidget(
+                        //         key: ValueKey(discountItem.id),
+                        //         discountItem: discountItem,
+                        //         isDesk: isDesk,
+                        //         share:
+                        //             '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                        //         isLoading: false,
+                        //       ),
+                        //       DiscountLinkWidget(isDesk: isDesk),
+                        //     ],
+                        //   );
+                        // } else {
+                        return DiscountCardWidget(
+                          key: ValueKey(discountItem.id),
+                          discountItem: discountItem,
+                          isDesk: isDesk,
+                          share:
+                              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                          isLoading: false,
+                        );
+                        // }
+                      },
+                    ),
+                    left: SliverPersistentHeader(
+                      pinned: true,
+                      delegate: SliverHeaderWidget(
+                        // isDesk: isDesk,
+                        childWidget: ({
+                          required overlapsContent,
+                          required shrinkOffset,
+                        }) =>
+                            const AdvancedFilterDesk(),
+                        maxMinHeight: maxHeight,
+                        // isTablet: isTablet,
+                      ),
+                    ),
+                    leftWidthPercent: 0.3,
+                  )
+                ],
+              );
+            case LoadingStatus.initial:
+            case LoadingStatus.error:
+            case LoadingStatus.loading:
+              // TODO(refactor): change
+              return const SizedBox.shrink();
+          }
+        },
       );
     } else {
       return const _DiscountsWidgetList(isDesk: false);
