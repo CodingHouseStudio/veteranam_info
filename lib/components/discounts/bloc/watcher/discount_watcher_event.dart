@@ -21,7 +21,7 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   ) = _FilterLocation;
 
   const factory DiscountWatcherEvent.setMobFilter({
-    required List<dynamic> filterList,
+    required List<FilterItem> filterList,
     required List<DiscountEnum> sorting,
   }) = _SetMobFilter;
 

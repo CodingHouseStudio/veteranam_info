@@ -13,24 +13,33 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
           const AdvancedFilterMobState(
             filtersLocation: [],
             sorting: [],
+            choosenLocationList: [],
           ),
         );
   void started({
-    required List<dynamic> initialFilter,
+    required List<FilterItem> initialFilter,
     required List<DiscountEnum> initialSorting,
+    required List<FilterItem> initChoosenLocationList,
   }) =>
       emit(
         AdvancedFilterMobState(
           filtersLocation: initialFilter,
           sorting: initialSorting,
+          choosenLocationList: initChoosenLocationList,
         ),
       );
 
   void changeFilterList(dynamic value) {
-    final filterList = state.filtersLocation.checkValue(
-      filterValue: value,
-      equalValue: SubLocation.allStoresOfChain,
-    );
+    final filterList = state.filtersLocation
+      ..map(
+        (element) => element.value == value
+            ? element.copyWith(isSelected: !element.isSelected)
+            : element,
+      ).toList();
+    // checkValue(
+    //   filterValue: value,
+    //   equalValue: SubLocation.allStoresOfChain,
+    // );
     emit(state.copyWith(filtersLocation: filterList));
   }
 

@@ -11,11 +11,12 @@ class DiscountsWidgetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
-      //TODO: FIX
       return const Row(
         children: [
-          Expanded(child: AdvancedFilterDesk()),
-          _DiscountsWidgetList(isDesk: true),
+          Expanded(
+            child: AdvancedFilterDesk(),
+          ),
+          Expanded(flex: 3, child: _DiscountsWidgetList(isDesk: true)),
         ],
       );
     } else {

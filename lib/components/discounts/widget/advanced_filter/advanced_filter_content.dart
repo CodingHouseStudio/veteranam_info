@@ -11,53 +11,22 @@ class AdvancedFilterContent extends StatelessWidget {
     required this.sorting,
     required this.onChange,
     required this.onChangeSorting,
+    required this.choosenList,
     super.key,
   });
   final bool isDesk;
-  final List<dynamic> filterLocationes;
+  final List<FilterItem> filterLocationes;
+  final List<FilterItem> choosenList;
   final List<DiscountEnum> sorting;
   final void Function(dynamic) onChange;
   final void Function(DiscountEnum) onChangeSorting;
 
   @override
   Widget build(BuildContext context) {
-    final body = _widgetList(
-      isDesk: isDesk,
-      context: context,
-      filterLocationes: filterLocationes,
-      onChange: onChange,
-      sorting: sorting,
-      onChangeSorting: onChangeSorting,
-    );
-    return ListView.builder(
-      key: KWidgetkeys.screen.discounts.advancedFilterList,
-      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-      itemBuilder: (context, index) => body.elementAt(index),
-      itemCount: body.length,
-      semanticChildCount: body.length,
-      addAutomaticKeepAlives: false,
-      addRepaintBoundaries: false,
-      shrinkWrap: isDesk,
-    );
-  }
-
-  List<Widget> _widgetList({
-    required bool isDesk,
-    required BuildContext context,
-    required List<dynamic> filterLocationes,
-    required List<DiscountEnum> sorting,
-    required void Function(dynamic) onChange,
-    required void Function(DiscountEnum) onChangeSorting,
-  }) {
-    final locationes = context
-        .read<DiscountWatcherBloc>()
-        .state
-        .categoryDiscountModelItems
-        .getLocationFilter(context: context, isEnglish: context.isEnglish);
-    return [
+    final body = [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
       // KSizedBox.kHeightSizedBox24,
-      if (filterLocationes.isNotEmpty || sorting.isNotEmpty) ...[
+      if (choosenList.isNotEmpty || sorting.isNotEmpty) ...[
         if (isDesk)
           Row(
             children: [
@@ -84,7 +53,7 @@ class AdvancedFilterContent extends StatelessWidget {
           ),
         ...List.generate(filterLocationes.length + sorting.length, (index) {
           final filter = sorting.length <= index
-              ? filterLocationes.elementAt(index - sorting.length)
+              ? choosenList.elementAt(index - sorting.length)
               : sorting.elementAt(index);
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
@@ -97,13 +66,7 @@ class AdvancedFilterContent extends StatelessWidget {
                     ? filter.getList(context).first
                     : filter is DiscountEnum
                         ? filter.getValue(context)
-                        : locationes
-                            .firstWhere(
-                              (element) =>
-                                  element.value == filter ||
-                                  element.valueEN == filter,
-                            )
-                            .getString(context),
+                        : (filter as FilterItem).getString(context),
                 onPressed: () {
                   if (filter is DiscountEnum) {
                     onChangeSorting(filter);
@@ -152,9 +115,9 @@ class AdvancedFilterContent extends StatelessWidget {
             : AppTextStyle.materialThemeTitleMedium,
       ),
       ...List.generate(
-        locationes.length,
+        filterLocationes.length,
         (index) {
-          final location = locationes.elementAt(index);
+          final location = filterLocationes.elementAt(index);
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: CheckPointAmountWidget(
@@ -176,6 +139,17 @@ class AdvancedFilterContent extends StatelessWidget {
         },
       ),
     ];
+    return ListView.builder(
+      key: KWidgetkeys.screen.discounts.advancedFilterList,
+      primary: true,
+      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+      itemBuilder: (context, index) => body.elementAt(index),
+      itemCount: body.length,
+      semanticChildCount: body.length,
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      shrinkWrap: isDesk,
+    );
   }
 
   static bool _isCheck({

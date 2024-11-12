@@ -90,6 +90,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   sorting: _.sorting,
                   onChangeSorting: (value) =>
                       context.read<AdvancedFilterMobCubit>().sorting(value),
+                  choosenList: _.choosenLocationList,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
