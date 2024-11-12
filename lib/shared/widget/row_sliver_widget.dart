@@ -72,13 +72,13 @@ class _RenderRowSliverSliver extends RenderSliver
 
     final leftSize = constraints.crossAxisExtent * leftWidthPercent;
 
-    // Layout the left child with its calculated size
+    // Layout left child
     left.layout(
       constraints.copyWith(crossAxisExtent: leftSize),
       parentUsesSize: true,
     );
 
-    // Layout the right child with the remaining space
+    // Layout right child
     right.layout(
       constraints.copyWith(
         crossAxisExtent: constraints.crossAxisExtent - leftSize,
@@ -86,25 +86,19 @@ class _RenderRowSliverSliver extends RenderSliver
       parentUsesSize: true,
     );
 
-    // Position the right child to the right side
-    right.rowSliver.paintOffset = Offset(leftSize, 0);
-
-    // Calculate geometry based on children's layout extents
+    // Calculate scroll and paint extents
     final maxScrollExtent =
         max(left.geometry!.scrollExtent, right.geometry!.scrollExtent);
 
-    final paintExtent = constraints.remainingPaintExtent;
-    final layoutExtent = min(maxScrollExtent, paintExtent);
+    // Ensure paintExtent is not infinity
+    final paintExtent = min(constraints.remainingPaintExtent, maxScrollExtent);
 
     geometry = SliverGeometry(
       scrollExtent: maxScrollExtent,
-      paintExtent: paintExtent,
-      layoutExtent: layoutExtent,
+      paintExtent: paintExtent, // Ensure this value isn't infinity
+      layoutExtent: paintExtent,
       maxPaintExtent: maxScrollExtent,
-      maxScrollObstructionExtent: max(
-        left.geometry!.maxScrollObstructionExtent,
-        right.geometry!.maxScrollObstructionExtent,
-      ),
+      cacheExtent: maxScrollExtent,
     );
   }
 
@@ -112,15 +106,15 @@ class _RenderRowSliverSliver extends RenderSliver
   void paint(PaintingContext context, Offset offset) {
     if (!geometry!.visible) return;
 
-    // Paint the left child
+    // Paint left child
     context.paintChild(left, offset);
 
-    // Calculate the offset for painting the right child
+    // Calculate the offset for the right child
     final rightOffsetX =
         offset.dx + constraints.crossAxisExtent * leftWidthPercent;
     final rightOffset = Offset(rightOffsetX, offset.dy);
 
-    // Paint the right child
+    // Paint right child
     context.paintChild(right, rightOffset);
   }
 

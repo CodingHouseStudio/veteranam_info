@@ -86,12 +86,9 @@ class DiscountBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           Padding(
             padding: padding,
-            child: SizedBox(
-              height: constraints.maxHeight,
-              child: DiscountsWidgetList(
-                isDesk: isDesk,
-                maxHeight: constraints.maxHeight,
-              ),
+            child: DiscountsWidgetList(
+              isDesk: isDesk,
+              maxHeight: constraints.maxHeight,
             ),
           ),
           // LoadingButton(
@@ -109,6 +106,7 @@ class DiscountBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
         ];
         return ListView.builder(
+          primary: true,
           itemCount: body.length,
           itemBuilder: (context, index) => body.elementAt(index),
         );
