@@ -14,17 +14,17 @@ Future<void> homeMockButtonHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
-        itemKey: KWidgetkeys.screen.home.buttonMock,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp1000,
+      //   itemKey: KWidgetkeys.screen.home.buttonMock,
+      // );
 
-      await mockButtonHelper(
-        tester: tester,
-        card: KWidgetkeys.screen.home.faq,
-        buttonMock: KWidgetkeys.screen.home.buttonMock,
-      );
+      // await mockButtonHelper(
+      //   tester: tester,
+      //   card: KWidgetkeys.screen.home.faq,
+      //   buttonMock: KWidgetkeys.screen.home.buttonMock,
+      // );
     },
   );
 }

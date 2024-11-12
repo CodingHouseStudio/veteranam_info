@@ -46,15 +46,12 @@ List<Widget> _formWidgegList({
                         style: AppTextStyle.materialThemeTitleMedium,
                       ),
                       KSizedBox.kHeightSizedBox8,
-                      Wrap(
-                        children: FooterWidget.socialMediaLinks(
-                          isTablet: isDesk,
-                          context: context,
-                          padding: KSizedBox.kWidthSizedBox24,
-                          instagramKey: KWidgetkeys.screen.feedback.instagram,
-                          linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-                          facebookKey: KWidgetkeys.screen.feedback.facebook,
-                        ),
+                      SocialMediaLinks(
+                        isDesk: isDesk,
+                        padding: KSizedBox.kWidthSizedBox24,
+                        instagramKey: KWidgetkeys.screen.feedback.instagram,
+                        linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+                        facebookKey: KWidgetkeys.screen.feedback.facebook,
                       ),
                     ],
                   ),
@@ -115,15 +112,12 @@ List<Widget> _formWidgegList({
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             KSizedBox.kHeightSizedBox8,
-            Wrap(
-              children: FooterWidget.socialMediaLinks(
-                isTablet: isDesk,
-                context: context,
-                padding: KSizedBox.kWidthSizedBox24,
-                instagramKey: KWidgetkeys.screen.feedback.instagram,
-                linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-                facebookKey: KWidgetkeys.screen.feedback.facebook,
-              ),
+            SocialMediaLinks(
+              isDesk: isDesk,
+              padding: KSizedBox.kWidthSizedBox24,
+              instagramKey: KWidgetkeys.screen.feedback.instagram,
+              linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+              facebookKey: KWidgetkeys.screen.feedback.facebook,
             ),
             KSizedBox.kHeightSizedBox32,
           ];

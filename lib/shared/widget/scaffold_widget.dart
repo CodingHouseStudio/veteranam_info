@@ -68,13 +68,13 @@ class ScaffoldWidget extends StatelessWidget {
           );
           final footerWidget = <Widget>[];
           if (hasFooter) {
-            footerWidget.addAll(
-              FooterWidget.get(
-                context: context,
-                isTablet: isTablet,
-                isDesk: isDesk,
-              ),
-            );
+            // footerWidget.addAll(
+            //   FooterWidget.get(
+            //     context: context,
+            //     isTablet: isTablet,
+            //     isDesk: isDesk,
+            //   ),
+            // );
           }
 
           final scaffold = FocusTraversalGroup(

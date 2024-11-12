@@ -122,15 +122,12 @@ class MobSettingsBodyWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize16,
           ),
-          child: Wrap(
-            children: FooterWidget.socialMediaLinks(
-              isTablet: false,
-              context: context,
-              padding: KSizedBox.kWidthSizedBox16,
-              instagramKey: KWidgetkeys.screen.mobSettings.instagramIcon,
-              linkedInKey: KWidgetkeys.screen.mobSettings.likedInIcon,
-              facebookKey: KWidgetkeys.screen.mobSettings.facebookIcon,
-            ),
+          child: SocialMediaLinks(
+            isDesk: isDesk,
+            padding: KSizedBox.kWidthSizedBox24,
+            instagramKey: KWidgetkeys.screen.feedback.instagram,
+            linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+            facebookKey: KWidgetkeys.screen.feedback.facebook,
           ),
         ),
         KSizedBox.kHeightSizedBox8,
