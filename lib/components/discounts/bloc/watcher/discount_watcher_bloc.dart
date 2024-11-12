@@ -114,6 +114,8 @@ class DiscountWatcherBloc
       getUAFilter: (item) => item.category,
       list: event.discountItemsModel,
     );
+    final locationes = state.categoryDiscountModelItems
+        .getLocationFilter(isEnglish: event.isEnglish);
 
     logTimestamp('_onUpdated', point: 'after processing categories');
 
@@ -135,10 +137,11 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
-      itemsLoaded: state.itemsLoaded.getLoaded(
-        list: event.discountItemsModel,
-        loadItems: getItemsLoading,
-      ),
+      itemsLoaded: event.discountItemsModel.length,
+      // state.itemsLoaded.getLoaded(
+      //   list: event.discountItemsModel,
+      //   loadItems: getItemsLoading,
+      // ),
     );
     logTimestamp('_onUpdated', point: 'after main filtering');
 
@@ -150,17 +153,19 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
         filterCategory: categories,
-        // itemsLoaded: list.length,
-
         itemsLoaded: list.length,
         categoryListEmpty: categories.haveSelectedValue,
         failure: null,
-        filterLocation: state.filterLocation,
+        filterLocation: locationes,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
-        sorting: state.sorting,
+        sorting: [
+          SortingItem(DiscountEnum.free),
+          SortingItem(DiscountEnum.largestSmallest),
+        ],
         sortingDiscountModelItems: sortingList,
-        choosenLocationList: state.choosenLocationList, choosenSortingnList: [],
+        choosenLocationList: state.choosenLocationList,
+        choosenSortingnList: [],
       ),
     );
     logTimestamp('_onUpdated', point: 'end');
@@ -441,7 +446,9 @@ class DiscountWatcherBloc
     required List<DiscountModel> list,
     required List<SortingItem>? sorting,
   }) {
-    final value = sorting ?? state.sorting;
+    final value = (sorting ?? state.sorting).where(
+      (element) => element.isSelected,
+    );
     if (value.isEmpty) return list;
 
     final items = list

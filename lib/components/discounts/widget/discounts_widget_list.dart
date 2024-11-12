@@ -7,11 +7,9 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class DiscountsWidgetList extends StatelessWidget {
   const DiscountsWidgetList({
     required this.isDesk,
-    required this.maxHeight,
     super.key,
   });
   final bool isDesk;
-  final double maxHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -81,18 +79,8 @@ class DiscountsWidgetList extends StatelessWidget {
                 }
               },
             ),
-            left: SliverPersistentHeader(
-              pinned: true,
-              delegate: SliverHeaderWidget(
-                // isDesk: isDesk,
-                childWidget: ({
-                  required overlapsContent,
-                  required shrinkOffset,
-                }) =>
-                    const AdvancedFilterDesk(),
-                maxMinHeight: maxHeight,
-                // isTablet: isTablet,
-              ),
+            left: const SliverToBoxAdapter(
+              child: AdvancedFilterDesk(),
             ),
             leftWidthPercent: 0.3,
           ),

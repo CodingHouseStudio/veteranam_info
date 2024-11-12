@@ -88,7 +88,6 @@ class DiscountBodyWidget extends StatelessWidget {
             padding: padding,
             child: DiscountsWidgetList(
               isDesk: isDesk,
-              maxHeight: constraints.maxHeight,
             ),
           ),
           // LoadingButton(

@@ -47,20 +47,18 @@ class AdvancedFilterDesk extends StatelessWidget {
                 previous.loadingStatus != current.loadingStatus ||
                 previous.filterLocation != current.filterLocation,
             builder: (context, state) {
-              return Expanded(
-                child: AdvancedFilterContent(
-                  isDesk: true,
-                  onChange: (value) => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.filterLocation(value)),
-                  filterLocationes: state.filterLocation,
-                  sorting: state.sorting,
-                  onChangeSorting: (value) => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.sorting(value)),
-                  chooseLocationList: state.choosenLocationList,
-                  chooseSortingList: state.choosenSortingnList,
-                ),
+              return AdvancedFilterContent(
+                isDesk: true,
+                onChange: (value) => context
+                    .read<DiscountWatcherBloc>()
+                    .add(DiscountWatcherEvent.filterLocation(value)),
+                filterLocationes: state.filterLocation,
+                sorting: state.sorting,
+                onChangeSorting: (value) => context
+                    .read<DiscountWatcherBloc>()
+                    .add(DiscountWatcherEvent.sorting(value)),
+                chooseLocationList: state.choosenLocationList,
+                chooseSortingList: state.choosenSortingnList,
               );
             },
           ),

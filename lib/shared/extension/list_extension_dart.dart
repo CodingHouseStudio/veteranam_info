@@ -519,6 +519,48 @@ extension ListExtensionsNull<T> on List<T>? {
   }
 }
 
+/// Extension on List<DiscountModel> providing utility methods for DiscountModel
+/// operations.
+extension DiscountModelExtensions on List<DiscountModel> {
+  /// Method to retrieve location filters based on context.
+  ///
+  /// Parameters:
+  /// - context: BuildContext for accessing necessary resources.
+  ///
+  /// Returns:
+  /// A list of FilterItem instances representing location filters.
+  List<FilterItem> getLocationFilter({
+    required bool isEnglish,
+  }) {
+    // Return a list of FilterItem instances
+    return [
+      // Filter items for overall locations sorted from largest to smallest
+      // FilterItem(context.l10n.fromLargestToSmallest),
+      // Filter item for free items
+      // FilterItem(context.l10n.free),
+      // Additional filters based on sub-locations using overallItems method
+      ...overallItems(
+        getUAFilter: (item) => [item.subLocation],
+        isEnglish: isEnglish,
+        // numberGetList: context
+        //     .read<DiscountWatcherBloc>()
+        //     .state
+        //     .categoryDiscountModelItems,
+      ),
+      // Additional filters based on primary locations using overallItems method
+      ...overallItems(
+        getENFilter: (item) => item.locationEN ?? [],
+        getUAFilter: (item) => item.location ?? [],
+        isEnglish: isEnglish,
+        // numberGetList: context
+        //     .read<DiscountWatcherBloc>()
+        //     .state
+        //     .categoryDiscountModelItems,
+      ),
+    ];
+  }
+}
+
 /// Extension on List<ImageModel> providing utility methods for image handling.
 // extension ExtendedImage on List<ImageModel>? {
 //   /// Property to get the download URL of the first image in the list.
