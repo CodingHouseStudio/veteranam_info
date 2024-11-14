@@ -24,6 +24,7 @@ class FAQSectionWidget extends StatelessWidget {
               isDesk: true,
             ),
           ),
+          KSizedBox.kWidthSizedBox8,
           Expanded(
             flex: 3,
             child: QuestionWidgetList(

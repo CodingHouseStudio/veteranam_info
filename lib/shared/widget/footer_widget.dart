@@ -13,191 +13,393 @@ class FooterWidget extends StatelessWidget {
 
   final bool isDesk;
   final bool isTablet;
+
   @override
   Widget build(BuildContext context) {
-    if (isTablet) {
-      return Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: _Support(isTablet: isTablet),
-              ),
-              Expanded(
-                child: _Sections(isTablet: isTablet),
-              ),
-              if (Config.isDevelopment)
-                Expanded(
-                  child: _Information(isTablet: isTablet),
-                ),
-              Expanded(
-                child: _Contact(isTablet: isTablet),
-              ),
-              SocialMediaLinks(
-                isDesk: isTablet,
-                padding: isTablet
-                    ? KSizedBox.kHeightSizedBox24
-                    : KSizedBox.kWidthSizedBox16,
-                instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-              ),
-            ],
-          ),
-          KSizedBox.kHeightSizedBox56,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(
-                key: KWidgetkeys.widget.footer.logo,
-                height: KSize.kPixel80,
-                width: KSize.kPixel140,
-                child: KImage.logo(),
-              ),
-              Expanded(
-                child: Wrap(
-                  spacing: KPadding.kPaddingSize8,
-                  alignment: WrapAlignment.end,
-                  crossAxisAlignment: WrapCrossAlignment.end,
-                  children: [
-                    Text(
-                      '${KAppText.madeBy}  |',
-                      key: KWidgetkeys.widget.footer.madeBy,
-                      style:
-                          AppTextStyle.materialThemeBodyLargeNeutralVariant35,
-                      textAlign: TextAlign.end,
-                    ),
-                    // KSizedBox.kWidthSizedBox16,
-                    // const VerticalDivider(
-                    //   thickness: 1,
-                    //   color: AppColors
-                    //
-                    // .materialThemeRefNeutralVariantNeutralVariant35,
-                    // ),
-                    //KSizedBox.kWidthSizedBox16,
-                    Text(
-                      '${context.l10n.allRightsReserved}  |',
-                      key: KWidgetkeys.widget.footer.rightReserved,
-                      style:
-                          AppTextStyle.materialThemeBodyLargeNeutralVariant35,
-                    ),
-                    // KSizedBox.kWidthSizedBox16,
-                    // const VerticalDivider(
-                    //   thickness: 1,
-                    //   color: AppColors
-                    //
-                    // .materialThemeRefNeutralVariantNeutralVariant35,
-                    // ),
-                    //KSizedBox.kWidthSizedBox16,
-                    _PrivacyPolice(isDesk: isDesk),
-                    // KSizedBox.kHeightSizedBox90,
+    return DecoratedBox(
+      decoration: KWidgetTheme.boxDecorationFooter,
+      child: Padding(
+        padding: isDesk
+            ? const EdgeInsets.all(
+                KPadding.kPaddingSize32,
+              ).copyWith(left: KPadding.kPaddingSize46)
+            : isTablet
+                ? const EdgeInsets.all(
+                    KPadding.kPaddingSize46,
+                  )
+                : const EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize32,
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+        child: isTablet
+            ? Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _Support(isTablet: isTablet),
+                      ),
+                      Expanded(
+                        child: _Sections(isTablet: isTablet),
+                      ),
+                      if (Config.isDevelopment)
+                        Expanded(
+                          child: _Information(isTablet: isTablet),
+                        ),
+                      Expanded(
+                        child: _Contact(isTablet: isTablet),
+                      ),
+                      SocialMediaLinks(
+                        isDesk: isTablet,
+                        padding: isTablet
+                            ? KSizedBox.kHeightSizedBox24
+                            : KSizedBox.kWidthSizedBox16,
+                        instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                        linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                        facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                      ),
+                    ],
+                  ),
+                  KSizedBox.kHeightSizedBox56,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        key: KWidgetkeys.widget.footer.logo,
+                        height: KSize.kPixel80,
+                        width: KSize.kPixel140,
+                        child: KImage.logo(),
+                      ),
+                      Expanded(
+                        child: Wrap(
+                          spacing: KPadding.kPaddingSize8,
+                          alignment: WrapAlignment.end,
+                          crossAxisAlignment: WrapCrossAlignment.end,
+                          children: [
+                            Text(
+                              '${KAppText.madeBy}  |',
+                              key: KWidgetkeys.widget.footer.madeBy,
+                              style: AppTextStyle
+                                  .materialThemeBodyLargeNeutralVariant35,
+                              textAlign: TextAlign.end,
+                            ),
+                            // KSizedBox.kWidthSizedBox16,
+                            // const VerticalDivider(
+                            //   thickness: 1,
+                            //   color: AppColors
+                            //
+                            // .materialThemeRefNeutralVariantNeutralVariant35,
+                            // ),
+                            //KSizedBox.kWidthSizedBox16,
+                            Text(
+                              '${context.l10n.allRightsReserved}  |',
+                              key: KWidgetkeys.widget.footer.rightReserved,
+                              style: AppTextStyle
+                                  .materialThemeBodyLargeNeutralVariant35,
+                            ),
+                            // KSizedBox.kWidthSizedBox16,
+                            // const VerticalDivider(
+                            //   thickness: 1,
+                            //   color: AppColors
+                            //
+                            // .materialThemeRefNeutralVariantNeutralVariant35,
+                            // ),
+                            //KSizedBox.kWidthSizedBox16,
+                            _PrivacyPolice(isDesk: isDesk),
+                            // KSizedBox.kHeightSizedBox90,
+                          ],
+                        ),
+                      ),
+                      KSizedBox.kWidthSizedBox4,
+                      InfoVersionWidget(
+                        isDesk: isDesk,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _Support(isTablet: isTablet),
+                  KSizedBox.kHeightSizedBox40,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: _Sections(isTablet: isTablet),
+                      ),
+                      if (Config.isDevelopment)
+                        Expanded(
+                          flex: 2,
+                          child: _Information(isTablet: isTablet),
+                        )
+                      else
+                        Expanded(
+                          flex: 3,
+                          child: _Contact(isTablet: isTablet),
+                        ),
+                    ],
+                  ),
+                  if (Config.isDevelopment) ...[
+                    KSizedBox.kHeightSizedBox40,
+                    _Contact(isTablet: isTablet),
                   ],
-                ),
+                  KSizedBox.kHeightSizedBox40,
+                  SocialMediaLinks(
+                    isDesk: isTablet,
+                    padding: isTablet
+                        ? KSizedBox.kHeightSizedBox24
+                        : KSizedBox.kWidthSizedBox16,
+                    instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                    linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                    facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                  ),
+                  // Wrap(
+                  //   children: socialMediaLinks(
+                  //     isTablet: isTablet,
+                  //     context: context,
+                  //     padding: isTablet
+                  //         ? KSizedBox.kHeightSizedBox24
+                  //         : KSizedBox.kWidthSizedBox16,
+                  //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                  //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                  //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                  //   ),
+                  // ),
+                  KSizedBox.kHeightSizedBox40,
+                  Container(
+                    key: KWidgetkeys.widget.footer.logo,
+                    alignment: Alignment.centerLeft,
+                    height: KSize.kPixel60,
+                    child: KImage.logo(),
+                  ),
+                  KSizedBox.kHeightSizedBox24,
+                  Text(
+                    '${KAppText.madeBy}  | ',
+                    key: KWidgetkeys.widget.footer.madeBy,
+                    style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+                  ),
+                  KSizedBox.kHeightSizedBox4,
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${context.l10n.allRightsReserved}  | ',
+                          key: KWidgetkeys.widget.footer.rightReserved,
+                          style: AppTextStyle
+                              .materialThemeLabelSmallNeutralVariant35,
+                        ),
+                      ),
+                      // KSizedBox.kWidthSizedBox8,
+                      // const VerticalDivider(
+                      //   thickness: 1,
+                      //   color: AppColors
+                      // .materialThemeRefNeutralVariantNeutralVariant35,
+                      // ),
+                      KSizedBox.kWidthSizedBox8,
+                      Expanded(
+                        child: _PrivacyPolice(isDesk: isDesk),
+                      ),
+                      KSizedBox.kWidthSizedBox3,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: InfoVersionWidget(isDesk: isDesk),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              KSizedBox.kWidthSizedBox4,
-              InfoVersionWidget(
-                isDesk: isDesk,
-              ),
-            ],
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _Support(isTablet: isTablet),
-          KSizedBox.kHeightSizedBox40,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: _Sections(isTablet: isTablet),
-              ),
-              if (Config.isDevelopment)
-                Expanded(
-                  flex: 2,
-                  child: _Information(isTablet: isTablet),
-                )
-              else
-                Expanded(
-                  flex: 3,
-                  child: _Contact(isTablet: isTablet),
-                ),
-            ],
-          ),
-          if (Config.isDevelopment) ...[
-            KSizedBox.kHeightSizedBox40,
-            _Contact(isTablet: isTablet),
-          ],
-          KSizedBox.kHeightSizedBox40,
-          SocialMediaLinks(
-            isDesk: isTablet,
-            padding: isTablet
-                ? KSizedBox.kHeightSizedBox24
-                : KSizedBox.kWidthSizedBox16,
-            instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-            linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-            facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-          ),
-          // Wrap(
-          //   children: socialMediaLinks(
-          //     isTablet: isTablet,
-          //     context: context,
-          //     padding: isTablet
-          //         ? KSizedBox.kHeightSizedBox24
-          //         : KSizedBox.kWidthSizedBox16,
-          //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-          //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-          //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-          //   ),
-          // ),
-          KSizedBox.kHeightSizedBox40,
-          Container(
-            key: KWidgetkeys.widget.footer.logo,
-            alignment: Alignment.centerLeft,
-            height: KSize.kPixel60,
-            child: KImage.logo(),
-          ),
-          KSizedBox.kHeightSizedBox24,
-          Text(
-            '${KAppText.madeBy}  | ',
-            key: KWidgetkeys.widget.footer.madeBy,
-            style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
-          ),
-          KSizedBox.kHeightSizedBox4,
-          Row(
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Text(
-                  '${context.l10n.allRightsReserved}  | ',
-                  key: KWidgetkeys.widget.footer.rightReserved,
-                  style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
-                ),
-              ),
-              // KSizedBox.kWidthSizedBox8,
-              // const VerticalDivider(
-              //   thickness: 1,
-              //   color: AppColors
-              //       .materialThemeRefNeutralVariantNeutralVariant35,
-              // ),
-              KSizedBox.kWidthSizedBox8,
-              Expanded(
-                child: _PrivacyPolice(isDesk: isDesk),
-              ),
-              KSizedBox.kWidthSizedBox3,
-              Align(
-                alignment: Alignment.centerRight,
-                child: InfoVersionWidget(isDesk: isDesk),
-              ),
-            ],
-          ),
-        ],
-      );
-    }
+      ),
+    );
+
+    // if (isTablet) {
+    //    Column(
+    //     children: [
+    //       Row(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           Expanded(
+    //             child: _Support(isTablet: isTablet),
+    //           ),
+    //           Expanded(
+    //             child: _Sections(isTablet: isTablet),
+    //           ),
+    //           if (Config.isDevelopment)
+    //             Expanded(
+    //               child: _Information(isTablet: isTablet),
+    //             ),
+    //           Expanded(
+    //             child: _Contact(isTablet: isTablet),
+    //           ),
+    //           SocialMediaLinks(
+    //             isDesk: isTablet,
+    //             padding: isTablet
+    //                 ? KSizedBox.kHeightSizedBox24
+    //                 : KSizedBox.kWidthSizedBox16,
+    //             instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+    //             linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+    //             facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+    //           ),
+    //         ],
+    //       ),
+    //       KSizedBox.kHeightSizedBox56,
+    //       Row(
+    //         crossAxisAlignment: CrossAxisAlignment.end,
+    //         children: [
+    //           SizedBox(
+    //             key: KWidgetkeys.widget.footer.logo,
+    //             height: KSize.kPixel80,
+    //             width: KSize.kPixel140,
+    //             child: KImage.logo(),
+    //           ),
+    //           Expanded(
+    //             child: Wrap(
+    //               spacing: KPadding.kPaddingSize8,
+    //               alignment: WrapAlignment.end,
+    //               crossAxisAlignment: WrapCrossAlignment.end,
+    //               children: [
+    //                 Text(
+    //                   '${KAppText.madeBy}  |',
+    //                   key: KWidgetkeys.widget.footer.madeBy,
+    //                   style:
+    //                    AppTextStyle.materialThemeBodyLargeNeutralVariant35,
+    //                   textAlign: TextAlign.end,
+    //                 ),
+    //                 // KSizedBox.kWidthSizedBox16,
+    //                 // const VerticalDivider(
+    //                 //   thickness: 1,
+    //                 //   color: AppColors
+    //                 //
+    //                 // .materialThemeRefNeutralVariantNeutralVariant35,
+    //                 // ),
+    //                 //KSizedBox.kWidthSizedBox16,
+    //                 Text(
+    //                   '${context.l10n.allRightsReserved}  |',
+    //                   key: KWidgetkeys.widget.footer.rightReserved,
+    //                   style:
+    //                    AppTextStyle.materialThemeBodyLargeNeutralVariant35,
+    //                 ),
+    //                 // KSizedBox.kWidthSizedBox16,
+    //                 // const VerticalDivider(
+    //                 //   thickness: 1,
+    //                 //   color: AppColors
+    //                 //
+    //                 // .materialThemeRefNeutralVariantNeutralVariant35,
+    //                 // ),
+    //                 //KSizedBox.kWidthSizedBox16,
+    //                 _PrivacyPolice(isDesk: isDesk),
+    //                 // KSizedBox.kHeightSizedBox90,
+    //               ],
+    //             ),
+    //           ),
+    //           KSizedBox.kWidthSizedBox4,
+    //           InfoVersionWidget(
+    //             isDesk: isDesk,
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //   );
+    // } else {
+    //    Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       _Support(isTablet: isTablet),
+    //       KSizedBox.kHeightSizedBox40,
+    //       Row(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           Expanded(
+    //             flex: 2,
+    //             child: _Sections(isTablet: isTablet),
+    //           ),
+    //           if (Config.isDevelopment)
+    //             Expanded(
+    //               flex: 2,
+    //               child: _Information(isTablet: isTablet),
+    //             )
+    //           else
+    //             Expanded(
+    //               flex: 3,
+    //               child: _Contact(isTablet: isTablet),
+    //             ),
+    //         ],
+    //       ),
+    //       if (Config.isDevelopment) ...[
+    //         KSizedBox.kHeightSizedBox40,
+    //         _Contact(isTablet: isTablet),
+    //       ],
+    //       KSizedBox.kHeightSizedBox40,
+    //       SocialMediaLinks(
+    //         isDesk: isTablet,
+    //         padding: isTablet
+    //             ? KSizedBox.kHeightSizedBox24
+    //             : KSizedBox.kWidthSizedBox16,
+    //         instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+    //         linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+    //         facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+    //       ),
+    //       // Wrap(
+    //       //   children: socialMediaLinks(
+    //       //     isTablet: isTablet,
+    //       //     context: context,
+    //       //     padding: isTablet
+    //       //         ? KSizedBox.kHeightSizedBox24
+    //       //         : KSizedBox.kWidthSizedBox16,
+    //       //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+    //       //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+    //       //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+    //       //   ),
+    //       // ),
+    //       KSizedBox.kHeightSizedBox40,
+    //       Container(
+    //         key: KWidgetkeys.widget.footer.logo,
+    //         alignment: Alignment.centerLeft,
+    //         height: KSize.kPixel60,
+    //         child: KImage.logo(),
+    //       ),
+    //       KSizedBox.kHeightSizedBox24,
+    //       Text(
+    //         '${KAppText.madeBy}  | ',
+    //         key: KWidgetkeys.widget.footer.madeBy,
+    //         style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+    //       ),
+    //       KSizedBox.kHeightSizedBox4,
+    //       Row(
+    //         // crossAxisAlignment: CrossAxisAlignment.end,
+    //         children: [
+    //           Expanded(
+    //             child: Text(
+    //               '${context.l10n.allRightsReserved}  | ',
+    //               key: KWidgetkeys.widget.footer.rightReserved,
+    //               style:
+    // AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+    //             ),
+    //           ),
+    //           // KSizedBox.kWidthSizedBox8,
+    //           // const VerticalDivider(
+    //           //   thickness: 1,
+    //           //   color: AppColors
+    //           //       .materialThemeRefNeutralVariantNeutralVariant35,
+    //           // ),
+    //           KSizedBox.kWidthSizedBox8,
+    //           Expanded(
+    //             child: _PrivacyPolice(isDesk: isDesk),
+    //           ),
+    //           KSizedBox.kWidthSizedBox3,
+    //           Align(
+    //             alignment: Alignment.centerRight,
+    //             child: InfoVersionWidget(isDesk: isDesk),
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //   );
+    // }
   }
 
   // static List<Widget> socialMediaLinks({
@@ -255,7 +457,7 @@ class _Sections extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox8,
         _Button(
-          key: KWidgetkeys.widget.footer.discountsButton,
+          widgetKey: KWidgetkeys.widget.footer.discountsButton,
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
@@ -265,7 +467,7 @@ class _Sections extends StatelessWidget {
           KSizedBox.kHeightSizedBox4,
         if (Config.isDevelopment)
           _Button(
-            key: KWidgetkeys.widget.footer.informationButton,
+            widgetKey: KWidgetkeys.widget.footer.informationButton,
             text: context.l10n.information,
             onPressed: () => context.goNamed(KRoute.information.name),
           ),
@@ -274,7 +476,7 @@ class _Sections extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox4,
         _Button(
-          key: KWidgetkeys.widget.footer.investorsButton,
+          widgetKey: KWidgetkeys.widget.footer.investorsButton,
           text: context.l10n.investors,
           onPressed: () => context.goNamed(KRoute.support.name),
         ),
@@ -284,7 +486,7 @@ class _Sections extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox4,
           _Button(
-            key: KWidgetkeys.widget.footer.workButton,
+            widgetKey: KWidgetkeys.widget.footer.workButton,
             text: context.l10n.work,
             onPressed: () => context.goNamed(KRoute.work.name),
           ),
@@ -293,7 +495,7 @@ class _Sections extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox4,
           _Button(
-            key: KWidgetkeys.widget.footer.storyButton,
+            widgetKey: KWidgetkeys.widget.footer.storyButton,
             text: context.l10n.stories,
             onPressed: () => context.goNamed(KRoute.stories.name),
           ),
@@ -329,7 +531,7 @@ class _Information extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox8,
         _Button(
-          key: KWidgetkeys.widget.footer.aboutUsButton,
+          widgetKey: KWidgetkeys.widget.footer.aboutUsButton,
           text: context.l10n.aboutUs,
           onPressed: () => context.goNamed(KRoute.aboutUs.name),
         ),
@@ -338,7 +540,7 @@ class _Information extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox4,
         _Button(
-          key: KWidgetkeys.widget.footer.profileButton,
+          widgetKey: KWidgetkeys.widget.footer.profileButton,
           text: context.l10n.myProfile,
           onPressed: () => context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated
@@ -350,7 +552,7 @@ class _Information extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox4,
         _Button(
-          key: KWidgetkeys.widget.footer.consultationOnlineButton,
+          widgetKey: KWidgetkeys.widget.footer.consultationOnlineButton,
           text: context.l10n.consultationOnline,
           onPressed: () => context.goNamed(KRoute.consultation.name),
         ),
@@ -434,16 +636,17 @@ class _Button extends StatelessWidget {
   const _Button({
     required this.onPressed,
     required this.text,
-    super.key,
+    required this.widgetKey,
   });
 
   final void Function() onPressed;
   final String text;
+  final Key widgetKey;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      key: key,
+      key: widgetKey,
       onPressed: onPressed,
       style: KButtonStyles.footerButtonTransparent,
       child: Text(text),
@@ -474,19 +677,19 @@ class SocialMediaLinks extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           _SocialButton(
-            key: linkedInKey,
+            widgetKey: linkedInKey,
             url: KAppText.linkedIn,
             image: KImage.linkedIn(),
           ),
           padding,
           _SocialButton(
-            key: instagramKey,
+            widgetKey: instagramKey,
             url: KAppText.instagram,
             image: KImage.instagram(),
           ),
           padding,
           _SocialButton(
-            key: facebookKey,
+            widgetKey: facebookKey,
             url: KAppText.facebook,
             image: KImage.facebook(),
           ),
@@ -496,19 +699,19 @@ class SocialMediaLinks extends StatelessWidget {
       return Wrap(
         children: [
           _SocialButton(
-            key: linkedInKey,
+            widgetKey: linkedInKey,
             url: KAppText.linkedIn,
             image: KImage.linkedIn(),
           ),
           padding,
           _SocialButton(
-            key: instagramKey,
+            widgetKey: instagramKey,
             url: KAppText.instagram,
             image: KImage.instagram(),
           ),
           padding,
           _SocialButton(
-            key: facebookKey,
+            widgetKey: facebookKey,
             url: KAppText.facebook,
             image: KImage.facebook(),
           ),
@@ -522,16 +725,17 @@ class _SocialButton extends StatelessWidget {
   const _SocialButton({
     required this.url,
     required this.image,
-    super.key,
+    required this.widgetKey,
   });
 
   final String url;
   final Widget image;
+  final Key widgetKey;
 
   @override
   Widget build(BuildContext context) {
     return IconButtonWidget(
-      key: key,
+      key: widgetKey,
       onPressed: () => context
         ..read<UrlCubit>().launchUrl(
           url: url,

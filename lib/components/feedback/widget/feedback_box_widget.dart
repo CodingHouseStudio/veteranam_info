@@ -30,9 +30,8 @@ List<Widget> _feedbackBoxWidgetList({
                       context.l10n.ourSocialNetworks,
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    //TODO: Problem
                     SocialMediaLinks(
-                      isDesk: false,
+                      isDesk: true,
                       padding: KSizedBox.kWidthSizedBox24,
                       instagramKey: KWidgetkeys.screen.feedback.instagram,
                       linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
@@ -130,9 +129,9 @@ List<Widget> _feedbackBoxWidgetList({
             SocialMediaLinks(
               isDesk: false,
               padding: KSizedBox.kWidthSizedBox24,
-              instagramKey: KWidgetkeys.screen.mobSettings.instagramIcon,
-              linkedInKey: KWidgetkeys.screen.mobSettings.likedInIcon,
-              facebookKey: KWidgetkeys.screen.mobSettings.facebookIcon,
+              instagramKey: KWidgetkeys.screen.feedback.instagram,
+              linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+              facebookKey: KWidgetkeys.screen.feedback.facebook,
             ),
           ];
 

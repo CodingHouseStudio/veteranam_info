@@ -47,7 +47,7 @@ List<Widget> _formWidgegList({
                       ),
                       KSizedBox.kHeightSizedBox8,
                       SocialMediaLinks(
-                        isDesk: isDesk,
+                        isDesk: false,
                         padding: KSizedBox.kWidthSizedBox24,
                         instagramKey: KWidgetkeys.screen.feedback.instagram,
                         linkedInKey: KWidgetkeys.screen.feedback.linkedIn,

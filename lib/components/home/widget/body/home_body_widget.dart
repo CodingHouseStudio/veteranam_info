@@ -70,10 +70,12 @@ class HomeBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox160
             else
               KSizedBox.kHeightSizedBox40,
-            InformationSection(
-              isDesk: isDesk,
-              isTablet: isTablet,
+            Padding(
               padding: padding,
+              child: InformationSection(
+                isDesk: isDesk,
+                isTablet: isTablet,
+              ),
             ),
           ],
           if (isDesk || isTablet)
@@ -95,41 +97,44 @@ class HomeBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox48,
           Padding(
             padding: padding,
-            child: DecoratedBox(
-              decoration: KWidgetTheme.boxDecorationFooter,
-              child: Padding(
-                padding: isDesk
-                    ? const EdgeInsets.all(
-                        KPadding.kPaddingSize32,
-                      ).copyWith(left: KPadding.kPaddingSize46)
-                    : isTablet
-                        ? const EdgeInsets.all(
-                            KPadding.kPaddingSize46,
-                          )
-                        : const EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize32,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                child: FooterWidget(
-                  isTablet: isTablet,
-                  isDesk: isDesk,
-                ),
-              ),
+            child: FooterWidget(
+              isTablet: isTablet,
+              isDesk: isDesk,
             ),
           ),
         ];
-        return BlocListener<HomeWatcherBloc, HomeWatcherState>(
-          listener: (context, state) => context.dialog.showGetErrorDialog(
-            error: state.failure?.value(context),
-            onPressed: () => context
-                .read<HomeWatcherBloc>()
-                .add(const HomeWatcherEvent.started()),
-          ),
-          child: ListView.builder(
-            key: KWidgetkeys.widget.scaffold.scroll,
-            primary: false,
-            itemCount: body.length,
-            itemBuilder: (context, index) => body.elementAt(index),
+        return BlocListener<NetworkCubit, NetworkStatus>(
+          listener: (context, state) {
+            if (state == NetworkStatus.network) {
+              context.read<HomeWatcherBloc>().add(
+                    const HomeWatcherEvent.started(),
+                  );
+            }
+          },
+          child: BlocListener<UrlCubit, UrlEnum?>(
+            listener: (context, state) async {
+              if (state != null) {
+                context.dialog.showSnackBardTextDialog(
+                  state.value(context),
+                  duration: const Duration(milliseconds: 4000),
+                );
+                context.read<UrlCubit>().reset();
+              }
+            },
+            child: BlocListener<HomeWatcherBloc, HomeWatcherState>(
+              listener: (context, state) => context.dialog.showGetErrorDialog(
+                error: state.failure?.value(context),
+                onPressed: () => context
+                    .read<HomeWatcherBloc>()
+                    .add(const HomeWatcherEvent.started()),
+              ),
+              child: ListView.builder(
+                key: KWidgetkeys.widget.scaffold.scroll,
+                primary: true,
+                itemCount: body.length,
+                itemBuilder: (context, index) => body.elementAt(index),
+              ),
+            ),
           ),
         );
       },
