@@ -118,11 +118,19 @@ class _RenderRowSliver extends RenderSliver
     required double mainAxisPosition,
     required double crossAxisPosition,
   }) {
-    final children = [right, left]; // The order of checking doesn't change
+    final children = [left, right]; // Check both children
     for (final child in children) {
       if (child.geometry!.visible) {
-        final adjustedCrossAxisPosition =
-            crossAxisPosition - child.rowSliver.paintOffset.dx;
+        var adjustedCrossAxisPosition = crossAxisPosition;
+
+        // For the right child, adjust the position based on the left
+        // widget's width
+        if (child == right) {
+          adjustedCrossAxisPosition -=
+              constraints.crossAxisExtent * _leftWidthPercent;
+        }
+
+        // Now check if the touch is inside the child
         if (child.hitTest(
           result,
           mainAxisPosition: mainAxisPosition,

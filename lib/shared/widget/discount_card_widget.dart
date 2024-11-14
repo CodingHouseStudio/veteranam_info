@@ -330,7 +330,6 @@ class _CompanyInfoWidget extends StatelessWidget {
         companyEN: companyEN,
         userName: userName,
         dateVerified: dateVerified,
-        mainAxisSize: MainAxisSize.min,
       );
 }
 
@@ -340,13 +339,11 @@ class _CompanyInformationWidget extends StatelessWidget {
     required this.companyEN,
     required this.userName,
     required this.dateVerified,
-    required this.mainAxisSize,
   });
   final String? company;
   final String? companyEN;
   final String? userName;
   final DateTime dateVerified;
-  final MainAxisSize mainAxisSize;
 
   @override
   Widget build(BuildContext context) {
@@ -364,8 +361,7 @@ class _CompanyInformationWidget extends StatelessWidget {
           overflow: TextOverflow.clip,
           textAlign: TextAlign.left,
         ),
-        Row(
-          mainAxisSize: mainAxisSize,
+        Wrap(
           children: [
             Text(
               key: KWidgetkeys.widget.discountCard.userName,
@@ -377,7 +373,6 @@ class _CompanyInformationWidget extends StatelessWidget {
               key: KWidgetkeys.widget.discountCard.date,
               dateVerified.toLocalDateString(context: context),
               style: AppTextStyle.materialThemeLabelSmall,
-              overflow: TextOverflow.clip,
             ),
           ],
         ),

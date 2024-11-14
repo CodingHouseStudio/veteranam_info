@@ -261,3 +261,18 @@ extension FilePickerItemExtension on FilePickerItem? {
       : 'Image/File: name - ${this!.name}, extension - ${this!.extension},'
           ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
 }
+
+extension SubLocationExtension on SubLocation? {
+  List<SubLocation> get getValue {
+    switch (this) {
+      case SubLocation.all:
+      // return [SubLocation.allStoresOfChain, SubLocation.online];
+      case SubLocation.allStoresOfChain:
+      // return [SubLocation.allStoresOfChain];
+      case SubLocation.online:
+        return [SubLocation.online];
+      case null:
+        return [];
+    }
+  }
+}

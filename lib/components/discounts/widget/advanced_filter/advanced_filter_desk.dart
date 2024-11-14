@@ -45,7 +45,10 @@ class AdvancedFilterDesk extends StatelessWidget {
           BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
             buildWhen: (previous, current) =>
                 previous.loadingStatus != current.loadingStatus ||
-                previous.filterLocation != current.filterLocation,
+                previous.filterLocation != current.filterLocation ||
+                previous.sorting != current.sorting ||
+                previous.choosenLocationList != current.choosenLocationList ||
+                current.choosenSortingnList != previous.choosenSortingnList,
             builder: (context, state) {
               return AdvancedFilterContent(
                 isDesk: true,

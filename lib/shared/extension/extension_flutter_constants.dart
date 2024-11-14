@@ -175,15 +175,15 @@ extension StringFllutterExtension on String {
             : substringValue;
   }
 
-  SubLocation? getSublocation(BuildContext context) {
-    if (this == SubLocation.all.getList(context).first) {
-      return SubLocation.all;
-    }
-    // if (this == SubLocation.online.getList(context).first) {
-    //   return SubLocation.online;
-    // }
-    return null;
-  }
+  // SubLocation? getSublocation(BuildContext context) {
+  //   if (this == SubLocation.all.getList(context).first) {
+  //     return SubLocation.all;
+  //   }
+  //   // if (this == SubLocation.online.getList(context).first) {
+  //   //   return SubLocation.online;
+  //   // }
+  //   return null;
+  // }
 
   double getTextWidth({
     required TextStyle textStyle,
@@ -308,8 +308,11 @@ extension UrlEnumExtension on UrlEnum {
 }
 
 extension FilterItemExtension on FilterItem {
-  String getString(BuildContext context) =>
-      (context.isEnglish && valueEN != null ? valueEN : value).toString();
+  String getString(BuildContext context) => value is SubLocation
+      ? context.l10n.allUkraine
+      : value is DiscountEnum
+          ? (value as DiscountEnum).getValue(context)
+          : (context.isEnglish && valueEN != null ? valueEN : value).toString();
 }
 
 extension UserRoleExtensions on UserRole {
@@ -506,6 +509,17 @@ extension SubLocationString on SubLocation {
       case SubLocation.allStoresOfChain:
       case SubLocation.online:
         return [context.l10n.allUkraine];
+    }
+  }
+
+  String getFilterText(BuildContext context) {
+    switch (this) {
+      // case null:
+      //   return [];
+      case SubLocation.all:
+      case SubLocation.allStoresOfChain:
+      case SubLocation.online:
+        return context.l10n.allUkraine;
     }
   }
 

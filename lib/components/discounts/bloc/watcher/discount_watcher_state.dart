@@ -5,12 +5,12 @@ class SortingItem extends FilterItem {
     DiscountEnum value, {
     super.isSelected = false,
     super.number,
-  })  : _value = value,
+  })  : sortValue = value,
         super(null);
-  final DiscountEnum _value;
+  final DiscountEnum sortValue;
 
   @override
-  DiscountEnum get value => _value;
+  DiscountEnum get value => sortValue;
 
   @override
   SortingItem copyWith({
@@ -20,7 +20,7 @@ class SortingItem extends FilterItem {
     int? number,
   }) {
     return SortingItem(
-      value is DiscountEnum ? value : _value,
+      value is DiscountEnum ? value : sortValue,
       isSelected: isSelected ?? this.isSelected,
       number: number ?? this.number,
     );

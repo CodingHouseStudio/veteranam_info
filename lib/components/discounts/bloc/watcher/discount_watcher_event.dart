@@ -23,6 +23,8 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.setMobFilter({
     required List<FilterItem> filterList,
     required List<SortingItem> sorting,
+    required List<FilterItem> choosenLocationList,
+    required List<SortingItem> choosenSortingnList,
   }) = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(

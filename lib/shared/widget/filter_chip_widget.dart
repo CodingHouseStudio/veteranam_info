@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
-
-import '../../components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 
 class FilterChipBodyWidget extends StatelessWidget {
   const FilterChipBodyWidget({
@@ -10,13 +7,15 @@ class FilterChipBodyWidget extends StatelessWidget {
     required this.fullLength,
     required this.isDesk,
     required this.filterIsEmpty,
-    Key? key,
-  }) : super(key: key);
+    required this.onSelected,
+    super.key,
+  });
 
   final List<FilterItem> filtersItems;
   final int fullLength;
   final bool isDesk;
   final bool filterIsEmpty;
+  final void Function(dynamic value) onSelected;
   // final void Function() onResetValue;
 
   @override
@@ -30,56 +29,26 @@ class FilterChipBodyWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: true,
-          itemCount: filtersItems.length,
+          itemCount: filtersItems.length + 1,
           itemBuilder: (context, index) {
-            final filterItem = filtersItems.elementAt(index);
             if (index == 0) {
-              return Row(
-                key: ObjectKey(filterItem),
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      right: isDesk
-                          ? KPadding.kPaddingSize16
-                          : KPadding.kPaddingSize8,
-                    ),
-                    child: ChipWidget(
-                      filter: FilterItem(
-                        CategoryEnum.all.getValue(context),
-                        number: fullLength,
-                      ),
-                      onSelected: (isSelected) =>
-                          context.read<DiscountWatcherBloc>().add(
-                                const DiscountWatcherEvent.filterCategory(
-                                  CategoryEnum.all,
-                                ),
-                              ),
-                      isSelected: filterIsEmpty,
-                      isDesk: isDesk,
-                    ),
+              return Padding(
+                padding: EdgeInsets.only(
+                  right:
+                      isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+                ),
+                child: ChipWidget(
+                  filter: FilterItem(
+                    CategoryEnum.all.getValue(context),
+                    number: fullLength,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      right: isDesk
-                          ? KPadding.kPaddingSize16
-                          : KPadding.kPaddingSize8,
-                    ),
-                    child: ChipWidget(
-                      key: UniqueKey(),
-                      filter: filterItem,
-                      onSelected: (isSelected) =>
-                          context.read<DiscountWatcherBloc>().add(
-                                DiscountWatcherEvent.filterCategory(
-                                  filterItem.value,
-                                ),
-                              ),
-                      isSelected: filterItem.isSelected,
-                      isDesk: isDesk,
-                    ),
-                  ),
-                ],
+                  onSelected: (isSelected) => onSelected(CategoryEnum.all),
+                  isSelected: filterIsEmpty,
+                  isDesk: isDesk,
+                ),
               );
             } else {
+              final filterItem = filtersItems.elementAt(index - 1);
               return Padding(
                 key: ValueKey(filterItem.value),
                 padding: EdgeInsets.only(
@@ -89,12 +58,7 @@ class FilterChipBodyWidget extends StatelessWidget {
                 child: ChipWidget(
                   key: KWidgetkeys.widget.filterChip.chips,
                   filter: filterItem,
-                  onSelected: (isSelected) =>
-                      context.read<DiscountWatcherBloc>().add(
-                            DiscountWatcherEvent.filterCategory(
-                              filterItem.value,
-                            ),
-                          ),
+                  onSelected: (isSelected) => onSelected(filterItem.value),
                   isSelected: filterItem.isSelected,
                   isDesk: isDesk,
                 ),

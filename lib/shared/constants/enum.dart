@@ -2,7 +2,16 @@ import 'dart:io' show Platform;
 
 import 'package:veteranam/shared/constants/config.dart';
 
-enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
+enum LoadingStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+  listLoadedFull;
+
+  bool get isLoaded =>
+      this == LoadingStatus.loaded || this == LoadingStatus.listLoadedFull;
+}
 
 //enum EvaluationEnum { like, dislike, smile, none }
 

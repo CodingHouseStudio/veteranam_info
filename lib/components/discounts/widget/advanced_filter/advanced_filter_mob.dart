@@ -83,9 +83,9 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Expanded(
                 child: AdvancedFilterContent(
                   isDesk: false,
-                  onChange: (index) => context
+                  onChange: (value) => context
                       .read<AdvancedFilterMobCubit>()
-                      .changeFilterList(index),
+                      .changeFilterList(value),
                   filterLocationes: _.filtersLocation,
                   sorting: _.sorting,
                   onChangeSorting: (value) =>
@@ -120,6 +120,8 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                             DiscountWatcherEvent.setMobFilter(
                               filterList: _.filtersLocation,
                               sorting: _.sorting,
+                              choosenLocationList: _.choosenLocationList,
+                              choosenSortingnList: _.choosenSortingnList,
                             ),
                           );
                       context.pop();

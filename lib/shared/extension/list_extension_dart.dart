@@ -540,7 +540,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getUAFilter: (item) => [item.subLocation],
+        getUAFilter: (item) => item.subLocation.getValue,
         isEnglish: isEnglish,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()

@@ -34,10 +34,6 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
       );
 
   void changeFilterList(dynamic value) {
-    final chooseLocation = state.choosenLocationList.checkValue(
-      filterValue: FilterItem(value),
-      equalValue: null,
-    );
     final filterList = state.filtersLocation
         .map(
           (element) => element.value == value
@@ -52,16 +48,16 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     emit(
       state.copyWith(
         filtersLocation: filterList,
-        choosenLocationList: chooseLocation,
+        choosenLocationList: filterList
+            .where(
+              (element) => element.isSelected,
+            )
+            .toList(),
       ),
     );
   }
 
   void sorting(DiscountEnum value) {
-    final chooseSorting = state.choosenSortingnList.checkValue(
-      filterValue: SortingItem(value),
-      equalValue: null,
-    );
     final sorting = state.sorting
         .map(
           (element) => element.value == value
@@ -72,7 +68,11 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
 
     emit(
       state.copyWith(
-        choosenSortingnList: chooseSorting,
+        choosenSortingnList: sorting
+            .where(
+              (element) => element.isSelected,
+            )
+            .toList(),
         sorting: sorting,
       ),
     );
