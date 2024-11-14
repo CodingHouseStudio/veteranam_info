@@ -31,7 +31,7 @@ class DiscountsWidgetList extends StatelessWidget {
                     return SliverList.builder(
                       itemCount: state.filteredDiscountModelItems.length +
                           (state.loadingStatus.isLoaded
-                              ? 0
+                              ? 1
                               : config.loadingItems),
                       itemBuilder: (context, index) {
                         if (index < state.filteredDiscountModelItems.length) {
@@ -40,40 +40,72 @@ class DiscountsWidgetList extends StatelessWidget {
                           if ((config.linkScrollCount + 1) *
                                   config.loadingItems ==
                               index + 1) {
-                            return ListView(
-                              primary: false,
-                              shrinkWrap: true,
-                              children: [
-                                DiscountCardWidget(
-                                  key: ValueKey(discountItem.id),
-                                  discountItem: discountItem,
-                                  isDesk: isDesk,
-                                  share:
-                                      '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-                                  isLoading: false,
-                                ),
-                                DiscountLinkWidget(isDesk: isDesk),
-                              ],
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                top: KPadding.kPaddingSize48,
+                              ),
+                              child: ListView(
+                                primary: false,
+                                shrinkWrap: true,
+                                children: [
+                                  DiscountCardWidget(
+                                    key: ValueKey(discountItem.id),
+                                    discountItem: discountItem,
+                                    isDesk: isDesk,
+                                    share:
+                                        '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                                    isLoading: false,
+                                  ),
+                                  DiscountLinkWidget(isDesk: isDesk),
+                                ],
+                              ),
                             );
                           } else {
-                            return DiscountCardWidget(
-                              key: ValueKey(discountItem.id),
-                              discountItem: discountItem,
-                              isDesk: isDesk,
-                              share:
-                                  '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-                              isLoading: false,
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                top: KPadding.kPaddingSize48,
+                              ),
+                              child: DiscountCardWidget(
+                                key: ValueKey(discountItem.id),
+                                discountItem: discountItem,
+                                isDesk: isDesk,
+                                share:
+                                    '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                                isLoading: false,
+                              ),
                             );
                           }
                         } else {
-                          return SkeletonizerWidget(
-                            isLoading: true,
-                            child: DiscountCardWidget(
-                              key: KWidgetkeys.screen.discounts.card,
-                              discountItem: KMockText.discountModel,
-                              isDesk: isDesk,
-                              share: '',
+                          if (state.loadingStatus.isLoaded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                top: KPadding.kPaddingSize48,
+                              ),
+                              child: LoadingButtonWidget(
+                                widgetKey: KWidgetkeys.screen.discounts.button,
+                                text: context.l10n.moreDiscounts,
+                                onPressed: () =>
+                                    context.read<DiscountWatcherBloc>().add(
+                                          const DiscountWatcherEvent
+                                              .loadNextItems(),
+                                        ),
+                                isDesk: isDesk,
+                              ),
+                            );
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              top: KPadding.kPaddingSize48,
+                            ),
+                            child: SkeletonizerWidget(
                               isLoading: true,
+                              child: DiscountCardWidget(
+                                key: KWidgetkeys.screen.discounts.card,
+                                discountItem: KMockText.discountModel,
+                                isDesk: isDesk,
+                                share: '',
+                                isLoading: true,
+                              ),
                             ),
                           );
                         }
@@ -91,13 +123,13 @@ class DiscountsWidgetList extends StatelessWidget {
         ],
       );
     } else {
-      return const _DiscountsWidgetList(isDesk: false);
+      return const _DiscountsMobWidgetList(isDesk: false);
     }
   }
 }
 
-class _DiscountsWidgetList extends StatelessWidget {
-  const _DiscountsWidgetList({required this.isDesk});
+class _DiscountsMobWidgetList extends StatelessWidget {
+  const _DiscountsMobWidgetList({required this.isDesk});
   final bool isDesk;
 
   @override
@@ -110,43 +142,48 @@ class _DiscountsWidgetList extends StatelessWidget {
               previous.filteredDiscountModelItems !=
                   current.filteredDiscountModelItems,
           builder: (context, state) {
-            switch (state.loadingStatus) {
-              case LoadingStatus.loaded:
-              case LoadingStatus.listLoadedFull:
-                return ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: state.filteredDiscountModelItems.length,
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  // addAutomaticKeepAlives: false,
-                  // addRepaintBoundaries: false,
-                  itemBuilder: (context, index) {
-                    final discountItem =
-                        state.filteredDiscountModelItems.elementAt(index);
-                    if ((config.linkScrollCount + 1) * config.loadingItems ==
-                        index + 1) {
-                      return ListView(
-                        primary: false,
-                        shrinkWrap: true,
-                        children: [
-                          DiscountCardWidget(
-                            key: ValueKey(discountItem.id),
-                            discountItem: discountItem,
-                            isDesk: isDesk,
-                            // reportEvent: null,
-                            share:
-                                '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-                            isLoading: false,
-                            // () => context
-                            //     .read<DiscountWatcherBloc>()
-                            //     .add(const DiscountWatcherEvent.getReport()),
-                          ),
-                          DiscountLinkWidget(isDesk: isDesk),
-                        ],
-                      );
-                    } else {
-                      return DiscountCardWidget(
+            return ListView.builder(
+              primary: false,
+              shrinkWrap: true,
+              itemCount: state.filteredDiscountModelItems.length +
+                  (state.loadingStatus.isLoaded ? 3 : config.loadingItems),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              // addAutomaticKeepAlives: false,
+              // addRepaintBoundaries: false,
+              itemBuilder: (context, index) {
+                if (index < state.filteredDiscountModelItems.length) {
+                  final discountItem =
+                      state.filteredDiscountModelItems.elementAt(index);
+                  if ((config.linkScrollCount + 1) * config.loadingItems ==
+                      index + 1) {
+                    return ListView(
+                      primary: false,
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      shrinkWrap: true,
+                      children: [
+                        DiscountCardWidget(
+                          key: ValueKey(discountItem.id),
+                          discountItem: discountItem,
+                          isDesk: isDesk,
+                          // reportEvent: null,
+                          share:
+                              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                          isLoading: false,
+                          // () => context
+                          //     .read<DiscountWatcherBloc>()
+                          //     .add(const DiscountWatcherEvent.getReport()),
+                        ),
+                        DiscountLinkWidget(isDesk: isDesk),
+                      ],
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      child: DiscountCardWidget(
                         key: ValueKey(discountItem.id),
                         discountItem: discountItem,
                         isDesk: isDesk,
@@ -157,65 +194,77 @@ class _DiscountsWidgetList extends StatelessWidget {
                         // () => context
                         //     .read<DiscountWatcherBloc>()
                         //     .add(const DiscountWatcherEvent.getReport()),
-                      );
-                    }
-                    // cardWidgetList<DiscountModel>(
-                    //   loadingStatus:
-                    //       context.read<DiscountWatcherBloc>().state.
-                    // loadingStatus,
-                    //   modelItems: context
-                    //       .read<DiscountWatcherBloc>()
-                    //       .state
-                    //       .filteredDiscountModelItems,
-                    //   cardWidget: ({required modelItem, required isLoading}) =>
-                    //       DiscountCardWidget(
-                    //     key: KWidgetkeys.screen.discounts.card,
-                    //     discountItem: modelItem,
-                    //     isDesk: isDesk,
-                    //     // reportEvent: null,
-                    //     share:
-                    //         '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
-                    //     isLoading: isLoading,
-                    //     // () => context
-                    //     //     .read<DiscountWatcherBloc>()
-                    //     //     .add(const DiscountWatcherEvent.getReport()),
-                    //   ),
-                    //   isDesk: isDesk,
-                    //   shimmerItemsNumber:
-                    //       context.read<DiscountConfigCubit>().state.loadingItems,
-                    //   isNotFailure:
-                    //       context.read<DiscountWatcherBloc>().
-                    //state.failure == null,
-                    //   shimmerItem: KMockText.discountModel,
-                    // );
+                      ),
+                    );
+                  }
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize48,
+                    ),
+                    child: SkeletonizerWidget(
+                      isLoading: true,
+                      child: DiscountCardWidget(
+                        key: KWidgetkeys.screen.discounts.card,
+                        discountItem: KMockText.discountModel,
+                        isDesk: isDesk,
+                        share: '',
+                        isLoading: true,
+                      ),
+                    ),
+                  );
+                }
+                // cardWidgetList<DiscountModel>(
+                //   loadingStatus:
+                //       context.read<DiscountWatcherBloc>().state.
+                // loadingStatus,
+                //   modelItems: context
+                //       .read<DiscountWatcherBloc>()
+                //       .state
+                //       .filteredDiscountModelItems,
+                //   cardWidget: ({required modelItem, required isLoading}) =>
+                //       DiscountCardWidget(
+                //     key: KWidgetkeys.screen.discounts.card,
+                //     discountItem: modelItem,
+                //     isDesk: isDesk,
+                //     // reportEvent: null,
+                //     share:
+                //         '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
+                //     isLoading: isLoading,
+                //     // () => context
+                //     //     .read<DiscountWatcherBloc>()
+                //     //     .add(const DiscountWatcherEvent.getReport()),
+                //   ),
+                //   isDesk: isDesk,
+                //   shimmerItemsNumber:
+                //       context.read<DiscountConfigCubit>().state.loadingItems,
+                //   isNotFailure:
+                //       context.read<DiscountWatcherBloc>().
+                //state.failure == null,
+                //   shimmerItem: KMockText.discountModel,
+                // );
 
-                    // final finalList = <Widget>[];
-                    // for (var i = 0; i < items.length; i++) {
-                    //   finalList.add(items[i]);
-                    //   if ((context
-                    //                   .read<DiscountConfigCubit>()
-                    //                   .state
-                    //                   .linkScrollCount +
-                    //               1) *
-                    //           context
-                    //               .read<DiscountConfigCubit>()
-                    //               .state
-                    //               .loadingItems ==
-                    //       i + 1) {
-                    //     finalList.add(
-                    //       DiscountLinkWidget(isDesk: isDesk),
-                    //     );
-                    //   }
-                    // }
-                    // return finalList;
-                  },
-                );
-              case LoadingStatus.initial:
-              case LoadingStatus.error:
-              case LoadingStatus.loading:
-                // TODO(refactor): change
-                return const SizedBox.shrink();
-            }
+                // final finalList = <Widget>[];
+                // for (var i = 0; i < items.length; i++) {
+                //   finalList.add(items[i]);
+                //   if ((context
+                //                   .read<DiscountConfigCubit>()
+                //                   .state
+                //                   .linkScrollCount +
+                //               1) *
+                //           context
+                //               .read<DiscountConfigCubit>()
+                //               .state
+                //               .loadingItems ==
+                //       i + 1) {
+                //     finalList.add(
+                //       DiscountLinkWidget(isDesk: isDesk),
+                //     );
+                //   }
+                // }
+                // return finalList;
+              },
+            );
           },
         );
       },

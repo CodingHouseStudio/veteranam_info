@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,24 +89,15 @@ class DiscountWatcherBloc
     );
   }
 
-  void logTimestamp(String methodName, {String point = 'start'}) {
-    final DateTime currentTime = DateTime.now();
-    dev.log('TIME LINE: $methodName $point at: $currentTime');
-  }
-
   Future<void> _onUpdated(
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    logTimestamp('_onUpdated', point: 'start');
-
     if (event.discountItemsModel.isEmpty && Config.isProduction) {
-      logTimestamp('_onUpdated', point: 'exit early');
       return;
     }
 
     // Track before processing categories
-    logTimestamp('_onUpdated', point: 'before processing categories');
     final categories = event.discountItemsModel.overallItems(
       isEnglish: event.isEnglish,
       getENFilter: (item) => item.categoryEN,
@@ -117,36 +107,28 @@ class DiscountWatcherBloc
     final locationes =
         event.discountItemsModel.getLocationFilter(isEnglish: event.isEnglish);
 
-    logTimestamp('_onUpdated', point: 'after processing categories');
-
     final sortingList = _sorting(list: event.discountItemsModel, sorting: null);
-    logTimestamp('_onUpdated', point: 'after sorting');
 
     final categoryFilter = _filterCategory(
       categories: state.filterCategory,
       list: sortingList,
     );
-    logTimestamp('_onUpdated', point: 'after category filter');
 
     final locationList = _filterLocation(
       location: state.filterLocation,
       listValue: sortingList,
     );
-    logTimestamp('_onUpdated', point: 'after location filter');
 
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
-      itemsLoaded: event.discountItemsModel.length,
-      // state.itemsLoaded.getLoaded(
-      //   list: event.discountItemsModel,
-      //   loadItems: getItemsLoading,
-      // ),
+      itemsLoaded: state.itemsLoaded.getLoaded(
+        list: event.discountItemsModel,
+        loadItems: getItemsLoading,
+      ),
     );
-    logTimestamp('_onUpdated', point: 'after main filtering');
 
     // Before emitting state
-    logTimestamp('_onUpdated', point: 'before emit');
     emit(
       _Initial(
         discountModelItems: event.discountItemsModel,
@@ -168,7 +150,6 @@ class DiscountWatcherBloc
         choosenSortingnList: [],
       ),
     );
-    logTimestamp('_onUpdated', point: 'end');
   }
 
   void _onLoadNextItems(
@@ -180,6 +161,7 @@ class DiscountWatcherBloc
       emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     // final (:list, :loadingStatus) = _filterLocation(
     //   itemsLoaded: state.itemsLoaded,
     //   locationIndex: state.filtersLocationIndex,
@@ -194,10 +176,7 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         filteredDiscountModelItems: list,
-        itemsLoaded: (state.itemsLoaded + getItemsLoading).getLoaded(
-          list: list,
-          loadItems: getItemsLoading,
-        ),
+        itemsLoaded: list.length,
         loadingStatus: loadingStatus,
       ),
     );
@@ -239,7 +218,9 @@ class DiscountWatcherBloc
             .toList(),
         choosenLocationList: [], choosenSortingnList: [],
         categoryListEmpty: true,
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus: state.discountModelItems.length != state.itemsLoaded
+            ? LoadingStatus.loaded
+            : LoadingStatus.listLoadedFull,
       ),
     );
   }
@@ -284,10 +265,7 @@ class DiscountWatcherBloc
       state.copyWith(
         filteredDiscountModelItems: list,
         filterCategory: selectedFilters,
-        // itemsLoaded: state.itemsLoaded.getLoaded(
-        //   list: list,
-        //   loadItems: getItemsLoading,
-        // ),
+        itemsLoaded: list.length,
         loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
         categoryListEmpty: !selectedFilters.haveSelectedValue,
@@ -331,10 +309,7 @@ class DiscountWatcherBloc
               (element) => element.isSelected,
             )
             .toList(),
-        // itemsLoaded: state.itemsLoaded.getLoaded(
-        //   list: list,
-        //   loadItems: getItemsLoading,
-        // ),
+        itemsLoaded: list.length,
         loadingStatus: loadingStatus,
       ),
     );
@@ -364,11 +339,7 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        // itemsLoaded: state.itemsLoaded.getLoaded(
-        //   list: list,
-        //   loadItems: getItemsLoading,
-        // ),
-        // reportItems: event.reportItems,
+        itemsLoaded: list.length,
         choosenLocationList: event.choosenLocationList,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
@@ -420,11 +391,7 @@ class DiscountWatcherBloc
               (element) => element.isSelected,
             )
             .toList(),
-        // itemsLoaded: state.itemsLoaded.getLoaded(
-        //   list: list,
-        //   loadItems: getItemsLoading,
-        // ),
-        // reportItems: event.reportItems,
+        itemsLoaded: list.length,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
         sorting: sorting,
@@ -529,66 +496,11 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = categoryList.combiningFilteredLists(
       secondList: locationList,
       itemsLoaded: itemsLoaded,
-      loadItems: state.discountModelItems.length,
+      loadItems: loadItems,
       // sorting: (list) => _sorting(list: list, location: location),
     );
     return (list: list, loadingStatus: loadingStatus);
   }
-
-  // Future<void> _onGetReport(
-  //   _GetReport event,
-  //   Emitter<DiscountWatcherState> emit,
-  // ) async {
-  //   // Get report items and remove them from existing items
-  //   final reportItems = await _getReport();
-  //   final items = state.discountModelItems.removeReportItems(
-  //     checkFunction: (item) => item.id,
-  //     reportItems: reportItems,
-  //   );
-
-  //   final filtersCategoriesIndex = items.updateFilterList(
-  //     getFilter: (item) => item.category,
-  //     previousList: state.discountModelItems,
-  //     previousFilter: state.filtersCategoriesIndex,
-  //   );
-  //   final filtersLocationIndex = items.updateFilterList(
-  //     getFilter: (item) =>
-  //         item.location?.toList() ?? item.subLocation?._getList ?? const [],
-  //     previousList: state.discountModelItems,
-  //     previousFilter: state.filtersLocationIndex,
-  //   );
-  //   final categoryItems = _filterCategory(
-  //     categoryIndex: filtersCategoriesIndex,
-  //     list: items,
-  //   );
-  //   final (:list, :loadingStatus) = _filterLocation(
-  //     locationIndex: filtersLocationIndex,
-  //     itemsLoaded: state.itemsLoaded,
-  //     list: categoryItems,
-  //   );
-  //   emit(
-  //     state.copyWith(
-  //       discountModelItems: items,
-  //       // reportItems: reportItems,
-  //       filteredDiscountModelItems: list,
-  //       loadingStatus: loadingStatus,
-  //       filtersCategoriesIndex: filtersCategoriesIndex,
-  //       filtersLocationIndex: filtersLocationIndex,
-  //       categoryDiscountModelItems: categoryItems,
-  //     ),
-  //   );
-  // }
-
-  // Future<List<ReportModel>?> _getReport() async {
-  //   final reportItems = await _reportRepository.getCardReportById(
-  //     cardEnum: CardEnum.discount,
-  //     userId: _appAuthenticationRepository.currentUser.id,
-  //   );
-  //   return reportItems.fold(
-  //     (l) => null,
-  //     (r) => r.isEmpty ? null : r,
-  //   );
-  // }
 
   int get getItemsLoading {
     final loadingItems = _firebaseRemoteConfigProvider.getInt(loadingItemsKey);
