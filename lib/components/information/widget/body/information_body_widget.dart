@@ -116,7 +116,7 @@ class InformationBodyWidget extends StatelessWidget {
   }
 
   Widget _filter({required bool isDesk, required BuildContext context}) =>
-      SizedBox.shrink();
+      const SizedBox.shrink();
   // ShaderWidget(
   //   key: KWidgetkeys.screen.information.filter,
   //   filtersItems: context

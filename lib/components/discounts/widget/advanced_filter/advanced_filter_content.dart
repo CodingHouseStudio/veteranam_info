@@ -41,7 +41,10 @@ class AdvancedFilterContent extends StatelessWidget {
             : AppTextStyle.materialThemeTitleMedium,
       ),
       _SortingItems(
-          isDesk: isDesk, sorting: sorting, onChangeSorting: onChangeSorting),
+        isDesk: isDesk,
+        sorting: sorting,
+        onChangeSorting: onChangeSorting,
+      ),
       // ...List.generate(
       //   sorting.length,
       //   (index) => Padding(

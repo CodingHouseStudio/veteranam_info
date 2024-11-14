@@ -217,7 +217,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                               //               required shrinkOffset,
                               //             }) =>
                               //                 widget.mainRightChildWidget!,
-                              //             maxMinHeight: constraints.maxHeight,
+                              //            maxMinHeight: constraints.maxHeight,
                               //             // isTablet: isTablet,
                               //           ),
                               //         ),

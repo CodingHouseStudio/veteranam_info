@@ -126,6 +126,7 @@ abstract class KMockText {
     subtitleEN: questionSubtitleEN,
     // navigationLink: 'null',
   );
+  static const category = 'Медицина';
 
   static final discountModel = DiscountModel(
     id: '',
@@ -137,7 +138,7 @@ abstract class KMockText {
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
     categoryEN: ['Medical'],
-    category: ['Медицина'],
+    category: [category],
     subcategoryEN: ['Analyses'],
     subcategory: ['Аналізи'],
     // eligibility: 'Військовослужбовці та ВПО',

@@ -4,25 +4,23 @@ import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_blo
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountBodyWidget extends StatefulWidget {
-  const DiscountBodyWidget({super.key});
+class DiscountsBodyWidget extends StatelessWidget {
+  const DiscountsBodyWidget({super.key});
 
   @override
-  State<DiscountBodyWidget> createState() => _DiscountBodyWidgetState();
+  Widget build(BuildContext context) {
+    if (PlatformEnumFlutter.isWebDesktop) {
+      return const _DiscountsBodyWidget(
+        scrollController: null,
+      );
+    }
+    return const _DiscountMobBodyWidget();
+  }
 }
 
-class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _scrollController = ScrollController();
-    if (!PlatformEnumFlutter.isWebDesktop) {
-      _scrollController.addListener(_onScroll);
-    }
-  }
+class _DiscountsBodyWidget extends StatelessWidget {
+  const _DiscountsBodyWidget({required this.scrollController});
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +88,7 @@ class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
         ];
         return ListView.builder(
           // primary: true,
-          controller: _scrollController,
+          controller: scrollController,
           restorationId: 'discount_page',
           itemCount: body.length,
           addAutomaticKeepAlives: false,
@@ -261,11 +259,37 @@ class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
     //   },
     // );
   }
+}
+
+class _DiscountMobBodyWidget extends StatefulWidget {
+  const _DiscountMobBodyWidget();
+
+  @override
+  State<_DiscountMobBodyWidget> createState() => _DiscountMobBodyWidgetState();
+}
+
+class _DiscountMobBodyWidgetState extends State<_DiscountMobBodyWidget> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = ScrollController();
+    if (!PlatformEnumFlutter.isWebDesktop) {
+      _scrollController.addListener(_onScroll);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _DiscountsBodyWidget(scrollController: _scrollController);
+  }
 
   void _onScroll() {
     if (_isBottom &&
-        context.read<DiscountWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.listLoadedFull) {
+        context.read<DiscountWatcherBloc>().state.loadingStatus ==
+            LoadingStatus.loaded) {
       context.read<DiscountWatcherBloc>().add(
             const DiscountWatcherEvent.loadNextItems(),
           );
@@ -276,7 +300,8 @@ class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
+    return currentScroll >=
+        ((maxScroll - KDimensions.discountMobLoadingArea) * 0.9);
   }
 
   @override

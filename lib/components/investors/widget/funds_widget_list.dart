@@ -51,10 +51,12 @@ class FundsList extends StatelessWidget {
               itemBuilder: (context, index) {
                 if (index < listLength) {
                   return Padding(
+                    key: isDesk
+                        ? ValueKey(_.deskFundItems.elementAt(index).first.id)
+                        : ValueKey(_.mobFundItems.elementAt(index).id),
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),
-                    // TODO(Refactor): Add value key
                     child: isDesk
                         ? DonatesCardsWidget(
                             key: KWidgetkeys.screen.investors.cards,

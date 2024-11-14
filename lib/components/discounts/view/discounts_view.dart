@@ -9,7 +9,7 @@ class DiscountsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DiscountBlocprovider(
-        childWidget: DiscountBodyWidget(
+        childWidget: DiscountsBodyWidget(
           key: KWidgetkeys.screen.discounts.screen,
         ),
       ),

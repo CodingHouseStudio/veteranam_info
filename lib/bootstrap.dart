@@ -13,17 +13,16 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
-  // TODO: return
-  // @override
-  // void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-  //   super.onChange(bloc, change);
-  //   log(
-  //     'onChange(${bloc.runtimeType}, $change)',
-  //     sequenceNumber: KDimensions.sequenceNumberData,
-  //     level: KDimensions.logLevelData,
-  //     name: 'Bootstrap DATA',
-  //   );
-  // }
+  @override
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
+    super.onChange(bloc, change);
+    log(
+      'onChange(${bloc.runtimeType}, $change)',
+      sequenceNumber: KDimensions.sequenceNumberData,
+      level: KDimensions.logLevelData,
+      name: 'Bootstrap DATA',
+    );
+  }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {

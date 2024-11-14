@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/shared_flutter.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class ShaderWidget extends StatelessWidget {
   const ShaderWidget({
     required this.isDesk,
-    // required this.onResetValue,
+    required this.child, // required this.onResetValue,
 
     super.key,
-    required this.child,
   });
 
   final bool isDesk;
@@ -28,7 +27,8 @@ class ShaderWidget extends StatelessWidget {
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
-            child: child)
+            child: child,
+          )
         : child;
     //     ),
     //   ],

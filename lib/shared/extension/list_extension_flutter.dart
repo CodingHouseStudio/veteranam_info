@@ -1,7 +1,4 @@
-import 'package:collection/collection.dart' show groupBy;
 import 'package:flutter/material.dart' show BuildContext;
-//TODO: remove it
-import 'package:veteranam/shared/extension/extension_dart.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Extension for filtering FilterItem list items.

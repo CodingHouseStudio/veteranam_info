@@ -31,7 +31,9 @@ class DiscountsWidgetList extends StatelessWidget {
                     return SliverList.builder(
                       itemCount: state.filteredDiscountModelItems.length +
                           (state.loadingStatus.isLoaded
-                              ? 1
+                              ? PlatformEnumFlutter.isWebDesktop
+                                  ? 1
+                                  : 0
                               : config.loadingItems),
                       itemBuilder: (context, index) {
                         if (index < state.filteredDiscountModelItems.length) {
@@ -76,7 +78,8 @@ class DiscountsWidgetList extends StatelessWidget {
                             );
                           }
                         } else {
-                          if (state.loadingStatus.isLoaded) {
+                          if (state.loadingStatus.isLoaded &&
+                              PlatformEnumFlutter.isWebDesktop) {
                             return Padding(
                               padding: const EdgeInsets.only(
                                 top: KPadding.kPaddingSize48,
@@ -149,18 +152,22 @@ class _DiscountsMobWidgetList extends StatelessWidget {
               shrinkWrap: true,
               restorationId: 'discount_list',
               findChildIndexCallback: (key) {
-                final valueKey = key as ValueKey<String>;
-                if (!valueKey.value.contains('mock_discount_')) {
-                  return state.filteredDiscountModelItems.indexWhere(
-                    (element) => element.id == valueKey.value,
+                if (key is ValueKey<String>) {
+                  final valueKey = key;
+                  if (!valueKey.value.contains('mock_discount_')) {
+                    return state.filteredDiscountModelItems.indexWhere(
+                      (element) => element.id == valueKey.value,
+                    );
+                  }
+                  final mockValue = int.parse(
+                    valueKey.value.replaceAll('mock_discount_', ''),
                   );
+                  return state.filteredDiscountModelItems.length + mockValue;
                 }
-                final mockValue =
-                    int.parse(valueKey.value.replaceAll('mock_discount_', ''));
-                return state.filteredDiscountModelItems.length + mockValue;
+                return null;
               },
               itemCount: state.filteredDiscountModelItems.length +
-                  (state.loadingStatus.isLoaded ? 3 : config.loadingItems),
+                  KDimensions.shimmerDiscountsItems,
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemBuilder: (context, index) {
                 if (index < state.filteredDiscountModelItems.length) {
@@ -309,7 +316,7 @@ class _DiscountsMobWidgetList extends StatelessWidget {
 //       //     .add(const DiscountWatcherEvent.getReport()),
 //     ),
 //     isDesk: isDesk,
-//     shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
+//   shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
 //     isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
 //     shimmerItem: KMockText.discountModel,
 //   );

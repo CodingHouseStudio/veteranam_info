@@ -188,10 +188,9 @@ class DiscountWatcherBloc
   ) {
     emit(
       state.copyWith(
-        filteredDiscountModelItems: state.discountModelItems,
-        // .loading(
-        //   itemsLoaded: state.itemsLoaded,
-        // ),
+        filteredDiscountModelItems: state.discountModelItems.loading(
+          itemsLoaded: state.itemsLoaded,
+        ),
         categoryDiscountModelItems: state.discountModelItems,
         locationDiscountModelItems: state.discountModelItems,
         sortingDiscountModelItems: state.discountModelItems,
@@ -216,7 +215,8 @@ class DiscountWatcherBloc
                   : element,
             )
             .toList(),
-        choosenLocationList: [], choosenSortingnList: [],
+        choosenLocationList: [],
+        choosenSortingnList: [],
         categoryListEmpty: true,
         loadingStatus: state.discountModelItems.length != state.itemsLoaded
             ? LoadingStatus.loaded
@@ -533,9 +533,4 @@ class DiscountWatcherBloc
     _discountItemsSubscription?.cancel();
     return super.close();
   }
-}
-
-void logTimestamp(String methodName, {String point = 'start'}) {
-  final DateTime currentTime = DateTime.now();
-  print('$methodName $point at: $currentTime');
 }

@@ -33,19 +33,54 @@ class FilterChipBodyWidget extends StatelessWidget {
             addRepaintBoundaries: false,
             shrinkWrap: true,
             primary: true,
-            itemCount: filtersItems.length + 1,
+            itemCount: filtersItems.isEmpty
+                ? KDimensions.shimmerCategoryItems
+                : filtersItems.length + 1,
             findChildIndexCallback: (key) {
-              final valueKey = key as ValueKey;
-              if (valueKey is ValueKey<CategoryEnum>) {
-                return 0;
+              if (key is ValueKey) {
+                if (filtersItems.isNotEmpty) {
+                  final valueKey = key;
+                  if (valueKey is ValueKey<CategoryEnum>) {
+                    return 0;
+                  }
+                  return filtersItems.indexWhere(
+                        (element) => element.value == valueKey.value,
+                      ) +
+                      1;
+                }
+                if (key is ValueKey<String>) {
+                  final valueKey = key;
+                  final mockValue = int.parse(
+                    valueKey.value.replaceAll('mock_category_', ''),
+                  );
+                  return mockValue;
+                }
               }
-              return filtersItems.indexWhere(
-                    (element) => element.value == valueKey.value,
-                  ) +
-                  1;
+              return null;
             },
             restorationId: 'category',
             itemBuilder: (context, index) {
+              if (filtersItems.isEmpty) {
+                return SkeletonizerWidget(
+                  isLoading: true,
+                  child: Padding(
+                    key: ValueKey('mock_category_$index'),
+                    padding: EdgeInsets.only(
+                      right: isDesk
+                          ? KPadding.kPaddingSize16
+                          : KPadding.kPaddingSize8,
+                    ),
+                    child: ChipWidget(
+                      filter: FilterItem(
+                        KMockText.category,
+                      ),
+                      onSelected: null,
+                      isSelected: false,
+                      isDesk: isDesk,
+                    ),
+                  ),
+                );
+              }
               if (index == 0) {
                 return Padding(
                   key: const ValueKey(CategoryEnum.all),
