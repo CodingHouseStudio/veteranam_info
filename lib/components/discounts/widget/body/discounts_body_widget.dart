@@ -54,32 +54,6 @@ class DiscountBodyWidget extends StatelessWidget {
             padding: padding,
             child: DiscountsFilterWidget(isDesk: isDesk),
           ),
-          // if (isDesk)
-          //   Row(
-          //     children: [
-          //       Expanded(
-          //         child: _filter(
-          //           context: context,
-          //           isDesk: isDesk,
-          //         ),
-          //       ),
-          //       if (Config.isBusiness) _myDiscountButton(context),
-          //     ],
-          //   )
-          // else ...[
-          //   _filter(
-          //     context: context,
-          //     isDesk: isDesk,
-          //   ),
-          //   if (Config.isBusiness) ...[
-          //     KSizedBox.kHeightSizedBox8,
-          //     _myDiscountButton(context),
-          //   ],
-          //   KSizedBox.kHeightSizedBox24,
-          //   AdvancedFilterMob(
-          //     key: KWidgetkeys.screen.discounts.advancedFilterMob,
-          //   ),
-          // ],
           if (isDesk)
             KSizedBox.kHeightSizedBox40
           else
