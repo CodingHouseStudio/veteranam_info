@@ -91,7 +91,10 @@ class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
         return ListView.builder(
           // primary: true,
           controller: _scrollController,
+          restorationId: 'discount_page',
           itemCount: body.length,
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
           itemBuilder: (context, index) => body.elementAt(index),
         );
       },

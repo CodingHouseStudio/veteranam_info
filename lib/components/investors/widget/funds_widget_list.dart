@@ -45,6 +45,8 @@ class FundsList extends StatelessWidget {
             return ListView.builder(
               shrinkWrap: true,
               primary: false,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               itemCount: listLength + 1,
               itemBuilder: (context, index) {
                 if (index < listLength) {
