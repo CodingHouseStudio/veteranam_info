@@ -50,6 +50,7 @@ class QuestionWidgetList extends StatelessWidget {
               );
             } else {
               return Padding(
+                key: ValueKey(KMockText.questionModel.id),
                 padding: index != 0
                     ? const EdgeInsets.only(
                         top: KPadding.kPaddingSize24,
