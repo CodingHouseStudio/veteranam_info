@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountBodyWidget extends StatelessWidget {
+class DiscountBodyWidget extends StatefulWidget {
   const DiscountBodyWidget({super.key});
+
+  @override
+  State<DiscountBodyWidget> createState() => _DiscountBodyWidgetState();
+}
+
+class _DiscountBodyWidgetState extends State<DiscountBodyWidget> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = ScrollController();
+    if (!PlatformEnumFlutter.isWebDesktop) {
+      _scrollController.addListener(_onScroll);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,22 +83,14 @@ class DiscountBodyWidget extends StatelessWidget {
               isDesk: isDesk,
             ),
           ),
-          // LoadingButton(
-          //   widgetKey: KWidgetkeys.screen.discounts.button,
-          //   text: context.l10n.moreDiscounts,
-          //   onPressed: () => context
-          //       .read<DiscountWatcherBloc>()
-          //       .add(const DiscountWatcherEvent.
-          // loadNextItems()),
-          //   isDesk: isDesk,
-          // ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
           else
             KSizedBox.kHeightSizedBox24,
         ];
         return ListView.builder(
-          primary: true,
+          // primary: true,
+          controller: _scrollController,
           itemCount: body.length,
           itemBuilder: (context, index) => body.elementAt(index),
         );
@@ -248,56 +259,28 @@ class DiscountBodyWidget extends StatelessWidget {
     // );
   }
 
-  // Widget _filter({
-  //   required BuildContext context,
-  //   required bool isDesk,
-  // }) =>
-  //     FiltersChipWidget(
-  //       key: KWidgetkeys.screen.discounts.filter,
-  //       filtersItems: context
-  //           .read<DiscountWatcherBloc>()
-  //           .state
-  //           .discountModelItems
-  //           .overallItems(
-  //             context: context,
-  //             getENFilter: (item) => item.categoryEN,
-  //             getUAFilter: (item) => item.category,
-  //             numberGetList: context
-  //                 .read<DiscountWatcherBloc>()
-  //                 .state
-  //                 .locationDiscountModelItems,
-  //           ),
-  //       isDesk: isDesk,
-  //       // onResetValue: () => context.read<DiscountWatcherBloc>().add(
-  //       //       const DiscountWatcherEvent.filterReset(),
-  //       //     ),
-  //       isSelected: (index) => context
-  //           .read<DiscountWatcherBloc>()
-  //           .state
-  //           .filtersCategories
-  //           .contains(index),
-  //       onSelected: (index) => context.read<DiscountWatcherBloc>().add(
-  //             DiscountWatcherEvent.filterCategory(
-  //               index,
-  //             ),
-  //           ),
-  //       fullLength: context
-  //           .read<DiscountWatcherBloc>()
-  //           .state
-  //           .locationDiscountModelItems
-  //           .length,
-  //       filterIsEmpty:
-  //           context.read<DiscountWatcherBloc>().state
-  // .filtersCategories.isEmpty,
-  //     );
+  void _onScroll() {
+    if (_isBottom &&
+        context.read<DiscountWatcherBloc>().state.loadingStatus !=
+            LoadingStatus.listLoadedFull) {
+      context.read<DiscountWatcherBloc>().add(
+            const DiscountWatcherEvent.loadNextItems(),
+          );
+    }
+  }
 
-  // Widget _myDiscountButton(
-  //   BuildContext context,
-  // ) =>
-  //     TextButton(
-  //       key: KWidgetkeys.screen.discounts.addDiscountButton,
-  //       onPressed: () => context.goNamed(KRoute.myDiscounts.name),
-  //       style: KButtonStyles.whiteButtonStyle,
-  //       child: Text(context.l10n.offerDiscount),
-  //     );
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
 }
