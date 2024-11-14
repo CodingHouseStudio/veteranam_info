@@ -144,12 +144,24 @@ class _DiscountsMobWidgetList extends StatelessWidget {
           builder: (context, state) {
             return ListView.builder(
               primary: false,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               shrinkWrap: true,
+              restorationId: 'discount_list',
+              findChildIndexCallback: (key) {
+                final valueKey = key as ValueKey<String>;
+                if (!valueKey.value.contains('mock_discount_')) {
+                  return state.filteredDiscountModelItems.indexWhere(
+                    (element) => element.id == valueKey.value,
+                  );
+                }
+                final mockValue =
+                    int.parse(valueKey.value.replaceAll('mock_discount_', ''));
+                return state.filteredDiscountModelItems.length + mockValue;
+              },
               itemCount: state.filteredDiscountModelItems.length +
                   (state.loadingStatus.isLoaded ? 3 : config.loadingItems),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              // addAutomaticKeepAlives: false,
-              // addRepaintBoundaries: false,
               itemBuilder: (context, index) {
                 if (index < state.filteredDiscountModelItems.length) {
                   final discountItem =
@@ -157,6 +169,7 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                   if ((config.linkScrollCount + 1) * config.loadingItems ==
                       index + 1) {
                     return ListView(
+                      key: ValueKey(discountItem.id),
                       primary: false,
                       padding: const EdgeInsets.only(
                         top: KPadding.kPaddingSize48,
@@ -164,7 +177,6 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                       shrinkWrap: true,
                       children: [
                         DiscountCardWidget(
-                          key: ValueKey(discountItem.id),
                           discountItem: discountItem,
                           isDesk: isDesk,
                           // reportEvent: null,
@@ -180,11 +192,11 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                     );
                   } else {
                     return Padding(
+                      key: ValueKey(discountItem.id),
                       padding: const EdgeInsets.only(
                         top: KPadding.kPaddingSize48,
                       ),
                       child: DiscountCardWidget(
-                        key: ValueKey(discountItem.id),
                         discountItem: discountItem,
                         isDesk: isDesk,
                         // reportEvent: null,
@@ -199,6 +211,10 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                   }
                 } else {
                   return Padding(
+                    key: ValueKey(
+                      'mock_discount'
+                      '_${state.filteredDiscountModelItems.length - index}',
+                    ),
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),

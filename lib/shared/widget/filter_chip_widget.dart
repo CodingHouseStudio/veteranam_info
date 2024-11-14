@@ -29,12 +29,26 @@ class FilterChipBodyWidget extends StatelessWidget {
           child: ListView.builder(
             key: KWidgetkeys.widget.filterChip.widget,
             scrollDirection: Axis.horizontal,
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
             shrinkWrap: true,
             primary: true,
             itemCount: filtersItems.length + 1,
+            findChildIndexCallback: (key) {
+              final valueKey = key as ValueKey;
+              if (valueKey is ValueKey<CategoryEnum>) {
+                return 0;
+              }
+              return filtersItems.indexWhere(
+                    (element) => element.value == valueKey.value,
+                  ) +
+                  1;
+            },
+            restorationId: 'category',
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Padding(
+                  key: const ValueKey(CategoryEnum.all),
                   padding: EdgeInsets.only(
                     right: isDesk
                         ? KPadding.kPaddingSize16

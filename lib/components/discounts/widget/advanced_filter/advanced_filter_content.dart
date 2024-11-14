@@ -77,7 +77,6 @@ class AdvancedFilterContent extends StatelessWidget {
       itemCount: body.length,
       semanticChildCount: body.length,
       addAutomaticKeepAlives: false,
-      addRepaintBoundaries: false,
       shrinkWrap: isDesk,
     );
   }
@@ -100,6 +99,7 @@ class _ChooseItems extends StatelessWidget {
     return ListView.builder(
       itemCount: choosenList.length + 1,
       primary: false,
+      addAutomaticKeepAlives: false,
       shrinkWrap: true,
       padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize24),
       itemBuilder: (context, index) {
@@ -176,6 +176,7 @@ class _SortingItems extends StatelessWidget {
     return ListView.builder(
       primary: false,
       shrinkWrap: true,
+      addAutomaticKeepAlives: false,
       itemCount: sorting.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
@@ -206,6 +207,8 @@ class _LocationItems extends StatelessWidget {
     return ListView.builder(
       primary: false,
       shrinkWrap: true,
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
       itemCount: filterLocationes.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),

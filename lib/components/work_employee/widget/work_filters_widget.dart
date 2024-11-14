@@ -64,6 +64,8 @@ class WorkEmployeeFilters extends StatelessWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: filter.length,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
                 shrinkWrap: true,
                 primary: true,
                 itemBuilder: (context, index) => filter.elementAt(index),
