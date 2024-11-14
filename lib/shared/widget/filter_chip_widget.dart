@@ -25,7 +25,7 @@ class FilterChipBodyWidget extends StatelessWidget {
       child: ScrollConfiguration(
         behavior: CustomScrollBehavior(),
         child: SizedBox(
-          height: 100,
+          height: KSize.kPixel48,
           child: ListView.builder(
             key: KWidgetkeys.widget.filterChip.widget,
             scrollDirection: Axis.horizontal,
