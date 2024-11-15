@@ -11,8 +11,8 @@ part 'password_reset_bloc.freezed.dart';
 @injectable
 class PasswordResetBloc extends Bloc<PasswordResetEvent, PasswordResetState> {
   PasswordResetBloc({
-    required AuthenticationRepository authenticationRepository,
-  })  : _authenticationRepository = authenticationRepository,
+    required UserRepository userRepository,
+  })  : _userRepository = userRepository,
         super(
           const _Initial(
             password: PasswordFieldModel.pure(),
@@ -26,7 +26,7 @@ class PasswordResetBloc extends Bloc<PasswordResetEvent, PasswordResetState> {
     on<_PasswordReset>(_onPasswordReset);
   }
 
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
 
   void _onPasswordUpdate(
     _PasswordUpdated event,
@@ -65,7 +65,7 @@ class PasswordResetBloc extends Bloc<PasswordResetEvent, PasswordResetState> {
 
     if (Formz.validate([state.password, state.confirmPassword])) {
       emit(state.copyWith(formState: PasswordResetEnum.sending));
-      final result = await _authenticationRepository.resetPasswordUseCode(
+      final result = await _userRepository.resetPasswordUseCode(
         newPassword: state.password.value,
         code: event.code!,
       );

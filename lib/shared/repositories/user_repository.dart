@@ -1,0 +1,234 @@
+import 'dart:async';
+import 'dart:developer' show log;
+
+import 'package:dartz/dartz.dart';
+import 'package:veteranam/shared/shared_dart.dart';
+
+class UserRepository {
+  UserRepository(
+    this.iAppAuthenticationRepository,
+  ) {
+    _userSettingController = StreamController<UserSetting>.broadcast(
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
+    );
+    _userController = StreamController<User>.broadcast(
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
+    );
+  }
+  final IAppAuthenticationRepository iAppAuthenticationRepository;
+  late StreamController<UserSetting> _userSettingController;
+  late StreamController<User> _userController;
+  StreamSubscription<User>? _userSubscription;
+  StreamSubscription<UserSetting>? _userSettingSubscription;
+
+  void _onUserStreamListen() {
+    _userSubscription ??=
+        iAppAuthenticationRepository.user.listen((currentUser) {
+      if (currentUser.isNotEmpty) {
+        _userController.add(
+          currentUser,
+        );
+        if (currentUserSetting.id != currentUser.id &&
+            _userSettingSubscription != null) {
+          _userSettingSubscription?.cancel();
+          _userSettingSubscription = null;
+        }
+        var userSettingIsNew = _userSettingSubscription == null;
+        _userSettingSubscription ??=
+            iAppAuthenticationRepository.userSetting.listen(
+          (currentUserSetting) {
+            if (userSettingIsNew) {
+              _createFcmUserSettingAndRemoveDeleteParameter();
+              userSettingIsNew = false;
+            }
+            _userSettingController.add(
+              currentUserSetting,
+            );
+          },
+        );
+        // if (isAnonymously()) {
+        //   _authenticationStatuscontroller.add(
+        //     AuthenticationStatus.anonymous,
+        //   );
+        //   return;
+        // }
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.authenticated,
+        // );
+
+        return;
+      }
+      unawaited(_logInAnonymously());
+      _userSettingSubscription?.cancel();
+      _userSettingSubscription = null;
+    });
+  }
+
+  void _onUserStreamCancel() {
+    _userSettingSubscription?.cancel();
+    _userSubscription?.cancel();
+    _userSettingSubscription = null;
+    _userSubscription = null;
+  }
+
+  Stream<UserSetting> get userSetting => _userSettingController.stream;
+  Stream<User> get user => _userController.stream;
+
+  User get currentUser {
+    return iAppAuthenticationRepository.currentUser;
+  }
+
+  UserSetting get currentUserSetting {
+    return iAppAuthenticationRepository.currentUserSetting;
+  }
+
+  Future<void> _createFcmUserSettingAndRemoveDeleteParameter() async {
+    final result = await iAppAuthenticationRepository
+        .createFcmUserSettingAndRemoveDeletePameter();
+    result.fold(
+      (l) {},
+      (r) {
+        log('created FCM TOKEN', name: 'FCM Token', level: 1);
+      },
+    );
+  }
+
+  // TODO: Move to authentication repository
+  Future<void> _logInAnonymously() async {
+    final result = await iAppAuthenticationRepository.logInAnonymously();
+    result.fold(
+      (l) {},
+      (r) {
+        log('created anonymously user');
+        if (r != null) {
+          _userController.add(r);
+        }
+      },
+    );
+    await _createFcmUserSettingAndRemoveDeleteParameter();
+  }
+
+  // Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({
+  //   required String email,
+  // }) async {
+  //   final result =
+  //       await iAppAuthenticationRepository.sendVerificationCode(email: email);
+  //   return result.fold(
+  //     Left.new,
+  //     (success) {
+  //       log(
+  //         'Sending email letter succeses $email',
+  //         name: 'Reset Password',
+  //       );
+  //       return const Right(true);
+  //     },
+  //   );
+  // }
+
+  // Future<Either<SomeFailure, bool>> checkVerificationCode(
+  //   String? code,
+  // ) async {
+  //   final result =
+  //       await iAppAuthenticationRepository.checkVerificationCode(code);
+  //   return result.fold(
+  //     Left.new,
+  //     (success) {
+  //       log(
+  //         'Reset password verification code is succes',
+  //         name: 'Reset Password',
+  //       );
+  //       return Right(success);
+  //     },
+  //   );
+  // }
+
+  // Future<Either<SomeFailure, bool>> resetPasswordUseCode({
+  //   required String code,
+  //   required String newPassword,
+  // }) async {
+  //   final result = await iAppAuthenticationRepository.resetPasswordUseCode(
+  //     code: code,
+  //     newPassword: newPassword,
+  //   );
+  //   return result.fold(
+  //     Left.new,
+  //     (success) {
+  //       log('Password reseted success', name: 'Reset Password');
+  //       return Right(success);
+  //     },
+  //   );
+  // }
+
+  Future<Either<SomeFailure, bool>> updateUserSetting({
+    required UserSetting userSetting,
+  }) async {
+    final result =
+        await iAppAuthenticationRepository.updateUserSetting(userSetting);
+    return result.fold(
+      Left.new,
+      (success) {
+        _userSettingController.add(success);
+        log('User Setting Updated, new is $success', name: 'User Setting');
+        return const Right(true);
+      },
+    );
+  }
+
+  Future<Either<SomeFailure, bool>> updateUserData({
+    required User user,
+    required String? nickname,
+    required FilePickerItem? image,
+  }) async {
+    SomeFailure? failureValue;
+
+    if (image != null || user.name != currentUser.name) {
+      final result = await iAppAuthenticationRepository.updateUserData(
+        user: user,
+        image: image,
+      );
+
+      result.fold(
+        (failure) {
+          failureValue = failure;
+        },
+        (success) {
+          _userController.add(success);
+          log('Sending succeses $userSetting');
+        },
+      );
+    }
+    if (nickname != currentUserSetting.nickname) {
+      final result = await updateUserSetting(
+        userSetting: currentUserSetting.copyWith(nickname: nickname),
+      );
+
+      result.fold(
+        (failure) {
+          failureValue = failure;
+        },
+        (success) {
+          log('User Setting Updated, new is $success', name: 'User Setting');
+        },
+      );
+    }
+
+    if (failureValue != null) {
+      return Left(failureValue!);
+    } else {
+      return const Right(true);
+    }
+  }
+
+  bool get isAnonymously => iAppAuthenticationRepository.isAnonymously;
+
+  // @disposeMethod
+  void dispose() {
+    _userController.close();
+    _userSubscription?.cancel();
+
+    _userSettingController.close();
+    _userSettingSubscription?.cancel();
+  }
+}

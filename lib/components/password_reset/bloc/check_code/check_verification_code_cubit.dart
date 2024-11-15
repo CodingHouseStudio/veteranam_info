@@ -5,16 +5,16 @@ import 'package:veteranam/shared/shared_dart.dart';
 @injectable
 class CheckVerificationCodeCubit extends Cubit<bool?> {
   CheckVerificationCodeCubit({
-    required AuthenticationRepository authenticationRepository,
-  })  : _authenticationRepository = authenticationRepository,
+    required UserRepository userRepository,
+  })  : _userRepository = userRepository,
         super(
           null,
         );
 
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
 
   Future<void> started(String? code) async {
-    final result = await _authenticationRepository.checkVerificationCode(code);
+    final result = await _userRepository.checkVerificationCode(code);
 
     result.fold(
       (l) => emit(

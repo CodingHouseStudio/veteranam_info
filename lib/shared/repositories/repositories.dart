@@ -41,4 +41,5 @@ export 'secure_storage_repository.dart';
 export 'story_repository.dart';
 export 'tags_repository.dart';
 export 'url_repository.dart';
+export 'user_repository.dart';
 export 'work_repository.dart';

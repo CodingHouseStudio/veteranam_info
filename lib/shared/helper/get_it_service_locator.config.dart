@@ -247,6 +247,11 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1026.CacheClient>(),
               gh<_i806.FacebookAuth>(),
             ));
+    gh.singleton<_i777.FirebaseAnalyticsService>(
+        () => _i777.FirebaseAnalyticsService(
+              gh<_i398.FirebaseAnalytics>(),
+              gh<_i1026.UserRepository>(),
+            ));
     gh.singleton<_i1026.IReportRepository>(
       () => _i205.ReportRepository(),
       registerFor: {_user},
@@ -277,6 +282,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i187.FirebaseRemoteConfigProvider>(() =>
         _i187.FirebaseRemoteConfigProvider(gh<_i627.FirebaseRemoteConfig>()));
+    gh.factory<_i846.CheckVerificationCodeCubit>(() =>
+        _i846.CheckVerificationCodeCubit(
+            userRepository: gh<_i1026.UserRepository>()));
+    gh.factory<_i335.PasswordResetBloc>(() =>
+        _i335.PasswordResetBloc(userRepository: gh<_i1026.UserRepository>()));
+    gh.factory<_i361.PwResetEmailBloc>(() =>
+        _i361.PwResetEmailBloc(userRepository: gh<_i1026.UserRepository>()));
     gh.singleton<_i1026.IWorkRepository>(
       () => _i76.WorkRepository(),
       registerFor: {_development},
@@ -292,18 +304,19 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
+    gh.factory<_i254.UserEmailFormBloc>(
+      () => _i254.UserEmailFormBloc(
+        discountRepository: gh<_i1026.IDiscountRepository>(),
+        appAuthenticationRepository: gh<_i1026.IAppAuthenticationRepository>(),
+        firebaseAnalyticsService: gh<_i1026.FirebaseAnalyticsService>(),
+      ),
+      registerFor: {_user},
+    );
     gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
         investorsRepository: gh<_i1026.IInvestorsRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i846.CheckVerificationCodeCubit>(() =>
-        _i846.CheckVerificationCodeCubit(
-            authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i335.PasswordResetBloc>(() => _i335.PasswordResetBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i361.PwResetEmailBloc>(() => _i361.PwResetEmailBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
         authenticationRepository: gh<_i1026.AuthenticationRepository>()));
@@ -340,6 +353,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1026.NetworkRepository>()));
+    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
+          userRepository: gh<_i1026.UserRepository>(),
+          dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
+        ));
     gh.factory<_i716.StoryAddBloc>(
       () => _i716.StoryAddBloc(
         storyRepository: gh<_i1026.IStoryRepository>(),
@@ -348,10 +365,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
-    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
-          authenticationRepository: gh<_i1026.AuthenticationRepository>(),
-          dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
-        ));
     gh.factory<_i227.DiscountLinkCubit>(
       () => _i227.DiscountLinkCubit(
         discountRepository: gh<_i1026.IDiscountRepository>(),
@@ -423,11 +436,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_business},
     );
-    gh.singleton<_i777.FirebaseAnalyticsService>(
-        () => _i777.FirebaseAnalyticsService(
-              gh<_i398.FirebaseAnalytics>(),
-              gh<_i1026.AuthenticationRepository>(),
-            ));
     gh.factory<_i675.EmployeeRespondBloc>(
       () => _i675.EmployeeRespondBloc(
         employeeRespondRepository: gh<_i1026.IWorkRepository>(),
@@ -447,14 +455,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i728.MobileRatingCubit(
           mobileRatingRepository: gh<_i1026.MobileRatingRepository>()),
       registerFor: {_mobile},
-    );
-    gh.factory<_i254.UserEmailFormBloc>(
-      () => _i254.UserEmailFormBloc(
-        discountRepository: gh<_i1026.IDiscountRepository>(),
-        appAuthenticationRepository: gh<_i1026.IAppAuthenticationRepository>(),
-        firebaseAnalyticsService: gh<_i1026.FirebaseAnalyticsService>(),
-      ),
-      registerFor: {_user},
     );
     gh.factory<_i174.CompanyFormBloc>(
       () => _i174.CompanyFormBloc(
