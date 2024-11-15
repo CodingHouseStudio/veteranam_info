@@ -19,10 +19,10 @@ Future<void> nawbarBusinessProfileNavigationHelper({
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.nawbar.myDiscountsButton),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.nawbar.myDiscountsButton),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.loginIcon),

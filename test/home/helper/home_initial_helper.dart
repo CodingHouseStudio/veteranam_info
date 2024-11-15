@@ -13,6 +13,11 @@ Future<void> homeInitialHelper(
     tabletTest: true,
     tester: tester,
     test: () async {
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp,
+      );
+
       await nawbarHelper(tester: tester, searchText: KTestText.field);
 
       expect(

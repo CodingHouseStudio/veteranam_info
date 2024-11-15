@@ -1,10 +1,109 @@
-part of 'body/home_body_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/home/widget/widget.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
-List<Widget> getDiscountSection({
-  required BuildContext context,
-  required bool isTablet,
-}) =>
-    SectionWidget.get(
+class DiscountSection extends StatelessWidget {
+  const DiscountSection({
+    required this.isDesk,
+    required this.isTablet,
+    required this.padding,
+    super.key,
+  });
+
+  final bool isDesk;
+  final bool isTablet;
+  final EdgeInsets padding;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isDesk) {
+      return Padding(
+        padding: padding,
+        child: HomeScreenCard(
+          rightWidget: const Padding(
+            padding: EdgeInsets.only(
+              left: KPadding.kPaddingSize48,
+            ),
+            child: _DiscountSectionWidget(isTablet: true),
+          ),
+          leftWidget: KImage.discountImage(
+            key: KWidgetkeys.screen.home.discountImage,
+          ),
+          rightPadding: KPadding.kPaddingSize84,
+        ),
+      );
+    } else {
+      return Padding(
+        padding: padding,
+        child: Column(
+          children: [
+            KImage.discountImage(
+              key: KWidgetkeys.screen.home.discountImage,
+            ),
+            if (isTablet)
+              KSizedBox.kHeightSizedBox48
+            else
+              KSizedBox.kHeightSizedBox16,
+            _DiscountSectionWidget(isTablet: isTablet),
+          ],
+        ),
+      );
+    }
+  }
+}
+
+class InformationSection extends StatelessWidget {
+  const InformationSection({
+    required this.isDesk,
+    required this.isTablet,
+    super.key,
+  });
+
+  final bool isDesk;
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isDesk) {
+      return HomeScreenCard(
+        leftWidget: const Padding(
+          padding: EdgeInsets.only(
+            right: KPadding.kPaddingSize48,
+          ),
+          child: _InformationSectionWidget(isTablet: true),
+        ),
+        rightWidget: KImage.inforamationImage(
+          key: KWidgetkeys.screen.home.informationImage,
+        ),
+        rightPadding: KPadding.kPaddingSize32,
+      );
+    } else {
+      return Column(
+        children: [
+          KImage.inforamationImage(
+            key: KWidgetkeys.screen.home.informationImage,
+          ),
+          if (isTablet)
+            KSizedBox.kWidthSizedBox48
+          else
+            KSizedBox.kHeightSizedBox16,
+          _InformationSectionWidget(isTablet: isTablet),
+        ],
+      );
+    }
+  }
+}
+
+class _DiscountSectionWidget extends StatelessWidget {
+  const _DiscountSectionWidget({
+    required this.isTablet,
+  });
+
+  final bool isTablet;
+  @override
+  Widget build(BuildContext context) {
+    return SectionWidget(
       buttonKey: KWidgetkeys.screen.home.discountButton,
       // prefixKey: KWidgetkeys.screen.home.discountPrefix,
       titleKey: KWidgetkeys.screen.home.discountTitle,
@@ -15,13 +114,20 @@ List<Widget> getDiscountSection({
       textButton: context.l10n.toDiscount,
       route: () => context.goNamed(KRoute.discounts.name),
       bottomWidget: KSizedBox.kHeightSizedBox90,
-      isTablet: isTablet,
+      isDesk: isTablet,
     );
-List<Widget> getInformationSection({
-  required BuildContext context,
-  required bool isTablet,
-}) =>
-    SectionWidget.get(
+  }
+}
+
+class _InformationSectionWidget extends StatelessWidget {
+  const _InformationSectionWidget({
+    required this.isTablet,
+  });
+
+  final bool isTablet;
+  @override
+  Widget build(BuildContext context) {
+    return SectionWidget(
       buttonKey: KWidgetkeys.screen.home.informationButton,
       // prefixKey: KWidgetkeys.screen.home.informationPrefix,
       subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
@@ -32,39 +138,7 @@ List<Widget> getInformationSection({
       textButton: context.l10n.toInfomation,
       route: () => context.goNamed(KRoute.information.name),
       bottomWidget: KSizedBox.kHeightSizedBox48,
-      isTablet: isTablet,
+      isDesk: isTablet,
     );
-
-List<Widget> getFAQSection({
-  required BuildContext context,
-  required bool isDesk,
-}) =>
-    [
-      // TextPointWidget(
-      //   context.l10n.whatYouMostInterestedIn,
-      //   key: KWidgetkeys.screen.home.faqPrefix,
-      // ),
-      // if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8
-      Text(
-        context.l10n.answersYourQuestions,
-        key: KWidgetkeys.screen.home.faqTitle,
-        style: isDesk
-            ? AppTextStyle.materialThemeDisplayLarge
-            : AppTextStyle.materialThemeDisplaySmall,
-      ),
-      if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
-      Text(
-        context.l10n.questionSubtitle,
-        key: KWidgetkeys.screen.home.faqSubtitle,
-        style: isDesk
-            ? AppTextStyle.materialThemeBodyLarge
-            : AppTextStyle.materialThemeBodyMedium,
-      ),
-      KSizedBox.kHeightSizedBox16,
-      DoubleButtonWidget(
-        widgetKey: KWidgetkeys.screen.home.faqButton,
-        text: context.l10n.writeMessage,
-        onPressed: () => context.goNamed(KRoute.feedback.name),
-        isDesk: isDesk,
-      ),
-    ];
+  }
+}
