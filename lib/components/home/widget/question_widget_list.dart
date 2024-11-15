@@ -12,29 +12,27 @@ class QuestionWidgetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = context.read<HomeWatcherBloc>().state.loadingStatus !=
-        LoadingStatusHome.loaded;
-    final questionModelItems = isLoading
-        ? List.generate(
-            KDimensions.shimmerQuestionItems,
-            (index) => KMockText.questionModel.copyWith(
-              id: index.toString(),
-            ),
-          )
-        : context.read<HomeWatcherBloc>().state.questionModelItems;
-
     return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
       builder: (context, state) {
+        final isLoading = state.loadingStatus != LoadingStatusHome.loaded;
+        final questionModelItems = isLoading
+            ? List.generate(
+                KDimensions.shimmerQuestionItems,
+                (index) => KMockText.questionModel.copyWith(
+                  id: index.toString(),
+                ),
+              )
+            : state.questionModelItems;
+
         final listLength = state.questionModelItems.length;
+
         return ListView.builder(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           primary: false,
-          itemCount: state.loadingStatus == LoadingStatusHome.loaded
-              ? listLength
-              : KDimensions.shimmerQuestionItems,
+          itemCount: isLoading ? KDimensions.shimmerQuestionItems : listLength,
           itemBuilder: (context, index) {
-            if (state.loadingStatus == LoadingStatusHome.loaded) {
+            if (!isLoading) {
               return Padding(
                 key: ValueKey(state.questionModelItems.elementAt(index).id),
                 padding: index != 0
