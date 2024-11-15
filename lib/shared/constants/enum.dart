@@ -7,10 +7,7 @@ enum LoadingStatus {
   loading,
   loaded,
   error,
-  listLoadedFull;
-
-  bool get isLoaded =>
-      this == LoadingStatus.loaded || this == LoadingStatus.listLoadedFull;
+  listLoadedFull,
 }
 
 //enum EvaluationEnum { like, dislike, smile, none }

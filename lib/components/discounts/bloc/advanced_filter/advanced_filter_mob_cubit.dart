@@ -19,14 +19,14 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
           ),
         );
   void started({
-    required List<FilterItem> initialFilter,
+    required List<FilterItem> initialLocationFilter,
     required List<SortingItem> initialSorting,
     required List<FilterItem> initChooseLocationList,
     required List<SortingItem> initialChooseSorting,
   }) =>
       emit(
         AdvancedFilterMobState(
-          filtersLocation: initialFilter,
+          filtersLocation: initialLocationFilter,
           sorting: initialSorting,
           choosenLocationList: initChooseLocationList,
           choosenSortingnList: initialChooseSorting,

@@ -41,7 +41,10 @@ class AdvancedFilterMob extends StatelessWidget {
           showDragHandle: true,
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
-            bloc: bloc,
+            initialFilter: bloc.state.filterLocation,
+            initialSorting: bloc.state.sorting,
+            initChooseLocationList: bloc.state.choosenLocationList,
+            initialChooseSorting: bloc.state.choosenSortingnList,
           ),
         );
       },

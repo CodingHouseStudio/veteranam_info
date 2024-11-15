@@ -358,8 +358,7 @@ class DiscountWatcherBloc
           getUAFilter: (item) => item.category,
           calculateNumber: true,
         ),
-        filterLocation:
-            categoryFilter.getLocationFilter(isEnglish: state.isEnglish),
+        filterLocation: event.filterList,
       ),
     );
   }
