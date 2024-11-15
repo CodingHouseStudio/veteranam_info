@@ -21,7 +21,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-            ..add(const DiscountWatcherEvent.started()),
+            ..add(const DiscountWatcherEvent.started(isEnglish: false)),
         ),
         BlocProvider(
           create: (context) => GetIt.I.get<InvestorsWatcherBloc>()

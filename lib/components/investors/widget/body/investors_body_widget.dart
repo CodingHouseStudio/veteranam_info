@@ -27,7 +27,7 @@ class InvestorsBodyWidget extends StatelessWidget {
               : KPadding.kPaddingSize16),
         );
         final body = [
-          NawbarWidget(isDesk: isDesk, isTablet: isTablet),
+          NavbarWidget(isDesk: isDesk, isTablet: isTablet),
           KSizedBox.kHeightSizedBox24,
           if (Config.isWeb)
             Padding(
@@ -83,7 +83,9 @@ class InvestorsBodyWidget extends StatelessWidget {
             child: Scaffold(
               body: ListView.builder(
                 key: KWidgetkeys.widget.scaffold.scroll,
-                primary: false,
+                primary: true,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
                 itemCount: body.length,
                 itemBuilder: (context, index) => body.elementAt(index),
               ),

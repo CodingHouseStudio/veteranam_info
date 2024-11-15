@@ -41,7 +41,10 @@ class AdvancedFilterMob extends StatelessWidget {
           showDragHandle: true,
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
-            bloc: bloc,
+            initialFilter: bloc.state.filterLocation,
+            initialSorting: bloc.state.sorting,
+            initChooseLocationList: bloc.state.choosenLocationList,
+            initialChooseSorting: bloc.state.choosenSortingnList,
           ),
         );
       },
@@ -83,13 +86,15 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Expanded(
                 child: AdvancedFilterContent(
                   isDesk: false,
-                  onChange: (index) => context
+                  onChange: (value) => context
                       .read<AdvancedFilterMobCubit>()
-                      .changeFilterList(index),
+                      .changeFilterList(value),
                   filterLocationes: _.filtersLocation,
                   sorting: _.sorting,
                   onChangeSorting: (value) =>
                       context.read<AdvancedFilterMobCubit>().sorting(value),
+                  chooseLocationList: _.choosenLocationList,
+                  chooseSortingList: _.choosenSortingnList,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
@@ -118,6 +123,8 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                             DiscountWatcherEvent.setMobFilter(
                               filterList: _.filtersLocation,
                               sorting: _.sorting,
+                              choosenLocationList: _.choosenLocationList,
+                              choosenSortingnList: _.choosenSortingnList,
                             ),
                           );
                       context.pop();
