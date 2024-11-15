@@ -162,7 +162,7 @@ class DiscountWatcherBloc
       emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    // emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     // final (:list, :loadingStatus) = _filterLocation(
     //   itemsLoaded: state.itemsLoaded,
     //   locationIndex: state.filtersLocationIndex,
