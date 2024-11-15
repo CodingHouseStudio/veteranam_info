@@ -18,6 +18,8 @@ class QuestionWidgetList extends StatelessWidget {
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           primary: false,
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
           itemCount: state.loadingStatus == LoadingStatusHome.loaded
               ? state.questionModelItems.length
               : KDimensions.shimmerQuestionItems,
