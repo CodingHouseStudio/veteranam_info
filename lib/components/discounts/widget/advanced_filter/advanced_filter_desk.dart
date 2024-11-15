@@ -9,60 +9,65 @@ class AdvancedFilterDesk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
-          child: Column(
-            children: [
-              // Row(
-              //   children: [
-              //     const IconWidget(
-              //       icon: KIcon.tune,
-              //       background: AppColors.materialThemeKeyColorsNeutral,
-              //       padding: KPadding.kPaddingSize20,
-              //     ),
-              //     KSizedBox.kWidthSizedBox8,
-              //     Expanded(
-              //       child: Text(
-              //         context.l10n.advancedFilter,
-              //         style: AppTextStyle.materialThemeHeadlineSmall,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              const AdvancedFilterButton(
-                isDesk: true,
-                // icon: showFilter
-                //     ? KIcon.trailing.copyWith(
-                //         key: KWidgetkeys
-                //             .screen.discounts.advancedFilterButtonIcon,
-                //       )
-                //     : KIcon.trailingUp.copyWith(
-                //         key: KWidgetkeys
-                //             .screen.discounts.advancedFilterButtonIconUp,
-                //       ),
-              ),
-
-              Expanded(
-                child: AdvancedFilterContent(
-                  isDesk: true,
-                  onChange: (value) => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.filterLocation(value)),
-                  filterLocationes:
-                      context.read<DiscountWatcherBloc>().state.filtersLocation,
-                  sorting: context.read<DiscountWatcherBloc>().state.sorting,
-                  onChangeSorting: (value) => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.sorting(value)),
-                ),
-              ),
-              // ...AdvanceFilter.resetButton(isDesk: true, context: context),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
+      child: Column(
+        children: [
+          // Row(
+          //   children: [
+          //     const IconWidget(
+          //       icon: KIcon.tune,
+          //       background: AppColors.materialThemeKeyColorsNeutral,
+          //       padding: KPadding.kPaddingSize20,
+          //     ),
+          //     KSizedBox.kWidthSizedBox8,
+          //     Expanded(
+          //       child: Text(
+          //         context.l10n.advancedFilter,
+          //         style: AppTextStyle.materialThemeHeadlineSmall,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          const AdvancedFilterButton(
+            isDesk: true,
+            // icon: showFilter
+            //     ? KIcon.trailing.copyWith(
+            //         key: KWidgetkeys
+            //             .screen.discounts.advancedFilterButtonIcon,
+            //       )
+            //     : KIcon.trailingUp.copyWith(
+            //         key: KWidgetkeys
+            //             .screen.discounts.advancedFilterButtonIconUp,
+            //       ),
           ),
-        );
-      },
+
+          BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+            buildWhen: (previous, current) =>
+                previous.loadingStatus != current.loadingStatus ||
+                previous.filterLocation != current.filterLocation ||
+                previous.sorting != current.sorting ||
+                previous.choosenLocationList != current.choosenLocationList ||
+                current.choosenSortingnList != previous.choosenSortingnList,
+            builder: (context, state) {
+              return AdvancedFilterContent(
+                isDesk: true,
+                onChange: (value) => context
+                    .read<DiscountWatcherBloc>()
+                    .add(DiscountWatcherEvent.filterLocation(value)),
+                filterLocationes: state.filterLocation,
+                sorting: state.sorting,
+                onChangeSorting: (value) => context
+                    .read<DiscountWatcherBloc>()
+                    .add(DiscountWatcherEvent.sorting(value)),
+                chooseLocationList: state.choosenLocationList,
+                chooseSortingList: state.choosenSortingnList,
+              );
+            },
+          ),
+          // ...AdvanceFilter.resetButton(isDesk: true, context: context),
+        ],
+      ),
     );
   }
 }

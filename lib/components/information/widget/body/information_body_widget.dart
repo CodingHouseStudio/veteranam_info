@@ -116,37 +116,38 @@ class InformationBodyWidget extends StatelessWidget {
   }
 
   Widget _filter({required bool isDesk, required BuildContext context}) =>
-      FiltersChipWidget(
-        key: KWidgetkeys.screen.information.filter,
-        filtersItems: context
-            .read<InformationWatcherBloc>()
-            .state
-            .informationModelItems
-            .overallItems(
-              context: context,
-              getENFilter: (item) => item.category,
-              getUAFilter: (item) => item.categoryUA,
-            ),
-        isDesk: isDesk,
-        // onResetValue: () => context.read<InformationWatcherBloc>().add(
-        //       const InformationWatcherEvent.filterReset(),
-        //     ),
-        isSelected: (index) => context
-            .read<InformationWatcherBloc>()
-            .state
-            .filters
-            .contains(index),
-        onSelected: (index) => context.read<InformationWatcherBloc>().add(
-              InformationWatcherEvent.filter(
-                index,
-              ),
-            ),
-        fullLength: context
-            .read<InformationWatcherBloc>()
-            .state
-            .informationModelItems
-            .length,
-        filterIsEmpty:
-            context.read<InformationWatcherBloc>().state.filters.isEmpty,
-      );
+      const SizedBox.shrink();
+  // ShaderWidget(
+  //   key: KWidgetkeys.screen.information.filter,
+  //   filtersItems: context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .informationModelItems
+  //       .overallItems(
+  //         isEnglish: context.isEnglish,
+  //         getENFilter: (item) => item.category,
+  //         getUAFilter: (item) => item.categoryUA,
+  //       ),
+  //   isDesk: isDesk,
+  //   // onResetValue: () => context.read<InformationWatcherBloc>().add(
+  //   //       const InformationWatcherEvent.filterReset(),
+  //   //     ),
+  //   isSelected: (index) => context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .filters
+  //       .contains(index),
+  //   onSelected: (index) => context.read<InformationWatcherBloc>().add(
+  //         InformationWatcherEvent.filter(
+  //           index,
+  //         ),
+  //       ),
+  //   fullLength: context
+  //       .read<InformationWatcherBloc>()
+  //       .state
+  //       .informationModelItems
+  //       .length,
+  //   filterIsEmpty:
+  //       context.read<InformationWatcherBloc>().state.filters.isEmpty,
+  // );
 }

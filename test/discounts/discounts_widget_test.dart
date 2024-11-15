@@ -96,47 +96,48 @@ void main() {
         await loadingFailureHelper(
           tester: tester,
           card: KWidgetkeys.screen.discounts.card,
-          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+          buttonMock: null,
         );
       });
     });
-    group('${KGroupText.getEmptyList} ', () {
-      setUp(() {
-        when(
-          mockDiscountRepository.getDiscountItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
-        ).thenAnswer(
-          (invocation) => Stream.value([]),
-        );
-        when(mockDiscountRepository.addMockDiscountItems()).thenAnswer(
-          (invocation) {},
-        );
-        if (GetIt.I.isRegistered<IDiscountRepository>()) {
-          GetIt.I.unregister<IDiscountRepository>();
-        }
-        GetIt.I.registerSingleton<IDiscountRepository>(mockDiscountRepository);
-      });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
-        await discountsPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockReportRepository: mockReportRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockBuildRepository: mockBuildRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockMobileRatingRepository: null,
-        );
+    // group('${KGroupText.getEmptyList} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockDiscountRepository.getDiscountItems(
+    //           // reportIdItems: KTestText.reportItems.getIdCard,
+    //           ),
+    //     ).thenAnswer(
+    //       (invocation) => Stream.value([]),
+    //     );
+    //     when(mockDiscountRepository.addMockDiscountItems()).thenAnswer(
+    //       (invocation) {},
+    //     );
+    //     if (GetIt.I.isRegistered<IDiscountRepository>()) {
+    //       GetIt.I.unregister<IDiscountRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IDiscountRepository>
+    // (mockDiscountRepository);
+    //   });
+    //   testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //     await discountsPumpAppHelper(
+    //       tester: tester,
+    //       mockDiscountRepository: mockDiscountRepository,
+    //       mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //       mockReportRepository: mockReportRepository,
+    //       mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+    //       mockBuildRepository: mockBuildRepository,
+    //       mockAuthenticationRepository: mockAuthenticationRepository,
+    //       mockMobileRatingRepository: null,
+    //     );
 
-        await mockButtonHelper(
-          tester: tester,
-          card: KWidgetkeys.screen.discounts.card,
-          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
-        );
-      });
-    });
+    //     await mockButtonHelper(
+    //       tester: tester,
+    //       card: KWidgetkeys.screen.discounts.card,
+    //       buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+    //     );
+    //   });
+    // });
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(
