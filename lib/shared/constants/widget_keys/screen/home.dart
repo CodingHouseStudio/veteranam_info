@@ -31,4 +31,5 @@ class _HomeKeys {
   final faqSubtitle = const Key('home_screen_faq_subtitle');
   final faqButton = const Key('home_screen_faq_button');
   final faq = const Key('home_screen_faq');
+  final faqSkeletonizer = const Key('home_screen_faq_skeletonizer');
 }

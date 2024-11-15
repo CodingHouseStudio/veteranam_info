@@ -19,6 +19,11 @@ Future<void> footerFeedbackHelper({
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.footer.button,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.footer.button));
 
   verify(
