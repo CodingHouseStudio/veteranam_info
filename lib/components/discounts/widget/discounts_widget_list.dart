@@ -155,14 +155,21 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                 if (key is ValueKey<String>) {
                   final valueKey = key;
                   if (!valueKey.value.contains('mock_discount_')) {
-                    return state.filteredDiscountModelItems.indexWhere(
+                    final index = state.filteredDiscountModelItems.indexWhere(
                       (element) => element.id == valueKey.value,
                     );
+                    if (index >= 0) {
+                      return index;
+                    }
+                  } else {
+                    final mockValue = int.tryParse(
+                      valueKey.value.replaceAll('mock_discount_', ''),
+                    );
+                    if (mockValue != null) {
+                      return state.filteredDiscountModelItems.length +
+                          mockValue;
+                    }
                   }
-                  final mockValue = int.parse(
-                    valueKey.value.replaceAll('mock_discount_', ''),
-                  );
-                  return state.filteredDiscountModelItems.length + mockValue;
                 }
                 return null;
               },

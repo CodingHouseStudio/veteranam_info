@@ -142,19 +142,14 @@ class _ChooseItems extends StatelessWidget {
               widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
               isDesk: isDesk,
               labelText: choosenList.elementAt(index - 1).getString(context),
-              // filter is SubLocation
-              //     ? filter.getList(context).first
-              //     : filter is DiscountEnum
-              //         ? filter.getValue(context)
-              //         : (filter as FilterItem).getString(context),
               onPressed: () {
-                // if (filter is DiscountEnum) {
-                //   onChangeSorting(filter);
-                // } else {
-                onChange(
-                  chooseItem.value,
-                );
-                // }
+                if (chooseItem.value is DiscountEnum) {
+                  onChangeSorting(chooseItem.value as DiscountEnum);
+                } else {
+                  onChange(
+                    chooseItem.value,
+                  );
+                }
               },
             ),
           ),

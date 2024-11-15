@@ -51,6 +51,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
+    required bool isEnglish,
     // required List<ReportModel> reportItems,
   }) = _Initial;
 }

@@ -85,7 +85,7 @@ extension ListExtensions<T> on List<T> {
     required List<dynamic> Function(T) getUAFilter,
     List<dynamic>? Function(T)? getENFilter,
     List<T>? fullList,
-    List<T>? list,
+    bool calculateNumber = false,
   }) {
     try {
       final allFilters = <FilterItem>[];
@@ -101,9 +101,9 @@ extension ListExtensions<T> on List<T> {
           );
         }
       }
-      final allNumberFilters = list == null ? null : <FilterItem>[];
-      if (list != null) {
-        for (final item in list) {
+      final allNumberFilters = calculateNumber ? <FilterItem>[] : null;
+      if (calculateNumber) {
+        for (final item in this) {
           allNumberFilters!.addAll(
             getUAFilter(item).map(
               FilterItem.new,

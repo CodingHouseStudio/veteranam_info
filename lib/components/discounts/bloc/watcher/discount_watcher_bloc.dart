@@ -38,6 +38,7 @@ class DiscountWatcherBloc
             categoryListEmpty: true,
             choosenLocationList: [],
             choosenSortingnList: [],
+            isEnglish: false,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -97,26 +98,25 @@ class DiscountWatcherBloc
       return;
     }
 
-    // Track before processing categories
-    final categories = event.discountItemsModel.overallItems(
-      isEnglish: event.isEnglish,
-      getENFilter: (item) => item.categoryEN,
-      getUAFilter: (item) => item.category,
-      list: event.discountItemsModel,
-    );
-    final locationes =
-        event.discountItemsModel.getLocationFilter(isEnglish: event.isEnglish);
-
     final sortingList = _sorting(list: event.discountItemsModel, sorting: null);
 
     final categoryFilter = _filterCategory(
       categories: state.filterCategory,
       list: sortingList,
     );
+    final locationes =
+        categoryFilter.getLocationFilter(isEnglish: event.isEnglish);
 
     final locationList = _filterLocation(
       location: state.filterLocation,
       listValue: sortingList,
+    );
+
+    final categories = locationList.overallItems(
+      isEnglish: event.isEnglish,
+      getENFilter: (item) => item.categoryEN,
+      getUAFilter: (item) => item.category,
+      calculateNumber: true,
     );
 
     final (:list, :loadingStatus) = _filter(
@@ -136,6 +136,7 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: list,
         filterCategory: categories,
         itemsLoaded: list.length,
+        isEnglish: event.isEnglish,
         categoryListEmpty: state.categoryListEmpty,
         failure: null,
         filterLocation: locationes,
@@ -186,6 +187,15 @@ class DiscountWatcherBloc
     _FilterReset event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    final locationes =
+        state.discountModelItems.getLocationFilter(isEnglish: state.isEnglish);
+
+    final categories = state.discountModelItems.overallItems(
+      isEnglish: state.isEnglish,
+      getENFilter: (item) => item.categoryEN,
+      getUAFilter: (item) => item.category,
+      calculateNumber: true,
+    );
     emit(
       state.copyWith(
         filteredDiscountModelItems: state.discountModelItems.loading(
@@ -201,20 +211,8 @@ class DiscountWatcherBloc
                   : element,
             )
             .toList(),
-        filterCategory: state.filterCategory
-            .map(
-              (element) => element.isSelected
-                  ? element.copyWith(isSelected: false)
-                  : element,
-            )
-            .toList(),
-        filterLocation: state.filterLocation
-            .map(
-              (element) => element.isSelected
-                  ? element.copyWith(isSelected: false)
-                  : element,
-            )
-            .toList(),
+        filterCategory: categories,
+        filterLocation: locationes,
         choosenLocationList: [],
         choosenSortingnList: [],
         categoryListEmpty: true,
@@ -269,6 +267,8 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
         categoryListEmpty: !selectedFilters.haveSelectedValue,
+        filterLocation:
+            categoryItems.getLocationFilter(isEnglish: state.isEnglish),
       ),
     );
   }
@@ -311,6 +311,12 @@ class DiscountWatcherBloc
             .toList(),
         itemsLoaded: list.length,
         loadingStatus: loadingStatus,
+        filterCategory: locationList.overallItems(
+          isEnglish: state.isEnglish,
+          getENFilter: (item) => item.categoryEN,
+          getUAFilter: (item) => item.category,
+          calculateNumber: true,
+        ),
       ),
     );
   }
@@ -345,8 +351,15 @@ class DiscountWatcherBloc
         locationDiscountModelItems: locationList,
         sorting: event.sorting,
         sortingDiscountModelItems: sortingList,
-        filterLocation: event.filterList,
         choosenSortingnList: event.choosenSortingnList,
+        filterCategory: locationList.overallItems(
+          isEnglish: state.isEnglish,
+          getENFilter: (item) => item.categoryEN,
+          getUAFilter: (item) => item.category,
+          calculateNumber: true,
+        ),
+        filterLocation:
+            categoryFilter.getLocationFilter(isEnglish: state.isEnglish),
       ),
     );
   }
@@ -396,6 +409,12 @@ class DiscountWatcherBloc
         locationDiscountModelItems: locationList,
         sorting: sorting,
         sortingDiscountModelItems: sortingList,
+        filterCategory: locationList.overallItems(
+          isEnglish: state.isEnglish,
+          getENFilter: (item) => item.categoryEN,
+          getUAFilter: (item) => item.category,
+          calculateNumber: true,
+        ),
       ),
     );
   }

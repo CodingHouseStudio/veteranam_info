@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -32,28 +34,32 @@ class FilterChipBodyWidget extends StatelessWidget {
             addAutomaticKeepAlives: false,
             addRepaintBoundaries: false,
             shrinkWrap: true,
-            primary: true,
+            // primary: true,
             itemCount: filtersItems.isEmpty
                 ? KDimensions.shimmerCategoryItems
                 : filtersItems.length + 1,
             findChildIndexCallback: (key) {
               if (key is ValueKey) {
-                if (filtersItems.isNotEmpty) {
+                if (key is ValueKey<String> &&
+                    key.value.contains('mock_category_')) {
                   final valueKey = key;
-                  if (valueKey is ValueKey<CategoryEnum>) {
-                    return 0;
-                  }
+                  final mockValue = int.tryParse(
+                    valueKey.value.replaceAll('mock_category_', ''),
+                  );
+                  return mockValue;
+                }
+                final valueKey = key;
+                if (valueKey is ValueKey<CategoryEnum>) {
+                  return 0;
+                }
+                final index = filtersItems.indexWhere(
+                  (element) => element.value == valueKey.value,
+                );
+                if (index >= 0) {
                   return filtersItems.indexWhere(
                         (element) => element.value == valueKey.value,
                       ) +
                       1;
-                }
-                if (key is ValueKey<String>) {
-                  final valueKey = key;
-                  final mockValue = int.parse(
-                    valueKey.value.replaceAll('mock_category_', ''),
-                  );
-                  return mockValue;
                 }
               }
               return null;
