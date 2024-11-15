@@ -35,7 +35,7 @@ int _itemCount(DiscountWatcherState state) =>
 /// performance, especially in scenarios with filtering or dynamic content
 /// changes. This prevents unnecessary removal and recreation of widgets.
 /// Note:
-/// These are just my impressions from working with this method and ChatGPT's
+/// These are based on my experience working with this method and ChatGPT's
 /// response. I need to read more articles to understand all the nuances.
 
 int? _findChildIndexCallback({
