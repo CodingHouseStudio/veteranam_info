@@ -106,7 +106,7 @@ class ScaffoldWidget extends StatelessWidget {
                         ),
                       ),
                     SliverPersistentHeader(
-                      delegate: NawbarWidget.getSliverHeader(
+                      delegate: NavbarWidget.getSliverHeader(
                         isDesk: isDesk,
                         isTablet: isTablet,
                         pageName: pageName,

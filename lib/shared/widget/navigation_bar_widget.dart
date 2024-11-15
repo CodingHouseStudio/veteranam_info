@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class NawbarWidget extends StatefulWidget {
-  const NawbarWidget({
+class NavbarWidget extends StatefulWidget {
+  const NavbarWidget({
     required this.isDesk,
     required this.isTablet,
     // required this.showMobileNawbar,
-    super.key = const ValueKey('naw_bar'),
+    super.key = const Key('nav_bar'),
     // this.childWidget,
     this.pageName,
     this.showBackButton,
@@ -22,7 +22,7 @@ class NawbarWidget extends StatefulWidget {
   final bool? showBackButton;
 
   @override
-  State<NawbarWidget> createState() => _NawbarWidgetState();
+  State<NavbarWidget> createState() => _NavbarWidgetState();
 
   static SliverPersistentHeaderDelegate getSliverHeader({
     required bool isDesk,
@@ -34,7 +34,7 @@ class NawbarWidget extends StatefulWidget {
   }) =>
       SliverHeaderWidget(
         childWidget: ({required overlapsContent, required shrinkOffset}) =>
-            NawbarWidget(
+            NavbarWidget(
           isDesk: isDesk,
           // childWidget: childWidget,
           isTablet: isTablet,
@@ -47,7 +47,7 @@ class NawbarWidget extends StatefulWidget {
       );
 }
 
-class _NawbarWidgetState extends State<NawbarWidget> {
+class _NavbarWidgetState extends State<NavbarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

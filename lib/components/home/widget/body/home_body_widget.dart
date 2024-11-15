@@ -30,7 +30,7 @@ class HomeBodyWidget extends StatelessWidget {
               : KPadding.kPaddingSize16),
         );
         final body = [
-          NawbarWidget(isDesk: isDesk, isTablet: isTablet),
+          NavbarWidget(isDesk: isDesk, isTablet: isTablet),
           KSizedBox.kHeightSizedBox24,
           Padding(
             padding: padding,
