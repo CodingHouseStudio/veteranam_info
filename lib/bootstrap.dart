@@ -13,7 +13,6 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
-
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);

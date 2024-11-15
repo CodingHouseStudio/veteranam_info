@@ -1,5 +1,32 @@
 part of 'discount_watcher_bloc.dart';
 
+class SortingItem extends FilterItem {
+  SortingItem(
+    DiscountEnum value, {
+    super.isSelected = false,
+    super.number,
+  })  : sortValue = value,
+        super(null);
+  final DiscountEnum sortValue;
+
+  @override
+  DiscountEnum get value => sortValue;
+
+  @override
+  SortingItem copyWith({
+    dynamic value,
+    dynamic valueEN,
+    bool? isSelected,
+    int? number,
+  }) {
+    return SortingItem(
+      value is DiscountEnum ? value : sortValue,
+      isSelected: isSelected ?? this.isSelected,
+      number: number ?? this.number,
+    );
+  }
+}
+
 extension DiscountFailureExtension on SomeFailure {
   DiscountFailure _toDiscount() {
     return DiscountFailure.error;
@@ -14,12 +41,17 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required List<DiscountModel> categoryDiscountModelItems,
     required List<DiscountModel> locationDiscountModelItems,
     required List<DiscountModel> sortingDiscountModelItems,
-    required List<dynamic> filtersCategories,
-    required List<dynamic> filtersLocation,
-    required List<DiscountEnum> sorting,
+    // required List<dynamic> chooseFilterItems,
+    required List<FilterItem> filterLocation,
+    required List<FilterItem> choosenLocationList,
+    required List<SortingItem> choosenSortingnList,
+    required List<FilterItem> filterCategory,
+    required List<SortingItem> sorting,
+    required bool categoryListEmpty,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
+    required bool isEnglish,
     // required List<ReportModel> reportItems,
   }) = _Initial;
 }
