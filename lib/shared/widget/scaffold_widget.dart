@@ -37,12 +37,12 @@ class ScaffoldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NetworkCubit, NetworkStatus>(
-      listener: (context, state) {
-        if (state == NetworkStatus.network && loadDataAgain != null) {
-          loadDataAgain!();
-        }
-      },
+    return BlocBuilder<NetworkCubit, NetworkStatus>(
+      // listener: (context, state) {
+      //   if (state == NetworkStatus.network && loadDataAgain != null) {
+      //     loadDataAgain!();
+      //   }
+      // },
       builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
@@ -66,16 +66,16 @@ class ScaffoldWidget extends StatelessWidget {
                     ? KPadding.kPaddingSize32
                     : KPadding.kPaddingSize16),
           );
-          final footerWidget = <Widget>[];
-          if (hasFooter) {
-            footerWidget.addAll(
-              FooterWidget.get(
-                context: context,
-                isTablet: isTablet,
-                isDesk: isDesk,
-              ),
-            );
-          }
+          //final footerWidget = <Widget>[];
+          //if (hasFooter) {
+          // footerWidget.addAll(
+          //   FooterWidget.get(
+          //     context: context,
+          //     isTablet: isTablet,
+          //     isDesk: isDesk,
+          //   ),
+          // );
+          //}
 
           final scaffold = FocusTraversalGroup(
             // policy: WidgetOrderTraversalPolicy(),
@@ -157,40 +157,40 @@ class ScaffoldWidget extends StatelessWidget {
                         itemCount: mainChildWidget.length,
                       ),
                     ),
-                    if (hasFooter)
-                      SliverPadding(
-                        padding: padding.copyWith(
-                          bottom: KPadding.kPaddingSize40,
-                        ),
-                        sliver: DecoratedSliver(
-                          decoration: KWidgetTheme.boxDecorationFooter,
-                          sliver: SliverPadding(
-                            padding: isDesk
-                                ? const EdgeInsets.all(
-                                    KPadding.kPaddingSize32,
-                                  ).copyWith(left: KPadding.kPaddingSize46)
-                                : isTablet
-                                    ? const EdgeInsets.all(
-                                        KPadding.kPaddingSize46,
-                                      )
-                                    : const EdgeInsets.symmetric(
-                                        vertical: KPadding.kPaddingSize32,
-                                        horizontal: KPadding.kPaddingSize16,
-                                      ),
-                            sliver: SliverList.builder(
-                              key: KWidgetkeys.widget.footer.widget,
-                              addAutomaticKeepAlives: false,
-                              addRepaintBoundaries: false,
-                              itemBuilder: (context, index) =>
-                                  footerWidget.elementAt(index),
-                              itemCount: footerWidget.length,
-                            ),
-                          ),
-                        ),
-                      ),
+                    // if (hasFooter)
+                    //   SliverPadding(
+                    //     padding: padding.copyWith(
+                    //       bottom: KPadding.kPaddingSize40,
+                    //     ),
+                    //     sliver: DecoratedSliver(
+                    //       decoration: KWidgetTheme.boxDecorationFooter,
+                    //       sliver: SliverPadding(
+                    //         padding: isDesk
+                    //             ? const EdgeInsets.all(
+                    //                 KPadding.kPaddingSize32,
+                    //               ).copyWith(left: KPadding.kPaddingSize46)
+                    //             : isTablet
+                    //                 ? const EdgeInsets.all(
+                    //                     KPadding.kPaddingSize46,
+                    //                   )
+                    //                 : const EdgeInsets.symmetric(
+                    //                     vertical: KPadding.kPaddingSize32,
+                    //                     horizontal: KPadding.kPaddingSize16,
+                    //                   ),
+                    //         sliver: SliverList.builder(
+                    //           key: KWidgetkeys.widget.footer.widget,
+                    //           addAutomaticKeepAlives: false,
+                    //           addRepaintBoundaries: false,
+                    //           itemBuilder: (context, index) =>
+                    //               footerWidget.elementAt(index),
+                    //           itemCount: footerWidget.length,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
                   ],
-                  semanticChildCount: mainChildWidget.length +
-                      (hasFooter ? (footerWidget.length + 1) : 1),
+                  semanticChildCount: mainChildWidget.length + 1,
+                  // (hasFooter ? (footerWidget.length + 1) : 1),
                   maxHeight: constraints.maxHeight,
                 ),
               ),

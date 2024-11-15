@@ -53,9 +53,8 @@ class MenuDialogWidget extends StatelessWidget {
               key: KWidgetkeys.widget.menuDialog.languageSwitcher,
             ),
             KSizedBox.kWidthSizedBox30,
-            ...FooterWidget.socialMediaLinks(
-              isTablet: true,
-              context: context,
+            SocialMediaLinks(
+              isDesk: true,
               padding: KSizedBox.kWidthSizedBox8,
               instagramKey: KWidgetkeys.widget.menuDialog.instagram,
               linkedInKey: KWidgetkeys.widget.menuDialog.linkedIn,

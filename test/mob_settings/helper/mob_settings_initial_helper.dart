@@ -73,7 +73,7 @@ Future<void> mobSettingsInitialHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.likedInIcon),
+    find.byKey(KWidgetkeys.screen.mobSettings.linkedInIcon),
     findsOneWidget,
   );
 
