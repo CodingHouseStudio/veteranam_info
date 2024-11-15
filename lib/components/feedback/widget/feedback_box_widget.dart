@@ -12,6 +12,7 @@ part of 'body/feedback_body_widget.dart';
 //   }
 //   super.initState();
 // }
+
 List<Widget> _feedbackBoxWidgetList({
   required bool isDesk,
   required void Function() sendAgain,
@@ -29,17 +30,12 @@ List<Widget> _feedbackBoxWidgetList({
                       context.l10n.ourSocialNetworks,
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    Wrap(
-                      children: FooterWidget.socialMediaLinks(
-                        isTablet: false,
-                        context: context,
-                        padding: KSizedBox.kWidthSizedBox24,
-                        instagramKey:
-                            KWidgetkeys.screen.mobSettings.instagramIcon,
-                        linkedInKey: KWidgetkeys.screen.mobSettings.likedInIcon,
-                        facebookKey:
-                            KWidgetkeys.screen.mobSettings.facebookIcon,
-                      ),
+                    SocialMediaLinks(
+                      isDesk: true,
+                      padding: KSizedBox.kWidthSizedBox24,
+                      instagramKey: KWidgetkeys.screen.feedback.instagram,
+                      linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+                      facebookKey: KWidgetkeys.screen.feedback.facebook,
                     ),
                   ],
                 ),
@@ -130,15 +126,12 @@ List<Widget> _feedbackBoxWidgetList({
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             KSizedBox.kHeightSizedBox8,
-            Wrap(
-              children: FooterWidget.socialMediaLinks(
-                isTablet: false,
-                context: context,
-                padding: KSizedBox.kWidthSizedBox24,
-                instagramKey: KWidgetkeys.screen.mobSettings.instagramIcon,
-                linkedInKey: KWidgetkeys.screen.mobSettings.likedInIcon,
-                facebookKey: KWidgetkeys.screen.mobSettings.facebookIcon,
-              ),
+            SocialMediaLinks(
+              isDesk: false,
+              padding: KSizedBox.kWidthSizedBox24,
+              instagramKey: KWidgetkeys.screen.feedback.instagram,
+              linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+              facebookKey: KWidgetkeys.screen.feedback.facebook,
             ),
           ];
 

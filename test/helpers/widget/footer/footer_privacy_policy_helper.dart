@@ -11,7 +11,7 @@ Future<void> footerPrivacyPolicyHelper({
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
-    windowsTest: true,
+    // windowsTest: true,
     test: () async {
       await scrollingHelper(
         tester: tester,
@@ -21,6 +21,11 @@ Future<void> footerPrivacyPolicyHelper({
       expect(
         find.byKey(KWidgetkeys.widget.footer.privacyPolicy),
         findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.widget.footer.privacyPolicy,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.widget.footer.privacyPolicy));

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 import '../../test_dependency.dart';
 
@@ -13,7 +14,17 @@ Future<void> homeFailureHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp1000,
+    offset: KTestConstants.scrollingUp250,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.home.faqSubtitle,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.home.faqSkeletonizer),
+    findsWidgets,
   );
 
   await loadingFailureHelper(

@@ -38,10 +38,10 @@ void main() {
       },
       expect: () async => [
         predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusHome.loading,
         ),
         predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loaded,
+          (state) => state.loadingStatus == LoadingStatusHome.loaded,
         ),
       ],
     );
@@ -56,10 +56,10 @@ void main() {
       },
       expect: () async => [
         predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
+          (state) => state.loadingStatus == LoadingStatusHome.loading,
         ),
         predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.error,
+          (state) => state.loadingStatus == LoadingStatusHome.error,
         ),
       ],
     );
