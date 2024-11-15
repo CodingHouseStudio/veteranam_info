@@ -29,6 +29,15 @@ int _itemCount(DiscountWatcherState state) =>
         ? 1
         : KDimensions.shimmerDiscountsItems);
 
+/// The findChildIndexCallback method is called whenever the list is rebuilt.
+/// Initially, it returns the old keys of the list items. If an item remains
+/// in the updated list, assigning it a new index helps optimize the list's
+/// performance, especially in scenarios with filtering or dynamic content
+/// changes. This prevents unnecessary removal and recreation of widgets.
+/// Note:
+/// These are just my impressions from working with this method and ChatGPT's
+/// response. I need to read more articles to understand all the nuances.
+
 int? _findChildIndexCallback({
   required Key key,
   required DiscountWatcherState state,
