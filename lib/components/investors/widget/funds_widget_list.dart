@@ -45,10 +45,15 @@ class FundsList extends StatelessWidget {
             return ListView.builder(
               shrinkWrap: true,
               primary: false,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               itemCount: listLength + 1,
               itemBuilder: (context, index) {
                 if (index < listLength) {
                   return Padding(
+                    key: isDesk
+                        ? ValueKey(_.deskFundItems.elementAt(index).first.id)
+                        : ValueKey(_.mobFundItems.elementAt(index).id),
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),

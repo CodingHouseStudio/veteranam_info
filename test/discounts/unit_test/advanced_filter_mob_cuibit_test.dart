@@ -20,13 +20,17 @@ void main() {
     setUp(() {
       advancedFilterMobCubit = AdvancedFilterMobCubit()
         ..started(
-          initialFilter: [
-            ...KTestText.discountModelItems.last.location!,
-            KTestText.discountModelItems.first.subLocation,
+          initialLocationFilter: [
+            ...KTestText.discountModelItems.last.location!.map(
+              FilterItem.new,
+            ),
+            FilterItem(KTestText.discountModelItems.first.subLocation),
           ],
           initialSorting: [
-            DiscountEnum.largestSmallest,
+            SortingItem(DiscountEnum.largestSmallest),
           ],
+          initChooseLocationList: [],
+          initialChooseSorting: [],
         );
     });
 

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'advanced_filter_mob_state.dart';
@@ -13,33 +14,68 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
           const AdvancedFilterMobState(
             filtersLocation: [],
             sorting: [],
+            choosenLocationList: [],
+            choosenSortingnList: [],
           ),
         );
   void started({
-    required List<dynamic> initialFilter,
-    required List<DiscountEnum> initialSorting,
+    required List<FilterItem> initialLocationFilter,
+    required List<SortingItem> initialSorting,
+    required List<FilterItem> initChooseLocationList,
+    required List<SortingItem> initialChooseSorting,
   }) =>
       emit(
         AdvancedFilterMobState(
-          filtersLocation: initialFilter,
+          filtersLocation: initialLocationFilter,
           sorting: initialSorting,
+          choosenLocationList: initChooseLocationList,
+          choosenSortingnList: initialChooseSorting,
         ),
       );
 
   void changeFilterList(dynamic value) {
-    final filterList = state.filtersLocation.checkValue(
-      filterValue: value,
-      equalValue: SubLocation.allStoresOfChain,
+    final filterList = state.filtersLocation
+        .map(
+          (element) => element.value == value
+              ? element.copyWith(isSelected: !element.isSelected)
+              : element,
+        )
+        .toList();
+    // checkValue(
+    //   filterValue: value,
+    //   equalValue: SubLocation.allStoresOfChain,
+    // );
+    emit(
+      state.copyWith(
+        filtersLocation: filterList,
+        choosenLocationList: filterList
+            .where(
+              (element) => element.isSelected,
+            )
+            .toList(),
+      ),
     );
-    emit(state.copyWith(filtersLocation: filterList));
   }
 
   void sorting(DiscountEnum value) {
-    final sorting = state.sorting.checkValue(
-      filterValue: value,
-      equalValue: null,
+    final sorting = state.sorting
+        .map(
+          (element) => element.value == value
+              ? element.copyWith(isSelected: !element.isSelected)
+              : element,
+        )
+        .toList();
+
+    emit(
+      state.copyWith(
+        choosenSortingnList: sorting
+            .where(
+              (element) => element.isSelected,
+            )
+            .toList(),
+        sorting: sorting,
+      ),
     );
-    emit(state.copyWith(sorting: sorting));
   }
 
   // void reset() {

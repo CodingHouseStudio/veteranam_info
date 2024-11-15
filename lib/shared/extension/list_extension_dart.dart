@@ -1,6 +1,31 @@
+import 'package:collection/collection.dart' show groupBy;
 import 'package:connectivity_plus/connectivity_plus.dart'
     show ConnectivityResult;
 import 'package:veteranam/shared/shared_dart.dart';
+
+/// Extension for filtering FilterItem list items.
+extension FilterItems on List<FilterItem> {
+  /// Get a list of FilterItem with summarized values.
+  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
+    final grouped = groupBy(this, (FilterItem item) => item.value);
+
+    return grouped.entries.map((entry) {
+      final item = FilterItem(
+        entry.key,
+        valueEN: entry.value.first.valueEN,
+        number:
+            numberGetList?.where((item) => item.value == entry.key).length ??
+                entry.value.length,
+      );
+
+      return item;
+    }).toList();
+  }
+
+  bool get haveSelectedValue => any(
+        (element) => element.isSelected,
+      );
+}
 
 extension ListReportModelExtensions on List<ReportModel> {
   List<String> get getIdCard => map(
@@ -53,6 +78,68 @@ extension ListExtensions<T> on List<T> {
 
     // Return the first `loadedItemsCount` items of the list
     return take(loadNumber).toList();
+  }
+
+  List<FilterItem> overallItems({
+    required bool? isEnglish,
+    required List<dynamic> Function(T) getUAFilter,
+    List<dynamic>? Function(T)? getENFilter,
+    List<T>? fullList,
+    bool calculateNumber = false,
+  }) {
+    try {
+      final allFilters = <FilterItem>[];
+      for (final item in fullList ?? this) {
+        for (var i = 0; i < (getUAFilter(item).length); i++) {
+          allFilters.add(
+            FilterItem(
+              getUAFilter(item).elementAt(i),
+              valueEN: getENFilter == null
+                  ? null
+                  : getENFilter(item)?.elementAtOrNull(i),
+            ),
+          );
+        }
+      }
+      final allNumberFilters = calculateNumber ? <FilterItem>[] : null;
+      if (calculateNumber) {
+        for (final item in this) {
+          allNumberFilters!.addAll(
+            getUAFilter(item).map(
+              FilterItem.new,
+            ),
+          );
+        }
+      }
+      final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
+        ..sort((a, b) {
+          final numberSort = b.number.compareTo(a.number);
+          if (numberSort == 0) {
+            return a.alphabeteCompare(
+              b: b,
+              isEnglish: isEnglish,
+              addEnglish: getENFilter != null,
+            );
+          }
+          return numberSort;
+        });
+
+      final firstFive = allFiltersList.take(5).toList();
+      final remaining = allFiltersList.skip(5).toList()
+        ..sort(
+          (a, b) => a.alphabeteCompare(
+            b: b,
+            isEnglish: isEnglish,
+            addEnglish: getENFilter != null,
+          ),
+        );
+
+      final sortedList = [...firstFive, ...remaining];
+
+      return sortedList;
+    } catch (e) {
+      return [];
+    }
   }
 
   /// Method to remove items based on report items.
@@ -429,6 +516,48 @@ extension ListExtensionsNull<T> on List<T>? {
     }
 
     return selectedFilters; // Return the modified list.
+  }
+}
+
+/// Extension on List<DiscountModel> providing utility methods for DiscountModel
+/// operations.
+extension DiscountModelExtensions on List<DiscountModel> {
+  /// Method to retrieve location filters based on context.
+  ///
+  /// Parameters:
+  /// - context: BuildContext for accessing necessary resources.
+  ///
+  /// Returns:
+  /// A list of FilterItem instances representing location filters.
+  List<FilterItem> getLocationFilter({
+    required bool isEnglish,
+  }) {
+    // Return a list of FilterItem instances
+    return [
+      // Filter items for overall locations sorted from largest to smallest
+      // FilterItem(context.l10n.fromLargestToSmallest),
+      // Filter item for free items
+      // FilterItem(context.l10n.free),
+      // Additional filters based on sub-locations using overallItems method
+      ...overallItems(
+        getUAFilter: (item) => item.subLocation.getValue,
+        isEnglish: isEnglish,
+        // numberGetList: context
+        //     .read<DiscountWatcherBloc>()
+        //     .state
+        //     .categoryDiscountModelItems,
+      ),
+      // Additional filters based on primary locations using overallItems method
+      ...overallItems(
+        getENFilter: (item) => item.locationEN ?? [],
+        getUAFilter: (item) => item.location ?? [],
+        isEnglish: isEnglish,
+        // numberGetList: context
+        //     .read<DiscountWatcherBloc>()
+        //     .state
+        //     .categoryDiscountModelItems,
+      ),
+    ];
   }
 }
 

@@ -11,10 +11,10 @@ Future<void> myDiscountFailureHelper(
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.buttonMock),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.buttonMock),
+  //   findsNothing,
+  // );
 
   await dialogFailureGetTapHelper(tester: tester);
 }

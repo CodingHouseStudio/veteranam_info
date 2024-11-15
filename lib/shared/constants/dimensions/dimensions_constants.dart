@@ -26,6 +26,7 @@ abstract class KDimensions {
   static const shimmerStoriesItems = 3;
   static const shimmerWorksItems = 3;
   static const shimmerDiscountsItems = 3;
+  static const shimmerCategoryItems = 5;
 
   static const maxLinkPerDay = 3;
 
@@ -67,6 +68,8 @@ abstract class KDimensions {
   static const sequenceNumberWarning = 1;
   static const sequenceNumber = 0;
   static const sequenceNumberData = -2;
+
+  static const discountMobLoadingArea = 1000;
 
   static const logLevelData = -200;
   static const logLevelInfo = 1;

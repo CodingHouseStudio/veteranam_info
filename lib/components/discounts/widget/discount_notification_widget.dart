@@ -4,17 +4,15 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountNotificationWidget extends StatefulWidget {
-  const DiscountNotificationWidget({required this.isDesk, super.key});
+class DiscountLinkWidget extends StatefulWidget {
+  const DiscountLinkWidget({required this.isDesk, super.key});
   final bool isDesk;
 
   @override
-  State<DiscountNotificationWidget> createState() =>
-      _DiscountNotificationWidgetState();
+  State<DiscountLinkWidget> createState() => _DiscountLinkWidgetState();
 }
 
-class _DiscountNotificationWidgetState
-    extends State<DiscountNotificationWidget> {
+class _DiscountLinkWidgetState extends State<DiscountLinkWidget> {
   late TextEditingController controller;
   @override
   void initState() {
