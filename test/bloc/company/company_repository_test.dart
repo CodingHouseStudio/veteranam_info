@@ -80,8 +80,10 @@ void main() {
         }
         GetIt.I.registerSingleton(mockStorageService);
         companyRepository = CompanyRepository(
-          mockAppAuthenticationRepository,
-          mockCache,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cache: mockCache,
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
         );
       });
       test('Update company with image', () async {
@@ -140,8 +142,10 @@ void main() {
         }
         GetIt.I.registerSingleton(mockStorageService);
         companyRepository = CompanyRepository(
-          mockAppAuthenticationRepository,
-          mockCache,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cache: mockCache,
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
         );
       });
       test('Update company with image', () async {
@@ -198,8 +202,10 @@ void main() {
         }
         GetIt.I.registerSingleton(mockStorageService);
         companyRepository = CompanyRepository(
-          mockAppAuthenticationRepository,
-          mockCache,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cache: mockCache,
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
         );
       });
       test('Update company with image', () async {

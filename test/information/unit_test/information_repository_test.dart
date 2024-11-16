@@ -57,12 +57,9 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.informationModelItems.first,
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        mockInformationRepository = InformationRepository();
+        mockInformationRepository =
+            InformationRepository(firestoreService: mockFirestoreService);
       });
       test('information', () async {
         expect(
@@ -142,12 +139,9 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        mockInformationRepository = InformationRepository();
+        mockInformationRepository =
+            InformationRepository(firestoreService: mockFirestoreService);
       });
       test('information', () async {
         expect(
@@ -201,12 +195,9 @@ void main() {
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        mockInformationRepository = InformationRepository();
+        mockInformationRepository =
+            InformationRepository(firestoreService: mockFirestoreService);
       });
       test('update like count', () async {
         expect(

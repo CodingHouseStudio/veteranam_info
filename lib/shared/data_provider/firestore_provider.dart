@@ -19,22 +19,17 @@ import 'package:veteranam/shared/shared_dart.dart';
 /// COMMENT: Class to get, update, delete or set values in firebase
 @Singleton(order: -1)
 class FirestoreService {
-  FirestoreService(
-    // this.appNetworkRepository,
-    this._db,
-    this._cache,
-  ) {
+  FirestoreService({
+    required FirebaseFirestore firebaseFirestore,
+    required CacheClient cache,
+  })  : _db = firebaseFirestore,
+        _cache = cache {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-  // final IAppNetworkRepository appNetworkRepository;
-  // final IAppNetworkRepository appNetworkRepository = AppNetworkRepository(
-  //   Connectivity(),
-  //   CacheClient(),
-  // );
   final FirebaseFirestore _db;
   final CacheClient _cache;
-  late var _offlineMode = MobMode.offline;
+  var _offlineMode = MobMode.offline;
 
   MobMode get offlineMode =>
       _cache.read<MobMode>(key: offlineModeCacheKey) ?? _offlineMode;

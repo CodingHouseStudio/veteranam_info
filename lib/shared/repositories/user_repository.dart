@@ -7,9 +7,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class UserRepository {
-  UserRepository(
-    this.iAppAuthenticationRepository,
-  ) {
+  UserRepository({
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  }) : _appAuthenticationRepository = appAuthenticationRepository {
     _userSettingController = StreamController<UserSetting>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
@@ -19,7 +19,7 @@ class UserRepository {
       onCancel: _onUserStreamCancel,
     );
   }
-  final IAppAuthenticationRepository iAppAuthenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
   StreamSubscription<User>? _userSubscription;
@@ -27,7 +27,7 @@ class UserRepository {
 
   void _onUserStreamListen() {
     _userSubscription ??=
-        iAppAuthenticationRepository.user.listen((currentUser) {
+        _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
         _userController.add(
           currentUser,
@@ -39,7 +39,7 @@ class UserRepository {
         }
         var userSettingIsNew = _userSettingSubscription == null;
         _userSettingSubscription ??=
-            iAppAuthenticationRepository.userSetting.listen(
+            _appAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
             if (userSettingIsNew) {
               _createFcmUserSettingAndRemoveDeleteParameter();
@@ -68,15 +68,15 @@ class UserRepository {
   Stream<User> get user => _userController.stream;
 
   User get currentUser {
-    return iAppAuthenticationRepository.currentUser;
+    return _appAuthenticationRepository.currentUser;
   }
 
   UserSetting get currentUserSetting {
-    return iAppAuthenticationRepository.currentUserSetting;
+    return _appAuthenticationRepository.currentUserSetting;
   }
 
   Future<void> _createFcmUserSettingAndRemoveDeleteParameter() async {
-    final result = await iAppAuthenticationRepository
+    final result = await _appAuthenticationRepository
         .createFcmUserSettingAndRemoveDeletePameter();
     result.fold(
       (l) {},
@@ -90,7 +90,7 @@ class UserRepository {
     required UserSetting userSetting,
   }) async {
     final result =
-        await iAppAuthenticationRepository.updateUserSetting(userSetting);
+        await _appAuthenticationRepository.updateUserSetting(userSetting);
     return result.fold(
       Left.new,
       (success) {
@@ -109,7 +109,7 @@ class UserRepository {
     SomeFailure? failureValue;
 
     if (image != null || user.name != currentUser.name) {
-      final result = await iAppAuthenticationRepository.updateUserData(
+      final result = await _appAuthenticationRepository.updateUserData(
         user: user,
         image: image,
       );

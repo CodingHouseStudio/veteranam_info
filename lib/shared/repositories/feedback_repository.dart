@@ -2,14 +2,18 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IFeedbackRepository)
 class FeedbackRepository implements IFeedbackRepository {
-  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final StorageService _storageService = GetIt.I.get<StorageService>();
+  FeedbackRepository({
+    required FirestoreService firestoreService,
+    required StorageService storageService,
+  })  : _firestoreService = firestoreService,
+        _storageService = storageService;
+  final FirestoreService _firestoreService;
+  final StorageService _storageService;
 
   @override
   Future<Either<SomeFailure, bool>> sendFeedback(FeedbackModel feedback) async {

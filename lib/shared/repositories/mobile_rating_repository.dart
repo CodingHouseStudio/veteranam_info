@@ -6,9 +6,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(env: [Config.mobile])
 class MobileRatingRepository {
-  MobileRatingRepository(
-    this._inAppReview,
-  );
+  MobileRatingRepository({
+    required InAppReview inAppReview,
+  }) : _inAppReview = inAppReview;
   final InAppReview _inAppReview;
   Future<Either<SomeFailure, bool>> showRatingDialog() async {
     try {

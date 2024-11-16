@@ -47,16 +47,11 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.storyModelItems.first.image!.downloadURL,
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Get Story', () async {
         expect(
@@ -105,16 +100,11 @@ void main() {
             .thenThrow(
           Exception(KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Get Story', () async {
         expect(
@@ -162,16 +152,11 @@ void main() {
             .thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Get Story', () async {
         expect(

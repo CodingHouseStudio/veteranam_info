@@ -75,18 +75,11 @@ void main() {
         (_) async => const Right(true),
       );
 
-      if (GetIt.I.isRegistered<FirestoreService>()) {
-        GetIt.I.unregister<FirestoreService>();
-      }
-      GetIt.I.registerSingleton(mockFirestoreService);
-
-      if (GetIt.I.isRegistered<StorageService>()) {
-        GetIt.I.unregister<StorageService>();
-      }
-      GetIt.I.registerSingleton(mockStorageService);
       companyRepository = CompanyRepository(
-        mockAppAuthenticationRepository,
-        mockCache,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+        cache: mockCache,
+        firestoreService: mockFirestoreService,
+        storageService: mockStorageService,
       );
     });
 

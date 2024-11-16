@@ -54,7 +54,7 @@ void main() {
         (realInvocation) async =>
             KTestText.storyModelItems.last.image!.downloadURL,
       );
-      storageService = StorageService(mockFirebaseStorage);
+      storageService = StorageService(storage: mockFirebaseStorage);
     });
     void verifyMethod(String path) {
       verify(

@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -14,10 +13,15 @@ import 'package:veteranam/shared/shared_dart.dart';
   // signalsReady: true,
 )
 class CompanyRepository implements ICompanyRepository {
-  CompanyRepository(
-    this._iAppAuthenticationRepository,
-    this._cache,
-  ) {
+  CompanyRepository({
+    required IAppAuthenticationRepository appAuthenticationRepository,
+    required CacheClient cache,
+    required FirestoreService firestoreService,
+    required StorageService storageService,
+  })  : _appAuthenticationRepository = appAuthenticationRepository,
+        _cache = cache,
+        _firestoreService = firestoreService,
+        _storageService = storageService {
     // Listen to currentUser changes and emit auth status
     // _authenticationStatuscontroller =
     //     StreamController<AuthenticationStatus>.broadcast(
@@ -30,22 +34,23 @@ class CompanyRepository implements ICompanyRepository {
     );
   }
 
-  final IAppAuthenticationRepository _iAppAuthenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
+  final CacheClient _cache;
+  final FirestoreService _firestoreService;
+  final StorageService _storageService;
+
   late StreamController<CompanyModel> _userCompanyController;
   StreamSubscription<CompanyModel>? _userCompanySubscription;
   StreamSubscription<User>? _userSubscription;
-  final CacheClient _cache;
-  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final StorageService _storageService = GetIt.I.get<StorageService>();
 
   @visibleForTesting
   static const userCompanyCacheKey = '__user_company_cache_key__';
 
   void _onUserStreamListen() {
     _userSubscription ??=
-        _iAppAuthenticationRepository.user.listen((currentUser) {
+        _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty &&
-          !_iAppAuthenticationRepository.isAnonymously) {
+          !_appAuthenticationRepository.isAnonymously) {
         if (!currentUserCompany.userEmails.contains(currentUser.email) &&
             _userCompanySubscription != null) {
           _userCompanySubscription?.cancel();
@@ -118,10 +123,10 @@ class CompanyRepository implements ICompanyRepository {
     try {
       late var methodCompanyModel = company;
       if (!company.userEmails
-          .contains(_iAppAuthenticationRepository.currentUser.email)) {
+          .contains(_appAuthenticationRepository.currentUser.email)) {
         methodCompanyModel = methodCompanyModel.copyWith(
           userEmails: List.from(methodCompanyModel.userEmails)
-            ..add(_iAppAuthenticationRepository.currentUser.email!),
+            ..add(_appAuthenticationRepository.currentUser.email!),
         );
       }
       if (imageItem != null) {
@@ -150,9 +155,9 @@ class CompanyRepository implements ICompanyRepository {
           user: User(
             id: currentUserCompany.id,
             name: currentUserCompany.companyName,
-            email: _iAppAuthenticationRepository.currentUser.email,
+            email: _appAuthenticationRepository.currentUser.email,
           ),
-          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          userSetting: _appAuthenticationRepository.currentUserSetting,
           tag: 'Company(updateCompany)',
           tagKey: ErrorText.repositoryKey,
           data: 'Compnay: $company| ${imageItem.getErrorData}',
@@ -168,9 +173,9 @@ class CompanyRepository implements ICompanyRepository {
           user: User(
             id: currentUserCompany.id,
             name: currentUserCompany.companyName,
-            email: _iAppAuthenticationRepository.currentUser.email,
+            email: _appAuthenticationRepository.currentUser.email,
           ),
-          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          userSetting: _appAuthenticationRepository.currentUserSetting,
           data: 'Compnay: $company| ${imageItem.getErrorData}',
         ),
       );
@@ -187,7 +192,7 @@ class CompanyRepository implements ICompanyRepository {
           currentUserCompany.copyWith(deletedOn: ExtendedDateTime.current),
         );
         _userCompanyController.add(CompanyModel.empty);
-        await _iAppAuthenticationRepository.logOut();
+        await _appAuthenticationRepository.logOut();
       }
       // if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
       //   await iAppAuthenticationRepository.deleteUser();
@@ -202,9 +207,9 @@ class CompanyRepository implements ICompanyRepository {
           user: User(
             id: currentUserCompany.id,
             name: currentUserCompany.companyName,
-            email: _iAppAuthenticationRepository.currentUser.email,
+            email: _appAuthenticationRepository.currentUser.email,
           ),
-          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          userSetting: _appAuthenticationRepository.currentUserSetting,
           tag: 'Company(deleteCompany)',
           tagKey: ErrorText.repositoryKey,
         ).status,
@@ -219,9 +224,9 @@ class CompanyRepository implements ICompanyRepository {
           user: User(
             id: currentUserCompany.id,
             name: currentUserCompany.companyName,
-            email: _iAppAuthenticationRepository.currentUser.email,
+            email: _appAuthenticationRepository.currentUser.email,
           ),
-          userSetting: _iAppAuthenticationRepository.currentUserSetting,
+          userSetting: _appAuthenticationRepository.currentUserSetting,
         ),
       );
     }

@@ -1,26 +1,16 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'
-    show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IStorage)
 class SecureStorageRepository implements IStorage {
-  SecureStorageRepository();
-  FlutterSecureStorage? _secureStorage;
-
-  @override
-  FlutterSecureStorage get secureStorage =>
-      _secureStorage ?? const FlutterSecureStorage();
-
-  @visibleForTesting
-  @override
-  set secureStorage(FlutterSecureStorage setSecureStorage) =>
-      _secureStorage = setSecureStorage;
+  SecureStorageRepository({required FlutterSecureStorage secureStorage})
+      : _secureStorage = secureStorage;
+  final FlutterSecureStorage _secureStorage;
 
   @override
   Future<String?> readOne({required String keyItem}) async {
-    return secureStorage.read(key: keyItem);
+    return _secureStorage.read(key: keyItem);
   }
 
   @override
@@ -28,7 +18,7 @@ class SecureStorageRepository implements IStorage {
     required String keyItem,
     required String valueItem,
   }) async {
-    await secureStorage.write(key: keyItem, value: valueItem);
+    await _secureStorage.write(key: keyItem, value: valueItem);
     final result = await readOne(keyItem: keyItem);
     if (result == keyItem) {
       return true;
@@ -39,6 +29,6 @@ class SecureStorageRepository implements IStorage {
 
   @override
   Future<void> deleteAll() async {
-    await secureStorage.deleteAll();
+    await _secureStorage.deleteAll();
   }
 }

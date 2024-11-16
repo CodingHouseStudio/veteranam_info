@@ -40,12 +40,8 @@ void main() {
           ),
         ).thenAnswer((_) async => true);
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Get company discounts', () async {
@@ -92,12 +88,8 @@ void main() {
           Exception(KGroupText.failure),
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Get company discounts failure', () async {
@@ -131,12 +123,8 @@ void main() {
           FirebaseException(plugin: KGroupText.failure),
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Get company discounts firebaseError', () async {
