@@ -9,14 +9,14 @@ import '../../test_dependency.dart';
 
 Future<void> profilePumpAppHelper({
   required WidgetTester tester,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required IDataPickerRepository mockDataPickerRepository,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerAuthenticationBloc(mockAuthenticationRepository);
+  _registerUserWatcherBloc(mockUserRepository);
 
   _registerProfileBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockUserRepository: mockUserRepository,
     mockDataPickerRepository: mockDataPickerRepository,
   );
 
@@ -30,24 +30,24 @@ Future<void> profilePumpAppHelper({
   await tester.pumpAndSettle();
 }
 
-void _registerAuthenticationBloc(
-  AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc(
+  UserRepository mockUserRepository,
 ) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }
 
 void _registerProfileBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required IDataPickerRepository mockDataPickerRepository,
 }) {
   final profileBloc = ProfileBloc(
-    authenticationRepository: mockAuthenticationRepository,
+    userRepository: mockUserRepository,
     dataPickerRepository: mockDataPickerRepository,
   );
   if (GetIt.I.isRegistered<ProfileBloc>()) {

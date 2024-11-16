@@ -14,11 +14,11 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.passwordReset} ${KGroupText.bloc}', () {
     late CheckVerificationCodeCubit checkVerificationCodeCubit;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       checkVerificationCodeCubit = CheckVerificationCodeCubit(
-        authenticationRepository: mockAuthenticationRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -27,7 +27,7 @@ void main() {
       build: () => checkVerificationCodeCubit,
       act: (bloc) async {
         when(
-          mockAuthenticationRepository.checkVerificationCode(
+          mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
         ).thenAnswer(
@@ -43,7 +43,7 @@ void main() {
       build: () => checkVerificationCodeCubit,
       act: (bloc) async {
         when(
-          mockAuthenticationRepository.checkVerificationCode(
+          mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
         ).thenAnswer(

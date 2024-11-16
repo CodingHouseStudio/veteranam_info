@@ -56,7 +56,6 @@ class DiscountWatcherBloc
   final IDiscountRepository _discountRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
   // final IReportRepository _reportRepository;
-  // final IAppAuthenticationRepository _appAuthenticationRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
 
   @visibleForTesting

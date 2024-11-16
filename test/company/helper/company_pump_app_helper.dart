@@ -9,13 +9,13 @@ import '../../test_dependency.dart';
 
 Future<void> companyPumpAppHelper({
   required WidgetTester tester,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required IDataPickerRepository mockDataPickerRepository,
   required ICompanyRepository mockCompanyRepository,
   required IDiscountRepository mockDiscountRepository,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerAuthenticationBloc(mockAuthenticationRepository);
+  _registerUserWatcherBloc(mockUserRepository);
 
   _registerCompanyWatcherBloc(
     mockCompanyRepository,
@@ -37,16 +37,16 @@ Future<void> companyPumpAppHelper({
   await tester.pumpAndSettle();
 }
 
-void _registerAuthenticationBloc(
-  AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc(
+  UserRepository mockUserRepository,
 ) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }
 
 void _registerCompanyWatcherBloc(

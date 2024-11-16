@@ -10,8 +10,8 @@ import '../../test_dependency.dart';
 Future<void> homePumpAppHelper({
   // required IFeedbackRepository mockFeedbackRepository,
   required IFaqRepository mockFaqRepository,
-  required AuthenticationRepository mockAuthenticationRepository,
-  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required UserRepository mockUserRepository,
+  required AuthenticationRepository mockAuthencticationRepository,
   required WidgetTester tester,
   required IUrlRepository mockUrlRepository,
   required AppInfoRepository mockBuildRepository,
@@ -22,9 +22,12 @@ Future<void> homePumpAppHelper({
   //   mockFeedbackRepository: mockFeedbackRepository,
   //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   // );
-  _registerHomeBloc(mockFaqRepository: mockFaqRepository);
   _registerAuthenticationBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAuthencticationRepository: mockAuthencticationRepository,
+  );
+  _registerHomeBloc(mockFaqRepository: mockFaqRepository);
+  _registerUserWatcherBloc(
+    mockUserRepository: mockUserRepository,
   );
   _registerUrlCubit(mockUrlRepository);
   _registerBuildCubit(
@@ -65,11 +68,23 @@ void _registerHomeBloc({
   GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
 }
 
+void _registerUserWatcherBloc({
+  required UserRepository mockUserRepository,
+}) {
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
+  );
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
+}
+
 void _registerAuthenticationBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required AuthenticationRepository mockAuthencticationRepository,
 }) {
   final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+    authenticationRepository: mockAuthencticationRepository,
   );
   if (GetIt.I.isRegistered<AuthenticationBloc>()) {
     GetIt.I.unregister<AuthenticationBloc>();
