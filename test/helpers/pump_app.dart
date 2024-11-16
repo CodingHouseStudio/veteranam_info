@@ -7,14 +7,9 @@ import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_blo
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
 import 'package:veteranam/l10n/l10n.dart';
-import 'package:veteranam/shared/bloc/app_version/app_version_cubit.dart';
-import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart';
-import 'package:veteranam/shared/bloc/company/company_watcher_bloc.dart';
-import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart';
-import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.dart';
-import 'package:veteranam/shared/bloc/network/network_cubit.dart';
-import 'package:veteranam/shared/bloc/url/url_cubit.dart';
+import 'package:veteranam/shared/bloc/bloc.dart';
 import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/models/user_setting_model.dart';
 import 'package:veteranam/shared/widget/mob_feedback_widget.dart';
 
 import '../test_mocks/test_mocks.dart';
@@ -41,7 +36,18 @@ extension PumpApp on WidgetTester {
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<AuthenticationBloc>()
-              ..add(AuthenticationInitialized()),
+              ..add(
+                AuthenticationInitialized(),
+              ),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<UserWatcherBloc>()
+              ..add(
+                const UserWatcherEvent.started(),
+              ),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<LanguageCubit>()..started(),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<UrlCubit>(),
@@ -73,13 +79,12 @@ extension PumpApp on WidgetTester {
             ),
           ],
         ],
-        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        child: BlocBuilder<LanguageCubit, Language>(
           builder: (context, state) {
-            final localeValue = state.userSetting.locale.value;
             if (mockGoRouter == null) {
               return _body(
                 widget: widget,
-                currentLocale: localeValue,
+                currentLocale: state.value,
                 addFeedback: addFeedback,
               );
             } else {
@@ -87,7 +92,7 @@ extension PumpApp on WidgetTester {
                 goRouter: mockGoRouter,
                 child: _body(
                   widget: widget,
-                  currentLocale: localeValue,
+                  currentLocale: state.value,
                   addFeedback: addFeedback,
                 ),
               );

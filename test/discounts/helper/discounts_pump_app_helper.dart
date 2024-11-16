@@ -29,7 +29,7 @@ Future<void> discountsPumpAppHelper({
     // mockReportRepository: mockReportRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  _registerAuthenticationBloc(
+  _registerUserWatcherBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
   _registerDiscountLinkFormBloc(
@@ -102,7 +102,7 @@ void _registerDiscountBloc({
   GetIt.I.registerSingleton<DiscountWatcherBloc>(discountBloc);
 }
 
-void _registerAuthenticationBloc({
+void _registerUserWatcherBloc({
   required AuthenticationRepository mockAuthenticationRepository,
 }) {
   final authenticationBloc = AuthenticationBloc(

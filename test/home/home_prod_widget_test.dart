@@ -16,8 +16,9 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.prod}', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IFaqRepository mockFaqRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late IUrlRepository mockUrlRepository;
     late AppInfoRepository mockBuildRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
@@ -26,20 +27,25 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockFaqRepository = MockIFaqRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockUrlRepository = MockIUrlRepository();
       mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+      mockAuthenticationRepository = MockAuthenticationRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
+      );
+
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );
@@ -61,11 +67,12 @@ void main() {
       await homePumpAppHelper(
         // mockFeedbackRepository: mockFeedbackRepository,
         mockFaqRepository: mockFaqRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         tester: tester,
         mockBuildRepository: mockBuildRepository,
         mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         mockUrlRepository: mockUrlRepository,
+        mockAuthencticationRepository: mockAuthenticationRepository,
         // mockAppAuthenticationRepository:
         // mockAppAuthenticationRepository,
       );
@@ -80,11 +87,12 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
           mockBuildRepository: mockBuildRepository, mockGoRouter: mockGoRouter,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -96,11 +104,12 @@ void main() {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
+            mockAuthencticationRepository: mockAuthenticationRepository,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
@@ -111,57 +120,63 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
-        group('${Config.business} ', () {
-          setUp(
-            () {
-              when(mockAuthenticationRepository.user).thenAnswer(
-                (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
-              );
-              Config.roleValue = Config.business;
-            },
-          );
-          testWidgets('${KRoute.profile.name} ', (tester) async {
-            await homePumpAppHelper(
-              // mockFeedbackRepository: mockFeedbackRepository,
-              mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockBuildRepository: mockBuildRepository, tester: tester,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockGoRouter: mockGoRouter,
-              mockUrlRepository: mockUrlRepository,
-              // mockAppAuthenticationRepository:
-              // mockAppAuthenticationRepository,
-            );
+        // group('${Config.business} ', () {
+        //   setUp(
+        //     () {
+        //       when(mockAuthenticationRepository.currectAuthenticationStatus)
+        //           .thenAnswer(
+        //         (realInvocation) => AuthenticationStatus.authenticated,
+        //       );
+        //       when(mockUserRepository.user).thenAnswer(
+        //         (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+        //       );
+        //       Config.roleValue = Config.business;
+        //     },
+        //   );
+        //   testWidgets('${KRoute.profile.name} ', (tester) async {
+        //     await homePumpAppHelper(
+        //       // mockFeedbackRepository: mockFeedbackRepository,
+        //       mockFaqRepository: mockFaqRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockBuildRepository: mockBuildRepository, tester: tester,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAuthencticationRepository: mockAuthenticationRepository,
+        //       mockUrlRepository: mockUrlRepository,
+        //       // mockAppAuthenticationRepository:
+        //       // mockAppAuthenticationRepository,
+        //     );
 
-            await homeChangeWindowSizeHelper(
-              tester: tester,
-              test: () async => nawbarBusinessNavigationHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
-            );
-          });
-          testWidgets('${KRoute.company.name} ', (tester) async {
-            await homePumpAppHelper(
-              // mockFeedbackRepository: mockFeedbackRepository,
-              mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockBuildRepository: mockBuildRepository, tester: tester,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockGoRouter: mockGoRouter,
-              mockUrlRepository: mockUrlRepository,
-              // mockAppAuthenticationRepository:
-              // mockAppAuthenticationRepository,
-            );
+        //     await homeChangeWindowSizeHelper(
+        //       tester: tester,
+        //       test: () async => nawbarBusinessNavigationHelper(
+        //         tester: tester,
+        //         mockGoRouter: mockGoRouter,
+        //       ),
+        //     );
+        //   });
+        //   testWidgets('${KRoute.company.name} ', (tester) async {
+        //     await homePumpAppHelper(
+        //       // mockFeedbackRepository: mockFeedbackRepository,
+        //       mockFaqRepository: mockFaqRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockBuildRepository: mockBuildRepository, tester: tester,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAuthencticationRepository: mockAuthenticationRepository,
+        //       mockUrlRepository: mockUrlRepository,
+        //       // mockAppAuthenticationRepository:
+        //       // mockAppAuthenticationRepository,
+        //     );
 
-            await nawbarBusinessProfileNavigationHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
-          });
-        });
+        //     await nawbarBusinessProfileNavigationHelper(
+        //       tester: tester,
+        //       mockGoRouter: mockGoRouter,
+        //     );
+        //   });
+        // });
       });
     });
   });

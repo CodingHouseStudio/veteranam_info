@@ -7,7 +7,7 @@ import '../../test_dependency.dart';
 
 Future<void> sendUserRoleHelper({
   required WidgetTester tester,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
 }) async {
   await chekPointHelper(
     tester: tester,
@@ -24,7 +24,7 @@ Future<void> sendUserRoleHelper({
   await tester.pumpAndSettle();
 
   verify(
-    mockAuthenticationRepository.updateUserSetting(
+    mockUserRepository.updateUserSetting(
       userSetting: UserSetting.empty.copyWith(
         userRole: UserRole.veteran,
       ),

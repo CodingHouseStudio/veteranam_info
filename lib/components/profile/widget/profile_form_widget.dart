@@ -74,7 +74,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
           previous.formState != current.formState ||
           previous.image != current.image,
       builder: (context, _) {
-        return BlocListener<AuthenticationBloc, AuthenticationState>(
+        return BlocListener<UserWatcherBloc, UserWatcherState>(
           listener: (context, state) {
             context.read<ProfileBloc>().add(const ProfileEvent.started());
             if (nameController.text.isEmpty) {
@@ -108,7 +108,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                           .read<ProfileBloc>()
                           .add(const ProfileEvent.imageUpdated()),
                       imageUrl:
-                          context.read<AuthenticationBloc>().state.user.photo,
+                          context.read<UserWatcherBloc>().state.user.photo,
                       // perimeter: KSize.kPixel72,
                       icon: KIcon.personEdit,
                       // background: AppColors.materialThemeKeyColorsPrimary,

@@ -7,12 +7,12 @@ import 'package:veteranam/shared/shared_dart.dart';
 import '../../test_dependency.dart';
 
 Future<void> questionFormPumpAppHelper({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerAuthenticationBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+  _registerUserWatcherBloc(
+    mockUserRepository: mockUserRepository,
   );
   await tester.pumpApp(const QuestionsFormScreen(), mockGoRouter: mockGoRouter);
 
@@ -26,14 +26,14 @@ Future<void> questionFormPumpAppHelper({
   await tester.pumpAndSettle();
 }
 
-void _registerAuthenticationBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc({
+  required UserRepository mockUserRepository,
 }) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }

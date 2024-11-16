@@ -88,6 +88,7 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<PlatformFile>(),
     MockSpec<MobileRatingRepository>(),
     MockSpec<InAppReview>(),
+    MockSpec<UserRepository>(),
   ],
 )
 void load() => log('loaded', name: 'Test', sequenceNumber: -2);

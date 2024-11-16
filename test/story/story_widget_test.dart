@@ -16,16 +16,16 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.story} ', () {
     late IStoryRepository mockStoryRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      mockUserRepository = MockUserRepository();
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.userWithoutPhoto,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
     });
@@ -37,7 +37,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await storyPumpAppHelper(
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockStoryRepository: mockStoryRepository,
           tester: tester,
         );
@@ -55,7 +55,7 @@ void main() {
         await storyPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
         );
 
         await storyInitialHelper(tester);
@@ -65,7 +65,7 @@ void main() {
         (tester) async => storyPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
         ),
         // lastCard: KWidgetkeys.screen.story.cardLast,
       );
@@ -74,7 +74,7 @@ void main() {
         await storyPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
         );
 
         await listLoadHelper(tester);
@@ -87,7 +87,7 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockStoryRepository: mockStoryRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
           );
 
           await storyInitialHelper(tester);
@@ -98,7 +98,7 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
               mockStoryRepository: mockStoryRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
             );
 
             await storyAddNavigationHelper(

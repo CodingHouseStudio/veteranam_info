@@ -53,7 +53,7 @@ class HomeBoxWidget extends StatelessWidget {
             child: AnimatedTextKit(
               repeatForever: true,
               key: ValueKey<Language>(
-                context.read<AuthenticationBloc>().state.userSetting.locale,
+                context.read<LanguageCubit>().state,
               ),
               animatedTexts: [
                 TyperAnimatedText(

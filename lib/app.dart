@@ -34,6 +34,15 @@ class App extends StatelessWidget {
             ),
         ),
         BlocProvider(
+          create: (context) => GetIt.I.get<UserWatcherBloc>()
+            ..add(
+              const UserWatcherEvent.started(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<LanguageCubit>()..started(),
+        ),
+        BlocProvider(
           create: (context) => GetIt.I.get<UrlCubit>(),
         ),
         BlocProvider(
@@ -75,31 +84,23 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
-      // Initiliazation date formating when change language and first app init
-      listenWhen: (previous, current) =>
-          previous.userSetting.locale != current.userSetting.locale ||
-          (previous.user.isEmpty),
-      listener: (context, state) => unawaited(
-        initializeDateFormatting(state.userSetting.locale.value.languageCode),
+    return BlocConsumer<LanguageCubit, Language>(
+      listener: (context, language) => unawaited(
+        initializeDateFormatting(language.value.languageCode),
       ),
-      builder: (context, state) {
-        if (state.status == AuthenticationStatus.unknown) {
-          return const SizedBox.shrink();
-        }
-        final localeValue = state.userSetting.locale.value;
+      builder: (context, language) {
         return Config.isWeb
-            ? body(localeValue)
+            ? body(language.value)
             : BetterFeedback(
                 localizationsDelegates: locale,
-                localeOverride: localeValue,
+                localeOverride: language.value,
                 themeMode: ThemeMode.light,
                 mode: FeedbackMode.navigate,
                 feedbackBuilder: (context, onSubmit, scrollController) =>
                     MobFeedbackWidget(onSubmit: onSubmit),
                 child: BlocBuilder<MobOfflineModeCubit, MobMode>(
                   builder: (context, _) {
-                    return body(localeValue);
+                    return body(language.value);
                   },
                 ),
               );

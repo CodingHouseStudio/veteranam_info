@@ -213,7 +213,7 @@ abstract class KAppText {
   static const String exampleEmail = 'example@veteranam.info';
   static const String examplePhone = '+38 099 000 00 00';
   static const String authTokenKey = 'AUTH_TOKEN';
-  static const String authChange = 'AuthenticationStatusChanged:';
+  static const String authChange = 'Authentication Status Changed:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
   static const String madeBy = '© Coding House Studio LLC - 2024';

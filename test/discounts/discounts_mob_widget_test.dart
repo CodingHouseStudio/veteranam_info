@@ -40,18 +40,15 @@ void main() {
       mockBuildRepository = MockAppInfoRepository();
       mockMobileRatingRepository = MockMobileRatingRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
 
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
