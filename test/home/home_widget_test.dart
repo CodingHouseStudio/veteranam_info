@@ -17,6 +17,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
+    late UserRepository mockUserRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
@@ -29,13 +30,17 @@ void main() {
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       PlatformEnumFlutter.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockUrlRepository = MockIUrlRepository();
       mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
-      // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
+      );
+
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
@@ -50,12 +55,12 @@ void main() {
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
       //   (realInvocation) => KTestText.user,
       // );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(
         mockUrlRepository.launchUrl(
           url: KAppText.instagram,
@@ -113,10 +118,11 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -130,10 +136,11 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -147,10 +154,11 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -175,10 +183,11 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -198,10 +207,11 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -214,11 +224,12 @@ void main() {
           tester: tester,
           pumpApp: () async => homePumpAppHelper(
             mockFaqRepository: mockFaqRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockUrlRepository: mockUrlRepository,
+            mockAuthencticationRepository: mockAuthenticationRepository,
           ),
         );
 
@@ -232,10 +243,12 @@ void main() {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockBuildRepository: mockBuildRepository, tester: tester,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
+            mockAuthencticationRepository: mockAuthenticationRepository,
+
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
@@ -247,10 +260,12 @@ void main() {
           await homePumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             // mockFeedbackRepository: mockFeedbackRepository,
+            mockAuthencticationRepository: mockAuthenticationRepository,
+
             mockFaqRepository: mockFaqRepository,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
@@ -274,10 +289,12 @@ void main() {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -294,11 +311,12 @@ void main() {
               ),
             );
           });
-          group("user isn't anonymously", () {
+          group('${KGroupText.authenticated} ', () {
             setUp(
-              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty)
-                  .thenAnswer(
-                (realInvocation) => false,
+              () =>
+                  when(mockAuthenticationRepository.currectAuthenticationStatus)
+                      .thenAnswer(
+                (realInvocation) => AuthenticationStatus.authenticated,
               ),
             );
 
@@ -306,10 +324,12 @@ void main() {
               await homePumpAppHelper(
                 // mockFeedbackRepository: mockFeedbackRepository,
                 mockFaqRepository: mockFaqRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockBuildRepository: mockBuildRepository, tester: tester,
                 mockFirebaseRemoteConfigProvider:
                     mockFirebaseRemoteConfigProvider,
+                mockAuthencticationRepository: mockAuthenticationRepository,
+
                 mockGoRouter: mockGoRouter,
                 mockUrlRepository: mockUrlRepository,
                 // mockAppAuthenticationRepository:
@@ -333,7 +353,8 @@ void main() {
             //   mockBuildRepository:
             //mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider
             //,  mockBuildRepository,
-            //   // mockFeedbackRepository: mockFeedbackRepository,
+            //   /mockAuthencticationRepository: mockAuthenticationRepository,
+            /// mockFeedbackRepository: mockFeedbackRepository,
             //       mockFaqRepository: mockFaqRepository,
             //       mockAppAuthenticationRepository:
             //           mockAppAuthenticationRepository,
@@ -350,10 +371,12 @@ void main() {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -370,10 +393,12 @@ void main() {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -390,10 +415,11 @@ void main() {
             await homePumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -411,10 +437,11 @@ void main() {
             await homePumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -431,10 +458,11 @@ void main() {
             await homePumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -448,14 +476,14 @@ void main() {
             );
           });
           group(
-            'User authentication',
+            '${KGroupText.authenticated} ',
             () {
               setUp(() {
-                when(mockAuthenticationRepository.isAnonymouslyOrEmty)
+                when(mockAuthenticationRepository.currectAuthenticationStatus)
                     .thenAnswer(
-                  (realInvocation) => false,
+                  (realInvocation) => AuthenticationStatus.authenticated,
                 );
-                when(mockAuthenticationRepository.user).thenAnswer(
+                when(mockUserRepository.user).thenAnswer(
                   (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
                 );
               });
@@ -463,10 +491,11 @@ void main() {
                 await homePumpAppHelper(
                   tester: tester,
                   mockGoRouter: mockGoRouter,
-                  mockAuthenticationRepository: mockAuthenticationRepository,
+                  mockUserRepository: mockUserRepository,
                   mockBuildRepository: mockBuildRepository,
                   mockFirebaseRemoteConfigProvider:
                       mockFirebaseRemoteConfigProvider,
+                  mockAuthencticationRepository: mockAuthenticationRepository,
                   mockFaqRepository: mockFaqRepository,
                   mockUrlRepository: mockUrlRepository,
                 );

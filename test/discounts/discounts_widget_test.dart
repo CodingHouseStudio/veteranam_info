@@ -38,15 +38,12 @@ void main() {
       mockReportRepository = MockIReportRepository();
       mockBuildRepository = MockAppInfoRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
 
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
@@ -328,9 +325,9 @@ void main() {
         });
         testWidgets('Report Dialog Incorect Send(field null and user)',
             (tester) async {
-          when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-            (realInvocation) => false,
-          );
+          // when(mockUserRepository.isAnonymously).thenAnswer(
+          //   (realInvocation) => false,
+          // );
 
           await discountsPumpAppHelper(
             tester: tester,

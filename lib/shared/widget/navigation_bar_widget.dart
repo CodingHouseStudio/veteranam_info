@@ -342,6 +342,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
 
   Widget get getImageWidget => Config.isBusiness
       ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.company.image != current.company.image,
           builder: (context, state) {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
@@ -350,10 +352,16 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             );
           },
         )
-      : UserPhotoWidget(
-          key: KWidgetkeys.widget.nawbar.loginIcon,
-          onPressed: () => context.goNamed(profilePath),
-          imageUrl: context.read<AuthenticationBloc>().state.user.photo,
+      : BlocBuilder<UserWatcherBloc, UserWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.user.photo != current.user.photo,
+          builder: (context, state) {
+            return UserPhotoWidget(
+              key: KWidgetkeys.widget.nawbar.loginIcon,
+              onPressed: () => context.goNamed(profilePath),
+              imageUrl: context.read<UserWatcherBloc>().state.user.photo,
+            );
+          },
         );
 
   Widget pageName({

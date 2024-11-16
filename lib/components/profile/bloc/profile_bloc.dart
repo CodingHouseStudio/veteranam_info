@@ -12,9 +12,9 @@ part 'profile_state.dart';
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
-    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
     required IDataPickerRepository dataPickerRepository,
-  })  : _authenticationRepository = authenticationRepository,
+  })  : _userRepository = userRepository,
         _dataPickerRepository = dataPickerRepository,
         super(
           const ProfileState(
@@ -34,14 +34,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<_Save>(_onSave);
   }
 
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
   final IDataPickerRepository _dataPickerRepository;
 
   Future<void> _onStarted(
     _Started event,
     Emitter<ProfileState> emit,
   ) async {
-    final user = _authenticationRepository.currentUser;
+    final user = _userRepository.currentUser;
     final nameFieldModel = NameFieldModel.dirty(
       user.firstName ?? '',
     );
@@ -134,7 +134,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(state.copyWith(formState: ProfileEnum.sendInProgress));
       final name = '${state.name.value} ${state.surname.value}';
 
-      if (name == _authenticationRepository.currentUser.name &&
+      if (name == _userRepository.currentUser.name &&
           // state.nickname.value ==
           //     _authenticationRepository.currentUserSetting.nickname &&
           state.image.value == null) {
@@ -145,12 +145,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         );
         return;
       }
-      final result = await _authenticationRepository.updateUserData(
-        user: _authenticationRepository.currentUser.copyWith(
+      final result = await _userRepository.updateUserData(
+        user: _userRepository.currentUser.copyWith(
           name: name,
         ),
         nickname: state.nickname.isPure
-            ? _authenticationRepository.currentUserSetting.nickname
+            ? _userRepository.currentUserSetting.nickname
             : state.nickname.value,
         image: state.image.value,
       );

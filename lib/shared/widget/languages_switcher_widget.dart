@@ -14,13 +14,11 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      builder: (context, state) => IconButton(
+    return BlocBuilder<LanguageCubit, Language>(
+      builder: (context, language) => IconButton(
         key: KWidgetkeys.widget.languageSwitcher.widget,
         style: KButtonStyles.withoutStyle,
-        onPressed: () => context.read<AuthenticationBloc>().add(
-              const AppLanguageChanged(),
-            ),
+        onPressed: () => context.read<LanguageCubit>().languageChanged(),
         icon: DecoratedBox(
           decoration: decoration ?? KWidgetTheme.boxDecorationWhiteMain,
           child: Row(
@@ -30,8 +28,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
               Language.values.length,
               (index) => _buildLanguageOption(
                 languageName: Language.values.elementAt(index).text,
-                isSelected: Language.values.elementAt(index) ==
-                    state.userSetting.locale,
+                isSelected: Language.values.elementAt(index) == language,
               ),
             ),
           ),

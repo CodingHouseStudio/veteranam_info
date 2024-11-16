@@ -11,13 +11,13 @@ import 'package:veteranam/shared/shared_dart.dart';
 class FirebaseAnalyticsService {
   FirebaseAnalyticsService(
     this._firebaseAnalytics,
-    this._authenticationRepository,
+    this._userRepository,
   ) {
     _initUserId();
   }
 
   final FirebaseAnalytics _firebaseAnalytics;
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
   bool _userConsentGranted = false;
 
   Future<void> _initUserId() async {
@@ -45,14 +45,14 @@ class FirebaseAnalyticsService {
           try {
             unawaited(
               _firebaseAnalytics.setUserId(
-                id: _authenticationRepository.currentUser.id,
+                id: _userRepository.currentUser.id,
                 callOptions: AnalyticsCallOptions(global: true),
               ),
             );
             unawaited(
               _firebaseAnalytics.setUserProperty(
                 name: 'Language',
-                value: _authenticationRepository.currentUserSetting.locale.text,
+                value: _userRepository.currentUserSetting.locale.text,
               ),
             );
           } catch (e) {

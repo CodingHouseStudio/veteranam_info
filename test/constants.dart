@@ -68,6 +68,7 @@ abstract class KGroupText {
   static const failureNetwork = 'Failure Network';
   static const stream = 'Stream';
   static const smallList = 'Small list';
+  static const authenticated = 'Authentication Status is Authenticated';
 }
 
 abstract class KTestText {

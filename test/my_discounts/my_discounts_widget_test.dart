@@ -19,17 +19,17 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.myDiscounts} ', () {
     late IDiscountRepository mockDiscountRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late ICompanyRepository mockCompanyRepository;
     late StreamController<CompanyModel> companyStream;
     setUp(() {
       Config.roleValue = Config.business;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       companyStream = StreamController();
 
-      when(mockAuthenticationRepository.currentUserSetting)
+      when(mockUserRepository.currentUserSetting)
           .thenAnswer((invocation) => KTestText.userSetting);
       for (var i = 0; i < 3; i++) {
         when(
@@ -61,7 +61,7 @@ void main() {
           );
           companyStream.add(KTestText.fullCompanyModel);
 
-          when(mockAuthenticationRepository.currentUser)
+          when(mockUserRepository.currentUser)
               .thenAnswer((invocation) => KTestText.userWithoutPhoto);
           when(
             mockDiscountRepository
@@ -75,7 +75,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
 
@@ -92,7 +92,7 @@ void main() {
           );
           companyStream.add(KTestText.fullCompanyModel);
 
-          when(mockAuthenticationRepository.currentUser)
+          when(mockUserRepository.currentUser)
               .thenAnswer((invocation) => KTestText.userWithoutPhoto);
           when(
             mockDiscountRepository
@@ -107,7 +107,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
 
@@ -123,7 +123,7 @@ void main() {
           (_) => KTestText.pureCompanyModel,
         );
         companyStream.add(KTestText.pureCompanyModel);
-        when(mockAuthenticationRepository.currentUser)
+        when(mockUserRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userAnonymous);
         when(
           mockDiscountRepository.getDiscountsByCompanyId(
@@ -144,7 +144,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
         await myDiscountsEmptyProfilePageHelper(tester);
@@ -157,7 +157,7 @@ void main() {
           await myDiscountsPumpAppHelper(
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -167,13 +167,28 @@ void main() {
           testWidgets('${KRoute.profile.name} ', (tester) async {
             await myDiscountsPumpAppHelper(
               mockDiscountRepository: mockDiscountRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockCompanyRepository: mockCompanyRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
 
             await profileButtonDiscountsNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+
+          testWidgets('${KRoute.company.name} ', (tester) async {
+            await myDiscountsPumpAppHelper(
+              mockDiscountRepository: mockDiscountRepository,
+              mockUserRepository: mockUserRepository,
+              mockCompanyRepository: mockCompanyRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await nawbarBusinessProfileNavigationHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -190,7 +205,7 @@ void main() {
           (_) => KTestText.fullCompanyModel,
         );
         companyStream.add(KTestText.fullCompanyModel);
-        when(mockAuthenticationRepository.currentUser)
+        when(mockUserRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
 
         when(
@@ -212,7 +227,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
 
@@ -226,7 +241,7 @@ void main() {
           await myDiscountsPumpAppHelper(
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -238,7 +253,7 @@ void main() {
             testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -262,7 +277,7 @@ void main() {
           (_) => KTestText.fullCompanyModel,
         );
         companyStream.add(KTestText.fullCompanyModel);
-        when(mockAuthenticationRepository.currentUser)
+        when(mockUserRepository.currentUser)
             .thenAnswer((invocation) => KTestText.userWithoutPhoto);
         when(
           mockDiscountRepository
@@ -275,7 +290,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
 
@@ -286,7 +301,7 @@ void main() {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         );
 
@@ -299,7 +314,7 @@ void main() {
           await myDiscountsPumpAppHelper(
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -311,7 +326,7 @@ void main() {
           (tester) async => myDiscountsPumpAppHelper(
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
           ),
           // lastCard: KWidgetkeys.screen.discounts.cardLast,
@@ -322,7 +337,7 @@ void main() {
             testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -340,7 +355,7 @@ void main() {
             testWidgets('Edit discount ', (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -370,7 +385,7 @@ void main() {
                 (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -389,7 +404,7 @@ void main() {
                 (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -405,7 +420,7 @@ void main() {
                 (tester) async {
               await myDiscountsPumpAppHelper(
                 mockDiscountRepository: mockDiscountRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
+                mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,

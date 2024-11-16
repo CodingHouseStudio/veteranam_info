@@ -17,11 +17,11 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.passwordReset} ', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
-        mockAuthenticationRepository.resetPasswordUseCode(
+        mockAppAuthenticationRepository.resetPasswordUseCode(
           code: KTestText.code,
           newPassword: KTestText.passwordCorrect,
         ),
@@ -32,7 +32,7 @@ void main() {
     group('Code is NULL', () {
       setUp(() {
         when(
-          mockAuthenticationRepository.checkVerificationCode(
+          mockAppAuthenticationRepository.checkVerificationCode(
             null,
           ),
         ).thenAnswer(
@@ -43,7 +43,7 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await passwordResetPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           code: null,
         );
 
@@ -57,7 +57,7 @@ void main() {
           await passwordResetPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             code: null,
           );
 
@@ -68,7 +68,7 @@ void main() {
             await passwordResetPumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               code: null,
             );
 
@@ -83,7 +83,7 @@ void main() {
     group('Code correct', () {
       setUp(() {
         when(
-          mockAuthenticationRepository.checkVerificationCode(
+          mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
         ).thenAnswer(
@@ -93,7 +93,7 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await passwordResetPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await passwordResetInitialHelper(tester);
@@ -107,7 +107,7 @@ void main() {
           await passwordResetPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await passwordResetInitialHelper(tester);
@@ -116,7 +116,7 @@ void main() {
         testWidgets('Enter wrong password', (tester) async {
           await passwordResetPumpAppHelper(
             tester: tester,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 
@@ -126,7 +126,7 @@ void main() {
         testWidgets('Enter correct password', (tester) async {
           await passwordResetPumpAppHelper(
             tester: tester,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 
@@ -139,7 +139,7 @@ void main() {
         group('${KGroupText.failureSend} ', () {
           setUp(() {
             when(
-              mockAuthenticationRepository.resetPasswordUseCode(
+              mockAppAuthenticationRepository.resetPasswordUseCode(
                 code: KTestText.code,
                 newPassword: KTestText.passwordCorrect,
               ),
@@ -151,7 +151,7 @@ void main() {
           testWidgets('Enter correct password', (tester) async {
             await passwordResetPumpAppHelper(
               tester: tester,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockGoRouter: mockGoRouter,
             );
 

@@ -96,7 +96,7 @@ class CompanyBodyWidget extends StatelessWidget {
         isDesk: isDesk,
         initialCompanyName:
             context.read<CompanyWatcherBloc>().state.company.companyName,
-        initialEmail: context.read<AuthenticationBloc>().state.user.email,
+        initialEmail: context.read<UserWatcherBloc>().state.user.email,
         initialCode: context.read<CompanyWatcherBloc>().state.company.code,
         initialLink: context.read<CompanyWatcherBloc>().state.company.link,
         initialPublicName:

@@ -18,7 +18,7 @@ void main() {
   group('${KScreenBlocName.investors} ', () {
     late IInvestorsRepository mockInvestorsRepository;
     late IReportRepository mockReportRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IUrlRepository mockUrlRepository;
     setUp(() {
@@ -28,19 +28,19 @@ void main() {
 
       mockInvestorsRepository = MockIInvestorsRepository();
       mockReportRepository = MockIReportRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
@@ -87,7 +87,7 @@ void main() {
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         mockInvestorsRepository: mockInvestorsRepository,
         mockReportRepository: mockReportRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         mockUrlRepository: mockUrlRepository,
         tester: tester,
       );
@@ -117,7 +117,7 @@ void main() {
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockUrlRepository: mockUrlRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
