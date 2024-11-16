@@ -37,11 +37,9 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        investorsRepository = InvestorsRepository();
+
+        investorsRepository =
+            InvestorsRepository(firestoreService: mockFirestoreService);
       });
       test('funds', () async {
         expect(
@@ -68,11 +66,9 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        investorsRepository = InvestorsRepository();
+
+        investorsRepository =
+            InvestorsRepository(firestoreService: mockFirestoreService);
       });
       test('Get funds', () async {
         expect(
@@ -95,11 +91,9 @@ void main() {
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        investorsRepository = InvestorsRepository();
+
+        investorsRepository =
+            InvestorsRepository(firestoreService: mockFirestoreService);
       });
       test('Get funds', () async {
         expect(

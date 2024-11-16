@@ -7,9 +7,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 /// COMMENT: Class to get, update, delete or set values in storage
 @Singleton(order: -1)
 class StorageService {
-  StorageService(
-    this._storage,
-  );
+  StorageService({
+    required FirebaseStorage storage,
+  }) : _storage = storage;
   final FirebaseStorage _storage;
 
   @visibleForTesting
@@ -49,28 +49,4 @@ class StorageService {
     // in the repositories
     await _storage.ref(url).delete();
   }
-
-  // Future<ResumeModel?> saveRespond({
-  //   required ImagePickerItem resumeItem,
-  //   required String respondId,
-  // }) async {
-  //   if (resumeItem.bytes.isEmpty) return null;
-  //   final value = storage
-  //       .ref(
-  //         StoragePath.getResumePath(
-  //           collection: FirebaseCollectionName.respond,
-  //           modelId: respondId,
-  //           // resumeName: resumeItem.name,
-  //           fileExtension: resumeItem.extension,
-  //         ),
-  //       )
-  //       .putData(resumeItem.bytes);
-
-  //   final snapshot = value.snapshot;
-  //   final downloadUrl = await snapshot.ref.getDownloadURL();
-
-  //   if (downloadUrl.isEmpty) return null;
-
-  //   return resumeItem.resume(downloadUrl);
-  // }
 }

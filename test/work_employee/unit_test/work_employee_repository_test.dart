@@ -53,17 +53,10 @@ void main() {
           (realInvocation) async => KTestText.downloadURL,
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
-
-        mockWorkRepository = WorkRepository();
+        mockWorkRepository = WorkRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Work', () async {
         expect(
@@ -99,16 +92,11 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failure),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
-        mockWorkRepository = WorkRepository();
+        mockWorkRepository = WorkRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('information', () async {
         expect(
@@ -138,16 +126,11 @@ void main() {
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
-        mockWorkRepository = WorkRepository();
+        mockWorkRepository = WorkRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('send respond', () async {
         expect(

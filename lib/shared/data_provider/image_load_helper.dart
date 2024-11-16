@@ -10,10 +10,10 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(order: -1)
 class ArtifactDownloadHelper {
-  ArtifactDownloadHelper(this._dio);
+  ArtifactDownloadHelper({required Dio dio}) : _dio = dio;
   final Dio _dio;
 
-  final String _imagesDir = 'assets/images'; // Use assets directory for mobile
+  static const _imagesDir = 'assets/images'; // Use assets directory for mobile
 
   static final Map<String, Uint8List> _imageMemmoryDir = {};
   final _options = Options(

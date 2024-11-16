@@ -26,3 +26,4 @@ lib/shared/widget/row_sliver_widget.dart
 lib/shared/repositories/app_info_repository.dart
 lib/shared/repositories/failure_repository.dart
 lib/shared/widget/popup_menu_item_widget.dart
+lib\shared\repositories\data_picker_repository.dart

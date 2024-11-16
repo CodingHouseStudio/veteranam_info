@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IWorkRepository, env: [Config.development])
 class WorkRepository implements IWorkRepository {
-  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final StorageService _storageService = GetIt.I.get<StorageService>();
+  WorkRepository({
+    required FirestoreService firestoreService,
+    required StorageService storageService,
+  })  : _firestoreService = firestoreService,
+        _storageService = storageService;
+  final FirestoreService _firestoreService;
+  final StorageService _storageService;
   @override
   Stream<List<WorkModel>> getWorks() => _firestoreService.getWorks();
 

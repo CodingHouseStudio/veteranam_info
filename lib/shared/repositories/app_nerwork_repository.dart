@@ -13,10 +13,11 @@ import 'package:veteranam/shared/shared_dart.dart';
 class AppNetworkRepository implements IAppNetworkRepository {
   /// Constructor for [AppNetworkRepository].
   /// Takes [Connectivity] and [CacheClient] as dependencies.
-  AppNetworkRepository(
-    this._connectivity,
-    this._cache,
-  ) {
+  AppNetworkRepository({
+    required Connectivity connectivity,
+    required CacheClient cache,
+  })  : _connectivity = connectivity,
+        _cache = cache {
     _updateAuthStatusBasedOnCache();
   }
 

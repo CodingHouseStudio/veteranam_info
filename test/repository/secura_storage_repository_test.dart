@@ -31,8 +31,9 @@ void main() {
           when(mockFlutterSecureStorage.deleteAll()).thenAnswer(
             (_) async => {},
           );
-          storage = SecureStorageRepository()
-            ..secureStorage = mockFlutterSecureStorage;
+
+          storage =
+              SecureStorageRepository(secureStorage: mockFlutterSecureStorage);
         });
         test('read one', () async {
           expect(

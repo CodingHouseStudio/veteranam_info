@@ -69,12 +69,8 @@ void main() {
           (realInvocation) async {},
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
       test('Discount get', () async {
         expect(
@@ -243,12 +239,9 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
       test('Discount get', () async {
         expect(
@@ -398,12 +391,9 @@ void main() {
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
       test('User Can Send Link', () async {
         expect(
