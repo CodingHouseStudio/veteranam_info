@@ -1,6 +1,5 @@
 import 'dart:typed_data' show Uint8List;
 
-import 'package:file_picker/file_picker.dart' show FilePickerResult;
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:veteranam/shared/models/models.dart';
 
@@ -57,25 +56,6 @@ class FilePickerItem {
           : null,
       name: image.name,
       ref: image.path,
-    );
-  }
-
-  static Future<FilePickerItem?> getFromFile(
-    FilePickerResult? fileResult,
-  ) async {
-    if (fileResult == null) return null;
-    final file = fileResult.files.first;
-    if (file.bytes == null) return null;
-    final hasExtension = file.name.contains('.');
-    return FilePickerItem(
-      bytes: file.bytes!,
-      extension: hasExtension
-          ? file.name.substring(
-              file.name.lastIndexOf('.'),
-            )
-          : null,
-      name: file.name,
-      ref: file.path,
     );
   }
 

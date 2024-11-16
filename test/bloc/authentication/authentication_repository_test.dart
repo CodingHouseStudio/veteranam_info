@@ -125,8 +125,9 @@ void main() {
           (_) async => const Right(true),
         );
 
-        authenticationRepository =
-            AuthenticationRepository(mockAppAuthenticationRepository);
+        authenticationRepository = AuthenticationRepository(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+        );
       });
       test('Log in', () async {
         expect(
@@ -307,8 +308,9 @@ void main() {
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
-        authenticationRepository =
-            AuthenticationRepository(mockAppAuthenticationRepository);
+        authenticationRepository = AuthenticationRepository(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+        );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
             email: KTestText.userEmail,

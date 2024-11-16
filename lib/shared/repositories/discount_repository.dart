@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -11,7 +10,9 @@ import 'package:veteranam/shared/shared_dart.dart';
   // signalsReady: true,
 )
 class DiscountRepository implements IDiscountRepository {
-  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  DiscountRepository({required FirestoreService firestoreService})
+      : _firestoreService = firestoreService;
+  final FirestoreService _firestoreService;
 
   @override
   Stream<List<DiscountModel>> getDiscountItems(

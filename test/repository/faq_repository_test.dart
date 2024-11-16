@@ -34,11 +34,8 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+
+        faqRepository = FaqRepository(firestoreService: mockFirestoreService);
       });
       test('questions', () async {
         expect(
@@ -60,11 +57,8 @@ void main() {
       setUp(() {
         when(mockFirestoreService.getQuestions())
             .thenThrow(Exception(KGroupText.failureGet));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+
+        faqRepository = FaqRepository(firestoreService: mockFirestoreService);
       });
       test('Get questions', () async {
         expect(
@@ -82,11 +76,8 @@ void main() {
       setUp(() {
         when(mockFirestoreService.getQuestions())
             .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+
+        faqRepository = FaqRepository(firestoreService: mockFirestoreService);
       });
       test('Get questions', () async {
         expect(

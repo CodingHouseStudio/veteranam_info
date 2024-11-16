@@ -38,7 +38,8 @@ void main() {
         (_) => [ConnectivityResult.none],
       );
 
-      networkRepository = NetworkRepository(mockAppnetworkRepository);
+      networkRepository =
+          NetworkRepository(appNetworkRepository: mockAppnetworkRepository);
     });
 
     group('${KGroupText.stream} ', () {

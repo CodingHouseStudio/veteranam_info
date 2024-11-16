@@ -28,6 +28,7 @@ void main() {
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     late FacebookAuth mockFacebookAuth;
+    late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -39,6 +40,7 @@ void main() {
       mockFacebookAuth = MockFacebookAuth();
       mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
+      mockFacebookAuthProvider = MockFacebookAuthProvider();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -85,27 +87,19 @@ void main() {
         (_) async => const Right(null),
       );
 
-      if (GetIt.I.isRegistered<FirestoreService>()) {
-        GetIt.I.unregister<FirestoreService>();
-      }
-      GetIt.I.registerSingleton(mockFirestoreService);
-
-      if (GetIt.I.isRegistered<StorageService>()) {
-        GetIt.I.unregister<StorageService>();
-      }
-      GetIt.I.registerSingleton(mockStorageService);
-
-      if (GetIt.I.isRegistered<IDeviceRepository>()) {
-        GetIt.I.unregister<IDeviceRepository>();
-      }
-      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
-        mockSecureStorageRepository,
-        mockFirebaseAuth,
-        mockGoogleSignIn,
-        mockCache,
-        mockFacebookAuth,
-      )..googleAuthProvider = mockGoogleAuthProvider;
+        cache: mockCache,
+        deviceRepository: mockDeviceRepository,
+        facebookAuthProvider: mockFacebookAuthProvider,
+        facebookSignIn: mockFacebookAuth,
+        firebaseAuth: mockFirebaseAuth,
+        firestoreService: mockFirestoreService,
+        googleAuthProvider: mockGoogleAuthProvider,
+        googleSignIn: mockGoogleSignIn,
+        secureStorageRepository: mockSecureStorageRepository,
+        storageService: mockStorageService,
+      );
+      AppAuthenticationRepository.authCredential = KTestText.authCredential;
     });
     test('User Setting', () async {
       await expectLater(

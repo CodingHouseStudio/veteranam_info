@@ -29,8 +29,8 @@ void main() {
       );
 
       appNetworkRepository = AppNetworkRepository(
-        mockConnectivity,
-        mockCache,
+        cache: mockCache,
+        connectivity: mockConnectivity,
       );
     });
 

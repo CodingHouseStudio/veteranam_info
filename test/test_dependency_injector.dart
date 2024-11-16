@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -37,7 +38,10 @@ void configureDependenciesTest() {
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
+  GetIt.I.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
+  GetIt.I.registerSingleton<GoogleAuthProvider>(MockGoogleAuthProvider());
+  GetIt.I.registerSingleton<FacebookAuthProvider>(MockFacebookAuthProvider());
   GetIt.I.registerSingleton<FacebookAuth>(MockFacebookAuth());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
   GetIt.I.registerSingleton<FirebaseAnalytics>(MockFirebaseAnalytics());
@@ -47,16 +51,19 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<Connectivity>(Connectivity());
   GetIt.I.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
   GetIt.I.registerSingleton<FirestoreService>(
-    FirestoreService(GetIt.I.get<FirebaseFirestore>(), CacheClient()),
+    FirestoreService(
+      firebaseFirestore: GetIt.I.get<FirebaseFirestore>(),
+      cache: CacheClient(),
+    ),
   );
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(
-      GetIt.I.get<FirebaseRemoteConfig>(),
+      firebaseRemoteConfig: GetIt.I.get<FirebaseRemoteConfig>(),
     ),
   );
   GetIt.I.registerSingleton<ArtifactDownloadHelper>(
     ArtifactDownloadHelper(
-      GetIt.I.get<Dio>(),
+      dio: GetIt.I.get<Dio>(),
     ),
   );
 
@@ -64,64 +71,96 @@ void configureDependenciesTest() {
   GetIt.I.registerLazySingleton<FailureRepository>(
     FailureRepository.new, //GetIt.I.get<FirebaseCrashlytics>()
   );
-  GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
-  GetIt.I.registerSingleton<AppInfoRepository>(AppInfoRepository());
-  GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
-  GetIt.I.registerSingleton<IDeviceRepository>(
-    DeviceRepository(
-      GetIt.I.get<FirebaseMessaging>(),
-      GetIt.I.get<DeviceInfoPlugin>(),
-      GetIt.I.get<AppInfoRepository>(),
+  GetIt.I.registerSingleton<IStorage>(
+    SecureStorageRepository(
+      secureStorage: GetIt.I.get<FlutterSecureStorage>(),
     ),
   );
-  GetIt.I.registerSingleton<IFaqRepository>(FaqRepository());
+  GetIt.I.registerSingleton<AppInfoRepository>(AppInfoRepository());
+  GetIt.I.registerSingleton<IFeedbackRepository>(
+    FeedbackRepository(
+      firestoreService: GetIt.I.get<FirestoreService>(),
+      storageService: GetIt.I.get<StorageService>(),
+    ),
+  );
+  GetIt.I.registerSingleton<IDeviceRepository>(
+    DeviceRepository(
+      firebaseMessaging: GetIt.I.get<FirebaseMessaging>(),
+      deviceInfoPlugin: GetIt.I.get<DeviceInfoPlugin>(),
+      buildRepository: GetIt.I.get<AppInfoRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<IFaqRepository>(
+    FaqRepository(
+      firestoreService: GetIt.I.get<FirestoreService>(),
+    ),
+  );
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
-      GetIt.I.get<IStorage>(),
-      GetIt.I.get<FirebaseAuth>(),
-      GetIt.I.get<GoogleSignIn>(),
-      CacheClient(),
-      GetIt.I.get<FacebookAuth>(),
+      secureStorageRepository: GetIt.I.get<IStorage>(),
+      firebaseAuth: GetIt.I.get<FirebaseAuth>(),
+      googleSignIn: GetIt.I.get<GoogleSignIn>(),
+      cache: CacheClient(),
+      facebookSignIn: GetIt.I.get<FacebookAuth>(),
+      deviceRepository: GetIt.I.get<IDeviceRepository>(),
+      facebookAuthProvider: GetIt.I.get<FacebookAuthProvider>(),
+      firestoreService: GetIt.I.get<FirestoreService>(),
+      googleAuthProvider: GetIt.I.get<GoogleAuthProvider>(),
+      storageService: GetIt.I.get<StorageService>(),
     ),
   );
   GetIt.I.registerSingleton<AuthenticationRepository>(
     AuthenticationRepository(
-      GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
   GetIt.I.registerSingleton<UserRepository>(
     UserRepository(
-      GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
   GetIt.I.registerSingleton<FirebaseAnalyticsService>(
     FirebaseAnalyticsService(
-      GetIt.I.get<FirebaseAnalytics>(),
-      GetIt.I.get<UserRepository>(),
+      firebaseAnalytics: GetIt.I.get<FirebaseAnalytics>(),
+      userRepository: GetIt.I.get<UserRepository>(),
     ),
   );
   GetIt.I.registerSingleton<IAppNetworkRepository>(
     AppNetworkRepository(
-      GetIt.I.get<Connectivity>(),
-      CacheClient(),
+      connectivity: GetIt.I.get<Connectivity>(),
+      cache: CacheClient(),
     ),
   );
-  GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
-  GetIt.I.registerSingleton<IReportRepository>(ReportRepository());
+  GetIt.I.registerSingleton<IDiscountRepository>(
+    DiscountRepository(
+      firestoreService: GetIt.I.get<FirestoreService>(),
+    ),
+  );
+  GetIt.I.registerSingleton<IReportRepository>(
+    ReportRepository(
+      firestoreService: GetIt.I.get<FirestoreService>(),
+    ),
+  );
   GetIt.I.registerSingleton<IUrlRepository>(UrlRepository());
   GetIt.I.registerSingleton<ICompanyRepository>(
     CompanyRepository(
-      GetIt.I.get<IAppAuthenticationRepository>(),
-      CacheClient(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      cache: CacheClient(),
+      firestoreService: GetIt.I.get<FirestoreService>(),
+      storageService: GetIt.I.get<StorageService>(),
     ),
   );
   GetIt.I.registerSingleton<NetworkRepository>(
     NetworkRepository(
-      GetIt.I.get<IAppNetworkRepository>(),
+      appNetworkRepository: GetIt.I.get<IAppNetworkRepository>(),
     ),
   );
   // GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
-  GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
+  GetIt.I.registerSingleton<IInvestorsRepository>(
+    InvestorsRepository(
+      firestoreService: GetIt.I.get<FirestoreService>(),
+    ),
+  );
   // GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
   // GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
@@ -247,7 +286,7 @@ void configureFailureDependenciesTest() {
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<ArtifactDownloadHelper>(
     ArtifactDownloadHelper(
-      GetIt.I.get<Dio>(),
+      dio: GetIt.I.get<Dio>(),
     ),
   );
 

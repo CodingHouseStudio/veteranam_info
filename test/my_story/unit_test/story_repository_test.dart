@@ -30,16 +30,11 @@ void main() {
             .thenAnswer(
           (_) async => KTestText.storyModelItems,
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Get Story by id', () async {
         expect(
@@ -57,16 +52,11 @@ void main() {
             plugin: KGroupText.failureGet,
           ),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Get Story by id', () async {
         expect(

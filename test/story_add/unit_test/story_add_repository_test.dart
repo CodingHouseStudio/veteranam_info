@@ -51,16 +51,11 @@ void main() {
         ).thenAnswer(
           (realInvocation) async => KTestText.downloadURL,
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Add Story(has image)', () async {
         expect(
@@ -110,16 +105,11 @@ void main() {
             collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        if (GetIt.I.isRegistered<StorageService>()) {
-          GetIt.I.unregister<StorageService>();
-        }
-        GetIt.I.registerSingleton(mockStorageService);
 
-        mockStoryRepository = StoryRepository();
+        mockStoryRepository = StoryRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('Add Story(has image)', () async {
         expect(
