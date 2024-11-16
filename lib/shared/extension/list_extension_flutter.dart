@@ -61,9 +61,9 @@ extension ListStringExtensions on List<String> {
     // required BuildContext context,
   }) {
     if (showFullText) {
-      return first;
+      return toString().replaceAll('[', '').replaceAll(']', '');
     } else {
-      return toString();
+      return first;
     }
   }
 }
