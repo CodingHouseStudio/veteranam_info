@@ -9,10 +9,11 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class FirebaseAnalyticsService {
-  FirebaseAnalyticsService(
-    this._firebaseAnalytics,
-    this._userRepository,
-  ) {
+  FirebaseAnalyticsService({
+    required FirebaseAnalytics firebaseAnalytics,
+    required UserRepository userRepository,
+  })  : _firebaseAnalytics = firebaseAnalytics,
+        _userRepository = userRepository {
     _initUserId();
   }
 

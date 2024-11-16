@@ -40,7 +40,10 @@ void main() {
       ).thenAnswer(
         (_) {},
       );
-      mockFirestoreService = FirestoreService(mockFirebaseFirestore, mockCache);
+      mockFirestoreService = FirestoreService(
+        cache: mockCache,
+        firebaseFirestore: mockFirebaseFirestore,
+      );
       mobOfflineModeCubit = MobOfflineModeCubit(
         firestoreService: mockFirestoreService,
       );

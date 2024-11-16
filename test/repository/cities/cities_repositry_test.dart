@@ -29,11 +29,9 @@ void main() {
           (_) async => KTestText.cityModelItems
               .sublist(1, KTestText.cityModelItems.length),
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        citiesRepostory = CitiesRepository();
+
+        citiesRepostory =
+            CitiesRepository(firestoreService: mockFirestoreService);
       });
       test('questions', () async {
         expect(
@@ -51,11 +49,9 @@ void main() {
       setUp(() {
         when(mockFirestoreService.getCities())
             .thenThrow(Exception(KGroupText.failureGet));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        citiesRepostory = CitiesRepository();
+
+        citiesRepostory =
+            CitiesRepository(firestoreService: mockFirestoreService);
       });
       test('Get questions', () async {
         expect(
@@ -68,11 +64,9 @@ void main() {
       setUp(() {
         when(mockFirestoreService.getCities())
             .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        citiesRepostory = CitiesRepository();
+
+        citiesRepostory =
+            CitiesRepository(firestoreService: mockFirestoreService);
       });
       test('Get questions', () async {
         expect(

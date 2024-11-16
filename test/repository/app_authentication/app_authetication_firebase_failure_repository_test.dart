@@ -196,29 +196,19 @@ void main() {
         ),
       );
 
-      if (GetIt.I.isRegistered<FirestoreService>()) {
-        GetIt.I.unregister<FirestoreService>();
-      }
-      GetIt.I.registerSingleton(mockFirestoreService);
-
-      if (GetIt.I.isRegistered<StorageService>()) {
-        GetIt.I.unregister<StorageService>();
-      }
-      GetIt.I.registerSingleton(mockStorageService);
-
-      if (GetIt.I.isRegistered<IDeviceRepository>()) {
-        GetIt.I.unregister<IDeviceRepository>();
-      }
-      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
-        mockSecureStorageRepository,
-        mockFirebaseAuth,
-        mockGoogleSignIn,
-        mockCache,
-        mockFacebookAuth,
-      )
-        ..googleAuthProvider = mockGoogleAuthProvider
-        ..facebookAuthProvider = mockFacebookAuthProvider;
+        cache: mockCache,
+        deviceRepository: mockDeviceRepository,
+        facebookAuthProvider: mockFacebookAuthProvider,
+        facebookSignIn: mockFacebookAuth,
+        firebaseAuth: mockFirebaseAuth,
+        firestoreService: mockFirestoreService,
+        googleAuthProvider: mockGoogleAuthProvider,
+        googleSignIn: mockGoogleSignIn,
+        secureStorageRepository: mockSecureStorageRepository,
+        storageService: mockStorageService,
+      );
+      AppAuthenticationRepository.authCredential = KTestText.authCredential;
     });
     test('Sign up with google', () async {
       expect(

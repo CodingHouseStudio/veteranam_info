@@ -22,14 +22,14 @@ void main() {
     late List<QueryDocumentSnapshot<Map<String, dynamic>>>
         mockQueryDocumentSnapshot;
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
-    late CacheClient mockCacheClient;
+    late CacheClient mockCache;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
       mockDocumentReference = MockDocumentReference();
       mockQuerySnapshot = MockQuerySnapshot();
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
-      mockCacheClient = MockCacheClient();
+      mockCache = MockCacheClient();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.questions),
@@ -66,8 +66,10 @@ void main() {
             KTestText.questionModelItems.map((e) => e.toJson()).toList().first,
       );
 
-      firestoreService =
-          FirestoreService(mockFirebaseFirestore, mockCacheClient);
+      firestoreService = FirestoreService(
+        cache: mockCache,
+        firebaseFirestore: mockFirebaseFirestore,
+      );
     });
     test('add question', () async {
       await firestoreService.addQuestion(KTestText.questionModelItems.first);

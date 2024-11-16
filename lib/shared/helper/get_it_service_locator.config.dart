@@ -12,13 +12,13 @@ import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:device_info_plus/device_info_plus.dart' as _i833;
 import 'package:dio/dio.dart' as _i361;
-import 'package:file_picker/file_picker.dart' as _i388;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i806;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:image_picker/image_picker.dart' as _i183;
@@ -118,6 +118,8 @@ import 'package:veteranam/shared/repositories/app_info_repository.dart'
     as _i1008;
 import 'package:veteranam/shared/repositories/app_nerwork_repository.dart'
     as _i336;
+import 'package:veteranam/shared/repositories/auth_provider_module.dart'
+    as _i1041;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
     as _i208;
 import 'package:veteranam/shared/repositories/cities_repository.dart' as _i751;
@@ -145,6 +147,8 @@ import 'package:veteranam/shared/repositories/mobile_rating_repository.dart'
 import 'package:veteranam/shared/repositories/network_module.dart' as _i385;
 import 'package:veteranam/shared/repositories/network_repository.dart' as _i997;
 import 'package:veteranam/shared/repositories/report_repository.dart' as _i205;
+import 'package:veteranam/shared/repositories/secure_storage_module.dart'
+    as _i689;
 import 'package:veteranam/shared/repositories/secure_storage_repository.dart'
     as _i949;
 import 'package:veteranam/shared/repositories/story_repository.dart' as _i801;
@@ -175,9 +179,11 @@ extension GetItInjectableX on _i174.GetIt {
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
+    final authProviderModule = _$AuthProviderModule();
     final dataPickerModule = _$DataPickerModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
+    final secureStorageModule = _$SecureStorageModule();
     final mobileRatingModule = _$MobileRatingModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
     gh.lazySingleton<_i960.FailureRepository>(
@@ -193,76 +199,168 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i833.DeviceInfoPlugin>(
         () => messagingModule.deviceInfoPlugin);
     gh.singleton<_i99.StorageService>(
-        () => _i99.StorageService(gh<_i457.FirebaseStorage>()));
-    gh.singleton<_i369.ArtifactDownloadHelper>(
-        () => _i369.ArtifactDownloadHelper(gh<_i361.Dio>()));
-    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService(
-          gh<_i974.FirebaseFirestore>(),
-          gh<_i1026.CacheClient>(),
-        ));
+        () => _i99.StorageService(storage: gh<_i457.FirebaseStorage>()));
     gh.singleton<_i1026.IDeviceRepository>(() => _i712.DeviceRepository(
-          gh<_i892.FirebaseMessaging>(),
-          gh<_i833.DeviceInfoPlugin>(),
-          gh<_i1026.AppInfoRepository>(),
+          firebaseMessaging: gh<_i892.FirebaseMessaging>(),
+          deviceInfoPlugin: gh<_i833.DeviceInfoPlugin>(),
+          buildRepository: gh<_i1026.AppInfoRepository>(),
+        ));
+    gh.singleton<_i369.ArtifactDownloadHelper>(
+        () => _i369.ArtifactDownloadHelper(dio: gh<_i361.Dio>()));
+    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService(
+          firebaseFirestore: gh<_i974.FirebaseFirestore>(),
+          cache: gh<_i1026.CacheClient>(),
         ));
     gh.singleton<_i398.FirebaseAnalytics>(
         () => analytucsModule.firebaseAnalytics);
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
+    gh.singleton<_i59.FacebookAuthProvider>(
+        () => authProviderModule.firebaseAuth);
+    gh.singleton<_i59.GoogleAuthProvider>(
+        () => authProviderModule.googleSignIn);
     gh.singleton<_i183.ImagePicker>(() => dataPickerModule.imagePicker);
-    gh.singleton<_i388.FilePicker>(() => dataPickerModule.filePicker);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i806.FacebookAuth>(() => firebaseModule.firebaseSignIn);
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
+    gh.singleton<_i558.FlutterSecureStorage>(
+        () => secureStorageModule.flutterSecureStorage);
+    gh.singleton<_i187.FirebaseRemoteConfigProvider>(() =>
+        _i187.FirebaseRemoteConfigProvider(
+            firebaseRemoteConfig: gh<_i627.FirebaseRemoteConfig>()));
     gh.singleton<_i1026.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
-          gh<_i895.Connectivity>(),
-          gh<_i1026.CacheClient>(),
+          connectivity: gh<_i895.Connectivity>(),
+          cache: gh<_i1026.CacheClient>(),
         ));
-    gh.singleton<_i1026.IInvestorsRepository>(
-        () => _i994.InvestorsRepository());
     gh.lazySingleton<_i1026.IUrlRepository>(() => _i929.UrlRepository());
-    gh.singleton<_i1026.IDataPickerRepository>(() => _i290.DataPickerRepository(
-          gh<_i183.ImagePicker>(),
-          gh<_i388.FilePicker>(),
-        ));
     gh.singleton<_i553.InAppReview>(
       () => mobileRatingModule.inAppReview,
       registerFor: {_mobile},
     );
-    gh.singleton<_i1026.IFeedbackRepository>(() => _i361.FeedbackRepository());
-    gh.singleton<_i1026.IStorage>(() => _i949.SecureStorageRepository());
-    gh.singleton<_i1026.IDiscountRepository>(() => _i452.DiscountRepository());
+    gh.factory<_i43.DiscountConfigCubit>(
+      () => _i43.DiscountConfigCubit(
+          firebaseRemoteConfigProvider:
+              gh<_i1026.FirebaseRemoteConfigProvider>()),
+      registerFor: {_user},
+    );
+    gh.factory<_i70.AppVersionCubit>(() => _i70.AppVersionCubit(
+          buildRepository: gh<_i1026.AppInfoRepository>(),
+          firebaseRemoteConfigProvider:
+              gh<_i1026.FirebaseRemoteConfigProvider>(),
+        ));
+    gh.singleton<_i1026.IStorage>(() => _i949.SecureStorageRepository(
+        secureStorage: gh<_i558.FlutterSecureStorage>()));
+    gh.factory<_i319.UrlCubit>(
+        () => _i319.UrlCubit(urlRepository: gh<_i1026.IUrlRepository>()));
+    gh.singleton<_i1026.IStoryRepository>(
+      () => _i801.StoryRepository(
+        firestoreService: gh<_i1026.FirestoreService>(),
+        storageService: gh<_i1026.StorageService>(),
+      ),
+      registerFor: {_development},
+    );
+    gh.factory<_i189.AdvancedFilterMobCubit>(
+      () => _i189.AdvancedFilterMobCubit(),
+      registerFor: {_user},
+    );
+    gh.singleton<_i1026.IDataPickerRepository>(
+        () => _i290.DataPickerRepository(imagePciker: gh<_i183.ImagePicker>()));
+    gh.singleton<_i1026.IInformationRepository>(
+      () => _i154.InformationRepository(
+          firestoreService: gh<_i1026.FirestoreService>()),
+      registerFor: {_development},
+    );
+    gh.singleton<_i192.MobileRatingRepository>(
+      () => _i192.MobileRatingRepository(inAppReview: gh<_i553.InAppReview>()),
+      registerFor: {_mobile},
+    );
+    gh.singleton<_i997.NetworkRepository>(() => _i997.NetworkRepository(
+        appNetworkRepository: gh<_i1026.IAppNetworkRepository>()));
+    gh.singleton<_i1026.IInvestorsRepository>(() => _i994.InvestorsRepository(
+        firestoreService: gh<_i1026.FirestoreService>()));
+    gh.factory<_i763.StoryWatcherBloc>(
+      () => _i763.StoryWatcherBloc(
+          storyRepository: gh<_i1026.IStoryRepository>()),
+      registerFor: {_development},
+    );
+    gh.factory<_i891.NetworkCubit>(() =>
+        _i891.NetworkCubit(networkRepository: gh<_i1026.NetworkRepository>()));
+    gh.singleton<_i1026.IFeedbackRepository>(() => _i361.FeedbackRepository(
+          firestoreService: gh<_i1026.FirestoreService>(),
+          storageService: gh<_i1026.StorageService>(),
+        ));
+    gh.factory<_i43.MobOfflineModeCubit>(
+      () => _i43.MobOfflineModeCubit(
+          firestoreService: gh<_i1026.FirestoreService>()),
+      registerFor: {_mobile},
+    );
+    gh.singleton<_i1026.IDiscountRepository>(() => _i452.DiscountRepository(
+        firestoreService: gh<_i1026.FirestoreService>()));
     gh.singleton<_i1026.IFaqRepository>(
-      () => _i1007.FaqRepository(),
+      () =>
+          _i1007.FaqRepository(firestoreService: gh<_i1026.FirestoreService>()),
       registerFor: {
         _user,
         _mobile,
       },
     );
+    gh.singleton<_i1026.ICitiesRepository>(() => _i751.CitiesRepository(
+        firestoreService: gh<_i1026.FirestoreService>()));
     gh.factory<_i334.DiscountCardWatcherBloc>(() =>
         _i334.DiscountCardWatcherBloc(
             discountRepository: gh<_i1026.IDiscountRepository>()));
-    gh.singleton<_i1026.ICitiesRepository>(() => _i751.CitiesRepository());
+    gh.factory<_i408.InformationWatcherBloc>(
+      () => _i408.InformationWatcherBloc(
+          informationRepository: gh<_i1026.IInformationRepository>()),
+      registerFor: {_development},
+    );
+    gh.factory<_i688.NewsCardWatcherBloc>(
+      () => _i688.NewsCardWatcherBloc(
+          informationRepository: gh<_i1026.IInformationRepository>()),
+      registerFor: {_development},
+    );
     gh.singleton<_i1026.IAppAuthenticationRepository>(
         () => _i99.AppAuthenticationRepository(
-              gh<_i1026.IStorage>(),
-              gh<_i59.FirebaseAuth>(),
-              gh<_i116.GoogleSignIn>(),
-              gh<_i1026.CacheClient>(),
-              gh<_i806.FacebookAuth>(),
+              secureStorageRepository: gh<_i1026.IStorage>(),
+              firebaseAuth: gh<_i59.FirebaseAuth>(),
+              googleSignIn: gh<_i116.GoogleSignIn>(),
+              cache: gh<_i1026.CacheClient>(),
+              facebookSignIn: gh<_i806.FacebookAuth>(),
+              firestoreService: gh<_i1026.FirestoreService>(),
+              deviceRepository: gh<_i1026.IDeviceRepository>(),
+              storageService: gh<_i1026.StorageService>(),
+              googleAuthProvider: gh<_i59.GoogleAuthProvider>(),
+              facebookAuthProvider: gh<_i59.FacebookAuthProvider>(),
             ));
     gh.singleton<_i1026.IReportRepository>(
-      () => _i205.ReportRepository(),
+      () => _i205.ReportRepository(
+          firestoreService: gh<_i1026.FirestoreService>()),
       registerFor: {_user},
     );
-    gh.factory<_i319.UrlCubit>(
-        () => _i319.UrlCubit(urlRepository: gh<_i1026.IUrlRepository>()));
-    gh.singleton<_i208.AuthenticationRepository>(() =>
-        _i208.AuthenticationRepository(
-            gh<_i1026.IAppAuthenticationRepository>()));
-    gh.singleton<_i909.UserRepository>(
-        () => _i909.UserRepository(gh<_i1026.IAppAuthenticationRepository>()));
+    gh.singleton<_i1026.IWorkRepository>(
+      () => _i76.WorkRepository(
+        firestoreService: gh<_i1026.FirestoreService>(),
+        storageService: gh<_i1026.StorageService>(),
+      ),
+      registerFor: {_development},
+    );
+    gh.factory<_i675.EmployeeRespondBloc>(
+      () => _i675.EmployeeRespondBloc(
+        employeeRespondRepository: gh<_i1026.IWorkRepository>(),
+        dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
+      ),
+      registerFor: {_development},
+    );
+    gh.singleton<_i1026.ICompanyRepository>(
+      () => _i115.CompanyRepository(
+        appAuthenticationRepository: gh<_i1026.IAppAuthenticationRepository>(),
+        cache: gh<_i1026.CacheClient>(),
+        firestoreService: gh<_i1026.FirestoreService>(),
+        storageService: gh<_i1026.StorageService>(),
+      ),
+      registerFor: {_business},
+    );
     gh.factory<_i765.ReportBloc>(
       () => _i765.ReportBloc(
         reportRepository: gh<_i1026.IReportRepository>(),
@@ -270,31 +368,22 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_user},
     );
-    gh.singleton<_i1026.IStoryRepository>(
-      () => _i801.StoryRepository(),
-      registerFor: {_development},
+    gh.factory<_i855.DiscountsAddBloc>(
+      () => _i855.DiscountsAddBloc(
+        discountRepository: gh<_i1026.IDiscountRepository>(),
+        companyRepository: gh<_i1026.ICompanyRepository>(),
+        citiesRepository: gh<_i1026.ICitiesRepository>(),
+      ),
+      registerFor: {_business},
     );
     gh.factory<_i687.MobFaqWatcherBloc>(
       () => _i687.MobFaqWatcherBloc(faqRepository: gh<_i1026.IFaqRepository>()),
       registerFor: {_mobile},
     );
-    gh.factory<_i189.AdvancedFilterMobCubit>(
-      () => _i189.AdvancedFilterMobCubit(),
-      registerFor: {_user},
-    );
-    gh.singleton<_i187.FirebaseRemoteConfigProvider>(() =>
-        _i187.FirebaseRemoteConfigProvider(gh<_i627.FirebaseRemoteConfig>()));
-    gh.factory<_i638.LanguageCubit>(
-        () => _i638.LanguageCubit(userRepository: gh<_i1026.UserRepository>()));
-    gh.factory<_i923.UserWatcherBloc>(() =>
-        _i923.UserWatcherBloc(userRepository: gh<_i1026.UserRepository>()));
-    gh.singleton<_i1026.IWorkRepository>(
-      () => _i76.WorkRepository(),
-      registerFor: {_development},
-    );
-    gh.singleton<_i1026.IInformationRepository>(
-      () => _i154.InformationRepository(),
-      registerFor: {_development},
+    gh.factory<_i728.MobileRatingCubit>(
+      () => _i728.MobileRatingCubit(
+          mobileRatingRepository: gh<_i1026.MobileRatingRepository>()),
+      registerFor: {_mobile},
     );
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
@@ -305,22 +394,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
         investorsRepository: gh<_i1026.IInvestorsRepository>()));
-    gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
-        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.factory<_i209.AuthenticationServicesCubit>(() =>
-        _i209.AuthenticationServicesCubit(
-            authenticationRepository: gh<_i1026.AuthenticationRepository>()));
-    gh.singleton<_i997.NetworkRepository>(
-        () => _i997.NetworkRepository(gh<_i1026.IAppNetworkRepository>()));
     gh.factory<_i372.DiscountLinkFormBloc>(() => _i372.DiscountLinkFormBloc(
           discountRepository: gh<_i1026.IDiscountRepository>(),
           appAuthenticationRepository:
               gh<_i1026.IAppAuthenticationRepository>(),
         ));
+    gh.factory<_i174.CompanyFormBloc>(
+      () => _i174.CompanyFormBloc(
+        companyRepository: gh<_i1026.ICompanyRepository>(),
+        dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
+        discountRepository: gh<_i1026.IDiscountRepository>(),
+      ),
+      registerFor: {_business},
+    );
     gh.factory<_i1006.DiscountWatcherBloc>(
       () => _i1006.DiscountWatcherBloc(
         discountRepository: gh<_i1026.IDiscountRepository>(),
@@ -332,21 +418,6 @@ extension GetItInjectableX on _i174.GetIt {
           feedbackRepository: gh<_i1026.IFeedbackRepository>(),
           appAuthenticationRepository:
               gh<_i1026.IAppAuthenticationRepository>(),
-        ));
-    gh.factory<_i763.StoryWatcherBloc>(
-      () => _i763.StoryWatcherBloc(
-          storyRepository: gh<_i1026.IStoryRepository>()),
-      registerFor: {_development},
-    );
-    gh.singleton<_i192.MobileRatingRepository>(
-      () => _i192.MobileRatingRepository(gh<_i553.InAppReview>()),
-      registerFor: {_mobile},
-    );
-    gh.factory<_i891.NetworkCubit>(() =>
-        _i891.NetworkCubit(networkRepository: gh<_i1026.NetworkRepository>()));
-    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
-          userRepository: gh<_i1026.UserRepository>(),
-          dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
         ));
     gh.factory<_i716.StoryAddBloc>(
       () => _i716.StoryAddBloc(
@@ -363,6 +434,13 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_user},
     );
+    gh.singleton<_i208.AuthenticationRepository>(() =>
+        _i208.AuthenticationRepository(
+            appAuthenticationRepository:
+                gh<_i1026.IAppAuthenticationRepository>()));
+    gh.singleton<_i909.UserRepository>(() => _i909.UserRepository(
+        appAuthenticationRepository:
+            gh<_i1026.IAppAuthenticationRepository>()));
     gh.factory<_i908.MarkdownFileCubit>(() => _i908.MarkdownFileCubit(
         appAuthenticationRepository:
             gh<_i1026.IAppAuthenticationRepository>()));
@@ -380,12 +458,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i369.UserRoleBloc(userRepository: gh<_i1026.UserRepository>()),
       registerFor: {_development},
     );
-    gh.factory<_i43.DiscountConfigCubit>(
-      () => _i43.DiscountConfigCubit(
-          firebaseRemoteConfigProvider:
-              gh<_i1026.FirebaseRemoteConfigProvider>()),
-      registerFor: {_user},
-    );
     gh.factory<_i872.MobFeedbackBloc>(
       () => _i872.MobFeedbackBloc(
         feedbackRepository: gh<_i1026.IFeedbackRepository>(),
@@ -393,46 +465,24 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_mobile},
     );
-    gh.factory<_i43.MobOfflineModeCubit>(
-      () => _i43.MobOfflineModeCubit(
-          firestoreService: gh<_i1026.FirestoreService>()),
-      registerFor: {_mobile},
-    );
     gh.factory<_i522.HomeWatcherBloc>(
       () => _i522.HomeWatcherBloc(faqRepository: gh<_i1026.IFaqRepository>()),
       registerFor: {_user},
     );
-    gh.factory<_i70.AppVersionCubit>(() => _i70.AppVersionCubit(
-          buildRepository: gh<_i1026.AppInfoRepository>(),
-          firebaseRemoteConfigProvider:
-              gh<_i1026.FirebaseRemoteConfigProvider>(),
-        ));
     gh.factory<_i557.WorkEmployeeWatcherBloc>(
       () => _i557.WorkEmployeeWatcherBloc(
           workRepository: gh<_i1026.IWorkRepository>()),
       registerFor: {_development},
     );
-    gh.singleton<_i1026.ICompanyRepository>(
-      () => _i115.CompanyRepository(
-        gh<_i1026.IAppAuthenticationRepository>(),
-        gh<_i1026.CacheClient>(),
-      ),
-      registerFor: {_business},
-    );
+    gh.singleton<_i777.FirebaseAnalyticsService>(
+        () => _i777.FirebaseAnalyticsService(
+              firebaseAnalytics: gh<_i398.FirebaseAnalytics>(),
+              userRepository: gh<_i1026.UserRepository>(),
+            ));
     gh.factory<_i86.CompanyWatcherBloc>(
       () => _i86.CompanyWatcherBloc(
           companyRepository: gh<_i1026.ICompanyRepository>()),
       registerFor: {_business},
-    );
-    gh.factory<_i408.InformationWatcherBloc>(
-      () => _i408.InformationWatcherBloc(
-          informationRepository: gh<_i1026.IInformationRepository>()),
-      registerFor: {_development},
-    );
-    gh.factory<_i688.NewsCardWatcherBloc>(
-      () => _i688.NewsCardWatcherBloc(
-          informationRepository: gh<_i1026.IInformationRepository>()),
-      registerFor: {_development},
     );
     gh.factory<_i1032.MyDiscountsWatcherBloc>(
       () => _i1032.MyDiscountsWatcherBloc(
@@ -441,31 +491,10 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_business},
     );
-    gh.singleton<_i777.FirebaseAnalyticsService>(
-        () => _i777.FirebaseAnalyticsService(
-              gh<_i398.FirebaseAnalytics>(),
-              gh<_i1026.UserRepository>(),
-            ));
-    gh.factory<_i675.EmployeeRespondBloc>(
-      () => _i675.EmployeeRespondBloc(
-        employeeRespondRepository: gh<_i1026.IWorkRepository>(),
-        dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
-      ),
-      registerFor: {_development},
-    );
-    gh.factory<_i855.DiscountsAddBloc>(
-      () => _i855.DiscountsAddBloc(
-        discountRepository: gh<_i1026.IDiscountRepository>(),
-        companyRepository: gh<_i1026.ICompanyRepository>(),
-        citiesRepository: gh<_i1026.ICitiesRepository>(),
-      ),
-      registerFor: {_business},
-    );
-    gh.factory<_i728.MobileRatingCubit>(
-      () => _i728.MobileRatingCubit(
-          mobileRatingRepository: gh<_i1026.MobileRatingRepository>()),
-      registerFor: {_mobile},
-    );
+    gh.factory<_i638.LanguageCubit>(
+        () => _i638.LanguageCubit(userRepository: gh<_i1026.UserRepository>()));
+    gh.factory<_i923.UserWatcherBloc>(() =>
+        _i923.UserWatcherBloc(userRepository: gh<_i1026.UserRepository>()));
     gh.factory<_i254.UserEmailFormBloc>(
       () => _i254.UserEmailFormBloc(
         discountRepository: gh<_i1026.IDiscountRepository>(),
@@ -474,14 +503,19 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_user},
     );
-    gh.factory<_i174.CompanyFormBloc>(
-      () => _i174.CompanyFormBloc(
-        companyRepository: gh<_i1026.ICompanyRepository>(),
-        dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
-        discountRepository: gh<_i1026.IDiscountRepository>(),
-      ),
-      registerFor: {_business},
-    );
+    gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
+        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
+        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
+        authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i209.AuthenticationServicesCubit>(() =>
+        _i209.AuthenticationServicesCubit(
+            authenticationRepository: gh<_i1026.AuthenticationRepository>()));
+    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
+          userRepository: gh<_i1026.UserRepository>(),
+          dataPickerRepository: gh<_i1026.IDataPickerRepository>(),
+        ));
     return this;
   }
 }
@@ -498,10 +532,14 @@ class _$AnalytucsModule extends _i606.AnalytucsModule {}
 
 class _$RemoteConfigModule extends _i769.RemoteConfigModule {}
 
+class _$AuthProviderModule extends _i1041.AuthProviderModule {}
+
 class _$DataPickerModule extends _i567.DataPickerModule {}
 
 class _$FirebaseModule extends _i926.FirebaseModule {}
 
 class _$NetworkModule extends _i385.NetworkModule {}
+
+class _$SecureStorageModule extends _i689.SecureStorageModule {}
 
 class _$MobileRatingModule extends _i220.MobileRatingModule {}

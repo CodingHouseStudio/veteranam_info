@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart'
+import 'package:file_picker/file_picker.dart' deferred as file_picker
     show FilePicker, FilePickerResult, FileType;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
@@ -7,21 +7,14 @@ import 'package:image_picker/image_picker.dart'
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-@Singleton(
-  // env: [Config.business, Config.development],
-  as: IDataPickerRepository,
-)
+@Singleton(as: IDataPickerRepository)
 class DataPickerRepository implements IDataPickerRepository {
-  DataPickerRepository(
-    this._imagePciker,
-    this._filePicker,
-  );
+  DataPickerRepository({
+    required ImagePicker imagePciker,
+  }) : _imagePciker = imagePciker;
   final ImagePicker _imagePciker;
-  final FilePicker _filePicker;
   @visibleForTesting
   static const imageSource = ImageSource.gallery;
-  @visibleForTesting
-  static const fileType = FileType.custom;
   @visibleForTesting
   static const fileAllowedExtensions = ['pdf', 'word'];
   @override
@@ -37,11 +30,26 @@ class DataPickerRepository implements IDataPickerRepository {
   @override
   Future<FilePickerItem?> get getFile async {
     try {
-      final file = await _filePicker.pickFiles(
-        type: fileType,
+      // It's a big library
+      await file_picker.loadLibrary();
+      final fileResult = await file_picker.FilePicker.platform.pickFiles(
+        type: file_picker.FileType.custom,
         allowedExtensions: fileAllowedExtensions,
       );
-      return FilePickerItem.getFromFile(file);
+      if (fileResult == null) return null;
+      final file = fileResult.files.first;
+      if (file.bytes == null) return null;
+      final hasExtension = file.name.contains('.');
+      return FilePickerItem(
+        bytes: file.bytes!,
+        extension: hasExtension
+            ? file.name.substring(
+                file.name.lastIndexOf('.'),
+              )
+            : null,
+        name: file.name,
+        ref: file.path,
+      );
     } catch (e) {
       return null;
     }

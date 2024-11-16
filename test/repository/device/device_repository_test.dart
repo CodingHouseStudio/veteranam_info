@@ -147,9 +147,9 @@ void main() {
         );
 
         deviceRepository = DeviceRepository(
-          mockFirebaseMessaging,
-          mockDeviceInfoPlugin,
-          mockBuildRepository,
+          buildRepository: mockBuildRepository,
+          deviceInfoPlugin: mockDeviceInfoPlugin,
+          firebaseMessaging: mockFirebaseMessaging,
         );
       });
 
@@ -472,9 +472,9 @@ void main() {
         );
 
         deviceRepository = DeviceRepository(
-          mockFirebaseMessaging,
-          mockDeviceInfoPlugin,
-          mockBuildRepository,
+          buildRepository: mockBuildRepository,
+          deviceInfoPlugin: mockDeviceInfoPlugin,
+          firebaseMessaging: mockFirebaseMessaging,
         );
       });
       test('Get device(get device id failure)', () async {

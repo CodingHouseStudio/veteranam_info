@@ -41,7 +41,8 @@ void main() {
         (_) async {},
       );
 
-      mobileRatingRepository = MobileRatingRepository(mockInAppReview);
+      mobileRatingRepository =
+          MobileRatingRepository(inAppReview: mockInAppReview);
     });
 
     test('Show Rating Dialog when is available', () async {

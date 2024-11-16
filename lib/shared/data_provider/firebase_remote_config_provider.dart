@@ -6,9 +6,9 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class FirebaseRemoteConfigProvider {
-  FirebaseRemoteConfigProvider(
-    this._firebaseRemoteConfig,
-  ) {
+  FirebaseRemoteConfigProvider({
+    required FirebaseRemoteConfig firebaseRemoteConfig,
+  }) : _firebaseRemoteConfig = firebaseRemoteConfig {
     // Initialization logic can't use await directly in constructor
     _initRemoteConfigSettings();
   }

@@ -9,11 +9,13 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IDeviceRepository, order: -1)
 class DeviceRepository implements IDeviceRepository {
-  DeviceRepository(
-    this._firebaseMessaging,
-    this._deviceInfoPlugin,
-    this._buildRepository,
-  );
+  DeviceRepository({
+    required FirebaseMessaging firebaseMessaging,
+    required DeviceInfoPlugin deviceInfoPlugin,
+    required AppInfoRepository buildRepository,
+  })  : _firebaseMessaging = firebaseMessaging,
+        _deviceInfoPlugin = deviceInfoPlugin,
+        _buildRepository = buildRepository;
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;

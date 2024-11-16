@@ -87,9 +87,13 @@ void main() {
     // );
     group('Call AuthenticationInitialized auto', () {
       setUp(() {
-        // when(mockAuthenticationRepository.isAnonymously).thenAnswer(
-        //   (realInvocation) => false,
-        // );
+        when(mockAuthenticationRepository.currectAuthenticationStatus)
+            .thenAnswer(
+          (realInvocation) => AuthenticationStatus.authenticated,
+        );
+        when(mockAuthenticationRepository.status).thenAnswer(
+          (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
+        );
         authenticationBloc.add(AuthenticationInitialized());
       });
       // blocTest<AuthenticationBloc, AuthenticationState>(
