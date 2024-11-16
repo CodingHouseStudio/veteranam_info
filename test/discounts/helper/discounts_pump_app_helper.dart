@@ -12,7 +12,7 @@ Future<void> discountsPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required IReportRepository mockReportRepository,
-  required UserRepository mockUserRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required AppInfoRepository mockBuildRepository,
@@ -30,7 +30,7 @@ Future<void> discountsPumpAppHelper({
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerUserWatcherBloc(
-    mockUserRepository: mockUserRepository,
+    mockAuthenticationRepository: mockAuthenticationRepository,
   );
   _registerDiscountLinkFormBloc(
     mockDiscountRepository: mockDiscountRepository,
@@ -103,15 +103,15 @@ void _registerDiscountBloc({
 }
 
 void _registerUserWatcherBloc({
-  required UserRepository mockUserRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
 }) {
-  final userWatcherBloc = UserWatcherBloc(
-    userRepository: mockUserRepository,
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
   );
-  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
-    GetIt.I.unregister<UserWatcherBloc>();
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
   }
-  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }
 
 void _registerDiscountLinkFormBloc({

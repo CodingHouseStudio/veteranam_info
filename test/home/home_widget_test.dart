@@ -122,6 +122,7 @@ void main() {
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -139,6 +140,7 @@ void main() {
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -156,6 +158,7 @@ void main() {
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -184,6 +187,7 @@ void main() {
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -207,6 +211,7 @@ void main() {
           mockBuildRepository: mockBuildRepository, tester: tester,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
+          mockAuthencticationRepository: mockAuthenticationRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -224,6 +229,7 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockUrlRepository: mockUrlRepository,
+            mockAuthencticationRepository: mockAuthenticationRepository,
           ),
         );
 
@@ -241,6 +247,8 @@ void main() {
             mockBuildRepository: mockBuildRepository, tester: tester,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
+            mockAuthencticationRepository: mockAuthenticationRepository,
+
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
@@ -256,6 +264,8 @@ void main() {
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             // mockFeedbackRepository: mockFeedbackRepository,
+            mockAuthencticationRepository: mockAuthenticationRepository,
+
             mockFaqRepository: mockFaqRepository,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
@@ -283,6 +293,8 @@ void main() {
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -299,12 +311,14 @@ void main() {
               ),
             );
           });
-          group("user isn't anonymously", () {
-            // setUp(
-            //   () => when(mockUserRepository.isAnonymously).thenAnswer(
-            //     (realInvocation) => false,
-            //   ),
-            // );
+          group('${KGroupText.authenticated} ', () {
+            setUp(
+              () =>
+                  when(mockAuthenticationRepository.currectAuthenticationStatus)
+                      .thenAnswer(
+                (realInvocation) => AuthenticationStatus.authenticated,
+              ),
+            );
 
             testWidgets('${KRoute.profile.name} ', (tester) async {
               await homePumpAppHelper(
@@ -314,6 +328,8 @@ void main() {
                 mockBuildRepository: mockBuildRepository, tester: tester,
                 mockFirebaseRemoteConfigProvider:
                     mockFirebaseRemoteConfigProvider,
+                mockAuthencticationRepository: mockAuthenticationRepository,
+
                 mockGoRouter: mockGoRouter,
                 mockUrlRepository: mockUrlRepository,
                 // mockAppAuthenticationRepository:
@@ -337,7 +353,8 @@ void main() {
             //   mockBuildRepository:
             //mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider
             //,  mockBuildRepository,
-            //   // mockFeedbackRepository: mockFeedbackRepository,
+            //   /mockAuthencticationRepository: mockAuthenticationRepository,
+            /// mockFeedbackRepository: mockFeedbackRepository,
             //       mockFaqRepository: mockFaqRepository,
             //       mockAppAuthenticationRepository:
             //           mockAppAuthenticationRepository,
@@ -358,6 +375,8 @@ void main() {
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -378,6 +397,8 @@ void main() {
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
+
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -398,6 +419,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -419,6 +441,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -439,6 +462,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockAuthencticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -452,12 +476,13 @@ void main() {
             );
           });
           group(
-            'User authentication',
+            '${KGroupText.authenticated} ',
             () {
               setUp(() {
-                // when(mockUserRepository.isAnonymously).thenAnswer(
-                //   (realInvocation) => false,
-                // );
+                when(mockAuthenticationRepository.currectAuthenticationStatus)
+                    .thenAnswer(
+                  (realInvocation) => AuthenticationStatus.authenticated,
+                );
                 when(mockUserRepository.user).thenAnswer(
                   (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
                 );
@@ -470,6 +495,7 @@ void main() {
                   mockBuildRepository: mockBuildRepository,
                   mockFirebaseRemoteConfigProvider:
                       mockFirebaseRemoteConfigProvider,
+                  mockAuthencticationRepository: mockAuthenticationRepository,
                   mockFaqRepository: mockFaqRepository,
                   mockUrlRepository: mockUrlRepository,
                 );

@@ -178,6 +178,21 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+
+          testWidgets('${KRoute.company.name} ', (tester) async {
+            await myDiscountsPumpAppHelper(
+              mockDiscountRepository: mockDiscountRepository,
+              mockUserRepository: mockUserRepository,
+              mockCompanyRepository: mockCompanyRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await nawbarBusinessProfileNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

@@ -11,7 +11,7 @@ Future<void> homePumpAppHelper({
   // required IFeedbackRepository mockFeedbackRepository,
   required IFaqRepository mockFaqRepository,
   required UserRepository mockUserRepository,
-  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required AuthenticationRepository mockAuthencticationRepository,
   required WidgetTester tester,
   required IUrlRepository mockUrlRepository,
   required AppInfoRepository mockBuildRepository,
@@ -22,6 +22,9 @@ Future<void> homePumpAppHelper({
   //   mockFeedbackRepository: mockFeedbackRepository,
   //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   // );
+  _registerAuthenticationBloc(
+    mockAuthencticationRepository: mockAuthencticationRepository,
+  );
   _registerHomeBloc(mockFaqRepository: mockFaqRepository);
   _registerUserWatcherBloc(
     mockUserRepository: mockUserRepository,
@@ -75,6 +78,18 @@ void _registerUserWatcherBloc({
     GetIt.I.unregister<UserWatcherBloc>();
   }
   GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthencticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthencticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }
 
 void _registerUrlCubit(

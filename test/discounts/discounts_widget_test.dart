@@ -21,7 +21,7 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
-    late UserRepository mockUserRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
@@ -32,17 +32,14 @@ void main() {
       PlatformEnumFlutter.isWebDesktop = true;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      mockUserRepository = MockUserRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockReportRepository = MockIReportRepository();
       mockBuildRepository = MockAppInfoRepository();
 
-      when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
-      when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
       );
       // when(mockUserRepository.isAnonymously).thenAnswer(
       //   (realInvocation) => true,
@@ -89,7 +86,7 @@ void main() {
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockMobileRatingRepository: null,
         );
 
@@ -163,7 +160,7 @@ void main() {
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockMobileRatingRepository: null,
         );
 
@@ -178,7 +175,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockBuildRepository: mockBuildRepository,
           mockMobileRatingRepository: null,
         ),
@@ -194,7 +191,7 @@ void main() {
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockMobileRatingRepository: null,
         );
 
@@ -209,7 +206,7 @@ void main() {
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockMobileRatingRepository: null,
         );
 
@@ -254,7 +251,7 @@ void main() {
                   mockFirebaseRemoteConfigProvider,
               mockBuildRepository: mockBuildRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
             await discountsScrollHelper(
@@ -282,7 +279,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             mockMobileRatingRepository: null,
           );
 
@@ -298,7 +295,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             mockMobileRatingRepository: null,
           );
 
@@ -316,7 +313,7 @@ void main() {
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockBuildRepository: mockBuildRepository,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
             mockMobileRatingRepository: null,
           );
@@ -340,7 +337,7 @@ void main() {
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockBuildRepository: mockBuildRepository,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
             mockMobileRatingRepository: null,
           );
@@ -360,7 +357,7 @@ void main() {
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockBuildRepository: mockBuildRepository,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             mockGoRouter: mockGoRouter,
             mockMobileRatingRepository: null,
           );
@@ -388,7 +385,7 @@ void main() {
                 mockBuildRepository: mockBuildRepository,
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-                mockUserRepository: mockUserRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 mockMobileRatingRepository: null,
               );
 
@@ -410,7 +407,7 @@ void main() {
                 mockBuildRepository: mockBuildRepository,
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-                mockUserRepository: mockUserRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 mockMobileRatingRepository: null,
               );
 
@@ -443,7 +440,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
 
@@ -467,7 +464,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
 
@@ -491,7 +488,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
 
@@ -512,7 +509,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
 
@@ -552,7 +549,7 @@ void main() {
                     mockFirebaseRemoteConfigProvider,
                 mockReportRepository: mockReportRepository,
                 mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-                mockUserRepository: mockUserRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 mockMobileRatingRepository: null,
               );
 
@@ -588,7 +585,7 @@ void main() {
               mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               mockMobileRatingRepository: null,
             );
 

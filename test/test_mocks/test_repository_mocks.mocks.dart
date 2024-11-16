@@ -2543,7 +2543,7 @@ class MockAuthenticationRepository extends _i1.Mock
   @override
   _i3.AuthenticationStatus get currectAuthenticationStatus =>
       (super.noSuchMethod(
-        Invocation.getter(#authenticationStatus),
+        Invocation.getter(#currectAuthenticationStatus),
         returnValue: _i3.AuthenticationStatus.unknown,
         returnValueForMissingStub: _i3.AuthenticationStatus.unknown,
       ) as _i3.AuthenticationStatus);
@@ -13188,13 +13188,6 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
           Invocation.getter(#currentUserSetting),
         ),
       ) as _i3.UserSetting);
-
-  @override
-  bool get isAnonymously => (super.noSuchMethod(
-        Invocation.getter(#isAnonymously),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
