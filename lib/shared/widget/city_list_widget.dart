@@ -101,7 +101,7 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
           : KWidgetkeys.widget.cityList.markdown,
       text: TextSpan(
         text: '${widget.cityList.getCityString(
-          showFullText: !isExpanded,
+          showFullText: isExpanded,
         )} ',
         style: AppTextStyle.materialThemeLabelLarge,
         children: [
