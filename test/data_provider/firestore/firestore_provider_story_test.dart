@@ -23,7 +23,7 @@ void main() {
     late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
     late SnapshotMetadata mockSnapshotMetadata;
     late Query<Map<String, dynamic>> mockQuery;
-    late CacheClient mockCacheClient;
+    late CacheClient mockCache;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -33,7 +33,7 @@ void main() {
       mockDocumentChange = [MockDocumentChange()];
       mockSnapshotMetadata = MockSnapshotMetadata();
       mockQuery = MockQuery();
-      mockCacheClient = MockCacheClient();
+      mockCache = MockCacheClient();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
@@ -109,8 +109,10 @@ void main() {
         (_) async => mockQuerySnapshot,
       );
 
-      firestoreService =
-          FirestoreService(mockFirebaseFirestore, mockCacheClient);
+      firestoreService = FirestoreService(
+        cache: mockCache,
+        firebaseFirestore: mockFirebaseFirestore,
+      );
     });
     test('add story', () async {
       await firestoreService.addStory(KTestText.storyModelItems.first);

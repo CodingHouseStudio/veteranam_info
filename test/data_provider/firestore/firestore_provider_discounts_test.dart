@@ -130,7 +130,10 @@ void main() {
         (_) async {},
       );
 
-      firestoreService = FirestoreService(mockFirebaseFirestore, mockCache);
+      firestoreService = FirestoreService(
+        cache: mockCache,
+        firebaseFirestore: mockFirebaseFirestore,
+      );
     });
 
     test('get discounts', () async {

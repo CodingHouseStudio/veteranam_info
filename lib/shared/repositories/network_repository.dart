@@ -6,23 +6,23 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class NetworkRepository {
-  NetworkRepository(
-    this.appNetworkRepository,
-  ) {
+  NetworkRepository({
+    required IAppNetworkRepository appNetworkRepository,
+  }) : _appNetworkRepository = appNetworkRepository {
     _networkStatuscontroller = StreamController<NetworkStatus>.broadcast(
       onListen: _onListConnectivityResultStreamListen,
       onCancel: _onListConnectivityResultStreamCancel,
     );
   }
 
-  final IAppNetworkRepository appNetworkRepository;
+  final IAppNetworkRepository _appNetworkRepository;
   late StreamController<NetworkStatus> _networkStatuscontroller;
   StreamSubscription<List<ConnectivityResult>>?
       _listConnectivityResultSubscription;
 
   void _onListConnectivityResultStreamListen() {
     _listConnectivityResultSubscription ??=
-        appNetworkRepository.connectivityResults.listen((connectivityResults) {
+        _appNetworkRepository.connectivityResults.listen((connectivityResults) {
       if (connectivityResults.hasNetwork) {
         _networkStatuscontroller.add(NetworkStatus.network);
       } else {
@@ -39,7 +39,8 @@ class NetworkRepository {
   Stream<NetworkStatus> get status => _networkStatuscontroller.stream;
 
   NetworkStatus get currentNetwork {
-    final connectivityResults = appNetworkRepository.currentConnectivityResults;
+    final connectivityResults =
+        _appNetworkRepository.currentConnectivityResults;
     if (connectivityResults.hasNetwork) {
       return NetworkStatus.network;
     } else {

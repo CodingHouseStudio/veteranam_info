@@ -51,8 +51,9 @@ void main() {
         (_) async => const Right(true),
       );
 
-      authenticationRepository =
-          AuthenticationRepository(mockAppAuthenticationRepository);
+      authenticationRepository = AuthenticationRepository(
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+      );
     });
     // group('authenticated', () {
     //   setUp(() async {

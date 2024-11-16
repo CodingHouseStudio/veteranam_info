@@ -22,7 +22,7 @@ void main() {
     late SnapshotMetadata mockSnapshotMetadata;
 
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
-    late CacheClient mockCacheClient;
+    late CacheClient mockCache;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       mockCollectionReference = MockCollectionReference();
@@ -32,7 +32,7 @@ void main() {
       mockSnapshotMetadata = MockSnapshotMetadata();
       mockEmptyDocumentReference = MockDocumentReference();
       mockEmptyDocumentSnapshot = MockDocumentSnapshot();
-      mockCacheClient = MockCacheClient();
+      mockCache = MockCacheClient();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
@@ -124,8 +124,10 @@ void main() {
         (_) async {},
       );
 
-      firestoreService =
-          FirestoreService(mockFirebaseFirestore, mockCacheClient);
+      firestoreService = FirestoreService(
+        cache: mockCache,
+        firebaseFirestore: mockFirebaseFirestore,
+      );
     });
     test('get user setting', () async {
       await expectLater(

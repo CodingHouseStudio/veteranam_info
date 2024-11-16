@@ -7,21 +7,34 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
-import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IAppAuthenticationRepository)
 class AppAuthenticationRepository implements IAppAuthenticationRepository {
-  AppAuthenticationRepository(
+  AppAuthenticationRepository({
     // super.dioClient,
-    this._secureStorageRepository,
-    this._firebaseAuth,
-    this._googleSignIn,
-    this._cache,
-    this._facebookSignIn,
-  ) {
+    required IStorage secureStorageRepository,
+    required firebase_auth.FirebaseAuth firebaseAuth,
+    required GoogleSignIn googleSignIn,
+    required CacheClient cache,
+    required FacebookAuth facebookSignIn,
+    required FirestoreService firestoreService,
+    required IDeviceRepository deviceRepository,
+    required StorageService storageService,
+    required firebase_auth.GoogleAuthProvider googleAuthProvider,
+    required firebase_auth.FacebookAuthProvider facebookAuthProvider,
+  })  : _secureStorageRepository = secureStorageRepository,
+        _firebaseAuth = firebaseAuth,
+        _googleSignIn = googleSignIn,
+        _facebookSignIn = facebookSignIn,
+        _cache = cache,
+        _firestoreService = firestoreService,
+        _deviceRepository = deviceRepository,
+        _storageService = storageService,
+        _googleAuthProvider = googleAuthProvider,
+        _facebookAuthProvider = facebookAuthProvider {
     _updateAuthStatusBasedOnCache();
     _updateUserSettingBasedOnCache();
   }
@@ -31,20 +44,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookSignIn;
   final CacheClient _cache;
-  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
-  final StorageService _storageService = GetIt.I.get<StorageService>();
+  final FirestoreService _firestoreService;
+  final IDeviceRepository _deviceRepository;
+  final StorageService _storageService;
+  final firebase_auth.GoogleAuthProvider _googleAuthProvider;
+  final firebase_auth.FacebookAuthProvider _facebookAuthProvider;
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
   @visibleForTesting
-  firebase_auth.GoogleAuthProvider googleAuthProvider =
-      firebase_auth.GoogleAuthProvider();
-  @visibleForTesting
-  firebase_auth.AuthCredential? authCredential;
-  @visibleForTesting
-  firebase_auth.FacebookAuthProvider facebookAuthProvider =
-      firebase_auth.FacebookAuthProvider();
+  static firebase_auth.AuthCredential? authCredential;
 
   /// User cache key.
   /// Should only be used for testing purposes.
@@ -167,7 +176,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialWeb() async {
     final userCredential = await _firebaseAuth.signInWithPopup(
-      googleAuthProvider,
+      _googleAuthProvider,
     );
     return userCredential.credential;
   }
@@ -233,7 +242,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   Future<firebase_auth.AuthCredential?> _getFacebookAuthCredentialWeb() async {
     final userCredential = await _firebaseAuth.signInWithPopup(
-      facebookAuthProvider,
+      _facebookAuthProvider,
     );
     return userCredential.credential;
   }

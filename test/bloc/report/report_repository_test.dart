@@ -31,11 +31,8 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.reportItems,
         );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        reportRepository = ReportRepository();
+        reportRepository =
+            ReportRepository(firestoreService: mockFirestoreService);
       });
       test('${KGroupText.successfulSet} ', () async {
         expect(
@@ -67,11 +64,8 @@ void main() {
           ),
         ).thenThrow(Exception(KGroupText.failureGet));
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        reportRepository = ReportRepository();
+        reportRepository =
+            ReportRepository(firestoreService: mockFirestoreService);
       });
       test('${KGroupText.failureSend} ', () async {
         expect(
@@ -115,11 +109,9 @@ void main() {
             userId: KTestText.user.id,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        reportRepository = ReportRepository();
+
+        reportRepository =
+            ReportRepository(firestoreService: mockFirestoreService);
       });
       test('${KGroupText.failureSend} ', () async {
         expect(

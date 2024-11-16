@@ -20,15 +20,6 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockStorageService = MockStorageService();
       Uint8ListExtension.imagePickerItem = KTestText.filePickerItemFeedback;
-      if (GetIt.I.isRegistered<FirestoreService>()) {
-        GetIt.I.unregister<FirestoreService>();
-      }
-      GetIt.I.registerSingleton(mockFirestoreService);
-
-      if (GetIt.I.isRegistered<StorageService>()) {
-        GetIt.I.unregister<StorageService>();
-      }
-      GetIt.I.registerSingleton(mockStorageService);
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -56,7 +47,11 @@ void main() {
         ).thenAnswer(
           (_) async => [KTestText.feedbackModel],
         );
-        mockFeedbackRepository = FeedbackRepository();
+
+        mockFeedbackRepository = FeedbackRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('${KGroupText.successfulSet} feedback', () async {
         expect(
@@ -109,7 +104,11 @@ void main() {
             filePickerItem: KTestText.filePickerItemFeedback,
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
-        mockFeedbackRepository = FeedbackRepository();
+
+        mockFeedbackRepository = FeedbackRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('${KGroupText.failureSend} feedback', () async {
         expect(
@@ -202,7 +201,11 @@ void main() {
             filePickerItem: KTestText.filePickerItemFeedback,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-        mockFeedbackRepository = FeedbackRepository();
+
+        mockFeedbackRepository = FeedbackRepository(
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+        );
       });
       test('${KGroupText.failureSend} feedback', () async {
         expect(

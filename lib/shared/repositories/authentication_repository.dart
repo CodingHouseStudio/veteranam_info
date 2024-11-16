@@ -7,9 +7,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class AuthenticationRepository {
-  AuthenticationRepository(
-    this.iAppAuthenticationRepository,
-  ) {
+  AuthenticationRepository({
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  }) : _appAuthenticationRepository = appAuthenticationRepository {
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
@@ -18,15 +18,15 @@ class AuthenticationRepository {
     );
   }
 
-  final IAppAuthenticationRepository iAppAuthenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
   late StreamController<AuthenticationStatus> _authenticationStatuscontroller;
   StreamSubscription<User>? _userSubscription;
 
   void _onUserStreamListen() {
     _userSubscription ??=
-        iAppAuthenticationRepository.user.listen((currentUser) {
+        _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
-        if (iAppAuthenticationRepository.isAnonymously) {
+        if (_appAuthenticationRepository.isAnonymously) {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.anonymous,
           );
@@ -53,7 +53,7 @@ class AuthenticationRepository {
       _authenticationStatuscontroller.stream;
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    final result = await iAppAuthenticationRepository.deleteUser();
+    final result = await _appAuthenticationRepository.deleteUser();
     return result.fold(
       (l) {
         return Left(l);
@@ -70,7 +70,7 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    final result = await iAppAuthenticationRepository.logInWithEmailAndPassword(
+    final result = await _appAuthenticationRepository.logInWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -96,7 +96,7 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    final result = await iAppAuthenticationRepository.signUp(
+    final result = await _appAuthenticationRepository.signUp(
       email: email,
       password: password,
     );
@@ -119,7 +119,7 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
-    final result = await iAppAuthenticationRepository.signUpWithGoogle();
+    final result = await _appAuthenticationRepository.signUpWithGoogle();
     return result.fold(
       (l) {
         _authenticationStatuscontroller.add(
@@ -139,7 +139,7 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> signUpWithFacebook() async {
-    final result = await iAppAuthenticationRepository.signUpWithFacebook();
+    final result = await _appAuthenticationRepository.signUpWithFacebook();
     return result.fold(
       (l) {
         _authenticationStatuscontroller.add(
@@ -159,7 +159,7 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> logOut() async {
-    final result = await iAppAuthenticationRepository.logOut();
+    final result = await _appAuthenticationRepository.logOut();
     return result.fold(
       (l) {
         _authenticationStatuscontroller.add(
@@ -177,7 +177,7 @@ class AuthenticationRepository {
   }
 
   Future<void> _logInAnonymously() async {
-    final result = await iAppAuthenticationRepository.logInAnonymously();
+    final result = await _appAuthenticationRepository.logInAnonymously();
     result.fold(
       (l) {},
       (r) {
@@ -190,9 +190,9 @@ class AuthenticationRepository {
   }
 
   AuthenticationStatus get currectAuthenticationStatus {
-    if (iAppAuthenticationRepository.isAnonymously) {
+    if (_appAuthenticationRepository.isAnonymously) {
       return AuthenticationStatus.anonymous;
-    } else if (iAppAuthenticationRepository.currentUser.isEmpty) {
+    } else if (_appAuthenticationRepository.currentUser.isEmpty) {
       return AuthenticationStatus.unknown;
     } else {
       return AuthenticationStatus.authenticated;

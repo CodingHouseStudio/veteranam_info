@@ -55,12 +55,8 @@ void main() {
           (_) async {},
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Get by user ID', () async {
@@ -123,12 +119,8 @@ void main() {
           Exception(KGroupText.failure),
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Get by user ID Failure', () async {
@@ -190,12 +182,8 @@ void main() {
           FirebaseException(plugin: KGroupText.failure),
         );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
+        mockDiscountRepository =
+            DiscountRepository(firestoreService: mockFirestoreService);
       });
 
       test('Delete by discount ID Failure', () async {
