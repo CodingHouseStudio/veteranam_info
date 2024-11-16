@@ -137,7 +137,6 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             hasMarkdown: !isLoading,
             isDesk: isDesk,
             icon: SharedIconListWidget(
-              context: context,
               isDesk: isDesk,
               // if this is iOS and medical services, do not offer
               // pointing to the website

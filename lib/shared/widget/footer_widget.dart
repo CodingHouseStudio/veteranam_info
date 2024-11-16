@@ -587,7 +587,6 @@ class _Contact extends StatelessWidget {
         EmailButtonWidget(
           key: KWidgetkeys.widget.footer.emailButton,
           isDesk: isTablet,
-          context: context,
         ),
       ],
     );

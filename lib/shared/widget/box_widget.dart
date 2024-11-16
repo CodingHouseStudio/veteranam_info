@@ -31,68 +31,88 @@ class BoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ??
-          EdgeInsets.only(
-            top: KPadding.kPaddingSize16,
-            right: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
-            bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
-            left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
-          ),
-      decoration: KWidgetTheme.boxDecorationCard.copyWith(color: background),
-      child: isDesk
-          ? InkWell(
-              onTap: onTap,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  if (iconText != null)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            iconText!,
-                            style: AppTextStyle.materialThemeBodySmall,
-                          ),
-                        ),
-                        getIcon,
-                      ],
-                    )
-                  else
-                    getIcon,
-                  textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: textRightPadding ?? 0),
+    // decoration: KWidgetTheme.boxDecorationCard.copyWith(color: background),
+    if (isDesk) {
+      return TextButton(
+        onPressed: onTap,
+        style: KButtonStyles.boxButtonStyle.copyWith(
+          backgroundColor:
+              background == null ? null : WidgetStatePropertyAll(background),
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: Padding(
+          padding: padding ??
+              const EdgeInsets.only(
+                top: KPadding.kPaddingSize16,
+                right: KPadding.kPaddingSize24,
+                bottom: KPadding.kPaddingSize24,
+                left: KPadding.kPaddingSize24,
+              ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              if (iconText != null)
+                Row(
+                  children: [
+                    Expanded(
                       child: Text(
-                        text,
-                        key: KWidgetkeys.widget.box.text,
-                        style: textStyle ??
-                            AppTextStyle.materialThemeHeadlineSmall,
+                        iconText!,
+                        style: AppTextStyle.materialThemeBodySmall,
                       ),
                     ),
+                    getIcon,
+                  ],
+                )
+              else
+                getIcon,
+              textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(right: textRightPadding ?? 0),
+                  child: Text(
+                    text,
+                    key: KWidgetkeys.widget.box.text,
+                    style: textStyle ?? AppTextStyle.materialThemeHeadlineSmall,
                   ),
-                ],
-              ),
-            )
-          : TextButton.icon(
-              onPressed: onTap,
-              style: KButtonStyles.boxButtonStyle,
-              icon: Expanded(
-                child: Text(
-                  text,
-                  key: KWidgetkeys.widget.box.text,
-                  style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
-                  maxLines: 1,
                 ),
               ),
-              label: Align(
-                alignment: Alignment.centerRight,
-                child: getIcon,
-              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return TextButton.icon(
+        onPressed: onTap,
+        style: KButtonStyles.boxMobButtonStyle.copyWith(
+          backgroundColor:
+              background == null ? null : WidgetStatePropertyAll(background),
+        ),
+        icon: Padding(
+          padding: EdgeInsets.only(
+            left: padding?.left ?? KPadding.kPaddingSize16,
+          ),
+          child: Expanded(
+            child: Text(
+              text,
+              key: KWidgetkeys.widget.box.text,
+              style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
+              maxLines: 1,
             ),
-    );
+          ),
+        ),
+        label: Padding(
+          padding: padding ??
+              const EdgeInsets.all(
+                KPadding.kPaddingSize8,
+              ),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: getIcon,
+          ),
+        ),
+      );
+    }
   }
 
   Widget get getIcon {

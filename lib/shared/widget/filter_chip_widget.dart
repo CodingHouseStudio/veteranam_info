@@ -63,68 +63,91 @@ class FilterChipBodyWidget extends StatelessWidget {
               return null;
             },
             restorationId: 'category',
-            itemBuilder: (context, index) {
-              if (filtersItems.isEmpty) {
-                return SkeletonizerWidget(
-                  isLoading: true,
-                  child: Padding(
-                    key: ValueKey('mock_category_$index'),
-                    padding: EdgeInsets.only(
-                      right: isDesk
-                          ? KPadding.kPaddingSize16
-                          : KPadding.kPaddingSize8,
-                    ),
-                    child: ChipWidget(
-                      filter: FilterItem(
-                        KMockText.category,
-                      ),
-                      onSelected: null,
-                      isSelected: false,
-                      isDesk: isDesk,
-                    ),
-                  ),
-                );
-              }
-              if (index == 0) {
-                return Padding(
-                  key: const ValueKey(CategoryEnum.all),
-                  padding: EdgeInsets.only(
-                    right: isDesk
-                        ? KPadding.kPaddingSize16
-                        : KPadding.kPaddingSize8,
-                  ),
-                  child: ChipWidget(
-                    filter: FilterItem(
-                      CategoryEnum.all.getValue(context),
-                      number: fullLength,
-                    ),
-                    onSelected: (isSelected) => onSelected(CategoryEnum.all),
-                    isSelected: filterIsEmpty,
-                    isDesk: isDesk,
-                  ),
-                );
-              } else {
-                final filterItem = filtersItems.elementAt(index - 1);
-                return Padding(
-                  key: ValueKey(filterItem.value),
-                  padding: EdgeInsets.only(
-                    right: isDesk
-                        ? KPadding.kPaddingSize16
-                        : KPadding.kPaddingSize8,
-                  ),
-                  child: ChipWidget(
-                    key: KWidgetkeys.widget.filterChip.chips,
-                    filter: filterItem,
-                    onSelected: (isSelected) => onSelected(filterItem.value),
-                    isSelected: filterItem.isSelected,
-                    isDesk: isDesk,
-                  ),
-                );
-              }
-            },
+            itemBuilder: (context, index) => _FilterChipItemWidget(
+              filtersItems: filtersItems,
+              isDesk: isDesk,
+              index: index,
+              fullLength: fullLength,
+              filterIsEmpty: filterIsEmpty,
+              onSelected: onSelected,
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+class _FilterChipItemWidget extends StatelessWidget {
+  const _FilterChipItemWidget({
+    required this.filtersItems,
+    required this.isDesk,
+    required this.index,
+    required this.fullLength,
+    required this.filterIsEmpty,
+    required this.onSelected,
+  });
+  final List<FilterItem> filtersItems;
+  final bool isDesk;
+  final int index;
+  final int fullLength;
+  final bool filterIsEmpty;
+  final void Function(dynamic value) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    {
+      if (filtersItems.isEmpty) {
+        return SkeletonizerWidget(
+          isLoading: true,
+          child: Padding(
+            key: ValueKey('mock_category_$index'),
+            padding: EdgeInsets.only(
+              right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+            ),
+            child: ChipWidget(
+              filter: FilterItem(
+                KMockText.category,
+              ),
+              onSelected: null,
+              isSelected: false,
+              isDesk: isDesk,
+            ),
+          ),
+        );
+      }
+      if (index == 0) {
+        return Padding(
+          key: const ValueKey(CategoryEnum.all),
+          padding: EdgeInsets.only(
+            right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+          ),
+          child: ChipWidget(
+            filter: FilterItem(
+              CategoryEnum.all.getValue(context),
+              number: fullLength,
+            ),
+            onSelected: (isSelected) => onSelected(CategoryEnum.all),
+            isSelected: filterIsEmpty,
+            isDesk: isDesk,
+          ),
+        );
+      } else {
+        final filterItem = filtersItems.elementAt(index - 1);
+        return Padding(
+          key: ValueKey(filterItem.value),
+          padding: EdgeInsets.only(
+            right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+          ),
+          child: ChipWidget(
+            key: KWidgetkeys.widget.filterChip.chips,
+            filter: filterItem,
+            onSelected: (isSelected) => onSelected(filterItem.value),
+            isSelected: filterItem.isSelected,
+            isDesk: isDesk,
+          ),
+        );
+      }
+    }
   }
 }

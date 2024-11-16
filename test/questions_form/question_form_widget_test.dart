@@ -51,17 +51,6 @@ void main() {
 
       await checkPointHelper(tester);
     });
-    testWidgets('send user role', (tester) async {
-      await questionFormPumpAppHelper(
-        tester: tester,
-        mockUserRepository: mockUserRepository,
-      );
-
-      await sendUserRoleHelper(
-        tester: tester,
-        mockUserRepository: mockUserRepository,
-      );
-    });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -73,6 +62,18 @@ void main() {
         );
 
         await questionForminitialHelper(tester);
+      });
+      testWidgets('send user role', (tester) async {
+        await questionFormPumpAppHelper(
+          tester: tester,
+          mockUserRepository: mockUserRepository,
+          mockGoRouter: mockGoRouter,
+        );
+
+        await sendUserRoleHelper(
+          tester: tester,
+          mockUserRepository: mockUserRepository,
+        );
       });
     });
   });

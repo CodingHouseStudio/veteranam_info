@@ -270,7 +270,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                             KSizedBox.kWidthSizedBox16,
                             DoubleButtonWidget(
                               widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                              onPressed: () => userRoleNavigation(context),
+                              onPressed: () =>
+                                  context.goNamed(KRoute.userRole.name),
                               text: context.l10n.login,
                               isDesk: true,
                               darkMode: true,
@@ -279,7 +280,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                             KSizedBox.kWidthSizedBox4,
                             IconButtonWidget(
                               key: KWidgetkeys.widget.nawbar.loginIcon,
-                              onPressed: () => userRoleNavigation(context),
+                              onPressed: () =>
+                                  context.goNamed(KRoute.userRole.name),
                               icon: KIcon.person.copyWith(
                                 color: AppColors.materialThemeWhite,
                               ),
@@ -337,9 +339,6 @@ class _NavbarWidgetState extends State<NavbarWidget> {
     );
   }
 
-  String get profilePath =>
-      Config.isBusiness ? KRoute.company.name : KRoute.profile.name;
-
   Widget get getImageWidget => Config.isBusiness
       ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
           buildWhen: (previous, current) =>
@@ -347,7 +346,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           builder: (context, state) {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
-              onPressed: () => context.goNamed(profilePath),
+              onPressed: () => context.goNamed(KRoute.company.name),
               imageUrl: state.company.imageUrl,
             );
           },
@@ -358,7 +357,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           builder: (context, state) {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
-              onPressed: () => context.goNamed(profilePath),
+              onPressed: () => context.goNamed(KRoute.profile.name),
               imageUrl: context.read<UserWatcherBloc>().state.user.photo,
             );
           },
@@ -402,6 +401,4 @@ class _NavbarWidgetState extends State<NavbarWidget> {
         // isDesk: widget.isTablet,
         icon: icon,
       );
-  void userRoleNavigation(BuildContext context) =>
-      context.goNamed(KRoute.userRole.name);
 }

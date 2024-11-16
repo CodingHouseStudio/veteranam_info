@@ -28,6 +28,7 @@ void main() {
           ],
           initialSorting: [
             SortingItem(DiscountEnum.largestSmallest),
+            SortingItem(DiscountEnum.free),
           ],
           initChooseLocationList: [],
           initialChooseSorting: [],
@@ -56,22 +57,55 @@ void main() {
       expect: () => [
         predicate<AdvancedFilterMobState>(
           (state) =>
-              state.filtersLocation.isNotEmpty && state.sorting.length == 2,
+              state.sorting
+                  .where(
+                    (element) => element.isSelected,
+                  )
+                  .length ==
+              1,
         ),
         predicate<AdvancedFilterMobState>(
-          (state) => state.sorting.length == 1,
+          (state) => state.sorting
+              .where(
+                (element) => element.isSelected,
+              )
+              .isEmpty,
         ),
         predicate<AdvancedFilterMobState>(
-          (state) => state.sorting.isEmpty,
+          (state) =>
+              state.sorting
+                  .where(
+                    (element) => element.isSelected,
+                  )
+                  .length ==
+              1,
         ),
         predicate<AdvancedFilterMobState>(
-          (state) => state.filtersLocation.length == 1,
+          (state) =>
+              state.filtersLocation
+                  .where(
+                    (element) => element.isSelected,
+                  )
+                  .length ==
+              1,
         ),
         predicate<AdvancedFilterMobState>(
-          (state) => state.filtersLocation.isEmpty,
+          (state) =>
+              state.filtersLocation
+                  .where(
+                    (element) => element.isSelected,
+                  )
+                  .length ==
+              2,
         ),
         predicate<AdvancedFilterMobState>(
-          (state) => state.filtersLocation.length == 1,
+          (state) =>
+              state.filtersLocation
+                  .where(
+                    (element) => element.isSelected,
+                  )
+                  .length ==
+              1,
         ),
       ],
     );

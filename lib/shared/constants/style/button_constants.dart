@@ -92,11 +92,13 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(LinearBorder.none),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
-  static const boxButtonStyle = ButtonStyle(
+  static const boxMobButtonStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
-    padding:
-        WidgetStatePropertyAll(EdgeInsets.only(left: KPadding.kPaddingSize8)),
-    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.zero,
+    ),
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
   );
   static const borderButtonStyle = ButtonStyle(
     shape: WidgetStatePropertyAll(
@@ -350,6 +352,16 @@ abstract class KButtonStyles {
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
     minimumSize: WidgetStatePropertyAll(
       Size(double.minPositive, KMinMaxSize.minHeight30),
+    ),
+  );
+  static const boxButtonStyle = ButtonStyle(
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder,
+    ),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.zero,
     ),
   );
   static const closeDialogButtonStyle = ButtonStyle(
