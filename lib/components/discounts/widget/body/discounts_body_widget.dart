@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -86,14 +86,47 @@ class _DiscountsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ];
-        return ListView.builder(
-          // primary: true,
-          controller: scrollController,
-          restorationId: 'discount_page',
-          itemCount: body.length,
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          itemBuilder: (context, index) => body.elementAt(index),
+        return BlocListener<DiscountWatcherBloc, DiscountWatcherState>(
+          listener: (context, state) {
+            if (state.failure != null) {
+              context.dialog.showGetErrorDialog(
+                error: state.failure!.value(context),
+                onPressed: () {},
+                // I think this event is not necessary for Stream, but
+                // I think it's better to give
+                // the user imaginary control over it
+
+                // () => context
+                //     .read<DiscountWatcherBloc>()
+                //     .add(const DiscountWatcherEvent.started()),
+              );
+            }
+            if (context.read<UserEmailFormBloc>().state.emailEnum.show &&
+                state.itemsLoaded ==
+                    (context.read<DiscountConfigCubit>().state.loadingItems *
+                        (context
+                                .read<DiscountConfigCubit>()
+                                .state
+                                .emailScrollCount +
+                            1))) {
+              if (Config.isWeb) {
+                context.dialog.showUserEmailDialog(
+                  context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                );
+              } else {
+                context.read<MobileRatingCubit>().showDialog();
+              }
+            }
+          },
+          child: ListView.builder(
+            // primary: true,
+            controller: scrollController,
+            restorationId: 'discount_page',
+            itemCount: body.length,
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
+            itemBuilder: (context, index) => body.elementAt(index),
+          ),
         );
       },
     );
@@ -300,8 +333,7 @@ class _DiscountMobBodyWidgetState extends State<_DiscountMobBodyWidget> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >=
-        ((maxScroll - KDimensions.discountMobLoadingArea) * 0.9);
+    return currentScroll >= maxScroll * 0.9;
   }
 
   @override

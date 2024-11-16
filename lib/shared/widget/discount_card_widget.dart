@@ -251,22 +251,24 @@ class _DiscountCardTitleWidget extends StatelessWidget {
         top: KPadding.kPaddingSize16,
       ),
       child: isDesk
-          ? Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: KPadding.kPaddingSize16,
-              runSpacing: KPadding.kPaddingSize16,
+          ? Row(
+              // alignment: WrapAlignment.spaceBetween,
+              // crossAxisAlignment: WrapCrossAlignment.center,
+              // spacing: KPadding.kPaddingSize16,
+              // runSpacing: KPadding.kPaddingSize16,
               children: [
-                _CompanyInfoWidget(
-                  dateVerified: dateVerified,
-                  category: category,
-                  company: company,
-                  companyEN: companyEN,
-                  userName: userName,
-                  categoryEN: categoryEN,
-                  userPhoto: userPhoto,
-                  mainAxisSize: MainAxisSize.min,
+                Expanded(
+                  child: _CompanyInfoWidget(
+                    dateVerified: dateVerified,
+                    category: category,
+                    company: company,
+                    companyEN: companyEN,
+                    userName: userName,
+                    categoryEN: categoryEN,
+                    userPhoto: userPhoto,
+                  ),
                 ),
+                KSizedBox.kWidthSizedBox16,
                 _CategoryWidget(
                   categories: category,
                   categoriesEn: categoryEN,
@@ -281,7 +283,6 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               userName: userName,
               categoryEN: categoryEN,
               userPhoto: userPhoto,
-              mainAxisSize: MainAxisSize.max,
             ),
     );
   }
@@ -296,7 +297,6 @@ class _CompanyInfoWidget extends StatelessWidget {
     required this.userName,
     required this.categoryEN,
     required this.userPhoto,
-    required this.mainAxisSize,
   });
   final String? company;
   final String? companyEN;
@@ -305,11 +305,9 @@ class _CompanyInfoWidget extends StatelessWidget {
   final List<String> category;
   final List<String>? categoryEN;
   final ImageModel? userPhoto;
-  final MainAxisSize mainAxisSize;
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: mainAxisSize,
       children: [
         UserPhotoWidget(
           imageUrl: userPhoto?.downloadURL,
@@ -317,10 +315,7 @@ class _CompanyInfoWidget extends StatelessWidget {
           imageName: userPhoto?.name,
         ),
         KSizedBox.kWidthSizedBox16,
-        if (mainAxisSize == MainAxisSize.max)
-          Expanded(child: companyInfo)
-        else
-          companyInfo,
+        Expanded(child: companyInfo),
       ],
     );
   }

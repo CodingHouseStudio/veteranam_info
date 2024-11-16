@@ -30,36 +30,7 @@ class SectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
-      children: get(
-        isTablet: isDesk,
-        // textPoint: null,
-        title: title,
-        subtitle: subtitle,
-        textButton: textButton,
-        route: route,
-        // prefixKey: null,
-        titleKey: titleKey,
-        subtitleKey: subtitleKey,
-        buttonKey: buttonKey,
-        bottomWidget: bottomWidget,
-      ),
-    );
-  }
-
-  static List<Widget> get({
-    required bool isTablet,
-    // required String? textPoint,
-    required String title,
-    required String subtitle,
-    required String textButton,
-    required void Function()? route,
-    // required Key? prefixKey,
-    required Key titleKey,
-    required Key subtitleKey,
-    required Key buttonKey,
-    Widget? bottomWidget,
-  }) =>
-      [
+      children: [
         // if (textPoint != null) ...[
         //   TextPointWidget(
         //     textPoint,
@@ -75,34 +46,28 @@ class SectionWidget extends StatelessWidget {
           child: Text(
             title,
             key: titleKey,
-            style: isTablet
+            style: isDesk
                 ? AppTextStyle.materialThemeDisplayLarge
-                : isTablet
-                    ? AppTextStyle.materialThemeDisplayMedium
-                    : AppTextStyle.materialThemeDisplaySmall,
+                : AppTextStyle.materialThemeDisplaySmall,
           ),
         ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox8,
+        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         Text(
           subtitle,
           key: subtitleKey,
-          style: isTablet
+          style: isDesk
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodyMedium,
         ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox8,
+        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         DoubleButtonWidget(
           widgetKey: buttonKey,
           text: textButton,
           onPressed: route,
-          isDesk: isTablet,
+          isDesk: isDesk,
         ),
-        if (bottomWidget != null) bottomWidget,
-      ];
+        if (bottomWidget != null) bottomWidget!,
+      ],
+    );
+  }
 }

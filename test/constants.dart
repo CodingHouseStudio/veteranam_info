@@ -648,6 +648,7 @@ abstract class KTestConstants {
   static const scrollingUp = Offset(0, 10000);
   static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp150 = Offset(0, 150);
+  static const scrollingUp250 = Offset(0, 250);
   static const scrollingUp500 = Offset(0, 500);
   static const scrollingUp1000 = Offset(0, 1000);
   static const scrollingUp1500 = Offset(0, 1500);
