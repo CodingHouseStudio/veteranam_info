@@ -9,8 +9,9 @@ part 'pw_reset_email_bloc.freezed.dart';
 
 @injectable
 class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
-  PwResetEmailBloc({required UserRepository userRepository})
-      : _userRepository = userRepository,
+  PwResetEmailBloc({
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  })  : _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const _Initial(
             email: EmailFieldModel.pure(),
@@ -24,7 +25,7 @@ class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
     on<_ResetStatus>(_onResetStatus);
   }
 
-  final UserRepository _userRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
 
   void _onStarted(
     _Started event,
@@ -84,7 +85,7 @@ class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
               : PwResetEmailEnum.sending,
         ),
       );
-      final result = await _userRepository.sendVerificationCodeToEmail(
+      final result = await _appAuthenticationRepository.sendVerificationCode(
         email: state.email.value,
       );
       result.fold(

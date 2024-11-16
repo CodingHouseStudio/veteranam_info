@@ -16,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.prod}', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
     late AppInfoRepository mockBuildRepository;
@@ -26,18 +26,18 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockFaqRepository = MockIFaqRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockUrlRepository = MockIUrlRepository();
       mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
+      when(mockUserRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
       when(mockFaqRepository.getQuestions()).thenAnswer(
@@ -61,7 +61,7 @@ void main() {
       await homePumpAppHelper(
         // mockFeedbackRepository: mockFeedbackRepository,
         mockFaqRepository: mockFaqRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         tester: tester,
         mockBuildRepository: mockBuildRepository,
         mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
@@ -80,7 +80,7 @@ void main() {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
           mockBuildRepository: mockBuildRepository, mockGoRouter: mockGoRouter,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
@@ -96,7 +96,7 @@ void main() {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             tester: tester,
             mockBuildRepository: mockBuildRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
@@ -114,7 +114,7 @@ void main() {
         group('${Config.business} ', () {
           setUp(
             () {
-              when(mockAuthenticationRepository.user).thenAnswer(
+              when(mockUserRepository.user).thenAnswer(
                 (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
               );
               Config.roleValue = Config.business;
@@ -124,7 +124,7 @@ void main() {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
@@ -146,7 +146,7 @@ void main() {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUserRepository: mockUserRepository,
               mockBuildRepository: mockBuildRepository, tester: tester,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,

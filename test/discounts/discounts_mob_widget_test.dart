@@ -20,7 +20,7 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
@@ -34,22 +34,22 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockBuildRepository = MockAppInfoRepository();
       mockMobileRatingRepository = MockMobileRatingRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
+      when(mockUserRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
 
@@ -107,7 +107,7 @@ void main() {
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         mockReportRepository: mockReportRepository,
         mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         mockBuildRepository: mockBuildRepository,
         mockMobileRatingRepository: mockMobileRatingRepository,
@@ -125,7 +125,7 @@ void main() {
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockMobileRatingRepository: mockMobileRatingRepository,
@@ -144,7 +144,7 @@ void main() {
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockMobileRatingRepository: mockMobileRatingRepository,
@@ -170,7 +170,7 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
@@ -191,7 +191,7 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,

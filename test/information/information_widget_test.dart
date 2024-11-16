@@ -19,7 +19,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.information} ', () {
     late IInformationRepository mockInformationRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     setUp(() {
@@ -27,14 +27,14 @@ void main() {
       ExtendedDateTime.id = '';
       PlatformEnumFlutter.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      mockUserRepository = MockUserRepository();
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
+      when(mockUserRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
       for (var i = 0; i < 5; i++) {
@@ -82,7 +82,7 @@ void main() {
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
@@ -118,7 +118,7 @@ void main() {
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           tester: tester,
@@ -145,7 +145,7 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           tester: tester,
@@ -157,7 +157,7 @@ void main() {
       loadingList(
         (tester) async => informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           tester: tester,
@@ -168,7 +168,7 @@ void main() {
       testWidgets('News list load and filter', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           tester: tester,
@@ -183,7 +183,7 @@ void main() {
         testWidgets('${KGroupText.initial} ', (tester) async {
           await informationPumpAppHelper(
             mockInformationRepository: mockInformationRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockReportRepository: mockReportRepository,
             tester: tester,

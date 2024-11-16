@@ -18,7 +18,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.company} ', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IDataPickerRepository mockDataPickerRepository;
     late ICompanyRepository mockCompanyRepository;
     late IDiscountRepository mockDiscountRepository;
@@ -26,7 +26,7 @@ void main() {
     // late XFile image;
     setUp(() {
       Config.roleValue = Config.business;
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockDiscountRepository = MockIDiscountRepository();
@@ -34,10 +34,10 @@ void main() {
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.userWithoutPhoto,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestText.userSettingModel,
       );
 
@@ -78,7 +78,7 @@ void main() {
         (realInvocation) async => KTestText.filePickerItem,
       );
 
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
+      when(mockUserRepository.isAnonymously).thenAnswer(
         (realInvocation) => false,
       );
     });
@@ -87,7 +87,7 @@ void main() {
         tester: tester,
         mockCompanyRepository: mockCompanyRepository,
         mockDiscountRepository: mockDiscountRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
       );
 
@@ -99,7 +99,7 @@ void main() {
         tester: tester,
         mockCompanyRepository: mockCompanyRepository,
         mockDiscountRepository: mockDiscountRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
       );
 
@@ -122,7 +122,7 @@ void main() {
           tester: tester,
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
@@ -139,7 +139,7 @@ void main() {
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
@@ -152,7 +152,7 @@ void main() {
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
         await logOutUnconfirmButtonlHelper(
@@ -168,7 +168,7 @@ void main() {
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
@@ -186,7 +186,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
           mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
         );
 
         await logOutConfirmButtonlHelper(
@@ -200,7 +200,7 @@ void main() {
           tester: tester,
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
@@ -212,7 +212,7 @@ void main() {
           tester: tester,
           mockCompanyRepository: mockCompanyRepository,
           mockDiscountRepository: mockDiscountRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
@@ -229,7 +229,7 @@ void main() {
           await companyPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockDataPickerRepository: mockDataPickerRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
@@ -247,7 +247,7 @@ void main() {
           await companyPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockDataPickerRepository: mockDataPickerRepository,
@@ -264,7 +264,7 @@ void main() {
           await companyPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockDataPickerRepository: mockDataPickerRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
@@ -282,7 +282,7 @@ void main() {
           await companyPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUserRepository: mockUserRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockDataPickerRepository: mockDataPickerRepository,

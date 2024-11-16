@@ -9,11 +9,11 @@ import '../../test_dependency.dart';
 
 Future<void> pwResetEmailPumpAppHelper({
   required WidgetTester tester,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerPwResetEmailBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
 
   await tester.pumpApp(
@@ -32,10 +32,10 @@ Future<void> pwResetEmailPumpAppHelper({
 }
 
 void _registerPwResetEmailBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final pwResetEmailBloc = PwResetEmailBloc(
-    authenticationRepository: mockAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<PwResetEmailBloc>()) {
     GetIt.I.unregister<PwResetEmailBloc>();

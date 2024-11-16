@@ -92,7 +92,7 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseAnalyticsService>(
     FirebaseAnalyticsService(
       GetIt.I.get<FirebaseAnalytics>(),
-      GetIt.I.get<AuthenticationRepository>(),
+      GetIt.I.get<UserRepository>(),
     ),
   );
   GetIt.I.registerSingleton<IAppNetworkRepository>(

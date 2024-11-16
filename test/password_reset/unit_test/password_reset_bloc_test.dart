@@ -14,11 +14,11 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.passwordReset} ${KGroupText.bloc}', () {
     late PasswordResetBloc passwordResetBloc;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
-        mockAuthenticationRepository.resetPasswordUseCode(
+        mockAppAuthenticationRepository.resetPasswordUseCode(
           code: KTestText.code,
           newPassword: KTestText.passwordCorrect,
         ),
@@ -26,7 +26,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       passwordResetBloc = PasswordResetBloc(
-        authenticationRepository: mockAuthenticationRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -140,7 +140,7 @@ void main() {
       build: () => passwordResetBloc,
       act: (bloc) async {
         when(
-          mockAuthenticationRepository.resetPasswordUseCode(
+          mockAppAuthenticationRepository.resetPasswordUseCode(
             code: KTestText.code,
             newPassword: KTestText.passwordCorrect,
           ),

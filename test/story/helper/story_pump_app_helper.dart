@@ -8,13 +8,13 @@ import 'package:veteranam/shared/shared_dart.dart';
 import '../../test_dependency.dart';
 
 Future<void> storyPumpAppHelper({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required IStoryRepository mockStoryRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerAuthenticationBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+  _registerUserWatcherBloc(
+    mockUserRepository: mockUserRepository,
   );
   _registerStoryBloc(mockStoryRepository: mockStoryRepository);
   await tester.pumpApp(const StoryScreen(), mockGoRouter: mockGoRouter);
@@ -39,14 +39,14 @@ void _registerStoryBloc({
   GetIt.I.registerSingleton<StoryWatcherBloc>(storyBloc);
 }
 
-void _registerAuthenticationBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc({
+  required UserRepository mockUserRepository,
 }) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }

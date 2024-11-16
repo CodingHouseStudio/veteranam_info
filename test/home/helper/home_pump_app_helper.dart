@@ -10,7 +10,7 @@ import '../../test_dependency.dart';
 Future<void> homePumpAppHelper({
   // required IFeedbackRepository mockFeedbackRepository,
   required IFaqRepository mockFaqRepository,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   required IUrlRepository mockUrlRepository,
@@ -23,8 +23,8 @@ Future<void> homePumpAppHelper({
   //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   // );
   _registerHomeBloc(mockFaqRepository: mockFaqRepository);
-  _registerAuthenticationBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+  _registerUserWatcherBloc(
+    mockUserRepository: mockUserRepository,
   );
   _registerUrlCubit(mockUrlRepository);
   _registerBuildCubit(
@@ -65,16 +65,16 @@ void _registerHomeBloc({
   GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
 }
 
-void _registerAuthenticationBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc({
+  required UserRepository mockUserRepository,
 }) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }
 
 void _registerUrlCubit(

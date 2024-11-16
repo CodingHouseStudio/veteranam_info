@@ -30,15 +30,17 @@ class AuthenticationRepository {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.anonymous,
           );
-          return;
+        } else {
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.authenticated,
+          );
         }
+      } else {
+        unawaited(_logInAnonymously());
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.authenticated,
+          AuthenticationStatus.unknown,
         );
       }
-      _authenticationStatuscontroller.add(
-        AuthenticationStatus.unknown,
-      );
     });
   }
 
@@ -174,10 +176,27 @@ class AuthenticationRepository {
     );
   }
 
-  bool get isAnonymously => iAppAuthenticationRepository.isAnonymously;
+  Future<void> _logInAnonymously() async {
+    final result = await iAppAuthenticationRepository.logInAnonymously();
+    result.fold(
+      (l) {},
+      (r) {
+        log('created anonymously user');
+        if (r != null) {
+          _authenticationStatuscontroller.add(AuthenticationStatus.anonymous);
+        }
+      },
+    );
+  }
 
-  User get currentUser {
-    return iAppAuthenticationRepository.currentUser;
+  AuthenticationStatus get authenticationStatus {
+    if (iAppAuthenticationRepository.isAnonymously) {
+      return AuthenticationStatus.anonymous;
+    } else if (iAppAuthenticationRepository.currentUser.isEmpty) {
+      return AuthenticationStatus.unknown;
+    } else {
+      return AuthenticationStatus.authenticated;
+    }
   }
 
   // @disposeMethod

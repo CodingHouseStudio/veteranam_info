@@ -2541,24 +2541,11 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Stream<_i3.AuthenticationStatus>);
 
   @override
-  bool get isAnonymously => (super.noSuchMethod(
-        Invocation.getter(#isAnonymously),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  _i3.User get currentUser => (super.noSuchMethod(
-        Invocation.getter(#currentUser),
-        returnValue: _FakeUser_3(
-          this,
-          Invocation.getter(#currentUser),
-        ),
-        returnValueForMissingStub: _FakeUser_3(
-          this,
-          Invocation.getter(#currentUser),
-        ),
-      ) as _i3.User);
+  _i3.AuthenticationStatus get authenticationStatus => (super.noSuchMethod(
+        Invocation.getter(#authenticationStatus),
+        returnValue: _i3.AuthenticationStatus.unknown,
+        returnValueForMissingStub: _i3.AuthenticationStatus.unknown,
+      ) as _i3.AuthenticationStatus);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
@@ -13141,4 +13128,154 @@ class MockInAppReview extends _i1.Mock implements _i37.InAppReview {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+}
+
+/// A class which mocks [UserRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
+  @override
+  _i3.IAppAuthenticationRepository get iAppAuthenticationRepository =>
+      (super.noSuchMethod(
+        Invocation.getter(#iAppAuthenticationRepository),
+        returnValue: _FakeIAppAuthenticationRepository_7(
+          this,
+          Invocation.getter(#iAppAuthenticationRepository),
+        ),
+        returnValueForMissingStub: _FakeIAppAuthenticationRepository_7(
+          this,
+          Invocation.getter(#iAppAuthenticationRepository),
+        ),
+      ) as _i3.IAppAuthenticationRepository);
+
+  @override
+  _i8.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i8.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
+      ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
+  _i8.Stream<_i3.User> get user => (super.noSuchMethod(
+        Invocation.getter(#user),
+        returnValue: _i8.Stream<_i3.User>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.User>.empty(),
+      ) as _i8.Stream<_i3.User>);
+
+  @override
+  _i3.User get currentUser => (super.noSuchMethod(
+        Invocation.getter(#currentUser),
+        returnValue: _FakeUser_3(
+          this,
+          Invocation.getter(#currentUser),
+        ),
+        returnValueForMissingStub: _FakeUser_3(
+          this,
+          Invocation.getter(#currentUser),
+        ),
+      ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_4(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_4(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
+
+  @override
+  bool get isAnonymously => (super.noSuchMethod(
+        Invocation.getter(#isAnonymously),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+          {required _i3.UserSetting? userSetting}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserSetting,
+          [],
+          {#userSetting: userSetting},
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [],
+            {#userSetting: userSetting},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [],
+            {#userSetting: userSetting},
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required String? nickname,
+    required _i3.FilePickerItem? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #nickname: nickname,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #nickname: nickname,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #nickname: nickname,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

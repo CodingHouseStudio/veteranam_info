@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
+@singleton
 class UserRepository {
   UserRepository(
     this.iAppAuthenticationRepository,
@@ -48,21 +50,10 @@ class UserRepository {
             );
           },
         );
-        // if (isAnonymously()) {
-        //   _authenticationStatuscontroller.add(
-        //     AuthenticationStatus.anonymous,
-        //   );
-        //   return;
-        // }
-        // _authenticationStatuscontroller.add(
-        //   AuthenticationStatus.authenticated,
-        // );
-
-        return;
+      } else {
+        _userSettingSubscription?.cancel();
+        _userSettingSubscription = null;
       }
-      unawaited(_logInAnonymously());
-      _userSettingSubscription?.cancel();
-      _userSettingSubscription = null;
     });
   }
 
@@ -94,72 +85,6 @@ class UserRepository {
       },
     );
   }
-
-  // TODO: Move to authentication repository
-  Future<void> _logInAnonymously() async {
-    final result = await iAppAuthenticationRepository.logInAnonymously();
-    result.fold(
-      (l) {},
-      (r) {
-        log('created anonymously user');
-        if (r != null) {
-          _userController.add(r);
-        }
-      },
-    );
-    await _createFcmUserSettingAndRemoveDeleteParameter();
-  }
-
-  // Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({
-  //   required String email,
-  // }) async {
-  //   final result =
-  //       await iAppAuthenticationRepository.sendVerificationCode(email: email);
-  //   return result.fold(
-  //     Left.new,
-  //     (success) {
-  //       log(
-  //         'Sending email letter succeses $email',
-  //         name: 'Reset Password',
-  //       );
-  //       return const Right(true);
-  //     },
-  //   );
-  // }
-
-  // Future<Either<SomeFailure, bool>> checkVerificationCode(
-  //   String? code,
-  // ) async {
-  //   final result =
-  //       await iAppAuthenticationRepository.checkVerificationCode(code);
-  //   return result.fold(
-  //     Left.new,
-  //     (success) {
-  //       log(
-  //         'Reset password verification code is succes',
-  //         name: 'Reset Password',
-  //       );
-  //       return Right(success);
-  //     },
-  //   );
-  // }
-
-  // Future<Either<SomeFailure, bool>> resetPasswordUseCode({
-  //   required String code,
-  //   required String newPassword,
-  // }) async {
-  //   final result = await iAppAuthenticationRepository.resetPasswordUseCode(
-  //     code: code,
-  //     newPassword: newPassword,
-  //   );
-  //   return result.fold(
-  //     Left.new,
-  //     (success) {
-  //       log('Password reseted success', name: 'Reset Password');
-  //       return Right(success);
-  //     },
-  //   );
-  // }
 
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,

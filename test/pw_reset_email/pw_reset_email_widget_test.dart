@@ -17,15 +17,15 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.pwResetEmail} ', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
     });
 
     group('${KGroupText.failureSend} ', () {
       setUp(() {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(
@@ -36,7 +36,7 @@ void main() {
       testWidgets('Enter correct email', (tester) async {
         await pwResetEmailPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await emailFailureHelper(tester);
@@ -46,7 +46,7 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(
@@ -56,7 +56,7 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await pwResetEmailPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await pwResetEmailInitialHelper(tester);
@@ -65,7 +65,7 @@ void main() {
       testWidgets('Enter wrong email', (tester) async {
         await pwResetEmailPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await emailWrongHelper(tester);
@@ -74,7 +74,7 @@ void main() {
       testWidgets('Enter correct email', (tester) async {
         await pwResetEmailPumpAppHelper(
           tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await emailCorrectHelper(tester);
@@ -88,7 +88,7 @@ void main() {
           await pwResetEmailPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await pwResetEmailInitialHelper(tester);
@@ -97,7 +97,7 @@ void main() {
           await pwResetEmailPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await backButtonResetEmailNavigationHelper(
