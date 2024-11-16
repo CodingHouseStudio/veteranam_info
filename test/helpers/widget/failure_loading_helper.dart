@@ -7,11 +7,14 @@ Future<void> loadingFailureHelper({
   required WidgetTester tester,
   required Key card,
   required Key? buttonMock,
+  bool hasShimmer = false,
 }) async {
-  expect(
-    find.byKey(card),
-    findsNothing,
-  );
+  if (!hasShimmer) {
+    expect(
+      find.byKey(card),
+      findsNothing,
+    );
+  }
 
   if (buttonMock != null) {
     expect(

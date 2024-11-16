@@ -494,17 +494,15 @@ extension ListExtensionsNull<T> on List<T>? {
   List<T> changeListValue({required T eventFilter, T? removeValue}) {
     // Create a copy of the current list or an empty list if the original is
     // null.
+    if (eventFilter == removeValue) {
+      return [];
+    }
     final selectedFilters = List<T>.from(this ?? []);
 
     // Toggle the presence of eventFilterIndex in selectedFilters.
     if (selectedFilters.contains(eventFilter)) {
       selectedFilters.remove(eventFilter); // Remove if already present.
     } else {
-      if (eventFilter == removeValue || selectedFilters.contains(removeValue)) {
-        return [
-          eventFilter,
-        ]; // Return a list with -1 if it's the special case.
-      }
       selectedFilters.add(
         eventFilter,
       ); // Add eventFilterIndex if not already present.

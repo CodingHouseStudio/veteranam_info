@@ -118,7 +118,6 @@ class _DiscountsDeskWidgetList extends StatelessWidget {
                       state: state,
                       index: index,
                       config: config,
-                      context: context,
                     ),
                   );
                 },
@@ -164,7 +163,6 @@ class _DiscountsMobWidgetList extends StatelessWidget {
                 state: state,
                 index: index,
                 config: config,
-                context: context,
               ),
             );
           },
@@ -179,7 +177,6 @@ class _DiscountsWidgetItem extends StatelessWidget {
     required this.state,
     required this.index,
     required this.config,
-    required this.context,
     required this.isDesk,
     super.key,
   });
@@ -187,7 +184,6 @@ class _DiscountsWidgetItem extends StatelessWidget {
   final DiscountWatcherState state;
   final int index;
   final DiscountConfigState config;
-  final BuildContext context;
   @override
   Widget build(BuildContext context) {
     if (index < state.filteredDiscountModelItems.length) {
@@ -254,7 +250,7 @@ class _DiscountsWidgetItem extends StatelessWidget {
             top: KPadding.kPaddingSize48,
           ),
           child: LoadingButtonWidget(
-            widgetKey: KWidgetkeys.screen.discounts.button,
+            widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
             text: context.l10n.moreDiscounts,
             onPressed: () => context.read<DiscountWatcherBloc>().add(
                   const DiscountWatcherEvent.loadNextItems(),

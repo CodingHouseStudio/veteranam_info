@@ -118,14 +118,37 @@ class _DiscountsBodyWidget extends StatelessWidget {
               }
             }
           },
-          child: ListView.builder(
-            // primary: true,
-            controller: scrollController,
-            restorationId: 'discount_page',
-            itemCount: body.length,
-            addAutomaticKeepAlives: false,
-            addRepaintBoundaries: false,
-            itemBuilder: (context, index) => body.elementAt(index),
+          child: BlocListener<NetworkCubit, NetworkStatus>(
+            listener: (context, state) {
+              if (state == NetworkStatus.network) {
+                context.read<DiscountWatcherBloc>().add(
+                      DiscountWatcherEvent.started(
+                        isEnglish: context.isEnglish,
+                      ),
+                    );
+              }
+            },
+            child: BlocListener<UrlCubit, UrlEnum?>(
+              listener: (context, state) async {
+                if (state != null) {
+                  context.dialog.showSnackBardTextDialog(
+                    state.value(context),
+                    duration: const Duration(milliseconds: 4000),
+                  );
+                  context.read<UrlCubit>().reset();
+                }
+              },
+              child: ListView.builder(
+                key: KWidgetkeys.widget.scaffold.scroll,
+                // primary: true,
+                controller: scrollController,
+                restorationId: 'discount_page',
+                itemCount: body.length,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
+                itemBuilder: (context, index) => body.elementAt(index),
+              ),
+            ),
           ),
         );
       },
