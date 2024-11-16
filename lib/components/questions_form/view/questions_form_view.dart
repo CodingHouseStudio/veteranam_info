@@ -7,8 +7,10 @@ class QuestionsFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QuestionsFormBody(
-      key: KWidgetkeys.screen.questionsForm.screen,
+    return QuestionFormBlocprovider(
+      childWidget: QuestionsFormBody(
+        key: KWidgetkeys.screen.questionsForm.screen,
+      ),
     );
   }
 }

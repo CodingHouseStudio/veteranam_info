@@ -23,9 +23,9 @@ Future<void> cityListHelper(
     );
   }
 
-  if (find.byKey(KWidgetkeys.widget.cityList.markdown).evaluate().isNotEmpty) {
+  if (find.byKey(KWidgetkeys.widget.cityList.longText).evaluate().isNotEmpty) {
     expect(
-      find.byKey(KWidgetkeys.widget.cityList.markdown),
+      find.byKey(KWidgetkeys.widget.cityList.longText),
       findsWidgets,
     );
 

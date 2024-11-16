@@ -18,7 +18,7 @@ class SkeletonizerWidget extends StatelessWidget {
         baseColor: AppColors.materialThemeWhite,
         highlightColor: AppColors.materialThemeKeyColorsNeutral,
       ),
-      enabled: isLoading,
+      enabled: !KTest.isTest && isLoading,
       child: child,
     );
   }

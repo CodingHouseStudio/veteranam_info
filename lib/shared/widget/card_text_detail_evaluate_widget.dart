@@ -155,7 +155,6 @@ class _CardTextDetailEvaluateWidgetState
                     ],
                   ),
                   SharedIconListWidget(
-                    context: context,
                     isDesk: widget.isDesk,
                     link: widget.link,
                     cardEnum: widget.cardEnum,

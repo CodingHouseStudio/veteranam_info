@@ -23,42 +23,57 @@ class QuestionWidgetList extends StatelessWidget {
           itemCount: state.loadingStatus == LoadingStatusHome.loaded
               ? state.questionModelItems.length
               : KDimensions.shimmerQuestionItems,
-          itemBuilder: (context, index) {
-            if (state.loadingStatus == LoadingStatusHome.loaded) {
-              return Padding(
-                key: ValueKey(state.questionModelItems.elementAt(index).id),
-                padding: index != 0
-                    ? const EdgeInsets.only(
-                        top: KPadding.kPaddingSize24,
-                      )
-                    : EdgeInsets.zero,
-                child: QuestionWidget(
-                  key: KWidgetkeys.screen.home.faq,
-                  questionModel: state.questionModelItems.elementAt(index),
-                  isDesk: isDesk,
-                ),
-              );
-            } else {
-              return Padding(
-                key: ValueKey(KMockText.questionModel.id),
-                padding: index != 0
-                    ? const EdgeInsets.only(
-                        top: KPadding.kPaddingSize24,
-                      )
-                    : EdgeInsets.zero,
-                child: SkeletonizerWidget(
-                  isLoading: !KTest.isTest,
-                  child: QuestionWidget(
-                    key: KWidgetkeys.screen.home.faqSkeletonizer,
-                    questionModel: KMockText.questionModel,
-                    isDesk: isDesk,
-                  ),
-                ),
-              );
-            }
-          },
+          itemBuilder: (context, index) =>
+              _QuestionWidgetItem(state: state, index: index, isDesk: isDesk),
         );
       },
     );
+  }
+}
+
+class _QuestionWidgetItem extends StatelessWidget {
+  const _QuestionWidgetItem({
+    required this.state,
+    required this.index,
+    required this.isDesk,
+  });
+  final HomeWatcherState state;
+  final int index;
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.loadingStatus == LoadingStatusHome.loaded) {
+      return Padding(
+        key: ValueKey(state.questionModelItems.elementAt(index).id),
+        padding: index != 0
+            ? const EdgeInsets.only(
+                top: KPadding.kPaddingSize24,
+              )
+            : EdgeInsets.zero,
+        child: QuestionWidget(
+          key: KWidgetkeys.screen.home.faq,
+          questionModel: state.questionModelItems.elementAt(index),
+          isDesk: isDesk,
+        ),
+      );
+    } else {
+      return Padding(
+        key: ValueKey(KMockText.questionModel.id),
+        padding: index != 0
+            ? const EdgeInsets.only(
+                top: KPadding.kPaddingSize24,
+              )
+            : EdgeInsets.zero,
+        child: SkeletonizerWidget(
+          isLoading: true,
+          child: QuestionWidget(
+            key: KWidgetkeys.screen.home.faqSkeletonizer,
+            questionModel: KMockText.questionModel,
+            isDesk: isDesk,
+          ),
+        ),
+      );
+    }
   }
 }

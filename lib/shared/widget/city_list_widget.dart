@@ -97,8 +97,8 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
   Widget build(BuildContext context) {
     return RichText(
       key: isExpanded
-          ? KWidgetkeys.widget.cityList.markdownFulllList
-          : KWidgetkeys.widget.cityList.markdown,
+          ? KWidgetkeys.widget.cityList.longText
+          : KWidgetkeys.widget.cityList.markdownFulllList,
       text: TextSpan(
         text: '${widget.cityList.getCityString(
           showFullText: isExpanded,

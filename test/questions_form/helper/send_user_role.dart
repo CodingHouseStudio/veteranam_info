@@ -12,6 +12,7 @@ Future<void> sendUserRoleHelper({
   await chekPointHelper(
     tester: tester,
     twiceTap: false,
+    isEmpty: false,
   );
 
   await scrollingHelper(

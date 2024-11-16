@@ -4,7 +4,6 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 class SharedIconListWidget extends StatelessWidget {
   const SharedIconListWidget({
-    required this.context,
     required this.isDesk,
     required this.cardEnum,
     required this.cardId,
@@ -19,7 +18,6 @@ class SharedIconListWidget extends StatelessWidget {
     this.showShare = true,
     this.background = AppColors.materialThemeWhite,
   });
-  final BuildContext context;
   final bool isDesk;
   final String? link;
   final CardEnum cardEnum;
