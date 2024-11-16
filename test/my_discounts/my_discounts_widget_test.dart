@@ -21,12 +21,15 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late UserRepository mockUserRepository;
     late ICompanyRepository mockCompanyRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late StreamController<CompanyModel> companyStream;
     setUp(() {
       Config.roleValue = Config.business;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockUserRepository = MockUserRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+
       companyStream = StreamController();
 
       when(mockUserRepository.currentUserSetting)
@@ -49,6 +52,9 @@ void main() {
       }
       when(mockCompanyRepository.company).thenAnswer(
         (realInvocation) => companyStream.stream,
+      );
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.authenticated,
       );
     });
     group('${KGroupText.failure} ', () {
@@ -76,6 +82,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -108,6 +115,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -145,6 +153,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
         await myDiscountsEmptyProfilePageHelper(tester);
@@ -158,6 +167,7 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -169,6 +179,7 @@ void main() {
               mockDiscountRepository: mockDiscountRepository,
               mockUserRepository: mockUserRepository,
               mockCompanyRepository: mockCompanyRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -184,6 +195,7 @@ void main() {
               mockDiscountRepository: mockDiscountRepository,
               mockUserRepository: mockUserRepository,
               mockCompanyRepository: mockCompanyRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -228,6 +240,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -242,6 +255,7 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -255,6 +269,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -291,6 +306,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -302,6 +318,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -315,6 +332,7 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -327,6 +345,7 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
           ),
           // lastCard: KWidgetkeys.screen.discounts.cardLast,
@@ -339,6 +358,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -357,6 +377,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -387,6 +408,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -406,6 +428,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );
@@ -422,6 +445,7 @@ void main() {
                 mockDiscountRepository: mockDiscountRepository,
                 mockUserRepository: mockUserRepository,
                 mockCompanyRepository: mockCompanyRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );

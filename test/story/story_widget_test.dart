@@ -16,17 +16,14 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.story} ', () {
     late IStoryRepository mockStoryRepository;
-    late UserRepository mockUserRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
-      mockUserRepository = MockUserRepository();
-      when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.userWithoutPhoto,
-      );
-      when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.authenticated,
       );
     });
     group('${KGroupText.failure} ', () {
@@ -37,7 +34,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await storyPumpAppHelper(
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           mockStoryRepository: mockStoryRepository,
           tester: tester,
         );
@@ -55,7 +52,7 @@ void main() {
         await storyPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await storyInitialHelper(tester);
@@ -65,7 +62,7 @@ void main() {
         (tester) async => storyPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         ),
         // lastCard: KWidgetkeys.screen.story.cardLast,
       );
@@ -74,7 +71,7 @@ void main() {
         await storyPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
           tester: tester,
-          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await listLoadHelper(tester);
@@ -87,7 +84,7 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockStoryRepository: mockStoryRepository,
-            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await storyInitialHelper(tester);
@@ -98,7 +95,7 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
               mockStoryRepository: mockStoryRepository,
-              mockUserRepository: mockUserRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
             );
 
             await storyAddNavigationHelper(

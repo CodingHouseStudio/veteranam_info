@@ -51,6 +51,7 @@ class AdvancedFilterDesk extends StatelessWidget {
                 current.choosenSortingnList != previous.choosenSortingnList,
             builder: (context, state) {
               return AdvancedFilterContent(
+                key: KWidgetkeys.screen.discounts.advancedFilterDesk,
                 isDesk: true,
                 onChange: (value) => context
                     .read<DiscountWatcherBloc>()

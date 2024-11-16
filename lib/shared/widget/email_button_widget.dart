@@ -4,11 +4,9 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class EmailButtonWidget extends StatelessWidget {
   const EmailButtonWidget({
     required this.isDesk,
-    this.context,
     super.key,
   });
   final bool isDesk;
-  final BuildContext? context;
 
   @override
   Widget build(BuildContext context) {

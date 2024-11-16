@@ -94,6 +94,7 @@ void main() {
           tester: tester,
           card: KWidgetkeys.screen.discounts.card,
           buttonMock: null,
+          hasShimmer: true,
         );
       });
     });

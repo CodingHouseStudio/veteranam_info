@@ -83,5 +83,5 @@ Future<void> questionForminitialHelper(
     },
   );
 
-  await chekPointHelper(tester: tester, twiceTap: false);
+  await chekPointHelper(tester: tester, twiceTap: false, isEmpty: false);
 }

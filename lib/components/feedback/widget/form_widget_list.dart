@@ -35,7 +35,6 @@ List<Widget> _formWidgegList({
                           EmailButtonWidget(
                             key: KWidgetkeys.screen.feedback.emailButton,
                             isDesk: isDesk,
-                            context: context,
                           ),
                         ],
                       ),
@@ -101,7 +100,6 @@ List<Widget> _formWidgegList({
                 EmailButtonWidget(
                   key: KWidgetkeys.screen.feedback.emailButton,
                   isDesk: isDesk,
-                  context: context,
                 ),
               ],
             ),

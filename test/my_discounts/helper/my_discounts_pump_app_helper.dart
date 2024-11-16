@@ -11,9 +11,13 @@ Future<void> myDiscountsPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
   required ICompanyRepository mockCompanyRepository,
   required UserRepository mockUserRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
+  _registerAuthenticationBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
   _registerMyDiscountsBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockCompanyRepository: mockCompanyRepository,
@@ -76,4 +80,16 @@ void _registerCompanyWatcherBloc({
     GetIt.I.unregister<CompanyWatcherBloc>();
   }
   GetIt.I.registerSingleton<CompanyWatcherBloc>(companyWatcherBloc);
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }

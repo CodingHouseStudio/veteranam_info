@@ -7,6 +7,7 @@ Future<void> chekPointHelper({
   required WidgetTester tester,
   bool hasAmount = false,
   bool twiceTap = true,
+  bool isEmpty = true,
 }) async {
   await scrollingHelper(
     tester: tester,
@@ -20,7 +21,7 @@ Future<void> chekPointHelper({
 
   expect(
     find.byKey(KWidgetkeys.widget.checkPoint.icon),
-    findsNothing,
+    isEmpty ? findsNothing : findsOneWidget,
   );
 
   expect(

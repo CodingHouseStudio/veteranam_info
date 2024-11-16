@@ -13,6 +13,7 @@ class DiscountBoxwWidget extends StatelessWidget {
     if (isTablet) {
       return InkWell(
         hoverColor: Colors.transparent,
+        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         onTap: () => context.goNamed(KRoute.discounts.name),
         child: DecoratedBox(
           decoration: KWidgetTheme.boxDecorationDiscount,
@@ -67,6 +68,8 @@ class DiscountBoxwWidget extends StatelessWidget {
       );
     } else {
       return InkWell(
+        hoverColor: Colors.transparent,
+        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         onTap: () => context.goNamed(KRoute.discounts.name),
         child: DecoratedBox(
           decoration: KWidgetTheme.boxDecorationDiscount,

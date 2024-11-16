@@ -29,6 +29,12 @@ Future<void> nawbarBusinessProfileNavigationHelper({
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    itemKey: KWidgetkeys.widget.nawbar.loginIcon,
+  );
+
   await tester.tap(
     find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
   );
