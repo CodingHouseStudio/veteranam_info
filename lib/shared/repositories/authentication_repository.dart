@@ -189,7 +189,7 @@ class AuthenticationRepository {
     );
   }
 
-  AuthenticationStatus get authenticationStatus {
+  AuthenticationStatus get currectAuthenticationStatus {
     if (iAppAuthenticationRepository.isAnonymously) {
       return AuthenticationStatus.anonymous;
     } else if (iAppAuthenticationRepository.currentUser.isEmpty) {

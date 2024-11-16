@@ -38,9 +38,9 @@ void main() {
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );

@@ -146,8 +146,6 @@ class UserRepository {
     }
   }
 
-  bool get isAnonymously => iAppAuthenticationRepository.isAnonymously;
-
   // @disposeMethod
   void dispose() {
     _userController.close();

@@ -17,7 +17,7 @@ class AuthenticationBloc
   })  : _authenticationRepository = authenticationRepository,
         super(
           AuthenticationState._(
-            status: authenticationRepository.authenticationStatus,
+            status: authenticationRepository.currectAuthenticationStatus,
           ),
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);

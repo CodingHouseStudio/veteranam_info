@@ -53,6 +53,7 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   Future<void> close() {
     userSettingSubscription.cancel();
     userSubscription.cancel();
+    _userRepository.dispose();
     return super.close();
   }
 }

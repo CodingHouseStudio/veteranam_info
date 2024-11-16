@@ -58,9 +58,9 @@ void main() {
         (realInvocation) async => KTestText.filePickerItem,
       );
 
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => false,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => false,
+      // );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await profilePumpAppHelper(

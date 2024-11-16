@@ -37,9 +37,9 @@ void main() {
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );

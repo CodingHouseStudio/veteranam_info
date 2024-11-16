@@ -44,9 +44,9 @@ void main() {
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
 
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
@@ -328,9 +328,9 @@ void main() {
         });
         testWidgets('Report Dialog Incorect Send(field null and user)',
             (tester) async {
-          when(mockUserRepository.isAnonymously).thenAnswer(
-            (realInvocation) => false,
-          );
+          // when(mockUserRepository.isAnonymously).thenAnswer(
+          //   (realInvocation) => false,
+          // );
 
           await discountsPumpAppHelper(
             tester: tester,

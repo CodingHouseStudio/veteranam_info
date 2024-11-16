@@ -18,6 +18,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
     late UserRepository mockUserRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
     late AppInfoRepository mockBuildRepository;
@@ -33,7 +34,11 @@ void main() {
       mockUrlRepository = MockIUrlRepository();
       mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
-      // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.anonymous,
+      );
 
       when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -53,9 +58,9 @@ void main() {
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       when(
         mockUrlRepository.launchUrl(
           url: KAppText.instagram,
@@ -295,11 +300,11 @@ void main() {
             );
           });
           group("user isn't anonymously", () {
-            setUp(
-              () => when(mockUserRepository.isAnonymously).thenAnswer(
-                (realInvocation) => false,
-              ),
-            );
+            // setUp(
+            //   () => when(mockUserRepository.isAnonymously).thenAnswer(
+            //     (realInvocation) => false,
+            //   ),
+            // );
 
             testWidgets('${KRoute.profile.name} ', (tester) async {
               await homePumpAppHelper(
@@ -450,9 +455,9 @@ void main() {
             'User authentication',
             () {
               setUp(() {
-                when(mockUserRepository.isAnonymously).thenAnswer(
-                  (realInvocation) => false,
-                );
+                // when(mockUserRepository.isAnonymously).thenAnswer(
+                //   (realInvocation) => false,
+                // );
                 when(mockUserRepository.user).thenAnswer(
                   (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
                 );

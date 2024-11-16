@@ -34,9 +34,9 @@ void main() {
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockUserRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
+      // when(mockUserRepository.isAnonymously).thenAnswer(
+      //   (realInvocation) => true,
+      // );
       for (var i = 0; i < 5; i++) {
         when(
           mockInformationRepository.updateLikeCount(

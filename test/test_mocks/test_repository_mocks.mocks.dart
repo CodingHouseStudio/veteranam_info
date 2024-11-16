@@ -2541,7 +2541,8 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Stream<_i3.AuthenticationStatus>);
 
   @override
-  _i3.AuthenticationStatus get authenticationStatus => (super.noSuchMethod(
+  _i3.AuthenticationStatus get currectAuthenticationStatus =>
+      (super.noSuchMethod(
         Invocation.getter(#authenticationStatus),
         returnValue: _i3.AuthenticationStatus.unknown,
         returnValueForMissingStub: _i3.AuthenticationStatus.unknown,
