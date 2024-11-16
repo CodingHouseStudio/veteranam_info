@@ -14,11 +14,11 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.pwResetEmail} ${KGroupText.bloc}', () {
     late PwResetEmailBloc pwResetEmailBloc;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       pwResetEmailBloc = PwResetEmailBloc(
-        authenticationRepository: mockAuthenticationRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -28,7 +28,7 @@ void main() {
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(
@@ -74,7 +74,7 @@ void main() {
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(
@@ -115,7 +115,7 @@ void main() {
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(
@@ -149,7 +149,7 @@ void main() {
       build: () => pwResetEmailBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.sendVerificationCodeToEmail(
+          mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestText.userEmail,
           ),
         ).thenAnswer(

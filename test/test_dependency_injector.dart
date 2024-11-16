@@ -89,10 +89,15 @@ void configureDependenciesTest() {
       GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
+  GetIt.I.registerSingleton<UserRepository>(
+    UserRepository(
+      GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
   GetIt.I.registerSingleton<FirebaseAnalyticsService>(
     FirebaseAnalyticsService(
       GetIt.I.get<FirebaseAnalytics>(),
-      GetIt.I.get<AuthenticationRepository>(),
+      GetIt.I.get<UserRepository>(),
     ),
   );
   GetIt.I.registerSingleton<IAppNetworkRepository>(
@@ -136,6 +141,16 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(
       authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<UserWatcherBloc>(
+    UserWatcherBloc(
+      userRepository: GetIt.I.get<UserRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<LanguageCubit>(
+    LanguageCubit(
+      userRepository: GetIt.I.get<UserRepository>(),
     ),
   );
   GetIt.I.registerSingleton<MobOfflineModeCubit>(

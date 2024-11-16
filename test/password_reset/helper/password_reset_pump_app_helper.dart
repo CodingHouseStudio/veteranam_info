@@ -10,15 +10,15 @@ import '../../test_dependency.dart';
 
 Future<void> passwordResetPumpAppHelper({
   required WidgetTester tester,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
   MockGoRouter? mockGoRouter,
   String? code = KTestText.code,
 }) async {
   _registerPasswordResetBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
   _registerCheckVerificationCodeCubit(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
 
   await tester.pumpApp(
@@ -37,10 +37,10 @@ Future<void> passwordResetPumpAppHelper({
 }
 
 void _registerPasswordResetBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final pwResetEmailBloc = PasswordResetBloc(
-    authenticationRepository: mockAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<PasswordResetBloc>()) {
     GetIt.I.unregister<PasswordResetBloc>();
@@ -49,10 +49,10 @@ void _registerPasswordResetBloc({
 }
 
 void _registerCheckVerificationCodeCubit({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final checkVerificationCodeCubit = CheckVerificationCodeCubit(
-    authenticationRepository: mockAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<CheckVerificationCodeCubit>()) {
     GetIt.I.unregister<CheckVerificationCodeCubit>();

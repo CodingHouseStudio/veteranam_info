@@ -16,17 +16,17 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.questionsForm} ', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      mockUserRepository = MockUserRepository();
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.userWithoutPhoto,
       );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
       when(
-        mockAuthenticationRepository.updateUserSetting(
+        mockUserRepository.updateUserSetting(
           userSetting: UserSetting.empty.copyWith(
             userRole: UserRole.veteran,
           ),
@@ -38,7 +38,7 @@ void main() {
     testWidgets('${KGroupText.initial} ', (tester) async {
       await questionFormPumpAppHelper(
         tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
 
       await questionForminitialHelper(tester);
@@ -46,7 +46,7 @@ void main() {
     testWidgets('check point switch', (tester) async {
       await questionFormPumpAppHelper(
         tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
 
       await checkPointHelper(tester);
@@ -54,12 +54,12 @@ void main() {
     testWidgets('send user role', (tester) async {
       await questionFormPumpAppHelper(
         tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
 
       await sendUserRoleHelper(
         tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
     });
     group('${KGroupText.goRouter} ', () {
@@ -69,7 +69,7 @@ void main() {
         await questionFormPumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
         );
 
         await questionForminitialHelper(tester);

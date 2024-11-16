@@ -10,7 +10,7 @@ import '../../test_dependency.dart';
 Future<void> investorsPumpAppHelper({
   required IInvestorsRepository mockInvestorsRepository,
   required IReportRepository mockReportRepository,
-  required AuthenticationRepository mockAuthenticationRepository,
+  required UserRepository mockUserRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required IUrlRepository mockUrlRepository,
   required WidgetTester tester,
@@ -25,8 +25,8 @@ Future<void> investorsPumpAppHelper({
     // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     // mockReportRepository: mockReportRepository,
   );
-  _registerAuthenticationBloc(
-    mockAuthenticationRepository,
+  _registerUserWatcherBloc(
+    mockUserRepository,
   );
   _registerUrlCubit(mockUrlRepository);
   await tester.pumpApp(const InvestorsScreen(), mockGoRouter: mockGoRouter);
@@ -69,16 +69,16 @@ void _registerReportBloc({
   GetIt.I.registerSingleton<ReportBloc>(reportBloc);
 }
 
-void _registerAuthenticationBloc(
-  AuthenticationRepository mockAuthenticationRepository,
+void _registerUserWatcherBloc(
+  UserRepository mockUserRepository,
 ) {
-  final authenticationBloc = AuthenticationBloc(
-    authenticationRepository: mockAuthenticationRepository,
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-    GetIt.I.unregister<AuthenticationBloc>();
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
   }
-  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }
 
 void _registerUrlCubit(

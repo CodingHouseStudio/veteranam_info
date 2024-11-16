@@ -15,14 +15,14 @@ void main() {
 
   group('${KScreenBlocName.profile} ${KGroupText.bloc}', () {
     late ProfileBloc profileBloc;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late UserRepository mockUserRepository;
     late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
 
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
+      when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
 
@@ -33,7 +33,7 @@ void main() {
       );
 
       when(
-        mockAuthenticationRepository.updateUserData(
+        mockUserRepository.updateUserData(
           user: KTestText.profileUser,
           image: KTestText.filePickerItem,
           nickname: KTestText.nicknameCorrect,
@@ -42,12 +42,12 @@ void main() {
         (realInvocation) async => const Right(true),
       );
 
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestText.userSettingModel,
       );
 
       profileBloc = ProfileBloc(
-        authenticationRepository: mockAuthenticationRepository,
+        userRepository: mockUserRepository,
         dataPickerRepository: mockDataPickerRepository,
       )..add(const ProfileEvent.started());
     });
@@ -222,12 +222,12 @@ void main() {
     blocTest<ProfileBloc, ProfileState>(
       'emits [ProfileState] with unmodify success',
       build: () {
-        when(mockAuthenticationRepository.currentUser).thenAnswer(
+        when(mockUserRepository.currentUser).thenAnswer(
           (realInvocation) => KTestText.profileUser,
         );
 
         when(
-          mockAuthenticationRepository.updateUserData(
+          mockUserRepository.updateUserData(
             user: KTestText.profileUser,
             image: null,
             nickname: KTestText.nicknameCorrect,
@@ -275,7 +275,7 @@ void main() {
       build: () => profileBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.updateUserData(
+          mockUserRepository.updateUserData(
             user: KTestText.profileUser,
             image: KTestText.filePickerItem,
             nickname: KTestText.nicknameCorrect,

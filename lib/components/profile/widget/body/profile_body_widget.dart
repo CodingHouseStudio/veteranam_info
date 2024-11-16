@@ -50,13 +50,12 @@ class ProfileBodyWidget extends StatelessWidget {
                   ),
             child: ProfileFormWidget(
               isDesk: isDesk,
-              initialName:
-                  context.read<AuthenticationBloc>().state.user.firstName,
-              initialEmail: context.read<AuthenticationBloc>().state.user.email,
+              initialName: context.read<UserWatcherBloc>().state.user.firstName,
+              initialEmail: context.read<UserWatcherBloc>().state.user.email,
               initialSurname:
-                  context.read<AuthenticationBloc>().state.user.lastName,
+                  context.read<UserWatcherBloc>().state.user.lastName,
               initialNickname:
-                  context.read<AuthenticationBloc>().state.userSetting.nickname,
+                  context.read<UserWatcherBloc>().state.userSetting.nickname,
             ),
           ),
         ),

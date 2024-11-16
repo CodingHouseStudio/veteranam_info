@@ -35,18 +35,18 @@ void main() {
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockMobileRatingRepository = MockMobileRatingRepository();
 
-      when(mockAuthenticationRepository.userSetting).thenAnswer(
-        (realInvocation) => Stream.value(KTestText.userSetting),
-      );
-      when(mockAuthenticationRepository.user).thenAnswer(
-        (realInvocation) => Stream.value(KTestText.userAnonymous),
-      );
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestText.userSetting,
-      );
+      // when(mockAuthenticationRepository.userSetting).thenAnswer(
+      //   (realInvocation) => Stream.value(KTestText.userSetting),
+      // );
+      // when(mockAuthenticationRepository.user).thenAnswer(
+      //   (realInvocation) => Stream.value(KTestText.userAnonymous),
+      // );
+      // when(mockAuthenticationRepository.currentUser).thenAnswer(
+      //   (realInvocation) => User.empty,
+      // );
+      // when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+      //   (realInvocation) => KTestText.userSetting,
+      // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );
