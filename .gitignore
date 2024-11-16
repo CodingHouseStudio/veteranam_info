@@ -150,5 +150,6 @@ doc/api/
 # **/generated/
 # Ignore test generated folder
 test/.test_optimizer.dart
+test/.test_optimizer_test.dart
 # l10n error message
 untranslated_messages.json
