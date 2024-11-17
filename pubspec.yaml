@@ -168,7 +168,8 @@ sentry:
   org: coding-house-studio-llc
 
   # set by env. var. SENTRY_AUTH_TOKEN
-  auth_token: REDACTED
+  # We need this variable only when push release build. Used only when upload_source_maps
+  auth_token: 
 
   # disabled by default
   # wait_for_processing: true
