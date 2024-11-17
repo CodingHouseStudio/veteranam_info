@@ -1,12 +1,9 @@
-// ignore_for_file: empty_catches
-
-// import 'dart:developer' show log;
+import 'dart:developer';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart'
     show DiagnosticLevel, PlatformDispatcher;
-// import 'package:flutter/foundation.dart' show Config.isReleaseMode;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
@@ -28,7 +25,7 @@ void main() async {
   try {
     await FirebaseAppCheck.instanceFor(app: app).activate(
       webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheckDev,
+        KSecurityKeys.firebaseAppCheck,
       ),
       androidProvider: Config.isReleaseMode
           ? AndroidProvider.playIntegrity
@@ -39,7 +36,7 @@ void main() async {
     );
     await FirebaseAppCheck.instance.activate(
       webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheckDev,
+        KSecurityKeys.firebaseAppCheck,
       ),
       androidProvider: Config.isReleaseMode
           ? AndroidProvider.playIntegrity
@@ -48,9 +45,15 @@ void main() async {
           ? AppleProvider.deviceCheck
           : AppleProvider.debug,
     );
-  } catch (e) {}
+  } catch (e, stack) {
+    log(
+      'Firebase AppCheck Error',
+      name: 'Firebase AppCheck',
+      error: e,
+      stackTrace: stack,
+    );
+  }
 
-  // Non-async exceptions
   // Non-async exceptions handling
   FlutterError.onError = (details) {
     // Declare error level variable for classification
@@ -102,69 +105,6 @@ void main() async {
 
     return true; // Return true to indicate the error has been handled
   };
-  // }
-
-  // try {
-  // if (Config.isWeb) {
-  //   await FirebasePerformance.instanceFor(app: app)
-  //       .setPerformanceCollectionEnabled(Config.isReleaseMode);
-  // } else {
-  //   await FirebasePerformance.instance
-  //       .setPerformanceCollectionEnabled(Config.isReleaseMode);
-  // }
-  // } catch (e, stack) {
-  //   print('firebase performance issue');
-  //   print(e);
-  // }
-  // try {
-  // if (!Config.isWeb) {
-  //   // {
-  //   //   final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
-  //   //     webProvider: ReCaptchaV3Provider(Config.isReleaseMode
-  //   //         ? '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG'
-  //   //         : '4A104621-0F8F-4D82-A07F-008910737512'),
-  //   //   );
-  //   // } else {
-  //   await FirebaseAppCheck.instance.activate(
-  //     androidProvider:
-  //         Config.isReleaseMode ? AndroidProvider.playIntegrity :
-  // AndroidProvider.debug,
-  //     appleProvider: Config.isReleaseMode
-  //         ? AppleProvider.appAttestWithDeviceCheckFallback
-  //         : AppleProvider.debug,
-  //   );
-  // }
-  // } catch (e, stack) {
-  //   print('firebase app check issue');
-  //   print(e);
-  // }
-
-  // Non-async exceptions
-  // FlutterError.onError = (details) {
-  //   if (Config.isWeb) {
-  //     Sentry.captureException(
-  //       details.exceptionAsString(),
-  //       stackTrace: details.stack,
-  //     );
-  //   } else {
-  //     FirebaseCrashlytics.instance.recordFlutterError(details);
-  //   }
-  //   log(details.exceptionAsString(), stackTrace: details.stack);
-  // };
-  // Async exceptions
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   if (Config.isWeb) {
-  //     Sentry.captureException(
-  //       error,
-  //       stackTrace: stack,
-  //     );
-  //   } else {
-  //     FirebaseCrashlytics.instance.recordError(error, stack);
-  //   }
-  //   log(error.toString(), stackTrace: stack);
-
-  //   return true;
-  // };
 
   await bootstrap(App.new);
 }
