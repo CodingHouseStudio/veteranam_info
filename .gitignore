@@ -153,3 +153,5 @@ test/.test_optimizer.dart
 test/.test_optimizer_test.dart
 # l10n error message
 untranslated_messages.json
+# Environment
+env.json
