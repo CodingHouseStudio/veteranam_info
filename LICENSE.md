@@ -6,7 +6,7 @@ FSL-1.1-Apache-2.0
 
 ## Notice
 
-Copyright 2024 Coding House Studio LLC dba Veteranam Info
+Copyright 2025 Coding House Studio LLC dba Veteranam Info
 
 ## Terms and Conditions
 
