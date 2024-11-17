@@ -12,7 +12,7 @@
       "args": [
         "--dart-define=FLAVOUR=development",
         "--dart-define=ROLE=user",
-        "--dart-define-from-file=.env.json",
+        "--dart-define-from-file=.env_dev.json",
         "localhost",
         "--web-port",
         "4001",
@@ -22,24 +22,24 @@
         "lib/main_development.dart"
       ],
     },
-    {
-      "name": "Launch staging",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main_staging.dart",
-      "args": [
-        "--dart-define=FLAVOUR=staging",
-        "--dart-define=ROLE=user",
-        "--dart-define-from-file=.env.json",
-        "localhost",
-        "--web-port",
-        "8080",
-        "--flavor",
-        "staging",
-        "--target",
-        "lib/main_staging.dart"
-      ],
-    },
+    // {
+    //   "name": "Launch staging",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "program": "lib/main_staging.dart",
+    //   "args": [
+    //     "--dart-define=FLAVOUR=staging",
+    //     "--dart-define=ROLE=user",
+    //     "--dart-define-from-file=.env_dev.json",
+    //     "localhost",
+    //     "--web-port",
+    //     "8080",
+    //     "--flavor",
+    //     "staging",
+    //     "--target",
+    //     "lib/main_staging.dart"
+    //   ],
+    // },
     {
       "name": "Launch production",
       "request": "launch",
@@ -48,7 +48,7 @@
       "args": [
         "--dart-define=FLAVOUR=production",
         "--dart-define=ROLE=user",
-        "--dart-define-from-file=.env.json",
+        "--dart-define-from-file=.env_prod.json",
         "localhost",
         "--web-port",
         "4001",
@@ -66,7 +66,7 @@
       "args": [
         "--dart-define=FLAVOUR=production",
         "--dart-define=ROLE=business",
-        "--dart-define-from-file=.env.json",
+        "--dart-define-from-file=.env_prod.json",
         "localhost",
         "--web-port",
         "4001",
@@ -84,7 +84,7 @@
       "args": [
         "--dart-define=FLAVOUR=development",
         "--dart-define=ROLE=business",
-        "--dart-define-from-file=.env.json",
+        "--dart-define-from-file=.env_dev.json",
         "localhost",
         "--web-port",
         "4001",
