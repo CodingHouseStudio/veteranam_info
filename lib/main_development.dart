@@ -1,7 +1,3 @@
-// ignore_for_file: empty_catches
-
-// import 'dart:developer' show log;
-
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart'
