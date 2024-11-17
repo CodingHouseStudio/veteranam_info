@@ -74,4 +74,6 @@ abstract class KDimensions {
   static const logLevelWarning = 200;
   static const logLevelError = 500;
   static const logLevelCriticalError = 1000;
+
+  static const listCacheExtent = 1000.0;
 }
