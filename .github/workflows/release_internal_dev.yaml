@@ -15,12 +15,13 @@ concurrency:
 jobs:
   web_build:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_build.yml@main
+    secrets: inherit
     with:
       FLAVOUR: "development"
       run_sentry_plugin: false
       project_name: "veteran-development"
       ROLE: "user"
-      secrets: inherit
+      
   #  ios-build:
   #    name: Deploy beta build to TestFlight
   #    runs-on: macOS-latest
