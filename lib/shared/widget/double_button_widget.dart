@@ -131,77 +131,79 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() => isHovering = value),
-      child: Stack(
-        key: KWidgetkeys.widget.doubleButton.desk,
-        alignment: Alignment.centerRight,
-        children: [
-          AnimatedPadding(
-            duration: const Duration(
-              milliseconds: KDimensions.doubleButtonAnimationDuration,
-            ),
-            padding: isHovering
-                ? const EdgeInsets.only(right: KPadding.kPaddingSize12)
-                : EdgeInsets.zero,
-            child: Container(
-              width: widget.textWidth,
-              margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
-              decoration: KWidgetTheme.boxDecorationGreen.copyWith(
-                color: widget.color ??
-                    (widget.useBlackStyle ?? false
-                        ? AppColors.materialThemeKeyColorsSecondary
-                        : null),
+      child: RepaintBoundary(
+        child: Stack(
+          key: KWidgetkeys.widget.doubleButton.desk,
+          alignment: Alignment.centerRight,
+          children: [
+            AnimatedPadding(
+              duration: const Duration(
+                milliseconds: KDimensions.doubleButtonAnimationDuration,
               ),
-              padding: widget.padding ??
-                  const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize30,
-                    vertical: KPadding.kPaddingSize12,
-                  ),
-              child: Text(
-                widget.text,
-                key: KWidgetkeys.widget.doubleButton.text,
-                style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                  color: widget.textColor ??
+              padding: isHovering
+                  ? const EdgeInsets.only(right: KPadding.kPaddingSize12)
+                  : EdgeInsets.zero,
+              child: Container(
+                width: widget.textWidth,
+                margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
+                decoration: KWidgetTheme.boxDecorationGreen.copyWith(
+                  color: widget.color ??
                       (widget.useBlackStyle ?? false
-                          ? AppColors.materialThemeWhite
-                          : AppColors.materialThemeKeyColorsSecondary),
+                          ? AppColors.materialThemeKeyColorsSecondary
+                          : null),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          TweenAnimationBuilder<double>(
-            tween: Tween<double>(
-              begin: 0,
-              end: isHovering ? widget.angle ?? (pi / 4) : 0,
-            ),
-            duration: const Duration(
-              milliseconds: KDimensions.doubleButtonAnimationDuration,
-            ),
-            builder: (BuildContext context, double angle, Widget? child) {
-              return Transform.rotate(
-                angle: angle,
-                child: child,
-              );
-            },
-            child: IconWidget(
-              key: isHovering
-                  ? KWidgetkeys.widget.doubleButton.rotateIcon
-                  : KWidgetkeys.widget.doubleButton.icon,
-              icon: widget.icon ??
-                  KIcon.arrowUpRight.copyWith(
+                padding: widget.padding ??
+                    const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize30,
+                      vertical: KPadding.kPaddingSize12,
+                    ),
+                child: Text(
+                  widget.text,
+                  key: KWidgetkeys.widget.doubleButton.text,
+                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
                     color: widget.textColor ??
                         (widget.useBlackStyle ?? false
                             ? AppColors.materialThemeWhite
                             : AppColors.materialThemeKeyColorsSecondary),
                   ),
-              background: widget.color ??
-                  (widget.useBlackStyle ?? false
-                      ? AppColors.materialThemeKeyColorsSecondary
-                      : null),
-              padding: widget.iconPadding ?? KPadding.kPaddingSize12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-        ],
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(
+                begin: 0,
+                end: isHovering ? widget.angle ?? (pi / 4) : 0,
+              ),
+              duration: const Duration(
+                milliseconds: KDimensions.doubleButtonAnimationDuration,
+              ),
+              builder: (BuildContext context, double angle, Widget? child) {
+                return Transform.rotate(
+                  angle: angle,
+                  child: child,
+                );
+              },
+              child: IconWidget(
+                key: isHovering
+                    ? KWidgetkeys.widget.doubleButton.rotateIcon
+                    : KWidgetkeys.widget.doubleButton.icon,
+                icon: widget.icon ??
+                    KIcon.arrowUpRight.copyWith(
+                      color: widget.textColor ??
+                          (widget.useBlackStyle ?? false
+                              ? AppColors.materialThemeWhite
+                              : AppColors.materialThemeKeyColorsSecondary),
+                    ),
+                background: widget.color ??
+                    (widget.useBlackStyle ?? false
+                        ? AppColors.materialThemeKeyColorsSecondary
+                        : null),
+                padding: widget.iconPadding ?? KPadding.kPaddingSize12,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
