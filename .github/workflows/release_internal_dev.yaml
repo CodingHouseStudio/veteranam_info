@@ -20,6 +20,7 @@ jobs:
       run_sentry_plugin: false
       project_name: "veteran-development"
       ROLE: "user"
+      sentry_dsn: ${{ secrets.SENTRY_DSN }}
   #  ios-build:
   #    name: Deploy beta build to TestFlight
   #    runs-on: macOS-latest
