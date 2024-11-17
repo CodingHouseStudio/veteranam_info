@@ -2,6 +2,8 @@
 
 // import 'dart:developer' show log;
 
+import 'dart:developer';
+
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart'
@@ -20,6 +22,9 @@ import 'package:veteranam/shared/repositories/failure_repository.dart';
 /// COMMENT: DEV main file
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Evnironment.loadEnv();
+
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -47,7 +52,14 @@ void main() async {
           ? AppleProvider.deviceCheck
           : AppleProvider.debug,
     );
-  } catch (e) {}
+  } catch (e, stack) {
+    log(
+      'Firebase App check not registred',
+      name: 'Firebase App Check',
+      error: e,
+      stackTrace: stack,
+    );
+  }
 
   // Non-async exceptions handling
   FlutterError.onError = (details) {

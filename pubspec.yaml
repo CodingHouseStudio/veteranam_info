@@ -34,6 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_dotenv: ^5.2.1
   flutter_facebook_auth: ^7.1.0
   flutter_localizations:
     sdk: flutter
@@ -103,6 +104,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/markdown/
+    - .env
 
   fonts:
     - family: Gilroy
