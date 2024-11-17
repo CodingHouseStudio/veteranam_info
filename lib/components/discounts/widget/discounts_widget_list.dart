@@ -1,33 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountsWidgetList extends StatelessWidget {
-  const DiscountsWidgetList({
-    required this.isDesk,
-    super.key,
-  });
-  final bool isDesk;
+// class DiscountsWidgetList extends SingleChildRenderObjectWidget {
+//   const DiscountsWidgetList({
+//     required this.isDesk,
+//     super.key,
+//   });
+//   final bool isDesk;
 
-  @override
-  Widget build(BuildContext context) {
-    if (isDesk) {
-      return const _DiscountsDeskWidgetList();
-    } else {
-      return const _DiscountsMobWidgetList();
-    }
-  }
-}
+//   @override
+//   MultiChildRenderObjectWidget createRenderObject(BuildContext context) {
+//     if (isDesk) {
+//       return _DiscountsDeskWidgetList();
+//     } else {
+//       return  _DiscountsMobWidgetList();
+//     }
+//   }
+// }
 
-int _itemCount(DiscountWatcherState state) =>
-    state.filteredDiscountModelItems.length +
-    ((state.loadingStatus == LoadingStatus.loaded &&
-                PlatformEnumFlutter.isWebDesktop) ||
-            state.loadingStatus == LoadingStatus.listLoadedFull
-        ? 1
-        : KDimensions.shimmerDiscountsItems);
+int _itemCount({
+  required DiscountWatcherState state,
+  required DiscountConfigState config,
+}) =>
+    state.filteredDiscountModelItems.isEmpty
+        ? config.loadingItems
+        : state.filteredDiscountModelItems.length +
+            ((state.loadingStatus == LoadingStatus.loaded &&
+                        PlatformEnumFlutter.isWebDesktop) ||
+                    state.loadingStatus == LoadingStatus.listLoadedFull
+                ? 1
+                : KDimensions.shimmerDiscountsItems) +
+            ((config.linkScrollCount + 1) * config.loadingItems >
+                    state.filteredDiscountModelItems.length
+                ? 0
+                : 1);
 
 /// The findChildIndexCallback method is called whenever the list is rebuilt.
 /// Initially, it returns the old keys of the list items. If an item remains
@@ -48,7 +58,7 @@ int? _findChildIndexCallback({
       return state.filteredDiscountModelItems.length;
     }
     if (valueKey.value.contains('load_button')) {
-      return _itemCount(state) - 1;
+      return state.filteredDiscountModelItems.length;
     }
     if (!valueKey.value.contains('mock_discount_')) {
       final index = state.filteredDiscountModelItems.indexWhere(
@@ -85,57 +95,77 @@ ValueKey<String> _key({
   }
   return ValueKey(
     'mock_discount_'
-    '${index + 1 - state.filteredDiscountModelItems.length}',
+    '${index + 2 - state.filteredDiscountModelItems.length}',
   );
 }
 
-class _DiscountsDeskWidgetList extends StatelessWidget {
-  const _DiscountsDeskWidgetList();
+class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
+  // Constructor for the RowSliver widget
+  DiscountsDeskWidgetList({
+    required this.maxHeight,
+    super.key,
+  }) : super(
+          children: [
+            _AdvancedFilterDesk(
+              maxHeight: maxHeight,
+            ),
+            const _DiscountWidgetList(
+              isDesk: true,
+            ),
+          ],
+        );
+  final double maxHeight;
+
+  // Creates the render object for this widget
+  @override
+  RenderRowSliver createRenderObject(BuildContext context) {
+    return RenderRowSliver(leftWidthPercent: 0.3);
+  }
+}
+
+class _AdvancedFilterDesk extends StatelessWidget {
+  const _AdvancedFilterDesk({
+    required this.maxHeight,
+  });
+  final double maxHeight;
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      primary: false,
-      shrinkWrap: true,
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      slivers: [
-        RowSliver(
-          right: BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
-            builder: (context, config) {
-              return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                buildWhen: (previous, current) =>
-                    previous.loadingStatus != current.loadingStatus ||
-                    previous.filteredDiscountModelItems !=
-                        current.filteredDiscountModelItems,
-                builder: (context, state) {
-                  return SliverList.builder(
-                    itemCount: _itemCount(state),
-                    findChildIndexCallback: (key) =>
-                        _findChildIndexCallback(key: key, state: state),
-                    itemBuilder: (context, index) => _DiscountsWidgetItem(
-                      isDesk: true,
-                      key: _key(state: state, index: index),
-                      state: state,
-                      index: index,
-                      config: config,
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-          left: const SliverToBoxAdapter(
-            child: AdvancedFilterDesk(),
-          ),
-          leftWidthPercent: 0.3,
-        ),
-      ],
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: SliverHeaderWidget(
+        // isDesk: isDesk,
+        childWidget: ({
+          required overlapsContent,
+          required shrinkOffset,
+        }) =>
+            const AdvancedFilterDesk(),
+        maxMinHeight: maxHeight,
+        // isTablet: isTablet,
+      ),
     );
   }
 }
 
-class _DiscountsMobWidgetList extends StatelessWidget {
-  const _DiscountsMobWidgetList();
+class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
+  const DiscountsMobWidgetList({super.key})
+      : super(
+          child: const _DiscountWidgetList(
+            isDesk: false,
+          ),
+        );
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return RenderSliverIgnorePointer(
+      ignoring: false,
+    );
+  }
+}
+
+class _DiscountWidgetList extends StatelessWidget {
+  const _DiscountWidgetList({required this.isDesk});
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -147,18 +177,17 @@ class _DiscountsMobWidgetList extends StatelessWidget {
               previous.filteredDiscountModelItems !=
                   current.filteredDiscountModelItems,
           builder: (context, state) {
-            return ListView.builder(
-              primary: false,
+            return SliverList.builder(
               addAutomaticKeepAlives: false,
               addRepaintBoundaries: false,
-              shrinkWrap: true,
-              restorationId: 'discount_list',
               findChildIndexCallback: (key) =>
                   _findChildIndexCallback(key: key, state: state),
-              itemCount: _itemCount(state),
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              itemCount: _itemCount(
+                state: state,
+                config: config,
+              ),
               itemBuilder: (context, index) => _DiscountsWidgetItem(
-                isDesk: false,
+                isDesk: isDesk,
                 key: _key(state: state, index: index),
                 state: state,
                 index: index,
@@ -186,48 +215,32 @@ class _DiscountsWidgetItem extends StatelessWidget {
   final DiscountConfigState config;
   @override
   Widget build(BuildContext context) {
-    if (index < state.filteredDiscountModelItems.length) {
-      final discountItem = state.filteredDiscountModelItems.elementAt(index);
+    var indexValue = index;
+    if ((config.linkScrollCount + 1) * config.loadingItems <= index + 1) {
       if ((config.linkScrollCount + 1) * config.loadingItems == index + 1) {
-        return ListView(
-          primary: false,
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
-          ),
-          shrinkWrap: true,
-          children: [
-            DiscountCardWidget(
-              discountItem: discountItem,
-              isDesk: isDesk,
-              // reportEvent: null,
-              share:
-                  '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-              isLoading: false,
-              // () => context
-              //     .read<DiscountWatcherBloc>()
-              //     .add(const DiscountWatcherEvent.getReport()),
-            ),
-            DiscountLinkWidget(isDesk: isDesk),
-          ],
-        );
-      } else {
-        return Padding(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
-          ),
-          child: DiscountCardWidget(
-            discountItem: discountItem,
-            isDesk: isDesk,
-            // reportEvent: null,
-            share:
-                '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-            isLoading: false,
-            // () => context
-            //     .read<DiscountWatcherBloc>()
-            //     .add(const DiscountWatcherEvent.getReport()),
-          ),
-        );
+        return DiscountLinkWidget(isDesk: isDesk);
       }
+      indexValue--;
+    }
+    if (indexValue < state.filteredDiscountModelItems.length) {
+      final discountItem =
+          state.filteredDiscountModelItems.elementAt(indexValue);
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize48,
+        ),
+        child: DiscountCardWidget(
+          discountItem: discountItem,
+          isDesk: isDesk,
+          // reportEvent: null,
+          share:
+              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+          isLoading: false,
+          // () => context
+          //     .read<DiscountWatcherBloc>()
+          //     .add(const DiscountWatcherEvent.getReport()),
+        ),
+      );
     } else {
       if (state.loadingStatus == LoadingStatus.listLoadedFull) {
         return Padding(
@@ -246,8 +259,8 @@ class _DiscountsWidgetItem extends StatelessWidget {
       if (state.loadingStatus == LoadingStatus.loaded &&
           PlatformEnumFlutter.isWebDesktop) {
         return Padding(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
+          padding: const EdgeInsets.symmetric(
+            vertical: KPadding.kPaddingSize48,
           ),
           child: LoadingButtonWidget(
             widgetKey: KWidgetkeys.widget.scaffold.loadingButton,

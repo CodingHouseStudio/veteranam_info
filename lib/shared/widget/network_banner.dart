@@ -74,31 +74,33 @@ class NetworkStatusBanner extends StatefulWidget {
         childWidget: ({required overlapsContent, required shrinkOffset}) {
           const maxMinHeight = KSize.kPixel36;
           final progress = shrinkOffset / maxMinHeight;
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              AnimatedOpacity(
-                opacity: 1 - progress,
-                duration: const Duration(milliseconds: 250),
-                child: NetworkStatusBanner(
-                  networkStatus: networkStatus!,
-                ),
-              ),
-              AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                opacity: progress,
-                child: const Padding(
-                  padding: EdgeInsets.only(
-                    top: KPadding.kPaddingSize20,
-                    right: KPadding.kPaddingSize32,
-                  ),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: KIcon.noInternet,
+          return RepaintBoundary(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                AnimatedOpacity(
+                  opacity: 1 - progress,
+                  duration: const Duration(milliseconds: 250),
+                  child: NetworkStatusBanner(
+                    networkStatus: networkStatus!,
                   ),
                 ),
-              ),
-            ],
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity: progress,
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      top: KPadding.kPaddingSize20,
+                      right: KPadding.kPaddingSize32,
+                    ),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: KIcon.noInternet,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
         maxMinHeight: KSize.kPixel36,

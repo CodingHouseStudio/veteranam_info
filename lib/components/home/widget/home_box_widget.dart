@@ -50,29 +50,31 @@ class HomeBoxWidget extends StatelessWidget {
                     : AppTextStyle.h1Mob.copyWith(
                         color: AppColors.materialThemeKeyColorsSecondary,
                       ),
-            child: AnimatedTextKit(
-              repeatForever: true,
-              key: ValueKey<Language>(
-                context.read<LanguageCubit>().state,
+            child: RepaintBoundary(
+              child: AnimatedTextKit(
+                repeatForever: true,
+                key: ValueKey<Language>(
+                  context.read<LanguageCubit>().state,
+                ),
+                animatedTexts: [
+                  TyperAnimatedText(
+                    context.l10n.veterans,
+                    speed: const Duration(milliseconds: 55),
+                  ),
+                  TyperAnimatedText(
+                    context.l10n.theirFamilies,
+                    speed: const Duration(milliseconds: 55),
+                  ),
+                  TyperAnimatedText(
+                    context.l10n.activeMilitary,
+                    speed: const Duration(milliseconds: 55),
+                  ),
+                  TyperAnimatedText(
+                    context.l10n.militaryDoctors,
+                    speed: const Duration(milliseconds: 55),
+                  ),
+                ],
               ),
-              animatedTexts: [
-                TyperAnimatedText(
-                  context.l10n.veterans,
-                  speed: const Duration(milliseconds: 55),
-                ),
-                TyperAnimatedText(
-                  context.l10n.theirFamilies,
-                  speed: const Duration(milliseconds: 55),
-                ),
-                TyperAnimatedText(
-                  context.l10n.activeMilitary,
-                  speed: const Duration(milliseconds: 55),
-                ),
-                TyperAnimatedText(
-                  context.l10n.militaryDoctors,
-                  speed: const Duration(milliseconds: 55),
-                ),
-              ],
             ),
           ),
           if (isDesk)
