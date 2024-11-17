@@ -67,6 +67,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                     ),
                     body: CustomScrollView(
                       key: KWidgetkeys.widget.scaffold.scroll,
+                      cacheExtent: KDimensions.listCacheExtent,
                       slivers: [
                         if (!Config.isWeb)
                           BlocBuilder<NetworkCubit, NetworkStatus>(
