@@ -24,16 +24,20 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 int _itemCount({
   required DiscountWatcherState state,
-  required int loadingItems,
+  required DiscountConfigState config,
 }) =>
     state.filteredDiscountModelItems.isEmpty
-        ? loadingItems
+        ? config.loadingItems
         : state.filteredDiscountModelItems.length +
             ((state.loadingStatus == LoadingStatus.loaded &&
                         PlatformEnumFlutter.isWebDesktop) ||
                     state.loadingStatus == LoadingStatus.listLoadedFull
                 ? 1
-                : KDimensions.shimmerDiscountsItems);
+                : KDimensions.shimmerDiscountsItems) +
+            ((config.linkScrollCount + 1) * config.loadingItems >
+                    state.filteredDiscountModelItems.length
+                ? 0
+                : 1);
 
 /// The findChildIndexCallback method is called whenever the list is rebuilt.
 /// Initially, it returns the old keys of the list items. If an item remains
@@ -91,7 +95,7 @@ ValueKey<String> _key({
   }
   return ValueKey(
     'mock_discount_'
-    '${index + 1 - state.filteredDiscountModelItems.length}',
+    '${index + 2 - state.filteredDiscountModelItems.length}',
   );
 }
 
@@ -105,7 +109,9 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
             _AdvancedFilterDesk(
               maxHeight: maxHeight,
             ),
-            const _DiscountsDeskWidgetList(),
+            const _DiscountWidgetList(
+              isDesk: true,
+            ),
           ],
         );
   final double maxHeight;
@@ -114,41 +120,6 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
   @override
   RenderRowSliver createRenderObject(BuildContext context) {
     return RenderRowSliver(leftWidthPercent: 0.3);
-  }
-}
-
-class _DiscountsDeskWidgetList extends StatelessWidget {
-  const _DiscountsDeskWidgetList();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
-      builder: (context, config) {
-        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.loadingStatus != current.loadingStatus ||
-              previous.filteredDiscountModelItems !=
-                  current.filteredDiscountModelItems,
-          builder: (context, state) {
-            return SliverList.builder(
-              itemCount: _itemCount(
-                state: state,
-                loadingItems: config.loadingItems,
-              ),
-              findChildIndexCallback: (key) =>
-                  _findChildIndexCallback(key: key, state: state),
-              itemBuilder: (context, index) => _DiscountsWidgetItem(
-                isDesk: true,
-                key: _key(state: state, index: index),
-                state: state,
-                index: index,
-                config: config,
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 }
 
@@ -179,7 +150,9 @@ class _AdvancedFilterDesk extends StatelessWidget {
 class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
   const DiscountsMobWidgetList({super.key})
       : super(
-          child: const _DiscountMobWidgetList(),
+          child: const _DiscountWidgetList(
+            isDesk: false,
+          ),
         );
 
   @override
@@ -190,8 +163,9 @@ class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
   }
 }
 
-class _DiscountMobWidgetList extends StatelessWidget {
-  const _DiscountMobWidgetList();
+class _DiscountWidgetList extends StatelessWidget {
+  const _DiscountWidgetList({required this.isDesk});
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -204,16 +178,16 @@ class _DiscountMobWidgetList extends StatelessWidget {
                   current.filteredDiscountModelItems,
           builder: (context, state) {
             return SliverList.builder(
-              // addAutomaticKeepAlives: false,
-              // addRepaintBoundaries: false,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               findChildIndexCallback: (key) =>
                   _findChildIndexCallback(key: key, state: state),
               itemCount: _itemCount(
                 state: state,
-                loadingItems: config.loadingItems,
+                config: config,
               ),
               itemBuilder: (context, index) => _DiscountsWidgetItem(
-                isDesk: false,
+                isDesk: isDesk,
                 key: _key(state: state, index: index),
                 state: state,
                 index: index,
@@ -241,48 +215,32 @@ class _DiscountsWidgetItem extends StatelessWidget {
   final DiscountConfigState config;
   @override
   Widget build(BuildContext context) {
-    if (index < state.filteredDiscountModelItems.length) {
-      final discountItem = state.filteredDiscountModelItems.elementAt(index);
+    var indexValue = index;
+    if ((config.linkScrollCount + 1) * config.loadingItems <= index + 1) {
       if ((config.linkScrollCount + 1) * config.loadingItems == index + 1) {
-        return ListView(
-          primary: false,
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
-          ),
-          shrinkWrap: true,
-          children: [
-            DiscountCardWidget(
-              discountItem: discountItem,
-              isDesk: isDesk,
-              // reportEvent: null,
-              share:
-                  '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-              isLoading: false,
-              // () => context
-              //     .read<DiscountWatcherBloc>()
-              //     .add(const DiscountWatcherEvent.getReport()),
-            ),
-            DiscountLinkWidget(isDesk: isDesk),
-          ],
-        );
-      } else {
-        return Padding(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
-          ),
-          child: DiscountCardWidget(
-            discountItem: discountItem,
-            isDesk: isDesk,
-            // reportEvent: null,
-            share:
-                '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-            isLoading: false,
-            // () => context
-            //     .read<DiscountWatcherBloc>()
-            //     .add(const DiscountWatcherEvent.getReport()),
-          ),
-        );
+        return DiscountLinkWidget(isDesk: isDesk);
       }
+      indexValue--;
+    }
+    if (indexValue < state.filteredDiscountModelItems.length) {
+      final discountItem =
+          state.filteredDiscountModelItems.elementAt(indexValue);
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize48,
+        ),
+        child: DiscountCardWidget(
+          discountItem: discountItem,
+          isDesk: isDesk,
+          // reportEvent: null,
+          share:
+              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+          isLoading: false,
+          // () => context
+          //     .read<DiscountWatcherBloc>()
+          //     .add(const DiscountWatcherEvent.getReport()),
+        ),
+      );
     } else {
       if (state.loadingStatus == LoadingStatus.listLoadedFull) {
         return Padding(

@@ -18,39 +18,42 @@ class SwitchOfflineWidget extends StatelessWidget {
       onPressed: onChanged,
       icon: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationNawbar,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          constraints: const BoxConstraints(
-            minWidth: KSize.kPixel40,
-            minHeight: KSize.kPixel40,
-          ),
-          decoration: isSelected
-              ? KWidgetTheme.boxDecorationBlackCircular.copyWith(
-                  color: onChanged == null
-                      ? AppColors.materialThemeRefNeutralVariantNeutralVariant70
-                      : null,
-                )
-              : KWidgetTheme.boxDecorationWhiteCircular,
-          margin: EdgeInsets.only(
-            top: KPadding.kPaddingSize4,
-            bottom: KPadding.kPaddingSize4,
-            left: horizontalMergin(isRight: false),
-            right: horizontalMergin(isRight: true),
-          ),
-          padding: const EdgeInsets.all(
-            KPadding.kPaddingSize8,
-          ),
-          child: KIcon.modeOffOn.copyWith(
-            key: isSelected
-                ? KWidgetkeys.widget.switchOffline.active
-                : KWidgetkeys.widget.switchOffline.icon,
-            color: isSelected
-                ? onChanged == null
-                    ? AppColors.materialThemeKeyColorsNeutral
-                    : AppColors.materialThemeWhite
-                : onChanged == null
-                    ? AppColors.materialThemeRefNeutralNeutral70
-                    : AppColors.materialThemeKeyColorsSecondary,
+        child: RepaintBoundary(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            constraints: const BoxConstraints(
+              minWidth: KSize.kPixel40,
+              minHeight: KSize.kPixel40,
+            ),
+            decoration: isSelected
+                ? KWidgetTheme.boxDecorationBlackCircular.copyWith(
+                    color: onChanged == null
+                        ? AppColors
+                            .materialThemeRefNeutralVariantNeutralVariant70
+                        : null,
+                  )
+                : KWidgetTheme.boxDecorationWhiteCircular,
+            margin: EdgeInsets.only(
+              top: KPadding.kPaddingSize4,
+              bottom: KPadding.kPaddingSize4,
+              left: horizontalMergin(isRight: false),
+              right: horizontalMergin(isRight: true),
+            ),
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize8,
+            ),
+            child: KIcon.modeOffOn.copyWith(
+              key: isSelected
+                  ? KWidgetkeys.widget.switchOffline.active
+                  : KWidgetkeys.widget.switchOffline.icon,
+              color: isSelected
+                  ? onChanged == null
+                      ? AppColors.materialThemeKeyColorsNeutral
+                      : AppColors.materialThemeWhite
+                  : onChanged == null
+                      ? AppColors.materialThemeRefNeutralNeutral70
+                      : AppColors.materialThemeKeyColorsSecondary,
+            ),
           ),
         ),
       ),

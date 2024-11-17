@@ -80,24 +80,26 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() => _isHovered = value),
-      icon: Column(
-        // mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            widget.text,
-            key: KWidgetkeys.widget.buttonBottomLine.text,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-          AnimatedContainer(
-            key: KWidgetkeys.widget.buttonBottomLine.line,
-            duration: const Duration(milliseconds: 300),
-            width: _isHovered ? textWidth : 0,
-            height: 1,
-            decoration: const BoxDecoration(color: Colors.black),
-          ),
-        ],
+      icon: RepaintBoundary(
+        child: Column(
+          // mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.text,
+              key: KWidgetkeys.widget.buttonBottomLine.text,
+              style: AppTextStyle.materialThemeTitleMedium,
+            ),
+            AnimatedContainer(
+              key: KWidgetkeys.widget.buttonBottomLine.line,
+              duration: const Duration(milliseconds: 300),
+              width: _isHovered ? textWidth : 0,
+              height: 1,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+          ],
+        ),
       ),
       label: widget.icon != null ? widget.icon! : const SizedBox.shrink(),
     );

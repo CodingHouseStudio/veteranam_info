@@ -88,55 +88,57 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
       onHover: _handleHover,
-      child: Stack(
-        key: KWidgetkeys.widget.loadingButton.desk,
-        alignment: Alignment.centerRight,
-        children: [
-          AnimatedPadding(
-            duration: const Duration(
-              milliseconds: KDimensions.doubleButtonAnimationDuration,
-            ),
-            padding: isHovering
-                ? const EdgeInsets.only(right: KPadding.kPaddingSize12)
-                : EdgeInsets.zero,
-            child: Container(
-              margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
-              decoration: KWidgetTheme.boxDecorationBlack,
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize30,
-                vertical: KPadding.kPaddingSize12,
+      child: RepaintBoundary(
+        child: Stack(
+          key: KWidgetkeys.widget.loadingButton.desk,
+          alignment: Alignment.centerRight,
+          children: [
+            AnimatedPadding(
+              duration: const Duration(
+                milliseconds: KDimensions.doubleButtonAnimationDuration,
               ),
-              child: Text(
-                widget.text,
-                key: KWidgetkeys.widget.loadingButton.text,
-                style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                  color: AppColors.materialThemeWhite,
+              padding: isHovering
+                  ? const EdgeInsets.only(right: KPadding.kPaddingSize12)
+                  : EdgeInsets.zero,
+              child: Container(
+                margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
+                decoration: KWidgetTheme.boxDecorationBlack,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize30,
+                  vertical: KPadding.kPaddingSize12,
+                ),
+                child: Text(
+                  widget.text,
+                  key: KWidgetkeys.widget.loadingButton.text,
+                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
+                    color: AppColors.materialThemeWhite,
+                  ),
                 ),
               ),
             ),
-          ),
-          AnimatedBuilder(
-            animation: _animation,
-            builder: (BuildContext context, Widget? child) {
-              // ignore: omit_local_variable_types
-              final double angle = _controller.value * 2 * pi;
-              return Transform.rotate(
-                angle: angle,
-                child: child,
-              );
-            },
-            child: IconWidget(
-              key: isHovering
-                  ? KWidgetkeys.widget.loadingButton.loadingIcon
-                  : KWidgetkeys.widget.loadingButton.icon,
-              icon: KIcon.refresh.copyWith(
-                color: AppColors.materialThemeWhite,
+            AnimatedBuilder(
+              animation: _animation,
+              builder: (BuildContext context, Widget? child) {
+                // ignore: omit_local_variable_types
+                final double angle = _controller.value * 2 * pi;
+                return Transform.rotate(
+                  angle: angle,
+                  child: child,
+                );
+              },
+              child: IconWidget(
+                key: isHovering
+                    ? KWidgetkeys.widget.loadingButton.loadingIcon
+                    : KWidgetkeys.widget.loadingButton.icon,
+                icon: KIcon.refresh.copyWith(
+                  color: AppColors.materialThemeWhite,
+                ),
+                padding: KPadding.kPaddingSize12,
+                background: AppColors.materialThemeKeyColorsSecondary,
               ),
-              padding: KPadding.kPaddingSize12,
-              background: AppColors.materialThemeKeyColorsSecondary,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
