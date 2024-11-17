@@ -124,7 +124,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                               ? DiscountsDeskWidgetList(
                                   maxHeight: constraints.maxHeight,
                                 )
-                              : DiscountsMobWidgetList(),
+                              : const DiscountsMobWidgetList(),
                         ),
                       ],
                       controller: scrollController,
@@ -145,7 +145,8 @@ class _DiscountsBodyWidget extends StatelessWidget {
     //     final isDesk =
     //         constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
     //     final isTablet =
-    //         constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+    //         constraints.maxWidth > KPlatformConstants.
+    // minWidthThresholdTablet;
     //     final padding = EdgeInsets.symmetric(
     //       horizontal: (isDesk
     //           ? KPadding.kPaddingSize90 +
