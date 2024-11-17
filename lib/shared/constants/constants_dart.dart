@@ -1,6 +1,7 @@
 export 'config.dart';
 export 'dimensions/dimensions.dart';
 export 'enum.dart';
+export 'evnironment.dart';
 export 'failure_enum.dart';
 export 'models.dart';
 export 'platform_constants.dart';

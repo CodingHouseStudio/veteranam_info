@@ -12,7 +12,7 @@ import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
-import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/constants/evnironment.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
 
@@ -24,70 +24,18 @@ Future<void> main() async {
   );
 
   if (Config.isReleaseMode) {
-    // if (Config.isWeb) {
-    //   await SentryFlutter.init(
-    //     (options) {
-    //       options
-    //         ..dsn = KSecurityKeys.sentryDSN
-    //         // Set tracesSampleRate to 1.0 to capture 100% of transactions for
-    //         // performance monitoring.
-    //         // We recommend adjusting this value in production.
-    //         ..tracesSampleRate = 1.0
-    //         // The sampling rate for profiling is relative to tracesSampleRate
-    //         // Setting to 1.0 will profile 100% of sampled transactions:
-    //         ..profilesSampleRate = 1.0
-    //         // ignore package error
-    //         ..reportPackages = false
-    //         // add information about threads
-    //         ..attachThreads = true
-    //         ..reportSilentFlutterErrors = true
-    //         // Add screenshot for error
-    //         ..attachScreenshot = true
-    //         // Optimization screenshot
-    //         ..screenshotQuality = SentryScreenshotQuality.low
-    //         // Add hierarchy for error report
-    //         ..attachViewHierarchy = true
-    //         // Turns on Spotlight functionality, which can help you track
-    //         // certain events or conditions.
-    //         ..spotlight = Spotlight(enabled: true)
-    //         // Turns on time tracking until full display to help you understand
-    //         // the performance of the app's loading.
-    //         ..enableTimeToFullDisplayTracing = true;
-    //     },
-    //   );
-    // }
-
-    // try {
     if (Config.isWeb) {
       await FirebasePerformance.instanceFor(app: app)
           .setPerformanceCollectionEnabled(Config.isReleaseMode);
-
-      //   final temp = await FirebasePerformance.instanceFor(app: app)
-      //       .isPerformanceCollectionEnabled();
-      //   if (temp) {
-      //     await FirebasePerformance.instanceFor(app: app)
-      //         .newTrace('test-web')
-      //         .start();
-      //     print('Performance collection is enabled');
-
-      //     await FirebasePerformance.instanceFor(app: app)
-      //         .newTrace('test-web')
-      //         .stop();
-      //   } else {
-      //     print('Performance collection is disabled');
-      //   }
     } else {
       await FirebasePerformance.instance
           .setPerformanceCollectionEnabled(Config.isReleaseMode);
     }
-    // } catch (e, stack) {}
   }
   try {
-    // if (!Config.isWeb)
-    // {
     await FirebaseAppCheck.instanceFor(app: app).activate(
       webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheckProd,
+        Evnironment.firebaseAppCheckProd,
       ),
       androidProvider: Config.isReleaseMode
           ? AndroidProvider.playIntegrity
@@ -98,7 +46,7 @@ Future<void> main() async {
     );
     await FirebaseAppCheck.instance.activate(
       webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheckProd,
+        Evnironment.firebaseAppCheckProd,
       ),
       androidProvider: Config.isReleaseMode
           ? AndroidProvider.playIntegrity
@@ -174,68 +122,3 @@ Future<void> main() async {
 
   await bootstrap(App.new);
 }
-
-// Future<void> _onError({
-//   required Object error,
-//   required StackTrace? stack,
-// }) async {
-//   if (Config.isReleaseMode) {
-//     if (Config.isWeb) {
-//       if (_isCrashlyticsLoaded) {
-//         await sentry.loadLibrary();
-//         _isCrashlyticsLoaded = true;
-//       }
-//       if (!sentry.Sentry.isEnabled) {
-//         await sentry.SentryFlutter.init(
-//           (options) {
-//             options
-//               ..dsn = KSecurityKeys.sentryDSN
-//               // Set tracesSampleRate to 1.0 to capture 100% of transactions for
-//               // performance monitoring.
-//               // We recommend adjusting this value in production.
-//               ..tracesSampleRate = 1.0
-//               // The sampling rate for profiling is relative to tracesSampleRate
-//               // Setting to 1.0 will profile 100% of sampled transactions:
-//               ..profilesSampleRate = 1.0
-//               // ignore package error
-//               ..reportPackages = false
-//               // add information about threads
-//               ..attachThreads = true
-//               ..reportSilentFlutterErrors = true
-//               // Add screenshot for error
-//               ..attachScreenshot = true
-//               // Optimization screenshot
-//               ..screenshotQuality = sentry.SentryScreenshotQuality.low
-//               // Add hierarchy for error report
-//               ..attachViewHierarchy = true
-//               // Turns on Spotlight functionality, which can help you track
-//               // certain events or conditions.
-//               ..spotlight = sentry.Spotlight(enabled: true)
-//               // Turns on time tracking until full display to help you
-//               // understand
-//               // the performance of the app's loading.
-//               ..enableTimeToFullDisplayTracing = true;
-//           },
-//         );
-//       }
-//       await sentry.Sentry.captureException(
-//         error is FlutterErrorDetails ? error.exceptionAsString() : error,
-//         stackTrace: stack,
-//       );
-//     } else {
-//       if (_isCrashlyticsLoaded) {
-//         await firebase_crashlytics.loadLibrary();
-//         _isCrashlyticsLoaded = true;
-//       }
-//       if (error is FlutterErrorDetails) {
-//         await firebase_crashlytics.FirebaseCrashlytics.instance
-//             .recordFlutterError(error);
-//       } else {
-//         await firebase_crashlytics.FirebaseCrashlytics.instance
-//             .recordError(error, stack);
-//       }
-//     }
-//   }
-// }
-
-// bool _isCrashlyticsLoaded = false;

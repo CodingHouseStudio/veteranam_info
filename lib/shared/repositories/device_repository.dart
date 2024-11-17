@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IDeviceRepository, order: -1)
@@ -167,8 +166,8 @@ class DeviceRepository implements IDeviceRepository {
         if (!platform.isIOS || apnsToken != null) {
           fcmToken = await _firebaseMessaging.getToken(
             vapidKey: Config.isProduction
-                ? KSecurityKeys.firebaseProdVapidKey
-                : KSecurityKeys.firebaseDevVapidKey,
+                ? Evnironment.firebaseProdVapidKey
+                : Evnironment.firebaseDevVapidKey,
           );
         }
       }

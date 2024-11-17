@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -108,7 +107,7 @@ void main() {
         );
         when(
           mockFirebaseMessaging.getToken(
-            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+            vapidKey: Evnironment.firebaseDevVapidKey,
           ),
         ).thenAnswer(
           (_) async => KTestText.fcmToken,
@@ -455,7 +454,7 @@ void main() {
         );
         when(
           mockFirebaseMessaging.getToken(
-            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+            vapidKey: Evnironment.firebaseDevVapidKey,
           ),
         ).thenThrow(
           Exception(KGroupText.failure),

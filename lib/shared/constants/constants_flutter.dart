@@ -1,6 +1,7 @@
 export 'config.dart';
 export 'dimensions/dimensions.dart';
 export 'enum.dart';
+export 'evnironment.dart';
 export 'models.dart';
 export 'models_flutter.dart';
 export 'platform_constants.dart';

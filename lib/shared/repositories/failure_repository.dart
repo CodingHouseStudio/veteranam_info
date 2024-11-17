@@ -12,7 +12,6 @@ import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
         SentryScreenshotQuality,
         SentryUser,
         Spotlight;
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @LazySingleton(order: -2)
@@ -87,7 +86,7 @@ class FailureRepository {
           await sentry.SentryFlutter.init(
             (options) {
               options
-                ..dsn = KSecurityKeys.sentryDSN
+                ..dsn = Evnironment.sentryDSN
                 // Set tracesSampleRate to 1.0 to capture 100% of
                 // transactions for
                 // performance monitoring.
