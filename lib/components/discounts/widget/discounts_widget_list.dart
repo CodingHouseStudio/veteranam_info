@@ -102,46 +102,10 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
     super.key,
   }) : super(
           children: [
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: SliverHeaderWidget(
-                // isDesk: isDesk,
-                childWidget: ({
-                  required overlapsContent,
-                  required shrinkOffset,
-                }) =>
-                    const AdvancedFilterDesk(),
-                maxMinHeight: maxHeight,
-                // isTablet: isTablet,
-              ),
+            _AdvancedFilterDesk(
+              maxHeight: maxHeight,
             ),
-            BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
-              builder: (context, config) {
-                return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                  buildWhen: (previous, current) =>
-                      previous.loadingStatus != current.loadingStatus ||
-                      previous.filteredDiscountModelItems !=
-                          current.filteredDiscountModelItems,
-                  builder: (context, state) {
-                    return SliverList.builder(
-                      itemCount: _itemCount(
-                        state: state,
-                        loadingItems: config.loadingItems,
-                      ),
-                      findChildIndexCallback: (key) =>
-                          _findChildIndexCallback(key: key, state: state),
-                      itemBuilder: (context, index) => _DiscountsWidgetItem(
-                        isDesk: true,
-                        key: _key(state: state, index: index),
-                        state: state,
-                        index: index,
-                        config: config,
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            const _DiscountsDeskWidgetList(),
           ],
         );
   final double maxHeight;
@@ -153,44 +117,112 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
   }
 }
 
+class _DiscountsDeskWidgetList extends StatelessWidget {
+  const _DiscountsDeskWidgetList();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
+      builder: (context, config) {
+        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.loadingStatus != current.loadingStatus ||
+              previous.filteredDiscountModelItems !=
+                  current.filteredDiscountModelItems,
+          builder: (context, state) {
+            return SliverList.builder(
+              itemCount: _itemCount(
+                state: state,
+                loadingItems: config.loadingItems,
+              ),
+              findChildIndexCallback: (key) =>
+                  _findChildIndexCallback(key: key, state: state),
+              itemBuilder: (context, index) => _DiscountsWidgetItem(
+                isDesk: true,
+                key: _key(state: state, index: index),
+                state: state,
+                index: index,
+                config: config,
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _AdvancedFilterDesk extends StatelessWidget {
+  const _AdvancedFilterDesk({
+    required this.maxHeight,
+  });
+  final double maxHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: SliverHeaderWidget(
+        // isDesk: isDesk,
+        childWidget: ({
+          required overlapsContent,
+          required shrinkOffset,
+        }) =>
+            const AdvancedFilterDesk(),
+        maxMinHeight: maxHeight,
+        // isTablet: isTablet,
+      ),
+    );
+  }
+}
+
 class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  DiscountsMobWidgetList({super.key})
+  const DiscountsMobWidgetList({super.key})
       : super(
-          child: BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
-            builder: (context, config) {
-              return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                buildWhen: (previous, current) =>
-                    previous.loadingStatus != current.loadingStatus ||
-                    previous.filteredDiscountModelItems !=
-                        current.filteredDiscountModelItems,
-                builder: (context, state) {
-                  return SliverList.builder(
-                    addAutomaticKeepAlives: false,
-                    addRepaintBoundaries: false,
-                    findChildIndexCallback: (key) =>
-                        _findChildIndexCallback(key: key, state: state),
-                    itemCount: _itemCount(
-                      state: state,
-                      loadingItems: config.loadingItems,
-                    ),
-                    itemBuilder: (context, index) => _DiscountsWidgetItem(
-                      isDesk: false,
-                      key: _key(state: state, index: index),
-                      state: state,
-                      index: index,
-                      config: config,
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+          child: const _DiscountMobWidgetList(),
         );
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderSliverIgnorePointer(
       ignoring: false,
+    );
+  }
+}
+
+class _DiscountMobWidgetList extends StatelessWidget {
+  const _DiscountMobWidgetList();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
+      builder: (context, config) {
+        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.loadingStatus != current.loadingStatus ||
+              previous.filteredDiscountModelItems !=
+                  current.filteredDiscountModelItems,
+          builder: (context, state) {
+            return SliverList.builder(
+              // addAutomaticKeepAlives: false,
+              // addRepaintBoundaries: false,
+              findChildIndexCallback: (key) =>
+                  _findChildIndexCallback(key: key, state: state),
+              itemCount: _itemCount(
+                state: state,
+                loadingItems: config.loadingItems,
+              ),
+              itemBuilder: (context, index) => _DiscountsWidgetItem(
+                isDesk: false,
+                key: _key(state: state, index: index),
+                state: state,
+                index: index,
+                config: config,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
