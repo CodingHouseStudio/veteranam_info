@@ -1,35 +1,34 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:math';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class RowSliver extends MultiChildRenderObjectWidget {
-  // Constructor for the RowSliver widget
-  RowSliver({
-    required this.left,
-    required this.right,
-    required this.leftWidthPercent,
-    super.key,
-  }) : super(children: [left, right]);
+// class RowSliver extends MultiChildRenderObjectWidget {
+//   // Constructor for the RowSliver widget
+//   RowSliver({
+//     required this.left,
+//     required this.right,
+//     required this.leftWidthPercent,
+//     super.key,
+//   }) : super(children: [left, right]);
 
-  final Widget left; // Left widget to display
-  final Widget right; // Right widget to display
-  final double
-      leftWidthPercent; // Percentage of width allocated to the left widget
+//   final Widget left; // Left widget to display
+//   final Widget right; // Right widget to display
+//   final double
+//       leftWidthPercent; // Percentage of width allocated to the left widget
 
-  // Creates the render object for this widget
-  @override
-  _RenderRowSliver createRenderObject(BuildContext context) {
-    return _RenderRowSliver(leftWidthPercent: leftWidthPercent);
-  }
+//   // Creates the render object for this widget
+//   @override
+//   RenderRowSliver createRenderObject(BuildContext context) {
+//     return RenderRowSliver(leftWidthPercent: leftWidthPercent);
+//   }
 
-  @override
-  void updateRenderObject(
-    BuildContext context,
-    _RenderRowSliver renderObject,
-  ) {}
-}
+//   @override
+//   void updateRenderObject(
+//     BuildContext context,
+//     RenderRowSliver renderObject,
+//   ) {}
+// }
 
 // Extension to get custom parent data for RowSliver
 extension _RowSliderParentDataExt on RenderSliver {
@@ -40,10 +39,10 @@ extension _RowSliderParentDataExt on RenderSliver {
 class _RowSliverParentData extends SliverPhysicalParentData
     with ContainerParentDataMixin<RenderSliver> {}
 
-class _RenderRowSliver extends RenderSliver
+class RenderRowSliver extends RenderSliver
     with ContainerRenderObjectMixin<RenderSliver, _RowSliverParentData> {
   // Constructor to initialize the width percentage for the left widget
-  _RenderRowSliver({required double leftWidthPercent})
+  RenderRowSliver({required double leftWidthPercent})
       : _leftWidthPercent = leftWidthPercent;
 
   final double _leftWidthPercent;

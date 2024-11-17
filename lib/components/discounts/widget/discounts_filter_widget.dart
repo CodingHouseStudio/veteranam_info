@@ -48,7 +48,10 @@ class DiscountsFilterWidget extends StatelessWidget {
 
         return ShaderWidget(
           isDesk: isDesk,
-          child: childWidget,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize40),
+            child: childWidget,
+          ),
         );
         // }
       },
