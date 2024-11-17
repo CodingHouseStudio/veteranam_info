@@ -1,5 +1,4 @@
 abstract class KSecurityKeys {
-  static const appStoreId = String.fromEnvironment('APP_STORE_ID');
   static const firebaseProdVapidKey =
       String.fromEnvironment('FIREBASE_VAPID_PROD_KEY');
   static const firebaseDevVapidKey =
