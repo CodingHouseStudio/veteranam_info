@@ -108,7 +108,7 @@ void main() {
         );
         when(
           mockFirebaseMessaging.getToken(
-            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+            vapidKey: KSecurityKeys.firebaseVapidKey,
           ),
         ).thenAnswer(
           (_) async => KTestText.fcmToken,
@@ -455,7 +455,7 @@ void main() {
         );
         when(
           mockFirebaseMessaging.getToken(
-            vapidKey: KSecurityKeys.firebaseDevVapidKey,
+            vapidKey: KSecurityKeys.firebaseVapidKey,
           ),
         ).thenThrow(
           Exception(KGroupText.failure),
