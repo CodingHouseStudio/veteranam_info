@@ -12,6 +12,7 @@
       "args": [
         "--dart-define=FLAVOUR=development",
         "--dart-define=ROLE=user",
+        "--dart-define-from-file=env.json",
         "localhost",
         "--web-port",
         "4001",
@@ -29,6 +30,7 @@
       "args": [
         "--dart-define=FLAVOUR=staging",
         "--dart-define=ROLE=user",
+        "--dart-define-from-file=env.json",
         "localhost",
         "--web-port",
         "8080",
@@ -46,6 +48,7 @@
       "args": [
         "--dart-define=FLAVOUR=production",
         "--dart-define=ROLE=user",
+        "--dart-define-from-file=env.json",
         "localhost",
         "--web-port",
         "4001",
@@ -63,6 +66,7 @@
       "args": [
         "--dart-define=FLAVOUR=production",
         "--dart-define=ROLE=business",
+        "--dart-define-from-file=env.json",
         "localhost",
         "--web-port",
         "4001",
@@ -80,6 +84,7 @@
       "args": [
         "--dart-define=FLAVOUR=development",
         "--dart-define=ROLE=business",
+        "--dart-define-from-file=env.json",
         "localhost",
         "--web-port",
         "4001",

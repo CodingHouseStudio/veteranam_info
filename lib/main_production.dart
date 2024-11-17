@@ -20,8 +20,6 @@ import 'package:veteranam/shared/repositories/failure_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Evnironment.loadEnv();
-
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
