@@ -199,6 +199,7 @@ abstract class KMockText {
     // registered: 'Ukraine registered',
     // domain: 'Ветерани',
   );
+  static const fundDesk = [fundModel, fundModel, fundModel];
   static final storyModel = StoryModel(
     id: '',
     date: ExtendedDateTime.current,

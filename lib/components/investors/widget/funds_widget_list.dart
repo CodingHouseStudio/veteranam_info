@@ -1,97 +1,125 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/investors/investors.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class FundsWidgetList extends StatelessWidget {
-  const FundsWidgetList({required this.isDesk, super.key});
+class FundsWidgetList extends SingleChildRenderObjectWidget {
+  FundsWidgetList({
+    required this.isDesk,
+    required this.padding,
+    super.key,
+  }) : super(
+          child: BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+            builder: (context, _) {
+              final listLength =
+                  isDesk ? _.deskFundItems.length : _.mobFundItems.length;
+              return SliverList.builder(
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
+                itemCount: listLength == 0
+                    ? isDesk
+                        ? KDimensions.shimmerFundsDeskItems
+                        : KDimensions.shimmerFundsMobItems
+                    : listLength + 1,
+                itemBuilder: (context, index) => _FundsItemWidget(
+                  isDesk: isDesk,
+                  index: index,
+                  state: _,
+                  listLength: listLength,
+                ),
+              );
+            },
+          ),
+        );
   final bool isDesk;
+  final EdgeInsets padding;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: Text(
-            context.l10n.provenFunds,
-            key: KWidgetkeys.screen.investors.fundsTitle,
-            style: AppTextStyle.materialThemeDisplayMedium,
-          ),
-        ),
-        FundsList(
-          isDesk: isDesk,
-        ),
-      ],
+  RenderSliverPadding createRenderObject(BuildContext context) {
+    return RenderSliverPadding(
+      padding: padding,
+      textDirection: Directionality.of(context),
     );
   }
 }
 
-class FundsList extends StatelessWidget {
-  const FundsList({
+class _FundsItemWidget extends StatelessWidget {
+  const _FundsItemWidget({
     required this.isDesk,
-    super.key,
+    required this.index,
+    required this.state,
+    required this.listLength,
   });
   final bool isDesk;
+  final int index;
+  final InvestorsWatcherState state;
+  final int listLength;
+  @override
+  Widget build(BuildContext context) {
+    if (state.loadingStatus != LoadingStatusInvestors.loaded) {
+      return SkeletonizerWidget(
+        isLoading: true,
+        child: _FundWidget(
+          isDesk: isDesk,
+          fundMob: KMockText.fundModel,
+          fundDesk: KMockText.fundDesk,
+        ),
+      );
+    }
+    if (index < listLength) {
+      return _FundWidget(
+        isDesk: isDesk,
+        fundMob: state.mobFundItems.elementAt(index),
+        fundDesk: state.deskFundItems.elementAt(index),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize48,
+        ),
+        child: Center(
+          child: Text(
+            context.l10n.thatEndOfList,
+            key: KWidgetkeys.screen.investors.endListText,
+            style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+          ),
+        ),
+      );
+    }
+  }
+}
+
+class _FundWidget extends StatelessWidget {
+  const _FundWidget({
+    required this.isDesk,
+    required this.fundMob,
+    required this.fundDesk,
+  });
+
+  final bool isDesk;
+  final FundModel fundMob;
+  final List<FundModel> fundDesk;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
-      builder: (context, _) {
-        switch (_.loadingStatus) {
-          case LoadingStatusInvestors.loaded:
-            final listLength =
-                isDesk ? _.deskFundItems.length : _.mobFundItems.length;
-            return ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              itemCount: listLength + 1,
-              itemBuilder: (context, index) {
-                if (index < listLength) {
-                  return Padding(
-                    key: isDesk
-                        ? ValueKey(_.deskFundItems.elementAt(index).first.id)
-                        : ValueKey(_.mobFundItems.elementAt(index).id),
-                    padding: const EdgeInsets.only(
-                      top: KPadding.kPaddingSize48,
-                    ),
-                    child: isDesk
-                        ? DonatesCardsWidget(
-                            key: KWidgetkeys.screen.investors.cards,
-                            fundItems: _.deskFundItems.elementAt(index),
-                          )
-                        : DonateCardWidget(
-                            key: KWidgetkeys.screen.investors.card,
-                            hasSubtitle: true,
-                            fundModel: _.mobFundItems.elementAt(index),
-                            isDesk: false,
-                          ),
-                  );
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      top: KPadding.kPaddingSize48,
-                    ),
-                    child: Center(
-                      child: Text(
-                        context.l10n.thatEndOfList,
-                        key: KWidgetkeys.screen.investors.endListText,
-                        style: AppTextStyle
-                            .materialThemeTitleMediumNeutralVariant70,
-                      ),
-                    ),
-                  );
-                }
-              },
-            );
-          case LoadingStatusInvestors.loading:
-          case LoadingStatusInvestors.error:
-          case LoadingStatusInvestors.initial:
-            return const SizedBox.shrink();
-        }
-      },
+    return Padding(
+      key: isDesk ? ValueKey(fundDesk.first.id) : ValueKey(fundMob.id),
+      padding: const EdgeInsets.only(
+        top: KPadding.kPaddingSize48,
+      ),
+      child: isDesk
+          ? DonatesCardsWidget(
+              key: KWidgetkeys.screen.investors.cards,
+              fundItems: fundDesk,
+            )
+          : DonateCardWidget(
+              key: KWidgetkeys.screen.investors.card,
+              hasSubtitle: true,
+              fundModel: fundMob,
+              isDesk: false,
+            ),
     );
   }
 }
