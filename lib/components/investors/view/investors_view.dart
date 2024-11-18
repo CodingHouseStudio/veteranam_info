@@ -7,7 +7,7 @@ class InvestorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final sacaffold = Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: Config.isWeb
           ? null
@@ -20,5 +20,9 @@ class InvestorsScreen extends StatelessWidget {
       ),
       body: InvestorsBodyWidget(key: KWidgetkeys.screen.investors.screen),
     );
+    if (Config.isWeb) {
+      return sacaffold;
+    }
+    return SafeArea(child: sacaffold);
   }
 }

@@ -32,63 +32,106 @@ class _DiscountsBodyWidget extends StatelessWidget {
               );
         }
       },
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDesk =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-          final isTablet =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+      child: BlocListener<DiscountWatcherBloc, DiscountWatcherState>(
+        listener: (context, state) {
+          if (state.failure != null) {
+            context.dialog.showGetErrorDialog(
+              error: state.failure!.value(context),
+              onPressed: () {},
+              // I think this event is not necessary for Stream, but
+              // I think it's better to give
+              // the user imaginary control over it
 
-          final padding = EdgeInsets.symmetric(
-            horizontal: (isDesk
-                ? KPadding.kPaddingSize90 +
-                    ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
-                        ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
-                            2
-                        : 0)
-                : KPadding.kPaddingSize16),
-          );
-          final scaffold = FocusTraversalGroup(
-            child: Semantics(
-              child: CustomScrollView(
-                key: KWidgetkeys.widget.scaffold.scroll,
-                cacheExtent: KDimensions.listCacheExtent,
-                slivers: [
-                  NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                  if (Config.isWeb)
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                      pageName: context.l10n.discount,
-                    ),
-                  DiscountTitleWidget(isDesk: isDesk, padding: padding),
-                  SliverPadding(
-                    padding: padding,
-                    sliver: SliverToBoxAdapter(
-                      child: DiscountsFilterWidget(isDesk: isDesk),
-                    ),
-                  ),
-                  if (isDesk)
+              // () => context
+              //     .read<DiscountWatcherBloc>()
+              //     .add(const DiscountWatcherEvent.started()),
+            );
+          }
+          if (state.itemsLoaded ==
+                  (context.read<DiscountConfigCubit>().state.loadingItems *
+                      (context
+                              .read<DiscountConfigCubit>()
+                              .state
+                              .emailScrollCount +
+                          1)) &&
+              context.read<UserEmailFormBloc>().state.emailEnum.show) {
+            if (Config.isWeb) {
+              if ((context.read<UserWatcherBloc>().state.user.email ?? '')
+                  .isEmpty) {
+                context.dialog.showUserEmailDialog(
+                  context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                );
+              }
+            } else {
+              context.read<MobileRatingCubit>().showDialog();
+            }
+          }
+        },
+        listenWhen: (previous, current) =>
+            current.failure != null ||
+            previous.itemsLoaded != current.itemsLoaded,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            final isDesk =
+                constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+            final isTablet = constraints.maxWidth >
+                KPlatformConstants.minWidthThresholdTablet;
+
+            final padding = EdgeInsets.symmetric(
+              horizontal: (isDesk
+                  ? KPadding.kPaddingSize90 +
+                      ((constraints.maxWidth >
+                              KPlatformConstants.maxWidthThresholdTablet)
+                          ? (constraints.maxWidth -
+                                  KPlatformConstants.maxWidthThresholdTablet) /
+                              2
+                          : 0)
+                  : KPadding.kPaddingSize16),
+            );
+            return FocusTraversalGroup(
+              child: Semantics(
+                child: CustomScrollView(
+                  key: KWidgetkeys.widget.scaffold.scroll,
+                  cacheExtent: KDimensions.listCacheExtent,
+                  slivers: [
+                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                    if (Config.isWeb)
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.discount,
+                      ),
                     SliverPadding(
                       padding: padding,
-                      sliver: DiscountsDeskWidgetList(
-                        maxHeight: constraints.maxHeight,
+                      sliver: DiscountTitleWidget(
+                        isDesk: isDesk,
                       ),
-                    )
-                  else
-                    DiscountsMobWidgetList(
-                      padding: padding,
                     ),
-                ],
-                controller: scrollController,
-                // semanticChildCount: null,
+                    SliverPadding(
+                      padding: padding,
+                      sliver: SliverToBoxAdapter(
+                        child: DiscountsFilterWidget(isDesk: isDesk),
+                      ),
+                    ),
+                    if (isDesk)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: DiscountsDeskWidgetList(
+                          maxHeight: constraints.maxHeight,
+                        ),
+                      )
+                    else
+                      DiscountsMobWidgetList(
+                        padding: padding,
+                      ),
+                  ],
+                  controller: scrollController,
+                  // semanticChildCount: null,
+                ),
               ),
-            ),
-          );
-          return Config.isWeb ? scaffold : SafeArea(child: scaffold);
-        },
+            );
+          },
+        ),
       ),
     );
   }
