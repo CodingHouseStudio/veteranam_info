@@ -75,7 +75,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
 
 extension SubLocationString on SubLocation {
   List<SubLocation> get _getList {
-    return [SubLocation.all];
+    return [SubLocation.online];
     // switch (this) {
     //   case SubLocation.all:
     //     return [

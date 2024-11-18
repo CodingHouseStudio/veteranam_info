@@ -244,7 +244,8 @@ class _DiscountsWidgetItem extends StatelessWidget {
         ),
       );
     } else {
-      if (state.loadingStatus == LoadingStatus.listLoadedFull) {
+      if (state.loadingStatus == LoadingStatus.listLoadedFull &&
+          state.filteredDiscountModelItems.isNotEmpty) {
         return Padding(
           padding: const EdgeInsets.only(
             top: KPadding.kPaddingSize48,
@@ -259,7 +260,8 @@ class _DiscountsWidgetItem extends StatelessWidget {
         );
       }
       if (state.loadingStatus == LoadingStatus.loaded &&
-          PlatformEnumFlutter.isWebDesktop) {
+          PlatformEnumFlutter.isWebDesktop &&
+          state.filteredDiscountModelItems.isNotEmpty) {
         return Padding(
           padding: const EdgeInsets.symmetric(
             vertical: KPadding.kPaddingSize48,
