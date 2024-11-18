@@ -78,29 +78,12 @@ class InvestorsBodyWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.scaffold.scroll,
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
-                    if (!Config.isWeb)
-                      BlocBuilder<NetworkCubit, NetworkStatus>(
-                        builder: (context, state) {
-                          if (state.isOffline) {
-                            SliverPersistentHeader(
-                              pinned: true,
-                              delegate: NetworkStatusBanner.getSliverHeader(
-                                isDesk: isDesk,
-                                isTablet: isTablet,
-                                networkStatus: state,
-                              ),
-                            );
-                          }
-                          return const SliverToBoxAdapter();
-                        },
-                      ),
+                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
                     if (Config.isWeb)
-                      SliverPersistentHeader(
-                        delegate: NavbarWidget.getSliverHeader(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                          pageName: context.l10n.discount,
-                        ),
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.discount,
                       ),
                     SliverPadding(
                       padding: padding,

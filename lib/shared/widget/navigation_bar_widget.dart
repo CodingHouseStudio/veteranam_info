@@ -4,12 +4,48 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class NavbarWidget extends StatefulWidget {
-  const NavbarWidget({
+class NavigationBarWidget extends StatelessWidget {
+  const NavigationBarWidget({
+    required this.isDesk,
+    required this.isTablet,
+    super.key = const ValueKey('nav_bar'),
+    this.childWidget,
+    this.pageName,
+    this.showMobBackButton,
+    this.maxMinHeight,
+  });
+
+  final bool isDesk;
+  final bool isTablet;
+  final Widget? childWidget;
+  final String? pageName;
+  final bool? showMobBackButton;
+  final double? maxMinHeight;
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      delegate: SliverHeaderWidget(
+        childWidget: ({required overlapsContent, required shrinkOffset}) =>
+            _NavbarWidget(
+          isDesk: isDesk,
+          // childWidget: childWidget,
+          isTablet: isTablet,
+          pageName: pageName,
+          // showMobileNawbar: showMobileNawbar ?? false,
+          showBackButton: showMobBackButton,
+        ),
+        rebuildValues: [isDesk, isTablet],
+        maxMinHeight: maxMinHeight ?? KMinMaxSize.minmaxHeight94,
+      ),
+    );
+  }
+}
+
+class _NavbarWidget extends StatefulWidget {
+  const _NavbarWidget({
     required this.isDesk,
     required this.isTablet,
     // required this.showMobileNawbar,
-    super.key = const Key('nav_bar'),
     // this.childWidget,
     this.pageName,
     this.showBackButton,
@@ -22,32 +58,10 @@ class NavbarWidget extends StatefulWidget {
   final bool? showBackButton;
 
   @override
-  State<NavbarWidget> createState() => _NavbarWidgetState();
-
-  static SliverPersistentHeaderDelegate getSliverHeader({
-    required bool isDesk,
-    required bool isTablet,
-    Widget? childWidget,
-    String? pageName,
-    bool? showMobBackButton,
-    double? maxMinHeight,
-  }) =>
-      SliverHeaderWidget(
-        childWidget: ({required overlapsContent, required shrinkOffset}) =>
-            NavbarWidget(
-          isDesk: isDesk,
-          // childWidget: childWidget,
-          isTablet: isTablet,
-          pageName: pageName,
-          // showMobileNawbar: showMobileNawbar ?? false,
-          showBackButton: showMobBackButton,
-        ),
-        rebuildValues: [isDesk, isTablet],
-        maxMinHeight: maxMinHeight ?? KMinMaxSize.minmaxHeight94,
-      );
+  State<_NavbarWidget> createState() => _NavbarWidgetState();
 }
 
-class _NavbarWidgetState extends State<NavbarWidget> {
+class _NavbarWidgetState extends State<_NavbarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -5,23 +5,6 @@ import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-// class DiscountsWidgetList extends SingleChildRenderObjectWidget {
-//   const DiscountsWidgetList({
-//     required this.isDesk,
-//     super.key,
-//   });
-//   final bool isDesk;
-
-//   @override
-//   MultiChildRenderObjectWidget createRenderObject(BuildContext context) {
-//     if (isDesk) {
-//       return _DiscountsDeskWidgetList();
-//     } else {
-//       return  _DiscountsMobWidgetList();
-//     }
-//   }
-// }
-
 int _itemCount({
   required DiscountWatcherState state,
   required DiscountConfigState config,
@@ -34,10 +17,11 @@ int _itemCount({
                     state.loadingStatus == LoadingStatus.listLoadedFull
                 ? 1
                 : KDimensions.shimmerDiscountsItems) +
-            ((config.linkScrollCount + 1) * config.loadingItems >
-                    state.filteredDiscountModelItems.length
-                ? 0
-                : 1);
+            (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
+
+extension LinkScrollExtension on DiscountConfigState {
+  int get linkInt => (linkScrollCount + 1) * loadingItems;
+}
 
 /// The findChildIndexCallback method is called whenever the list is rebuilt.
 /// Initially, it returns the old keys of the list items. If an item remains
@@ -47,32 +31,38 @@ int _itemCount({
 /// Note:
 /// These are based on my experience working with this method and ChatGPT's
 /// response. I need to read more articles to understand all the nuances.
-
 int? _findChildIndexCallback({
   required Key key,
   required DiscountWatcherState state,
+  required DiscountConfigState config,
 }) {
   if (key is ValueKey<String>) {
     final valueKey = key;
-    if (valueKey.value.contains('end_list_text')) {
-      return state.filteredDiscountModelItems.length;
+    if (valueKey.value == 'link_field') {
+      return config.linkInt - 1;
     }
-    if (valueKey.value.contains('load_button')) {
-      return state.filteredDiscountModelItems.length;
+    if (valueKey.value == 'end_list_text') {
+      return state.filteredDiscountModelItems.length + 1;
     }
-    if (!valueKey.value.contains('mock_discount_')) {
+    if (valueKey.value == 'load_button') {
+      return state.filteredDiscountModelItems.length +
+          (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
+    }
+    if (valueKey.value.contains('mock_discount_')) {
+      final mockValue = int.tryParse(
+        valueKey.value.replaceFirst('mock_discount_', ''),
+      );
+      if (mockValue != null) {
+        return state.filteredDiscountModelItems.length +
+            mockValue +
+            (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
+      }
+    } else {
       final index = state.filteredDiscountModelItems.indexWhere(
         (element) => element.id == valueKey.value,
       );
       if (index >= 0) {
-        return index;
-      }
-    } else {
-      final mockValue = int.tryParse(
-        valueKey.value.replaceAll('mock_discount_', ''),
-      );
-      if (mockValue != null) {
-        return state.filteredDiscountModelItems.length + mockValue;
+        return index + (config.linkInt <= index ? 1 : 0);
       }
     }
   }
@@ -82,9 +72,19 @@ int? _findChildIndexCallback({
 ValueKey<String> _key({
   required DiscountWatcherState state,
   required int index,
+  required DiscountConfigState config,
 }) {
-  if (index < state.filteredDiscountModelItems.length) {
-    return ValueKey(state.filteredDiscountModelItems.elementAt(index).id);
+  if (index + 1 == config.linkInt) {
+    return const ValueKey('link_field');
+  }
+  if (index <
+      state.filteredDiscountModelItems.length +
+          (config.linkInt <= index ? 1 : 0)) {
+    return ValueKey(
+      state.filteredDiscountModelItems
+          .elementAt(index - (config.linkInt <= index ? 1 : 0))
+          .id,
+    );
   }
   if (state.loadingStatus == LoadingStatus.listLoadedFull) {
     return const ValueKey('end_list_text');
@@ -181,15 +181,18 @@ class _DiscountWidgetList extends StatelessWidget {
             return SliverList.builder(
               addAutomaticKeepAlives: false,
               addRepaintBoundaries: false,
-              findChildIndexCallback: (key) =>
-                  _findChildIndexCallback(key: key, state: state),
+              findChildIndexCallback: (key) => _findChildIndexCallback(
+                key: key,
+                state: state,
+                config: config,
+              ),
               itemCount: _itemCount(
                 state: state,
                 config: config,
               ),
               itemBuilder: (context, index) => _DiscountsWidgetItem(
                 isDesk: isDesk,
-                key: _key(state: state, index: index),
+                key: _key(state: state, index: index, config: config),
                 state: state,
                 index: index,
                 config: config,
@@ -217,13 +220,15 @@ class _DiscountsWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var indexValue = index;
-    if ((config.linkScrollCount + 1) * config.loadingItems <= index + 1) {
-      if ((config.linkScrollCount + 1) * config.loadingItems == index + 1) {
-        return DiscountLinkWidget(isDesk: isDesk);
-      }
+
+    if (config.linkInt < index &&
+        state.filteredDiscountModelItems.length > config.linkInt) {
       indexValue--;
     }
     if (indexValue < state.filteredDiscountModelItems.length) {
+      if (config.linkInt == index + 1) {
+        return DiscountLinkWidget(isDesk: isDesk);
+      }
       final discountItem =
           state.filteredDiscountModelItems.elementAt(indexValue);
       return Padding(
@@ -233,13 +238,9 @@ class _DiscountsWidgetItem extends StatelessWidget {
         child: DiscountCardWidget(
           discountItem: discountItem,
           isDesk: isDesk,
-          // reportEvent: null,
           share:
               '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
           isLoading: false,
-          // () => context
-          //     .read<DiscountWatcherBloc>()
-          //     .add(const DiscountWatcherEvent.getReport()),
         ),
       );
     } else {
@@ -291,42 +292,3 @@ class _DiscountsWidgetItem extends StatelessWidget {
     }
   }
 }
-// List<Widget> discountsWidgetList({
-//   required BuildContext context,
-//   required bool isDesk,
-// }) {
-//   final items = cardWidgetList<DiscountModel>(
-//     loadingStatus: context.read<DiscountWatcherBloc>().state.loadingStatus,
-//     modelItems:
-//         context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
-//     cardWidget: ({required modelItem, required isLoading}) =>
-//         DiscountCardWidget(
-//       key: KWidgetkeys.screen.discounts.card,
-//       discountItem: modelItem,
-//       isDesk: isDesk,
-//       // reportEvent: null,
-//       share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
-//       isLoading: isLoading,
-//       // () => context
-//       //     .read<DiscountWatcherBloc>()
-//       //     .add(const DiscountWatcherEvent.getReport()),
-//     ),
-//     isDesk: isDesk,
-//   shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
-//     isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
-//     shimmerItem: KMockText.discountModel,
-//   );
-
-//   final finalList = <Widget>[];
-//   for (var i = 0; i < items.length; i++) {
-//     finalList.add(items[i]);
-//     if ((context.read<DiscountConfigCubit>().state.linkScrollCount + 1) *
-//             context.read<DiscountConfigCubit>().state.loadingItems ==
-//         i + 1) {
-//       finalList.add(
-//         DiscountLinkWidget(isDesk: isDesk),
-//       );
-//     }
-//   }
-//   return finalList;
-// }

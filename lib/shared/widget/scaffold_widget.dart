@@ -96,24 +96,15 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
-                    if (!Config.isWeb && state.isOffline)
-                      SliverPersistentHeader(
-                        pinned: true,
-                        delegate: NetworkStatusBanner.getSliverHeader(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                          networkStatus: state,
-                        ),
-                      ),
-                    SliverPersistentHeader(
-                      delegate: NavbarWidget.getSliverHeader(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                        pageName: pageName,
-                        showMobBackButton: showMobNawbarBackButton,
-                        // showMobileNawbar: showMobileNawbar,
-                      ),
+                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                    NavigationBarWidget(
+                      isDesk: isDesk,
+                      isTablet: isTablet,
+                      pageName: pageName,
+                      showMobBackButton: showMobNawbarBackButton,
+                      // showMobileNawbar: showMobileNawbar,
                     ),
+
                     if (titleChildWidgetsFunction != null)
                       SliverPadding(
                         padding: isTablet && titleDeskPadding != null
