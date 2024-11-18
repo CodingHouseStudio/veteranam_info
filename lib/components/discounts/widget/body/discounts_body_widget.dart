@@ -106,14 +106,17 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       child: DiscountsFilterWidget(isDesk: isDesk),
                     ),
                   ),
-                  SliverPadding(
-                    padding: padding,
-                    sliver: isDesk
-                        ? DiscountsDeskWidgetList(
-                            maxHeight: constraints.maxHeight,
-                          )
-                        : const DiscountsMobWidgetList(),
-                  ),
+                  if (isDesk)
+                    SliverPadding(
+                      padding: padding,
+                      sliver: DiscountsDeskWidgetList(
+                        maxHeight: constraints.maxHeight,
+                      ),
+                    )
+                  else
+                    DiscountsMobWidgetList(
+                      padding: padding,
+                    ),
                 ],
                 controller: scrollController,
                 // semanticChildCount: null,
