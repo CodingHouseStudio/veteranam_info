@@ -24,18 +24,19 @@ class QuestionWidgetList extends StatelessWidget {
               ? state.questionModelItems.length
               : KDimensions.shimmerQuestionItems,
           itemBuilder: (context, index) =>
-              _QuestionWidgetItem(state: state, index: index, isDesk: isDesk),
+              QuestionWidgetItem(state: state, index: index, isDesk: isDesk),
         );
       },
     );
   }
 }
 
-class _QuestionWidgetItem extends StatelessWidget {
-  const _QuestionWidgetItem({
+class QuestionWidgetItem extends StatelessWidget {
+  const QuestionWidgetItem({
     required this.state,
     required this.index,
     required this.isDesk,
+    super.key,
   });
   final HomeWatcherState state;
   final int index;

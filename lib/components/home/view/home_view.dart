@@ -9,7 +9,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomeBlocprovider(
       key: KWidgetkeys.screen.home.screen,
-      childWidget: const Scaffold(body: HomeBodyWidget()),
+      childWidget: Scaffold(
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Config.isWeb
+            ? null
+            : const MobNavigationWidget(
+                index: 0,
+              ),
+        appBar: AppBar(
+          backgroundColor: AppColors.materialThemeWhite,
+          toolbarHeight: KSize.kAppBarHeight,
+        ),
+        body: const HomeBodyWidget(),
+      ),
     );
   }
 }

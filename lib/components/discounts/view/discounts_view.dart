@@ -7,9 +7,19 @@ class DiscountsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DiscountBlocprovider(
-        childWidget: DiscountsBodyWidget(
+    return DiscountBlocprovider(
+      childWidget: Scaffold(
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Config.isWeb
+            ? null
+            : const MobNavigationWidget(
+                index: 0,
+              ),
+        appBar: AppBar(
+          backgroundColor: AppColors.materialThemeWhite,
+          toolbarHeight: KSize.kAppBarHeight,
+        ),
+        body: DiscountsBodyWidget(
           key: KWidgetkeys.screen.discounts.screen,
         ),
       ),
