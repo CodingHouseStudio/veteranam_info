@@ -81,12 +81,7 @@ class _FooterWidgetList extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                SizedBox(
-                  key: KWidgetkeys.widget.footer.logo,
-                  height: KSize.kPixel80,
-                  width: KSize.kPixel140,
-                  child: KImage.logo(),
-                ),
+                KIcon.logo.copyWith(size: KSize.kFont78),
                 Expanded(
                   child: Wrap(
                     spacing: KPadding.kPaddingSize8,
@@ -149,11 +144,10 @@ class _FooterWidgetList extends StatelessWidget {
               facebookKey: KWidgetkeys.widget.footer.facebookIcon,
             ),
             KSizedBox.kHeightSizedBox40,
-            Container(
+            Align(
               key: KWidgetkeys.widget.footer.logo,
               alignment: Alignment.centerLeft,
-              height: KSize.kPixel60,
-              child: KImage.logo(),
+              child: KIcon.logo,
             ),
             KSizedBox.kHeightSizedBox24,
             Text(
@@ -448,19 +442,19 @@ class SocialMediaLinks extends StatelessWidget {
           _SocialButton(
             widgetKey: linkedInKey,
             url: KAppText.linkedIn,
-            image: KImage.linkedIn(),
+            image: KIcon.linkedIn,
           ),
           padding,
           _SocialButton(
             widgetKey: instagramKey,
             url: KAppText.instagram,
-            image: KImage.instagram(),
+            image: KIcon.instagram,
           ),
           padding,
           _SocialButton(
             widgetKey: facebookKey,
             url: KAppText.facebook,
-            image: KImage.facebook(),
+            image: KIcon.facebook,
           ),
         ],
       );
@@ -470,19 +464,19 @@ class SocialMediaLinks extends StatelessWidget {
           _SocialButton(
             widgetKey: linkedInKey,
             url: KAppText.linkedIn,
-            image: KImage.linkedIn(),
+            image: KIcon.linkedIn,
           ),
           padding,
           _SocialButton(
             widgetKey: instagramKey,
             url: KAppText.instagram,
-            image: KImage.instagram(),
+            image: KIcon.instagram,
           ),
           padding,
           _SocialButton(
             widgetKey: facebookKey,
             url: KAppText.facebook,
-            image: KImage.facebook(),
+            image: KIcon.facebook,
           ),
         ],
       );

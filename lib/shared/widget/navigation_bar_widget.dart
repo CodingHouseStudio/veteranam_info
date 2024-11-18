@@ -91,7 +91,8 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  padding: EdgeInsets.zero,
+                  padding:
+                      const EdgeInsets.only(right: KPadding.kPaddingSize32),
                   onPressed: () => EasyDebounce.debounce(
                     KAppText.logo,
                     Duration.zero,
@@ -108,7 +109,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
                       }
                     },
                   ),
-                  icon: KImage.logo(
+                  icon: KIcon.logo.copyWith(
                     key: KWidgetkeys.widget.nawbar.logo,
                     // width: 78,
                   ),

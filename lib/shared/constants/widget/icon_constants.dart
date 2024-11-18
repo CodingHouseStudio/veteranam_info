@@ -147,6 +147,30 @@ abstract class KIcon {
     Symbols.logout,
     color: AppColors.materialThemeWhite,
   );
+  static const logo = _KIcon(
+    IconData(0xe1, fontFamily: 'Vetranam'),
+    size: KSize.kFont48,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const instagram = _KIcon(
+    IconData(0xe915, fontFamily: 'Vetranam'),
+  );
+  static const linkedIn = _KIcon(
+    IconData(0xe90e, fontFamily: 'Vetranam'),
+  );
+  static const facebook = _KIcon(
+    IconData(0xe90c, fontFamily: 'Vetranam'),
+  );
+  static const google = _KIcon(
+    IconData(0xe91a, fontFamily: 'Vetranam'),
+  );
+  static const discountEmpty = _KIcon(
+    IconData(0xe90b, fontFamily: 'Vetranam'),
+  );
+  static const found = _KIcon(
+    IconData(0xe90b, fontFamily: 'Vetranam'),
+  );
+
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,
