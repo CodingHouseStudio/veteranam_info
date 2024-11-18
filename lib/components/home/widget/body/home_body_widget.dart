@@ -95,85 +95,73 @@ class HomeBodyWidget extends StatelessWidget {
               ),
               child: FocusTraversalGroup(
                 child: Semantics(
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: true,
-                    bottomNavigationBar: Config.isWeb
-                        ? null
-                        : const MobNavigationWidget(
-                            index: 0,
+                  child: CustomScrollView(
+                    key: KWidgetkeys.widget.scaffold.scroll,
+                    cacheExtent: KDimensions.listCacheExtent,
+                    slivers: [
+                      if (!Config.isWeb)
+                        BlocBuilder<NetworkCubit, NetworkStatus>(
+                          builder: (context, state) {
+                            if (state.isOffline) {
+                              SliverPersistentHeader(
+                                pinned: true,
+                                delegate: NetworkStatusBanner.getSliverHeader(
+                                  isDesk: isDesk,
+                                  isTablet: isTablet,
+                                  networkStatus: state,
+                                ),
+                              );
+                            }
+                            return const SliverToBoxAdapter();
+                          },
+                        ),
+                      if (Config.isWeb)
+                        SliverPersistentHeader(
+                          delegate: NavbarWidget.getSliverHeader(
+                            isDesk: isDesk,
+                            isTablet: isTablet,
                           ),
-                    appBar: AppBar(
-                      backgroundColor: AppColors.materialThemeWhite,
-                      toolbarHeight: KSize.kAppBarHeight,
-                    ),
-                    body: CustomScrollView(
-                      key: KWidgetkeys.widget.scaffold.scroll,
-                      cacheExtent: KDimensions.listCacheExtent,
-                      slivers: [
-                        if (!Config.isWeb)
-                          BlocBuilder<NetworkCubit, NetworkStatus>(
-                            builder: (context, state) {
-                              if (state.isOffline) {
-                                SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: NetworkStatusBanner.getSliverHeader(
-                                    isDesk: isDesk,
-                                    isTablet: isTablet,
-                                    networkStatus: state,
-                                  ),
-                                );
-                              }
-                              return const SliverToBoxAdapter();
-                            },
-                          ),
-                        if (Config.isWeb)
-                          SliverPersistentHeader(
-                            delegate: NavbarWidget.getSliverHeader(
+                        ),
+                      SliverPadding(
+                        padding: padding,
+                        sliver: SliverList.builder(
+                          itemBuilder: (context, index) =>
+                              main.elementAt(index),
+                          addAutomaticKeepAlives: false,
+                          addRepaintBoundaries: false,
+                          itemCount: main.length,
+                        ),
+                      ),
+                      if (isDesk)
+                        SliverPadding(
+                          padding: padding,
+                          sliver: SliverToBoxAdapter(
+                            child: FAQSectionDeskWidget(
                               isDesk: isDesk,
                               isTablet: isTablet,
                             ),
                           ),
-                        SliverPadding(
+                        )
+                      else
+                        FaqSectionMobWidget(
+                          isTablet: isTablet,
                           padding: padding,
-                          sliver: SliverList.builder(
-                            itemBuilder: (context, index) =>
-                                main.elementAt(index),
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: false,
-                            itemCount: main.length,
-                          ),
                         ),
-                        if (isDesk)
-                          SliverPadding(
-                            padding: padding,
-                            sliver: SliverToBoxAdapter(
-                              child: FAQSectionDeskWidget(
-                                isDesk: isDesk,
-                                isTablet: isTablet,
-                              ),
-                            ),
-                          )
-                        else
-                          FaqSectionMobWidget(
-                            isTablet: isTablet,
-                            padding: padding,
-                          ),
-                        SliverToBoxAdapter(
-                          child: isDesk
-                              ? KSizedBox.kHeightSizedBox160
-                              : isTablet
-                                  ? KSizedBox.kHeightSizedBox64
-                                  : KSizedBox.kHeightSizedBox48,
+                      SliverToBoxAdapter(
+                        child: isDesk
+                            ? KSizedBox.kHeightSizedBox160
+                            : isTablet
+                                ? KSizedBox.kHeightSizedBox64
+                                : KSizedBox.kHeightSizedBox48,
+                      ),
+                      SliverPadding(
+                        padding: padding,
+                        sliver: FooterWidget(
+                          isTablet: isTablet,
+                          isDesk: isDesk,
                         ),
-                        SliverPadding(
-                          padding: padding,
-                          sliver: FooterWidget(
-                            isTablet: isTablet,
-                            isDesk: isDesk,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -52,83 +52,71 @@ class _DiscountsBodyWidget extends StatelessWidget {
           );
           final scaffold = FocusTraversalGroup(
             child: Semantics(
-              child: Scaffold(
-                resizeToAvoidBottomInset: true,
-                bottomNavigationBar: Config.isWeb
-                    ? null
-                    : const MobNavigationWidget(
-                        index: 0,
+              child: CustomScrollView(
+                key: KWidgetkeys.widget.scaffold.scroll,
+                cacheExtent: KDimensions.listCacheExtent,
+                slivers: [
+                  if (!Config.isWeb)
+                    BlocBuilder<NetworkCubit, NetworkStatus>(
+                      builder: (context, state) {
+                        if (state.isOffline) {
+                          SliverPersistentHeader(
+                            pinned: true,
+                            delegate: NetworkStatusBanner.getSliverHeader(
+                              isDesk: isDesk,
+                              isTablet: isTablet,
+                              networkStatus: state,
+                            ),
+                          );
+                        }
+                        return const SliverToBoxAdapter();
+                      },
+                    ),
+                  if (Config.isWeb)
+                    SliverPersistentHeader(
+                      delegate: NavbarWidget.getSliverHeader(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.discount,
                       ),
-                appBar: AppBar(
-                  backgroundColor: AppColors.materialThemeWhite,
-                  toolbarHeight: KSize.kAppBarHeight,
-                ),
-                body: CustomScrollView(
-                  key: KWidgetkeys.widget.scaffold.scroll,
-                  cacheExtent: KDimensions.listCacheExtent,
-                  slivers: [
-                    if (!Config.isWeb)
-                      BlocBuilder<NetworkCubit, NetworkStatus>(
-                        builder: (context, state) {
-                          if (state.isOffline) {
-                            SliverPersistentHeader(
-                              pinned: true,
-                              delegate: NetworkStatusBanner.getSliverHeader(
-                                isDesk: isDesk,
-                                isTablet: isTablet,
-                                networkStatus: state,
-                              ),
-                            );
-                          }
-                          return const SliverToBoxAdapter();
-                        },
-                      ),
-                    if (Config.isWeb)
-                      SliverPersistentHeader(
-                        delegate: NavbarWidget.getSliverHeader(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                          pageName: context.l10n.discount,
+                    ),
+                  SliverPadding(
+                    padding: padding,
+                    sliver: SliverToBoxAdapter(
+                      child: TitlePointWidget(
+                        title: context.l10n.specialOffers,
+                        titleKey: KWidgetkeys.screen.discounts.title,
+                        titleSecondPart:
+                            context.l10n.forVeteransAndTheirFamilies,
+                        // pointText: context.l10n.discounts,
+                        // pointKey: KWidgetkeys.screen.discounts.
+                        // titlePoint,
+                        isDesk: isDesk,
+                        titleSecondPartPadding: const EdgeInsets.only(
+                          left: KPadding.kPaddingSize72,
                         ),
-                      ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: TitlePointWidget(
-                          title: context.l10n.specialOffers,
-                          titleKey: KWidgetkeys.screen.discounts.title,
-                          titleSecondPart:
-                              context.l10n.forVeteransAndTheirFamilies,
-                          // pointText: context.l10n.discounts,
-                          // pointKey: KWidgetkeys.screen.discounts.
-                          // titlePoint,
-                          isDesk: isDesk,
-                          titleSecondPartPadding: const EdgeInsets.only(
-                            left: KPadding.kPaddingSize72,
-                          ),
-                          iconCrossAxisAlignment: CrossAxisAlignment.end,
-                          isRightArrow: false,
-                        ),
+                        iconCrossAxisAlignment: CrossAxisAlignment.end,
+                        isRightArrow: false,
                       ),
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: DiscountsFilterWidget(isDesk: isDesk),
-                      ),
+                  ),
+                  SliverPadding(
+                    padding: padding,
+                    sliver: SliverToBoxAdapter(
+                      child: DiscountsFilterWidget(isDesk: isDesk),
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: isDesk
-                          ? DiscountsDeskWidgetList(
-                              maxHeight: constraints.maxHeight,
-                            )
-                          : const DiscountsMobWidgetList(),
-                    ),
-                  ],
-                  controller: scrollController,
-                  // semanticChildCount: null,
-                ),
+                  ),
+                  SliverPadding(
+                    padding: padding,
+                    sliver: isDesk
+                        ? DiscountsDeskWidgetList(
+                            maxHeight: constraints.maxHeight,
+                          )
+                        : const DiscountsMobWidgetList(),
+                  ),
+                ],
+                controller: scrollController,
+                // semanticChildCount: null,
               ),
             ),
           );
