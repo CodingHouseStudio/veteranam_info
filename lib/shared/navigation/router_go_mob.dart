@@ -88,7 +88,7 @@ GoRouter router = GoRouter(
         ),
         GoRoute(
           name: KRoute.discounts.name,
-          path: KRoute.discounts.path,
+          path: '/${KRoute.discounts.path}',
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
