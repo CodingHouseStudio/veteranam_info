@@ -7,47 +7,39 @@ class DiscountSection extends StatelessWidget {
   const DiscountSection({
     required this.isDesk,
     required this.isTablet,
-    required this.padding,
     super.key,
   });
 
   final bool isDesk;
   final bool isTablet;
-  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
-      return Padding(
-        padding: padding,
-        child: HomeScreenCard(
-          rightWidget: const Padding(
-            padding: EdgeInsets.only(
-              left: KPadding.kPaddingSize48,
-            ),
-            child: _DiscountSectionWidget(isTablet: true),
+      return HomeScreenCard(
+        rightWidget: const Padding(
+          padding: EdgeInsets.only(
+            left: KPadding.kPaddingSize48,
           ),
-          leftWidget: KImage.discountImage(
-            key: KWidgetkeys.screen.home.discountImage,
-          ),
-          rightPadding: KPadding.kPaddingSize84,
+          child: _DiscountSectionWidget(isTablet: true),
         ),
+        leftWidget: KImage.discountImage(
+          key: KWidgetkeys.screen.home.discountImage,
+        ),
+        rightPadding: KPadding.kPaddingSize84,
       );
     } else {
-      return Padding(
-        padding: padding,
-        child: Column(
-          children: [
-            KImage.discountImage(
-              key: KWidgetkeys.screen.home.discountImage,
-            ),
-            if (isTablet)
-              KSizedBox.kHeightSizedBox48
-            else
-              KSizedBox.kHeightSizedBox16,
-            _DiscountSectionWidget(isTablet: isTablet),
-          ],
-        ),
+      return Column(
+        children: [
+          KImage.discountImage(
+            key: KWidgetkeys.screen.home.discountImage,
+          ),
+          if (isTablet)
+            KSizedBox.kHeightSizedBox48
+          else
+            KSizedBox.kHeightSizedBox16,
+          _DiscountSectionWidget(isTablet: isTablet),
+        ],
       );
     }
   }

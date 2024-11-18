@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomeBlocprovider(
       key: KWidgetkeys.screen.home.screen,
-      childWidget: const Scaffold(body: HomeBodyWidget()),
+      childWidget: const HomeBodyWidget(),
     );
   }
 }

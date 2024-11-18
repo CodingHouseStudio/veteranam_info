@@ -1,434 +1,273 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class FooterWidget extends StatelessWidget {
-  const FooterWidget({
+class FooterWidget extends SingleChildRenderObjectWidget {
+  FooterWidget({
     required this.isDesk,
     required this.isTablet,
     super.key,
-  });
+  }) : super(
+          child: _FooterWidgetList(
+            isDesk: isDesk,
+            isTablet: isTablet,
+            delegate: _body(isTablet: isTablet, isDesk: isDesk),
+          ),
+        );
 
   final bool isDesk;
   final bool isTablet;
 
   @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
+  RenderDecoratedSliver createRenderObject(BuildContext context) {
+    return RenderDecoratedSliver(
       decoration: KWidgetTheme.boxDecorationFooter,
-      child: Padding(
-        padding: isDesk
-            ? const EdgeInsets.all(
-                KPadding.kPaddingSize32,
-              ).copyWith(left: KPadding.kPaddingSize46)
-            : isTablet
-                ? const EdgeInsets.all(
-                    KPadding.kPaddingSize46,
-                  )
-                : const EdgeInsets.symmetric(
-                    vertical: KPadding.kPaddingSize32,
-                    horizontal: KPadding.kPaddingSize16,
+    );
+  }
+
+  static SliverChildDelegate _body({
+    required bool isTablet,
+    required bool isDesk,
+  }) {
+    final body = isTablet
+        ? [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: _Support(isTablet: isTablet),
+                ),
+                Expanded(
+                  child: _Sections(isTablet: isTablet),
+                ),
+                if (Config.isDevelopment)
+                  Expanded(
+                    child: _Information(isTablet: isTablet),
                   ),
-        child: isTablet
-            ? Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Expanded(
+                  child: _Contact(isTablet: isTablet),
+                ),
+                SocialMediaLinks(
+                  isDesk: isTablet,
+                  padding: isTablet
+                      ? KSizedBox.kHeightSizedBox24
+                      : KSizedBox.kWidthSizedBox16,
+                  instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                  linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                  facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                ),
+              ],
+            ),
+            KSizedBox.kHeightSizedBox56,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  key: KWidgetkeys.widget.footer.logo,
+                  height: KSize.kPixel80,
+                  width: KSize.kPixel140,
+                  child: KImage.logo(),
+                ),
+                Expanded(
+                  child: Wrap(
+                    spacing: KPadding.kPaddingSize8,
+                    alignment: WrapAlignment.end,
+                    crossAxisAlignment: WrapCrossAlignment.end,
                     children: [
-                      Expanded(
-                        child: _Support(isTablet: isTablet),
+                      Text(
+                        '${KAppText.madeBy}  |',
+                        key: KWidgetkeys.widget.footer.madeBy,
+                        style:
+                            AppTextStyle.materialThemeBodyLargeNeutralVariant35,
+                        textAlign: TextAlign.end,
                       ),
-                      Expanded(
-                        child: _Sections(isTablet: isTablet),
-                      ),
-                      if (Config.isDevelopment)
-                        Expanded(
-                          child: _Information(isTablet: isTablet),
-                        ),
-                      Expanded(
-                        child: _Contact(isTablet: isTablet),
-                      ),
-                      SocialMediaLinks(
-                        isDesk: isTablet,
-                        padding: isTablet
-                            ? KSizedBox.kHeightSizedBox24
-                            : KSizedBox.kWidthSizedBox16,
-                        instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                        linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                        facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-                      ),
-                    ],
-                  ),
-                  KSizedBox.kHeightSizedBox56,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        key: KWidgetkeys.widget.footer.logo,
-                        height: KSize.kPixel80,
-                        width: KSize.kPixel140,
-                        child: KImage.logo(),
-                      ),
-                      Expanded(
-                        child: Wrap(
-                          spacing: KPadding.kPaddingSize8,
-                          alignment: WrapAlignment.end,
-                          crossAxisAlignment: WrapCrossAlignment.end,
-                          children: [
-                            Text(
-                              '${KAppText.madeBy}  |',
-                              key: KWidgetkeys.widget.footer.madeBy,
-                              style: AppTextStyle
-                                  .materialThemeBodyLargeNeutralVariant35,
-                              textAlign: TextAlign.end,
-                            ),
-                            // KSizedBox.kWidthSizedBox16,
-                            // const VerticalDivider(
-                            //   thickness: 1,
-                            //   color: AppColors
-                            //
-                            // .materialThemeRefNeutralVariantNeutralVariant35,
-                            // ),
-                            //KSizedBox.kWidthSizedBox16,
-                            Text(
-                              '${context.l10n.allRightsReserved}  |',
-                              key: KWidgetkeys.widget.footer.rightReserved,
-                              style: AppTextStyle
-                                  .materialThemeBodyLargeNeutralVariant35,
-                            ),
-                            // KSizedBox.kWidthSizedBox16,
-                            // const VerticalDivider(
-                            //   thickness: 1,
-                            //   color: AppColors
-                            //
-                            // .materialThemeRefNeutralVariantNeutralVariant35,
-                            // ),
-                            //KSizedBox.kWidthSizedBox16,
-                            _PrivacyPolice(isDesk: isDesk),
-                            // KSizedBox.kHeightSizedBox90,
-                          ],
-                        ),
-                      ),
-                      KSizedBox.kWidthSizedBox4,
-                      InfoVersionWidget(
-                        isDesk: isDesk,
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _Support(isTablet: isTablet),
-                  KSizedBox.kHeightSizedBox40,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: _Sections(isTablet: isTablet),
-                      ),
-                      if (Config.isDevelopment)
-                        Expanded(
-                          flex: 2,
-                          child: _Information(isTablet: isTablet),
-                        )
-                      else
-                        Expanded(
-                          flex: 3,
-                          child: _Contact(isTablet: isTablet),
-                        ),
-                    ],
-                  ),
-                  if (Config.isDevelopment) ...[
-                    KSizedBox.kHeightSizedBox40,
-                    _Contact(isTablet: isTablet),
-                  ],
-                  KSizedBox.kHeightSizedBox40,
-                  SocialMediaLinks(
-                    isDesk: isTablet,
-                    padding: isTablet
-                        ? KSizedBox.kHeightSizedBox24
-                        : KSizedBox.kWidthSizedBox16,
-                    instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                    linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                    facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-                  ),
-                  // Wrap(
-                  //   children: socialMediaLinks(
-                  //     isTablet: isTablet,
-                  //     context: context,
-                  //     padding: isTablet
-                  //         ? KSizedBox.kHeightSizedBox24
-                  //         : KSizedBox.kWidthSizedBox16,
-                  //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                  //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                  //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-                  //   ),
-                  // ),
-                  KSizedBox.kHeightSizedBox40,
-                  Container(
-                    key: KWidgetkeys.widget.footer.logo,
-                    alignment: Alignment.centerLeft,
-                    height: KSize.kPixel60,
-                    child: KImage.logo(),
-                  ),
-                  KSizedBox.kHeightSizedBox24,
-                  Text(
-                    '${KAppText.madeBy}  | ',
-                    key: KWidgetkeys.widget.footer.madeBy,
-                    style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
-                  ),
-                  KSizedBox.kHeightSizedBox4,
-                  Row(
-                    // crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${context.l10n.allRightsReserved}  | ',
-                          key: KWidgetkeys.widget.footer.rightReserved,
-                          style: AppTextStyle
-                              .materialThemeLabelSmallNeutralVariant35,
-                        ),
-                      ),
-                      // KSizedBox.kWidthSizedBox8,
+                      // KSizedBox.kWidthSizedBox16,
                       // const VerticalDivider(
                       //   thickness: 1,
                       //   color: AppColors
+                      //
                       // .materialThemeRefNeutralVariantNeutralVariant35,
                       // ),
-                      KSizedBox.kWidthSizedBox8,
-                      Expanded(
-                        child: _PrivacyPolice(isDesk: isDesk),
-                      ),
-                      KSizedBox.kWidthSizedBox3,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: InfoVersionWidget(isDesk: isDesk),
-                      ),
+                      //KSizedBox.kWidthSizedBox16,
+                      const _FooterRightsReservedWidget(),
+                      // KSizedBox.kWidthSizedBox16,
+                      // const VerticalDivider(
+                      //   thickness: 1,
+                      //   color: AppColors
+                      //
+                      // .materialThemeRefNeutralVariantNeutralVariant35,
+                      // ),
+                      //KSizedBox.kWidthSizedBox16,
+                      _PrivacyPolice(isDesk: isDesk),
+                      // KSizedBox.kHeightSizedBox90,
                     ],
                   ),
-                ],
-              ),
-      ),
+                ),
+                KSizedBox.kWidthSizedBox4,
+                InfoVersionWidget(
+                  isDesk: isDesk,
+                ),
+              ],
+            ),
+          ]
+        : [
+            _Support(isTablet: isTablet),
+            KSizedBox.kHeightSizedBox40,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _Sections(isTablet: isTablet),
+                ),
+                if (Config.isDevelopment)
+                  Expanded(
+                    flex: 2,
+                    child: _Information(isTablet: isTablet),
+                  )
+                else
+                  Expanded(
+                    flex: 3,
+                    child: _Contact(isTablet: isTablet),
+                  ),
+              ],
+            ),
+            if (Config.isDevelopment) ...[
+              KSizedBox.kHeightSizedBox40,
+              _Contact(isTablet: isTablet),
+            ],
+            KSizedBox.kHeightSizedBox40,
+            SocialMediaLinks(
+              isDesk: isTablet,
+              padding: isTablet
+                  ? KSizedBox.kHeightSizedBox24
+                  : KSizedBox.kWidthSizedBox16,
+              instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+              linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+              facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+            ),
+            // Wrap(
+            //   children: socialMediaLinks(
+            //     isTablet: isTablet,
+            //     context: context,
+            //     padding: isTablet
+            //         ? KSizedBox.kHeightSizedBox24
+            //         : KSizedBox.kWidthSizedBox16,
+            //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+            //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+            //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+            //   ),
+            // ),
+            KSizedBox.kHeightSizedBox40,
+            Container(
+              key: KWidgetkeys.widget.footer.logo,
+              alignment: Alignment.centerLeft,
+              height: KSize.kPixel60,
+              child: KImage.logo(),
+            ),
+            KSizedBox.kHeightSizedBox24,
+            Text(
+              '${KAppText.madeBy}  | ',
+              key: KWidgetkeys.widget.footer.madeBy,
+              style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+            ),
+            KSizedBox.kHeightSizedBox4,
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Expanded(
+                  child: _FooterRightsReservedWidget(),
+                ),
+                // KSizedBox.kWidthSizedBox8,
+                // const VerticalDivider(
+                //   thickness: 1,
+                //   color: AppColors
+                // .materialThemeRefNeutralVariantNeutralVariant35,
+                // ),
+                KSizedBox.kWidthSizedBox8,
+                Expanded(
+                  child: _PrivacyPolice(isDesk: isDesk),
+                ),
+                KSizedBox.kWidthSizedBox3,
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: InfoVersionWidget(isDesk: isDesk),
+                ),
+              ],
+            ),
+          ];
+    return SliverChildBuilderDelegate(
+      (context, index) => body.elementAt(index),
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      childCount: body.length,
     );
-
-    // if (isTablet) {
-    //    Column(
-    //     children: [
-    //       Row(
-    //         crossAxisAlignment: CrossAxisAlignment.start,
-    //         children: [
-    //           Expanded(
-    //             child: _Support(isTablet: isTablet),
-    //           ),
-    //           Expanded(
-    //             child: _Sections(isTablet: isTablet),
-    //           ),
-    //           if (Config.isDevelopment)
-    //             Expanded(
-    //               child: _Information(isTablet: isTablet),
-    //             ),
-    //           Expanded(
-    //             child: _Contact(isTablet: isTablet),
-    //           ),
-    //           SocialMediaLinks(
-    //             isDesk: isTablet,
-    //             padding: isTablet
-    //                 ? KSizedBox.kHeightSizedBox24
-    //                 : KSizedBox.kWidthSizedBox16,
-    //             instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-    //             linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-    //             facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-    //           ),
-    //         ],
-    //       ),
-    //       KSizedBox.kHeightSizedBox56,
-    //       Row(
-    //         crossAxisAlignment: CrossAxisAlignment.end,
-    //         children: [
-    //           SizedBox(
-    //             key: KWidgetkeys.widget.footer.logo,
-    //             height: KSize.kPixel80,
-    //             width: KSize.kPixel140,
-    //             child: KImage.logo(),
-    //           ),
-    //           Expanded(
-    //             child: Wrap(
-    //               spacing: KPadding.kPaddingSize8,
-    //               alignment: WrapAlignment.end,
-    //               crossAxisAlignment: WrapCrossAlignment.end,
-    //               children: [
-    //                 Text(
-    //                   '${KAppText.madeBy}  |',
-    //                   key: KWidgetkeys.widget.footer.madeBy,
-    //                   style:
-    //                    AppTextStyle.materialThemeBodyLargeNeutralVariant35,
-    //                   textAlign: TextAlign.end,
-    //                 ),
-    //                 // KSizedBox.kWidthSizedBox16,
-    //                 // const VerticalDivider(
-    //                 //   thickness: 1,
-    //                 //   color: AppColors
-    //                 //
-    //                 // .materialThemeRefNeutralVariantNeutralVariant35,
-    //                 // ),
-    //                 //KSizedBox.kWidthSizedBox16,
-    //                 Text(
-    //                   '${context.l10n.allRightsReserved}  |',
-    //                   key: KWidgetkeys.widget.footer.rightReserved,
-    //                   style:
-    //                    AppTextStyle.materialThemeBodyLargeNeutralVariant35,
-    //                 ),
-    //                 // KSizedBox.kWidthSizedBox16,
-    //                 // const VerticalDivider(
-    //                 //   thickness: 1,
-    //                 //   color: AppColors
-    //                 //
-    //                 // .materialThemeRefNeutralVariantNeutralVariant35,
-    //                 // ),
-    //                 //KSizedBox.kWidthSizedBox16,
-    //                 _PrivacyPolice(isDesk: isDesk),
-    //                 // KSizedBox.kHeightSizedBox90,
-    //               ],
-    //             ),
-    //           ),
-    //           KSizedBox.kWidthSizedBox4,
-    //           InfoVersionWidget(
-    //             isDesk: isDesk,
-    //           ),
-    //         ],
-    //       ),
-    //     ],
-    //   );
-    // } else {
-    //    Column(
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: [
-    //       _Support(isTablet: isTablet),
-    //       KSizedBox.kHeightSizedBox40,
-    //       Row(
-    //         crossAxisAlignment: CrossAxisAlignment.start,
-    //         children: [
-    //           Expanded(
-    //             flex: 2,
-    //             child: _Sections(isTablet: isTablet),
-    //           ),
-    //           if (Config.isDevelopment)
-    //             Expanded(
-    //               flex: 2,
-    //               child: _Information(isTablet: isTablet),
-    //             )
-    //           else
-    //             Expanded(
-    //               flex: 3,
-    //               child: _Contact(isTablet: isTablet),
-    //             ),
-    //         ],
-    //       ),
-    //       if (Config.isDevelopment) ...[
-    //         KSizedBox.kHeightSizedBox40,
-    //         _Contact(isTablet: isTablet),
-    //       ],
-    //       KSizedBox.kHeightSizedBox40,
-    //       SocialMediaLinks(
-    //         isDesk: isTablet,
-    //         padding: isTablet
-    //             ? KSizedBox.kHeightSizedBox24
-    //             : KSizedBox.kWidthSizedBox16,
-    //         instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-    //         linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-    //         facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-    //       ),
-    //       // Wrap(
-    //       //   children: socialMediaLinks(
-    //       //     isTablet: isTablet,
-    //       //     context: context,
-    //       //     padding: isTablet
-    //       //         ? KSizedBox.kHeightSizedBox24
-    //       //         : KSizedBox.kWidthSizedBox16,
-    //       //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-    //       //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-    //       //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-    //       //   ),
-    //       // ),
-    //       KSizedBox.kHeightSizedBox40,
-    //       Container(
-    //         key: KWidgetkeys.widget.footer.logo,
-    //         alignment: Alignment.centerLeft,
-    //         height: KSize.kPixel60,
-    //         child: KImage.logo(),
-    //       ),
-    //       KSizedBox.kHeightSizedBox24,
-    //       Text(
-    //         '${KAppText.madeBy}  | ',
-    //         key: KWidgetkeys.widget.footer.madeBy,
-    //         style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
-    //       ),
-    //       KSizedBox.kHeightSizedBox4,
-    //       Row(
-    //         // crossAxisAlignment: CrossAxisAlignment.end,
-    //         children: [
-    //           Expanded(
-    //             child: Text(
-    //               '${context.l10n.allRightsReserved}  | ',
-    //               key: KWidgetkeys.widget.footer.rightReserved,
-    //               style:
-    // AppTextStyle.materialThemeLabelSmallNeutralVariant35,
-    //             ),
-    //           ),
-    //           // KSizedBox.kWidthSizedBox8,
-    //           // const VerticalDivider(
-    //           //   thickness: 1,
-    //           //   color: AppColors
-    //           //       .materialThemeRefNeutralVariantNeutralVariant35,
-    //           // ),
-    //           KSizedBox.kWidthSizedBox8,
-    //           Expanded(
-    //             child: _PrivacyPolice(isDesk: isDesk),
-    //           ),
-    //           KSizedBox.kWidthSizedBox3,
-    //           Align(
-    //             alignment: Alignment.centerRight,
-    //             child: InfoVersionWidget(isDesk: isDesk),
-    //           ),
-    //         ],
-    //       ),
-    //     ],
-    //   );
-    // }
   }
+}
 
-  // static List<Widget> socialMediaLinks({
-  //   required bool isTablet,
-  //   required BuildContext context,
-  //   required Widget padding,
-  //   required Key instagramKey,
-  //   required Key linkedInKey,
-  //   required Key facebookKey,
-  // }) =>
-  //     [
-  //       _SocialButton(
-  //         key: linkedInKey,
-  //         url: KAppText.linkedIn,
-  //         image: KImage.linkedIn(),
-  //       ),
-  //       padding,
-  //       _SocialButton(
-  //         key: instagramKey,
-  //         url: KAppText.instagram,
-  //         image: KImage.instagram(),
-  //       ),
-  //       padding,
-  //       _SocialButton(
-  //         key: facebookKey,
-  //         url: KAppText.facebook,
-  //         image: KImage.facebook(),
-  //       ),
-  //     ];
+class _FooterWidgetList extends SingleChildRenderObjectWidget {
+  _FooterWidgetList({
+    required this.isDesk,
+    required this.isTablet,
+    required this.delegate,
+  }) : super(
+          child: SliverPadding(
+            padding: isDesk
+                ? const EdgeInsets.all(
+                    KPadding.kPaddingSize32,
+                  ).copyWith(left: KPadding.kPaddingSize46)
+                : isTablet
+                    ? const EdgeInsets.all(
+                        KPadding.kPaddingSize46,
+                      )
+                    : const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize32,
+                        horizontal: KPadding.kPaddingSize16,
+                      ),
+            sliver: SliverList(
+              delegate: delegate,
+            ),
+          ),
+        );
+
+  final bool isDesk;
+  final bool isTablet;
+  final SliverChildDelegate delegate;
+
+  @override
+  RenderSliverPadding createRenderObject(BuildContext context) {
+    return RenderSliverPadding(
+      padding: isDesk
+          ? const EdgeInsets.all(
+              KPadding.kPaddingSize32,
+            ).copyWith(left: KPadding.kPaddingSize46)
+          : isTablet
+              ? const EdgeInsets.all(
+                  KPadding.kPaddingSize46,
+                )
+              : const EdgeInsets.symmetric(
+                  vertical: KPadding.kPaddingSize32,
+                  horizontal: KPadding.kPaddingSize16,
+                ),
+      textDirection: Directionality.of(context),
+    );
+  }
+}
+
+class _FooterRightsReservedWidget extends StatelessWidget {
+  const _FooterRightsReservedWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '${context.l10n.allRightsReserved}  |',
+      key: KWidgetkeys.widget.footer.rightReserved,
+      style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
+    );
+  }
 }
 
 class _Sections extends StatelessWidget {

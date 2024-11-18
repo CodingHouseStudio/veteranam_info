@@ -29,79 +29,44 @@ class HomeBodyWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final body = [
-          NavbarWidget(isDesk: isDesk, isTablet: isTablet),
+        final main = [
           KSizedBox.kHeightSizedBox24,
-          Padding(
-            padding: padding,
-            child: BoxWidgetList(
-              isDesk: isDesk,
-              isTablet: isTablet,
-              aboutProjectKey: aboutProjectKey,
-            ),
+          BoxWidgetList(
+            isDesk: isDesk,
+            isTablet: isTablet,
+            aboutProjectKey: aboutProjectKey,
           ),
           SizedBox(
             key: aboutProjectKey,
             height: KSize.kPixel48,
           ),
-          Padding(
-            padding: padding,
-            child: Text(
-              context.l10n.aboutProject,
-              key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-              style: isDesk
-                  ? AppTextStyle.materialThemeDisplayMedium
-                  : isTablet
-                      ? AppTextStyle.materialThemeDisplaySmall
-                      : AppTextStyle.materialThemeHeadlineSmall,
-            ),
+          Text(
+            context.l10n.aboutProject,
+            key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplayMedium
+                : isTablet
+                    ? AppTextStyle.materialThemeDisplaySmall
+                    : AppTextStyle.materialThemeHeadlineSmall,
           ),
-          if (isTablet)
-            KSizedBox.kHeightSizedBox160
-          else
-            KSizedBox.kHeightSizedBox48,
           DiscountSection(
             isDesk: isDesk,
             isTablet: isTablet,
-            padding: padding,
           ),
           if (Config.isDevelopment) ...[
             if (isTablet)
               KSizedBox.kHeightSizedBox160
             else
               KSizedBox.kHeightSizedBox40,
-            Padding(
-              padding: padding,
-              child: InformationSection(
-                isDesk: isDesk,
-                isTablet: isTablet,
-              ),
+            InformationSection(
+              isDesk: isDesk,
+              isTablet: isTablet,
             ),
           ],
           if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox40,
-          Padding(
-            padding: padding,
-            child: FAQSectionWidget(
-              isDesk: isDesk,
-              isTablet: isTablet,
-            ),
-          ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox160
-          else if (isTablet)
-            KSizedBox.kHeightSizedBox64
-          else
-            KSizedBox.kHeightSizedBox48,
-          Padding(
-            padding: padding,
-            child: FooterWidget(
-              isTablet: isTablet,
-              isDesk: isDesk,
-            ),
-          ),
         ];
         return BlocListener<NetworkCubit, NetworkStatus>(
           listener: (context, state) {
@@ -128,13 +93,89 @@ class HomeBodyWidget extends StatelessWidget {
                     .read<HomeWatcherBloc>()
                     .add(const HomeWatcherEvent.started()),
               ),
-              child: ListView.builder(
-                key: KWidgetkeys.widget.scaffold.scroll,
-                primary: true,
-                addAutomaticKeepAlives: false,
-                addRepaintBoundaries: false,
-                itemCount: body.length,
-                itemBuilder: (context, index) => body.elementAt(index),
+              child: FocusTraversalGroup(
+                child: Semantics(
+                  child: Scaffold(
+                    resizeToAvoidBottomInset: true,
+                    bottomNavigationBar: Config.isWeb
+                        ? null
+                        : const MobNavigationWidget(
+                            index: 0,
+                          ),
+                    appBar: AppBar(
+                      backgroundColor: AppColors.materialThemeWhite,
+                      toolbarHeight: KSize.kAppBarHeight,
+                    ),
+                    body: CustomScrollView(
+                      key: KWidgetkeys.widget.scaffold.scroll,
+                      cacheExtent: KDimensions.listCacheExtent,
+                      slivers: [
+                        if (!Config.isWeb)
+                          BlocBuilder<NetworkCubit, NetworkStatus>(
+                            builder: (context, state) {
+                              if (state.isOffline) {
+                                SliverPersistentHeader(
+                                  pinned: true,
+                                  delegate: NetworkStatusBanner.getSliverHeader(
+                                    isDesk: isDesk,
+                                    isTablet: isTablet,
+                                    networkStatus: state,
+                                  ),
+                                );
+                              }
+                              return const SliverToBoxAdapter();
+                            },
+                          ),
+                        if (Config.isWeb)
+                          SliverPersistentHeader(
+                            delegate: NavbarWidget.getSliverHeader(
+                              isDesk: isDesk,
+                              isTablet: isTablet,
+                            ),
+                          ),
+                        SliverPadding(
+                          padding: padding,
+                          sliver: SliverList.builder(
+                            itemBuilder: (context, index) =>
+                                main.elementAt(index),
+                            addAutomaticKeepAlives: false,
+                            addRepaintBoundaries: false,
+                            itemCount: main.length,
+                          ),
+                        ),
+                        if (isDesk)
+                          SliverPadding(
+                            padding: padding,
+                            sliver: SliverToBoxAdapter(
+                              child: FAQSectionDeskWidget(
+                                isDesk: isDesk,
+                                isTablet: isTablet,
+                              ),
+                            ),
+                          )
+                        else
+                          FaqSectionMobWidget(
+                            isTablet: isTablet,
+                            padding: padding,
+                          ),
+                        SliverToBoxAdapter(
+                          child: isDesk
+                              ? KSizedBox.kHeightSizedBox160
+                              : isTablet
+                                  ? KSizedBox.kHeightSizedBox64
+                                  : KSizedBox.kHeightSizedBox48,
+                        ),
+                        SliverPadding(
+                          padding: padding,
+                          sliver: FooterWidget(
+                            isTablet: isTablet,
+                            isDesk: isDesk,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
