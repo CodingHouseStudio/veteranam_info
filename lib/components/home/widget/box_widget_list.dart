@@ -3,32 +3,46 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/home/home.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class BoxWidgetList extends StatelessWidget {
+class BoxWidgetList extends StatefulWidget {
   const BoxWidgetList({
     required this.isDesk,
     required this.isTablet,
-    required this.aboutProjectKey,
     super.key,
   });
   final bool isDesk;
   final bool isTablet;
-  final GlobalKey aboutProjectKey;
+
+  @override
+  State<BoxWidgetList> createState() => _BoxWidgetListState();
+}
+
+class _BoxWidgetListState extends State<BoxWidgetList> {
+  late GlobalKey aboutProjectKey;
+  @override
+  void initState() {
+    super.initState();
+    aboutProjectKey = GlobalKey();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (isDesk)
+        if (widget.isDesk)
           KSizedBox.kHeightSizedBox36
         else
           KSizedBox.kHeightSizedBox16,
         _ProdBoxWidgets(
-          isDesk: isDesk,
-          isTablet: isTablet,
+          isDesk: widget.isDesk,
+          isTablet: widget.isTablet,
           aboutProjectKey: aboutProjectKey,
         ),
         KSizedBox.kHeightSizedBox16,
-        if (Config.isDevelopment) _DevBoxWidgets(isTablet: isTablet),
+        if (Config.isDevelopment) _DevBoxWidgets(isTablet: widget.isTablet),
+        SizedBox(
+          key: aboutProjectKey,
+          height: KSize.kPixel48,
+        ),
       ],
     );
   }

@@ -11,26 +11,8 @@ class FundsWidgetList extends SingleChildRenderObjectWidget {
     required this.padding,
     super.key,
   }) : super(
-          child: BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
-            builder: (context, _) {
-              final listLength =
-                  isDesk ? _.deskFundItems.length : _.mobFundItems.length;
-              return SliverList.builder(
-                addAutomaticKeepAlives: false,
-                addRepaintBoundaries: false,
-                itemCount: listLength == 0
-                    ? isDesk
-                        ? KDimensions.shimmerFundsDeskItems
-                        : KDimensions.shimmerFundsMobItems
-                    : listLength + 1,
-                itemBuilder: (context, index) => _FundsItemWidget(
-                  isDesk: isDesk,
-                  index: index,
-                  state: _,
-                  listLength: listLength,
-                ),
-              );
-            },
+          child: _FundsWidgetList(
+            isDesk: isDesk,
           ),
         );
   final bool isDesk;
@@ -41,6 +23,38 @@ class FundsWidgetList extends SingleChildRenderObjectWidget {
     return RenderSliverPadding(
       padding: padding,
       textDirection: Directionality.of(context),
+    );
+  }
+}
+
+class _FundsWidgetList extends StatelessWidget {
+  const _FundsWidgetList({
+    required this.isDesk,
+  });
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+      builder: (context, _) {
+        final listLength =
+            isDesk ? _.deskFundItems.length : _.mobFundItems.length;
+        return SliverList.builder(
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
+          itemCount: listLength == 0
+              ? isDesk
+                  ? KDimensions.shimmerFundsDeskItems
+                  : KDimensions.shimmerFundsMobItems
+              : listLength + 1,
+          itemBuilder: (context, index) => _FundsItemWidget(
+            isDesk: isDesk,
+            index: index,
+            state: _,
+            listLength: listLength,
+          ),
+        );
+      },
     );
   }
 }
@@ -72,7 +86,7 @@ class _FundsItemWidget extends StatelessWidget {
       return _FundWidget(
         isDesk: isDesk,
         fundMob: state.mobFundItems.elementAt(index),
-        fundDesk: state.deskFundItems.elementAt(index),
+        fundDesk: isDesk ? state.deskFundItems.elementAt(index) : const [],
       );
     } else {
       return Padding(

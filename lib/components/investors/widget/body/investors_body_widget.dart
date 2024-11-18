@@ -26,37 +26,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final title = [
-          KSizedBox.kHeightSizedBox24,
-          if (Config.isWeb)
-            TitlePointWidget(
-              title: context.l10n.provideSuggestionsFromBusinesses,
-              titleKey: KWidgetkeys.screen.investors.title,
-              titleSecondPart: context.l10n.orDonateHere,
-              isDesk: isDesk,
-              isRightArrow: false,
-              titleAlignment: WrapAlignment.end,
-              textAlign: TextAlign.end,
-            ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox40
-          else if (Config.isWeb)
-            KSizedBox.kHeightSizedBox24,
-          InvestorsDescriptionWidget(
-            isDesk: isDesk,
-          ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox40
-          else if (Config.isWeb)
-            KSizedBox.kHeightSizedBox24,
-          Center(
-            child: Text(
-              context.l10n.provenFunds,
-              key: KWidgetkeys.screen.investors.fundsTitle,
-              style: AppTextStyle.materialThemeDisplayMedium,
-            ),
-          ),
-        ];
+
         return BlocListener<NetworkCubit, NetworkStatus>(
           listener: (context, state) {
             if (state == NetworkStatus.network) {
@@ -78,38 +48,16 @@ class InvestorsBodyWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.scaffold.scroll,
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
-                    if (!Config.isWeb)
-                      BlocBuilder<NetworkCubit, NetworkStatus>(
-                        builder: (context, state) {
-                          if (state.isOffline) {
-                            SliverPersistentHeader(
-                              pinned: true,
-                              delegate: NetworkStatusBanner.getSliverHeader(
-                                isDesk: isDesk,
-                                isTablet: isTablet,
-                                networkStatus: state,
-                              ),
-                            );
-                          }
-                          return const SliverToBoxAdapter();
-                        },
-                      ),
+                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
                     if (Config.isWeb)
-                      SliverPersistentHeader(
-                        delegate: NavbarWidget.getSliverHeader(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                          pageName: context.l10n.discount,
-                        ),
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.discount,
                       ),
                     SliverPadding(
                       padding: padding,
-                      sliver: SliverList.builder(
-                        itemBuilder: (context, index) => title.elementAt(index),
-                        addAutomaticKeepAlives: false,
-                        addRepaintBoundaries: false,
-                        itemCount: title.length,
-                      ),
+                      sliver: InvestorsTitleWidget(isDesk: isDesk),
                     ),
                     FundsWidgetList(
                       isDesk: isDesk,

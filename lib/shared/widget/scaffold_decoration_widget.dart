@@ -68,12 +68,11 @@ class ScaffoldDecorationWidget extends StatelessWidget {
               body: KeyboardScrollView(
                 widgetKey: KWidgetkeys.widget.scaffold.scroll,
                 slivers: [
-                  SliverPersistentHeader(
-                    delegate: NavbarWidget.getSliverHeader(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                    ),
+                  NavigationBarWidget(
+                    isDesk: isDesk,
+                    isTablet: isTablet,
                   ),
+
                   if (titleChildWidgetsFunction != null)
                     SliverPadding(
                       padding: padding,

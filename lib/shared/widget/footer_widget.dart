@@ -11,10 +11,20 @@ class FooterWidget extends SingleChildRenderObjectWidget {
     required this.isTablet,
     super.key,
   }) : super(
-          child: _FooterWidgetList(
-            isDesk: isDesk,
-            isTablet: isTablet,
-            delegate: _body(isTablet: isTablet, isDesk: isDesk),
+          child: SliverPadding(
+            padding: isDesk
+                ? const EdgeInsets.all(
+                    KPadding.kPaddingSize32,
+                  ).copyWith(left: KPadding.kPaddingSize46)
+                : isTablet
+                    ? const EdgeInsets.all(
+                        KPadding.kPaddingSize46,
+                      )
+                    : const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize32,
+                        horizontal: KPadding.kPaddingSize16,
+                      ),
+            sliver: _FooterWidgetList(isDesk: isDesk, isTablet: isTablet),
           ),
         );
 
@@ -27,11 +37,17 @@ class FooterWidget extends SingleChildRenderObjectWidget {
       decoration: KWidgetTheme.boxDecorationFooter,
     );
   }
+}
 
-  static SliverChildDelegate _body({
-    required bool isTablet,
-    required bool isDesk,
-  }) {
+class _FooterWidgetList extends StatelessWidget {
+  const _FooterWidgetList({
+    required this.isDesk,
+    required this.isTablet,
+  });
+  final bool isDesk;
+  final bool isTablet;
+  @override
+  Widget build(BuildContext context) {
     final body = isTablet
         ? [
             Row(
@@ -84,25 +100,8 @@ class FooterWidget extends SingleChildRenderObjectWidget {
                             AppTextStyle.materialThemeBodyLargeNeutralVariant35,
                         textAlign: TextAlign.end,
                       ),
-                      // KSizedBox.kWidthSizedBox16,
-                      // const VerticalDivider(
-                      //   thickness: 1,
-                      //   color: AppColors
-                      //
-                      // .materialThemeRefNeutralVariantNeutralVariant35,
-                      // ),
-                      //KSizedBox.kWidthSizedBox16,
                       const _FooterRightsReservedWidget(),
-                      // KSizedBox.kWidthSizedBox16,
-                      // const VerticalDivider(
-                      //   thickness: 1,
-                      //   color: AppColors
-                      //
-                      // .materialThemeRefNeutralVariantNeutralVariant35,
-                      // ),
-                      //KSizedBox.kWidthSizedBox16,
                       _PrivacyPolice(isDesk: isDesk),
-                      // KSizedBox.kHeightSizedBox90,
                     ],
                   ),
                 ),
@@ -149,18 +148,6 @@ class FooterWidget extends SingleChildRenderObjectWidget {
               linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
               facebookKey: KWidgetkeys.widget.footer.facebookIcon,
             ),
-            // Wrap(
-            //   children: socialMediaLinks(
-            //     isTablet: isTablet,
-            //     context: context,
-            //     padding: isTablet
-            //         ? KSizedBox.kHeightSizedBox24
-            //         : KSizedBox.kWidthSizedBox16,
-            //     instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-            //     linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-            //     facebookKey: KWidgetkeys.widget.footer.facebookIcon,
-            //   ),
-            // ),
             KSizedBox.kHeightSizedBox40,
             Container(
               key: KWidgetkeys.widget.footer.logo,
@@ -176,17 +163,10 @@ class FooterWidget extends SingleChildRenderObjectWidget {
             ),
             KSizedBox.kHeightSizedBox4,
             Row(
-              // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const Expanded(
                   child: _FooterRightsReservedWidget(),
                 ),
-                // KSizedBox.kWidthSizedBox8,
-                // const VerticalDivider(
-                //   thickness: 1,
-                //   color: AppColors
-                // .materialThemeRefNeutralVariantNeutralVariant35,
-                // ),
                 KSizedBox.kWidthSizedBox8,
                 Expanded(
                   child: _PrivacyPolice(isDesk: isDesk),
@@ -199,60 +179,11 @@ class FooterWidget extends SingleChildRenderObjectWidget {
               ],
             ),
           ];
-    return SliverChildBuilderDelegate(
-      (context, index) => body.elementAt(index),
+    return SliverList.builder(
+      itemBuilder: (context, index) => body.elementAt(index),
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
-      childCount: body.length,
-    );
-  }
-}
-
-class _FooterWidgetList extends SingleChildRenderObjectWidget {
-  _FooterWidgetList({
-    required this.isDesk,
-    required this.isTablet,
-    required this.delegate,
-  }) : super(
-          child: SliverPadding(
-            padding: isDesk
-                ? const EdgeInsets.all(
-                    KPadding.kPaddingSize32,
-                  ).copyWith(left: KPadding.kPaddingSize46)
-                : isTablet
-                    ? const EdgeInsets.all(
-                        KPadding.kPaddingSize46,
-                      )
-                    : const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize32,
-                        horizontal: KPadding.kPaddingSize16,
-                      ),
-            sliver: SliverList(
-              delegate: delegate,
-            ),
-          ),
-        );
-
-  final bool isDesk;
-  final bool isTablet;
-  final SliverChildDelegate delegate;
-
-  @override
-  RenderSliverPadding createRenderObject(BuildContext context) {
-    return RenderSliverPadding(
-      padding: isDesk
-          ? const EdgeInsets.all(
-              KPadding.kPaddingSize32,
-            ).copyWith(left: KPadding.kPaddingSize46)
-          : isTablet
-              ? const EdgeInsets.all(
-                  KPadding.kPaddingSize46,
-                )
-              : const EdgeInsets.symmetric(
-                  vertical: KPadding.kPaddingSize32,
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-      textDirection: Directionality.of(context),
+      itemCount: body.length,
     );
   }
 }

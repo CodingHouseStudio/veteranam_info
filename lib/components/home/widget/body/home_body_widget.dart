@@ -11,7 +11,6 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final aboutProjectKey = GlobalKey();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
@@ -29,45 +28,6 @@ class HomeBodyWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final main = [
-          KSizedBox.kHeightSizedBox24,
-          BoxWidgetList(
-            isDesk: isDesk,
-            isTablet: isTablet,
-            aboutProjectKey: aboutProjectKey,
-          ),
-          SizedBox(
-            key: aboutProjectKey,
-            height: KSize.kPixel48,
-          ),
-          Text(
-            context.l10n.aboutProject,
-            key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-            style: isDesk
-                ? AppTextStyle.materialThemeDisplayMedium
-                : isTablet
-                    ? AppTextStyle.materialThemeDisplaySmall
-                    : AppTextStyle.materialThemeHeadlineSmall,
-          ),
-          DiscountSection(
-            isDesk: isDesk,
-            isTablet: isTablet,
-          ),
-          if (Config.isDevelopment) ...[
-            if (isTablet)
-              KSizedBox.kHeightSizedBox160
-            else
-              KSizedBox.kHeightSizedBox40,
-            InformationSection(
-              isDesk: isDesk,
-              isTablet: isTablet,
-            ),
-          ],
-          if (isDesk || isTablet)
-            KSizedBox.kHeightSizedBox160
-          else
-            KSizedBox.kHeightSizedBox40,
-        ];
         return BlocListener<NetworkCubit, NetworkStatus>(
           listener: (context, state) {
             if (state == NetworkStatus.network) {
@@ -99,54 +59,23 @@ class HomeBodyWidget extends StatelessWidget {
                     key: KWidgetkeys.widget.scaffold.scroll,
                     cacheExtent: KDimensions.listCacheExtent,
                     slivers: [
-                      if (!Config.isWeb)
-                        BlocBuilder<NetworkCubit, NetworkStatus>(
-                          builder: (context, state) {
-                            if (state.isOffline) {
-                              SliverPersistentHeader(
-                                pinned: true,
-                                delegate: NetworkStatusBanner.getSliverHeader(
-                                  isDesk: isDesk,
-                                  isTablet: isTablet,
-                                  networkStatus: state,
-                                ),
-                              );
-                            }
-                            return const SliverToBoxAdapter();
-                          },
-                        ),
-                      if (Config.isWeb)
-                        SliverPersistentHeader(
-                          delegate: NavbarWidget.getSliverHeader(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
-                          ),
-                        ),
+                      NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                      ),
                       SliverPadding(
                         padding: padding,
-                        sliver: SliverList.builder(
-                          itemBuilder: (context, index) =>
-                              main.elementAt(index),
-                          addAutomaticKeepAlives: false,
-                          addRepaintBoundaries: false,
-                          itemCount: main.length,
+                        sliver: HomeSectionsWidget(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
                         ),
                       ),
-                      if (isDesk)
-                        SliverPadding(
-                          padding: padding,
-                          sliver: SliverToBoxAdapter(
-                            child: FAQSectionDeskWidget(
-                              isDesk: isDesk,
-                              isTablet: isTablet,
-                            ),
-                          ),
-                        )
-                      else
-                        FaqSectionMobWidget(
-                          isTablet: isTablet,
-                          padding: padding,
-                        ),
+                      FaqSectionWidget(
+                        isDesk: isDesk,
+                        padding: padding,
+                        isTablet: isTablet,
+                      ),
                       SliverToBoxAdapter(
                         child: isDesk
                             ? KSizedBox.kHeightSizedBox160
