@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:veteranam/components/feedback/feedback.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -9,7 +9,19 @@ class FeedbackScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FeedbackBlocprovider(
       key: KWidgetkeys.screen.feedback.screen,
-      childWidget: const FeedbackBodyWidget(),
+      childWidget: Scaffold(
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Config.isWeb
+            ? null
+            : const MobNavigationWidget(
+                index: 0,
+              ),
+        appBar: AppBar(
+          backgroundColor: AppColors.materialThemeWhite,
+          toolbarHeight: KSize.kAppBarHeight,
+        ),
+        body: const FeedbackBodyWidget(),
+      ),
     );
   }
 }
