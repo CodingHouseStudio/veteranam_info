@@ -35,7 +35,7 @@ class AppVersionCubit extends Cubit<AppVersionState> {
     var mobAppVersion =
         _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
     if (mobAppVersion.isEmpty) {
-      _delay = Timer(Duration(seconds: KTest.isTest ? 0 : 5), () {
+      _delay = Timer(Duration(seconds: KTest.getTimer(5)), () {
         mobAppVersion =
             _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
         _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);

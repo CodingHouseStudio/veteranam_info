@@ -24,6 +24,7 @@ class AuthenticationBloc
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
+    on<AuthenticationFailureEvent>(_onAuthenticationFailure);
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -78,6 +79,25 @@ class AuthenticationBloc
   ) {
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
+      onError: (Object error, StackTrace stack) =>
+          add(AuthenticationFailureEvent(stack: stack, error: error)),
+    );
+  }
+
+  void _onAuthenticationFailure(
+    AuthenticationFailureEvent event,
+    Emitter<AuthenticationState> emit,
+  ) {
+    emit(
+      AuthenticationState._(
+        status: state.status,
+        failure: SomeFailure.serverError(
+          error: event.error,
+          stack: event.stack,
+          tag: 'Authentication Bloc',
+          tagKey: ErrorText.streamBlocKey,
+        )._toAuthentication(),
+      ),
     );
   }
 }
