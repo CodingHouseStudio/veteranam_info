@@ -15,6 +15,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, Language>(
+      buildWhen: (previous, current) => previous.value != current.value,
       builder: (context, language) => IconButton(
         key: KWidgetkeys.widget.languageSwitcher.widget,
         style: KButtonStyles.withoutStyle,
