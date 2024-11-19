@@ -7,7 +7,7 @@ class FeedbackScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FeedbackBlocprovider(
+    final scaffold = FeedbackBlocprovider(
       key: KWidgetkeys.screen.feedback.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -23,5 +23,9 @@ class FeedbackScreen extends StatelessWidget {
         body: const FeedbackBodyWidget(),
       ),
     );
+    if (Config.isWeb) {
+      return scaffold;
+    }
+    return SafeArea(child: scaffold);
   }
 }

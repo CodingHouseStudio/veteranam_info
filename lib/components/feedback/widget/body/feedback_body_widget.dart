@@ -4,24 +4,8 @@ import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart';
 import 'package:veteranam/components/feedback/feedback.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class FeedbackBodyWidget extends StatefulWidget {
+class FeedbackBodyWidget extends StatelessWidget {
   const FeedbackBodyWidget({super.key});
-
-  @override
-  State<FeedbackBodyWidget> createState() => _FeedbackBodyWidgetState();
-}
-
-class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController messageController;
-  @override
-  void initState() {
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    messageController = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,96 +26,43 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                       : 0)
               : KPadding.kPaddingSize16,
         );
-        return BlocConsumer<FeedbackBloc, FeedbackState>(
+        return BlocListener<FeedbackBloc, FeedbackState>(
           listener: (context, state) {
-            if (state.formState == FeedbackEnum.initial) {
-              nameController.clear();
-              emailController.clear();
-              messageController.clear();
-            }
             context.dialog.showSnackBardTextDialog(
               state.failure?.value(context),
             );
           },
-          buildWhen: (previous, current) =>
-              current.failure != null ||
-              previous.formState != current.formState,
-          builder: (context, state) {
-            return FocusTraversalGroup(
-              child: Semantics(
-                child: CustomScrollView(
-                  key: KWidgetkeys.widget.scaffold.scroll,
-                  cacheExtent: KDimensions.listCacheExtent,
-                  slivers: [
-                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    NavigationBarWidget(
+          listenWhen: (previous, current) =>
+              current.failure != null || current.failure != previous.failure,
+          child: FocusTraversalGroup(
+            child: Semantics(
+              child: CustomScrollView(
+                key: KWidgetkeys.widget.scaffold.scroll,
+                cacheExtent: KDimensions.listCacheExtent,
+                slivers: [
+                  NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                  NavigationBarWidget(
+                    isDesk: isDesk,
+                    isTablet: isTablet,
+                  ),
+                  SliverPadding(
+                    padding: padding,
+                    sliver: FeedbackFormStateWidget(
                       isDesk: isDesk,
-                      isTablet: isTablet,
                     ),
-                    if (context.read<FeedbackBloc>().state.formState ==
-                            FeedbackEnum.success ||
-                        context.read<FeedbackBloc>().state.formState ==
-                            FeedbackEnum.sendingMessage) ...[
-                      SliverPadding(
-                        padding: padding,
-                        sliver: FeedbackTitle(
-                          isDesk: isDesk,
-                          title: context.l10n.thanks,
-                          // secondText: context.l10n.thanks,
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: FeedbackBoxWidget(
-                          isDesk: isDesk,
-                          padding: padding,
-                          sendAgain: () => context
-                              .read<FeedbackBloc>()
-                              .add(const FeedbackEvent.sendignMessageAgain()),
-                        ),
-                      ),
-                    ] else ...[
-                      SliverPadding(
-                        padding: padding,
-                        sliver: FeedbackTitle(
-                          isDesk: isDesk,
-                          title: context.l10n.write,
-                          titleSecondPart:
-                              '${context.l10n.us} ${context.l10n.aMessage}',
-                          // text: '${context.l10n.write} ${context.l10n.us}',
-                          // secondText: context.l10n.aMessage,
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: FormWidget(
-                          isDesk: isDesk,
-                          padding: padding,
-                          nameController: nameController,
-                          emailController: emailController,
-                          messageController: messageController,
-                        ),
-                      ),
-                    ],
-                    SliverToBoxAdapter(
-                      child: isDesk
-                          ? KSizedBox.kHeightSizedBox100
-                          : KSizedBox.kHeightSizedBox32,
-                    ),
-                  ],
-                ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: isDesk
+                        ? KSizedBox.kHeightSizedBox100
+                        : KSizedBox.kHeightSizedBox32,
+                  ),
+                ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    messageController.dispose();
-    super.dispose();
   }
 }
 

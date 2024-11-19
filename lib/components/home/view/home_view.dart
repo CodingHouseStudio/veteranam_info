@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeBlocprovider(
+    final scaffold = HomeBlocprovider(
       key: KWidgetkeys.screen.home.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -23,5 +23,9 @@ class HomeScreen extends StatelessWidget {
         body: const HomeBodyWidget(),
       ),
     );
+    if (Config.isWeb) {
+      return scaffold;
+    }
+    return SafeArea(child: scaffold);
   }
 }

@@ -32,7 +32,7 @@ class DiscountBlocprovider extends StatelessWidget {
             create: (context) => GetIt.I.get<MobileRatingCubit>(),
           ),
       ],
-      child: Config.isWeb ? childWidget : SafeArea(child: childWidget),
+      child: childWidget,
     );
   }
 }
