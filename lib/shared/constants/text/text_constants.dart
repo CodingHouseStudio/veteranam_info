@@ -232,6 +232,7 @@ abstract class KAppText {
   static const String businessSite = 'https://business.veteranam.info';
   static const String appStoreId = '6584519009';
   static const String unknown = 'Unknown';
+  static const String veteranamFontName = 'Veteranam';
 
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
   static const String iphoneInstallUrl =

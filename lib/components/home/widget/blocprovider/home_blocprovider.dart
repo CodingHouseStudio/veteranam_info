@@ -19,7 +19,7 @@ class HomeBlocprovider extends StatelessWidget {
           create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
         ),
       ],
-      child: Config.isWeb ? childWidget : SafeArea(child: childWidget),
+      child: childWidget,
     );
   }
 }

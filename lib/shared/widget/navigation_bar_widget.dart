@@ -41,7 +41,7 @@ class NavigationBarWidget extends StatelessWidget {
   }
 }
 
-class _NavbarWidget extends StatefulWidget {
+class _NavbarWidget extends StatelessWidget {
   const _NavbarWidget({
     required this.isDesk,
     required this.isTablet,
@@ -58,11 +58,6 @@ class _NavbarWidget extends StatefulWidget {
   final bool? showBackButton;
 
   @override
-  State<_NavbarWidget> createState() => _NavbarWidgetState();
-}
-
-class _NavbarWidgetState extends State<_NavbarWidget> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       key: KWidgetkeys.widget.nawbar.widget,
@@ -72,7 +67,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
         left: padding,
         right: padding,
       ),
-      padding: widget.isTablet
+      padding: isTablet
           ? const EdgeInsets.only(
               left: KPadding.kPaddingSize32,
               right: KPadding.kPaddingSize16,
@@ -107,7 +102,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
                 // }
               },
             ),
-            icon: KImage.logo(
+            icon: KIcon.logo.copyWith(
               key: KWidgetkeys.widget.nawbar.logo,
               // width: 78,
             ),
@@ -143,12 +138,12 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
           // else
           if (Config.isWeb)
             _NavigationCenterWebWidget(
-              isTablet: widget.isTablet,
-              isDesk: widget.isDesk,
+              isTablet: isTablet,
+              isDesk: isDesk,
             )
           else
             Expanded(
-              child: pageName(
+              child: pageNameWidget(
                 showBackButton: true, // widget.networkStatus,
               ),
             ),
@@ -162,7 +157,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
           //     ),
           //   ),
           if (!Config.isBusiness && Config.isWeb)
-            if (widget.isTablet)
+            if (isTablet)
               LanguagesSwitcherWidget(
                 key: KWidgetkeys.widget.nawbar.language,
               )
@@ -184,7 +179,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
                       //      &&
                       // (Config.isDevelopment || Config.isBusiness)
                       ) ...[
-                    if (widget.isDesk) ...[
+                    if (isDesk) ...[
                       KSizedBox.kWidthSizedBox16,
                       DoubleButtonWidget(
                         widgetKey: KWidgetkeys.widget.nawbar.loginButton,
@@ -282,7 +277,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
           },
         );
 
-  Widget pageName({
+  Widget pageNameWidget({
     required bool showBackButton,
   }) {
     return Row(
@@ -291,7 +286,7 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
       children: [
         Expanded(
           child: Text(
-            '${widget.pageName}',
+            '$pageName',
             style: AppTextStyle.materialThemeTitleMedium,
             textAlign: TextAlign.center,
           ),
@@ -300,9 +295,9 @@ class _NavbarWidgetState extends State<_NavbarWidget> {
     );
   }
 
-  double get padding => widget.isDesk
+  double get padding => isDesk
       ? KPadding.kPaddingSize90
-      : widget.isTablet
+      : isTablet
           ? KPadding.kPaddingSize32
           : KPadding.kPaddingSize16;
 }

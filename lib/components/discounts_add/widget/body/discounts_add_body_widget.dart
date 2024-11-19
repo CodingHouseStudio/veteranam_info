@@ -114,9 +114,10 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     KSizedBox.kHeightSizedBox80
                   else
                     KSizedBox.kHeightSizedBox24,
-                  KImage.found(
+                  KIcon.found.copyWith(
                     key: KWidgetkeys.screen.discountsAdd.imageWrongLink,
                   ),
+                  KSizedBox.kHeightSizedBox24,
                   Text(
                     context.l10n.discountEditNotFound,
                     key: KWidgetkeys.screen.discountsAdd.textWrongLink,
