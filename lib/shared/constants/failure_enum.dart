@@ -102,3 +102,11 @@ enum DiscountsAddFailure {
   send,
   linkWrong;
 }
+
+enum UserWatcherFailure {
+  error,
+}
+
+enum AuthenticationFailure {
+  error,
+}

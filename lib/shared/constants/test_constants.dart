@@ -12,6 +12,8 @@ class KTest {
   @visibleForTesting
   static set isTest(bool value) => _isTest = value;
 
+  static int getTimer(int value) => isTest ? 0 : value;
+
   // static double? _animatioRepeat;
   // static double? get animatioRepeat => _animatioRepeat;
   // @visibleForTesting

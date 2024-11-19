@@ -1,8 +1,15 @@
 part of 'authentication_bloc.dart';
 
+extension AuthenticationFailureExtension on SomeFailure {
+  AuthenticationFailure _toAuthentication() {
+    return AuthenticationFailure.error;
+  }
+}
+
 class AuthenticationState extends Equatable {
   const AuthenticationState._({
     this.status = AuthenticationStatus.unknown,
+    this.failure,
   });
 
   const AuthenticationState.unknown()
@@ -22,6 +29,8 @@ class AuthenticationState extends Equatable {
         );
 
   final AuthenticationStatus status;
+
+  final AuthenticationFailure? failure;
 
   @override
   List<Object> get props => [status];
