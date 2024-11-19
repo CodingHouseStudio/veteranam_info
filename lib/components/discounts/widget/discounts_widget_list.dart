@@ -190,12 +190,20 @@ class _DiscountWidgetList extends StatelessWidget {
                 state: state,
                 config: config,
               ),
-              itemBuilder: (context, index) => _DiscountsWidgetItem(
-                isDesk: isDesk,
+              itemBuilder: (context, index) => Padding(
                 key: _key(state: state, index: index, config: config),
-                state: state,
-                index: index,
-                config: config,
+                padding: index == 0
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                child: _DiscountsWidgetItem(
+                  isDesk: isDesk,
+                  key: _key(state: state, index: index, config: config),
+                  state: state,
+                  index: index,
+                  config: config,
+                ),
               ),
             );
           },
@@ -231,64 +239,43 @@ class _DiscountsWidgetItem extends StatelessWidget {
       }
       final discountItem =
           state.filteredDiscountModelItems.elementAt(indexValue);
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: KPadding.kPaddingSize48,
-        ),
-        child: DiscountCardWidget(
-          discountItem: discountItem,
-          isDesk: isDesk,
-          share:
-              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-          isLoading: false,
-        ),
+      return DiscountCardWidget(
+        discountItem: discountItem,
+        isDesk: isDesk,
+        share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+        isLoading: false,
       );
     } else {
       if (state.loadingStatus == LoadingStatus.listLoadedFull &&
           state.filteredDiscountModelItems.isNotEmpty) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize48,
-          ),
-          child: Center(
-            child: Text(
-              context.l10n.thatEndOfList,
-              key: KWidgetkeys.screen.investors.endListText,
-              style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
-            ),
+        return Center(
+          child: Text(
+            context.l10n.thatEndOfList,
+            key: KWidgetkeys.screen.investors.endListText,
+            style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
           ),
         );
       }
       if (state.loadingStatus == LoadingStatus.loaded &&
           PlatformEnumFlutter.isWebDesktop &&
           state.filteredDiscountModelItems.isNotEmpty) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize48,
-          ),
-          child: LoadingButtonWidget(
-            widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
-            text: context.l10n.moreDiscounts,
-            onPressed: () => context.read<DiscountWatcherBloc>().add(
-                  const DiscountWatcherEvent.loadNextItems(),
-                ),
-            isDesk: isDesk,
-          ),
+        return LoadingButtonWidget(
+          widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+          text: context.l10n.moreDiscounts,
+          onPressed: () => context.read<DiscountWatcherBloc>().add(
+                const DiscountWatcherEvent.loadNextItems(),
+              ),
+          isDesk: isDesk,
         );
       }
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: KPadding.kPaddingSize48,
-        ),
-        child: SkeletonizerWidget(
+      return SkeletonizerWidget(
+        isLoading: true,
+        child: DiscountCardWidget(
+          key: KWidgetkeys.screen.discounts.card,
+          discountItem: KMockText.discountModel,
+          isDesk: isDesk,
+          share: '',
           isLoading: true,
-          child: DiscountCardWidget(
-            key: KWidgetkeys.screen.discounts.card,
-            discountItem: KMockText.discountModel,
-            isDesk: isDesk,
-            share: '',
-            isLoading: true,
-          ),
         ),
       );
     }
