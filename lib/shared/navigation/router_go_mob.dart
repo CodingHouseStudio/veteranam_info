@@ -9,9 +9,13 @@ import 'package:veteranam/components/discounts/view/discounts_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
 import 'package:veteranam/components/feedback/view/feedback_view.dart';
 import 'package:veteranam/components/investors/view/investors_view.dart';
+import 'package:veteranam/components/login/view/login_view.dart';
 import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
 import 'package:veteranam/components/mob_faq/view/mob_faq_view.dart';
 import 'package:veteranam/components/mob_settings/view/mob_settings_view.dart';
+import 'package:veteranam/components/profile/view/profile_view.dart';
+import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
+import 'package:veteranam/components/user_role/view/user_role_view.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -31,7 +35,7 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: '/${KRoute.discounts.path}',
+  initialLocation: '${KRoute.settings.path}/${KRoute.discounts.path}',
   observers: [
     if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
@@ -51,17 +55,44 @@ GoRouter router = GoRouter(
         AuthenticationStatus.authenticated) {
       return state.uri.toString().contains(KRoute.login.path) ||
               state.uri.toString().contains(KRoute.signUp.path)
-          ?
-          // context.read<AuthenticationBloc>().state.userSetting.userRole ==
-          //         null
-          //     ? KRoute.questionsForm.path
-          //     :
-          KRoute.home.path
+          ? '${KRoute.settings.path}/${KRoute.discounts.path}'
           : null;
     }
     return null;
   },
   routes: [
+    GoRoute(
+      name: KRoute.userRole.name,
+      path: KRoute.userRole.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const UserRoleScreen(),
+      ),
+      routes: [
+        GoRoute(
+          name: KRoute.login.name,
+          path: KRoute.login.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            child: const LoginScreen(),
+          ),
+        ),
+        GoRoute(
+          name: KRoute.signUp.name,
+          path: KRoute.signUp.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            child: const SignUpScreen(),
+          ),
+        ),
+      ],
+    ),
     GoRoute(
       name: KRoute.settings.name,
       path: KRoute.settings.path,
@@ -88,7 +119,7 @@ GoRouter router = GoRouter(
         ),
         GoRoute(
           name: KRoute.discounts.name,
-          path: '/${KRoute.discounts.path}',
+          path: KRoute.discounts.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
@@ -138,6 +169,16 @@ GoRouter router = GoRouter(
             name: state.name,
             restorationId: state.pageKey.value,
             child: const MobFaqScreen(),
+          ),
+        ),
+        GoRoute(
+          name: KRoute.profile.name,
+          path: KRoute.profile.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            child: const ProfileScreen(),
           ),
         ),
       ],
