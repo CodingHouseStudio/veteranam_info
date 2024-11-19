@@ -28,9 +28,8 @@ class UrlRepository extends IUrlRepository {
       return const Right(true);
     } catch (e, stack) {
       // Error if user closes the sharing dialog in Safari
-      if (e.toString() ==
-          'Exception: Navigator.share() failed: Abort due to cancellation'
-              ' of share.') {
+      if (e.toString().contains('cancellation') ||
+          e.toString().contains('canceled')) {
         return const Right(true);
       }
       final error = ShareFailure.fromCode(
