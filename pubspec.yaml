@@ -99,12 +99,11 @@ flutter:
 
   # icons
   assets:
-    - assets/icons/
     - assets/images/
     - assets/markdown/
 
   fonts:
-    - family: Vetranam
+    - family: Veteranam
       fonts:
         - asset: assets/fonts/veteranam_icons.woff
           weight: 400

@@ -148,27 +148,26 @@ abstract class KIcon {
     color: AppColors.materialThemeWhite,
   );
   static const logo = _KIcon(
-    IconData(0xe1, fontFamily: 'Vetranam'),
+    IconData(0xe1, fontFamily: 'Veteranam'),
     size: KSize.kFont48,
-    color: AppColors.materialThemeKeyColorsSecondary,
   );
   static const instagram = _KIcon(
-    IconData(0xe915, fontFamily: 'Vetranam'),
+    IconData(0xe90b, fontFamily: 'Veteranam'),
   );
   static const linkedIn = _KIcon(
-    IconData(0xe90e, fontFamily: 'Vetranam'),
+    IconData(0xe90c, fontFamily: 'Veteranam'),
   );
   static const facebook = _KIcon(
-    IconData(0xe90c, fontFamily: 'Vetranam'),
+    IconData(0xe909, fontFamily: 'Veteranam'),
   );
   static const google = _KIcon(
-    IconData(0xe91a, fontFamily: 'Vetranam'),
+    IconData(0xe900, fontFamily: 'Veteranam'),
   );
   static const discountEmpty = _KIcon(
-    IconData(0xe90b, fontFamily: 'Vetranam'),
+    IconData(0xe908, fontFamily: 'Veteranam'),
   );
   static const found = _KIcon(
-    IconData(0xe90b, fontFamily: 'Vetranam'),
+    IconData(0xe90a, fontFamily: 'Veteranam'),
   );
 
   static List<Icon> get icons => [
