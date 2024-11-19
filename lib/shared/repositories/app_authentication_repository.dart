@@ -181,9 +181,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return userCredential.credential;
   }
 
-  Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
+  Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialMobile() async {
     final googleUser = await _googleSignIn.signIn();
-    final googleAuth = await googleUser!.authentication;
+    // If user cancelled dialog
+    if (googleUser == null) return null;
+    log('fdsfdssfddfsdfsdfssdfdfssdffsdfsd $googleUser');
+    final googleAuth = await googleUser.authentication;
     return firebase_auth.GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
