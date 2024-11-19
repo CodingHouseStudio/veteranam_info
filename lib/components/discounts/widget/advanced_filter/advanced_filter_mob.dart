@@ -26,9 +26,9 @@ class AdvancedFilterMob extends StatelessWidget {
       //   padding: KPadding.kPaddingSize12,
       // ),
 
-      onPressed: () {
+      onPressed: () async {
         final bloc = context.read<DiscountWatcherBloc>();
-        showModalBottomSheet<AdvancedFilterMobState>(
+        await showModalBottomSheet<AdvancedFilterMobState>(
           context: context,
           isScrollControlled: true,
           barrierColor:
