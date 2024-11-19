@@ -19,6 +19,8 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
     on<_Started>(_onStarted);
     on<_UserChanged>(_onUserChanged);
     on<_UserSettingChanged>(_onUserSettingChanged);
+    on<_UserFailure>(_onUserFailure);
+    on<_UserSettingFailure>(_onUserSettingFailure);
   }
   late StreamSubscription<UserSetting> userSettingSubscription;
   late StreamSubscription<User> userSubscription;
@@ -47,6 +49,38 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
     Emitter<UserWatcherState> emit,
   ) {
     emit(state.copyWith(userSetting: event.userSetting));
+  }
+
+  void _onUserFailure(
+    _UserFailure event,
+    Emitter<UserWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        failure: SomeFailure.serverError(
+          error: event.error,
+          stack: event.stack,
+          tag: 'User ${ErrorText.watcherBloc}',
+          tagKey: 'User ${ErrorText.streamBlocKey}',
+        )._toUserWatcher(),
+      ),
+    );
+  }
+
+  void _onUserSettingFailure(
+    _UserSettingFailure event,
+    Emitter<UserWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        failure: SomeFailure.serverError(
+          error: event.error,
+          stack: event.stack,
+          tag: 'User ${ErrorText.watcherBloc}',
+          tagKey: 'User Setting ${ErrorText.streamBlocKey}',
+        )._toUserWatcher(),
+      ),
+    );
   }
 
   @override

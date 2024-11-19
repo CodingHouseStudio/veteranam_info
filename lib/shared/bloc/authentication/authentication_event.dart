@@ -18,6 +18,16 @@ class AuthenticationStatusChanged extends AuthenticationEvent {
   List<Object> get props => [status];
 }
 
+class AuthenticationFailureEvent extends AuthenticationEvent {
+  const AuthenticationFailureEvent({required this.stack, required this.error});
+
+  final Object error;
+  final StackTrace stack;
+
+  @override
+  List<Object> get props => [stack, error];
+}
+
 class AuthenticationLogoutRequested extends AuthenticationEvent {}
 
 class AuthenticationDeleteRequested extends AuthenticationEvent {}

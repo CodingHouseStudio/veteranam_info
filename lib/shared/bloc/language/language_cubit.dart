@@ -23,7 +23,8 @@ class LanguageCubit extends Cubit<Language> {
       _timer = Timer.periodic(
         const Duration(seconds: 1),
         (_) {
-          if (_userRepository.currentUserSetting.isNotEmpty || counter > 5) {
+          if (_userRepository.currentUserSetting.isNotEmpty ||
+              counter > KTest.getTimer(5)) {
             emit(_userRepository.currentUserSetting.locale);
             _timer?.cancel();
           } else {
@@ -36,13 +37,13 @@ class LanguageCubit extends Cubit<Language> {
 
   void languageChanged() {
     final value = state.isEnglish ? Language.ukrain : Language.english;
+    emit(value);
     unawaited(
       _userRepository.updateUserSetting(
         userSetting: _userRepository.currentUserSetting.copyWith(locale: value),
       ),
     );
     log('Language changed: $value');
-    emit(value);
   }
 
   @override
