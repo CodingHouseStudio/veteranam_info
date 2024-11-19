@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart' show BoxFit, Key;
-import 'package:flutter_svg/svg.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -49,39 +48,6 @@ import 'package:veteranam/shared/shared_flutter.dart';
 // }
 
 class KImage {
-  static SvgPicture instagram({Key? key}) => SvgPicture.asset(
-        'assets/icons/instagram.svg',
-        key: key,
-      );
-  static SvgPicture linkedIn({Key? key}) => SvgPicture.asset(
-        'assets/icons/linkedin.svg',
-        key: key,
-      );
-  static SvgPicture facebook({Key? key}) => SvgPicture.asset(
-        'assets/icons/facebook.svg',
-        key: key,
-      );
-  // static SvgPicture facebookLogin({Key? key}) => SvgPicture.asset(
-  //       'assets/icons/Social_Icons_F.svg',
-  //       key: key,
-  //     );
-  // static SvgPicture apple({Key? key}) => SvgPicture.asset(
-  //       'assets/icons/Social_Icons.svg',
-  //       key: key,
-  //     );
-  static SvgPicture google({Key? key}) => SvgPicture.asset(
-        'assets/icons/social_icons_g.svg',
-        key: key,
-      );
-  static SvgPicture logo({Key? key}) => SvgPicture.asset(
-        'assets/images/logo.svg',
-        key: key,
-      );
-
-  static SvgPicture discountEmpty({Key? key}) => SvgPicture.asset(
-        'assets/icons/discount_icon.svg',
-        key: key,
-      );
   // AssetImageWidget(
   //       'assets/images/logo.png',
   //       key: key,
@@ -160,8 +126,4 @@ class KImage {
   //   ),
   //   context,
   // );
-  static SvgPicture found({Key? key}) => SvgPicture.asset(
-        'assets/icons/found_icon.svg',
-        key: key,
-      );
 }

@@ -40,7 +40,6 @@ dependencies:
   flutter_markdown: ^0.7.3
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.2.2
-  flutter_svg: ^2.0.10
   formz: ^0.7.0
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
@@ -100,11 +99,16 @@ flutter:
 
   # icons
   assets:
-    - assets/icons/
     - assets/images/
     - assets/markdown/
 
   fonts:
+    - family: Veteranam
+      fonts:
+        - asset: assets/fonts/veteranam_icons.woff
+          weight: 400
+          style: normal
+
     - family: Gilroy
       fonts:
         # - asset: assets/fonts/Gilroy-Thin.woff

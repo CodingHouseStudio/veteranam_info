@@ -114,7 +114,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
         context: context,
         isDesk: isDesk,
         text: context.l10n.google,
-        icon: KImage.google(),
+        icon: KIcon.google,
         onPressed: () => context
             .read<AuthenticationServicesCubit>()
             .authenticationUseGoogle(),
