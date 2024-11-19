@@ -111,7 +111,7 @@ class _BuildMobileLayout extends StatelessWidget {
         style: AppTextStyle.materialThemeBodyMedium,
       ),
       KSizedBox.kHeightSizedBox32,
-      FieldWidget(
+      const FieldWidget(
         isDesk: false,
       ),
       KSizedBox.kHeightSizedBox32,
