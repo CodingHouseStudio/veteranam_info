@@ -148,26 +148,67 @@ abstract class KIcon {
     color: AppColors.materialThemeWhite,
   );
   static const logo = _KIcon(
-    IconData(0xe1, fontFamily: 'Veteranam'),
+    IconData(0xe1, fontFamily: KAppText.veteranamFontName),
     size: KSize.kFont48,
   );
-  static const instagram = _KIcon(
-    IconData(0xe90b, fontFamily: 'Veteranam'),
+  static const google = _KIcon(
+    IconData(0xe2, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
-  static const linkedIn = _KIcon(
-    IconData(0xe90c, fontFamily: 'Veteranam'),
+  static const myDiscountEmpty = _KIcon(
+    IconData(0xe3, fontFamily: KAppText.veteranamFontName),
+    size: KSize.kFont96,
+    color: AppColors.materialThemeRefNeutralNeutral80,
   );
   static const facebook = _KIcon(
-    IconData(0xe909, fontFamily: 'Veteranam'),
-  );
-  static const google = _KIcon(
-    IconData(0xe900, fontFamily: 'Veteranam'),
-  );
-  static const discountEmpty = _KIcon(
-    IconData(0xe908, fontFamily: 'Veteranam'),
+    IconData(0xe4, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
   static const found = _KIcon(
-    IconData(0xe90a, fontFamily: 'Veteranam'),
+    IconData(0xe5, fontFamily: KAppText.veteranamFontName),
+    size: KSize.kFont128,
+    color: AppColors.materialThemeRefNeutralNeutral80,
+  );
+  static const instagram = _KIcon(
+    IconData(0xe6, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const linkedIn = _KIcon(
+    IconData(0xe7, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const apple = _KIcon(
+    IconData(0xe8, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
+  static const veteransIcon = _KIcon(
+    IconData(0xe10, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const dsns = _KIcon(
+    IconData(0xe11, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const familyMembers = _KIcon(
+    IconData(0xe12, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const military = _KIcon(
+    IconData(0xe13, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const personsWithDisabilities = _KIcon(
+    IconData(0xe14, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const police = _KIcon(
+    IconData(0xe15, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const ubd = _KIcon(
+    IconData(0xe16, fontFamily: KAppText.veteranamFontName),
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
 
   static List<Icon> get icons => [

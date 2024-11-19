@@ -15,7 +15,7 @@ class MyDiscountEmptyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        KIcon.discountEmpty.copyWith(
+        KIcon.myDiscountEmpty.copyWith(
           key: KWidgetkeys.screen.myDiscounts.iconEmpty,
         ),
         KSizedBox.kHeightSizedBox16,
