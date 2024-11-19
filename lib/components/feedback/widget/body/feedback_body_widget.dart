@@ -105,7 +105,7 @@ class FeedbackBodyWidget extends StatelessWidget {
 //           showMobBottomNavigation: false,
 //           showMobNawbarBackButton: true,
 //           pageName: context.l10n.feedback,
-//           mainChildWidgetsFunction: 
+//           mainChildWidgetsFunction:
 //({required isDesk, required isTablet}) => [
 //             if (context.read<FeedbackBloc>().state.formState ==
 //                     FeedbackEnum.success ||
@@ -126,7 +126,7 @@ class FeedbackBodyWidget extends StatelessWidget {
 //               FeedbackTitle(
 //                 isDesk: isDesk,
 //                 title: context.l10n.write,
-//                 titleSecondPart: 
+//                 titleSecondPart:
 //'${context.l10n.us} ${context.l10n.aMessage}',
 //                 // text: '${context.l10n.write} ${context.l10n.us}',
 //                 // secondText: context.l10n.aMessage,
