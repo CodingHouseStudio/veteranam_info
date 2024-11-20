@@ -28,7 +28,7 @@ class AdvancedFilterMob extends StatelessWidget {
 
       onPressed: () async {
         final bloc = context.read<DiscountWatcherBloc>();
-        await showModalBottomSheet<void>(
+        await showModalBottomSheet<AdvancedFilterMobState>(
           context: context,
           isScrollControlled: true,
           barrierColor:
@@ -46,6 +46,25 @@ class AdvancedFilterMob extends StatelessWidget {
             initChooseLocationList: bloc.state.choosenLocationList,
             initialChooseSorting: bloc.state.choosenSortingnList,
           ),
+        ).then(
+          (_) {
+            if (!context.mounted) return;
+
+            if (_ != null) {
+              context.read<DiscountWatcherBloc>().add(
+                    DiscountWatcherEvent.setMobFilter(
+                      filterList: _.filtersLocation,
+                      sorting: _.sorting,
+                      choosenLocationList: _.choosenLocationList,
+                      choosenSortingnList: _.choosenSortingnList,
+                    ),
+                  );
+            } else {
+              context.read<DiscountWatcherBloc>().add(
+                    const DiscountWatcherEvent.filterReset(),
+                  );
+            }
+          },
         );
       },
 
@@ -106,12 +125,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                     isDesk: false,
                     resetEvent: _.choosenLocationList.isNotEmpty ||
                             _.choosenSortingnList.isNotEmpty
-                        ? () {
-                            context.read<DiscountWatcherBloc>().add(
-                                  const DiscountWatcherEvent.filterReset(),
-                                );
-                            context.pop();
-                          }
+                        ? context.pop
                         : null,
                   ),
                   KSizedBox.kWidthSizedBox8,
@@ -119,15 +133,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                     text: context.l10n.apply,
                     isDesk: false,
                     onPressed: () {
-                      context.read<DiscountWatcherBloc>().add(
-                            DiscountWatcherEvent.setMobFilter(
-                              filterList: _.filtersLocation,
-                              sorting: _.sorting,
-                              choosenLocationList: _.choosenLocationList,
-                              choosenSortingnList: _.choosenSortingnList,
-                            ),
-                          );
-                      context.pop();
+                      context.pop(_);
                     },
                     widgetKey: KWidgetkeys
                         .screen.discounts.advancedFilterMobAppliedButton,
