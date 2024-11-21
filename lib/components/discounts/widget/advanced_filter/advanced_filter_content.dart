@@ -108,23 +108,29 @@ class _ChooseItems extends StatelessWidget {
       itemBuilder: (context, index) {
         if (index == 0) {
           if (isDesk) {
-            return Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    context.l10n.filterApplied,
-                    key: KWidgetkeys.screen.discounts.appliedFilterText,
-                    style: AppTextStyle.materialThemeTitleLarge,
-                  ),
-                ),
-                AdvancedFilterResetButton(
-                  isDesk: true,
-                  resetEvent: () => context
-                      .read<DiscountWatcherBloc>()
-                      .add(const DiscountWatcherEvent.filterReset()),
-                ),
-              ],
+            return AdvancedFilterResetButton(
+              isDesk: true,
+              resetEvent: () => context
+                  .read<DiscountWatcherBloc>()
+                  .add(const DiscountWatcherEvent.filterReset()),
             );
+            //      Row(
+            //   children: [
+            //     Expanded(
+            //       child: Text(
+            //         context.l10n.filterApplied,
+            //         key: KWidgetkeys.screen.discounts.appliedFilterText,
+            //         style: AppTextStyle.materialThemeTitleLarge,
+            //       ),
+            //     ),
+            //     AdvancedFilterResetButton(
+            //       isDesk: true,
+            //       resetEvent: () => context
+            //           .read<DiscountWatcherBloc>()
+            //           .add(const DiscountWatcherEvent.filterReset()),
+            //     ),
+            //   ],
+            // );
           } else {
             return Text(
               context.l10n.filterApplied,
