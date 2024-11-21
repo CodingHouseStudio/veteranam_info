@@ -103,20 +103,37 @@ class DiscountWatcherBloc
       categories: state.filterCategory,
       list: sortingList,
     );
-    final locationes =
-        categoryFilter.getLocationFilter(isEnglish: event.isEnglish);
+    final locationes = categoryFilter
+        .getLocationFilter(isEnglish: event.isEnglish)
+        .map(
+          (e) => state.choosenLocationList.contains(e)
+              ? e.copyWith(isSelected: true)
+              : e,
+        )
+        .toList();
 
     final locationList = _filterLocation(
       location: state.filterLocation,
       listValue: sortingList,
     );
 
-    final categories = locationList.overallItems(
-      isEnglish: event.isEnglish,
-      getENFilter: (item) => item.categoryEN,
-      getUAFilter: (item) => item.category,
-      calculateNumber: true,
-    );
+    final categories = locationList
+        .overallItems(
+          isEnglish: event.isEnglish,
+          getENFilter: (item) => item.categoryEN,
+          getUAFilter: (item) => item.category,
+          calculateNumber: true,
+        )
+        .map(
+          (e) => state.filterCategory
+                      .where((element) => element == e)
+                      .firstOrNull
+                      ?.isSelected ??
+                  false
+              ? e.copyWith(isSelected: true)
+              : e,
+        )
+        .toList();
 
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
@@ -142,8 +159,14 @@ class DiscountWatcherBloc
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
         sorting: [
-          SortingItem(DiscountEnum.free),
-          SortingItem(DiscountEnum.largestSmallest),
+          SortingItem(
+            DiscountEnum.free,
+            isSelected: state.sorting.firstOrNull?.isSelected ?? false,
+          ),
+          SortingItem(
+            DiscountEnum.largestSmallest,
+            isSelected: state.sorting.lastOrNull?.isSelected ?? false,
+          ),
         ],
         sortingDiscountModelItems: sortingList,
         choosenLocationList: state.choosenLocationList,
