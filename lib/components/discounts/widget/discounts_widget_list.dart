@@ -249,10 +249,15 @@ class _DiscountsWidgetItem extends StatelessWidget {
       if (state.loadingStatus == LoadingStatus.listLoadedFull &&
           state.filteredDiscountModelItems.isNotEmpty) {
         return Center(
-          child: Text(
-            context.l10n.thatEndOfList,
-            key: KWidgetkeys.screen.investors.endListText,
-            style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: KPadding.kPaddingSize48,
+            ),
+            child: Text(
+              context.l10n.thatEndOfList,
+              key: KWidgetkeys.screen.investors.endListText,
+              style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+            ),
           ),
         );
       }

@@ -1620,6 +1620,10 @@
   "@dataIsSavedSuccess": {
     "examples": "Message after the user has successfully saved their data."
   },
+  "joinUs": "Join Us",
+  "@joinUs": {
+    "examples": "Header for the mobile app on the User Role page"
+  },
   "activate": "Activate",
   "@activate": {
     "examples": "Text for a button on the MyDiscount page.",

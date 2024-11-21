@@ -48,19 +48,17 @@ class _DiscountsBodyWidget extends StatelessWidget {
             );
           }
           if (state.itemsLoaded ==
-                  (context.read<DiscountConfigCubit>().state.loadingItems *
-                      (context
-                              .read<DiscountConfigCubit>()
-                              .state
-                              .emailScrollCount +
-                          1)) &&
-              context.read<UserEmailFormBloc>().state.emailEnum.show) {
+              (context.read<DiscountConfigCubit>().state.loadingItems *
+                  (context.read<DiscountConfigCubit>().state.emailScrollCount +
+                      1))) {
             if (Config.isWeb) {
-              if ((context.read<UserWatcherBloc>().state.user.email ?? '')
-                  .isEmpty) {
-                context.dialog.showUserEmailDialog(
-                  context.read<DiscountConfigCubit>().state.emailCloseDelay,
-                );
+              if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
+                if ((context.read<UserWatcherBloc>().state.user.email ?? '')
+                    .isEmpty) {
+                  context.dialog.showUserEmailDialog(
+                    context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                  );
+                }
               }
             } else {
               context.read<MobileRatingCubit>().showDialog();
@@ -95,12 +93,11 @@ class _DiscountsBodyWidget extends StatelessWidget {
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
                     NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    if (Config.isWeb)
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                        pageName: context.l10n.discount,
-                      ),
+                    NavigationBarWidget(
+                      isDesk: isDesk,
+                      isTablet: isTablet,
+                      pageName: context.l10n.discounts,
+                    ),
                     SliverPadding(
                       padding: padding,
                       sliver: DiscountTitleWidget(
