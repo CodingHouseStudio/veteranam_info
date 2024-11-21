@@ -40,11 +40,37 @@ class FeedbackBodyWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.scaffold.scroll,
                 cacheExtent: KDimensions.listCacheExtent,
                 slivers: [
-                  NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                  NavigationBarWidget(
+                  NetworkBanner(
                     isDesk: isDesk,
                     isTablet: isTablet,
                   ),
+                  if (Config.isWeb)
+                    NavigationBarWidget(
+                      isDesk: isDesk,
+                      isTablet: isTablet,
+                    )
+                  else
+                    BlocBuilder<FeedbackBloc, FeedbackState>(
+                      buildWhen: (previous, current) =>
+                          previous.formState != current.formState,
+                      builder: (context, state) {
+                        return NavigationBarWidget(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
+                          showMobBackButton: true,
+                          pageName:
+                              context.read<FeedbackBloc>().state.formState ==
+                                          FeedbackEnum.success ||
+                                      context
+                                              .read<FeedbackBloc>()
+                                              .state
+                                              .formState ==
+                                          FeedbackEnum.sendingMessage
+                                  ? context.l10n.thanks
+                                  : '${context.l10n.write} ${context.l10n.us}',
+                        );
+                      },
+                    ),
                   SliverPadding(
                     padding: padding,
                     sliver: FeedbackFormStateWidget(

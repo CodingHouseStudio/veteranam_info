@@ -35,7 +35,7 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: '${KRoute.settings.path}/${KRoute.discounts.path}',
+  initialLocation: '${KRoute.settings.path}${KRoute.discounts.path}',
   observers: [
     if (Config.isProduction && Config.isReleaseMode)
       FirebaseAnalyticsObserver(
@@ -55,7 +55,7 @@ GoRouter router = GoRouter(
         AuthenticationStatus.authenticated) {
       return state.uri.toString().contains(KRoute.login.path) ||
               state.uri.toString().contains(KRoute.signUp.path)
-          ? '${KRoute.settings.path}/${KRoute.discounts.path}'
+          ? '${KRoute.settings.path}${KRoute.discounts.path}'
           : null;
     }
     return null;
@@ -180,6 +180,11 @@ GoRouter router = GoRouter(
             restorationId: state.pageKey.value,
             child: const ProfileScreen(),
           ),
+          redirect: (context, state) =>
+              context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated
+                  ? '${KRoute.settings.path}${KRoute.discounts.path}'
+                  : null,
         ),
       ],
     ),

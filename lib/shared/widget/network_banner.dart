@@ -8,15 +8,11 @@ class NetworkBanner extends StatelessWidget {
     required this.isTablet,
     super.key,
     this.childWidget,
-    this.pageName,
-    this.showMobBackButton,
     this.networkStatus,
   });
   final bool isDesk;
   final bool isTablet;
   final Widget? childWidget;
-  final String? pageName;
-  final bool? showMobBackButton;
   final NetworkStatus? networkStatus;
 
   @override

@@ -83,30 +83,46 @@ class _NavbarWidget extends StatelessWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: () => EasyDebounce.debounce(
-              KAppText.logo,
-              Duration.zero,
-              () {
-                // if (Config.isWeb
-                //     // || !widget.showMobileNawbar
-                //     ) {
-                context.goNamed(
-                  Config.isWeb
-                      ? Config.isUser
-                          ? KRoute.home.name
-                          : KRoute.myDiscounts.name
-                      : KRoute.discounts.name, //KRoute.businessDashboard.name,
-                );
-                // }
-              },
+          if (Config.isWeb || !(showBackButton ?? false))
+            IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => EasyDebounce.debounce(
+                KAppText.logo,
+                Duration.zero,
+                () {
+                  // if (Config.isWeb
+                  //     // || !widget.showMobileNawbar
+                  //     ) {
+                  context.goNamed(
+                    Config.isWeb
+                        ? Config.isUser
+                            ? KRoute.home.name
+                            : KRoute.myDiscounts.name
+                        : KRoute
+                            .discounts.name, //KRoute.businessDashboard.name,
+                  );
+                  // }
+                },
+              ),
+              icon: KIcon.logo.copyWith(
+                key: KWidgetkeys.widget.nawbar.logo,
+                // width: 78,
+              ),
+            )
+          else
+            IconButton(
+              key: KWidgetkeys.widget.nawbar.backButton,
+              style: KButtonStyles.withoutStyle.copyWith(
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize12,
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+                ),
+              ),
+              onPressed: () => context.pop(),
+              icon: KIcon.arrowBack,
             ),
-            icon: KIcon.logo.copyWith(
-              key: KWidgetkeys.widget.nawbar.logo,
-              // width: 78,
-            ),
-          ),
           // if (Config.isDevelopment)
           //   if (widget.isDesk)
           //     KSizedBox.kWidthSizedBox40
@@ -143,8 +159,11 @@ class _NavbarWidget extends StatelessWidget {
             )
           else
             Expanded(
-              child: pageNameWidget(
-                showBackButton: true, // widget.networkStatus,
+              child: Text(
+                '$pageName',
+                key: KWidgetkeys.widget.nawbar.pageName,
+                style: AppTextStyle.materialThemeTitleMedium,
+                textAlign: TextAlign.center,
               ),
             ),
           // if (widget.isDesk && widget.hasMicrophone)
@@ -276,24 +295,6 @@ class _NavbarWidget extends StatelessWidget {
             );
           },
         );
-
-  Widget pageNameWidget({
-    required bool showBackButton,
-  }) {
-    return Row(
-      key: KWidgetkeys.widget.nawbar.pageName,
-      //mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Text(
-            '$pageName',
-            style: AppTextStyle.materialThemeTitleMedium,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    );
-  }
 
   double get padding => isDesk
       ? KPadding.kPaddingSize90

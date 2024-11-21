@@ -22,14 +22,18 @@ class SignUpBodyWidget extends StatelessWidget {
             notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
           isForm: true,
+          pageName: context.l10n.signUp,
+          showMobNawbarBackButton: true,
+          showMobBottomNavigation: false,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (!isDesk) KSizedBox.kHeightSizedBox24,
-            ShortTitleIconWidget(
-              title: context.l10n.signUp,
-              titleKey: KWidgetkeys.screen.signUp.title,
-              isDesk: isDesk,
-              expanded: isDesk,
-            ),
+            if (Config.isWeb)
+              ShortTitleIconWidget(
+                title: context.l10n.signUp,
+                titleKey: KWidgetkeys.screen.signUp.title,
+                isDesk: isDesk,
+                expanded: isDesk,
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else
