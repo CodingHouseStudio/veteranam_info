@@ -14,13 +14,15 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required List<DiscountModel> categoryDiscountModelItems,
     required List<DiscountModel> locationDiscountModelItems,
     required List<DiscountModel> sortingDiscountModelItems,
+    required List<DiscountModel> eligibilitiesDiscountModelItems,
     // required List<dynamic> chooseFilterItems,
     required List<FilterItem<String>> filterLocation,
+    required List<FilterItem<String>> filterEligibilities,
     required List<FilterItem<String>> choosenLocationList,
-    required List<FilterItem<DiscountEnum>> choosenSortingnList,
+    required List<FilterItem<String>> choosenCategoriesnList,
+    required List<FilterItem<String>> choosenEligibilitiesList,
     required List<FilterItem<String>> filterCategory,
     required List<FilterItem<DiscountEnum>> sorting,
-    required bool categoryListEmpty,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
@@ -46,8 +48,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
 // }
 
 extension SubLocationString on SubLocation {
-  List<SubLocation> get _getList {
-    return [SubLocation.online];
+  String get _getList {
+    return KAppText.sulocationUA;
     // switch (this) {
     //   case SubLocation.all:
     //     return [

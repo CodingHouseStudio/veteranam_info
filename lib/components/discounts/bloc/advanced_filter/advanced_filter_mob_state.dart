@@ -4,9 +4,11 @@ part of 'advanced_filter_mob_cubit.dart';
 class AdvancedFilterMobState with _$AdvancedFilterMobState {
   const factory AdvancedFilterMobState({
     required List<FilterItem<String>> filtersLocation,
-    required List<FilterItem<DiscountEnum>> sorting,
     required List<FilterItem<String>> choosenLocationList,
-    required List<FilterItem<DiscountEnum>> choosenSortingnList,
+    required List<FilterItem<String>> choosenCategoriesnList,
+    required List<FilterItem<String>> filterCategory,
+    required List<FilterItem<String>> choosenEligibilitiesList,
+    required List<FilterItem<String>> filterEligibilities,
     // required List<ReportModel> reportItems,
   }) = _Initial;
 }

@@ -13,23 +13,30 @@ class AdvancedFilterDesk extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.loadingStatus != current.loadingStatus ||
           previous.filterLocation != current.filterLocation ||
-          previous.sorting != current.sorting ||
           previous.choosenLocationList != current.choosenLocationList ||
-          current.choosenSortingnList != previous.choosenSortingnList,
+          previous.choosenCategoriesnList != current.choosenCategoriesnList ||
+          current.filterCategory != previous.filterCategory ||
+          previous.choosenCategoriesnList != current.choosenEligibilitiesList ||
+          current.filterCategory != previous.filterEligibilities,
       builder: (context, state) {
         return AdvancedFilterContent(
           key: KWidgetkeys.screen.discounts.advancedFilterDesk,
           isDesk: true,
-          onChange: (value) => context
+          onLocationChange: (value) => context
               .read<DiscountWatcherBloc>()
               .add(DiscountWatcherEvent.filterLocation(value)),
           filterLocationes: state.filterLocation,
-          sorting: state.sorting,
-          onChangeSorting: (value) => context
-              .read<DiscountWatcherBloc>()
-              .add(DiscountWatcherEvent.sorting(value)),
           chooseLocationList: state.choosenLocationList,
-          chooseSortingList: state.choosenSortingnList,
+          filterCategories: state.filterCategory,
+          chooseCategoriesList: state.choosenCategoriesnList,
+          onCategoriesChange: (value) => context
+              .read<DiscountWatcherBloc>()
+              .add(DiscountWatcherEvent.filterCategory(value)),
+          filterEligibilities: state.filterEligibilities,
+          chooseEligibilitiesList: state.choosenEligibilitiesList,
+          onEligibilitiesChange: (value) => context
+              .read<DiscountWatcherBloc>()
+              .add(DiscountWatcherEvent.filterEligibilities(value)),
         );
       },
     );

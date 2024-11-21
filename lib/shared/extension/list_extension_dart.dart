@@ -22,6 +22,10 @@ extension FilterItems<T> on List<FilterItem<T>> {
     }).toList();
   }
 
+  List<FilterItem<T>> get selectedList => where(
+        (element) => element.isSelected,
+      ).toList();
+
   bool get haveSelectedValue => any(
         (element) => element.isSelected,
       );
@@ -82,7 +86,7 @@ extension ListExtensions<T> on List<T> {
 
   List<FilterItem<String>> overallItems({
     required bool? isEnglish,
-    required List<String> Function(T) getUAFilter,
+    required List<String>? Function(T) getUAFilter,
     List<String>? Function(T)? getENFilter,
     List<T>? fullList,
     bool calculateNumber = false,
@@ -90,25 +94,31 @@ extension ListExtensions<T> on List<T> {
     try {
       final allFilters = <FilterItem<String>>[];
       for (final item in fullList ?? this) {
-        for (var i = 0; i < (getUAFilter(item).length); i++) {
-          allFilters.add(
-            FilterItem(
-              getUAFilter(item).elementAt(i),
-              valueEN: getENFilter == null
-                  ? null
-                  : getENFilter(item)?.elementAtOrNull(i),
-            ),
-          );
+        final value = getUAFilter(item);
+        if (value != null) {
+          for (var i = 0; i < (value.length); i++) {
+            allFilters.add(
+              FilterItem(
+                value.elementAt(i),
+                valueEN: getENFilter == null
+                    ? null
+                    : getENFilter(item)?.elementAtOrNull(i),
+              ),
+            );
+          }
         }
       }
       final allNumberFilters = calculateNumber ? <FilterItem<String>>[] : null;
       if (calculateNumber) {
         for (final item in this) {
-          allNumberFilters!.addAll(
-            getUAFilter(item).map(
-              FilterItem.new,
-            ),
-          );
+          final value = getUAFilter(item);
+          if (value != null) {
+            allNumberFilters!.addAll(
+              value.map(
+                FilterItem.new,
+              ),
+            );
+          }
         }
       }
       final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
@@ -208,7 +218,7 @@ extension ListExtensions<T> on List<T> {
   List<T> loadingFilter({
     required List<dynamic>? filtersValue,
     required int? itemsLoaded,
-    required List<dynamic> Function(T item) getENFilter,
+    required List<dynamic> Function(T item) getFilter,
     int? loadItems,
     // List<FilterItem>? overallFilter,
     // List<T>? fullList,
@@ -221,9 +231,9 @@ extension ListExtensions<T> on List<T> {
             (loadItems ?? 0);
 
     // Apply filters to the list and return up to 'loadedItemsCount' items
-    return _filter(
+    return filter(
       filtersValue: filtersValue,
-      getFilter: getENFilter,
+      getFilter: getFilter,
       // overallFilter: overallFilter,
       // fullList: fullList,
       // containAnyItems: containAnyItems,
@@ -264,9 +274,9 @@ extension ListExtensions<T> on List<T> {
   ///
   /// Returns:
   /// A filtered list of items.
-  List<T> _filter({
+  List<T> filter({
     required List<dynamic>? filtersValue,
-    required List<dynamic> Function(T item) getFilter,
+    required List<dynamic>? Function(T item) getFilter,
     // required List<FilterItem>? overallFilter,
     // required List<T>? fullList,
     // required bool containAnyItems,
@@ -296,17 +306,21 @@ extension ListExtensions<T> on List<T> {
     // toList();
 
     // Apply filters to the list
-    return where(
-      (item) =>
-          //  containAnyItems
-          //     ?
-          filtersValue.any(
-        getFilter(item).contains,
-      ), // Match any filter if 'containAnyItems' is true
+    return where((item) {
+      //  containAnyItems
+      //     ?
+      final value = getFilter(item);
+      if (value == null) {
+        return true;
+      } else {
+        return filtersValue.any(
+          value.contains,
+        ); // Match any filter if 'containAnyItems' is true
+      }
       // : filtersValue.every(
       //     getFilter(item).contains,
       //   ), // Match all filters if 'containAnyItems' is false
-    ).toList();
+    }).toList();
   }
 
   /// Method to filter items, load a specific number of items, and return the
@@ -336,7 +350,7 @@ extension ListExtensions<T> on List<T> {
     // List<T>? listForFilter,
   }) {
     // Apply filters to the list
-    final list = _filter(
+    final list = filter(
       filtersValue: filtersValue,
       getFilter: getFilter,
       // overallFilter: overallFilter,

@@ -45,13 +45,13 @@ void main() {
         ..sorting(
           DiscountEnum.largestSmallest,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           SubLocation.all,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           KTestText.discountModelItemsModify.first.location!.first,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           SubLocation.all,
         ),
       expect: () => [

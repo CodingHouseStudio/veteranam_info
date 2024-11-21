@@ -12,27 +12,57 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
       : super(
           const AdvancedFilterMobState(
             filtersLocation: [],
-            sorting: [],
             choosenLocationList: [],
-            choosenSortingnList: [],
+            choosenCategoriesnList: [],
+            filterCategory: [],
+            choosenEligibilitiesList: [],
+            filterEligibilities: [],
           ),
         );
   void started({
     required List<FilterItem<String>> initialLocationFilter,
-    required List<FilterItem<DiscountEnum>> initialSorting,
+    required List<FilterItem<String>> initialCategories,
+    required List<FilterItem<String>> initialEligibilities,
     required List<FilterItem<String>> initChooseLocationList,
-    required List<FilterItem<DiscountEnum>> initialChooseSorting,
+    required List<FilterItem<String>> initialChooseCategories,
+    required List<FilterItem<String>> initialChooseEligibilities,
   }) =>
       emit(
         AdvancedFilterMobState(
           filtersLocation: initialLocationFilter,
-          sorting: initialSorting,
           choosenLocationList: initChooseLocationList,
-          choosenSortingnList: initialChooseSorting,
+          filterCategory: initialCategories,
+          choosenCategoriesnList: initialChooseCategories,
+          filterEligibilities: initialEligibilities,
+          choosenEligibilitiesList: initialChooseEligibilities,
         ),
       );
 
-  void changeFilterList(dynamic value) {
+  void changeCategoriesList(String value) {
+    final filterList = state.filterCategory
+        .map(
+          (element) => element.value == value
+              ? element.copyWith(isSelected: !element.isSelected)
+              : element,
+        )
+        .toList();
+    // checkValue(
+    //   filterValue: value,
+    //   equalValue: SubLocation.allStoresOfChain,
+    // );
+    emit(
+      state.copyWith(
+        filterCategory: filterList,
+        choosenCategoriesnList: filterList
+            .where(
+              (element) => element.isSelected,
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  void changeLocationsList(String value) {
     final filterList = state.filtersLocation
         .map(
           (element) => element.value == value
@@ -56,23 +86,22 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     );
   }
 
-  void sorting(DiscountEnum value) {
-    final sorting = state.sorting
+  void changeEligibilitiesList(String value) {
+    final filterList = state.filterEligibilities
         .map(
           (element) => element.value == value
               ? element.copyWith(isSelected: !element.isSelected)
               : element,
         )
         .toList();
-
     emit(
       state.copyWith(
-        choosenSortingnList: sorting
+        filterEligibilities: filterList,
+        choosenEligibilitiesList: filterList
             .where(
               (element) => element.isSelected,
             )
             .toList(),
-        sorting: sorting,
       ),
     );
   }

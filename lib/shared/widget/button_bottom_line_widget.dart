@@ -80,7 +80,9 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() => _isHovered = value),
-      icon: RepaintBoundary(
+      iconAlignment: IconAlignment.end,
+      icon: widget.icon,
+      label: RepaintBoundary(
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +103,6 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
           ],
         ),
       ),
-      label: widget.icon != null ? widget.icon! : const SizedBox.shrink(),
     );
   }
 }
