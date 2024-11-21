@@ -3,7 +3,7 @@ import 'dart:typed_data' show Uint8List;
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:veteranam/shared/models/models.dart';
 
-class FilterItem {
+class FilterItem<T> {
   FilterItem(
     this.value, {
     this.number = 1,
@@ -11,14 +11,14 @@ class FilterItem {
     this.isSelected = false,
   });
 
-  final dynamic value;
-  final dynamic valueEN;
+  final T value;
+  final T? valueEN;
   final bool isSelected;
   final int number;
 
-  FilterItem copyWith({
-    dynamic value,
-    dynamic valueEN,
+  FilterItem<T> copyWith({
+    T? value,
+    T? valueEN,
     bool? isSelected,
     int? number,
   }) {

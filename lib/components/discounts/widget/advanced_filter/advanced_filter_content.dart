@@ -16,71 +16,98 @@ class AdvancedFilterContent extends StatelessWidget {
     super.key,
   });
   final bool isDesk;
-  final List<FilterItem> filterLocationes;
-  final List<FilterItem> chooseLocationList;
-  final List<SortingItem> sorting;
-  final List<SortingItem> chooseSortingList;
-  final void Function(dynamic) onChange;
+  final List<FilterItem<String>> filterLocationes;
+  final List<FilterItem<String>> chooseLocationList;
+  final List<FilterItem<DiscountEnum>> sorting;
+  final List<FilterItem<DiscountEnum>> chooseSortingList;
+  final void Function(String) onChange;
   final void Function(DiscountEnum) onChangeSorting;
 
   @override
   Widget build(BuildContext context) {
     final body = [
-      if (chooseLocationList.isNotEmpty || chooseSortingList.isNotEmpty)
-        _ChooseItems(
+      if (chooseLocationList.isNotEmpty || chooseSortingList.isNotEmpty) ...[
+        if (isDesk)
+          SliverToBoxAdapter(
+            child: AdvancedFilterResetButton(
+              isDesk: true,
+              resetEvent: () => context
+                  .read<DiscountWatcherBloc>()
+                  .add(const DiscountWatcherEvent.filterReset()),
+            ),
+          )
+        else
+          SliverToBoxAdapter(
+            child: Text(
+              context.l10n.filterApplied,
+              key: KWidgetkeys.screen.discounts.appliedFilterText,
+              style: AppTextStyle.materialThemeTitleMedium,
+            ),
+          ),
+        SliverPadding(
+          padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+          sliver: _ChooseItems(
+            isDesk: isDesk,
+            choosenList: [...chooseSortingList, ...chooseLocationList],
+            onChange: onChange,
+            onChangeSorting: onChangeSorting,
+          ),
+        ),
+      ],
+      SliverPadding(
+        padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+        sliver: SliverToBoxAdapter(
+          child: Text(
+            context.l10n.discount,
+            key: KWidgetkeys.screen.discounts.discountText,
+            style: isDesk
+                ? AppTextStyle.materialThemeTitleLarge
+                : AppTextStyle.materialThemeTitleMedium,
+          ),
+        ),
+      ),
+      SliverPadding(
+        padding: const EdgeInsets.only(
+          bottom: KPadding.kPaddingSize24,
+          right: KPadding.kPaddingSize8,
+        ),
+        sliver: _FilterItems(
           isDesk: isDesk,
-          choosenList: [...chooseSortingList, ...chooseLocationList],
-          onChange: onChange,
+          sorting: sorting,
           onChangeSorting: onChangeSorting,
         ),
-      Text(
-        context.l10n.discount,
-        key: KWidgetkeys.screen.discounts.discountText,
-        style: isDesk
-            ? AppTextStyle.materialThemeTitleLarge
-            : AppTextStyle.materialThemeTitleMedium,
       ),
-      _SortingItems(
-        isDesk: isDesk,
-        sorting: sorting,
-        onChangeSorting: onChangeSorting,
+      SliverPadding(
+        padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+        sliver: SliverToBoxAdapter(
+          child: Text(
+            context.l10n.city,
+            key: KWidgetkeys.screen.discounts.cityText,
+            style: isDesk
+                ? AppTextStyle.materialThemeTitleLarge
+                : AppTextStyle.materialThemeTitleMedium,
+          ),
+        ),
       ),
-      // ...List.generate(
-      //   sorting.length,
-      //   (index) => Padding(
-      //     padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-      //     child: CheckPointWidget(
-      //       key: KWidgetkeys.screen.discounts.discountItems,
-      //       onChanged: () => onChangeSorting(sorting.elementAt(index).value),
-      //       isCheck: sorting.elementAt(index).isSelected,
-      //       text: sorting.elementAt(index).value.getValue(context),
-      //       isDesk: isDesk,
-      //     ),
-      //   ),
-      // ),
-      KSizedBox.kHeightSizedBox24,
-      Text(
-        context.l10n.city,
-        key: KWidgetkeys.screen.discounts.cityText,
-        style: isDesk
-            ? AppTextStyle.materialThemeTitleLarge
-            : AppTextStyle.materialThemeTitleMedium,
-      ),
-      _LocationItems(
-        filterLocationes: filterLocationes,
-        onChange: onChange,
-        isDesk: isDesk,
+      SliverPadding(
+        padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+        sliver: _LocationItems(
+          filterLocationes: filterLocationes,
+          onChange: onChange,
+          isDesk: isDesk,
+        ),
       ),
     ];
-    return ListView.builder(
-      key: KWidgetkeys.screen.discounts.advancedFilterList,
-      primary: true,
-      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-      itemBuilder: (context, index) => body.elementAt(index),
-      itemCount: body.length,
-      semanticChildCount: body.length,
-      addAutomaticKeepAlives: false,
-      shrinkWrap: isDesk,
+    return Padding(
+      padding: isDesk
+          ? const EdgeInsets.only(right: KPadding.kPaddingSize16)
+          : const EdgeInsets.all(KPadding.kPaddingSize16),
+      child: CustomScrollView(
+        key: KWidgetkeys.screen.discounts.advancedFilterList,
+        primary: true,
+        slivers: body,
+        shrinkWrap: isDesk,
+      ),
     );
   }
 }
@@ -93,94 +120,80 @@ class _ChooseItems extends StatelessWidget {
     required this.onChangeSorting,
   });
   final bool isDesk;
-  final List<FilterItem> choosenList;
-  final void Function(dynamic) onChange;
+  final List<FilterItem<dynamic>> choosenList;
+  final void Function(String) onChange;
   final void Function(DiscountEnum) onChangeSorting;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: choosenList.length + 1,
-      primary: false,
-      addAutomaticKeepAlives: false,
-      shrinkWrap: true,
+    return SliverPadding(
       padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize24),
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          if (isDesk) {
-            return AdvancedFilterResetButton(
-              isDesk: true,
-              resetEvent: () => context
-                  .read<DiscountWatcherBloc>()
-                  .add(const DiscountWatcherEvent.filterReset()),
-            );
-            //      Row(
-            //   children: [
-            //     Expanded(
-            //       child: Text(
-            //         context.l10n.filterApplied,
-            //         key: KWidgetkeys.screen.discounts.appliedFilterText,
-            //         style: AppTextStyle.materialThemeTitleLarge,
-            //       ),
-            //     ),
-            //     AdvancedFilterResetButton(
-            //       isDesk: true,
-            //       resetEvent: () => context
-            //           .read<DiscountWatcherBloc>()
-            //           .add(const DiscountWatcherEvent.filterReset()),
-            //     ),
-            //   ],
-            // );
-          } else {
-            return Text(
-              context.l10n.filterApplied,
-              key: KWidgetkeys.screen.discounts.appliedFilterText,
-              style: AppTextStyle.materialThemeTitleMedium,
-            );
-          }
-        }
-        final chooseItem = choosenList.elementAt(index - 1);
-        return Padding(
+      sliver: SliverPrototypeExtentList.builder(
+        prototypeItem: Padding(
           padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: CancelChipWidget(
-              widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-              isDesk: isDesk,
-              labelText: choosenList.elementAt(index - 1).getString(context),
-              onPressed: () {
-                if (chooseItem.value is DiscountEnum) {
-                  onChangeSorting(chooseItem.value as DiscountEnum);
-                } else {
-                  onChange(
-                    chooseItem.value,
-                  );
-                }
-              },
-            ),
+          child: CancelChipWidget(
+            widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+            isDesk: isDesk,
+            labelText: KMockText.category,
+            onPressed: null,
           ),
-        );
-      },
+        ),
+        itemCount: choosenList.length,
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
+        itemBuilder: (context, index) {
+          final chooseItem = choosenList.elementAt(index);
+          return Padding(
+            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CancelChipWidget(
+                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+                isDesk: isDesk,
+                labelText: chooseItem.getString(context),
+                onPressed: () {
+                  if (chooseItem.value is DiscountEnum) {
+                    onChangeSorting(chooseItem.value as DiscountEnum);
+                  } else {
+                    onChange(
+                      chooseItem.value as String,
+                    );
+                  }
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
-class _SortingItems extends StatelessWidget {
-  const _SortingItems({
+class _FilterItems extends StatelessWidget {
+  const _FilterItems({
     required this.isDesk,
     required this.sorting,
     required this.onChangeSorting,
   });
   final bool isDesk;
-  final List<SortingItem> sorting;
+  final List<FilterItem<DiscountEnum>> sorting;
   final void Function(DiscountEnum) onChangeSorting;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      primary: false,
-      shrinkWrap: true,
+    return SliverPrototypeExtentList.builder(
+      prototypeItem: Padding(
+        padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+        child: CheckPointWidget(
+          key: KWidgetkeys.screen.discounts.discountItems,
+          onChanged: null,
+          isCheck: false,
+          text: KMockText.category,
+          isDesk: isDesk,
+        ),
+      ),
       addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
       itemCount: sorting.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
@@ -202,19 +215,34 @@ class _LocationItems extends StatelessWidget {
     required this.onChange,
     required this.isDesk,
   });
-  final List<FilterItem> filterLocationes;
-  final void Function(dynamic) onChange;
+  final List<FilterItem<String>> filterLocationes;
+  final void Function(String) onChange;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      primary: false,
-      shrinkWrap: true,
+    return SliverPrototypeExtentList.builder(
+      prototypeItem: Padding(
+        padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+        child: CheckPointAmountWidget(
+          key: KWidgetkeys.screen.discounts.cityItems,
+          isCheck: false,
+          filterItem: FilterItem(KMockText.category, number: 10),
+          isDesk: isDesk,
+          onChanged: null,
+        ),
+      ),
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
       itemCount: filterLocationes.length,
+      findChildIndexCallback: (key) {
+        if (key is ValueKey<String>) {
+          final valueKey = key;
+        }
+        return null;
+      },
       itemBuilder: (context, index) => Padding(
+        key: ValueKey(filterLocationes.elementAt(index).value),
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
         child: CheckPointAmountWidget(
           key: KWidgetkeys.screen.discounts.cityItems,

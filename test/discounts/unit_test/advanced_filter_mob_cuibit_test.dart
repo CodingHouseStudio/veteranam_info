@@ -27,8 +27,8 @@ void main() {
             FilterItem(KTestText.discountModelItems.first.subLocation),
           ],
           initialSorting: [
-            SortingItem(DiscountEnum.largestSmallest),
-            SortingItem(DiscountEnum.free),
+            FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
+            FilterItem<DiscountEnum>(DiscountEnum.free),
           ],
           initChooseLocationList: [],
           initialChooseSorting: [],

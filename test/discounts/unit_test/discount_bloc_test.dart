@@ -567,7 +567,7 @@ void main() {
                 FilterItem(KTestText.discountModelItems.first.subLocation),
               ],
               sorting: [
-                SortingItem(DiscountEnum.largestSmallest),
+                FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
               ],
               choosenLocationList: [],
               choosenSortingnList: [],

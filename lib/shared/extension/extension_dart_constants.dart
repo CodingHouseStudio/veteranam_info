@@ -109,19 +109,19 @@ extension InformationModelExtension on InformationModel {
   }
 }
 
-extension FilterItemExtension on FilterItem {
+extension FilterItemExtension on FilterItem<String> {
   int alphabeteCompare({
-    required FilterItem b,
+    required FilterItem<String> b,
     required bool? isEnglish,
     required bool addEnglish,
   }) {
     if ((isEnglish ?? false) && addEnglish) {
       return valueEN
-          .toString()
-          .toLowerCase()
-          .compareTo(b.valueEN.toString().toLowerCase());
+              ?.toLowerCase()
+              .compareTo(b.valueEN.toString().toLowerCase()) ??
+          -1;
     } else {
-      return value.toString().compareUkrain(b.value.toString());
+      return value.compareUkrain(b.value);
     }
   }
 }
@@ -260,19 +260,4 @@ extension FilePickerItemExtension on FilePickerItem? {
       ? null
       : 'Image/File: name - ${this!.name}, extension - ${this!.extension},'
           ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
-}
-
-extension SubLocationExtension on SubLocation? {
-  List<SubLocation> get getValue {
-    switch (this) {
-      case SubLocation.all:
-      // return [SubLocation.allStoresOfChain, SubLocation.online];
-      case SubLocation.allStoresOfChain:
-      // return [SubLocation.allStoresOfChain];
-      case SubLocation.online:
-        return [SubLocation.online];
-      case null:
-        return [];
-    }
-  }
 }

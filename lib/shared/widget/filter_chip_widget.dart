@@ -11,7 +11,7 @@ class FilterChipBodyWidget extends StatelessWidget {
     super.key,
   });
 
-  final List<FilterItem> filtersItems;
+  final List<FilterItem<dynamic>> filtersItems;
   final int fullLength;
   final bool isDesk;
   final bool filterIsEmpty;
@@ -87,7 +87,7 @@ class _FilterChipItemWidget extends StatelessWidget {
     required this.filterIsEmpty,
     required this.onSelected,
   });
-  final List<FilterItem> filtersItems;
+  final List<FilterItem<dynamic>> filtersItems;
   final bool isDesk;
   final int index;
   final int fullLength;

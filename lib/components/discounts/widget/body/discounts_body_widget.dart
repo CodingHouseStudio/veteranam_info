@@ -28,7 +28,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
       listener: (context, state) {
         if (state == NetworkStatus.network) {
           context.read<DiscountWatcherBloc>().add(
-                DiscountWatcherEvent.started(isEnglish: context.isEnglish),
+                const DiscountWatcherEvent.started(),
               );
         }
       },

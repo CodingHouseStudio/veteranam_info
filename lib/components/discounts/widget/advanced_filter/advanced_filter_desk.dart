@@ -17,21 +17,19 @@ class AdvancedFilterDesk extends StatelessWidget {
           previous.choosenLocationList != current.choosenLocationList ||
           current.choosenSortingnList != previous.choosenSortingnList,
       builder: (context, state) {
-        return Expanded(
-          child: AdvancedFilterContent(
-            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
-            isDesk: true,
-            onChange: (value) => context
-                .read<DiscountWatcherBloc>()
-                .add(DiscountWatcherEvent.filterLocation(value)),
-            filterLocationes: state.filterLocation,
-            sorting: state.sorting,
-            onChangeSorting: (value) => context
-                .read<DiscountWatcherBloc>()
-                .add(DiscountWatcherEvent.sorting(value)),
-            chooseLocationList: state.choosenLocationList,
-            chooseSortingList: state.choosenSortingnList,
-          ),
+        return AdvancedFilterContent(
+          key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+          isDesk: true,
+          onChange: (value) => context
+              .read<DiscountWatcherBloc>()
+              .add(DiscountWatcherEvent.filterLocation(value)),
+          filterLocationes: state.filterLocation,
+          sorting: state.sorting,
+          onChangeSorting: (value) => context
+              .read<DiscountWatcherBloc>()
+              .add(DiscountWatcherEvent.sorting(value)),
+          chooseLocationList: state.choosenLocationList,
+          chooseSortingList: state.choosenSortingnList,
         );
       },
     );

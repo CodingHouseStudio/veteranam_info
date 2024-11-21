@@ -4,10 +4,10 @@ import 'package:connectivity_plus/connectivity_plus.dart'
 import 'package:veteranam/shared/shared_dart.dart';
 
 /// Extension for filtering FilterItem list items.
-extension FilterItems on List<FilterItem> {
+extension FilterItems<T> on List<FilterItem<T>> {
   /// Get a list of FilterItem with summarized values.
-  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
-    final grouped = groupBy(this, (FilterItem item) => item.value);
+  List<FilterItem<T>> getToSet(List<FilterItem<T>>? numberGetList) {
+    final grouped = groupBy(this, (FilterItem<T> item) => item.value);
 
     return grouped.entries.map((entry) {
       final item = FilterItem(
@@ -80,15 +80,15 @@ extension ListExtensions<T> on List<T> {
     return take(loadNumber).toList();
   }
 
-  List<FilterItem> overallItems({
+  List<FilterItem<String>> overallItems({
     required bool? isEnglish,
-    required List<dynamic> Function(T) getUAFilter,
-    List<dynamic>? Function(T)? getENFilter,
+    required List<String> Function(T) getUAFilter,
+    List<String>? Function(T)? getENFilter,
     List<T>? fullList,
     bool calculateNumber = false,
   }) {
     try {
-      final allFilters = <FilterItem>[];
+      final allFilters = <FilterItem<String>>[];
       for (final item in fullList ?? this) {
         for (var i = 0; i < (getUAFilter(item).length); i++) {
           allFilters.add(
@@ -101,7 +101,7 @@ extension ListExtensions<T> on List<T> {
           );
         }
       }
-      final allNumberFilters = calculateNumber ? <FilterItem>[] : null;
+      final allNumberFilters = calculateNumber ? <FilterItem<String>>[] : null;
       if (calculateNumber) {
         for (final item in this) {
           allNumberFilters!.addAll(
@@ -527,7 +527,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
   ///
   /// Returns:
   /// A list of FilterItem instances representing location filters.
-  List<FilterItem> getLocationFilter({
+  List<FilterItem<String>> getLocationFilter({
     required bool isEnglish,
   }) {
     // Return a list of FilterItem instances
@@ -538,12 +538,15 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getUAFilter: (item) => item.subLocation.getValue,
+        getUAFilter: (item) {
+          if (item.subLocation == null) return [];
+          return [KAppText.sulocationUA];
+        },
         isEnglish: isEnglish,
-        // numberGetList: context
-        //     .read<DiscountWatcherBloc>()
-        //     .state
-        //     .categoryDiscountModelItems,
+        getENFilter: (item) {
+          if (item.subLocation == null) return [];
+          return [KAppText.sulocationEN];
+        },
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(

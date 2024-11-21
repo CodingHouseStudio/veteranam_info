@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'advanced_filter_mob_state.dart';
@@ -19,10 +18,10 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
           ),
         );
   void started({
-    required List<FilterItem> initialLocationFilter,
-    required List<SortingItem> initialSorting,
-    required List<FilterItem> initChooseLocationList,
-    required List<SortingItem> initialChooseSorting,
+    required List<FilterItem<String>> initialLocationFilter,
+    required List<FilterItem<DiscountEnum>> initialSorting,
+    required List<FilterItem<String>> initChooseLocationList,
+    required List<FilterItem<DiscountEnum>> initialChooseSorting,
   }) =>
       emit(
         AdvancedFilterMobState(

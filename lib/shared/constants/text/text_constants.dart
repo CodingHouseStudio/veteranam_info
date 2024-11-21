@@ -258,6 +258,10 @@ abstract class KAppText {
         KRoute.settings.name,
       ];
   static const deletedFieldId = 'deletedOn';
+
+  static const sulocationUA = 'Вся Україна';
+  static const sulocationEN = 'All Ukraine';
+
   static const discountsCategories = [
     'Автосервіс',
     'Військторг',

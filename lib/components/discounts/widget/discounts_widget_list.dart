@@ -119,7 +119,7 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
   // Creates the render object for this widget
   @override
   RenderRowSliver createRenderObject(BuildContext context) {
-    return RenderRowSliver(leftWidthPercent: 0.3);
+    return RenderRowSliver(leftWidthPercent: 1 / 3);
   }
 }
 
@@ -134,14 +134,12 @@ class _AdvancedFilterDesk extends StatelessWidget {
     return SliverPersistentHeader(
       pinned: true,
       delegate: SliverHeaderWidget(
-        // isDesk: isDesk,
         childWidget: ({
           required overlapsContent,
           required shrinkOffset,
         }) =>
             const AdvancedFilterDesk(),
         maxMinHeight: maxHeight,
-        // isTablet: isTablet,
       ),
     );
   }
