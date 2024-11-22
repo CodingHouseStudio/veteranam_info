@@ -9,7 +9,6 @@ on:
       build_number:
         description: 'The build number'
         required: false
-        default: "$(date +%s)"  # This is a default value, but will not work as intended directly in YAML
         type: string
 
 concurrency:
