@@ -15,37 +15,14 @@ class DiscountRepository implements IDiscountRepository {
   DiscountRepository({required FirestoreService firestoreService})
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
-  static final searcher = HitsSearcher(
-    applicationID: '6Y3VCMAXD7', //TODO: ask
-    apiKey: KSecurityKeys.alogoliaApiKey,
-    indexName: 'discount',
-  );
+  static final filterState = FilterState();
   @override
   Stream<List<DiscountModel>> getDiscountItems(
       //{List<String>? reportIdItems}
       ) {
-    final filters = <String>[];
-    if (Config.isProduction) {
-      // Filter by published status in production
-      filters.add('status:"${DiscountState.published.enumString}"');
-    }
-
-    searcher.applyState((state) => state.copyWith(
-          facetFilters: filters,
-
-          // sortBy: ['dateVerified:desc'], // Sort by dateVerified descending
-        ));
-    return searcher.responses.map((response) {
-      final hits = response.hits;
-
-      return hits.map((hit) {
-        // Assuming hit data matches DiscountModel.fromJson
-        return DiscountModel.fromJson(hit);
-      }).toList();
-    });
-    // return _firestoreService.getDiscounts(
-    //     //reportIdItems
-    //     );
+    return _firestoreService.getDiscounts(
+        //reportIdItems
+        );
   }
 
   @override
