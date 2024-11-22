@@ -40,11 +40,37 @@ class FeedbackBodyWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.scaffold.scroll,
                 cacheExtent: KDimensions.listCacheExtent,
                 slivers: [
-                  NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                  NavigationBarWidget(
+                  NetworkBanner(
                     isDesk: isDesk,
                     isTablet: isTablet,
                   ),
+                  if (Config.isWeb)
+                    NavigationBarWidget(
+                      isDesk: isDesk,
+                      isTablet: isTablet,
+                    )
+                  else
+                    BlocBuilder<FeedbackBloc, FeedbackState>(
+                      buildWhen: (previous, current) =>
+                          previous.formState != current.formState,
+                      builder: (context, state) {
+                        return NavigationBarWidget(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
+                          showMobBackButton: true,
+                          pageName:
+                              context.read<FeedbackBloc>().state.formState ==
+                                          FeedbackEnum.success ||
+                                      context
+                                              .read<FeedbackBloc>()
+                                              .state
+                                              .formState ==
+                                          FeedbackEnum.sendingMessage
+                                  ? context.l10n.thanks
+                                  : '${context.l10n.write} ${context.l10n.us}',
+                        );
+                      },
+                    ),
                   SliverPadding(
                     padding: padding,
                     sliver: FeedbackFormStateWidget(
@@ -105,7 +131,7 @@ class FeedbackBodyWidget extends StatelessWidget {
 //           showMobBottomNavigation: false,
 //           showMobNawbarBackButton: true,
 //           pageName: context.l10n.feedback,
-//           mainChildWidgetsFunction: 
+//           mainChildWidgetsFunction:
 //({required isDesk, required isTablet}) => [
 //             if (context.read<FeedbackBloc>().state.formState ==
 //                     FeedbackEnum.success ||
@@ -126,7 +152,7 @@ class FeedbackBodyWidget extends StatelessWidget {
 //               FeedbackTitle(
 //                 isDesk: isDesk,
 //                 title: context.l10n.write,
-//                 titleSecondPart: 
+//                 titleSecondPart:
 //'${context.l10n.us} ${context.l10n.aMessage}',
 //                 // text: '${context.l10n.write} ${context.l10n.us}',
 //                 // secondText: context.l10n.aMessage,

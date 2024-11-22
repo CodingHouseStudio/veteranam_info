@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "326120302123-etqjl7la2qoaep7uqfouor20lv9ruj9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.veteranam",
+            "certificate_hash": "ac181368c1ba1b87750d4069e7845ac20eef4699"
+          }
+        },
+        {
           "client_id": "326120302123-0u4vg4crj4viek7sb7f5aho19icfarbc.apps.googleusercontent.com",
           "client_type": 3
         }

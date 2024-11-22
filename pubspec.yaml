@@ -1,6 +1,6 @@
 name: veteranam
 description: veteran
-version: 0.0.6+61
+version: 0.0.6+62
 publish_to: none
 
 environment:
@@ -62,7 +62,7 @@ dependencies:
   share_plus: ^10.0.0
   skeletonizer: ^1.4.2
   url_launcher: ^6.3.0
-  web: 0.5.1 # Wait when share plus support version 1.0.0
+#  web: 0.5.1 # Wait when share plus support version 1.0.0
 
 dependency_overrides:
   flutter_secure_storage_web: ^2.0.0-beta.1
@@ -72,6 +72,8 @@ dependency_overrides:
   algolia_client_insights: 1.27.1
   algolia_client_search: 1.27.1
   algoliasearch: 1.27.1
+  web: ^1.1.0
+
 #   vector_graphics_compiler:
 #     git:
 #       url: https://github.com/nohli/vector_graphics

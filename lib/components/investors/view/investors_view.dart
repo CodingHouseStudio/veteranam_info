@@ -12,7 +12,7 @@ class InvestorsScreen extends StatelessWidget {
       bottomNavigationBar: Config.isWeb
           ? null
           : const MobNavigationWidget(
-              index: 0,
+              index: 1,
             ),
       appBar: AppBar(
         backgroundColor: AppColors.materialThemeWhite,

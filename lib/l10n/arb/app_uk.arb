@@ -1628,6 +1628,10 @@
   "@dataIsSavedSuccess": {
     "examples": "Повідомлення після успішного збрерігання даних."
   },
+  "joinUs": "Приєднуйтесь",
+  "@joinUs": {
+    "examples": "Заголовок для мобільного додатку на сторінці User Role"
+  },
   "activate": "Активувати",
   "@activate": {
     "examples": "Текст для кнопки на сторінці MyDiscount.",

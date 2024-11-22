@@ -15,6 +15,9 @@ class UserRoleBodyWidget extends StatelessWidget {
             : maxWidth * KDimensions.thirtyPercent,
         vertical: KPadding.kPaddingSize120,
       ),
+      showMobNawbarBackButton: true,
+      showMobBottomNavigation: false,
+      pageName: context.l10n.joinUs,
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         if (!isDesk) KSizedBox.kHeightSizedBox24,
         DecoratedBox(
