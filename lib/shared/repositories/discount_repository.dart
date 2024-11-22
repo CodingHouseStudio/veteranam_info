@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(
@@ -13,14 +15,38 @@ class DiscountRepository implements IDiscountRepository {
   DiscountRepository({required FirestoreService firestoreService})
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
-
+  static final searcher = HitsSearcher(
+    applicationID: '6Y3VCMAXD7', //TODO: ask
+    apiKey: KSecurityKeys.alogoliaApiKey,
+    indexName: 'discount',
+  );
   @override
   Stream<List<DiscountModel>> getDiscountItems(
-          //{List<String>? reportIdItems}
-          ) =>
-      _firestoreService.getDiscounts(
-          //reportIdItems
-          );
+      //{List<String>? reportIdItems}
+      ) {
+    final filters = <String>[];
+    if (Config.isProduction) {
+      // Filter by published status in production
+      filters.add('status:"${DiscountState.published.enumString}"');
+    }
+
+    searcher.applyState((state) => state.copyWith(
+          facetFilters: filters,
+
+          // sortBy: ['dateVerified:desc'], // Sort by dateVerified descending
+        ));
+    return searcher.responses.map((response) {
+      final hits = response.hits;
+
+      return hits.map((hit) {
+        // Assuming hit data matches DiscountModel.fromJson
+        return DiscountModel.fromJson(hit);
+      }).toList();
+    });
+    // return _firestoreService.getDiscounts(
+    //     //reportIdItems
+    //     );
+  }
 
   @override
   Future<void> addMockDiscountItems() async {

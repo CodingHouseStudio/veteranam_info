@@ -107,14 +107,15 @@ class _DiscountsBodyWidget extends StatelessWidget {
                         isDesk: isDesk,
                       ),
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: AdvancedFilterMob(
-                          key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                    if (!isDesk)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: SliverToBoxAdapter(
+                          child: AdvancedFilterMob(
+                            key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                          ),
                         ),
                       ),
-                    ),
                     if (isDesk)
                       SliverPadding(
                         padding: padding,
