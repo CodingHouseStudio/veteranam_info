@@ -88,7 +88,18 @@ class BoxWidget extends StatelessWidget {
           backgroundColor:
               background == null ? null : WidgetStatePropertyAll(background),
         ),
+        iconAlignment: IconAlignment.end,
         icon: Padding(
+          padding: padding ??
+              const EdgeInsets.all(
+                KPadding.kPaddingSize8,
+              ),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: getIcon,
+          ),
+        ),
+        label: Padding(
           padding: EdgeInsets.only(
             left: padding?.left ?? KPadding.kPaddingSize16,
           ),
@@ -99,16 +110,6 @@ class BoxWidget extends StatelessWidget {
               style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
               maxLines: 1,
             ),
-          ),
-        ),
-        label: Padding(
-          padding: padding ??
-              const EdgeInsets.all(
-                KPadding.kPaddingSize8,
-              ),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: getIcon,
           ),
         ),
       );

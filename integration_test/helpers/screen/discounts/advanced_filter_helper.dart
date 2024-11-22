@@ -96,7 +96,7 @@ Future<void> advancedFilterHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.cityText),
+    find.byKey(KWidgetkeys.screen.discounts.citiesText),
     findsOneWidget,
   );
 
