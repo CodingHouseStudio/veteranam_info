@@ -15,7 +15,7 @@ part 'discount_watcher_state.dart';
 class DiscountWatcherBloc
     extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
   DiscountWatcherBloc({
-    required IDiscountRepository discountRepository,
+    required DiscountFilterRepository discountRepository,
     required UserRepository userRepository,
     // required IReportRepository reportRepository,
     // required IAppAuthenticationRepository appAuthenticationRepository,
@@ -57,7 +57,7 @@ class DiscountWatcherBloc
     // on<_GetReport>(_onGetReport);
   }
 
-  final IDiscountRepository _discountRepository;
+  final DiscountFilterRepository _discountRepository;
   final UserRepository _userRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
   // final IReportRepository _reportRepository;

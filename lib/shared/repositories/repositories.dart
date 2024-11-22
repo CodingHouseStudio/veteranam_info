@@ -1,12 +1,14 @@
 export 'app_authentication_repository.dart';
 export 'app_info_repository.dart';
 export 'app_nerwork_repository.dart';
+export 'auth_provider_module.dart';
 export 'authentication_repository.dart';
 export 'cities_repository.dart';
 export 'company_repository.dart';
 export 'data_picker_module.dart';
 export 'data_picker_repository.dart';
 export 'device_repository.dart';
+export 'discount_filter_repository.dart';
 export 'discount_repository.dart';
 export 'failure_repository.dart';
 export 'faq_repository.dart';

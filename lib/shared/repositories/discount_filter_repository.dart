@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
+@singleton
 class DiscountFilterRepository {
   /// Component holding search filters
 
@@ -17,8 +19,9 @@ class DiscountFilterRepository {
       ) {
     filterState.add(group, {
       Filter.facet(
-        DiscountModelJsonField.status,
-        DiscountState.published.enumString,
+        DiscountModelJsonField.category,
+        'Медицина',
+        // DiscountState.published.enumString,
       ),
     });
     final searcher = HitsSearcher(
