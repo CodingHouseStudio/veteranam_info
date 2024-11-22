@@ -5,6 +5,11 @@ name: BUSINESS build
 on:
   workflow_dispatch:
     branches: [main]
+    inputs:
+      build_number:
+        description: 'The build number'
+        required: false
+        type: string
 concurrency:
   group: business-$
   cancel-in-progress: true
