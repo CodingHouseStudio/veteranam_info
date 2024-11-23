@@ -268,9 +268,8 @@ class _NavbarWidget extends StatelessWidget {
     );
   }
 
-  String get loginPath => Config.isWeb || Config.isBusiness
-      ? KRoute.login.name
-      : KRoute.userRole.name;
+  String get loginPath =>
+      Config.isBusiness ? KRoute.login.name : KRoute.userRole.name;
 
   Widget get getImageWidget => Config.isBusiness
       ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
