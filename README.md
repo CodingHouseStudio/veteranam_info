@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+TO BE CHANGED SOON
 
 # Veteranam
 
