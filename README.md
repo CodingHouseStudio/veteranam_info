@@ -2,7 +2,6 @@ TO BE CHANGED SOON
 
 # Veteranam
 
-
 Available types of Pull requests:
 
 - feat: A new feature
