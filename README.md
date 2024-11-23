@@ -35,7 +35,6 @@ fvm flutter pub run build_runner build --delete-conflicting-outputs
 for Clean build in case of issues
 
 fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
-
 fvm flutter clean; fvm flutter pub get; fvm flutter pub run build_runner build --delete-conflicting-outputs
 
 # BEFORE YOU PUSH
