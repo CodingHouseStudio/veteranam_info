@@ -28,6 +28,12 @@ class HomeSectionsWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeDisplaySmall
                 : AppTextStyle.materialThemeHeadlineSmall,
       ),
+      if (isDesk)
+        KSizedBox.kHeightSizedBox100
+      else if (isTablet)
+        KSizedBox.kHeightSizedBox80
+      else
+        KSizedBox.kHeightSizedBox64,
       DiscountSection(
         isDesk: isDesk,
         isTablet: isTablet,

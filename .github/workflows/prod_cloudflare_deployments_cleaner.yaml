@@ -11,5 +11,7 @@ concurrency:
 jobs:
   cloudflare_deployments_cleaner:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/cloudflare_deployments_cleaner.yml@main
+    secrets: inherit
     with:
       project_name: "veteran-production"
+      environment: "production"

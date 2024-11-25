@@ -5,6 +5,11 @@ name: PRODUCTION build
 on:
   workflow_dispatch:
     branches: [ main ]
+    inputs:
+      build_number:
+        description: 'The build number'
+        required: false
+        type: string
 concurrency:
   group: prod-$
   cancel-in-progress: true

@@ -170,8 +170,9 @@ class _DiscountWidgetList extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!PlatformEnumFlutter.isWebDesktop ||
-                    state.filteredDiscountModelItems.isEmpty)
+                if ((!PlatformEnumFlutter.isWebDesktop &&
+                        state.loadingStatus != LoadingStatus.listLoadedFull) ||
+                    state.discountModelItems.isEmpty)
                   SliverPrototypeExtentList.builder(
                     itemCount: state.filteredDiscountModelItems.isEmpty
                         ? config.loadingItems
@@ -207,9 +208,8 @@ class _DiscountWidgetList extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                if (state.loadingStatus == LoadingStatus.listLoadedFull &&
-                    state.filteredDiscountModelItems.isNotEmpty)
+                  )
+                else if (state.loadingStatus == LoadingStatus.listLoadedFull)
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(
                       vertical: KPadding.kPaddingSize48,
@@ -224,10 +224,8 @@ class _DiscountWidgetList extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                if (state.loadingStatus == LoadingStatus.loaded &&
-                    PlatformEnumFlutter.isWebDesktop &&
-                    state.filteredDiscountModelItems.isNotEmpty)
+                  )
+                else
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(
                       vertical: KPadding.kPaddingSize48,
