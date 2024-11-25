@@ -26,11 +26,11 @@
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Use the environment variable in the command
-        #   command = ["flutter" "run" "--flavor" "production" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
-        #   manager = "flutter";
-        # };
+        web = {
+          # Use the environment variable in the command
+          command = ["flutter" "run" "--flavor" "production" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--dart-define" "ROLE=user" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
+          manager = "flutter";
+        };
         android = {
           # Use the environment variable in the command
           command = ["flutter" "run" "--flavor" "development" "-t" "lib/main_development.dart" "-dart--define" "FLAVOUR=development" "--machine" "-d" "android" "-d" "localhost:5555" ];
@@ -42,12 +42,7 @@
 # Workspace lifecycle hooks
     workspace = {
       # Runs when a workspace is first created
-      onStart = {
-                flutterSetup = ''
-          cd /home/user/veteran
-          flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
-          '';
+      onCreate= {
                 build-flutter = ''
           cd /home/user/veteran
           flutter pub get
