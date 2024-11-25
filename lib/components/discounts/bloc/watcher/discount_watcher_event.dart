@@ -2,29 +2,33 @@ part of 'discount_watcher_bloc.dart';
 
 @freezed
 class DiscountWatcherEvent with _$DiscountWatcherEvent {
-  const factory DiscountWatcherEvent.started({required bool isEnglish}) =
-      _Started;
+  const factory DiscountWatcherEvent.started() = _Started;
 
-  const factory DiscountWatcherEvent.updated({
-    required List<DiscountModel> discountItemsModel,
-    required bool isEnglish,
-  }) = _Updated;
+  const factory DiscountWatcherEvent.updated(
+    List<DiscountModel> discountItemsModel,
+  ) = _Updated;
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
   const factory DiscountWatcherEvent.filterCategory(
-    dynamic value,
+    String value,
   ) = _FilterCategory;
 
+  const factory DiscountWatcherEvent.filterEligibilities(
+    String value,
+  ) = _FilterEligibilities;
+
   const factory DiscountWatcherEvent.filterLocation(
-    dynamic value,
+    String value,
   ) = _FilterLocation;
 
   const factory DiscountWatcherEvent.setMobFilter({
-    required List<FilterItem> filterList,
-    required List<SortingItem> sorting,
-    required List<FilterItem> choosenLocationList,
-    required List<SortingItem> choosenSortingnList,
+    required List<FilterItem<String>> filterList,
+    required List<FilterItem<String>> categories,
+    required List<FilterItem<String>> choosenLocationList,
+    required List<FilterItem<String>> choosenCategoriesList,
+    required List<FilterItem<String>> choosenEligibilitiesList,
+    required List<FilterItem<String>> filterEligibilities,
   }) = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(

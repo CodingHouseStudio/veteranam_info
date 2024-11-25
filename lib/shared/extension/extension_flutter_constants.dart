@@ -300,7 +300,7 @@ extension UrlEnumExtension on UrlEnum {
   }
 }
 
-extension FilterItemExtension on FilterItem {
+extension FilterItemExtension<T> on FilterItem<T> {
   String getString(BuildContext context) => value is SubLocation
       ? context.l10n.allUkraine
       : value is DiscountEnum

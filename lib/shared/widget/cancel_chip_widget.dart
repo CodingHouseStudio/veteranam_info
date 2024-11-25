@@ -15,7 +15,7 @@ class CancelChipWidget extends StatelessWidget {
   final Key widgetKey;
   final bool isDesk;
   final String labelText;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final ButtonStyle? style;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
@@ -32,6 +32,7 @@ class CancelChipWidget extends StatelessWidget {
       label: Text(
         labelText,
         textAlign: TextAlign.center,
+        maxLines: 1,
         style: textStyle ??
             (isDesk
                 ? AppTextStyle.materialThemeBodyLarge

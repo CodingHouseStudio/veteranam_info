@@ -69,15 +69,15 @@ class CheckPointAmountWidget extends StatelessWidget {
     required this.isDesk,
     required this.isCheck,
     required this.filterItem,
+    required this.onChanged,
     super.key,
-    this.onChanged,
     this.amoutActiveClor,
     this.amoutInactiveClor,
   });
   final bool isDesk;
   final void Function()? onChanged;
   final bool isCheck;
-  final FilterItem filterItem;
+  final FilterItem<String> filterItem;
   final Color? amoutActiveClor;
   final Color? amoutInactiveClor;
 

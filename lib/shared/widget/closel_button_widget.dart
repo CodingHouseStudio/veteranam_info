@@ -22,14 +22,15 @@ class CloseButtonWidget extends StatelessWidget {
         key: widgetKey,
         style: KButtonStyles.closeDialogButtonStyle,
         onPressed: () => context.goNamed(routeName),
-        icon: Text(
-          context.l10n.close,
-          style: AppTextStyle.materialThemeTitleMediumNeutral,
-        ),
-        label: const IconWidget(
+        iconAlignment: IconAlignment.end,
+        icon: const IconWidget(
           icon: KIcon.close,
           padding: KPadding.kPaddingSize4,
           background: AppColors.materialThemeWhite,
+        ),
+        label: Text(
+          context.l10n.close,
+          style: AppTextStyle.materialThemeTitleMediumNeutral,
         ),
       ),
     );

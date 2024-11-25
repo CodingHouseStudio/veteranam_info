@@ -28,7 +28,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
       listener: (context, state) {
         if (state == NetworkStatus.network) {
           context.read<DiscountWatcherBloc>().add(
-                DiscountWatcherEvent.started(isEnglish: context.isEnglish),
+                const DiscountWatcherEvent.started(),
               );
         }
       },
@@ -104,12 +104,15 @@ class _DiscountsBodyWidget extends StatelessWidget {
                         isDesk: isDesk,
                       ),
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: DiscountsFilterWidget(isDesk: isDesk),
+                    if (!isDesk)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: SliverToBoxAdapter(
+                          child: AdvancedFilterMob(
+                            key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                          ),
+                        ),
                       ),
-                    ),
                     if (isDesk)
                       SliverPadding(
                         padding: padding,
