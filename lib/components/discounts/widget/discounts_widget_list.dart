@@ -243,7 +243,6 @@ class _DiscountsWidgetItem extends StatelessWidget {
         discountItem: discountItem,
         isDesk: isDesk,
         share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-        isLoading: false,
       );
     } else {
       if (state.loadingStatus == LoadingStatus.listLoadedFull &&
@@ -275,7 +274,6 @@ class _DiscountsWidgetItem extends StatelessWidget {
           discountItem: KMockText.discountModel,
           isDesk: isDesk,
           share: '',
-          isLoading: true,
         ),
       );
     }

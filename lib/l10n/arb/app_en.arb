@@ -1624,5 +1624,16 @@
   "@activate": {
     "examples": "Text for a button on the MyDiscount page.",
     "description": "The button is used to activate a discount created by the user."
+  },
+  "moreWhomGranted": "{count} more..",
+  "@moreWhomGranted": {
+    "placeholders": {
+      "count": {}
+    },
+    "examples": "Text on the Discount page, description in the skating rink"
+  },
+  "moreDetails": "More Details",
+  "@moreDetails": {
+    "examples": "Button text on the Discounts page"
   }
 }

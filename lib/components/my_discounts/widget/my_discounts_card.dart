@@ -34,7 +34,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           // reportEvent: null,
           share:
               '${KRoute.home.path}${KRoute.discounts.path}/${widget.discountModel.id}',
-          isLoading: widget.isLoading,
+          // isLoading: widget.isLoading,
           useSiteUrl: true,
           // () => context
           //     .read<DiscountWatcherBloc>()

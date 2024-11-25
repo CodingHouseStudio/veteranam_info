@@ -66,6 +66,17 @@ extension ListStringExtensions on List<String> {
       return first;
     }
   }
+
+  // String getWhomGrantedString({
+  //   required bool showFullText,
+  //   // required BuildContext context,
+  // }) {
+  //   if (showFullText) {
+  //     return toString().replaceAll('[' '').replaceAll(']', '');
+  //   } else {
+  //     return length > 2 ? '${this[0]}  ${this[1]}' : join('  ');
+  //   }
+  // }
 }
 
 /// Extension on List<int> providing utility methods for handling discount

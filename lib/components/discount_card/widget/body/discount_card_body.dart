@@ -30,7 +30,7 @@ class DiscountCardBody extends StatelessWidget {
               share:
                   '${KRoute.home.path}${KRoute.discounts.path}/${_.discountModel?.id}',
 
-              isLoading: _.loadingStatus != LoadingStatus.loaded,
+              // isLoading: _.loadingStatus != LoadingStatus.loaded,
               descriptionMethod: (description) => description.replaceAll(
                 '- ',
                 '‣ ',

@@ -1632,5 +1632,16 @@
   "@activate": {
     "examples": "Текст для кнопки на сторінці MyDiscount.",
     "description": "Кнопка використовується для активації знижки яку створив користувач."
+  },
+  "moreWhomGranted": "та ще {count} ...",
+  "@moreWhomGranted": {
+    "placeholders": {
+      "count": {}
+    },
+    "examples": "Текст на сторінці Discount, опис в каточці"
+  },
+  "moreDetails": "Детальніше",
+  "@moreDetails": {
+    "examples": "Текст для кнопки на сторінці Discounts"
   }
 }

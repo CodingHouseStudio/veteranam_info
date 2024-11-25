@@ -23,48 +23,41 @@ class CityListWidget extends StatelessWidget {
         ...location!.getTrnslation(en: locationEN, context: context),
       if (subLocation != null) ...subLocation!.getCardList(context),
     ];
-    return Align(
+    return Padding(
       key: ValueKey(cityList),
-      alignment: isDesk ? Alignment.centerRight : Alignment.centerLeft,
-      child: DecoratedBox(
-        decoration: KWidgetTheme.boxDecorationWhiteMain,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize8,
-            vertical: KPadding.kPaddingSize4,
-          ),
-          child: IntrinsicWidth(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                KIcon.distance.copyWith(
-                  key: KWidgetkeys.widget.cityList.icon,
-                ),
-                KSizedBox.kWidthSizedBox8,
-                if (cityList.isNotEmpty)
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: KPadding.kPaddingSize2,
-                        right: KPadding.kPaddingSize5,
-                      ),
-                      child: cityList.length == 1
-                          ? Text(
-                              cityList.first,
-                              key: KWidgetkeys.widget.cityList.text,
-                              style: AppTextStyle.materialThemeLabelLarge,
-                            )
-                          : CityWidgetListExpanded(
-                              key: ValueKey(cityList),
-                              cityList: cityList,
-                              isDesk: isDesk,
-                            ),
-                    ),
-                  ),
-              ],
+      padding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+      ),
+      child: IntrinsicWidth(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            KIcon.distance.copyWith(
+              key: KWidgetkeys.widget.cityList.icon,
             ),
-          ),
+            KSizedBox.kWidthSizedBox8,
+            if (cityList.isNotEmpty)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: KPadding.kPaddingSize2,
+                    right: KPadding.kPaddingSize5,
+                  ),
+                  child: cityList.length == 1
+                      ? Text(
+                          cityList.first,
+                          key: KWidgetkeys.widget.cityList.text,
+                          style: AppTextStyle.materialThemeLabelLarge,
+                        )
+                      : CityWidgetListExpanded(
+                          key: ValueKey(cityList),
+                          cityList: cityList,
+                          isDesk: isDesk,
+                        ),
+                ),
+              ),
+          ],
         ),
       ),
     );
