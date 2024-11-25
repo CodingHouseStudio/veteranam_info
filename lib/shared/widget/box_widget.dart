@@ -82,34 +82,35 @@ class BoxWidget extends StatelessWidget {
         ),
       );
     } else {
-      return TextButton.icon(
+      return TextButton(
         onPressed: onTap,
         style: KButtonStyles.boxMobButtonStyle.copyWith(
           backgroundColor:
               background == null ? null : WidgetStatePropertyAll(background),
-        ),
-        icon: Padding(
-          padding: EdgeInsets.only(
-            left: padding?.left ?? KPadding.kPaddingSize16,
-          ),
-          child: Expanded(
-            child: Text(
-              text,
-              key: KWidgetkeys.widget.box.text,
-              style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
-              maxLines: 1,
-            ),
+          padding: WidgetStatePropertyAll(
+            padding ??
+                const EdgeInsets.all(
+                  KPadding.kPaddingSize8,
+                ),
           ),
         ),
-        label: Padding(
-          padding: padding ??
-              const EdgeInsets.all(
-                KPadding.kPaddingSize8,
+        child: Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: KPadding.kPaddingSize8,
+                ),
+                child: Text(
+                  text,
+                  key: KWidgetkeys.widget.box.text,
+                  style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
+                  maxLines: 1,
+                ),
               ),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: getIcon,
-          ),
+            ),
+            getIcon,
+          ],
         ),
       );
     }
