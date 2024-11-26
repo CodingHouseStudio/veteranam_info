@@ -21,7 +21,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-            ..add(const DiscountWatcherEvent.started()),
+            ..add(const DiscountWatcherEvent.started(isEnglish: false)),
         ),
         BlocProvider(
           create: (context) => GetIt.I.get<InvestorsWatcherBloc>()
@@ -85,6 +85,8 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LanguageCubit, Language>(
+      listenWhen: (previous, current) =>
+          previous.value.languageCode != current.value.languageCode,
       listener: (context, language) => unawaited(
         initializeDateFormatting(language.value.languageCode),
       ),

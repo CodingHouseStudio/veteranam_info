@@ -6,21 +6,18 @@ class CityListWidget extends StatelessWidget {
   const CityListWidget({
     required this.isDesk,
     required this.location,
-    required this.locationEN,
     required this.subLocation,
     super.key,
   });
 
-  final List<String>? location;
-  final List<String>? locationEN;
+  final List<TranslateModel>? location;
   final SubLocation? subLocation;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
     final cityList = [
-      if (location != null)
-        ...location!.getTrnslation(en: locationEN, context: context),
+      if (location != null) ...location!,
       if (subLocation != null) ...subLocation!.getCardList(context),
     ];
     return Align(
@@ -51,7 +48,7 @@ class CityListWidget extends StatelessWidget {
                       ),
                       child: cityList.length == 1
                           ? Text(
-                              cityList.first,
+                              cityList.first.getTrsnslation(context),
                               key: KWidgetkeys.widget.cityList.text,
                               style: AppTextStyle.materialThemeLabelLarge,
                             )
@@ -78,7 +75,7 @@ class CityWidgetListExpanded extends StatefulWidget {
     super.key,
   });
 
-  final List<String> cityList;
+  final List<TranslateModel> cityList;
   final bool isDesk;
 
   @override
@@ -102,6 +99,7 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
       text: TextSpan(
         text: '${widget.cityList.getCityString(
           showFullText: isExpanded,
+          context: context,
         )} ',
         style: AppTextStyle.materialThemeLabelLarge,
         children: [

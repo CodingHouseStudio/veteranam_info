@@ -64,28 +64,28 @@ void main() {
         await mobFaqFailureHelper(tester);
       });
     });
-    group('${KGroupText.getEmptyList} ', () {
-      setUp(() {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => const Right([]),
-        );
-        when(mockFaqRepository.addMockQuestions()).thenAnswer(
-          (invocation) {},
-        );
-        if (GetIt.I.isRegistered<IFaqRepository>()) {
-          GetIt.I.unregister<IFaqRepository>();
-        }
-        GetIt.I.registerSingleton<IFaqRepository>(mockFaqRepository);
-      });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
-        await mobFaqPumpAppHelper(
-          mockFaqRepository: mockFaqRepository,
-          tester: tester,
-        );
+    // group('${KGroupText.getEmptyList} ', () {
+    //   setUp(() {
+    //     when(mockFaqRepository.getQuestions()).thenAnswer(
+    //       (invocation) async => const Right([]),
+    //     );
+    //     when(mockFaqRepository.addMockQuestions()).thenAnswer(
+    //       (invocation) {},
+    //     );
+    //     if (GetIt.I.isRegistered<IFaqRepository>()) {
+    //       GetIt.I.unregister<IFaqRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IFaqRepository>(mockFaqRepository);
+    //   });
+    //   testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //     await mobFaqPumpAppHelper(
+    //       mockFaqRepository: mockFaqRepository,
+    //       tester: tester,
+    //     );
 
-        await mobFaqMockButtonHelper(tester);
-      });
-    });
+    //     await mobFaqMockButtonHelper(tester);
+    //   });
+    // });
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockFaqRepository.getQuestions()).thenAnswer(

@@ -77,7 +77,7 @@ class CheckPointAmountWidget extends StatelessWidget {
   final bool isDesk;
   final void Function()? onChanged;
   final bool isCheck;
-  final FilterItem<String> filterItem;
+  final FilterItem filterItem;
   final Color? amoutActiveClor;
   final Color? amoutInactiveClor;
 
@@ -90,7 +90,7 @@ class CheckPointAmountWidget extends StatelessWidget {
           child: CheckPointWidget(
             onChanged: onChanged,
             isCheck: isCheck,
-            text: filterItem.getString(context),
+            text: filterItem.value.getTrsnslation(context),
             isDesk: isDesk,
           ),
         ),

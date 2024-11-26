@@ -24,7 +24,7 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddMainEnterHelper(
     tester: tester,
-    titleText: KTestText.sendDiscountModel.title,
+    titleText: KTestText.sendDiscountModel.title.uk,
     linkText: KTestText.sendDiscountModel.directLink!,
     discountsText: KTestText.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true,
@@ -59,8 +59,8 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddDetailEnterHelper(
     tester: tester,
-    categoryText: KTestText.sendDiscountModel.category.first,
-    cityText: KTestText.sendDiscountModel.location!.first,
+    categoryText: KTestText.sendDiscountModel.category.first.uk,
+    cityText: KTestText.sendDiscountModel.location!.first.uk,
   );
 
   await discountsAddDetailHelper(tester: tester, hasField: false);

@@ -34,13 +34,4 @@ class FaqRepository implements IFaqRepository {
       );
     }
   }
-
-  @override
-  void addMockQuestions() {
-    for (var i = 0; i < KMockText.questionTitle.length; i++) {
-      _firestoreService.addQuestion(
-        KMockText.questionModel.copyWith(id: '${ExtendedDateTime.id}$i'),
-      );
-    }
-  }
 }

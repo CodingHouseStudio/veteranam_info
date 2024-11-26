@@ -564,10 +564,10 @@ void main() {
                 ...KTestText.discountModelItems.last.location!.map(
                   FilterItem.new,
                 ),
-                FilterItem(KTestText.discountModelItems.first.subLocation),
+                FilterItem(KAppText.allUkrainOnline),
               ],
               sorting: [
-                FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
+                SortingItem(DiscountEnum.largestSmallest),
               ],
               choosenLocationList: [],
               choosenSortingnList: [],

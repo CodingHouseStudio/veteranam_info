@@ -46,12 +46,10 @@ class CitiesDropFieldWidget extends StatelessWidget {
 
         return citiesList
             .where(
-              (element) => element.name.uk
-                  .getTrnslation(en: element.name.en, context: context)
-                  .toLowerCase()
-                  .contains(
-                    textEditingValue.text.toLowerCase(),
-                  ),
+              (element) =>
+                  element.name.getTrsnslation(context).toLowerCase().contains(
+                        textEditingValue.text.toLowerCase(),
+                      ),
             )
             .toList();
       },
@@ -66,8 +64,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox4,
           Text(
-            element.region.uk
-                .getTrnslation(en: element.region.en, context: context),
+            element.region.getTrsnslation(context),
             key: KWidgetkeys.widget.citiesDropField.region,
             style: AppTextStyle.materialThemeLabelSmallNeutralVariant70,
           ),
@@ -84,5 +81,5 @@ class CitiesDropFieldWidget extends StatelessWidget {
     required CityModel cityModel,
     required BuildContext context,
   }) =>
-      cityModel.name.uk.getTrnslation(en: cityModel.name.en, context: context);
+      cityModel.name.getTrsnslation(context);
 }

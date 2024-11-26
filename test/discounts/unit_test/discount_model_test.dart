@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/extension/extension_dart_constants.dart';
+import 'package:veteranam/shared/extension/list_extension_dart.dart';
 import 'package:veteranam/shared/models/models.dart';
 
 import '../../test_dependency.dart';
@@ -22,7 +23,9 @@ void main() {
       DiscountModelJsonField.category:
           KTestText.discountModelItems.last.category,
       DiscountModelJsonField.categoryEN:
-          KTestText.discountModelItems.last.categoryEN,
+          KTestText.discountModelItems.last.category.getTrsnslation(
+        isEnglish: false,
+      ),
       DiscountModelJsonField.company: KTestText.discountModelItems.last.company,
       DiscountModelJsonField.dateVerified:
           KTestText.discountModelItems.last.dateVerified.toIso8601String(),
@@ -50,32 +53,35 @@ void main() {
           KTestText.discountModelItems.last.subLocation,
       DiscountModelJsonField.subcategory:
           KTestText.discountModelItems.last.subcategory,
-      DiscountModelJsonField.subcategoryEN:
-          KTestText.discountModelItems.last.subcategoryEN,
+      DiscountModelJsonField.subcategoryEN: KTestText
+          .discountModelItems.last.subcategory
+          ?.getTrsnslation(isEnglish: false),
       DiscountModelJsonField.territory:
           KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
       DiscountModelJsonField.userName:
           KTestText.discountModelItems.last.userName,
-      DiscountModelJsonField.titleEN: KTestText.discountModelItems.last.titleEN,
-      DiscountModelJsonField.locationEN:
-          KTestText.discountModelItems.last.locationEN,
+      DiscountModelJsonField.titleEN:
+          KTestText.discountModelItems.last.title.uk,
+      DiscountModelJsonField.locationEN: KTestText
+          .discountModelItems.last.location
+          ?.getTrsnslation(isEnglish: false),
       DiscountModelJsonField.territoryEN:
-          KTestText.discountModelItems.last.territoryEN,
+          KTestText.discountModelItems.last.territory?.uk,
       DiscountModelJsonField.exclusionsEN:
-          KTestText.discountModelItems.last.exclusionsEN,
+          KTestText.discountModelItems.last.exclusions?.uk,
       DiscountModelJsonField.expirationEN:
-          KTestText.discountModelItems.last.expirationEN,
+          KTestText.discountModelItems.last.expiration?.uk,
       DiscountModelJsonField.descriptionEN:
-          KTestText.discountModelItems.last.descriptionEN,
+          KTestText.discountModelItems.last.description.uk,
       // DiscountModelJsonField.eligibilityEN:
       //     KTestText.discountModelItems.last.eligibilityEN,
       DiscountModelJsonField.requirementsEN:
-          KTestText.discountModelItems.last.requirementsEN,
+          KTestText.discountModelItems.last.requirements?.uk,
       DiscountModelJsonField.companyEN:
-          KTestText.discountModelItems.last.companyEN,
+          KTestText.discountModelItems.last.company?.uk,
       DiscountModelJsonField.additionalDetailsEN:
-          KTestText.discountModelItems.last.additionalDetailsEN,
+          KTestText.discountModelItems.last.additionalDetails?.uk,
       DiscountModelJsonField.userPhoto: [
         KTestText.discountModelItems.last.userPhoto!.toJson(),
       ],
@@ -83,8 +89,9 @@ void main() {
           KTestText.discountModelItems.last.status.enumString,
       DiscountModelJsonField.eligibility:
           KTestText.discountModelItems.last.eligibility,
-      DiscountModelJsonField.eligibilityEN:
-          KTestText.discountModelItems.last.eligibilityEN,
+      DiscountModelJsonField.eligibilityEN: KTestText
+          .discountModelItems.last.eligibility
+          ?.getTrsnslation(isEnglish: false),
       // DiscountModelJsonField.hasMarkdown:
       //     KTestText.discountModelItems.last.hasMarkdown,
       // DiscountModelJsonField.date:
@@ -165,10 +172,10 @@ void main() {
           discountModel.category,
           KTestText.discountModelItems.last.category,
         );
-        expect(
-          discountModel.categoryEN,
-          KTestText.discountModelItems.last.categoryEN,
-        );
+        // expect(
+        //   discountModel.categoryEN,
+        //   KTestText.discountModelItems.last.categoryEN,
+        // );
         expect(
           discountModel.company,
           KTestText.discountModelItems.last.company,
@@ -229,10 +236,10 @@ void main() {
           discountModel.subcategory,
           KTestText.discountModelItems.last.subcategory,
         );
-        expect(
-          discountModel.subcategoryEN,
-          KTestText.discountModelItems.last.subcategoryEN,
-        );
+        // expect(
+        //   discountModel.subcategoryEN,
+        //   KTestText.discountModelItems.last.subcategoryEN,
+        // );
         expect(
           discountModel.territory,
           KTestText.discountModelItems.last.territory,
@@ -245,42 +252,42 @@ void main() {
           discountModel.userPhoto,
           KTestText.discountModelItems.last.userPhoto,
         );
-        expect(
-          discountModel.titleEN,
-          KTestText.discountModelItems.last.titleEN,
-        );
-        expect(
-          discountModel.locationEN,
-          KTestText.discountModelItems.last.locationEN,
-        );
-        expect(
-          discountModel.territoryEN,
-          KTestText.discountModelItems.last.territoryEN,
-        );
-        expect(
-          discountModel.exclusionsEN,
-          KTestText.discountModelItems.last.exclusionsEN,
-        );
-        expect(
-          discountModel.expirationEN,
-          KTestText.discountModelItems.last.expirationEN,
-        );
-        expect(
-          discountModel.descriptionEN,
-          KTestText.discountModelItems.last.descriptionEN,
-        );
-        expect(
-          discountModel.companyEN,
-          KTestText.discountModelItems.last.companyEN,
-        );
+        // expect(
+        //   discountModel.titleEN,
+        //   KTestText.discountModelItems.last.titleEN,
+        // );
+        // expect(
+        //   discountModel.locationEN,
+        //   KTestText.discountModelItems.last.locationEN,
+        // );
+        // expect(
+        //   discountModel.territoryEN,
+        //   KTestText.discountModelItems.last.territoryEN,
+        // );
+        // expect(
+        //   discountModel.exclusionsEN,
+        //   KTestText.discountModelItems.last.exclusionsEN,
+        // );
+        // expect(
+        //   discountModel.expirationEN,
+        //   KTestText.discountModelItems.last.expirationEN,
+        // );
+        // expect(
+        //   discountModel.descriptionEN,
+        //   KTestText.discountModelItems.last.descriptionEN,
+        // );
+        // expect(
+        //   discountModel.companyEN,
+        //   KTestText.discountModelItems.last.companyEN,
+        // );
         // expect(
         //   discountModel.eligibilityEN,
         //   KTestText.discountModelItems.last.eligibilityEN,
         // );
-        expect(
-          discountModel.requirementsEN,
-          KTestText.discountModelItems.last.requirementsEN,
-        );
+        // expect(
+        //   discountModel.requirementsEN,
+        //   KTestText.discountModelItems.last.requirementsEN,
+        // );
         expect(
           discountModel.status,
           KTestText.discountModelItems.last.status,
@@ -289,10 +296,10 @@ void main() {
           discountModel.eligibility,
           KTestText.discountModelItems.last.eligibility,
         );
-        expect(
-          discountModel.eligibilityEN,
-          KTestText.discountModelItems.last.eligibilityEN,
-        );
+        // expect(
+        //   discountModel.eligibilityEN,
+        //   KTestText.discountModelItems.last.eligibilityEN,
+        // );
         // expect(
         //   discountModel.date,
         //   KTestText.discountModelItems.last.date,
@@ -322,10 +329,10 @@ void main() {
           discountModel.category,
           KTestText.discountModelItems.last.category,
         );
-        expect(
-          discountModel.categoryEN,
-          null,
-        );
+        // expect(
+        //   discountModel.categoryEN,
+        //   null,
+        // );
         expect(
           discountModel.company,
           null,
@@ -386,10 +393,10 @@ void main() {
           discountModel.subcategory,
           null,
         );
-        expect(
-          discountModel.subcategoryEN,
-          null,
-        );
+        // expect(
+        //   discountModel.subcategoryEN,
+        //   null,
+        // );
         expect(
           discountModel.territory,
           KTestText.discountModelItems.last.territory,
@@ -402,50 +409,50 @@ void main() {
           discountModel.userPhoto,
           null,
         );
-        expect(
-          discountModel.titleEN,
-          null,
-        );
-        expect(
-          discountModel.locationEN,
-          null,
-        );
-        expect(
-          discountModel.territoryEN,
-          null,
-        );
-        expect(
-          discountModel.exclusionsEN,
-          null,
-        );
-        expect(
-          discountModel.expirationEN,
-          null,
-        );
-        expect(
-          discountModel.descriptionEN,
-          null,
-        );
+        // expect(
+        //   discountModel.titleEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.locationEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.territoryEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.exclusionsEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.expirationEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.descriptionEN,
+        //   null,
+        // );
         // expect(
         //   discountModel.eligibilityEN,
         //   KTestText.discountModelItems.last.eligibilityEN,
         // );
-        expect(
-          discountModel.requirementsEN,
-          null,
-        );
-        expect(
-          discountModel.companyEN,
-          null,
-        );
-        expect(
-          discountModel.eligibility,
-          null,
-        );
-        expect(
-          discountModel.eligibilityEN,
-          null,
-        );
+        // expect(
+        //   discountModel.requirementsEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.companyEN,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.eligibility,
+        //   null,
+        // );
+        // expect(
+        //   discountModel.eligibilityEN,
+        //   null,
+        // );
         expect(
           discountModel.status,
           DiscountState.isNew,
@@ -469,8 +476,9 @@ void main() {
               KTestText.discountModelItems.last.additionalDetails,
           DiscountModelJsonField.category:
               KTestText.discountModelItems.last.category,
-          DiscountModelJsonField.categoryEN:
-              KTestText.discountModelItems.last.categoryEN,
+          DiscountModelJsonField.categoryEN: KTestText
+              .discountModelItems.last.category
+              .getTrsnslation(isEnglish: false),
           DiscountModelJsonField.company:
               KTestText.discountModelItems.last.company,
           DiscountModelJsonField.dateVerified:
@@ -500,28 +508,30 @@ void main() {
               KTestText.discountModelItems.last.subLocation,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
-          DiscountModelJsonField.subcategoryEN:
-              KTestText.discountModelItems.last.subcategoryEN,
+          DiscountModelJsonField.subcategoryEN: KTestText
+              .discountModelItems.last.subcategory
+              ?.getTrsnslation(isEnglish: false),
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.titleEN:
-              KTestText.discountModelItems.last.titleEN,
-          DiscountModelJsonField.locationEN:
-              KTestText.discountModelItems.last.locationEN,
+              KTestText.discountModelItems.last.title.uk,
+          DiscountModelJsonField.locationEN: KTestText
+              .discountModelItems.last.location
+              ?.getTrsnslation(isEnglish: false),
           DiscountModelJsonField.territoryEN:
-              KTestText.discountModelItems.last.territoryEN,
+              KTestText.discountModelItems.last.territory?.uk,
           DiscountModelJsonField.exclusionsEN:
-              KTestText.discountModelItems.last.exclusionsEN,
+              KTestText.discountModelItems.last.exclusions?.uk,
           DiscountModelJsonField.expirationEN:
-              KTestText.discountModelItems.last.expirationEN,
+              KTestText.discountModelItems.last.expiration?.uk,
           DiscountModelJsonField.descriptionEN:
-              KTestText.discountModelItems.last.descriptionEN,
+              KTestText.discountModelItems.last.description.uk,
           // DiscountModelJsonField.eligibilityEN:
           //     KTestText.discountModelItems.last.eligibilityEN,
           DiscountModelJsonField.requirementsEN:
-              KTestText.discountModelItems.last.requirementsEN,
+              KTestText.discountModelItems.last.requirements?.uk,
           DiscountModelJsonField.companyEN:
-              KTestText.discountModelItems.last.companyEN,
+              KTestText.discountModelItems.last.company?.uk,
           // DiscountModelJsonField.date:
           //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
@@ -551,25 +561,13 @@ void main() {
               location: null,
               subLocation: null,
               userPhoto: null,
-              locationEN: null,
-              expirationEN: null,
-              additionalDetailsEN: null,
-              companyEN: null,
               phoneNumber: null,
-              categoryEN: null,
-              descriptionEN: null,
-              exclusionsEN: null,
-              requirementsEN: null,
               expiration: null,
               requirements: null,
-              territoryEN: null,
-              titleEN: null,
               status: DiscountState.isNew,
               subcategory: null,
-              subcategoryEN: null,
               exclusions: null,
               eligibility: null,
-              eligibilityEN: null,
             )
             .toJson();
 

@@ -30,12 +30,8 @@ class _DiscountsKeys {
   final appliedFilterItems = const Key('discounts_screen_applied_filter_items');
   final discountText = const Key('discounts_screen_discountText');
   final discountItems = const Key('discounts_screen_discount_items');
-  final citiesText = const Key('discounts_screen_cities_text');
-  final categoriesText = const Key('discounts_screen_categories_text');
-  final eligibilitiesText = const Key('discounts_screen_eligibilities_text');
+  final cityText = const Key('discounts_screen_city_text');
   final cityItems = const Key('discounts_screen_city_items');
-  final categoriesItems = const Key('discounts_screen_categories_items');
-  final eligibilitiesItems = const Key('discounts_screen_eligibilities_items');
   final userEmailDialog = const Key('discounts_screen_user_email_dialog');
   // final cancelIcon = const Key('discounts_screen_cancel_icon');
   // final cancelText = const Key('discounts_screen_cancel_text');

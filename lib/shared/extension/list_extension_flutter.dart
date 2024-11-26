@@ -56,16 +56,6 @@ extension ListStringExtensions on List<String> {
   //     ).join()}[${context.l10n.hideExpansion}]()';
   //   }
   // }
-  String getCityString({
-    required bool showFullText,
-    // required BuildContext context,
-  }) {
-    if (showFullText) {
-      return toString().replaceAll('[', '').replaceAll(']', '');
-    } else {
-      return first;
-    }
-  }
 }
 
 /// Extension on List<int> providing utility methods for handling discount
@@ -144,4 +134,24 @@ extension ListBoolExtension on List<bool> {
       return indexOf(true) - 1 == index;
     }
   }
+}
+
+extension TranslateModelListExtension on List<TranslateModel> {
+  String getCityString({
+    required bool showFullText,
+    required BuildContext context,
+  }) {
+    if (showFullText) {
+      return map(
+        (e) => e.getTrsnslation(context),
+      ).toString().replaceAll('[', '').replaceAll(']', '');
+    } else {
+      return first.getTrsnslation(context);
+    }
+  }
+
+  List<String> getTrsnslation(
+    BuildContext context,
+  ) =>
+      map((e) => context.isEnglish ? e.en ?? e.uk : e.uk).toList();
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -14,7 +13,6 @@ class DiscountRepository implements IDiscountRepository {
   DiscountRepository({required FirestoreService firestoreService})
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
-  static final filterState = FilterState();
   @override
   Stream<List<DiscountModel>> getDiscountItems(
       //{List<String>? reportIdItems}

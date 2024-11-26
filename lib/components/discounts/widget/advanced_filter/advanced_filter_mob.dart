@@ -42,11 +42,9 @@ class AdvancedFilterMob extends StatelessWidget {
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
             initialFilter: bloc.state.filterLocation,
+            initialSorting: bloc.state.sorting,
             initChooseLocationList: bloc.state.choosenLocationList,
-            initialCategories: bloc.state.filterCategory,
-            initialChooseCategories: bloc.state.choosenCategoriesnList,
-            initialEligibilities: bloc.state.filterEligibilities,
-            initialChooseEligibilities: bloc.state.choosenEligibilitiesList,
+            initialChooseSorting: bloc.state.choosenSortingnList,
           ),
         ).then(
           (_) {
@@ -56,11 +54,9 @@ class AdvancedFilterMob extends StatelessWidget {
               context.read<DiscountWatcherBloc>().add(
                     DiscountWatcherEvent.setMobFilter(
                       filterList: _.filtersLocation,
+                      sorting: _.sorting,
                       choosenLocationList: _.choosenLocationList,
-                      categories: _.filterCategory,
-                      choosenCategoriesList: _.choosenCategoriesnList,
-                      choosenEligibilitiesList: _.choosenEligibilitiesList,
-                      filterEligibilities: _.filterEligibilities,
+                      choosenSortingnList: _.choosenSortingnList,
                     ),
                   );
             } else {
@@ -109,21 +105,15 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Expanded(
                 child: AdvancedFilterContent(
                   isDesk: false,
-                  onLocationChange: context
+                  onChange: (value) => context
                       .read<AdvancedFilterMobCubit>()
-                      .changeLocationsList,
+                      .changeFilterList(value),
                   filterLocationes: _.filtersLocation,
+                  sorting: _.sorting,
+                  onChangeSorting: (value) =>
+                      context.read<AdvancedFilterMobCubit>().sorting(value),
                   chooseLocationList: _.choosenLocationList,
-                  filterCategories: _.filterCategory,
-                  chooseCategoriesList: _.choosenCategoriesnList,
-                  onCategoriesChange: context
-                      .read<AdvancedFilterMobCubit>()
-                      .changeCategoriesList,
-                  filterEligibilities: _.filterEligibilities,
-                  chooseEligibilitiesList: _.choosenEligibilitiesList,
-                  onEligibilitiesChange: context
-                      .read<AdvancedFilterMobCubit>()
-                      .changeEligibilitiesList,
+                  chooseSortingList: _.choosenSortingnList,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
@@ -134,8 +124,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   AdvancedFilterResetButton(
                     isDesk: false,
                     resetEvent: _.choosenLocationList.isNotEmpty ||
-                            _.choosenCategoriesnList.isNotEmpty ||
-                            _.choosenEligibilitiesList.isNotEmpty
+                            _.choosenSortingnList.isNotEmpty
                         ? context.pop
                         : null,
                   ),

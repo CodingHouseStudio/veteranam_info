@@ -28,10 +28,10 @@ void main() {
 
     setUp(() {
       LocalizedDateTime.enDateString = KTestText
-          .blocSendDiscountModel.expirationEN!
+          .blocSendDiscountModel.expiration!.en!
           .replaceAll('Up to ', '');
       LocalizedDateTime.ukDateString =
-          KTestText.blocSendDiscountModel.expiration!.replaceAll('До ', '');
+          KTestText.blocSendDiscountModel.expiration!.uk.replaceAll('До ', '');
       StringDartExtension.date = KTestText.nextDateTime;
       ExtendedDateTime.id = KTestText.blocSendDiscountModel.id;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -115,7 +115,7 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.blocSendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title.uk,
             ),
           )
           ..add(
@@ -150,12 +150,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
@@ -170,12 +170,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityRemoveItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
@@ -211,17 +211,17 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KTestText.blocSendDiscountModel.category.first,
+              KTestText.blocSendDiscountModel.category.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
@@ -236,12 +236,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityRemove(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
@@ -253,12 +253,12 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.blocSendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -546,7 +546,7 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.blocSendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title.uk,
             ),
           )
           ..add(
@@ -556,7 +556,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
@@ -573,19 +573,19 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.blocSendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.back())
@@ -767,7 +767,7 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.blocSendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title.uk,
             ),
           )
           ..add(
@@ -779,12 +779,12 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.blocSendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -1093,7 +1093,7 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestText.blocSendDiscountModel.title,
+              KTestText.blocSendDiscountModel.title.uk,
             ),
           )
           ..add(
@@ -1103,7 +1103,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
@@ -1123,7 +1123,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first,
+              KTestText.blocSendDiscountModel.eligibility!.first.uk,
             ),
           )
           ..add(
@@ -1134,23 +1134,23 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KTestText.blocSendDiscountModel.category.first,
+              KTestText.blocSendDiscountModel.category.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestText.blocSendDiscountModel.location!.first,
+              KTestText.blocSendDiscountModel.location!.first.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestText.blocSendDiscountModel.description,
+              KTestText.blocSendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!,
+              KTestText.blocSendDiscountModel.exclusions!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());

@@ -4,15 +4,14 @@ import 'package:connectivity_plus/connectivity_plus.dart'
 import 'package:veteranam/shared/shared_dart.dart';
 
 /// Extension for filtering FilterItem list items.
-extension FilterItems<T> on List<FilterItem<T>> {
+extension FilterItems<T> on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
-  List<FilterItem<T>> getToSet(List<FilterItem<T>>? numberGetList) {
-    final grouped = groupBy(this, (FilterItem<T> item) => item.value);
+  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
+    final grouped = groupBy(this, (FilterItem item) => item.value);
 
     return grouped.entries.map((entry) {
       final item = FilterItem(
         entry.key,
-        valueEN: entry.value.first.valueEN,
         number:
             numberGetList?.where((item) => item.value == entry.key).length ??
                 entry.value.length,
@@ -22,7 +21,7 @@ extension FilterItems<T> on List<FilterItem<T>> {
     }).toList();
   }
 
-  List<FilterItem<T>> get selectedList => where(
+  List<FilterItem> get selectedList => where(
         (element) => element.isSelected,
       ).toList();
 
@@ -84,34 +83,30 @@ extension ListExtensions<T> on List<T> {
     return take(loadNumber).toList();
   }
 
-  List<FilterItem<String>> overallItems({
+  List<FilterItem> overallItems({
     required bool? isEnglish,
-    required List<String>? Function(T) getUAFilter,
-    List<String>? Function(T)? getENFilter,
+    required List<TranslateModel>? Function(T) getFilter,
     List<T>? fullList,
     bool calculateNumber = false,
   }) {
     try {
-      final allFilters = <FilterItem<String>>[];
+      final allFilters = <FilterItem>[];
       for (final item in fullList ?? this) {
-        final value = getUAFilter(item);
+        final value = getFilter(item);
         if (value != null) {
           for (var i = 0; i < (value.length); i++) {
             allFilters.add(
               FilterItem(
                 value.elementAt(i),
-                valueEN: getENFilter == null
-                    ? null
-                    : getENFilter(item)?.elementAtOrNull(i),
               ),
             );
           }
         }
       }
-      final allNumberFilters = calculateNumber ? <FilterItem<String>>[] : null;
+      final allNumberFilters = calculateNumber ? <FilterItem>[] : null;
       if (calculateNumber) {
         for (final item in this) {
-          final value = getUAFilter(item);
+          final value = getFilter(item);
           if (value != null) {
             allNumberFilters!.addAll(
               value.map(
@@ -128,7 +123,7 @@ extension ListExtensions<T> on List<T> {
             return a.alphabeteCompare(
               b: b,
               isEnglish: isEnglish,
-              addEnglish: getENFilter != null,
+              addEnglish: true,
             );
           }
           return numberSort;
@@ -140,7 +135,7 @@ extension ListExtensions<T> on List<T> {
           (a, b) => a.alphabeteCompare(
             b: b,
             isEnglish: isEnglish,
-            addEnglish: getENFilter != null,
+            addEnglish: true,
           ),
         );
 
@@ -541,7 +536,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
   ///
   /// Returns:
   /// A list of FilterItem instances representing location filters.
-  List<FilterItem<String>> getLocationFilter({
+  List<FilterItem> getLocationFilter({
     required bool isEnglish,
   }) {
     // Return a list of FilterItem instances
@@ -552,20 +547,15 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getUAFilter: (item) {
+        getFilter: (item) {
           if (item.subLocation == null) return [];
-          return [KAppText.sulocationUA];
+          return [KAppText.sublocation];
         },
         isEnglish: isEnglish,
-        getENFilter: (item) {
-          if (item.subLocation == null) return [];
-          return [KAppText.sulocationEN];
-        },
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
-        getENFilter: (item) => item.locationEN ?? [],
-        getUAFilter: (item) => item.location ?? [],
+        getFilter: (item) => item.location ?? [],
         isEnglish: isEnglish,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()
@@ -587,4 +577,11 @@ extension ConnectivityExtension on List<ConnectivityResult> {
   bool get hasNetwork => any(
         (result) => ConnectivityResult.none != result,
       );
+}
+
+extension TranslateModelListExtension on List<TranslateModel> {
+  List<String> getTrsnslation({
+    required bool isEnglish,
+  }) =>
+      map((e) => isEnglish ? e.en ?? e.uk : e.uk).toList();
 }

@@ -7,7 +7,7 @@ part 'translate_model.g.dart';
 class TranslateModel with _$TranslateModel {
   const factory TranslateModel({
     required String uk,
-    required String en,
+    String? en,
   }) = _TranslateModel;
 
   factory TranslateModel.fromJson(Map<String, dynamic> json) =>
@@ -17,4 +17,6 @@ class TranslateModel with _$TranslateModel {
 abstract class TranslateModelJsonField {
   static const uk = 'uk';
   static const en = 'en';
+  static const enSufix = 'EN';
+  static const trnslationListJson = 'trnslation_list_json';
 }

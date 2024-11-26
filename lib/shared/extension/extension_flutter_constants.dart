@@ -61,7 +61,7 @@ extension DiscountModelLocation on DiscountModel {
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
   String getDescription(BuildContext context) =>
-      '${description.getTrnslation(en: descriptionEN, context: context)}'
+      '${description.getTrsnslation(context)}'
       '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
       '${requirements != null ? _getMarkdownRequirements(context) : ''}'
       '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
@@ -71,9 +71,8 @@ extension DiscountModelLocation on DiscountModel {
       '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
 
   String _getMarkdownAdditionalDetails(BuildContext context) =>
-      '\n\n${additionalDetails.getTrnslation(
-            en: additionalDetailsEN,
-            context: context,
+      '\n\n${additionalDetails?.getTrsnslation(
+            context,
           ) ?? ''}';
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
@@ -86,20 +85,22 @@ extension DiscountModelLocation on DiscountModel {
                 '',
               ).replaceAll(' ', '')})'}';
   String _getMarkdownExclusions(BuildContext context) => '\n\n'
-      '${exclusions.getTrnslation(
-            en: exclusionsEN,
-            context: context,
+      '${exclusions?.getTrsnslation(
+            context,
           ) ?? ''}';
   String _getMarkdownRequirements(BuildContext context) => '\n\n- '
-      '${requirements.getTrnslation(
-            en: requirementsEN,
-            context: context,
+      '${requirements?.getTrsnslation(
+            context,
           ) ?? ''}';
   String _getMarkdownToGetIfYouNeed(BuildContext context) =>
       '\n\n***${context.l10n.toGetItYouNeed}***';
 
   String? get getLink => PlatformEnum.getPlatform.isIOS
-      ? category.contains('Медицина')
+      ? category
+              .where(
+                (element) => element.uk.contains('Медицина'),
+              )
+              .isNotEmpty
           ? null
           : _getLink
       : _getLink;
@@ -210,12 +211,11 @@ extension StringFllutterExtension on String {
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
-extension GenericsExtensions<T> on T {
-  T getTrnslation({
-    required T? en,
-    required BuildContext context,
-  }) =>
-      context.isEnglish ? en ?? this : this;
+extension TranslateModelExtension on TranslateModel {
+  String getTrsnslation(
+    BuildContext context,
+  ) =>
+      context.isEnglish ? en ?? uk : uk;
 }
 
 extension ContextExtensions on BuildContext {
@@ -273,10 +273,10 @@ extension DiscountEnumExtensions on DiscountEnum {
 }
 
 extension CategoryEnumExtensions on CategoryEnum {
-  String getValue(BuildContext context) {
+  TranslateModel get getValue {
     switch (this) {
       case CategoryEnum.all:
-        return context.l10n.all;
+        return KAppText.categoryAll;
     }
   }
 }
@@ -298,14 +298,6 @@ extension UrlEnumExtension on UrlEnum {
         return context.l10n.copyLink;
     }
   }
-}
-
-extension FilterItemExtension<T> on FilterItem<T> {
-  String getString(BuildContext context) => value is SubLocation
-      ? context.l10n.allUkraine
-      : value is DiscountEnum
-          ? (value as DiscountEnum).getValue(context)
-          : (context.isEnglish && valueEN != null ? valueEN : value).toString();
 }
 
 extension UserRoleExtensions on UserRole {
@@ -516,14 +508,14 @@ extension SubLocationString on SubLocation {
     }
   }
 
-  List<String> getCardList(BuildContext context) {
+  List<TranslateModel> getCardList(BuildContext context) {
     switch (this) {
       case SubLocation.all:
-        return [context.l10n.allStoresOfChain, context.l10n.allUkrainOnline];
+        return [KAppText.allStoresOfChain, KAppText.allUkrainOnline];
       case SubLocation.allStoresOfChain:
-        return [context.l10n.allStoresOfChain];
+        return [KAppText.allStoresOfChain];
       case SubLocation.online:
-        return [context.l10n.allUkrainOnline];
+        return [KAppText.allUkrainOnline];
     }
   }
 }

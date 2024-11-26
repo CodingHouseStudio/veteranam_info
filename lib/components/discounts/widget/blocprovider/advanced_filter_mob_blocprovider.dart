@@ -8,21 +8,17 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
   const AdvancedFilterMobBlocprovider({
     required this.childWidget,
     required this.initialFilter,
+    required this.initialSorting,
     required this.initChooseLocationList,
-    required this.initialCategories,
-    required this.initialChooseCategories,
-    required this.initialEligibilities,
-    required this.initialChooseEligibilities,
+    required this.initialChooseSorting,
     super.key,
   });
 
   final Widget childWidget;
-  final List<FilterItem<String>> initialFilter;
-  final List<FilterItem<String>> initialCategories;
-  final List<FilterItem<String>> initialEligibilities;
-  final List<FilterItem<String>> initChooseLocationList;
-  final List<FilterItem<String>> initialChooseCategories;
-  final List<FilterItem<String>> initialChooseEligibilities;
+  final List<FilterItem> initialFilter;
+  final List<SortingItem> initialSorting;
+  final List<FilterItem> initChooseLocationList;
+  final List<SortingItem> initialChooseSorting;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +26,9 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
       create: (context) => GetIt.I.get<AdvancedFilterMobCubit>()
         ..started(
           initialLocationFilter: initialFilter,
+          initialSorting: initialSorting,
           initChooseLocationList: initChooseLocationList,
-          initialCategories: initialCategories,
-          initialChooseCategories: initialChooseCategories,
-          initialEligibilities: initialEligibilities,
-          initialChooseEligibilities: initialChooseEligibilities,
+          initialChooseSorting: initialChooseSorting,
         ),
       child: childWidget,
     );

@@ -9,36 +9,68 @@ class AdvancedFilterDesk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-      buildWhen: (previous, current) =>
-          previous.loadingStatus != current.loadingStatus ||
-          previous.filterLocation != current.filterLocation ||
-          previous.choosenLocationList != current.choosenLocationList ||
-          previous.choosenCategoriesnList != current.choosenCategoriesnList ||
-          current.filterCategory != previous.filterCategory ||
-          previous.choosenCategoriesnList != current.choosenEligibilitiesList ||
-          current.filterCategory != previous.filterEligibilities,
-      builder: (context, state) {
-        return AdvancedFilterContent(
-          key: KWidgetkeys.screen.discounts.advancedFilterDesk,
-          isDesk: true,
-          onLocationChange: (value) => context
-              .read<DiscountWatcherBloc>()
-              .add(DiscountWatcherEvent.filterLocation(value)),
-          filterLocationes: state.filterLocation,
-          chooseLocationList: state.choosenLocationList,
-          filterCategories: state.filterCategory,
-          chooseCategoriesList: state.choosenCategoriesnList,
-          onCategoriesChange: (value) => context
-              .read<DiscountWatcherBloc>()
-              .add(DiscountWatcherEvent.filterCategory(value)),
-          filterEligibilities: state.filterEligibilities,
-          chooseEligibilitiesList: state.choosenEligibilitiesList,
-          onEligibilitiesChange: (value) => context
-              .read<DiscountWatcherBloc>()
-              .add(DiscountWatcherEvent.filterEligibilities(value)),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
+      child: Column(
+        children: [
+          // Row(
+          //   children: [
+          //     const IconWidget(
+          //       icon: KIcon.tune,
+          //       background: AppColors.materialThemeKeyColorsNeutral,
+          //       padding: KPadding.kPaddingSize20,
+          //     ),
+          //     KSizedBox.kWidthSizedBox8,
+          //     Expanded(
+          //       child: Text(
+          //         context.l10n.advancedFilter,
+          //         style: AppTextStyle.materialThemeHeadlineSmall,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          const AdvancedFilterButton(
+            isDesk: true,
+            // icon: showFilter
+            //     ? KIcon.trailing.copyWith(
+            //         key: KWidgetkeys
+            //             .screen.discounts.advancedFilterButtonIcon,
+            //       )
+            //     : KIcon.trailingUp.copyWith(
+            //         key: KWidgetkeys
+            //             .screen.discounts.advancedFilterButtonIconUp,
+            //       ),
+          ),
+
+          BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+            buildWhen: (previous, current) =>
+                previous.loadingStatus != current.loadingStatus ||
+                previous.filterLocation != current.filterLocation ||
+                previous.sorting != current.sorting ||
+                previous.choosenLocationList != current.choosenLocationList ||
+                current.choosenSortingnList != previous.choosenSortingnList,
+            builder: (context, state) {
+              return Expanded(
+                child: AdvancedFilterContent(
+                  key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+                  isDesk: true,
+                  onChange: (value) => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.filterLocation(value)),
+                  filterLocationes: state.filterLocation,
+                  sorting: state.sorting,
+                  onChangeSorting: (value) => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.sorting(value)),
+                  chooseLocationList: state.choosenLocationList,
+                  chooseSortingList: state.choosenSortingnList,
+                ),
+              );
+            },
+          ),
+          // ...AdvanceFilter.resetButton(isDesk: true, context: context),
+        ],
+      ),
     );
   }
 }

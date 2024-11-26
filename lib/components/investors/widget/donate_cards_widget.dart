@@ -18,7 +18,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
   late List<bool> hasSubtitles;
   @override
   void initState() {
-    hasSubtitles = List.generate(KDimensions.donateCardsLine, (index) => false);
+    hasSubtitles = List.filled(KDimensions.donateCardsLine, false);
     super.initState();
   }
 

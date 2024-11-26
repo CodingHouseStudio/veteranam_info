@@ -3,28 +3,24 @@ import 'dart:typed_data' show Uint8List;
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:veteranam/shared/models/models.dart';
 
-class FilterItem<T> {
+class FilterItem {
   FilterItem(
     this.value, {
     this.number = 1,
-    this.valueEN,
     this.isSelected = false,
   });
 
-  final T value;
-  final T? valueEN;
+  final TranslateModel value;
   final bool isSelected;
   final int number;
 
-  FilterItem<T> copyWith({
-    T? value,
-    T? valueEN,
+  FilterItem copyWith({
+    TranslateModel? value,
     bool? isSelected,
     int? number,
   }) {
     return FilterItem(
       value ?? this.value,
-      valueEN: valueEN ?? this.valueEN,
       isSelected: isSelected ?? this.isSelected,
       number: number ?? this.number,
     );

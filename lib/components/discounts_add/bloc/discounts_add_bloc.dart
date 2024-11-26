@@ -102,24 +102,32 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
 
     if (discount != null) {
       final periodIsNull = discount!.expiration == null ||
-          discount!.expiration!.isEmpty ||
-          discount!.expiration!.toLowerCase() == 'до кінця воєнного стану' ||
-          discount!.expiration!.toLowerCase() == 'Щомісяця оновлюється';
+          discount!.expiration!.uk.isEmpty ||
+          discount!.expiration!.uk.toLowerCase() == 'до кінця воєнного стану' ||
+          discount!.expiration!.uk.toLowerCase() == 'Щомісяця оновлюється';
       emit(
         state.copyWith(
           discount: discount,
-          category: CategoriesFieldModel.dirty(discount!.category),
+          category: CategoriesFieldModel.dirty(
+            discount!.category.getTrsnslation(
+              isEnglish: false,
+            ),
+          ),
           city: discount!.location == null
               ? const CitiesFieldModel.pure()
-              : CitiesFieldModel.dirty(discount!.location!),
+              : CitiesFieldModel.dirty(
+                  discount!.location!.getTrsnslation(
+                    isEnglish: false,
+                  ),
+                ),
           period: periodIsNull
               ? const DateFieldModel.pure()
               : DateFieldModel.dirty(
-                  discount!.expiration?.getDateDiscountString(
+                  discount!.expiration?.uk.getDateDiscountString(
                     Language.ukrain.value.languageCode,
                   ),
                 ),
-          title: MessageFieldModel.dirty(discount!.title),
+          title: MessageFieldModel.dirty(discount!.title.uk),
           discounts: DiscountsFieldModel.dirty(
             discount!.discount
                 .map(
@@ -129,12 +137,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           ),
           eligibility: discount!.eligibility == null
               ? null
-              : ListFieldModel.dirty(discount!.eligibility!),
+              : ListFieldModel.dirty(
+                  discount!.eligibility!.getTrsnslation(isEnglish: false),
+                ),
           link: LinkFieldModel.dirty(discount!.directLink),
-          description: MessageFieldModel.dirty(discount!.description),
+          description: MessageFieldModel.dirty(discount!.description.uk),
           exclusions: discount!.exclusions == null
               ? const MessageFieldModel.pure()
-              : MessageFieldModel.dirty(discount!.exclusions!),
+              : MessageFieldModel.dirty(discount!.exclusions!.uk),
           formState: DiscountsAddEnum.initial,
           isIndefinitely: periodIsNull,
           isOnline: discount!.subLocation?.isOnline ?? false,
@@ -183,8 +193,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CityAdd event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final cityFieldModel =
-        CitiesFieldModel.dirty(state.city.value.addFieldModel(event.city));
+    final cityFieldModel = CitiesFieldModel.dirty(
+      state.city.value.addFieldModel(event.city),
+    );
 
     emit(
       state.copyWith(
@@ -459,16 +470,23 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             )
             .cast<int>()
             .toList(),
-        title: state.title.value,
-        category: state.category.value,
-        location: state.city.value,
-        description: state.description.value,
+        title: TranslateModel(uk: state.title.value),
+        category:
+            state.category.value.map((e) => TranslateModel(uk: e)).toList(),
+        location: state.city.value.map((e) => TranslateModel(uk: e)).toList(),
+        description: TranslateModel(uk: state.description.value),
         link: _companyRepository.currentUserCompany.link,
-        company: _companyRepository.currentUserCompany.publicName,
-        eligibility: state.eligibility?.value,
-        exclusions: state.exclusions.value,
-        expiration: _getExpiration(Language.ukrain),
-        expirationEN: _getExpiration(Language.english),
+        company: _companyRepository.currentUserCompany.publicName == null
+            ? null
+            : TranslateModel(
+                uk: _companyRepository.currentUserCompany.publicName!,
+              ),
+        eligibility:
+            state.eligibility?.value.map((e) => TranslateModel(uk: e)).toList(),
+        exclusions: TranslateModel(
+          uk: state.exclusions.value,
+        ),
+        expiration: _getExpiration,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
         userId: _companyRepository.currentUserCompany.id,
@@ -506,24 +524,16 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   DiscountModel get discountModel => DiscountModel(
         id: ExtendedDateTime.id,
         discount: const [],
-        title: '',
-        titleEN: null,
+        title: const TranslateModel(uk: ''),
         category: const [],
-        categoryEN: null,
         subcategory: null,
-        subcategoryEN: null,
-        description: '',
-        descriptionEN: null,
+        description: const TranslateModel(uk: ''),
         requirements: null,
-        requirementsEN: null,
         territory: null,
-        territoryEN: null,
         dateVerified: ExtendedDateTime.current,
         link: null,
       );
 
-  String? _getExpiration(
-    Language language,
-  ) =>
-      state.isIndefinitely ? null : state.period.getString(language);
+  TranslateModel? get _getExpiration =>
+      state.isIndefinitely ? null : state.period.getString;
 }
