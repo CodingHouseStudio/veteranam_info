@@ -133,7 +133,7 @@ class ChipImplementationWidget extends StatelessWidget {
               right: KPadding.kPaddingSize10,
             ),
             child: Text(
-              filter.getString(context),
+              filter.value.getTrsnslation(context),
               key: KWidgetkeys.widget.chip.text,
               style: textStyle ??
                   AppTextStyle.materialThemeLabelLarge.copyWith(

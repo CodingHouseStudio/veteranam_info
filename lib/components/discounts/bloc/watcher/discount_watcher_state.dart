@@ -1,28 +1,21 @@
 part of 'discount_watcher_bloc.dart';
 
-class SortingItem extends FilterItem {
+class SortingItem {
   SortingItem(
-    DiscountEnum value, {
-    super.isSelected = false,
-    super.number,
-  })  : sortValue = value,
-        super(null);
-  final DiscountEnum sortValue;
+    this.value, {
+    this.isSelected = false,
+  });
 
-  @override
-  DiscountEnum get value => sortValue;
+  final DiscountEnum value;
+  final bool isSelected;
 
-  @override
   SortingItem copyWith({
-    dynamic value,
-    dynamic valueEN,
+    DiscountEnum? value,
     bool? isSelected,
-    int? number,
   }) {
     return SortingItem(
-      value is DiscountEnum ? value : sortValue,
+      value ?? this.value,
       isSelected: isSelected ?? this.isSelected,
-      number: number ?? this.number,
     );
   }
 }
@@ -74,8 +67,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
 // }
 
 extension SubLocationString on SubLocation {
-  List<SubLocation> get _getList {
-    return [SubLocation.online];
+  List<String> get _getList {
+    return [KAppText.sublocation.uk];
     // switch (this) {
     //   case SubLocation.all:
     //     return [

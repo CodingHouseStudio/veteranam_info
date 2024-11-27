@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart'
 import 'package:veteranam/shared/shared_dart.dart';
 
 /// Extension for filtering FilterItem list items.
-extension FilterItems on List<FilterItem> {
+extension FilterItems<T> on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
   List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
     final grouped = groupBy(this, (FilterItem item) => item.value);
@@ -12,7 +12,6 @@ extension FilterItems on List<FilterItem> {
     return grouped.entries.map((entry) {
       final item = FilterItem(
         entry.key,
-        valueEN: entry.value.first.valueEN,
         number:
             numberGetList?.where((item) => item.value == entry.key).length ??
                 entry.value.length,
@@ -21,6 +20,10 @@ extension FilterItems on List<FilterItem> {
       return item;
     }).toList();
   }
+
+  List<FilterItem> get selectedList => where(
+        (element) => element.isSelected,
+      ).toList();
 
   bool get haveSelectedValue => any(
         (element) => element.isSelected,
@@ -82,33 +85,35 @@ extension ListExtensions<T> on List<T> {
 
   List<FilterItem> overallItems({
     required bool? isEnglish,
-    required List<dynamic> Function(T) getUAFilter,
-    List<dynamic>? Function(T)? getENFilter,
+    required List<TranslateModel>? Function(T) getFilter,
     List<T>? fullList,
     bool calculateNumber = false,
   }) {
     try {
       final allFilters = <FilterItem>[];
       for (final item in fullList ?? this) {
-        for (var i = 0; i < (getUAFilter(item).length); i++) {
-          allFilters.add(
-            FilterItem(
-              getUAFilter(item).elementAt(i),
-              valueEN: getENFilter == null
-                  ? null
-                  : getENFilter(item)?.elementAtOrNull(i),
-            ),
-          );
+        final value = getFilter(item);
+        if (value != null) {
+          for (var i = 0; i < (value.length); i++) {
+            allFilters.add(
+              FilterItem(
+                value.elementAt(i),
+              ),
+            );
+          }
         }
       }
       final allNumberFilters = calculateNumber ? <FilterItem>[] : null;
       if (calculateNumber) {
         for (final item in this) {
-          allNumberFilters!.addAll(
-            getUAFilter(item).map(
-              FilterItem.new,
-            ),
-          );
+          final value = getFilter(item);
+          if (value != null) {
+            allNumberFilters!.addAll(
+              value.map(
+                FilterItem.new,
+              ),
+            );
+          }
         }
       }
       final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
@@ -118,7 +123,7 @@ extension ListExtensions<T> on List<T> {
             return a.alphabeteCompare(
               b: b,
               isEnglish: isEnglish,
-              addEnglish: getENFilter != null,
+              addEnglish: true,
             );
           }
           return numberSort;
@@ -130,7 +135,7 @@ extension ListExtensions<T> on List<T> {
           (a, b) => a.alphabeteCompare(
             b: b,
             isEnglish: isEnglish,
-            addEnglish: getENFilter != null,
+            addEnglish: true,
           ),
         );
 
@@ -208,7 +213,7 @@ extension ListExtensions<T> on List<T> {
   List<T> loadingFilter({
     required List<dynamic>? filtersValue,
     required int? itemsLoaded,
-    required List<dynamic> Function(T item) getENFilter,
+    required List<dynamic> Function(T item) getFilter,
     int? loadItems,
     // List<FilterItem>? overallFilter,
     // List<T>? fullList,
@@ -221,9 +226,9 @@ extension ListExtensions<T> on List<T> {
             (loadItems ?? 0);
 
     // Apply filters to the list and return up to 'loadedItemsCount' items
-    return _filter(
+    return filter(
       filtersValue: filtersValue,
-      getFilter: getENFilter,
+      getFilter: getFilter,
       // overallFilter: overallFilter,
       // fullList: fullList,
       // containAnyItems: containAnyItems,
@@ -264,9 +269,9 @@ extension ListExtensions<T> on List<T> {
   ///
   /// Returns:
   /// A filtered list of items.
-  List<T> _filter({
+  List<T> filter({
     required List<dynamic>? filtersValue,
-    required List<dynamic> Function(T item) getFilter,
+    required List<dynamic>? Function(T item) getFilter,
     // required List<FilterItem>? overallFilter,
     // required List<T>? fullList,
     // required bool containAnyItems,
@@ -296,17 +301,21 @@ extension ListExtensions<T> on List<T> {
     // toList();
 
     // Apply filters to the list
-    return where(
-      (item) =>
-          //  containAnyItems
-          //     ?
-          filtersValue.any(
-        getFilter(item).contains,
-      ), // Match any filter if 'containAnyItems' is true
+    return where((item) {
+      //  containAnyItems
+      //     ?
+      final value = getFilter(item);
+      if (value == null) {
+        return true;
+      } else {
+        return filtersValue.any(
+          value.contains,
+        ); // Match any filter if 'containAnyItems' is true
+      }
       // : filtersValue.every(
       //     getFilter(item).contains,
       //   ), // Match all filters if 'containAnyItems' is false
-    ).toList();
+    }).toList();
   }
 
   /// Method to filter items, load a specific number of items, and return the
@@ -336,7 +345,7 @@ extension ListExtensions<T> on List<T> {
     // List<T>? listForFilter,
   }) {
     // Apply filters to the list
-    final list = _filter(
+    final list = filter(
       filtersValue: filtersValue,
       getFilter: getFilter,
       // overallFilter: overallFilter,
@@ -538,17 +547,15 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getUAFilter: (item) => item.subLocation.getValue,
+        getFilter: (item) {
+          if (item.subLocation == null) return [];
+          return [KAppText.sublocation];
+        },
         isEnglish: isEnglish,
-        // numberGetList: context
-        //     .read<DiscountWatcherBloc>()
-        //     .state
-        //     .categoryDiscountModelItems,
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
-        getENFilter: (item) => item.locationEN ?? [],
-        getUAFilter: (item) => item.location ?? [],
+        getFilter: (item) => item.location ?? [],
         isEnglish: isEnglish,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()
@@ -570,4 +577,11 @@ extension ConnectivityExtension on List<ConnectivityResult> {
   bool get hasNetwork => any(
         (result) => ConnectivityResult.none != result,
       );
+}
+
+extension TranslateModelListExtension on List<TranslateModel> {
+  List<String> getTrsnslation({
+    required bool isEnglish,
+  }) =>
+      map((e) => isEnglish ? e.en ?? e.uk : e.uk).toList();
 }

@@ -8,10 +8,14 @@ part 'question_model.g.dart';
 class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
-    @TitleConverter() required String title,
-    @TitleConverter() required String titleEN,
-    @SubtitleConverter() required String subtitle,
-    @SubtitleConverter() required String subtitleEN,
+    // ignore: invalid_annotation_target
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TitleConverter()
+    required TranslateModel title,
+    // ignore: invalid_annotation_target
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @SubtitleConverter()
+    required TranslateModel subtitle,
     // String? navigationLink,
   }) = _QuestionModel;
 

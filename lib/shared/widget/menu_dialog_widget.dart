@@ -19,14 +19,15 @@ class MenuDialogWidget extends StatelessWidget {
             onPressed: () => context
               ..pop()
               ..goNamed(KRoute.discounts.name),
-            icon: Text(
-              context.l10n.discounts,
-              style: AppTextStyle.materialThemeTitleMedium,
-            ),
-            label: const IconWidget(
+            iconAlignment: IconAlignment.end,
+            icon: const IconWidget(
               icon: KIcon.tag,
               background: AppColors.materialThemeSourceSeed,
               padding: KPadding.kPaddingSize8,
+            ),
+            label: Text(
+              context.l10n.discounts,
+              style: AppTextStyle.materialThemeTitleMedium,
             ),
             style: KButtonStyles.withoutStyle,
           ),

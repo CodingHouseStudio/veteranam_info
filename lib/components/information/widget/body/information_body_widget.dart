@@ -125,8 +125,12 @@ class InformationBodyWidget extends StatelessWidget {
             .informationModelItems
             .overallItems(
               isEnglish: context.isEnglish,
-              getENFilter: (item) => item.category,
-              getUAFilter: (item) => item.categoryUA,
+              getFilter: (item) => [
+                TranslateModel(
+                  uk: item.categoryUA.first,
+                  en: item.category.first,
+                ),
+              ],
             )
             .map(
               (element) => context

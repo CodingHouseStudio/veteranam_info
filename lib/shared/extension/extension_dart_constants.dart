@@ -116,12 +116,9 @@ extension FilterItemExtension on FilterItem {
     required bool addEnglish,
   }) {
     if ((isEnglish ?? false) && addEnglish) {
-      return valueEN
-          .toString()
-          .toLowerCase()
-          .compareTo(b.valueEN.toString().toLowerCase());
+      return value.en?.compareTo(b.value.en.toString().toLowerCase()) ?? -1;
     } else {
-      return value.toString().compareUkrain(b.value.toString());
+      return value.uk.compareUkrain(b.value.uk);
     }
   }
 }
@@ -185,12 +182,16 @@ extension DiscountStateExtention on DiscountState {
 }
 
 extension DateFieldModelDart on DateFieldModel {
-  String getString(Language language) =>
-      '${language.isEnglish ? 'Up to' : 'До'}'
-      ' ${value?.toLocalDateString(
-        localeValue: language.value.languageCode,
-        showDay: true,
-      )}';
+  TranslateModel get getString => TranslateModel(
+        uk: 'До ${value?.toLocalDateString(
+          localeValue: Language.ukrain.value.languageCode,
+          showDay: true,
+        )}',
+        en: 'Up to ${value?.toLocalDateString(
+          localeValue: Language.english.value.languageCode,
+          showDay: true,
+        )}',
+      );
 }
 
 extension UrlFailureExtension on SomeFailure {
@@ -260,19 +261,4 @@ extension FilePickerItemExtension on FilePickerItem? {
       ? null
       : 'Image/File: name - ${this!.name}, extension - ${this!.extension},'
           ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
-}
-
-extension SubLocationExtension on SubLocation? {
-  List<SubLocation> get getValue {
-    switch (this) {
-      case SubLocation.all:
-      // return [SubLocation.allStoresOfChain, SubLocation.online];
-      case SubLocation.allStoresOfChain:
-      // return [SubLocation.allStoresOfChain];
-      case SubLocation.online:
-        return [SubLocation.online];
-      case null:
-        return [];
-    }
-  }
 }

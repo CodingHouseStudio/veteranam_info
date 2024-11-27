@@ -354,16 +354,8 @@ abstract class KTestText {
     for (var i = 0; i < 5; i++)
       CityModel(
         id: i.toString(),
-        name: i == 0
-            ? translateModel
-            : TranslateModel(
-                uk: KMockText.discountModel.location!.first,
-                en: KMockText.discountModel.locationEN!.first,
-              ),
-        region: TranslateModel(
-          uk: KMockText.discountModel.location!.last,
-          en: KMockText.discountModel.locationEN!.last,
-        ),
+        name: i == 0 ? translateModel : KMockText.discountModel.location!.first,
+        region: KMockText.discountModel.location!.last,
       ),
   ];
 
@@ -372,7 +364,7 @@ abstract class KTestText {
   );
 
   static final blocSendDiscountModel = sendDiscountModel.copyWith(
-    eligibility: [KTestText.field],
+    eligibility: const [TranslateModel(uk: KTestText.field)],
   );
 
   static final sendDiscountModel = discountModelItems.first.copyWith(
@@ -381,23 +373,13 @@ abstract class KTestText {
     territory: null,
     userId: fullCompanyModel.id,
     userName: fullCompanyModel.companyName,
-    company: fullCompanyModel.publicName,
+    company: TranslateModel(uk: fullCompanyModel.publicName!),
     subLocation: null,
     userPhoto: null,
-    locationEN: null,
-    additionalDetailsEN: null,
-    companyEN: null,
-    exclusionsEN: null,
     phoneNumber: null,
-    categoryEN: null, eligibilityEN: null,
-    descriptionEN: null,
-    requirementsEN: null,
     requirements: null,
-    territoryEN: null,
-    titleEN: null,
     status: DiscountState.isNew,
     subcategory: null,
-    subcategoryEN: null,
     dateVerified: dateTime,
   );
 
@@ -440,8 +422,13 @@ abstract class KTestText {
         expiration: i == 0 ? null : KMockText.discountModel.expiration,
         id: i.toString(),
         userId: i.toString(),
-        categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,
-        category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
+        category: i == 0
+            ? KMockText.tag
+                .map(
+                  (e) => TranslateModel(uk: e),
+                )
+                .toList()
+            : KMockText.discountModel.category,
         dateVerified: dateTime,
         discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,
         subLocation: i == 0

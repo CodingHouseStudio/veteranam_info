@@ -24,7 +24,7 @@ void main() {
             ...KTestText.discountModelItems.last.location!.map(
               FilterItem.new,
             ),
-            FilterItem(KTestText.discountModelItems.first.subLocation),
+            FilterItem(KAppText.allStoresOfChain),
           ],
           initialSorting: [
             SortingItem(DiscountEnum.largestSmallest),

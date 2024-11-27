@@ -124,7 +124,7 @@ class _FilterChipItemWidget extends StatelessWidget {
           ),
           child: ChipWidget(
             filter: FilterItem(
-              CategoryEnum.all.getValue(context),
+              CategoryEnum.all.getValue,
               number: fullLength,
             ),
             onSelected: (isSelected) => onSelected(CategoryEnum.all),

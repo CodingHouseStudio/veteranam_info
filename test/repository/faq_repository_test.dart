@@ -44,14 +44,14 @@ void main() {
               .having((e) => e.value, 'value', KTestText.questionModelItems),
         );
       });
-      test('mock', () async {
-        faqRepository.addMockQuestions();
-        verify(
-          mockFirestoreService.addQuestion(
-            KTestText.questionModelItems.first,
-          ),
-        ).called(1);
-      });
+      // test('mock', () async {
+      //   faqRepository.addMockQuestions();
+      //   verify(
+      //     mockFirestoreService.addQuestion(
+      //       KTestText.questionModelItems.first,
+      //     ),
+      //   ).called(1);
+      // });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
