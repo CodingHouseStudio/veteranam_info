@@ -1,18 +1,32 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/constants/dimensions/min_max_size_constants.dart';
 import 'package:veteranam/shared/extension/extension_dart.dart';
+import 'package:veteranam/shared/models/translate_model.dart';
 
-class SubtitleConverter implements JsonConverter<String, String> {
+class SubtitleConverter implements JsonConverter<TranslateModel, dynamic> {
   const SubtitleConverter();
 
   @override
-  String fromJson(String json) {
-    return json.setStringLength(KMinMaxSize.subtitleMaxLength);
+  TranslateModel fromJson(dynamic json) {
+    final map = json as Map<String, dynamic>;
+    final uk = (map[TranslateModelJsonField.uk] as String)
+        .setStringLength(KMinMaxSize.subtitleMaxLength);
+    final en = (map[TranslateModelJsonField.en] as String)
+        .setStringLength(KMinMaxSize.subtitleMaxLength);
+    return TranslateModel(
+      uk: uk,
+      en: en,
+    );
   }
 
   @override
-  String toJson(String object) {
-    return object.setStringLength(KMinMaxSize.subtitleMaxLength);
+  dynamic toJson(TranslateModel object) {
+    return {
+      TranslateModelJsonField.uk:
+          object.uk.setStringLength(KMinMaxSize.subtitleMaxLength),
+      TranslateModelJsonField.en:
+          object.en?.setStringLength(KMinMaxSize.subtitleMaxLength),
+    };
   }
 }
 

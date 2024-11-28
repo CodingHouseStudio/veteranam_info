@@ -14,7 +14,6 @@ class DiscountRepository implements IDiscountRepository {
   DiscountRepository({required FirestoreService firestoreService})
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
-  static final filterState = FilterState();
   @override
   Stream<List<DiscountModel>> getDiscountItems(
       //{List<String>? reportIdItems}

@@ -172,7 +172,7 @@ class _DiscountWidgetList extends StatelessWidget {
                 ),
                 if ((!PlatformEnumFlutter.isWebDesktop &&
                         state.loadingStatus != LoadingStatus.listLoadedFull) ||
-                    state.discountModelItems.isEmpty)
+                    state.unmodifiedDiscountModelItems.isEmpty)
                   SliverPrototypeExtentList.builder(
                     itemCount: state.filteredDiscountModelItems.isEmpty
                         ? config.loadingItems

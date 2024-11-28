@@ -40,11 +40,9 @@ class DiscountCardWidget extends StatelessWidget {
             _DiscountCardTitleWidget(
               isDesk: isDesk,
               company: discountItem.company,
-              companyEN: discountItem.companyEN,
               userName: discountItem.userName,
               dateVerified: discountItem.dateVerified,
               category: discountItem.category,
-              categoryEN: discountItem.categoryEN,
               userPhoto: discountItem.userPhoto,
             ),
             if (isDesk)
@@ -104,14 +102,11 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             category: discountItem.category,
             discount: discountItem.discount,
             title: discountItem.title,
-            categoryEN: discountItem.categoryEN,
-            titleEN: discountItem.titleEN,
           ),
           if (!isDesk) ...[
             KSizedBox.kHeightSizedBox16,
             Text(
-              discountItem.title
-                  .getTrnslation(en: discountItem.titleEN, context: context),
+              discountItem.title.getTrsnslation(context),
               key: KWidgetkeys.widget.discountCard.discountTitle,
               style: AppTextStyle.materialThemeHeadlineSmall,
               overflow: TextOverflow.clip,
@@ -121,9 +116,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
           _CitiesExpirationWidget(
             isDesk: isDesk,
             location: discountItem.location,
-            locationEN: discountItem.locationEN,
             expiration: discountItem.expiration,
-            expirationEN: discountItem.expirationEN,
             subLocation: discountItem.subLocation,
           ),
           KSizedBox.kHeightSizedBox16,
@@ -171,15 +164,11 @@ class _DescrptionTitleWidget extends StatelessWidget {
     required this.category,
     required this.discount,
     required this.title,
-    required this.categoryEN,
-    required this.titleEN,
   });
   final bool isDesk;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final List<int> discount;
-  final String title;
-  final String? titleEN;
+  final TranslateModel title;
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +177,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
         if (isDesk)
           Expanded(
             child: Text(
-              title.getTrnslation(en: titleEN, context: context),
+              title.getTrsnslation(context),
               key: KWidgetkeys.widget.discountCard.discountTitle,
               style: AppTextStyle.materialThemeDisplaySmall,
             ),
@@ -197,7 +186,6 @@ class _DescrptionTitleWidget extends StatelessWidget {
           Expanded(
             child: _CategoryWidget(
               categories: category,
-              categoriesEn: categoryEN,
             ),
           ),
         KSizedBox.kHeightSizedBox8,
@@ -224,20 +212,16 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   const _DiscountCardTitleWidget({
     required this.isDesk,
     required this.company,
-    required this.companyEN,
     required this.userName,
     required this.dateVerified,
     required this.category,
-    required this.categoryEN,
     required this.userPhoto,
   });
   final bool isDesk;
-  final String? company;
-  final String? companyEN;
+  final TranslateModel? company;
   final String? userName;
   final DateTime dateVerified;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final ImageModel? userPhoto;
 
   @override
@@ -261,16 +245,13 @@ class _DiscountCardTitleWidget extends StatelessWidget {
                     dateVerified: dateVerified,
                     category: category,
                     company: company,
-                    companyEN: companyEN,
                     userName: userName,
-                    categoryEN: categoryEN,
                     userPhoto: userPhoto,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox16,
                 _CategoryWidget(
                   categories: category,
-                  categoriesEn: categoryEN,
                 ),
               ],
             )
@@ -278,9 +259,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               dateVerified: dateVerified,
               category: category,
               company: company,
-              companyEN: companyEN,
               userName: userName,
-              categoryEN: categoryEN,
               userPhoto: userPhoto,
             ),
     );
@@ -292,17 +271,13 @@ class _CompanyInfoWidget extends StatelessWidget {
     required this.dateVerified,
     required this.category,
     required this.company,
-    required this.companyEN,
     required this.userName,
-    required this.categoryEN,
     required this.userPhoto,
   });
-  final String? company;
-  final String? companyEN;
+  final TranslateModel? company;
   final String? userName;
   final DateTime dateVerified;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final ImageModel? userPhoto;
   @override
   Widget build(BuildContext context) {
@@ -321,7 +296,6 @@ class _CompanyInfoWidget extends StatelessWidget {
 
   Widget get companyInfo => _CompanyInformationWidget(
         company: company,
-        companyEN: companyEN,
         userName: userName,
         dateVerified: dateVerified,
       );
@@ -330,12 +304,10 @@ class _CompanyInfoWidget extends StatelessWidget {
 class _CompanyInformationWidget extends StatelessWidget {
   const _CompanyInformationWidget({
     required this.company,
-    required this.companyEN,
     required this.userName,
     required this.dateVerified,
   });
-  final String? company;
-  final String? companyEN;
+  final TranslateModel? company;
   final String? userName;
   final DateTime dateVerified;
 
@@ -346,11 +318,7 @@ class _CompanyInformationWidget extends StatelessWidget {
       children: [
         Text(
           key: KWidgetkeys.widget.discountCard.service,
-          company.getTrnslation(
-                context: context,
-                en: companyEN,
-              ) ??
-              context.l10n.companyIsHidden,
+          company?.getTrsnslation(context) ?? context.l10n.companyIsHidden,
           style: AppTextStyle.materialThemeTitleMedium,
           overflow: TextOverflow.clip,
           textAlign: TextAlign.left,
@@ -378,17 +346,11 @@ class _CompanyInformationWidget extends StatelessWidget {
 class _CategoryWidget extends StatelessWidget {
   const _CategoryWidget({
     required this.categories,
-    required this.categoriesEn,
   });
-  final List<String> categories;
-  final List<String>? categoriesEn;
+  final List<TranslateModel> categories;
 
   @override
   Widget build(BuildContext context) {
-    final categoriesValue = categories.getTrnslation(
-      en: categoriesEn,
-      context: context,
-    );
     return Wrap(
       runSpacing: KPadding.kPaddingSize4,
       children: List.generate(categories.length, (int index) {
@@ -410,7 +372,7 @@ class _CategoryWidget extends StatelessWidget {
                 ),
                 child: Text(
                   key: KWidgetkeys.widget.discountCard.category,
-                  categoriesValue.elementAt(index),
+                  categories.elementAt(index).getTrsnslation(context),
                   style: AppTextStyle.materialThemeLabelLarge,
                 ),
               ),
@@ -426,16 +388,12 @@ class _CitiesExpirationWidget extends StatelessWidget {
   const _CitiesExpirationWidget({
     required this.isDesk,
     required this.location,
-    required this.locationEN,
     required this.expiration,
-    required this.expirationEN,
     required this.subLocation,
   });
   final bool isDesk;
-  final List<String>? location;
-  final List<String>? locationEN;
-  final String? expiration;
-  final String? expirationEN;
+  final List<TranslateModel>? location;
+  final TranslateModel? expiration;
   final SubLocation? subLocation;
   @override
   Widget build(BuildContext context) {
@@ -444,9 +402,8 @@ class _CitiesExpirationWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ExpirationWidget(
-            expiration: expiration.getTrnslation(
-              en: expirationEN,
-              context: context,
+            expiration: expiration?.getTrsnslation(
+              context,
             ),
           ),
           KSizedBox.kWidthSizedBox16,
@@ -454,7 +411,6 @@ class _CitiesExpirationWidget extends StatelessWidget {
             child: CityListWidget(
               key: KWidgetkeys.widget.discountCard.city,
               location: location,
-              locationEN: locationEN,
               subLocation: subLocation,
               isDesk: true,
             ),
@@ -466,9 +422,8 @@ class _CitiesExpirationWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ExpirationWidget(
-            expiration: expiration.getTrnslation(
-              en: expirationEN,
-              context: context,
+            expiration: expiration?.getTrsnslation(
+              context,
             ),
           ),
           KSizedBox.kHeightSizedBox8,
@@ -476,7 +431,6 @@ class _CitiesExpirationWidget extends StatelessWidget {
             key: KWidgetkeys.widget.discountCard.city,
             isDesk: false,
             location: location,
-            locationEN: locationEN,
             subLocation: subLocation,
           ),
         ],

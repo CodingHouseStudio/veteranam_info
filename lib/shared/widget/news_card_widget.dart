@@ -70,10 +70,10 @@ class NewsCardWidget extends StatelessWidget {
                 spacing: KSize.kWrapSpacing8,
                 runSpacing: KSize.kWrapRunSpacing4,
                 children: informationItem.categoryUA
-                    .getTrnslation(
-                  en: informationItem.category,
-                  context: context,
-                )
+                    //     .getTrsnslation(
+                    //   en: informationItem.category,
+                    //   context: context,
+                    // )
                     .map((category) {
                   return Container(
                     decoration: KWidgetTheme.boxDecorationCardGrayBorder,

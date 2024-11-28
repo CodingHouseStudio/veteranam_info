@@ -41,12 +41,12 @@ class AdvancedFilterMob extends StatelessWidget {
           showDragHandle: true,
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
-            initialFilter: bloc.state.filterLocation,
-            initChooseLocationList: bloc.state.choosenLocationList,
-            initialCategories: bloc.state.filterCategory,
-            initialChooseCategories: bloc.state.choosenCategoriesnList,
-            initialEligibilities: bloc.state.filterEligibilities,
-            initialChooseEligibilities: bloc.state.choosenEligibilitiesList,
+            initialFilter: [],
+            initChooseLocationList: [],
+            initialCategories: [],
+            initialChooseCategories: [],
+            initialEligibilities: [],
+            initialChooseEligibilities: [],
           ),
         ).then(
           (_) {
@@ -112,15 +112,11 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   onLocationChange: context
                       .read<AdvancedFilterMobCubit>()
                       .changeLocationsList,
-                  filterLocationes: _.filtersLocation,
-                  chooseLocationList: _.choosenLocationList,
-                  filterCategories: _.filterCategory,
-                  chooseCategoriesList: _.choosenCategoriesnList,
+                  discountFilter:
+                      const DiscountFilterItems.empty(), //TODO change
                   onCategoriesChange: context
                       .read<AdvancedFilterMobCubit>()
                       .changeCategoriesList,
-                  filterEligibilities: _.filterEligibilities,
-                  chooseEligibilitiesList: _.choosenEligibilitiesList,
                   onEligibilitiesChange: context
                       .read<AdvancedFilterMobCubit>()
                       .changeEligibilitiesList,

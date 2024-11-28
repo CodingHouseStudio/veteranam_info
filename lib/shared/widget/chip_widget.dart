@@ -9,7 +9,7 @@ class ChipWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
   });
-  final FilterItem<dynamic> filter;
+  final FilterItem filter;
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final bool isDesk;
@@ -42,7 +42,7 @@ class ChipDeskWidget extends StatefulWidget {
     required this.widgetKey,
     super.key,
   });
-  final FilterItem<dynamic> filter;
+  final FilterItem filter;
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final Key widgetKey;
@@ -107,7 +107,7 @@ class ChipImplementationWidget extends StatelessWidget {
     this.side,
     this.selectedColor,
   });
-  final FilterItem<dynamic> filter;
+  final FilterItem filter;
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final TextStyle? textStyle;
@@ -133,7 +133,7 @@ class ChipImplementationWidget extends StatelessWidget {
               right: KPadding.kPaddingSize10,
             ),
             child: Text(
-              filter.getString(context),
+              filter.value.getTrsnslation(context),
               key: KWidgetkeys.widget.chip.text,
               style: textStyle ??
                   AppTextStyle.materialThemeLabelLarge.copyWith(

@@ -85,6 +85,8 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LanguageCubit, Language>(
+      listenWhen: (previous, current) =>
+          previous.value.languageCode != current.value.languageCode,
       listener: (context, language) => unawaited(
         initializeDateFormatting(language.value.languageCode),
       ),

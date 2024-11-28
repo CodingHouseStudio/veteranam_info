@@ -17,12 +17,12 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
   });
 
   final Widget childWidget;
-  final List<FilterItem<String>> initialFilter;
-  final List<FilterItem<String>> initialCategories;
-  final List<FilterItem<String>> initialEligibilities;
-  final List<FilterItem<String>> initChooseLocationList;
-  final List<FilterItem<String>> initialChooseCategories;
-  final List<FilterItem<String>> initialChooseEligibilities;
+  final List<FilterItem> initialFilter;
+  final List<FilterItem> initialCategories;
+  final List<FilterItem> initialEligibilities;
+  final List<FilterItem> initChooseLocationList;
+  final List<FilterItem> initialChooseCategories;
+  final List<FilterItem> initialChooseEligibilities;
 
   @override
   Widget build(BuildContext context) {

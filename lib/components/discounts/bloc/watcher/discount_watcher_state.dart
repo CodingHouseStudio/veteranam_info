@@ -9,25 +9,147 @@ extension DiscountFailureExtension on SomeFailure {
 @freezed
 class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
-    required List<DiscountModel> discountModelItems,
-    required List<DiscountModel> filteredDiscountModelItems,
-    required List<DiscountModel> categoryDiscountModelItems,
-    required List<DiscountModel> locationDiscountModelItems,
-    required List<DiscountModel> sortingDiscountModelItems,
-    required List<DiscountModel> eligibilitiesDiscountModelItems,
+    required List<DiscountModel> unmodifiedDiscountModelItems,
     // required List<dynamic> chooseFilterItems,
-    required List<FilterItem<String>> filterLocation,
-    required List<FilterItem<String>> filterEligibilities,
-    required List<FilterItem<String>> choosenLocationList,
-    required List<FilterItem<String>> choosenCategoriesnList,
-    required List<FilterItem<String>> choosenEligibilitiesList,
-    required List<FilterItem<String>> filterCategory,
-    required List<FilterItem<DiscountEnum>> sorting,
+    required DiscountFilterItems discountFilterItems,
+    required List<DiscountEnum> sorting,
     required LoadingStatus loadingStatus,
-    required int itemsLoaded,
     required DiscountFailure? failure,
+    required List<DiscountModel> filteredDiscountModelItems,
     // required List<ReportModel> reportItems,
   }) = _Initial;
+}
+
+class DiscountFilterItems {
+  const DiscountFilterItems._({
+    required this.filterCategories,
+    required this.choosenCategoriesnList,
+    required this.filterLocation,
+    required this.choosenLocationList,
+    required this.filterEligibilities,
+    required this.choosenEligibilitiesList,
+  });
+
+  const DiscountFilterItems.empty({
+    this.filterCategories = const {},
+    this.choosenCategoriesnList = const {},
+    this.filterLocation = const {},
+    this.choosenLocationList = const {},
+    this.filterEligibilities = const {},
+    this.choosenEligibilitiesList = const {},
+  });
+
+  final Map<String, FilterItem> filterCategories;
+  final Map<String, FilterItem> choosenCategoriesnList;
+  final Map<String, FilterItem> filterLocation;
+  final Map<String, FilterItem> choosenLocationList;
+  final Map<String, FilterItem> filterEligibilities;
+  final Map<String, FilterItem> choosenEligibilitiesList;
+
+  void addCategory(String valueUK) {
+    _addFilterItem(
+      valueUK: valueUK,
+      filter: filterCategories,
+      choosenFilter: choosenCategoriesnList,
+    );
+  }
+
+  void addLocation(String valueUK) {
+    _addFilterItem(
+      valueUK: valueUK,
+      filter: filterLocation,
+      choosenFilter: choosenLocationList,
+    );
+  }
+
+  void addEligibility(String valueUK) {
+    _addFilterItem(
+      valueUK: valueUK,
+      filter: filterEligibilities,
+      choosenFilter: choosenEligibilitiesList,
+    );
+  }
+
+  bool get hasChoosenItem =>
+      choosenEligibilitiesList.isEmpty &&
+      choosenCategoriesnList.isEmpty &&
+      choosenLocationList.isEmpty;
+
+  Map<String, FilterItem> get getChoosenList => {
+        ...choosenEligibilitiesList,
+        ...choosenCategoriesnList,
+        ...choosenLocationList,
+      };
+
+  void _addFilterItem({
+    required String valueUK,
+    required Map<String, FilterItem> filter,
+    required Map<String, FilterItem> choosenFilter,
+  }) {
+    final value = filter[valueUK];
+    final filterItem = value?.copyWith(isSelected: !value.isSelected) ??
+        FilterItem(
+          TranslateModel(uk: valueUK),
+        );
+    filter[valueUK] = filterItem;
+    final chooseValue = choosenFilter[valueUK];
+    if (chooseValue == null) {
+      choosenFilter[valueUK] = filterItem;
+    } else {
+      choosenFilter.remove(valueUK);
+    }
+  }
+
+  // ignore: prefer_constructors_over_static_methods
+  static DiscountFilterItems init(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
+    final categoriesList = <TranslateModel>[];
+    final locationList = <TranslateModel>[];
+    final eligibilitiesList = <TranslateModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      categoriesList.addAll(discount.category);
+      if (discount.location != null) {
+        locationList.addAll(discount.location!);
+      }
+      if (discount.subLocation != null) {
+        locationList.add(KAppText.sublocation);
+      }
+      if (discount.eligibility != null) {
+        eligibilitiesList.addAll(discount.eligibility!);
+      }
+    }
+
+    return DiscountFilterItems._(
+      filterCategories: _getFilterFromTranslateModel(categoriesList),
+      choosenCategoriesnList: const {},
+      filterLocation: _getFilterFromTranslateModel(locationList),
+      choosenLocationList: const {},
+      filterEligibilities: _getFilterFromTranslateModel(eligibilitiesList),
+      choosenEligibilitiesList: const {},
+    );
+  }
+
+  static Map<String, FilterItem> _getFilterFromTranslateModel(
+    List<TranslateModel> list,
+  ) {
+    final groupList = groupBy(
+      list,
+      (value) => value,
+    );
+
+    final filters = <String, FilterItem>{};
+    for (final category in groupList.keys) {
+      filters.addAll({
+        category.uk: FilterItem(
+          category,
+          number: groupList[category]?.length ?? 1,
+        ),
+      });
+    }
+    return filters;
+  }
 }
 
 // extension LocationGetter on List<DiscountModel> {

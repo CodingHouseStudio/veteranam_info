@@ -23,12 +23,12 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   ) = _FilterLocation;
 
   const factory DiscountWatcherEvent.setMobFilter({
-    required List<FilterItem<String>> filterList,
-    required List<FilterItem<String>> categories,
-    required List<FilterItem<String>> choosenLocationList,
-    required List<FilterItem<String>> choosenCategoriesList,
-    required List<FilterItem<String>> choosenEligibilitiesList,
-    required List<FilterItem<String>> filterEligibilities,
+    required List<FilterItem> filterList,
+    required List<FilterItem> categories,
+    required List<FilterItem> choosenLocationList,
+    required List<FilterItem> choosenCategoriesList,
+    required List<FilterItem> choosenEligibilitiesList,
+    required List<FilterItem> filterEligibilities,
   }) = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(

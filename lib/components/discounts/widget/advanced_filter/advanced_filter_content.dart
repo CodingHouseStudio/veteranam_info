@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterContent extends StatelessWidget {
   const AdvancedFilterContent({
     required this.isDesk,
-    required this.filterLocationes,
     required this.onLocationChange,
-    required this.chooseLocationList,
-    required this.filterCategories,
-    required this.chooseCategoriesList,
     required this.onCategoriesChange,
-    required this.filterEligibilities,
-    required this.chooseEligibilitiesList,
     required this.onEligibilitiesChange,
+    required this.discountFilter,
     super.key,
   });
   final bool isDesk;
-  final List<FilterItem<String>> filterLocationes;
-  final List<FilterItem<String>> chooseLocationList;
-  final List<FilterItem<String>> filterCategories;
-  final List<FilterItem<String>> chooseCategoriesList;
-  final List<FilterItem<String>> filterEligibilities;
-  final List<FilterItem<String>> chooseEligibilitiesList;
+  final DiscountFilterItems discountFilter;
   final void Function(String) onEligibilitiesChange;
   final void Function(String) onCategoriesChange;
   final void Function(String) onLocationChange;
@@ -32,9 +23,7 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
-      if (chooseLocationList.isNotEmpty ||
-          chooseCategoriesList.isNotEmpty ||
-          chooseEligibilitiesList.isNotEmpty) ...[
+      if (discountFilter.hasChoosenItem) ...[
         if (isDesk)
           SliverToBoxAdapter(
             child: AdvancedFilterResetButton(
@@ -56,15 +45,11 @@ class AdvancedFilterContent extends StatelessWidget {
           padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
           sliver: _ChooseItems(
             isDesk: isDesk,
-            choosenItems: [
-              ...chooseEligibilitiesList,
-              ...chooseCategoriesList,
-              ...chooseLocationList,
-            ],
-            categoriesLength: chooseCategoriesList.length,
+            choosenItems: discountFilter.getChoosenList,
+            categoriesLength: discountFilter.choosenCategoriesnList.length,
             onChangeLocation: onLocationChange,
             onChangeCategories: onCategoriesChange,
-            eligibilitiesLength: chooseEligibilitiesList.length,
+            eligibilitiesLength: discountFilter.choosenEligibilitiesList.length,
             onChangeEligibilities: onEligibilitiesChange,
           ),
         ),
@@ -72,7 +57,7 @@ class AdvancedFilterContent extends StatelessWidget {
       AdvancedFilterListWidget(
         isDesk: isDesk,
         list: _AdvancedListWidget(
-          filter: filterEligibilities,
+          filter: discountFilter.filterEligibilities,
           onChange: onEligibilitiesChange,
           isDesk: isDesk,
           itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
@@ -83,7 +68,7 @@ class AdvancedFilterContent extends StatelessWidget {
       AdvancedFilterListWidget(
         isDesk: isDesk,
         list: _AdvancedListWidget(
-          filter: filterCategories,
+          filter: discountFilter.filterCategories,
           onChange: onCategoriesChange,
           isDesk: isDesk,
           itemKey: KWidgetkeys.screen.discounts.categoriesItems,
@@ -117,7 +102,7 @@ class AdvancedFilterContent extends StatelessWidget {
       AdvancedFilterListWidget(
         isDesk: isDesk,
         list: _AdvancedListWidget(
-          filter: filterLocationes,
+          filter: discountFilter.filterLocation,
           onChange: onLocationChange,
           isDesk: isDesk,
           itemKey: KWidgetkeys.screen.discounts.cityItems,
@@ -147,7 +132,7 @@ class _AdvancedListWidget extends StatelessWidget {
     required this.isDesk,
     required this.itemKey,
   });
-  final List<FilterItem<String>> filter;
+  final Map<String, FilterItem> filter;
   final void Function(String) onChange;
   final bool isDesk;
   final Key itemKey;
@@ -173,28 +158,35 @@ class _AdvancedListWidget extends StatelessWidget {
       findChildIndexCallback: (key) {
         if (key is ValueKey<String>) {
           final valueKey = key;
-          return filter.indexWhere(
-            (element) => element.value == valueKey.value,
-          );
+          if (filter.containsKey(valueKey.value)) {
+            for (var i = 0; i < filter.keys.length; i++) {
+              if (filter.keys.elementAt(i) == valueKey.value) {
+                return i;
+              }
+            }
+          }
         }
         return null;
       },
-      itemBuilder: (context, index) => Padding(
-        key: ValueKey(filter.elementAt(index).value),
-        padding: isDesk
-            ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-            : EdgeInsets.zero,
-        child: CheckPointAmountWidget(
-          key: itemKey,
-          onChanged: () => onChange(
-            filter.elementAt(index).value,
+      itemBuilder: (context, index) {
+        final value = filter[filter.keys.elementAt(index)]!;
+        return Padding(
+          key: ValueKey(filter.keys.elementAt(index)),
+          padding: isDesk
+              ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+              : EdgeInsets.zero,
+          child: CheckPointAmountWidget(
+            key: itemKey,
+            onChanged: () => onChange(
+              value.value.uk,
+            ),
+            isCheck: value.isSelected,
+            filterItem: value,
+            isDesk: isDesk,
+            amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
           ),
-          isCheck: filter.elementAt(index).isSelected,
-          filterItem: filter.elementAt(index),
-          isDesk: isDesk,
-          amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -210,7 +202,7 @@ class _ChooseItems extends StatelessWidget {
     required this.onChangeEligibilities,
   });
   final bool isDesk;
-  final List<FilterItem<String>> choosenItems;
+  final Map<String, FilterItem> choosenItems;
   final int categoriesLength;
   final int eligibilitiesLength;
   final void Function(String) onChangeLocation;
@@ -231,7 +223,7 @@ class _ChooseItems extends StatelessWidget {
           child: CancelChipWidget(
             widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
             isDesk: isDesk,
-            labelText: KMockText.category,
+            labelText: KMockText.category.getTrsnslation(context),
             onPressed: null,
           ),
         ),
@@ -239,7 +231,7 @@ class _ChooseItems extends StatelessWidget {
         addAutomaticKeepAlives: false,
         addRepaintBoundaries: false,
         itemBuilder: (context, index) {
-          final chooseItem = choosenItems.elementAt(index);
+          final chooseItem = choosenItems[choosenItems.keys.elementAt(index)]!;
           return Padding(
             padding: isDesk
                 ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
@@ -249,16 +241,14 @@ class _ChooseItems extends StatelessWidget {
               child: CancelChipWidget(
                 widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
                 isDesk: isDesk,
-                labelText: chooseItem.getString(context),
+                labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
                   if (eligibilitiesLength < index) {
-                    onChangeEligibilities(chooseItem.value);
+                    onChangeEligibilities(chooseItem.value.uk);
                   } else if (eligibilitiesLength + categoriesLength < index) {
-                    onChangeCategories(chooseItem.value);
+                    onChangeCategories(chooseItem.value.uk);
                   } else {
-                    onChangeLocation(
-                      chooseItem.value,
-                    );
+                    onChangeLocation(chooseItem.value.uk);
                   }
                 },
               ),

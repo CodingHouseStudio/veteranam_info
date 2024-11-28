@@ -109,19 +109,16 @@ extension InformationModelExtension on InformationModel {
   }
 }
 
-extension FilterItemExtension on FilterItem<String> {
+extension FilterItemExtension on FilterItem {
   int alphabeteCompare({
-    required FilterItem<String> b,
+    required FilterItem b,
     required bool? isEnglish,
     required bool addEnglish,
   }) {
     if ((isEnglish ?? false) && addEnglish) {
-      return valueEN
-              ?.toLowerCase()
-              .compareTo(b.valueEN.toString().toLowerCase()) ??
-          -1;
+      return value.en?.compareTo(b.value.en.toString().toLowerCase()) ?? -1;
     } else {
-      return value.compareUkrain(b.value);
+      return value.uk.compareUkrain(b.value.uk);
     }
   }
 }
@@ -185,12 +182,16 @@ extension DiscountStateExtention on DiscountState {
 }
 
 extension DateFieldModelDart on DateFieldModel {
-  String getString(Language language) =>
-      '${language.isEnglish ? 'Up to' : 'До'}'
-      ' ${value?.toLocalDateString(
-        localeValue: language.value.languageCode,
-        showDay: true,
-      )}';
+  TranslateModel get getString => TranslateModel(
+        uk: 'До ${value?.toLocalDateString(
+          localeValue: Language.ukrain.value.languageCode,
+          showDay: true,
+        )}',
+        en: 'Up to ${value?.toLocalDateString(
+          localeValue: Language.english.value.languageCode,
+          showDay: true,
+        )}',
+      );
 }
 
 extension UrlFailureExtension on SomeFailure {

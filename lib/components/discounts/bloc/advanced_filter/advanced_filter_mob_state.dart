@@ -3,12 +3,12 @@ part of 'advanced_filter_mob_cubit.dart';
 @freezed
 class AdvancedFilterMobState with _$AdvancedFilterMobState {
   const factory AdvancedFilterMobState({
-    required List<FilterItem<String>> filtersLocation,
-    required List<FilterItem<String>> choosenLocationList,
-    required List<FilterItem<String>> choosenCategoriesnList,
-    required List<FilterItem<String>> filterCategory,
-    required List<FilterItem<String>> choosenEligibilitiesList,
-    required List<FilterItem<String>> filterEligibilities,
+    required List<FilterItem> filtersLocation,
+    required List<FilterItem> choosenLocationList,
+    required List<FilterItem> choosenCategoriesnList,
+    required List<FilterItem> filterCategory,
+    required List<FilterItem> choosenEligibilitiesList,
+    required List<FilterItem> filterEligibilities,
     // required List<ReportModel> reportItems,
   }) = _Initial;
 }

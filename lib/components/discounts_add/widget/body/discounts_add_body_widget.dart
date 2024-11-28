@@ -68,15 +68,19 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           }
           if (state.formState == DiscountsAddEnum.initial &&
               state.discount != null) {
-            titleController.text = state.discount!.title;
+            titleController.text =
+                state.discount!.title.getTrsnslation(context);
             linkController.text = state.discount!.link ?? linkController.text;
             // categoryController = TextEditingController();
             // cityController = TextEditingController();
             periodController.text =
-                state.discount!.expiration ?? periodController.text;
+                state.discount!.expiration?.getTrsnslation(context) ??
+                    periodController.text;
             exclusionController.text =
-                state.discount!.exclusions ?? exclusionController.text;
-            descriptionController.text = state.discount!.description;
+                state.discount!.exclusions?.getTrsnslation(context) ??
+                    exclusionController.text;
+            descriptionController.text =
+                state.discount!.description.getTrsnslation(context);
           }
         },
         // Add because without it we have small lag when fast write some fields

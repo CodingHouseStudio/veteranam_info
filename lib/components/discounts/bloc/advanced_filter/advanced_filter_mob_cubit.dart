@@ -20,12 +20,12 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
           ),
         );
   void started({
-    required List<FilterItem<String>> initialLocationFilter,
-    required List<FilterItem<String>> initialCategories,
-    required List<FilterItem<String>> initialEligibilities,
-    required List<FilterItem<String>> initChooseLocationList,
-    required List<FilterItem<String>> initialChooseCategories,
-    required List<FilterItem<String>> initialChooseEligibilities,
+    required List<FilterItem> initialLocationFilter,
+    required List<FilterItem> initialCategories,
+    required List<FilterItem> initialEligibilities,
+    required List<FilterItem> initChooseLocationList,
+    required List<FilterItem> initialChooseCategories,
+    required List<FilterItem> initialChooseEligibilities,
   }) =>
       emit(
         AdvancedFilterMobState(
@@ -41,7 +41,7 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
   void changeCategoriesList(String value) {
     final filterList = state.filterCategory
         .map(
-          (element) => element.value == value
+          (element) => element.value.uk == value
               ? element.copyWith(isSelected: !element.isSelected)
               : element,
         )
@@ -89,7 +89,7 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
   void changeEligibilitiesList(String value) {
     final filterList = state.filterEligibilities
         .map(
-          (element) => element.value == value
+          (element) => element.value.uk == value
               ? element.copyWith(isSelected: !element.isSelected)
               : element,
         )

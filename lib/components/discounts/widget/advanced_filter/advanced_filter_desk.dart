@@ -11,13 +11,7 @@ class AdvancedFilterDesk extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       buildWhen: (previous, current) =>
-          previous.loadingStatus != current.loadingStatus ||
-          previous.filterLocation != current.filterLocation ||
-          previous.choosenLocationList != current.choosenLocationList ||
-          previous.choosenCategoriesnList != current.choosenCategoriesnList ||
-          current.filterCategory != previous.filterCategory ||
-          previous.choosenCategoriesnList != current.choosenEligibilitiesList ||
-          current.filterCategory != previous.filterEligibilities,
+          previous.discountFilterItems != current.discountFilterItems,
       builder: (context, state) {
         return AdvancedFilterContent(
           key: KWidgetkeys.screen.discounts.advancedFilterDesk,
@@ -25,15 +19,11 @@ class AdvancedFilterDesk extends StatelessWidget {
           onLocationChange: (value) => context
               .read<DiscountWatcherBloc>()
               .add(DiscountWatcherEvent.filterLocation(value)),
-          filterLocationes: state.filterLocation,
-          chooseLocationList: state.choosenLocationList,
-          filterCategories: state.filterCategory,
-          chooseCategoriesList: state.choosenCategoriesnList,
-          onCategoriesChange: (value) => context
-              .read<DiscountWatcherBloc>()
-              .add(DiscountWatcherEvent.filterCategory(value)),
-          filterEligibilities: state.filterEligibilities,
-          chooseEligibilitiesList: state.choosenEligibilitiesList,
+          discountFilter: state.discountFilterItems,
+          onCategoriesChange: (value) =>
+              context.read<DiscountWatcherBloc>().add(
+                    DiscountWatcherEvent.filterCategory(value),
+                  ),
           onEligibilitiesChange: (value) => context
               .read<DiscountWatcherBloc>()
               .add(DiscountWatcherEvent.filterEligibilities(value)),
