@@ -76,4 +76,6 @@ abstract class KDimensions {
   static const logLevelCriticalError = 1000;
 
   static const listCacheExtent = 1000.0;
+
+  static const discountLocationNumberSortedItems = 5;
 }

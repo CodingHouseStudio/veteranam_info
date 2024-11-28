@@ -101,34 +101,58 @@ class DiscountFilterItems {
   }
 
   // ignore: prefer_constructors_over_static_methods
-  static DiscountFilterItems init(
-    List<DiscountModel> unmodifiedDiscountModelItems,
-  ) {
-    final categoriesList = <TranslateModel>[];
-    final locationList = <TranslateModel>[];
-    final eligibilitiesList = <TranslateModel>[];
+  static DiscountFilterItems init({
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required bool isEnglish,
+  }) {
+    try {
+      final categoriesList = <TranslateModel>[];
+      final locationList = <TranslateModel>[];
+      final eligibilitiesList = <TranslateModel>[];
 
-    for (final discount in unmodifiedDiscountModelItems) {
-      categoriesList.addAll(discount.category);
-      if (discount.location != null) {
-        locationList.addAll(discount.location!);
+      for (final discount in unmodifiedDiscountModelItems) {
+        categoriesList.addAll(discount.category);
+        if (discount.location != null) {
+          locationList.addAll(discount.location!);
+        }
+        if (discount.subLocation != null) {
+          locationList.add(KAppText.sublocation);
+        }
+        if (discount.eligibility != null) {
+          eligibilitiesList.addAll(discount.eligibility!);
+        }
       }
-      if (discount.subLocation != null) {
-        locationList.add(KAppText.sublocation);
-      }
-      if (discount.eligibility != null) {
-        eligibilitiesList.addAll(discount.eligibility!);
-      }
+      final locationEntries =
+          _getFilterFromTranslateModel(locationList).entries;
+      final filterLocationList = Map.fromEntries(
+        [
+          ...locationEntries
+              .take(KDimensions.discountLocationNumberSortedItems),
+          ...locationEntries
+              .skip(KDimensions.discountLocationNumberSortedItems)
+              .sorted(
+            (a, b) {
+              if (isEnglish && a.value.value.en != null) {
+                return a.value.value.en!
+                    .compareTo(b.value.value.en.toString().toLowerCase());
+              } else {
+                return a.value.value.uk.compareUkrain(b.value.value.uk);
+              }
+            },
+          ),
+        ],
+      );
+      return DiscountFilterItems._(
+        filterCategories: _getFilterFromTranslateModel(categoriesList),
+        choosenCategoriesnList: const {},
+        filterLocation: filterLocationList,
+        choosenLocationList: const {},
+        filterEligibilities: _getFilterFromTranslateModel(eligibilitiesList),
+        choosenEligibilitiesList: const {},
+      );
+    } catch (e) {
+      return const DiscountFilterItems.empty();
     }
-
-    return DiscountFilterItems._(
-      filterCategories: _getFilterFromTranslateModel(categoriesList),
-      choosenCategoriesnList: const {},
-      filterLocation: _getFilterFromTranslateModel(locationList),
-      choosenLocationList: const {},
-      filterEligibilities: _getFilterFromTranslateModel(eligibilitiesList),
-      choosenEligibilitiesList: const {},
-    );
   }
 
   static Map<String, FilterItem> _getFilterFromTranslateModel(
@@ -136,15 +160,20 @@ class DiscountFilterItems {
   ) {
     final groupList = groupBy(
       list,
-      (value) => value,
+      (value) => value.uk,
     );
 
     final filters = <String, FilterItem>{};
-    for (final category in groupList.keys) {
+    final keysSorted = groupList.keys.sorted(
+      (a, b) => groupList[b]!.length.compareTo(
+            groupList[a]!.length,
+          ),
+    );
+    for (final key in keysSorted) {
       filters.addAll({
-        category.uk: FilterItem(
-          category,
-          number: groupList[category]?.length ?? 1,
+        key: FilterItem(
+          groupList[key]!.first,
+          number: groupList[key]?.length ?? 1,
         ),
       });
     }
