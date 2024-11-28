@@ -276,3 +276,15 @@ extension SubLocationExtension on SubLocation? {
     }
   }
 }
+
+extension DiscountModelExtension on DiscountModel {
+  int? getLike({required bool isLiked}) {
+    if (isLiked) {
+      return likes ?? 1;
+    } else if (likes != null && likes! > 1) {
+      return likes! - 1;
+    } else {
+      return null;
+    }
+  }
+}

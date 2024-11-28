@@ -435,4 +435,19 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const borderWhiteButtonStyle = ButtonStyle(
+    // padding: WidgetStatePropertyAll(
+    //   EdgeInsets.symmetric(
+    //     vertical: KPadding.kPaddingSize4,
+    //     horizontal: KPadding.kPaddingSize16,
+    //   ),
+    // ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeWhite, width: 3),
+      ),
+    ),
+  );
 }

@@ -273,4 +273,18 @@ abstract class KWidgetTheme {
     ),
     visualDensity: VisualDensity.comfortable,
   );
+  static const boxDecorationWidgetWithImage = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusOnlyRight,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+  static const boxDecorationDiscountBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsPrimary,
+        width: 3,
+      ),
+    ),
+  );
 }

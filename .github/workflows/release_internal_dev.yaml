@@ -5,6 +5,12 @@ name: DEVELOPMENT build
 on:
   workflow_dispatch:
     branches: [main]
+    inputs:
+      build_number:
+        description: 'The build number'
+        required: false
+        type: string
+
 concurrency:
   group: dev-$
   cancel-in-progress: true

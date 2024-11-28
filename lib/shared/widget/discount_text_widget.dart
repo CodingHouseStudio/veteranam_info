@@ -5,7 +5,7 @@ class DiscountTextWidget extends StatelessWidget {
   const DiscountTextWidget({
     required this.isDesk,
     required this.description,
-    required this.text,
+    this.text,
     this.maxLines,
     this.icon,
     this.button,
@@ -13,7 +13,7 @@ class DiscountTextWidget extends StatelessWidget {
   });
 
   final String description;
-  final List<String> text;
+  final List<String>? text;
   final int? maxLines;
   final Widget? icon;
   final Widget? button;
@@ -32,16 +32,16 @@ class DiscountTextWidget extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         KSizedBox.kHeightSizedBox16,
-        Text(
-          //TODO: додати в
-          'Кому надається:',
-          style: AppTextStyle.materialThemeLabelMedium.copyWith(
-            color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
+        if (text != null) ...[
+          Text(
+            context.l10n.eligibility,
+            style: AppTextStyle.materialThemeLabelMedium.copyWith(
+              color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
+            ),
           ),
-        ),
-        //TODO: перейменувати
-        Eligibility(text: text),
-        KSizedBox.kHeightSizedBox16,
+          Eligibility(text: text!),
+          KSizedBox.kHeightSizedBox16,
+        ],
         if (icon != null && button != null)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

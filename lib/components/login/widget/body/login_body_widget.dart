@@ -22,13 +22,17 @@ class LoginBodyWidget extends StatelessWidget {
             notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
           isForm: true,
+          pageName: context.l10n.login,
+          showMobNawbarBackButton: true,
+          showMobBottomNavigation: false,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (!isDesk) KSizedBox.kHeightSizedBox24,
-            ShortTitleIconWidget(
-              title: context.l10n.login,
-              titleKey: KWidgetkeys.screen.login.title,
-              isDesk: isDesk,
-            ),
+            if (Config.isWeb)
+              ShortTitleIconWidget(
+                title: context.l10n.login,
+                titleKey: KWidgetkeys.screen.login.title,
+                isDesk: isDesk,
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else

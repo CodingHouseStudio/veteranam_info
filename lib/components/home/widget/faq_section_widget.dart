@@ -101,57 +101,34 @@ class _FaqSectionMobWidgetImplementation extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.loadingStatus != current.loadingStatus,
       builder: (context, state) {
-        return SliverList.builder(
-          itemBuilder: (context, index) => _FaqSectionItemWidget(
-            state: state,
-            index: index,
-            isTablet: isTablet,
-          ),
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          itemCount: 3 +
-              (state.loadingStatus == LoadingStatusHome.loaded
+        return SliverMainAxisGroup(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: _GetFAQSection(
+                isDesk: false,
+              ),
+            ),
+            SliverList.builder(
+              itemBuilder: (context, index) => Padding(
+                key: ValueKey(KMockText.questionModel.id),
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize24,
+                ),
+                child: QuestionWidgetItem(
+                  state: state,
+                  index: index,
+                  isDesk: false,
+                ),
+              ),
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
+              itemCount: (state.loadingStatus == LoadingStatusHome.loaded
                   ? state.questionModelItems.length
                   : KDimensions.shimmerQuestionItems),
+            ),
+          ],
         );
       },
-    );
-  }
-}
-
-class _FaqSectionItemWidget extends StatelessWidget {
-  const _FaqSectionItemWidget({
-    required this.state,
-    required this.index,
-    required this.isTablet,
-  });
-  final HomeWatcherState state;
-  final int index;
-  final bool isTablet;
-
-  @override
-  Widget build(BuildContext context) {
-    if (index == 0) {
-      return const _GetFAQSection(
-        isDesk: false,
-      );
-    }
-    if (index == 1) {
-      if (isTablet) {
-        return KSizedBox.kHeightSizedBox40;
-      } else {
-        return KSizedBox.kHeightSizedBox24;
-      }
-    }
-    if (index == 2) {
-      return const QuestionWidgetList(
-        isDesk: false,
-      );
-    }
-    return QuestionWidgetItem(
-      state: state,
-      index: index - 3,
-      isDesk: false,
     );
   }
 }
@@ -166,6 +143,7 @@ class _GetFAQSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           context.l10n.answersYourQuestions,

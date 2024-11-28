@@ -130,6 +130,8 @@ abstract class KIcon {
   static const _KIcon info = _KIcon(
     Symbols.info,
   );
+  static const _KIcon favorite = _KIcon(Symbols.favorite);
+  static const _KIcon moreVert = _KIcon(Symbols.more_vert);
   static const _KIcon modeOffOn = _KIcon(
     Symbols.mode_off_on,
   );

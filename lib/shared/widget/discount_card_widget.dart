@@ -49,34 +49,62 @@ class DiscountCardWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16
             else
               KSizedBox.kHeightSizedBox8,
-            // if (discountItem.images != null) ...[
-            //   Row(
-            //     children: [
-            //       print('dfkkdf: ${discountItem.images}'),
-            //       Image.network(
-            //         discountItem.images![0].downloadURL,
-            //         fit: BoxFit.cover,
-            //       ),
-            //       _DiscountCardDesciprtionWidget(
-            //         isDesk: isDesk,
-            //         descriptionMethod: descriptionMethod,
-            //         discountItem: discountItem,
-            //         closeWidget: closeWidget,
-            //         isBusiness: isBusiness,
-            //         share: share,
-            //         useSiteUrl: useSiteUrl,
-            //       ),
-            //     ],
-            //   ),
-            // ] else
-            _DiscountCardDesciprtionWidget(
-              isDesk: isDesk,
-              descriptionMethod: descriptionMethod,
-              discountItem: discountItem,
-              closeWidget: closeWidget,
-              isBusiness: isBusiness,
-              share: share,
-              useSiteUrl: useSiteUrl,
+            IntrinsicHeight(
+              child: Container(
+                decoration: discountItem.discount.getDiscountString(context) ==
+                        context.l10n.free
+                    ? KWidgetTheme.boxDecorationDiscountBorder
+                    : null,
+                child: Row(
+                  children: [
+                    if (discountItem.images != null &&
+                        discountItem.images!.isNotEmpty)
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(KSize.kRadius32),
+                              topLeft: Radius.circular(KSize.kRadius32),
+                            ),
+                            child: NetworkImageWidget(
+                              imageUrl: discountItem.images![0].downloadURL,
+                            ),
+                          ),
+                          Positioned(
+                            top: KPadding.kPaddingSize16,
+                            right: KPadding.kPaddingSize16,
+                            child: DecoratedBox(
+                              decoration: KWidgetTheme.boxDecorationDiscount,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: KPadding.kPaddingSize8,
+                                  vertical: KPadding.kPaddingSize4,
+                                ),
+                                child: TextPointWidget(
+                                  discountItem.discount
+                                      .getDiscountString(context),
+                                  key: KWidgetkeys.widget.discountCard.discount,
+                                  mainAxisSize: MainAxisSize.min,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    Flexible(
+                      child: _DiscountCardDesciprtionWidget(
+                        isDesk: isDesk,
+                        descriptionMethod: descriptionMethod,
+                        discountItem: discountItem,
+                        closeWidget: closeWidget,
+                        isBusiness: isBusiness,
+                        share: share,
+                        useSiteUrl: useSiteUrl,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -105,100 +133,20 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('dfkkdf: ${discountItem}');
     return Container(
-      decoration: KWidgetTheme.boxDecorationWidget,
+      decoration:
+          (discountItem.images != null && discountItem.images!.isNotEmpty)
+              ? KWidgetTheme.boxDecorationWidgetWithImage
+              : KWidgetTheme.boxDecorationWidget,
       padding: EdgeInsets.symmetric(
         horizontal: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
       ),
-      child:
-          // child: discountItem.images != null
-          //     ? Row(
-          //         children: [
-          //           // NetworkImageWidget(
-          //           //   imageUrl: discountItem.images.downloadURL,
-          //           // ),
-          //           Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               KSizedBox.kHeightSizedBox16,
-          //               _DescrptionTitleWidget(
-          //                 isDesk: isDesk,
-          //                 category: discountItem.category,
-          //                 discount: discountItem.discount,
-          //                 title: discountItem.title,
-          //                 categoryEN: discountItem.categoryEN,
-          //                 titleEN: discountItem.titleEN,
-          //               ),
-          //               if (!isDesk) ...[
-          //                 KSizedBox.kHeightSizedBox8,
-          //                 Text(
-          //                   discountItem.title.getTrnslation(
-          //                       en: discountItem.titleEN, context: context),
-          //                   key: KWidgetkeys.widget.discountCard.discountTitle,
-          //                   style: AppTextStyle.materialThemeHeadlineSmall,
-          //                   overflow: TextOverflow.clip,
-          //                 ),
-          //               ],
-          //               KSizedBox.kHeightSizedBox4,
-          //               _CitiesExpirationWidget(
-          //                 isDesk: isDesk,
-          //                 location: discountItem.location,
-          //                 locationEN: discountItem.locationEN,
-          //                 expiration: discountItem.expiration,
-          //                 expirationEN: discountItem.expirationEN,
-          //                 subLocation: discountItem.subLocation,
-          //               ),
-          //               KSizedBox.kHeightSizedBox16,
-          //               DiscountTextWidget(
-          //                 key: KWidgetkeys.widget.discountCard.description,
-          //                 description: descriptionMethod == null
-          //                     ? discountItem.getDescription(context)
-          //                     : descriptionMethod!(
-          //                         discountItem.getDescription(context),
-          //                       ),
-          //                 isDesk: isDesk,
-          //                 text: discountItem.eligibility!,
-          //                 button: TextButton(
-          //                   key: KWidgetkeys.screen.company.boxMyDiscounts,
-          //                   onPressed: () {},
-          //                   style: KButtonStyles.blackDetailsButtonStyle,
-          //                   child: Text(
-          //                     context.l10n.moreDetails,
-          //                     style: AppTextStyle.materialThemeTitleMediumNeutral,
-          //                   ),
-          //                 ),
-          //                 icon: SharedIconListWidget(
-          //                   isDesk: isDesk,
-          //                   // if this is iOS and medical services, do not offer
-          //                   // pointing to the website
-          //                   link: discountItem.getLink,
-          //                   useSiteUrl: useSiteUrl,
-          //                   cardEnum: CardEnum.discount,
-          //                   // afterEvent: reportEvent,
-          //                   cardId: discountItem.id,
-          //                   share: share,
-          //                   complaintKey:
-          //                       KWidgetkeys.widget.discountCard.iconComplaint,
-          //                   shareKey: KWidgetkeys.widget.discountCard.iconShare,
-          //                   webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
-          //                   showComplaint: !isBusiness,
-          //                   showShare: !isBusiness ||
-          //                       discountItem.status == DiscountState.published,
-          //                 ),
-          //               ),
-          //               KSizedBox.kHeightSizedBox16,
-          //               if (closeWidget != null) ...[
-          //                 closeWidget!,
-          //                 KSizedBox.kHeightSizedBox16,
-          //               ],
-          //             ],
-          //           ),
-          //         ],
-          //       )
-          // :
-          Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            (discountItem.images != null && discountItem.images!.isNotEmpty)
+                ? CrossAxisAlignment.stretch
+                : CrossAxisAlignment.start,
         children: [
           KSizedBox.kHeightSizedBox16,
           _DescrptionTitleWidget(
@@ -208,6 +156,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             title: discountItem.title,
             categoryEN: discountItem.categoryEN,
             titleEN: discountItem.titleEN,
+            hasImage: discountItem.images != null,
           ),
           if (!isDesk) ...[
             KSizedBox.kHeightSizedBox8,
@@ -220,14 +169,48 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             ),
           ],
           KSizedBox.kHeightSizedBox4,
-          _CitiesExpirationWidget(
-            isDesk: isDesk,
-            location: discountItem.location,
-            locationEN: discountItem.locationEN,
-            expiration: discountItem.expiration,
-            expirationEN: discountItem.expirationEN,
-            subLocation: discountItem.subLocation,
-          ),
+          if (isDesk)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _ExpirationWidget(
+                  expiration: discountItem.expiration.getTrnslation(
+                    en: discountItem.expirationEN,
+                    context: context,
+                  ),
+                ),
+                KSizedBox.kWidthSizedBox24,
+                Expanded(
+                  child: CityListWidget(
+                    key: KWidgetkeys.widget.discountCard.city,
+                    location: discountItem.location,
+                    locationEN: discountItem.locationEN,
+                    subLocation: discountItem.subLocation,
+                    isDesk: true,
+                  ),
+                ),
+              ],
+            )
+          else
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CityListWidget(
+                  key: KWidgetkeys.widget.discountCard.city,
+                  isDesk: false,
+                  location: discountItem.location,
+                  locationEN: discountItem.locationEN,
+                  subLocation: discountItem.subLocation,
+                ),
+                KSizedBox.kHeightSizedBox4,
+                _ExpirationWidget(
+                  expiration: discountItem.expiration.getTrnslation(
+                    en: discountItem.expirationEN,
+                    context: context,
+                  ),
+                ),
+              ],
+            ),
           KSizedBox.kHeightSizedBox16,
           DiscountTextWidget(
             key: KWidgetkeys.widget.discountCard.description,
@@ -237,7 +220,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
                     discountItem.getDescription(context),
                   ),
             isDesk: isDesk,
-            text: discountItem.eligibility!,
+            text: discountItem.eligibility,
             button: TextButton(
               key: KWidgetkeys.screen.company.boxMyDiscounts,
               onPressed: () {},
@@ -254,11 +237,13 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               link: discountItem.getLink,
               useSiteUrl: useSiteUrl,
               cardEnum: CardEnum.discount,
+              discountItem: discountItem,
               // afterEvent: reportEvent,
               cardId: discountItem.id,
               share: share,
               complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
               shareKey: KWidgetkeys.widget.discountCard.iconShare,
+              likeKey: KWidgetkeys.widget.discountCard.iconLike,
               webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
               showComplaint: !isBusiness,
               showShare:
@@ -284,6 +269,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
     required this.title,
     required this.categoryEN,
     required this.titleEN,
+    this.hasImage = false,
   });
   final bool isDesk;
   final List<String> category;
@@ -291,6 +277,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
   final List<int> discount;
   final String title;
   final String? titleEN;
+  final bool hasImage;
 
   @override
   Widget build(BuildContext context) {
@@ -305,21 +292,23 @@ class _DescrptionTitleWidget extends StatelessWidget {
               style: AppTextStyle.materialThemeHeadlineSmall,
             ),
           ),
-          KSizedBox.kWidthSizedBox30,
-          DecoratedBox(
-            decoration: KWidgetTheme.boxDecorationDiscount,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize8,
-                vertical: KPadding.kPaddingSize4,
-              ),
-              child: TextPointWidget(
-                discount.getDiscountString(context),
-                key: KWidgetkeys.widget.discountCard.discount,
-                mainAxisSize: MainAxisSize.min,
+          if (!hasImage) ...[
+            KSizedBox.kWidthSizedBox30,
+            DecoratedBox(
+              decoration: KWidgetTheme.boxDecorationDiscount,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize8,
+                  vertical: KPadding.kPaddingSize4,
+                ),
+                child: TextPointWidget(
+                  discount.getDiscountString(context),
+                  key: KWidgetkeys.widget.discountCard.discount,
+                  mainAxisSize: MainAxisSize.min,
+                ),
               ),
             ),
-          ),
+          ],
         ],
       );
     } else {
@@ -438,176 +427,91 @@ class _CompanyInfoWidget extends StatelessWidget {
           imageName: userPhoto?.name,
         ),
         KSizedBox.kWidthSizedBox16,
-        Expanded(child: companyInfo),
-      ],
-    );
-  }
-
-  Widget get companyInfo => _CompanyInformationWidget(
-        company: company,
-        companyEN: companyEN,
-        userName: userName,
-        dateVerified: dateVerified,
-      );
-}
-
-class _CompanyInformationWidget extends StatelessWidget {
-  const _CompanyInformationWidget({
-    required this.company,
-    required this.companyEN,
-    required this.userName,
-    required this.dateVerified,
-  });
-  final String? company;
-  final String? companyEN;
-  final String? userName;
-  final DateTime dateVerified;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          key: KWidgetkeys.widget.discountCard.service,
-          company.getTrnslation(
-                context: context,
-                en: companyEN,
-              ) ??
-              context.l10n.companyIsHidden,
-          style: AppTextStyle.materialThemeTitleMedium,
-          overflow: TextOverflow.clip,
-          textAlign: TextAlign.left,
-        ),
-        Wrap(
-          children: [
-            Text(
-              key: KWidgetkeys.widget.discountCard.userName,
-              userName ?? KAppText.veteranamName,
-              style: AppTextStyle.materialThemeLabelSmall,
-            ),
-            KSizedBox.kWidthSizedBox8,
-            Text(
-              key: KWidgetkeys.widget.discountCard.date,
-              dateVerified.toLocalDateString(context: context),
-              style: AppTextStyle.materialThemeLabelSmall,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _CategoryWidget extends StatelessWidget {
-  const _CategoryWidget({
-    required this.categories,
-    required this.categoriesEn,
-  });
-  final List<String> categories;
-  final List<String>? categoriesEn;
-
-  @override
-  Widget build(BuildContext context) {
-    final categoriesValue = categories.getTrnslation(
-      en: categoriesEn,
-      context: context,
-    );
-    return Wrap(
-      runSpacing: KPadding.kPaddingSize4,
-      children: List.generate(categories.length, (int index) {
-        return Container(
-          constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
-          padding: const EdgeInsets.symmetric(
-            //vertical: KPadding.kPaddingSize4,
-            horizontal: KPadding.kPaddingSize8,
-          ),
-          decoration: KWidgetTheme.boxDecorationDiscountCategory,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              KIcon.check,
-              KSizedBox.kWidthSizedBox8,
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: KPadding.kPaddingSize5,
-                ),
-                child: Text(
-                  key: KWidgetkeys.widget.discountCard.category,
-                  categoriesValue.elementAt(index),
-                  style: AppTextStyle.materialThemeLabelLarge,
-                ),
+              Text(
+                key: KWidgetkeys.widget.discountCard.service,
+                company.getTrnslation(
+                      context: context,
+                      en: companyEN,
+                    ) ??
+                    context.l10n.companyIsHidden,
+                style: AppTextStyle.materialThemeTitleMedium,
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.left,
+              ),
+              Wrap(
+                children: [
+                  Text(
+                    key: KWidgetkeys.widget.discountCard.userName,
+                    userName ?? KAppText.veteranamName,
+                    style: AppTextStyle.materialThemeLabelSmall,
+                  ),
+                  KSizedBox.kWidthSizedBox8,
+                  Text(
+                    key: KWidgetkeys.widget.discountCard.date,
+                    dateVerified.toLocalDateString(context: context),
+                    style: AppTextStyle.materialThemeLabelSmall,
+                  ),
+                ],
               ),
             ],
           ),
-        );
-      }),
+        ),
+      ],
     );
   }
 }
 
-class _CitiesExpirationWidget extends StatelessWidget {
-  const _CitiesExpirationWidget({
-    required this.isDesk,
-    required this.location,
-    required this.locationEN,
-    required this.expiration,
-    required this.expirationEN,
-    required this.subLocation,
-  });
-  final bool isDesk;
-  final List<String>? location;
-  final List<String>? locationEN;
-  final String? expiration;
-  final String? expirationEN;
-  final SubLocation? subLocation;
-  @override
-  Widget build(BuildContext context) {
-    if (isDesk) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _ExpirationWidget(
-            expiration: expiration.getTrnslation(
-              en: expirationEN,
-              context: context,
-            ),
-          ),
-          KSizedBox.kWidthSizedBox24,
-          Expanded(
-            child: CityListWidget(
-              key: KWidgetkeys.widget.discountCard.city,
-              location: location,
-              locationEN: locationEN,
-              subLocation: subLocation,
-              isDesk: true,
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CityListWidget(
-            key: KWidgetkeys.widget.discountCard.city,
-            isDesk: false,
-            location: location,
-            locationEN: locationEN,
-            subLocation: subLocation,
-          ),
-          KSizedBox.kHeightSizedBox4,
-          _ExpirationWidget(
-            expiration: expiration.getTrnslation(
-              en: expirationEN,
-              context: context,
-            ),
-          ),
-        ],
-      );
-    }
-  }
-}
+// class _CategoryWidget extends StatelessWidget {
+//   const _CategoryWidget({
+//     required this.categories,
+//     required this.categoriesEn,
+//   });
+//   final List<String> categories;
+//   final List<String>? categoriesEn;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final categoriesValue = categories.getTrnslation(
+//       en: categoriesEn,
+//       context: context,
+//     );
+//     return Wrap(
+//       runSpacing: KPadding.kPaddingSize4,
+//       children: List.generate(categories.length, (int index) {
+//         return Container(
+//           constraints: const BoxConstraints(minHeight:
+// KMinMaxSize.minHeight30),
+//           padding: const EdgeInsets.symmetric(
+//             //vertical: KPadding.kPaddingSize4,
+//             horizontal: KPadding.kPaddingSize8,
+//           ),
+//           decoration: KWidgetTheme.boxDecorationDiscountCategory,
+//           child: Row(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               KIcon.check,
+//               KSizedBox.kWidthSizedBox8,
+//               Padding(
+//                 padding: const EdgeInsets.only(
+//                   right: KPadding.kPaddingSize5,
+//                 ),
+//                 child: Text(
+//                   key: KWidgetkeys.widget.discountCard.category,
+//                   categoriesValue.elementAt(index),
+//                   style: AppTextStyle.materialThemeLabelLarge,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       }),
+//     );
+//   }
+// }
 
 class _ExpirationWidget extends StatelessWidget {
   const _ExpirationWidget({required this.expiration});

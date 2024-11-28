@@ -9,15 +9,8 @@ int _itemCount({
   required DiscountWatcherState state,
   required DiscountConfigState config,
 }) =>
-    state.filteredDiscountModelItems.isEmpty
-        ? config.loadingItems
-        : state.filteredDiscountModelItems.length +
-            ((state.loadingStatus == LoadingStatus.loaded &&
-                        PlatformEnumFlutter.isWebDesktop) ||
-                    state.loadingStatus == LoadingStatus.listLoadedFull
-                ? 1
-                : KDimensions.shimmerDiscountsItems) +
-            (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
+    state.filteredDiscountModelItems.length +
+    (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
 
 extension LinkScrollExtension on DiscountConfigState {
   int get linkInt => (linkScrollCount + 1) * loadingItems;
@@ -41,29 +34,11 @@ int? _findChildIndexCallback({
     if (valueKey.value == 'link_field') {
       return config.linkInt - 1;
     }
-    if (valueKey.value == 'end_list_text') {
-      return state.filteredDiscountModelItems.length + 1;
-    }
-    if (valueKey.value == 'load_button') {
-      return state.filteredDiscountModelItems.length +
-          (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
-    }
-    if (valueKey.value.contains('mock_discount_')) {
-      final mockValue = int.tryParse(
-        valueKey.value.replaceFirst('mock_discount_', ''),
-      );
-      if (mockValue != null) {
-        return state.filteredDiscountModelItems.length +
-            mockValue +
-            (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
-      }
-    } else {
-      final index = state.filteredDiscountModelItems.indexWhere(
-        (element) => element.id == valueKey.value,
-      );
-      if (index >= 0) {
-        return index + (config.linkInt <= index ? 1 : 0);
-      }
+    final index = state.filteredDiscountModelItems.indexWhere(
+      (element) => element.id == valueKey.value,
+    );
+    if (index >= 0) {
+      return index + (config.linkInt <= index ? 1 : 0);
     }
   }
   return null;
@@ -77,25 +52,10 @@ ValueKey<String> _key({
   if (index + 1 == config.linkInt) {
     return const ValueKey('link_field');
   }
-  if (index <
-      state.filteredDiscountModelItems.length +
-          (config.linkInt <= index ? 1 : 0)) {
-    return ValueKey(
-      state.filteredDiscountModelItems
-          .elementAt(index - (config.linkInt <= index ? 1 : 0))
-          .id,
-    );
-  }
-  if (state.loadingStatus == LoadingStatus.listLoadedFull) {
-    return const ValueKey('end_list_text');
-  }
-  if (state.loadingStatus == LoadingStatus.loaded &&
-      PlatformEnumFlutter.isWebDesktop) {
-    return const ValueKey('load_button');
-  }
   return ValueKey(
-    'mock_discount_'
-    '${index + 2 - state.filteredDiscountModelItems.length}',
+    state.filteredDiscountModelItems
+        .elementAt(index - (config.linkInt <= index ? 1 : 0))
+        .id,
   );
 }
 
@@ -119,7 +79,7 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
   // Creates the render object for this widget
   @override
   RenderRowSliver createRenderObject(BuildContext context) {
-    return RenderRowSliver(leftWidthPercent: 0.3);
+    return RenderRowSliver(leftWidthPercent: 1 / 3);
   }
 }
 
@@ -131,17 +91,20 @@ class _AdvancedFilterDesk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: SliverHeaderWidget(
-        // isDesk: isDesk,
-        childWidget: ({
-          required overlapsContent,
-          required shrinkOffset,
-        }) =>
-            const AdvancedFilterDesk(),
-        maxMinHeight: maxHeight,
-        // isTablet: isTablet,
+    return SliverPadding(
+      padding: const EdgeInsets.only(
+        top: KPadding.kPaddingSize48,
+      ),
+      sliver: SliverPersistentHeader(
+        pinned: true,
+        delegate: SliverHeaderWidget(
+          childWidget: ({
+            required overlapsContent,
+            required shrinkOffset,
+          }) =>
+              const AdvancedFilterDesk(),
+          maxMinHeight: maxHeight,
+        ),
       ),
     );
   }
@@ -166,6 +129,7 @@ class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
 
 class _DiscountWidgetList extends StatelessWidget {
   const _DiscountWidgetList({required this.isDesk});
+
   final bool isDesk;
 
   @override
@@ -178,33 +142,106 @@ class _DiscountWidgetList extends StatelessWidget {
               previous.filteredDiscountModelItems !=
                   current.filteredDiscountModelItems,
           builder: (context, state) {
-            return SliverList.builder(
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              findChildIndexCallback: (key) => _findChildIndexCallback(
-                key: key,
-                state: state,
-                config: config,
-              ),
-              itemCount: _itemCount(
-                state: state,
-                config: config,
-              ),
-              itemBuilder: (context, index) => Padding(
-                key: _key(state: state, index: index, config: config),
-                padding: index == 0
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.only(
+            return SliverMainAxisGroup(
+              slivers: [
+                //TODO: SliverPrototypeExtentList
+                SliverList.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  findChildIndexCallback: (key) => _findChildIndexCallback(
+                    key: key,
+                    state: state,
+                    config: config,
+                  ),
+                  itemCount: _itemCount(
+                    state: state,
+                    config: config,
+                  ),
+                  itemBuilder: (context, index) => Padding(
+                    key: _key(state: state, index: index, config: config),
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize48,
+                    ),
+                    child: _DiscountsWidgetItem(
+                      isDesk: isDesk,
+                      key: _key(state: state, index: index, config: config),
+                      state: state,
+                      index: index,
+                      config: config,
+                    ),
+                  ),
+                ),
+                if ((!PlatformEnumFlutter.isWebDesktop &&
+                        state.loadingStatus != LoadingStatus.listLoadedFull) ||
+                    state.discountModelItems.isEmpty)
+                  SliverPrototypeExtentList.builder(
+                    itemCount: state.filteredDiscountModelItems.isEmpty
+                        ? config.loadingItems
+                        : KDimensions.shimmerDiscountsItems,
+                    prototypeItem: Padding(
+                      padding: const EdgeInsets.only(
                         top: KPadding.kPaddingSize48,
                       ),
-                child: _DiscountsWidgetItem(
-                  isDesk: isDesk,
-                  key: _key(state: state, index: index, config: config),
-                  state: state,
-                  index: index,
-                  config: config,
-                ),
-              ),
+                      child: SkeletonizerWidget(
+                        isLoading: false,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: isDesk,
+                          share: '',
+                        ),
+                      ),
+                    ),
+                    itemBuilder: (context, index) => Padding(
+                      key: const ValueKey('discount_mock_card'),
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      child: SkeletonizerWidget(
+                        isLoading: true,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: isDesk,
+                          share: '',
+                        ),
+                      ),
+                    ),
+                  )
+                else if (state.loadingStatus == LoadingStatus.listLoadedFull)
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize48,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Center(
+                        child: Text(
+                          context.l10n.thatEndOfList,
+                          key: KWidgetkeys.screen.investors.endListText,
+                          style: AppTextStyle
+                              .materialThemeTitleMediumNeutralVariant70,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize48,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: LoadingButtonWidget(
+                        widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+                        text: context.l10n.moreDiscounts,
+                        onPressed: () =>
+                            context.read<DiscountWatcherBloc>().add(
+                                  const DiscountWatcherEvent.loadNextItems(),
+                                ),
+                        isDesk: isDesk,
+                      ),
+                    ),
+                  ),
+              ],
             );
           },
         );
@@ -233,49 +270,14 @@ class _DiscountsWidgetItem extends StatelessWidget {
         state.filteredDiscountModelItems.length > config.linkInt) {
       indexValue--;
     }
-    if (indexValue < state.filteredDiscountModelItems.length) {
-      if (config.linkInt == index + 1) {
-        return DiscountLinkWidget(isDesk: isDesk);
-      }
-      final discountItem =
-          state.filteredDiscountModelItems.elementAt(indexValue);
-      return DiscountCardWidget(
-        discountItem: discountItem,
-        isDesk: isDesk,
-        share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-      );
-    } else {
-      if (state.loadingStatus == LoadingStatus.listLoadedFull &&
-          state.filteredDiscountModelItems.isNotEmpty) {
-        return Center(
-          child: Text(
-            context.l10n.thatEndOfList,
-            key: KWidgetkeys.screen.investors.endListText,
-            style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
-          ),
-        );
-      }
-      if (state.loadingStatus == LoadingStatus.loaded &&
-          PlatformEnumFlutter.isWebDesktop &&
-          state.filteredDiscountModelItems.isNotEmpty) {
-        return LoadingButtonWidget(
-          widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
-          text: context.l10n.moreDiscounts,
-          onPressed: () => context.read<DiscountWatcherBloc>().add(
-                const DiscountWatcherEvent.loadNextItems(),
-              ),
-          isDesk: isDesk,
-        );
-      }
-      return SkeletonizerWidget(
-        isLoading: true,
-        child: DiscountCardWidget(
-          key: KWidgetkeys.screen.discounts.card,
-          discountItem: KMockText.discountModel,
-          isDesk: isDesk,
-          share: '',
-        ),
-      );
+    if (config.linkInt == index + 1) {
+      return DiscountLinkWidget(isDesk: isDesk);
     }
+    final discountItem = state.filteredDiscountModelItems.elementAt(indexValue);
+    return DiscountCardWidget(
+      discountItem: discountItem,
+      isDesk: isDesk,
+      share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+    );
   }
 }

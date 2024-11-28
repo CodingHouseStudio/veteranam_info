@@ -14,7 +14,7 @@ permissions:
 jobs:
   build:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/integration_test.yml@main
-
+    secrets: inherit
     with:
       flutter_channel: stable
       flutter_version: 3.24.1

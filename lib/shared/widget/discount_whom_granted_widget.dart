@@ -29,7 +29,7 @@ class Eligibility extends StatelessWidget {
   }
 }
 
-class EligibilityExpanded extends StatefulWidget {
+class EligibilityExpanded extends StatelessWidget {
   const EligibilityExpanded({
     required this.text,
     super.key,
@@ -38,51 +38,31 @@ class EligibilityExpanded extends StatefulWidget {
   final List<String> text;
 
   @override
-  State<EligibilityExpanded> createState() => _EligibilityExpandedState();
-}
-
-class _EligibilityExpandedState extends State<EligibilityExpanded> {
-  bool isExpanded = false;
-
-  @override
   Widget build(BuildContext context) {
-    final displayedText = isExpanded
-        ? widget.text
-        : widget.text.length > 5
-            ? widget.text.take(5).toList()
-            : widget.text;
     return RichText(
-      key: isExpanded
-          ? KWidgetkeys.widget.cityList.longText
-          : KWidgetkeys.widget.cityList.markdownFulllList,
+      key: KWidgetkeys.widget.cityList.markdownFulllList,
       text: TextSpan(
         style: AppTextStyle.materialThemeLabelLarge,
         children: [
-          ..._buildTextSpans(displayedText),
-          if (widget.text.length > 5 && !isExpanded) ...[
-            TextSpan(
-              text: ' ${context.l10n.moreWhomGranted(widget.text.length - 5)}',
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
-            ),
-          ],
-          if (isExpanded)
-            TextSpan(
-              text: ' ${context.l10n.hideExpansion}',
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
-            ),
+          ..._buildTextSpans(
+            text.length > 5 ? text.take(5).toList() : text,
+            context,
+          ),
         ],
       ),
     );
   }
 
-  List<InlineSpan> _buildTextSpans(List<String> textList) {
+  List<InlineSpan> _buildTextSpans(
+    List<String> textList,
+    BuildContext context,
+  ) {
     final textSpans = <InlineSpan>[];
 
     for (final text in textList) {
       textSpans.add(
         WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -95,6 +75,20 @@ class _EligibilityExpandedState extends State<EligibilityExpanded> {
         ),
       );
     }
+
+    if (text.length > 5) {
+      textSpans.add(
+        TextSpan(
+          text: ' ${context.l10n.moreWhomGranted(text.length - 5)}',
+          style: AppTextStyle.materialThemeLabelLargeRef,
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              //context.goNamed();
+            },
+        ),
+      );
+    }
+
     return textSpans;
   }
 
@@ -173,14 +167,5 @@ class _EligibilityExpandedState extends State<EligibilityExpanded> {
           style: AppTextStyle.materialThemeLabelMedium,
         );
     }
-  }
-
-  GestureRecognizer get _textSpanEvent =>
-      TapGestureRecognizer()..onTap = _toggleExpanded;
-
-  void _toggleExpanded() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
   }
 }

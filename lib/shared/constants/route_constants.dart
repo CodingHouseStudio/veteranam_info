@@ -131,7 +131,7 @@ abstract class KRoute {
     name: 'My Discounts',
   );
   static const _RouteItem settings = _RouteItem(
-    path: '/settings',
+    path: '/',
     name: 'Settings',
   );
   static const _RouteItem mobFAQ = _RouteItem(

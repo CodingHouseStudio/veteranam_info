@@ -13,29 +13,37 @@ class ProfileBodyWidget extends StatelessWidget {
         precent: KDimensions.twentyEightPercent,
         // verticalPadding: KPadding.kPaddingSize48,
       ),
+      showMobNawbarBackButton: true,
+      showMobBottomNavigation: false,
+      pageName: context.l10n.myProfileTitle,
       titleChildWidgetsFunction: ({required isDesk}) => [
-        if (isDesk)
-          KSizedBox.kHeightSizedBox40
-        else
-          KSizedBox.kHeightSizedBox24,
-        ShortTitleIconWidget(
-          title: context.l10n.myProfileTitle,
-          titleKey: KWidgetkeys.screen.profile.title,
-          isDesk: isDesk,
-          icon: KIcon.arrowDownRight,
-          firstIcon: !isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox32
-        else
-          KSizedBox.kHeightSizedBox24,
-        const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
-        ),
+        if (Config.isWeb) ...[
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox24,
+          ShortTitleIconWidget(
+            title: context.l10n.myProfileTitle,
+            titleKey: KWidgetkeys.screen.profile.title,
+            isDesk: isDesk,
+            icon: KIcon.arrowDownRight,
+            firstIcon: !isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox32
+          else
+            KSizedBox.kHeightSizedBox24,
+          const Divider(
+            color: AppColors.materialThemeKeyColorsNeutral,
+          ),
+        ],
       ],
       isForm: true,
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-        KSizedBox.kHeightSizedBox48,
+        if (Config.isWeb)
+          KSizedBox.kHeightSizedBox48
+        else
+          KSizedBox.kHeightSizedBox24,
         DecoratedBox(
           decoration: KWidgetTheme.boxDecorationHome
               .copyWith(color: AppColors.materialThemeKeyColorsNeutral),

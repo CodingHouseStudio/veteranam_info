@@ -39,69 +39,71 @@ class _FundsWidgetList extends StatelessWidget {
       builder: (context, _) {
         final listLength =
             isDesk ? _.deskFundItems.length : _.mobFundItems.length;
-        return SliverList.builder(
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          itemCount: listLength == 0
-              ? isDesk
-                  ? KDimensions.shimmerFundsDeskItems
-                  : KDimensions.shimmerFundsMobItems
-              : listLength + 1,
-          itemBuilder: (context, index) => _FundsItemWidget(
-            isDesk: isDesk,
-            index: index,
-            state: _,
-            listLength: listLength,
-          ),
-        );
+        if (listLength != 0) {
+          return SliverMainAxisGroup(
+            slivers: [
+              SliverList.builder(
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
+                itemCount: listLength,
+                itemBuilder: (context, index) => Padding(
+                  key: ValueKey(
+                    isDesk
+                        ? '${_.deskFundItems.elementAt(index).first.id}_desk'
+                        : _.mobFundItems.elementAt(index).id,
+                  ),
+                  padding: const EdgeInsets.only(
+                    top: KPadding.kPaddingSize48,
+                  ),
+                  child: _FundWidget(
+                    isDesk: isDesk,
+                    fundDesk:
+                        isDesk ? _.deskFundItems.elementAt(index) : const [],
+                    fundMob: _.mobFundItems.elementAt(index),
+                  ),
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize48,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: Center(
+                    child: Text(
+                      context.l10n.thatEndOfList,
+                      key: KWidgetkeys.screen.investors.endListText,
+                      style:
+                          AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return SliverList.builder(
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
+            itemCount: isDesk
+                ? KDimensions.shimmerFundsDeskItems
+                : KDimensions.shimmerFundsMobItems,
+            itemBuilder: (context, index) => SkeletonizerWidget(
+              isLoading: true,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize48,
+                ),
+                child: _FundWidget(
+                  isDesk: isDesk,
+                  fundMob: KMockText.fundModel,
+                  fundDesk: KMockText.fundDesk,
+                ),
+              ),
+            ),
+          );
+        }
       },
     );
-  }
-}
-
-class _FundsItemWidget extends StatelessWidget {
-  const _FundsItemWidget({
-    required this.isDesk,
-    required this.index,
-    required this.state,
-    required this.listLength,
-  });
-  final bool isDesk;
-  final int index;
-  final InvestorsWatcherState state;
-  final int listLength;
-  @override
-  Widget build(BuildContext context) {
-    if (state.loadingStatus != LoadingStatusInvestors.loaded) {
-      return SkeletonizerWidget(
-        isLoading: true,
-        child: _FundWidget(
-          isDesk: isDesk,
-          fundMob: KMockText.fundModel,
-          fundDesk: KMockText.fundDesk,
-        ),
-      );
-    }
-    if (index < listLength) {
-      return _FundWidget(
-        isDesk: isDesk,
-        fundMob: state.mobFundItems.elementAt(index),
-        fundDesk: isDesk ? state.deskFundItems.elementAt(index) : const [],
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: KPadding.kPaddingSize48,
-        ),
-        child: Center(
-          child: Text(
-            context.l10n.thatEndOfList,
-            key: KWidgetkeys.screen.investors.endListText,
-            style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
-          ),
-        ),
-      );
-    }
   }
 }
 
@@ -118,22 +120,18 @@ class _FundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      key: isDesk ? ValueKey(fundDesk.first.id) : ValueKey(fundMob.id),
-      padding: const EdgeInsets.only(
-        top: KPadding.kPaddingSize48,
-      ),
-      child: isDesk
-          ? DonatesCardsWidget(
-              key: KWidgetkeys.screen.investors.cards,
-              fundItems: fundDesk,
-            )
-          : DonateCardWidget(
-              key: KWidgetkeys.screen.investors.card,
-              hasSubtitle: true,
-              fundModel: fundMob,
-              isDesk: false,
-            ),
-    );
+    if (isDesk) {
+      return DonatesCardsWidget(
+        key: KWidgetkeys.screen.investors.cards,
+        fundItems: fundDesk,
+      );
+    } else {
+      return DonateCardWidget(
+        key: KWidgetkeys.screen.investors.card,
+        hasSubtitle: true,
+        fundModel: fundMob,
+        isDesk: false,
+      );
+    }
   }
 }

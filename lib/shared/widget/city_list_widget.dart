@@ -64,7 +64,7 @@ class CityListWidget extends StatelessWidget {
   }
 }
 
-class CityWidgetListExpanded extends StatefulWidget {
+class CityWidgetListExpanded extends StatelessWidget {
   const CityWidgetListExpanded({
     required this.cityList,
     required this.isDesk,
@@ -75,43 +75,32 @@ class CityWidgetListExpanded extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<CityWidgetListExpanded> createState() => _CityWidgetListExpandedState();
-}
-
-class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
-  bool isExpanded = false;
-  @override
-  void initState() {
-    isExpanded = false;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return RichText(
-      key: isExpanded
-          ? KWidgetkeys.widget.cityList.longText
-          : KWidgetkeys.widget.cityList.markdownFulllList,
+      key: KWidgetkeys.widget.cityList.markdownFulllList,
       text: TextSpan(
-        text: '${widget.cityList.getCityString(
-          showFullText: isExpanded,
+        text: '${cityList.getCityString(
+          showFullText: false,
         )} ',
         style: AppTextStyle.materialThemeLabelLarge,
         children: [
-          if (isExpanded)
-            TextSpan(
-              text: context.l10n.hideExpansion,
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
-            )
-          else
-            TextSpan(
-              text: context.l10n.moreCities(
-                widget.cityList.length - 1,
-              ),
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
+          // if (isExpanded)
+          //   TextSpan(
+          //     text: context.l10n.hideExpansion,
+          //     style: AppTextStyle.materialThemeLabelLargeRef,
+          //     recognizer: TapGestureRecognizer()..onTap,
+          //   )
+          // else
+          TextSpan(
+            text: context.l10n.moreCities(
+              cityList.length - 1,
             ),
+            style: AppTextStyle.materialThemeLabelLargeRef,
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                //context.goNamed();
+              },
+          ),
         ],
       ),
     );
@@ -130,10 +119,4 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
     //   ),
     // );
   }
-
-  GestureRecognizer get _textSpanEvent =>
-      TapGestureRecognizer()..onTap = _expandedChangeEvent;
-  void _expandedChangeEvent() => setState(() {
-        isExpanded = !isExpanded;
-      });
 }

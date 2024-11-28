@@ -1620,6 +1620,10 @@
   "@dataIsSavedSuccess": {
     "examples": "Message after the user has successfully saved their data."
   },
+  "joinUs": "Join Us",
+  "@joinUs": {
+    "examples": "Header for the mobile app on the User Role page"
+  },
   "activate": "Activate",
   "@activate": {
     "examples": "Text for a button on the MyDiscount page.",
@@ -1635,5 +1639,10 @@
   "moreDetails": "More Details",
   "@moreDetails": {
     "examples": "Button text on the Discounts page"
+  },
+  "favorite": "Like",
+  "@favorite": {
+    "examples": "Text on card pages under the like button",
+    "description": "The button is used to like the card data."
   }
 }
