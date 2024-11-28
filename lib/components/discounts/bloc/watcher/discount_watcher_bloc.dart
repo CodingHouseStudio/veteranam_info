@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -191,6 +190,9 @@ class DiscountWatcherBloc
     _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    state.discountFilterItems.addCategory(event.value);
+
+    emit(state.copyWith(discountFilterItems: state.discountFilterItems));
     // final selectedFilters = state.filterCategory
     //     .map(
     //       (element) => element.value == event.value

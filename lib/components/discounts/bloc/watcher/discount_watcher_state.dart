@@ -144,11 +144,11 @@ class DiscountFilterItems {
       );
       return DiscountFilterItems._(
         filterCategories: _getFilterFromTranslateModel(categoriesList),
-        choosenCategoriesnList: const {},
+        choosenCategoriesnList: {},
         filterLocation: filterLocationList,
-        choosenLocationList: const {},
+        choosenLocationList: {},
         filterEligibilities: _getFilterFromTranslateModel(eligibilitiesList),
-        choosenEligibilitiesList: const {},
+        choosenEligibilitiesList: {},
       );
     } catch (e) {
       return const DiscountFilterItems.empty();
