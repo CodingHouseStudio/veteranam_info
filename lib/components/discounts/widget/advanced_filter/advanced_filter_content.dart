@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterContent extends StatelessWidget {
@@ -15,7 +16,7 @@ class AdvancedFilterContent extends StatelessWidget {
     super.key,
   });
   final bool isDesk;
-  final DiscountFilterItems discountFilter;
+  final FilterItemsModel discountFilter;
   final void Function(String) onEligibilitiesChange;
   final void Function(String) onCategoriesChange;
   final void Function(String) onLocationChange;

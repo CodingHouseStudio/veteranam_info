@@ -84,11 +84,12 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           widget.emptyWidget != null)
                         widget.emptyWidget!.call(isDesk: isDesk)
                       else ...[
-                        if (widget.loadingStatus !=
-                                LoadingStatus.listLoadedFull &&
+                        if ( //TODO:
+                            // widget.loadingStatus !=
+                            //       LoadingStatus.listLoadedFull &&
                             PlatformEnumFlutter.isWebDesktop &&
-                            !(widget.cardListIsEmpty ?? false) &&
-                            widget.loadingStatus != LoadingStatus.loading)
+                                !(widget.cardListIsEmpty ?? false) &&
+                                widget.loadingStatus != LoadingStatus.loading)
                           LoadingButtonWidget(
                             isDesk: isDesk,
                             onPressed: widget.loadFunction,
@@ -121,10 +122,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         //     ),
                         //   ),
                         // ],
-                        if (widget.loadingStatus ==
-                                LoadingStatus.listLoadedFull &&
+                        if ( //TODO:
+                            // widget.loadingStatus ==
+                            //       LoadingStatus.listLoadedFull &&
                             !(widget.cardListIsEmpty ?? false) &&
-                            widget.showLoadingWidget)
+                                widget.showLoadingWidget)
                           ListScrollUpWidget(
                             scrollController: _scrollController,
                           ),
@@ -256,7 +258,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   void _onScroll() {
     if (_isBottom &&
-        widget.loadingStatus != LoadingStatus.listLoadedFull &&
+        //TODO:
+        // widget.loadingStatus != LoadingStatus.listLoadedFull &&
         !(widget.cardListIsEmpty ?? false)) {
       widget.loadFunction();
     }

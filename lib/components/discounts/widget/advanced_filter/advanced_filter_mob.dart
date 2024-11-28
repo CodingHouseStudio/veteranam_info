@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterMob extends StatelessWidget {
@@ -112,8 +113,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   onLocationChange: context
                       .read<AdvancedFilterMobCubit>()
                       .changeLocationsList,
-                  discountFilter:
-                      const DiscountFilterItems.empty(), //TODO change
+                  discountFilter: const FilterItemsModel.empty(), //TODO change
                   onCategoriesChange: context
                       .read<AdvancedFilterMobCubit>()
                       .changeCategoriesList,

@@ -11,9 +11,9 @@ class AdvancedFilterDesk extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       buildWhen: (previous, current) =>
-          previous.discountFilterItems != current.discountFilterItems ||
-          previous.discountFilterItems.getChoosenList !=
-              current.discountFilterItems.getChoosenList,
+          previous.filterItemsModel != current.filterItemsModel ||
+          previous.filterStatus == FilterStatus.filtering &&
+              current.filterStatus == FilterStatus.filtered,
       builder: (context, state) {
         return AdvancedFilterContent(
           key: KWidgetkeys.screen.discounts.advancedFilterDesk,
@@ -21,7 +21,7 @@ class AdvancedFilterDesk extends StatelessWidget {
           onLocationChange: (value) => context
               .read<DiscountWatcherBloc>()
               .add(DiscountWatcherEvent.filterLocation(value)),
-          discountFilter: state.discountFilterItems,
+          discountFilter: state.filterItemsModel,
           onCategoriesChange: (value) =>
               context.read<DiscountWatcherBloc>().add(
                     DiscountWatcherEvent.filterCategory(value),

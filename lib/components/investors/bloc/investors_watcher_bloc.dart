@@ -19,7 +19,7 @@ class InvestorsWatcherBloc
   })  : _investorsRepository = investorsRepository,
         super(
           const InvestorsWatcherState(
-            loadingStatus: LoadingStatusInvestors.initial,
+            loadingStatus: LoadingStatus.initial,
             // loadingDeskFundItems: [],
             mobFundItems: [],
             // loadingMobFundItems: [],
@@ -46,7 +46,7 @@ class InvestorsWatcherBloc
     _Started event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    emit(state.copyWith(loadingStatus: LoadingStatusInvestors.loading));
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     // Fetch funds from the repository
     final result = await _investorsRepository.getFunds();
@@ -54,7 +54,7 @@ class InvestorsWatcherBloc
       (l) => emit(
         state.copyWith(
           failure: l._toInvestors(),
-          loadingStatus: LoadingStatusInvestors.error,
+          loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) {
@@ -68,7 +68,7 @@ class InvestorsWatcherBloc
           InvestorsWatcherState(
             mobFundItems: r,
             deskFundItems: getDeskList(r),
-            loadingStatus: LoadingStatusInvestors.loaded,
+            loadingStatus: LoadingStatus.loaded,
             // loadedFull: r.length < KDimensions.investorsLoadItems,
             // loadingMobFundItems: loadingItems,
             // itemsLoaded: KDimensions.investorsLoadItems,

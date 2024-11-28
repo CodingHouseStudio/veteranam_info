@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
+import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'discount_watcher_bloc.freezed.dart';
@@ -31,17 +33,20 @@ class DiscountWatcherBloc
             failure: null,
             sorting: [],
             unmodifiedDiscountModelItems: [],
-            discountFilterItems: DiscountFilterItems.empty(),
-            filteredDiscountModelItems: [],
+            filterItemsModel: FilterItemsModel.empty(),
+            filterDiscountModelList: [],
+            filterStatus: FilterStatus.initial,
+            idFilterItemsModel: IDFilterItemsModel.empty(),
+            isListLoadedFull: false,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
+    on<_FilterEligibilities>(_onFilterEligibilities);
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
-    // on<_FilterEligibilities>(_onFilterEligibilities);
     on<_SetMobFilter>(_setMobFilter);
     on<_FilterReset>(_onFilterReset);
     on<_Sorting>(_onSorting);
@@ -92,19 +97,47 @@ class DiscountWatcherBloc
       return;
     }
 
-    final discountFilter = DiscountFilterItems.init(
+    final filterItemsModel = FilterItemsModel.init(
       unmodifiedDiscountModelItems: event.discountItemsModel,
       isEnglish: _userRepository.isEnglish,
     );
 
+    final idFilterItems = <String, IDFilterItem>{};
+
+    for (final discount in event.discountItemsModel) {
+      idFilterItems.addAll({
+        discount.id: IDFilterItem(
+          discountId: discount.id,
+        ),
+      });
+    }
+
+    final idFilterItemsModel = IDFilterItemsModel(value: idFilterItems);
+
+    final filteredDiscountIdList = idFilterItemsModel.getFilteringId;
+
+    final itemsNumber = getCurrentLoadNumber(
+      unmodifiedDiscountModelItems: event.discountItemsModel,
+    );
+
+    final filterDiscountModelList = event.discountItemsModel
+        .where(
+          (discount) => filteredDiscountIdList.contains(discount.id),
+        )
+        .take(itemsNumber)
+        .toList();
+
     emit(
       _Initial(
         unmodifiedDiscountModelItems: event.discountItemsModel,
-        discountFilterItems: discountFilter,
+        filterItemsModel: filterItemsModel,
         sorting: [],
         loadingStatus: LoadingStatus.loaded,
         failure: null,
-        filteredDiscountModelItems: event.discountItemsModel,
+        filterDiscountModelList: filterDiscountModelList,
+        filterStatus: FilterStatus.initial,
+        idFilterItemsModel: idFilterItemsModel,
+        isListLoadedFull: filteredDiscountIdList.length == itemsNumber,
       ),
     );
   }
@@ -113,6 +146,34 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    final filteredDiscountIdList = state.idFilterItemsModel.getFilteringId;
+
+    final itemsNumber = getCurrentLoadNumber();
+
+    if (itemsNumber == filteredDiscountIdList.length) {
+      if (!state.isListLoadedFull) {
+        emit(state.copyWith(isListLoadedFull: true));
+      }
+      return;
+    }
+
+    final currentLoadingItems = itemsNumber + getItemsLoading;
+
+    final filterDiscounts = state.unmodifiedDiscountModelItems
+        .where(
+          (discount) => filteredDiscountIdList.contains(discount.id),
+        )
+        .take(
+          currentLoadingItems,
+        )
+        .toList();
+
+    emit(
+      state.copyWith(
+        filterDiscountModelList: filterDiscounts,
+        isListLoadedFull: currentLoadingItems == filteredDiscountIdList.length,
+      ),
+    );
     // if (state.itemsLoaded
     //     .checkLoadingPosible(state.categoryDiscountModelItems)) {
     //   emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
@@ -143,6 +204,19 @@ class DiscountWatcherBloc
     _FilterReset event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.filterItemsModel.clearChooseItems();
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
+      ),
+    );
     // final locationes = state.discountModelItems
     //     .getLocationFilter(isEnglish: _userRepository.isEnglish);
 
@@ -186,13 +260,101 @@ class DiscountWatcherBloc
     // );
   }
 
+  void _onFilterEligibilities(
+    _FilterEligibilities event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.filterItemsModel.addEligibility(event.value);
+
+    for (final discount in state.unmodifiedDiscountModelItems) {
+      var hasEligibility = false;
+      var hasCategory = false;
+      var hasLocation = false;
+
+      if (state.filterItemsModel.choosenEligibilitiesList.isEmpty) {
+        hasEligibility = true;
+      } else {
+        if (discount.eligibility != null) {
+          for (final eligiblity in discount.eligibility!) {
+            if (state.filterItemsModel.choosenEligibilitiesList
+                .containsKey(eligiblity.uk)) {
+              hasEligibility = true;
+            }
+          }
+        }
+      }
+
+      if (state.filterItemsModel.choosenCategoriesnList.isEmpty) {
+        hasCategory = true;
+      } else {
+        for (final category in discount.category) {
+          if (state.filterItemsModel.choosenCategoriesnList
+              .containsKey(category.uk)) {
+            hasCategory = true;
+          }
+        }
+      }
+
+      if (state.filterItemsModel.choosenLocationList.isEmpty) {
+        hasLocation = true;
+      } else {
+        if (discount.location != null) {
+          for (final location in discount.location!) {
+            if (state.filterItemsModel.choosenLocationList
+                .containsKey(location.uk)) {
+              hasLocation = true;
+            }
+          }
+        }
+        if (discount.subLocation != null) {
+          if (state.filterItemsModel.choosenLocationList
+              .containsKey(KAppText.sublocation.uk)) {
+            hasLocation = true;
+          }
+        }
+      }
+
+      state.idFilterItemsModel.value[discount.id] = IDFilterItem(
+        discountId: discount.id,
+        hasCateogries: hasCategory,
+        hasEligibilities: hasEligibility,
+        hasLocation: hasLocation,
+      );
+    }
+
+    add(const DiscountWatcherEvent.loadNextItems());
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
+      ),
+    );
+  }
+
   void _onFilterCategory(
     _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    state.discountFilterItems.addCategory(event.value);
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
 
-    emit(state.copyWith(discountFilterItems: state.discountFilterItems));
+    state.filterItemsModel.addCategory(event.value);
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
+      ),
+    );
+
     // final selectedFilters = state.filterCategory
     //     .map(
     //       (element) => element.value == event.value
@@ -237,6 +399,19 @@ class DiscountWatcherBloc
     _FilterLocation event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.filterItemsModel.addLocation(event.value);
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
+      ),
+    );
     // final selectedFilters = state.filterLocation
     //     .map(
     //       (element) => element.value == event.value
@@ -499,6 +674,15 @@ class DiscountWatcherBloc
       return KDimensions.loadItems;
     }
   }
+
+  int getCurrentLoadNumber({
+    List<DiscountModel>? unmodifiedDiscountModelItems,
+  }) =>
+      min(
+        unmodifiedDiscountModelItems?.length ??
+            state.unmodifiedDiscountModelItems.length,
+        max(state.filterDiscountModelList.length, getItemsLoading),
+      );
 
   void _onFailure(
     _Failure event,

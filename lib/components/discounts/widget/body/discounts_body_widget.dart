@@ -47,7 +47,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
               //     .add(const DiscountWatcherEvent.started()),
             );
           }
-          if (state.filteredDiscountModelItems.length ==
+          if (state.filterDiscountModelList.length ==
               (context.read<DiscountConfigCubit>().state.loadingItems *
                   (context.read<DiscountConfigCubit>().state.emailScrollCount +
                       1))) {
@@ -67,8 +67,8 @@ class _DiscountsBodyWidget extends StatelessWidget {
         },
         listenWhen: (previous, current) =>
             current.failure != null ||
-            previous.filteredDiscountModelItems.length !=
-                current.filteredDiscountModelItems.length,
+            previous.filterDiscountModelList.length !=
+                current.filterDiscountModelList.length,
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             final isDesk =

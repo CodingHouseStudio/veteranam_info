@@ -370,9 +370,10 @@ extension ListExtensions<T> on List<T> {
   }
 
   LoadingStatus getLoadingStatus(int loadedItemsCount) =>
-      length <= loadedItemsCount && isNotEmpty
-          ? LoadingStatus.listLoadedFull
-          : LoadingStatus.loaded;
+      LoadingStatus.loaded; //TODO:
+  // length <= loadedItemsCount && isNotEmpty
+  //     ? LoadingStatus.listLoadedFull
+  //     : LoadingStatus.loaded;
 
   /// Method to calculate overall filter values.
   ///
