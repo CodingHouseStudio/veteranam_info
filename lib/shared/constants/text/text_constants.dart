@@ -50,9 +50,13 @@ abstract class KMockText {
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
   static const questionTitle =
+      TranslateModel(uk: questionTitleUA, en: questionTitleEN);
+  static const questionTitleUA =
       'Як мені знайти роботу за допомогою цього сайту?';
   static const questionTitleEN = 'How do I find a job using this site?';
   static const questionSubtitle =
+      TranslateModel(uk: questionSubtitleUA, en: questionSubtitleEN);
+  static const questionSubtitleUA =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
       'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
@@ -121,54 +125,60 @@ abstract class KMockText {
   static const questionModel = QuestionModel(
     id: '0',
     title: questionTitle,
-    titleEN: questionTitleEN,
     subtitle: questionSubtitle,
-    subtitleEN: questionSubtitleEN,
     // navigationLink: 'null',
   );
-  static const category = 'Медицина';
+  static const category = TranslateModel(
+    uk: 'Медицина',
+    en: 'Medical',
+  );
 
   static final discountModel = DiscountModel(
     id: '',
     userId: '',
-    company: 'Ескулаб',
-    companyEN: 'Ecsculab',
+    company: const TranslateModel(uk: 'Ескулаб', en: 'Ecsculab'),
     link: 'https://veteranam.info/',
     discount: [10],
-    title:
-        '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
-    categoryEN: ['Medical'],
-    category: [category],
-    subcategoryEN: ['Analyses'],
-    subcategory: ['Аналізи'],
+    title: const TranslateModel(
+      uk: '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
+      en: '20% discount on tests for military personnel and internally displaced persons.',
+    ),
+    category: const [category],
+    subcategory: const [TranslateModel(uk: 'Аналізи', en: 'Analyses')],
     // eligibility: 'Військовослужбовці та ВПО',
-    description:
-        'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test) лабораторії.',
-    requirements:
-        'Військовим - наявність документу, що підтверджує  професійну',
-    territory: 'Всі відділення лабораторії.',
-    location: ['Київ'],
-    expiration: 'До 24 жовтня 2026 р.',
-    exclusions:
-        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
+    description: const TranslateModel(
+      uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test) лабораторії.',
+      en: 'The offer is valid in all branches of the laboratory.',
+    ),
+    requirements: const TranslateModel(
+      uk: 'Військовим - наявність документу, що підтверджує  професійну',
+      en: 'Military personnel - presence of a document confirming professional status',
+    ),
+    territory: const TranslateModel(
+      uk: 'Всі відділення лабораторії.',
+      en: 'All branches of the laboratory.',
+    ),
+    location: const [
+      TranslateModel(
+        uk: 'Київ',
+        en: 'Kyiv',
+      ),
+    ],
+    expiration: const TranslateModel(
+      uk: 'До 24 жовтня 2026 р.',
+      en: 'Up to October 24, 2026',
+    ),
+    exclusions: const TranslateModel(
+      uk: '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
+      en: '- when ordering tests and paying for them online on the Esculab website;',
+    ),
+    eligibility: const [TranslateModel(uk: 'Всі перелічені', en: 'Veterans')],
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
-    titleEN:
-        '20% discount on tests for military personnel and internally displaced persons.',
-    // eligibilityEN: 'Military personnel and internally displaced persons',
-    descriptionEN: 'The offer is valid in all branches of the laboratory.',
-    requirementsEN:
-        'Military personnel - presence of a document confirming professional status',
-    territoryEN: 'All branches of the laboratory.',
-    exclusionsEN:
-        '- when ordering tests and paying for them online on the Esculab website;',
-    expirationEN: 'Up to October 24, 2026',
-    locationEN: ['Kyiv'],
     status: DiscountState.published,
-    eligibility: ['Всі перелічені'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
     id: '',
@@ -184,20 +194,13 @@ abstract class KMockText {
   );
   static const fundModel = FundModel(
     id: '',
-    title: 'PATRIOT UA',
-    description:
-        'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
+    title: TranslateModel(uk: 'PATRIOT UA', en: 'PATRIOT UA'),
+    description: TranslateModel(
+      uk: 'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
+      en: 'A state institution under the management of the Ministry of Veterans Affairs. A state provider of services for reintegrating veterans into productive civilian life.',
+    ),
     link: 'https://veteranfund.com.ua/',
     projectsLink: 'https://veteranfund.com.ua/projects/',
-    titleEN: 'PATRIOT UA',
-    descriptionEN:
-        'A state institution under the management of the Ministry of Veterans Affairs. A state provider of services for reintegrating veterans into productive civilian life.',
-    // teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
-    // email: 'info@veteranfund.mva.gov.ua',
-    // phoneNumber: '+380 (98) 009 48 72',
-    // size: 48,
-    // registered: 'Ukraine registered',
-    // domain: 'Ветерани',
   );
   static const fundDesk = [fundModel, fundModel, fundModel];
   static final storyModel = StoryModel(
@@ -258,6 +261,19 @@ abstract class KAppText {
         KRoute.settings.name,
       ];
   static const deletedFieldId = 'deletedOn';
+
+  static const sulocationUA = 'Вся Україна';
+  static const sulocationEN = 'All Ukraine';
+
+  static const sublocation = TranslateModel(uk: sulocationUA, en: sulocationEN);
+  static const categoryAll = TranslateModel(uk: 'Все', en: 'All');
+  static const allStoresOfChain = TranslateModel(
+    uk: 'Всі заклади мережі',
+    en: 'All establishments of the chain',
+  );
+  static const allUkrainOnline =
+      TranslateModel(uk: 'Вся Україна (онлайн)', en: 'All of Ukraine (online)');
+
   static const discountsCategories = [
     'Автосервіс',
     'Військторг',

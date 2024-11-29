@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
-import 'package:veteranam/shared/repositories/i_faq_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobFaqBodyWidget extends StatelessWidget {
@@ -32,35 +30,35 @@ class MobFaqBodyWidget extends StatelessWidget {
           showMobNawbarBackButton: true,
           pageName: context.l10n.faq,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-            if (_.questionModelItems.isEmpty &&
-                _.loadingStatus == LoadingStatus.loaded &&
-                Config.isDevelopment)
-              MockButtonWidget(
-                key: KWidgetkeys.screen.mobFaq.buttonMock,
-                onPressed: () {
-                  GetIt.I.get<IFaqRepository>().addMockQuestions();
-                  context.read<MobFaqWatcherBloc>().add(
-                        const MobFaqWatcherEvent.started(),
-                      );
-                },
-              )
-            else
-              ...List.generate(
-                  _.failure == null ? questionModelItems.length : 0, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    top: KPadding.kPaddingSize24,
+            // if (_.questionModelItems.isEmpty &&
+            //     _.loadingStatus == LoadingStatus.loaded &&
+            //     Config.isDevelopment)
+            //   MockButtonWidget(
+            //     key: KWidgetkeys.screen.mobFaq.buttonMock,
+            //     onPressed: () {
+            //       GetIt.I.get<IFaqRepository>().addMockQuestions();
+            //       context.read<MobFaqWatcherBloc>().add(
+            //             const MobFaqWatcherEvent.started(),
+            //           );
+            //     },
+            //   )
+            // else
+            ...List.generate(_.failure == null ? questionModelItems.length : 0,
+                (index) {
+              return Padding(
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize24,
+                ),
+                child: SkeletonizerWidget(
+                  isLoading: isLoading,
+                  child: QuestionWidget(
+                    key: KWidgetkeys.screen.mobFaq.list,
+                    questionModel: questionModelItems.elementAt(index),
+                    isDesk: false,
                   ),
-                  child: SkeletonizerWidget(
-                    isLoading: isLoading,
-                    child: QuestionWidget(
-                      key: KWidgetkeys.screen.mobFaq.list,
-                      questionModel: questionModelItems.elementAt(index),
-                      isDesk: false,
-                    ),
-                  ),
-                );
-              }),
+                ),
+              );
+            }),
             KSizedBox.kHeightSizedBox32,
           ],
         );

@@ -2,44 +2,44 @@ import 'package:flutter/material.dart' show BuildContext;
 import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Extension for filtering FilterItem list items.
-extension FilterItems on List<FilterItem> {
-  /// Method to find indices where differences occur between this list and a new
-  ///  list.
-  ///
-  /// Parameters:
-  /// - newList: New list to compare with.
-  ///
-  /// Returns:
-  /// A list of indices where differences were found.
-  // List<int> findDifferencesIndex({required List<FilterItem> newList}) {
-  //   if (length == newList.length) {
-  //     return [];
-  //   }
-  //   final differentIndices =
-  //       <int>[]; // Initialize an empty list for storing different indices.
-  //   var add = 0; // Variable to track how many indices need to be added to
-  //   // differentIndices.
+// extension FilterItems on List<FilterItem> {
+/// Method to find indices where differences occur between this list and a new
+///  list.
+///
+/// Parameters:
+/// - newList: New list to compare with.
+///
+/// Returns:
+/// A list of indices where differences were found.
+// List<int> findDifferencesIndex({required List<FilterItem> newList}) {
+//   if (length == newList.length) {
+//     return [];
+//   }
+//   final differentIndices =
+//       <int>[]; // Initialize an empty list for storing different indices.
+//   var add = 0; // Variable to track how many indices need to be added to
+//   // differentIndices.
 
-  //   // Iterate through indices of the current list.
-  //   for (var i = 0; i < length; i++) {
-  //     // Check if the index i is within bounds of newList and if elements at i
-  //     // differ.
-  //     if ((i < newList.length &&
-  //             newList.elementAt(i).value != elementAt(i).value) ||
-  //         (i >= newList.length && add <= i)) {
-  //       differentIndices
-  //           .add(i); // Add index i to differentIndices if there's a difference.
-  //       add--; // Increment add to indicate that an index was added.
-  //     } else if (i >= newList.length && add > 0) {
-  //       add++; // Decrement add if index i is beyond newList's length and was
-  //       // previously added.
-  //     }
-  //   }
+//   // Iterate through indices of the current list.
+//   for (var i = 0; i < length; i++) {
+//     // Check if the index i is within bounds of newList and if elements at i
+//     // differ.
+//     if ((i < newList.length &&
+//             newList.elementAt(i).value != elementAt(i).value) ||
+//         (i >= newList.length && add <= i)) {
+//       differentIndices
+//           .add(i); // Add index i to differentIndices if there's a difference.
+//       add--; // Increment add to indicate that an index was added.
+//     } else if (i >= newList.length && add > 0) {
+//       add++; // Decrement add if index i is beyond newList's length and was
+//       // previously added.
+//     }
+//   }
 
-  //   return differentIndices; // Return the list of indices where differences
-  //   // were found.
-  // }
-}
+//   return differentIndices; // Return the list of indices where differences
+//   // were found.
+// }
+// }
 
 extension ListStringExtensions on List<String> {
   // String getCityList({
@@ -66,17 +66,6 @@ extension ListStringExtensions on List<String> {
       return first;
     }
   }
-
-  // String getWhomGrantedString({
-  //   required bool showFullText,
-  //   // required BuildContext context,
-  // }) {
-  //   if (showFullText) {
-  //     return toString().replaceAll('[' '').replaceAll(']', '');
-  //   } else {
-  //     return length > 2 ? '${this[0]}  ${this[1]}' : join('  ');
-  //   }
-  // }
 }
 
 /// Extension on List<int> providing utility methods for handling discount
@@ -155,4 +144,24 @@ extension ListBoolExtension on List<bool> {
       return indexOf(true) - 1 == index;
     }
   }
+}
+
+extension TranslateModelListExtension on List<TranslateModel> {
+  String getCityString({
+    required bool showFullText,
+    required BuildContext context,
+  }) {
+    if (showFullText) {
+      return map(
+        (e) => e.getTrsnslation(context),
+      ).toString().replaceAll('[', '').replaceAll(']', '');
+    } else {
+      return first.getTrsnslation(context);
+    }
+  }
+
+  List<String> getTrsnslation(
+    BuildContext context,
+  ) =>
+      map((e) => context.isEnglish ? e.en ?? e.uk : e.uk).toList();
 }

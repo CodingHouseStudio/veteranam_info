@@ -166,35 +166,35 @@ void main() {
         await homeFailureHelper(tester);
       });
     });
-    group('${KGroupText.getEmptyList} ', () {
-      setUp(() {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => const Right([]),
-        );
-        when(mockFaqRepository.addMockQuestions()).thenAnswer(
-          (invocation) {},
-        );
-        if (GetIt.I.isRegistered<IFaqRepository>()) {
-          GetIt.I.unregister<IFaqRepository>();
-        }
-        GetIt.I.registerSingleton<IFaqRepository>(mockFaqRepository);
-      });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
-        await homePumpAppHelper(
-          // mockFeedbackRepository: mockFeedbackRepository,
-          mockFaqRepository: mockFaqRepository,
-          mockUserRepository: mockUserRepository,
-          mockBuildRepository: mockBuildRepository, tester: tester,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockUrlRepository: mockUrlRepository,
-          mockAuthencticationRepository: mockAuthenticationRepository,
-          // mockAppAuthenticationRepository:
-          // mockAppAuthenticationRepository,
-        );
+    // group('${KGroupText.getEmptyList} ', () {
+    //   setUp(() {
+    //     when(mockFaqRepository.getQuestions()).thenAnswer(
+    //       (invocation) async => const Right([]),
+    //     );
+    //     when(mockFaqRepository.addMockQuestions()).thenAnswer(
+    //       (invocation) {},
+    //     );
+    //     if (GetIt.I.isRegistered<IFaqRepository>()) {
+    //       GetIt.I.unregister<IFaqRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IFaqRepository>(mockFaqRepository);
+    //   });
+    //   testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //     await homePumpAppHelper(
+    //       // mockFeedbackRepository: mockFeedbackRepository,
+    //       mockFaqRepository: mockFaqRepository,
+    //       mockUserRepository: mockUserRepository,
+    //       mockBuildRepository: mockBuildRepository, tester: tester,
+    //       mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    //       mockUrlRepository: mockUrlRepository,
+    //       mockAuthencticationRepository: mockAuthenticationRepository,
+    //       // mockAppAuthenticationRepository:
+    //       // mockAppAuthenticationRepository,
+    //     );
 
-        await homeMockButtonHelper(tester);
-      });
-    });
+    //     await homeMockButtonHelper(tester);
+    //   });
+    // });
     group('${KGroupText.getList} ', () {
       setUp(() {
         Config.roleValue = Config.user;

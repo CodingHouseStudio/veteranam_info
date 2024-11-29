@@ -13,14 +13,14 @@ class DiscountRepository implements IDiscountRepository {
   DiscountRepository({required FirestoreService firestoreService})
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
-
   @override
   Stream<List<DiscountModel>> getDiscountItems(
-          //{List<String>? reportIdItems}
-          ) =>
-      _firestoreService.getDiscounts(
-          //reportIdItems
-          );
+      //{List<String>? reportIdItems}
+      ) {
+    return _firestoreService.getDiscounts(
+        //reportIdItems
+        );
+  }
 
   @override
   Future<void> addMockDiscountItems() async {

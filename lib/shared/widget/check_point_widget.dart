@@ -69,8 +69,8 @@ class CheckPointAmountWidget extends StatelessWidget {
     required this.isDesk,
     required this.isCheck,
     required this.filterItem,
+    required this.onChanged,
     super.key,
-    this.onChanged,
     this.amoutActiveClor,
     this.amoutInactiveClor,
   });
@@ -90,7 +90,7 @@ class CheckPointAmountWidget extends StatelessWidget {
           child: CheckPointWidget(
             onChanged: onChanged,
             isCheck: isCheck,
-            text: filterItem.getString(context),
+            text: filterItem.value.getTrsnslation(context),
             isDesk: isDesk,
           ),
         ),

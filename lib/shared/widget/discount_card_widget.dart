@@ -38,11 +38,9 @@ class DiscountCardWidget extends StatelessWidget {
             _DiscountCardTitleWidget(
               isDesk: isDesk,
               company: discountItem.company,
-              companyEN: discountItem.companyEN,
               userName: discountItem.userName,
               dateVerified: discountItem.dateVerified,
               category: discountItem.category,
-              categoryEN: discountItem.categoryEN,
               userPhoto: discountItem.userPhoto,
             ),
             if (isDesk)
@@ -154,63 +152,24 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             category: discountItem.category,
             discount: discountItem.discount,
             title: discountItem.title,
-            categoryEN: discountItem.categoryEN,
-            titleEN: discountItem.titleEN,
             hasImage: discountItem.images != null,
           ),
           if (!isDesk) ...[
             KSizedBox.kHeightSizedBox8,
             Text(
-              discountItem.title
-                  .getTrnslation(en: discountItem.titleEN, context: context),
+              discountItem.title.getTrsnslation(context),
               key: KWidgetkeys.widget.discountCard.discountTitle,
               style: AppTextStyle.materialThemeHeadlineSmall,
               overflow: TextOverflow.clip,
             ),
           ],
           KSizedBox.kHeightSizedBox4,
-          if (isDesk)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _ExpirationWidget(
-                  expiration: discountItem.expiration.getTrnslation(
-                    en: discountItem.expirationEN,
-                    context: context,
-                  ),
-                ),
-                KSizedBox.kWidthSizedBox24,
-                Expanded(
-                  child: CityListWidget(
-                    key: KWidgetkeys.widget.discountCard.city,
-                    location: discountItem.location,
-                    locationEN: discountItem.locationEN,
-                    subLocation: discountItem.subLocation,
-                    isDesk: true,
-                  ),
-                ),
-              ],
-            )
-          else
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CityListWidget(
-                  key: KWidgetkeys.widget.discountCard.city,
-                  isDesk: false,
-                  location: discountItem.location,
-                  locationEN: discountItem.locationEN,
-                  subLocation: discountItem.subLocation,
-                ),
-                KSizedBox.kHeightSizedBox4,
-                _ExpirationWidget(
-                  expiration: discountItem.expiration.getTrnslation(
-                    en: discountItem.expirationEN,
-                    context: context,
-                  ),
-                ),
-              ],
-            ),
+          _CitiesExpirationWidget(
+            isDesk: isDesk,
+            location: discountItem.location,
+            expiration: discountItem.expiration,
+            subLocation: discountItem.subLocation,
+          ),
           KSizedBox.kHeightSizedBox16,
           DiscountTextWidget(
             key: KWidgetkeys.widget.discountCard.description,
@@ -267,16 +226,12 @@ class _DescrptionTitleWidget extends StatelessWidget {
     required this.category,
     required this.discount,
     required this.title,
-    required this.categoryEN,
-    required this.titleEN,
     this.hasImage = false,
   });
   final bool isDesk;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final List<int> discount;
-  final String title;
-  final String? titleEN;
+  final TranslateModel title;
   final bool hasImage;
 
   @override
@@ -287,7 +242,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              title.getTrnslation(en: titleEN, context: context),
+              title.getTrsnslation(context),
               key: KWidgetkeys.widget.discountCard.discountTitle,
               style: AppTextStyle.materialThemeHeadlineSmall,
             ),
@@ -337,20 +292,16 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   const _DiscountCardTitleWidget({
     required this.isDesk,
     required this.company,
-    required this.companyEN,
     required this.userName,
     required this.dateVerified,
     required this.category,
-    required this.categoryEN,
     required this.userPhoto,
   });
   final bool isDesk;
-  final String? company;
-  final String? companyEN;
+  final TranslateModel? company;
   final String? userName;
   final DateTime dateVerified;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final ImageModel? userPhoto;
 
   @override
@@ -374,9 +325,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
                     dateVerified: dateVerified,
                     category: category,
                     company: company,
-                    companyEN: companyEN,
                     userName: userName,
-                    categoryEN: categoryEN,
                     userPhoto: userPhoto,
                   ),
                 ),
@@ -391,9 +340,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               dateVerified: dateVerified,
               category: category,
               company: company,
-              companyEN: companyEN,
               userName: userName,
-              categoryEN: categoryEN,
               userPhoto: userPhoto,
             ),
     );
@@ -405,17 +352,13 @@ class _CompanyInfoWidget extends StatelessWidget {
     required this.dateVerified,
     required this.category,
     required this.company,
-    required this.companyEN,
     required this.userName,
-    required this.categoryEN,
     required this.userPhoto,
   });
-  final String? company;
-  final String? companyEN;
+  final TranslateModel? company;
   final String? userName;
   final DateTime dateVerified;
-  final List<String> category;
-  final List<String>? categoryEN;
+  final List<TranslateModel> category;
   final ImageModel? userPhoto;
   @override
   Widget build(BuildContext context) {
@@ -433,10 +376,7 @@ class _CompanyInfoWidget extends StatelessWidget {
             children: [
               Text(
                 key: KWidgetkeys.widget.discountCard.service,
-                company.getTrnslation(
-                      context: context,
-                      en: companyEN,
-                    ) ??
+                company?.getTrsnslation(context) ??
                     context.l10n.companyIsHidden,
                 style: AppTextStyle.materialThemeTitleMedium,
                 overflow: TextOverflow.clip,
@@ -465,20 +405,56 @@ class _CompanyInfoWidget extends StatelessWidget {
   }
 }
 
-// class _CategoryWidget extends StatelessWidget {
-//   const _CategoryWidget({
-//     required this.categories,
-//     required this.categoriesEn,
+// class _CompanyInformationWidget extends StatelessWidget {
+//   const _CompanyInformationWidget({
+//     required this.company,
+//     required this.userName,
+//     required this.dateVerified,
 //   });
-//   final List<String> categories;
-//   final List<String>? categoriesEn;
+//   final TranslateModel? company;
+//   final String? userName;
+//   final DateTime dateVerified;
 
 //   @override
 //   Widget build(BuildContext context) {
-//     final categoriesValue = categories.getTrnslation(
-//       en: categoriesEn,
-//       context: context,
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(
+//           key: KWidgetkeys.widget.discountCard.service,
+//           company?.getTrsnslation(context) ?? context.l10n.companyIsHidden,
+//           style: AppTextStyle.materialThemeTitleMedium,
+//           overflow: TextOverflow.clip,
+//           textAlign: TextAlign.left,
+//         ),
+//         Wrap(
+//           children: [
+//             Text(
+//               key: KWidgetkeys.widget.discountCard.userName,
+//               userName ?? KAppText.veteranamName,
+//               style: AppTextStyle.materialThemeLabelSmall,
+//             ),
+//             KSizedBox.kWidthSizedBox8,
+//             Text(
+//               key: KWidgetkeys.widget.discountCard.date,
+//               dateVerified.toLocalDateString(context: context),
+//               style: AppTextStyle.materialThemeLabelSmall,
+//             ),
+//           ],
+//         ),
+//       ],
 //     );
+//   }
+// }
+
+// class _CategoryWidget extends StatelessWidget {
+//   const _CategoryWidget({
+//     required this.categories,
+//   });
+//   final List<TranslateModel> categories;
+
+//   @override
+//   Widget build(BuildContext context) {
 //     return Wrap(
 //       runSpacing: KPadding.kPaddingSize4,
 //       children: List.generate(categories.length, (int index) {
@@ -501,7 +477,7 @@ class _CompanyInfoWidget extends StatelessWidget {
 //                 ),
 //                 child: Text(
 //                   key: KWidgetkeys.widget.discountCard.category,
-//                   categoriesValue.elementAt(index),
+//                   categories.elementAt(index).getTrsnslation(context),
 //                   style: AppTextStyle.materialThemeLabelLarge,
 //                 ),
 //               ),
@@ -512,6 +488,61 @@ class _CompanyInfoWidget extends StatelessWidget {
 //     );
 //   }
 // }
+
+class _CitiesExpirationWidget extends StatelessWidget {
+  const _CitiesExpirationWidget({
+    required this.isDesk,
+    required this.location,
+    required this.expiration,
+    required this.subLocation,
+  });
+  final bool isDesk;
+  final List<TranslateModel>? location;
+  final TranslateModel? expiration;
+  final SubLocation? subLocation;
+  @override
+  Widget build(BuildContext context) {
+    if (isDesk) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _ExpirationWidget(
+            expiration: expiration?.getTrsnslation(
+              context,
+            ),
+          ),
+          KSizedBox.kWidthSizedBox16,
+          Expanded(
+            child: CityListWidget(
+              key: KWidgetkeys.widget.discountCard.city,
+              location: location,
+              subLocation: subLocation,
+              isDesk: true,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _ExpirationWidget(
+            expiration: expiration?.getTrsnslation(
+              context,
+            ),
+          ),
+          KSizedBox.kHeightSizedBox8,
+          CityListWidget(
+            key: KWidgetkeys.widget.discountCard.city,
+            isDesk: false,
+            location: location,
+            subLocation: subLocation,
+          ),
+        ],
+      );
+    }
+  }
+}
 
 class _ExpirationWidget extends StatelessWidget {
   const _ExpirationWidget({required this.expiration});

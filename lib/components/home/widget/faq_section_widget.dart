@@ -108,23 +108,27 @@ class _FaqSectionMobWidgetImplementation extends StatelessWidget {
                 isDesk: false,
               ),
             ),
-            SliverList.builder(
-              itemBuilder: (context, index) => Padding(
-                key: ValueKey(KMockText.questionModel.id),
-                padding: const EdgeInsets.only(
-                  top: KPadding.kPaddingSize24,
-                ),
-                child: QuestionWidgetItem(
-                  state: state,
-                  index: index,
-                  isDesk: false,
-                ),
-              ),
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              itemCount: (state.loadingStatus == LoadingStatusHome.loaded
-                  ? state.questionModelItems.length
-                  : KDimensions.shimmerQuestionItems),
+            BlocBuilder<LanguageCubit, Language>(
+              builder: (context, language) {
+                return SliverList.builder(
+                  itemBuilder: (context, index) => Padding(
+                    key: ValueKey(KMockText.questionModel.id),
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize24,
+                    ),
+                    child: QuestionWidgetItem(
+                      state: state,
+                      index: index,
+                      isDesk: false,
+                    ),
+                  ),
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  itemCount: (state.loadingStatus == LoadingStatusHome.loaded
+                      ? state.questionModelItems.length
+                      : KDimensions.shimmerQuestionItems),
+                );
+              },
             ),
           ],
         );

@@ -13,19 +13,9 @@ class DiscountTitleWidget extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize24),
-        child: TitlePointWidget(
-          title: context.l10n.specialOffers,
+        child: LineTitleIconWidget(
+          title: context.l10n.discounts,
           titleKey: KWidgetkeys.screen.discounts.title,
-          titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
-          // pointText: context.l10n.discounts,
-          // pointKey: KWidgetkeys.screen.discounts.
-          // titlePoint,
-          isDesk: isDesk,
-          titleSecondPartPadding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize72,
-          ),
-          iconCrossAxisAlignment: CrossAxisAlignment.end,
-          isRightArrow: false,
         ),
       ),
     );

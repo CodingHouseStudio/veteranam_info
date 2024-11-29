@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/models/models.dart';
 
@@ -10,39 +12,51 @@ class DiscountModel with _$DiscountModel {
     required String id,
     // required DateTime date,
     required List<int> discount,
-    required String title,
-    required String? titleEN,
-    required List<String> category,
-    required List<String>? categoryEN,
-    required List<String>? subcategory,
-    required List<String>? subcategoryEN,
-    required String description,
-    required String? descriptionEN,
-    required String? requirements,
-    required String? requirementsEN,
-    required String? territory,
-    required String? territoryEN,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateConverter()
+    required TranslateModel title,
+    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
+    @TranslateItemsConverter()
+    required List<TranslateModel> category,
+    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
+    @TranslateItemsOrNullConverter()
+    required List<TranslateModel>? subcategory,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateConverter()
+    required TranslateModel description,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    required TranslateModel? requirements,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    required TranslateModel? territory,
     required DateTime dateVerified,
     required String? link,
-    List<String>? eligibility,
-    List<String>? eligibilityEN,
-    String? exclusions,
-    String? exclusionsEN,
+    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
+    @TranslateItemsOrNullConverter()
+    List<TranslateModel>? eligibility,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    TranslateModel? exclusions,
     String? phoneNumber,
-    String? expiration,
-    String? expirationEN,
-    List<String>? location,
-    List<String>? locationEN,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    TranslateModel? expiration,
+    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
+    @TranslateItemsOrNullConverter()
+    List<TranslateModel>? location,
     String? userId,
     // String? html,
     String? userName,
     @ImageConverter() ImageModel? userPhoto,
-    String? company,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    TranslateModel? company,
     @Default(DiscountState.isNew) DiscountState status,
-    String? companyEN,
     String? directLink,
-    String? additionalDetails,
-    String? additionalDetailsEN,
+    @JsonKey(readValue: TranslateConverter.readJsonItem)
+    @TranslateOrNullConverter()
+    TranslateModel? additionalDetails,
     SubLocation? subLocation,
     @ImagesConverter() List<ImageModel>? images,
     int? likes,

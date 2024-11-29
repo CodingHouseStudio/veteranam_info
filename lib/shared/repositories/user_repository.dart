@@ -146,6 +146,8 @@ class UserRepository {
     }
   }
 
+  bool get isEnglish => currentUserSetting.locale.isEnglish;
+
   // @disposeMethod
   void dispose() {
     _userController.close();

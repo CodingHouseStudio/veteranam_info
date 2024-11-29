@@ -144,7 +144,6 @@ class _DiscountWidgetList extends StatelessWidget {
           builder: (context, state) {
             return SliverMainAxisGroup(
               slivers: [
-                //TODO: SliverPrototypeExtentList
                 SliverList.builder(
                   addAutomaticKeepAlives: false,
                   addRepaintBoundaries: false,

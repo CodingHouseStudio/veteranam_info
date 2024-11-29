@@ -120,8 +120,7 @@ class DiscountWatcherBloc
     final categories = locationList
         .overallItems(
           isEnglish: event.isEnglish,
-          getENFilter: (item) => item.categoryEN,
-          getUAFilter: (item) => item.category,
+          getFilter: (item) => item.category,
           calculateNumber: true,
         )
         .map(
@@ -214,8 +213,7 @@ class DiscountWatcherBloc
 
     final categories = state.discountModelItems.overallItems(
       isEnglish: state.isEnglish,
-      getENFilter: (item) => item.categoryEN,
-      getUAFilter: (item) => item.category,
+      getFilter: (item) => item.category,
       calculateNumber: true,
     );
     emit(
@@ -335,8 +333,7 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         filterCategory: locationList.overallItems(
           isEnglish: state.isEnglish,
-          getENFilter: (item) => item.categoryEN,
-          getUAFilter: (item) => item.category,
+          getFilter: (item) => item.category,
           calculateNumber: true,
         ),
       ),
@@ -376,8 +373,7 @@ class DiscountWatcherBloc
         choosenSortingnList: event.choosenSortingnList,
         filterCategory: locationList.overallItems(
           isEnglish: state.isEnglish,
-          getENFilter: (item) => item.categoryEN,
-          getUAFilter: (item) => item.category,
+          getFilter: (item) => item.category,
           calculateNumber: true,
         ),
         filterLocation: event.filterList,
@@ -432,8 +428,7 @@ class DiscountWatcherBloc
         sortingDiscountModelItems: sortingList,
         filterCategory: locationList.overallItems(
           isEnglish: state.isEnglish,
-          getENFilter: (item) => item.categoryEN,
-          getUAFilter: (item) => item.category,
+          getFilter: (item) => item.category,
           calculateNumber: true,
         ),
       ),
@@ -460,12 +455,13 @@ class DiscountWatcherBloc
             (element) => element.isSelected,
           )
           .map(
-            (e) => e.value,
+            (e) => e.value.uk,
           )
           .toList(), //?.where((element) => element is! DiscountEnum).toList(),
       itemsLoaded: null,
-      getENFilter: (item) => [
-        if (item.location != null) ...item.location!,
+      getFilter: (item) => [
+        if (item.location != null)
+          ...item.location!.getTrsnslation(isEnglish: false),
         if (item.subLocation != null) ...item.subLocation!._getList,
       ],
       // overallFilter: items
@@ -522,7 +518,7 @@ class DiscountWatcherBloc
             )
             .toList(),
         itemsLoaded: null,
-        getENFilter: (item) => item.category,
+        getFilter: (item) => item.category,
         // listForFilter: locationList ?? state.locationDiscountModelItems,
       );
 

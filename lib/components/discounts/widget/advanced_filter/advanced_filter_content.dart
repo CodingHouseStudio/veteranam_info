@@ -29,8 +29,9 @@ class AdvancedFilterContent extends StatelessWidget {
       if (chooseLocationList.isNotEmpty || chooseSortingList.isNotEmpty)
         _ChooseItems(
           isDesk: isDesk,
-          choosenList: [...chooseSortingList, ...chooseLocationList],
+          choosenList: chooseLocationList,
           onChange: onChange,
+          choosenSortingList: chooseSortingList,
           onChangeSorting: onChangeSorting,
         ),
       Text(
@@ -91,8 +92,10 @@ class _ChooseItems extends StatelessWidget {
     required this.choosenList,
     required this.onChange,
     required this.onChangeSorting,
+    required this.choosenSortingList,
   });
   final bool isDesk;
+  final List<SortingItem> choosenSortingList;
   final List<FilterItem> choosenList;
   final void Function(dynamic) onChange;
   final void Function(DiscountEnum) onChangeSorting;
@@ -100,7 +103,7 @@ class _ChooseItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: choosenList.length + 1,
+      itemCount: choosenList.length + choosenSortingList.length + 1,
       primary: false,
       addAutomaticKeepAlives: false,
       shrinkWrap: true,
@@ -133,7 +136,15 @@ class _ChooseItems extends StatelessWidget {
             );
           }
         }
-        final chooseItem = choosenList.elementAt(index - 1);
+        TranslateModel? value;
+        DiscountEnum? sortingValue;
+        if (choosenSortingList.length < index) {
+          value = choosenList
+              .elementAt(index - choosenSortingList.length - 1)
+              .value;
+        } else {
+          sortingValue = choosenSortingList.elementAt(index - 1).value;
+        }
         return Padding(
           padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: Align(
@@ -141,13 +152,15 @@ class _ChooseItems extends StatelessWidget {
             child: CancelChipWidget(
               widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
               isDesk: isDesk,
-              labelText: choosenList.elementAt(index - 1).getString(context),
+              labelText: (value?.getTrsnslation(context) ??
+                  sortingValue?.getValue(context))!,
               onPressed: () {
-                if (chooseItem.value is DiscountEnum) {
-                  onChangeSorting(chooseItem.value as DiscountEnum);
-                } else {
+                if (sortingValue != null) {
+                  onChangeSorting(sortingValue);
+                }
+                if (value != null) {
                   onChange(
-                    chooseItem.value,
+                    value,
                   );
                 }
               },

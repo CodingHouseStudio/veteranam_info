@@ -116,12 +116,9 @@ extension FilterItemExtension on FilterItem {
     required bool addEnglish,
   }) {
     if ((isEnglish ?? false) && addEnglish) {
-      return valueEN
-          .toString()
-          .toLowerCase()
-          .compareTo(b.valueEN.toString().toLowerCase());
+      return value.en?.compareTo(b.value.en.toString().toLowerCase()) ?? -1;
     } else {
-      return value.toString().compareUkrain(b.value.toString());
+      return value.uk.compareUkrain(b.value.uk);
     }
   }
 }
@@ -185,12 +182,16 @@ extension DiscountStateExtention on DiscountState {
 }
 
 extension DateFieldModelDart on DateFieldModel {
-  String getString(Language language) =>
-      '${language.isEnglish ? 'Up to' : 'До'}'
-      ' ${value?.toLocalDateString(
-        localeValue: language.value.languageCode,
-        showDay: true,
-      )}';
+  TranslateModel get getString => TranslateModel(
+        uk: 'До ${value?.toLocalDateString(
+          localeValue: Language.ukrain.value.languageCode,
+          showDay: true,
+        )}',
+        en: 'Up to ${value?.toLocalDateString(
+          localeValue: Language.english.value.languageCode,
+          showDay: true,
+        )}',
+      );
 }
 
 extension UrlFailureExtension on SomeFailure {
@@ -273,18 +274,6 @@ extension SubLocationExtension on SubLocation? {
         return [SubLocation.online];
       case null:
         return [];
-    }
-  }
-}
-
-extension DiscountModelExtension on DiscountModel {
-  int? getLike({required bool isLiked}) {
-    if (isLiked) {
-      return likes ?? 1;
-    } else if (likes != null && likes! > 1) {
-      return likes! - 1;
-    } else {
-      return null;
     }
   }
 }
