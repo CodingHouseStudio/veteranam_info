@@ -1,7 +1,22 @@
 import 'package:collection/collection.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
+/// A model for managing and filtering discount items by categories, locations,
+/// and eligibilities.
+///
+/// This class provides methods to manage filter criteria, apply those filters
+/// to a list of items,
+/// and dynamically update the filter lists based on the user's selections. It
+/// operates on three
+/// main dimensions: categories, locations, and eligibilities.
+///
+/// Each filter dimension is represented by a map where the keys are the filter
+/// names
+/// (in Ukrainian by default), and the values are `FilterItem` objects
+/// containing metadata
+/// about the filter (e.g., whether it is selected).
 class FilterItemsModel {
+  // Private constructor for initializing the object with specific filter data.
   const FilterItemsModel._({
     required this.filterCategories,
     required this.chosenCategoriesList,
@@ -11,6 +26,7 @@ class FilterItemsModel {
     required this.chosenEligibilitiesList,
   });
 
+  /// Constructor to initialize an empty maps.
   const FilterItemsModel.empty({
     this.filterCategories = const {},
     this.chosenCategoriesList = const {},
@@ -20,13 +36,19 @@ class FilterItemsModel {
     this.chosenEligibilitiesList = const {},
   });
 
-  final Map<String, FilterItem> filterCategories;
-  final Map<String, FilterItem> chosenCategoriesList;
-  final Map<String, FilterItem> filterLocation;
-  final Map<String, FilterItem> chosenLocationList;
+  // Maps to store current available filters
   final Map<String, FilterItem> filterEligibilities;
-  final Map<String, FilterItem> chosenEligibilitiesList;
+  final Map<String, FilterItem> filterCategories;
+  final Map<String, FilterItem> filterLocation;
 
+  // Maps to store current selected user filters
+  final Map<String, FilterItem> chosenEligibilitiesList;
+  final Map<String, FilterItem> chosenCategoriesList;
+  final Map<String, FilterItem> chosenLocationList;
+
+  /// Toggles an existing category filter.
+  /// Updates the chosen categories filter
+  /// and available filter lists accordingly.
   void addCategory({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
@@ -36,60 +58,13 @@ class FilterItemsModel {
       valueUK: valueUK,
       filter: filterCategories,
       chosenFilter: chosenCategoriesList,
+      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
+      filterEnum: _FilterEnum.category,
     );
-
-    final eligibilitiesList = <TranslateModel>[];
-    final locationList = <TranslateModel>[];
-
-    for (final discount in unmodifiedDiscountModelItems) {
-      if (chosenListContainAnyValues(
-        values: discount.category,
-        chosenFilter: chosenCategoriesList,
-      )) {
-        // Eligibility
-        if (chosenListContainAnyValues(
-          values: discount.location,
-          chosenFilter: chosenLocationList,
-        )) {
-          if (discount.eligibility != null) {
-            eligibilitiesList.addAll(discount.eligibility!);
-          }
-        }
-
-        // Location
-        if (chosenListContainAnyValues(
-          values: discount.eligibility,
-          chosenFilter: chosenEligibilitiesList,
-        )) {
-          if (discount.location != null) {
-            locationList.addAll(discount.location!);
-          }
-          if (discount.subLocation != null) {
-            locationList.add(KAppText.sublocation);
-          }
-        }
-      }
-    }
-
-    filterEligibilities
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: eligibilitiesList,
-          chosenMap: chosenEligibilitiesList,
-        ),
-      );
-
-    filterLocation
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: locationList,
-          chosenMap: chosenLocationList,
-        ),
-      );
   }
 
+  /// Toggles an existing location filter.
+  /// Updates the chosen location filter and available filter lists accordingly.
   void addLocation({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
@@ -99,136 +74,43 @@ class FilterItemsModel {
       valueUK: valueUK,
       filter: filterLocation,
       chosenFilter: chosenLocationList,
+      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
+      filterEnum: _FilterEnum.location,
     );
-
-    final categoriesList = <TranslateModel>[];
-    final eligibilityList = <TranslateModel>[];
-
-    for (final discount in unmodifiedDiscountModelItems) {
-      if (chosenListContainAnyValues(
-        values: discount.location,
-        chosenFilter: chosenLocationList,
-      )) {
-        // Category
-        if (chosenListContainAnyValues(
-          values: discount.eligibility,
-          chosenFilter: chosenEligibilitiesList,
-        )) {
-          categoriesList.addAll(discount.category);
-        }
-
-        // Eligibility
-        if (chosenListContainAnyValues(
-          values: discount.category,
-          chosenFilter: chosenCategoriesList,
-        )) {
-          if (discount.eligibility != null) {
-            eligibilityList.addAll(discount.eligibility!);
-          }
-        }
-      }
-    }
-
-    filterCategories
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: categoriesList,
-          chosenMap: chosenEligibilitiesList,
-        ),
-      );
-
-    filterEligibilities
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: eligibilityList,
-          chosenMap: chosenEligibilitiesList,
-        ),
-      );
   }
 
+  /// Toggles an existing eligibilities filter.
+  /// Updates the chosen eligibilities
+  /// filter and available filter lists accordingly.
   void addEligibility({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
   }) {
-    // Add Eligibility to lists: Start
     _addFilterItem(
       valueUK: valueUK,
       filter: filterEligibilities,
       chosenFilter: chosenEligibilitiesList,
+      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
+      filterEnum: _FilterEnum.eligibility,
     );
-    // Add Eligibility to lists: End
-
-    final categoriesList = <TranslateModel>[];
-    final locationList = <TranslateModel>[];
-
-    for (final discount in unmodifiedDiscountModelItems) {
-      if (chosenListContainAnyValues(
-        values: discount.eligibility,
-        chosenFilter: chosenEligibilitiesList,
-      )) {
-        // Category
-        if (chosenListContainAnyValues(
-          values: discount.location,
-          chosenFilter: chosenLocationList,
-        )) {
-          categoriesList.addAll(discount.category);
-        }
-
-        // Location
-        if (chosenListContainAnyValues(
-          values: discount.category,
-          chosenFilter: chosenCategoriesList,
-        )) {
-          if (discount.location != null) {
-            locationList.addAll(discount.location!);
-          }
-          if (discount.subLocation != null) {
-            locationList.add(KAppText.sublocation);
-          }
-        }
-      }
-    }
-
-    filterCategories
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: categoriesList,
-          chosenMap: chosenCategoriesList,
-        ),
-      );
-
-    filterLocation
-      ..clear()
-      ..addAll(
-        _getFilterFromTranslateModel(
-          list: locationList,
-          chosenMap: chosenLocationList,
-        ),
-      );
   }
 
+  /// Filters the given list of discount items based on the chosen filters.
+  ///
+  /// Only items that contain all filters in the cosen list.
   List<DiscountModel> getFilterList(
     List<DiscountModel> unmodifiedDiscountModelItems,
   ) {
     final filterList = <DiscountModel>[];
 
     for (final discount in unmodifiedDiscountModelItems) {
-      if (chosenListContainAnyValues(
-            values: discount.category,
-            chosenFilter: chosenCategoriesList,
-          ) &&
-          chosenListContainAnyValues(
-            values: discount.location,
-            chosenFilter: chosenLocationList,
-          ) &&
-          chosenListContainAnyValues(
-            values: discount.eligibility,
-            chosenFilter: chosenEligibilitiesList,
-          )) {
+      if (_FilterEnum.values.every(
+        (filterEnum) => _chosenListContainAnyValuesWithFilterEnum(
+          filterEnum: filterEnum,
+          discount: discount,
+        ),
+      )) {
         filterList.add(discount);
       }
     }
@@ -236,10 +118,12 @@ class FilterItemsModel {
     return filterList;
   }
 
+  /// Checks if any filters are currently chosen in any dimension.
   bool get haschosenItem =>
       chosenEligibilitiesList.isNotEmpty ||
       chosenCategoriesList.isNotEmpty | chosenLocationList.isNotEmpty;
 
+  /// Combines all chosen filters into a single map.
   Map<String, FilterItem> get getchosenList => {
         ...chosenEligibilitiesList,
         ...chosenCategoriesList,
@@ -250,7 +134,10 @@ class FilterItemsModel {
     required String valueUK,
     required Map<String, FilterItem> filter,
     required Map<String, FilterItem> chosenFilter,
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required _FilterEnum filterEnum,
   }) {
+    // Add New Filter Item For Current List: Start
     final value = filter[valueUK];
     final filterItem = value?.copyWith(isSelected: !value.isSelected) ??
         FilterItem(
@@ -263,9 +150,118 @@ class FilterItemsModel {
     } else {
       chosenFilter.remove(valueUK);
     }
+    // Add New Filter Item For Current List: End
+
+    // Change two another filter list: Start
+    final eligibilitiesList = <TranslateModel>[];
+    final locationList = <TranslateModel>[];
+    final categoriesList = <TranslateModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      if (_chosenListContainAnyValuesWithFilterEnum(
+        filterEnum: filterEnum,
+        discount: discount,
+      )) {
+        // Eligibility
+        if (_chosenListContainAnyValuesWithFilterEnum(
+          filterEnum: filterEnum == _FilterEnum.category
+              ? _FilterEnum.eligibility
+              : _FilterEnum.category,
+          discount: discount,
+        )) {
+          if (discount.eligibility != null) {
+            eligibilitiesList.addAll(discount.eligibility!);
+          }
+        }
+
+        // Location
+        if (_chosenListContainAnyValuesWithFilterEnum(
+          filterEnum: filterEnum == _FilterEnum.category
+              ? _FilterEnum.location
+              : _FilterEnum.category,
+          discount: discount,
+        )) {
+          if (discount.location != null) {
+            locationList.addAll(discount.location!);
+          }
+          if (discount.subLocation != null) {
+            locationList.add(KAppText.sublocation);
+          }
+        }
+
+        // Category
+        if (_chosenListContainAnyValuesWithFilterEnum(
+          filterEnum: filterEnum == _FilterEnum.location
+              ? _FilterEnum.eligibility
+              : _FilterEnum.location,
+          discount: discount,
+        )) {
+          if (discount.eligibility != null) {
+            categoriesList.addAll(discount.category);
+          }
+        }
+      }
+    }
+
+    if (filterEnum != _FilterEnum.eligibility) {
+      filterEligibilities
+        ..clear()
+        ..addAll(
+          _getFilterFromTranslateModel(
+            list: eligibilitiesList,
+            chosenMap: chosenEligibilitiesList,
+          ),
+        );
+    }
+
+    if (filterEnum != _FilterEnum.location) {
+      filterLocation
+        ..clear()
+        ..addAll(
+          _getFilterFromTranslateModel(
+            list: locationList,
+            chosenMap: chosenLocationList,
+          ),
+        );
+    }
+
+    if (filterEnum != _FilterEnum.category) {
+      filterCategories
+        ..clear()
+        ..addAll(
+          _getFilterFromTranslateModel(
+            list: categoriesList,
+            chosenMap: chosenCategoriesList,
+          ),
+        );
+    }
+    // Change two another filter list: End
   }
 
-  bool chosenListContainAnyValues({
+  bool _chosenListContainAnyValuesWithFilterEnum({
+    required _FilterEnum filterEnum,
+    required DiscountModel discount,
+  }) {
+    switch (filterEnum) {
+      case _FilterEnum.category:
+        return _chosenListContainAnyValues(
+          values: discount.category,
+          chosenFilter: chosenCategoriesList,
+        );
+      case _FilterEnum.location:
+        return _chosenListContainAnyValues(
+          values: discount.location,
+          chosenFilter: chosenLocationList,
+        );
+      case _FilterEnum.eligibility:
+        return _chosenListContainAnyValues(
+          values: discount.eligibility,
+          chosenFilter: chosenEligibilitiesList,
+        );
+    }
+  }
+
+  bool _chosenListContainAnyValues({
     required List<TranslateModel>? values,
     required Map<String, FilterItem> chosenFilter,
   }) {
@@ -388,4 +384,10 @@ class FilterItemsModel {
       ],
     );
   }
+}
+
+enum _FilterEnum {
+  category,
+  eligibility,
+  location,
 }

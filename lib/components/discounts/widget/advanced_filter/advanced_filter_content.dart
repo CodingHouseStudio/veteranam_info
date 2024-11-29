@@ -24,6 +24,9 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
+      const SliverToBoxAdapter(
+        child: KSizedBox.kHeightSizedBox8,
+      ),
       if (discountFilter.haschosenItem) ...[
         if (isDesk)
           SliverToBoxAdapter(
@@ -55,28 +58,30 @@ class AdvancedFilterContent extends StatelessWidget {
           ),
         ),
       ],
-      AdvancedFilterListWidget(
-        isDesk: isDesk,
-        list: _AdvancedListWidget(
-          filter: discountFilter.filterEligibilities,
-          onChange: onEligibilitiesChange,
+      if (discountFilter.filterEligibilities.isNotEmpty)
+        AdvancedFilterListWidget(
           isDesk: isDesk,
-          itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
+          list: _AdvancedListWidget(
+            filter: discountFilter.filterEligibilities,
+            onChange: onEligibilitiesChange,
+            isDesk: isDesk,
+            itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
+          ),
+          textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
+          title: context.l10n.eligibility,
         ),
-        textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
-        title: context.l10n.eligibility,
-      ),
-      AdvancedFilterListWidget(
-        isDesk: isDesk,
-        list: _AdvancedListWidget(
-          filter: discountFilter.filterCategories,
-          onChange: onCategoriesChange,
+      if (discountFilter.filterCategories.isNotEmpty)
+        AdvancedFilterListWidget(
           isDesk: isDesk,
-          itemKey: KWidgetkeys.screen.discounts.categoriesItems,
+          list: _AdvancedListWidget(
+            filter: discountFilter.filterCategories,
+            onChange: onCategoriesChange,
+            isDesk: isDesk,
+            itemKey: KWidgetkeys.screen.discounts.categoriesItems,
+          ),
+          textKey: KWidgetkeys.screen.discounts.categoriesText,
+          title: context.l10n.category,
         ),
-        textKey: KWidgetkeys.screen.discounts.categoriesText,
-        title: context.l10n.category,
-      ),
       // SliverPadding(
       //   padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
       //   sliver: SliverToBoxAdapter(
@@ -100,17 +105,18 @@ class AdvancedFilterContent extends StatelessWidget {
       //     onChangeSorting: onChangeSorting,
       //   ),
       // ),
-      AdvancedFilterListWidget(
-        isDesk: isDesk,
-        list: _AdvancedListWidget(
-          filter: discountFilter.filterLocation,
-          onChange: onLocationChange,
+      if (discountFilter.filterLocation.isNotEmpty)
+        AdvancedFilterListWidget(
           isDesk: isDesk,
-          itemKey: KWidgetkeys.screen.discounts.cityItems,
+          list: _AdvancedListWidget(
+            filter: discountFilter.filterLocation,
+            onChange: onLocationChange,
+            isDesk: isDesk,
+            itemKey: KWidgetkeys.screen.discounts.cityItems,
+          ),
+          textKey: KWidgetkeys.screen.discounts.citiesText,
+          title: context.l10n.city,
         ),
-        textKey: KWidgetkeys.screen.discounts.citiesText,
-        title: context.l10n.city,
-      ),
     ];
     return Padding(
       padding: isDesk
@@ -244,9 +250,9 @@ class _ChooseItems extends StatelessWidget {
                 isDesk: isDesk,
                 labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
-                  if (eligibilitiesLength < index) {
+                  if (eligibilitiesLength > index) {
                     onChangeEligibilities(chooseItem.value.uk);
-                  } else if (eligibilitiesLength + categoriesLength < index) {
+                  } else if (eligibilitiesLength + categoriesLength > index) {
                     onChangeCategories(chooseItem.value.uk);
                   } else {
                     onChangeLocation(chooseItem.value.uk);
