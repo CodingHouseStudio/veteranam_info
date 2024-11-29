@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/constants/dimensions/min_max_size_constants.dart';
 import 'package:veteranam/shared/extension/extension_dart.dart';
-import 'package:veteranam/shared/models/translate_model.dart';
+import 'package:veteranam/shared/models/helper_models/translate_model.dart';
 
 class SubtitleConverter implements JsonConverter<TranslateModel, dynamic> {
   const SubtitleConverter();

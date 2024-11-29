@@ -173,6 +173,7 @@ abstract class KMockText {
       en: '- when ordering tests and paying for them online on the Esculab website;',
     ),
     eligibility: const [TranslateModel(uk: 'Всі перелічені', en: 'Veterans')],
+
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
