@@ -3,9 +3,7 @@ import 'package:veteranam/components/company/field_models/company_code_field_mod
 import 'package:veteranam/components/company/field_models/company_name_field_model.dart';
 import 'package:veteranam/components/company/field_models/piblic_name_field_model.dart';
 import 'package:veteranam/components/discounts/field_model/discount_link_field_model.dart';
-import 'package:veteranam/components/discounts_add/field_models/categories_field_model.dart';
-import 'package:veteranam/components/discounts_add/field_models/cities_field_model.dart';
-import 'package:veteranam/components/discounts_add/field_models/discounts_field_model.dart';
+import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 extension EmailFieldModelValidationErrorEmpl
@@ -263,6 +261,18 @@ extension CategoriesFieldModelValidationErrorEmpl
       case CategoriesFieldModelValidationError.limit:
         return '${context.l10n.discountLimitMessage}'
             ' ${context.l10n.categoriesLimit}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension EligibilityFieldModelValidationErrorEmpl
+    on EligibilityFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case EligibilityFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
       case null:
         return null;
     }
