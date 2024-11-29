@@ -77,7 +77,7 @@ class TranslateItemsConverter
     final ukItems = json[key] as List?;
     if (ukItems == null) return {};
     if (ukItems.isEmpty) {
-      return {TranslateModelJsonField.trnslationListJson: const <dynamic>[]};
+      return {TranslateModelJsonField.trnslationListJson: ukItems};
     }
     if (ukItems.first is Map<String, dynamic>) {
       return {
