@@ -18,11 +18,10 @@ class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     // required List<dynamic> chooseFilterItems,
-    required List<DiscountModel> filterDiscountModelList,
-    required IDFilterItemsModel idFilterItemsModel,
     required FilterItemsModel filterItemsModel,
     required LoadingStatus loadingStatus,
     required FilterStatus filterStatus,
+    required List<DiscountModel> filterDiscountModelList,
     required List<DiscountEnum> sorting,
     required bool isListLoadedFull,
     required DiscountFailure? failure,

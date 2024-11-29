@@ -569,8 +569,8 @@ void main() {
               sorting: [
                 FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
               ],
-              choosenLocationList: [],
-              choosenSortingnList: [],
+              chosenLocationList: [],
+              chosenSortingnList: [],
             ),
           );
       },

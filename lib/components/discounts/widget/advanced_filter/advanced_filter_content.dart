@@ -24,7 +24,7 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
-      if (discountFilter.hasChoosenItem) ...[
+      if (discountFilter.haschosenItem) ...[
         if (isDesk)
           SliverToBoxAdapter(
             child: AdvancedFilterResetButton(
@@ -46,11 +46,11 @@ class AdvancedFilterContent extends StatelessWidget {
           padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
           sliver: _ChooseItems(
             isDesk: isDesk,
-            choosenItems: discountFilter.getChoosenList,
-            categoriesLength: discountFilter.choosenCategoriesnList.length,
+            chosenItems: discountFilter.getchosenList,
+            categoriesLength: discountFilter.chosenCategoriesList.length,
             onChangeLocation: onLocationChange,
             onChangeCategories: onCategoriesChange,
-            eligibilitiesLength: discountFilter.choosenEligibilitiesList.length,
+            eligibilitiesLength: discountFilter.chosenEligibilitiesList.length,
             onChangeEligibilities: onEligibilitiesChange,
           ),
         ),
@@ -195,7 +195,7 @@ class _AdvancedListWidget extends StatelessWidget {
 class _ChooseItems extends StatelessWidget {
   const _ChooseItems({
     required this.isDesk,
-    required this.choosenItems,
+    required this.chosenItems,
     required this.onChangeLocation,
     required this.onChangeCategories,
     required this.categoriesLength,
@@ -203,7 +203,7 @@ class _ChooseItems extends StatelessWidget {
     required this.onChangeEligibilities,
   });
   final bool isDesk;
-  final Map<String, FilterItem> choosenItems;
+  final Map<String, FilterItem> chosenItems;
   final int categoriesLength;
   final int eligibilitiesLength;
   final void Function(String) onChangeLocation;
@@ -228,11 +228,11 @@ class _ChooseItems extends StatelessWidget {
             onPressed: null,
           ),
         ),
-        itemCount: choosenItems.length,
+        itemCount: chosenItems.length,
         addAutomaticKeepAlives: false,
         addRepaintBoundaries: false,
         itemBuilder: (context, index) {
-          final chooseItem = choosenItems[choosenItems.keys.elementAt(index)]!;
+          final chooseItem = chosenItems[chosenItems.keys.elementAt(index)]!;
           return Padding(
             padding: isDesk
                 ? const EdgeInsets.only(top: KPadding.kPaddingSize16)

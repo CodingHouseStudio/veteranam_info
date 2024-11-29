@@ -4,85 +4,252 @@ import 'package:veteranam/shared/shared_dart.dart';
 class FilterItemsModel {
   const FilterItemsModel._({
     required this.filterCategories,
-    required this.choosenCategoriesnList,
+    required this.chosenCategoriesList,
     required this.filterLocation,
-    required this.choosenLocationList,
+    required this.chosenLocationList,
     required this.filterEligibilities,
-    required this.choosenEligibilitiesList,
+    required this.chosenEligibilitiesList,
   });
 
   const FilterItemsModel.empty({
     this.filterCategories = const {},
-    this.choosenCategoriesnList = const {},
+    this.chosenCategoriesList = const {},
     this.filterLocation = const {},
-    this.choosenLocationList = const {},
+    this.chosenLocationList = const {},
     this.filterEligibilities = const {},
-    this.choosenEligibilitiesList = const {},
+    this.chosenEligibilitiesList = const {},
   });
 
   final Map<String, FilterItem> filterCategories;
-  final Map<String, FilterItem> choosenCategoriesnList;
+  final Map<String, FilterItem> chosenCategoriesList;
   final Map<String, FilterItem> filterLocation;
-  final Map<String, FilterItem> choosenLocationList;
+  final Map<String, FilterItem> chosenLocationList;
   final Map<String, FilterItem> filterEligibilities;
-  final Map<String, FilterItem> choosenEligibilitiesList;
+  final Map<String, FilterItem> chosenEligibilitiesList;
 
-  void addCategory(String valueUK) {
+  void addCategory({
+    required String valueUK,
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required bool isEnglish,
+  }) {
     _addFilterItem(
       valueUK: valueUK,
       filter: filterCategories,
-      choosenFilter: choosenCategoriesnList,
+      chosenFilter: chosenCategoriesList,
     );
+
+    final eligibilitiesList = <TranslateModel>[];
+    final locationList = <TranslateModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      if (chosenListContainAnyValues(
+        values: discount.category,
+        chosenFilter: chosenCategoriesList,
+      )) {
+        // Eligibility
+        if (chosenListContainAnyValues(
+          values: discount.location,
+          chosenFilter: chosenLocationList,
+        )) {
+          if (discount.eligibility != null) {
+            eligibilitiesList.addAll(discount.eligibility!);
+          }
+        }
+
+        // Location
+        if (chosenListContainAnyValues(
+          values: discount.eligibility,
+          chosenFilter: chosenEligibilitiesList,
+        )) {
+          if (discount.location != null) {
+            locationList.addAll(discount.location!);
+          }
+          if (discount.subLocation != null) {
+            locationList.add(KAppText.sublocation);
+          }
+        }
+      }
+    }
+
+    filterEligibilities
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: eligibilitiesList,
+          chosenMap: chosenEligibilitiesList,
+        ),
+      );
+
+    filterLocation
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: locationList,
+          chosenMap: chosenLocationList,
+        ),
+      );
   }
 
-  void addLocation(String valueUK) {
+  void addLocation({
+    required String valueUK,
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required bool isEnglish,
+  }) {
     _addFilterItem(
       valueUK: valueUK,
       filter: filterLocation,
-      choosenFilter: choosenLocationList,
+      chosenFilter: chosenLocationList,
     );
+
+    final categoriesList = <TranslateModel>[];
+    final eligibilityList = <TranslateModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      if (chosenListContainAnyValues(
+        values: discount.location,
+        chosenFilter: chosenLocationList,
+      )) {
+        // Category
+        if (chosenListContainAnyValues(
+          values: discount.eligibility,
+          chosenFilter: chosenEligibilitiesList,
+        )) {
+          categoriesList.addAll(discount.category);
+        }
+
+        // Eligibility
+        if (chosenListContainAnyValues(
+          values: discount.category,
+          chosenFilter: chosenCategoriesList,
+        )) {
+          if (discount.eligibility != null) {
+            eligibilityList.addAll(discount.eligibility!);
+          }
+        }
+      }
+    }
+
+    filterCategories
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: categoriesList,
+          chosenMap: chosenEligibilitiesList,
+        ),
+      );
+
+    filterEligibilities
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: eligibilityList,
+          chosenMap: chosenEligibilitiesList,
+        ),
+      );
   }
 
-  void addEligibility(String valueUK) {
+  void addEligibility({
+    required String valueUK,
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required bool isEnglish,
+  }) {
+    // Add Eligibility to lists: Start
     _addFilterItem(
       valueUK: valueUK,
       filter: filterEligibilities,
-      choosenFilter: choosenEligibilitiesList,
+      chosenFilter: chosenEligibilitiesList,
     );
+    // Add Eligibility to lists: End
+
+    final categoriesList = <TranslateModel>[];
+    final locationList = <TranslateModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      if (chosenListContainAnyValues(
+        values: discount.eligibility,
+        chosenFilter: chosenEligibilitiesList,
+      )) {
+        // Category
+        if (chosenListContainAnyValues(
+          values: discount.location,
+          chosenFilter: chosenLocationList,
+        )) {
+          categoriesList.addAll(discount.category);
+        }
+
+        // Location
+        if (chosenListContainAnyValues(
+          values: discount.category,
+          chosenFilter: chosenCategoriesList,
+        )) {
+          if (discount.location != null) {
+            locationList.addAll(discount.location!);
+          }
+          if (discount.subLocation != null) {
+            locationList.add(KAppText.sublocation);
+          }
+        }
+      }
+    }
+
+    filterCategories
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: categoriesList,
+          chosenMap: chosenCategoriesList,
+        ),
+      );
+
+    filterLocation
+      ..clear()
+      ..addAll(
+        _getFilterFromTranslateModel(
+          list: locationList,
+          chosenMap: chosenLocationList,
+        ),
+      );
   }
 
-  void clearChooseItems() {
-    _clearIsSelecter(
-      filter: filterCategories,
-      choosenFilter: choosenCategoriesnList,
-    );
-    _clearIsSelecter(
-      filter: filterEligibilities,
-      choosenFilter: choosenEligibilitiesList,
-    );
-    _clearIsSelecter(
-      filter: filterLocation,
-      choosenFilter: choosenLocationList,
-    );
-    choosenCategoriesnList.clear();
-    choosenEligibilitiesList.clear();
-    choosenLocationList.clear();
+  List<DiscountModel> getFilterList(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
+    final filterList = <DiscountModel>[];
+
+    for (final discount in unmodifiedDiscountModelItems) {
+      if (chosenListContainAnyValues(
+            values: discount.category,
+            chosenFilter: chosenCategoriesList,
+          ) &&
+          chosenListContainAnyValues(
+            values: discount.location,
+            chosenFilter: chosenLocationList,
+          ) &&
+          chosenListContainAnyValues(
+            values: discount.eligibility,
+            chosenFilter: chosenEligibilitiesList,
+          )) {
+        filterList.add(discount);
+      }
+    }
+
+    return filterList;
   }
 
-  bool get hasChoosenItem =>
-      choosenEligibilitiesList.isNotEmpty ||
-      choosenCategoriesnList.isNotEmpty | choosenLocationList.isNotEmpty;
+  bool get haschosenItem =>
+      chosenEligibilitiesList.isNotEmpty ||
+      chosenCategoriesList.isNotEmpty | chosenLocationList.isNotEmpty;
 
-  Map<String, FilterItem> get getChoosenList => {
-        ...choosenEligibilitiesList,
-        ...choosenCategoriesnList,
-        ...choosenLocationList,
+  Map<String, FilterItem> get getchosenList => {
+        ...chosenEligibilitiesList,
+        ...chosenCategoriesList,
+        ...chosenLocationList,
       };
 
   void _addFilterItem({
     required String valueUK,
     required Map<String, FilterItem> filter,
-    required Map<String, FilterItem> choosenFilter,
+    required Map<String, FilterItem> chosenFilter,
   }) {
     final value = filter[valueUK];
     final filterItem = value?.copyWith(isSelected: !value.isSelected) ??
@@ -90,21 +257,27 @@ class FilterItemsModel {
           TranslateModel(uk: valueUK),
         );
     filter[valueUK] = filterItem;
-    final chooseValue = choosenFilter[valueUK];
+    final chooseValue = chosenFilter[valueUK];
     if (chooseValue == null) {
-      choosenFilter[valueUK] = filterItem;
+      chosenFilter[valueUK] = filterItem;
     } else {
-      choosenFilter.remove(valueUK);
+      chosenFilter.remove(valueUK);
     }
   }
 
-  void _clearIsSelecter({
-    required Map<String, FilterItem> filter,
-    required Map<String, FilterItem> choosenFilter,
+  bool chosenListContainAnyValues({
+    required List<TranslateModel>? values,
+    required Map<String, FilterItem> chosenFilter,
   }) {
-    for (final key in choosenFilter.keys) {
-      final value = filter[key];
-      if (value != null) filter[key] = value.copyWith(isSelected: false);
+    if (chosenFilter.isEmpty) {
+      return true;
+    } else if (values == null) {
+      return false;
+    } else {
+      return chosenFilter.keys.every(
+        (key) => values.any((element) => element.uk == key),
+      );
+      // return values.any((value) => chosenFilter.containsKey(value.uk));
     }
   }
 
@@ -112,6 +285,9 @@ class FilterItemsModel {
   static FilterItemsModel init({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
+    required Map<String, FilterItem> chosenCategories,
+    required Map<String, FilterItem> chosenLocation,
+    required Map<String, FilterItem> chosenEligibilities,
   }) {
     try {
       final categoriesList = <TranslateModel>[];
@@ -119,53 +295,53 @@ class FilterItemsModel {
       final eligibilitiesList = <TranslateModel>[];
 
       for (final discount in unmodifiedDiscountModelItems) {
+        // Category
         categoriesList.addAll(discount.category);
+
+        // Location
         if (discount.location != null) {
           locationList.addAll(discount.location!);
         }
         if (discount.subLocation != null) {
           locationList.add(KAppText.sublocation);
         }
+
+        // Eligibility
         if (discount.eligibility != null) {
           eligibilitiesList.addAll(discount.eligibility!);
         }
       }
-      final locationEntries =
-          _getFilterFromTranslateModel(locationList).entries;
-      final filterLocationList = Map.fromEntries(
-        [
-          ...locationEntries
-              .take(KDimensions.discountLocationNumberSortedItems),
-          ...locationEntries
-              .skip(KDimensions.discountLocationNumberSortedItems)
-              .sorted(
-            (a, b) {
-              if (isEnglish && a.value.value.en != null) {
-                return a.value.value.en!
-                    .compareTo(b.value.value.en.toString().toLowerCase());
-              } else {
-                return a.value.value.uk.compareUkrain(b.value.value.uk);
-              }
-            },
-          ),
-        ],
-      );
+
       return FilterItemsModel._(
-        filterCategories: _getFilterFromTranslateModel(categoriesList),
-        choosenCategoriesnList: {},
-        filterLocation: filterLocationList,
-        choosenLocationList: {},
-        filterEligibilities: _getFilterFromTranslateModel(eligibilitiesList),
-        choosenEligibilitiesList: {},
+        filterCategories: _getFilterFromTranslateModel(
+          list: categoriesList,
+          chosenMap: chosenCategories,
+        ),
+        chosenCategoriesList: chosenCategories.isEmpty ? {} : chosenCategories,
+        filterLocation: _sortingLocation(
+          locationMap: _getFilterFromTranslateModel(
+            list: locationList,
+            chosenMap: chosenLocation,
+          ),
+          isEnglish: isEnglish,
+        ),
+        chosenLocationList: chosenLocation.isEmpty ? {} : chosenLocation,
+        filterEligibilities: _getFilterFromTranslateModel(
+          list: eligibilitiesList,
+          chosenMap: chosenEligibilities,
+        ),
+        chosenEligibilitiesList:
+            chosenEligibilities.isEmpty ? {} : chosenEligibilities,
       );
     } catch (e) {
       return const FilterItemsModel.empty();
     }
   }
 
-  static Map<String, FilterItem> _getFilterFromTranslateModel(
-    List<TranslateModel> list,
-  ) {
+  static Map<String, FilterItem> _getFilterFromTranslateModel({
+    required List<TranslateModel> list,
+    required Map<String, FilterItem> chosenMap,
+  }) {
     final groupList = groupBy(
       list,
       (value) => value.uk,
@@ -182,9 +358,34 @@ class FilterItemsModel {
         key: FilterItem(
           groupList[key]!.first,
           number: groupList[key]?.length ?? 1,
+          isSelected: chosenMap.containsKey(key),
         ),
       });
     }
     return filters;
+  }
+
+  static Map<String, FilterItem> _sortingLocation({
+    required Map<String, FilterItem> locationMap,
+    required bool isEnglish,
+  }) {
+    final locationEntries = locationMap.entries;
+    return Map.fromEntries(
+      [
+        ...locationEntries.take(KDimensions.discountLocationNumberSortedItems),
+        ...locationEntries
+            .skip(KDimensions.discountLocationNumberSortedItems)
+            .sorted(
+          (a, b) {
+            if (isEnglish && a.value.value.en != null) {
+              return a.value.value.en!
+                  .compareTo(b.value.value.en.toString().toLowerCase());
+            } else {
+              return a.value.value.uk.compareUkrain(b.value.value.uk);
+            }
+          },
+        ),
+      ],
+    );
   }
 }

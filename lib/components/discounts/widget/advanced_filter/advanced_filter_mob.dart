@@ -57,10 +57,10 @@ class AdvancedFilterMob extends StatelessWidget {
               context.read<DiscountWatcherBloc>().add(
                     DiscountWatcherEvent.setMobFilter(
                       filterList: _.filtersLocation,
-                      choosenLocationList: _.choosenLocationList,
+                      chosenLocationList: _.chosenLocationList,
                       categories: _.filterCategory,
-                      choosenCategoriesList: _.choosenCategoriesnList,
-                      choosenEligibilitiesList: _.choosenEligibilitiesList,
+                      chosenCategoriesList: _.chosenCategoriesnList,
+                      chosenEligibilitiesList: _.chosenEligibilitiesList,
                       filterEligibilities: _.filterEligibilities,
                     ),
                   );
@@ -129,9 +129,9 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   KSizedBox.kWidthSizedBox8,
                   AdvancedFilterResetButton(
                     isDesk: false,
-                    resetEvent: _.choosenLocationList.isNotEmpty ||
-                            _.choosenCategoriesnList.isNotEmpty ||
-                            _.choosenEligibilitiesList.isNotEmpty
+                    resetEvent: _.chosenLocationList.isNotEmpty ||
+                            _.chosenCategoriesnList.isNotEmpty ||
+                            _.chosenEligibilitiesList.isNotEmpty
                         ? context.pop
                         : null,
                   ),

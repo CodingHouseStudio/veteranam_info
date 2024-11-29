@@ -36,7 +36,6 @@ class DiscountWatcherBloc
             filterItemsModel: FilterItemsModel.empty(),
             filterDiscountModelList: [],
             filterStatus: FilterStatus.initial,
-            idFilterItemsModel: IDFilterItemsModel.empty(),
             isListLoadedFull: false,
           ),
         ) {
@@ -97,35 +96,22 @@ class DiscountWatcherBloc
       return;
     }
 
-    final filterItemsModel = FilterItemsModel.init(
+    late FilterItemsModel filterItemsModel;
+
+    filterItemsModel = FilterItemsModel.init(
       unmodifiedDiscountModelItems: event.discountItemsModel,
       isEnglish: _userRepository.isEnglish,
+      chosenCategories: state.filterItemsModel.chosenCategoriesList,
+      chosenEligibilities: state.filterItemsModel.chosenEligibilitiesList,
+      chosenLocation: state.filterItemsModel.chosenLocationList,
     );
-
-    final idFilterItems = <String, IDFilterItem>{};
-
-    for (final discount in event.discountItemsModel) {
-      idFilterItems.addAll({
-        discount.id: IDFilterItem(
-          discountId: discount.id,
-        ),
-      });
-    }
-
-    final idFilterItemsModel = IDFilterItemsModel(value: idFilterItems);
-
-    final filteredDiscountIdList = idFilterItemsModel.getFilteringId;
 
     final itemsNumber = getCurrentLoadNumber(
       unmodifiedDiscountModelItems: event.discountItemsModel,
     );
 
-    final filterDiscountModelList = event.discountItemsModel
-        .where(
-          (discount) => filteredDiscountIdList.contains(discount.id),
-        )
-        .take(itemsNumber)
-        .toList();
+    final filterDiscountModelList =
+        filterItemsModel.getFilterList(event.discountItemsModel);
 
     emit(
       _Initial(
@@ -134,10 +120,10 @@ class DiscountWatcherBloc
         sorting: [],
         loadingStatus: LoadingStatus.loaded,
         failure: null,
-        filterDiscountModelList: filterDiscountModelList,
-        filterStatus: FilterStatus.initial,
-        idFilterItemsModel: idFilterItemsModel,
-        isListLoadedFull: filteredDiscountIdList.length == itemsNumber,
+        filterDiscountModelList:
+            filterDiscountModelList.take(itemsNumber).toList(),
+        filterStatus: state.filterStatus,
+        isListLoadedFull: itemsNumber >= filterDiscountModelList.length,
       ),
     );
   }
@@ -146,11 +132,13 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final filteredDiscountIdList = state.idFilterItemsModel.getFilteringId;
+    final filterDiscountModelList = state.filterItemsModel.getFilterList(
+      state.unmodifiedDiscountModelItems,
+    );
 
     final itemsNumber = getCurrentLoadNumber();
 
-    if (itemsNumber == filteredDiscountIdList.length) {
+    if (itemsNumber == filterDiscountModelList.length) {
       if (!state.isListLoadedFull) {
         emit(state.copyWith(isListLoadedFull: true));
       }
@@ -159,45 +147,16 @@ class DiscountWatcherBloc
 
     final currentLoadingItems = itemsNumber + getItemsLoading;
 
-    final filterDiscounts = state.unmodifiedDiscountModelItems
-        .where(
-          (discount) => filteredDiscountIdList.contains(discount.id),
-        )
-        .take(
-          currentLoadingItems,
-        )
-        .toList();
-
     emit(
       state.copyWith(
-        filterDiscountModelList: filterDiscounts,
-        isListLoadedFull: currentLoadingItems == filteredDiscountIdList.length,
+        filterDiscountModelList: filterDiscountModelList
+            .take(
+              currentLoadingItems,
+            )
+            .toList(),
+        isListLoadedFull: currentLoadingItems >= filterDiscountModelList.length,
       ),
     );
-    // if (state.itemsLoaded
-    //     .checkLoadingPosible(state.categoryDiscountModelItems)) {
-    //   emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
-    //   return;
-    // }
-    // // emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    // // final (:list, :loadingStatus) = _filterLocation(
-    // //   itemsLoaded: state.itemsLoaded,
-    // //   locationIndex: state.filtersLocationIndex,
-    // //   loadItems: getItemsLoading,
-    // // );
-    // final (:list, :loadingStatus) = _filter(
-    //   categoryList: state.categoryDiscountModelItems,
-    //   locationList: state.locationDiscountModelItems,
-    //   itemsLoaded: state.itemsLoaded,
-    //   loadItems: getItemsLoading,
-    // );
-    // emit(
-    //   state.copyWith(
-    //     filteredDiscountModelItems: list,
-    //     itemsLoaded: list.length,
-    //     loadingStatus: loadingStatus,
-    //   ),
-    // );
   }
 
   void _onFilterReset(
@@ -206,58 +165,20 @@ class DiscountWatcherBloc
   ) {
     emit(
       state.copyWith(
-        filterStatus: FilterStatus.filtering,
+        filterDiscountModelList: state.unmodifiedDiscountModelItems
+            .take(getCurrentLoadNumber())
+            .toList(),
+        filterItemsModel: FilterItemsModel.init(
+          unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
+          isEnglish: _userRepository.isEnglish,
+          chosenCategories: const {},
+          chosenLocation: const {},
+          chosenEligibilities: const {},
+        ),
+        isListLoadedFull: state.unmodifiedDiscountModelItems.length <=
+            state.filterDiscountModelList.length,
       ),
     );
-
-    state.filterItemsModel.clearChooseItems();
-
-    emit(
-      state.copyWith(
-        filterStatus: FilterStatus.filtered,
-      ),
-    );
-    // final locationes = state.discountModelItems
-    //     .getLocationFilter(isEnglish: _userRepository.isEnglish);
-
-    // final categories = state.discountModelItems.overallItems(
-    //   isEnglish: state.isEnglish,
-    //   getFilter: (item) => item.category,
-    //   calculateNumber: true,
-    // );
-
-    // final eligibilities = state.discountModelItems.overallItems(
-    //   isEnglish: _userRepository.isEnglish,
-    //   getENFilter: (item) => item.eligibilityEN,
-    //   getUAFilter: (item) => item.eligibility,
-    //   calculateNumber: true,
-    // );
-    // emit(
-    //   state.copyWith(
-    //     filteredDiscountModelItems: state.discountModelItems.loading(
-    //       itemsLoaded: state.itemsLoaded,
-    //     ),
-    //     categoryDiscountModelItems: state.discountModelItems,
-    //     locationDiscountModelItems: state.discountModelItems,
-    //     sortingDiscountModelItems: state.discountModelItems,
-    //     sorting: state.sorting
-    //         .map(
-    //           (element) => element.isSelected
-    //               ? element.copyWith(isSelected: false)
-    //               : element,
-    //         )
-    //         .toList(),
-    //     filterCategory: categories,
-    //     filterLocation: locationes,
-    //     filterEligibilities: eligibilities,
-    //     choosenLocationList: [],
-    //     choosenCategoriesnList: [],
-    //     choosenEligibilitiesList: [],
-    //     loadingStatus: state.discountModelItems.length != state.itemsLoaded
-    //         ? LoadingStatus.loaded
-    //         : LoadingStatus.listLoadedFull,
-    //   ),
-    // );
   }
 
   void _onFilterEligibilities(
@@ -270,69 +191,23 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addEligibility(event.value);
+    state.filterItemsModel.addEligibility(
+      valueUK: event.value,
+      unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
+      isEnglish: _userRepository.isEnglish,
+    );
 
-    for (final discount in state.unmodifiedDiscountModelItems) {
-      var hasEligibility = false;
-      var hasCategory = false;
-      var hasLocation = false;
+    final itemsNumber = getCurrentLoadNumber();
 
-      if (state.filterItemsModel.choosenEligibilitiesList.isEmpty) {
-        hasEligibility = true;
-      } else {
-        if (discount.eligibility != null) {
-          for (final eligiblity in discount.eligibility!) {
-            if (state.filterItemsModel.choosenEligibilitiesList
-                .containsKey(eligiblity.uk)) {
-              hasEligibility = true;
-            }
-          }
-        }
-      }
-
-      if (state.filterItemsModel.choosenCategoriesnList.isEmpty) {
-        hasCategory = true;
-      } else {
-        for (final category in discount.category) {
-          if (state.filterItemsModel.choosenCategoriesnList
-              .containsKey(category.uk)) {
-            hasCategory = true;
-          }
-        }
-      }
-
-      if (state.filterItemsModel.choosenLocationList.isEmpty) {
-        hasLocation = true;
-      } else {
-        if (discount.location != null) {
-          for (final location in discount.location!) {
-            if (state.filterItemsModel.choosenLocationList
-                .containsKey(location.uk)) {
-              hasLocation = true;
-            }
-          }
-        }
-        if (discount.subLocation != null) {
-          if (state.filterItemsModel.choosenLocationList
-              .containsKey(KAppText.sublocation.uk)) {
-            hasLocation = true;
-          }
-        }
-      }
-
-      state.idFilterItemsModel.value[discount.id] = IDFilterItem(
-        discountId: discount.id,
-        hasCateogries: hasCategory,
-        hasEligibilities: hasEligibility,
-        hasLocation: hasLocation,
-      );
-    }
-
-    add(const DiscountWatcherEvent.loadNextItems());
+    final filterDiscountModelList = state.filterItemsModel
+        .getFilterList(state.unmodifiedDiscountModelItems);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
+        filterDiscountModelList:
+            filterDiscountModelList.take(itemsNumber).toList(),
+        isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
   }
@@ -347,52 +222,25 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addCategory(event.value);
+    state.filterItemsModel.addCategory(
+      valueUK: event.value,
+      unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
+      isEnglish: _userRepository.isEnglish,
+    );
+
+    final itemsNumber = getCurrentLoadNumber();
+
+    final filterDiscountModelList = state.filterItemsModel
+        .getFilterList(state.unmodifiedDiscountModelItems);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
+        filterDiscountModelList:
+            filterDiscountModelList.take(itemsNumber).toList(),
+        isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
-
-    // final selectedFilters = state.filterCategory
-    //     .map(
-    //       (element) => element.value == event.value
-    //           ? element.copyWith(isSelected: !element.isSelected)
-    //           : element,
-    //     )
-    //     .toList();
-
-    // if (selectedFilters == state.filterCategory) return;
-    // final chooseCategories = selectedFilters.selectedList;
-    // final categoryItems = _filterCategory(
-    //   chooseCategories: chooseCategories,
-    // );
-    // final (:list, :loadingStatus) = _filter(
-    //   categoryList: categoryItems,
-    //   locationList: state.locationDiscountModelItems,
-    //   itemsLoaded: state.itemsLoaded.getLoaded(
-    //     list: categoryItems,
-    //     loadItems: getItemsLoading,
-    //   ),
-    // );
-
-    // final locations = categoryItems.getLocationFilter(
-    //   isEnglish: _userRepository.isEnglish,
-    // );
-
-    // emit(
-    //   state.copyWith(
-    //     filteredDiscountModelItems: list,
-    //     filterCategory: selectedFilters,
-    //     itemsLoaded: list.length,
-    //     loadingStatus: loadingStatus,
-    //     choosenCategoriesnList: chooseCategories,
-    //     categoryDiscountModelItems: categoryItems,
-    //     filterLocation: locations,
-    //     choosenLocationList: locations.selectedList,
-    //   ),
-    // );
   }
 
   void _onFilterLocation(
@@ -405,68 +253,25 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addLocation(event.value);
+    state.filterItemsModel.addLocation(
+      valueUK: event.value,
+      unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
+      isEnglish: _userRepository.isEnglish,
+    );
+
+    final itemsNumber = getCurrentLoadNumber();
+
+    final filterDiscountModelList = state.filterItemsModel
+        .getFilterList(state.unmodifiedDiscountModelItems);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
+        filterDiscountModelList:
+            filterDiscountModelList.take(itemsNumber).toList(),
+        isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
-    // final selectedFilters = state.filterLocation
-    //     .map(
-    //       (element) => element.value == event.value
-    //           ? element.copyWith(isSelected: !element.isSelected)
-    //           : element,
-    //     )
-    //     .toList();
-    // // checkValue(
-    // //   filterValue: event.value,
-    // //   equalValue: SubLocation.allStoresOfChain,
-    // // );
-
-    // final chooseLocation = selectedFilters.selectedList;
-    // final locationList = _filterLocation(
-    //   chooseLocation: chooseLocation,
-    // );
-    // final (:list, :loadingStatus) = _filter(
-    //   categoryList: state.categoryDiscountModelItems,
-    //   locationList: locationList,
-    //   itemsLoaded: state.itemsLoaded,
-    //   location: selectedFilters,
-    // );
-    // final categories = locationList
-    //     .overallItems(
-    //       isEnglish: _userRepository.isEnglish,
-    //       getENFilter: (item) => item.categoryEN,
-    //       getUAFilter: (item) => item.category,
-    //       calculateNumber: true,
-    //     )
-    //     .map(
-    //       (e) => state.choosenCategoriesnList
-    //               .where(
-    //                 (element) => element.value == e.value,
-    //               )
-    //               .isNotEmpty
-    //           ? e.copyWith(isSelected: true)
-    //           : e,
-    //     )
-    //     .toList();
-
-    // emit(
-    //   state.copyWith(
-    //     filteredDiscountModelItems: list,
-    //     locationDiscountModelItems: locationList,
-    //     filterLocation: selectedFilters,
-    //     choosenLocationList: chooseLocation,
-    //     itemsLoaded: list.length,
-    //     loadingStatus: loadingStatus,
-    //     filterCategory: locationList.overallItems(
-    //       isEnglish: state.isEnglish,
-    //       getFilter: (item) => item.category,
-    //       calculateNumber: true,
-    //     ),
-    //   ),
-    // );
   }
 
   void _setMobFilter(
@@ -474,15 +279,15 @@ class DiscountWatcherBloc
     Emitter<DiscountWatcherState> emit,
   ) {
     // final locationList = _filterLocation(
-    //   chooseLocation: event.choosenLocationList,
+    //   chooseLocation: event.chosenLocationList,
     //   listValue: state.sortingDiscountModelItems,
     // );
     // final categoryFilter = _filterCategory(
-    //   chooseCategories: event.choosenCategoriesList,
+    //   chooseCategories: event.chosenCategoriesList,
     //   list: state.sortingDiscountModelItems,
     // );
     // final eligibilitiesFilter = _filterEligebilities(
-    //   chooseEligibilities: event.choosenEligibilitiesList,
+    //   chooseEligibilities: event.chosenEligibilitiesList,
     //   list: state.sortingDiscountModelItems,
     // );
     // final (:list, :loadingStatus) = _filter(
@@ -501,12 +306,12 @@ class DiscountWatcherBloc
     //     loadingStatus: loadingStatus,
     //     filteredDiscountModelItems: list,
     //     itemsLoaded: list.length,
-    //     choosenLocationList: event.choosenLocationList,
+    //     chosenLocationList: event.chosenLocationList,
     //     categoryDiscountModelItems: categoryFilter,
     //     locationDiscountModelItems: locationList,
     //     sorting: event.sorting,
     //     sortingDiscountModelItems: sortingList,
-    //     choosenSortingnList: event.choosenSortingnList,
+    //     chosenSortingnList: event.chosenSortingnList,
     //     filterCategory: locationList.overallItems(
     //       isEnglish: state.isEnglish,
     //       getFilter: (item) => item.category,
@@ -515,7 +320,7 @@ class DiscountWatcherBloc
     //     filterLocation: event.filterList,
     //     eligibilitiesDiscountModelItems: eligibilitiesFilter,
     //     filterEligibilities: event.filterEligibilities,
-    //     choosenEligibilitiesList: event.choosenEligibilitiesList,
+    //     chosenEligibilitiesList: event.chosenEligibilitiesList,
     //   ),
     // );
   }

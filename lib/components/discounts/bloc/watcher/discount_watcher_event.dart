@@ -25,9 +25,9 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.setMobFilter({
     required List<FilterItem> filterList,
     required List<FilterItem> categories,
-    required List<FilterItem> choosenLocationList,
-    required List<FilterItem> choosenCategoriesList,
-    required List<FilterItem> choosenEligibilitiesList,
+    required List<FilterItem> chosenLocationList,
+    required List<FilterItem> chosenCategoriesList,
+    required List<FilterItem> chosenEligibilitiesList,
     required List<FilterItem> filterEligibilities,
   }) = _SetMobFilter;
 

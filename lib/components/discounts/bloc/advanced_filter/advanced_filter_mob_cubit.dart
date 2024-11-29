@@ -12,10 +12,10 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
       : super(
           const AdvancedFilterMobState(
             filtersLocation: [],
-            choosenLocationList: [],
-            choosenCategoriesnList: [],
+            chosenLocationList: [],
+            chosenCategoriesnList: [],
             filterCategory: [],
-            choosenEligibilitiesList: [],
+            chosenEligibilitiesList: [],
             filterEligibilities: [],
           ),
         );
@@ -30,11 +30,11 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
       emit(
         AdvancedFilterMobState(
           filtersLocation: initialLocationFilter,
-          choosenLocationList: initChooseLocationList,
+          chosenLocationList: initChooseLocationList,
           filterCategory: initialCategories,
-          choosenCategoriesnList: initialChooseCategories,
+          chosenCategoriesnList: initialChooseCategories,
           filterEligibilities: initialEligibilities,
-          choosenEligibilitiesList: initialChooseEligibilities,
+          chosenEligibilitiesList: initialChooseEligibilities,
         ),
       );
 
@@ -53,7 +53,7 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     emit(
       state.copyWith(
         filterCategory: filterList,
-        choosenCategoriesnList: filterList
+        chosenCategoriesnList: filterList
             .where(
               (element) => element.isSelected,
             )
@@ -77,7 +77,7 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     emit(
       state.copyWith(
         filtersLocation: filterList,
-        choosenLocationList: filterList
+        chosenLocationList: filterList
             .where(
               (element) => element.isSelected,
             )
@@ -97,7 +97,7 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     emit(
       state.copyWith(
         filterEligibilities: filterList,
-        choosenEligibilitiesList: filterList
+        chosenEligibilitiesList: filterList
             .where(
               (element) => element.isSelected,
             )
