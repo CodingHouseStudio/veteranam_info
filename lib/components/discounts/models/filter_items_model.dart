@@ -137,7 +137,8 @@ class FilterItemsModel {
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required _FilterEnum filterEnum,
   }) {
-    // Add New Filter Item For Current List: Start
+    // Add New Filter Item To Chosen List and Change Is Selected For Item With
+    // Value ValueUK: Start
     final value = filter[valueUK];
     final filterItem = value?.copyWith(isSelected: !value.isSelected) ??
         FilterItem(
@@ -150,7 +151,8 @@ class FilterItemsModel {
     } else {
       chosenFilter.remove(valueUK);
     }
-    // Add New Filter Item For Current List: End
+    // Add New Filter Item To Chosen List and Change Is Selected For Item With
+    // Value ValueUK: End
 
     // Change two another filter list: Start
     final eligibilitiesList = <TranslateModel>[];
@@ -162,10 +164,13 @@ class FilterItemsModel {
         filterEnum: filterEnum,
         discount: discount,
       )) {
-        // Eligibility
+        // Add Eligibility
+        // discount contain category and call from add Location method
+        // OR
+        // discount contain location and call from add Category method
         if (_chosenListContainAnyValuesWithFilterEnum(
           filterEnum: filterEnum == _FilterEnum.category
-              ? _FilterEnum.eligibility
+              ? _FilterEnum.location
               : _FilterEnum.category,
           discount: discount,
         )) {
@@ -174,10 +179,13 @@ class FilterItemsModel {
           }
         }
 
-        // Location
+        // Add Location
+        // discount contain category and call from add Eligibility method
+        // OR
+        // discount contain eligibility and call from add Category method
         if (_chosenListContainAnyValuesWithFilterEnum(
           filterEnum: filterEnum == _FilterEnum.category
-              ? _FilterEnum.location
+              ? _FilterEnum.eligibility
               : _FilterEnum.category,
           discount: discount,
         )) {
@@ -189,7 +197,10 @@ class FilterItemsModel {
           }
         }
 
-        // Category
+        // Add Category
+        // discount contain location and call from add Eligibility method
+        // OR
+        // discount contain dligibility and call from add Location method
         if (_chosenListContainAnyValuesWithFilterEnum(
           filterEnum: filterEnum == _FilterEnum.location
               ? _FilterEnum.eligibility
@@ -203,6 +214,7 @@ class FilterItemsModel {
       }
     }
 
+    // Romve prevoius value from filter Eligibilities and set new value
     if (filterEnum != _FilterEnum.eligibility) {
       filterEligibilities
         ..clear()
@@ -214,6 +226,7 @@ class FilterItemsModel {
         );
     }
 
+    // Romve prevoius value from filter Location and set new value
     if (filterEnum != _FilterEnum.location) {
       filterLocation
         ..clear()
@@ -225,6 +238,7 @@ class FilterItemsModel {
         );
     }
 
+    // Romve prevoius value from filter Categories and set new value
     if (filterEnum != _FilterEnum.category) {
       filterCategories
         ..clear()
@@ -238,6 +252,8 @@ class FilterItemsModel {
     // Change two another filter list: End
   }
 
+  /// Helper to check if discount contain value from chosen list.
+  /// discount field and chosen filter set use filterEnum
   bool _chosenListContainAnyValuesWithFilterEnum({
     required _FilterEnum filterEnum,
     required DiscountModel discount,
@@ -261,6 +277,14 @@ class FilterItemsModel {
     }
   }
 
+  /// Checks if chosen filter list contain translate model list.
+  ///
+  /// return true if chosen list empty
+  ///
+  /// return false if chosen list is not empty and translate model list is null
+  ///
+  /// return true/false if chosen list is not empty, translate model list is not null
+  /// and if translate model list(uk value) contain every keys
   bool _chosenListContainAnyValues({
     required List<TranslateModel>? values,
     required Map<String, FilterItem> chosenFilter,
@@ -290,6 +314,9 @@ class FilterItemsModel {
       final locationList = <TranslateModel>[];
       final eligibilitiesList = <TranslateModel>[];
 
+      // Add all categories, location and eligibilities: Start
+      // item in the list can contain the same values.
+      // It'll fix in the _getFilterFromTranslateModel method
       for (final discount in unmodifiedDiscountModelItems) {
         // Category
         categoriesList.addAll(discount.category);
@@ -307,6 +334,7 @@ class FilterItemsModel {
           eligibilitiesList.addAll(discount.eligibility!);
         }
       }
+      // Add all categories, location and eligibilities: End
 
       return FilterItemsModel._(
         filterCategories: _getFilterFromTranslateModel(
@@ -334,21 +362,33 @@ class FilterItemsModel {
     }
   }
 
+  /// Create Map<String, FilterItem> from List<TranslateModel>
+  /// set is selected true for element where value.uk contain chosen map
   static Map<String, FilterItem> _getFilterFromTranslateModel({
     required List<TranslateModel> list,
     required Map<String, FilterItem> chosenMap,
   }) {
+    // Create map where key is not repeat value(uk) and values
+    // contain how main another element in the list contain the same value
     final groupList = groupBy(
       list,
       (value) => value.uk,
     );
 
     final filters = <String, FilterItem>{};
+
+    // sorted key list use how many values the in the groupList
+    // Sorting in descending order
     final keysSorted = groupList.keys.sorted(
       (a, b) => groupList[b]!.length.compareTo(
             groupList[a]!.length,
           ),
     );
+
+    // Create Filter Item map use group list
+    // values set use first value from map with the same values
+    // number set how many the same values contain group list
+    // set is selected true if chosenMap contain value.uk/key
     for (final key in keysSorted) {
       filters.addAll({
         key: FilterItem(
@@ -361,6 +401,10 @@ class FilterItemsModel {
     return filters;
   }
 
+  /// Sorting location
+  /// First five value sorting by number
+  /// After first five value sorting by alphabet
+  /// Language for alphabet sorting set use isEnglish
   static Map<String, FilterItem> _sortingLocation({
     required Map<String, FilterItem> locationMap,
     required bool isEnglish,
@@ -368,15 +412,21 @@ class FilterItemsModel {
     final locationEntries = locationMap.entries;
     return Map.fromEntries(
       [
+        // not srting first five value because when get value
+        // from _getFilterFromTranslateModel it sorting by number
         ...locationEntries.take(KDimensions.discountLocationNumberSortedItems),
+        // sorting by alphabet all item after first five
         ...locationEntries
             .skip(KDimensions.discountLocationNumberSortedItems)
             .sorted(
           (a, b) {
             if (isEnglish && a.value.value.en != null) {
+              // sorting by english alphabet if isEnglish and item
+              // contain english value
               return a.value.value.en!
                   .compareTo(b.value.value.en.toString().toLowerCase());
             } else {
+              // sorting by ukrain aphabet
               return a.value.value.uk.compareUkrain(b.value.value.uk);
             }
           },
