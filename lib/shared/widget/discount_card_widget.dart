@@ -199,7 +199,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               discountItem: discountItem,
               // afterEvent: reportEvent,
               cardId: discountItem.id,
-              share: share,
+              share: share!,
               complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
               shareKey: KWidgetkeys.widget.discountCard.iconShare,
               likeKey: KWidgetkeys.widget.discountCard.iconLike,

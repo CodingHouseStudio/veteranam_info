@@ -5,18 +5,18 @@ class DiscountTextWidget extends StatelessWidget {
   const DiscountTextWidget({
     required this.isDesk,
     required this.description,
-    this.text,
+    required this.icon,
+    required this.button,
     this.maxLines,
-    this.icon,
-    this.button,
+    this.text,
     super.key,
   });
 
   final String description;
   final List<TranslateModel>? text;
   final int? maxLines;
-  final Widget? icon;
-  final Widget? button;
+  final Widget icon;
+  final Widget button;
   final bool isDesk;
 
   @override
@@ -39,18 +39,17 @@ class DiscountTextWidget extends StatelessWidget {
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          Eligibility(text: text!.getTrsnslation(context)),
+          DiscountEligibilityWidget(text: text!),
           KSizedBox.kHeightSizedBox16,
         ],
-        if (icon != null && button != null)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              button!,
-              icon!,
-            ],
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            button,
+            icon,
+          ],
+        ),
       ],
     );
   }

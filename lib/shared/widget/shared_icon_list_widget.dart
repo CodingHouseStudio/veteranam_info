@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class SharedIconListWidget extends StatefulWidget {
+class SharedIconListWidget extends StatelessWidget {
   const SharedIconListWidget({
     required this.isDesk,
     required this.cardEnum,
     required this.cardId,
     required this.shareKey,
     required this.complaintKey,
+    required this.share,
     super.key,
     this.link,
     this.webSiteKey,
-    this.share,
     this.useSiteUrl,
     this.showComplaint = true,
     this.showShare = true,
@@ -28,25 +28,12 @@ class SharedIconListWidget extends StatefulWidget {
   final Key shareKey;
   final Key? likeKey;
   final Key complaintKey;
-  final String? share;
+  final String share;
   final bool showComplaint;
   final bool showShare;
   final Color background;
   final bool? useSiteUrl;
   final DiscountModel? discountItem;
-
-  @override
-  State<SharedIconListWidget> createState() => _SharedIconListWidgetState();
-}
-
-class _SharedIconListWidgetState extends State<SharedIconListWidget> {
-  late bool like;
-
-  @override
-  void initState() {
-    super.initState();
-    like = false;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +42,13 @@ class _SharedIconListWidgetState extends State<SharedIconListWidget> {
       children: [
         _CardLikeIconWidget(
           label: context.l10n.favorite,
-          onPressed: () {
-            setState(() {
-              like = !like;
-            });
-          },
-          icon: like
-              ? KIcon.favorite
-                  .copyWith(color: AppColors.materialThemeRefErrorError50)
-              : KIcon.favorite,
-          countLike: widget.discountItem?.likes ?? 0,
-          background: widget.background,
-          key: widget.likeKey,
+          onPressed: () {},
+          icon: KIcon.favorite,
+          countLike: discountItem?.likes ?? 0,
+          background: background,
+          key: likeKey,
         ),
-        if (widget.isDesk)
-          KSizedBox.kWidthSizedBox16
-        else
-          KSizedBox.kWidthSizedBox8,
+        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
         // if (link != null && link!.isUrlValid) ...[
         //   _CardIconWidget(
         //     label: context.l10n.webSite,
@@ -83,55 +60,49 @@ class _SharedIconListWidgetState extends State<SharedIconListWidget> {
         //   if (isDesk) KSizedBox.kWidthSizedBox12
         //else KSizedBox.kWidthSizedBox4,
         // ],
-        if (widget.showShare)
+        if (showShare)
           _CardIconWidget(
             label: context.l10n.share,
-            onPressed: widget.share != null
-                ? () => context.read<UrlCubit>().share(
-                      widget.share,
-                      useSiteUrl: widget.useSiteUrl,
-                    )
-                : null,
+            onPressed: () => context.read<UrlCubit>().share(
+                  share,
+                  useSiteUrl: useSiteUrl,
+                ),
             icon: KIcon.share,
-            background: widget.background,
-            key: widget.shareKey,
+            background: background,
+            key: shareKey,
           ),
-        if (widget.isDesk)
-          KSizedBox.kWidthSizedBox16
-        else
-          KSizedBox.kWidthSizedBox8,
+        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
         Column(
           children: [
             DropDownButton(
-              isDesk: widget.isDesk,
+              isDesk: isDesk,
               style: KButtonStyles.borderWhiteButtonStyle,
               discountButtons: true,
               items: [
                 DropDownItem(
                   text: context.l10n.webSite,
                   icon: IconWidget(
-                    background: widget.background,
+                    background: background,
                     icon: KIcon.captivePortal,
                     padding: KPadding.kPaddingSize12,
                   ),
-                  action: () =>
-                      context..read<UrlCubit>().launchUrl(url: widget.link),
-                  key: widget.webSiteKey!,
+                  action: () => context..read<UrlCubit>().launchUrl(url: link),
+                  key: webSiteKey!,
                 ),
                 DropDownItem(
                   text: context.l10n.complaint,
                   icon: IconWidget(
-                    background: widget.background,
+                    background: background,
                     icon: KIcon.brightnessAlert,
                     padding: KPadding.kPaddingSize12,
                   ),
                   action: () => context.dialog.showReportDialog(
-                    isDesk: widget.isDesk,
-                    cardEnum: widget.cardEnum,
+                    isDesk: isDesk,
+                    cardEnum: cardEnum,
                     // afterEvent: afterEvent,
-                    cardId: widget.cardId,
+                    cardId: cardId,
                   ),
-                  key: widget.complaintKey,
+                  key: complaintKey,
                 ),
               ],
               offset: KDimensions.discountOffset,
@@ -237,7 +208,7 @@ class _CardLikeIconWidget extends StatelessWidget {
                       vertical: KPadding.kPaddingSize4,
                     ),
                     child: Text(
-                      '$countLike',
+                      countLike.toString(),
                       style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),

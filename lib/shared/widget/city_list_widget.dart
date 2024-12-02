@@ -25,37 +25,35 @@ class CityListWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize4,
       ),
-      child: IntrinsicWidth(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            KIcon.distance.copyWith(
-              key: KWidgetkeys.widget.cityList.icon,
-            ),
-            KSizedBox.kWidthSizedBox8,
-            if (cityList.isNotEmpty)
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: KPadding.kPaddingSize2,
-                    right: KPadding.kPaddingSize5,
-                  ),
-                  child: cityList.length == 1
-                      ? Text(
-                          cityList.first.getTrsnslation(context),
-                          key: KWidgetkeys.widget.cityList.text,
-                          style: AppTextStyle.materialThemeLabelLarge,
-                        )
-                      : CityWidgetListExpanded(
-                          key: ValueKey(cityList),
-                          cityList: cityList,
-                          isDesk: isDesk,
-                        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          KIcon.distance.copyWith(
+            key: KWidgetkeys.widget.cityList.icon,
+          ),
+          KSizedBox.kWidthSizedBox8,
+          if (cityList.isNotEmpty)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize2,
+                  right: KPadding.kPaddingSize5,
                 ),
+                child: cityList.length == 1
+                    ? Text(
+                        cityList.first.getTrsnslation(context),
+                        key: KWidgetkeys.widget.cityList.text,
+                        style: AppTextStyle.materialThemeLabelLarge,
+                      )
+                    : CityWidgetListExpanded(
+                        key: ValueKey(cityList),
+                        cityList: cityList,
+                        isDesk: isDesk,
+                      ),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

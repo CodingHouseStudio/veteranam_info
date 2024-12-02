@@ -2,13 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class Eligibility extends StatelessWidget {
-  const Eligibility({
+class DiscountEligibilityWidget extends StatelessWidget {
+  const DiscountEligibilityWidget({
     required this.text,
     super.key,
   });
 
-  final List<String> text;
+  final List<TranslateModel> text;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class Eligibility extends StatelessWidget {
           top: KPadding.kPaddingSize4,
           right: KPadding.kPaddingSize8,
         ),
-        child: EligibilityExpanded(
+        child: DiscountEligibilityExpandedWidget(
           key: ValueKey(text),
-          text: text,
+          text: text.getTrsnslation(context),
         ),
       );
     } else {
@@ -29,8 +29,8 @@ class Eligibility extends StatelessWidget {
   }
 }
 
-class EligibilityExpanded extends StatelessWidget {
-  const EligibilityExpanded({
+class DiscountEligibilityExpandedWidget extends StatelessWidget {
+  const DiscountEligibilityExpandedWidget({
     required this.text,
     super.key,
   });
@@ -68,7 +68,10 @@ class EligibilityExpanded extends StatelessWidget {
             children: [
               _getIconWidget(text),
               KSizedBox.kWidthSizedBox4,
-              _getLabelWidget(text),
+              Text(
+                _getLabelWidget(text),
+                style: AppTextStyle.materialThemeLabelMedium,
+              ),
               KSizedBox.kWidthSizedBox8,
             ],
           ),
@@ -117,55 +120,28 @@ class EligibilityExpanded extends StatelessWidget {
     }
   }
 
-  Widget _getLabelWidget(String text) {
+  String _getLabelWidget(String text) {
     switch (text) {
       case 'Ветерани':
-        return const Text(
-          'Ветерани',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'Ветерани';
       case 'Військовослужбовці':
       case 'Військовослужбовці ЗСУ':
-        return const Text(
-          'Військовослужбовці',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'Військовослужбовці';
       case 'Учасники бойових дій':
-        return const Text(
-          'УБД',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'УБД';
       case 'Особи з інвалідністю внаслідок війни':
-        return const Text(
-          'Особи з інвалідністю',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'Особи з інвалідністю';
       case 'Члени сімей загиблих':
-        return const Text(
-          'ЧСЗ',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'ЧСЗ';
       case 'Співробітники ДСНС':
-        return const Text(
-          'ДСНС',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'ДСНС';
       case 'Поліція':
-        return const Text(
-          'Поліція',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'Поліція';
       case 'Внутрішньо переміщені особи':
       case 'ВПО':
-        return const Text(
-          'Військовослужбовці',
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return 'Військовослужбовці';
       default:
-        return Text(
-          text,
-          style: AppTextStyle.materialThemeLabelMedium,
-        );
+        return text;
     }
   }
 }

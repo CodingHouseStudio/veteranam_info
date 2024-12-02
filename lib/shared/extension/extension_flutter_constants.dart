@@ -60,23 +60,20 @@ extension DiscountModelLocation on DiscountModel {
   //       if (location != null) ...location!,
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
-  String getDescription(BuildContext context) {
-    final parts = [
-      description.getTrsnslation(context),
-      if (requirements != null) _getMarkdownToGetIfYouNeed(context),
-      if (requirements != null) _getMarkdownRequirements(context),
-      if (exclusions != null) _getMarkdownExclusions(context),
-      if (additionalDetails != null) _getMarkdownAdditionalDetails(context),
-      if (phoneNumber != null) _getMarkdownPhoneNumber(context),
-    ];
-
-    return parts
-        .where((part) => part.isNotEmpty)
-        .join(' ')
-        .replaceAll('**', '')
-        .replaceAll('*', '')
-        .replaceAll('\n', ' ');
-  }
+  String getDescription(BuildContext context) =>
+      '${description.getTrsnslation(context)}'
+              // ignore: lines_longer_than_80_chars
+              '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
+              '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+              '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+              '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+                  context,
+                ) : ''}'
+              '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
+          .replaceAll('**', '')
+          .replaceAll('*', '')
+          .replaceAll('\n', ' ')
+          .trim();
 
   String _getMarkdownAdditionalDetails(BuildContext context) =>
       '\n\n${additionalDetails?.getTrsnslation(
