@@ -106,7 +106,7 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      // emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));//TODO:
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));

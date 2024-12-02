@@ -567,10 +567,10 @@ void main() {
                 FilterItem(KAppText.allUkrainOnline),
               ],
               sorting: [
-                SortingItem(DiscountEnum.largestSmallest),
+                FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
               ],
-              choosenLocationList: [],
-              choosenSortingnList: [],
+              chosenLocationList: [],
+              chosenSortingnList: [],
             ),
           );
       },
