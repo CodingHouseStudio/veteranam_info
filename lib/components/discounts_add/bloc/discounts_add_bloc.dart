@@ -27,7 +27,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
-            eligibility: ListFieldModel.pure(),
+            eligibility: EligibilityFieldModel.pure(),
             link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
@@ -137,8 +137,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           ),
           eligibility: discount!.eligibility == null
               ? null
-              : ListFieldModel.dirty(
-                  discount!.eligibility!.getTrsnslation(isEnglish: false),
+              : EligibilityFieldModel.dirty(
+                  discount!.eligibility!.toEligibility,
                 ),
           link: LinkFieldModel.dirty(discount!.directLink),
           description: MessageFieldModel.dirty(discount!.description.uk),
@@ -328,13 +328,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     final value = event.eligibility;
-    final eligibilityFieldModel =
-        value == KAppText.eligibilityAllEN || value == KAppText.eligibilityAll
-            ? null
-            : ListFieldModel.dirty(
-                state.eligibility?.value.addFieldModel(event.eligibility) ??
-                    [event.eligibility],
-              );
+    final eligibilityFieldModel = value == EligibilityEnum.all
+        ? null
+        : EligibilityFieldModel.dirty(
+            List.from(state.eligibility?.value ?? [])..add(event.eligibility),
+          );
 
     emit(
       state.copyWith(
@@ -349,11 +347,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityRemoveItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final eligibilityList =
-        state.eligibility?.value.removeFieldModel(event.eligibility) ?? [];
-    final eligibilityFieldModel = eligibilityList.isEmpty
-        ? const ListFieldModel.pure()
-        : ListFieldModel.dirty(eligibilityList);
+    final eligibilityList = state.eligibility == null
+        ? null
+        : (List<EligibilityEnum>.from(state.eligibility!.value)
+          ..remove(event.eligibility));
+    final eligibilityFieldModel =
+        eligibilityList == null || eligibilityList.isEmpty
+            ? const EligibilityFieldModel.pure()
+            : EligibilityFieldModel.dirty(eligibilityList);
 
     emit(
       state.copyWith(
@@ -482,7 +483,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
                 uk: _companyRepository.currentUserCompany.publicName!,
               ),
         eligibility:
-            state.eligibility?.value.map((e) => TranslateModel(uk: e)).toList(),
+            state.eligibility?.value.contains(EligibilityEnum.all) ?? true
+                ? null
+                : state.eligibility?.value
+                    .map(
+                      (e) => e.getTranslateModel!,
+                    )
+                    .toList(),
         exclusions: TranslateModel(
           uk: state.exclusions.value,
         ),

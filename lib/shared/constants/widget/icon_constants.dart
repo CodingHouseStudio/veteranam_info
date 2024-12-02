@@ -94,6 +94,10 @@ abstract class KIcon {
   static const _KIcon check = _KIcon(
     Symbols.check,
   );
+  static const _KIcon checkSmall = _KIcon(
+    Symbols.check,
+    size: KSize.kSmallIconSize,
+  );
   static const _KIcon website = _KIcon(Symbols.captive_portal);
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
