@@ -209,6 +209,39 @@ extension StringFllutterExtension on String {
   }
   // : '/cdn-cgi/image/${Config.isWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
+
+  EligibilityEnum get toEligibility {
+    switch (toLowerCase()) {
+      case 'ветерани':
+      case 'ветерани та ветеранки російсько-української війни':
+        return EligibilityEnum.veterans;
+      case 'військовослужбовці':
+      case 'військовослужбовці зсу':
+      case 'бійці нацональної гвардії україни':
+      case 'курсанти військових училищ':
+      case 'медики':
+      case 'нгу':
+      case 'представники сил безпеки та оборони':
+      case 'тро':
+      case 'учасгики фломування тро':
+        return EligibilityEnum.militaryPersonnel;
+      case 'Учасники бойових дій':
+        return EligibilityEnum.combatants;
+      case "сім'ї військовослужбовців":
+      case 'особи з інвалідністю внаслідок війни':
+        return EligibilityEnum.disabledWarVeterans;
+      case 'поліція':
+        return EligibilityEnum.policeOfficers;
+      case 'співробітники дснс':
+      case 'працівники дснс':
+        return EligibilityEnum.dsnsEmployees;
+      case 'члени сімей загиблих':
+        return EligibilityEnum.fallenFamilyMembers;
+      case 'внутрішньо переміщені особи':
+        return EligibilityEnum.internallyDisplacedPersons;
+    }
+    return EligibilityEnum.all;
+  }
 }
 
 extension TranslateModelExtension on TranslateModel {
@@ -528,4 +561,31 @@ extension WidgetStatePropertyExtension on WidgetStateProperty<dynamic> {
         }
         return SystemMouseCursors.click;
       });
+}
+
+extension EligibilityEnumExtension on EligibilityEnum {
+  String getValue(BuildContext context) {
+    switch (this) {
+      case EligibilityEnum.allConditionsMet:
+        return context.l10n.allOfListed;
+      case EligibilityEnum.veterans:
+        return context.l10n.veterans;
+      case EligibilityEnum.combatants:
+        return context.l10n.combatantsEligibility;
+      case EligibilityEnum.militaryPersonnel:
+        return context.l10n.militaryEligibility;
+      case EligibilityEnum.fallenFamilyMembers:
+        return context.l10n.fallenFamilyEligibility;
+      case EligibilityEnum.disabledWarVeterans:
+        return context.l10n.disabledWarEligibility;
+      case EligibilityEnum.dsnsEmployees:
+        return context.l10n.dsnsEligibility;
+      case EligibilityEnum.policeOfficers:
+        return context.l10n.policeEligibility;
+      case EligibilityEnum.internallyDisplacedPersons:
+        return context.l10n.idpEligibility;
+      case EligibilityEnum.all:
+        return context.l10n.allOfListed;
+    }
+  }
 }

@@ -29,7 +29,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required DateFieldModel period,
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
-    required ListFieldModel? eligibility,
+    required EligibilityFieldModel? eligibility,
     required LinkFieldModel link,
     required MessageFieldModel description,
     required MessageFieldModel exclusions,
