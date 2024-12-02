@@ -109,6 +109,14 @@ class UserRoleBodyWidget extends StatelessWidget {
             KSizedBox.kWidthSizedBox16,
             DropDownButton(
               isDesk: isDesk,
+              style: KButtonStyles.borderBlackButtonStyle.copyWith(
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.only(
+                    left: KPadding.kPaddingSize10,
+                    right: KPadding.kPaddingSize22,
+                  ),
+                ),
+              ),
               buttonText: context.l10n.login,
               items: [
                 DropDownItem(
