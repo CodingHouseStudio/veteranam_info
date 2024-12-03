@@ -27,8 +27,8 @@ void main() {
             FilterItem(KAppText.allStoresOfChain),
           ],
           initialSorting: [
-            SortingItem(DiscountEnum.largestSmallest),
-            SortingItem(DiscountEnum.free),
+            FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
+            FilterItem<DiscountEnum>(DiscountEnum.free),
           ],
           initChooseLocationList: [],
           initialChooseSorting: [],
@@ -45,13 +45,13 @@ void main() {
         ..sorting(
           DiscountEnum.largestSmallest,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           SubLocation.all,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           KTestText.discountModelItemsModify.first.location!.first,
         )
-        ..changeFilterList(
+        ..changeLocationsList(
           SubLocation.all,
         ),
       expect: () => [

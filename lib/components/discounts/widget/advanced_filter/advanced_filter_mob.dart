@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterMob extends StatelessWidget {
@@ -41,10 +42,12 @@ class AdvancedFilterMob extends StatelessWidget {
           showDragHandle: true,
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
-            initialFilter: bloc.state.filterLocation,
-            initialSorting: bloc.state.sorting,
-            initChooseLocationList: bloc.state.choosenLocationList,
-            initialChooseSorting: bloc.state.choosenSortingnList,
+            initialFilter: [],
+            initChooseLocationList: [],
+            initialCategories: [],
+            initialChooseCategories: [],
+            initialEligibilities: [],
+            initialChooseEligibilities: [],
           ),
         ).then(
           (_) {
@@ -54,9 +57,11 @@ class AdvancedFilterMob extends StatelessWidget {
               context.read<DiscountWatcherBloc>().add(
                     DiscountWatcherEvent.setMobFilter(
                       filterList: _.filtersLocation,
-                      sorting: _.sorting,
-                      choosenLocationList: _.choosenLocationList,
-                      choosenSortingnList: _.choosenSortingnList,
+                      chosenLocationList: _.chosenLocationList,
+                      categories: _.filterCategory,
+                      chosenCategoriesList: _.chosenCategoriesnList,
+                      chosenEligibilitiesList: _.chosenEligibilitiesList,
+                      filterEligibilities: _.filterEligibilities,
                     ),
                   );
             } else {
@@ -105,15 +110,16 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Expanded(
                 child: AdvancedFilterContent(
                   isDesk: false,
-                  onChange: (value) => context
+                  onLocationChange: context
                       .read<AdvancedFilterMobCubit>()
-                      .changeFilterList(value),
-                  filterLocationes: _.filtersLocation,
-                  sorting: _.sorting,
-                  onChangeSorting: (value) =>
-                      context.read<AdvancedFilterMobCubit>().sorting(value),
-                  chooseLocationList: _.choosenLocationList,
-                  chooseSortingList: _.choosenSortingnList,
+                      .changeLocationsList,
+                  discountFilter: const FilterItemsModel.empty(), //TODO change
+                  onCategoriesChange: context
+                      .read<AdvancedFilterMobCubit>()
+                      .changeCategoriesList,
+                  onEligibilitiesChange: context
+                      .read<AdvancedFilterMobCubit>()
+                      .changeEligibilitiesList,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
@@ -123,8 +129,9 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   KSizedBox.kWidthSizedBox8,
                   AdvancedFilterResetButton(
                     isDesk: false,
-                    resetEvent: _.choosenLocationList.isNotEmpty ||
-                            _.choosenSortingnList.isNotEmpty
+                    resetEvent: _.chosenLocationList.isNotEmpty ||
+                            _.chosenCategoriesnList.isNotEmpty ||
+                            _.chosenEligibilitiesList.isNotEmpty
                         ? context.pop
                         : null,
                   ),

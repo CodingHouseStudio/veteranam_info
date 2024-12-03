@@ -71,7 +71,8 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     Emitter<StoryWatcherState> emit,
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      //TODO:
+      // emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
@@ -84,9 +85,10 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
       state.copyWith(
         loadingStoryModelItems: filterItems,
         itemsLoaded: filterItems.length,
-        loadingStatus: state.storyModelItems.length <= filterItems.length
-            ? LoadingStatus.listLoadedFull
-            : LoadingStatus.loaded,
+        loadingStatus: LoadingStatus.loaded, //TODO:
+        //  state.storyModelItems.length <= filterItems.length
+        //     ? LoadingStatus.listLoadedFull
+        //     : LoadingStatus.loaded,
       ),
     );
   }
