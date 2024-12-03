@@ -188,7 +188,6 @@ class _DiscountWidgetList extends StatelessWidget {
                           discountItem: KMockText.discountModel,
                           isDesk: isDesk,
                           share: '',
-                          isLoading: false,
                         ),
                       ),
                     ),
@@ -204,7 +203,6 @@ class _DiscountWidgetList extends StatelessWidget {
                           discountItem: KMockText.discountModel,
                           isDesk: isDesk,
                           share: '',
-                          isLoading: true,
                         ),
                       ),
                     ),
@@ -279,7 +277,6 @@ class _DiscountsWidgetItem extends StatelessWidget {
       discountItem: discountItem,
       isDesk: isDesk,
       share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
-      isLoading: false,
     );
   }
 }
