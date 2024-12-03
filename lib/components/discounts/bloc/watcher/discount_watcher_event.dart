@@ -22,6 +22,10 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     String value,
   ) = _FilterLocation;
 
+  const factory DiscountWatcherEvent.searchLocation(
+    String value,
+  ) = _SearchLocation;
+
   const factory DiscountWatcherEvent.setMobFilter({
     required List<FilterItem> filterList,
     required List<FilterItem> categories,

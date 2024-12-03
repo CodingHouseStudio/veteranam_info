@@ -50,19 +50,19 @@ class AdvancedFilterContent extends StatelessWidget {
           sliver: _ChooseItems(
             isDesk: isDesk,
             chosenItems: discountFilter.getchosenList,
-            categoriesLength: discountFilter.chosenCategoriesList.length,
+            categoriesLength: discountFilter.activeCategoryMap.length,
             onChangeLocation: onLocationChange,
             onChangeCategories: onCategoriesChange,
-            eligibilitiesLength: discountFilter.chosenEligibilitiesList.length,
+            eligibilitiesLength: discountFilter.activeEligibilityMap.length,
             onChangeEligibilities: onEligibilitiesChange,
           ),
         ),
       ],
-      if (discountFilter.filterEligibilities.isNotEmpty)
+      if (discountFilter.eligibilityMap.isNotEmpty)
         AdvancedFilterListWidget(
           isDesk: isDesk,
           list: _AdvancedListWidget(
-            filter: discountFilter.filterEligibilities,
+            filter: discountFilter.eligibilityMap,
             onChange: onEligibilitiesChange,
             isDesk: isDesk,
             itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
@@ -70,11 +70,11 @@ class AdvancedFilterContent extends StatelessWidget {
           textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
           title: context.l10n.eligibility,
         ),
-      if (discountFilter.filterCategories.isNotEmpty)
+      if (discountFilter.categoryMap.isNotEmpty)
         AdvancedFilterListWidget(
           isDesk: isDesk,
           list: _AdvancedListWidget(
-            filter: discountFilter.filterCategories,
+            filter: discountFilter.categoryMap,
             onChange: onCategoriesChange,
             isDesk: isDesk,
             itemKey: KWidgetkeys.screen.discounts.categoriesItems,
@@ -105,14 +105,33 @@ class AdvancedFilterContent extends StatelessWidget {
       //     onChangeSorting: onChangeSorting,
       //   ),
       // ),
-      if (discountFilter.filterLocation.isNotEmpty)
+      if (discountFilter.locationIsNotEpmty)
         AdvancedFilterListWidget(
           isDesk: isDesk,
-          list: _AdvancedListWidget(
-            filter: discountFilter.filterLocation,
-            onChange: onLocationChange,
-            isDesk: isDesk,
-            itemKey: KWidgetkeys.screen.discounts.cityItems,
+          list: SliverMainAxisGroup(
+            slivers: [
+              SliverToBoxAdapter(
+                child: TextFieldWidget(
+                  widgetKey: const Key('value1'),
+                  onChanged: (value) => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.searchLocation(value)),
+                  isDesk: isDesk,
+                  labelText: context.l10n.search,
+                  suffixIcon: KIcon.search,
+                  fillColor: AppColors.materialThemeKeyColorsNeutral,
+                  enabledBorder: KWidgetTheme.outlineInputBorder,
+                  focusColor: AppColors.materialThemeKeyColorsNeutralVariant,
+                  hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                ),
+              ),
+              _AdvancedListWidget(
+                filter: discountFilter.locationSearchMap,
+                onChange: onLocationChange,
+                isDesk: isDesk,
+                itemKey: KWidgetkeys.screen.discounts.cityItems,
+              ),
+            ],
           ),
           textKey: KWidgetkeys.screen.discounts.citiesText,
           title: context.l10n.city,

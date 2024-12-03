@@ -16,35 +16,112 @@ import 'package:veteranam/shared/shared_dart.dart';
 /// containing metadata
 /// about the filter (e.g., whether it is selected).
 class FilterItemsModel {
-  // Private constructor for initializing the object with specific filter data.
-  const FilterItemsModel._({
-    required this.filterCategories,
-    required this.chosenCategoriesList,
-    required this.filterLocation,
-    required this.chosenLocationList,
-    required this.filterEligibilities,
-    required this.chosenEligibilitiesList,
-  });
-
   /// Constructor to initialize an empty maps.
   const FilterItemsModel.empty({
-    this.filterCategories = const {},
-    this.chosenCategoriesList = const {},
-    this.filterLocation = const {},
-    this.chosenLocationList = const {},
-    this.filterEligibilities = const {},
-    this.chosenEligibilitiesList = const {},
-  });
+    this.categoryMap = const {},
+    this.activeCategoryMap = const {},
+    this.locationSearchMap = const {},
+    this.activeLocationMap = const {},
+    this.eligibilityMap = const {},
+    this.activeEligibilityMap = const {},
+  }) : _locationMap = const {};
+
+  /// Constructor to initialize maps.
+  FilterItemsModel.init({
+    required List<DiscountModel> unmodifiedDiscountModelItems,
+    required bool isEnglish,
+    required Map<String, FilterItem> chosenCategories,
+    required Map<String, FilterItem> chosenLocation,
+    required Map<String, FilterItem> chosenEligibilities,
+  })  : categoryMap = {},
+        activeCategoryMap = {},
+        _locationMap = {},
+        locationSearchMap = {},
+        activeLocationMap = {},
+        eligibilityMap = {},
+        activeEligibilityMap = {} {
+    try {
+      final categoriesList = <TranslateModel>[];
+      final locationList = <TranslateModel>[];
+      final eligibilitiesList = <TranslateModel>[];
+
+      // Add all categories, location and eligibilities: Start
+      // item in the list can contain the same values.
+      // It'll fix in the _getFilterFromTranslateModel method
+      for (final discount in unmodifiedDiscountModelItems) {
+        // Category
+        categoriesList.addAll(discount.category);
+
+        // Location
+        if (discount.location != null) {
+          locationList.addAll(discount.location!);
+        }
+        if (discount.subLocation != null) {
+          locationList.add(KAppText.sublocation);
+        }
+
+        // Eligibility
+        if (discount.eligibility != null) {
+          eligibilitiesList.addAll(discount.eligibility!);
+        }
+      }
+      // Add all categories, location and eligibilities: End
+
+      categoryMap.addAll(
+        _getFilterFromTranslateModel(
+          list: categoriesList,
+          chosenMap: chosenCategories,
+        ),
+      );
+      if (chosenCategories.isNotEmpty) {
+        activeCategoryMap.addAll(
+          chosenCategories,
+        );
+      }
+      _locationMap.addAll(
+        _sortingLocation(
+          locationMap: _getFilterFromTranslateModel(
+            list: locationList,
+            chosenMap: chosenLocation,
+          ),
+          isEnglish: isEnglish,
+        ),
+      );
+      locationSearchMap.addAll(_locationMap);
+      if (chosenLocation.isNotEmpty) {
+        activeLocationMap.addAll(
+          chosenLocation,
+        );
+      }
+      eligibilityMap.addAll(
+        _getFilterFromTranslateModel(
+          list: eligibilitiesList,
+          chosenMap: chosenEligibilities,
+        ),
+      );
+      if (chosenEligibilities.isNotEmpty) {
+        activeEligibilityMap.addAll(
+          chosenEligibilities,
+        );
+      }
+    } catch (e) {
+      // TODO: add error handling
+    }
+  }
 
   // Maps to store current available filters
-  final Map<String, FilterItem> filterEligibilities;
-  final Map<String, FilterItem> filterCategories;
-  final Map<String, FilterItem> filterLocation;
+  final Map<String, FilterItem> eligibilityMap;
+  final Map<String, FilterItem> categoryMap;
+  final Map<String, FilterItem> locationSearchMap;
 
   // Maps to store current selected user filters
-  final Map<String, FilterItem> chosenEligibilitiesList;
-  final Map<String, FilterItem> chosenCategoriesList;
-  final Map<String, FilterItem> chosenLocationList;
+  final Map<String, FilterItem> activeEligibilityMap;
+  final Map<String, FilterItem> activeCategoryMap;
+  final Map<String, FilterItem> activeLocationMap;
+
+  // private variables
+  final Map<String, FilterItem> _locationMap;
+  static var _locationSearchValue = '';
 
   /// Toggles an existing category filter.
   /// Updates the chosen categories filter
@@ -56,11 +133,12 @@ class FilterItemsModel {
   }) {
     _addFilterItem(
       valueUK: valueUK,
-      filter: filterCategories,
-      chosenFilter: chosenCategoriesList,
+      filter: categoryMap,
+      chosenFilter: activeCategoryMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.category,
     );
+    locationSearch(null);
   }
 
   /// Toggles an existing location filter.
@@ -72,8 +150,8 @@ class FilterItemsModel {
   }) {
     _addFilterItem(
       valueUK: valueUK,
-      filter: filterLocation,
-      chosenFilter: chosenLocationList,
+      filter: _locationMap,
+      chosenFilter: activeLocationMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.location,
     );
@@ -89,11 +167,32 @@ class FilterItemsModel {
   }) {
     _addFilterItem(
       valueUK: valueUK,
-      filter: filterEligibilities,
-      chosenFilter: chosenEligibilitiesList,
+      filter: eligibilityMap,
+      chosenFilter: activeEligibilityMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.eligibility,
     );
+    locationSearch(null);
+  }
+
+  /// Serch location value in the location map.
+  /// Search value in the uk and en values
+  void locationSearch(String? value) {
+    if (value != null) {
+      _locationSearchValue = value;
+    }
+
+    locationSearchMap.clear();
+
+    if (_locationSearchValue.isEmpty) {
+      locationSearchMap.addAll(_locationMap);
+    } else {
+      for (final key in _locationMap.keys.where(
+        (element) => element.toLowerCase().startsWith(_locationSearchValue),
+      )) {
+        locationSearchMap.addAll({key: _locationMap[key]!});
+      }
+    }
   }
 
   /// Filters the given list of discount items based on the chosen filters.
@@ -120,14 +219,16 @@ class FilterItemsModel {
 
   /// Checks if any filters are currently chosen in any dimension.
   bool get haschosenItem =>
-      chosenEligibilitiesList.isNotEmpty ||
-      chosenCategoriesList.isNotEmpty | chosenLocationList.isNotEmpty;
+      activeEligibilityMap.isNotEmpty ||
+      activeCategoryMap.isNotEmpty | activeLocationMap.isNotEmpty;
+
+  bool get locationIsNotEpmty => _locationMap.isNotEmpty;
 
   /// Combines all chosen filters into a single map.
   Map<String, FilterItem> get getchosenList => {
-        ...chosenEligibilitiesList,
-        ...chosenCategoriesList,
-        ...chosenLocationList,
+        ...activeEligibilityMap,
+        ...activeCategoryMap,
+        ...activeLocationMap,
       };
 
   void _addFilterItem({
@@ -216,36 +317,36 @@ class FilterItemsModel {
 
     // Romve prevoius value from filter Eligibilities and set new value
     if (filterEnum != _FilterEnum.eligibility) {
-      filterEligibilities
+      eligibilityMap
         ..clear()
         ..addAll(
           _getFilterFromTranslateModel(
             list: eligibilitiesList,
-            chosenMap: chosenEligibilitiesList,
+            chosenMap: activeEligibilityMap,
           ),
         );
     }
 
     // Romve prevoius value from filter Location and set new value
     if (filterEnum != _FilterEnum.location) {
-      filterLocation
+      _locationMap
         ..clear()
         ..addAll(
           _getFilterFromTranslateModel(
             list: locationList,
-            chosenMap: chosenLocationList,
+            chosenMap: activeLocationMap,
           ),
         );
     }
 
     // Romve prevoius value from filter Categories and set new value
     if (filterEnum != _FilterEnum.category) {
-      filterCategories
+      categoryMap
         ..clear()
         ..addAll(
           _getFilterFromTranslateModel(
             list: categoriesList,
-            chosenMap: chosenCategoriesList,
+            chosenMap: activeCategoryMap,
           ),
         );
     }
@@ -262,17 +363,17 @@ class FilterItemsModel {
       case _FilterEnum.category:
         return _chosenListContainAnyValues(
           values: discount.category,
-          chosenFilter: chosenCategoriesList,
+          chosenFilter: activeCategoryMap,
         );
       case _FilterEnum.location:
         return _chosenListContainAnyValues(
           values: discount.location,
-          chosenFilter: chosenLocationList,
+          chosenFilter: activeLocationMap,
         );
       case _FilterEnum.eligibility:
         return _chosenListContainAnyValues(
           values: discount.eligibility,
-          chosenFilter: chosenEligibilitiesList,
+          chosenFilter: activeEligibilityMap,
         );
     }
   }
@@ -301,70 +402,9 @@ class FilterItemsModel {
     }
   }
 
-  // ignore: prefer_constructors_over_static_methods
-  static FilterItemsModel init({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-    required Map<String, FilterItem> chosenCategories,
-    required Map<String, FilterItem> chosenLocation,
-    required Map<String, FilterItem> chosenEligibilities,
-  }) {
-    try {
-      final categoriesList = <TranslateModel>[];
-      final locationList = <TranslateModel>[];
-      final eligibilitiesList = <TranslateModel>[];
-
-      // Add all categories, location and eligibilities: Start
-      // item in the list can contain the same values.
-      // It'll fix in the _getFilterFromTranslateModel method
-      for (final discount in unmodifiedDiscountModelItems) {
-        // Category
-        categoriesList.addAll(discount.category);
-
-        // Location
-        if (discount.location != null) {
-          locationList.addAll(discount.location!);
-        }
-        if (discount.subLocation != null) {
-          locationList.add(KAppText.sublocation);
-        }
-
-        // Eligibility
-        if (discount.eligibility != null) {
-          eligibilitiesList.addAll(discount.eligibility!);
-        }
-      }
-      // Add all categories, location and eligibilities: End
-
-      return FilterItemsModel._(
-        filterCategories: _getFilterFromTranslateModel(
-          list: categoriesList,
-          chosenMap: chosenCategories,
-        ),
-        chosenCategoriesList: chosenCategories.isEmpty ? {} : chosenCategories,
-        filterLocation: _sortingLocation(
-          locationMap: _getFilterFromTranslateModel(
-            list: locationList,
-            chosenMap: chosenLocation,
-          ),
-          isEnglish: isEnglish,
-        ),
-        chosenLocationList: chosenLocation.isEmpty ? {} : chosenLocation,
-        filterEligibilities: _getFilterFromTranslateModel(
-          list: eligibilitiesList,
-          chosenMap: chosenEligibilities,
-        ),
-        chosenEligibilitiesList:
-            chosenEligibilities.isEmpty ? {} : chosenEligibilities,
-      );
-    } catch (e) {
-      return const FilterItemsModel.empty();
-    }
-  }
-
   /// Create Map<String, FilterItem> from List<TranslateModel>
   /// set is selected true for element where value.uk contain chosen map
-  static Map<String, FilterItem> _getFilterFromTranslateModel({
+  Map<String, FilterItem> _getFilterFromTranslateModel({
     required List<TranslateModel> list,
     required Map<String, FilterItem> chosenMap,
   }) {
@@ -405,7 +445,7 @@ class FilterItemsModel {
   /// First five value sorting by number
   /// After first five value sorting by alphabet
   /// Language for alphabet sorting set use isEnglish
-  static Map<String, FilterItem> _sortingLocation({
+  Map<String, FilterItem> _sortingLocation({
     required Map<String, FilterItem> locationMap,
     required bool isEnglish,
   }) {

@@ -45,6 +45,7 @@ class DiscountWatcherBloc
     on<_FilterEligibilities>(_onFilterEligibilities);
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
+    on<_SearchLocation>(_onSearchLocation);
     on<_SetMobFilter>(_setMobFilter);
     on<_FilterReset>(_onFilterReset);
     on<_Sorting>(_onSorting);
@@ -100,9 +101,9 @@ class DiscountWatcherBloc
     filterItemsModel = FilterItemsModel.init(
       unmodifiedDiscountModelItems: event.discountItemsModel,
       isEnglish: _userRepository.isEnglish,
-      chosenCategories: state.filterItemsModel.chosenCategoriesList,
-      chosenEligibilities: state.filterItemsModel.chosenEligibilitiesList,
-      chosenLocation: state.filterItemsModel.chosenLocationList,
+      chosenCategories: state.filterItemsModel.activeCategoryMap,
+      chosenEligibilities: state.filterItemsModel.activeEligibilityMap,
+      chosenLocation: state.filterItemsModel.activeLocationMap,
     );
 
     final itemsNumber = getCurrentLoadNumber(
@@ -269,6 +270,27 @@ class DiscountWatcherBloc
         filterDiscountModelList:
             filterDiscountModelList.take(itemsNumber).toList(),
         isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
+      ),
+    );
+  }
+
+  void _onSearchLocation(
+    _SearchLocation event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.filterItemsModel.locationSearch(
+      event.value,
+    );
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
       ),
     );
   }
