@@ -364,7 +364,7 @@ abstract class KTestText {
   );
 
   static final blocSendDiscountModel = sendDiscountModel.copyWith(
-    eligibility: const [TranslateModel(uk: KTestText.field)],
+    eligibility: const [EligibilityEnum.all],
   );
 
   static final sendDiscountModel = discountModelItems.first.copyWith(

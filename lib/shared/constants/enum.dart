@@ -82,16 +82,3 @@ enum ErrorLevelEnum {
   info,
   warning;
 }
-
-enum EligibilityEnum {
-  all,
-  allConditionsMet,
-  veterans,
-  combatants,
-  militaryPersonnel,
-  fallenFamilyMembers,
-  disabledWarVeterans,
-  dsnsEmployees, // For "State Emergency Service"
-  policeOfficers,
-  internallyDisplacedPersons; // IDPs
-}

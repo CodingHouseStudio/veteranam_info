@@ -138,7 +138,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           eligibility: discount!.eligibility == null
               ? null
               : EligibilityFieldModel.dirty(
-                  discount!.eligibility!.toEligibility,
+                  discount!.eligibility!,
                 ),
           link: LinkFieldModel.dirty(discount!.directLink),
           description: MessageFieldModel.dirty(discount!.description.uk),
@@ -485,11 +485,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         eligibility:
             state.eligibility?.value.contains(EligibilityEnum.all) ?? true
                 ? null
-                : state.eligibility?.value
-                    .map(
-                      (e) => e.getTranslateModel!,
-                    )
-                    .toList(),
+                : state.eligibility?.value,
         exclusions: TranslateModel(
           uk: state.exclusions.value,
         ),
