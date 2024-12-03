@@ -585,59 +585,59 @@ extension TranslateModelListExtension on List<TranslateModel> {
   }) =>
       map((e) => isEnglish ? e.en ?? e.uk : e.uk).toList();
 
-  List<EligibilityEnum> get toEligibility {
-    final enumList = <EligibilityEnum>[];
-    for (final text in this) {
-      switch (text.uk.toLowerCase()) {
-        case 'ветерани':
-        case 'ветерани та ветеранки російсько-української війни':
-          enumList.add(EligibilityEnum.veterans);
-        case 'військовослужбовці':
-        case 'військовослужбовці зсу':
-        case 'бійці нацональної гвардії україни':
-        case 'курсанти військових училищ':
-        case 'медики':
-        case 'нгу':
-        case 'представники сил безпеки та оборони':
-        case 'тро':
-        case 'учасгики фломування тро':
-          enumList.add(EligibilityEnum.militaryPersonnel);
-        case 'Учасники бойових дій':
-          enumList.add(EligibilityEnum.combatants);
-        case "сім'ї військовослужбовців":
-        case 'близьким родичам військових та членам їх сімей':
-          enumList.addAll([
-            EligibilityEnum.militaryPersonnel,
-            EligibilityEnum.disabledWarVeterans,
-          ]);
-        case 'військовослужбовці та ветерани':
-          enumList.addAll([
-            EligibilityEnum.veterans,
-            EligibilityEnum.militaryPersonnel,
-          ]);
-        case 'нгу та співробітники дснс':
-          enumList.addAll([
-            EligibilityEnum.militaryPersonnel,
-            EligibilityEnum.dsnsEmployees,
-          ]);
-        case 'особи з інвалідністю внаслідок війни':
-          enumList.add(EligibilityEnum.disabledWarVeterans);
-        case 'поліція':
-          enumList.add(EligibilityEnum.policeOfficers);
-        case 'співробітники дснс':
-        case 'працівники дснс':
-          enumList.add(EligibilityEnum.dsnsEmployees);
-        case 'співробітники дснс і поліція':
-          enumList.addAll([
-            EligibilityEnum.dsnsEmployees,
-            EligibilityEnum.policeOfficers,
-          ]);
-        case 'члени сімей загиблих':
-          enumList.add(EligibilityEnum.fallenFamilyMembers);
-        case 'внутрішньо переміщені особи':
-          enumList.add(EligibilityEnum.internallyDisplacedPersons);
-      }
-    }
-    return enumList;
-  }
+  // List<EligibilityEnum> get toEligibility {
+  //   final enumList = <EligibilityEnum>[];
+  //   for (final text in this) {
+  //     switch (text.uk.toLowerCase()) {
+  //       case 'ветерани':
+  //       case 'ветерани та ветеранки російсько-української війни':
+  //         enumList.add(EligibilityEnum.veterans);
+  //       case 'військовослужбовці':
+  //       case 'військовослужбовці зсу':
+  //       case 'бійці нацональної гвардії україни':
+  //       case 'курсанти військових училищ':
+  //       case 'медики':
+  //       case 'нгу':
+  //       case 'представники сил безпеки та оборони':
+  //       case 'тро':
+  //       case 'учасгики фломування тро':
+  //         enumList.add(EligibilityEnum.militaryPersonnel);
+  //       case 'Учасники бойових дій':
+  //         enumList.add(EligibilityEnum.combatants);
+  //       case "сім'ї військовослужбовців":
+  //       case 'близьким родичам військових та членам їх сімей':
+  //         enumList.addAll([
+  //           EligibilityEnum.militaryPersonnel,
+  //           EligibilityEnum.disabledWarVeterans,
+  //         ]);
+  //       case 'військовослужбовці та ветерани':
+  //         enumList.addAll([
+  //           EligibilityEnum.veterans,
+  //           EligibilityEnum.militaryPersonnel,
+  //         ]);
+  //       case 'нгу та співробітники дснс':
+  //         enumList.addAll([
+  //           EligibilityEnum.militaryPersonnel,
+  //           EligibilityEnum.dsnsEmployees,
+  //         ]);
+  //       case 'особи з інвалідністю внаслідок війни':
+  //         enumList.add(EligibilityEnum.disabledWarVeterans);
+  //       case 'поліція':
+  //         enumList.add(EligibilityEnum.policeOfficers);
+  //       case 'співробітники дснс':
+  //       case 'працівники дснс':
+  //         enumList.add(EligibilityEnum.dsnsEmployees);
+  //       case 'співробітники дснс і поліція':
+  //         enumList.addAll([
+  //           EligibilityEnum.dsnsEmployees,
+  //           EligibilityEnum.policeOfficers,
+  //         ]);
+  //       case 'члени сімей загиблих':
+  //         enumList.add(EligibilityEnum.fallenFamilyMembers);
+  //       case 'внутрішньо переміщені особи':
+  //         enumList.add(EligibilityEnum.internallyDisplacedPersons);
+  //     }
+  //   }
+  //   return enumList;
+  // }
 }
