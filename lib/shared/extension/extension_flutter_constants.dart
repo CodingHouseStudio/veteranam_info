@@ -62,13 +62,19 @@ extension DiscountModelLocation on DiscountModel {
   //     ];
   String getDescription(BuildContext context) =>
       '${description.getTrsnslation(context)}'
-      '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
-      '${requirements != null ? _getMarkdownRequirements(context) : ''}'
-      '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
-      '${additionalDetails != null ? _getMarkdownAdditionalDetails(
-          context,
-        ) : ''}'
-      '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
+              '${requirements != null ? _getMarkdownToGetIfYouNeed(
+                  context,
+                ) : ''}'
+              '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+              '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+              '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+                  context,
+                ) : ''}'
+              '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
+          .replaceAll('**', '')
+          .replaceAll('*', '')
+          .replaceAll('\n\n', '\n')
+          .trim();
 
   String _getMarkdownAdditionalDetails(BuildContext context) =>
       '\n\n${additionalDetails?.getTrsnslation(
