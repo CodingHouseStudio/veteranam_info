@@ -28,7 +28,7 @@ class SharedIconListWidget extends StatelessWidget {
   final Key shareKey;
   final Key? likeKey;
   final Key complaintKey;
-  final String share;
+  final String? share;
   final bool showComplaint;
   final bool showShare;
   final Color background;
@@ -42,7 +42,6 @@ class SharedIconListWidget extends StatelessWidget {
       children: [
         _CardLikeIconWidget(
           label: context.l10n.favorite,
-          onPressed: () {},
           icon: KIcon.favorite,
           countLike: discountItem?.likes ?? 0,
           background: background,
@@ -63,10 +62,12 @@ class SharedIconListWidget extends StatelessWidget {
         if (showShare)
           _CardIconWidget(
             label: context.l10n.share,
-            onPressed: () => context.read<UrlCubit>().share(
-                  share,
-                  useSiteUrl: useSiteUrl,
-                ),
+            onPressed: share != null
+                ? () => context.read<UrlCubit>().share(
+                      share,
+                      useSiteUrl: useSiteUrl,
+                    )
+                : null,
             icon: KIcon.share,
             background: background,
             key: shareKey,
@@ -79,16 +80,18 @@ class SharedIconListWidget extends StatelessWidget {
               style: KButtonStyles.borderWhiteButtonStyle,
               discountButtons: true,
               items: [
-                DropDownItem(
-                  text: context.l10n.webSite,
-                  icon: IconWidget(
-                    background: background,
-                    icon: KIcon.captivePortal,
-                    padding: KPadding.kPaddingSize12,
+                if (link != null && link!.isUrlValid)
+                  DropDownItem(
+                    text: context.l10n.webSite,
+                    icon: IconWidget(
+                      background: background,
+                      icon: KIcon.captivePortal,
+                      padding: KPadding.kPaddingSize12,
+                    ),
+                    action: () =>
+                        context..read<UrlCubit>().launchUrl(url: link),
+                    key: webSiteKey!,
                   ),
-                  action: () => context..read<UrlCubit>().launchUrl(url: link),
-                  key: webSiteKey!,
-                ),
                 DropDownItem(
                   text: context.l10n.complaint,
                   icon: IconWidget(
@@ -175,10 +178,10 @@ class _CardLikeIconWidget extends StatelessWidget {
     required this.label,
     required this.background,
     required this.countLike,
-    this.onPressed,
+    // this.onPressed,
     super.key,
   });
-  final VoidCallback? onPressed;
+  // final VoidCallback? onPressed;
   final Icon icon;
   final String label;
   final Color background;
@@ -188,7 +191,7 @@ class _CardLikeIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       key: key,
-      onTap: onPressed,
+      // onTap: onPressed,
       child: Column(
         children: [
           Stack(

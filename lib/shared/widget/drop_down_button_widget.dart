@@ -16,7 +16,7 @@ class DropDownButton extends StatefulWidget {
   final String? buttonText;
   final List<DropDownItem> items;
   final Offset offset;
-  final bool? discountButtons;
+  final bool discountButtons;
   final ButtonStyle style;
 
   @override
@@ -51,7 +51,7 @@ class DropDownButtonState extends State<DropDownButton> {
             key: widget.items.elementAt(index).key,
             //onTap: widget.items.elementAt(index).action,
             value: index,
-            child: widget.discountButtons!
+            child: widget.discountButtons
                 ? Row(
                     children: [
                       widget.items.elementAt(index).icon!,

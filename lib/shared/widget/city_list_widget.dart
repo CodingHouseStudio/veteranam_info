@@ -74,10 +74,10 @@ class CityWidgetListExpanded extends StatelessWidget {
     return RichText(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       text: TextSpan(
-        text: '${cityList.getCityString(
+        text: cityList.getCityString(
           context: context,
           showFullText: false,
-        )} ',
+        ),
         style: AppTextStyle.materialThemeLabelLarge,
         children: [
           // if (isExpanded)

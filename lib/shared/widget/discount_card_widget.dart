@@ -199,7 +199,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               discountItem: discountItem,
               // afterEvent: reportEvent,
               cardId: discountItem.id,
-              share: share!,
+              share: share,
               complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
               shareKey: KWidgetkeys.widget.discountCard.iconShare,
               likeKey: KWidgetkeys.widget.discountCard.iconLike,
@@ -308,9 +308,9 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize16,
-        left: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize16,
-        bottom: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+        right: KPadding.kPaddingSize16,
+        left: KPadding.kPaddingSize16,
+        bottom: isDesk ? KPadding.kPaddingSize16 : 0,
         top: KPadding.kPaddingSize16,
       ),
       child: isDesk
@@ -550,7 +550,7 @@ class _ExpirationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
       // padding: const EdgeInsets.symmetric(
       //   vertical: KPadding.kPaddingSize4,
