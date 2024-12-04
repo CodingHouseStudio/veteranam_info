@@ -32,6 +32,7 @@ class DiscountModel with _$DiscountModel {
     required TranslateModel? territory,
     required DateTime dateVerified,
     required String? link,
+    @JsonKey(unknownEnumValue: EligibilityEnum.all)
     List<EligibilityEnum>? eligibility,
     @JsonKey(readValue: TranslateConverter.readJsonItem)
     @TranslateOrNullConverter()
