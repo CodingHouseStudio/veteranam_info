@@ -172,7 +172,7 @@ abstract class KMockText {
       uk: '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
       en: '- when ordering tests and paying for them online on the Esculab website;',
     ),
-    eligibility: const [TranslateModel(uk: 'Всі перелічені', en: 'Veterans')],
+    eligibility: const [EligibilityEnum.veterans],
 
     phoneNumber: '+380 800 503 680',
     directLink:

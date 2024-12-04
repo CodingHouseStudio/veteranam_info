@@ -267,7 +267,7 @@ class _DiscountsWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var indexValue = index;
 
-    if (config.linkInt < index &&
+    if (config.linkInt <= index &&
         state.filterDiscountModelList.length > config.linkInt) {
       indexValue--;
     }

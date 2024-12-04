@@ -32,9 +32,8 @@ class DiscountModel with _$DiscountModel {
     required TranslateModel? territory,
     required DateTime dateVerified,
     required String? link,
-    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
-    @TranslateItemsOrNullConverter()
-    List<TranslateModel>? eligibility,
+    @JsonKey(unknownEnumValue: EligibilityEnum.all)
+    List<EligibilityEnum>? eligibility,
     @JsonKey(readValue: TranslateConverter.readJsonItem)
     @TranslateOrNullConverter()
     TranslateModel? exclusions,
@@ -63,6 +62,25 @@ class DiscountModel with _$DiscountModel {
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>
       _$DiscountModelFromJson(json);
+}
+
+enum EligibilityEnum {
+  all,
+  @JsonValue('Veterans')
+  veterans,
+  @JsonValue('Combatants')
+  combatants,
+  @JsonValue('Military personnel')
+  militaryPersonnel,
+  @JsonValue('Persons with disabilities due to war')
+  personsWithDisabilitiesDueToWar,
+  @JsonValue('Family members of the deceased')
+  familyMembersOfTheDeceased,
+  @JsonValue('Emergency Service employees')
+  emergencyServiceEmployees, // DSNS staff
+  @JsonValue('Police officers')
+  policeOfficers,
+  internallyDisplacedPersons,
 }
 
 enum SubLocation {
@@ -99,7 +117,6 @@ abstract class DiscountModelJsonField {
   static const subcategory = 'subcategory';
   static const subcategoryEN = 'subcategoryEN';
   static const eligibility = 'eligibility';
-  static const eligibilityEN = 'eligibilityEN';
   static const description = 'description';
   static const descriptionEN = 'descriptionEN';
   static const requirements = 'requirements';
