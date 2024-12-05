@@ -111,18 +111,21 @@ class AdvancedFilterContent extends StatelessWidget {
           list: SliverMainAxisGroup(
             slivers: [
               SliverToBoxAdapter(
-                child: TextFieldWidget(
-                  widgetKey: const Key('value1'),
-                  onChanged: (value) => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.searchLocation(value)),
-                  isDesk: isDesk,
-                  labelText: context.l10n.search,
-                  suffixIcon: KIcon.search,
-                  fillColor: AppColors.materialThemeKeyColorsNeutral,
-                  enabledBorder: KWidgetTheme.outlineInputBorder,
-                  focusColor: AppColors.materialThemeKeyColorsNeutralVariant,
-                  hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+                  child: TextFieldWidget(
+                    widgetKey: const Key('value1'),
+                    onChanged: (value) => context
+                        .read<DiscountWatcherBloc>()
+                        .add(DiscountWatcherEvent.searchLocation(value)),
+                    isDesk: isDesk,
+                    labelText: context.l10n.search,
+                    suffixIcon: KIcon.search,
+                    fillColor: AppColors.materialThemeKeyColorsNeutral,
+                    enabledBorder: KWidgetTheme.outlineInputBorder,
+                    focusColor: AppColors.materialThemeKeyColorsNeutralVariant,
+                    hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                  ),
                 ),
               ),
               _AdvancedListWidget(

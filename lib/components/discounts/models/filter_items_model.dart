@@ -43,7 +43,7 @@ class FilterItemsModel {
     try {
       final categoriesList = <TranslateModel>[];
       final locationList = <TranslateModel>[];
-      final eligibilitiesList = <TranslateModel>[];
+      final eligibilitiesList = <EligibilityEnum>[];
 
       // Add all categories, location and eligibilities: Start
       // item in the list can contain the same values.
@@ -73,11 +73,12 @@ class FilterItemsModel {
           chosenMap: chosenCategories,
         ),
       );
-      if (chosenCategories.isNotEmpty) {
-        activeCategoryMap.addAll(
-          chosenCategories,
-        );
-      }
+      _addChosenMap(
+        chosenMap: chosenCategories,
+        currentChosenMap: activeCategoryMap,
+        itemsMap: categoryMap,
+      );
+      //Location. Start:
       _locationMap.addAll(
         _sortingLocation(
           locationMap: _getFilterFromTranslateModel(
@@ -87,23 +88,30 @@ class FilterItemsModel {
           isEnglish: isEnglish,
         ),
       );
+      _addChosenMap(
+        chosenMap: chosenLocation.isEmpty &&
+                _locationMap.containsKey(KAppText.sublocation.uk)
+            ? {
+                KAppText.sublocation.uk: _locationMap[KAppText.sublocation.uk]!,
+              }
+            : chosenLocation,
+        currentChosenMap: activeLocationMap,
+        itemsMap: _locationMap,
+      );
       locationSearchMap.addAll(_locationMap);
-      if (chosenLocation.isNotEmpty) {
-        activeLocationMap.addAll(
-          chosenLocation,
-        );
-      }
+      //Location. End.
+
       eligibilityMap.addAll(
         _getFilterFromTranslateModel(
-          list: eligibilitiesList,
+          list: eligibilitiesList.getTranslateModels,
           chosenMap: chosenEligibilities,
         ),
       );
-      if (chosenEligibilities.isNotEmpty) {
-        activeEligibilityMap.addAll(
-          chosenEligibilities,
-        );
-      }
+      _addChosenMap(
+        chosenMap: chosenEligibilities,
+        currentChosenMap: activeEligibilityMap,
+        itemsMap: eligibilityMap,
+      );
     } catch (e) {
       // TODO: add error handling
     }
@@ -138,7 +146,6 @@ class FilterItemsModel {
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.category,
     );
-    locationSearch(null);
   }
 
   /// Toggles an existing location filter.
@@ -172,7 +179,6 @@ class FilterItemsModel {
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.eligibility,
     );
-    locationSearch(null);
   }
 
   /// Serch location value in the location map.
@@ -245,13 +251,12 @@ class FilterItemsModel {
         FilterItem(
           TranslateModel(uk: valueUK),
         );
-    filter[valueUK] = filterItem;
-    final chooseValue = chosenFilter[valueUK];
-    if (chooseValue == null) {
+    if (chosenFilter.containsKey(valueUK)) {
       chosenFilter[valueUK] = filterItem;
     } else {
       chosenFilter.remove(valueUK);
     }
+    filter[valueUK] = filterItem;
     // Add New Filter Item To Chosen List and Change Is Selected For Item With
     // Value ValueUK: End
 
@@ -276,7 +281,7 @@ class FilterItemsModel {
           discount: discount,
         )) {
           if (discount.eligibility != null) {
-            eligibilitiesList.addAll(discount.eligibility!);
+            eligibilitiesList.addAll(discount.eligibility!.getTranslateModels);
           }
         }
 
@@ -351,6 +356,25 @@ class FilterItemsModel {
         );
     }
     // Change two another filter list: End
+
+    locationSearch(null);
+  }
+
+  void _addChosenMap({
+    required Map<String, FilterItem> chosenMap,
+    required Map<String, FilterItem> currentChosenMap,
+    required Map<String, FilterItem> itemsMap,
+  }) {
+    if (chosenMap.isNotEmpty) {
+      currentChosenMap.addAll(
+        chosenMap,
+      );
+      for (final key in chosenMap.keys) {
+        if (itemsMap.containsKey(key)) {
+          itemsMap[key] = itemsMap[key]!.copyWith(isSelected: true);
+        }
+      }
+    }
   }
 
   /// Helper to check if discount contain value from chosen list.
@@ -367,12 +391,17 @@ class FilterItemsModel {
         );
       case _FilterEnum.location:
         return _chosenListContainAnyValues(
-          values: discount.location,
+          values: discount.subLocation == null
+              ? discount.location
+              : [
+                  if (discount.location != null) ...discount.location!,
+                  if (discount.subLocation != null) KAppText.sublocation,
+                ],
           chosenFilter: activeLocationMap,
         );
       case _FilterEnum.eligibility:
         return _chosenListContainAnyValues(
-          values: discount.eligibility,
+          values: discount.eligibility?.getTranslateModels,
           chosenFilter: activeEligibilityMap,
         );
     }
@@ -395,10 +424,7 @@ class FilterItemsModel {
     } else if (values == null) {
       return false;
     } else {
-      return chosenFilter.keys.every(
-        (key) => values.any((element) => element.uk == key),
-      );
-      // return values.any((value) => chosenFilter.containsKey(value.uk));
+      return values.any((value) => chosenFilter.containsKey(value.uk));
     }
   }
 
