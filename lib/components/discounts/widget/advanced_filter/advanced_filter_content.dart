@@ -3,147 +3,197 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
-import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterContent extends StatelessWidget {
   const AdvancedFilterContent({
     required this.isDesk,
-    required this.onLocationChange,
-    required this.onCategoriesChange,
-    required this.onEligibilitiesChange,
-    required this.discountFilter,
+    // required this.onLocationChange,
+    // required this.onCategoriesChange,
+    // required this.onEligibilitiesChange,
+    // required this.discountFilter,
     super.key,
   });
   final bool isDesk;
-  final FilterItemsModel discountFilter;
-  final void Function(String) onEligibilitiesChange;
-  final void Function(String) onCategoriesChange;
-  final void Function(String) onLocationChange;
+  // final IDiscountFilterRepository discountFilter;
+  // final void Function(String) onEligibilitiesChange;
+  // final void Function(String) onCategoriesChange;
+  // final void Function(String) onLocationChange;
 
   @override
   Widget build(BuildContext context) {
     final body = [
-      const SliverToBoxAdapter(
-        child: KSizedBox.kHeightSizedBox8,
-      ),
-      if (discountFilter.haschosenItem) ...[
-        if (isDesk)
-          SliverToBoxAdapter(
-            child: AdvancedFilterResetButton(
-              isDesk: true,
-              resetEvent: () => context
-                  .read<DiscountWatcherBloc>()
-                  .add(const DiscountWatcherEvent.filterReset()),
-            ),
-          )
-        else
-          SliverToBoxAdapter(
-            child: Text(
-              context.l10n.filterApplied,
-              key: KWidgetkeys.screen.discounts.appliedFilterText,
-              style: AppTextStyle.materialThemeTitleMedium,
-            ),
-          ),
-        SliverPadding(
-          padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-          sliver: _ChooseItems(
-            isDesk: isDesk,
-            chosenItems: discountFilter.getchosenList,
-            categoriesLength: discountFilter.activeCategoryMap.length,
-            onChangeLocation: onLocationChange,
-            onChangeCategories: onCategoriesChange,
-            eligibilitiesLength: discountFilter.activeEligibilityMap.length,
-            onChangeEligibilities: onEligibilitiesChange,
-          ),
-        ),
-      ],
-      if (discountFilter.eligibilityMap.isNotEmpty)
-        AdvancedFilterListWidget(
-          isDesk: isDesk,
-          list: _AdvancedListWidget(
-            filter: discountFilter.eligibilityMap,
-            onChange: onEligibilitiesChange,
-            isDesk: isDesk,
-            itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
-          ),
-          textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
-          title: context.l10n.eligibility,
-        ),
-      if (discountFilter.categoryMap.isNotEmpty)
-        AdvancedFilterListWidget(
-          isDesk: isDesk,
-          list: _AdvancedListWidget(
-            filter: discountFilter.categoryMap,
-            onChange: onCategoriesChange,
-            isDesk: isDesk,
-            itemKey: KWidgetkeys.screen.discounts.categoriesItems,
-          ),
-          textKey: KWidgetkeys.screen.discounts.categoriesText,
-          title: context.l10n.category,
-        ),
-      // SliverPadding(
-      //   padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-      //   sliver: SliverToBoxAdapter(
-      //     child: Text(
-      //       context.l10n.discount,
-      //       key: KWidgetkeys.screen.discounts.discountText,
-      //       style: isDesk
-      //           ? AppTextStyle.materialThemeTitleLarge
-      //           : AppTextStyle.materialThemeTitleMedium,
-      //     ),
-      //   ),
-      // ),
-      // SliverPadding(
-      //   padding: const EdgeInsets.only(
-      //     bottom: KPadding.kPaddingSize24,
-      //     right: KPadding.kPaddingSize8,
-      //   ),
-      //   sliver: _SortingFilterItems(
-      //     isDesk: isDesk,
-      //     sorting: sorting,
-      //     onChangeSorting: onChangeSorting,
-      //   ),
-      // ),
-      if (discountFilter.locationIsNotEpmty)
-        AdvancedFilterListWidget(
-          isDesk: isDesk,
-          list: SliverMainAxisGroup(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-                  child: TextFieldWidget(
-                    widgetKey: const Key('value1'),
-                    onChanged: (value) => context
-                        .read<DiscountWatcherBloc>()
-                        .add(DiscountWatcherEvent.searchLocation(value)),
+      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        buildWhen: (previous, current) =>
+            previous.discountFilterRepository.getActivityList !=
+                current.discountFilterRepository.getActivityList ||
+            previous.filterStatus == FilterStatus.filtering &&
+                current.filterStatus == FilterStatus.filtered,
+        builder: (context, state) {
+          if (state.discountFilterRepository.hasActivityItem) {
+            return SliverMainAxisGroup(
+              slivers: [
+                if (isDesk)
+                  SliverToBoxAdapter(
+                    child: AdvancedFilterResetButton(
+                      isDesk: true,
+                      resetEvent: () => context
+                          .read<DiscountWatcherBloc>()
+                          .add(const DiscountWatcherEvent.filterReset()),
+                    ),
+                  )
+                else
+                  SliverToBoxAdapter(
+                    child: Text(
+                      context.l10n.filterApplied,
+                      key: KWidgetkeys.screen.discounts.appliedFilterText,
+                      style: AppTextStyle.materialThemeTitleMedium,
+                    ),
+                  ),
+                SliverPadding(
+                  padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+                  sliver: _ChooseItems(
                     isDesk: isDesk,
-                    labelText: context.l10n.search,
-                    suffixIcon: KIcon.search,
-                    fillColor: AppColors.materialThemeKeyColorsNeutral,
-                    enabledBorder: KWidgetTheme.outlineInputBorder,
-                    focusColor: AppColors.materialThemeKeyColorsNeutralVariant,
-                    hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                    chosenItems: state.discountFilterRepository.getActivityList,
+                    categoriesLength:
+                        state.discountFilterRepository.activeCategoryMap.length,
+                    eligibilitiesLength: state
+                        .discountFilterRepository.activeEligibilityMap.length,
                   ),
                 ),
-              ),
-              _AdvancedListWidget(
-                filter: discountFilter.locationSearchMap,
-                onChange: onLocationChange,
+              ],
+            );
+          } else {
+            return const SliverToBoxAdapter();
+          }
+        },
+      ),
+      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        buildWhen: (previous, current) =>
+            previous.discountFilterRepository.eligibilityMap !=
+                current.discountFilterRepository.eligibilityMap ||
+            previous.filterStatus == FilterStatus.filtering &&
+                current.filterStatus == FilterStatus.filtered,
+        builder: (context, state) {
+          if (state.discountFilterRepository.eligibilityMap.isNotEmpty) {
+            return AdvancedFilterListWidget(
+              isDesk: isDesk,
+              list: _AdvancedListWidget(
+                filter: state.discountFilterRepository.eligibilityMap,
+                onChange: (value) => context.read<DiscountWatcherBloc>().add(
+                      DiscountWatcherEvent.filterEligibilities(
+                        eligibility: value,
+                        isDesk: isDesk,
+                      ),
+                    ),
                 isDesk: isDesk,
-                itemKey: KWidgetkeys.screen.discounts.cityItems,
+                itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
               ),
-            ],
-          ),
-          textKey: KWidgetkeys.screen.discounts.citiesText,
-          title: context.l10n.city,
-        ),
+              textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
+              title: context.l10n.eligibility,
+            );
+          } else {
+            return const SliverToBoxAdapter();
+          }
+        },
+      ),
+      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        buildWhen: (previous, current) =>
+            previous.discountFilterRepository.categoryMap !=
+                current.discountFilterRepository.categoryMap ||
+            previous.filterStatus == FilterStatus.filtering &&
+                current.filterStatus == FilterStatus.filtered,
+        builder: (context, state) {
+          if (state.discountFilterRepository.categoryMap.isNotEmpty) {
+            return AdvancedFilterListWidget(
+              isDesk: isDesk,
+              list: _AdvancedListWidget(
+                filter: state.discountFilterRepository.categoryMap,
+                onChange: (value) => context.read<DiscountWatcherBloc>().add(
+                      DiscountWatcherEvent.filterCategory(
+                        category: value,
+                        isDesk: isDesk,
+                      ),
+                    ),
+                isDesk: isDesk,
+                itemKey: KWidgetkeys.screen.discounts.categoriesItems,
+              ),
+              textKey: KWidgetkeys.screen.discounts.categoriesText,
+              title: context.l10n.category,
+            );
+          } else {
+            return const SliverToBoxAdapter();
+          }
+        },
+      ),
+      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        buildWhen: (previous, current) =>
+            previous.discountFilterRepository.locationMap !=
+                current.discountFilterRepository.locationMap ||
+            previous.filterStatus == FilterStatus.filtering &&
+                current.filterStatus == FilterStatus.filtered,
+        builder: (context, state) {
+          if (state.discountFilterRepository.locationIsNotEpmty) {
+            return AdvancedFilterListWidget(
+              isDesk: isDesk,
+              list: SliverMainAxisGroup(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: KPadding.kPaddingSize16),
+                      child: TextFieldWidget(
+                        widgetKey: const Key('value1'),
+                        onChanged: (value) => context
+                            .read<DiscountWatcherBloc>()
+                            .add(DiscountWatcherEvent.searchLocation(value)),
+                        isDesk: isDesk,
+                        labelText: context.l10n.search,
+                        suffixIcon: KIcon.search,
+                        fillColor: isDesk
+                            ? AppColors.materialThemeKeyColorsNeutral
+                            : null,
+                        enabledBorder: KWidgetTheme.outlineInputBorder,
+                        focusColor:
+                            AppColors.materialThemeKeyColorsNeutralVariant,
+                        hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                      ),
+                    ),
+                  ),
+                  _AdvancedListWidget(
+                    filter: state.discountFilterRepository.locationMap,
+                    onChange: (value) =>
+                        context.read<DiscountWatcherBloc>().add(
+                              DiscountWatcherEvent.filterLocation(
+                                location: value,
+                                isDesk: isDesk,
+                              ),
+                            ),
+                    isDesk: isDesk,
+                    itemKey: KWidgetkeys.screen.discounts.cityItems,
+                  ),
+                ],
+              ),
+              textKey: KWidgetkeys.screen.discounts.citiesText,
+              title: context.l10n.city,
+            );
+          } else {
+            return const SliverToBoxAdapter();
+          }
+        },
+      ),
     ];
     return Padding(
       padding: isDesk
-          ? const EdgeInsets.only(right: KPadding.kPaddingSize16)
-          : const EdgeInsets.all(KPadding.kPaddingSize16),
+          ? const EdgeInsets.only(
+              right: KPadding.kPaddingSize16,
+              top: KPadding.kPaddingSize8,
+            )
+          : const EdgeInsets.only(
+              right: KPadding.kPaddingSize16,
+              left: KPadding.kPaddingSize16,
+              bottom: KPadding.kPaddingSize16,
+            ),
       child: CustomScrollView(
         key: KWidgetkeys.screen.discounts.advancedFilterList,
         primary: true,
@@ -224,19 +274,19 @@ class _ChooseItems extends StatelessWidget {
   const _ChooseItems({
     required this.isDesk,
     required this.chosenItems,
-    required this.onChangeLocation,
-    required this.onChangeCategories,
+    // required this.onChangeLocation,
+    // required this.onChangeCategories,
     required this.categoriesLength,
     required this.eligibilitiesLength,
-    required this.onChangeEligibilities,
+    // required this.onChangeEligibilities,
   });
   final bool isDesk;
   final Map<String, FilterItem> chosenItems;
   final int categoriesLength;
   final int eligibilitiesLength;
-  final void Function(String) onChangeLocation;
-  final void Function(String) onChangeCategories;
-  final void Function(String) onChangeEligibilities;
+  // final void Function(String) onChangeLocation;
+  // final void Function(String) onChangeCategories;
+  // final void Function(String) onChangeEligibilities;
 
   @override
   Widget build(BuildContext context) {
@@ -273,11 +323,26 @@ class _ChooseItems extends StatelessWidget {
                 labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
                   if (eligibilitiesLength > index) {
-                    onChangeEligibilities(chooseItem.value.uk);
+                    context.read<DiscountWatcherBloc>().add(
+                          DiscountWatcherEvent.filterEligibilities(
+                            eligibility: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
                   } else if (eligibilitiesLength + categoriesLength > index) {
-                    onChangeCategories(chooseItem.value.uk);
+                    context.read<DiscountWatcherBloc>().add(
+                          DiscountWatcherEvent.filterCategory(
+                            category: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
                   } else {
-                    onChangeLocation(chooseItem.value.uk);
+                    context.read<DiscountWatcherBloc>().add(
+                          DiscountWatcherEvent.filterLocation(
+                            location: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
                   }
                 },
               ),

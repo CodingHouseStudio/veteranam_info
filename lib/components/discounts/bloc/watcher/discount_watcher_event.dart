@@ -10,30 +10,26 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
-  const factory DiscountWatcherEvent.filterCategory(
-    String value,
-  ) = _FilterCategory;
+  const factory DiscountWatcherEvent.filterCategory({
+    required String category,
+    required bool isDesk,
+  }) = _FilterCategory;
 
-  const factory DiscountWatcherEvent.filterEligibilities(
-    String value,
-  ) = _FilterEligibilities;
+  const factory DiscountWatcherEvent.filterEligibilities({
+    required String eligibility,
+    required bool isDesk,
+  }) = _FilterEligibilities;
 
-  const factory DiscountWatcherEvent.filterLocation(
-    String value,
-  ) = _FilterLocation;
+  const factory DiscountWatcherEvent.filterLocation({
+    required String location,
+    required bool isDesk,
+  }) = _FilterLocation;
 
   const factory DiscountWatcherEvent.searchLocation(
-    String value,
+    String serachText,
   ) = _SearchLocation;
 
-  const factory DiscountWatcherEvent.setMobFilter({
-    required List<FilterItem> filterList,
-    required List<FilterItem> categories,
-    required List<FilterItem> chosenLocationList,
-    required List<FilterItem> chosenCategoriesList,
-    required List<FilterItem> chosenEligibilitiesList,
-    required List<FilterItem> filterEligibilities,
-  }) = _SetMobFilter;
+  const factory DiscountWatcherEvent.setMobFilter() = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(
     DiscountEnum value,

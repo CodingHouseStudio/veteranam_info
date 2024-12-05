@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
-import 'package:veteranam/components/discounts/models/models.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'discount_watcher_bloc.freezed.dart';
@@ -32,7 +31,7 @@ class DiscountWatcherBloc
             failure: null,
             sorting: [],
             unmodifiedDiscountModelItems: [],
-            filterItemsModel: FilterItemsModel.empty(),
+            discountFilterRepository: DiscountFilterRepository.empty(),
             filterDiscountModelList: [],
             filterStatus: FilterStatus.initial,
             isListLoadedFull: false,
@@ -96,14 +95,9 @@ class DiscountWatcherBloc
       return;
     }
 
-    late FilterItemsModel filterItemsModel;
-
-    filterItemsModel = FilterItemsModel.init(
+    final discountFilterRepository = DiscountFilterRepository.init(
       unmodifiedDiscountModelItems: event.discountItemsModel,
       isEnglish: _userRepository.isEnglish,
-      chosenCategories: state.filterItemsModel.activeCategoryMap,
-      chosenEligibilities: state.filterItemsModel.activeEligibilityMap,
-      chosenLocation: state.filterItemsModel.activeLocationMap,
     );
 
     final itemsNumber = getCurrentLoadNumber(
@@ -111,12 +105,12 @@ class DiscountWatcherBloc
     );
 
     final filterDiscountModelList =
-        filterItemsModel.getFilterList(event.discountItemsModel);
+        discountFilterRepository.getFilterList(event.discountItemsModel);
 
     emit(
       _Initial(
         unmodifiedDiscountModelItems: event.discountItemsModel,
-        filterItemsModel: filterItemsModel,
+        discountFilterRepository: discountFilterRepository,
         sorting: [],
         loadingStatus: LoadingStatus.loaded,
         failure: null,
@@ -132,7 +126,8 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final filterDiscountModelList = state.filterItemsModel.getFilterList(
+    final filterDiscountModelList =
+        state.discountFilterRepository.getFilterList(
       state.unmodifiedDiscountModelItems,
     );
 
@@ -165,16 +160,21 @@ class DiscountWatcherBloc
   ) {
     emit(
       state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.discountFilterRepository.resetAll(
+      unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
+      isEnglish: _userRepository.isEnglish,
+    );
+
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtered,
         filterDiscountModelList: state.unmodifiedDiscountModelItems
             .take(getCurrentLoadNumber())
             .toList(),
-        filterItemsModel: FilterItemsModel.init(
-          unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
-          isEnglish: _userRepository.isEnglish,
-          chosenCategories: const {},
-          chosenLocation: const {},
-          chosenEligibilities: const {},
-        ),
         isListLoadedFull: state.unmodifiedDiscountModelItems.length <=
             state.filterDiscountModelList.length,
       ),
@@ -191,22 +191,22 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addEligibility(
-      valueUK: event.value,
+    state.discountFilterRepository.addEligibility(
+      valueUK: event.eligibility,
       unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
       isEnglish: _userRepository.isEnglish,
     );
 
     final itemsNumber = getCurrentLoadNumber();
 
-    final filterDiscountModelList = state.filterItemsModel
-        .getFilterList(state.unmodifiedDiscountModelItems);
+    final filterDiscountModelList = _filter(isDesk: event.isDesk);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
-        filterDiscountModelList:
-            filterDiscountModelList.take(itemsNumber).toList(),
+        filterDiscountModelList: event.isDesk
+            ? filterDiscountModelList.take(itemsNumber).toList()
+            : filterDiscountModelList,
         isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
@@ -222,22 +222,22 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addCategory(
-      valueUK: event.value,
+    state.discountFilterRepository.addCategory(
+      valueUK: event.category,
       unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
       isEnglish: _userRepository.isEnglish,
     );
 
     final itemsNumber = getCurrentLoadNumber();
 
-    final filterDiscountModelList = state.filterItemsModel
-        .getFilterList(state.unmodifiedDiscountModelItems);
+    final filterDiscountModelList = _filter(isDesk: event.isDesk);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
-        filterDiscountModelList:
-            filterDiscountModelList.take(itemsNumber).toList(),
+        filterDiscountModelList: event.isDesk
+            ? filterDiscountModelList.take(itemsNumber).toList()
+            : filterDiscountModelList,
         isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
@@ -253,22 +253,22 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.addLocation(
-      valueUK: event.value,
+    state.discountFilterRepository.addLocation(
+      valueUK: event.location,
       unmodifiedDiscountModelItems: state.unmodifiedDiscountModelItems,
       isEnglish: _userRepository.isEnglish,
     );
 
     final itemsNumber = getCurrentLoadNumber();
 
-    final filterDiscountModelList = state.filterItemsModel
-        .getFilterList(state.unmodifiedDiscountModelItems);
+    final filterDiscountModelList = _filter(isDesk: event.isDesk);
 
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtered,
-        filterDiscountModelList:
-            filterDiscountModelList.take(itemsNumber).toList(),
+        filterDiscountModelList: event.isDesk
+            ? filterDiscountModelList.take(itemsNumber).toList()
+            : filterDiscountModelList,
         isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
       ),
     );
@@ -284,8 +284,8 @@ class DiscountWatcherBloc
       ),
     );
 
-    state.filterItemsModel.locationSearch(
-      event.value,
+    state.discountFilterRepository.locationSearch(
+      event.serachText,
     );
 
     emit(
@@ -299,6 +299,18 @@ class DiscountWatcherBloc
     _SetMobFilter event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    final itemsNumber = getCurrentLoadNumber();
+
+    final filterDiscountModelList = state.discountFilterRepository
+        .getFilterList(state.unmodifiedDiscountModelItems);
+
+    emit(
+      state.copyWith(
+        filterDiscountModelList:
+            filterDiscountModelList.take(itemsNumber).toList(),
+        isListLoadedFull: filterDiscountModelList.length <= itemsNumber,
+      ),
+    );
     // final locationList = _filterLocation(
     //   chooseLocation: event.chosenLocationList,
     //   listValue: state.sortingDiscountModelItems,
@@ -379,118 +391,14 @@ class DiscountWatcherBloc
     // );
   }
 
-  // List<DiscountModel> _filterLocation({
-  //   required List<FilterItem<String>>? chooseLocation,
-  //   List<DiscountModel>? listValue,
-  //   // List<DiscountModel>? categiryList,
-  // }) {
-  //   // final items = listValue ??
-  //   //     state.discountModelItems
-  //   //         .where(
-  //   //           (item) =>
-  //   //               location == null ||
-  //   //               !location.contains(DiscountEnum.free) ||
-  //   //               item.discount.contains(100),
-  //   //         )
-  //   //         .toList();
-  //   return (listValue ?? state.sortingDiscountModelItems).loadingFilter(
-  //     filtersValue: location
-  //         ?.where(
-  //           (element) => element.isSelected,
-  //         )
-  //         .map(
-  //           (e) => e.value.uk,
-  //         )
-  //         .toList(), //?.where((element) => element is! DiscountEnum).toList(),
-  //     itemsLoaded: null,
-  //     getFilter: (item) => [
-  //       if (item.location != null)
-  //         ...item.location!.getTrsnslation(isEnglish: false),
-  //       if (item.subLocation != null) ...item.subLocation!._getList,
-  //     ],
-  //     // overallFilter: items
-  //     //     ._getLocationItems(categiryList ?? state
-  //     // .categoryDiscountModelItems),
-  //     // containAnyItems: false,
-  //   );
-  // }
-
-  // List<DiscountModel> _sorting({
-  //   required List<DiscountModel> list,
-  //   required List<FilterItem<DiscountEnum>>? sorting,
-  // }) {
-  //   final value = (sorting ?? state.sorting).selectedList;
-  //   if (value.isEmpty) return list;
-
-  //   final items = list
-  //       .where(
-  //         (item) =>
-  //             !value.any((element) => element.value == DiscountEnum.free) ||
-  //             item.discount.contains(100),
-  //       )
-  //       .toList();
-  //   if (value.any((element) => element.value == DiscountEnum.largestSmallest)) {
-  //     return items
-  //       ..sort((a, b) {
-  //         // if (locationIndex != null && locationIndex.contains(0)) {
-  //         final maxDiscountA =
-  //             a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
-  //         final maxDiscountB =
-  //             b.discount.isNotEmpty == true ? b.discount.reduce(max) : 0;
-
-  //         return maxDiscountB.compareTo(maxDiscountA); // Descending order
-  //       });
-  //   } else {
-  //     return items;
-  //   }
-  // }
-
-  // List<DiscountModel> _filterCategory({
-  //   required List<FilterItem<String>>? chooseCategories,
-  //   List<DiscountModel>? list,
-  //   // List<DiscountModel>? locationList,
-  // }) =>
-  //     (list ?? state.sortingDiscountModelItems).filter(
-  //       filtersValue: chooseCategories
-  //           ?.map(
-  //             (e) => e.value,
-  //           )
-  //           .toList(),
-  //       // itemsLoaded: null,
-  //       getFilter: (item) => item.category,
-  //       // listForFilter: locationList ?? state.locationDiscountModelItems,
-  //     );
-  // List<DiscountModel> _filterEligebilities({
-  //   required List<FilterItem<String>>? chooseEligibilities,
-  //   List<DiscountModel>? list,
-  //   // List<DiscountModel>? locationList,
-  // }) =>
-  //     (list ?? state.sortingDiscountModelItems).filter(
-  //       filtersValue: chooseEligibilities?.selectedList
-  //           .map(
-  //             (e) => e.value,
-  //           )
-  //           .toList(),
-  //       itemsLoaded: null,
-  //       getFilter: (item) => item.category,
-  //       // listForFilter: locationList ?? state.locationDiscountModelItems,
-  //     );
-
-  // ({List<DiscountModel> list, LoadingStatus loadingStatus}) _filter({
-  //   required List<DiscountModel> categoryList,
-  //   required List<DiscountModel> locationList,
-  //   required int itemsLoaded,
-  //   int? loadItems,
-  //   List<dynamic>? location,
-  // }) {
-  //   final (:list, :loadingStatus) = categoryList.combiningFilteredLists(
-  //     secondList: locationList,
-  //     itemsLoaded: itemsLoaded,
-  //     loadItems: loadItems,
-  //     // sorting: (list) => _sorting(list: list, location: location),
-  //   );
-  //   return (list: list, loadingStatus: loadingStatus);
-  // }
+  List<DiscountModel> _filter({required bool isDesk}) {
+    if (isDesk) {
+      return state.discountFilterRepository
+          .getFilterList(state.unmodifiedDiscountModelItems);
+    } else {
+      return state.filterDiscountModelList;
+    }
+  }
 
   int get getItemsLoading {
     final loadingItems = _firebaseRemoteConfigProvider.getInt(loadingItemsKey);

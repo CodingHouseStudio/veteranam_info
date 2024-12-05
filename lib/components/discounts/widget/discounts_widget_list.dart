@@ -102,7 +102,10 @@ class _AdvancedFilterDesk extends StatelessWidget {
             required overlapsContent,
             required shrinkOffset,
           }) =>
-              const AdvancedFilterDesk(),
+              AdvancedFilterContent(
+            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+            isDesk: true,
+          ),
           maxMinHeight: maxHeight,
         ),
       ),
@@ -171,7 +174,7 @@ class _DiscountWidgetList extends StatelessWidget {
                   ),
                 ),
                 if ((!PlatformEnumFlutter.isWebDesktop &&
-                        state.isListLoadedFull) ||
+                        !state.isListLoadedFull) ||
                     state.unmodifiedDiscountModelItems.isEmpty)
                   SliverPrototypeExtentList.builder(
                     itemCount: state.filterDiscountModelList.isEmpty

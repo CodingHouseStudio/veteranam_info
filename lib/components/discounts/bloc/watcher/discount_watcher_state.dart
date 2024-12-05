@@ -18,7 +18,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     // required List<dynamic> chooseFilterItems,
-    required FilterItemsModel filterItemsModel,
+    required IDiscountFilterRepository discountFilterRepository,
     required LoadingStatus loadingStatus,
     required FilterStatus filterStatus,
     required List<DiscountModel> filterDiscountModelList,
