@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart'
 import 'package:veteranam/shared/shared_dart.dart';
 
 /// Extension for filtering FilterItem list items.
-extension FilterItems<T> on List<FilterItem> {
+extension FilterItems on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
   List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
     final grouped = groupBy(this, (FilterItem item) => item.value);
@@ -370,9 +370,10 @@ extension ListExtensions<T> on List<T> {
   }
 
   LoadingStatus getLoadingStatus(int loadedItemsCount) =>
-      length <= loadedItemsCount && isNotEmpty
-          ? LoadingStatus.listLoadedFull
-          : LoadingStatus.loaded;
+      LoadingStatus.loaded; //TODO:
+  // length <= loadedItemsCount && isNotEmpty
+  //     ? LoadingStatus.listLoadedFull
+  //     : LoadingStatus.loaded;
 
   /// Method to calculate overall filter values.
   ///
@@ -640,4 +641,16 @@ extension TranslateModelListExtension on List<TranslateModel> {
   //   }
   //   return enumList;
   // }
+}
+
+extension EligiblityEnumListExtension on List<EligibilityEnum> {
+  List<TranslateModel> get getTranslateModels {
+    final translateModelItems = <TranslateModel>[];
+    for (final eligibility in this) {
+      if (eligibility != EligibilityEnum.all) {
+        translateModelItems.add(eligibility.getTranslateModel);
+      }
+    }
+    return translateModelItems;
+  }
 }

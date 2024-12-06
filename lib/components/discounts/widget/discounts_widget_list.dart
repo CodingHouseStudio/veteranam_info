@@ -9,8 +9,8 @@ int _itemCount({
   required DiscountWatcherState state,
   required DiscountConfigState config,
 }) =>
-    state.filteredDiscountModelItems.length +
-    (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
+    state.filterDiscountModelList.length +
+    (config.linkInt >= state.filterDiscountModelList.length ? 0 : 1);
 
 extension LinkScrollExtension on DiscountConfigState {
   int get linkInt => (linkScrollCount + 1) * loadingItems;
@@ -34,7 +34,7 @@ int? _findChildIndexCallback({
     if (valueKey.value == 'link_field') {
       return config.linkInt - 1;
     }
-    final index = state.filteredDiscountModelItems.indexWhere(
+    final index = state.filterDiscountModelList.indexWhere(
       (element) => element.id == valueKey.value,
     );
     if (index >= 0) {
@@ -53,7 +53,7 @@ ValueKey<String> _key({
     return const ValueKey('link_field');
   }
   return ValueKey(
-    state.filteredDiscountModelItems
+    state.filterDiscountModelList
         .elementAt(index - (config.linkInt <= index ? 1 : 0))
         .id,
   );
@@ -102,7 +102,10 @@ class _AdvancedFilterDesk extends StatelessWidget {
             required overlapsContent,
             required shrinkOffset,
           }) =>
-              const AdvancedFilterDesk(),
+              AdvancedFilterContent(
+            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+            isDesk: true,
+          ),
           maxMinHeight: maxHeight,
         ),
       ),
@@ -139,8 +142,8 @@ class _DiscountWidgetList extends StatelessWidget {
         return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
           buildWhen: (previous, current) =>
               previous.loadingStatus != current.loadingStatus ||
-              previous.filteredDiscountModelItems !=
-                  current.filteredDiscountModelItems,
+              previous.filterDiscountModelList !=
+                  current.filterDiscountModelList,
           builder: (context, state) {
             return SliverMainAxisGroup(
               slivers: [
@@ -171,10 +174,10 @@ class _DiscountWidgetList extends StatelessWidget {
                   ),
                 ),
                 if ((!PlatformEnumFlutter.isWebDesktop &&
-                        state.loadingStatus != LoadingStatus.listLoadedFull) ||
-                    state.discountModelItems.isEmpty)
+                        !state.isListLoadedFull) ||
+                    state.unmodifiedDiscountModelItems.isEmpty)
                   SliverPrototypeExtentList.builder(
-                    itemCount: state.filteredDiscountModelItems.isEmpty
+                    itemCount: state.filterDiscountModelList.isEmpty
                         ? config.loadingItems
                         : KDimensions.shimmerDiscountsItems,
                     prototypeItem: Padding(
@@ -209,7 +212,7 @@ class _DiscountWidgetList extends StatelessWidget {
                       ),
                     ),
                   )
-                else if (state.loadingStatus == LoadingStatus.listLoadedFull)
+                else if (state.isListLoadedFull)
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(
                       vertical: KPadding.kPaddingSize48,
@@ -268,13 +271,13 @@ class _DiscountsWidgetItem extends StatelessWidget {
     var indexValue = index;
 
     if (config.linkInt <= index &&
-        state.filteredDiscountModelItems.length > config.linkInt) {
+        state.filterDiscountModelList.length > config.linkInt) {
       indexValue--;
     }
     if (config.linkInt == index + 1) {
       return DiscountLinkWidget(isDesk: isDesk);
     }
-    final discountItem = state.filteredDiscountModelItems.elementAt(indexValue);
+    final discountItem = state.filterDiscountModelList.elementAt(indexValue);
     return DiscountCardWidget(
       discountItem: discountItem,
       isDesk: isDesk,

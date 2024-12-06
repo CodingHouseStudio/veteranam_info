@@ -28,7 +28,7 @@ extension PumpApp on WidgetTester {
         providers: [
           BlocProvider(
             create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-              ..add(const DiscountWatcherEvent.started(isEnglish: false)),
+              ..add(const DiscountWatcherEvent.started()),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<InvestorsWatcherBloc>()

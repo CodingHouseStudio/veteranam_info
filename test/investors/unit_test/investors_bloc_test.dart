@@ -59,10 +59,10 @@ void main() {
       },
       expect: () async => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.loaded,
+          (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
       ],
     );
@@ -81,10 +81,10 @@ void main() {
       },
       expect: () async => [
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
         predicate<InvestorsWatcherState>(
-          (state) => state.loadingStatus == LoadingStatusInvestors.error,
+          (state) => state.loadingStatus == LoadingStatus.error,
         ),
       ],
     );
@@ -98,11 +98,11 @@ void main() {
     //       bloc.stream,
     //       emitsInOrder([
     //         predicate<InvestorsWatcherState>(
-    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    //           (state) => state.loadingStatus == LoadingStatus
     // .loading,
     //         ),
     //         predicate<InvestorsWatcherState>(
-    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    //           (state) => state.loadingStatus == LoadingStatus
     // .loaded,
     //         ),
     //       ]),
@@ -125,11 +125,11 @@ void main() {
     //   },
     //   expect: () => [
     //     predicate<InvestorsWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+    //       (state) => state.loadingStatus == LoadingStatus.loading,
     //     ),
     //     predicate<InvestorsWatcherState>(
     //       (state) =>
-    //           state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //           state.loadingStatus == LoadingStatus.loaded &&
     //           state.loadingMobFundItems.length ==
     //               KDimensions.investorsLoadItems &&
     //           state.itemsLoaded == KDimensions.investorsLoadItems,
@@ -138,14 +138,14 @@ void main() {
     //     ),
     //     predicate<InvestorsWatcherState>(
     //       (state) =>
-    //           state.loadingStatus == LoadingStatusInvestors.loading &&
+    //           state.loadingStatus == LoadingStatus.loading &&
     //           state.loadingMobFundItems.length ==
     //               KDimensions.investorsLoadItems &&
     //           state.itemsLoaded == KDimensions.investorsLoadItems,
     //     ),
     //     predicate<InvestorsWatcherState>(
     //       (state) =>
-    //           state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //           state.loadingStatus == LoadingStatus.loaded &&
     //           state.loadingMobFundItems.length ==
     //               KDimensions.investorsLoadItems * 2 &&
     //           state.itemsLoaded == KDimensions.investorsLoadItems * 2,
@@ -154,7 +154,7 @@ void main() {
     //     ),
     //     // predicate<InvestorsWatcherState>(
     //     //   (state) =>
-    //     //       state.loadingStatus == LoadingStatusInvestors.loaded &&
+    //     //       state.loadingStatus == LoadingStatus.loaded &&
     //     //       state.loadingFundItems.length ==
     //     //           KDimensions.investorsLoadItems * 2 &&
     //     //       state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
@@ -189,7 +189,7 @@ void main() {
     //       bloc.stream,
     //       emitsInOrder([
     //         predicate<InvestorsWatcherState>(
-    //           (state) => state.loadingStatus == LoadingStatusInvestors
+    //           (state) => state.loadingStatus == LoadingStatus
     // .loading,
     //         ),
     //         predicate<InvestorsWatcherState>(
@@ -204,7 +204,7 @@ void main() {
     //   },
     //   expect: () => [
     //     predicate<InvestorsWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatusInvestors.loading,
+    //       (state) => state.loadingStatus == LoadingStatus.loading,
     //     ),
     //     predicate<InvestorsWatcherState>(
     //       (state) => state.loadedFull,

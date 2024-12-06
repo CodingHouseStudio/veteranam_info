@@ -28,7 +28,7 @@ class AdvancedFilterMob extends StatelessWidget {
 
       onPressed: () async {
         final bloc = context.read<DiscountWatcherBloc>();
-        await showModalBottomSheet<AdvancedFilterMobState>(
+        await showModalBottomSheet<void>(
           context: context,
           isScrollControlled: true,
           barrierColor:
@@ -41,30 +41,8 @@ class AdvancedFilterMob extends StatelessWidget {
           showDragHandle: true,
           builder: (context) => AdvancedFilterMobBlocprovider(
             childWidget: const AdvancedFilterMobDialog(),
-            initialFilter: bloc.state.filterLocation,
-            initialSorting: bloc.state.sorting,
-            initChooseLocationList: bloc.state.choosenLocationList,
-            initialChooseSorting: bloc.state.choosenSortingnList,
+            bloc: bloc,
           ),
-        ).then(
-          (_) {
-            if (!context.mounted) return;
-
-            if (_ != null) {
-              context.read<DiscountWatcherBloc>().add(
-                    DiscountWatcherEvent.setMobFilter(
-                      filterList: _.filtersLocation,
-                      sorting: _.sorting,
-                      choosenLocationList: _.choosenLocationList,
-                      choosenSortingnList: _.choosenSortingnList,
-                    ),
-                  );
-            } else {
-              context.read<DiscountWatcherBloc>().add(
-                    const DiscountWatcherEvent.filterReset(),
-                  );
-            }
-          },
         );
       },
 
@@ -78,75 +56,56 @@ class AdvancedFilterMobDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AdvancedFilterMobCubit, AdvancedFilterMobState>(
-      builder: (context, _) {
-        return FractionallySizedBox(
-          key: KWidgetkeys.screen.discounts.advancedFilterDialog,
-          heightFactor: KDimensions.bottomDialogHeightFactor,
-          child: Column(
+    return FractionallySizedBox(
+      key: KWidgetkeys.screen.discounts.advancedFilterDialog,
+      heightFactor: KDimensions.bottomDialogHeightFactor,
+      child: Column(
+        children: [
+          const Expanded(
+            child: AdvancedFilterContent(
+              isDesk: false,
+            ),
+          ),
+          KSizedBox.kHeightSizedBox8,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Row(
-              //   children: [
-              //     IconButtonWidget(
-              //       key: KWidgetkeys.screen.discounts.cancelIcon,
-              //       icon: KIcon.close,
-              //       background: AppColors.materialThemeWhite,
-              //       padding: KPadding.kPaddingSize12,
-              //       onPressed: () => context.pop(),
-              //     ),
-              // KSizedBox.kHeightSizedBox16,
-              // Text(
-              //   context.l10n.advancedFilter,
-              //   key: KWidgetkeys.screen.discounts.cancelText,
-              //   style: AppTextStyle.materialThemeTitleMedium,
-              // ),
-              //   ],
-              // ),
-              Expanded(
-                child: AdvancedFilterContent(
-                  isDesk: false,
-                  onChange: (value) => context
-                      .read<AdvancedFilterMobCubit>()
-                      .changeFilterList(value),
-                  filterLocationes: _.filtersLocation,
-                  sorting: _.sorting,
-                  onChangeSorting: (value) =>
-                      context.read<AdvancedFilterMobCubit>().sorting(value),
-                  chooseLocationList: _.choosenLocationList,
-                  chooseSortingList: _.choosenSortingnList,
-                ),
-              ),
-              KSizedBox.kHeightSizedBox8,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  KSizedBox.kWidthSizedBox8,
-                  AdvancedFilterResetButton(
+              KSizedBox.kWidthSizedBox8,
+              BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+                builder: (context, state) {
+                  return AdvancedFilterResetButton(
                     isDesk: false,
-                    resetEvent: _.choosenLocationList.isNotEmpty ||
-                            _.choosenSortingnList.isNotEmpty
-                        ? context.pop
+                    resetEvent: state.discountFilterRepository.hasActivityItem
+                        ? () {
+                            context.pop();
+                            context
+                                .read<DiscountWatcherBloc>()
+                                .add(const DiscountWatcherEvent.filterReset());
+                          }
                         : null,
-                  ),
-                  KSizedBox.kWidthSizedBox8,
-                  DoubleButtonWidget(
-                    text: context.l10n.apply,
-                    isDesk: false,
-                    onPressed: () {
-                      context.pop(_);
-                    },
-                    widgetKey: KWidgetkeys
-                        .screen.discounts.advancedFilterMobAppliedButton,
-                    darkMode: true,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                ],
+                  );
+                },
               ),
-              KSizedBox.kHeightSizedBox8,
+              KSizedBox.kWidthSizedBox8,
+              DoubleButtonWidget(
+                text: context.l10n.apply,
+                isDesk: false,
+                onPressed: () {
+                  context.pop();
+                  context
+                      .read<DiscountWatcherBloc>()
+                      .add(const DiscountWatcherEvent.setMobFilter());
+                },
+                widgetKey:
+                    KWidgetkeys.screen.discounts.advancedFilterMobAppliedButton,
+                darkMode: true,
+              ),
+              KSizedBox.kWidthSizedBox16,
             ],
           ),
-        );
-      },
+          KSizedBox.kHeightSizedBox8,
+        ],
+      ),
     );
   }
 }

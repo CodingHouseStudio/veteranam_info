@@ -7,7 +7,6 @@ enum LoadingStatus {
   loading,
   loaded,
   error,
-  listLoadedFull,
 }
 
 //enum EvaluationEnum { like, dislike, smile, none }

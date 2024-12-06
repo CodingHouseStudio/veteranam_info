@@ -9,5 +9,5 @@ class DropDownItem {
 
   final String text;
   final VoidCallback? action;
-  final Key key;
+  final Key? key;
 }

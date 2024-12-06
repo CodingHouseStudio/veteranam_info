@@ -107,9 +107,17 @@ class UserRoleBodyWidget extends StatelessWidget {
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             KSizedBox.kWidthSizedBox16,
-            DropDownButton(
+            DropDownButtonWidget(
               isDesk: isDesk,
               buttonText: context.l10n.login,
+              style: KButtonStyles.borderBlackButtonStyle.copyWith(
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.only(
+                    left: KPadding.kPaddingSize10,
+                    right: KPadding.kPaddingSize22,
+                  ),
+                ),
+              ),
               items: [
                 DropDownItem(
                   text: context.l10n.asBusiness,
@@ -124,7 +132,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   key: KWidgetkeys.screen.userRole.loginUserButton,
                 ),
               ],
-              offset: KDimensions.offset,
+              offset: KDimensions.userRoleDropButtonOffset,
             ),
           ],
         ),
