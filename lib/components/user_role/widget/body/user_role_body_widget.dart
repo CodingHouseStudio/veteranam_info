@@ -133,7 +133,9 @@ class UserRoleBodyWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              position: PopupMenuButtonPosition.bottomRight,
+              position: isTablet
+                  ? PopupMenuButtonPosition.bottomRight
+                  : PopupMenuButtonPosition.bottomCenter,
             ),
           ],
         ),
