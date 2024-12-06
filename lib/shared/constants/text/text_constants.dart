@@ -133,6 +133,8 @@ abstract class KMockText {
     en: 'Medical',
   );
 
+  static const filterItem = FilterItem(KMockText.category, number: 10);
+
   static final discountModel = DiscountModel(
     id: '',
     userId: '',

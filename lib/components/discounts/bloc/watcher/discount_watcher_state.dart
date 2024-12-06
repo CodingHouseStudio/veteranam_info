@@ -8,9 +8,13 @@ extension DiscountFailureExtension on SomeFailure {
 
 enum FilterStatus {
   initial,
+  loading,
   filtering,
   filtered,
-  error,
+  error;
+
+  bool get isLoading =>
+      this == FilterStatus.loading || this == FilterStatus.initial;
 }
 
 @freezed
@@ -46,18 +50,18 @@ class DiscountWatcherState with _$DiscountWatcherState {
 //       ];
 // }
 
-extension SubLocationString on SubLocation {
-  String get _getList {
-    return KAppText.sulocationUA;
-    // switch (this) {
-    //   case SubLocation.all:
-    //     return [
-    //       SubLocation.allStoresOfChain,
-    //       SubLocation.online,
-    //     ];
-    //   case SubLocation.allStoresOfChain:
-    //   case SubLocation.online:
-    //     return [this];
-    // }
-  }
-}
+// extension SubLocationString on SubLocation {
+//   String get _getList {
+//     return KAppText.sulocationUA;
+//     // switch (this) {
+//     //   case SubLocation.all:
+//     //     return [
+//     //       SubLocation.allStoresOfChain,
+//     //       SubLocation.online,
+//     //     ];
+//     //   case SubLocation.allStoresOfChain:
+//     //   case SubLocation.online:
+//     //     return [this];
+//     // }
+//   }
+// }

@@ -149,33 +149,33 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
-            ),
-          )
-          ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityAddItem(
-              'test',
+              EligibilityEnum.veterans,
+            ),
+          )
+          ..add(
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.all,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityRemoveItem(
-              'test',
+              EligibilityEnum.all,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityRemoveItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityRemoveItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
@@ -279,12 +279,12 @@ void main() {
           description: MessageFieldModel.pure(),
           exclusions: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
         ),
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -301,7 +301,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
@@ -318,7 +318,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: false,
@@ -555,8 +555,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
@@ -595,7 +595,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -612,7 +612,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -629,7 +629,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -646,7 +646,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -793,7 +793,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -810,7 +810,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -889,7 +889,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -906,7 +906,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -989,7 +989,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -1006,7 +1006,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: KTestText.cityModelItems,
           isIndefinitely: true,
@@ -1102,28 +1102,28 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityAddItem(
-              KAppText.eligibilityAll,
+              EligibilityEnum.all,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityRemoveItem(
-              KAppText.eligibilityAll,
+              EligibilityEnum.all,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityAddItem(
-              KAppText.eligibilityAll,
+              EligibilityEnum.all,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              KTestText.blocSendDiscountModel.eligibility!.first.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
@@ -1159,7 +1159,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -1176,7 +1176,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: true,
@@ -1194,7 +1194,7 @@ void main() {
         const DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: ListFieldModel.pure(),
+          eligibility: EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,
@@ -1211,7 +1211,7 @@ void main() {
         DiscountsAddState(
           isOnline: false,
           discount: null,
-          eligibility: const ListFieldModel.pure(),
+          eligibility: const EligibilityFieldModel.pure(),
           categoryList: KAppText.discountsCategories,
           citiesList: [],
           isIndefinitely: false,

@@ -26,6 +26,7 @@ abstract class KDimensions {
   static const shimmerStoriesItems = 3;
   static const shimmerWorksItems = 3;
   static const shimmerDiscountsItems = 1;
+  static const shimmerDiscountsFilterItems = 4;
   static const shimmerCategoryItems = 5;
 
   static const maxLinkPerDay = 3;
@@ -38,7 +39,8 @@ abstract class KDimensions {
   static const descriptionMobHideLength = 100;
   static const descriptionDeskHideLength = 200;
 
-  static const offset = Offset(110, 45);
+  static const userRoleDropButtonOffset = Offset(110, 45);
+  static const discountSortingDropButtonOffset = Offset(0, 45);
 
   // static const kUserRoleWidth = 0.3;
 

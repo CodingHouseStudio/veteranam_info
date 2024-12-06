@@ -1,7 +1,7 @@
 import 'package:veteranam/shared/models/helper_models/translate_model.dart';
 
 class FilterItem {
-  FilterItem(
+  const FilterItem(
     this.value, {
     this.number = 1,
     this.isSelected = false,

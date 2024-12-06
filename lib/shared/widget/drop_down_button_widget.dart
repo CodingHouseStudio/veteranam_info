@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DropDownButton extends StatefulWidget {
-  const DropDownButton({
+class DropDownButtonWidget extends StatefulWidget {
+  const DropDownButtonWidget({
     required this.isDesk,
     required this.buttonText,
     required this.items,
     required this.offset,
     super.key,
+    this.style,
   });
 
   final bool isDesk;
   final String buttonText;
   final List<DropDownItem> items;
   final Offset offset;
+  final ButtonStyle? style;
 
   @override
-  DropDownButtonState createState() => DropDownButtonState();
+  DropDownButtonWidgetState createState() => DropDownButtonWidgetState();
 }
 
-class DropDownButtonState extends State<DropDownButton> {
-  bool _showButtons = false;
+class DropDownButtonWidgetState extends State<DropDownButtonWidget> {
+  late bool _showButtons;
+
+  @override
+  void initState() {
+    _showButtons = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +37,7 @@ class DropDownButtonState extends State<DropDownButton> {
       offset: widget.offset,
       // position: PopupMenuPosition.under,
       shape: KWidgetTheme.outlineBorder,
-      style: KButtonStyles.borderBlackButtonStyle.copyWith(
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.only(
-            left: KPadding.kPaddingSize10,
-            right: KPadding.kPaddingSize22,
-          ),
-        ),
-      ),
+      style: widget.style,
       menuPadding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize8,
       ),

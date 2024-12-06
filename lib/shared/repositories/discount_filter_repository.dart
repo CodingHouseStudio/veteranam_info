@@ -149,12 +149,12 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         ),
       );
 
-      if (_activeLocationMap.isEmpty &&
-          _locationMap.containsKey(KAppText.sublocation.uk)) {
-        _activeLocationMap.addAll({
-          KAppText.sublocation.uk: _locationMap[KAppText.sublocation.uk]!,
-        });
-      }
+      // if (_activeLocationMap.isEmpty &&
+      //     _locationMap.containsKey(KAppText.sublocation.uk)) {
+      //   _activeLocationMap.addAll({
+      //     KAppText.sublocation.uk: _locationMap[KAppText.sublocation.uk]!,
+      //   });
+      // }
 
       _addActivityMapToItemsMap(
         activityMap: _activeLocationMap,

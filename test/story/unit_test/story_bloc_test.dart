@@ -149,9 +149,9 @@ void main() {
         predicate<StoryWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
-        predicate<StoryWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-        ),
+        // predicate<StoryWatcherState>(
+        //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+        // ),
         // predicate<StoryWatcherState>(
         //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
         // &&

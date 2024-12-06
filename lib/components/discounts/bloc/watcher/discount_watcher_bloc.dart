@@ -64,7 +64,12 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.loading,
+        filterStatus: FilterStatus.loading,
+      ),
+    );
 
     // final reportItems = await _getReport();
 
@@ -116,7 +121,7 @@ class DiscountWatcherBloc
         failure: null,
         filterDiscountModelList:
             filterDiscountModelList.take(itemsNumber).toList(),
-        filterStatus: state.filterStatus,
+        filterStatus: FilterStatus.filtered,
         isListLoadedFull: itemsNumber >= filterDiscountModelList.length,
       ),
     );

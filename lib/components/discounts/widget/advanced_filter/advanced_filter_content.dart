@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
@@ -72,10 +73,10 @@ class AdvancedFilterContent extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.eligibilityMap !=
                 current.discountFilterRepository.eligibilityMap ||
-            previous.filterStatus == FilterStatus.filtering &&
-                current.filterStatus == FilterStatus.filtered,
+            previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.eligibilityMap.isNotEmpty) {
+          if (state.discountFilterRepository.eligibilityMap.isNotEmpty ||
+              state.filterStatus.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: _AdvancedListWidget(
@@ -88,12 +89,16 @@ class AdvancedFilterContent extends StatelessWidget {
                     ),
                 isDesk: isDesk,
                 itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
+                isLoading: state.filterStatus.isLoading,
               ),
               textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
               title: context.l10n.eligibility,
             );
           } else {
-            return const SliverToBoxAdapter();
+            return _AdvancedLoadingListWidget(
+              isDesk: isDesk,
+              itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
+            );
           }
         },
       ),
@@ -101,10 +106,10 @@ class AdvancedFilterContent extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.categoryMap !=
                 current.discountFilterRepository.categoryMap ||
-            previous.filterStatus == FilterStatus.filtering &&
-                current.filterStatus == FilterStatus.filtered,
+            previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.categoryMap.isNotEmpty) {
+          if (state.discountFilterRepository.categoryMap.isNotEmpty ||
+              state.filterStatus.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: _AdvancedListWidget(
@@ -117,6 +122,7 @@ class AdvancedFilterContent extends StatelessWidget {
                     ),
                 isDesk: isDesk,
                 itemKey: KWidgetkeys.screen.discounts.categoriesItems,
+                isLoading: state.filterStatus.isLoading,
               ),
               textKey: KWidgetkeys.screen.discounts.categoriesText,
               title: context.l10n.category,
@@ -130,10 +136,10 @@ class AdvancedFilterContent extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.locationMap !=
                 current.discountFilterRepository.locationMap ||
-            previous.filterStatus == FilterStatus.filtering &&
-                current.filterStatus == FilterStatus.filtered,
+            previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.locationIsNotEpmty) {
+          if (state.discountFilterRepository.locationIsNotEpmty ||
+              state.filterStatus.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: SliverMainAxisGroup(
@@ -171,6 +177,7 @@ class AdvancedFilterContent extends StatelessWidget {
                             ),
                     isDesk: isDesk,
                     itemKey: KWidgetkeys.screen.discounts.cityItems,
+                    isLoading: state.filterStatus.isLoading,
                   ),
                 ],
               ),
@@ -210,14 +217,19 @@ class _AdvancedListWidget extends StatelessWidget {
     required this.onChange,
     required this.isDesk,
     required this.itemKey,
+    required this.isLoading,
   });
   final Map<String, FilterItem> filter;
   final void Function(String) onChange;
   final bool isDesk;
   final Key itemKey;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return _AdvancedLoadingListWidget(isDesk: isDesk, itemKey: itemKey);
+    }
     return SliverPrototypeExtentList.builder(
       prototypeItem: Padding(
         padding: isDesk
@@ -226,9 +238,10 @@ class _AdvancedListWidget extends StatelessWidget {
         child: CheckPointAmountWidget(
           key: itemKey,
           isCheck: false,
-          filterItem: FilterItem(KMockText.category, number: 10),
+          filterItem: KMockText.filterItem,
           isDesk: isDesk,
           onChanged: null,
+          maxLines: 1,
         ),
       ),
       addAutomaticKeepAlives: false,
@@ -259,6 +272,7 @@ class _AdvancedListWidget extends StatelessWidget {
             onChanged: () => onChange(
               value.value.uk,
             ),
+            maxLines: 1,
             isCheck: value.isSelected,
             filterItem: value,
             isDesk: isDesk,
@@ -298,7 +312,7 @@ class _ChooseItems extends StatelessWidget {
         prototypeItem: Padding(
           padding: isDesk
               ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-              : EdgeInsets.zero,
+              : const EdgeInsets.only(top: KPadding.kPaddingSize8),
           child: CancelChipWidget(
             widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
             isDesk: isDesk,
@@ -314,7 +328,7 @@ class _ChooseItems extends StatelessWidget {
           return Padding(
             padding: isDesk
                 ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-                : EdgeInsets.zero,
+                : const EdgeInsets.only(top: KPadding.kPaddingSize8),
             child: Align(
               alignment: Alignment.centerLeft,
               child: CancelChipWidget(
@@ -350,6 +364,64 @@ class _ChooseItems extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _AdvancedLoadingListWidget extends StatelessWidget {
+  const _AdvancedLoadingListWidget({
+    required this.isDesk,
+    required this.itemKey,
+  });
+  final bool isDesk;
+  final Key itemKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPrototypeExtentList.builder(
+      prototypeItem: Padding(
+        padding: isDesk
+            ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+            : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+        child: CheckPointAmountWidget(
+          key: itemKey,
+          isCheck: false,
+          filterItem: KMockText.filterItem,
+          isDesk: isDesk,
+          maxLines: 1,
+          onChanged: null,
+        ),
+      ),
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      itemCount: KDimensions.shimmerDiscountsFilterItems,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: isDesk
+              ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+              : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+          child: const SkeletonizerWidget(
+            isLoading: true,
+            highlightColor: AppColors.materialThemeWhite,
+            baseColor: AppColors.materialThemeKeyColorsNeutral,
+            child: Skeleton.leaf(
+              child: DecoratedBox(
+                decoration: KWidgetTheme.boxDecorationWidget,
+                // child: CheckPointAmountWidget(
+                //   key: itemKey,
+                //   maxLines: 1,
+                //   onChanged: null,
+                //   isCheck: false,
+                //   filterItem: KMockText.filterItem,
+                //   isDesk: isDesk,
+                //   amoutInactiveClor:
+                //       isDesk ? null : AppColors.materialThemeWhite,
+                // ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
