@@ -25,8 +25,8 @@ class AdvancedFilterButton extends StatelessWidget {
       return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
         buildWhen: (previous, current) =>
             previous.filterStatus != current.filterStatus &&
-            current.discountFilterRepository.getActivityList !=
-                previous.discountFilterRepository.getActivityList,
+            current.discountFilterRepository.getActivityList.isEmpty !=
+                previous.discountFilterRepository.getActivityList.isEmpty,
         builder: (context, state) {
           if (state.discountFilterRepository.getActivityList.isEmpty) {
             return Align(
