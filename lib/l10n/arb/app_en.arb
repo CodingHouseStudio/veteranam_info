@@ -1624,6 +1624,15 @@
   "@joinUs": {
     "examples": "Header for the mobile app on the User Role page"
   },
+  "sortByDate": "By Newest",
+  "@sortByDate": {
+    "examples": "Text for the sorting button on the Discount page",
+    "description": "The button is used to sort discounts by date. From newest to oldest."
+  },
+  "discountFilterFailureMessage": "An error occurred during filtering.",
+  "@discountFilterFailureMessage": {
+    "description": "Error message displayed during filtering"
+  },
   "activate": "Activate",
   "@activate": {
     "examples": "Text for a button on the MyDiscount page.",

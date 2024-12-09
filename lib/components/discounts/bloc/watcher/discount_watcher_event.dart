@@ -2,30 +2,34 @@ part of 'discount_watcher_bloc.dart';
 
 @freezed
 class DiscountWatcherEvent with _$DiscountWatcherEvent {
-  const factory DiscountWatcherEvent.started({required bool isEnglish}) =
-      _Started;
+  const factory DiscountWatcherEvent.started() = _Started;
 
-  const factory DiscountWatcherEvent.updated({
-    required List<DiscountModel> discountItemsModel,
-    required bool isEnglish,
-  }) = _Updated;
+  const factory DiscountWatcherEvent.updated(
+    List<DiscountModel> discountItemsModel,
+  ) = _Updated;
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
-  const factory DiscountWatcherEvent.filterCategory(
-    dynamic value,
-  ) = _FilterCategory;
+  const factory DiscountWatcherEvent.filterCategory({
+    required String category,
+    required bool isDesk,
+  }) = _FilterCategory;
 
-  const factory DiscountWatcherEvent.filterLocation(
-    dynamic value,
-  ) = _FilterLocation;
+  const factory DiscountWatcherEvent.filterEligibilities({
+    required String eligibility,
+    required bool isDesk,
+  }) = _FilterEligibilities;
 
-  const factory DiscountWatcherEvent.setMobFilter({
-    required List<FilterItem> filterList,
-    required List<SortingItem> sorting,
-    required List<FilterItem> choosenLocationList,
-    required List<SortingItem> choosenSortingnList,
-  }) = _SetMobFilter;
+  const factory DiscountWatcherEvent.filterLocation({
+    required String location,
+    required bool isDesk,
+  }) = _FilterLocation;
+
+  const factory DiscountWatcherEvent.searchLocation(
+    String serachText,
+  ) = _SearchLocation;
+
+  const factory DiscountWatcherEvent.setMobFilter() = _SetMobFilter;
 
   const factory DiscountWatcherEvent.sorting(
     DiscountEnum value,

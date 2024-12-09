@@ -288,8 +288,8 @@ extension ContextExtensions on BuildContext {
 extension DiscountEnumExtensions on DiscountEnum {
   String getValue(BuildContext context) {
     switch (this) {
-      case DiscountEnum.free:
-        return context.l10n.free;
+      case DiscountEnum.byDate:
+        return context.l10n.sortByDate;
       case DiscountEnum.largestSmallest:
         return context.l10n.fromLargestToSmallest;
     }

@@ -106,7 +106,7 @@ class _FilterChipItemWidget extends StatelessWidget {
               right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
             ),
             child: ChipWidget(
-              filter: FilterItem(
+              filter: const FilterItem(
                 KMockText.category,
               ),
               onSelected: null,

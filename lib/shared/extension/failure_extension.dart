@@ -8,6 +8,8 @@ extension DiscountFailureValue on DiscountFailure {
       case DiscountFailure.report:
       case DiscountFailure.error:
         return context.l10n.error;
+      case DiscountFailure.filter:
+        return context.l10n.discountFilterFailureMessage;
     }
   }
 }

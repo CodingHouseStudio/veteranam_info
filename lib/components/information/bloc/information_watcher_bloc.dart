@@ -26,7 +26,7 @@ class InformationWatcherBloc
             filteredInformationModelItems: [],
             filters: [],
             itemsLoaded: 0,
-            failure: null,
+            failure: null, isListLoadedFull: false,
             // reportItems: [],
           ),
         ) {
@@ -82,7 +82,7 @@ class InformationWatcherBloc
     //   checkFunction: (item) => item.id,
     //   reportItems: event.reportItems,
     // );
-    final (:list, :loadingStatus) = _filter(
+    final (:list, :isListLoadedFull) = _filter(
       filters: state.filters,
       itemsLoaded: state.itemsLoaded,
       list: event.informationItemsModel,
@@ -91,7 +91,7 @@ class InformationWatcherBloc
     emit(
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
-        loadingStatus: loadingStatus,
+        loadingStatus: LoadingStatus.loaded, isListLoadedFull: isListLoadedFull,
         filteredInformationModelItems: list,
         filters: state.filters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
@@ -106,11 +106,11 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      emit(state.copyWith(isListLoadedFull: true));
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final (:list, :loadingStatus) = _filter(
+    final (:list, :isListLoadedFull) = _filter(
       filters: state.filters,
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.loadItems,
@@ -119,7 +119,8 @@ class InformationWatcherBloc
       state.copyWith(
         filteredInformationModelItems: list,
         itemsLoaded: list.length,
-        loadingStatus: loadingStatus,
+        loadingStatus: LoadingStatus.loaded,
+        isListLoadedFull: isListLoadedFull,
       ),
     );
   }
@@ -147,7 +148,7 @@ class InformationWatcherBloc
       removeValue: CategoryEnum.all,
     );
 
-    final (:list, :loadingStatus) = _filter(
+    final (:list, :isListLoadedFull) = _filter(
       filters: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
@@ -157,14 +158,14 @@ class InformationWatcherBloc
         filteredInformationModelItems: list,
         filters: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
-        loadingStatus: loadingStatus,
+        isListLoadedFull: isListLoadedFull,
       ),
     );
   }
 
   ({
     List<InformationModel> list,
-    LoadingStatus loadingStatus,
+    bool isListLoadedFull,
   }) _filter({
     required List<dynamic>? filters,
     required int itemsLoaded,

@@ -54,20 +54,25 @@ class TranslateItemsConverter
   @override
   List<TranslateModel> fromJson(dynamic json) {
     final map = json as Map<String, dynamic>;
-    return (map[TranslateModelJsonField.trnslationListJson] as List)
-        .map(
-          (e) => TranslateModel.fromJson(e as Map<String, dynamic>),
-        )
-        .toList();
+    final items = map[TranslateModelJsonField.trnslationListJson];
+    if (items is List) {
+      return List.generate(
+        items.length,
+        (index) => TranslateModel.fromJson(
+          items.elementAt(index) as Map<String, dynamic>,
+        ),
+      );
+    }
+    return [];
   }
 
   @override
   dynamic toJson(List<TranslateModel> object) {
-    return object
-        .map(
-          (e) => e.toJson(),
-        )
-        .toList();
+    return List.generate(
+      object.length,
+      (index) => object.elementAt(index).toJson(),
+      growable: false,
+    );
   }
 
   static Map<String, dynamic> readJsonItems(
@@ -103,21 +108,28 @@ class TranslateItemsOrNullConverter
   @override
   List<TranslateModel>? fromJson(dynamic json) {
     final map = json as Map<String, dynamic>;
-    return map.isEmpty
-        ? null
-        : (map[TranslateModelJsonField.trnslationListJson] as List)
-            .map(
-              (e) => TranslateModel.fromJson(e as Map<String, dynamic>),
-            )
-            .toList();
+    if (map.isNotEmpty) {
+      final items = map[TranslateModelJsonField.trnslationListJson];
+      if (items is List) {
+        return List.generate(
+          items.length,
+          (index) => TranslateModel.fromJson(
+            items.elementAt(index) as Map<String, dynamic>,
+          ),
+        );
+      }
+    }
+    return null;
   }
 
   @override
   dynamic toJson(List<TranslateModel>? object) {
-    return object
-        ?.map(
-          (e) => e.toJson(),
-        )
-        .toList();
+    return object == null
+        ? null
+        : List.generate(
+            object.length,
+            (index) => object.elementAt(index).toJson(),
+            growable: false,
+          );
   }
 }

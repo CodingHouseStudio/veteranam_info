@@ -7,9 +7,14 @@ class DeviceConverter
 
   @override
   List<DeviceInfoModel>? fromJson(List<dynamic>? json) {
-    final list = json
-        ?.map((e) => DeviceInfoModel?.fromJson(e as Map<String, dynamic>))
-        .toList();
+    final list = json == null
+        ? null
+        : List.generate(
+            json.length,
+            (index) => DeviceInfoModel?.fromJson(
+              json.elementAt(index) as Map<String, dynamic>,
+            ),
+          );
     if (list?.isEmpty ?? true) {
       return null;
     } else {
@@ -19,10 +24,12 @@ class DeviceConverter
 
   @override
   List<dynamic>? toJson(List<DeviceInfoModel>? object) {
-    return object
-        ?.map(
-          (e) => e.toJson(),
-        )
-        .toList();
+    return object == null
+        ? null
+        : List.generate(
+            object.length,
+            (index) => object.elementAt(index).toJson(),
+            growable: false,
+          );
   }
 }

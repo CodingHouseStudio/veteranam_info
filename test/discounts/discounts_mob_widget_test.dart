@@ -25,6 +25,7 @@ void main() {
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
     late MobileRatingRepository mockMobileRatingRepository;
+    late UserRepository mockUserRepository;
     setUp(() {
       Config.testIsWeb = false;
       PlatformEnumFlutter.isWebDesktop = true;
@@ -39,6 +40,7 @@ void main() {
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockBuildRepository = MockAppInfoRepository();
       mockMobileRatingRepository = MockMobileRatingRepository();
+      mockUserRepository = MockUserRepository();
 
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -107,6 +109,7 @@ void main() {
         mockAuthenticationRepository: mockAuthenticationRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         mockBuildRepository: mockBuildRepository,
+        mockUserRepository: mockUserRepository,
         mockMobileRatingRepository: mockMobileRatingRepository,
       );
 
@@ -126,6 +129,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockBuildRepository: mockBuildRepository,
           mockMobileRatingRepository: mockMobileRatingRepository,
+          mockUserRepository: mockUserRepository,
         ),
       );
     });
@@ -143,6 +147,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockUserRepository: mockUserRepository,
           mockBuildRepository: mockBuildRepository,
           mockMobileRatingRepository: mockMobileRatingRepository,
         );
@@ -169,6 +174,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockUserRepository: mockUserRepository,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );
@@ -190,6 +196,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockUserRepository: mockUserRepository,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
           );

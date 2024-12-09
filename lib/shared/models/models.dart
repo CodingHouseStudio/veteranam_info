@@ -8,6 +8,7 @@ export 'employee_respond_model.dart';
 export 'failure_model/failure_model.dart';
 export 'feedback_model.dart';
 export 'field_models/field_models.dart';
+export 'filter_model.dart';
 export 'funds_model.dart';
 export 'helper_models/helper_models.dart';
 export 'information_model.dart';

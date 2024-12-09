@@ -12,6 +12,7 @@ abstract class ErrorText {
   static const nonAsync = 'Non-async exceptions';
   static const fromCode = 'From Code';
   static const dataKey = 'DATA';
+  static const callFrom = 'Called From Method';
 
   static const sendError = 'Send';
   static const serverError = 'Unkown';

@@ -71,6 +71,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                 : const SizedBox.shrink(),
           );
         },
+        growable: false,
       ),
     );
   }

@@ -315,11 +315,15 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                               text.toEligibility,
                             ),
                           ),
-                      values: _.eligibility?.value
-                          .map(
-                            (e) => e.getValue(context),
-                          )
-                          .toList(),
+                      values: _.eligibility == null
+                          ? null
+                          : List.generate(
+                              _.eligibility!.value.length,
+                              (index) => _.eligibility!.value
+                                  .elementAt(index)
+                                  .getValue(context),
+                              growable: false,
+                            ),
                       removeEvent: (value) =>
                           context.read<DiscountsAddBloc>().add(
                                 DiscountsAddEvent.eligibilityRemoveItem(

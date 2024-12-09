@@ -7,7 +7,6 @@ enum LoadingStatus {
   loading,
   loaded,
   error,
-  listLoadedFull,
 }
 
 //enum EvaluationEnum { like, dislike, smile, none }
@@ -72,8 +71,8 @@ enum PlatformEnum {
 }
 
 enum DiscountEnum {
+  byDate,
   largestSmallest,
-  free,
 }
 
 enum ErrorLevelEnum {

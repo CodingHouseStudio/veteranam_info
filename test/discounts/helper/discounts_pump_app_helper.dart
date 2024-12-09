@@ -17,6 +17,7 @@ Future<void> discountsPumpAppHelper({
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required AppInfoRepository mockBuildRepository,
   required MobileRatingRepository? mockMobileRatingRepository,
+  required UserRepository mockUserRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -28,6 +29,7 @@ Future<void> discountsPumpAppHelper({
     // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     // mockReportRepository: mockReportRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    mockUserRepository: mockUserRepository,
   );
   _registerUserWatcherBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
@@ -50,7 +52,7 @@ Future<void> discountsPumpAppHelper({
   //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   //   // mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   // );
-  _registerAdvancedFilterMobCubit();
+  // _registerAdvancedFilterMobCubit();
   _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
   _registerBuildCubit(
     mockBuildRepository: mockBuildRepository,
@@ -89,12 +91,14 @@ void _registerDiscountBloc({
   // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   // required IReportRepository mockReportRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+  required UserRepository mockUserRepository,
 }) {
   final discountBloc = DiscountWatcherBloc(
     discountRepository: mockDiscountRepository,
     // reportRepository: mockReportRepository,
     // appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    userRepository: mockUserRepository,
   );
   if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
     GetIt.I.unregister<DiscountWatcherBloc>();
@@ -191,13 +195,13 @@ void _registerMobileRatingCubit(
 //   GetIt.I.registerSingleton<DiscountUserEmailCubit>(authenticationBloc);
 // }
 
-void _registerAdvancedFilterMobCubit() {
-  final advancedFilterMobCubit = AdvancedFilterMobCubit();
-  if (GetIt.I.isRegistered<AdvancedFilterMobCubit>()) {
-    GetIt.I.unregister<AdvancedFilterMobCubit>();
-  }
-  GetIt.I.registerSingleton<AdvancedFilterMobCubit>(advancedFilterMobCubit);
-}
+// void _registerAdvancedFilterMobCubit() {
+//   final advancedFilterMobCubit = AdvancedFilterMobCubit();
+//   if (GetIt.I.isRegistered<AdvancedFilterMobCubit>()) {
+//     GetIt.I.unregister<AdvancedFilterMobCubit>();
+//   }
+//   GetIt.I.registerSingleton<AdvancedFilterMobCubit>(advancedFilterMobCubit);
+// }
 
 void _registerDiscountConfigCubit(
   FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,

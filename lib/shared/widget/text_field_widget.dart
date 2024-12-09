@@ -45,6 +45,8 @@ class TextFieldWidget extends StatefulWidget {
     this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
     this.description,
     this.textInputAction,
+    this.focusColor,
+    this.hoverColor,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -87,6 +89,8 @@ class TextFieldWidget extends StatefulWidget {
   final String? description;
   final TextInputAction? textInputAction;
   final bool? isRequired;
+  final Color? focusColor;
+  final Color? hoverColor;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -157,6 +161,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                       )
                     : null,
               ),
+          hoverColor: widget.hoverColor,
+          focusColor: widget.focusColor,
           focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,

@@ -14,6 +14,7 @@ class _KIcon extends Icon {
     // ignore: unused_element
     super.size = KSize.kIconSize,
     super.color,
+    super.grade,
   });
 }
 
@@ -151,6 +152,13 @@ abstract class KIcon {
     Symbols.logout,
     color: AppColors.materialThemeWhite,
   );
+  static const _KIcon arrowDropDown = _KIcon(Symbols.arrow_drop_down);
+  static const _KIcon arrowDropUp = _KIcon(Symbols.arrow_drop_up);
+  static const _KIcon sort = _KIcon(
+    Symbols.sort,
+    grade: 200,
+  );
+
   static const logo = _KIcon(
     IconData(0xe1, fontFamily: KAppText.veteranamFontName),
     size: KSize.kFont48,

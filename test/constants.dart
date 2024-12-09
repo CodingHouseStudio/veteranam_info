@@ -423,11 +423,10 @@ abstract class KTestText {
         id: i.toString(),
         userId: i.toString(),
         category: i == 0
-            ? KMockText.tag
-                .map(
-                  (e) => TranslateModel(uk: e),
-                )
-                .toList()
+            ? List.generate(
+                KMockText.tag.length,
+                (index) => TranslateModel(uk: KMockText.tag.elementAt(index)),
+              )
             : KMockText.discountModel.category,
         dateVerified: dateTime,
         discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,

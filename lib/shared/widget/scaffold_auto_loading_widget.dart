@@ -8,6 +8,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     required this.loadFunction,
     required this.loadingButtonText,
     required this.loadingStatus,
+    required this.isListLoadedFull,
     this.loadDataAgain,
     this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
@@ -37,6 +38,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   // final bool? showMobileNawbar;
   final Widget Function({required bool isDesk})? emptyWidget;
   final bool showLoadingWidget;
+  final bool isListLoadedFull;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -84,8 +86,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           widget.emptyWidget != null)
                         widget.emptyWidget!.call(isDesk: isDesk)
                       else ...[
-                        if (widget.loadingStatus !=
-                                LoadingStatus.listLoadedFull &&
+                        if (!widget.isListLoadedFull &&
                             PlatformEnumFlutter.isWebDesktop &&
                             !(widget.cardListIsEmpty ?? false) &&
                             widget.loadingStatus != LoadingStatus.loading)
@@ -121,8 +122,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         //     ),
                         //   ),
                         // ],
-                        if (widget.loadingStatus ==
-                                LoadingStatus.listLoadedFull &&
+                        if (widget.isListLoadedFull &&
                             !(widget.cardListIsEmpty ?? false) &&
                             widget.showLoadingWidget)
                           ListScrollUpWidget(
@@ -256,7 +256,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   void _onScroll() {
     if (_isBottom &&
-        widget.loadingStatus != LoadingStatus.listLoadedFull &&
+        !widget.isListLoadedFull &&
         !(widget.cardListIsEmpty ?? false)) {
       widget.loadFunction();
     }

@@ -1,5 +1,6 @@
 enum DiscountFailure {
   error,
+  filter,
   report;
 }
 

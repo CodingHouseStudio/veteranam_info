@@ -87,6 +87,7 @@ class StoryBodyWidget extends StatelessWidget {
           loadFunction: () => context.read<StoryWatcherBloc>().add(
                 const StoryWatcherEvent.loadNextItems(),
               ),
+          isListLoadedFull: _.isListLoadedFull,
         );
       },
     );

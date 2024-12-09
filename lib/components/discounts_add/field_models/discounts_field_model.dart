@@ -13,8 +13,10 @@ class DiscountsFieldModel
   const DiscountsFieldModel.dirty([super.value = const []]) : super.dirty();
 
   List<int?> get getValue {
-    return value.map(
-      (discount) {
+    return List.generate(
+      value.length,
+      (index) {
+        final discount = value.elementAt(index);
         if (discount.toLowerCase() == 'безкоштовно' ||
             discount.toLowerCase() == 'free') {
           return 100;
@@ -22,7 +24,7 @@ class DiscountsFieldModel
           return int.tryParse(discount.replaceAll('%', ''));
         }
       },
-    ).toList();
+    );
   }
 
   @override

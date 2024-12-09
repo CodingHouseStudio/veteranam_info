@@ -116,11 +116,13 @@ class UserRoleBodyWidget extends StatelessWidget {
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
                   key: KWidgetkeys.screen.userRole.loginBusinessButton,
+                  value: 1,
                 ),
                 DropDownItem(
                   text: context.l10n.asUser,
                   event: () => context.goNamed(KRoute.login.name),
                   key: KWidgetkeys.screen.userRole.loginUserButton,
+                  value: 2,
                 ),
               ],
               buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(

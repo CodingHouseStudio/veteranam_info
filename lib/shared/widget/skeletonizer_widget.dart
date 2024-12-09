@@ -7,16 +7,21 @@ class SkeletonizerWidget extends StatelessWidget {
     required this.child,
     required this.isLoading,
     super.key,
+    this.baseColor,
+    this.highlightColor,
   });
   final Widget child;
   final bool isLoading;
+  final Color? baseColor;
+  final Color? highlightColor;
 
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      effect: const ShimmerEffect(
-        baseColor: AppColors.materialThemeWhite,
-        highlightColor: AppColors.materialThemeKeyColorsNeutral,
+      effect: ShimmerEffect(
+        baseColor: baseColor ?? AppColors.materialThemeWhite,
+        highlightColor:
+            highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
       ),
       enabled: !KTest.isTest && isLoading,
       child: child,

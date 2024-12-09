@@ -77,6 +77,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
               else
                 KSizedBox.kHeightSizedBox32,
             ],
+            isListLoadedFull: _.isListLoadedFull,
             // loadFunction: () {
             //   context
             //       .read<MyDiscountsWatcherBloc>()

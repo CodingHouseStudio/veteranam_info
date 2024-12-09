@@ -130,16 +130,15 @@ class ViewpagerIndicatorWidget extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final textWidths = pageName.map((text) {
-      final textPainter = TextPainter(
-        text:
-            TextSpan(text: text, style: AppTextStyle.materialThemeTitleMedium),
-        textDirection: TextDirection.ltr,
-        maxLines: 1,
-        // overflow: TextOverflow.ellipsis,
-      )..layout();
-      return textPainter.width;
-    }).toList();
+    final textWidths = List.generate(
+      pageName.length,
+      (index) {
+        return pageName
+            .elementAt(index)
+            .getTextWidth(textStyle: AppTextStyle.materialThemeTitleMedium);
+      },
+      growable: false,
+    );
     final pageCount = pageName.length;
     final paint = Paint()
       ..color = unselectedColor
