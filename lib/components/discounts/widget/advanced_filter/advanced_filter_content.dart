@@ -28,8 +28,7 @@ class AdvancedFilterContent extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.getActivityList !=
                 current.discountFilterRepository.getActivityList ||
-            previous.filterStatus == FilterStatus.filtering &&
-                current.filterStatus == FilterStatus.filtered,
+            previous.filterStatus != current.filterStatus,
         builder: (context, state) {
           if (state.discountFilterRepository.hasActivityItem) {
             return SliverMainAxisGroup(

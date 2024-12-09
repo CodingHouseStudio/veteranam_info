@@ -2,6 +2,7 @@ part of 'discount_watcher_bloc.dart';
 
 extension DiscountFailureExtension on SomeFailure {
   DiscountFailure _toDiscount() {
+    if (this == FailureFilter()) return DiscountFailure.filter;
     return DiscountFailure.error;
   }
 }
@@ -26,7 +27,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required LoadingStatus loadingStatus,
     required FilterStatus filterStatus,
     required List<DiscountModel> filterDiscountModelList,
-    required List<DiscountEnum> sorting,
+    required List<DiscountModel> sortingDiscountModelList,
+    required DiscountEnum sortingBy,
     required bool isListLoadedFull,
     required DiscountFailure? failure,
     // required List<ReportModel> reportItems,

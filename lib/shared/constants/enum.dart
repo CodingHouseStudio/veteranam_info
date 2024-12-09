@@ -71,8 +71,8 @@ enum PlatformEnum {
 }
 
 enum DiscountEnum {
+  byDate,
   largestSmallest,
-  free,
 }
 
 enum ErrorLevelEnum {

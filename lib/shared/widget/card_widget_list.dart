@@ -15,9 +15,7 @@ List<Widget> cardWidgetList<T>({
   required T shimmerItem,
   required bool isDesk,
 }) {
-  final isLoading = loadingStatus != LoadingStatus.loaded; //TODO:
-  // &&
-  //     loadingStatus != LoadingStatus.listLoadedFull;
+  final isLoading = loadingStatus != LoadingStatus.loaded;
   final fullList = [
     if (isNotFailure) ...[
       ...modelItems,

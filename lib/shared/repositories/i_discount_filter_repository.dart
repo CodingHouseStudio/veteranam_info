@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_unused_constructor_parameters
 
+import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/models/discount_model.dart';
+import 'package:veteranam/shared/models/failure_model/some_failure_model.dart';
 import 'package:veteranam/shared/models/filter_model.dart';
 
 /// A model for managing and filtering discount items by categories, locations,
@@ -28,16 +30,10 @@ abstract class IDiscountFilterRepository {
   Map<String, FilterItem> get activeCategoryMap;
   Map<String, FilterItem> get activeLocationMap;
 
-  /// Set new values to map from List<DiscountModel>
-  void getFilterValuesFromDiscountItems({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-  });
-
   /// Toggles an existing category filter.
   /// Updates the Activity categories filter
   /// and available filter lists accordingly.
-  void addCategory({
+  Either<SomeFailure, bool> addCategory({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
@@ -46,7 +42,7 @@ abstract class IDiscountFilterRepository {
   /// Toggles an existing location filter.
   /// Updates the activity location filter
   /// and available filter lists accordingly.
-  void addLocation({
+  Either<SomeFailure, bool> addLocation({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
@@ -55,7 +51,7 @@ abstract class IDiscountFilterRepository {
   /// Toggles an existing eligibilities filter.
   /// Updates the Activity eligibilities
   /// filter and available filter lists accordingly.
-  void addEligibility({
+  Either<SomeFailure, bool> addEligibility({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
@@ -63,10 +59,10 @@ abstract class IDiscountFilterRepository {
 
   /// Serch location value in the location map.
   /// Search value in the uk and en values
-  void locationSearch(String? value);
+  Either<SomeFailure, bool> locationSearch(String? value);
 
   /// Clear values in the Activity map
-  void resetAll({
+  Either<SomeFailure, bool> resetAll({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required bool isEnglish,
   });
@@ -74,7 +70,7 @@ abstract class IDiscountFilterRepository {
   /// Filters the given list of discount items based on the Activity filters.
   ///
   /// Only items that contain all filters in the cosen list.
-  List<DiscountModel> getFilterList(
+  Either<SomeFailure, List<DiscountModel>> getFilterList(
     List<DiscountModel> unmodifiedDiscountModelItems,
   );
 

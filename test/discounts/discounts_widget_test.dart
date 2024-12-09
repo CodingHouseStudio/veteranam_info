@@ -128,7 +128,8 @@ void main() {
     //       mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
     //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
     //       mockBuildRepository: mockBuildRepository,
-    //  mockUserRepository: mockUserRepository,     mockAuthenticationRepository: mockAuthenticationRepository,
+    //  mockUserRepository: mockUserRepository,
+    // mockAuthenticationRepository: mockAuthenticationRepository,
     //       mockMobileRatingRepository: null,
     //     );
 

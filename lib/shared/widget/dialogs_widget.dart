@@ -406,14 +406,18 @@ class _DialogsWidget {
     required void Function()? onPressed,
   }) {
     if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          key: KWidgetkeys.widget.dialogs.failure,
-          backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-          content: GetErrorDialogWidget(onPressed: onPressed, error: error),
-          duration: const Duration(minutes: 1),
-        ),
-      );
+      if (onPressed == null) {
+        showSnackBardTextDialog(error);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            key: KWidgetkeys.widget.dialogs.failure,
+            backgroundColor: AppColors.materialThemeKeyColorsSecondary,
+            content: GetErrorDialogWidget(onPressed: onPressed, error: error),
+            duration: const Duration(minutes: 1),
+          ),
+        );
+      }
     }
   }
 

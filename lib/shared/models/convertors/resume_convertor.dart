@@ -6,9 +6,14 @@ class ResumeConverter implements JsonConverter<ResumeModel?, List<dynamic>?> {
 
   @override
   ResumeModel? fromJson(List<dynamic>? json) {
-    final list = json
-        ?.map((e) => ResumeModel?.fromJson(e as Map<String, dynamic>))
-        .toList();
+    final list = json == null
+        ? null
+        : List.generate(
+            json.length,
+            (index) => ResumeModel.fromJson(
+              json.elementAt(index) as Map<String, dynamic>,
+            ),
+          );
     if (list?.isEmpty ?? true) {
       return null;
     } else {

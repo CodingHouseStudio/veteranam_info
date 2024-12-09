@@ -109,14 +109,6 @@ class UserRoleBodyWidget extends StatelessWidget {
             KSizedBox.kWidthSizedBox16,
             PopupMenuButtonWidget<int>(
               buttonText: context.l10n.login,
-              style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.only(
-                    left: KPadding.kPaddingSize10,
-                    right: KPadding.kPaddingSize22,
-                  ),
-                ),
-              ),
               items: [
                 DropDownItem(
                   text: context.l10n.asBusiness,
@@ -124,11 +116,13 @@ class UserRoleBodyWidget extends StatelessWidget {
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
                   key: KWidgetkeys.screen.userRole.loginBusinessButton,
+                  value: 1,
                 ),
                 DropDownItem(
                   text: context.l10n.asUser,
                   event: () => context.goNamed(KRoute.login.name),
                   key: KWidgetkeys.screen.userRole.loginUserButton,
+                  value: 2,
                 ),
               ],
               buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(

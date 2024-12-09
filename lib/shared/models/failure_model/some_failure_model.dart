@@ -196,5 +196,18 @@ class SomeFailure with _$SomeFailure {
     String? data,
   }) = FailureWrongVerifyCode;
 
+  factory SomeFailure.filter({
+    Object? error,
+    StackTrace? stack,
+    ErrorLevelEnum? errorLevel,
+    String? tag,
+    String? tagKey,
+    String? tag2,
+    String? tag2Key,
+    User? user,
+    UserSetting? userSetting,
+    String? data,
+  }) = FailureFilter;
+
   final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();
 }

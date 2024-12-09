@@ -204,8 +204,12 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc
-          ..add(const DiscountWatcherEvent.sorting(DiscountEnum.free))
-          ..add(const DiscountWatcherEvent.sorting(DiscountEnum.free))
+          ..add(
+            const DiscountWatcherEvent.sorting(DiscountEnum.largestSmallest),
+          )
+          ..add(
+            const DiscountWatcherEvent.sorting(DiscountEnum.largestSmallest),
+          )
           ..add(
             const DiscountWatcherEvent.sorting(
               DiscountEnum.largestSmallest,
@@ -240,45 +244,39 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state
-                  .sorting
-                  // .where(
-                  //   (element) => element.isSelected,
-                  // )
-                  .isEmpty,
+              state.sortingBy == DiscountEnum.byDate,
+          // .where(
+          //   (element) => element.isSelected,
+          // )
+          // .isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.isListLoadedFull &&
               // state.sortingDiscountModelItems.length == 1 &&
-              state
-                  .sorting
-                  // .where(
-                  //   (element) => element.isSelected,
-                  // )
-                  .isNotEmpty,
+              state.sortingBy == DiscountEnum.largestSmallest,
+          // .where(
+          //   (element) => element.isSelected,
+          // )
+          // .isNotEmpty,
         ),
+        // predicate<DiscountWatcherState>(
+        //   (state) =>
+        //       state.loadingStatus == LoadingStatus.loaded &&
+        //       state.filterDiscountModelList.length == KDimensions.loadItems
+        // &&
+        //       state
+        //           .sorting
+        //           // .where(
+        //           //   (element) => element.isSelected,
+        //           // )
+        //           .isEmpty,
+        // ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filterDiscountModelList.length == KDimensions.loadItems &&
-              state
-                  .sorting
-                  // .where(
-                  //   (element) => element.isSelected,
-                  // )
-                  .isEmpty,
-        ),
-        predicate<DiscountWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.filterDiscountModelList.length == KDimensions.loadItems &&
-              state
-                  .sorting
-                  // .where(
-                  //   (element) => element.isSelected,
-                  // )
-                  .isNotEmpty,
+              state.sortingBy == DiscountEnum.largestSmallest,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -551,19 +549,7 @@ void main() {
             const DiscountWatcherEvent.loadNextItems(),
           )
           ..add(
-            DiscountWatcherEvent.setMobFilter(
-                // filterList: [
-                //   ...KTestText.discountModelItems.last.location!.map(
-                //     FilterItem.new,
-                //   ),
-                //   FilterItem(KAppText.allUkrainOnline),
-                // ],
-                // sorting: [
-                //   FilterItem<DiscountEnum>(DiscountEnum.largestSmallest),
-                // ],
-                // chosenLocationList: [],
-                // chosenSortingnList: [],
-                ),
+            const DiscountWatcherEvent.setMobFilter(),
           );
       },
       expect: () => [

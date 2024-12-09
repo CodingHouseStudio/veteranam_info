@@ -129,11 +129,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
                 ),
           title: MessageFieldModel.dirty(discount!.title.uk),
           discounts: DiscountsFieldModel.dirty(
-            discount!.discount
-                .map(
-                  (e) => '$e%',
-                )
-                .toList(),
+            List.generate(
+              discount!.discount.length,
+              (index) => '${discount!.discount.elementAt(index)}%',
+            ),
           ),
           eligibility: discount!.eligibility == null
               ? null
@@ -472,9 +471,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             .cast<int>()
             .toList(),
         title: TranslateModel(uk: state.title.value),
-        category:
-            state.category.value.map((e) => TranslateModel(uk: e)).toList(),
-        location: state.city.value.map((e) => TranslateModel(uk: e)).toList(),
+        category: List.generate(
+          state.category.value.length,
+          (index) => TranslateModel(uk: state.category.value.elementAt(index)),
+        ),
+        location: List.generate(
+          state.city.value.length,
+          (index) => TranslateModel(uk: state.city.value.elementAt(index)),
+        ),
         description: TranslateModel(uk: state.description.value),
         link: _companyRepository.currentUserCompany.link,
         company: _companyRepository.currentUserCompany.publicName == null

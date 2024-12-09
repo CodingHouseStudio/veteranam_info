@@ -9,16 +9,23 @@ extension FilterItems on List<FilterItem> {
   List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
     final grouped = groupBy(this, (FilterItem item) => item.value);
 
-    return grouped.entries.map((entry) {
-      final item = FilterItem(
-        entry.key,
-        number:
-            numberGetList?.where((item) => item.value == entry.key).length ??
-                entry.value.length,
-      );
+    return List.generate(
+      grouped.entries.length,
+      (index) {
+        final item = FilterItem(
+          grouped.entries.elementAt(index).key,
+          number: numberGetList
+                  ?.where(
+                    (item) =>
+                        item.value == grouped.entries.elementAt(index).key,
+                  )
+                  .length ??
+              grouped.entries.elementAt(index).value.length,
+        );
 
-      return item;
-    }).toList();
+        return item;
+      },
+    );
   }
 
   List<FilterItem> get selectedList => where(
@@ -236,7 +243,7 @@ extension ListExtensions<T> on List<T> {
     ).take(loadedItemsCount).toList();
   }
 
-  ({List<T> list, LoadingStatus loadingStatus}) combiningFilteredLists({
+  ({List<T> list, bool isListLoadedFull}) combiningFilteredLists({
     required List<T> secondList,
     required int itemsLoaded,
     // List<T> Function(List<T> list)? sorting,
@@ -253,7 +260,7 @@ extension ListExtensions<T> on List<T> {
     // }
     return (
       list: list.take(loadedItemsCount).toList(),
-      loadingStatus: list.getLoadingStatus(loadedItemsCount)
+      isListLoadedFull: list.getLoadingStatus(loadedItemsCount)
     );
   }
 
@@ -334,7 +341,10 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// A tuple containing a filtered and loaded list of items and the loading
   /// status.
-  ({List<T> list, LoadingStatus loadingStatus}) loadingFilterAndStatus({
+  ({
+    List<T> list,
+    bool isListLoadedFull,
+  }) loadingFilterAndStatus({
     required List<dynamic>? filtersValue,
     required int? itemsLoaded,
     required List<dynamic> Function(T item) getFilter,
@@ -360,20 +370,17 @@ extension ListExtensions<T> on List<T> {
             (loadItems ?? 0);
 
     // Determine the loading status based on the number of loaded items
-    final loadingStatus = list.getLoadingStatus(loadedItemsCount);
+    // final loadingStatus = list.getLoadingStatus(loadedItemsCount);
 
     // Return the filtered and loaded list along with the loading status
     return (
       list: list.take(loadedItemsCount).toList(),
-      loadingStatus: loadingStatus
+      isListLoadedFull: getLoadingStatus(loadedItemsCount)
     );
   }
 
-  LoadingStatus getLoadingStatus(int loadedItemsCount) =>
-      LoadingStatus.loaded; //TODO:
-  // length <= loadedItemsCount && isNotEmpty
-  //     ? LoadingStatus.listLoadedFull
-  //     : LoadingStatus.loaded;
+  bool getLoadingStatus(int loadedItemsCount) =>
+      length <= loadedItemsCount && isNotEmpty;
 
   /// Method to calculate overall filter values.
   ///

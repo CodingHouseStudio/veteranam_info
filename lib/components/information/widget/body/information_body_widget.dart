@@ -112,6 +112,7 @@ class InformationBodyWidget extends StatelessWidget {
         loadFunction: () => context.read<InformationWatcherBloc>().add(
               const InformationWatcherEvent.loadNextItems(),
             ),
+        isListLoadedFull: _.isListLoadedFull,
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsBodyWidget extends StatelessWidget {
@@ -37,7 +38,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
           if (state.failure != null) {
             context.dialog.showGetErrorDialog(
               error: state.failure!.value(context),
-              onPressed: () {},
+              onPressed: state.failure == DiscountFailure.filter ? null : () {},
               // I think this event is not necessary for Stream, but
               // I think it's better to give
               // the user imaginary control over it
@@ -47,6 +48,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
               //     .add(const DiscountWatcherEvent.started()),
             );
           }
+
           if (state.filterDiscountModelList.length ==
               (context.read<DiscountConfigCubit>().state.loadingItems *
                   (context.read<DiscountConfigCubit>().state.emailScrollCount +
