@@ -324,6 +324,8 @@ class DiscountWatcherBloc
   ) {
     final itemsNumber = getCurrentLoadNumber();
 
+    state.discountFilterRepository.locationSearch('');
+
     state.discountFilterRepository
         .getFilterList(state.sortingDiscountModelList)
         .fold(
