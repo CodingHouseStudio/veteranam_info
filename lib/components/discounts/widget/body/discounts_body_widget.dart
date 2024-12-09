@@ -111,7 +111,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       SliverPadding(
                         padding: padding,
                         sliver: SliverToBoxAdapter(
-                          child: AdvancedFilterMob(
+                          child: DiscountsFilterMob(
                             key: KWidgetkeys.screen.discounts.advancedFilterMob,
                           ),
                         ),

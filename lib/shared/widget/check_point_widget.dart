@@ -39,9 +39,8 @@ class CheckPointWidget extends StatelessWidget {
           // ),
           child: Padding(
             key: isCheck ? KWidgetkeys.widget.checkPoint.icon : null,
-            padding: const EdgeInsets.only(
-              bottom: KPadding.kPaddingSize4,
-              left: KPadding.kPaddingSize4,
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize4,
             ),
             child: isCheck
                 ? KIcon.checkSmall

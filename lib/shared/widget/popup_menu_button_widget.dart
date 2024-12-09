@@ -34,6 +34,9 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.menuTextStyle = AppTextStyle.materialThemeBodyMedium,
     this.menuTopSpace = KPadding.kPaddingSize8,
     this.itemAlignment = Alignment.center,
+    this.iconAlignment = IconAlignment.start,
+    this.closeIcon,
+    this.showIcon,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.
@@ -206,6 +209,12 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final Alignment itemAlignment;
 
+  final IconAlignment iconAlignment;
+
+  final Widget? closeIcon;
+
+  final Widget? showIcon;
+
   @override
   PopupMenuButtonWidgetState<T> createState() =>
       PopupMenuButtonWidgetState<T>();
@@ -353,21 +362,18 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return TextButton.icon(
       onPressed: widget.enabled ? showButtonMenu : null,
       style: widget.buttonStyle,
-      child: Row(
-        // key: KWidgetkeys.widget.dropDownButton.loginButton,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (_showMenu) KIcon.trailingUp else KIcon.keyboardArrowDown,
-          KSizedBox.kWidthSizedBox8,
+      icon: _showMenu
+          ? widget.closeIcon ?? KIcon.trailingUp
+          : widget.showIcon ?? KIcon.keyboardArrowDown,
+      iconAlignment: widget.iconAlignment,
+      label: widget.icon ??
           Text(
             widget.buttonText,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
-        ],
-      ),
     );
   }
 }

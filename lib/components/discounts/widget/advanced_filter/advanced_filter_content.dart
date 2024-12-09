@@ -143,28 +143,30 @@ class AdvancedFilterContent extends StatelessWidget {
               isDesk: isDesk,
               list: SliverMainAxisGroup(
                 slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: KPadding.kPaddingSize16),
-                      child: TextFieldWidget(
-                        widgetKey: const Key('value1'),
-                        onChanged: (value) => context
-                            .read<DiscountWatcherBloc>()
-                            .add(DiscountWatcherEvent.searchLocation(value)),
-                        isDesk: isDesk,
-                        labelText: context.l10n.search,
-                        suffixIcon: KIcon.search,
-                        fillColor: isDesk
-                            ? AppColors.materialThemeKeyColorsNeutral
-                            : null,
-                        enabledBorder: KWidgetTheme.outlineInputBorder,
-                        focusColor:
-                            AppColors.materialThemeKeyColorsNeutralVariant,
-                        hoverColor: AppColors.materialThemeRefNeutralNeutral95,
+                  if (!state.filterStatus.isLoading)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: KPadding.kPaddingSize16),
+                        child: TextFieldWidget(
+                          widgetKey: const Key('value1'),
+                          onChanged: (value) => context
+                              .read<DiscountWatcherBloc>()
+                              .add(DiscountWatcherEvent.searchLocation(value)),
+                          isDesk: isDesk,
+                          labelText: context.l10n.search,
+                          suffixIcon: KIcon.search,
+                          fillColor: isDesk
+                              ? AppColors.materialThemeKeyColorsNeutral
+                              : null,
+                          enabledBorder: KWidgetTheme.outlineInputBorder,
+                          focusColor:
+                              AppColors.materialThemeKeyColorsNeutralVariant,
+                          hoverColor:
+                              AppColors.materialThemeRefNeutralNeutral95,
+                        ),
                       ),
                     ),
-                  ),
                   _AdvancedListWidget(
                     filter: state.discountFilterRepository.locationMap,
                     onChange: (value) =>
