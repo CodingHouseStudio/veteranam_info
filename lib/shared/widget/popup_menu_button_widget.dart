@@ -37,6 +37,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.iconAlignment = IconAlignment.start,
     this.closeIcon,
     this.showIcon,
+    this.iconButton = false,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.
@@ -215,6 +216,8 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final Widget? showIcon;
 
+  final bool iconButton;
+
   @override
   PopupMenuButtonWidgetState<T> createState() =>
       PopupMenuButtonWidgetState<T>();
@@ -261,6 +264,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
             enabled: item.enabled && widget.initialValue != item.value,
             alignment: widget.itemAlignment,
             value: item.value,
+            icon: item.icon,
           );
         },
         growable: false,
@@ -362,19 +366,36 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
-      onPressed: widget.enabled ? showButtonMenu : null,
-      style: widget.buttonStyle,
-      icon: _showMenu
-          ? widget.closeIcon ?? KIcon.trailingUp
-          : widget.showIcon ?? KIcon.keyboardArrowDown,
-      iconAlignment: widget.iconAlignment,
-      label: widget.icon ??
-          Text(
-            widget.buttonText,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-    );
+    return widget.iconButton
+        ? InkWell(
+            onTap: widget.enabled ? showButtonMenu : null,
+            child: const IconWidget(
+              icon: KIcon.moreVert,
+              background: AppColors.materialThemeKeyColorsNeutral,
+              padding: KPadding.kPaddingSize12,
+              decoration: ShapeDecoration(
+                shape: CircleBorder(
+                  side: BorderSide(
+                    width: KDimensions.borderWidth,
+                    color: AppColors.materialThemeWhite,
+                  ),
+                ),
+              ),
+            ),
+          )
+        : TextButton.icon(
+            onPressed: widget.enabled ? showButtonMenu : null,
+            style: widget.buttonStyle,
+            icon: _showMenu
+                ? widget.closeIcon ?? KIcon.trailingUp
+                : widget.showIcon ?? KIcon.keyboardArrowDown,
+            iconAlignment: widget.iconAlignment,
+            label: widget.icon ??
+                Text(
+                  widget.buttonText,
+                  style: AppTextStyle.materialThemeTitleMedium,
+                ),
+          );
   }
 }
 
@@ -394,6 +415,7 @@ class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
     required this.onTap,
     required this.enabled,
     this.height = kMinInteractiveDimension,
+    this.icon,
     super.key,
   });
 
@@ -401,6 +423,7 @@ class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
   final VoidCallback? onTap;
   final bool enabled;
   final EdgeInsets padding;
+  final Widget? icon;
 
   @override
   final double height;
@@ -433,19 +456,33 @@ class _PopupMenuItemState<T, W extends _PopupMenuItemWidget<T>>
       child: Semantics(
         enabled: widget.enabled,
         button: true,
-        child: TextButton(
-          style: ButtonStyle(
-            padding: WidgetStatePropertyAll(widget.padding),
-            shape: const WidgetStatePropertyAll(KWidgetTheme.outlineBorder),
-            alignment: widget.alignment,
-          ),
-          onPressed: widget.enabled ? handleTap : null,
-          child: ListTileTheme.merge(
-            contentPadding: EdgeInsets.zero,
-            child: Text(
-              widget.text,
-              textAlign: TextAlign.start,
-              style: widget.textStyle,
+        onTap: widget.enabled ? handleTap : null,
+        child: Padding(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize5),
+          child: TextButton(
+            style: ButtonStyle(
+              padding: WidgetStatePropertyAll(widget.padding),
+              shape: const WidgetStatePropertyAll(
+                KWidgetTheme.outlineBorder,
+              ),
+              alignment: widget.alignment,
+            ),
+            onPressed: widget.enabled ? handleTap : null,
+            child: ListTileTheme.merge(
+              contentPadding: EdgeInsets.zero,
+              child: Row(
+                children: [
+                  if (widget.icon != null) ...[
+                    widget.icon!,
+                    KSizedBox.kWidthSizedBox16,
+                  ],
+                  Text(
+                    widget.text,
+                    textAlign: TextAlign.start,
+                    style: widget.textStyle,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -57,6 +57,8 @@ class DiscountModel with _$DiscountModel {
     @TranslateOrNullConverter()
     TranslateModel? additionalDetails,
     SubLocation? subLocation,
+    @ImagesConverter() List<ImageModel>? images,
+    int? likes,
     // @Default(false) bool hasMarkdown,
   }) = _DiscountModel;
 
@@ -142,4 +144,6 @@ abstract class DiscountModelJsonField {
   static const subLocation = 'subLocation';
   // static const hasMarkdown = 'hasMarkdown';
   static const status = 'status';
+  static const images = 'images';
+  static const likes = 'likes';
 }

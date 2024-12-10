@@ -94,6 +94,11 @@ class RenderRowSliver extends RenderSliver
       maxPaintExtent: maxScrollExtent,
       cacheExtent: maxScrollExtent,
     );
+
+    (left.parentData! as _RowSliverParentData).paintOffset = Offset.zero;
+
+    (right.parentData! as _RowSliverParentData).paintOffset =
+        Offset(leftSize, 0);
   }
 
   // Paint the children to the canvas
@@ -102,12 +107,12 @@ class RenderRowSliver extends RenderSliver
     if (!geometry!.visible) return;
 
     // Paint the left child first, then the right child with a horizontal offset
+    final leftParentData = left.parentData! as _RowSliverParentData;
+    final rightParentData = right.parentData! as _RowSliverParentData;
+
     context
-      ..paintChild(left, offset)
-      ..paintChild(
-        right,
-        offset.translate(constraints.crossAxisExtent * _leftWidthPercent, 0),
-      );
+      ..paintChild(left, offset + leftParentData.paintOffset)
+      ..paintChild(right, offset + rightParentData.paintOffset);
   }
 
   // Check if the touch event hit any of the children

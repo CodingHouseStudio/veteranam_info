@@ -26,4 +26,8 @@ abstract class KBorderRadius {
     topLeft: Radius.circular(KSize.kRadius32),
     topRight: Radius.circular(KSize.kRadius32),
   );
+  static const kBorderRadiusOnlyRight = BorderRadius.only(
+    bottomRight: Radius.circular(KSize.kRadius32),
+    topRight: Radius.circular(KSize.kRadius32),
+  );
 }
