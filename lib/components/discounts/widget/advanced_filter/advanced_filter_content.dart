@@ -401,13 +401,21 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
           padding: isDesk
               ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
               : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-          child: const SkeletonizerWidget(
+          child: SkeletonizerWidget(
             isLoading: true,
-            highlightColor: AppColors.materialThemeWhite,
-            baseColor: AppColors.materialThemeKeyColorsNeutral,
+            highlightColor: isDesk
+                ? AppColors.materialThemeWhite
+                : AppColors.materialThemeKeyColorsNeutral,
+            baseColor: isDesk
+                ? AppColors.materialThemeKeyColorsNeutral
+                : AppColors.materialThemeWhite,
             child: Skeleton.leaf(
               child: DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationWidget,
+                decoration: KWidgetTheme.boxDecorationWidget.copyWith(
+                  color: isDesk
+                      ? AppColors.materialThemeKeyColorsNeutral
+                      : AppColors.materialThemeWhite,
+                ),
                 // child: CheckPointAmountWidget(
                 //   key: itemKey,
                 //   maxLines: 1,
