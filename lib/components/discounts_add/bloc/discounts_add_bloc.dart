@@ -15,6 +15,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     required IDiscountRepository discountRepository,
     required ICompanyRepository companyRepository,
     required ICitiesRepository citiesRepository,
+    @factoryParam required DiscountModel? discount,
+    @factoryParam required String? discountId,
   })  : _discountRepository = discountRepository,
         _companyRepository = companyRepository,
         _citiesRepository = citiesRepository,
@@ -37,7 +39,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             isOnline: false,
           ),
         ) {
-    on<_Started>(_onStarted);
+    // init method
+    _onStarted();
+    // init method
     on<_LoadedDiscount>(_onLoadedDiscount);
     on<_CategoryAdd>(_onCategoryAdd);
     on<_CategoryRemove>(_onCategoryRemove);
@@ -56,16 +60,24 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_ExclusionsUpdate>(_onExclusionsUpdated);
     on<_Send>(_onSend);
     on<_Back>(_onBack);
+
+    add(
+      DiscountsAddEvent.loadedDiscount(
+        discount: discount,
+        discountId: discountId,
+      ),
+    );
   }
   final IDiscountRepository _discountRepository;
   final ICompanyRepository _companyRepository;
   final ICitiesRepository _citiesRepository;
 
   Future<void> _onStarted(
-    _Started event,
-    Emitter<DiscountsAddState> emit,
-  ) async {
+      // _Started event,
+      // Emitter<DiscountsAddState> emit,
+      ) async {
     // TODO(firebase): add categories spreadsheet, remove hardcode categories
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(
       state.copyWith(
         categoryList: KAppText.discountsCategories,
@@ -75,7 +87,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     final result = await _citiesRepository.getCities();
 
     result.fold(
+      // ignore: invalid_use_of_visible_for_testing_member
       (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
+      // ignore: invalid_use_of_visible_for_testing_member
       (r) => emit(state.copyWith(citiesList: r)),
     );
   }
@@ -135,7 +149,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             ),
           ),
           eligibility: discount!.eligibility == null
-              ? null
+              ? const EligibilityFieldModel.dirty([EligibilityEnum.all])
               : EligibilityFieldModel.dirty(
                   discount!.eligibility!,
                 ),
@@ -326,11 +340,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityAddItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final value = event.eligibility;
-    final eligibilityFieldModel = value == EligibilityEnum.all
-        ? null
+    final eligibilityEnum = event.eligibility.toEligibility;
+    final eligibilityFieldModel = eligibilityEnum == EligibilityEnum.all
+        ? const EligibilityFieldModel.dirty([EligibilityEnum.all])
         : EligibilityFieldModel.dirty(
-            List.from(state.eligibility?.value ?? [])..add(event.eligibility),
+            List.from(state.eligibility.value)..add(eligibilityEnum),
           );
 
     emit(
@@ -346,14 +360,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityRemoveItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final eligibilityList = state.eligibility == null
-        ? null
-        : (List<EligibilityEnum>.from(state.eligibility!.value)
-          ..remove(event.eligibility));
-    final eligibilityFieldModel =
-        eligibilityList == null || eligibilityList.isEmpty
-            ? const EligibilityFieldModel.pure()
-            : EligibilityFieldModel.dirty(eligibilityList);
+    final eligibilityList = (List<EligibilityEnum>.from(state.eligibility.value)
+      ..remove(event.eligibility.toEligibility));
+    final eligibilityFieldModel = eligibilityList.isEmpty
+        ? const EligibilityFieldModel.pure()
+        : EligibilityFieldModel.dirty(eligibilityList);
 
     emit(
       state.copyWith(
@@ -435,11 +446,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) async {
     if (state.formState.isMain) {
       if (Formz.validate([
-            state.title,
-            state.discounts,
-            state.link,
-          ]) &&
-          (state.eligibility == null || state.eligibility!.isValid)) {
+        state.title,
+        state.discounts,
+        state.link,
+        state.eligibility,
+      ])) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));
@@ -486,10 +497,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             : TranslateModel(
                 uk: _companyRepository.currentUserCompany.publicName!,
               ),
-        eligibility:
-            state.eligibility?.value.contains(EligibilityEnum.all) ?? true
-                ? null
-                : state.eligibility?.value,
+        eligibility: state.eligibility.value,
         exclusions: TranslateModel(
           uk: state.exclusions.value,
         ),

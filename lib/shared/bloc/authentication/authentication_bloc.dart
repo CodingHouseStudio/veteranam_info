@@ -23,8 +23,9 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
-    on<AuthenticationInitialized>(_onAuthenticationInitialized);
+    // on<AuthenticationInitialized>(_onAuthenticationInitialized);
     on<AuthenticationFailureEvent>(_onAuthenticationFailure);
+    _onAuthenticationInitialized();
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -74,9 +75,9 @@ class AuthenticationBloc
   }
 
   void _onAuthenticationInitialized(
-    AuthenticationInitialized event,
-    Emitter<AuthenticationState> emit,
-  ) {
+      // AuthenticationInitialized event,
+      // Emitter<AuthenticationState> emit,
+      ) {
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
       onError: (Object error, StackTrace stack) =>

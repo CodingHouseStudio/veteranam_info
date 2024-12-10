@@ -16,19 +16,16 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
         super(
           const _Initial(user: User.empty, userSetting: UserSetting.empty),
         ) {
-    on<_Started>(_onStarted);
     on<_UserChanged>(_onUserChanged);
     on<_UserSettingChanged>(_onUserSettingChanged);
     on<_UserFailure>(_onUserFailure);
     on<_UserSettingFailure>(_onUserSettingFailure);
+    _onStarted();
   }
   late StreamSubscription<UserSetting> userSettingSubscription;
   late StreamSubscription<User> userSubscription;
   final UserRepository _userRepository;
-  void _onStarted(
-    _Started event,
-    Emitter<UserWatcherState> emit,
-  ) {
+  void _onStarted() {
     userSettingSubscription = _userRepository.userSetting.listen(
       (userSetting) => add(UserWatcherEvent.userSettingChanged(userSetting)),
     );

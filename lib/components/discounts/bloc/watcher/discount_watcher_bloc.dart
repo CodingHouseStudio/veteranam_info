@@ -49,6 +49,8 @@ class DiscountWatcherBloc
     on<_SetMobFilter>(_setMobFilter);
     on<_FilterReset>(_onFilterReset);
     on<_Sorting>(_onSorting);
+
+    add(const DiscountWatcherEvent.started());
     // on<_GetReport>(_onGetReport);
   }
 

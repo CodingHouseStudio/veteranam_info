@@ -95,6 +95,30 @@ extension StringDartExtension on String {
 
     return substring(startIndex + 1, endIndex);
   }
+
+  EligibilityEnum get toEligibility {
+    switch (toLowerCase()) {
+      case 'ветерани':
+        return EligibilityEnum.veterans;
+      case 'військовослужбовці':
+        return EligibilityEnum.militaryPersonnel;
+      case 'учасники бойових дій':
+        return EligibilityEnum.combatants;
+      case 'особи з інвалідністю внаслідок війни':
+        return EligibilityEnum.personsWithDisabilitiesDueToWar;
+      case 'поліція':
+        return EligibilityEnum.policeOfficers;
+      case 'співробітники дснс':
+        return EligibilityEnum.emergencyServiceEmployees;
+      case 'члени сімей загиблих':
+        return EligibilityEnum.familyMembersOfTheDeceased;
+      case 'внутрішньо переміщені особи':
+        return EligibilityEnum.internallyDisplacedPersons;
+      case 'всі перелічені':
+        return EligibilityEnum.all;
+    }
+    return EligibilityEnum.all;
+  }
 }
 
 extension InformationModelExtension on InformationModel {

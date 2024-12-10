@@ -14,7 +14,9 @@ class NetworkCubit extends Cubit<NetworkStatus> {
   })  : _nerworkRepository = networkRepository,
         super(
           networkRepository.currentNetwork,
-        );
+        ) {
+    _networkInitialized();
+  }
 
   final NetworkRepository _nerworkRepository;
   late StreamSubscription<NetworkStatus> networkStatusSubscription;
@@ -43,7 +45,7 @@ class NetworkCubit extends Cubit<NetworkStatus> {
     }
   }
 
-  void networkInitialized() {
+  void _networkInitialized() {
     networkStatusSubscription = _nerworkRepository.status.listen(
       networkStatusChanged,
     );

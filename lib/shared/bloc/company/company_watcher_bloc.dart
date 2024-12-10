@@ -22,7 +22,7 @@ class CompanyWatcherBloc
             failure: null,
           ),
         ) {
-    on<_Started>(_onStarted);
+    _onStarted();
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
   }
@@ -30,10 +30,7 @@ class CompanyWatcherBloc
   final ICompanyRepository _companyRepository;
   StreamSubscription<CompanyModel>? _userCompanySubscription;
 
-  Future<void> _onStarted(
-    _Started event,
-    Emitter<CompanyWatcherState> emit,
-  ) async {
+  Future<void> _onStarted() async {
     await _userCompanySubscription?.cancel();
     _userCompanySubscription = _companyRepository.company.listen(
       (company) {

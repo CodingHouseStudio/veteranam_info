@@ -35,9 +35,9 @@ void main() {
         when(mockCompanyRepository.company).thenAnswer(
           (realInvocation) => Stream.value(KTestText.fullCompanyModel),
         );
-        bloc.add(
-          const CompanyWatcherEvent.started(),
-        );
+        // bloc.add(
+        //   const CompanyWatcherEvent.started(),
+        // );
         await expectLater(
           bloc.stream,
           emitsInOrder([
@@ -68,9 +68,9 @@ void main() {
         when(mockCompanyRepository.company).thenAnswer(
           (realInvocation) => Stream.error(KGroupText.failureGet),
         );
-        bloc.add(
-          const CompanyWatcherEvent.started(),
-        );
+        // bloc.add(
+        //   const CompanyWatcherEvent.started(),
+        // );
       },
       expect: () async => [
         const CompanyWatcherState(

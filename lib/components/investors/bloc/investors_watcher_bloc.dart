@@ -30,6 +30,7 @@ class InvestorsWatcherBloc
           ),
         ) {
     on<_Started>(_onStarted);
+    add(const InvestorsWatcherEvent.started());
     // on<_LoadNextItems>(_loadNextItems);
   }
 

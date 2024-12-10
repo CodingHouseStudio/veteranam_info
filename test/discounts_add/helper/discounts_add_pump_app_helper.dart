@@ -20,6 +20,8 @@ Future<void> discountsAddPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockCompanyRepository: mockCompanyRepository,
     mockCitiesRepository: mockCitiesRepository,
+    discount: discount,
+    discountId: discountId,
   );
 
   _registerCompanyWatcherBloc(mockCompanyRepository);
@@ -44,11 +46,15 @@ void _registerDiscountsAddBloc({
   required IDiscountRepository mockDiscountRepository,
   required ICompanyRepository mockCompanyRepository,
   required ICitiesRepository mockCitiesRepository,
+  required DiscountModel? discount,
+  required String? discountId,
 }) {
   final discountsAddBloc = DiscountsAddBloc(
     discountRepository: mockDiscountRepository,
     companyRepository: mockCompanyRepository,
     citiesRepository: mockCitiesRepository,
+    discount: discount,
+    discountId: discountId,
   );
   if (GetIt.I.isRegistered<DiscountsAddBloc>()) {
     GetIt.I.unregister<DiscountsAddBloc>();

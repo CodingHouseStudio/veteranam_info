@@ -20,6 +20,7 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
           ),
         ) {
     on<_Started>(_onStarted);
+    add(const HomeWatcherEvent.started());
   }
   final IFaqRepository _faqRepository;
 

@@ -41,6 +41,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     on<_LinkUpdated>(_onLinkUpdated);
     on<_DeleteCompany>(_onDeleteCompany);
     on<_Save>(_onSave);
+    add(const CompanyFormEvent.started());
   }
 
   final ICompanyRepository _companyRepository;

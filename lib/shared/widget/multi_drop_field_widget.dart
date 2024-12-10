@@ -212,7 +212,8 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
           items: widget.item,
           errorMaxLines: widget.errorMaxLines,
           description: widget.description,
-          unenabledList: widget.values == null
+          unenabledList: widget.values == null ||
+                  (widget.values?.contains(widget.allElemts) ?? false)
               ? null
               : widget.dropDownList
                   .where(
@@ -257,9 +258,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
     );
   }
 
-  String getValue(int index) => widget.values == null
-      ? getItemText(widget.allElemts!)
-      : widget.values!.elementAt(index);
+  String getValue(int index) => widget.values!.elementAt(index);
 
   String getItemText(T value) =>
       widget.getItemText?.call(value) ?? value.toString();
