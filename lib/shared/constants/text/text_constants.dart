@@ -245,6 +245,8 @@ abstract class KAppText {
 
   static const String nickname = 'Nickname';
 
+  static const String adminCompanyID = '1';
+
   static const String ukPrivacyPolicyPath =
       '${_markdownStartPath}privacy_policy_uk.md';
   static const String enPrivacyPolicyPath =
