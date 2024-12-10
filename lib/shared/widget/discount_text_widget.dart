@@ -13,7 +13,7 @@ class DiscountTextWidget extends StatelessWidget {
   });
 
   final String description;
-  final List<TranslateModel>? text;
+  final List<EligibilityEnum>? text;
   final int? maxLines;
   final Widget icon;
   final Widget button;
@@ -39,7 +39,7 @@ class DiscountTextWidget extends StatelessWidget {
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          DiscountEligibilityWidget(text: text!),
+          DiscountEligibilityWidget(eligibility: text!),
           KSizedBox.kHeightSizedBox16,
         ],
         Row(

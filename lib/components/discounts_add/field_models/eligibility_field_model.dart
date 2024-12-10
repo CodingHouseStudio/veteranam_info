@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/constants/constants_dart.dart';
+import 'package:veteranam/shared/models/discount_model.dart';
 
 enum EligibilityFieldModelValidationError { empty }
 

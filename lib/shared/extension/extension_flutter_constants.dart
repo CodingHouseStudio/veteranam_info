@@ -219,32 +219,23 @@ extension StringFllutterExtension on String {
   EligibilityEnum get toEligibility {
     switch (toLowerCase()) {
       case 'ветерани':
-      case 'ветерани та ветеранки російсько-української війни':
         return EligibilityEnum.veterans;
       case 'військовослужбовці':
-      case 'військовослужбовці зсу':
-      case 'бійці нацональної гвардії україни':
-      case 'курсанти військових училищ':
-      case 'медики':
-      case 'нгу':
-      case 'представники сил безпеки та оборони':
-      case 'тро':
-      case 'учасгики фломування тро':
         return EligibilityEnum.militaryPersonnel;
-      case 'Учасники бойових дій':
+      case 'учасники бойових дій':
         return EligibilityEnum.combatants;
-      case "сім'ї військовослужбовців":
       case 'особи з інвалідністю внаслідок війни':
-        return EligibilityEnum.disabledWarVeterans;
+        return EligibilityEnum.personsWithDisabilitiesDueToWar;
       case 'поліція':
         return EligibilityEnum.policeOfficers;
       case 'співробітники дснс':
-      case 'працівники дснс':
-        return EligibilityEnum.dsnsEmployees;
+        return EligibilityEnum.emergencyServiceEmployees;
       case 'члени сімей загиблих':
-        return EligibilityEnum.fallenFamilyMembers;
+        return EligibilityEnum.familyMembersOfTheDeceased;
       case 'внутрішньо переміщені особи':
         return EligibilityEnum.internallyDisplacedPersons;
+      case 'всі перелічені':
+        return EligibilityEnum.all;
     }
     return EligibilityEnum.all;
   }
@@ -572,7 +563,7 @@ extension WidgetStatePropertyExtension on WidgetStateProperty<dynamic> {
 extension EligibilityEnumExtension on EligibilityEnum {
   String getValue(BuildContext context) {
     switch (this) {
-      case EligibilityEnum.allConditionsMet:
+      case EligibilityEnum.all:
         return context.l10n.allOfListed;
       case EligibilityEnum.veterans:
         return context.l10n.veterans;
@@ -580,18 +571,39 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return context.l10n.combatantsEligibility;
       case EligibilityEnum.militaryPersonnel:
         return context.l10n.militaryEligibility;
-      case EligibilityEnum.fallenFamilyMembers:
+      case EligibilityEnum.familyMembersOfTheDeceased:
         return context.l10n.fallenFamilyEligibility;
-      case EligibilityEnum.disabledWarVeterans:
+      case EligibilityEnum.personsWithDisabilitiesDueToWar:
         return context.l10n.disabledWarEligibility;
-      case EligibilityEnum.dsnsEmployees:
+      case EligibilityEnum.emergencyServiceEmployees:
         return context.l10n.dsnsEligibility;
       case EligibilityEnum.policeOfficers:
         return context.l10n.policeEligibility;
       case EligibilityEnum.internallyDisplacedPersons:
         return context.l10n.idpEligibility;
-      case EligibilityEnum.all:
-        return context.l10n.allOfListed;
+    }
+  }
+
+  Widget get eligibilityIcon {
+    switch (this) {
+      case EligibilityEnum.veterans:
+        return KIcon.veteransIcon;
+      case EligibilityEnum.militaryPersonnel:
+        return KIcon.military;
+      case EligibilityEnum.combatants:
+        return KIcon.ubd;
+      case EligibilityEnum.personsWithDisabilitiesDueToWar:
+        return KIcon.personsWithDisabilities;
+      case EligibilityEnum.familyMembersOfTheDeceased:
+        return KIcon.familyMembers;
+      case EligibilityEnum.emergencyServiceEmployees:
+        return KIcon.dsns;
+      case EligibilityEnum.policeOfficers:
+        return KIcon.police;
+      case EligibilityEnum.internallyDisplacedPersons:
+        return KIcon.military;
+      case EligibilityEnum.all: //TODO: спитати
+        return KIcon.veteransIcon;
     }
   }
 }

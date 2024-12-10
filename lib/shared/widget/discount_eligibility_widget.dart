@@ -4,23 +4,23 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountEligibilityWidget extends StatelessWidget {
   const DiscountEligibilityWidget({
-    required this.text,
+    required this.eligibility,
     super.key,
   });
 
-  final List<TranslateModel> text;
+  final List<EligibilityEnum> eligibility;
 
   @override
   Widget build(BuildContext context) {
-    if (text.isNotEmpty) {
+    if (eligibility.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(
           top: KPadding.kPaddingSize4,
           right: KPadding.kPaddingSize8,
         ),
         child: DiscountEligibilityExpandedWidget(
-          key: ValueKey(text),
-          text: text.getTrsnslation(context),
+          key: ValueKey(eligibility),
+          eligibility: eligibility,
         ),
       );
     } else {
@@ -31,11 +31,11 @@ class DiscountEligibilityWidget extends StatelessWidget {
 
 class DiscountEligibilityExpandedWidget extends StatelessWidget {
   const DiscountEligibilityExpandedWidget({
-    required this.text,
+    required this.eligibility,
     super.key,
   });
 
-  final List<String> text;
+  final List<EligibilityEnum> eligibility;
 
   @override
   Widget build(BuildContext context) {
@@ -43,33 +43,33 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       text: TextSpan(
         style: AppTextStyle.materialThemeLabelLarge,
-        children: [
-          ..._buildTextSpans(
-            text.length > 5 ? text.take(5).toList() : text,
-            context,
-          ),
-        ],
+        children: _buildTextSpans(
+          eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
+          context,
+        ),
       ),
     );
   }
 
   List<InlineSpan> _buildTextSpans(
-    List<String> textList,
+    List<EligibilityEnum> eligibilityItems,
     BuildContext context,
   ) {
     final textSpans = <InlineSpan>[];
 
-    for (final text in textList) {
+    for (final eligibilityItem in eligibilityItems) {
       textSpans.add(
         WidgetSpan(
           alignment: PlaceholderAlignment.middle,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _getIconWidget(text),
+              // _getIconWidget(text),
+              eligibilityItem.eligibilityIcon,
               KSizedBox.kWidthSizedBox4,
               Text(
-                _getLabelWidget(text),
+                // _getLabelWidget(text),
+                eligibilityItem.getValue(context),
                 style: AppTextStyle.materialThemeLabelMedium,
               ),
               KSizedBox.kWidthSizedBox8,
@@ -79,10 +79,10 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
       );
     }
 
-    if (text.length > 5) {
+    if (eligibilityItems.length > 5) {
       textSpans.add(
         TextSpan(
-          text: ' ${context.l10n.moreWhomGranted(text.length - 5)}',
+          text: ' ${context.l10n.moreWhomGranted(eligibilityItems.length - 5)}',
           style: AppTextStyle.materialThemeLabelLargeRef,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
@@ -93,55 +93,5 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
     }
 
     return textSpans;
-  }
-
-  Widget _getIconWidget(String text) {
-    switch (text) {
-      case 'Ветерани':
-        return KIcon.veteransIcon;
-      case 'Військовослужбовці':
-      case 'Військовослужбовці ЗСУ':
-        return KIcon.military;
-      case 'Учасники бойових дій':
-        return KIcon.ubd;
-      case 'Особи з інвалідністю внаслідок війни':
-        return KIcon.personsWithDisabilities;
-      case 'Члени сімей загиблих':
-        return KIcon.familyMembers;
-      case 'Співробітники ДСНС':
-        return KIcon.dsns;
-      case 'Поліція':
-        return KIcon.police;
-      case 'Внутрішньо переміщені особи':
-      case 'ВПО':
-        return KIcon.military;
-      default:
-        return const SizedBox.shrink();
-    }
-  }
-
-  String _getLabelWidget(String text) {
-    switch (text) {
-      case 'Ветерани':
-        return 'Ветерани';
-      case 'Військовослужбовці':
-      case 'Військовослужбовці ЗСУ':
-        return 'Військовослужбовці';
-      case 'Учасники бойових дій':
-        return 'УБД';
-      case 'Особи з інвалідністю внаслідок війни':
-        return 'Особи з інвалідністю';
-      case 'Члени сімей загиблих':
-        return 'ЧСЗ';
-      case 'Співробітники ДСНС':
-        return 'ДСНС';
-      case 'Поліція':
-        return 'Поліція';
-      case 'Внутрішньо переміщені особи':
-      case 'ВПО':
-        return 'Військовослужбовці';
-      default:
-        return text;
-    }
   }
 }

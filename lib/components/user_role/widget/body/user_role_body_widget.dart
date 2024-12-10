@@ -107,32 +107,35 @@ class UserRoleBodyWidget extends StatelessWidget {
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             KSizedBox.kWidthSizedBox16,
-            DropDownButton(
-              isDesk: isDesk,
-              style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.only(
-                    left: KPadding.kPaddingSize10,
-                    right: KPadding.kPaddingSize22,
-                  ),
-                ),
-              ),
+            PopupMenuButtonWidget<int>(
               buttonText: context.l10n.login,
               items: [
                 DropDownItem(
                   text: context.l10n.asBusiness,
-                  action: () => context.read<UrlCubit>().launchUrl(
+                  event: () => context.read<UrlCubit>().launchUrl(
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
                   key: KWidgetkeys.screen.userRole.loginBusinessButton,
                 ),
                 DropDownItem(
                   text: context.l10n.asUser,
-                  action: () => context.goNamed(KRoute.login.name),
+                  event: () => context.goNamed(KRoute.login.name),
                   key: KWidgetkeys.screen.userRole.loginUserButton,
                 ),
               ],
-              offset: KDimensions.offset,
+              buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.only(
+                    left: KPadding.kPaddingSize8,
+                    right: KPadding.kPaddingSize16,
+                    top: KPadding.kPaddingSize4,
+                    bottom: KPadding.kPaddingSize4,
+                  ),
+                ),
+              ),
+              position: isTablet
+                  ? PopupMenuButtonPosition.bottomRight
+                  : PopupMenuButtonPosition.bottomCenter,
             ),
           ],
         ),

@@ -360,10 +360,12 @@ class FirestoreService {
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true);
     if (userId != null) {
-      query = query.where(
-        DiscountModelJsonField.userId,
-        isEqualTo: userId,
-      );
+      if (KAppText.adminCompanyID != userId) {
+        query = query.where(
+          DiscountModelJsonField.userId,
+          isEqualTo: userId,
+        );
+      }
     } else if (Config.isProduction) {
       query = query.where(
         DiscountModelJsonField.status,
