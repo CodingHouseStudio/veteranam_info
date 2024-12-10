@@ -44,7 +44,7 @@ class DiscountsFilterMob extends StatelessWidget {
               ),
               showDragHandle: true,
               builder: (context) => AdvancedFilterMobBlocprovider(
-                childWidget: const AdvancedFilterMobDialog(),
+                childWidget: const _AdvancedFilterMobDialog(),
                 bloc: bloc,
               ),
             );
@@ -58,8 +58,8 @@ class DiscountsFilterMob extends StatelessWidget {
   }
 }
 
-class AdvancedFilterMobDialog extends StatelessWidget {
-  const AdvancedFilterMobDialog({super.key});
+class _AdvancedFilterMobDialog extends StatelessWidget {
+  const _AdvancedFilterMobDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,44 +73,52 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               isDesk: false,
             ),
           ),
-          KSizedBox.kHeightSizedBox8,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              KSizedBox.kWidthSizedBox8,
-              BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                builder: (context, state) {
-                  return AdvancedFilterResetButton(
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize16,
+              ),
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                spacing: KPadding.kPaddingSize8,
+                verticalDirection: VerticalDirection.up,
+                runSpacing: KPadding.kPaddingSize8,
+                children: [
+                  BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+                    builder: (context, state) {
+                      return AdvancedFilterResetButton(
+                        isDesk: false,
+                        resetEvent: state
+                                .discountFilterRepository.hasActivityItem
+                            ? () {
+                                context.pop();
+                                context.read<DiscountWatcherBloc>().add(
+                                      const DiscountWatcherEvent.filterReset(),
+                                    );
+                              }
+                            : null,
+                      );
+                    },
+                  ),
+                  DoubleButtonWidget(
+                    text: context.l10n.apply,
+                    hasAlign: false,
                     isDesk: false,
-                    resetEvent: state.discountFilterRepository.hasActivityItem
-                        ? () {
-                            context.pop();
-                            context
-                                .read<DiscountWatcherBloc>()
-                                .add(const DiscountWatcherEvent.filterReset());
-                          }
-                        : null,
-                  );
-                },
+                    onPressed: () {
+                      context.pop();
+                      context
+                          .read<DiscountWatcherBloc>()
+                          .add(const DiscountWatcherEvent.setMobFilter());
+                    },
+                    widgetKey: KWidgetkeys
+                        .screen.discounts.advancedFilterMobAppliedButton,
+                    darkMode: true,
+                  ),
+                ],
               ),
-              KSizedBox.kWidthSizedBox8,
-              DoubleButtonWidget(
-                text: context.l10n.apply,
-                isDesk: false,
-                onPressed: () {
-                  context.pop();
-                  context
-                      .read<DiscountWatcherBloc>()
-                      .add(const DiscountWatcherEvent.setMobFilter());
-                },
-                widgetKey:
-                    KWidgetkeys.screen.discounts.advancedFilterMobAppliedButton,
-                darkMode: true,
-              ),
-              KSizedBox.kWidthSizedBox16,
-            ],
+            ),
           ),
-          KSizedBox.kHeightSizedBox8,
         ],
       ),
     );

@@ -35,11 +35,14 @@ class AdvancedFilterContent extends StatelessWidget {
               slivers: [
                 if (isDesk)
                   SliverToBoxAdapter(
-                    child: AdvancedFilterResetButton(
-                      isDesk: true,
-                      resetEvent: () => context
-                          .read<DiscountWatcherBloc>()
-                          .add(const DiscountWatcherEvent.filterReset()),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: AdvancedFilterResetButton(
+                        isDesk: true,
+                        resetEvent: () => context
+                            .read<DiscountWatcherBloc>()
+                            .add(const DiscountWatcherEvent.filterReset()),
+                      ),
                     ),
                   )
                 else
