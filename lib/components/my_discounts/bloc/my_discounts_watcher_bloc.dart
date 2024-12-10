@@ -23,6 +23,7 @@ class MyDiscountsWatcherBloc
             loadingStatus: LoadingStatus.initial,
             loadedDiscountsModelItems: [],
             itemsLoaded: 0,
+            isListLoadedFull: false,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -117,9 +118,10 @@ class MyDiscountsWatcherBloc
     emit(
       MyDiscountsWatcherState(
         discountsModelItems: event.discountItemsModel,
-        loadingStatus: event.discountItemsModel.length > itemsLoaded
-            ? LoadingStatus.loaded
-            : LoadingStatus.listLoadedFull,
+        loadingStatus: LoadingStatus.loaded,
+        // event.discountItemsModel.length > itemsLoaded
+        //     ? LoadingStatus.loaded
+        //     : LoadingStatus.listLoadedFull,
         loadedDiscountsModelItems: _loading(
           itemsLoaded: state.itemsLoaded,
           loadItems: itemsLoaded,
@@ -127,6 +129,7 @@ class MyDiscountsWatcherBloc
           list: event.discountItemsModel,
         ),
         itemsLoaded: itemsLoaded,
+        isListLoadedFull: itemsLoaded == event.discountItemsModel.length,
       ),
     );
   }
@@ -179,7 +182,7 @@ class MyDiscountsWatcherBloc
     Emitter<MyDiscountsWatcherState> emit,
   ) async {
     if (state.itemsLoaded.checkLoadingPosible(state.discountsModelItems)) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      emit(state.copyWith(isListLoadedFull: true));
       return;
     }
 
@@ -196,9 +199,9 @@ class MyDiscountsWatcherBloc
           list: filterItems,
           loadItems: KDimensions.loadItems,
         ),
-        loadingStatus: filterItems.length == state.discountsModelItems.length
-            ? LoadingStatus.listLoadedFull
-            : LoadingStatus.loaded,
+        loadingStatus: LoadingStatus.loaded,
+        isListLoadedFull:
+            filterItems.length == state.discountsModelItems.length,
       ),
     );
   }

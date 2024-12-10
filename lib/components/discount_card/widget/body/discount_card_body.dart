@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart';
+import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_cubit.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountCardBody extends StatelessWidget {
@@ -9,7 +9,7 @@ class DiscountCardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountCardWatcherBloc, DiscountCardWatcherState>(
+    return BlocBuilder<DiscountCardWatcherCubit, DiscountCardWatcherState>(
       builder: (context, _) => ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth640),
         child: CardEmptyWidget(

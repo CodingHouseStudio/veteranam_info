@@ -10,8 +10,7 @@ class CompanyBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          GetIt.I.get<CompanyFormBloc>()..add(const CompanyFormEvent.started()),
+      create: (context) => GetIt.I.get<CompanyFormBloc>(),
       child: childWidget,
     );
   }

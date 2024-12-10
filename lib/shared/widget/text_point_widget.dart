@@ -29,7 +29,7 @@ class TextPointWidget extends StatelessWidget {
       mainAxisSize: mainAxisSize ?? MainAxisSize.max,
       children: [
         CircleAvatar(
-          radius: KPadding.kPaddingSize4,
+          radius: KSize.kPixel4,
           backgroundColor: pointColor,
         ),
         KSizedBox.kWidthSizedBox8,

@@ -221,8 +221,7 @@ abstract class KButtonStyles {
   );
 
   static const advancedButtonStyle = ButtonStyle(
-    padding:
-        WidgetStatePropertyAll(EdgeInsets.only(right: KPadding.kPaddingSize8)),
+    padding: WidgetStatePropertyAll(EdgeInsets.zero),
     shape: WidgetStatePropertyAll(
       KWidgetTheme.outlineBorder,
     ),

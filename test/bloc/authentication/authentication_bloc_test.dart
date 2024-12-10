@@ -94,7 +94,7 @@ void main() {
         when(mockAuthenticationRepository.status).thenAnswer(
           (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
         );
-        authenticationBloc.add(AuthenticationInitialized());
+        // authenticationBloc.add(AuthenticationInitialized());
       });
       // blocTest<AuthenticationBloc, AuthenticationState>(
       //   'emits [AuthenticationState] when'

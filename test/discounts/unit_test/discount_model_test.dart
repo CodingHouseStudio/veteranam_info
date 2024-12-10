@@ -89,9 +89,9 @@ void main() {
           KTestText.discountModelItems.last.status.enumString,
       DiscountModelJsonField.eligibility:
           KTestText.discountModelItems.last.eligibility,
-      DiscountModelJsonField.eligibilityEN: KTestText
-          .discountModelItems.last.eligibility
-          ?.getTrsnslation(isEnglish: false),
+      // DiscountModelJsonField.eligibilityEN: KTestText
+      //     .discountModelItems.last.eligibility
+      //     ?.getTrsnslation(isEnglish: false),
       // DiscountModelJsonField.hasMarkdown:
       //     KTestText.discountModelItems.last.hasMarkdown,
       // DiscountModelJsonField.date:
@@ -146,7 +146,7 @@ void main() {
       DiscountModelJsonField.companyEN: null,
       DiscountModelJsonField.status: null,
       DiscountModelJsonField.eligibility: null,
-      DiscountModelJsonField.eligibilityEN: null,
+      // DiscountModelJsonField.eligibilityEN: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {

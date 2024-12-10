@@ -7,9 +7,11 @@ class MobOfflineModeCubit extends Cubit<MobMode> {
   MobOfflineModeCubit({
     required FirestoreService firestoreService,
   })  : _firestoreService = firestoreService,
-        super(MobMode.offline);
+        super(MobMode.offline) {
+    _started();
+  }
   final FirestoreService _firestoreService;
-  void started() {
+  void _started() {
     emit(_firestoreService.offlineMode);
   }
 

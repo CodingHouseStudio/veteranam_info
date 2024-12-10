@@ -133,6 +133,8 @@ abstract class KMockText {
     en: 'Medical',
   );
 
+  static const filterItem = FilterItem(KMockText.category, number: 10);
+
   static final discountModel = DiscountModel(
     id: '',
     userId: '',
@@ -265,10 +267,11 @@ abstract class KAppText {
       ];
   static const deletedFieldId = 'deletedOn';
 
-  static const sulocationUA = 'Вся Україна';
-  static const sulocationEN = 'All Ukraine';
+  static const sublocationUA = 'Вся Україна';
+  static const sublocationEN = 'All Ukraine';
 
-  static const sublocation = TranslateModel(uk: sulocationUA, en: sulocationEN);
+  static const sublocation =
+      TranslateModel(uk: sublocationUA, en: sublocationEN);
   static const categoryAll = TranslateModel(uk: 'Все', en: 'All');
   static const allStoresOfChain = TranslateModel(
     uk: 'Всі заклади мережі',

@@ -7,7 +7,7 @@ class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AuthenticationInitialized extends AuthenticationEvent {}
+// class AuthenticationInitialized extends AuthenticationEvent {}
 
 class AuthenticationStatusChanged extends AuthenticationEvent {
   const AuthenticationStatusChanged(this.status);

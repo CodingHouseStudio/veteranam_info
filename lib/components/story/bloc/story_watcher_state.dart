@@ -14,5 +14,6 @@ class StoryWatcherState with _$StoryWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required StoryFailure? failure,
+    required bool isListLoadedFull,
   }) = _Initial;
 }

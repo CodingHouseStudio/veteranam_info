@@ -309,21 +309,23 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       ],
                       allElemts: context.l10n.allOfListed,
                       showErrorText: _.formState.hasError,
-                      errorText: _.eligibility?.error.value(context),
+                      errorText: _.eligibility.error.value(context),
                       onChanged: (text) => context.read<DiscountsAddBloc>().add(
                             DiscountsAddEvent.eligibilityAddItem(
-                              text.toEligibility,
+                              text,
                             ),
                           ),
-                      values: _.eligibility?.value
-                          .map(
-                            (e) => e.getValue(context),
-                          )
-                          .toList(),
+                      values: List.generate(
+                        _.eligibility.value.length,
+                        (index) => _.eligibility.value
+                            .elementAt(index)
+                            .getValue(context),
+                        growable: false,
+                      ),
                       removeEvent: (value) =>
                           context.read<DiscountsAddBloc>().add(
                                 DiscountsAddEvent.eligibilityRemoveItem(
-                                  value.toEligibility,
+                                  value,
                                 ),
                               ),
                       description: context.l10n.eligibilityDescription,

@@ -33,10 +33,14 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.routeSettings,
     this.menuTextStyle = AppTextStyle.materialThemeBodyMedium,
     this.menuTopSpace = KPadding.kPaddingSize8,
+    this.itemAlignment = Alignment.center,
+    this.iconAlignment = IconAlignment.start,
+    this.closeIcon,
+    this.showIcon,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.
-  final List<DropDownItem> items;
+  final List<DropDownItem<T>> items;
 
   /// The value of the menu item, if any, that should be highlighted when
   /// the menu opens.
@@ -203,6 +207,14 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final double menuTopSpace;
 
+  final Alignment itemAlignment;
+
+  final IconAlignment iconAlignment;
+
+  final Widget? closeIcon;
+
+  final Widget? showIcon;
+
   @override
   PopupMenuButtonWidgetState<T> createState() =>
       PopupMenuButtonWidgetState<T>();
@@ -220,17 +232,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   @override
   void initState() {
     super.initState();
-    items = List.generate(
-      widget.items.length,
-      (index) => _PopupMenuItemWidget<T>(
-        key: widget.items.elementAt(index).key,
-        padding: widget.menuItemsPadding,
-        text: widget.items.elementAt(index).text,
-        textStyle: widget.menuTextStyle,
-        onTap: widget.items.elementAt(index).event,
-      ),
-      growable: false,
-    );
+    getItems();
     var longItem = '';
     for (final element in widget.items) {
       if (element.text.length > longItem.length) longItem = element.text;
@@ -239,6 +241,30 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
     _showMenu = false;
   }
+
+  @override
+  void didUpdateWidget(covariant PopupMenuButtonWidget<T> oldWidget) {
+    if (widget.items != oldWidget.items) getItems();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void getItems() => items = List.generate(
+        widget.items.length,
+        (index) {
+          final item = widget.items.elementAt(index);
+          return _PopupMenuItemWidget<T>(
+            key: item.key,
+            padding: widget.menuItemsPadding,
+            text: item.text,
+            textStyle: widget.menuTextStyle,
+            onTap: item.event,
+            enabled: item.enabled && widget.initialValue != item.value,
+            alignment: widget.itemAlignment,
+            value: item.value,
+          );
+        },
+        growable: false,
+      );
 
   /// A method to show a popup menu with the items supplied to
   /// [PopupMenuButtonWidget.items] at the position of your
@@ -336,21 +362,18 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return TextButton.icon(
       onPressed: widget.enabled ? showButtonMenu : null,
       style: widget.buttonStyle,
-      child: Row(
-        // key: KWidgetkeys.widget.dropDownButton.loginButton,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (_showMenu) KIcon.trailingUp else KIcon.keyboardArrowDown,
-          KSizedBox.kWidthSizedBox8,
+      icon: _showMenu
+          ? widget.closeIcon ?? KIcon.trailingUp
+          : widget.showIcon ?? KIcon.keyboardArrowDown,
+      iconAlignment: widget.iconAlignment,
+      label: widget.icon ??
           Text(
             widget.buttonText,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
-        ],
-      ),
     );
   }
 }
@@ -365,10 +388,11 @@ class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
   const _PopupMenuItemWidget({
     required this.text,
     required this.textStyle,
-    this.value,
-    this.padding = const EdgeInsets.all(KPadding.kPaddingSize16),
-    this.onTap,
-    this.enabled = true,
+    required this.alignment,
+    required this.value,
+    required this.padding,
+    required this.onTap,
+    required this.enabled,
     this.height = kMinInteractiveDimension,
     super.key,
   });
@@ -384,6 +408,8 @@ class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
   final String text;
 
   final TextStyle textStyle;
+
+  final Alignment alignment;
 
   @override
   bool represents(T? value) => value == this.value;
@@ -411,12 +437,14 @@ class _PopupMenuItemState<T, W extends _PopupMenuItemWidget<T>>
           style: ButtonStyle(
             padding: WidgetStatePropertyAll(widget.padding),
             shape: const WidgetStatePropertyAll(KWidgetTheme.outlineBorder),
+            alignment: widget.alignment,
           ),
           onPressed: widget.enabled ? handleTap : null,
           child: ListTileTheme.merge(
             contentPadding: EdgeInsets.zero,
             child: Text(
               widget.text,
+              textAlign: TextAlign.start,
               style: widget.textStyle,
             ),
           ),

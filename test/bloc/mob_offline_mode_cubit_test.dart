@@ -53,7 +53,7 @@ void main() {
       ' when initial and switch mode',
       build: () => mobOfflineModeCubit,
       act: (bloc) async => bloc
-        ..started()
+        // ..started()
         ..switchMode()
         ..switchMode(),
       expect: () async => [

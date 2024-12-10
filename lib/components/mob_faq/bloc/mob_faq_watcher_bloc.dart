@@ -18,6 +18,7 @@ class MobFaqWatcherBloc extends Bloc<MobFaqWatcherEvent, MobFaqWatcherState> {
           ),
         ) {
     on<_Started>(_onStarted);
+    add(const MobFaqWatcherEvent.started());
   }
   final IFaqRepository _faqRepository;
   Future<void> _onStarted(

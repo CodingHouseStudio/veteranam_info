@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsBodyWidget extends StatelessWidget {
@@ -28,7 +29,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
       listener: (context, state) {
         if (state == NetworkStatus.network) {
           context.read<DiscountWatcherBloc>().add(
-                DiscountWatcherEvent.started(isEnglish: context.isEnglish),
+                const DiscountWatcherEvent.started(),
               );
         }
       },
@@ -37,7 +38,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
           if (state.failure != null) {
             context.dialog.showGetErrorDialog(
               error: state.failure!.value(context),
-              onPressed: () {},
+              onPressed: state.failure == DiscountFailure.filter ? null : () {},
               // I think this event is not necessary for Stream, but
               // I think it's better to give
               // the user imaginary control over it
@@ -47,7 +48,8 @@ class _DiscountsBodyWidget extends StatelessWidget {
               //     .add(const DiscountWatcherEvent.started()),
             );
           }
-          if (state.itemsLoaded ==
+
+          if (state.filterDiscountModelList.length ==
               (context.read<DiscountConfigCubit>().state.loadingItems *
                   (context.read<DiscountConfigCubit>().state.emailScrollCount +
                       1))) {
@@ -67,7 +69,8 @@ class _DiscountsBodyWidget extends StatelessWidget {
         },
         listenWhen: (previous, current) =>
             current.failure != null ||
-            previous.itemsLoaded != current.itemsLoaded,
+            previous.filterDiscountModelList.length !=
+                current.filterDiscountModelList.length,
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             final isDesk =
@@ -104,12 +107,15 @@ class _DiscountsBodyWidget extends StatelessWidget {
                         isDesk: isDesk,
                       ),
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: DiscountsFilterWidget(isDesk: isDesk),
+                    if (!isDesk)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: SliverToBoxAdapter(
+                          child: DiscountsFilterMob(
+                            key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                          ),
+                        ),
                       ),
-                    ),
                     if (isDesk)
                       SliverPadding(
                         padding: padding,

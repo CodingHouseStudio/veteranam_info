@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart';
+import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_cubit.dart';
 
 class DiscountCardBlocprovider extends StatelessWidget {
   const DiscountCardBlocprovider({
@@ -15,8 +15,7 @@ class DiscountCardBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.I.get<DiscountCardWatcherBloc>()
-        ..add(DiscountCardWatcherEvent.started(id)),
+      create: (context) => GetIt.I.get<DiscountCardWatcherCubit>(param1: id),
       child: childWidget,
     );
   }
