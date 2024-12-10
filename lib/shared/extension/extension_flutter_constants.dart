@@ -211,7 +211,7 @@ extension StringFllutterExtension on String {
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 
   EligibilityEnum get toEligibility {
-    switch (this) {
+    switch (toLowerCase()) {
       case 'ветерани':
         return EligibilityEnum.veterans;
       case 'військовослужбовці':
