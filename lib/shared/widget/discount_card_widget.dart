@@ -209,6 +209,108 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
                   !isBusiness || discountItem.status == DiscountState.published,
             ),
           ),
+
+          // // DropdownButton(
+          // //   items: List.generate(1, (index) {
+          // //     return DropdownMenuItem(
+          // //       child: Text('dfjjkdjkfd'),
+          // //     );
+          // //   }),
+          // //   onChanged: (value) {},
+          // // ),
+          // // PopupMenuButton(
+          // //   position: PopupMenuPosition.under,
+          // //   itemBuilder: (context) {
+          // //     return List.generate(1, (index) {
+          // //       return PopupMenuItem(
+          // //         child: Text('dfjjkdjkfd'),
+          // //       );
+          // //     });
+          // //   },
+          // // ),
+          // PopupMenuButtonWidget<int>(
+          //   buttonText: context.l10n.login,
+          //   items: [
+          //     if (discountItem.getLink != null &&
+          //         discountItem.getLink!.isUrlValid)
+          //       DropDownItem(
+          //         value: 1,
+          //         text: context.l10n.webSite,
+          //         icon: IconWidget(
+          //           background: AppColors.materialThemeWhite,
+          //           icon: KIcon.captivePortal,
+          //           padding: KPadding.kPaddingSize12,
+          //         ),
+          //         event: () => context
+          //             .read<UrlCubit>()
+          //             .launchUrl(url: discountItem.getLink),
+          //         key: KWidgetkeys.widget.discountCard.iconWebsite,
+          //       ),
+          //     DropDownItem(
+          //       value: 2,
+          //       text: 'dkkdskdskdsdsnc',
+          //       icon: IconWidget(
+          //         background: AppColors.materialThemeWhite,
+          //         icon: KIcon.brightnessAlert,
+          //         padding: KPadding.kPaddingSize12,
+          //       ),
+          //       event: () => context.dialog.showReportDialog(
+          //         isDesk: isDesk,
+          //         cardEnum: CardEnum.discount,
+          //         // afterEvent: afterEvent,
+          //         cardId: discountItem.id,
+          //       ),
+          //       key: KWidgetkeys.widget.discountCard.iconComplaint,
+          //     ),
+          //   ],
+          //   buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
+          //     padding: const WidgetStatePropertyAll(
+          //       EdgeInsets.only(
+          //         left: KPadding.kPaddingSize8,
+          //         right: KPadding.kPaddingSize16,
+          //         top: KPadding.kPaddingSize4,
+          //         bottom: KPadding.kPaddingSize4,
+          //       ),
+          //     ),
+          //   ),
+          //   position: PopupMenuButtonPosition.bottomCenter,
+          // ),
+          // // DropDownButton(
+          // //   isDesk: isDesk,
+          // //   style: KButtonStyles.borderWhiteButtonStyle,
+          // //   discountButtons: true,
+          // //   items: [
+          // //     if (link != null && link!.isUrlValid)
+          // //       DropDownItem(
+          // //         text: context.l10n.webSite,
+          // //         icon: IconWidget(
+          // //           background: background,
+          // //           icon: KIcon.captivePortal,
+          // //           padding: KPadding.kPaddingSize12,
+          // //         ),
+          // //         action: () =>
+          // //             context..read<UrlCubit>().launchUrl(url: link),
+          // //         key: webSiteKey!,
+          // //       ),
+          // //     DropDownItem(
+          // //       text: context.l10n.complaint,
+          // //       icon: IconWidget(
+          // //         background: background,
+          // //         icon: KIcon.brightnessAlert,
+          // //         padding: KPadding.kPaddingSize12,
+          // //       ),
+          // //       action: () => context.dialog.showReportDialog(
+          // //         isDesk: isDesk,
+          // //         cardEnum: cardEnum,
+          // //         // afterEvent: afterEvent,
+          // //         cardId: cardId,
+          // //       ),
+          // //       key: complaintKey,
+          // //     ),
+          // //   ],
+          // //   offset: KDimensions.discountOffset,
+          // // ),
+
           KSizedBox.kHeightSizedBox16,
           if (closeWidget != null) ...[
             closeWidget!,

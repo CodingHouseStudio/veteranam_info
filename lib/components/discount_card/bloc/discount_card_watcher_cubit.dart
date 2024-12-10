@@ -3,15 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-part 'discount_card_watcher_event.dart';
+// part 'discount_card_watcher_event.dart';
 part 'discountcard_watcher_state.dart';
-part 'discount_card_watcher_bloc.freezed.dart';
+part 'discount_card_watcher_cubit.freezed.dart';
 
 @Injectable()
-class DiscountCardWatcherBloc
-    extends Bloc<DiscountCardWatcherEvent, DiscountCardWatcherState> {
-  DiscountCardWatcherBloc({
+class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
+  DiscountCardWatcherCubit({
     required IDiscountRepository discountRepository,
+    @factoryParam String? id,
   })  : _discountRepository = discountRepository,
         super(
           const _Initial(
@@ -20,14 +20,17 @@ class DiscountCardWatcherBloc
             failure: null,
           ),
         ) {
-    on<_Started>(_onStarted);
+    _onStarted(
+      id: id,
+      // emit: ,
+    );
   }
   final IDiscountRepository _discountRepository;
-  Future<void> _onStarted(
-    _Started event,
-    Emitter<DiscountCardWatcherState> emit,
-  ) async {
-    if (event.id == null || event.id!.isEmpty) {
+  Future<void> _onStarted({
+    // required Emitter<DiscountCardWatcherState> emit,
+    required String? id,
+  }) async {
+    if (id == null || id.isEmpty) {
       emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,
@@ -43,7 +46,7 @@ class DiscountCardWatcherBloc
       ),
     );
 
-    final result = await _discountRepository.getDiscount(event.id!);
+    final result = await _discountRepository.getDiscount(id);
 
     result.fold(
       (l) => emit(

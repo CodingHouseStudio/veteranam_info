@@ -12,11 +12,10 @@ class HomeBlocprovider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<HomeWatcherBloc>()
-            ..add(const HomeWatcherEvent.started()),
+          create: (context) => GetIt.I.get<HomeWatcherBloc>(),
         ),
         BlocProvider(
-          create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
+          create: (context) => GetIt.I.get<AppVersionCubit>(),
         ),
       ],
       child: childWidget,

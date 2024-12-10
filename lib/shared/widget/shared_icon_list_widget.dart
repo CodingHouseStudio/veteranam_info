@@ -75,41 +75,41 @@ class SharedIconListWidget extends StatelessWidget {
         if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
         Column(
           children: [
-            // DropDownButton(
-            //   isDesk: isDesk,
-            //   style: KButtonStyles.borderWhiteButtonStyle,
-            //   discountButtons: true,
-            //   items: [
-            //     if (link != null && link!.isUrlValid)
-            //       DropDownItem(
-            //         text: context.l10n.webSite,
-            //         icon: IconWidget(
-            //           background: background,
-            //           icon: KIcon.captivePortal,
-            //           padding: KPadding.kPaddingSize12,
-            //         ),
-            //         action: () =>
-            //             context..read<UrlCubit>().launchUrl(url: link),
-            //         key: webSiteKey!,
-            //       ),
-            //     DropDownItem(
-            //       text: context.l10n.complaint,
-            //       icon: IconWidget(
-            //         background: background,
-            //         icon: KIcon.brightnessAlert,
-            //         padding: KPadding.kPaddingSize12,
-            //       ),
-            //       action: () => context.dialog.showReportDialog(
-            //         isDesk: isDesk,
-            //         cardEnum: cardEnum,
-            //         // afterEvent: afterEvent,
-            //         cardId: cardId,
-            //       ),
-            //       key: complaintKey,
-            //     ),
-            //   ],
-            //   offset: KDimensions.discountOffset,
-            // ),
+            PopupMenuButtonWidget<int>(
+              buttonText: context.l10n.login,
+              iconButton: true,
+              buttonStyle: KButtonStyles.borderWhiteButtonStyle,
+              items: [
+                if (link != null && link!.isUrlValid)
+                  DropDownItem(
+                    value: 1,
+                    text: context.l10n.webSite,
+                    icon: IconWidget(
+                      background: background,
+                      icon: KIcon.captivePortal,
+                      padding: KPadding.kPaddingSize12,
+                    ),
+                    event: () => context.read<UrlCubit>().launchUrl(url: link),
+                    key: webSiteKey,
+                  ),
+                DropDownItem(
+                  value: 2,
+                  text: context.l10n.complaint,
+                  icon: IconWidget(
+                    background: background,
+                    icon: KIcon.brightnessAlert,
+                    padding: KPadding.kPaddingSize12,
+                  ),
+                  event: () => context.dialog.showReportDialog(
+                    isDesk: isDesk,
+                    cardEnum: cardEnum,
+                    cardId: cardId,
+                  ),
+                  key: complaintKey,
+                ),
+              ],
+              position: PopupMenuButtonPosition.bottomLeft,
+            ),
             KSizedBox.kHeightSizedBox6,
             Text(
               context.l10n.more,

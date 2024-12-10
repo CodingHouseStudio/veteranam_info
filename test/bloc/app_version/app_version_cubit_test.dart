@@ -42,7 +42,7 @@ void main() {
         ).thenAnswer(
           (_) => KTestText.build,
         );
-        await bloc.started();
+        // await bloc.started();
       },
       expect: () async => [
         AppVersionState(
@@ -66,7 +66,7 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.packageInfo,
         );
-        await bloc.started();
+        // await bloc.started();
       },
       expect: () async => [
         AppVersionState(
@@ -90,7 +90,7 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.packageInfo,
         );
-        await bloc.started();
+        // await bloc.started();
       },
       expect: () async => [
         AppVersionState(
@@ -109,7 +109,7 @@ void main() {
         ).thenAnswer(
           (_) => '',
         );
-        await bloc.started();
+        // await bloc.started();
       },
       expect: () async => [
         AppVersionState(

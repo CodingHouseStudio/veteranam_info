@@ -94,7 +94,7 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
         onPressed: onPressed,
         icon: IconWidget(
           icon: listShow ? KIcon.minus : KIcon.plus,
-          padding: KPadding.kPaddingSize12,
+          padding: KPadding.kPaddingSize8,
           background: isDesk
               ? AppColors.materialThemeKeyColorsNeutral
               : AppColors.materialThemeWhite,

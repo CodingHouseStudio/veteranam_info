@@ -121,11 +121,12 @@ class LineTitleIconWidget extends StatelessWidget {
     // required this.isDesk,
     this.iconCrossAxisAlignment = CrossAxisAlignment.end,
     super.key,
+    this.rightWidget,
   });
   final String title;
   final Key titleKey;
   // final bool isDesk;
-  // bool isRightArrow = true;
+  final Widget? rightWidget;
   final CrossAxisAlignment iconCrossAxisAlignment;
 
   @override
@@ -133,20 +134,12 @@ class LineTitleIconWidget extends StatelessWidget {
     return Column(
       children: [
         // if (isDesk)
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: AppTextStyle.materialThemeDisplayLarge,
-            ),
-            KSizedBox.kWidthSizedBox32,
-            const IconWidget(
-              // key: KWidgetkeys.screen.feedback.titleIcon,
-              icon: KIcon.arrowDownRight,
-            ),
-          ],
-        ),
+        if (rightWidget == null)
+          leftWidget
+        else
+          Row(
+            children: [Expanded(child: leftWidget), rightWidget!],
+          ),
         // else
         //   Row(
         //     crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,6 +164,22 @@ class LineTitleIconWidget extends StatelessWidget {
       ],
     );
   }
+
+  Widget get leftWidget => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            key: titleKey,
+            style: AppTextStyle.materialThemeDisplayLarge,
+          ),
+          KSizedBox.kWidthSizedBox32,
+          const IconWidget(
+            // key: KWidgetkeys.screen.feedback.titleIcon,
+            icon: KIcon.arrowDownRight,
+          ),
+        ],
+      );
 }
 
 /// A widget that displays a title with an optional second part, aligned icons,

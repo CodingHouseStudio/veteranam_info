@@ -3,30 +3,6 @@ import 'dart:typed_data' show Uint8List;
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:veteranam/shared/models/models.dart';
 
-class FilterItem {
-  FilterItem(
-    this.value, {
-    this.number = 1,
-    this.isSelected = false,
-  });
-
-  final TranslateModel value;
-  final bool isSelected;
-  final int number;
-
-  FilterItem copyWith({
-    TranslateModel? value,
-    bool? isSelected,
-    int? number,
-  }) {
-    return FilterItem(
-      value ?? this.value,
-      isSelected: isSelected ?? this.isSelected,
-      number: number ?? this.number,
-    );
-  }
-}
-
 class FilePickerItem {
   FilePickerItem({
     required this.bytes,

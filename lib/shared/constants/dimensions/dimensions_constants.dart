@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart' show Offset;
-
 /// COMMENT: Variables with dimensions that don't have a specific group
 abstract class KDimensions {
   static const storyCardMaxLines = 10;
@@ -26,6 +24,7 @@ abstract class KDimensions {
   static const shimmerStoriesItems = 3;
   static const shimmerWorksItems = 3;
   static const shimmerDiscountsItems = 1;
+  static const shimmerDiscountsFilterItems = 4;
   static const shimmerCategoryItems = 5;
 
   static const maxLinkPerDay = 3;
@@ -74,4 +73,8 @@ abstract class KDimensions {
   static const logLevelCriticalError = 1000;
 
   static const listCacheExtent = 1000.0;
+
+  static const discountLocationNumberSortedItems = 5;
+
+  static const borderWidth = 3.0;
 }

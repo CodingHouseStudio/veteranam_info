@@ -1,4 +1,4 @@
-part of 'discount_card_watcher_bloc.dart';
+part of 'discount_card_watcher_cubit.dart';
 
 enum DiscountCardFailure {
   wrongID,

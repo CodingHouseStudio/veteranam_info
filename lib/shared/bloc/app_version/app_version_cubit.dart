@@ -22,7 +22,9 @@ class AppVersionCubit extends Cubit<AppVersionState> {
             build: AppInfoRepository.defaultValue,
             mobHasNewBuild: false,
           ),
-        );
+        ) {
+    _started();
+  }
   final AppInfoRepository _buildRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
   Timer? _delay;
@@ -30,7 +32,7 @@ class AppVersionCubit extends Cubit<AppVersionState> {
   @visibleForTesting
   static const mobAppVersionKey = '__mob_app_version_key__';
 
-  Future<void> started() async {
+  Future<void> _started() async {
     final buildInfo = await _buildRepository.getBuildInfo();
     var mobAppVersion =
         _firebaseRemoteConfigProvider.getString(mobAppVersionKey);

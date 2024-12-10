@@ -19,12 +19,10 @@ class InvestorsWatcherState with _$InvestorsWatcherState {
     required List<FundModel> mobFundItems,
     required List<List<FundModel>> deskFundItems,
     // required List<FundModel> loadingMobFundItems,
-    required LoadingStatusInvestors loadingStatus,
+    required LoadingStatus loadingStatus,
     // required bool loadedFull,
     // required int itemsLoaded,
     // required List<ReportModel> reportItems,
     required InvestorsFailure? failure,
   }) = _Initial;
 }
-
-enum LoadingStatusInvestors { initial, loading, loaded, error }

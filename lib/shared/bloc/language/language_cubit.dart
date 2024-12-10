@@ -12,12 +12,14 @@ class LanguageCubit extends Cubit<Language> {
   })  : _userRepository = userRepository,
         super(
           userRepository.currentUserSetting.locale,
-        );
+        ) {
+    _started();
+  }
 
   final UserRepository _userRepository;
   Timer? _timer;
 
-  void started() {
+  void _started() {
     if (_userRepository.currentUserSetting.isEmpty) {
       var counter = 0;
       _timer = Timer.periodic(

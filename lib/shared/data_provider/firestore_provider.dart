@@ -87,9 +87,11 @@ class FirestoreService {
         .collection(FirebaseCollectionName.feedback)
         .where(FeedbackModelJsonField.guestId, isEqualTo: userId)
         .get();
-    return snapshot.docs
-        .map((doc) => FeedbackModel.fromJson(doc.data()))
-        .toList();
+    return List.generate(
+      snapshot.docs.length,
+      (index) => FeedbackModel.fromJson(snapshot.docs.elementAt(index).data()),
+      growable: false,
+    );
   }
 
   Future<void> addQuestion(QuestionModel question) {
@@ -107,9 +109,12 @@ class FirestoreService {
           .get(getOptions);
 
       // If the server fetch is successful, return the data
-      return docSnapshot.docs
-          .map((doc) => QuestionModel.fromJson(doc.data()))
-          .toList();
+      return List.generate(
+        docSnapshot.docs.length,
+        (index) =>
+            QuestionModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        growable: false,
+      );
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable, fall back to the cache
@@ -117,9 +122,13 @@ class FirestoreService {
             .collection(FirebaseCollectionName.questions)
             .get(getCacheOptions);
 
-        return docSnapshot.docs
-            .map((doc) => QuestionModel.fromJson(doc.data()))
-            .toList();
+        return List.generate(
+          docSnapshot.docs.length,
+          (index) => QuestionModel.fromJson(
+            docSnapshot.docs.elementAt(index).data(),
+          ),
+          growable: false,
+        );
       } else {
         rethrow;
       }
@@ -149,10 +158,11 @@ class FirestoreService {
       }
 
       // If the server fetch is successful, return the data
-      return docSnapshot.docs
-          .map((doc) => FundModel.fromJson(doc.data()))
-          // .where((e) => e.image != null || !Config.isProduction)
-          .toList();
+      return List.generate(
+        docSnapshot.docs.length,
+        (index) => FundModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        growable: false,
+      );
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable, fall back to the cache
@@ -160,9 +170,12 @@ class FirestoreService {
             .collection(FirebaseCollectionName.funds)
             .get(getCacheOptions);
 
-        return docSnapshot.docs
-            .map((doc) => FundModel.fromJson(doc.data()))
-            .toList();
+        return List.generate(
+          docSnapshot.docs.length,
+          (index) =>
+              FundModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+          growable: false,
+        );
       } else {
         rethrow;
       }
@@ -202,9 +215,13 @@ class FirestoreService {
           }
           return _tryCatchForCache(
             isFromCache: isFromCache,
-            event: () => snapshot.docs
-                .map((doc) => InformationModel.fromJson(doc.data()))
-                .toList(),
+            event: () => List.generate(
+              snapshot.docs.length,
+              (index) => InformationModel.fromJson(
+                snapshot.docs.elementAt(index).data(),
+              ),
+              growable: false,
+            ),
           );
         },
       );
@@ -295,9 +312,12 @@ class FirestoreService {
             }
           }
           return _tryCatchForCache<WorkModel>(
-            event: () => snapshot.docs
-                .map((doc) => WorkModel.fromJson(doc.data()))
-                .toList(),
+            event: () => List.generate(
+              snapshot.docs.length,
+              (index) =>
+                  WorkModel.fromJson(snapshot.docs.elementAt(index).data()),
+              growable: false,
+            ),
             isFromCache: isFromCache,
           );
         },
@@ -326,9 +346,12 @@ class FirestoreService {
           }
           return _tryCatchForCache(
             isFromCache: isFromCache,
-            event: () => snapshot.docs
-                .map((doc) => StoryModel.fromJson(doc.data()))
-                .toList(),
+            event: () => List.generate(
+              snapshot.docs.length,
+              (index) =>
+                  StoryModel.fromJson(snapshot.docs.elementAt(index).data()),
+              growable: false,
+            ),
           );
         },
       );
@@ -346,9 +369,12 @@ class FirestoreService {
         .where(StoryModelJsonField.userId, isEqualTo: userId)
         .get();
 
-    return querySnapshot.docs
-        .map((doc) => StoryModel.fromJson(doc.data()))
-        .toList();
+    return List.generate(
+      querySnapshot.docs.length,
+      (index) =>
+          StoryModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      growable: false,
+    );
   }
 
   Stream<List<DiscountModel>> getDiscounts(
@@ -392,9 +418,12 @@ class FirestoreService {
         }
 
         return _tryCatchForCache<DiscountModel>(
-          event: () => snapshot.docs
-              .map((doc) => DiscountModel.fromJson(doc.data()))
-              .toList(),
+          event: () => List.generate(
+            snapshot.docs.length,
+            (index) =>
+                DiscountModel.fromJson(snapshot.docs.elementAt(index).data()),
+            growable: false,
+          ),
           isFromCache: isFromCache,
         );
       },
@@ -467,9 +496,11 @@ class FirestoreService {
         .where(LinkModelJsonField.userId, isEqualTo: userId)
         .get();
 
-    return querySnapshot.docs
-        .map((doc) => LinkModel.fromJson(doc.data()))
-        .toList();
+    return List.generate(
+      querySnapshot.docs.length,
+      (index) => LinkModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      growable: false,
+    );
   }
 
   Future<List<EmailModel>> getUserDiscountsEmail(
@@ -480,9 +511,12 @@ class FirestoreService {
         .where(EmailModelJsonField.userId, isEqualTo: userId)
         .get();
 
-    return querySnapshot.docs
-        .map((doc) => EmailModel.fromJson(doc.data()))
-        .toList();
+    return List.generate(
+      querySnapshot.docs.length,
+      (index) =>
+          EmailModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      growable: false,
+    );
   }
 
   Future<void> addDiscount(DiscountModel discount) {
@@ -527,9 +561,12 @@ class FirestoreService {
           .where(ReportModelJsonField.userId, isEqualTo: userId)
           .get(getOptions);
 
-      return querySnapshot.docs
-          .map((doc) => ReportModel.fromJson(doc.data()))
-          .toList();
+      return List.generate(
+        querySnapshot.docs.length,
+        (index) =>
+            ReportModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+        growable: false,
+      );
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable and cache has not been tried, attempt
@@ -540,9 +577,13 @@ class FirestoreService {
             .where(ReportModelJsonField.userId, isEqualTo: userId)
             .get(getCacheOptions);
 
-        return cacheSnapshot.docs
-            .map((doc) => ReportModel.fromJson(doc.data()))
-            .toList();
+        return List.generate(
+          cacheSnapshot.docs.length,
+          (index) => ReportModel.fromJson(
+            cacheSnapshot.docs.elementAt(index).data(),
+          ),
+          growable: false,
+        );
       } else {
         rethrow;
       }
@@ -581,9 +622,11 @@ class FirestoreService {
           .get(getOptions);
 
       // If the server fetch is successful, return the data
-      return docSnapshot.docs
-          .map((doc) => CityModel.fromJson(doc.data()))
-          .toList();
+      return List.generate(
+        docSnapshot.docs.length,
+        (index) => CityModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        growable: false,
+      );
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable, fall back to the cache
@@ -591,9 +634,12 @@ class FirestoreService {
             .collection(FirebaseCollectionName.questions)
             .get(getCacheOptions);
 
-        return docSnapshot.docs
-            .map((doc) => CityModel.fromJson(doc.data()))
-            .toList();
+        return List.generate(
+          docSnapshot.docs.length,
+          (index) =>
+              CityModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+          growable: false,
+        );
       } else {
         rethrow;
       }

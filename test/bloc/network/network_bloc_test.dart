@@ -23,7 +23,8 @@ void main() {
       );
       networkCubit = NetworkCubit(
         networkRepository: mockNetworkRepository,
-      )..networkInitialized();
+      );
+      //..networkInitialized();
     });
     blocTest<NetworkCubit, NetworkStatus>(
       'emits [NetworkStatus] when'

@@ -95,6 +95,30 @@ extension StringDartExtension on String {
 
     return substring(startIndex + 1, endIndex);
   }
+
+  EligibilityEnum get toEligibility {
+    switch (toLowerCase()) {
+      case 'ветерани':
+        return EligibilityEnum.veterans;
+      case 'військовослужбовці':
+        return EligibilityEnum.militaryPersonnel;
+      case 'учасники бойових дій':
+        return EligibilityEnum.combatants;
+      case 'особи з інвалідністю внаслідок війни':
+        return EligibilityEnum.personsWithDisabilitiesDueToWar;
+      case 'поліція':
+        return EligibilityEnum.policeOfficers;
+      case 'співробітники дснс':
+        return EligibilityEnum.emergencyServiceEmployees;
+      case 'члени сімей загиблих':
+        return EligibilityEnum.familyMembersOfTheDeceased;
+      case 'внутрішньо переміщені особи':
+        return EligibilityEnum.internallyDisplacedPersons;
+      case 'всі перелічені':
+        return EligibilityEnum.all;
+    }
+    return EligibilityEnum.all;
+  }
 }
 
 extension InformationModelExtension on InformationModel {
@@ -263,56 +287,61 @@ extension FilePickerItemExtension on FilePickerItem? {
           ' path - ${this!.ref}, ${this!.bytes.getErrorData}';
 }
 
-// extension EligiblityEnumExtension on EligibilityEnum {
-//   TranslateModel? get getTranslateModel {
-//     switch (this) {
-//       case EligibilityEnum.allConditionsMet:
-//         return const TranslateModel(
-//           uk: 'Усі умови виконані',
-//           en: 'All conditions met',
-//         );
-//       case EligibilityEnum.veterans:
-//         return const TranslateModel(
-//           uk: 'Ветерани',
-//           en: 'Veterans',
-//         );
-//       case EligibilityEnum.combatants:
-//         return const TranslateModel(
-//           uk: 'Учасники бойових дій',
-//           en: 'Combatants',
-//         );
-//       case EligibilityEnum.militaryPersonnel:
-//         return const TranslateModel(
-//           uk: 'Військовослужбовці',
-//           en: 'Military personnel',
-//         );
-//       case EligibilityEnum.fallenFamilyMembers:
-//         return const TranslateModel(
-//           uk: 'Члени сімей загиблих',
-//           en: 'Fallen family members',
-//         );
-//       case EligibilityEnum.disabledWarVeterans:
-//         return const TranslateModel(
-//           uk: 'Особи з інвалідністю внаслідок війни',
-//           en: 'Disabled war veterans',
-//         );
-//       case EligibilityEnum.dsnsEmployees:
-//         return const TranslateModel(
-//           uk: 'Співробітники ДСНС',
-//           en: 'State Emergency Service employees',
-//         );
-//       case EligibilityEnum.policeOfficers:
-//         return const TranslateModel(
-//           uk: 'Поліція',
-//           en: 'Police officers',
-//         );
-//       case EligibilityEnum.internallyDisplacedPersons:
-//         return const TranslateModel(
-//           uk: 'Внутрішньо переміщені особи',
-//           en: 'Internally displaced persons',
-//         );
-//       case EligibilityEnum.all:
-//         return null;
-//     }
-//   }
-// }
+extension TranslateModelExtension on TranslateModel {
+  String getTrsnslation({
+    required bool isEnglish,
+  }) =>
+      isEnglish ? en ?? uk : uk;
+}
+
+extension EligiblityEnumExtension on EligibilityEnum {
+  TranslateModel get getTranslateModel {
+    switch (this) {
+      case EligibilityEnum.veterans:
+        return const TranslateModel(
+          uk: 'Ветерани',
+          en: 'Veterans',
+        );
+      case EligibilityEnum.combatants:
+        return const TranslateModel(
+          uk: 'Учасники бойових дій',
+          en: 'Combatants',
+        );
+      case EligibilityEnum.militaryPersonnel:
+        return const TranslateModel(
+          uk: 'Військовослужбовці',
+          en: 'Military personnel',
+        );
+      case EligibilityEnum.familyMembersOfTheDeceased:
+        return const TranslateModel(
+          uk: 'Члени сімей загиблих',
+          en: 'Fallen family members',
+        );
+      case EligibilityEnum.personsWithDisabilitiesDueToWar:
+        return const TranslateModel(
+          uk: 'Особи з інвалідністю внаслідок війни',
+          en: 'Disabled war veterans',
+        );
+      case EligibilityEnum.emergencyServiceEmployees:
+        return const TranslateModel(
+          uk: 'Співробітники ДСНС',
+          en: 'State Emergency Service employees',
+        );
+      case EligibilityEnum.policeOfficers:
+        return const TranslateModel(
+          uk: 'Поліція',
+          en: 'Police officers',
+        );
+      case EligibilityEnum.internallyDisplacedPersons:
+        return const TranslateModel(
+          uk: 'Внутрішньо переміщені особи',
+          en: 'Internally displaced persons',
+        );
+      case EligibilityEnum.all:
+        return const TranslateModel(
+          uk: 'Всі перелічені',
+          en: 'All of the listed',
+        );
+    }
+  }
+}

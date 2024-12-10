@@ -18,14 +18,10 @@ class DiscountsAddBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.I.get<DiscountsAddBloc>()
-        ..add(const DiscountsAddEvent.started())
-        ..add(
-          DiscountsAddEvent.loadedDiscount(
-            discount: discount,
-            discountId: discountId,
-          ),
-        ),
+      create: (context) => GetIt.I.get<DiscountsAddBloc>(
+        param1: discount,
+        param2: discountId,
+      ),
       child: childWidget,
     );
   }

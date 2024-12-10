@@ -244,6 +244,7 @@ void configureDependenciesTest() {
       // (),
       // reportRepository: GetIt.I.get<IReportRepository>(),
       firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
+      userRepository: GetIt.I.get<UserRepository>(),
     ),
   );
   GetIt.I.registerSingleton<UrlCubit>(

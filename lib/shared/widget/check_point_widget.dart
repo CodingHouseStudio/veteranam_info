@@ -10,6 +10,7 @@ class CheckPointWidget extends StatelessWidget {
     super.key,
     this.textStyle,
     this.textWidget,
+    this.maxLines = 3,
   });
   final void Function()? onChanged;
   final bool isCheck;
@@ -17,6 +18,7 @@ class CheckPointWidget extends StatelessWidget {
   final TextStyle? textStyle;
   final bool isDesk;
   final Widget? textWidget;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,8 @@ class CheckPointWidget extends StatelessWidget {
           // ),
           child: Padding(
             key: isCheck ? KWidgetkeys.widget.checkPoint.icon : null,
-            padding: const EdgeInsets.only(
-              bottom: KPadding.kPaddingSize4,
-              left: KPadding.kPaddingSize4,
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize4,
             ),
             child: isCheck
                 ? KIcon.checkSmall
@@ -53,7 +54,7 @@ class CheckPointWidget extends StatelessWidget {
             Text(
               text ?? '',
               key: KWidgetkeys.widget.checkPoint.text,
-              maxLines: 3,
+              maxLines: maxLines,
               style: textStyle ??
                   (isDesk
                       ? AppTextStyle.materialThemeBodyLarge
@@ -73,6 +74,9 @@ class CheckPointAmountWidget extends StatelessWidget {
     super.key,
     this.amoutActiveClor,
     this.amoutInactiveClor,
+    this.textWidget,
+    this.maxLines = 3,
+    this.textStyle,
   });
   final bool isDesk;
   final void Function()? onChanged;
@@ -80,6 +84,9 @@ class CheckPointAmountWidget extends StatelessWidget {
   final FilterItem filterItem;
   final Color? amoutActiveClor;
   final Color? amoutInactiveClor;
+  final Widget? textWidget;
+  final int? maxLines;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +99,9 @@ class CheckPointAmountWidget extends StatelessWidget {
             isCheck: isCheck,
             text: filterItem.value.getTrsnslation(context),
             isDesk: isDesk,
+            textWidget: textWidget,
+            maxLines: maxLines,
+            textStyle: textStyle,
           ),
         ),
         KSizedBox.kWidthSizedBox12,

@@ -28,38 +28,37 @@ extension PumpApp on WidgetTester {
         providers: [
           BlocProvider(
             create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-              ..add(const DiscountWatcherEvent.started(isEnglish: false)),
+              ..add(const DiscountWatcherEvent.started()),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<InvestorsWatcherBloc>()
               ..add(const InvestorsWatcherEvent.started()),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<AuthenticationBloc>()
-              ..add(
-                AuthenticationInitialized(),
-              ),
+            create: (context) => GetIt.I.get<AuthenticationBloc>(),
+            // ..add(
+            //   AuthenticationInitialized(),
+            // ),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<UserWatcherBloc>()
-              ..add(
-                const UserWatcherEvent.started(),
-              ),
+            create: (context) => GetIt.I.get<UserWatcherBloc>(),
+            // ..add(
+            //   const UserWatcherEvent.started(),
+            // ),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<LanguageCubit>()..started(),
+            create: (context) => GetIt.I.get<LanguageCubit>(),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<UrlCubit>(),
           ),
           BlocProvider(
-            create: (context) =>
-                GetIt.I.get<NetworkCubit>()..networkInitialized(),
+            create: (context) => GetIt.I.get<NetworkCubit>(),
           ),
           if (Config.isBusiness)
             BlocProvider(
-              create: (context) => GetIt.I.get<CompanyWatcherBloc>()
-                ..add(const CompanyWatcherEvent.started()),
+              create: (context) => GetIt.I.get<CompanyWatcherBloc>(),
+              //     ..add(const CompanyWatcherEvent.started()),
             ),
           if (!Config.isWeb) ...[
             BlocProvider(
@@ -75,7 +74,7 @@ extension PumpApp on WidgetTester {
               create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
             ),
             BlocProvider(
-              create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
+              create: (context) => GetIt.I.get<AppVersionCubit>(),
             ),
           ],
         ],

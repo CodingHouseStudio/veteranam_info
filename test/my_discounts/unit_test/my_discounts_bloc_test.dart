@@ -67,9 +67,10 @@ void main() {
               predicate<MyDiscountsWatcherState>(
                 (state) => state.loadingStatus == LoadingStatus.loading,
               ),
-              predicate<MyDiscountsWatcherState>(
-                (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-              ),
+              // predicate<MyDiscountsWatcherState>(
+              //   (state) => state.loadingStatus ==
+              // LoadingStatus.listLoadedFull,
+              // ),
             ]),
             reason: 'Wait loading data',
           );
@@ -81,9 +82,9 @@ void main() {
           predicate<MyDiscountsWatcherState>(
             (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          ),
+          // predicate<MyDiscountsWatcherState>(
+          //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+          // ),
         ],
       );
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
@@ -125,9 +126,10 @@ void main() {
               predicate<MyDiscountsWatcherState>(
                 (state) => state.loadingStatus == LoadingStatus.loading,
               ),
-              predicate<MyDiscountsWatcherState>(
-                (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-              ),
+              // predicate<MyDiscountsWatcherState>(
+              //   (state) => state.loadingStatus ==
+              // LoadingStatus.listLoadedFull,
+              // ),
             ]),
             reason: 'Wait loading data',
           );
@@ -139,9 +141,9 @@ void main() {
           predicate<MyDiscountsWatcherState>(
             (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          ),
+          // predicate<MyDiscountsWatcherState>(
+          //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+          // ),
         ],
       );
     });

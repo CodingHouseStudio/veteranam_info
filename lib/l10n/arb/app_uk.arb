@@ -1632,6 +1632,15 @@
   "@joinUs": {
     "examples": "Заголовок для мобільного додатку на сторінці User Role"
   },
+  "sortByDate": "За новизною",
+  "@sortByDate": {
+    "examples": "Текст для кнопки сортування на сторінці Discount",
+    "description": "Кнопка використовується для сортування знижок за датою. Від найновіших до найстаріших."
+  },
+  "discountFilterFailureMessage": "Виникла помилка під час фільтрації.",
+  "@discountFilterFailureMessage": {
+    "description": "повідомлення про помилка під час фільтрування"
+  },
   "activate": "Активувати",
   "@activate": {
     "examples": "Текст для кнопки на сторінці MyDiscount.",

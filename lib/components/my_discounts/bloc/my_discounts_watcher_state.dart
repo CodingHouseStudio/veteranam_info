@@ -20,6 +20,7 @@ class MyDiscountsWatcherState with _$MyDiscountsWatcherState {
     required List<DiscountModel> loadedDiscountsModelItems,
     required int itemsLoaded,
     required LoadingStatus loadingStatus,
+    required bool isListLoadedFull,
     MyDiscountFailure? failure,
   }) = _Initial;
 }
