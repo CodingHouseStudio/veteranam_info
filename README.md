@@ -10,7 +10,7 @@
 	<!--   <a href="https://app.codecov.io/gh/schultek/jaspr"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?logo=codecov&logoColor=fff&labelColor=333940" alt="codecov"></a> -->
 	<a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940" alt="contributors"></a>
 	<a href="https://github.com/CodingHouseStudio/veteranam_info/issues"><img src="https://img.shields.io/github/issues/CodingHouseStudio/veteranam_info?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="issues"></a>
-	<a href=""><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
+	<a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
 </p>
 
 <p align="center">
@@ -90,8 +90,6 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 ## License
 
 This application is released under the [MIT License](https://opensource.org/licenses/MIT). You can use the code for any purpose, including commercial projects.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 ---
