@@ -1,8 +1,97 @@
-TO BE CHANGED SOON
+<p align="center">
+	<a href="https://veteranam.info/"><img id="logo" src='assets/icons/logo.svg' width="20%"/></a>
+</p>
 
-# Veteranam
+<p align="center">
+		<a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
+	  <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github" alt="tests"></a>
+	<!-- After Testing	 -->
+	<!--   <a href="https://app.codecov.io/gh/schultek/jaspr"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?logo=codecov&logoColor=fff&labelColor=333940" alt="codecov"></a> -->
+	<a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940" alt="contributors"></a>
+</p>
 
-Available types of Pull requests:
+<p align="center">
+  <a href="https://app.veteranam.info">Web</a> •
+  <a href="#">Design</a> •
+  <a href="https://apps.apple.com/us/app/veteranam-info/id6584519009">IOS</a> •
+  <a href="https://play.google.com/store/apps/details?id=info.veteranam&hl=uk_UA">Android</a> •
+  <a href="https://business.veteranam.info">Web-site for business</a> •
+  <a href="https://dev-app.veteranam.info">Dev Web-site</a>
+</p>
+
+# Veteranam Info
+
+A Flutter non-profit app supporting Ukraine's war veterans.
+
+
+## Core Features
+
+- 💡 **Multi-Platform**: Works seamlessly across *iOS*, *Android*, and *Web* platforms.
+- 🚀 **Comprehensive Testing**: Achieves **100% code coverage**, ensuring minimal errors and robust performance.
+- 🧹 **Clean Architecture**: Designed with **clean architecture principles** for scalability and maintainability.
+
+
+## Preview
+
+<!-- Add preview images/screenshots here -->
+
+## Challenge
+
+The goal was to create an accessible, user-friendly app that centralizes discounts and offers for Ukraine's war veterans. The app needed to prioritize:
+
+- **Ease of use** for veterans.
+- **Inclusivity**, ensuring accessibility for users with varying tech skills.
+- A **dedicated platform** for businesses to independently manage and add their discount offerings.
+
+
+## Solution
+
+Using **Flutter**, we developed a cross-platform solution comprising:
+
+1. **Mobile App**: Available for both Android and iOS.
+2. **Web Version**: Accessible from any browser.
+3. **Business Management Platform**: A dedicated interface for businesses to independently add and manage their offers.
+
+The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of varying tech skills could navigate the app with ease.
+
+
+## Result
+
+- Veterans gained a centralized, easy-to-use platform to access discounts, significantly improving accessibility to benefits.
+- Businesses benefited by having a direct, user-friendly way to support veterans, independently manage their offerings, and engage with the veteran community.
+- The app strengthened connections between veterans and businesses, fostering support within the community.
+
+
+## Tags
+
+**Technologies & Features:**
+- Flutter
+- UX & UI Design
+- Firebase
+- Testing
+- Email Template Development
+- Mobile App Development
+- Web Application
+- Analytics
+- Application Security
+- Clean Architecture
+- Brand Identity Design
+- Cloudflare
+- App Store Upload
+
+
+## License
+
+This application is released under the [MIT License](https://opensource.org/licenses/MIT). You can use the code for any purpose, including commercial projects.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+---
+---
+# Information for developments
+
+## Available types of Pull requests:
 
 - feat: A new feature
 - fix: A bug fix
@@ -16,14 +105,12 @@ Available types of Pull requests:
 - chore: Other changes that don't modify src or test files
 - revert: Reverts a previous commit
 
-![coverage][coverage_badge]
+<!--![coverage][coverage_badge]
 
 
 [![License: MIT][license_badge]][license_link]
 
-Veteranam INFO
-
----
+Veteranam INFO-->
 
 ## Important Commands
 
