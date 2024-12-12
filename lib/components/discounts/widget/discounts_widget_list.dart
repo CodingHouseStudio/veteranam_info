@@ -5,62 +5,11 @@ import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-int _itemCount({
-  required DiscountWatcherState state,
-  required DiscountConfigState config,
-}) =>
-    state.filteredDiscountModelItems.length +
-    (config.linkInt >= state.filteredDiscountModelItems.length ? 0 : 1);
-
 extension LinkScrollExtension on DiscountConfigState {
   int get linkInt => (linkScrollCount + 1) * loadingItems;
 }
 
-/// The findChildIndexCallback method is called whenever the list is rebuilt.
-/// Initially, it returns the old keys of the list items. If an item remains
-/// in the updated list, assigning it a new index helps optimize the list's
-/// performance, especially in scenarios with filtering or dynamic content
-/// changes. This prevents unnecessary removal and recreation of widgets.
-/// Note:
-/// These are based on my experience working with this method and ChatGPT's
-/// response. I need to read more articles to understand all the nuances.
-int? _findChildIndexCallback({
-  required Key key,
-  required DiscountWatcherState state,
-  required DiscountConfigState config,
-}) {
-  if (key is ValueKey<String>) {
-    final valueKey = key;
-    if (valueKey.value == 'link_field') {
-      return config.linkInt - 1;
-    }
-    final index = state.filteredDiscountModelItems.indexWhere(
-      (element) => element.id == valueKey.value,
-    );
-    if (index >= 0) {
-      return index + (config.linkInt <= index ? 1 : 0);
-    }
-  }
-  return null;
-}
-
-ValueKey<String> _key({
-  required DiscountWatcherState state,
-  required int index,
-  required DiscountConfigState config,
-}) {
-  if (index + 1 == config.linkInt) {
-    return const ValueKey('link_field');
-  }
-  return ValueKey(
-    state.filteredDiscountModelItems
-        .elementAt(index - (config.linkInt <= index ? 1 : 0))
-        .id,
-  );
-}
-
 class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
-  // Constructor for the RowSliver widget
   DiscountsDeskWidgetList({
     required this.maxHeight,
     super.key,
@@ -76,7 +25,6 @@ class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
         );
   final double maxHeight;
 
-  // Creates the render object for this widget
   @override
   RenderRowSliver createRenderObject(BuildContext context) {
     return RenderRowSliver(leftWidthPercent: 1 / 3);
@@ -142,34 +90,96 @@ class _DiscountWidgetList extends StatelessWidget {
               previous.filteredDiscountModelItems !=
                   current.filteredDiscountModelItems,
           builder: (context, state) {
+            final totalCount = state.filteredDiscountModelItems.length;
+            final linkIndex = config.linkInt - 1;
+            final showLink = linkIndex >= 0 && linkIndex < totalCount;
+            final itemsBeforeLink = showLink ? linkIndex : totalCount;
+            final itemsAfterLink = showLink ? totalCount - linkIndex : 0;
             return SliverMainAxisGroup(
               slivers: [
-                SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  findChildIndexCallback: (key) => _findChildIndexCallback(
-                    key: key,
-                    state: state,
-                    config: config,
-                  ),
-                  itemCount: _itemCount(
-                    state: state,
-                    config: config,
-                  ),
-                  itemBuilder: (context, index) => Padding(
-                    key: _key(state: state, index: index, config: config),
-                    padding: const EdgeInsets.only(
-                      top: KPadding.kPaddingSize48,
+                if (itemsBeforeLink > 0)
+                  SliverPrototypeExtentList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    prototypeItem: Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      child: SkeletonizerWidget(
+                        isLoading: false,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: isDesk,
+                          share: '',
+                        ),
+                      ),
                     ),
-                    child: _DiscountsWidgetItem(
-                      isDesk: isDesk,
-                      key: _key(state: state, index: index, config: config),
-                      state: state,
-                      index: index,
-                      config: config,
+                    itemCount: itemsBeforeLink,
+                    itemBuilder: (context, index) {
+                      final discountItem =
+                          state.filteredDiscountModelItems.elementAt(index);
+                      return Padding(
+                        key: ValueKey(discountItem.id),
+                        padding: const EdgeInsets.only(
+                          top: KPadding.kPaddingSize48,
+                        ),
+                        child: DiscountCardWidget(
+                          discountItem: discountItem,
+                          isDesk: isDesk,
+                          share:
+                              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                        ),
+                      );
+                    },
+                  ),
+                if (showLink)
+                  SliverToBoxAdapter(
+                    key: const ValueKey('link_field'),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      child: DiscountLinkWidget(isDesk: isDesk),
                     ),
                   ),
-                ),
+                if (itemsAfterLink > 0)
+                  SliverPrototypeExtentList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    prototypeItem: Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize48,
+                      ),
+                      child: SkeletonizerWidget(
+                        isLoading: false,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: isDesk,
+                          share: '',
+                        ),
+                      ),
+                    ),
+                    itemCount: itemsAfterLink,
+                    itemBuilder: (context, index) {
+                      final discountIndex = linkIndex + index;
+                      final discountItem = state.filteredDiscountModelItems
+                          .elementAt(discountIndex);
+                      return Padding(
+                        key: ValueKey(discountItem.id),
+                        padding: const EdgeInsets.only(
+                          top: KPadding.kPaddingSize48,
+                        ),
+                        child: DiscountCardWidget(
+                          discountItem: discountItem,
+                          isDesk: isDesk,
+                          share:
+                              '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+                        ),
+                      );
+                    },
+                  ),
                 if ((!PlatformEnumFlutter.isWebDesktop &&
                         state.loadingStatus != LoadingStatus.listLoadedFull) ||
                     state.discountModelItems.isEmpty)
@@ -245,38 +255,6 @@ class _DiscountWidgetList extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-class _DiscountsWidgetItem extends StatelessWidget {
-  const _DiscountsWidgetItem({
-    required this.state,
-    required this.index,
-    required this.config,
-    required this.isDesk,
-    super.key,
-  });
-  final bool isDesk;
-  final DiscountWatcherState state;
-  final int index;
-  final DiscountConfigState config;
-  @override
-  Widget build(BuildContext context) {
-    var indexValue = index;
-
-    if (config.linkInt < index &&
-        state.filteredDiscountModelItems.length > config.linkInt) {
-      indexValue--;
-    }
-    if (config.linkInt == index + 1) {
-      return DiscountLinkWidget(isDesk: isDesk);
-    }
-    final discountItem = state.filteredDiscountModelItems.elementAt(indexValue);
-    return DiscountCardWidget(
-      discountItem: discountItem,
-      isDesk: isDesk,
-      share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
     );
   }
 }
