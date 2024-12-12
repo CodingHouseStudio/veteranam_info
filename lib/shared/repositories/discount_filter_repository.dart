@@ -273,8 +273,10 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         }
 
         // Eligibility
-        if (discount.eligibility != null) {
-          eligibilitiesList.addAll(discount.eligibility!);
+        if (discount.eligibility.contains(EligibilityEnum.all)) {
+          eligibilitiesList.addAll(EligibilityEnum.values);
+        } else {
+          eligibilitiesList.addAll(discount.eligibility);
         }
       }
       // Add all categories, location and eligibilities: End
@@ -399,9 +401,11 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
             discount: discount,
             callMethodName: callMethodName,
           )) {
-            if (discount.eligibility != null) {
+            if (discount.eligibility.contains(EligibilityEnum.all)) {
               eligibilitiesList
-                  .addAll(discount.eligibility!.getTranslateModels);
+                  .addAll(EligibilityEnum.values.getTranslateModels);
+            } else {
+              eligibilitiesList.addAll(discount.eligibility.getTranslateModels);
             }
           }
 
@@ -435,9 +439,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
             discount: discount,
             callMethodName: callMethodName,
           )) {
-            if (discount.eligibility != null) {
-              categoriesList.addAll(discount.category);
-            }
+            categoriesList.addAll(discount.category);
           }
         }
       }
@@ -571,7 +573,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         );
       case _FilterEnum.eligibility:
         return _activityListContainAnyValues(
-          values: discount.eligibility?.getTranslateModels,
+          values: discount.eligibility.getTranslateModels,
           activityFilter: _activeEligibilityMap,
           callMethodName: callMethodName,
         );
@@ -598,7 +600,11 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       } else if (values == null) {
         return false;
       } else {
-        return values.any((value) => activityFilter.containsKey(value.uk));
+        return values.any(
+          (value) =>
+              activityFilter.containsKey(value.uk) ||
+              value.uk == KAppText.eligibilityAllUA,
+        );
       }
     } catch (e, stack) {
       SomeFailure.filter(
