@@ -258,7 +258,7 @@ abstract class KAppText {
   static const String _markdownStartPath = 'assets/markdown/';
 
   static const String androidPackageName = 'com.veteranam.package';
-  static const String eligibilityAll = 'Всі перелічені';
+  static const String eligibilityAllUA = 'Всі перелічені';
   static const String eligibilityAllEN = 'All of the listed';
   static List<String> get routes => [
         KRoute.discounts.name,
@@ -272,6 +272,8 @@ abstract class KAppText {
 
   static const sublocation =
       TranslateModel(uk: sublocationUA, en: sublocationEN);
+  static const eligibilityAll =
+      TranslateModel(uk: eligibilityAllUA, en: eligibilityAllEN);
   static const categoryAll = TranslateModel(uk: 'Все', en: 'All');
   static const allStoresOfChain = TranslateModel(
     uk: 'Всі заклади мережі',

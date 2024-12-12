@@ -338,10 +338,7 @@ extension EligiblityEnumExtension on EligibilityEnum {
           en: 'Internally displaced persons',
         );
       case EligibilityEnum.all:
-        return const TranslateModel(
-          uk: 'Всі перелічені',
-          en: 'All of the listed',
-        );
+        return KAppText.eligibilityAll;
     }
   }
 }
