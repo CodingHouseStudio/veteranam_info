@@ -32,7 +32,6 @@ class ArtifactDownloadHelper {
       _imageMemmoryDir.containsKey(key) ? _imageMemmoryDir[key] : null;
 
   Future<void> downloadArtifacts(ImageModel imageModel) async {
-    return;
     try {
       if (!_imageMemmoryDir
               .containsKey(imageModel.name ?? imageModel.downloadURL) &&
