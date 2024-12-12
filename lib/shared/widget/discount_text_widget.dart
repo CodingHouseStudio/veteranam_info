@@ -8,12 +8,12 @@ class DiscountTextWidget extends StatelessWidget {
     required this.icon,
     required this.button,
     this.maxLines,
-    this.text,
+    this.eligibility,
     super.key,
   });
 
   final String description;
-  final List<EligibilityEnum>? text;
+  final List<EligibilityEnum>? eligibility;
   final int? maxLines;
   final Widget icon;
   final Widget button;
@@ -32,14 +32,14 @@ class DiscountTextWidget extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         KSizedBox.kHeightSizedBox16,
-        if (text != null) ...[
+        if (eligibility != null) ...[
           Text(
             context.l10n.eligibility,
             style: AppTextStyle.materialThemeLabelMedium.copyWith(
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          DiscountEligibilityWidget(eligibility: text!),
+          DiscountEligibilityWidget(eligibility: eligibility!),
           KSizedBox.kHeightSizedBox16,
         ],
         Row(

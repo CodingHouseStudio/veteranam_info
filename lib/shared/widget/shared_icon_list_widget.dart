@@ -17,7 +17,7 @@ class SharedIconListWidget extends StatelessWidget {
     this.showComplaint = true,
     this.showShare = true,
     this.background = AppColors.materialThemeWhite,
-    this.discountItem,
+    this.numberLikes,
     this.likeKey,
   });
   final bool isDesk;
@@ -33,7 +33,7 @@ class SharedIconListWidget extends StatelessWidget {
   final bool showShare;
   final Color background;
   final bool? useSiteUrl;
-  final DiscountModel? discountItem;
+  final int? numberLikes;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class SharedIconListWidget extends StatelessWidget {
         _CardLikeIconWidget(
           label: context.l10n.favorite,
           icon: KIcon.favorite,
-          countLike: discountItem?.likes ?? 0,
+          countLike: numberLikes ?? 0,
           background: background,
           key: likeKey,
         ),
@@ -79,6 +79,7 @@ class SharedIconListWidget extends StatelessWidget {
               buttonText: context.l10n.login,
               iconButton: true,
               buttonStyle: KButtonStyles.borderWhiteButtonStyle,
+              textUnderButton: context.l10n.more,
               items: [
                 if (link != null && link!.isUrlValid)
                   DropDownItem(
@@ -110,11 +111,11 @@ class SharedIconListWidget extends StatelessWidget {
               ],
               position: PopupMenuButtonPosition.bottomLeft,
             ),
-            KSizedBox.kHeightSizedBox6,
-            Text(
-              context.l10n.more,
-              style: AppTextStyle.materialThemeLabelSmallBlack,
-            ),
+            // KSizedBox.kHeightSizedBox6,
+            // Text(
+            //   context.l10n.more,
+            //   style: AppTextStyle.materialThemeLabelSmallBlack,
+            // ),
           ],
         ),
         // if (widget.showComplaint) ...[
@@ -189,9 +190,9 @@ class _CardLikeIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return TextButton(
       key: key,
-      // onTap: onPressed,
+      onPressed: null,
       child: Column(
         children: [
           Stack(

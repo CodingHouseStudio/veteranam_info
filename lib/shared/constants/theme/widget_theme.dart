@@ -287,4 +287,14 @@ abstract class KWidgetTheme {
       ),
     ),
   );
+
+  static const boxDecorationPopupMenuBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    border: Border.fromBorderSide(
+      BorderSide(
+        width: KDimensions.borderWidth3,
+        color: AppColors.materialThemeWhite,
+      ),
+    ),
+  );
 }

@@ -76,5 +76,5 @@ abstract class KDimensions {
 
   static const discountLocationNumberSortedItems = 5;
 
-  static const borderWidth = 3.0;
+  static const borderWidth3 = 3.0;
 }

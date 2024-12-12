@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -39,59 +38,59 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
+    return Wrap(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
-      text: TextSpan(
-        style: AppTextStyle.materialThemeLabelLarge,
-        children: _buildTextSpans(
-          eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
-          context,
-        ),
+      children: _buildWidgets(
+        eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
+        context,
       ),
+
+      // TextSpan(
+      //   style: AppTextStyle.materialThemeLabelLarge,
+      //   children: _buildTextSpans(
+      //     eligibility.length > 5 ? eligibility.take(5).toList()
+      // : eligibility,
+      //     context,
+      //   ),
+      // ),
     );
   }
 
-  List<InlineSpan> _buildTextSpans(
+  List<Widget> _buildWidgets(
     List<EligibilityEnum> eligibilityItems,
     BuildContext context,
   ) {
-    final textSpans = <InlineSpan>[];
+    final widgets = <Widget>[];
 
     for (final eligibilityItem in eligibilityItems) {
-      textSpans.add(
-        WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // _getIconWidget(text),
-              eligibilityItem.eligibilityIcon,
-              KSizedBox.kWidthSizedBox4,
-              Text(
-                // _getLabelWidget(text),
-                eligibilityItem.getValue(context),
-                style: AppTextStyle.materialThemeLabelMedium,
-              ),
-              KSizedBox.kWidthSizedBox8,
-            ],
+      widgets.add(
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            eligibilityItem.eligibilityIcon,
+            KSizedBox.kWidthSizedBox4,
+            Text(
+              eligibilityItem.getValue(context),
+              style: AppTextStyle.materialThemeLabelMedium,
+            ),
+            KSizedBox.kWidthSizedBox8,
+          ],
+        ),
+      );
+    }
+
+    if (eligibility.length > 5) {
+      widgets.add(
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            context.l10n.moreWhomGranted(eligibility.length - 5),
+            style: AppTextStyle.materialThemeLabelLargeRef,
           ),
         ),
       );
     }
 
-    if (eligibilityItems.length > 5) {
-      textSpans.add(
-        TextSpan(
-          text: ' ${context.l10n.moreWhomGranted(eligibilityItems.length - 5)}',
-          style: AppTextStyle.materialThemeLabelLargeRef,
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              //context.goNamed();
-            },
-        ),
-      );
-    }
-
-    return textSpans;
+    return widgets;
   }
 }

@@ -113,6 +113,13 @@ extension DiscountModelLocation on DiscountModel {
 
   String? get _getLink =>
       directLink != null && directLink!.isUrlValid ? directLink : link;
+
+  bool hasImages({required DiscountModel discountItem}) {
+    if (discountItem.images != null && discountItem.images!.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 }
 
 extension StringFllutterExtension on String {
@@ -578,7 +585,7 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return KIcon.police;
       case EligibilityEnum.internallyDisplacedPersons:
         return KIcon.military;
-      case EligibilityEnum.all: //TODO: спитати
+      case EligibilityEnum.all:
         return KIcon.veteransIcon;
     }
   }

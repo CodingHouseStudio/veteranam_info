@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -27,7 +26,6 @@ class CityListWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           KIcon.distance.copyWith(
             key: KWidgetkeys.widget.cityList.icon,
@@ -71,35 +69,58 @@ class CityWidgetListExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
+    return Row(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
-      text: TextSpan(
-        text: cityList.getCityString(
-          context: context,
-          showFullText: false,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          cityList.getCityString(
+            context: context,
+            showFullText: false,
+          ),
+          style: AppTextStyle.materialThemeLabelLarge,
         ),
-        style: AppTextStyle.materialThemeLabelLarge,
-        children: [
-          // if (isExpanded)
-          //   TextSpan(
-          //     text: context.l10n.hideExpansion,
-          //     style: AppTextStyle.materialThemeLabelLargeRef,
-          //     recognizer: TapGestureRecognizer()..onTap,
-          //   )
-          // else
-          TextSpan(
-            text: context.l10n.moreCities(
+        TextButton(
+          onPressed: null,
+          child: Text(
+            context.l10n.moreCities(
               cityList.length - 1,
             ),
             style: AppTextStyle.materialThemeLabelLargeRef,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                //context.goNamed();
-              },
           ),
-        ],
-      ),
+        ),
+      ],
     );
+
+    // RichText(
+    //   key: KWidgetkeys.widget.cityList.markdownFulllList,
+    //   text: TextSpan(
+    //     text: cityList.getCityString(
+    //       context: context,
+    //       showFullText: false,
+    //     ),
+    //     style: AppTextStyle.materialThemeLabelLarge,
+    //     children: [
+    //       // if (isExpanded)
+    //       //   TextSpan(
+    //       //     text: context.l10n.hideExpansion,
+    //       //     style: AppTextStyle.materialThemeLabelLargeRef,
+    //       //     recognizer: TapGestureRecognizer()..onTap,
+    //       //   )
+    //       // else
+    //       TextSpan(
+    //         text: context.l10n.moreCities(
+    //           cityList.length - 1,
+    //         ),
+    //         style: AppTextStyle.materialThemeLabelLargeRef,
+    //         recognizer: TapGestureRecognizer()
+    //           ..onTap = () {
+    //             //context.goNamed();
+    //           },
+    //       ),
+    //     ],
+    //   ),
+    // );
     // return MarkdownBody(
     //   key: isExpanded
     //       ? KWidgetkeys.widget.cityList.markdownFulllList
