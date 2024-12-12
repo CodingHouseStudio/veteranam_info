@@ -20,6 +20,10 @@ class FailureRepository {
   void sendError(SomeFailure failure) {
     if (KTest.isTest) return;
     final error = failure.error;
+    if (error ==
+        '[cloud_firestore/failed-precondition] The client has already been terminated.') {
+      return;
+    }
     final stack = failure.stack;
     if (error != null) {
       onError(
