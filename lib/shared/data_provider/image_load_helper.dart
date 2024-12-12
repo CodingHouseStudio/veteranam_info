@@ -55,7 +55,7 @@ class ArtifactDownloadHelper {
       // (withCredentials: true);
 
       final response = await _dio.get<Uint8List>(
-        image.downloadURL.getImageUrl,
+        image.downloadURL,
         options: _options,
       );
       if (response.data == null ||
