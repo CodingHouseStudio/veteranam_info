@@ -188,27 +188,6 @@ extension StringFllutterExtension on String {
       textDirection: TextDirection.ltr,
     );
   }
-
-  String get getImageUrl //({bool? highQuality})
-  {
-    if ((Config.isProduction && Config.isReleaseMode) || !Config.isWeb) {
-      final url = Config.isWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix$this';
-    } else {
-      return this;
-    }
-  }
-
-  String get _urlPrefix //({bool? highQuality})
-  {
-    // widget.size == null
-    // ?
-    const quality = '100'; // highQuality ?? false ? '100' : '85';
-    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
-  }
-  // : '/cdn-cgi/image/${Config.isWeb ? 'quality=100' : 'quality=85'}'
-  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
 extension TranslateModelExtension on TranslateModel {
