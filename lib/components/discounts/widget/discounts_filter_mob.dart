@@ -59,7 +59,7 @@ class DiscountsFilterMob extends StatelessWidget {
 }
 
 class _AdvancedFilterMobDialog extends StatelessWidget {
-  const _AdvancedFilterMobDialog({super.key});
+  const _AdvancedFilterMobDialog();
 
   @override
   Widget build(BuildContext context) {

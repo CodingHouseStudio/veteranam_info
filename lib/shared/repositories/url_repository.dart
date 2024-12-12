@@ -40,6 +40,9 @@ class UrlRepository extends IUrlRepository {
         data: 'Url: $url| Used Site Url - $useSiteUrl',
       ).status;
       if (error == null) {
+        return const Right(false);
+      }
+      if (error == FailureShareUnavailable()) {
         final resault = await copy(
           baseUrl + url,
         );
