@@ -94,17 +94,18 @@ class GetFailur {
       case 'not-found':
         return GetFailur(
           status: SomeFailure.notFound(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.getFailur}'
-                '(${ErrorText.notFoundError} ${ErrorText.firebaseException})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.getFailur}'
+              //     '(${ErrorText.notFoundError}
+              // ${ErrorText.firebaseException})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'missing-argument':
       case 'timeout':
