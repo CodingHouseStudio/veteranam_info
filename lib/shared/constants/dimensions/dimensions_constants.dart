@@ -75,4 +75,6 @@ abstract class KDimensions {
   static const listCacheExtent = 1000.0;
 
   static const discountLocationNumberSortedItems = 5;
+
+  static const borderWidth3 = 3.0;
 }

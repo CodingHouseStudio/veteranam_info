@@ -20,11 +20,6 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
             failure: null,
           ),
         ) {
-    const _Initial(
-      discountModel: null,
-      loadingStatus: LoadingStatus.initial,
-      failure: null,
-    );
     _onStarted(
       id: id,
       // emit: ,

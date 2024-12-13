@@ -273,4 +273,28 @@ abstract class KWidgetTheme {
     ),
     visualDensity: VisualDensity.comfortable,
   );
+  static const boxDecorationWidgetWithImage = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusOnlyRight,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+  static const boxDecorationDiscountBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsPrimary,
+        width: 3,
+      ),
+    ),
+  );
+
+  static const boxDecorationPopupMenuBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    border: Border.fromBorderSide(
+      BorderSide(
+        width: KDimensions.borderWidth3,
+        color: AppColors.materialThemeWhite,
+      ),
+    ),
+  );
 }

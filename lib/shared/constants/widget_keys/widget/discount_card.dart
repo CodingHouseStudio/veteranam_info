@@ -17,4 +17,5 @@ class _DiscountCardKeys {
   final iconComplaint = const Key('discount_card_icon_complaint');
   final iconShare = const Key('discount_card_icon_share');
   final iconWebsite = const Key('discount_card_icon_website');
+  final iconLike = const Key('discount_card_icon_like');
 }

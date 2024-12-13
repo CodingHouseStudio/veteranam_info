@@ -417,4 +417,42 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const blackDetailsButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(
+      AppColors.materialThemeKeyColorsSecondary,
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
+
+  static const borderWhiteButtonStyle = ButtonStyle(
+    // padding: WidgetStatePropertyAll(
+    //   EdgeInsets.symmetric(
+    //     vertical: KPadding.kPaddingSize4,
+    //     horizontal: KPadding.kPaddingSize16,
+    //   ),
+    // ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeWhite, width: 3),
+      ),
+    ),
+  );
+
+  static const noBackgroundOnHoverButtonStyle = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(
+      Colors.transparent,
+    ),
+  );
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -20,55 +19,40 @@ class CityListWidget extends StatelessWidget {
       if (location != null) ...location!,
       if (subLocation != null) ...subLocation!.getCardList(context),
     ];
-    return Align(
+    return Row(
       key: ValueKey(cityList),
-      alignment: isDesk ? Alignment.centerRight : Alignment.centerLeft,
-      child: DecoratedBox(
-        decoration: KWidgetTheme.boxDecorationWhiteMain,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize8,
-            vertical: KPadding.kPaddingSize4,
-          ),
-          child: IntrinsicWidth(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                KIcon.distance.copyWith(
-                  key: KWidgetkeys.widget.cityList.icon,
-                ),
-                KSizedBox.kWidthSizedBox8,
-                if (cityList.isNotEmpty)
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: KPadding.kPaddingSize2,
-                        right: KPadding.kPaddingSize5,
-                      ),
-                      child: cityList.length == 1
-                          ? Text(
-                              cityList.first.getTrsnslation(context),
-                              key: KWidgetkeys.widget.cityList.text,
-                              style: AppTextStyle.materialThemeLabelLarge,
-                            )
-                          : CityWidgetListExpanded(
-                              key: ValueKey(cityList),
-                              cityList: cityList,
-                              isDesk: isDesk,
-                            ),
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        KIcon.distance.copyWith(
+          key: KWidgetkeys.widget.cityList.icon,
+        ),
+        KSizedBox.kWidthSizedBox8,
+        if (cityList.isNotEmpty)
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: KPadding.kPaddingSize2,
+                right: KPadding.kPaddingSize5,
+              ),
+              child: cityList.length == 1
+                  ? Text(
+                      cityList.first.getTrsnslation(context),
+                      key: KWidgetkeys.widget.cityList.text,
+                      style: AppTextStyle.materialThemeLabelLarge,
+                    )
+                  : CityWidgetListExpanded(
+                      key: ValueKey(cityList),
+                      cityList: cityList,
+                      isDesk: isDesk,
                     ),
-                  ),
-              ],
             ),
           ),
-        ),
-      ),
+      ],
     );
   }
 }
 
-class CityWidgetListExpanded extends StatefulWidget {
+class CityWidgetListExpanded extends StatelessWidget {
   const CityWidgetListExpanded({
     required this.cityList,
     required this.isDesk,
@@ -79,47 +63,59 @@ class CityWidgetListExpanded extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<CityWidgetListExpanded> createState() => _CityWidgetListExpandedState();
-}
-
-class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
-  bool isExpanded = false;
-  @override
-  void initState() {
-    isExpanded = false;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return RichText(
-      key: isExpanded
-          ? KWidgetkeys.widget.cityList.longText
-          : KWidgetkeys.widget.cityList.markdownFulllList,
-      text: TextSpan(
-        text: '${widget.cityList.getCityString(
-          showFullText: isExpanded,
-          context: context,
-        )} ',
-        style: AppTextStyle.materialThemeLabelLarge,
-        children: [
-          if (isExpanded)
-            TextSpan(
-              text: context.l10n.hideExpansion,
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
-            )
-          else
-            TextSpan(
-              text: context.l10n.moreCities(
-                widget.cityList.length - 1,
-              ),
-              style: AppTextStyle.materialThemeLabelLargeRef,
-              recognizer: _textSpanEvent,
+    return Row(
+      key: KWidgetkeys.widget.cityList.markdownFulllList,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          cityList.getCityString(
+            context: context,
+            showFullText: false,
+          ),
+          style: AppTextStyle.materialThemeLabelLarge,
+        ),
+        TextButton(
+          onPressed: null,
+          child: Text(
+            context.l10n.moreCities(
+              cityList.length - 1,
             ),
-        ],
-      ),
+            style: AppTextStyle.materialThemeLabelLargeRef,
+          ),
+        ),
+      ],
     );
+
+    // RichText(
+    //   key: KWidgetkeys.widget.cityList.markdownFulllList,
+    //   text: TextSpan(
+    //     text: cityList.getCityString(
+    //       context: context,
+    //       showFullText: false,
+    //     ),
+    //     style: AppTextStyle.materialThemeLabelLarge,
+    //     children: [
+    //       // if (isExpanded)
+    //       //   TextSpan(
+    //       //     text: context.l10n.hideExpansion,
+    //       //     style: AppTextStyle.materialThemeLabelLargeRef,
+    //       //     recognizer: TapGestureRecognizer()..onTap,
+    //       //   )
+    //       // else
+    //       TextSpan(
+    //         text: context.l10n.moreCities(
+    //           cityList.length - 1,
+    //         ),
+    //         style: AppTextStyle.materialThemeLabelLargeRef,
+    //         recognizer: TapGestureRecognizer()
+    //           ..onTap = () {
+    //             //context.goNamed();
+    //           },
+    //       ),
+    //     ],
+    //   ),
+    // );
     // return MarkdownBody(
     //   key: isExpanded
     //       ? KWidgetkeys.widget.cityList.markdownFulllList
@@ -135,10 +131,4 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
     //   ),
     // );
   }
-
-  GestureRecognizer get _textSpanEvent =>
-      TapGestureRecognizer()..onTap = _expandedChangeEvent;
-  void _expandedChangeEvent() => setState(() {
-        isExpanded = !isExpanded;
-      });
 }

@@ -62,13 +62,18 @@ extension DiscountModelLocation on DiscountModel {
   //     ];
   String getDescription(BuildContext context) =>
       '${description.getTrsnslation(context)}'
-      '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
-      '${requirements != null ? _getMarkdownRequirements(context) : ''}'
-      '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
-      '${additionalDetails != null ? _getMarkdownAdditionalDetails(
-          context,
-        ) : ''}'
-      '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
+              '${requirements != null ? _getMarkdownToGetIfYouNeed(
+                  context,
+                ) : ''}'
+              '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+              '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+              '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+                  context,
+                ) : ''}'
+              '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
+          .replaceAll('*', '')
+          .replaceAll('\n\n', '\n')
+          .trim();
 
   String _getMarkdownAdditionalDetails(BuildContext context) =>
       '\n\n${additionalDetails?.getTrsnslation(
@@ -107,6 +112,10 @@ extension DiscountModelLocation on DiscountModel {
 
   String? get _getLink =>
       directLink != null && directLink!.isUrlValid ? directLink : link;
+
+  bool get hasImages {
+    return images != null && images!.isNotEmpty;
+  }
 }
 
 extension StringFllutterExtension on String {
@@ -530,6 +539,29 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return context.l10n.policeEligibility;
       // case EligibilityEnum.internallyDisplacedPersons:
       //   return context.l10n.idpEligibility;
+    }
+  }
+
+  Widget get eligibilityIcon {
+    switch (this) {
+      case EligibilityEnum.veterans:
+        return KIcon.veteransIcon;
+      case EligibilityEnum.militaryPersonnel:
+        return KIcon.military;
+      case EligibilityEnum.combatants:
+        return KIcon.ubd;
+      case EligibilityEnum.personsWithDisabilitiesDueToWar:
+        return KIcon.personsWithDisabilities;
+      case EligibilityEnum.familyMembersOfTheDeceased:
+        return KIcon.familyMembers;
+      case EligibilityEnum.emergencyServiceEmployees:
+        return KIcon.dsns;
+      case EligibilityEnum.policeOfficers:
+        return KIcon.police;
+      case EligibilityEnum.internallyDisplacedPersons:
+        return KIcon.military;
+      case EligibilityEnum.all:
+        return KIcon.veteransIcon;
     }
   }
 }

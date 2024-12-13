@@ -56,6 +56,16 @@ extension ListStringExtensions on List<String> {
   //     ).join()}[${context.l10n.hideExpansion}]()';
   //   }
   // }
+  String getCityString({
+    required bool showFullText,
+    // required BuildContext context,
+  }) {
+    if (showFullText) {
+      return toString().replaceAll('[', '').replaceAll(']', '');
+    } else {
+      return first;
+    }
+  }
 }
 
 /// Extension on List<int> providing utility methods for handling discount
