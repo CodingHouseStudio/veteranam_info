@@ -24,7 +24,7 @@ class DiscountWatcherBloc
     on<_Started>(_onStarted);
     add(
       DiscountWatcherEvent.started(
-        discountModel: discount,
+        discount: discount,
         discountId: discountId,
       ),
     );
@@ -39,7 +39,7 @@ class DiscountWatcherBloc
       discount = event.discount;
     } else if (event.discountId != null) {
       final result = await _discountRepository.getDiscount(
-        event.discountId,
+        event.discountId!,
       );
       result.fold(
         // ignore: invalid_use_of_visible_for_testing_member
