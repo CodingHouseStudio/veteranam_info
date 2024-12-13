@@ -296,17 +296,12 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       isDesk: isDesk,
                       labelText: context.l10n.eligibility, isRequired: true,
                       isButton: true,
-                      dropDownList: [
-                        context.l10n.allOfListed,
-                        context.l10n.veterans,
-                        context.l10n.combatantsEligibility,
-                        context.l10n.militaryEligibility,
-                        context.l10n.fallenFamilyEligibility,
-                        context.l10n.disabledWarEligibility,
-                        context.l10n.dsnsEligibility,
-                        context.l10n.policeEligibility,
-                        context.l10n.idpEligibility,
-                      ],
+                      dropDownList: List.generate(
+                        EligibilityEnum.values.length,
+                        (index) => EligibilityEnum.values
+                            .elementAt(index)
+                            .getValue(context),
+                      ),
                       allElemts: context.l10n.allOfListed,
                       showErrorText: _.formState.hasError,
                       errorText: _.eligibility.error.value(context),

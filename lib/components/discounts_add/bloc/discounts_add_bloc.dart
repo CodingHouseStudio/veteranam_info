@@ -148,11 +148,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
               (index) => '${discount!.discount.elementAt(index)}%',
             ),
           ),
-          eligibility: discount!.eligibility == null
-              ? const EligibilityFieldModel.dirty([EligibilityEnum.all])
-              : EligibilityFieldModel.dirty(
-                  discount!.eligibility!,
-                ),
+          eligibility: EligibilityFieldModel.dirty(
+            discount!.eligibility,
+          ),
           link: LinkFieldModel.dirty(discount!.directLink),
           description: MessageFieldModel.dirty(discount!.description.uk),
           exclusions: discount!.exclusions == null

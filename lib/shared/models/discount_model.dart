@@ -33,7 +33,8 @@ class DiscountModel with _$DiscountModel {
     required DateTime dateVerified,
     required String? link,
     @JsonKey(unknownEnumValue: EligibilityEnum.all)
-    List<EligibilityEnum>? eligibility,
+    @Default([EligibilityEnum.all])
+    List<EligibilityEnum> eligibility,
     @JsonKey(readValue: TranslateConverter.readJsonItem)
     @TranslateOrNullConverter()
     TranslateModel? exclusions,
@@ -81,8 +82,14 @@ enum EligibilityEnum {
   @JsonValue('Emergency Service employees')
   emergencyServiceEmployees, // DSNS staff
   @JsonValue('Police officers')
-  policeOfficers,
-  internallyDisplacedPersons,
+  policeOfficers;
+  // internallyDisplacedPersons;
+
+  static List<EligibilityEnum> get valuesWithoutAll => List.generate(
+        values.length - 1,
+        (index) => values.elementAt(index + 1),
+        growable: false,
+      );
 }
 
 enum SubLocation {

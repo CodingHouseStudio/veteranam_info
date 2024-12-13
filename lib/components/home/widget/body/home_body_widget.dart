@@ -84,7 +84,8 @@ class HomeBodyWidget extends StatelessWidget {
                                 : KSizedBox.kHeightSizedBox48,
                       ),
                       SliverPadding(
-                        padding: padding,
+                        padding:
+                            padding.copyWith(bottom: KPadding.kPaddingSize30),
                         sliver: FooterWidget(
                           isTablet: isTablet,
                           isDesk: isDesk,

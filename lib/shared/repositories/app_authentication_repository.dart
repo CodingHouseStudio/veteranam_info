@@ -139,16 +139,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       }
       return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SignUpWithGoogleFailure.fromCode(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'signUpWithGoogle(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ).status,
-      );
+      final failure = SignUpWithGoogleFailure.fromCode(
+        error: e,
+        stack: stack,
+        user: currentUser,
+        userSetting: currentUserSetting,
+        tag: 'signUpWithGoogle(${ErrorText.fromCode})',
+        tagKey: ErrorText.appAuthenticationKey,
+      ).status;
+      if (failure != null) {
+        return Left(
+          failure,
+        );
+      }
+      return const Right(null);
     } catch (_, stack) {
       return Left(
         SomeFailure.serverError(
@@ -208,16 +212,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       }
       return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SignUpWithFacebookFailure.fromCode(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'signUpWithFacebook(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ).status,
-      );
+      final failure = SignUpWithFacebookFailure.fromCode(
+        error: e,
+        stack: stack,
+        user: currentUser,
+        userSetting: currentUserSetting,
+        tag: 'signUpWithFacebook(${ErrorText.fromCode})',
+        tagKey: ErrorText.appAuthenticationKey,
+      ).status;
+      if (failure != null) {
+        return Left(
+          failure,
+        );
+      }
+      return const Right(null);
     } catch (_, stack) {
       return Left(
         SomeFailure.serverError(

@@ -654,9 +654,7 @@ extension EligiblityEnumListExtension on List<EligibilityEnum> {
   List<TranslateModel> get getTranslateModels {
     final translateModelItems = <TranslateModel>[];
     for (final eligibility in this) {
-      if (eligibility != EligibilityEnum.all) {
-        translateModelItems.add(eligibility.getTranslateModel);
-      }
+      translateModelItems.add(eligibility.getTranslateModel);
     }
     return translateModelItems;
   }

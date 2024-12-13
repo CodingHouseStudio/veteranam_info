@@ -94,17 +94,18 @@ class GetFailur {
       case 'not-found':
         return GetFailur(
           status: SomeFailure.notFound(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.getFailur}'
-                '(${ErrorText.notFoundError} ${ErrorText.firebaseException})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.getFailur}'
+              //     '(${ErrorText.notFoundError}
+              // ${ErrorText.firebaseException})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'missing-argument':
       case 'timeout':
@@ -223,17 +224,17 @@ class SignUpWithEmailAndPasswordFailure {
       case 'email-already-in-use':
         return SignUpWithEmailAndPasswordFailure(
           status: SomeFailure.duplicate(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-                '(${ErrorText.duplicateError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+              //     '(${ErrorText.duplicateError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'operation-not-allowed':
       case 'invalid-email':
@@ -310,17 +311,17 @@ class LogInWithEmailAndPasswordFailure {
       case 'invalid-credential':
         return LogInWithEmailAndPasswordFailure(
           status: SomeFailure.notFound(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
-                '(${ErrorText.notFoundError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
+              //     '(${ErrorText.notFoundError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'network-error':
         return LogInWithEmailAndPasswordFailure(
@@ -492,6 +493,14 @@ class SignUpWithGoogleFailure {
             tag2Key: tagKey,
           ),
         );
+      case 'popup-closed-by-user':
+      case 'popup-blocked':
+      case 'provider-already-linked':
+        return SignUpWithGoogleFailure(
+          status: SomeFailure.browserNotSupportPopupDialog(),
+        );
+      case 'cancelled-popup-request':
+        return const SignUpWithGoogleFailure(status: null);
       default:
         return SignUpWithGoogleFailure(
           status: SomeFailure.serverError(
@@ -510,7 +519,7 @@ class SignUpWithGoogleFailure {
     }
   }
 
-  final SomeFailure status;
+  final SomeFailure? status;
 }
 
 class SignUpWithFacebookFailure {
@@ -575,6 +584,14 @@ class SignUpWithFacebookFailure {
             tag2Key: tagKey,
           ),
         );
+      case 'popup-closed-by-user':
+      case 'popup-blocked':
+      case 'provider-already-linked':
+        return SignUpWithFacebookFailure(
+          status: SomeFailure.browserNotSupportPopupDialog(),
+        );
+      case 'cancelled-popup-request':
+        return const SignUpWithFacebookFailure(status: null);
       default:
         return SignUpWithFacebookFailure(
           status: SomeFailure.serverError(
@@ -593,7 +610,7 @@ class SignUpWithFacebookFailure {
     }
   }
 
-  final SomeFailure status;
+  final SomeFailure? status;
 }
 
 class ShareFailure {
@@ -610,9 +627,14 @@ class ShareFailure {
   }) {
     if (error is Exception) {
       switch (error.toString()) {
-        case 'Exception: Navigator.canShare() is unavailable':
+        case 'Exception: Navigator.share() failed: share()'
+              ' is already in progress':
           return const ShareFailure(
             status: null,
+          );
+        case 'Exception: Navigator.canShare() is unavailable':
+          return ShareFailure(
+            status: SomeFailure.shareUnavailable(),
           );
         default:
           return ShareFailure(
@@ -698,4 +720,45 @@ class VerifyCodeFailure {
   }
 
   final SomeFailure status;
+}
+
+class FcmTokenGetFailure {
+  const FcmTokenGetFailure({required this.status});
+
+  factory FcmTokenGetFailure.fromCode({
+    required Object error,
+    StackTrace? stack,
+    custom_user.User? user,
+    custom_user.UserSetting? userSetting,
+    String? data,
+    String? tag,
+    String? tagKey,
+  }) {
+    switch (error.toString()) {
+      case "AbortError: Failed to execute 'subscribe' on 'PushManager':"
+            ' Subscription failed - no active Service Worker':
+        return const FcmTokenGetFailure(
+          status: null,
+        );
+      default:
+        return FcmTokenGetFailure(
+          status: SomeFailure.serverError(
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.verifyCodeFailure}(${ErrorText.serverError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+          ),
+        );
+    }
+    // return VerifyCodeFailure(
+    //   status: SomeFailure.serverError(error: error, stack: stack),
+    // );
+  }
+
+  final SomeFailure? status;
 }

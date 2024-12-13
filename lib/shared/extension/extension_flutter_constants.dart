@@ -197,27 +197,6 @@ extension StringFllutterExtension on String {
       textDirection: TextDirection.ltr,
     );
   }
-
-  String get getImageUrl //({bool? highQuality})
-  {
-    if ((Config.isProduction && Config.isReleaseMode) || !Config.isWeb) {
-      final url = Config.isWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix$this';
-    } else {
-      return this;
-    }
-  }
-
-  String get _urlPrefix //({bool? highQuality})
-  {
-    // widget.size == null
-    // ?
-    const quality = '100'; // highQuality ?? false ? '100' : '85';
-    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
-  }
-  // : '/cdn-cgi/image/${Config.isWeb ? 'quality=100' : 'quality=85'}'
-  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
 extension TranslateModelExtension on TranslateModel {
@@ -558,8 +537,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return context.l10n.dsnsEligibility;
       case EligibilityEnum.policeOfficers:
         return context.l10n.policeEligibility;
-      case EligibilityEnum.internallyDisplacedPersons:
-        return context.l10n.idpEligibility;
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return context.l10n.idpEligibility;
     }
   }
 
@@ -579,8 +558,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return KIcon.dsns;
       case EligibilityEnum.policeOfficers:
         return KIcon.police;
-      case EligibilityEnum.internallyDisplacedPersons:
-        return KIcon.military;
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return KIcon.military;
       case EligibilityEnum.all:
         return KIcon.veteransIcon;
     }

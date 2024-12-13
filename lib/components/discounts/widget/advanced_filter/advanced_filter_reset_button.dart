@@ -12,25 +12,22 @@ class AdvancedFilterResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: TextButton(
-        key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
-        style: KButtonStyles.borderBlackButtonStyle.copyWith(
-          padding: isDesk
-              ? null
-              : const WidgetStatePropertyAll(
-                  EdgeInsets.symmetric(
-                    vertical: KPadding.kPaddingSize8,
-                    horizontal: KPadding.kPaddingSize24,
-                  ),
+    return TextButton(
+      key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
+      style: KButtonStyles.borderBlackButtonStyle.copyWith(
+        padding: isDesk
+            ? null
+            : const WidgetStatePropertyAll(
+                EdgeInsets.symmetric(
+                  vertical: KPadding.kPaddingSize8,
+                  horizontal: KPadding.kPaddingSize24,
                 ),
-        ),
-        onPressed: resetEvent,
-        child: Text(
-          context.l10n.resetAll,
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
+              ),
+      ),
+      onPressed: resetEvent,
+      child: Text(
+        context.l10n.resetAll,
+        style: AppTextStyle.materialThemeTitleMedium,
       ),
     );
   }

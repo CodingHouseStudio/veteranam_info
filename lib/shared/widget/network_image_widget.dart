@@ -122,8 +122,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
             );
             return KIcon.error;
           },
-          cacheHeight: KMinMaxSize.kImageMaxSize,
-          cacheWidth: KMinMaxSize.kImageMaxSize,
+          // cacheHeight: KMinMaxSize.kImageMaxSize,
+          // cacheWidth: KMinMaxSize.kImageMaxSize,
           filterQuality: widget.highQuality ?? false
               ? FilterQuality.high
               : FilterQuality.medium,

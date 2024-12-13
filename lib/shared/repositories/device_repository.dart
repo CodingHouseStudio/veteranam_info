@@ -173,15 +173,19 @@ class DeviceRepository implements IDeviceRepository {
 
       return Right(fcmToken);
     } catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'Device(getFcm)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Platform: $platformValue',
-        ),
-      );
+      final failure = FcmTokenGetFailure.fromCode(
+        error: e,
+        stack: stack,
+        tag: 'Device(getFcm)',
+        tagKey: ErrorText.repositoryKey,
+        data: 'Platform: $platformValue',
+      ).status;
+      if (failure != null) {
+        return Left(
+          failure,
+        );
+      }
+      return const Right(null);
     }
   }
 

@@ -567,7 +567,6 @@ void main() {
               status: DiscountState.isNew,
               subcategory: null,
               exclusions: null,
-              eligibility: null,
             )
             .toJson();
 

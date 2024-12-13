@@ -360,7 +360,7 @@ abstract class KTestText {
   ];
 
   static final widgetSendDiscountModel = sendDiscountModel.copyWith(
-    eligibility: null,
+    eligibility: [EligibilityEnum.all],
   );
 
   static final blocSendDiscountModel = sendDiscountModel.copyWith(

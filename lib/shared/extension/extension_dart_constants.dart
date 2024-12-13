@@ -112,8 +112,8 @@ extension StringDartExtension on String {
         return EligibilityEnum.emergencyServiceEmployees;
       case 'члени сімей загиблих':
         return EligibilityEnum.familyMembersOfTheDeceased;
-      case 'внутрішньо переміщені особи':
-        return EligibilityEnum.internallyDisplacedPersons;
+      // case 'внутрішньо переміщені особи':
+      //   return EligibilityEnum.internallyDisplacedPersons;
       case 'всі перелічені':
         return EligibilityEnum.all;
     }
@@ -332,16 +332,13 @@ extension EligiblityEnumExtension on EligibilityEnum {
           uk: 'Поліція',
           en: 'Police officers',
         );
-      case EligibilityEnum.internallyDisplacedPersons:
-        return const TranslateModel(
-          uk: 'Внутрішньо переміщені особи',
-          en: 'Internally displaced persons',
-        );
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return const TranslateModel(
+      //     uk: 'Внутрішньо переміщені особи',
+      //     en: 'Internally displaced persons',
+      //   );
       case EligibilityEnum.all:
-        return const TranslateModel(
-          uk: 'Всі перелічені',
-          en: 'All of the listed',
-        );
+        return KAppText.eligibilityAll;
     }
   }
 }

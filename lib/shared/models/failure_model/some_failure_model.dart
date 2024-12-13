@@ -92,7 +92,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureUnauthorized;
 
   factory SomeFailure.notFound({
-    required Object? error,
+    Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -105,7 +105,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureNotFound;
 
   factory SomeFailure.duplicate({
-    required Object? error,
+    Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -156,6 +156,19 @@ class SomeFailure with _$SomeFailure {
     UserSetting? userSetting,
     String? data,
   }) = FailureShare;
+
+  factory SomeFailure.shareUnavailable({
+    Object? error,
+    StackTrace? stack,
+    ErrorLevelEnum? errorLevel,
+    String? tag,
+    String? tagKey,
+    String? tag2,
+    String? tag2Key,
+    User? user,
+    UserSetting? userSetting,
+    String? data,
+  }) = FailureShareUnavailable;
 
   factory SomeFailure.link({
     required Object? error,
@@ -208,6 +221,19 @@ class SomeFailure with _$SomeFailure {
     UserSetting? userSetting,
     String? data,
   }) = FailureFilter;
+
+  factory SomeFailure.browserNotSupportPopupDialog({
+    Object? error,
+    StackTrace? stack,
+    ErrorLevelEnum? errorLevel,
+    String? tag,
+    String? tagKey,
+    String? tag2,
+    String? tag2Key,
+    User? user,
+    UserSetting? userSetting,
+    String? data,
+  }) = FailureBrowserNotSupportPopupDialog;
 
   final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();
 }
