@@ -332,11 +332,11 @@ extension EligiblityEnumExtension on EligibilityEnum {
           uk: 'Поліція',
           en: 'Police officers',
         );
-      case EligibilityEnum.internallyDisplacedPersons:
-        return const TranslateModel(
-          uk: 'Внутрішньо переміщені особи',
-          en: 'Internally displaced persons',
-        );
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return const TranslateModel(
+      //     uk: 'Внутрішньо переміщені особи',
+      //     en: 'Internally displaced persons',
+      //   );
       case EligibilityEnum.all:
         return KAppText.eligibilityAll;
     }
