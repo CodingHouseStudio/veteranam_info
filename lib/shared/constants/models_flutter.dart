@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart'
-    show EdgeInsets, Key, VoidCallback, Widget;
+import 'package:flutter/widgets.dart' show Key, VoidCallback, Widget;
 
 class DropDownItem<T> {
   DropDownItem({
