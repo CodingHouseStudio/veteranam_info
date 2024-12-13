@@ -489,9 +489,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           (index) => TranslateModel(uk: state.city.value.elementAt(index)),
         ),
         description: TranslateModel(uk: state.description.value),
-        link: _companyRepository.currentUserCompany.link,
-        company: _companyRepository.currentUserCompany.publicName == null
-            ? null
+        link: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.link
+            : _companyRepository.currentUserCompany.link,
+        company: _companyRepository.currentUserCompany.publicName == null ||
+                (_companyRepository.currentUserCompany.isAdmin &&
+                    state.discount != null)
+            ? state.discount?.company
             : TranslateModel(
                 uk: _companyRepository.currentUserCompany.publicName!,
               ),
@@ -502,9 +507,15 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         expiration: _getExpiration,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
-        userId: _companyRepository.currentUserCompany.id,
+        userId: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userId
+            : _companyRepository.currentUserCompany.id,
         userPhoto: _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.companyName,
+        userName: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userName
+            : _companyRepository.currentUserCompany.companyName,
         subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {
