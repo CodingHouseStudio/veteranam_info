@@ -558,8 +558,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return KIcon.dsns;
       case EligibilityEnum.policeOfficers:
         return KIcon.police;
-      case EligibilityEnum.internallyDisplacedPersons:
-        return KIcon.military;
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return KIcon.military;
       case EligibilityEnum.all:
         return KIcon.veteransIcon;
     }
