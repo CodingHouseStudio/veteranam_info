@@ -323,9 +323,8 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        right: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
-        left: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
+      padding: EdgeInsets.symmetric(
+        horizontal: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
       ),
       child: isDesk
           ? Row(

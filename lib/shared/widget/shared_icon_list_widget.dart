@@ -78,6 +78,12 @@ class SharedIconListWidget extends StatelessWidget {
           iconButton: KIcon.moreVert,
           buttonStyle: KButtonStyles.borderWhiteButtonStyle,
           textUnderButton: context.l10n.more,
+          menuItemsPadding: const EdgeInsets.only(
+            top: KPadding.kPaddingSize16,
+            bottom: KPadding.kPaddingSize16,
+            left: KPadding.kPaddingSize8,
+            right: KPadding.kPaddingSize8,
+          ),
           items: [
             if (link != null && link!.isUrlValid)
               DropDownItem(
@@ -89,12 +95,12 @@ class SharedIconListWidget extends StatelessWidget {
                   padding: KPadding.kPaddingSize12,
                 ),
                 event: () => context.read<UrlCubit>().launchUrl(url: link),
-                padding: const EdgeInsets.only(
-                  top: KPadding.kPaddingSize16,
-                  bottom: KPadding.kPaddingSize8,
-                  left: KPadding.kPaddingSize16,
-                  right: KPadding.kPaddingSize16,
-                ),
+                // padding: const EdgeInsets.only(
+                //   top: KPadding.kPaddingSize16,
+                //   bottom: KPadding.kPaddingSize8,
+                //   left: KPadding.kPaddingSize16,
+                //   right: KPadding.kPaddingSize16,
+                // ),
                 key: webSiteKey,
               ),
             DropDownItem(
@@ -110,11 +116,11 @@ class SharedIconListWidget extends StatelessWidget {
                 cardEnum: cardEnum,
                 cardId: cardId,
               ),
-              padding: const EdgeInsets.only(
-                bottom: KPadding.kPaddingSize16,
-                left: KPadding.kPaddingSize16,
-                right: KPadding.kPaddingSize16,
-              ),
+              // padding: const EdgeInsets.only(
+              //   bottom: KPadding.kPaddingSize16,
+              //   left: KPadding.kPaddingSize16,
+              //   right: KPadding.kPaddingSize16,
+              // ),
               key: complaintKey,
             ),
           ],
@@ -197,14 +203,14 @@ class _CardLikeIconWidget extends StatelessWidget {
       onPressed: null,
       child: Column(
         children: [
-          Stack(
-            children: [
-              IconWidget(
-                background: background,
-                icon: icon,
-                padding: KPadding.kPaddingSize12,
-              ),
-              if (countLike > 0)
+          if (countLike > 0)
+            Stack(
+              children: [
+                IconWidget(
+                  background: background,
+                  icon: icon,
+                  padding: KPadding.kPaddingSize12,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: KPadding.kPaddingSize36),
                   child: DecoratedBox(
@@ -221,8 +227,14 @@ class _CardLikeIconWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-            ],
-          ),
+              ],
+            )
+          else
+            IconWidget(
+              background: background,
+              icon: icon,
+              padding: KPadding.kPaddingSize12,
+            ),
           KSizedBox.kHeightSizedBox6,
           Text(
             label,
