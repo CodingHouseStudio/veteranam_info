@@ -511,7 +511,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
                 state.discount != null
             ? state.discount?.userId
             : _companyRepository.currentUserCompany.id,
-        userPhoto: _companyRepository.currentUserCompany.image,
+        userPhoto: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userPhoto
+            : _companyRepository.currentUserCompany.image,
         userName: _companyRepository.currentUserCompany.isAdmin &&
                 state.discount != null
             ? state.discount?.userName
