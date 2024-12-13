@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
+import 'package:veteranam/components/discount/view/discount_view_widget.dart';
+// import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
 import 'package:veteranam/components/discounts/view/discounts_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
 import 'package:veteranam/components/feedback/view/feedback_view.dart';
@@ -128,16 +129,23 @@ GoRouter router = GoRouter(
           ),
           routes: [
             GoRoute(
-              name: KRoute.discountCard.name,
+              name: KRoute.discount.name,
               path: ':${UrlParameters.cardId}',
-              pageBuilder: (context, state) => DialogPage(
-                key: state.pageKey,
-                name: state.name,
-                restorationId: state.pageKey.value,
-                builder: (_) => DiscountCardDialog(
-                  id: state.pathParameters[UrlParameters.cardId],
-                ),
-              ),
+              pageBuilder: (context, state) {
+                DiscountModel? discountModel;
+                if (state.extra is DiscountModel) {
+                  discountModel = state.extra as DiscountModel?;
+                }
+                return NoTransitionPage(
+                  key: state.pageKey,
+                  name: state.name,
+                  restorationId: state.pageKey.value,
+                  child: DiscountScreenWidget(
+                    discount: discountModel,
+                    discountId: state.pathParameters[UrlParameters.cardId],
+                  ),
+                );
+              },
             ),
           ],
         ),

@@ -86,9 +86,13 @@ abstract class KRoute {
     path: '',
     name: 'News Card',
   );
-  static const _RouteItem discountCard = _RouteItem(
+  // static const _RouteItem discountCard = _RouteItem(
+  //   path: '',
+  //   name: 'discountCard',
+  // );
+  static const _RouteItem discount = _RouteItem(
     path: '',
-    name: 'discountCard',
+    name: 'discount',
   );
   static const _RouteItem questionsForm = _RouteItem(
     path: '/questions-form',

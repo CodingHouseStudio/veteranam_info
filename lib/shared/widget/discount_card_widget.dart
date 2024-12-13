@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:veteranam/components/business_dashboard/widget/body/business_dashboard_body_widget.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountCardWidget extends StatelessWidget {
@@ -190,7 +192,13 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             eligibility: discountItem.eligibility,
             button: TextButton(
               key: KWidgetkeys.screen.company.boxMyDiscounts,
-              onPressed: () {},
+              onPressed: () => context.goNamed(
+                KRoute.discount.name,
+                pathParameters: {
+                  UrlParameters.cardId: discountItem.id,
+                },
+                extra: discountItem,
+              ),
               style: KButtonStyles.blackDetailsButtonStyle,
               child: Text(
                 context.l10n.moreDetails,
