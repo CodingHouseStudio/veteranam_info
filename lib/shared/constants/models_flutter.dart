@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart' show Key, VoidCallback, Widget;
+import 'package:flutter/widgets.dart'
+    show EdgeInsets, Key, VoidCallback, Widget;
 
 class DropDownItem<T> {
   DropDownItem({
@@ -8,6 +9,7 @@ class DropDownItem<T> {
     required this.key,
     this.enabled = true,
     this.icon,
+    this.padding,
   });
 
   final String text;
@@ -16,4 +18,5 @@ class DropDownItem<T> {
   final bool enabled;
   final T value;
   final Widget? icon;
+  final EdgeInsets? padding;
 }

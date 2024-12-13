@@ -323,11 +323,9 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         right: KPadding.kPaddingSize16,
         left: KPadding.kPaddingSize16,
-        bottom: isDesk ? KPadding.kPaddingSize16 : 0,
-        top: KPadding.kPaddingSize16,
       ),
       child: isDesk
           ? Row(
@@ -520,7 +518,6 @@ class _CitiesExpirationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ExpirationWidget(
             expiration: expiration?.getTrsnslation(
@@ -575,7 +572,7 @@ class _ExpirationWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          KIcon.calendarClock,
+          KIcon.date,
           KSizedBox.kWidthSizedBox8,
           Padding(
             padding: const EdgeInsets.only(

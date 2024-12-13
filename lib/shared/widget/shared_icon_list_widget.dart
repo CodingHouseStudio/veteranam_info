@@ -47,7 +47,7 @@ class SharedIconListWidget extends StatelessWidget {
           background: background,
           key: likeKey,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
+        KSizedBox.kWidthSizedBox8,
         // if (link != null && link!.isUrlValid) ...[
         //   _CardIconWidget(
         //     label: context.l10n.webSite,
@@ -89,6 +89,12 @@ class SharedIconListWidget extends StatelessWidget {
                   padding: KPadding.kPaddingSize12,
                 ),
                 event: () => context.read<UrlCubit>().launchUrl(url: link),
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize16,
+                  bottom: KPadding.kPaddingSize8,
+                  left: KPadding.kPaddingSize16,
+                  right: KPadding.kPaddingSize16,
+                ),
                 key: webSiteKey,
               ),
             DropDownItem(
@@ -103,6 +109,11 @@ class SharedIconListWidget extends StatelessWidget {
                 isDesk: isDesk,
                 cardEnum: cardEnum,
                 cardId: cardId,
+              ),
+              padding: const EdgeInsets.only(
+                bottom: KPadding.kPaddingSize16,
+                left: KPadding.kPaddingSize16,
+                right: KPadding.kPaddingSize16,
               ),
               key: complaintKey,
             ),
@@ -193,22 +204,23 @@ class _CardLikeIconWidget extends StatelessWidget {
                 icon: icon,
                 padding: KPadding.kPaddingSize12,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: KPadding.kPaddingSize36),
-                child: DecoratedBox(
-                  decoration: KWidgetTheme.boxDecorationDiscount,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize8,
-                      vertical: KPadding.kPaddingSize4,
-                    ),
-                    child: Text(
-                      countLike.toString(),
-                      style: AppTextStyle.materialThemeLabelSmall,
+              if (countLike > 0)
+                Padding(
+                  padding: const EdgeInsets.only(left: KPadding.kPaddingSize36),
+                  child: DecoratedBox(
+                    decoration: KWidgetTheme.boxDecorationDiscount,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize8,
+                        vertical: KPadding.kPaddingSize4,
+                      ),
+                      child: Text(
+                        countLike.toString(),
+                        style: AppTextStyle.materialThemeLabelSmall,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
           KSizedBox.kHeightSizedBox6,

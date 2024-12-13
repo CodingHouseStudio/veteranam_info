@@ -23,7 +23,7 @@ class CityListWidget extends StatelessWidget {
       key: ValueKey(cityList),
       mainAxisSize: MainAxisSize.min,
       children: [
-        KIcon.distance.copyWith(
+        KIcon.location.copyWith(
           key: KWidgetkeys.widget.cityList.icon,
         ),
         KSizedBox.kWidthSizedBox8,

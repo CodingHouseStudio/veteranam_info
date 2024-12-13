@@ -225,6 +225,10 @@ abstract class KIcon {
     color: AppColors.materialThemeKeyColorsSecondary,
   );
 
+  static const _KIcon location = _KIcon(Symbols.location_on);
+
+  static const _KIcon date = _KIcon(Symbols.date_range);
+
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,
