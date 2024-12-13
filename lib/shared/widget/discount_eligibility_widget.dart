@@ -60,12 +60,11 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
     List<EligibilityEnum> eligibilityItems,
     BuildContext context,
   ) {
-    final widgets = <Widget>[];
-
-    for (final eligibilityItem in eligibilityItems) {
-      widgets.add(
-        Row(
+    final widgets = <Widget>[
+      ...eligibilityItems.map(
+        (eligibilityItem) => Row(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             eligibilityItem.eligibilityIcon,
             KSizedBox.kWidthSizedBox4,
@@ -76,13 +75,13 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
             KSizedBox.kWidthSizedBox8,
           ],
         ),
-      );
-    }
+      ),
+    ];
 
     if (eligibility.length > 5) {
       widgets.add(
-        GestureDetector(
-          onTap: () {},
+        TextButton(
+          onPressed: null,
           child: Text(
             context.l10n.moreWhomGranted(eligibility.length - 5),
             style: AppTextStyle.materialThemeLabelLargeRef,

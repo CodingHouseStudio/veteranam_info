@@ -19,40 +19,35 @@ class CityListWidget extends StatelessWidget {
       if (location != null) ...location!,
       if (subLocation != null) ...subLocation!.getCardList(context),
     ];
-    return Padding(
+    return Row(
       key: ValueKey(cityList),
-      padding: const EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize4,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          KIcon.distance.copyWith(
-            key: KWidgetkeys.widget.cityList.icon,
-          ),
-          KSizedBox.kWidthSizedBox8,
-          if (cityList.isNotEmpty)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: KPadding.kPaddingSize2,
-                  right: KPadding.kPaddingSize5,
-                ),
-                child: cityList.length == 1
-                    ? Text(
-                        cityList.first.getTrsnslation(context),
-                        key: KWidgetkeys.widget.cityList.text,
-                        style: AppTextStyle.materialThemeLabelLarge,
-                      )
-                    : CityWidgetListExpanded(
-                        key: ValueKey(cityList),
-                        cityList: cityList,
-                        isDesk: isDesk,
-                      ),
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        KIcon.distance.copyWith(
+          key: KWidgetkeys.widget.cityList.icon,
+        ),
+        KSizedBox.kWidthSizedBox8,
+        if (cityList.isNotEmpty)
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: KPadding.kPaddingSize2,
+                right: KPadding.kPaddingSize5,
               ),
+              child: cityList.length == 1
+                  ? Text(
+                      cityList.first.getTrsnslation(context),
+                      key: KWidgetkeys.widget.cityList.text,
+                      style: AppTextStyle.materialThemeLabelLarge,
+                    )
+                  : CityWidgetListExpanded(
+                      key: ValueKey(cityList),
+                      cityList: cityList,
+                      isDesk: isDesk,
+                    ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
@@ -79,6 +74,7 @@ class CityWidgetListExpanded extends StatelessWidget {
             showFullText: false,
           ),
           style: AppTextStyle.materialThemeLabelLarge,
+          // textAlign: TextAlign.center,
         ),
         TextButton(
           onPressed: null,

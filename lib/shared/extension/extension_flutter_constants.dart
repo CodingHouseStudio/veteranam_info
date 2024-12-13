@@ -114,8 +114,8 @@ extension DiscountModelLocation on DiscountModel {
   String? get _getLink =>
       directLink != null && directLink!.isUrlValid ? directLink : link;
 
-  bool hasImages({required DiscountModel discountItem}) {
-    if (discountItem.images != null && discountItem.images!.isNotEmpty) {
+  bool get hasImages {
+    if (images != null && images!.isNotEmpty) {
       return true;
     }
     return false;

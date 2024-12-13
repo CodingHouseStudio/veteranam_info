@@ -371,18 +371,18 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   Widget build(BuildContext context) {
     return widget.iconButton
         ? widget.textUnderButton != null
-            ? InkWell(
-                onTap: widget.enabled ? showButtonMenu : null,
-                child: Column(
+            ? TextButton.icon(
+                onPressed: widget.enabled ? showButtonMenu : null,
+                style: KButtonStyles.noBackgroundOnHoverButtonStyle,
+                label: Column(
                   children: [
-                    DecoratedBox(
+                    const DecoratedBox(
                       decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
-                      child: IconButton(
-                        onPressed: widget.enabled ? showButtonMenu : null,
-                        icon: KIcon.moreVert,
-                        padding: const EdgeInsets.all(
+                      child: Padding(
+                        padding: EdgeInsets.all(
                           KPadding.kPaddingSize12,
                         ),
+                        child: KIcon.moreVert,
                       ),
                     ),
                     KSizedBox.kHeightSizedBox6,
@@ -393,14 +393,12 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
                   ],
                 ),
               )
-            : DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
-                child: IconButton(
-                  onPressed: widget.enabled ? showButtonMenu : null,
-                  icon: KIcon.moreVert,
-                  padding: const EdgeInsets.all(
-                    KPadding.kPaddingSize12,
-                  ),
+            : IconButton(
+                style: KButtonStyles.borderWhiteButtonStyle,
+                onPressed: widget.enabled ? showButtonMenu : null,
+                icon: KIcon.moreVert,
+                padding: const EdgeInsets.all(
+                  KPadding.kPaddingSize12,
                 ),
               )
         : TextButton.icon(
@@ -488,19 +486,23 @@ class _PopupMenuItemState<T, W extends _PopupMenuItemWidget<T>>
           onPressed: widget.enabled ? handleTap : null,
           child: ListTileTheme.merge(
             contentPadding: EdgeInsets.zero,
-            child: Row(
-              children: [
-                if (widget.icon != null) ...[
-                  widget.icon!,
-                  KSizedBox.kWidthSizedBox16,
-                ],
-                Text(
-                  widget.text,
-                  textAlign: TextAlign.start,
-                  style: widget.textStyle,
-                ),
-              ],
-            ),
+            child: widget.icon != null
+                ? Row(
+                    children: [
+                      widget.icon!,
+                      KSizedBox.kWidthSizedBox16,
+                      Text(
+                        widget.text,
+                        textAlign: TextAlign.start,
+                        style: widget.textStyle,
+                      ),
+                    ],
+                  )
+                : Text(
+                    widget.text,
+                    textAlign: TextAlign.start,
+                    style: widget.textStyle,
+                  ),
           ),
         ),
       ),

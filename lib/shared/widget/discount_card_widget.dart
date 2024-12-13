@@ -47,7 +47,7 @@ class DiscountCardWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16
             else
               KSizedBox.kHeightSizedBox8,
-            if (discountItem.hasImages(discountItem: discountItem))
+            if (discountItem.hasImages)
               IntrinsicHeight(
                 child: Container(
                   decoration:
@@ -142,7 +142,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: discountItem.hasImages(discountItem: discountItem)
+      decoration: discountItem.hasImages
           ? KWidgetTheme.boxDecorationWidgetWithImage
           : KWidgetTheme.boxDecorationWidget,
       padding: EdgeInsets.symmetric(
@@ -150,7 +150,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: discountItem.hasImages(discountItem: discountItem)
+        crossAxisAlignment: discountItem.hasImages
             ? CrossAxisAlignment.stretch
             : CrossAxisAlignment.start,
         children: [

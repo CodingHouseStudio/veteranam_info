@@ -449,4 +449,10 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const noBackgroundOnHoverButtonStyle = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(
+      Colors.transparent,
+    ),
+  );
 }
