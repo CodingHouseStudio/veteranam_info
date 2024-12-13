@@ -37,7 +37,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.iconAlignment = IconAlignment.start,
     this.closeIcon,
     this.showIcon,
-    this.iconButton = false,
+    this.iconButton,
     this.textUnderButton,
   });
 
@@ -217,7 +217,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final Widget? showIcon;
 
-  final bool iconButton;
+  final Icon? iconButton;
 
   final String? textUnderButton;
 
@@ -369,21 +369,17 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.iconButton
+    return widget.iconButton != null
         ? widget.textUnderButton != null
-            ? TextButton.icon(
+            ? TextButton(
                 onPressed: widget.enabled ? showButtonMenu : null,
                 style: KButtonStyles.noBackgroundOnHoverButtonStyle,
-                label: Column(
+                child: Column(
                   children: [
-                    const DecoratedBox(
+                    IconWidget(
                       decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          KPadding.kPaddingSize12,
-                        ),
-                        child: KIcon.moreVert,
-                      ),
+                      icon: widget.iconButton!,
+                      padding: KPadding.kPaddingSize12,
                     ),
                     KSizedBox.kHeightSizedBox6,
                     Text(

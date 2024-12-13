@@ -29,10 +29,8 @@ class ImagesConverter
 
   @override
   List<dynamic>? toJson(List<ImageModel>? object) {
-    return object
-        ?.map(
-          (e) => e.toJson(),
-        )
-        .toList();
+    return object == null
+        ? null
+        : List.generate(object.length, (index) => object[index].toJson());
   }
 }

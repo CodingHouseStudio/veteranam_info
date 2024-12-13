@@ -74,7 +74,6 @@ class CityWidgetListExpanded extends StatelessWidget {
             showFullText: false,
           ),
           style: AppTextStyle.materialThemeLabelLarge,
-          // textAlign: TextAlign.center,
         ),
         TextButton(
           onPressed: null,

@@ -71,7 +71,6 @@ extension DiscountModelLocation on DiscountModel {
                   context,
                 ) : ''}'
               '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
-          .replaceAll('**', '')
           .replaceAll('*', '')
           .replaceAll('\n\n', '\n')
           .trim();
@@ -115,10 +114,7 @@ extension DiscountModelLocation on DiscountModel {
       directLink != null && directLink!.isUrlValid ? directLink : link;
 
   bool get hasImages {
-    if (images != null && images!.isNotEmpty) {
-      return true;
-    }
-    return false;
+    return images != null && images!.isNotEmpty;
   }
 }
 
