@@ -274,7 +274,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
 
         // Eligibility
         if (discount.eligibility.contains(EligibilityEnum.all)) {
-          eligibilitiesList.addAll(EligibilityEnum.values);
+          eligibilitiesList.addAll(EligibilityEnum.valuesWithoutAll);
         } else {
           eligibilitiesList.addAll(discount.eligibility);
         }

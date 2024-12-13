@@ -112,8 +112,8 @@ extension StringDartExtension on String {
         return EligibilityEnum.emergencyServiceEmployees;
       case 'члени сімей загиблих':
         return EligibilityEnum.familyMembersOfTheDeceased;
-      case 'внутрішньо переміщені особи':
-        return EligibilityEnum.internallyDisplacedPersons;
+      // case 'внутрішньо переміщені особи':
+      //   return EligibilityEnum.internallyDisplacedPersons;
       case 'всі перелічені':
         return EligibilityEnum.all;
     }

@@ -80,8 +80,14 @@ enum EligibilityEnum {
   @JsonValue('Emergency Service employees')
   emergencyServiceEmployees, // DSNS staff
   @JsonValue('Police officers')
-  policeOfficers,
-  internallyDisplacedPersons,
+  policeOfficers;
+  // internallyDisplacedPersons;
+
+  static List<EligibilityEnum> get valuesWithoutAll => List.generate(
+        values.length - 1,
+        (index) => values.elementAt(index + 1),
+        growable: false,
+      );
 }
 
 enum SubLocation {

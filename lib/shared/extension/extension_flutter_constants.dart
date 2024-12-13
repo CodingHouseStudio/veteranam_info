@@ -528,8 +528,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return context.l10n.dsnsEligibility;
       case EligibilityEnum.policeOfficers:
         return context.l10n.policeEligibility;
-      case EligibilityEnum.internallyDisplacedPersons:
-        return context.l10n.idpEligibility;
+      // case EligibilityEnum.internallyDisplacedPersons:
+      //   return context.l10n.idpEligibility;
     }
   }
 }
