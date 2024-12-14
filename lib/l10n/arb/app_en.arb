@@ -1645,6 +1645,11 @@
     },
     "examples": "Text on the Discount page, description in the skating rink"
   },
+  "showPhoneNumber": "Show phone number",
+  "@showPhoneNumber": {
+    "examples": "Text for button on the page Discount",
+    "description": "Button use for show phone number."
+  },
   "moreDetails": "More Details",
   "@moreDetails": {
     "examples": "Button text on the Discounts page"

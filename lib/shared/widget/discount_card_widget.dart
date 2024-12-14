@@ -59,37 +59,10 @@ class DiscountCardWidget extends StatelessWidget {
                           : null,
                   child: Row(
                     children: [
-                      Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(KSize.kRadius32),
-                              topLeft: Radius.circular(KSize.kRadius32),
-                            ),
-                            child: NetworkImageWidget(
-                              imageUrl: discountItem.images![0].downloadURL,
-                            ),
-                          ),
-                          Positioned(
-                            top: KPadding.kPaddingSize16,
-                            right: KPadding.kPaddingSize16,
-                            child: DecoratedBox(
-                              decoration: KWidgetTheme.boxDecorationDiscount,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: KPadding.kPaddingSize8,
-                                  vertical: KPadding.kPaddingSize4,
-                                ),
-                                child: TextPointWidget(
-                                  discountItem.discount
-                                      .getDiscountString(context),
-                                  key: KWidgetkeys.widget.discountCard.discount,
-                                  mainAxisSize: MainAxisSize.min,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      DiscountImageWidget(
+                        discount:
+                            discountItem.discount.getDiscountString(context),
+                        images: discountItem.images!,
                       ),
                       Flexible(
                         child: _DiscountCardDesciprtionWidget(
@@ -119,6 +92,53 @@ class DiscountCardWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class DiscountImageWidget extends StatelessWidget {
+  const DiscountImageWidget({
+    required this.images,
+    required this.discount,
+    super.key,
+    this.borderRadius,
+  });
+
+  final List<ImageModel> images;
+  final String discount;
+  final BorderRadius? borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: KBorderRadius.kBorderRadiusLeft32,
+          child: NetworkImageWidget(
+            imageUrl: images.first.downloadURL,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: KPadding.kPaddingSize16,
+            right: KPadding.kPaddingSize16,
+          ),
+          child: DecoratedBox(
+            decoration: KWidgetTheme.boxDecorationDiscount,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize8,
+                vertical: KPadding.kPaddingSize4,
+              ),
+              child: TextPointWidget(
+                discount,
+                key: KWidgetkeys.widget.discountCard.discount,
+                mainAxisSize: MainAxisSize.min,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -345,7 +365,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               // runSpacing: KPadding.kPaddingSize16,
               children: [
                 Expanded(
-                  child: _CompanyInfoWidget(
+                  child: CompanyInfoWidget(
                     dateVerified: dateVerified,
                     category: category,
                     company: company,
@@ -360,7 +380,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
                 // ),
               ],
             )
-          : _CompanyInfoWidget(
+          : CompanyInfoWidget(
               dateVerified: dateVerified,
               category: category,
               company: company,
@@ -371,13 +391,14 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   }
 }
 
-class _CompanyInfoWidget extends StatelessWidget {
-  const _CompanyInfoWidget({
+class CompanyInfoWidget extends StatelessWidget {
+  const CompanyInfoWidget({
     required this.dateVerified,
     required this.category,
     required this.company,
     required this.userName,
     required this.userPhoto,
+    super.key,
   });
   final TranslateModel? company;
   final String? userName;
@@ -530,7 +551,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _ExpirationWidget(
+          ExpirationWidget(
             expiration: expiration?.getTrsnslation(
               context,
             ),
@@ -550,7 +571,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _ExpirationWidget(
+          ExpirationWidget(
             expiration: expiration?.getTrsnslation(
               context,
             ),
@@ -568,8 +589,8 @@ class _CitiesExpirationWidget extends StatelessWidget {
   }
 }
 
-class _ExpirationWidget extends StatelessWidget {
-  const _ExpirationWidget({required this.expiration});
+class ExpirationWidget extends StatelessWidget {
+  const ExpirationWidget({required this.expiration, super.key});
   final String? expiration;
 
   @override

@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
 import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
@@ -118,17 +118,17 @@ void _registerDiscountBloc({
   required UserRepository mockUserRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
-  final discountBloc = DiscountWatcherBloc(
+  final discountBloc = DiscountsWatcherBloc(
     discountRepository: mockDiscountRepository,
     // reportRepository: mockReportRepository,
     // appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
     userRepository: mockUserRepository,
   );
-  if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
-    GetIt.I.unregister<DiscountWatcherBloc>();
+  if (GetIt.I.isRegistered<DiscountsWatcherBloc>()) {
+    GetIt.I.unregister<DiscountsWatcherBloc>();
   }
-  GetIt.I.registerSingleton<DiscountWatcherBloc>(discountBloc);
+  GetIt.I.registerSingleton<DiscountsWatcherBloc>(discountBloc);
 }
 
 void _registerInvestorsBloc({

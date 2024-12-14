@@ -10,7 +10,7 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
   });
 
   final Widget childWidget;
-  final DiscountWatcherBloc bloc;
+  final DiscountsWatcherBloc bloc;
 
   @override
   Widget build(BuildContext context) {

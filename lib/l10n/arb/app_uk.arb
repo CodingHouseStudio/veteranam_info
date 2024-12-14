@@ -1653,6 +1653,11 @@
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
   },
+  "showPhoneNumber": "Показати номер телефону",
+  "@showPhoneNumber": {
+    "examples": "Текст для кнопки на сторінці Discount",
+    "description": "Кнопка використовується для показу номера телефону в знижці."
+  },
   "moreDetails": "Детальніше",
   "@moreDetails": {
     "examples": "Текст для кнопки на сторінці Discounts"

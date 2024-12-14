@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountSortingWidget extends StatelessWidget {
@@ -9,7 +9,7 @@ class DiscountSortingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+    return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
       buildWhen: (previous, current) => previous.sortingBy != current.sortingBy,
       builder: (context, state) {
         return PopupMenuButtonWidget<DiscountEnum>(
@@ -53,8 +53,8 @@ class DiscountSortingWidget extends StatelessWidget {
       DropDownItem<DiscountEnum>(
         value: discountEnum,
         text: discountEnum.getValue(context),
-        event: () => context.read<DiscountWatcherBloc>().add(
-              DiscountWatcherEvent.sorting(
+        event: () => context.read<DiscountsWatcherBloc>().add(
+              DiscountsWatcherEvent.sorting(
                 discountEnum,
               ),
             ),

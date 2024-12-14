@@ -1,1 +1,1 @@
-export 'discount_watcher_bloc.dart';
+export 'discounts_watcher_bloc.dart';

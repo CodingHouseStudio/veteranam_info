@@ -12,6 +12,8 @@ import 'package:flutter/material.dart'
         EdgeInsetsGeometry,
         Expanded,
         MouseCursor,
+        SizedBox,
+        SliverToBoxAdapter,
         Spacer,
         SystemMouseCursors,
         TargetPlatform,
@@ -564,4 +566,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return KIcon.veteransIcon;
     }
   }
+}
+
+extension SizedBoxExtension on SizedBox {
+  Widget get toSliver => SliverToBoxAdapter(child: this);
 }

@@ -160,6 +160,7 @@ abstract class KIcon {
     Symbols.sort,
     grade: 200,
   );
+  static const _KIcon call = _KIcon(Symbols.call);
 
   static const logo = _KIcon(
     IconData(0xe1, fontFamily: KAppText.veteranamFontName),

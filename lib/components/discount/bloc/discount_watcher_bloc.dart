@@ -34,6 +34,9 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    emit(
+      state.copyWith(loadingStatus: LoadingStatus.loading),
+    );
     DiscountModel? discount;
     if (event.discount != null) {
       discount = event.discount;
@@ -42,14 +45,12 @@ class DiscountWatcherBloc
         event.discountId!,
       );
       result.fold(
-        // ignore: invalid_use_of_visible_for_testing_member
         (l) => emit(state.copyWith(failure: DiscountFailure.linkWrong)),
         (r) => discount = r,
       );
     }
 
     if (discount != null) {
-      // ignore: invalid_use_of_visible_for_testing_member
       emit(
         _Initial(discountModel: discount!, loadingStatus: LoadingStatus.loaded),
       );

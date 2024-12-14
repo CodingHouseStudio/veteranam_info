@@ -237,6 +237,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.5,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
+  static const TextStyle materialThemeBodyLargeNeutralVariant50 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
+  );
   static const TextStyle materialThemeBodyLargeNeutralVariant60 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
@@ -379,6 +387,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.1,
     decoration: TextDecoration.underline,
     color: AppColors.materialThemeRefTertiaryTertiary40,
+  );
+  static const TextStyle materialThemeLabelLargeUnderLine = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    decoration: TextDecoration.underline,
   );
 
   /// materialThemeLabelMedium figma properties

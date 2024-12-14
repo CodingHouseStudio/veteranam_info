@@ -7,11 +7,13 @@ class CityListWidget extends StatelessWidget {
     required this.location,
     required this.subLocation,
     super.key,
+    this.showFullText = false,
   });
 
   final List<TranslateModel>? location;
   final SubLocation? subLocation;
   final bool isDesk;
+  final bool showFullText;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,11 @@ class CityListWidget extends StatelessWidget {
                       key: KWidgetkeys.widget.cityList.text,
                       style: AppTextStyle.materialThemeLabelLarge,
                     )
-                  : CityWidgetListExpanded(
+                  : _CityWidgetListExpanded(
                       key: ValueKey(cityList),
                       cityList: cityList,
                       isDesk: isDesk,
+                      showFullText: showFullText,
                     ),
             ),
           ),
@@ -52,18 +55,29 @@ class CityListWidget extends StatelessWidget {
   }
 }
 
-class CityWidgetListExpanded extends StatelessWidget {
-  const CityWidgetListExpanded({
+class _CityWidgetListExpanded extends StatelessWidget {
+  const _CityWidgetListExpanded({
     required this.cityList,
     required this.isDesk,
+    required this.showFullText,
     super.key,
   });
 
   final List<TranslateModel> cityList;
   final bool isDesk;
+  final bool showFullText;
 
   @override
   Widget build(BuildContext context) {
+    if (showFullText) {
+      return Text(
+        cityList.getCityString(
+          context: context,
+          showFullText: false,
+        ),
+        style: AppTextStyle.materialThemeLabelLarge,
+      );
+    }
     return Row(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       mainAxisSize: MainAxisSize.min,

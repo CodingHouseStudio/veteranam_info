@@ -16,9 +16,11 @@ class SharedIconListWidget extends StatelessWidget {
     this.useSiteUrl,
     this.showComplaint = true,
     this.showShare = true,
-    this.background = AppColors.materialThemeWhite,
+    this.iconBackground = AppColors.materialThemeWhite,
     this.numberLikes,
     this.likeKey,
+    this.isSeparatePage = false,
+    this.iconBorder,
   });
   final bool isDesk;
   final String? link;
@@ -31,48 +33,89 @@ class SharedIconListWidget extends StatelessWidget {
   final String? share;
   final bool showComplaint;
   final bool showShare;
-  final Color background;
+  final Color iconBackground;
   final bool? useSiteUrl;
   final int? numberLikes;
+  final bool isSeparatePage;
+  final BoxBorder? iconBorder;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _CardLikeIconWidget(
-          label: context.l10n.favorite,
-          icon: KIcon.favorite,
-          countLike: numberLikes ?? 0,
-          background: background,
-          key: likeKey,
-        ),
+    final children = [
+      _CardLikeIconWidget(
+        label: context.l10n.favorite,
+        icon: KIcon.favorite,
+        countLike: numberLikes ?? 0,
+        background: isSeparatePage
+            ? AppColors.materialThemeKeyColorsNeutral
+            : iconBackground,
+        key: likeKey,
+      ),
+      if (!isSeparatePage)
         if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
-        // if (link != null && link!.isUrlValid) ...[
-        //   _CardIconWidget(
-        //     label: context.l10n.webSite,
-        //     onPressed: () => context..read<UrlCubit>().launchUrl(url: link),
-        //     icon: KIcon.captivePortal,
-        //     background: background,
-        //     key: webSiteKey,
-        //   ),
-        //   if (isDesk) KSizedBox.kWidthSizedBox12
-        //else KSizedBox.kWidthSizedBox4,
-        // ],
-        if (showShare)
-          _CardIconWidget(
-            label: context.l10n.share,
-            onPressed: share != null
-                ? () => context.read<UrlCubit>().share(
-                      share,
-                      useSiteUrl: useSiteUrl,
+      // if (link != null && link!.isUrlValid) ...[
+      //   _CardIconWidget(
+      //     label: context.l10n.webSite,
+      //     onPressed: () => context..read<UrlCubit>().launchUrl(url: link),
+      //     icon: KIcon.captivePortal,
+      //     background: background,
+      //     key: webSiteKey,
+      //   ),
+      //   if (isDesk) KSizedBox.kWidthSizedBox12
+      //else KSizedBox.kWidthSizedBox4,
+      // ],
+      if (showShare)
+        _CardIconWidget(
+          label: context.l10n.share,
+          onPressed: share != null
+              ? () => context.read<UrlCubit>().share(
+                    share,
+                    useSiteUrl: useSiteUrl,
+                  )
+              : null,
+          icon: KIcon.share,
+          background: iconBackground,
+          key: shareKey,
+          border: iconBorder ??
+              (isSeparatePage
+                  ? Border.all(
+                      color: AppColors.materialThemeKeyColorsNeutral,
                     )
-                : null,
-            icon: KIcon.share,
-            background: background,
-            key: shareKey,
-          ),
+                  : null),
+        ),
+      if (!isSeparatePage)
         if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
+      if (isSeparatePage && isDesk) ...[
+        if (link != null && link!.isUrlValid)
+          _CardIconWidget(
+            background: iconBackground,
+            icon: KIcon.captivePortal,
+            onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
+            label: context.l10n.webSite,
+            border: iconBorder ??
+                (isSeparatePage
+                    ? Border.all(
+                        color: AppColors.materialThemeKeyColorsNeutral,
+                      )
+                    : null),
+          ),
+        _CardIconWidget(
+          background: iconBackground,
+          icon: KIcon.brightnessAlert,
+          onPressed: () => context.dialog.showReportDialog(
+            isDesk: isDesk,
+            cardEnum: cardEnum,
+            cardId: cardId,
+          ),
+          label: context.l10n.complaint,
+          border: iconBorder ??
+              (isSeparatePage
+                  ? Border.all(
+                      color: AppColors.materialThemeKeyColorsNeutral,
+                    )
+                  : null),
+        ),
+      ] else
         PopupMenuButtonWidget<int>(
           buttonText: context.l10n.login,
           iconButton: KIcon.moreVert,
@@ -84,7 +127,7 @@ class SharedIconListWidget extends StatelessWidget {
                 value: 1,
                 text: context.l10n.webSite,
                 icon: IconWidget(
-                  background: background,
+                  background: iconBackground,
                   icon: KIcon.captivePortal,
                   padding: KPadding.kPaddingSize12,
                 ),
@@ -95,7 +138,7 @@ class SharedIconListWidget extends StatelessWidget {
               value: 2,
               text: context.l10n.complaint,
               icon: IconWidget(
-                background: background,
+                background: iconBackground,
                 icon: KIcon.brightnessAlert,
                 padding: KPadding.kPaddingSize12,
               ),
@@ -109,22 +152,33 @@ class SharedIconListWidget extends StatelessWidget {
           ],
           position: PopupMenuButtonPosition.bottomLeft,
         ),
-        // if (widget.showComplaint) ...[
-        //   if (widget.isDesk)
-        //     KSizedBox.kWidthSizedBox16
-        //   else
-        //     KSizedBox.kWidthSizedBox8,
-        //   ComplaintWidget(
-        //     key: widget.complaintKey,
-        //     isDesk: widget.isDesk,
-        //     cardEnum: widget.cardEnum,
-        //     // afterEvent: afterEvent,
-        //     cardId: widget.cardId,
-        //     background: widget.background,
-        //   ),
-        //],
-      ],
-    );
+      // if (widget.showComplaint) ...[
+      //   if (widget.isDesk)
+      //     KSizedBox.kWidthSizedBox16
+      //   else
+      //     KSizedBox.kWidthSizedBox8,
+      //   ComplaintWidget(
+      //     key: widget.complaintKey,
+      //     isDesk: widget.isDesk,
+      //     cardEnum: widget.cardEnum,
+      //     // afterEvent: afterEvent,
+      //     cardId: widget.cardId,
+      //     background: widget.background,
+      //   ),
+      //],
+    ];
+    if (isSeparatePage) {
+      return Wrap(
+        spacing: KPadding.kPaddingSize24,
+        runSpacing: KPadding.kPaddingSize16,
+        children: children,
+      );
+    } else {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: children,
+      );
+    }
   }
 }
 
@@ -135,23 +189,30 @@ class _CardIconWidget extends StatelessWidget {
     required this.background,
     super.key,
     this.onPressed,
+    this.border,
   });
   final VoidCallback? onPressed;
   final Icon icon;
   final String label;
   final Color background;
+  final BoxBorder? border;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       key: key,
       onTap: onPressed,
+      hoverColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       child: Column(
         children: [
           IconWidget(
             background: background,
             icon: icon,
             padding: KPadding.kPaddingSize12,
+            border: border,
           ),
           KSizedBox.kHeightSizedBox6,
           Text(

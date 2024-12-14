@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:veteranam/components/discount/widget/blocprovider/discount_blocprovider.dart';
 import 'package:veteranam/components/discount/widget/body/discount_body_widget.dart';
-import 'package:veteranam/components/discounts/discounts.dart';
-import 'package:veteranam/shared/models/discount_model.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountScreenWidget extends StatelessWidget {
   const DiscountScreenWidget({super.key, this.discount, this.discountId});
@@ -10,8 +10,29 @@ class DiscountScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DiscountBlocprovider(
-      childWidget: DiscountBodyWidget(),
+    final scaffold = DiscountBlocprovider(
+      discount: discount,
+      discountId: discountId,
+      childWidget: Scaffold(
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Config.isWeb
+            ? null
+            : const MobNavigationWidget(
+                index: 0,
+              ),
+        appBar: AppBar(
+          backgroundColor: AppColors.materialThemeWhite,
+          toolbarHeight: KSize.kAppBarHeight,
+        ),
+        body: DiscountBodyWidget(
+          discount: discount,
+          discountId: discountId,
+        ),
+      ),
     );
+    if (Config.isWeb) {
+      return scaffold;
+    }
+    return SafeArea(child: scaffold);
   }
 }

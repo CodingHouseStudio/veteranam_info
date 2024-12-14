@@ -39,7 +39,7 @@ class DiscountTextWidget extends StatelessWidget {
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          DiscountEligibilityWidget(eligibility: eligibility!),
+          EligibilityWidget(eligibility: eligibility!),
           KSizedBox.kHeightSizedBox16,
         ],
         Row(
