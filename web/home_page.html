@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <base href="/" /> -->
+  <meta charset="utf-8" />
+  <style>
+    @font-face {
+      font-family: "Gilroy";
+      src: url(assets/fonts/Gilroy-Medium.woff);
+    }
+
+    @font-face {
+      font-family: "Gilroy";
+      src: url(assets/fonts/Gilroy-Regular.woff);
+    }
+
+    html,
+    body {
+      font-family: 'Gilroy', sans-serif;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+  <link href="logo.svg" rel="icon" type="image/svg" />
+  <link href="https://app.veteranam.info" rel="prefetch" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;icon_names=add,arrow_outward,language,sell"
+    rel="stylesheet" />
+  <!--$-->
+  <title>Veteranam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Veteranam" />
+  <meta name="apple-touch-icon" content="icons/logo-192.svg" />
+  <!--/-->
+  <script src="pages/home/view/home_view.client.dart.js" defer></script>
+  <style>
+    #double_button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    #double_button #text {
+      background-color: #dcf264;
+      padding: 12px 30px;
+      border-radius: 32px;
+    }
+
+    #double_button span {
+      background-color: #dcf264;
+      padding: 12px;
+      margin-left: -8px;
+      border-radius: 24px;
+      transition: transform 200ms, margin 200ms;
+    }
+
+    #double_button:hover span {
+      background-color: #dcf264;
+      margin-left: 4px;
+      transform: rotate(45deg);
+    }
+
+    .faq_item_body input[type="checkbox"] {
+      display: none;
+    }
+
+    .faq_item_body input[type="checkbox"]:checked~#faq_item #faq_description {
+      margin-top: 16px;
+      max-height: 480px;
+      visibility: visible;
+    }
+
+    .faq_item_body input[type="checkbox"]:checked~#faq_item #open_icon #icon_minus {
+      display: flex;
+    }
+
+    .faq_item_body input[type="checkbox"]:checked~#faq_item #open_icon #icon_plus {
+      display: none;
+    }
+
+    .faq_item_body #faq_item {
+      padding: 16px 16px 16px 32px;
+      display: flex;
+      border-radius: 32px;
+      cursor: pointer;
+      flex-direction: row;
+      justify-content: start;
+      align-items: start;
+      background-color: #f5f5f3;
+    }
+
+    .faq_item_body #faq_item p {
+      cursor: text;
+    }
+
+    .faq_item_body #faq_item #faq_description {
+      max-height: 0px;
+      overflow: hidden;
+      visibility: hidden;
+      transition: max-height 500ms, visibility 500ms, margin 500ms;
+    }
+
+    .faq_item_body #faq_item #faq_description a {
+      color: #0000EE;
+    }
+
+    .faq_item_body #faq_item .column {
+      text-align: start;
+    }
+
+    .faq_item_body #faq_item #faq_text {
+      flex: 1;
+      align-self: center;
+      text-align: start;
+    }
+
+    .faq_item_body #faq_item #open_icon {
+      padding: 20px;
+      border-radius: 32px;
+      background-color: #ffffff;
+    }
+
+    .faq_item_body #faq_item #open_icon #icon_minus {
+      display: none;
+    }
+
+    footer {
+      background-color: #babbb1;
+      display: flex;
+      align-items: stretch;
+      padding: 32px;
+      margin-top: 160px;
+      margin-bottom: 24px;
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 32px;
+    }
+
+    footer #main_footer_buttons_row {
+      display: flex;
+      align-items: start;
+      row-gap: 32px;
+      column-gap: 24px;
+    }
+
+    footer #main_footer_buttons_row #footer_buttons_row {
+      display: flex;
+      align-items: start;
+      flex: 6;
+    }
+
+    footer #main_footer_buttons_row .column {
+      flex: 3;
+    }
+
+    footer #main_footer_buttons_row .column a {
+      padding: 4px;
+    }
+
+    footer #main_footer_buttons_row .footer_column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer #main_footer_buttons_row p {
+      padding: 4px;
+    }
+
+    footer #main_footer_buttons_row #social_column {
+      flex: 0;
+      display: flex;
+      align-items: end;
+      row-gap: 16px;
+      column-gap: 24px;
+    }
+
+    footer #main_footer_buttons_row #social_column .social {
+      background-color: #dcf264;
+      padding: 12px;
+      border-radius: 24px;
+    }
+
+    footer #main_footer_buttons_row #contact_footer_section {
+      display: flex;
+      align-items: start;
+      flex: 4;
+    }
+
+    footer #bottom_row {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      row-gap: 32px;
+      column-gap: 40px;
+    }
+
+    footer #bottom_row img {
+      width: 132px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      footer #footer_buttons_row {
+        flex: 10;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      footer {
+        margin-top: 80px;
+        margin-bottom: 24px;
+      }
+
+      footer #main_footer_buttons_row {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      footer #main_footer_buttons_row #social_column {
+        display: flex;
+        flex-direction: row;
+      }
+
+      footer #main_footer_buttons_row #footer_buttons_row {
+        display: flex;
+        align-items: start;
+        flex: 6;
+      }
+
+      footer #main_footer_buttons_row #footer_buttons_row {
+        flex: 10;
+      }
+
+      footer #bottom_row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      footer #bottom_row img {
+        width: 80px;
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    header nav {
+      background-color: #f5f5f3;
+      padding: 12px 16px;
+      width: 100%;
+      height: 3em;
+      border-radius: 32px;
+      overflow: clip;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    header nav #logo_row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    header nav img {
+      padding-left: 16px;
+      height: 100%;
+    }
+
+    header nav #navigation-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    header nav #navigation-buttons .point {
+      background-color: #090C00;
+      width: 4px;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    header nav #navigation-buttons #tag {
+      padding: 8px;
+      border-radius: 18px;
+      background-color: #dcf264;
+    }
+
+    header nav #navigation-buttons a {
+      margin-left: 16px;
+      margin-right: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header nav #navigation-buttons a:hover #line {
+      width: 100%;
+      background-color: #090C00;
+    }
+
+    header nav #navigation-buttons .nav_button {
+      padding-left: 24px;
+      padding-right: 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    header nav #navigation-buttons .nav_button #line {
+      width: 0px;
+      height: 2px;
+      position: relative;
+      top: 4px;
+      transition: width 500ms;
+    }
+
+    @media screen and (max-width: 1024px) {
+      header nav #navigation-buttons a {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      header {
+        display: flex;
+        justify-content: center;
+        padding: 8px;
+      }
+
+      header nav img {
+        padding-left: 8px;
+      }
+
+      header nav #navigation-buttons {
+        display: none;
+      }
+    }
+
+    #discount_section {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 16px;
+      column-gap: 48px;
+      margin-top: 100px;
+      margin-bottom: 160px;
+    }
+
+    #discount_section #discount_image {
+      flex: 1;
+      width: 100%;
+      min-width: 100px;
+      min-height: 100px;
+    }
+
+    #discount_section .column {
+      flex: 1;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+    }
+
+    @media screen and (max-width: 768px) {
+      #discount_section {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+    }
+
+    #home_box_list {
+      column-gap: 20px;
+      row-gap: 12px;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    #home_box_list #home_box {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      padding: 40px;
+      border-radius: 32px;
+      background-color: #f5f5f3;
+    }
+
+    #home_box_list #home_small_boxes {
+      flex: 2;
+    }
+
+    #home_box_list #home_small_boxes #discount_box {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: start;
+      padding: 16px 16px 24px 24px;
+      border-radius: 32px;
+      background-color: #dcf264;
+    }
+
+    #home_box_list #home_small_boxes #discount_box .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+    }
+
+    #home_box_list #home_small_boxes #discount_box #discount_image_row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: end;
+      width: 100%;
+    }
+
+    #home_box_list #home_small_boxes #discount_box #discount_image_row img {
+      padding: 0;
+      margin-right: -20px;
+      margin-bottom: -20px;
+    }
+
+    #home_box_list #home_small_boxes .row {
+      display: flex;
+      align-items: stretch;
+    }
+
+    #home_box_list #home_small_boxes .row #support_box {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: start;
+      flex: 5;
+      padding: 16px 16px 24px 24px;
+      border-radius: 32px;
+      background-color: #babbb1;
+    }
+
+    #home_box_list #home_small_boxes .row #support_box .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 90px;
+    }
+
+    #home_box_list #home_small_boxes .row #contact_box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: start;
+      flex: 4;
+      padding: 16px 16px 24px 24px;
+      border-radius: 32px;
+      background-color: #f5f5f3;
+    }
+
+    #home_box_list #home_small_boxes .row #contact_box .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media screen and (max-width: 1024px) {
+      #home_box_list #home_box {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+      }
+
+      #home_box_list #home_small_boxes #discount_box .row {
+        padding-bottom: 10px;
+      }
+
+      #home_box_list #home_small_boxes .row #support_box .row {
+        padding-bottom: 24px;
+      }
+
+      #home_box_list #home_small_boxes .row #support_box {
+        flex: 4;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      #home_box_list {
+        column-gap: 20px;
+        row-gap: 12px;
+        margin-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+
+      #home_box_list #home_box {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 16px;
+        border-radius: 32px;
+        background-color: #f5f5f3;
+      }
+
+      #home_box_list #home_small_boxes #discount_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: start;
+        padding: 16px;
+      }
+
+      #home_box_list #home_small_boxes #discount_box .row {
+        padding-bottom: -20px;
+      }
+
+      #home_box_list #home_small_boxes #discount_box #discount_image_row img {
+        padding: 0;
+        margin-top: -25px;
+        margin-right: -20px;
+        margin-bottom: -10px;
+      }
+
+      #home_box_list #home_small_boxes .row #support_box {
+        flex: 4;
+        padding: 16px;
+      }
+
+      #home_box_list #home_small_boxes .row #contact_box {
+        padding: 16px;
+      }
+    }
+
+    #faq_section {
+      column-gap: 24px;
+      row-gap: 32px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    #faq_section #first_part {
+      flex: 2;
+      display: flex;
+      align-items: start;
+    }
+
+    #faq_section #faq {
+      flex: 3;
+      row-gap: 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+      #faq_section {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .main a {
+      color: #090C00;
+      text-decoration: none;
+    }
+
+    .main button {
+      border: unset;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      margin-left: 96px;
+      margin-right: 96px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      max-width: 1248px;
+    }
+
+    .main #page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 36px;
+    }
+
+    .main .row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .main .column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main .h1 {
+      padding: 0;
+      margin: 0;
+      font-size: 96px;
+      font-weight: 500;
+      letter-spacing: -0.25px;
+      line-height: 1.06em;
+    }
+
+    .main .materialThemeTitleLarge {
+      padding: 0;
+      margin: 0;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.27em;
+    }
+
+    .main .materialThemeTitleMedium {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.15px;
+      line-height: 1.5em;
+    }
+
+    .main .materialThemeBodySmall {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+      line-height: 1.33em;
+    }
+
+    .main .materialThemeHeadlineLarge {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.25em;
+    }
+
+    .main .materialThemeHeadlineSmall {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.33em;
+    }
+
+    .main .materialThemeDisplaySmall {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.22em;
+    }
+
+    .main .materialThemeDisplayMedium {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 45px;
+      font-weight: 400;
+      line-height: 1.25em;
+    }
+
+    .main .materialThemeDisplayLarge {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 57px;
+      font-weight: 400;
+      line-height: 1.12em;
+    }
+
+    .main .materialThemeBodyLarge {
+      padding: 0;
+      margin: 0;
+      color: #090C00;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      line-height: 1.5em;
+    }
+
+    .main #text_neutral_variant_35 {
+      color: #535251;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .main {
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+
+      .main .materialThemeDisplayMedium {
+        color: #090C00;
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 1.22em;
+      }
+
+      .main .h1 {
+        color: #090C00;
+        font-size: 48px;
+        font-weight: 500;
+        letter-spacing: -0.25px;
+        line-height: 1.17em;
+      }
+
+      .main .materialThemeTitleLarge {
+        color: #090C00;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        line-height: 1.5em;
+      }
+
+      .main .materialThemeDisplayLarge {
+        color: #090C00;
+        font-size: 45px;
+        font-weight: 400;
+        line-height: 1.25em;
+      }
+
+      .main .materialThemeDisplaySmall {
+        color: #090C00;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 1.29em;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .main {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      .main #page {
+        margin-top: 16px;
+      }
+
+      .main .materialThemeDisplayMedium {
+        color: #090C00;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.33em;
+      }
+
+      .main .h1 {
+        color: #090C00;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.22em;
+      }
+
+      .main .materialThemeTitleLarge {
+        color: #090C00;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        line-height: 1.5em;
+      }
+
+      .main .materialThemeHeadlineLarge {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 1.27em;
+      }
+
+      .main .materialThemeDisplayLarge {
+        color: #090C00;
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 1.22em;
+      }
+
+      .main .materialThemeBodyLarge {
+        color: #090C00;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.25px;
+        line-height: 1.43em;
+      }
+
+      .main .materialThemeHeadlineSmall {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 1.27em;
+      }
+
+      .main .materialThemeDisplaySmall {
+        color: #090C00;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 1.29em;
+      }
+    }
+  </style>
+  <script data-cfasync="false"
+    nonce="d6362cc3-cb2b-4f83-9c8a-2547d2f47180">try { (function (w, d) { !function (j, k, l, m) { if (j.zaraz) console.error("zaraz is loaded twice"); else { j[l] = j[l] || {}; j[l].executed = []; j.zaraz = { deferred: [], listeners: [] }; j.zaraz._v = "5828"; j.zaraz._n = "d6362cc3-cb2b-4f83-9c8a-2547d2f47180"; j.zaraz.q = []; j.zaraz._f = function (n) { return async function () { var o = Array.prototype.slice.call(arguments); j.zaraz.q.push({ m: n, a: o }) } }; for (const p of ["track", "set", "ecommerce", "debug"]) j.zaraz[p] = j.zaraz._f(p); j.zaraz.init = () => { var q = k.getElementsByTagName(m)[0], r = k.createElement(m), s = k.getElementsByTagName("title")[0]; s && (j[l].t = k.getElementsByTagName("title")[0].text); j[l].x = Math.random(); j[l].w = j.screen.width; j[l].h = j.screen.height; j[l].j = j.innerHeight; j[l].e = j.innerWidth; j[l].l = j.location.href; j[l].r = k.referrer; j[l].k = j.screen.colorDepth; j[l].n = k.characterSet; j[l].o = (new Date).getTimezoneOffset(); if (j.dataLayer) for (const t of Object.entries(Object.entries(dataLayer).reduce(((u, v) => ({ ...u[1], ...v[1] })), {}))) zaraz.set(t[0], t[1], { scope: "page" }); j[l].q = []; for (; j.zaraz.q.length;) { const w = j.zaraz.q.shift(); j[l].q.push(w) } r.defer = !0; for (const x of [localStorage, sessionStorage]) Object.keys(x || {}).filter((z => z.startsWith("_zaraz_"))).forEach((y => { try { j[l]["z_" + y.slice(7)] = JSON.parse(x.getItem(y)) } catch { j[l]["z_" + y.slice(7)] = x.getItem(y) } })); r.referrerPolicy = "origin"; r.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(j[l]))); q.parentNode.insertBefore(r, q) };["complete", "interactive"].includes(k.readyState) ? zaraz.init() : j.addEventListener("DOMContentLoaded", zaraz.init) } }(w, d, "zarazData", "script"); window.zaraz._p = async mY => new Promise((mZ => { if (mY) { mY.e && mY.e.forEach((m$ => { try { const na = d.querySelector("script[nonce]"), nb = na?.nonce || na?.getAttribute("nonce"), nc = d.createElement("script"); nb && (nc.nonce = nb); nc.innerHTML = m$; nc.onload = () => { d.head.removeChild(nc) }; d.head.appendChild(nc) } catch (nd) { console.error(`Error executing script: ${m$}\n`, nd) } })); Promise.allSettled((mY.f || []).map((ne => fetch(ne[0], ne[1])))) } mZ() })); zaraz._p({ "e": ["(function(w,d){})(window,document)"] }); })(window, document) } catch (e) { throw fetch("/cdn-cgi/zaraz/t"), e; };</script>
+</head>
+
+<body>
+  <div class="main">
+    <header>
+      <nav>
+        <a href><img src="assets/images/logo.svg" /></a>
+        <div id="navigation-buttons">
+          <a class="materialThemeTitleMedium" href="https://app.veteranam.info/discounts">
+            <div class="row">
+              <div class="nav_button">
+                <div class="row">
+                  <div class="column">Знижки<div id="line"></div>
+                  </div>
+                  <div style="width: 8px"></div>
+                  <span id="tag" class="material-symbols-outlined" style="width: 24px; height: 24px">sell</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="point"></div>
+          <a class="materialThemeTitleMedium" href="https://app.veteranam.info/support">
+            <div class="nav_button">Співпраця<div id="line"></div>
+            </div>
+          </a>
+          <div class="point"></div>
+          <a class="materialThemeTitleMedium" href="https://app.veteranam.info/feedback">
+            <div class="nav_button">Контакти<div id="line"></div>
+            </div>
+          </a>
+        </div>
+        <div id="login-button">
+          <a id="double_button" href="https://app.veteranam.info/intro">
+            <div id="text">Увійти</div>
+            <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <div id="page">
+      <!--@pages/home/view/home_view-->
+      <section>
+        <div id="home_box_list">
+          <div id="home_box">
+            <p class="h1">Дякуємо,<br />Ветерани!</p>
+            <div style="height: 24px"></div>
+            <p class="materialThemeTitleLarge">На нашому сайті ви знайдете актуальні знижки від бізнесів для вас та
+              ваших родин.</p>
+            <div style="height: 24px"></div>
+            <a id="double_button" href="https://app.veteranam.info">
+              <div id="text">Детальніше</div>
+              <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+            </a>
+          </div>
+          <div id="home_small_boxes" class="column">
+            <a id="discount_box" href="https://app.veteranam.info/discounts">
+              <div class="row">
+                <p class="materialThemeBodySmall">ЗНАЙДІТЬ СВОЮ ЗНИЖКУ</p>
+                <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+              </div>
+              <div id="discount_image_row">
+                <p class="materialThemeHeadlineLarge">Знижки</p>
+                <img id="discount_image" src="assets/images/discount_box.png" />
+              </div>
+            </a>
+            <div style="height: 16px"></div>
+            <div class="row">
+              <a id="support_box" href="https://app.veteranam.info/support">
+                <div class="row">
+                  <p class="materialThemeBodySmall">ПІДТРИМАЙТЕ<br />ВЕТЕРАНІВ</p>
+                  <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+                </div>
+                <p class="materialThemeHeadlineLarge">Співпраця</p>
+              </a>
+              <div style="width: 16px"></div>
+              <a id="contact_box" href="https://app.veteranam.info/feedback">
+                <div class="row">
+                  <p class="materialThemeBodySmall">МАЄТЕ ПИТАННЯ?</p>
+                  <span class="material-symbols-outlined" style="width: 24px; height: 24px">language</span>
+                </div>
+                <p class="materialThemeHeadlineLarge">Контакти</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="materialThemeDisplayMedium">
+          Veteranam - це платформа для підтримки ветеранів та їхніх сімей. Ми публікуємо інформацію про знижки та
+          послуги, щоб допомогти ветеранам у повсякденному житті та розвитку.
+        </p>
+        <div id="discount_section">
+          <img id="discount_image" src="assets/images/discount_image.png" />
+          <div class="column">
+            <p class="materialThemeDisplayLarge">Знижки і послуги</p>
+            <div style="height: 16px"></div>
+            <p class="materialThemeBodyLarge">
+              Тут ви знайдете актуальні пропозиції для ветеранів та чинних військовослужбовців, які оновлюються в
+              реальному часі. Медицина, сфера обслуговування, заклади харчування та одяг - всі знижки шукайте в цьому
+              розділі.
+            </p>
+            <div style="height: 16px"></div>
+            <a id="double_button" href="https://app.veteranam.info/discounts">
+              <div id="text">До знижок</div>
+              <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+            </a>
+          </div>
+        </div>
+        <div id="faq_section">
+          <div id="first_part" class="column">
+            <p class="materialThemeDisplayLarge">Відповіді на Ваші запитання</p>
+            <div style="height: 16px"></div>
+            <p class="materialThemeBodyLarge">
+              Не знайшли те, що шукали, хочете звʼязатись з нами, або маєте питання чи запити? Ми радо поспілкуємось!
+              Будь ласка, заповніть форму.
+            </p>
+            <div style="height: 16px"></div>
+            <a id="double_button" href="https://app.veteranam.info/feedback">
+              <div id="text">Написати повідомлення</div>
+              <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+            </a>
+          </div>
+          <div id="faq" class="column">
+            <div class="faq_item_body">
+              <input id="description_checkbox_[&lt;'faq_item_1'&gt;]" type="checkbox" />
+              <label id="faq_item" for="description_checkbox_[&lt;'faq_item_1'&gt;]">
+                <div id="faq_text" class="column">
+                  <p class="materialThemeHeadlineSmall">Як знайти знижки, доступні для ветеранів та їхніх сімей?</p>
+                  <p id="faq_description" class="materialThemeBodyLarge">Щоб знайти знижки для ветеранів, ви можете
+                    перейти з головної сторінки у розділ "Знижки". Там ми зібрали пропозиції від бізнесів, для зручності
+                    можете користуватись фільтрами.</p>
+                </div>
+                <div id="open_icon"><span id="icon_plus" class="material-symbols-outlined"
+                    style="width: 24px; height: 24px">add</span><svg id="icon_minus" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" width="24px" height="24px">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg></div>
+              </label>
+            </div>
+            <div class="faq_item_body">
+              <input id="description_checkbox_[&lt;'faq_item_2'&gt;]" type="checkbox" />
+              <label id="faq_item" for="description_checkbox_[&lt;'faq_item_2'&gt;]">
+                <div id="faq_text" class="column">
+                  <p class="materialThemeHeadlineSmall">Які документи необхідні для отримання знижки?</p>
+                  <p id="faq_description" class="materialThemeBodyLarge">Для отримання знижок, як правило, потрібно
+                    пред'явити посвідчення ветерана або інші документи, що підтверджують ваш статус. Деякі бізнеси
+                    можуть вимагати додаткові документи або підтвердження, тому рекомендуємо звернутися до умов
+                    конкретної пропозиції.</p>
+                </div>
+                <div id="open_icon"><span id="icon_plus" class="material-symbols-outlined"
+                    style="width: 24px; height: 24px">add</span><svg id="icon_minus" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" width="24px" height="24px">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg></div>
+              </label>
+            </div>
+            <div class="faq_item_body">
+              <input id="description_checkbox_[&lt;'faq_item_3'&gt;]" type="checkbox" />
+              <label id="faq_item" for="description_checkbox_[&lt;'faq_item_3'&gt;]">
+                <div id="faq_text" class="column">
+                  <p class="materialThemeHeadlineSmall">Як додати свій бізнес до списку на сайті?</p>
+                  <p id="faq_description" class="materialThemeBodyLarge">Якщо ви власник бізнесу і хочете запропонувати
+                    знижки ветеранам, перейдіть за
+                    <a href="https://business.veteranam.info"> посиланням </a>
+                    або зверніться до нас через форму зворотного звʼязку, що розташована у розділі "Контакти" або
+                    напишіть нам у соцмережі.
+                  </p>
+                </div>
+                <div id="open_icon"><span id="icon_plus" class="material-symbols-outlined"
+                    style="width: 24px; height: 24px">add</span><svg id="icon_minus" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" width="24px" height="24px">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg></div>
+              </label>
+            </div>
+            <div class="faq_item_body">
+              <input id="description_checkbox_[&lt;'faq_item_4'&gt;]" type="checkbox" />
+              <label id="faq_item" for="description_checkbox_[&lt;'faq_item_4'&gt;]">
+                <div id="faq_text" class="column">
+                  <p class="materialThemeHeadlineSmall">Чи доступні знижки тільки для ветеранів, чи також для їхніх
+                    сімей?</p>
+                  <p id="faq_description" class="materialThemeBodyLarge">Багато знижок доступні як для ветеранів, так і
+                    для членів їхніх сімей. Умови конкретної знижки завжди зазначені в описі пропозиції, тому радимо
+                    уважно читати деталі перед використанням.</p>
+                </div>
+                <div id="open_icon"><span id="icon_plus" class="material-symbols-outlined"
+                    style="width: 24px; height: 24px">add</span><svg id="icon_minus" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" width="24px" height="24px">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg></div>
+              </label>
+            </div>
+            <div class="faq_item_body">
+              <input id="description_checkbox_[&lt;'faq_item_5'&gt;]" type="checkbox" />
+              <label id="faq_item" for="description_checkbox_[&lt;'faq_item_5'&gt;]">
+                <div id="faq_text" class="column">
+                  <p class="materialThemeHeadlineSmall">Чи є обмеження за часом для знижок, що пропонуються?</p>
+                  <p id="faq_description" class="materialThemeBodyLarge">Ми намагаємося постійно підтримувати
+                    актуальність списку знижок. Нові пропозиції та оновлення регулярно публікуються на нашій сторінці
+                    Знижки, тому повертайтеся частіше для отримання оновленої інформації.</p>
+                </div>
+                <div id="open_icon"><span id="icon_plus" class="material-symbols-outlined"
+                    style="width: 24px; height: 24px">add</span><svg id="icon_minus" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" width="24px" height="24px">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg></div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <footer class="column">
+          <div id="main_footer_buttons_row" class="row">
+            <div id="contact_footer_section" class="footer_column">
+              <p class="materialThemeDisplaySmall">Хочете підтримати наш проєкт?</p>
+              <div style="height: 16px"></div>
+              <a id="double_button" href="https://app.veteranam.info/support">
+                <div id="text">Зв'язатись</div>
+                <span class="material-symbols-outlined" style="width: 24px; height: 24px">arrow_outward</span>
+              </a>
+            </div>
+            <div id="footer_buttons_row" class="row">
+              <div class="column">
+                <p id="text_neutral_variant_35" class="materialThemeBodyLarge">Розділи</p>
+                <div style="height: 16px"></div>
+                <a class="materialThemeTitleMedium" href="https://app.veteranam.info/discounts">Знижки</a>
+                <div style="height: 8px"></div>
+                <a class="materialThemeTitleMedium" href="https://app.veteranam.info/support">Співпраця</a>
+              </div>
+              <div class="column">
+                <p id="text_neutral_variant_35" class="materialThemeBodyLarge">Зв'язатись</p>
+                <div style="height: 16px"></div>
+                <p class="materialThemeTitleMedium"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                    data-cfemail="ee868b828281ae988b9a8b9c8f808f83c087808881">[email&#160;protected]</a></p>
+              </div>
+            </div>
+            <div id="social_column" class="column">
+              <a class="social" href="https://www.linkedin.com/company/veteranam"><img width="24" height="24"
+                  src="assets/images/linkedin.svg" /></a>
+              <a class="social" href="https://www.instagram.com/veteranam_info"><img width="24" height="24"
+                  src="assets/images/instagram.svg" /></a>
+              <a class="social" href="https://www.facebook.com/profile.php?id=61560499465895"><img width="24"
+                  height="24" src="assets/images/facebook.svg" /></a>
+            </div>
+          </div>
+          <div style="height: 56px"></div>
+          <div id="bottom_row" class="row">
+            <img src="assets/images/logo.svg" />
+            <div style="width: 40px"></div>
+            <p id="text_neutral_variant_35" class="materialThemeTitleMedium">
+              © MadeByCodingHouseLLC 2024
+              |
+              Всі права захищені
+              |
+              <a id="text_neutral_variant_35"
+                href="https://app.veteranam.info/privacy-policy">Політика конфіденційності</a>
+            </p>
+          </div>
+        </footer>
+      </section>
+      <!--/@pages/home/view/home_view-->
+    </div>
+  </div>
+  <!-- Cloudflare Pages Analytics -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "74c68dbe227941918b3a057d9e29c946"}'></script><!-- Cloudflare Pages Analytics -->
+</body>
+
+</html>
+<!-- Build Number: 1732651960 -->
