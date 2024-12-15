@@ -13,6 +13,7 @@ abstract class KMinMaxSize {
   static const maxHeight220 = 220.0;
   static const maxHeight400 = 400.0;
   static const maxHeight480 = 480.0;
+  static const maxHeight640 = 640.0;
   static const minHeight30 = 30.0;
   static const minHeight50 = 50.0;
   static const minHeight640 = 640.0;

@@ -1,34 +1,50 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/components/discount/bloc/discount_watcher_bloc.dart';
 import 'package:veteranam/components/discount/discount.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountInformationDeskWidget extends MultiChildRenderObjectWidget {
-  // Constructor for the RowSliver widget
-  DiscountInformationDeskWidget({
-    required this.maxHeight,
+class DiscountInformationWidget extends StatelessWidget {
+  const DiscountInformationWidget({
     required this.isDesk,
     super.key,
-  }) : super(
-          children: [
+  });
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isDesk) {
+      return const _DiscountInformationDeskWidget();
+    } else {
+      return const SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(
+            child: _DiscountContactInformationWidget(isDesk: false),
+          ),
+          SliverToBoxAdapter(child: KSizedBox.kHeightSizedBox24),
+          DiscountInformationBodyWidget(isDesk: false),
+        ],
+      );
+    }
+  }
+}
+
+class _DiscountInformationDeskWidget extends MultiChildRenderObjectWidget {
+  // Constructor for the RowSliver widget
+  const _DiscountInformationDeskWidget()
+      : super(
+          children: const [
             DiscountInformationBodyWidget(
-              isDesk: isDesk,
+              isDesk: true,
             ),
-            _DiscountContactWidget(
-              maxHeight: maxHeight,
-              isDesk: isDesk,
-            ),
+            _DiscountContactWidget(),
           ],
         );
-  final double maxHeight;
-  final bool isDesk;
 
   // Creates the render object for this widget
   @override
   RenderRowSliver createRenderObject(BuildContext context) {
-    return RenderRowSliver(leftWidthPercent: 2 / 3);
+    return RenderRowSliver(leftWidthPercent: 3 / 5);
   }
 }
 
@@ -104,35 +120,24 @@ class DiscountInformationBodyWidget extends StatelessWidget {
 }
 
 class _DiscountContactWidget extends StatelessWidget {
-  const _DiscountContactWidget({
-    required this.maxHeight,
-    required this.isDesk,
-  });
-  final double maxHeight;
-  final bool isDesk;
+  const _DiscountContactWidget();
 
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: SliverHeaderWidget(
-        childWidget: ({
-          required overlapsContent,
-          required shrinkOffset,
-        }) =>
-            BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-          builder: (context, state) {
-            return SkeletonizerWidget(
-              isLoading: state.loadingStatus.isLoading,
-              child: _DiscountContactInformationWidget(
-                discount: state.discountModel,
-                isDesk: isDesk,
-                isLoading: state.loadingStatus.isLoading,
-              ),
-            );
-          },
+    return SliverPadding(
+      padding: const EdgeInsets.only(left: KPadding.kPaddingSize60),
+      sliver: SliverPersistentHeader(
+        pinned: true,
+        delegate: SliverHeaderWidget(
+          childWidget: ({
+            required overlapsContent,
+            required shrinkOffset,
+          }) =>
+              const _DiscountContactInformationWidget(
+            isDesk: true,
+          ),
+          maxMinHeight: KMinMaxSize.maxHeight640,
         ),
-        maxMinHeight: maxHeight,
       ),
     );
   }
@@ -140,85 +145,89 @@ class _DiscountContactWidget extends StatelessWidget {
 
 class _DiscountContactInformationWidget extends StatelessWidget {
   const _DiscountContactInformationWidget({
-    required this.discount,
     required this.isDesk,
-    required this.isLoading,
   });
-
-  final bool isLoading;
-  final DiscountModel discount;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DecoratedBox(
-          decoration: KWidgetTheme.boxDecorationDiscountContainer,
+    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      builder: (context, state) {
+        return SkeletonizerWidget(
+          isLoading: state.loadingStatus.isLoading,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-                child: CompanyInfoWidget(
-                  dateVerified: discount.dateVerified,
-                  category: discount.category,
-                  company: discount.company,
-                  userName: discount.userName,
-                  userPhoto: discount.userPhoto,
+              DecoratedBox(
+                decoration: KWidgetTheme.boxDecorationDiscountContainer,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                      child: CompanyInfoWidget(
+                        dateVerified: state.discountModel.dateVerified,
+                        category: state.discountModel.category,
+                        company: state.discountModel.company,
+                        userName: state.discountModel.userName,
+                        userPhoto: state.discountModel.userPhoto,
+                      ),
+                    ),
+                    DecoratedBox(
+                      decoration: KWidgetTheme.boxDecorationWidget,
+                      child: Padding(
+                        padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.discountModel.title.getTrsnslation(context),
+                              style: AppTextStyle.materialThemeHeadlineMedium,
+                            ),
+                            KSizedBox.kHeightSizedBox4,
+                            CityListWidget(
+                              key: KWidgetkeys.widget.discountCard.city,
+                              isDesk: false,
+                              location: state.discountModel.location,
+                              subLocation: state.discountModel.subLocation,
+                              showFullText: true,
+                            ),
+                            KSizedBox.kHeightSizedBox4,
+                            ExpirationWidget(
+                              expiration: state.discountModel.expiration
+                                  ?.getTrsnslation(context),
+                            ),
+                            if (state.discountModel.phoneNumber != null) ...[
+                              KSizedBox.kHeightSizedBox4,
+                              ShowPhoneNumberWidget(
+                                phoneNumber: state.discountModel.phoneNumber!,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationWidget,
-                child: Padding(
-                  padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        discount.title.getTrsnslation(context),
-                        style: AppTextStyle.materialThemeHeadlineMedium,
-                      ),
-                      KSizedBox.kHeightSizedBox4,
-                      CityListWidget(
-                        key: KWidgetkeys.widget.discountCard.city,
-                        isDesk: false,
-                        location: discount.location,
-                        subLocation: discount.subLocation,
-                        showFullText: true,
-                      ),
-                      KSizedBox.kHeightSizedBox4,
-                      ExpirationWidget(
-                        expiration:
-                            discount.expiration?.getTrsnslation(context),
-                      ),
-                      if (discount.phoneNumber != null) ...[
-                        KSizedBox.kHeightSizedBox4,
-                        ShowPhoneNumberWidget(
-                          phoneNumber: discount.phoneNumber!,
-                        ),
-                      ],
-                    ],
-                  ),
+              KSizedBox.kHeightSizedBox24,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SharedIconListWidget(
+                  isDesk: isDesk,
+                  cardEnum: CardEnum.discount,
+                  cardId: state.discountModel.id,
+                  shareKey: const Key('share'),
+                  complaintKey: const Key('complaint'),
+                  share:
+                      '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModel.id}',
+                  isSeparatePage: true,
+                  link: state.discountModel.directLink ??
+                      state.discountModel.link,
                 ),
               ),
             ],
           ),
-        ),
-        KSizedBox.kHeightSizedBox24,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SharedIconListWidget(
-            isDesk: isDesk,
-            cardEnum: CardEnum.discount,
-            cardId: discount.id,
-            shareKey: const Key('share'),
-            complaintKey: const Key('complaint'),
-            share: '${KRoute.home.path}${KRoute.discounts.path}/${discount.id}',
-            isSeparatePage: true,
-            link: discount.directLink ?? discount.link,
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

@@ -55,18 +55,23 @@ class DiscountBodyWidget extends StatelessWidget {
                     isTablet: isTablet,
                     pageName: context.l10n.discounts,
                   ),
-                  KSizedBox.kHeightSizedBox32.toSliver,
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox32.toSliver
+                  else
+                    KSizedBox.kHeightSizedBox8.toSliver,
                   SliverPadding(
                     padding: padding,
                     sliver: const SliverToBoxAdapter(
                       child: DiscountBackButton(),
                     ),
                   ),
-                  KSizedBox.kHeightSizedBox32.toSliver,
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox32.toSliver
+                  else
+                    KSizedBox.kHeightSizedBox8.toSliver,
                   SliverPadding(
                     padding: padding,
-                    sliver: DiscountInformationDeskWidget(
-                      maxHeight: constraints.maxHeight,
+                    sliver: DiscountInformationWidget(
                       isDesk: isDesk,
                     ),
                   ),

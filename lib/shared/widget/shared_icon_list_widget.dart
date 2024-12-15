@@ -51,8 +51,6 @@ class SharedIconListWidget extends StatelessWidget {
             : iconBackground,
         key: likeKey,
       ),
-      if (!isSeparatePage)
-        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
       // if (link != null && link!.isUrlValid) ...[
       //   _CardIconWidget(
       //     label: context.l10n.webSite,
@@ -83,8 +81,6 @@ class SharedIconListWidget extends StatelessWidget {
                     )
                   : null),
         ),
-      if (!isSeparatePage)
-        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
       if (isSeparatePage && isDesk) ...[
         if (link != null && link!.isUrlValid)
           _CardIconWidget(
@@ -167,18 +163,19 @@ class SharedIconListWidget extends StatelessWidget {
       //   ),
       //],
     ];
-    if (isSeparatePage) {
-      return Wrap(
-        spacing: KPadding.kPaddingSize24,
+    // if (isSeparatePage) {
+    return Expanded(
+      child: Wrap(
+        spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
         runSpacing: KPadding.kPaddingSize16,
         children: children,
-      );
-    } else {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
-      );
-    }
+      ),
+    );
+    // } else {
+    //   return Row(
+    //     children: children,
+    //   );
+    // }
   }
 }
 
