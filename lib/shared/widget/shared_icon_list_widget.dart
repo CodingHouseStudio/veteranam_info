@@ -41,7 +41,6 @@ class SharedIconListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.shrink();
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: (isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8) +
