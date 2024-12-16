@@ -91,7 +91,7 @@ dev_dependencies:
   mockito: ^5.4.4 # Used for mocking classes
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
-  sentry_dart_plugin: ^2.1.0
+  sentry_dart_plugin: ^2.2.1
   url_launcher_platform_interface: ^2.3.2
   very_good_analysis: ^6.0.0
 
