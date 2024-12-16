@@ -403,7 +403,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           )) {
             if (discount.eligibility.contains(EligibilityEnum.all)) {
               eligibilitiesList
-                  .addAll(EligibilityEnum.values.getTranslateModels);
+                  .addAll(EligibilityEnum.valuesWithoutAll.getTranslateModels);
             } else {
               eligibilitiesList.addAll(discount.eligibility.getTranslateModels);
             }
