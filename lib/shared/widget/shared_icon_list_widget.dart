@@ -37,8 +37,11 @@ class SharedIconListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      alignment: WrapAlignment.end,
+      spacing: (isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8),
+      runSpacing: KPadding.kPaddingSize16,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         _CardLikeIconWidget(
           label: context.l10n.favorite,
@@ -47,7 +50,7 @@ class SharedIconListWidget extends StatelessWidget {
           background: background,
           key: likeKey,
         ),
-        KSizedBox.kWidthSizedBox8,
+        // KSizedBox.kWidthSizedBox8,
         // if (link != null && link!.isUrlValid) ...[
         //   _CardIconWidget(
         //     label: context.l10n.webSite,
@@ -72,7 +75,7 @@ class SharedIconListWidget extends StatelessWidget {
             background: background,
             key: shareKey,
           ),
-        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
+        // KSizedBox.kWidthSizedBox8,
         PopupMenuButtonWidget<int>(
           buttonText: context.l10n.login,
           iconButton: KIcon.moreVert,

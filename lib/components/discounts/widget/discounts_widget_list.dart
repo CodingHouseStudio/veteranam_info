@@ -114,13 +114,15 @@ class _AdvancedFilterDesk extends StatelessWidget {
 }
 
 class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  const DiscountsMobWidgetList({required this.padding, super.key})
+  DiscountsMobWidgetList(
+      {required this.padding, required this.isDesk, super.key})
       : super(
-          child: const _DiscountWidgetList(
-            isDesk: false,
+          child: _DiscountWidgetList(
+            isDesk: isDesk,
           ),
         );
   final EdgeInsets padding;
+  final bool isDesk;
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderSliverPadding(

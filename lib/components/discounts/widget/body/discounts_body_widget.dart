@@ -126,6 +126,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                     else
                       DiscountsMobWidgetList(
                         padding: padding,
+                        isDesk: isTablet,
                       ),
                   ],
                   controller: scrollController,

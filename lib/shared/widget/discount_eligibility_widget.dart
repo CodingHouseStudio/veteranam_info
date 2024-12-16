@@ -38,10 +38,27 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modifiableEligibility = List<EligibilityEnum>.from(eligibility);
+    if (modifiableEligibility.first == EligibilityEnum.all) {
+      modifiableEligibility
+        ..removeAt(0)
+        ..addAll([
+          EligibilityEnum.veterans,
+          EligibilityEnum.combatants,
+          EligibilityEnum.militaryPersonnel,
+          EligibilityEnum.familyMembersOfTheDeceased,
+          EligibilityEnum.personsWithDisabilitiesDueToWar,
+          EligibilityEnum.emergencyServiceEmployees,
+          EligibilityEnum.policeOfficers,
+        ]);
+    }
+
     return Wrap(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       children: _buildWidgets(
-        eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
+        modifiableEligibility.length > 5
+            ? modifiableEligibility.take(5).toList()
+            : modifiableEligibility,
         context,
       ),
 

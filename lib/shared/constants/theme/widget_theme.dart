@@ -273,7 +273,7 @@ abstract class KWidgetTheme {
     ),
     visualDensity: VisualDensity.comfortable,
   );
-  static const boxDecorationWidgetWithImage = BoxDecoration(
+  static const boxDecorationWidgetDeskWithImage = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusOnlyRight,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
@@ -296,5 +296,9 @@ abstract class KWidgetTheme {
         color: AppColors.materialThemeWhite,
       ),
     ),
+  );
+  static const boxDecorationWidgetMobWithImage = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusOnlyBottom,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 }

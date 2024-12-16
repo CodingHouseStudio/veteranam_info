@@ -55,53 +55,113 @@ class DiscountCardWidget extends StatelessWidget {
                               context.l10n.free
                           ? KWidgetTheme.boxDecorationDiscountBorder
                           : null,
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(KSize.kRadius32),
-                              topLeft: Radius.circular(KSize.kRadius32),
-                            ),
-                            child: NetworkImageWidget(
-                              imageUrl: discountItem.images![0].downloadURL,
-                            ),
-                          ),
-                          Positioned(
-                            top: KPadding.kPaddingSize16,
-                            right: KPadding.kPaddingSize16,
-                            child: DecoratedBox(
-                              decoration: KWidgetTheme.boxDecorationDiscount,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: KPadding.kPaddingSize8,
-                                  vertical: KPadding.kPaddingSize4,
-                                ),
-                                child: TextPointWidget(
-                                  discountItem.discount
-                                      .getDiscountString(context),
-                                  key: KWidgetkeys.widget.discountCard.discount,
-                                  mainAxisSize: MainAxisSize.min,
-                                ),
+                  child: isDesk
+                      ? Row(
+                          children: [
+                            Flexible(
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft:
+                                          Radius.circular(KSize.kRadius32),
+                                      topLeft: Radius.circular(KSize.kRadius32),
+                                    ),
+                                    child: NetworkImageWidget(
+                                      imageUrl:
+                                          discountItem.images![0].downloadURL,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: KPadding.kPaddingSize16,
+                                    right: KPadding.kPaddingSize16,
+                                    child: DecoratedBox(
+                                      decoration:
+                                          KWidgetTheme.boxDecorationDiscount,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: KPadding.kPaddingSize8,
+                                          vertical: KPadding.kPaddingSize4,
+                                        ),
+                                        child: TextPointWidget(
+                                          discountItem.discount
+                                              .getDiscountString(context),
+                                          key: KWidgetkeys
+                                              .widget.discountCard.discount,
+                                          mainAxisSize: MainAxisSize.min,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Flexible(
-                        child: _DiscountCardDesciprtionWidget(
-                          isDesk: isDesk,
-                          descriptionMethod: descriptionMethod,
-                          discountItem: discountItem,
-                          closeWidget: closeWidget,
-                          isBusiness: isBusiness,
-                          share: share,
-                          useSiteUrl: useSiteUrl,
+                            Flexible(
+                              child: _DiscountCardDesciprtionWidget(
+                                isDesk: isDesk,
+                                descriptionMethod: descriptionMethod,
+                                discountItem: discountItem,
+                                closeWidget: closeWidget,
+                                isBusiness: isBusiness,
+                                share: share,
+                                useSiteUrl: useSiteUrl,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            Flexible(
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight:
+                                          Radius.circular(KSize.kRadius32),
+                                      topLeft: Radius.circular(KSize.kRadius32),
+                                    ),
+                                    child: NetworkImageWidget(
+                                      imageUrl:
+                                          discountItem.images![0].downloadURL,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: KPadding.kPaddingSize16,
+                                    right: KPadding.kPaddingSize16,
+                                    child: DecoratedBox(
+                                      decoration:
+                                          KWidgetTheme.boxDecorationDiscount,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: KPadding.kPaddingSize8,
+                                          vertical: KPadding.kPaddingSize4,
+                                        ),
+                                        child: TextPointWidget(
+                                          discountItem.discount
+                                              .getDiscountString(context),
+                                          key: KWidgetkeys
+                                              .widget.discountCard.discount,
+                                          mainAxisSize: MainAxisSize.min,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              child: _DiscountCardDesciprtionWidget(
+                                isDesk: isDesk,
+                                descriptionMethod: descriptionMethod,
+                                discountItem: discountItem,
+                                closeWidget: closeWidget,
+                                isBusiness: isBusiness,
+                                share: share,
+                                useSiteUrl: useSiteUrl,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ),
               )
             else
@@ -143,7 +203,9 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: discountItem.hasImages
-          ? KWidgetTheme.boxDecorationWidgetWithImage
+          ? isDesk
+              ? KWidgetTheme.boxDecorationWidgetDeskWithImage
+              : KWidgetTheme.boxDecorationWidgetMobWithImage
           : KWidgetTheme.boxDecorationWidget,
       padding: EdgeInsets.symmetric(
         horizontal: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
