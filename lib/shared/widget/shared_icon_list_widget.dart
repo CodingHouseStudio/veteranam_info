@@ -41,76 +41,59 @@ class SharedIconListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: (isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8) +
-            (isSeparatePage ? KPadding.kPaddingSize8 : 0),
-        runSpacing: KPadding.kPaddingSize16,
-        children: [
-          // _CardLikeIconWidget(
-          //   label: context.l10n.favorite,
-          //   icon: KIcon.favorite,
-          //   countLike: numberLikes ?? 0,
-          //   background: isSeparatePage
-          //       ? AppColors.materialThemeKeyColorsNeutral
-          //       : iconBackground,
-          //   key: likeKey,
-          // ),
-          // if (link != null && link!.isUrlValid) ...[
-          //   _CardIconWidget(
-          //     label: context.l10n.webSite,
-          //     onPressed: () => context..read<UrlCubit>()
-          //.launchUrl(url: link),
-          //     icon: KIcon.captivePortal,
-          //     background: background,
-          //     key: webSiteKey,
-          //   ),
-          //   if (isDesk) KSizedBox.kWidthSizedBox12
-          //else KSizedBox.kWidthSizedBox4,
-          // ],
-          if (showShare)
-            _CardIconWidget(
-              label: context.l10n.share,
-              onPressed: share != null
-                  ? () => context.read<UrlCubit>().share(
-                        share,
-                        useSiteUrl: useSiteUrl,
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: (isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8) +
+          (isSeparatePage ? KPadding.kPaddingSize8 : 0),
+      runSpacing: KPadding.kPaddingSize16,
+      children: [
+        // _CardLikeIconWidget(
+        //   label: context.l10n.favorite,
+        //   icon: KIcon.favorite,
+        //   countLike: numberLikes ?? 0,
+        //   background: isSeparatePage
+        //       ? AppColors.materialThemeKeyColorsNeutral
+        //       : iconBackground,
+        //   key: likeKey,
+        // ),
+        // if (link != null && link!.isUrlValid) ...[
+        //   _CardIconWidget(
+        //     label: context.l10n.webSite,
+        //     onPressed: () => context..read<UrlCubit>()
+        //.launchUrl(url: link),
+        //     icon: KIcon.captivePortal,
+        //     background: background,
+        //     key: webSiteKey,
+        //   ),
+        //   if (isDesk) KSizedBox.kWidthSizedBox12
+        //else KSizedBox.kWidthSizedBox4,
+        // ],
+        if (showShare)
+          _CardIconWidget(
+            label: context.l10n.share,
+            onPressed: share != null
+                ? () => context.read<UrlCubit>().share(
+                      share,
+                      useSiteUrl: useSiteUrl,
+                    )
+                : null,
+            icon: KIcon.share,
+            background: iconBackground,
+            key: shareKey,
+            border: iconBorder ??
+                (isSeparatePage
+                    ? Border.all(
+                        color: AppColors.materialThemeKeyColorsNeutral,
                       )
-                  : null,
-              icon: KIcon.share,
-              background: iconBackground,
-              key: shareKey,
-              border: iconBorder ??
-                  (isSeparatePage
-                      ? Border.all(
-                          color: AppColors.materialThemeKeyColorsNeutral,
-                        )
-                      : null),
-            ),
-          if (isSeparatePage) ...[
-            if (link != null && link!.isUrlValid)
-              _CardIconWidget(
-                background: iconBackground,
-                icon: KIcon.captivePortal,
-                onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
-                label: context.l10n.webSite,
-                border: iconBorder ??
-                    (isSeparatePage
-                        ? Border.all(
-                            color: AppColors.materialThemeKeyColorsNeutral,
-                          )
-                        : null),
-              ),
+                    : null),
+          ),
+        if (isSeparatePage) ...[
+          if (link != null && link!.isUrlValid)
             _CardIconWidget(
               background: iconBackground,
-              icon: KIcon.brightnessAlert,
-              onPressed: () => context.dialog.showReportDialog(
-                isDesk: isDesk,
-                cardEnum: cardEnum,
-                cardId: cardId,
-              ),
-              label: context.l10n.complaint,
+              icon: KIcon.captivePortal,
+              onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
+              label: context.l10n.webSite,
               border: iconBorder ??
                   (isSeparatePage
                       ? Border.all(
@@ -118,76 +101,91 @@ class SharedIconListWidget extends StatelessWidget {
                         )
                       : null),
             ),
-          ] else
-            PopupMenuButtonWidget<int>(
-              buttonText: context.l10n.login,
-              iconButton: KIcon.moreVert,
-              buttonStyle: KButtonStyles.borderWhiteButtonStyle,
-              textUnderButton: context.l10n.more,
-              menuItemsPadding: const EdgeInsets.only(
-                top: KPadding.kPaddingSize16,
-                bottom: KPadding.kPaddingSize16,
-                left: KPadding.kPaddingSize8,
-                right: KPadding.kPaddingSize8,
-              ),
-              items: [
-                if (link != null && link!.isUrlValid)
-                  DropDownItem(
-                    value: 1,
-                    text: context.l10n.webSite,
-                    icon: IconWidget(
-                      background: iconBackground,
-                      icon: KIcon.captivePortal,
-                      padding: KPadding.kPaddingSize12,
-                    ),
-                    event: () => context.read<UrlCubit>().launchUrl(url: link),
-                    // padding: const EdgeInsets.only(
-                    //   top: KPadding.kPaddingSize16,
-                    //   bottom: KPadding.kPaddingSize8,
-                    //   left: KPadding.kPaddingSize16,
-                    //   right: KPadding.kPaddingSize16,
-                    // ),
-                    key: webSiteKey,
-                  ),
+          _CardIconWidget(
+            background: iconBackground,
+            icon: KIcon.brightnessAlert,
+            onPressed: () => context.dialog.showReportDialog(
+              isDesk: isDesk,
+              cardEnum: cardEnum,
+              cardId: cardId,
+            ),
+            label: context.l10n.complaint,
+            border: iconBorder ??
+                (isSeparatePage
+                    ? Border.all(
+                        color: AppColors.materialThemeKeyColorsNeutral,
+                      )
+                    : null),
+          ),
+        ] else
+          PopupMenuButtonWidget<int>(
+            buttonText: context.l10n.login,
+            iconButton: KIcon.moreVert,
+            buttonStyle: KButtonStyles.borderWhiteButtonStyle,
+            textUnderButton: context.l10n.more,
+            menuItemsPadding: const EdgeInsets.only(
+              top: KPadding.kPaddingSize16,
+              bottom: KPadding.kPaddingSize16,
+              left: KPadding.kPaddingSize8,
+              right: KPadding.kPaddingSize8,
+            ),
+            items: [
+              if (link != null && link!.isUrlValid)
                 DropDownItem(
-                  value: 2,
-                  text: context.l10n.complaint,
+                  value: 1,
+                  text: context.l10n.webSite,
                   icon: IconWidget(
                     background: iconBackground,
-                    icon: KIcon.brightnessAlert,
+                    icon: KIcon.captivePortal,
                     padding: KPadding.kPaddingSize12,
                   ),
-                  event: () => context.dialog.showReportDialog(
-                    isDesk: isDesk,
-                    cardEnum: cardEnum,
-                    cardId: cardId,
-                  ),
+                  event: () => context.read<UrlCubit>().launchUrl(url: link),
                   // padding: const EdgeInsets.only(
-                  //   bottom: KPadding.kPaddingSize16,
+                  //   top: KPadding.kPaddingSize16,
+                  //   bottom: KPadding.kPaddingSize8,
                   //   left: KPadding.kPaddingSize16,
                   //   right: KPadding.kPaddingSize16,
                   // ),
-                  key: complaintKey,
+                  key: webSiteKey,
                 ),
-              ],
-              position: PopupMenuButtonPosition.bottomLeft,
-            ),
-          // if (widget.showComplaint) ...[
-          //   if (widget.isDesk)
-          //     KSizedBox.kWidthSizedBox16
-          //   else
-          //     KSizedBox.kWidthSizedBox8,
-          //   ComplaintWidget(
-          //     key: widget.complaintKey,
-          //     isDesk: widget.isDesk,
-          //     cardEnum: widget.cardEnum,
-          //     // afterEvent: afterEvent,
-          //     cardId: widget.cardId,
-          //     background: widget.background,
-          //   ),
-          //],
-        ],
-      ),
+              DropDownItem(
+                value: 2,
+                text: context.l10n.complaint,
+                icon: IconWidget(
+                  background: iconBackground,
+                  icon: KIcon.brightnessAlert,
+                  padding: KPadding.kPaddingSize12,
+                ),
+                event: () => context.dialog.showReportDialog(
+                  isDesk: isDesk,
+                  cardEnum: cardEnum,
+                  cardId: cardId,
+                ),
+                // padding: const EdgeInsets.only(
+                //   bottom: KPadding.kPaddingSize16,
+                //   left: KPadding.kPaddingSize16,
+                //   right: KPadding.kPaddingSize16,
+                // ),
+                key: complaintKey,
+              ),
+            ],
+            position: PopupMenuButtonPosition.bottomLeft,
+          ),
+        // if (widget.showComplaint) ...[
+        //   if (widget.isDesk)
+        //     KSizedBox.kWidthSizedBox16
+        //   else
+        //     KSizedBox.kWidthSizedBox8,
+        //   ComplaintWidget(
+        //     key: widget.complaintKey,
+        //     isDesk: widget.isDesk,
+        //     cardEnum: widget.cardEnum,
+        //     // afterEvent: afterEvent,
+        //     cardId: widget.cardId,
+        //     background: widget.background,
+        //   ),
+        //],
+      ],
     );
   }
 }
