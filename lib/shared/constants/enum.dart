@@ -19,7 +19,7 @@ enum UrlEnum {
   linkError,
   copyError,
   error,
-  copyEmailSucceed,
+  copySucceed,
   copyLinkSucceed,
 }
 

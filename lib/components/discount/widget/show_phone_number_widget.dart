@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class ShowPhoneNumberWidget extends StatefulWidget {
@@ -21,8 +22,17 @@ class _ShowPhoneNumberWidgetState extends State<ShowPhoneNumberWidget> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: TextButton.icon(
-        onPressed: () => setState(() => showPhoneNumber = true),
+        onPressed: () => showPhoneNumber
+            ? PlatformEnumFlutter.isWebDesktop
+                ? context.read<UrlCubit>().copy(widget.phoneNumber)
+                : context.read<UrlCubit>().launchUrl(url: widget.phoneNumber)
+            : setState(() => showPhoneNumber = true),
         icon: KIcon.call,
+        style: KButtonStyles.transparentButtonStyle.copyWith(
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
+          ),
+        ),
         label: Text(
           showPhoneNumber ? widget.phoneNumber : context.l10n.showPhoneNumber,
           style: AppTextStyle.materialThemeLabelLargeUnderLine,

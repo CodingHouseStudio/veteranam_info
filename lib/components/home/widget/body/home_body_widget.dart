@@ -40,7 +40,7 @@ class HomeBodyWidget extends StatelessWidget {
             listener: (context, state) async {
               if (state != null) {
                 context.dialog.showSnackBardTextDialog(
-                  state.value(context),
+                  state.value(context: context),
                   duration: const Duration(milliseconds: 4000),
                 );
                 context.read<UrlCubit>().reset();

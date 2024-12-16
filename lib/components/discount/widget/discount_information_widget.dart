@@ -58,18 +58,10 @@ class DiscountInformationBodyWidget extends StatelessWidget {
       builder: (context, state) {
         final children = [
           if (state.discountModel.hasImages)
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxHeight: KMinMaxSize.maxHeight480,
-              ),
-              child: Center(
-                child: DiscountImageWidget(
-                  discount:
-                      state.discountModel.discount.getDiscountString(context),
-                  images: state.discountModel.images!,
-                  borderRadius: KBorderRadius.kBorderRadius32,
-                ),
-              ),
+            DiscountImageWidget(
+              discount: state.discountModel.discount.getDiscountString(context),
+              images: state.discountModel.images!,
+              borderRadius: KBorderRadius.kBorderRadius32,
             ),
           Text(
             context.l10n.eligibility,
@@ -90,7 +82,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
             text: state.discountModel.description.getTrsnslation(context),
             textStyle: AppTextStyle.materialThemeBodyLarge,
           ),
-          if (state.discountModel.exclusions != null) ...[
+          if (state.discountModel.requirements != null) ...[
             KSizedBox.kHeightSizedBox32,
             Text(
               context.l10n.toGetItYouNeed,
@@ -102,17 +94,23 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               textStyle: AppTextStyle.materialThemeBodyLarge,
             ),
           ],
-          if (state.discountModel.additionalDetails != null) ...[
+          if (state.discountModel.exclusions != null) ...[
             KSizedBox.kHeightSizedBox32,
-            Text(
-              state.discountModel.additionalDetails!.getTrsnslation(context),
-              style: AppTextStyle.materialThemeBodyLargeNeutralVariant50,
+            MarkdownLinkWidget(
+              text: state.discountModel.exclusions!.getTrsnslation(context),
+              textStyle: AppTextStyle.materialThemeBodyLargeNeutralVariant50,
             ),
           ],
         ];
-        return SliverList.builder(
-          itemBuilder: (context, index) => children.elementAt(index),
-          itemCount: children.length,
+        return SkeletonizerWidget(
+          isLoading: state.loadingStatus.isLoading,
+          isSliver: true,
+          highlightColor: AppColors.materialThemeWhite,
+          baseColor: AppColors.materialThemeKeyColorsNeutral,
+          child: SliverList.builder(
+            itemBuilder: (context, index) => children.elementAt(index),
+            itemCount: children.length,
+          ),
         );
       },
     );
@@ -174,31 +172,54 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                     DecoratedBox(
                       decoration: KWidgetTheme.boxDecorationWidget,
                       child: Padding(
-                        padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize16,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              state.discountModel.title.getTrsnslation(context),
-                              style: AppTextStyle.materialThemeHeadlineMedium,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: KPadding.kPaddingSize16,
+                              ),
+                              child: Text(
+                                state.discountModel.title
+                                    .getTrsnslation(context),
+                                style: AppTextStyle.materialThemeHeadlineMedium,
+                              ),
                             ),
                             KSizedBox.kHeightSizedBox4,
-                            CityListWidget(
-                              key: KWidgetkeys.widget.discountCard.city,
-                              isDesk: false,
-                              location: state.discountModel.location,
-                              subLocation: state.discountModel.subLocation,
-                              showFullText: true,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: KPadding.kPaddingSize16,
+                              ),
+                              child: CityListWidget(
+                                key: KWidgetkeys.widget.discountCard.city,
+                                isDesk: false,
+                                location: state.discountModel.location,
+                                subLocation: state.discountModel.subLocation,
+                                showFullText: true,
+                              ),
                             ),
                             KSizedBox.kHeightSizedBox4,
-                            ExpirationWidget(
-                              expiration: state.discountModel.expiration
-                                  ?.getTrsnslation(context),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: KPadding.kPaddingSize16,
+                              ),
+                              child: ExpirationWidget(
+                                expiration: state.discountModel.expiration
+                                    ?.getTrsnslation(context),
+                              ),
                             ),
                             if (state.discountModel.phoneNumber != null) ...[
                               KSizedBox.kHeightSizedBox4,
-                              ShowPhoneNumberWidget(
-                                phoneNumber: state.discountModel.phoneNumber!,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: KPadding.kPaddingSize8,
+                                ),
+                                child: ShowPhoneNumberWidget(
+                                  phoneNumber: state.discountModel.phoneNumber!,
+                                ),
                               ),
                             ],
                           ],
@@ -217,6 +238,8 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                   cardId: state.discountModel.id,
                   shareKey: const Key('share'),
                   complaintKey: const Key('complaint'),
+                  showShare: !Config.isBusiness ||
+                      state.discountModel.status == DiscountState.published,
                   share:
                       '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModel.id}',
                   isSeparatePage: true,

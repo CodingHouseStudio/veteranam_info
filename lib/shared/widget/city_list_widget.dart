@@ -36,9 +36,12 @@ class CityListWidget extends StatelessWidget {
                 top: KPadding.kPaddingSize2,
                 right: KPadding.kPaddingSize5,
               ),
-              child: cityList.length == 1
+              child: cityList.length == 1 || showFullText
                   ? Text(
-                      cityList.first.getTrsnslation(context),
+                      cityList.getCityString(
+                        showFullText: showFullText,
+                        context: context,
+                      ),
                       key: KWidgetkeys.widget.cityList.text,
                       style: AppTextStyle.materialThemeLabelLarge,
                     )
@@ -46,7 +49,6 @@ class CityListWidget extends StatelessWidget {
                       key: ValueKey(cityList),
                       cityList: cityList,
                       isDesk: isDesk,
-                      showFullText: showFullText,
                     ),
             ),
           ),
@@ -59,25 +61,14 @@ class _CityWidgetListExpanded extends StatelessWidget {
   const _CityWidgetListExpanded({
     required this.cityList,
     required this.isDesk,
-    required this.showFullText,
     super.key,
   });
 
   final List<TranslateModel> cityList;
   final bool isDesk;
-  final bool showFullText;
 
   @override
   Widget build(BuildContext context) {
-    if (showFullText) {
-      return Text(
-        cityList.getCityString(
-          context: context,
-          showFullText: false,
-        ),
-        style: AppTextStyle.materialThemeLabelLarge,
-      );
-    }
     return Row(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       mainAxisSize: MainAxisSize.min,

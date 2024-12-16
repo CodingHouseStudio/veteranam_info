@@ -9,22 +9,36 @@ class SkeletonizerWidget extends StatelessWidget {
     super.key,
     this.baseColor,
     this.highlightColor,
+    this.isSliver = false,
   });
   final Widget child;
   final bool isLoading;
   final Color? baseColor;
   final Color? highlightColor;
+  final bool isSliver;
 
   @override
   Widget build(BuildContext context) {
-    return Skeletonizer(
-      effect: ShimmerEffect(
-        baseColor: baseColor ?? AppColors.materialThemeWhite,
-        highlightColor:
-            highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
-      ),
-      enabled: !KTest.isTest && isLoading,
-      child: child,
-    );
+    if (isSliver) {
+      return SliverSkeletonizer(
+        effect: ShimmerEffect(
+          baseColor: baseColor ?? AppColors.materialThemeWhite,
+          highlightColor:
+              highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
+        ),
+        enabled: !KTest.isTest && isLoading,
+        child: child,
+      );
+    } else {
+      return Skeletonizer(
+        effect: ShimmerEffect(
+          baseColor: baseColor ?? AppColors.materialThemeWhite,
+          highlightColor:
+              highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
+        ),
+        enabled: !KTest.isTest && isLoading,
+        child: child,
+      );
+    }
   }
 }
