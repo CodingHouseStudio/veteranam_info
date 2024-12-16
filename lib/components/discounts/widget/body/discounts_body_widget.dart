@@ -28,12 +28,12 @@ class _DiscountsBodyWidget extends StatelessWidget {
     return BlocListener<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
         if (state == NetworkStatus.network) {
-          context.read<DiscountWatcherBloc>().add(
-                const DiscountWatcherEvent.started(),
+          context.read<DiscountsWatcherBloc>().add(
+                const DiscountsWatcherEvent.started(),
               );
         }
       },
-      child: BlocListener<DiscountWatcherBloc, DiscountWatcherState>(
+      child: BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
         listener: (context, state) {
           if (state.failure != null) {
             context.dialog.showGetErrorDialog(
@@ -167,10 +167,10 @@ class _DiscountMobBodyWidgetState extends State<_DiscountMobBodyWidget> {
 
   void _onScroll() {
     if (_isBottom &&
-        context.read<DiscountWatcherBloc>().state.loadingStatus ==
+        context.read<DiscountsWatcherBloc>().state.loadingStatus ==
             LoadingStatus.loaded) {
-      context.read<DiscountWatcherBloc>().add(
-            const DiscountWatcherEvent.loadNextItems(),
+      context.read<DiscountsWatcherBloc>().add(
+            const DiscountsWatcherEvent.loadNextItems(),
           );
     }
   }

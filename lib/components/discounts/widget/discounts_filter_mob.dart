@@ -30,7 +30,7 @@ class DiscountsFilterMob extends StatelessWidget {
           // ),
 
           onPressed: () async {
-            final bloc = context.read<DiscountWatcherBloc>();
+            final bloc = context.read<DiscountsWatcherBloc>();
             await showModalBottomSheet<void>(
               context: context,
               isScrollControlled: true,
@@ -85,7 +85,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                 verticalDirection: VerticalDirection.up,
                 runSpacing: KPadding.kPaddingSize8,
                 children: [
-                  BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+                  BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
                     builder: (context, state) {
                       return AdvancedFilterResetButton(
                         isDesk: false,
@@ -93,8 +93,8 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                                 .discountFilterRepository.hasActivityItem
                             ? () {
                                 context.pop();
-                                context.read<DiscountWatcherBloc>().add(
-                                      const DiscountWatcherEvent.filterReset(),
+                                context.read<DiscountsWatcherBloc>().add(
+                                      const DiscountsWatcherEvent.filterReset(),
                                     );
                               }
                             : null,
@@ -108,8 +108,8 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     onPressed: () {
                       context.pop();
                       context
-                          .read<DiscountWatcherBloc>()
-                          .add(const DiscountWatcherEvent.setMobFilter());
+                          .read<DiscountsWatcherBloc>()
+                          .add(const DiscountsWatcherEvent.setMobFilter());
                     },
                     widgetKey: KWidgetkeys
                         .screen.discounts.advancedFilterMobAppliedButton,

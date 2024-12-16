@@ -41,32 +41,32 @@ import 'package:veteranam/shared/shared_flutter.dart';
 // }
 // }
 
-extension ListStringExtensions on List<String> {
-  // String getCityList({
-  //   required bool showFullText,
-  //   required BuildContext context,
-  // }) {
-  //   if (showFullText) {
-  //     return '$first [${context.l10n.moreCities(
-  //       length - 1,
-  //     )}]()';
-  //   } else {
-  //     return '${map(
-  //       (e) => '$e | ',
-  //     ).join()}[${context.l10n.hideExpansion}]()';
-  //   }
-  // }
-  String getCityString({
-    required bool showFullText,
-    // required BuildContext context,
-  }) {
-    if (showFullText) {
-      return toString().replaceAll('[', '').replaceAll(']', '');
-    } else {
-      return first;
-    }
-  }
-}
+// extension ListStringExtensions on List<String> {
+// String getCityList({
+//   required bool showFullText,
+//   required BuildContext context,
+// }) {
+//   if (showFullText) {
+//     return '$first [${context.l10n.moreCities(
+//       length - 1,
+//     )}]()';
+//   } else {
+//     return '${map(
+//       (e) => '$e | ',
+//     ).join()}[${context.l10n.hideExpansion}]()';
+//   }
+// }
+// String getCityString({
+//   required bool showFullText,
+//   // required BuildContext context,
+// }) {
+//   if (showFullText) {
+//     return toString().replaceAll('[', '').replaceAll(']', '');
+//   } else {
+//     return first;
+//   }
+// }
+// }
 
 /// Extension on List<int> providing utility methods for handling discount
 ///  values.
@@ -147,21 +147,25 @@ extension ListBoolExtension on List<bool> {
 }
 
 extension TranslateModelListExtension on List<TranslateModel> {
+  List<String> getTrsnslation(
+    BuildContext context,
+  ) =>
+      List.generate(
+        length,
+        (index) => elementAt(index).getTrsnslation(context),
+      );
+
   String getCityString({
     required bool showFullText,
     required BuildContext context,
   }) {
     if (showFullText) {
-      return map(
-        (e) => e.getTrsnslation(context),
-      ).toString().replaceAll('[', '').replaceAll(']', '');
+      return getTrsnslation(context)
+          .toString()
+          .replaceAll('[', '')
+          .replaceAll(']', '');
     } else {
       return first.getTrsnslation(context);
     }
   }
-
-  List<String> getTrsnslation(
-    BuildContext context,
-  ) =>
-      map((e) => context.isEnglish ? e.en ?? e.uk : e.uk).toList();
 }

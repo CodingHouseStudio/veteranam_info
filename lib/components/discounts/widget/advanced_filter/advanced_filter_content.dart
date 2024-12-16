@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -24,7 +24,7 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
-      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.getActivityList !=
                 current.discountFilterRepository.getActivityList ||
@@ -40,8 +40,8 @@ class AdvancedFilterContent extends StatelessWidget {
                       child: AdvancedFilterResetButton(
                         isDesk: true,
                         resetEvent: () => context
-                            .read<DiscountWatcherBloc>()
-                            .add(const DiscountWatcherEvent.filterReset()),
+                            .read<DiscountsWatcherBloc>()
+                            .add(const DiscountsWatcherEvent.filterReset()),
                       ),
                     ),
                   )
@@ -71,7 +71,7 @@ class AdvancedFilterContent extends StatelessWidget {
           }
         },
       ),
-      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.eligibilityMap !=
                 current.discountFilterRepository.eligibilityMap ||
@@ -83,8 +83,8 @@ class AdvancedFilterContent extends StatelessWidget {
               isDesk: isDesk,
               list: _AdvancedListWidget(
                 filter: state.discountFilterRepository.eligibilityMap,
-                onChange: (value) => context.read<DiscountWatcherBloc>().add(
-                      DiscountWatcherEvent.filterEligibilities(
+                onChange: (value) => context.read<DiscountsWatcherBloc>().add(
+                      DiscountsWatcherEvent.filterEligibilities(
                         eligibility: value,
                         isDesk: isDesk,
                       ),
@@ -104,7 +104,7 @@ class AdvancedFilterContent extends StatelessWidget {
           }
         },
       ),
-      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.categoryMap !=
                 current.discountFilterRepository.categoryMap ||
@@ -116,8 +116,8 @@ class AdvancedFilterContent extends StatelessWidget {
               isDesk: isDesk,
               list: _AdvancedListWidget(
                 filter: state.discountFilterRepository.categoryMap,
-                onChange: (value) => context.read<DiscountWatcherBloc>().add(
-                      DiscountWatcherEvent.filterCategory(
+                onChange: (value) => context.read<DiscountsWatcherBloc>().add(
+                      DiscountsWatcherEvent.filterCategory(
                         category: value,
                         isDesk: isDesk,
                       ),
@@ -134,7 +134,7 @@ class AdvancedFilterContent extends StatelessWidget {
           }
         },
       ),
-      BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.locationMap !=
                 current.discountFilterRepository.locationMap ||
@@ -154,8 +154,8 @@ class AdvancedFilterContent extends StatelessWidget {
                         child: TextFieldWidget(
                           widgetKey: const Key('value1'),
                           onChanged: (value) => context
-                              .read<DiscountWatcherBloc>()
-                              .add(DiscountWatcherEvent.searchLocation(value)),
+                              .read<DiscountsWatcherBloc>()
+                              .add(DiscountsWatcherEvent.searchLocation(value)),
                           isDesk: isDesk,
                           labelText: context.l10n.search,
                           suffixIcon: KIcon.search,
@@ -173,8 +173,8 @@ class AdvancedFilterContent extends StatelessWidget {
                   _AdvancedListWidget(
                     filter: state.discountFilterRepository.locationMap,
                     onChange: (value) =>
-                        context.read<DiscountWatcherBloc>().add(
-                              DiscountWatcherEvent.filterLocation(
+                        context.read<DiscountsWatcherBloc>().add(
+                              DiscountsWatcherEvent.filterLocation(
                                 location: value,
                                 isDesk: isDesk,
                               ),
@@ -341,22 +341,22 @@ class _ChooseItems extends StatelessWidget {
                 labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
                   if (eligibilitiesLength > index) {
-                    context.read<DiscountWatcherBloc>().add(
-                          DiscountWatcherEvent.filterEligibilities(
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterEligibilities(
                             eligibility: chooseItem.value.uk,
                             isDesk: isDesk,
                           ),
                         );
                   } else if (eligibilitiesLength + categoriesLength > index) {
-                    context.read<DiscountWatcherBloc>().add(
-                          DiscountWatcherEvent.filterCategory(
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterCategory(
                             category: chooseItem.value.uk,
                             isDesk: isDesk,
                           ),
                         );
                   } else {
-                    context.read<DiscountWatcherBloc>().add(
-                          DiscountWatcherEvent.filterLocation(
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterLocation(
                             location: chooseItem.value.uk,
                             isDesk: isDesk,
                           ),

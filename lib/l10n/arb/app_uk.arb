@@ -1059,6 +1059,10 @@
   "@copyEmail": {
     "examples": "Текст діалогу при копіюванні"
   },
+  "copyPhoneNumber": "Номер телефону скопійовано",
+  "@copyPhoneNumber": {
+    "examples": "Текст діалогу при копіюванні"
+  },
   "copyLink": "Посилання скопійоване",
   "@copyLink": {
     "examples": "Текст діалогу при копіюванні"
@@ -1652,6 +1656,11 @@
       "count": {}
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
+  },
+  "showPhoneNumber": "Показати номер телефону",
+  "@showPhoneNumber": {
+    "examples": "Текст для кнопки на сторінці Discount",
+    "description": "Кнопка використовується для показу номера телефону в знижці."
   },
   "moreDetails": "Детальніше",
   "@moreDetails": {

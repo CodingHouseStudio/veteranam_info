@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/components/discount/widget/blocprovider/discount_blocprovider.dart';
+import 'package:veteranam/components/discount/widget/body/discount_body_widget.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountsScreen extends StatelessWidget {
-  const DiscountsScreen({super.key});
+class DiscountScreenWidget extends StatelessWidget {
+  const DiscountScreenWidget({super.key, this.discount, this.discountId});
+  final DiscountModel? discount;
+  final String? discountId;
 
   @override
   Widget build(BuildContext context) {
-    final scaffold = DiscountsBlocprovider(
+    final scaffold = DiscountBlocprovider(
+      discount: discount,
+      discountId: discountId,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb
@@ -19,8 +24,9 @@ class DiscountsScreen extends StatelessWidget {
           backgroundColor: AppColors.materialThemeWhite,
           toolbarHeight: KSize.kAppBarHeight,
         ),
-        body: DiscountsBodyWidget(
-          key: KWidgetkeys.screen.discounts.screen,
+        body: DiscountBodyWidget(
+          discount: discount,
+          discountId: discountId,
         ),
       ),
     );

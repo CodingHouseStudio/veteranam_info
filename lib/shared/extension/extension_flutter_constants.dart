@@ -12,6 +12,8 @@ import 'package:flutter/material.dart'
         EdgeInsetsGeometry,
         Expanded,
         MouseCursor,
+        SizedBox,
+        SliverToBoxAdapter,
         Spacer,
         SystemMouseCursors,
         TargetPlatform,
@@ -270,7 +272,7 @@ extension CategoryEnumExtensions on CategoryEnum {
 }
 
 extension UrlEnumExtension on UrlEnum {
-  String value(BuildContext context) {
+  String value({required BuildContext context, String? copyMessage}) {
     switch (this) {
       case UrlEnum.error:
         return context.l10n.error;
@@ -280,8 +282,8 @@ extension UrlEnumExtension on UrlEnum {
         return context.l10n.linkFailure;
       case UrlEnum.copyError:
         return context.l10n.copyFailure;
-      case UrlEnum.copyEmailSucceed:
-        return context.l10n.copyEmail;
+      case UrlEnum.copySucceed:
+        return copyMessage ?? context.l10n.copyEmail;
       case UrlEnum.copyLinkSucceed:
         return context.l10n.copyLink;
     }
@@ -564,4 +566,8 @@ extension EligibilityEnumExtension on EligibilityEnum {
         return KIcon.veteransIcon;
     }
   }
+}
+
+extension SizedBoxExtension on SizedBox {
+  Widget get toSliver => SliverToBoxAdapter(child: this);
 }

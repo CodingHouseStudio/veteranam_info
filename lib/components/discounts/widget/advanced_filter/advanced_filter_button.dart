@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterButton extends StatelessWidget {
@@ -22,7 +22,7 @@ class AdvancedFilterButton extends StatelessWidget {
         // KSizedBox.kWidthSizedBox8,
       );
     } else {
-      return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.filterStatus != current.filterStatus &&
             (current.discountFilterRepository.getActivityList.length == 1 ||

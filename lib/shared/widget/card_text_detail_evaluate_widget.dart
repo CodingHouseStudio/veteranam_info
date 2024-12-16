@@ -160,7 +160,7 @@ class _CardTextDetailEvaluateWidgetState
                     cardEnum: widget.cardEnum,
                     // afterEvent: widget.afterEvent,
                     cardId: widget.cardId,
-                    background: AppColors.materialThemeKeyColorsNeutral,
+                    iconBackground: AppColors.materialThemeKeyColorsNeutral,
                     share: widget.share,
                     complaintKey:
                         KWidgetkeys.widget.cardTextDetailEvaluate.iconComplaint,

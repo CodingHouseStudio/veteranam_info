@@ -39,12 +39,12 @@ class DiscountTextWidget extends StatelessWidget {
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          DiscountEligibilityWidget(eligibility: eligibility!),
+          EligibilityWidget(eligibility: eligibility!),
           KSizedBox.kHeightSizedBox16,
         ],
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          runSpacing: KPadding.kPaddingSize16,
           children: [
             button,
             icon,

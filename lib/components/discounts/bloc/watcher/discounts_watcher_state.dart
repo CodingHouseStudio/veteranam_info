@@ -1,4 +1,4 @@
-part of 'discount_watcher_bloc.dart';
+part of 'discounts_watcher_bloc.dart';
 
 extension DiscountFailureExtension on SomeFailure {
   DiscountFailure _toDiscount() {
@@ -19,8 +19,8 @@ enum FilterStatus {
 }
 
 @freezed
-class DiscountWatcherState with _$DiscountWatcherState {
-  const factory DiscountWatcherState({
+class DiscountsWatcherState with _$DiscountsWatcherState {
+  const factory DiscountsWatcherState({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     // required List<dynamic> chooseFilterItems,
     required IDiscountFilterRepository discountFilterRepository,

@@ -16,9 +16,11 @@ class SharedIconListWidget extends StatelessWidget {
     this.useSiteUrl,
     this.showComplaint = true,
     this.showShare = true,
-    this.background = AppColors.materialThemeWhite,
+    this.iconBackground = AppColors.materialThemeWhite,
     this.numberLikes,
     this.likeKey,
+    this.isSeparatePage = false,
+    this.iconBorder,
   });
   final bool isDesk;
   final String? link;
@@ -31,27 +33,34 @@ class SharedIconListWidget extends StatelessWidget {
   final String? share;
   final bool showComplaint;
   final bool showShare;
-  final Color background;
+  final Color iconBackground;
   final bool? useSiteUrl;
   final int? numberLikes;
+  final bool isSeparatePage;
+  final BoxBorder? iconBorder;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: (isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8) +
+          (isSeparatePage ? KPadding.kPaddingSize8 : 0),
+      runSpacing: KPadding.kPaddingSize16,
       children: [
-        _CardLikeIconWidget(
-          label: context.l10n.favorite,
-          icon: KIcon.favorite,
-          countLike: numberLikes ?? 0,
-          background: background,
-          key: likeKey,
-        ),
-        KSizedBox.kWidthSizedBox8,
+        // _CardLikeIconWidget(
+        //   label: context.l10n.favorite,
+        //   icon: KIcon.favorite,
+        //   countLike: numberLikes ?? 0,
+        //   background: isSeparatePage
+        //       ? AppColors.materialThemeKeyColorsNeutral
+        //       : iconBackground,
+        //   key: likeKey,
+        // ),
         // if (link != null && link!.isUrlValid) ...[
         //   _CardIconWidget(
         //     label: context.l10n.webSite,
-        //     onPressed: () => context..read<UrlCubit>().launchUrl(url: link),
+        //     onPressed: () => context..read<UrlCubit>()
+        //.launchUrl(url: link),
         //     icon: KIcon.captivePortal,
         //     background: background,
         //     key: webSiteKey,
@@ -69,63 +78,99 @@ class SharedIconListWidget extends StatelessWidget {
                     )
                 : null,
             icon: KIcon.share,
-            background: background,
+            background: iconBackground,
             key: shareKey,
+            border: iconBorder ??
+                (isSeparatePage
+                    ? Border.all(
+                        color: AppColors.materialThemeKeyColorsNeutral,
+                      )
+                    : null),
           ),
-        if (isDesk) KSizedBox.kWidthSizedBox16 else KSizedBox.kWidthSizedBox8,
-        PopupMenuButtonWidget<int>(
-          buttonText: context.l10n.login,
-          iconButton: KIcon.moreVert,
-          buttonStyle: KButtonStyles.borderWhiteButtonStyle,
-          textUnderButton: context.l10n.more,
-          menuItemsPadding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize16,
-            bottom: KPadding.kPaddingSize16,
-            left: KPadding.kPaddingSize8,
-            right: KPadding.kPaddingSize8,
+        if (isSeparatePage) ...[
+          if (link != null && link!.isUrlValid)
+            _CardIconWidget(
+              background: iconBackground,
+              icon: KIcon.captivePortal,
+              onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
+              label: context.l10n.webSite,
+              border: iconBorder ??
+                  (isSeparatePage
+                      ? Border.all(
+                          color: AppColors.materialThemeKeyColorsNeutral,
+                        )
+                      : null),
+            ),
+          _CardIconWidget(
+            background: iconBackground,
+            icon: KIcon.brightnessAlert,
+            onPressed: () => context.dialog.showReportDialog(
+              isDesk: isDesk,
+              cardEnum: cardEnum,
+              cardId: cardId,
+            ),
+            label: context.l10n.complaint,
+            border: iconBorder ??
+                (isSeparatePage
+                    ? Border.all(
+                        color: AppColors.materialThemeKeyColorsNeutral,
+                      )
+                    : null),
           ),
-          items: [
-            if (link != null && link!.isUrlValid)
+        ] else
+          PopupMenuButtonWidget<int>(
+            buttonText: context.l10n.login,
+            iconButton: KIcon.moreVert,
+            buttonStyle: KButtonStyles.borderWhiteButtonStyle,
+            textUnderButton: context.l10n.more,
+            menuItemsPadding: const EdgeInsets.only(
+              top: KPadding.kPaddingSize16,
+              bottom: KPadding.kPaddingSize16,
+              left: KPadding.kPaddingSize8,
+              right: KPadding.kPaddingSize8,
+            ),
+            items: [
+              if (link != null && link!.isUrlValid)
+                DropDownItem(
+                  value: 1,
+                  text: context.l10n.webSite,
+                  icon: IconWidget(
+                    background: iconBackground,
+                    icon: KIcon.captivePortal,
+                    padding: KPadding.kPaddingSize12,
+                  ),
+                  event: () => context.read<UrlCubit>().launchUrl(url: link),
+                  // padding: const EdgeInsets.only(
+                  //   top: KPadding.kPaddingSize16,
+                  //   bottom: KPadding.kPaddingSize8,
+                  //   left: KPadding.kPaddingSize16,
+                  //   right: KPadding.kPaddingSize16,
+                  // ),
+                  key: webSiteKey,
+                ),
               DropDownItem(
-                value: 1,
-                text: context.l10n.webSite,
+                value: 2,
+                text: context.l10n.complaint,
                 icon: IconWidget(
-                  background: background,
-                  icon: KIcon.captivePortal,
+                  background: iconBackground,
+                  icon: KIcon.brightnessAlert,
                   padding: KPadding.kPaddingSize12,
                 ),
-                event: () => context.read<UrlCubit>().launchUrl(url: link),
+                event: () => context.dialog.showReportDialog(
+                  isDesk: isDesk,
+                  cardEnum: cardEnum,
+                  cardId: cardId,
+                ),
                 // padding: const EdgeInsets.only(
-                //   top: KPadding.kPaddingSize16,
-                //   bottom: KPadding.kPaddingSize8,
+                //   bottom: KPadding.kPaddingSize16,
                 //   left: KPadding.kPaddingSize16,
                 //   right: KPadding.kPaddingSize16,
                 // ),
-                key: webSiteKey,
+                key: complaintKey,
               ),
-            DropDownItem(
-              value: 2,
-              text: context.l10n.complaint,
-              icon: IconWidget(
-                background: background,
-                icon: KIcon.brightnessAlert,
-                padding: KPadding.kPaddingSize12,
-              ),
-              event: () => context.dialog.showReportDialog(
-                isDesk: isDesk,
-                cardEnum: cardEnum,
-                cardId: cardId,
-              ),
-              // padding: const EdgeInsets.only(
-              //   bottom: KPadding.kPaddingSize16,
-              //   left: KPadding.kPaddingSize16,
-              //   right: KPadding.kPaddingSize16,
-              // ),
-              key: complaintKey,
-            ),
-          ],
-          position: PopupMenuButtonPosition.bottomLeft,
-        ),
+            ],
+            position: PopupMenuButtonPosition.bottomLeft,
+          ),
         // if (widget.showComplaint) ...[
         //   if (widget.isDesk)
         //     KSizedBox.kWidthSizedBox16
@@ -152,24 +197,34 @@ class _CardIconWidget extends StatelessWidget {
     required this.background,
     super.key,
     this.onPressed,
+    this.border,
+    this.iconWidget,
   });
   final VoidCallback? onPressed;
   final Icon icon;
   final String label;
   final Color background;
+  final BoxBorder? border;
+  final Widget? iconWidget;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       key: key,
       onTap: onPressed,
+      hoverColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       child: Column(
         children: [
-          IconWidget(
-            background: background,
-            icon: icon,
-            padding: KPadding.kPaddingSize12,
-          ),
+          iconWidget ??
+              IconWidget(
+                background: background,
+                icon: icon,
+                padding: KPadding.kPaddingSize12,
+                border: border,
+              ),
           KSizedBox.kHeightSizedBox6,
           Text(
             label,
@@ -198,13 +253,12 @@ class _CardLikeIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      key: key,
-      onPressed: null,
-      child: Column(
-        children: [
-          if (countLike > 0)
-            Stack(
+    return _CardIconWidget(
+      background: background,
+      icon: icon,
+      label: label,
+      iconWidget: countLike > 0
+          ? Stack(
               children: [
                 IconWidget(
                   background: background,
@@ -229,19 +283,49 @@ class _CardLikeIconWidget extends StatelessWidget {
                 ),
               ],
             )
-          else
-            IconWidget(
-              background: background,
-              icon: icon,
-              padding: KPadding.kPaddingSize12,
-            ),
-          KSizedBox.kHeightSizedBox6,
-          Text(
-            label,
-            style: AppTextStyle.materialThemeLabelSmallBlack,
-          ),
-        ],
-      ),
+          : null,
+      // child: Column(
+      //   children: [
+      //     if (countLike > 0)
+      //       Stack(
+      //         children: [
+      //           IconWidget(
+      //             background: background,
+      //             icon: icon,
+      //             padding: KPadding.kPaddingSize12,
+      //           ),
+      //           Padding(
+      //             padding: const EdgeInsets.only(left: KPadding.
+      // kPaddingSize36),
+      //             child: DecoratedBox(
+      //               decoration: KWidgetTheme.boxDecorationDiscount,
+      //               child: Padding(
+      //                 padding: const EdgeInsets.symmetric(
+      //                   horizontal: KPadding.kPaddingSize8,
+      //                   vertical: KPadding.kPaddingSize4,
+      //                 ),
+      //                 child: Text(
+      //                   countLike.toString(),
+      //                   style: AppTextStyle.materialThemeLabelSmall,
+      //                 ),
+      //               ),
+      //             ),
+      //           ),
+      //         ],
+      //       )
+      //     else
+      //       IconWidget(
+      //         background: background,
+      //         icon: icon,
+      //         padding: KPadding.kPaddingSize12,
+      //       ),
+      //     KSizedBox.kHeightSizedBox6,
+      //     Text(
+      //       label,
+      //       style: AppTextStyle.materialThemeLabelSmallBlack,
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

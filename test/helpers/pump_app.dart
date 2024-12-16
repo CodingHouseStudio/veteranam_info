@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
 import 'package:veteranam/l10n/l10n.dart';
@@ -27,8 +27,8 @@ extension PumpApp on WidgetTester {
       MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-              ..add(const DiscountWatcherEvent.started()),
+            create: (context) => GetIt.I.get<DiscountsWatcherBloc>()
+              ..add(const DiscountsWatcherEvent.started()),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<InvestorsWatcherBloc>()

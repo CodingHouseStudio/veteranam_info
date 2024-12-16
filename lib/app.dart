@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<DiscountWatcherBloc>(),
+          create: (context) => GetIt.I.get<DiscountsWatcherBloc>(),
         ),
         BlocProvider(
           create: (context) => GetIt.I.get<InvestorsWatcherBloc>(),

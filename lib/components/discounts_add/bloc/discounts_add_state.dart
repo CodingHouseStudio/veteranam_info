@@ -32,7 +32,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required EligibilityFieldModel eligibility,
     required LinkFieldModel link,
     required MessageFieldModel description,
-    required MessageFieldModel exclusions,
+    required MessageFieldModel requirements,
     required DiscountsAddEnum formState,
     required bool isIndefinitely,
     DiscountsAddFailure? failure,
