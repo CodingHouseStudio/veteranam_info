@@ -38,39 +38,36 @@ class DiscountEligibilityExpandedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final modifiableEligibility = List<EligibilityEnum>.from(eligibility);
-    if (modifiableEligibility.first == EligibilityEnum.all) {
-      modifiableEligibility
-        ..removeAt(0)
-        ..addAll([
-          EligibilityEnum.veterans,
-          EligibilityEnum.combatants,
-          EligibilityEnum.militaryPersonnel,
-          EligibilityEnum.familyMembersOfTheDeceased,
-          EligibilityEnum.personsWithDisabilitiesDueToWar,
-          EligibilityEnum.emergencyServiceEmployees,
-          EligibilityEnum.policeOfficers,
-        ]);
+    if (eligibility.isNotEmpty && eligibility.contains(EligibilityEnum.all)) {
+      final modifiableEligibility =
+          List<EligibilityEnum>.from(EligibilityEnum.valuesWithoutAll);
+      return Wrap(
+        key: KWidgetkeys.widget.cityList.markdownFulllList,
+        children: _buildWidgets(
+          modifiableEligibility.length > 5
+              ? modifiableEligibility.take(5).toList()
+              : modifiableEligibility,
+          context,
+        ),
+      );
+    } else {
+      return Wrap(
+        key: KWidgetkeys.widget.cityList.markdownFulllList,
+        children: _buildWidgets(
+          eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
+          context,
+        ),
+
+        // TextSpan(
+        //   style: AppTextStyle.materialThemeLabelLarge,
+        //   children: _buildTextSpans(
+        //     eligibility.length > 5 ? eligibility.take(5).toList()
+        // : eligibility,
+        //     context,
+        //   ),
+        // ),
+      );
     }
-
-    return Wrap(
-      key: KWidgetkeys.widget.cityList.markdownFulllList,
-      children: _buildWidgets(
-        modifiableEligibility.length > 5
-            ? modifiableEligibility.take(5).toList()
-            : modifiableEligibility,
-        context,
-      ),
-
-      // TextSpan(
-      //   style: AppTextStyle.materialThemeLabelLarge,
-      //   children: _buildTextSpans(
-      //     eligibility.length > 5 ? eligibility.take(5).toList()
-      // : eligibility,
-      //     context,
-      //   ),
-      // ),
-    );
   }
 
   List<Widget> _buildWidgets(
