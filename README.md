@@ -24,7 +24,7 @@
 
 # Veteranam Info
 
-A Flutter non-profit app supporting Ukraine's war veterans.
+A Flutter no-profit app supporting Ukraine's war veterans.
 
 
 ## Core Features
@@ -52,7 +52,7 @@ The goal was to create an accessible, user-friendly app that centralizes discoun
 Using **Flutter**, we developed a cross-platform solution comprising:
 
 1. **Mobile App**: Available for both Android and iOS.
-2. **Web Version**: Accessible from any browser.
+2. **Web Version**: Accessible from any modern web browser supported by Flutter framework
 3. **Business Management Platform**: A dedicated interface for businesses to independently add and manage their offers.
 
 The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of varying tech skills could navigate the app with ease.
@@ -91,7 +91,7 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 
 ## License
 
-This application is released under the [MIT License](https://opensource.org/licenses/MIT). You can use the code for any purpose, including commercial projects.
+This application is released under the [FSL-1.1-Apache-2.0 License].
 
 ---
 ---
@@ -113,9 +113,6 @@ This application is released under the [MIT License](https://opensource.org/lice
 - revert: Reverts a previous commit
 
 <!--![coverage][coverage_badge]
-
-
-[![License: MIT][license_badge]][license_link]
 
 Veteranam INFO-->
 
