@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountCardWidget extends StatelessWidget {
@@ -165,18 +166,71 @@ class DiscountCardWidget extends StatelessWidget {
                 ),
               )
             else
-              _DiscountCardDesciprtionWidget(
-                isDesk: isDesk,
-                descriptionMethod: descriptionMethod,
-                discountItem: discountItem,
-                closeWidget: closeWidget,
-                isBusiness: isBusiness,
-                share: share,
-                useSiteUrl: useSiteUrl,
+              Container(
+                decoration: discountItem.discount.getDiscountString(context) ==
+                        context.l10n.free
+                    ? KWidgetTheme.boxDecorationDiscountBorder
+                    : null,
+                child: _DiscountCardDesciprtionWidget(
+                  isDesk: isDesk,
+                  descriptionMethod: descriptionMethod,
+                  discountItem: discountItem,
+                  closeWidget: closeWidget,
+                  isBusiness: isBusiness,
+                  share: share,
+                  useSiteUrl: useSiteUrl,
+                ),
               ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class DiscountImageWidget extends StatelessWidget {
+  const DiscountImageWidget({
+    required this.images,
+    required this.discount,
+    super.key,
+    this.borderRadius,
+  });
+
+  final List<ImageModel> images;
+  final String discount;
+  final BorderRadius? borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: KBorderRadius.kBorderRadiusLeft32,
+          child: NetworkImageWidget(
+            imageUrl: images.first.downloadURL,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: KPadding.kPaddingSize16,
+            right: KPadding.kPaddingSize16,
+          ),
+          child: DecoratedBox(
+            decoration: KWidgetTheme.boxDecorationDiscount,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize8,
+                vertical: KPadding.kPaddingSize4,
+              ),
+              child: TextPointWidget(
+                discount,
+                key: KWidgetkeys.widget.discountCard.discount,
+                mainAxisSize: MainAxisSize.min,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -236,9 +290,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox4,
           _CitiesExpirationWidget(
             isDesk: isDesk,
-            location: discountItem.location,
-            expiration: discountItem.expiration,
-            subLocation: discountItem.subLocation,
+            discountItem: discountItem,
           ),
           KSizedBox.kHeightSizedBox16,
           DiscountTextWidget(
@@ -250,9 +302,22 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
                   ),
             isDesk: isDesk,
             eligibility: discountItem.eligibility,
+            moreButtonEvent: () => context.goNamed(
+              KRoute.discount.name,
+              pathParameters: {
+                UrlParameters.cardId: discountItem.id,
+              },
+              extra: discountItem,
+            ),
             button: TextButton(
               key: KWidgetkeys.screen.company.boxMyDiscounts,
-              onPressed: () {},
+              onPressed: () => context.goNamed(
+                KRoute.discount.name,
+                pathParameters: {
+                  UrlParameters.cardId: discountItem.id,
+                },
+                extra: discountItem,
+              ),
               style: KButtonStyles.blackDetailsButtonStyle,
               child: Text(
                 context.l10n.moreDetails,
@@ -396,7 +461,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
               // runSpacing: KPadding.kPaddingSize16,
               children: [
                 Expanded(
-                  child: _CompanyInfoWidget(
+                  child: CompanyInfoWidget(
                     dateVerified: dateVerified,
                     category: category,
                     company: company,
@@ -411,7 +476,7 @@ class _DiscountCardTitleWidget extends StatelessWidget {
                 // ),
               ],
             )
-          : _CompanyInfoWidget(
+          : CompanyInfoWidget(
               dateVerified: dateVerified,
               category: category,
               company: company,
@@ -422,13 +487,14 @@ class _DiscountCardTitleWidget extends StatelessWidget {
   }
 }
 
-class _CompanyInfoWidget extends StatelessWidget {
-  const _CompanyInfoWidget({
+class CompanyInfoWidget extends StatelessWidget {
+  const CompanyInfoWidget({
     required this.dateVerified,
     required this.category,
     required this.company,
     required this.userName,
     required this.userPhoto,
+    super.key,
   });
   final TranslateModel? company;
   final String? userName;
@@ -567,21 +633,17 @@ class _CompanyInfoWidget extends StatelessWidget {
 class _CitiesExpirationWidget extends StatelessWidget {
   const _CitiesExpirationWidget({
     required this.isDesk,
-    required this.location,
-    required this.expiration,
-    required this.subLocation,
+    required this.discountItem,
   });
   final bool isDesk;
-  final List<TranslateModel>? location;
-  final TranslateModel? expiration;
-  final SubLocation? subLocation;
+  final DiscountModel discountItem;
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
       return Row(
         children: [
-          _ExpirationWidget(
-            expiration: expiration?.getTrsnslation(
+          ExpirationWidget(
+            expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
@@ -589,8 +651,15 @@ class _CitiesExpirationWidget extends StatelessWidget {
           Expanded(
             child: CityListWidget(
               key: KWidgetkeys.widget.discountCard.city,
-              location: location,
-              subLocation: subLocation,
+              location: discountItem.location,
+              subLocation: discountItem.subLocation,
+              moreButtonEvent: () => context.goNamed(
+                KRoute.discount.name,
+                pathParameters: {
+                  UrlParameters.cardId: discountItem.id,
+                },
+                extra: discountItem,
+              ),
               isDesk: true,
             ),
           ),
@@ -600,8 +669,8 @@ class _CitiesExpirationWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _ExpirationWidget(
-            expiration: expiration?.getTrsnslation(
+          ExpirationWidget(
+            expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
@@ -609,8 +678,15 @@ class _CitiesExpirationWidget extends StatelessWidget {
           CityListWidget(
             key: KWidgetkeys.widget.discountCard.city,
             isDesk: false,
-            location: location,
-            subLocation: subLocation,
+            moreButtonEvent: () => context.goNamed(
+              KRoute.discount.name,
+              pathParameters: {
+                UrlParameters.cardId: discountItem.id,
+              },
+              extra: discountItem,
+            ),
+            location: discountItem.location,
+            subLocation: discountItem.subLocation,
           ),
         ],
       );
@@ -618,8 +694,8 @@ class _CitiesExpirationWidget extends StatelessWidget {
   }
 }
 
-class _ExpirationWidget extends StatelessWidget {
-  const _ExpirationWidget({required this.expiration});
+class ExpirationWidget extends StatelessWidget {
+  const ExpirationWidget({required this.expiration, super.key});
   final String? expiration;
 
   @override

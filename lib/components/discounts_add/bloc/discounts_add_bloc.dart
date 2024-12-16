@@ -32,7 +32,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             eligibility: EligibilityFieldModel.pure(),
             link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
-            exclusions: MessageFieldModel.pure(),
+            requirements: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
             citiesList: [],
             isIndefinitely: true,
@@ -57,7 +57,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_EligibilityRemoveItem>(_onEligibilityRemoveItem);
     on<_LinkUpdate>(_onLinkUpdated);
     on<_DescriptionUpdate>(_onDescriptionUpdated);
-    on<_ExclusionsUpdate>(_onExclusionsUpdated);
+    on<_RequirementsUpdate>(_onRequirementsUpdated);
     on<_Send>(_onSend);
     on<_Back>(_onBack);
 
@@ -153,9 +153,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           ),
           link: LinkFieldModel.dirty(discount!.directLink),
           description: MessageFieldModel.dirty(discount!.description.uk),
-          exclusions: discount!.exclusions == null
+          requirements: discount!.requirements == null
               ? const MessageFieldModel.pure()
-              : MessageFieldModel.dirty(discount!.exclusions!.uk),
+              : MessageFieldModel.dirty(discount!.requirements!.uk),
           formState: DiscountsAddEnum.initial,
           isIndefinitely: periodIsNull,
           isOnline: discount!.subLocation?.isOnline ?? false,
@@ -408,15 +408,15 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
-  void _onExclusionsUpdated(
-    _ExclusionsUpdate event,
+  void _onRequirementsUpdated(
+    _RequirementsUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final exclusionsFieldModel = MessageFieldModel.dirty(event.exclusions);
+    final requirementsFieldModel = MessageFieldModel.dirty(event.requirements);
 
     emit(
       state.copyWith(
-        exclusions: exclusionsFieldModel,
+        requirements: requirementsFieldModel,
         failure: null,
         formState: DiscountsAddEnum.descriptionInProgress,
       ),
@@ -471,7 +471,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           formState: DiscountsAddEnum.sendInProgress,
         ),
       );
-      //state.exclusions
+      //state.requirements
       final discount = (state.discount ?? discountModel).copyWith(
         discount: state.discounts.getValue
             .where(
@@ -489,22 +489,36 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           (index) => TranslateModel(uk: state.city.value.elementAt(index)),
         ),
         description: TranslateModel(uk: state.description.value),
-        link: _companyRepository.currentUserCompany.link,
-        company: _companyRepository.currentUserCompany.publicName == null
-            ? null
+        link: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.link
+            : _companyRepository.currentUserCompany.link,
+        company: _companyRepository.currentUserCompany.publicName == null ||
+                (_companyRepository.currentUserCompany.isAdmin &&
+                    state.discount != null)
+            ? state.discount?.company
             : TranslateModel(
                 uk: _companyRepository.currentUserCompany.publicName!,
               ),
         eligibility: state.eligibility.value,
-        exclusions: TranslateModel(
-          uk: state.exclusions.value,
+        requirements: TranslateModel(
+          uk: state.requirements.value,
         ),
         expiration: _getExpiration,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
-        userId: _companyRepository.currentUserCompany.id,
-        userPhoto: _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.companyName,
+        userId: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userId
+            : _companyRepository.currentUserCompany.id,
+        userPhoto: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userPhoto
+            : _companyRepository.currentUserCompany.image,
+        userName: _companyRepository.currentUserCompany.isAdmin &&
+                state.discount != null
+            ? state.discount?.userName
+            : _companyRepository.currentUserCompany.companyName,
         subLocation: state.isOnline ? SubLocation.online : null,
       );
       if (state.discount == discount) {

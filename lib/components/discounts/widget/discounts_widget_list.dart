@@ -6,7 +6,7 @@ import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 int _itemCount({
-  required DiscountWatcherState state,
+  required DiscountsWatcherState state,
   required DiscountConfigState config,
 }) =>
     state.filterDiscountModelList.length +
@@ -26,7 +26,7 @@ extension LinkScrollExtension on DiscountConfigState {
 /// response. I need to read more articles to understand all the nuances.
 int? _findChildIndexCallback({
   required Key key,
-  required DiscountWatcherState state,
+  required DiscountsWatcherState state,
   required DiscountConfigState config,
 }) {
   if (key is ValueKey<String>) {
@@ -45,7 +45,7 @@ int? _findChildIndexCallback({
 }
 
 ValueKey<String> _key({
-  required DiscountWatcherState state,
+  required DiscountsWatcherState state,
   required int index,
   required DiscountConfigState config,
 }) {
@@ -141,7 +141,7 @@ class _DiscountWidgetList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
           buildWhen: (previous, current) =>
               previous.loadingStatus != current.loadingStatus ||
               previous.filterDiscountModelList !=
@@ -238,8 +238,8 @@ class _DiscountWidgetList extends StatelessWidget {
                         widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
                         text: context.l10n.moreDiscounts,
                         onPressed: () =>
-                            context.read<DiscountWatcherBloc>().add(
-                                  const DiscountWatcherEvent.loadNextItems(),
+                            context.read<DiscountsWatcherBloc>().add(
+                                  const DiscountsWatcherEvent.loadNextItems(),
                                 ),
                         isDesk: isDesk,
                       ),
@@ -263,7 +263,7 @@ class _DiscountsWidgetItem extends StatelessWidget {
     super.key,
   });
   final bool isDesk;
-  final DiscountWatcherState state;
+  final DiscountsWatcherState state;
   final int index;
   final DiscountConfigState config;
   @override

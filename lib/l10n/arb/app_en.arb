@@ -1068,6 +1068,10 @@
   "@copyEmail": {
     "examples": "Text of the copy dialog"
   },
+  "copyPhoneNumber": "Phone number cipied",
+  "@copyPhoneNumber": {
+    "examples": "Text of the copy dialog"
+  },
   "copyLink": "Link copied",
   "@copyLink": {
     "examples": "Text of the copy dialog"
@@ -1153,6 +1157,10 @@
   "discountEditNotFound": "Unfortunately, the link is incorrect or you do not have the required permissions to access this discount. Please verify the link or try another one.",
   "@discountEditNotFound": {
     "examples": "This message appears on the Discount Edit page when a user enters an invalid discount ID or lacks access rights."
+  },
+  "discountNotFound": "Unfortunately, the link is incorrect. Please verify the link or try another one.",
+  "@discountNotFound": {
+    "examples": "This message appears on the Discount page when a user enters an invalid discount ID."
   },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
@@ -1644,6 +1652,11 @@
       "count": {}
     },
     "examples": "Text on the Discount page, description in the skating rink"
+  },
+  "showPhoneNumber": "Show phone number",
+  "@showPhoneNumber": {
+    "examples": "Text for button on the page Discount",
+    "description": "Button use for show phone number."
   },
   "moreDetails": "More Details",
   "@moreDetails": {

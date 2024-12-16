@@ -70,7 +70,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               state.discount != null) {
             titleController.text =
                 state.discount!.title.getTrsnslation(context);
-            linkController.text = state.discount!.link ?? linkController.text;
+            linkController.text =
+                state.discount!.directLink ?? linkController.text;
             // categoryController = TextEditingController();
             // cityController = TextEditingController();
             periodController.text =
@@ -88,7 +89,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             !(previous.link != current.link ||
                 previous.title != current.title ||
                 previous.description != current.description ||
-                previous.exclusions != current.exclusions) ||
+                previous.requirements != current.requirements) ||
             (current.discount != previous.discount),
         builder: (context, _) => ScaffoldWidget(
           titleDeskPadding: _.failure.linkIsWrong
@@ -285,7 +286,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       // errorText: _.exclusions.error.value(context),
                       changeMessage: (text) => context
                           .read<DiscountsAddBloc>()
-                          .add(DiscountsAddEvent.exclusionsUpdate(text)),
+                          .add(DiscountsAddEvent.requirementsUpdate(text)),
                     ),
                   if (_.formState.isMain) ...[
                     KSizedBox.kHeightSizedBox32,

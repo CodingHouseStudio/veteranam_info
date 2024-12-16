@@ -27,8 +27,9 @@ class DiscountCardBody extends StatelessWidget {
                 isDesk: isDesk,
                 routeName: KRoute.discounts.name,
               ),
-              share:
-                  '${KRoute.home.path}${KRoute.discounts.path}/${_.discountModel?.id}',
+              share: _.discountModel == null
+                  ? null
+                  : '${KRoute.home.path}${KRoute.discounts.path}/${_.discountModel!.id}',
 
               // isLoading: _.loadingStatus != LoadingStatus.loaded,
               descriptionMethod: (description) => description.replaceAll(

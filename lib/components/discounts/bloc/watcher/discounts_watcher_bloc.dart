@@ -7,14 +7,14 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-part 'discount_watcher_bloc.freezed.dart';
-part 'discount_watcher_event.dart';
-part 'discount_watcher_state.dart';
+part 'discounts_watcher_bloc.freezed.dart';
+part 'discounts_watcher_event.dart';
+part 'discounts_watcher_state.dart';
 
 @Injectable(env: [Config.user])
-class DiscountWatcherBloc
-    extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
-  DiscountWatcherBloc({
+class DiscountsWatcherBloc
+    extends Bloc<DiscountsWatcherEvent, DiscountsWatcherState> {
+  DiscountsWatcherBloc({
     required IDiscountRepository discountRepository,
     required UserRepository userRepository,
     // required IReportRepository reportRepository,
@@ -50,7 +50,7 @@ class DiscountWatcherBloc
     on<_FilterReset>(_onFilterReset);
     on<_Sorting>(_onSorting);
 
-    add(const DiscountWatcherEvent.started());
+    add(const DiscountsWatcherEvent.started());
     // on<_GetReport>(_onGetReport);
   }
 
@@ -65,7 +65,7 @@ class DiscountWatcherBloc
 
   Future<void> _onStarted(
     _Started event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) async {
     emit(
       state.copyWith(
@@ -84,20 +84,20 @@ class DiscountWatcherBloc
         .listen(
       (discount) {
         add(
-          DiscountWatcherEvent.updated(
+          DiscountsWatcherEvent.updated(
             discount,
           ),
         );
       },
       onError: (dynamic error, StackTrace stack) {
-        add(DiscountWatcherEvent.failure(error: error, stack: stack));
+        add(DiscountsWatcherEvent.failure(error: error, stack: stack));
       },
     );
   }
 
   Future<void> _onUpdated(
     _Updated event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) async {
     if (event.discountItemsModel.isEmpty && Config.isProduction) {
       return;
@@ -144,7 +144,7 @@ class DiscountWatcherBloc
 
   void _onLoadNextItems(
     _LoadNextItems event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     state.discountFilterRepository
         .getFilterList(
@@ -185,7 +185,7 @@ class DiscountWatcherBloc
 
   void _onFilterReset(
     _FilterReset event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(
@@ -220,7 +220,7 @@ class DiscountWatcherBloc
 
   void _onFilterEligibilities(
     _FilterEligibilities event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(
@@ -247,7 +247,7 @@ class DiscountWatcherBloc
 
   void _onFilterCategory(
     _FilterCategory event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(
@@ -274,7 +274,7 @@ class DiscountWatcherBloc
 
   void _onFilterLocation(
     _FilterLocation event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(
@@ -301,7 +301,7 @@ class DiscountWatcherBloc
 
   void _onSearchLocation(
     _SearchLocation event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(
@@ -322,7 +322,7 @@ class DiscountWatcherBloc
 
   void _setMobFilter(
     _SetMobFilter event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     final itemsNumber = getCurrentLoadNumber();
 
@@ -348,7 +348,7 @@ class DiscountWatcherBloc
 
   void _onSorting(
     _Sorting event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     if (state.sortingBy == event.value) return;
     final discountSortingList = _sorting(sortingBy: event.value);
@@ -375,7 +375,7 @@ class DiscountWatcherBloc
 
   void _filter({
     required bool isDesk,
-    required Emitter<DiscountWatcherState> emit,
+    required Emitter<DiscountsWatcherState> emit,
     List<DiscountModel>? discountsList,
   }) {
     if (isDesk) {
@@ -454,7 +454,7 @@ class DiscountWatcherBloc
 
   void _onFailure(
     _Failure event,
-    Emitter<DiscountWatcherState> emit,
+    Emitter<DiscountsWatcherState> emit,
   ) {
     emit(
       state.copyWith(

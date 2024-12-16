@@ -30,8 +30,8 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.linkUpdate(String link) = _LinkUpdate;
   const factory DiscountsAddEvent.descriptionUpdate(String description) =
       _DescriptionUpdate;
-  const factory DiscountsAddEvent.exclusionsUpdate(String exclusions) =
-      _ExclusionsUpdate;
+  const factory DiscountsAddEvent.requirementsUpdate(String requirements) =
+      _RequirementsUpdate;
   const factory DiscountsAddEvent.back() = _Back;
   const factory DiscountsAddEvent.send() = _Send;
 }

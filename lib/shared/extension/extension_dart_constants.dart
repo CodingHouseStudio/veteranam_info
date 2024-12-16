@@ -342,3 +342,7 @@ extension EligiblityEnumExtension on EligibilityEnum {
     }
   }
 }
+
+extension CompanyModelExtension on CompanyModel {
+  bool get isAdmin => id == KAppText.adminCompanyID;
+}

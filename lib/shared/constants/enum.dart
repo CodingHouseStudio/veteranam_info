@@ -6,7 +6,10 @@ enum LoadingStatus {
   initial,
   loading,
   loaded,
-  error,
+  error;
+
+  bool get isLoading =>
+      this == LoadingStatus.initial || this == LoadingStatus.loading;
 }
 
 //enum EvaluationEnum { like, dislike, smile, none }
@@ -16,7 +19,7 @@ enum UrlEnum {
   linkError,
   copyError,
   error,
-  copyEmailSucceed,
+  copySucceed,
   copyLinkSucceed,
 }
 

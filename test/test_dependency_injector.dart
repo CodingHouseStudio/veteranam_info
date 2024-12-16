@@ -12,7 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
@@ -237,8 +237,8 @@ void configureDependenciesTest() {
   //     storyRepository: GetIt.I.get<IStoryRepository>(),
   //   ),
   // );
-  GetIt.I.registerSingleton<DiscountWatcherBloc>(
-    DiscountWatcherBloc(
+  GetIt.I.registerSingleton<DiscountsWatcherBloc>(
+    DiscountsWatcherBloc(
       discountRepository: GetIt.I.get<IDiscountRepository>(),
       // appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
       // (),

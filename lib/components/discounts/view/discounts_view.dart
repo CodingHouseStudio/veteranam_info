@@ -7,7 +7,7 @@ class DiscountsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scaffold = DiscountBlocprovider(
+    final scaffold = DiscountsBlocprovider(
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb

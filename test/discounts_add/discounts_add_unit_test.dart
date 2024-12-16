@@ -279,7 +279,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
           eligibility: EligibilityFieldModel.pure(),
         ),
@@ -297,7 +297,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -314,7 +314,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
@@ -330,7 +330,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
           period: DateFieldModel.dirty(KTestText.nextDateTime),
         ),
@@ -608,7 +608,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -625,7 +625,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -642,7 +642,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.invalidData,
         ),
         DiscountsAddState(
@@ -659,7 +659,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -806,7 +806,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -823,7 +823,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         predicate<DiscountsAddState>(
@@ -902,7 +902,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -919,7 +919,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         predicate<DiscountsAddState>(
@@ -1002,7 +1002,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         DiscountsAddState(
@@ -1019,7 +1019,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         predicate<DiscountsAddState>(
@@ -1172,7 +1172,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
         ),
         const DiscountsAddState(
@@ -1189,7 +1189,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.initial,
           failure: DiscountsAddFailure.error,
         ),
@@ -1207,7 +1207,7 @@ void main() {
           discounts: DiscountsFieldModel.pure(),
           link: LinkFieldModel.pure(),
           description: MessageFieldModel.pure(),
-          exclusions: MessageFieldModel.pure(),
+          requirements: MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
         ),
         DiscountsAddState(
@@ -1224,7 +1224,7 @@ void main() {
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
           description: const MessageFieldModel.pure(),
-          exclusions: const MessageFieldModel.pure(),
+          requirements: const MessageFieldModel.pure(),
           formState: DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(

@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountBlocprovider extends StatelessWidget {
-  const DiscountBlocprovider({required this.childWidget, super.key});
+class DiscountsBlocprovider extends StatelessWidget {
+  const DiscountsBlocprovider({required this.childWidget, super.key});
 
   final Widget childWidget;
 
