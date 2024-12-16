@@ -64,7 +64,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               borderRadius: KBorderRadius.kBorderRadius32,
             ),
           Text(
-            context.l10n.eligibility,
+            '${context.l10n.eligibility}:',
             style: AppTextStyle.materialThemeHeadlineMedium,
           ),
           KSizedBox.kHeightSizedBox16,
@@ -74,7 +74,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox32,
           Text(
-            context.l10n.detail,
+            '${context.l10n.details}:',
             style: AppTextStyle.materialThemeHeadlineMedium,
           ),
           KSizedBox.kHeightSizedBox16,
@@ -85,7 +85,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
           if (state.discountModel.requirements != null) ...[
             KSizedBox.kHeightSizedBox32,
             Text(
-              context.l10n.toGetItYouNeed,
+              '${context.l10n.toGetItYouNeed}:',
               style: AppTextStyle.materialThemeHeadlineMedium,
             ),
             KSizedBox.kHeightSizedBox16,
