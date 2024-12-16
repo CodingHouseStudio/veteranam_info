@@ -196,9 +196,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox4,
           _CitiesExpirationWidget(
             isDesk: isDesk,
-            location: discountItem.location,
-            expiration: discountItem.expiration,
-            subLocation: discountItem.subLocation,
+            discountItem: discountItem,
           ),
           KSizedBox.kHeightSizedBox16,
           DiscountTextWidget(
@@ -210,6 +208,13 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
                   ),
             isDesk: isDesk,
             eligibility: discountItem.eligibility,
+            moreButtonEvent: () => context.goNamed(
+              KRoute.discount.name,
+              pathParameters: {
+                UrlParameters.cardId: discountItem.id,
+              },
+              extra: discountItem,
+            ),
             button: TextButton(
               key: KWidgetkeys.screen.company.boxMyDiscounts,
               onPressed: () => context.goNamed(
@@ -534,21 +539,17 @@ class CompanyInfoWidget extends StatelessWidget {
 class _CitiesExpirationWidget extends StatelessWidget {
   const _CitiesExpirationWidget({
     required this.isDesk,
-    required this.location,
-    required this.expiration,
-    required this.subLocation,
+    required this.discountItem,
   });
   final bool isDesk;
-  final List<TranslateModel>? location;
-  final TranslateModel? expiration;
-  final SubLocation? subLocation;
+  final DiscountModel discountItem;
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
       return Row(
         children: [
           ExpirationWidget(
-            expiration: expiration?.getTrsnslation(
+            expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
@@ -556,8 +557,15 @@ class _CitiesExpirationWidget extends StatelessWidget {
           Expanded(
             child: CityListWidget(
               key: KWidgetkeys.widget.discountCard.city,
-              location: location,
-              subLocation: subLocation,
+              location: discountItem.location,
+              subLocation: discountItem.subLocation,
+              moreButtonEvent: () => context.goNamed(
+                KRoute.discount.name,
+                pathParameters: {
+                  UrlParameters.cardId: discountItem.id,
+                },
+                extra: discountItem,
+              ),
               isDesk: true,
             ),
           ),
@@ -568,7 +576,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ExpirationWidget(
-            expiration: expiration?.getTrsnslation(
+            expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
@@ -576,8 +584,15 @@ class _CitiesExpirationWidget extends StatelessWidget {
           CityListWidget(
             key: KWidgetkeys.widget.discountCard.city,
             isDesk: false,
-            location: location,
-            subLocation: subLocation,
+            moreButtonEvent: () => context.goNamed(
+              KRoute.discount.name,
+              pathParameters: {
+                UrlParameters.cardId: discountItem.id,
+              },
+              extra: discountItem,
+            ),
+            location: discountItem.location,
+            subLocation: discountItem.subLocation,
           ),
         ],
       );

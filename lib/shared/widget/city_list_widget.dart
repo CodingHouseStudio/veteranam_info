@@ -8,12 +8,14 @@ class CityListWidget extends StatelessWidget {
     required this.subLocation,
     super.key,
     this.showFullText = false,
+    this.moreButtonEvent,
   });
 
   final List<TranslateModel>? location;
   final SubLocation? subLocation;
   final bool isDesk;
   final bool showFullText;
+  final void Function()? moreButtonEvent;
 
   @override
   Widget build(BuildContext context) {

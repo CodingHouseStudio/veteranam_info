@@ -10,6 +10,7 @@ class DiscountTextWidget extends StatelessWidget {
     this.maxLines,
     this.eligibility,
     super.key,
+    this.moreButtonEvent,
   });
 
   final String description;
@@ -18,6 +19,7 @@ class DiscountTextWidget extends StatelessWidget {
   final Widget icon;
   final Widget button;
   final bool isDesk;
+  final void Function()? moreButtonEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,10 @@ class DiscountTextWidget extends StatelessWidget {
               color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
             ),
           ),
-          EligibilityWidget(eligibility: eligibility!),
+          EligibilityWidget(
+            eligibility: eligibility!,
+            moreButtonEvent: moreButtonEvent,
+          ),
           KSizedBox.kHeightSizedBox16,
         ],
         Wrap(

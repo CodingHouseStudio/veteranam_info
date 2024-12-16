@@ -74,18 +74,32 @@ class DiscountBodyWidget extends StatelessWidget {
                       KSizedBox.kHeightSizedBox8.toSliver,
                     SliverPadding(
                       padding: padding,
-                      sliver: const SliverToBoxAdapter(
-                        child: DiscountBackButton(),
-                      ),
-                    ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox32.toSliver
-                    else
-                      KSizedBox.kHeightSizedBox8.toSliver,
-                    SliverPadding(
-                      padding: padding,
-                      sliver: DiscountInformationWidget(
-                        isDesk: isDesk,
+                      sliver: BlocBuilder<DiscountWatcherBloc,
+                          DiscountWatcherState>(
+                        buildWhen: (previous, current) =>
+                            current.failure == DiscountFailure.linkWrong &&
+                            previous.failure != DiscountFailure.linkWrong,
+                        builder: (context, state) {
+                          if (state.failure == DiscountFailure.linkWrong) {
+                            return DiscountWrongLinkWidget(
+                              isDesk: isDesk,
+                            );
+                          }
+                          return SliverMainAxisGroup(
+                            slivers: [
+                              const SliverToBoxAdapter(
+                                child: DiscountBackButton(),
+                              ),
+                              if (isDesk)
+                                KSizedBox.kHeightSizedBox32.toSliver
+                              else
+                                KSizedBox.kHeightSizedBox8.toSliver,
+                              DiscountInformationWidget(
+                                isDesk: isDesk,
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                     KSizedBox.kHeightSizedBox40.toSliver,
