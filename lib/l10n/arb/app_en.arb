@@ -1158,6 +1158,10 @@
   "@discountEditNotFound": {
     "examples": "This message appears on the Discount Edit page when a user enters an invalid discount ID or lacks access rights."
   },
+  "discountNotFound": "Unfortunately, the link is incorrect. Please verify the link or try another one.",
+  "@discountNotFound": {
+    "examples": "This message appears on the Discount page when a user enters an invalid discount ID."
+  },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
     "examples": "The text on the SignUp page before the login button with google, facebook, apple."

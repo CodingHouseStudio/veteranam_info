@@ -7,20 +7,22 @@ class DiscountBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButtonWidget(
-          icon: KIcon.arrowBack,
-          padding: KPadding.kPaddingSize8,
-          background: AppColors.materialThemeKeyColorsPrimary,
-          onPressed: () => context.goNamed(KRoute.discounts.name),
-        ),
-        KSizedBox.kWidthSizedBox8,
-        Text(
-          '${context.l10n.back} ${context.l10n.toDiscount.toLowerCase()}',
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
-      ],
+    return Align(
+      child: Row(
+        children: [
+          IconButtonWidget(
+            icon: KIcon.arrowBack,
+            padding: KPadding.kPaddingSize8,
+            background: AppColors.materialThemeKeyColorsPrimary,
+            onPressed: () => context.goNamed(KRoute.discounts.name),
+          ),
+          KSizedBox.kWidthSizedBox8,
+          Text(
+            '${context.l10n.back} ${context.l10n.toDiscount.toLowerCase()}',
+            style: AppTextStyle.materialThemeTitleMedium,
+          ),
+        ],
+      ),
     );
   }
 }

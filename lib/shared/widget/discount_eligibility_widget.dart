@@ -6,10 +6,12 @@ class EligibilityWidget extends StatelessWidget {
     required this.eligibility,
     super.key,
     this.showFullList = false,
+    this.moreButtonEvent,
   });
 
   final List<EligibilityEnum> eligibility;
   final bool showFullList;
+  final void Function()? moreButtonEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class EligibilityWidget extends StatelessWidget {
             ),
             if (eligibility.length > 5 && !showFullList)
               TextButton(
-                onPressed: null,
+                onPressed: moreButtonEvent,
                 child: Text(
                   context.l10n.moreWhomGranted(eligibility.length - 5),
                   style: AppTextStyle.materialThemeLabelLargeRef,
