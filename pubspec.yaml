@@ -11,7 +11,7 @@ dependencies:
   app_tracking_transparency: ^2.0.6
   bloc: ^8.1.4
   cached_network_image: ^3.4.1
-  cloud_firestore: ^5.5.1
+  cloud_firestore: ^5.2.1
   collection: ^1.18.0
   connectivity_plus: ^6.1.1
   dartz: ^0.10.1
