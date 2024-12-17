@@ -29,7 +29,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 /// it opens on the last screen they accessed. This provides a seamless
 /// and convenient user experience.
 GoRouter businessRouter = GoRouter(
-  // routerNeglect: true,
+  routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) => const ErrorScreen(),

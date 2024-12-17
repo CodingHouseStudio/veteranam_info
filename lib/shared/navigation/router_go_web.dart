@@ -44,7 +44,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 /// and convenient user experience.
 
 GoRouter router = GoRouter(
-  // routerNeglect: true,
+  routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) => const ErrorScreen(),
