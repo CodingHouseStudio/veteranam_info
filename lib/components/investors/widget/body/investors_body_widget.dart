@@ -52,12 +52,13 @@ class InvestorsBodyWidget extends StatelessWidget {
                     NavigationBarWidget(
                       isDesk: isDesk,
                       isTablet: isTablet,
-                      pageName: context.l10n.discount,
+                      pageName: context.l10n.provenFunds,
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: InvestorsTitleWidget(isDesk: isDesk),
-                    ),
+                    if (Config.isWeb)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: InvestorsTitleWidget(isDesk: isDesk),
+                      ),
                     FundsWidgetList(
                       isDesk: isDesk,
                       padding: padding,

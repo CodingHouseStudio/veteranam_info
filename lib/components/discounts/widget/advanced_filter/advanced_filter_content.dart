@@ -95,6 +95,14 @@ class AdvancedFilterContent extends StatelessWidget {
               ),
               textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
               title: context.l10n.eligibility,
+              value: state.discountFilterRepository.activeEligibilityMap.first,
+              onCancelWidgetPressed: (value) =>
+                  context.read<DiscountsWatcherBloc>().add(
+                        DiscountsWatcherEvent.filterEligibilities(
+                          eligibility: value,
+                          isDesk: isDesk,
+                        ),
+                      ),
             );
           } else {
             return _AdvancedLoadingListWidget(
@@ -128,6 +136,14 @@ class AdvancedFilterContent extends StatelessWidget {
               ),
               textKey: KWidgetkeys.screen.discounts.categoriesText,
               title: context.l10n.category,
+              value: state.discountFilterRepository.activeCategoryMap.first,
+              onCancelWidgetPressed: (value) =>
+                  context.read<DiscountsWatcherBloc>().add(
+                        DiscountsWatcherEvent.filterCategory(
+                          category: value,
+                          isDesk: isDesk,
+                        ),
+                      ),
             );
           } else {
             return const SliverToBoxAdapter();
@@ -187,6 +203,14 @@ class AdvancedFilterContent extends StatelessWidget {
               ),
               textKey: KWidgetkeys.screen.discounts.citiesText,
               title: context.l10n.city,
+              value: state.discountFilterRepository.activeLocationMap.first,
+              onCancelWidgetPressed: (value) =>
+                  context.read<DiscountsWatcherBloc>().add(
+                        DiscountsWatcherEvent.filterLocation(
+                          location: value,
+                          isDesk: isDesk,
+                        ),
+                      ),
             );
           } else {
             return const SliverToBoxAdapter();
@@ -312,62 +336,117 @@ class _ChooseItems extends StatelessWidget {
       padding: EdgeInsets.only(
         bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
       ),
-      sliver: SliverPrototypeExtentList.builder(
-        prototypeItem: Padding(
+      sliver: SliverToBoxAdapter(
+        child: Padding(
           padding: isDesk
               ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
               : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-          child: CancelChipWidget(
-            widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-            isDesk: isDesk,
-            labelText: KMockText.category.getTrsnslation(context),
-            onPressed: null,
+          child: Wrap(
+            runSpacing: KPadding.kPaddingSize8,
+            spacing: KPadding.kPaddingSize8,
+            children: List.generate(
+              chosenItems.length,
+              (index) {
+                final chooseItem =
+                    chosenItems[chosenItems.keys.elementAt(index)]!;
+                return Padding(
+                  padding: isDesk
+                      ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+                      : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+                  child: CancelChipWidget(
+                    widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+                    isDesk: isDesk,
+                    labelText: chooseItem.value.getTrsnslation(context),
+                    onPressed: () {
+                      if (eligibilitiesLength > index) {
+                        context.read<DiscountsWatcherBloc>().add(
+                              DiscountsWatcherEvent.filterEligibilities(
+                                eligibility: chooseItem.value.uk,
+                                isDesk: isDesk,
+                              ),
+                            );
+                      } else if (eligibilitiesLength + categoriesLength >
+                          index) {
+                        context.read<DiscountsWatcherBloc>().add(
+                              DiscountsWatcherEvent.filterCategory(
+                                category: chooseItem.value.uk,
+                                isDesk: isDesk,
+                              ),
+                            );
+                      } else {
+                        context.read<DiscountsWatcherBloc>().add(
+                              DiscountsWatcherEvent.filterLocation(
+                                location: chooseItem.value.uk,
+                                isDesk: isDesk,
+                              ),
+                            );
+                      }
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ),
-        itemCount: chosenItems.length,
-        addAutomaticKeepAlives: false,
-        addRepaintBoundaries: false,
-        itemBuilder: (context, index) {
-          final chooseItem = chosenItems[chosenItems.keys.elementAt(index)]!;
-          return Padding(
-            padding: isDesk
-                ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-                : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CancelChipWidget(
-                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-                isDesk: isDesk,
-                labelText: chooseItem.value.getTrsnslation(context),
-                onPressed: () {
-                  if (eligibilitiesLength > index) {
-                    context.read<DiscountsWatcherBloc>().add(
-                          DiscountsWatcherEvent.filterEligibilities(
-                            eligibility: chooseItem.value.uk,
-                            isDesk: isDesk,
-                          ),
-                        );
-                  } else if (eligibilitiesLength + categoriesLength > index) {
-                    context.read<DiscountsWatcherBloc>().add(
-                          DiscountsWatcherEvent.filterCategory(
-                            category: chooseItem.value.uk,
-                            isDesk: isDesk,
-                          ),
-                        );
-                  } else {
-                    context.read<DiscountsWatcherBloc>().add(
-                          DiscountsWatcherEvent.filterLocation(
-                            location: chooseItem.value.uk,
-                            isDesk: isDesk,
-                          ),
-                        );
-                  }
-                },
-              ),
-            ),
-          );
-        },
       ),
+      // SliverPrototypeExtentList.builder(
+      //   prototypeItem: Padding(
+      //     padding: isDesk
+      //         ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+      //         : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+      //     child: CancelChipWidget(
+      //       widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+      //       isDesk: isDesk,
+      //       labelText: KMockText.category.getTrsnslation(context),
+      //       onPressed: null,
+      //     ),
+      //   ),
+      //   itemCount: chosenItems.length,
+      //   addAutomaticKeepAlives: false,
+      //   addRepaintBoundaries: false,
+      //   itemBuilder: (context, index) {
+      //     final chooseItem = chosenItems[chosenItems.keys
+      // .elementAt(index)]!;
+      //     return Padding(
+      //       padding: isDesk
+      //           ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+      //           : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+      //       child: Align(
+      //         alignment: Alignment.centerLeft,
+      //         child: CancelChipWidget(
+      //           widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+      //           isDesk: isDesk,
+      //           labelText: chooseItem.value.getTrsnslation(context),
+      //           onPressed: () {
+      //             if (eligibilitiesLength > index) {
+      //               context.read<DiscountsWatcherBloc>().add(
+      //                     DiscountsWatcherEvent.filterEligibilities(
+      //                       eligibility: chooseItem.value.uk,
+      //                       isDesk: isDesk,
+      //                     ),
+      //                   );
+      //             } else if (eligibilitiesLength + categoriesLength >
+      // index) {
+      //               context.read<DiscountsWatcherBloc>().add(
+      //                     DiscountsWatcherEvent.filterCategory(
+      //                       category: chooseItem.value.uk,
+      //                       isDesk: isDesk,
+      //                     ),
+      //                   );
+      //             } else {
+      //               context.read<DiscountsWatcherBloc>().add(
+      //                     DiscountsWatcherEvent.filterLocation(
+      //                       location: chooseItem.value.uk,
+      //                       isDesk: isDesk,
+      //                     ),
+      //                   );
+      //             }
+      //           },
+      //         ),
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 }

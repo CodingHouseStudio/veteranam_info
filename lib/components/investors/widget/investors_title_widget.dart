@@ -10,27 +10,20 @@ class InvestorsTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final title = [
       KSizedBox.kHeightSizedBox24,
-      if (Config.isWeb)
-        TitlePointWidget(
-          title: context.l10n.provideSuggestionsFromBusinesses,
-          titleKey: KWidgetkeys.screen.investors.title,
-          titleSecondPart: context.l10n.orDonateHere,
-          isDesk: isDesk,
-          isRightArrow: false,
-          titleAlignment: WrapAlignment.end,
-          textAlign: TextAlign.end,
-        ),
-      if (isDesk)
-        KSizedBox.kHeightSizedBox40
-      else if (Config.isWeb)
-        KSizedBox.kHeightSizedBox24,
+      TitlePointWidget(
+        title: context.l10n.provideSuggestionsFromBusinesses,
+        titleKey: KWidgetkeys.screen.investors.title,
+        titleSecondPart: context.l10n.orDonateHere,
+        isDesk: isDesk,
+        isRightArrow: false,
+        titleAlignment: WrapAlignment.end,
+        textAlign: TextAlign.end,
+      ),
+      if (isDesk) KSizedBox.kHeightSizedBox40 else KSizedBox.kHeightSizedBox24,
       InvestorsDescriptionWidget(
         isDesk: isDesk,
       ),
-      if (isDesk)
-        KSizedBox.kHeightSizedBox40
-      else if (Config.isWeb)
-        KSizedBox.kHeightSizedBox24,
+      if (isDesk) KSizedBox.kHeightSizedBox40 else KSizedBox.kHeightSizedBox24,
       Center(
         child: Text(
           context.l10n.provenFunds,
