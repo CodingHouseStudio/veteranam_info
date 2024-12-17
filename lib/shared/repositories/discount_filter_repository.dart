@@ -233,7 +233,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: unmodifiedDiscountModelItems.toString(),
           tag: 'getFilterList',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
         ),
@@ -341,7 +340,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: '$isEnglish |$unmodifiedDiscountModelItems',
+          data: 'isEnglish: $isEnglish',
           tag: 'getFilterValuesFromDiscountItems',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
           tag2Key: ErrorText.callFrom,
@@ -506,8 +505,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: '$valueUK | $filter | $activityFilter '
-              '| $filterEnum $unmodifiedDiscountModelItems',
+          data: 'valueUK: $valueUK | activityFilter: $activityFilter '
+              '| filterEnum: $filterEnum',
           tag: '_addFilterItem',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
           tag2Key: ErrorText.callFrom,
@@ -536,7 +535,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: '$activityMap | $itemsMap',
+          data: 'activityMap: $activityMap',
           tag: '_addActivityMapToItemsMap',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
           tag2Key: ErrorText.callFrom,
@@ -610,7 +609,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       SomeFailure.filter(
         error: e,
         stack: stack,
-        data: '$values | $activityFilter',
+        data: 'activityFilter: $activityFilter',
         tag: '_activityListContainAnyValues',
         tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
         tag2Key: ErrorText.callFrom,
@@ -667,7 +666,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: '$list | $activityMap',
+          data: 'activityMap: $activityMap',
           tag: '_getFilterFromTranslateModel',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
           tag2Key: ErrorText.callFrom,

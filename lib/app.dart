@@ -99,6 +99,7 @@ class AppWidget extends StatelessWidget {
 
   Widget body(Locale localeValue) => MaterialApp.router(
         key: KWidgetkeys.screen.app.screen,
+        themeAnimationDuration: Duration.zero,
         theme: themeData,
         restorationScopeId: KAppText.logo,
         // scrollBehavior: CustomScrollBehavior(),
