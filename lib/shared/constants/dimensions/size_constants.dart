@@ -72,6 +72,7 @@ abstract class KSize {
   static const kFont128 = 128.0;
 
   static const kUserPhoto = 48.0;
+  static const kbottomNavigationUserPhoto = 40.0;
 
   static const kWrapSpacing8 = 8.0;
   static const kWrapRunSpacing4 = 4.0;

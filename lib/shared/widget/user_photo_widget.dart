@@ -14,6 +14,7 @@ class UserPhotoWidget extends StatelessWidget {
     // this.background,
     // this.iconColor,
     this.imageBytes,
+    this.imageSize,
   });
   final String? imageUrl;
   final VoidCallback? onPressed;
@@ -23,6 +24,7 @@ class UserPhotoWidget extends StatelessWidget {
   // final Color? background;
   // final Color? iconColor;
   final Uint8List? imageBytes;
+  final double? imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class UserPhotoWidget extends StatelessWidget {
         // decoration: KWidgetTheme.boxDecorationCircular
         //     .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
         // padding: EdgeInsets.all(_padding),
-        radius: KSize.kUserPhoto / 2,
+        radius: (imageSize ?? KSize.kUserPhoto) / 2,
         backgroundColor: AppColors.materialThemeKeyColorsPrimary,
         child: _body,
       );
@@ -39,7 +41,7 @@ class UserPhotoWidget extends StatelessWidget {
       return InkWell(
         onTap: onPressed,
         child: CircleAvatar(
-          radius: KSize.kUserPhoto / 2,
+          radius: (imageSize ?? KSize.kUserPhoto) / 2,
           backgroundColor: AppColors.materialThemeKeyColorsPrimary,
           child: _body,
         ),

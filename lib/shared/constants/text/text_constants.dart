@@ -264,6 +264,7 @@ abstract class KAppText {
         KRoute.discounts.name,
         KRoute.support.name,
         KRoute.settings.name,
+        KRoute.login.name,
       ];
   static const deletedFieldId = 'deletedOn';
 
