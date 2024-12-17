@@ -90,7 +90,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox16,
             MarkdownLinkWidget(
-              text: state.discountModel.exclusions!.getTrsnslation(context),
+              text: state.discountModel.requirements!.getTrsnslation(context),
               textStyle: AppTextStyle.materialThemeBodyLarge,
             ),
           ],
