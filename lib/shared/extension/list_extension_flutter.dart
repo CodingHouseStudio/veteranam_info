@@ -169,3 +169,10 @@ extension TranslateModelListExtension on List<TranslateModel> {
     }
   }
 }
+
+extension MapFilterExtension on Map<String, FilterItem> {
+  FilterItem? get first {
+    if (keys.isEmpty) return null;
+    return this[keys.first];
+  }
+}

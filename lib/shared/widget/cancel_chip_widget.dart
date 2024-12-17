@@ -33,6 +33,7 @@ class CancelChipWidget extends StatelessWidget {
         labelText,
         textAlign: TextAlign.center,
         maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: textStyle ??
             (isDesk
                 ? AppTextStyle.materialThemeBodyLarge
