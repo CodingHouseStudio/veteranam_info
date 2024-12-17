@@ -12,8 +12,8 @@ class MobNavigationWidget extends StatelessWidget {
     final labels = [
       context.l10n.discounts,
       context.l10n.investors,
-      context.l10n.login,
       context.l10n.settings,
+      context.l10n.login,
     ];
 
     return DecoratedBox(
@@ -42,7 +42,7 @@ class MobNavigationWidget extends StatelessWidget {
                           ? UserPhotoWidget(
                               onPressed: null,
                               imageUrl: state.user.photo,
-                              imageSize: KSize.kbottomNavigationUserPhoto,
+                              imageSize: KSize.kIconSize,
                             )
                           : KIcon.pagesIcons[index],
                     ),
@@ -50,6 +50,7 @@ class MobNavigationWidget extends StatelessWidget {
                         ? UserPhotoWidget(
                             onPressed: null,
                             imageUrl: state.user.photo,
+                            imageSize: KSize.kbottomNavigationUserPhoto,
                           )
                         : IconWidget(
                             icon: KIcon.pagesIcons[index],
@@ -64,12 +65,15 @@ class MobNavigationWidget extends StatelessWidget {
                 backgroundColor: AppColors.materialThemeKeyColorsNeutral,
                 selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
                 unselectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+                showUnselectedLabels: true,
+                showSelectedLabels: true,
                 currentIndex: index,
                 onTap: (i) => context.goNamed(
                   showProfile(state: state, index: i)
                       ? KRoute.profile.name
                       : KAppText.routes[i],
                 ),
+                type: BottomNavigationBarType.fixed,
               );
             },
           ),
@@ -82,5 +86,5 @@ class MobNavigationWidget extends StatelessWidget {
     required UserWatcherState state,
     required int index,
   }) =>
-      (state.user.email?.isNotEmpty ?? false) && index == 2;
+      (state.user.email?.isNotEmpty ?? false) && index == 3;
 }

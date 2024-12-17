@@ -24,7 +24,7 @@ class LoginBodyWidget extends StatelessWidget {
           isForm: true,
           pageName: context.l10n.login,
           showMobBottomNavigation: true,
-          bottomBarIndex: 2,
+          bottomBarIndex: 3,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (!isDesk) KSizedBox.kHeightSizedBox24,
             if (Config.isWeb)

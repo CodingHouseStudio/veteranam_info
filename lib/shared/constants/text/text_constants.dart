@@ -263,8 +263,8 @@ abstract class KAppText {
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,
-        KRoute.login.name,
         KRoute.settings.name,
+        KRoute.login.name,
       ];
   static const deletedFieldId = 'deletedOn';
 

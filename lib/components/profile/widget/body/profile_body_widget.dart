@@ -14,7 +14,7 @@ class ProfileBodyWidget extends StatelessWidget {
         // verticalPadding: KPadding.kPaddingSize48,
       ),
       showMobBottomNavigation: true,
-      bottomBarIndex: 2,
+      bottomBarIndex: 3,
       pageName: context.l10n.myProfileTitle,
       titleChildWidgetsFunction: ({required isDesk}) => [
         if (Config.isWeb) ...[

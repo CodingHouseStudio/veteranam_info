@@ -10,7 +10,7 @@ class _MobNavigationKeys {
   List<Key> get navButtonsKey => [
         discounts,
         investors,
-        login,
         settings,
+        login,
       ];
 }
