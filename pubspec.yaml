@@ -78,7 +78,7 @@ dev_dependencies:
   bloc_test: ^9.1.7
 
   build_runner: ^2.4.12 # Used for class generation
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.1
   flutter_test:
     sdk: flutter
