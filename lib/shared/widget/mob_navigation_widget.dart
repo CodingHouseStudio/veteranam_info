@@ -38,13 +38,18 @@ class MobNavigationWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         bottom: KPadding.kPaddingSize8,
                       ),
-                      child: showProfile(state: state, index: index)
-                          ? UserPhotoWidget(
-                              onPressed: null,
-                              imageUrl: state.user.photo,
-                              imageSize: KSize.kIconSize,
-                            )
-                          : KIcon.pagesIcons[index],
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: KPadding.kPaddingSize8,
+                        ),
+                        child: showProfile(state: state, index: index)
+                            ? UserPhotoWidget(
+                                onPressed: null,
+                                imageUrl: state.user.photo,
+                                imageSize: KSize.kIconSize,
+                              )
+                            : KIcon.pagesIcons[index],
+                      ),
                     ),
                     activeIcon: showProfile(state: state, index: index)
                         ? UserPhotoWidget(
