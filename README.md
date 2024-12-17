@@ -67,148 +67,164 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 ## Structure
 
 ```yaml
-- /lib 
-# This is where all the application's directories will be contained  
-    - /components
-    # Directory responsible for pages
-	- /[page_name]
-    	# Page Directory(it's common structure for all pages)
+- /lib
+# Root directory for the application's source code.
+
+	- /components
+	# Directory containing all pages of the application.
+
+		- /[page_name]
+		# Directory structure for an individual page.
+			
+			- /bloc
+			# Contains all BLoC (Business Logic Component) classes for this page (optional).
+
+			- /view
+			# Contains the main widget that initializes and displays this page.
+
+			- /widget
+			# Contains all widgets specific to this page.
+				
+				- /blocprovider
+				# Contains BlocProvider widgets that initialize and provide BLoCs (optional).
+
+				- /body
+				# Contains the main "body" widget for this page, which holds the page's structure and layout.
+
+			- /field_models
+			# Contains models for form fields or page-specific data (optional).
+
+	- /l10n
+	# Contains localization files for supporting multiple languages in the app.
+
+	- /shared
+	# Directory for reusable code, components, and utilities shared across pages.
+
 		- /bloc
-		# Directory contain all blocs for the page(is not required)
-		- /view
-		# Directory with start widget for page(call when want use this page)
+		# Contains reusable or global BLoC classes.
+
+		- /constants
+		# Contains constant values and configurations for styles, themes, and other UI elements.
+			- /dimensions
+			# Contains dimension constants like padding, margin, etc.
+			- /style
+			# Contains style constants for the application (e.g., text styles).
+			- /text
+			# Contains text constants like labels, titles, and descriptions.
+			- /theme
+			# Contains theme configurations for light and dark modes.
+			- /widget
+			# Contains reusable widget constants.
+			- /widget_keys
+			# Contains GlobalKeys for widgets used in tests or UI interaction.
+
+		- /data_provider
+		# Contains classes responsible for fetching or providing data.
+
+		- /extension
+		# Contains Dart extension methods to simplify and enhance code functionality.
+
+		- /helper
+		# Contains helper methods or classes for initializing BLoCs, repositories, and data providers using GetIt.
+
+		- /models
+		# Contains models used throughout the application.
+			- /convertors
+			# Contains converters for transforming model data into different formats.
+			- /failure_model
+			# Contains a model for handling failures/errors, including error reporting (e.g., to Sentry or Firebase Crashlytics).
+			- /field_models
+			# Contains reusable field models.
+			- /helper_models
+			# Contains models used as dependencies for other models.
+
+		- /navigation
+		# Contains the GoRouter instance or configuration for managing app navigation.
+
+		- /repositories
+		# Contains repository classes that prepare and handle data retrieval for BLoCs, including error handling.
+
 		- /widget
-		# Directory contain all the widgets for this page
-			- /blocprovider
-			# Directory contain all Bloc Provider for page(is not required)
-			- /body
-			#  Directory contain body widget. Body widget page main structure
-		- /field_models
-		# Directory contain field models for page(is not required)
-    - /l10n
-    # Localization Directory
-    - /shared
-    # Directory responsible for code that can be reused on pages
+		# Contains reusable widgets shared across different pages.
+
+		- shared_dart.dart
+		# Contains imports for backend or non-UI related code.
+
+		- shared_flutter.dart
+		# Contains imports for Flutter/UI-related code.
+
+	- app.dart
+	# Main app widget that initializes the entire application.
+
+	- bootstrap.dart
+	# Contains the standard app initialization settings.
+
+	- firebase_options_development.dart
+	# Firebase configuration for the development environment.
+
+	- firebase_options_production.dart
+	# Firebase configuration for the production environment.
+
+	- main_development.dart
+	# Entry point for the development environment.
+
+	- main_production.dart
+	# Entry point for the production environment.
+
+- /test
+# Root directory for the application's test cases.
+
+	- /[page_name]
+	# Directory for tests related to a specific page.
+
+		- /helpers
+		# Contains helper methods for initializing and testing the page.
+			- [page_name]_pump_app_helper.dart
+			# Contains a method to initialize the page within the test environment.
+			- [page_name]_initial_helper.dart
+			# Contains a method to initialize the page and verify all widgets without testing functionality.
+
+			- /unit_test
+			# Contains unit tests for BLoCs, models, or repositories related to this page. 
+			# (If the page has only one unit test, it can be a single file: [page_name]_unit_test.dart).
+
+			- [page_name]_widget_test.dart
+			# Contains widget tests for the page. Multiple files can exist for different app flavors.
+
 	- /bloc
-	# Directory for common blocs
-	- /constants
-		- /dimensions
-		- /style
-		- /text
-		- /theme
-		- /widget
-		- /widget_keys
+	# Contains tests for BLoC classes. May include tests for associated repositories and models.
+
 	- /data_provider
-	# Directory with classes for geting data
-	- /extension
- 	- /helper
-	# Directory file for initialize Bloc/Repository/Data_Provider use GetIt
-	- /models
-		- /convertors
-		# Directory contain special convertor for models
-		- /failure_model
-		# Directory with model for failure. This model also send error to senry or firebase crashlytics
-	- /navigation
-        - /enums 
-        - /services
-             # This is where we store our Services
-             # Here our repositories are just classes that will mediate the communication between our controller and our data.
-             # Our controllers won't need to know where the data comes from, and you can use more than one repository on a controller if you need to.
-             # The repositories must be separated by entities, and can almost always be based on their database tables.
-             # And inside it will contain all its functions that will request data from a local api or database.
-             # That is, if we have a user table that we will persist as, edit, add, update and delete, all these functions are requested 
-             # from an api, we will have a repository with this object of the api where we will call all the respective 
-             # functions to the user. So the controller does not need to know where it comes from, the repository being a 
-             # mandatory attribute for the controllers in this model, you should always initialize the controller with at - /repository
-            - /example_service.dart
-                - service.dart
-                - repository.dart
-        - /provider
-        # Our data provider, can be an api, local database or firebase for example.
-            - api_provider.dart
-            - db_provider.dart
-            - storage_provider.dart
-        # Here, our asynchronous data request, http, local database functions must remain ...
-        - /model
-        # Our classes, or data models responsible for abstracting our objects.
-            - model.dart
-    - /modules
-    # Each module consists of a page, its respective GetXController and its dependencies or Bindings.
-    # We treat each screen as an independent module, as it has its only controller, and can also contain its dependencies.
-    # If you use reusable widgets in this, and only in this module, you can choose to add a folder for them.
-        - /my_module
-            - page.dart
-            - controller.dart
-            - binding.dart
-            - repository.dart
-            - /local_widgets
-    # The Binding class is a class that decouples dependency injection, while "binding" routes to the state manager and the dependency manager.
-    # This lets you know which screen is being displayed when a specific controller is used and knows where and how to dispose of it.
-    # In addition, the Binding class allows you to have SmartManager configuration control.
-    # You can configure how dependencies are to be organized and remove a route from the stack, or when the widget used for disposition, or none of them.
-    #The decision to transfer the repositories "globally" to internal modes within each module is that we can use a function in different modules, but the problem was due to having to import more than one repository in the controller, so we can repeat the same calls functions, internal repositories, thus maintaining faster maintenance, making everything that gives life to the module reachable through the module itself.
-    #Repositories then become just a class to point to the controllers of our module, which and which provider we are going to consume, the same goes for services, services that have integration with some provider, must have its own repository
+	# Contains tests for data provider classes.
 
-    - /global_widgets 
-    # Widgets that can be reused by multiple **modules**.  
+	- /helpers
+	# Contains common helper methods and utilities used in tests.
+		- change_window_size_helper.dart
+		# Contains a method to simulate different screen sizes in tests.
+		- scrolling_helper.dart
+		# Contains a method to simulate screen scrolling during tests.
 
-    - /routes
-    # In this repository we will deposit our routes and pages.  
-    # We chose to separate into two files, and two classes, one being routes.dart, containing its constant routes and the other for routing.  
-        - routes.dart
-        # class Routes {
-        # This file will contain your constants ex:  
-        # class Routes { const HOME = '/ home'; }  
-        - pages.dart
-        # This file will contain your array routing ex :  
-        # class AppPages { static final pages = [  
-        #  GetPage(name: Routes.HOME, page:()=> HomePage()) 
-        # ]};  
-    - /core
-        - /errors
-        # error handling and classes
-        - /values
-            - strings.dart
-            # globally reusable strings
-            # example : enter > "Enter" on several buttons
-            - colors.dart
-            # colors that can be reused throughout the application
-            - /languages
-            # for applications that use internationalization, they can deposit their translation files here
-                - /from
-                    - pt-br.dart
-                    - en-au.dart
-        - /theme
-        #Here we can create themes for our widgets, texts and colors
-            - text_theme.dart  
-            # inside ex: final textTitle = TextStyle(fontSize: 30)  
-            - color_theme.dart  
-            # inside ex: final colorCard = Color(0xffEDEDEE)  
-            - app_theme.dart  
-            # inside ex: final textTheme = TextTheme(headline1: TextStyle(color: colorCard))  
-        - /utils
-        #Here you can insert utilities for your application, such as masks, form keys or widgets
-            - /extensions
-                # are a way to add functionality to existing libraries
-                - example_remove_underlines.dart
-                # https://dart.dev/guides/language/extension-methods
-                
-            - /functions
-            # functions that can be reused globally in the app
-                - get_percent_size.dart
-                # example: a function that returns the percentage of a parent widget
-                
-            - /helpers
-            # abstract classes or helper classes like key masks etc
-                - masks.dart  
-                # inside ex: static final maskCPF = MaskTextInputFormatter(mask: "###.###.###-##", filter: {"#": RegExp(r'[0-9]')});  
-                - keys.dart  
-                # inside ex: static final GlobalKey formKey = GlobalKey<FormState>();
-- /repos # Use for Micro Front-End multirepo example:
-    - /dependencies
-    - /core
-- main.dart  
-# main file
+		- /widget
+		# Contains common widget tests shared across pages.
+
+	- /model
+	# Contains tests for model classes (if models are not tested elsewhere).
+
+	- /repository
+	# Contains tests for repository classes. May include associated model tests.
+
+	- /test_mocks
+	# Contains mock classes and helper methods for testing purposes.
+		- go_router_provider_mocks.dart
+		# Provides a fake GoRouter class to simulate navigation in tests.
+		- mob_build_register.dart
+		# Initializes required dependencies for mobile platform tests. 
+		# (Without this, tests on mobile platforms will not run).
+		- test_repository_mocks.dart
+		# Generates mock classes using GenerateNiceMocks for repository tests.
+		- user_setting_register.dart
+		# Initializes app-specific settings and dependencies for tests. 
+		# (Required to ensure smooth test).
 ```
 
 ## Tags
