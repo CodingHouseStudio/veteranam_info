@@ -6,8 +6,6 @@
         <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-100%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
         <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
       <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
-    <!-- After Testing     -->
-    <!--   <a href="https://app.codecov.io/gh/schultek/jaspr"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?logo=codecov&logoColor=fff&labelColor=333940" alt="codecov"></a> -->
     <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info/issues"><img src="https://img.shields.io/github/issues/CodingHouseStudio/veteranam_info?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="issues"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github" alt="license"></a>
