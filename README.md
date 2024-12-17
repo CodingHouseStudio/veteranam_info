@@ -227,7 +227,7 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 
 ## License
 
-This application is released under the [FSL-1.1-Apache-2.0 License].
+This application is released under the [FSL-1.1-Apache-2.0 License](https://github.com/CodingHouseStudio/veteranam_info/blob/DemianKryk-patch-1/LICENSE.md).
 
 ---
 ---
