@@ -370,10 +370,17 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
             TranslateModel(uk: valueUK),
           );
       if (!activityFilter.containsKey(valueUK)) {
+        // One Item Code Start:
+        for (final key in activityFilter.keys) {
+          filter[key] = filter[key]!.copyWith(isSelected: false);
+        }
+        activityFilter.clear();
+        // One Item Code End:
         activityFilter[valueUK] = filterItem;
       } else {
         activityFilter.remove(valueUK);
       }
+
       filter[valueUK] = filterItem;
       // Add New Filter Item To activity List and Change Is Selected For Item
       // With
