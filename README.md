@@ -222,10 +222,10 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 
 ## Find Us At:
 
-- ### <a href="https://www.upwork.com/agencies/codinghouse/">Upwork <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/upwork-icon.png"  width="16"></a>
-- ### <a href="https://www.linkedin.com/company/coding-house-studio/posts/?feedView=all"> LinkeIn <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"  width="16"></a>
-- ### <a href="https://www.instagram.com/veteranam_info">Instagram <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"  width="16"></a>
-- ### <a href="https://www.facebook.com/brocodev">Facebook <img src="https://i.ibb.co/c8JfWMM/facebook.png" height="16"/></a>
+- <a href="https://www.upwork.com/agencies/codinghouse/">Upwork <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/upwork-icon.png"  width="16"></a>
+- <a href="https://www.linkedin.com/company/coding-house-studio/posts/?feedView=all"> LinkeIn <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"  width="16"></a>
+- <a href="https://www.instagram.com/veteranam_info">Instagram <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"  width="16"></a>
+- <a href="https://www.facebook.com/brocodev">Facebook <img src="https://i.ibb.co/c8JfWMM/facebook.png" height="16"/></a>
 
 ## License
 
