@@ -16,6 +16,8 @@ class ScaffoldWidget extends StatelessWidget {
     this.showMobNawbarBackButton,
     this.titleDeskPadding,
     this.isForm = false,
+    this.bottomBarIndex,
+    this.backButtonPathName,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -34,6 +36,8 @@ class ScaffoldWidget extends StatelessWidget {
   final void Function()? loadDataAgain;
   final bool? showMobNawbarBackButton;
   final bool isForm;
+  final int? bottomBarIndex;
+  final String? backButtonPathName;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +89,8 @@ class ScaffoldWidget extends StatelessWidget {
                 bottomNavigationBar:
                     Config.isWeb || !(showMobBottomNavigation ?? true)
                         ? null
-                        : const MobNavigationWidget(
-                            index: 2,
+                        : MobNavigationWidget(
+                            index: bottomBarIndex ?? 2,
                           ),
                 appBar: AppBar(
                   backgroundColor: AppColors.materialThemeWhite,
@@ -102,6 +106,7 @@ class ScaffoldWidget extends StatelessWidget {
                       isTablet: isTablet,
                       pageName: pageName,
                       showMobBackButton: showMobNawbarBackButton,
+                      backButtonPathName: backButtonPathName,
                       // showMobileNawbar: showMobileNawbar,
                     ),
 

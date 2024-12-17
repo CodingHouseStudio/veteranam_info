@@ -165,6 +165,7 @@ abstract class KIcon {
     grade: 200,
   );
   static const _KIcon call = _KIcon(Symbols.call);
+  static const _KIcon login = _KIcon(Symbols.login);
 
   static const logo = _KIcon(
     IconData(0xe1, fontFamily: KAppText.veteranamFontName),
@@ -234,9 +235,10 @@ abstract class KIcon {
 
   static const _KIcon date = _KIcon(Symbols.date_range);
 
-  static List<Icon> get icons => [
+  static List<Icon> get pagesIcons => [
         KIcon.tag,
         KIcon.briefcase,
+        KIcon.login,
         KIcon.settings,
       ];
 }

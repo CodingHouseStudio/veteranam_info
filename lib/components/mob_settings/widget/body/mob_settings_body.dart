@@ -164,6 +164,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         const InfoVersionWidget(isDesk: true),
         KSizedBox.kHeightSizedBox16,
       ],
+      bottomBarIndex: 3,
     );
 
     //     appBar: AppBar(

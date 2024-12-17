@@ -24,6 +24,7 @@ class SignUpBodyWidget extends StatelessWidget {
           isForm: true,
           pageName: context.l10n.signUp,
           showMobNawbarBackButton: true,
+          backButtonPathName: KRoute.login.name,
           showMobBottomNavigation: false,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (!isDesk) KSizedBox.kHeightSizedBox24,

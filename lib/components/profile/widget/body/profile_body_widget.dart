@@ -13,8 +13,8 @@ class ProfileBodyWidget extends StatelessWidget {
         precent: KDimensions.twentyEightPercent,
         // verticalPadding: KPadding.kPaddingSize48,
       ),
-      showMobNawbarBackButton: true,
-      showMobBottomNavigation: false,
+      showMobBottomNavigation: true,
+      bottomBarIndex: 2,
       pageName: context.l10n.myProfileTitle,
       titleChildWidgetsFunction: ({required isDesk}) => [
         if (Config.isWeb) ...[

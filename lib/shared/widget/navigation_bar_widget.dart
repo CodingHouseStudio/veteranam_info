@@ -13,6 +13,7 @@ class NavigationBarWidget extends StatelessWidget {
     this.pageName,
     this.showMobBackButton,
     this.maxMinHeight,
+    this.backButtonPathName,
   });
 
   final bool isDesk;
@@ -21,6 +22,7 @@ class NavigationBarWidget extends StatelessWidget {
   final String? pageName;
   final bool? showMobBackButton;
   final double? maxMinHeight;
+  final String? backButtonPathName;
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
@@ -33,6 +35,7 @@ class NavigationBarWidget extends StatelessWidget {
           pageName: pageName,
           // showMobileNawbar: showMobileNawbar ?? false,
           showBackButton: showMobBackButton,
+          backButtonPathName: backButtonPathName,
         ),
         rebuildValues: [isDesk, isTablet],
         maxMinHeight: maxMinHeight ?? KMinMaxSize.minmaxHeight94,
@@ -49,6 +52,7 @@ class _NavbarWidget extends StatelessWidget {
     // this.childWidget,
     this.pageName,
     this.showBackButton,
+    this.backButtonPathName,
   });
   final bool isDesk;
   // final Widget? childWidget;
@@ -56,6 +60,7 @@ class _NavbarWidget extends StatelessWidget {
   final String? pageName;
   // final bool showMobileNawbar;
   final bool? showBackButton;
+  final String? backButtonPathName;
 
   @override
   Widget build(BuildContext context) {
@@ -80,191 +85,176 @@ class _NavbarWidget extends StatelessWidget {
               top: KPadding.kPaddingSize8,
               bottom: KPadding.kPaddingSize8,
             ),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (Config.isWeb || !(showBackButton ?? false))
-            IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () => EasyDebounce.debounce(
-                KAppText.logo,
-                Duration.zero,
-                () {
-                  // if (Config.isWeb
-                  //     // || !widget.showMobileNawbar
-                  //     ) {
-                  context.goNamed(
-                    Config.isWeb
-                        ? Config.isUser
-                            ? KRoute.home.name
-                            : KRoute.myDiscounts.name
-                        : KRoute
-                            .discounts.name, //KRoute.businessDashboard.name,
-                  );
-                  // }
-                },
-              ),
-              icon: KIcon.logo.copyWith(
-                key: KWidgetkeys.widget.nawbar.logo,
-                // width: 78,
-              ),
-            )
-          else
-            IconButton(
-              key: KWidgetkeys.widget.nawbar.backButton,
-              style: KButtonStyles.withoutStyle.copyWith(
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.symmetric(
-                    vertical: KPadding.kPaddingSize12,
-                    horizontal: KPadding.kPaddingSize16,
+      child: Config.isWeb
+          ? Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () => EasyDebounce.debounce(
+                    KAppText.logo,
+                    Duration.zero,
+                    () {
+                      // if (Config.isWeb
+                      //     // || !widget.showMobileNawbar
+                      //     ) {
+                      context.goNamed(
+                        Config.isWeb
+                            ? Config.isUser
+                                ? KRoute.home.name
+                                : KRoute.myDiscounts.name
+                            : KRoute.discounts
+                                .name, //KRoute.businessDashboard.name,
+                      );
+                      // }
+                    },
+                  ),
+                  icon: KIcon.logo.copyWith(
+                    key: KWidgetkeys.widget.nawbar.logo,
+                    // width: 78,
                   ),
                 ),
-              ),
-              onPressed: () => context.pop(),
-              icon: KIcon.arrowBack,
-            ),
-          // if (Config.isDevelopment)
-          //   if (widget.isDesk)
-          //     KSizedBox.kWidthSizedBox40
-          //   else
-          //     KSizedBox.kWidthSizedBox22,
-          // if (Config.isDevelopment)
-          //   Expanded(
-          //     child: TextFieldWidget(
-          //       key: _formKey,
-          //       widgetKey: KWidgetkeys.widget.nawbar.field,
-          //       labelTextStyle: widget.isDesk
-          //           ? AppTextStyle.text24
-          //           : AppTextStyle.text16,
-          //       focusNode: focusNode,
-          //       prefixIcon: KIcon.search,
-          //       onChanged: (text) {},
-          //       labelText: context.l10n.search,
-          //       // suffixIcon: widget.isDesk || !widget.hasMicrophone
-          //       //     ? null
-          //       //     : KIcon.mic.setIconKey(
-          //       //         KWidgetkeys.widget.nawbar.iconMic,
-          //       //       ),
-          //       isDesk: widget.isDesk,
-          //       contentPadding: widget.isDesk
-          //           ? EdgeInsets.zero
-          //           : const EdgeInsets.all(KPadding.kPaddingSize16),
-          //     ),
-          //   )
-          // else
-          if (Config.isWeb)
-            _NavigationCenterWebWidget(
-              isTablet: isTablet,
-              isDesk: isDesk,
-            )
-          else
-            Expanded(
-              child: Text(
-                '$pageName',
-                key: KWidgetkeys.widget.nawbar.pageName,
-                style: AppTextStyle.materialThemeTitleMedium,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          // if (widget.isDesk && widget.hasMicrophone)
-          //   Padding(
-          //     padding: const EdgeInsets.only(right:
-          // KPadding.kPaddingSize32),
-          //     child: IconWidget(
-          //       key: KWidgetkeys.widget.nawbar.iconMic,
-          //       icon: KIcon.mic,
-          //     ),
-          //   ),
-          if (!Config.isBusiness && Config.isWeb)
-            if (isTablet)
-              LanguagesSwitcherWidget(
-                key: KWidgetkeys.widget.nawbar.language,
-              )
-            else
-              IconButtonWidget(
-                key: KWidgetkeys.widget.nawbar.menuButton,
-                icon: KIcon.menu.copyWith(
-                  color: AppColors.materialThemeWhite,
+                // if (Config.isDevelopment)
+                //   if (widget.isDesk)
+                //     KSizedBox.kWidthSizedBox40
+                //   else
+                //     KSizedBox.kWidthSizedBox22,
+                // if (Config.isDevelopment)
+                //   Expanded(
+                //     child: TextFieldWidget(
+                //       key: _formKey,
+                //       widgetKey: KWidgetkeys.widget.nawbar.field,
+                //       labelTextStyle: widget.isDesk
+                //           ? AppTextStyle.text24
+                //           : AppTextStyle.text16,
+                //       focusNode: focusNode,
+                //       prefixIcon: KIcon.search,
+                //       onChanged: (text) {},
+                //       labelText: context.l10n.search,
+                //       // suffixIcon: widget.isDesk || !widget.hasMicrophone
+                //       //     ? null
+                //       //     : KIcon.mic.setIconKey(
+                //       //         KWidgetkeys.widget.nawbar.iconMic,
+                //       //       ),
+                //       isDesk: widget.isDesk,
+                //       contentPadding: widget.isDesk
+                //           ? EdgeInsets.zero
+                //           : const EdgeInsets.all(KPadding.kPaddingSize16),
+                //     ),
+                //   )
+                // else
+                _NavigationCenterWebWidget(
+                  isTablet: isTablet,
+                  isDesk: isDesk,
                 ),
-                background: AppColors.materialThemeKeyColorsSecondary,
-                onPressed: () async => context.dialog.showMobileMenuDialog(),
-              ),
-          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              return Row(
-                children: [
-                  if (context.read<AuthenticationBloc>().state.status !=
-                          AuthenticationStatus.authenticated
-                      //      &&
-                      // (Config.isDevelopment || Config.isBusiness)
-                      ) ...[
-                    if (isDesk) ...[
-                      KSizedBox.kWidthSizedBox16,
-                      DoubleButtonWidget(
-                        widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                        onPressed: () => context.goNamed(loginPath),
-                        text: context.l10n.login,
-                        isDesk: true,
-                        darkMode: true,
+                // if (widget.isDesk && widget.hasMicrophone)
+                //   Padding(
+                //     padding: const EdgeInsets.only(right:
+                // KPadding.kPaddingSize32),
+                //     child: IconWidget(
+                //       key: KWidgetkeys.widget.nawbar.iconMic,
+                //       icon: KIcon.mic,
+                //     ),
+                //   ),
+                if (!Config.isBusiness)
+                  if (isTablet)
+                    LanguagesSwitcherWidget(
+                      key: KWidgetkeys.widget.nawbar.language,
+                    )
+                  else
+                    IconButtonWidget(
+                      key: KWidgetkeys.widget.nawbar.menuButton,
+                      icon: KIcon.menu.copyWith(
+                        color: AppColors.materialThemeWhite,
                       ),
-                    ] else ...[
-                      KSizedBox.kWidthSizedBox4,
-                      IconButtonWidget(
-                        key: KWidgetkeys.widget.nawbar.loginIcon,
-                        onPressed: () => context.goNamed(loginPath),
-                        icon: KIcon.person.copyWith(
-                          color: AppColors.materialThemeWhite,
+                      background: AppColors.materialThemeKeyColorsSecondary,
+                      onPressed: () async =>
+                          context.dialog.showMobileMenuDialog(),
+                    ),
+                BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    return Row(
+                      children: [
+                        if (context.read<AuthenticationBloc>().state.status !=
+                                AuthenticationStatus.authenticated
+                            //      &&
+                            // (Config.isDevelopment || Config.isBusiness)
+                            ) ...[
+                          if (isDesk) ...[
+                            KSizedBox.kWidthSizedBox16,
+                            DoubleButtonWidget(
+                              widgetKey: KWidgetkeys.widget.nawbar.loginButton,
+                              onPressed: () => context.goNamed(loginPath),
+                              text: context.l10n.login,
+                              isDesk: true,
+                              darkMode: true,
+                            ),
+                          ] else ...[
+                            KSizedBox.kWidthSizedBox4,
+                            IconButtonWidget(
+                              key: KWidgetkeys.widget.nawbar.loginIcon,
+                              onPressed: () => context.goNamed(loginPath),
+                              icon: KIcon.person.copyWith(
+                                color: AppColors.materialThemeWhite,
+                              ),
+                              background:
+                                  AppColors.materialThemeKeyColorsSecondary,
+                            ),
+                          ],
+                        ]
+                        // if (context.read<AuthenticationBloc>()
+                        //.state.status ==
+                        //         AuthenticationStatus.authenticated &&
+                        //     (Config.isDevelopment || Config.isBusiness))
+                        else ...[
+                          KSizedBox.kWidthSizedBox8,
+                          getImageWidget,
+                        ],
+                      ],
+                    );
+                  },
+                ),
+              ],
+            )
+          : showBackButton ?? false
+              ? Row(
+                  children: [
+                    IconButton(
+                      key: KWidgetkeys.widget.nawbar.backButton,
+                      style: KButtonStyles.withoutStyle.copyWith(
+                        padding: const WidgetStatePropertyAll(
+                          EdgeInsets.symmetric(
+                            vertical: KPadding.kPaddingSize12,
+                            horizontal: KPadding.kPaddingSize16,
+                          ),
                         ),
-                        background: AppColors.materialThemeKeyColorsSecondary,
                       ),
-                    ],
-                  ]
-                  // if (context.read<AuthenticationBloc>()
-                  //.state.status ==
-                  //         AuthenticationStatus.authenticated &&
-                  //     (Config.isDevelopment || Config.isBusiness))
-                  else ...[
-                    KSizedBox.kWidthSizedBox8,
-                    getImageWidget,
+                      onPressed: () => context
+                          .goNamed(backButtonPathName ?? KRoute.discounts.name),
+                      icon: KIcon.arrowBack,
+                    ),
+                    Expanded(
+                      child: Text(
+                        '$pageName',
+                        key: KWidgetkeys.widget.nawbar.pageName,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    KSizedBox.kWidthSizedBox56,
                   ],
-                ],
-              );
-            },
-          ),
-        ],
-      ),
-      //  widget.showBackButton ?? false
-      //       ? Row(
-      //           children: [
-      //             TextButton(
-      //               key: KWidgetkeys.widget.nawbar.backButton,
-      //               style: KButtonStyles.withoutStyle.copyWith(
-      //                 padding: const WidgetStatePropertyAll(
-      //                   EdgeInsets.symmetric(
-      //                     vertical: KPadding.kPaddingSize12,
-      //                     horizontal: KPadding.kPaddingSize16,
-      //                   ),
-      //                 ),
-      //               ),
-      //               onPressed: () => context.pop(),
-      //               child: KIcon.arrowBack,
-      //             ),
-      //             Expanded(
-      //               child: pageName(
-      //                 showBackButton: true, // widget.networkStatus,
-      //               ),
-      //             ),
-      //             KSizedBox.kWidthSizedBox56,
-      //           ],
-      //         )
-      //       : Padding(
-      //           padding: const EdgeInsets.symmetric(
-      //             vertical: KPadding.kPaddingSize8,
-      //           ),
-      //           child: pageName(
-      //             showBackButton: false,
-      //           ),
-      //         ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize8,
+                  ),
+                  child: Text(
+                    '$pageName',
+                    key: KWidgetkeys.widget.nawbar.pageName,
+                    style: AppTextStyle.materialThemeTitleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
     );
   }
 
