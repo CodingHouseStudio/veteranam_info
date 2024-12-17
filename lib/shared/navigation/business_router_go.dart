@@ -29,7 +29,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 /// it opens on the last screen they accessed. This provides a seamless
 /// and convenient user experience.
 GoRouter businessRouter = GoRouter(
-  routerNeglect: true,
+  // routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) => const ErrorScreen(),
@@ -66,45 +66,30 @@ GoRouter businessRouter = GoRouter(
     // GoRoute(
     //   name: KRoute.userRole.name,
     //   path: KRoute.userRole.path,
-    //   pageBuilder: (context, state) => NoTransitionPage(
-    //     key: state.pageKey,
-    //     name: state.name,
-    // restorationId: state.pageKey.value,
-    //     child: const UserRoleScreen(),
+    //   builder: (context, state) =>
+    //
+    //
+    //
+    //      const UserRoleScreen(),
     //   ),
     //   routes: [
     GoRoute(
       name: KRoute.login.name,
       path: '/${KRoute.login.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const LoginScreen(),
-      ),
+      builder: (context, state) => const LoginScreen(),
       routes: [
         GoRoute(
           name: KRoute.passwordReset.name,
           path: KRoute.passwordReset.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: PasswordResetScreen(
-              code: state.uri.queryParameters[UrlParameters.verificationCode],
-            ),
+          builder: (context, state) => PasswordResetScreen(
+            code: state.uri.queryParameters[UrlParameters.verificationCode],
           ),
           routes: [
             GoRoute(
               name: KRoute.pwResetEmail.name,
               path: KRoute.pwResetEmail.path,
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                name: state.name,
-                restorationId: state.pageKey.value,
-                child: PwResetEmailScreen(
-                  email: state.uri.queryParameters[UrlParameters.email],
-                ),
+              builder: (context, state) => PwResetEmailScreen(
+                email: state.uri.queryParameters[UrlParameters.email],
               ),
             ),
           ],
@@ -114,32 +99,17 @@ GoRouter businessRouter = GoRouter(
     GoRoute(
       name: KRoute.signUp.name,
       path: '/${KRoute.signUp.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const SignUpScreen(),
-      ),
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       name: KRoute.feedback.name,
       path: '/${KRoute.feedback.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const FeedbackScreen(),
-      ),
+      builder: (context, state) => const FeedbackScreen(),
     ),
     GoRoute(
       name: KRoute.support.name,
       path: '/${KRoute.support.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const InvestorsScreen(),
-      ),
+      builder: (context, state) => const InvestorsScreen(),
     ),
     //   ],
     // ),
@@ -147,50 +117,42 @@ GoRouter businessRouter = GoRouter(
     // GoRoute(
     //   name: KRoute.thanks.name,
     //   path: KRoute.thanks.path,
-    //   pageBuilder: (context, state) => NoTransitionPage(
-    //     key: state.pageKey,
-    //     name: state.name,
-    // restorationId: state.pageKey.value,
-    //     child: const ThanksScreen(),
+    //   builder: (context, state) =>
+    //
+    //
+    //
+    //      const ThanksScreen(),
     //   ),
     // ),
     GoRoute(
       name: KRoute.myDiscounts.name,
       path: '/${KRoute.myDiscounts.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const MyDiscountsScreen(),
-      ),
+      builder: (context, state) => const MyDiscountsScreen(),
+
       // name: KRoute.businessDashboard.name,
       // path: KRoute.businessDashboard.path,
-      // pageBuilder: (context, state) => NoTransitionPage(
-      //   key: state.pageKey,
-      //   name: state.name,
-      // restorationId: state.pageKey.value,
-      //   child: const BusinessDashboardScreen(),
+      // builder: (context, state) =>
+      //
+      //
+      //
+      //    const BusinessDashboardScreen(),
       // ),
       redirect: businessRedirect,
       routes: [
         GoRoute(
           name: KRoute.company.name,
           path: KRoute.company.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const CompanyScreen(),
-          ),
+          builder: (context, state) => const CompanyScreen(),
+
           // routes: [
           //   GoRoute(
           //     name: KRoute.profileMyStory.name,
           //     path: KRoute.profileMyStory.path,
-          //     pageBuilder: (context, state) => NoTransitionPage(
-          //       key: state.pageKey,
-          //       name: state.name,
-          // restorationId: state.pageKey.value,
-          //       child: const ProfileMyStoryScreen(),
+          //     builder: (context, state) =>
+          //
+          //
+          //
+          //        const ProfileMyStoryScreen(),
           //     ),
           //   ),
           // ],
@@ -204,27 +166,20 @@ GoRouter businessRouter = GoRouter(
         // GoRoute(
         //   name: KRoute.myDiscounts.name,
         //   path: KRoute.myDiscounts.path,
-        //   pageBuilder: (context, state) => NoTransitionPage(
-        //     key: state.pageKey,
-        //     name: state.name,
-        // restorationId: state.pageKey.value,
-        //     child: const MyDiscountsScreen(),
+        //   builder: (context, state) =>
+        //
+        //
+        //
+        //      const MyDiscountsScreen(),
         //   ),
         //   routes: [
         GoRoute(
           name: KRoute.discountsAdd.name,
           path: KRoute.discountsAdd.path,
-          pageBuilder: (context, state) {
-            return NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              restorationId: state.pageKey.value,
-              child: const DiscountsAddScreen(
-                discount: null,
-                discountId: null,
-              ),
-            );
-          },
+          builder: (context, state) => const DiscountsAddScreen(
+            discount: null,
+            discountId: null,
+          ),
           routes: [
             GoRoute(
               name: KRoute.termsAndConditions.name,
@@ -245,38 +200,28 @@ GoRouter businessRouter = GoRouter(
         GoRoute(
           name: KRoute.discountsEdit.name,
           path: '${KRoute.discountsEdit.path}/:${UrlParameters.cardId}',
-          pageBuilder: (context, state) {
+          builder: (context, state) {
             DiscountModel? discountModel;
             if (state.extra is DiscountModel) {
               discountModel = state.extra as DiscountModel?;
             }
-            return NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              restorationId: state.pageKey.value,
-              child: DiscountsAddScreen(
-                discount: discountModel,
-                discountId: state.pathParameters[UrlParameters.cardId],
-              ),
+            return DiscountsAddScreen(
+              discount: discountModel,
+              discountId: state.pathParameters[UrlParameters.cardId],
             );
           },
         ),
         GoRoute(
           name: KRoute.discount.name,
           path: ':${UrlParameters.cardId}',
-          pageBuilder: (context, state) {
+          builder: (context, state) {
             DiscountModel? discountModel;
             if (state.extra is DiscountModel) {
               discountModel = state.extra as DiscountModel?;
             }
-            return NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              restorationId: state.pageKey.value,
-              child: DiscountScreenWidget(
-                discount: discountModel,
-                discountId: state.pathParameters[UrlParameters.cardId],
-              ),
+            return DiscountScreenWidget(
+              discount: discountModel,
+              discountId: state.pathParameters[UrlParameters.cardId],
             );
           },
         ),
