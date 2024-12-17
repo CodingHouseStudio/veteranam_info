@@ -61,9 +61,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await initializeDateFormatting();
 
   // Add cross-flavor configuration here
-  // if (Config.kIsWeb) {
-  //   usePathUrlStrategy();
-  // }
+  if (Config.kIsWeb) {
+    usePathUrlStrategy();
+  }
 
   // Add cross-flavor configuration here
 
