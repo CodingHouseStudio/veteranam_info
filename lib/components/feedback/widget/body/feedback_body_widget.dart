@@ -58,6 +58,7 @@ class FeedbackBodyWidget extends StatelessWidget {
                           isDesk: isDesk,
                           isTablet: isTablet,
                           showMobBackButton: true,
+                          backButtonPathName: KRoute.settings.name,
                           pageName:
                               context.read<FeedbackBloc>().state.formState ==
                                           FeedbackEnum.success ||

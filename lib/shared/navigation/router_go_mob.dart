@@ -63,21 +63,14 @@ GoRouter router = GoRouter(
   },
   routes: [
     GoRoute(
-      name: KRoute.userRole.name,
-      path: KRoute.userRole.path,
-      builder: (context, state) => const UserRoleScreen(),
-      routes: [
-        GoRoute(
-          name: KRoute.login.name,
-          path: KRoute.login.path,
-          builder: (context, state) => const LoginScreen(),
-        ),
-        GoRoute(
-          name: KRoute.signUp.name,
-          path: KRoute.signUp.path,
-          builder: (context, state) => const SignUpScreen(),
-        ),
-      ],
+      name: KRoute.login.name,
+      path: KRoute.login.path,
+      builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      name: KRoute.signUp.name,
+      path: KRoute.signUp.path,
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       name: KRoute.settings.name,

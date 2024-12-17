@@ -41,20 +41,19 @@ class AppBlocObserver extends BlocObserver {
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
-  if (!Config.kIsWeb) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor:
-            Platform.isIOS ? Colors.transparent : AppColors.materialThemeWhite,
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: AppColors.materialThemeKeyColorsNeutral,
-        systemNavigationBarDividerColor:
-            AppColors.materialThemeKeyColorsNeutral,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
-  }
+  // if (!Config.kIsWeb) {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor:
+          Platform.isIOS ? Colors.transparent : AppColors.materialThemeWhite,
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: AppColors.materialThemeKeyColorsNeutral,
+      systemNavigationBarDividerColor: AppColors.materialThemeKeyColorsNeutral,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
+  // }
 
   configureDependencies();
 

@@ -28,6 +28,7 @@ class MobFaqBodyWidget extends StatelessWidget {
         return ScaffoldWidget(
           showMobBottomNavigation: false,
           showMobNawbarBackButton: true,
+          backButtonPathName: KRoute.settings.name,
           pageName: context.l10n.faq,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             // if (_.questionModelItems.isEmpty &&
