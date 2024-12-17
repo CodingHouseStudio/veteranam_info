@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://veteranam.info/"><img id="logo" src='assets/icons/logo.svg' width="20%"/></a>
+	<a href="https://veteranam.info/"><img id="logo" src='assets/read_me_images/preview.png' width="100%"/></a>
 </p>
 
 <p align="center">
