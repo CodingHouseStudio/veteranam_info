@@ -11,6 +11,7 @@ class CancelChipWidget extends StatelessWidget {
     this.style,
     this.textStyle,
     this.padding,
+    this.width,
   });
   final Key widgetKey;
   final bool isDesk;
@@ -19,6 +20,7 @@ class CancelChipWidget extends StatelessWidget {
   final ButtonStyle? style;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +28,31 @@ class CancelChipWidget extends StatelessWidget {
       key: widgetKey,
       style: (style ?? KButtonStyles.advancedFilterButtonStyle).copyWith(
         padding: padding == null ? null : WidgetStatePropertyAll(padding),
+        maximumSize: width == null
+            ? null
+            : WidgetStatePropertyAll(Size(width!, double.infinity)),
+        minimumSize:
+            width == null ? null : WidgetStatePropertyAll(Size(width!, 0)),
       ),
       icon: KIcon.close,
       clipBehavior: Clip.hardEdge,
-      label: Text(
+      label: width == null
+          ? textWidget
+          : Expanded(
+              child: textWidget,
+            ),
+      onPressed: onPressed,
+    );
+  }
+
+  Widget get textWidget => Text(
         labelText,
-        textAlign: TextAlign.center,
+        textAlign: width == null ? TextAlign.center : TextAlign.end,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: textStyle ??
             (isDesk
                 ? AppTextStyle.materialThemeBodyLarge
                 : AppTextStyle.materialThemeBodyMedium),
-      ),
-      onPressed: onPressed,
-    );
-  }
+      );
 }

@@ -70,6 +70,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                                 widget.value!.value.uk,
                               );
                             },
+                            width: KSize.kPixel160,
                           ),
                         ),
                       ),
