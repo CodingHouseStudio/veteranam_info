@@ -57,16 +57,20 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                       ),
                       KSizedBox.kWidthSizedBox8,
                       Expanded(
-                        child: CancelChipWidget(
-                          widgetKey:
-                              KWidgetkeys.screen.discounts.appliedFilterItems,
-                          isDesk: widget.isDesk,
-                          labelText:
-                              widget.value!.value.getTrsnslation(context),
-                          onPressed: () {
-                            widget
-                                .onCancelWidgetPressed(widget.value!.value.uk);
-                          },
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: CancelChipWidget(
+                            widgetKey:
+                                KWidgetkeys.screen.discounts.appliedFilterItems,
+                            isDesk: widget.isDesk,
+                            labelText:
+                                widget.value!.value.getTrsnslation(context),
+                            onPressed: () {
+                              widget.onCancelWidgetPressed(
+                                widget.value!.value.uk,
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],
