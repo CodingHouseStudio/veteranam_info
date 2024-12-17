@@ -51,6 +51,7 @@ class CityListWidget extends StatelessWidget {
                       key: ValueKey(cityList),
                       cityList: cityList,
                       isDesk: isDesk,
+                      moreButtonEvent: moreButtonEvent,
                     ),
             ),
           ),
@@ -64,10 +65,12 @@ class _CityWidgetListExpanded extends StatelessWidget {
     required this.cityList,
     required this.isDesk,
     super.key,
+    this.moreButtonEvent,
   });
 
   final List<TranslateModel> cityList;
   final bool isDesk;
+  final void Function()? moreButtonEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,7 @@ class _CityWidgetListExpanded extends StatelessWidget {
           style: AppTextStyle.materialThemeLabelLarge,
         ),
         TextButton(
-          onPressed: null,
+          onPressed: moreButtonEvent,
           child: Text(
             context.l10n.moreCities(
               cityList.length - 1,

@@ -16,6 +16,9 @@ class EligibilityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (eligibility.isNotEmpty) {
+      final list = eligibility.contains(EligibilityEnum.all)
+          ? EligibilityEnum.valuesWithoutAll
+          : eligibility;
       return Padding(
         padding: const EdgeInsets.only(
           top: KPadding.kPaddingSize4,
@@ -25,33 +28,33 @@ class EligibilityWidget extends StatelessWidget {
           key: ValueKey(eligibility),
           runSpacing: KPadding.kPaddingSize12,
           spacing: KPadding.kPaddingSize8,
-          children: <Widget>[
-            ...(eligibility.length > 5 && !showFullList
-                    ? eligibility.take(5)
-                    : eligibility)
-                .map(
-              (eligibilityItem) => Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  eligibilityItem.eligibilityIcon,
-                  KSizedBox.kWidthSizedBox4,
-                  Text(
-                    eligibilityItem.getValue(context),
-                    style: AppTextStyle.materialThemeLabelMedium,
-                  ),
-                ],
-              ),
-            ),
-            if (eligibility.length > 5 && !showFullList)
-              TextButton(
+          children: List.generate(
+            list.length > 5 && !showFullList ? 6 : list.length,
+            (index) {
+              if (5 > index || showFullList) {
+                final item = list.elementAt(index);
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    item.eligibilityIcon,
+                    KSizedBox.kWidthSizedBox4,
+                    Text(
+                      item.getValue(context),
+                      style: AppTextStyle.materialThemeLabelMedium,
+                    ),
+                  ],
+                );
+              }
+              return TextButton(
                 onPressed: moreButtonEvent,
                 child: Text(
-                  context.l10n.moreWhomGranted(eligibility.length - 5),
+                  context.l10n.moreWhomGranted(list.length - 5),
                   style: AppTextStyle.materialThemeLabelLargeRef,
                 ),
-              ),
-          ],
+              );
+            },
+          ),
         ),
       );
     } else {
