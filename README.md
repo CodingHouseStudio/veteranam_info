@@ -1,16 +1,16 @@
 <p align="center">
-	<a href="https://veteranam.info/"><img id="logo" src='assets/read_me_images/preview.png' width="100%"/></a>
+    <a href="https://veteranam.info/"><img id="logo" src='assets/read_me_images/preview.png' width="100%"/></a>
 </p>
 
 <p align="center">
-		<a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-100%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
-		<a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
-	  <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
-	<!-- After Testing	 -->
-	<!--   <a href="https://app.codecov.io/gh/schultek/jaspr"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?logo=codecov&logoColor=fff&labelColor=333940" alt="codecov"></a> -->
-	<a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>
-	<a href="https://github.com/CodingHouseStudio/veteranam_info/issues"><img src="https://img.shields.io/github/issues/CodingHouseStudio/veteranam_info?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="issues"></a>
-	<a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github" alt="license"></a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-100%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
+    <!-- After Testing     -->
+    <!--   <a href="https://app.codecov.io/gh/schultek/jaspr"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?logo=codecov&logoColor=fff&labelColor=333940" alt="codecov"></a> -->
+    <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>
+    <a href="https://github.com/CodingHouseStudio/veteranam_info/issues"><img src="https://img.shields.io/github/issues/CodingHouseStudio/veteranam_info?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="issues"></a>
+    <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github" alt="license"></a>
 </p>
 
 <p align="center">
@@ -70,161 +70,137 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
 - /lib
 # Root directory for the application's source code.
 
-	- /components
-	# Directory containing all pages of the application.
-
-		- /[page_name]
-		# Directory structure for an individual page.
-			
-			- /bloc
-			# Contains all BLoC (Business Logic Component) classes for this page (optional).
-
-			- /view
-			# Contains the main widget that initializes and displays this page.
-
-			- /widget
-			# Contains all widgets specific to this page.
-				
-				- /blocprovider
-				# Contains BlocProvider widgets that initialize and provide BLoCs (optional).
-
-				- /body
-				# Contains the main "body" widget for this page, which holds the page's structure and layout.
-
-			- /field_models
-			# Contains models for form fields or page-specific data (optional).
-
-	- /l10n
-	# Contains localization files for supporting multiple languages in the app.
-
-	- /shared
-	# Directory for reusable code, components, and utilities shared across pages.
-
-		- /bloc
-		# Contains reusable or global BLoC classes.
-
-		- /constants
-		# Contains constant values and configurations for styles, themes, and other UI elements.
-			- /dimensions
-			# Contains dimension constants like padding, margin, etc.
-			- /style
-			# Contains style constants for the application (e.g., text styles).
-			- /text
-			# Contains text constants like labels, titles, and descriptions.
-			- /theme
-			# Contains theme configurations for light and dark modes.
-			- /widget
-			# Contains reusable widget constants.
-			- /widget_keys
-			# Contains GlobalKeys for widgets used in tests or UI interaction.
-
-		- /data_provider
-		# Contains classes responsible for fetching or providing data.
-
-		- /extension
-		# Contains Dart extension methods to simplify and enhance code functionality.
-
-		- /helper
-		# Contains helper methods or classes for initializing BLoCs, repositories, and data providers using GetIt.
-
-		- /models
-		# Contains models used throughout the application.
-			- /convertors
-			# Contains converters for transforming model data into different formats.
-			- /failure_model
-			# Contains a model for handling failures/errors, including error reporting (e.g., to Sentry or Firebase Crashlytics).
-			- /field_models
-			# Contains reusable field models.
-			- /helper_models
-			# Contains models used as dependencies for other models.
-
-		- /navigation
-		# Contains the GoRouter instance or configuration for managing app navigation.
-
-		- /repositories
-		# Contains repository classes that prepare and handle data retrieval for BLoCs, including error handling.
-
-		- /widget
-		# Contains reusable widgets shared across different pages.
-
-		- shared_dart.dart
-		# Contains imports for backend or non-UI related code.
-
-		- shared_flutter.dart
-		# Contains imports for Flutter/UI-related code.
-
-	- app.dart
-	# Main app widget that initializes the entire application.
-
-	- bootstrap.dart
-	# Contains the standard app initialization settings.
-
-	- firebase_options_development.dart
-	# Firebase configuration for the development environment.
-
-	- firebase_options_production.dart
-	# Firebase configuration for the production environment.
-
-	- main_development.dart
-	# Entry point for the development environment.
-
-	- main_production.dart
-	# Entry point for the production environment.
+    - /components
+    # Directory containing all pages of the application.    
+        - /[page_name]
+        # Directory structure for an individual page.
+            
+            - /bloc
+            # Contains all BLoC (Business Logic Component) classes for this page (optional).    
+            - /view
+            # Contains the main widget that initializes and displays this page.    
+            - /widget
+            # Contains all widgets specific to this page.
+                
+                - /blocprovider
+                # Contains BlocProvider widgets that initialize and provide BLoCs (optional).    
+                - /body
+                # Contains the main "body" widget for this page, which holds the page's structure and layout.    
+            - /field_models
+            # Contains models for form fields or page-specific data (optional).    
+    - /l10n
+    # Contains localization files for supporting multiple languages in the app.    
+    - /shared
+    # Directory for reusable code, components, and utilities shared across pages.    
+        - /bloc
+        # Contains reusable or global BLoC classes.    
+        - /constants
+        # Contains constant values and configurations for styles, themes, and other UI elements.
+            - /dimensions
+            # Contains dimension constants like padding, margin, etc.
+            - /style
+            # Contains style constants for the application (e.g., text styles).
+            - /text
+            # Contains text constants like labels, titles, and descriptions.
+            - /theme
+            # Contains theme configurations for light and dark modes.
+            - /widget
+            # Contains reusable widget constants.
+            - /widget_keys
+            # Contains GlobalKeys for widgets used in tests or UI interaction.    
+        - /data_provider
+        # Contains classes responsible for fetching or providing data.    
+        - /extension
+        # Contains Dart extension methods to simplify and enhance code functionality.    
+        - /helper
+        # Contains helper methods or classes for initializing BLoCs, repositories, and data providers using GetIt.    
+        - /models
+        # Contains models used throughout the application.
+            - /convertors
+            # Contains converters for transforming model data into different formats.
+            - /failure_model
+            # Contains a model for handling failures/errors, including error reporting (e.g., to Sentry or Firebase Crashlytics).
+            - /field_models
+            # Contains reusable field models.
+            - /helper_models
+            # Contains models used as dependencies for other models.    
+        - /navigation
+        # Contains the GoRouter instance or configuration for managing app navigation.    
+        - /repositories
+        # Contains repository classes that prepare and handle data retrieval for BLoCs, including error handling.    
+        - /widget
+        # Contains reusable widgets shared across different pages.    
+        - shared_dart.dart
+        # Contains imports for backend or non-UI related code.    
+        - shared_flutter.dart
+        # Contains imports for Flutter/UI-related code.    
+    - app.dart
+    # Main app widget that initializes the entire application.    
+    - bootstrap.dart
+    # Contains the standard app initialization settings.    
+    - firebase_options_development.dart
+    # Firebase configuration for the development environment.    
+    - firebase_options_production.dart
+    # Firebase configuration for the production environment.    
+    - main_development.dart
+    # Entry point for the development environment.    
+    - main_production.dart
+    # Entry point for the production environment.
 
 - /test
 # Root directory for the application's test cases.
 
-	- /[page_name]
-	# Directory for tests related to a specific page.
+    - /[page_name]
+    # Directory for tests related to a specific page.
 
-		- /helpers
-		# Contains helper methods for initializing and testing the page.
-			- [page_name]_pump_app_helper.dart
-			# Contains a method to initialize the page within the test environment.
-			- [page_name]_initial_helper.dart
-			# Contains a method to initialize the page and verify all widgets without testing functionality.
+        - /helpers
+        # Contains helper methods for initializing and testing the page.
+            - [page_name]_pump_app_helper.dart
+            # Contains a method to initialize the page within the test environment.
+            - [page_name]_initial_helper.dart
+            # Contains a method to initialize the page and verify all widgets without testing functionality.
 
-			- /unit_test
-			# Contains unit tests for BLoCs, models, or repositories related to this page. 
-			# (If the page has only one unit test, it can be a single file: [page_name]_unit_test.dart).
+            - /unit_test
+            # Contains unit tests for BLoCs, models, or repositories related to this page. 
+            # (If the page has only one unit test, it can be a single file: [page_name]_unit_test.dart).
 
-			- [page_name]_widget_test.dart
-			# Contains widget tests for the page. Multiple files can exist for different app flavors.
+            - [page_name]_widget_test.dart
+            # Contains widget tests for the page. Multiple files can exist for different app flavors.
 
-	- /bloc
-	# Contains tests for BLoC classes. May include tests for associated repositories and models.
+    - /bloc
+    # Contains tests for BLoC classes. May include tests for associated repositories and models.
 
-	- /data_provider
-	# Contains tests for data provider classes.
+    - /data_provider
+    # Contains tests for data provider classes.
 
-	- /helpers
-	# Contains common helper methods and utilities used in tests.
-		- change_window_size_helper.dart
-		# Contains a method to simulate different screen sizes in tests.
-		- scrolling_helper.dart
-		# Contains a method to simulate screen scrolling during tests.
+    - /helpers
+    # Contains common helper methods and utilities used in tests.
+        - change_window_size_helper.dart
+        # Contains a method to simulate different screen sizes in tests.
+        - scrolling_helper.dart
+        # Contains a method to simulate screen scrolling during tests.
 
-		- /widget
-		# Contains common widget tests shared across pages.
+        - /widget
+        # Contains common widget tests shared across pages.
 
-	- /model
-	# Contains tests for model classes (if models are not tested elsewhere).
+    - /model
+    # Contains tests for model classes (if models are not tested elsewhere).
 
-	- /repository
-	# Contains tests for repository classes. May include associated model tests.
+    - /repository
+    # Contains tests for repository classes. May include associated model tests.
 
-	- /test_mocks
-	# Contains mock classes and helper methods for testing purposes.
-		- go_router_provider_mocks.dart
-		# Provides a fake GoRouter class to simulate navigation in tests.
-		- mob_build_register.dart
-		# Initializes required dependencies for mobile platform tests. 
-		# (Without this, tests on mobile platforms will not run).
-		- test_repository_mocks.dart
-		# Generates mock classes using GenerateNiceMocks for repository tests.
-		- user_setting_register.dart
-		# Initializes app-specific settings and dependencies for tests. 
-		# (Required to ensure smooth test).
+    - /test_mocks
+    # Contains mock classes and helper methods for testing purposes.
+        - go_router_provider_mocks.dart
+        # Provides a fake GoRouter class to simulate navigation in tests.
+        - mob_build_register.dart
+        # Initializes required dependencies for mobile platform tests. 
+        # (Without this, tests on mobile platforms will not run).
+        - test_repository_mocks.dart
+        # Generates mock classes using GenerateNiceMocks for repository tests.
+        - user_setting_register.dart
+        # Initializes app-specific settings and dependencies for tests. 
+        # (Required to ensure smooth test).
 ```
 
 ## Tags
@@ -497,10 +473,10 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
     ...
 
     <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>es</string>
-	</array>
+    <array>
+        <string>en</string>
+        <string>es</string>
+    </array>
 
     ...
 ```
