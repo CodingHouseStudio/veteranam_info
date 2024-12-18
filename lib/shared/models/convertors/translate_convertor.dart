@@ -14,21 +14,21 @@ class TranslateConverter implements JsonConverter<TranslateModel, dynamic> {
     return object.toJson();
   }
 
-  static Map<String, dynamic> readJsonItem(
-    Map<dynamic, dynamic> json,
-    String key,
-  ) {
-    final uk = json[key];
-    if (uk == null) return {};
-    if (uk is Map<String, dynamic>) {
-      return uk;
-    }
-    final en = json['$key${TranslateModelJsonField.enSufix}'];
-    return {
-      TranslateModelJsonField.uk: uk,
-      TranslateModelJsonField.en: en,
-    };
-  }
+  // static Map<String, dynamic> readJsonItem(
+  //   Map<dynamic, dynamic> json,
+  //   String key,
+  // ) {
+  //   final uk = json[key];
+  //   if (uk == null) return {};
+  //   if (uk is Map<String, dynamic>) {
+  //     return uk;
+  //   }
+  //   final en = json['$key${TranslateModelJsonField.enSufix}'];
+  //   return {
+  //     TranslateModelJsonField.uk: uk,
+  //     TranslateModelJsonField.en: en,
+  //   };
+  // }
 }
 
 class TranslateOrNullConverter
@@ -37,8 +37,7 @@ class TranslateOrNullConverter
 
   @override
   TranslateModel? fromJson(dynamic json) {
-    final map = json as Map<String, dynamic>;
-    return map.isEmpty ? null : TranslateModel.fromJson(map);
+    return json is Map<String, dynamic> ? TranslateModel.fromJson(json) : null;
   }
 
   @override
@@ -48,26 +47,21 @@ class TranslateOrNullConverter
 }
 
 class TranslateItemsConverter
-    implements JsonConverter<List<TranslateModel>, dynamic> {
+    implements JsonConverter<List<TranslateModel>, List<dynamic>> {
   const TranslateItemsConverter();
 
   @override
-  List<TranslateModel> fromJson(dynamic json) {
-    final map = json as Map<String, dynamic>;
-    final items = map[TranslateModelJsonField.trnslationListJson];
-    if (items is List) {
-      return List.generate(
-        items.length,
-        (index) => TranslateModel.fromJson(
-          items.elementAt(index) as Map<String, dynamic>,
-        ),
-      );
-    }
-    return [];
+  List<TranslateModel> fromJson(List<dynamic> json) {
+    return List.generate(
+      json.length,
+      (index) => TranslateModel.fromJson(
+        json.elementAt(index) as Map<String, dynamic>,
+      ),
+    );
   }
 
   @override
-  dynamic toJson(List<TranslateModel> object) {
+  List<dynamic> toJson(List<TranslateModel> object) {
     return List.generate(
       object.length,
       (index) => object.elementAt(index).toJson(),
@@ -75,55 +69,50 @@ class TranslateItemsConverter
     );
   }
 
-  static Map<String, dynamic> readJsonItems(
-    Map<dynamic, dynamic> json,
-    String key,
-  ) {
-    final ukItems = json[key] as List?;
-    if (ukItems == null) return {};
-    if (ukItems.isEmpty) {
-      return {TranslateModelJsonField.trnslationListJson: ukItems};
-    }
-    if (ukItems.first is Map<String, dynamic>) {
-      return {
-        TranslateModelJsonField.trnslationListJson: ukItems,
-      };
-    }
-    final enItems = json['$key${TranslateModelJsonField.enSufix}'];
-    final translationItems = <Map<String, dynamic>>[];
-    for (var i = 0; i < ukItems.length; i++) {
-      translationItems.add({
-        TranslateModelJsonField.uk: ukItems.elementAt(i),
-        TranslateModelJsonField.en: (enItems as List?)?.elementAtOrNull(i),
-      });
-    }
-    return {TranslateModelJsonField.trnslationListJson: translationItems};
-  }
+  // static Map<String, dynamic> readJsonItems(
+  //   Map<dynamic, dynamic> json,
+  //   String key,
+  // ) {
+  //   final ukItems = json[key] as List?;
+  //   if (ukItems == null) return {};
+  //   if (ukItems.isEmpty) {
+  //     return {TranslateModelJsonField.trnslationListJson: ukItems};
+  //   }
+  //   if (ukItems.first is Map<String, dynamic>) {
+  //     return {
+  //       TranslateModelJsonField.trnslationListJson: ukItems,
+  //     };
+  //   }
+  //   final enItems = json['$key${TranslateModelJsonField.enSufix}'];
+  //   final translationItems = <Map<String, dynamic>>[];
+  //   for (var i = 0; i < ukItems.length; i++) {
+  //     translationItems.add({
+  //       TranslateModelJsonField.uk: ukItems.elementAt(i),
+  //       TranslateModelJsonField.en: (enItems as List?)?.elementAtOrNull(i),
+  //     });
+  //   }
+  //   return {TranslateModelJsonField.trnslationListJson: translationItems};
+  // }
 }
 
 class TranslateItemsOrNullConverter
-    implements JsonConverter<List<TranslateModel>?, dynamic> {
+    implements JsonConverter<List<TranslateModel>?, List<dynamic>?> {
   const TranslateItemsOrNullConverter();
 
   @override
-  List<TranslateModel>? fromJson(dynamic json) {
-    final map = json as Map<String, dynamic>;
-    if (map.isNotEmpty) {
-      final items = map[TranslateModelJsonField.trnslationListJson];
-      if (items is List) {
-        return List.generate(
-          items.length,
-          (index) => TranslateModel.fromJson(
-            items.elementAt(index) as Map<String, dynamic>,
-          ),
-        );
-      }
-    }
-    return null;
+  List<TranslateModel>? fromJson(List<dynamic>? json) {
+    return json == null
+        ? null
+        : List.generate(
+            json.length,
+            (index) => TranslateModel.fromJson(
+              json.elementAt(index) as Map<String, dynamic>,
+            ),
+          );
   }
 
   @override
-  dynamic toJson(List<TranslateModel>? object) {
+  List<dynamic>? toJson(List<TranslateModel>? object) {
     return object == null
         ? null
         : List.generate(

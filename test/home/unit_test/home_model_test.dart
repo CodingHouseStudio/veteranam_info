@@ -17,11 +17,11 @@ void main() {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
       QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
       QuestionModelJsonField.titleEN:
-          KTestText.questionModelItems.first.title.en,
+          KTestText.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
           KTestText.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
-          KTestText.questionModelItems.first.subtitle.en,
+          KTestText.questionModelItems.first.subtitleEN,
       // QuestionModelJsonField.navigationLink:
       //     KTestText.questionModelItems.first.navigationLink,
     };
@@ -29,11 +29,11 @@ void main() {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
       QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
       QuestionModelJsonField.titleEN:
-          KTestText.questionModelItems.first.title.en,
+          KTestText.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
           KTestText.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
-          KTestText.questionModelItems.first.subtitle.en,
+          KTestText.questionModelItems.first.subtitleEN,
       // QuestionModelJsonField.navigationLink: null,
     };
     group('${KGroupText.modelJson} ', () {

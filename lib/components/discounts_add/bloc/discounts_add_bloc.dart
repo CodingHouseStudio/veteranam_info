@@ -553,10 +553,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         discount: const [],
         title: const TranslateModel(uk: ''),
         category: const [],
-        subcategory: null,
+        // subcategory: null,
         description: const TranslateModel(uk: ''),
         requirements: null,
-        territory: null,
+        // territory: null,
         dateVerified: ExtendedDateTime.current,
         link: null,
       );

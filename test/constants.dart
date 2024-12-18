@@ -368,9 +368,9 @@ abstract class KTestText {
   );
 
   static final sendDiscountModel = discountModelItems.first.copyWith(
-    additionalDetails: null,
+    // additionalDetails: null,
     // html: null,
-    territory: null,
+    // territory: null,
     userId: fullCompanyModel.id,
     userName: fullCompanyModel.companyName,
     company: TranslateModel(uk: fullCompanyModel.publicName!),
@@ -379,7 +379,7 @@ abstract class KTestText {
     phoneNumber: null,
     requirements: null,
     status: DiscountState.isNew,
-    subcategory: null,
+    // subcategory: null,
     dateVerified: dateTime,
   );
 

@@ -8,14 +8,8 @@ part 'funds_model.g.dart';
 class FundModel with _$FundModel {
   const factory FundModel({
     required String id,
-    // ignore: invalid_annotation_target
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateConverter()
-    required TranslateModel title,
-    // ignore: invalid_annotation_target
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateConverter()
-    required TranslateModel description,
+    @TranslateConverter() required TranslateModel title,
+    @TranslateConverter() required TranslateModel description,
     required String link,
     // required String domain,
     // String? registered,

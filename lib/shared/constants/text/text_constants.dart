@@ -49,13 +49,9 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
-  static const questionTitle =
-      TranslateModel(uk: questionTitleUA, en: questionTitleEN);
   static const questionTitleUA =
       'Як мені знайти роботу за допомогою цього сайту?';
   static const questionTitleEN = 'How do I find a job using this site?';
-  static const questionSubtitle =
-      TranslateModel(uk: questionSubtitleUA, en: questionSubtitleEN);
   static const questionSubtitleUA =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
@@ -124,8 +120,10 @@ abstract class KMockText {
 
   static const questionModel = QuestionModel(
     id: '0',
-    title: questionTitle,
-    subtitle: questionSubtitle,
+    title: questionTitleEN,
+    titleEN: questionSubtitleEN,
+    subtitle: questionSubtitleUA,
+    subtitleEN: questionSubtitleEN,
     // navigationLink: 'null',
   );
   static const category = TranslateModel(
@@ -146,7 +144,7 @@ abstract class KMockText {
       en: '20% discount on tests for military personnel and internally displaced persons.',
     ),
     category: const [category],
-    subcategory: const [TranslateModel(uk: 'Аналізи', en: 'Analyses')],
+    // subcategory: const [TranslateModel(uk: 'Аналізи', en: 'Analyses')],
     // eligibility: 'Військовослужбовці та ВПО',
     description: const TranslateModel(
       uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test) лабораторії.',
@@ -156,10 +154,10 @@ abstract class KMockText {
       uk: 'Військовим - наявність документу, що підтверджує  професійну',
       en: 'Military personnel - presence of a document confirming professional status',
     ),
-    territory: const TranslateModel(
-      uk: 'Всі відділення лабораторії.',
-      en: 'All branches of the laboratory.',
-    ),
+    // territory: const TranslateModel(
+    //   uk: 'Всі відділення лабораторії.',
+    //   en: 'All branches of the laboratory.',
+    // ),
     location: const [
       TranslateModel(
         uk: 'Київ',
