@@ -17,7 +17,6 @@ import 'package:veteranam/shared/repositories/failure_repository.dart';
 /// COMMENT: DEV main file
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final app =
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

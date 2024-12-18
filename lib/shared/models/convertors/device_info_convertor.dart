@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/models/models.dart';
+import 'package:veteranam/shared/models/device_info_model.dart';
+// import 'package:veteranam/shared/models/models.dart';
 
 class DeviceConverter
     implements JsonConverter<List<DeviceInfoModel>?, List<dynamic>?> {

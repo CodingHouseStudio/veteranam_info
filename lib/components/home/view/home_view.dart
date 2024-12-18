@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/components/home/home.dart';
-import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/dimensions/size_constants.dart';
+import 'package:veteranam/shared/constants/theme/app_colors.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+import 'package:veteranam/shared/widget/mob_navigation_widget.dart'
+    deferred as bottm_nav_bar;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,8 +18,17 @@ class HomeScreen extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb
             ? null
-            : const MobNavigationWidget(
-                index: 0,
+            : FutureBuilder(
+                future: bottm_nav_bar.loadLibrary(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return bottm_nav_bar.MobNavigationWidget(
+                      index: 0,
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               ),
         appBar: AppBar(
           backgroundColor: AppColors.materialThemeWhite,

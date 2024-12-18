@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
-import 'package:veteranam/components/home/home.dart';
+import 'package:veteranam/components/home/widget/faq_section_widget.dart'
+    deferred as faq_section_widget;
+import 'package:veteranam/components/home/widget/home_section_widget.dart'
+    deferred as home_section_widget;
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widget/footer_widget.dart'
+    deferred as footer_widget;
+import 'package:veteranam/shared/widget/navigation_bar_widget.dart'
+    deferred as nav_bar_widget;
+// import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
+// import 'package:veteranam/components/home/home.dart';
+// import 'package:veteranam/shared/shared_flutter.dart';
 
 class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
@@ -59,22 +69,52 @@ class HomeBodyWidget extends StatelessWidget {
                     key: KWidgetkeys.widget.scaffold.scroll,
                     cacheExtent: KDimensions.listCacheExtent,
                     slivers: [
-                      NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
+                      // NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                      FutureBuilder(
+                        future: nav_bar_widget.loadLibrary(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return nav_bar_widget.NavigationBarWidget(
+                              isDesk: isDesk,
+                              isTablet: isTablet,
+                            );
+                          } else {
+                            return const SliverToBoxAdapter();
+                          }
+                        },
                       ),
-                      SliverPadding(
-                        padding: padding,
-                        sliver: HomeSectionsWidget(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                        ),
+                      FutureBuilder(
+                        future: home_section_widget.loadLibrary(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return SliverPadding(
+                              padding: padding,
+                              sliver: home_section_widget.HomeSectionsWidget(
+                                isDesk: isDesk,
+                                isTablet: isTablet,
+                              ),
+                            );
+                          } else {
+                            return const SliverToBoxAdapter();
+                          }
+                        },
                       ),
-                      FaqSectionWidget(
-                        isDesk: isDesk,
-                        padding: padding,
-                        isTablet: isTablet,
+                      FutureBuilder(
+                        future: faq_section_widget.loadLibrary(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return faq_section_widget.FaqSectionWidget(
+                              isDesk: isDesk,
+                              padding: padding,
+                              isTablet: isTablet,
+                            );
+                          } else {
+                            return const SliverToBoxAdapter();
+                          }
+                        },
                       ),
                       SliverToBoxAdapter(
                         child: isDesk
@@ -83,13 +123,24 @@ class HomeBodyWidget extends StatelessWidget {
                                 ? KSizedBox.kHeightSizedBox64
                                 : KSizedBox.kHeightSizedBox48,
                       ),
-                      SliverPadding(
-                        padding:
-                            padding.copyWith(bottom: KPadding.kPaddingSize30),
-                        sliver: FooterWidget(
-                          isTablet: isTablet,
-                          isDesk: isDesk,
-                        ),
+                      FutureBuilder(
+                        future: footer_widget.loadLibrary(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return SliverPadding(
+                              padding: padding.copyWith(
+                                bottom: KPadding.kPaddingSize30,
+                              ),
+                              sliver: footer_widget.FooterWidget(
+                                isTablet: isTablet,
+                                isDesk: isDesk,
+                              ),
+                            );
+                          } else {
+                            return const SliverToBoxAdapter();
+                          }
+                        },
                       ),
                     ],
                   ),

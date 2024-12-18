@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/models/models.dart';
+import 'package:veteranam/shared/models/convertors/device_info_convertor.dart';
+import 'package:veteranam/shared/models/device_info_model.dart';
+// import 'package:veteranam/shared/models/models.dart';
 
 part 'user_setting_model.freezed.dart';
 part 'user_setting_model.g.dart';
