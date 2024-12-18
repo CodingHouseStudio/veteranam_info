@@ -65,7 +65,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureSend;
 
   factory SomeFailure.network({
-    required Object? error,
+    Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -234,6 +234,19 @@ class SomeFailure with _$SomeFailure {
     UserSetting? userSetting,
     String? data,
   }) = FailureBrowserNotSupportPopupDialog;
+
+  factory SomeFailure.emailInvalidFormat({
+    Object? error,
+    StackTrace? stack,
+    ErrorLevelEnum? errorLevel,
+    String? tag,
+    String? tagKey,
+    String? tag2,
+    String? tag2Key,
+    User? user,
+    UserSetting? userSetting,
+    String? data,
+  }) = FailureEmailInvalidFormat;
 
   final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();
 }

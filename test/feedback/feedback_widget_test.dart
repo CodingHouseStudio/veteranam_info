@@ -67,7 +67,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
             .thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => Left(SomeFailure.network()),
         );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,

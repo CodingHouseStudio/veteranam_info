@@ -241,33 +241,33 @@ class SignUpWithEmailAndPasswordFailure {
       case 'user-disabled':
       case 'weak-password':
         return SignUpWithEmailAndPasswordFailure(
-          status: SomeFailure.serverError(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-                '(${ErrorText.serverError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+          status: SomeFailure.emailInvalidFormat(
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+              //     '(${ErrorText.serverError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'network-error':
         return SignUpWithEmailAndPasswordFailure(
           status: SomeFailure.network(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-                '(${ErrorText.networkError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+              //     '(${ErrorText.networkError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       default:
         return SignUpWithEmailAndPasswordFailure(
@@ -326,17 +326,17 @@ class LogInWithEmailAndPasswordFailure {
       case 'network-error':
         return LogInWithEmailAndPasswordFailure(
           status: SomeFailure.network(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
-                '(${ErrorText.networkError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
+              //     '(${ErrorText.networkError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       default:
         return LogInWithEmailAndPasswordFailure(
@@ -398,16 +398,16 @@ class LogOutFailure {
       case 'network-error':
         return LogOutFailure(
           status: SomeFailure.network(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.logOutFailure}(${ErrorText.networkError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.logOutFailure}(${ErrorText.networkError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       default:
         return LogOutFailure(
@@ -444,6 +444,7 @@ class SignUpWithGoogleFailure {
     switch (error.code) {
       case 'account-exists-with-different-credential':
       case 'user-not-found':
+      case 'invalid-email':
       case 'wrong-password':
       case 'invalid-credential':
       case 'user-disabled':
@@ -451,17 +452,17 @@ class SignUpWithGoogleFailure {
       case 'invalid-verification-id':
         return SignUpWithGoogleFailure(
           status: SomeFailure.notFound(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithGoogleFailure}'
-                '(${ErrorText.notFoundError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithGoogleFailure}'
+              //     '(${ErrorText.notFoundError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'operation-not-allowed':
         return SignUpWithGoogleFailure(
@@ -481,17 +482,17 @@ class SignUpWithGoogleFailure {
       case 'network-error':
         return SignUpWithGoogleFailure(
           status: SomeFailure.network(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithGoogleFailure}'
-                '(${ErrorText.networkError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithGoogleFailure}'
+              //     '(${ErrorText.networkError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'popup-closed-by-user':
       case 'popup-blocked':
@@ -544,17 +545,17 @@ class SignUpWithFacebookFailure {
       case 'invalid-verification-id':
         return SignUpWithFacebookFailure(
           status: SomeFailure.notFound(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.signUpWithFacebookFailure}'
-                '(${ErrorText.notFoundError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.signUpWithFacebookFailure}'
+              //     '(${ErrorText.notFoundError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       case 'operation-not-allowed':
         return SignUpWithFacebookFailure(
@@ -687,17 +688,17 @@ class VerifyCodeFailure {
       case 'invalid-action-code':
         return VerifyCodeFailure(
           status: SomeFailure.wrongVerifyCode(
-            error: error,
-            stack: stack,
-            tag: '${ErrorText.verifyCodeFailure}'
-                '(${ErrorText.wrongVerifyCodeError})',
-            tagKey: ErrorText.exceptionsFolderKey,
-            user: user,
-            userSetting: userSetting,
-            data: data,
-            tag2: tag,
-            tag2Key: tagKey,
-          ),
+              // error: error,
+              // stack: stack,
+              // tag: '${ErrorText.verifyCodeFailure}'
+              //     '(${ErrorText.wrongVerifyCodeError})',
+              // tagKey: ErrorText.exceptionsFolderKey,
+              // user: user,
+              // userSetting: userSetting,
+              // data: data,
+              // tag2: tag,
+              // tag2Key: tagKey,
+              ),
         );
       default:
         return VerifyCodeFailure(

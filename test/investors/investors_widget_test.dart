@@ -104,7 +104,7 @@ void main() {
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => Left(SomeFailure.network()),
         );
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

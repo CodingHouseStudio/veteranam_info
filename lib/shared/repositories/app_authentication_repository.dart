@@ -291,6 +291,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
+          data: 'Email: $email | Password: $password',
           tag: 'logInWithEmailAndPassword(${ErrorText.fromCode})',
           tagKey: ErrorText.appAuthenticationKey,
         ).status,
@@ -347,6 +348,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           user: currentUser,
           userSetting: currentUserSetting,
           tag: 'signUp(${ErrorText.fromCode})',
+          data: 'Email: $email | Password: $password',
           tagKey: ErrorText.appAuthenticationKey,
         ).status,
       );

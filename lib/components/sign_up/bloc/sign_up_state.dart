@@ -9,6 +9,8 @@ extension AuthFailureToSignUpError on SomeFailure {
         return SignUpError.send;
       case FailureNetwork():
         return SignUpError.network;
+      case FailureEmailInvalidFormat():
+        return SignUpError.emailWrongFormat;
       default:
         return SignUpError.error;
     }

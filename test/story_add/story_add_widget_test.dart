@@ -74,7 +74,7 @@ void main() {
             storyModel: KTestText.storyModelItems.first,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => Left(SomeFailure.network()),
         );
         await storyAddPumpAppHelper(
           tester: tester,

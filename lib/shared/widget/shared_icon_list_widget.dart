@@ -242,8 +242,6 @@ class _CardLikeIconWidget extends StatelessWidget {
     required this.label,
     required this.background,
     required this.countLike,
-    // this.onPressed,
-    super.key,
   });
   // final VoidCallback? onPressed;
   final Icon icon;

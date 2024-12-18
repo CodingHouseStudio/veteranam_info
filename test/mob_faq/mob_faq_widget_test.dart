@@ -43,7 +43,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => Left(SomeFailure.network()),
         );
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
