@@ -16,7 +16,7 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
         super(
           const HomeWatcherState(
             questionModelItems: [],
-            loadingStatus: LoadingStatusHome.initial,
+            loadingStatus: LoadingStatus.initial,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -28,20 +28,20 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     _Started event,
     Emitter<HomeWatcherState> emit,
   ) async {
-    emit(state.copyWith(loadingStatus: LoadingStatusHome.loading));
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _faqRepository.getQuestions();
     result.fold(
       (l) => emit(
         state.copyWith(
           failure: l._toHome(),
-          loadingStatus: LoadingStatusHome.error,
+          loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) => emit(
         HomeWatcherState(
           questionModelItems: r,
-          loadingStatus: LoadingStatusHome.loaded,
+          loadingStatus: LoadingStatus.loaded,
         ),
       ),
     );

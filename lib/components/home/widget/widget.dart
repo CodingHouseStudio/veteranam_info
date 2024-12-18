@@ -7,4 +7,4 @@ export 'home_box_widget.dart';
 export 'home_screen_card.dart';
 export 'home_section_widget.dart';
 export 'home_section_widget_list.dart';
-export 'question_widget_list.dart';
+export 'question_widget_item.dart';

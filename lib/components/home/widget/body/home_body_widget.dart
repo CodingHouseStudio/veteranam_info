@@ -71,10 +71,11 @@ class HomeBodyWidget extends StatelessWidget {
                           isTablet: isTablet,
                         ),
                       ),
-                      FaqSectionWidget(
-                        isDesk: isDesk,
+                      SliverPadding(
                         padding: padding,
-                        isTablet: isTablet,
+                        sliver: isDesk
+                            ? const FAQSectionDeskWidget()
+                            : const FaqSectionMobWidget(),
                       ),
                       SliverToBoxAdapter(
                         child: isDesk

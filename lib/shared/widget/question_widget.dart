@@ -39,8 +39,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           ),
           title: Text(
             context.isEnglish
-                ? widget.questionModel.title
-                : widget.questionModel.titleEN,
+                ? widget.questionModel.titleEN
+                : widget.questionModel.title,
             key: KWidgetkeys.widget.question.title,
             style: widget.isDesk
                 ? AppTextStyle.materialThemeHeadlineSmall
@@ -84,8 +84,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             MarkdownLinkWidget(
               key: KWidgetkeys.widget.question.subtitle,
               text: context.isEnglish
-                  ? widget.questionModel.subtitle
-                  : widget.questionModel.subtitleEN,
+                  ? widget.questionModel.subtitleEN
+                  : widget.questionModel.subtitle,
               textStyle: widget.isDesk
                   ? AppTextStyle.materialThemeBodyLarge
                   : AppTextStyle.materialThemeBodyMedium,
