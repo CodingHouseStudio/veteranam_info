@@ -260,9 +260,7 @@ class _AdvancedListWidget extends StatelessWidget {
     }
     return SliverPrototypeExtentList.builder(
       prototypeItem: Padding(
-        padding: isDesk
-            ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-            : EdgeInsets.zero,
+        padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
         child: CheckPointAmountWidget(
           key: itemKey,
           isCheck: false,
@@ -292,9 +290,7 @@ class _AdvancedListWidget extends StatelessWidget {
         final value = filter[filter.keys.elementAt(index)]!;
         return Padding(
           key: ValueKey(filter.keys.elementAt(index)),
-          padding: isDesk
-              ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-              : EdgeInsets.zero,
+          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: CheckPointAmountWidget(
             key: itemKey,
             onChanged: () => onChange(

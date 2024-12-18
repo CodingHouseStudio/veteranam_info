@@ -11,6 +11,7 @@ class CheckPointWidget extends StatelessWidget {
     this.textStyle,
     this.textWidget,
     this.maxLines = 3,
+    this.ammountWidget,
   });
   final void Function()? onChanged;
   final bool isCheck;
@@ -19,47 +20,67 @@ class CheckPointWidget extends StatelessWidget {
   final bool isDesk;
   final Widget? textWidget;
   final int? maxLines;
+  final Widget? ammountWidget;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: TextButton.icon(
-        key: KWidgetkeys.widget.checkPoint.widget,
-        style: KButtonStyles.additionalButtonStyle,
-        onPressed: onChanged,
-        icon: DecoratedBox(
-          decoration: isCheck
-              ? KWidgetTheme.boxDecorCheckPointTrue
-              : KWidgetTheme.boxDecorCheckPointFalse,
-          // padding: const EdgeInsets.only(
-          //   top: KPadding.kPaddingSize4,
-          //   left: KPadding.kPaddingSize8,
-          //   bottom: KPadding.kPaddingSize8,
-          // ),
-          child: Padding(
-            key: isCheck ? KWidgetkeys.widget.checkPoint.icon : null,
-            padding: const EdgeInsets.all(
-              KPadding.kPaddingSize4,
-            ),
-            child: isCheck
-                ? KIcon.checkSmall
-                : const SizedBox(
-                    width: KSize.kSmallIconSize,
-                    height: KSize.kSmallIconSize,
+      child: TooltipWidget(
+        description: text ?? '',
+        duration: const Duration(milliseconds: 500),
+        waitDuration: const Duration(seconds: 1),
+        text: '',
+        child: TextButton(
+          key: KWidgetkeys.widget.checkPoint.widget,
+          style: KButtonStyles.additionalButtonStyle,
+          onPressed: onChanged,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DecoratedBox(
+                decoration: isCheck
+                    ? KWidgetTheme.boxDecorCheckPointTrue
+                    : KWidgetTheme.boxDecorCheckPointFalse,
+                // padding: const EdgeInsets.only(
+                //   top: KPadding.kPaddingSize4,
+                //   left: KPadding.kPaddingSize8,
+                //   bottom: KPadding.kPaddingSize8,
+                // ),
+                child: Padding(
+                  key: isCheck ? KWidgetkeys.widget.checkPoint.icon : null,
+                  padding: const EdgeInsets.all(
+                    KPadding.kPaddingSize4,
                   ),
+                  child: isCheck
+                      ? KIcon.checkSmall
+                      : const SizedBox(
+                          width: KSize.kSmallIconSize,
+                          height: KSize.kSmallIconSize,
+                        ),
+                ),
+              ),
+              KSizedBox.kWidthSizedBox16,
+              Flexible(
+                child: textWidget ??
+                    Text(
+                      text ?? '',
+                      key: KWidgetkeys.widget.checkPoint.text,
+                      maxLines: maxLines,
+                      overflow: TextOverflow.ellipsis,
+                      style: textStyle ??
+                          (isDesk
+                              ? AppTextStyle.materialThemeBodyLarge
+                              : AppTextStyle.materialThemeBodyMedium),
+                    ),
+              ),
+              if (ammountWidget != null) ...[
+                KSizedBox.kWidthSizedBox16,
+                ammountWidget!,
+              ],
+            ],
           ),
         ),
-        label: textWidget ??
-            Text(
-              text ?? '',
-              key: KWidgetkeys.widget.checkPoint.text,
-              maxLines: maxLines,
-              style: textStyle ??
-                  (isDesk
-                      ? AppTextStyle.materialThemeBodyLarge
-                      : AppTextStyle.materialThemeBodyMedium),
-            ),
       ),
     );
   }
@@ -74,7 +95,6 @@ class CheckPointAmountWidget extends StatelessWidget {
     super.key,
     this.amoutActiveClor,
     this.amoutInactiveClor,
-    this.textWidget,
     this.maxLines = 3,
     this.textStyle,
   });
@@ -84,50 +104,32 @@ class CheckPointAmountWidget extends StatelessWidget {
   final FilterItem filterItem;
   final Color? amoutActiveClor;
   final Color? amoutInactiveClor;
-  final Widget? textWidget;
   final int? maxLines;
   final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
-    // if (filterItem.number > 0) {
-    return Row(
-      children: [
-        Expanded(
-          child: CheckPointWidget(
-            onChanged: onChanged,
-            isCheck: isCheck,
-            text: filterItem.value.getTrsnslation(context),
-            isDesk: isDesk,
-            textWidget: textWidget,
-            maxLines: maxLines,
-            textStyle: textStyle,
-          ),
+    return CheckPointWidget(
+      onChanged: onChanged,
+      isCheck: isCheck,
+      text: filterItem.value.getTrsnslation(context),
+      isDesk: isDesk,
+      ammountWidget: AmountWidget(
+        key: KWidgetkeys.widget.checkPoint.ammount,
+        background: isCheck
+            ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
+            : amoutInactiveClor ?? AppColors.materialThemeKeyColorsNeutral,
+        textColor: isCheck
+            ? AppColors.materialThemeKeyColorsNeutral
+            : AppColors.materialThemeKeyColorsSecondary,
+        number: filterItem.number,
+        padding: const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize8,
+          vertical: KPadding.kPaddingSize4,
         ),
-        KSizedBox.kWidthSizedBox12,
-        AmountWidget(
-          key: KWidgetkeys.widget.checkPoint.ammount,
-          background: isCheck
-              ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
-              : amoutInactiveClor ?? AppColors.materialThemeKeyColorsNeutral,
-          textColor: isCheck
-              ? AppColors.materialThemeKeyColorsNeutral
-              : AppColors.materialThemeKeyColorsSecondary,
-          number: filterItem.number,
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize8,
-            vertical: KPadding.kPaddingSize4,
-          ),
-        ),
-      ],
+      ),
+      maxLines: maxLines,
+      textStyle: textStyle,
     );
-    // } else {
-    //   return CheckPointWidget(
-    //     onChanged: onChanged,
-    //     isCheck: isCheck,
-    //     text: filterItem.value.toString(),
-    //     isDesk: isDesk,
-    //   );
-    // }
   }
 }

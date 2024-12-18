@@ -42,7 +42,10 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
         slivers: [
           SliverToBoxAdapter(
             child: widget.value != null
-                ? Row(
+                ? Wrap(
+                    runSpacing: KPadding.kPaddingSize16,
+                    spacing: KPadding.kPaddingSize8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       _AdvancedFilterHideButtonWidget(
                         isDesk: widget.isDesk,
@@ -55,24 +58,17 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                             : null,
                         listShow: widget.value == null && listShow,
                       ),
-                      KSizedBox.kWidthSizedBox8,
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: CancelChipWidget(
-                            widgetKey:
-                                KWidgetkeys.screen.discounts.appliedFilterItems,
-                            isDesk: widget.isDesk,
-                            labelText:
-                                widget.value!.value.getTrsnslation(context),
-                            onPressed: () {
-                              widget.onCancelWidgetPressed(
-                                widget.value!.value.uk,
-                              );
-                            },
-                            width: KSize.kPixel160,
-                          ),
-                        ),
+                      CancelChipWidget(
+                        widgetKey:
+                            KWidgetkeys.screen.discounts.appliedFilterItems,
+                        isDesk: widget.isDesk,
+                        labelText: widget.value!.value.getTrsnslation(context),
+                        onPressed: () {
+                          widget.onCancelWidgetPressed(
+                            widget.value!.value.uk,
+                          );
+                        },
+                        // width: KSize.kPixel160,
                       ),
                     ],
                   )
@@ -118,9 +114,11 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
         child: Text(
           text,
           key: textKey,
-          style: isDesk
-              ? AppTextStyle.materialThemeTitleLarge
-              : AppTextStyle.materialThemeTitleMedium,
+          style: onPressed == null
+              ? textStyle.copyWith(
+                  color: AppColors.materialThemeKeyColorsNeutralVariant,
+                )
+              : textStyle,
         ),
       ),
       iconAlignment: IconAlignment.end,
@@ -141,4 +139,8 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
       ),
     );
   }
+
+  TextStyle get textStyle => isDesk
+      ? AppTextStyle.materialThemeTitleLarge
+      : AppTextStyle.materialThemeTitleMedium;
 }
