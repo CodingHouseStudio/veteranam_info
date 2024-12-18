@@ -73,63 +73,70 @@ class DiscountInformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+    return BlocBuilder<LanguageCubit, Language>(
       builder: (context, state) {
-        final children = [
-          if (state.discountModel.hasImages)
-            DiscountImageWidget(
-              discount: state.discountModel.discount.getDiscountString(context),
-              images: state.discountModel.images!,
-              borderRadius: KBorderRadius.kBorderRadius32,
-            ),
-          Text(
-            '${context.l10n.eligibility}:',
-            style: AppTextStyle.materialThemeHeadlineMedium,
-          ),
-          KSizedBox.kHeightSizedBox16,
-          EligibilityWidget(
-            eligibility: state.discountModel.eligibility,
-            showFullList: true,
-          ),
-          KSizedBox.kHeightSizedBox32,
-          Text(
-            '${context.l10n.details}:',
-            style: AppTextStyle.materialThemeHeadlineMedium,
-          ),
-          KSizedBox.kHeightSizedBox16,
-          MarkdownLinkWidget(
-            text: state.discountModel.description.getTrsnslation(context),
-            textStyle: AppTextStyle.materialThemeBodyLarge,
-          ),
-          if (state.discountModel.requirements != null) ...[
-            KSizedBox.kHeightSizedBox32,
-            Text(
-              '${context.l10n.toGetItYouNeed}:',
-              style: AppTextStyle.materialThemeHeadlineMedium,
-            ),
-            KSizedBox.kHeightSizedBox16,
-            MarkdownLinkWidget(
-              text: state.discountModel.requirements!.getTrsnslation(context),
-              textStyle: AppTextStyle.materialThemeBodyLarge,
-            ),
-          ],
-          if (state.discountModel.exclusions != null) ...[
-            KSizedBox.kHeightSizedBox32,
-            MarkdownLinkWidget(
-              text: state.discountModel.exclusions!.getTrsnslation(context),
-              textStyle: AppTextStyle.materialThemeBodyLargeNeutralVariant50,
-            ),
-          ],
-        ];
-        return SkeletonizerWidget(
-          isLoading: state.loadingStatus.isLoading,
-          isSliver: true,
-          highlightColor: AppColors.materialThemeWhite,
-          baseColor: AppColors.materialThemeKeyColorsNeutral,
-          child: SliverList.builder(
-            itemBuilder: (context, index) => children.elementAt(index),
-            itemCount: children.length,
-          ),
+        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+          builder: (context, state) {
+            final children = [
+              if (state.discountModel.hasImages)
+                DiscountImageWidget(
+                  discount:
+                      state.discountModel.discount.getDiscountString(context),
+                  images: state.discountModel.images!,
+                  borderRadius: KBorderRadius.kBorderRadius32,
+                ),
+              Text(
+                '${context.l10n.eligibility}:',
+                style: AppTextStyle.materialThemeHeadlineMedium,
+              ),
+              KSizedBox.kHeightSizedBox16,
+              EligibilityWidget(
+                eligibility: state.discountModel.eligibility,
+                showFullList: true,
+              ),
+              KSizedBox.kHeightSizedBox32,
+              Text(
+                '${context.l10n.details}:',
+                style: AppTextStyle.materialThemeHeadlineMedium,
+              ),
+              KSizedBox.kHeightSizedBox16,
+              MarkdownLinkWidget(
+                text: state.discountModel.description.getTrsnslation(context),
+                textStyle: AppTextStyle.materialThemeBodyLarge,
+              ),
+              if (state.discountModel.requirements != null) ...[
+                KSizedBox.kHeightSizedBox32,
+                Text(
+                  '${context.l10n.toGetItYouNeed}:',
+                  style: AppTextStyle.materialThemeHeadlineMedium,
+                ),
+                KSizedBox.kHeightSizedBox16,
+                MarkdownLinkWidget(
+                  text:
+                      state.discountModel.requirements!.getTrsnslation(context),
+                  textStyle: AppTextStyle.materialThemeBodyLarge,
+                ),
+              ],
+              if (state.discountModel.exclusions != null) ...[
+                KSizedBox.kHeightSizedBox32,
+                MarkdownLinkWidget(
+                  text: state.discountModel.exclusions!.getTrsnslation(context),
+                  textStyle:
+                      AppTextStyle.materialThemeBodyLargeNeutralVariant50,
+                ),
+              ],
+            ];
+            return SkeletonizerWidget(
+              isLoading: state.loadingStatus.isLoading,
+              isSliver: true,
+              highlightColor: AppColors.materialThemeWhite,
+              baseColor: AppColors.materialThemeKeyColorsNeutral,
+              child: SliverList.builder(
+                itemBuilder: (context, index) => children.elementAt(index),
+                itemCount: children.length,
+              ),
+            );
+          },
         );
       },
     );
@@ -168,106 +175,115 @@ class _DiscountContactInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+    return BlocBuilder<LanguageCubit, Language>(
       builder: (context, state) {
-        return SkeletonizerWidget(
-          isLoading: state.loadingStatus.isLoading,
-          child: Column(
-            children: [
-              DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationDiscountContainer,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-                      child: CompanyInfoWidget(
-                        dateVerified: state.discountModel.dateVerified,
-                        category: state.discountModel.category,
-                        company: state.discountModel.company,
-                        userName: state.discountModel.userName,
-                        userPhoto: state.discountModel.userPhoto,
-                      ),
-                    ),
-                    DecoratedBox(
-                      decoration: KWidgetTheme.boxDecorationWidget,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: KPadding.kPaddingSize16,
+        return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+          builder: (context, state) {
+            return SkeletonizerWidget(
+              isLoading: state.loadingStatus.isLoading,
+              child: Column(
+                children: [
+                  DecoratedBox(
+                    decoration: KWidgetTheme.boxDecorationDiscountContainer,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.all(KPadding.kPaddingSize16),
+                          child: CompanyInfoWidget(
+                            dateVerified: state.discountModel.dateVerified,
+                            category: state.discountModel.category,
+                            company: state.discountModel.company,
+                            userName: state.discountModel.userName,
+                            userPhoto: state.discountModel.userPhoto,
+                          ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: KPadding.kPaddingSize16,
-                              ),
-                              child: Text(
-                                state.discountModel.title
-                                    .getTrsnslation(context),
-                                style: AppTextStyle.materialThemeHeadlineMedium,
-                              ),
+                        DecoratedBox(
+                          decoration: KWidgetTheme.boxDecorationWidget,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize16,
                             ),
-                            KSizedBox.kHeightSizedBox4,
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: KPadding.kPaddingSize16,
-                              ),
-                              child: CityListWidget(
-                                key: KWidgetkeys.widget.discountCard.city,
-                                isDesk: false,
-                                location: state.discountModel.location,
-                                subLocation: state.discountModel.subLocation,
-                                showFullText: true,
-                              ),
-                            ),
-                            KSizedBox.kHeightSizedBox4,
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: KPadding.kPaddingSize16,
-                              ),
-                              child: ExpirationWidget(
-                                expiration: state.discountModel.expiration
-                                    ?.getTrsnslation(context),
-                              ),
-                            ),
-                            if (state.discountModel.phoneNumber != null) ...[
-                              KSizedBox.kHeightSizedBox4,
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: KPadding.kPaddingSize8,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: KPadding.kPaddingSize16,
+                                  ),
+                                  child: Text(
+                                    state.discountModel.title
+                                        .getTrsnslation(context),
+                                    style: AppTextStyle
+                                        .materialThemeHeadlineMedium,
+                                  ),
                                 ),
-                                child: ShowPhoneNumberWidget(
-                                  phoneNumber: state.discountModel.phoneNumber!,
+                                KSizedBox.kHeightSizedBox4,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: KPadding.kPaddingSize16,
+                                  ),
+                                  child: CityListWidget(
+                                    key: KWidgetkeys.widget.discountCard.city,
+                                    isDesk: false,
+                                    location: state.discountModel.location,
+                                    subLocation:
+                                        state.discountModel.subLocation,
+                                    showFullText: true,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ],
+                                KSizedBox.kHeightSizedBox4,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: KPadding.kPaddingSize16,
+                                  ),
+                                  child: ExpirationWidget(
+                                    expiration: state.discountModel.expiration
+                                        ?.getTrsnslation(context),
+                                  ),
+                                ),
+                                if (state.discountModel.phoneNumber !=
+                                    null) ...[
+                                  KSizedBox.kHeightSizedBox4,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: KPadding.kPaddingSize8,
+                                    ),
+                                    child: ShowPhoneNumberWidget(
+                                      phoneNumber:
+                                          state.discountModel.phoneNumber!,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  KSizedBox.kHeightSizedBox24,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SharedIconListWidget(
+                      isDesk: isDesk,
+                      cardEnum: CardEnum.discount,
+                      cardId: state.discountModel.id,
+                      shareKey: const Key('share'),
+                      complaintKey: const Key('complaint'),
+                      showShare: !Config.isBusiness ||
+                          state.discountModel.status == DiscountState.published,
+                      share:
+                          '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModel.id}',
+                      isSeparatePage: true,
+                      link: state.discountModel.directLink ??
+                          state.discountModel.link,
+                    ),
+                  ),
+                ],
               ),
-              KSizedBox.kHeightSizedBox24,
-              Align(
-                alignment: Alignment.centerLeft,
-                child: SharedIconListWidget(
-                  isDesk: isDesk,
-                  cardEnum: CardEnum.discount,
-                  cardId: state.discountModel.id,
-                  shareKey: const Key('share'),
-                  complaintKey: const Key('complaint'),
-                  showShare: !Config.isBusiness ||
-                      state.discountModel.status == DiscountState.published,
-                  share:
-                      '${KRoute.home.path}${KRoute.discounts.path}/${state.discountModel.id}',
-                  isSeparatePage: true,
-                  link: state.discountModel.directLink ??
-                      state.discountModel.link,
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
