@@ -30,7 +30,7 @@ class DiscountInformationWidget extends StatelessWidget {
 }
 
 class _DiscountInformationDeskWidget extends StatelessWidget {
-  const _DiscountInformationDeskWidget({Key? key}) : super(key: key);
+  const _DiscountInformationDeskWidget();
 
   @override
   Widget build(BuildContext context) {
