@@ -65,7 +65,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureSend;
 
   factory SomeFailure.network({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -92,7 +92,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureUnauthorized;
 
   factory SomeFailure.notFound({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -105,7 +105,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureNotFound;
 
   factory SomeFailure.duplicate({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -158,7 +158,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureShare;
 
   factory SomeFailure.shareUnavailable({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -197,7 +197,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureCopy;
 
   factory SomeFailure.wrongVerifyCode({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -210,7 +210,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureWrongVerifyCode;
 
   factory SomeFailure.filter({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -223,7 +223,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureFilter;
 
   factory SomeFailure.browserNotSupportPopupDialog({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,
@@ -236,7 +236,7 @@ class SomeFailure with _$SomeFailure {
   }) = FailureBrowserNotSupportPopupDialog;
 
   factory SomeFailure.emailInvalidFormat({
-    Object? error,
+    required Object? error,
     StackTrace? stack,
     ErrorLevelEnum? errorLevel,
     String? tag,

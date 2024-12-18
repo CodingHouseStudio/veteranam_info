@@ -309,15 +309,23 @@ class DiscountsWatcherBloc
       ),
     );
 
-    state.discountFilterRepository.locationSearch(
-      event.serachText,
-    );
-
-    emit(
-      state.copyWith(
-        filterStatus: FilterStatus.filtered,
-      ),
-    );
+    state.discountFilterRepository
+        .locationSearch(
+          event.serachText,
+        )
+        .fold(
+          (l) => emit(
+            state.copyWith(
+              filterStatus: FilterStatus.error,
+              failure: l._toDiscount(),
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              filterStatus: FilterStatus.filtered,
+            ),
+          ),
+        );
   }
 
   void _setMobFilter(

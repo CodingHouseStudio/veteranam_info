@@ -24,11 +24,10 @@ class FailureRepository {
         '[cloud_firestore/failed-precondition] The client has already been terminated.') {
       return;
     }
-    final stack = failure.stack;
     if (error != null) {
       onError(
         error: error,
-        stack: stack,
+        stack: failure.stack,
         reason: null,
         information: null,
         errorLevel: failure.errorLevel,
@@ -49,6 +48,7 @@ class FailureRepository {
     required ErrorLevelEnum? errorLevel,
     required String? tag,
     required String? tagKey,
+    bool? isInfo,
     String? tag2,
     String? tag2Key,
     String? data,
@@ -61,7 +61,21 @@ class FailureRepository {
       final errorString = error.toString().toLowerCase();
 
       // Determine the error level based on the exception type or error content
-      if (error is AssertionError || errorString.contains('outofmemoryerror')) {
+      if (isInfo ??
+          false ||
+              errorString.contains('timeout') ||
+              errorString.contains('connection refused') ||
+              errorString.contains('no internet') ||
+              errorString.contains('network-request') ||
+              errorString.contains('resource limit exceeded') ||
+              errorString.contains('permission-denied') ||
+              errorString.contains(
+                '[cloud_firestore/failed-precondition] The client has already been terminated.',
+              )) {
+        // Info level for network-related issues or resource constraints
+        errorLevelValue = ErrorLevelEnum.info;
+      } else if (error is AssertionError ||
+          errorString.contains('outofmemoryerror')) {
         // Fatal level for critical asynchronous issues that cause crashes
         errorLevelValue = ErrorLevelEnum.fatal;
       } else if (errorString.contains('deprecated') ||
@@ -69,14 +83,6 @@ class FailureRepository {
           errorString.contains('performance')) {
         // Warning level for performance concerns or deprecated code usage
         errorLevelValue = ErrorLevelEnum.warning;
-      } else if (errorString.contains('timeout') ||
-          errorString.contains('connection refused') ||
-          errorString.contains('no internet') ||
-          errorString.contains('network-request') ||
-          errorString.contains('resource limit exceeded') ||
-          errorString.contains('permission-denied')) {
-        // Info level for network-related issues or resource constraints
-        errorLevelValue = ErrorLevelEnum.info;
       } else {
         // Default error level for general asynchronous issues
         errorLevelValue = ErrorLevelEnum.error;

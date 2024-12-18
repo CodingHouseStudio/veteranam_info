@@ -49,7 +49,7 @@ void main() {
         when(
           mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,

@@ -16,6 +16,8 @@ abstract class ErrorText {
 
   static const sendError = 'Send';
   static const serverError = 'Unkown';
+  static const browserNotSupportPopupDialogError =
+      'Browser Not Support Popup Dialog';
   static const getError = 'Get';
   static const networkError = 'Network';
   static const unauthirizedError = 'Unauthorized';
@@ -24,6 +26,7 @@ abstract class ErrorText {
   static const tooManyRequestsError = 'Too Many Requests';
   static const emailSendingFailedError = 'Email Sending Failed';
   static const shareError = 'Share';
+  static const shareUnavailableError = 'Share Unavailable';
   static const linkError = 'Link';
   static const copyError = 'Copy';
   static const wrongVerifyCodeError = 'Wrong Verify Code';

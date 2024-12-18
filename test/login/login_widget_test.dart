@@ -68,7 +68,7 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,
@@ -100,7 +100,7 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.notFound()),
+          (invocation) async => Left(SomeFailure.notFound(error: null)),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,

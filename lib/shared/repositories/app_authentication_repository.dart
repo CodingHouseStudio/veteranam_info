@@ -511,7 +511,17 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (code == null) {
-        return Left(SomeFailure.wrongVerifyCode());
+        return Left(
+          SomeFailure.wrongVerifyCode(
+            error: 'Code is null',
+            tag: 'checkVerificationCode(${ErrorText.wrongVerifyCodeError})',
+            tagKey: ErrorText.appAuthenticationKey,
+            user: currentUser,
+            userSetting: currentUserSetting,
+            data: 'Code: $code',
+            errorLevel: ErrorLevelEnum.info,
+          ),
+        );
       }
       final email = await _firebaseAuth.verifyPasswordResetCode(
         code,

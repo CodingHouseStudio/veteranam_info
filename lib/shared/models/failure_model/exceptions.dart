@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
 
 import 'package:veteranam/shared/models/failure_model/some_failure_model.dart';
@@ -54,6 +55,7 @@ class SendFailure {
             data: data,
             tag2: tag,
             tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
           ),
         );
       default:
@@ -94,18 +96,19 @@ class GetFailur {
       case 'not-found':
         return GetFailur(
           status: SomeFailure.notFound(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.getFailur}'
-              //     '(${ErrorText.notFoundError}
-              // ${ErrorText.firebaseException})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.getFailur}'
+                '(${ErrorText.notFoundError}'
+                '${ErrorText.firebaseException})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'missing-argument':
       case 'timeout':
@@ -142,6 +145,7 @@ class GetFailur {
             data: data,
             tag2: tag,
             tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
           ),
         );
       default:
@@ -224,17 +228,18 @@ class SignUpWithEmailAndPasswordFailure {
       case 'email-already-in-use':
         return SignUpWithEmailAndPasswordFailure(
           status: SomeFailure.duplicate(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-              //     '(${ErrorText.duplicateError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+                '(${ErrorText.duplicateError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'operation-not-allowed':
       case 'invalid-email':
@@ -242,32 +247,34 @@ class SignUpWithEmailAndPasswordFailure {
       case 'weak-password':
         return SignUpWithEmailAndPasswordFailure(
           status: SomeFailure.emailInvalidFormat(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-              //     '(${ErrorText.serverError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+                '(${ErrorText.serverError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'network-error':
         return SignUpWithEmailAndPasswordFailure(
           status: SomeFailure.network(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
-              //     '(${ErrorText.networkError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithEmailAndPasswordFailure}'
+                '(${ErrorText.networkError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       default:
         return SignUpWithEmailAndPasswordFailure(
@@ -311,32 +318,34 @@ class LogInWithEmailAndPasswordFailure {
       case 'invalid-credential':
         return LogInWithEmailAndPasswordFailure(
           status: SomeFailure.notFound(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
-              //     '(${ErrorText.notFoundError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
+                '(${ErrorText.notFoundError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'network-error':
         return LogInWithEmailAndPasswordFailure(
           status: SomeFailure.network(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
-              //     '(${ErrorText.networkError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.logInWithEmailAndPasswordFailure}'
+                '(${ErrorText.networkError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       default:
         return LogInWithEmailAndPasswordFailure(
@@ -398,16 +407,17 @@ class LogOutFailure {
       case 'network-error':
         return LogOutFailure(
           status: SomeFailure.network(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.logOutFailure}(${ErrorText.networkError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.logOutFailure}(${ErrorText.networkError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       default:
         return LogOutFailure(
@@ -452,17 +462,18 @@ class SignUpWithGoogleFailure {
       case 'invalid-verification-id':
         return SignUpWithGoogleFailure(
           status: SomeFailure.notFound(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithGoogleFailure}'
-              //     '(${ErrorText.notFoundError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithGoogleFailure}'
+                '(${ErrorText.notFoundError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'operation-not-allowed':
         return SignUpWithGoogleFailure(
@@ -482,23 +493,36 @@ class SignUpWithGoogleFailure {
       case 'network-error':
         return SignUpWithGoogleFailure(
           status: SomeFailure.network(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithGoogleFailure}'
-              //     '(${ErrorText.networkError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithGoogleFailure}'
+                '(${ErrorText.networkError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'popup-closed-by-user':
       case 'popup-blocked':
       case 'provider-already-linked':
         return SignUpWithGoogleFailure(
-          status: SomeFailure.browserNotSupportPopupDialog(),
+          status: SomeFailure.browserNotSupportPopupDialog(
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithGoogleFailure}'
+                '(${ErrorText.browserNotSupportPopupDialogError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'cancelled-popup-request':
         return const SignUpWithGoogleFailure(status: null);
@@ -545,17 +569,18 @@ class SignUpWithFacebookFailure {
       case 'invalid-verification-id':
         return SignUpWithFacebookFailure(
           status: SomeFailure.notFound(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.signUpWithFacebookFailure}'
-              //     '(${ErrorText.notFoundError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithFacebookFailure}'
+                '(${ErrorText.notFoundError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'operation-not-allowed':
         return SignUpWithFacebookFailure(
@@ -583,13 +608,26 @@ class SignUpWithFacebookFailure {
             data: data,
             tag2: tag,
             tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
           ),
         );
       case 'popup-closed-by-user':
       case 'popup-blocked':
       case 'provider-already-linked':
         return SignUpWithFacebookFailure(
-          status: SomeFailure.browserNotSupportPopupDialog(),
+          status: SomeFailure.browserNotSupportPopupDialog(
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.signUpWithFacebookFailure}'
+                '(${ErrorText.browserNotSupportPopupDialogError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       case 'cancelled-popup-request':
         return const SignUpWithFacebookFailure(status: null);
@@ -635,7 +673,19 @@ class ShareFailure {
           );
         case 'Exception: Navigator.canShare() is unavailable':
           return ShareFailure(
-            status: SomeFailure.shareUnavailable(),
+            status: SomeFailure.shareUnavailable(
+              error: error,
+              stack: stack,
+              tag: '${ErrorText.shareFailure}'
+                  '(${ErrorText.shareUnavailableError})',
+              tagKey: ErrorText.exceptionsFolderKey,
+              user: user,
+              userSetting: userSetting,
+              data: data,
+              tag2: tag,
+              tag2Key: tagKey,
+              errorLevel: ErrorLevelEnum.info,
+            ),
           );
         default:
           return ShareFailure(
@@ -688,17 +738,18 @@ class VerifyCodeFailure {
       case 'invalid-action-code':
         return VerifyCodeFailure(
           status: SomeFailure.wrongVerifyCode(
-              // error: error,
-              // stack: stack,
-              // tag: '${ErrorText.verifyCodeFailure}'
-              //     '(${ErrorText.wrongVerifyCodeError})',
-              // tagKey: ErrorText.exceptionsFolderKey,
-              // user: user,
-              // userSetting: userSetting,
-              // data: data,
-              // tag2: tag,
-              // tag2Key: tagKey,
-              ),
+            error: error,
+            stack: stack,
+            tag: '${ErrorText.verifyCodeFailure}'
+                '(${ErrorText.wrongVerifyCodeError})',
+            tagKey: ErrorText.exceptionsFolderKey,
+            user: user,
+            userSetting: userSetting,
+            data: data,
+            tag2: tag,
+            tag2Key: tagKey,
+            errorLevel: ErrorLevelEnum.info,
+          ),
         );
       default:
         return VerifyCodeFailure(

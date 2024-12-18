@@ -2,7 +2,7 @@ part of 'discounts_watcher_bloc.dart';
 
 extension DiscountFailureExtension on SomeFailure {
   DiscountFailure _toDiscount() {
-    if (this == FailureFilter()) return DiscountFailure.filter;
+    if (this is FailureFilter) return DiscountFailure.filter;
     return DiscountFailure.error;
   }
 }
