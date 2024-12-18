@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/models/models.dart';
 
 part 'question_model.freezed.dart';
 part 'question_model.g.dart';
@@ -9,13 +8,10 @@ class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
     // ignore: invalid_annotation_target
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TitleConverter()
-    required TranslateModel title,
-    // ignore: invalid_annotation_target
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @SubtitleConverter()
-    required TranslateModel subtitle,
+    required String title,
+    required String titleEN,
+    required String subtitle,
+    required String subtitleEN,
     // String? navigationLink,
   }) = _QuestionModel;
 

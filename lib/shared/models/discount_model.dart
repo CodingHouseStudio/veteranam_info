@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/models/models.dart';
 
@@ -12,51 +10,28 @@ class DiscountModel with _$DiscountModel {
     required String id,
     // required DateTime date,
     required List<int> discount,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateConverter()
-    required TranslateModel title,
-    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
-    @TranslateItemsConverter()
-    required List<TranslateModel> category,
-    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
-    @TranslateItemsOrNullConverter()
-    required List<TranslateModel>? subcategory,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateConverter()
-    required TranslateModel description,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    required TranslateModel? requirements,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    required TranslateModel? territory,
+    @TranslateConverter() required TranslateModel title,
+    @TranslateItemsConverter() required List<TranslateModel> category,
+    // @TranslateItemsOrNullConverter() required List<TranslateModel>?
+    // subcategory,
+    @TranslateConverter() required TranslateModel description,
+    @TranslateOrNullConverter() required TranslateModel? requirements,
+    // @TranslateOrNullConverter() required TranslateModel? territory,
     required DateTime dateVerified,
     required String? link,
-    @JsonKey(unknownEnumValue: EligibilityEnum.all)
-    @Default([EligibilityEnum.all])
-    List<EligibilityEnum> eligibility,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    TranslateModel? exclusions,
+    @Default([EligibilityEnum.all]) List<EligibilityEnum> eligibility,
+    @TranslateOrNullConverter() TranslateModel? exclusions,
     String? phoneNumber,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    TranslateModel? expiration,
-    @JsonKey(readValue: TranslateItemsConverter.readJsonItems)
-    @TranslateItemsOrNullConverter()
-    List<TranslateModel>? location,
+    @TranslateOrNullConverter() TranslateModel? expiration,
+    @TranslateItemsOrNullConverter() List<TranslateModel>? location,
     String? userId,
     // String? html,
     String? userName,
     @ImageConverter() ImageModel? userPhoto,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    TranslateModel? company,
+    @TranslateOrNullConverter() TranslateModel? company,
     @Default(DiscountState.isNew) DiscountState status,
     String? directLink,
-    @JsonKey(readValue: TranslateConverter.readJsonItem)
-    @TranslateOrNullConverter()
-    TranslateModel? additionalDetails,
+    // @TranslateOrNullConverter() TranslateModel? additionalDetails,
     SubLocation? subLocation,
     @ImagesConverter() List<ImageModel>? images,
     int? likes,
@@ -123,15 +98,15 @@ abstract class DiscountModelJsonField {
   static const titleEN = 'titleEN';
   static const category = 'category';
   static const categoryEN = 'categoryEN';
-  static const subcategory = 'subcategory';
-  static const subcategoryEN = 'subcategoryEN';
+  // static const subcategory = 'subcategory';
+  // static const subcategoryEN = 'subcategoryEN';
   static const eligibility = 'eligibility';
   static const description = 'description';
   static const descriptionEN = 'descriptionEN';
   static const requirements = 'requirements';
   static const requirementsEN = 'requirementsEN';
-  static const territory = 'territory';
-  static const territoryEN = 'territoryEN';
+  // static const territory = 'territory';
+  // static const territoryEN = 'territoryEN';
   static const location = 'location';
   static const locationEN = 'locationEN';
   static const expiration = 'expiration';
@@ -142,8 +117,8 @@ abstract class DiscountModelJsonField {
   static const directLink = 'directLink';
   static const dateVerified = 'dateVerified';
   // static const html = 'html';
-  static const additionalDetails = 'additionalDetails';
-  static const additionalDetailsEN = 'additionalDetailsEN';
+  // static const additionalDetails = 'additionalDetails';
+  // static const additionalDetailsEN = 'additionalDetailsEN';
   static const link = 'link';
   static const userName = 'userName';
   static const userPhoto = 'userPhoto';
