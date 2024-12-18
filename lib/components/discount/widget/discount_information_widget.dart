@@ -29,24 +29,43 @@ class DiscountInformationWidget extends StatelessWidget {
   }
 }
 
-class _DiscountInformationDeskWidget extends MultiChildRenderObjectWidget {
-  // Constructor for the RowSliver widget
-  const _DiscountInformationDeskWidget()
-      : super(
-          children: const [
-            DiscountInformationBodyWidget(
-              isDesk: true,
-            ),
-            _DiscountContactWidget(),
-          ],
-        );
+class _DiscountInformationDeskWidget extends StatelessWidget {
+  const _DiscountInformationDeskWidget({Key? key}) : super(key: key);
 
-  // Creates the render object for this widget
   @override
-  RenderRowSliver createRenderObject(BuildContext context) {
-    return RenderRowSliver(leftWidthPercent: 3 / 5);
+  Widget build(BuildContext context) {
+    return const SliverCrossAxisGroup(
+      slivers: [
+        SliverCrossAxisExpanded(
+          flex: 5,
+          sliver: DiscountInformationBodyWidget(
+            isDesk: true,
+          ),
+        ),
+        SliverCrossAxisExpanded(flex: 3, sliver: _DiscountContactWidget()),
+      ],
+    );
   }
 }
+
+// class _DiscountInformationDeskWidget extends MultiChildRenderObjectWidget {
+//   // Constructor for the RowSliver widget
+//   const _DiscountInformationDeskWidget()
+//       : super(
+//           children: const [
+//             DiscountInformationBodyWidget(
+//               isDesk: true,
+//             ),
+//             _DiscountContactWidget(),
+//           ],
+//         );
+
+//   // Creates the render object for this widget
+//   @override
+//   RenderRowSliver createRenderObject(BuildContext context) {
+//     return RenderRowSliver(leftWidthPercent: 3 / 5);
+//   }
+// }
 
 class DiscountInformationBodyWidget extends StatelessWidget {
   const DiscountInformationBodyWidget({required this.isDesk, super.key});
