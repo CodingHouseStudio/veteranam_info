@@ -17,9 +17,7 @@ extension HomeFailureExtension on SomeFailure {
 class HomeWatcherState with _$HomeWatcherState {
   const factory HomeWatcherState({
     required List<QuestionModel> questionModelItems,
-    required LoadingStatusHome loadingStatus,
+    required LoadingStatus loadingStatus,
     HomeFailure? failure,
   }) = _Initial;
 }
-
-enum LoadingStatusHome { initial, loading, loaded, error }

@@ -49,7 +49,7 @@ class HomeSectionsWidget extends StatelessWidget {
         ),
       ],
       if (isDesk || isTablet)
-        KSizedBox.kHeightSizedBox160
+        KSizedBox.kHeightSizedBox132
       else
         KSizedBox.kHeightSizedBox40,
     ];
