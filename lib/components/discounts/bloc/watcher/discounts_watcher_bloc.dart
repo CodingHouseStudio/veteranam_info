@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:isolate';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -16,12 +18,10 @@ class DiscountsWatcherBloc
     extends Bloc<DiscountsWatcherEvent, DiscountsWatcherState> {
   DiscountsWatcherBloc({
     required IDiscountRepository discountRepository,
-    required UserRepository userRepository,
     // required IReportRepository reportRepository,
     // required IAppAuthenticationRepository appAuthenticationRepository,
     required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
   })  : _discountRepository = discountRepository,
-        _userRepository = userRepository,
         // _reportRepository = reportRepository,
         // _appAuthenticationRepository = appAuthenticationRepository,
         _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
@@ -46,7 +46,9 @@ class DiscountsWatcherBloc
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
     on<_SearchLocation>(_onSearchLocation);
-    on<_SetMobFilter>(_setMobFilter);
+    on<_MobSetFilter>(_onMobSetFilter);
+    on<_MobRevertFilter>(_onMobRevertFilter);
+    on<_MobSaveFilter>(_onMobSaveFilter);
     on<_FilterReset>(_onFilterReset);
     on<_Sorting>(_onSorting);
 
@@ -55,7 +57,7 @@ class DiscountsWatcherBloc
   }
 
   final IDiscountRepository _discountRepository;
-  final UserRepository _userRepository;
+  // final UserRepository _userRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
   // final IReportRepository _reportRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
@@ -107,8 +109,7 @@ class DiscountsWatcherBloc
         _sorting(discountsList: event.discountItemsModel);
 
     final discountFilterRepository = DiscountFilterRepository.init(
-      unmodifiedDiscountModelItems: discountSortingList,
-      isEnglish: _userRepository.isEnglish,
+      discountSortingList,
     );
 
     final itemsNumber = getCurrentLoadNumber(
@@ -195,8 +196,7 @@ class DiscountsWatcherBloc
 
     state.discountFilterRepository
         .resetAll(
-          unmodifiedDiscountModelItems: state.sortingDiscountModelList,
-          isEnglish: _userRepository.isEnglish,
+          state.sortingDiscountModelList,
         )
         .fold(
           (l) => emit(
@@ -232,7 +232,6 @@ class DiscountsWatcherBloc
         .addEligibility(
           valueUK: event.eligibility,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
-          isEnglish: _userRepository.isEnglish,
         )
         .fold(
           (l) => emit(
@@ -259,7 +258,6 @@ class DiscountsWatcherBloc
         .addCategory(
           valueUK: event.category,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
-          isEnglish: _userRepository.isEnglish,
         )
         .fold(
           (l) => emit(
@@ -286,7 +284,6 @@ class DiscountsWatcherBloc
         .addLocation(
           valueUK: event.location,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
-          isEnglish: _userRepository.isEnglish,
         )
         .fold(
           (l) => emit(
@@ -328,8 +325,8 @@ class DiscountsWatcherBloc
         );
   }
 
-  void _setMobFilter(
-    _SetMobFilter event,
+  void _onMobSetFilter(
+    _MobSetFilter event,
     Emitter<DiscountsWatcherState> emit,
   ) {
     final itemsNumber = getCurrentLoadNumber();
@@ -349,6 +346,67 @@ class DiscountsWatcherBloc
             state.copyWith(
               filterDiscountModelList: r.take(itemsNumber).toList(),
               isListLoadedFull: r.length <= itemsNumber,
+            ),
+          ),
+        );
+  }
+
+  void _onMobRevertFilter(
+    _MobRevertFilter event,
+    Emitter<DiscountsWatcherState> emit,
+  ) {
+    debugPrint('TEFDSFDSF Start ||| ${DateTime.now()}');
+    // await Future.delayed(const Duration(minutes: 1));
+    state.discountFilterRepository
+        .revertActiveFilter(state.unmodifiedDiscountModelItems);
+
+    debugPrint('TEFDSFDSF END ||| ${DateTime.now()}');
+    // .fold(
+    //   (l) => emit(
+    //     state.copyWith(
+    //       failure: l._toDiscount(),
+    //       filterStatus: FilterStatus.error,
+    //     ),
+    //   ),
+    //   (r) => emit(
+    //     state.copyWith(
+    //       filterStatus: FilterStatus.filtered,
+    //     ),
+    //   ),
+    // );
+  }
+
+  double complexCalculation() {
+    double value = (100232 * 10203234234 * 213923190342);
+    value = value * value * value * value * value;
+    value = value * value * value / 2;
+    double i = value;
+    while (i > -value) {
+      i = log(i);
+    }
+    return i;
+  }
+
+  void _onMobSaveFilter(
+    _MobSaveFilter event,
+    Emitter<DiscountsWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        filterStatus: FilterStatus.filtering,
+      ),
+    );
+
+    state.discountFilterRepository.saveActiveFilter().fold(
+          (l) => emit(
+            state.copyWith(
+              failure: l._toDiscount(),
+              filterStatus: FilterStatus.error,
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              filterStatus: FilterStatus.filtered,
             ),
           ),
         );

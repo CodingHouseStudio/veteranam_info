@@ -59,8 +59,11 @@ void main() {
         // reportRepository: mockReportRepository,
         // appAuthenticationRepository: mockAppAuthenticationRepository,
         firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        userRepository: mockUserRepository,
       );
+      if (GetIt.I.isRegistered<UserRepository>()) {
+        GetIt.I.unregister<UserRepository>();
+      }
+      GetIt.I.registerSingleton<UserRepository>(mockUserRepository);
     });
 
     blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(

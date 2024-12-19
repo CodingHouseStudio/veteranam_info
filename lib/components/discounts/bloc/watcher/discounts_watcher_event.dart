@@ -29,7 +29,11 @@ class DiscountsWatcherEvent with _$DiscountsWatcherEvent {
     String serachText,
   ) = _SearchLocation;
 
-  const factory DiscountsWatcherEvent.setMobFilter() = _SetMobFilter;
+  const factory DiscountsWatcherEvent.mobSetFilter() = _MobSetFilter;
+
+  const factory DiscountsWatcherEvent.mobSaveFilter() = _MobSaveFilter;
+
+  const factory DiscountsWatcherEvent.mobRevertFilter() = _MobRevertFilter;
 
   const factory DiscountsWatcherEvent.sorting(
     DiscountEnum value,

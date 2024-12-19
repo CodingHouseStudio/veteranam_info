@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,8 +32,14 @@ class DiscountsFilterMob extends StatelessWidget {
           // ),
 
           onPressed: () async {
-            final bloc = context.read<DiscountsWatcherBloc>();
-            await showModalBottomSheet<void>(
+            final bloc = context.read<DiscountsWatcherBloc>()
+              ..add(
+                const DiscountsWatcherEvent.mobSaveFilter(),
+              );
+            log('TEFDSFDSF START ${DateTime.now()}');
+            bloc.add(const DiscountsWatcherEvent.mobRevertFilter());
+            log('TEFDSFDSF END ${DateTime.now()}');
+            await showModalBottomSheet<bool>(
               context: context,
               isScrollControlled: true,
               barrierColor:
@@ -47,6 +55,19 @@ class DiscountsFilterMob extends StatelessWidget {
                 childWidget: const _AdvancedFilterMobDialog(),
                 bloc: bloc,
               ),
+            ).then(
+              (value) {
+                log('TEFDSFDSF START ${DateTime.now()}');
+                switch (value) {
+                  case true:
+                    bloc.add(const DiscountsWatcherEvent.mobSetFilter());
+                  case false:
+                    bloc.add(const DiscountsWatcherEvent.filterReset());
+                  case null:
+                    bloc.add(const DiscountsWatcherEvent.mobRevertFilter());
+                }
+                log('TEFDSFDSF END ${DateTime.now()}');
+              },
             );
           },
 
@@ -89,15 +110,10 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     builder: (context, state) {
                       return AdvancedFilterResetButton(
                         isDesk: false,
-                        resetEvent: state
-                                .discountFilterRepository.hasActivityItem
-                            ? () {
-                                context.pop();
-                                context.read<DiscountsWatcherBloc>().add(
-                                      const DiscountsWatcherEvent.filterReset(),
-                                    );
-                              }
-                            : null,
+                        resetEvent:
+                            state.discountFilterRepository.hasActivityItem
+                                ? () => context.pop(false)
+                                : null,
                       );
                     },
                   ),
@@ -105,12 +121,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     text: context.l10n.apply,
                     hasAlign: false,
                     isDesk: false,
-                    onPressed: () {
-                      context.pop();
-                      context
-                          .read<DiscountsWatcherBloc>()
-                          .add(const DiscountsWatcherEvent.setMobFilter());
-                    },
+                    onPressed: () => context.pop(true),
                     widgetKey: KWidgetkeys
                         .screen.discounts.advancedFilterMobAppliedButton,
                     darkMode: true,

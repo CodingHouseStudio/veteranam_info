@@ -98,12 +98,15 @@ void _registerDiscountBloc({
     // reportRepository: mockReportRepository,
     // appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    userRepository: mockUserRepository,
   );
   if (GetIt.I.isRegistered<DiscountsWatcherBloc>()) {
     GetIt.I.unregister<DiscountsWatcherBloc>();
   }
   GetIt.I.registerSingleton<DiscountsWatcherBloc>(discountBloc);
+  if (GetIt.I.isRegistered<UserRepository>()) {
+    GetIt.I.unregister<UserRepository>();
+  }
+  GetIt.I.registerSingleton<UserRepository>(mockUserRepository);
 }
 
 void _registerUserWatcherBloc({
