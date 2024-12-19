@@ -186,7 +186,7 @@ class LineTitleIconWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox24,
             IconWidget(
               // key: KWidgetkeys.screen.feedback.titleIcon,
-              padding: isDesk ? null : KPadding.kPaddingSize12,
+              padding: isDesk ? null : KPadding.kPaddingSize8,
               icon: isDesk ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
             ),
           ],
