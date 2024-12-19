@@ -102,7 +102,7 @@ The design emphasized **simplicity** and **inclusiveness**, ensuring veterans of
             - /text
             # Contains text constants like labels, titles, and descriptions.
             - /theme
-            # Contains theme configurations for light and dark modes.
+            # Contains theme configurations for app.
             - /widget
             # Contains reusable widget constants.
             - /widget_keys
