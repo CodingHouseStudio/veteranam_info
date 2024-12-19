@@ -31,7 +31,7 @@ class DiscountTextWidget extends StatelessWidget {
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines ?? 2,
           style: AppTextStyle.materialThemeBodyLarge,
-          overflow: TextOverflow.ellipsis,
+          // overflow: TextOverflow.ellipsis,
         ),
         KSizedBox.kHeightSizedBox16,
         if (eligibility != null) ...[
