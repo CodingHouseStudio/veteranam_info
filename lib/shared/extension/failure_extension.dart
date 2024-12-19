@@ -75,6 +75,8 @@ extension SignUpFailureValue on SignUpError {
         return context.l10n.networkFailure;
       case SignUpError.duplicate:
         return context.l10n.dublicateFailure;
+      case SignUpError.emailWrongFormat:
+        return '${context.l10n.email} ${context.l10n.isWrongEmail}';
     }
   }
 }

@@ -42,7 +42,7 @@ class UrlRepository extends IUrlRepository {
       if (error == null) {
         return const Right(false);
       }
-      if (error == FailureShareUnavailable()) {
+      if (error is FailureShareUnavailable) {
         final resault = await copy(
           baseUrl + url,
         );

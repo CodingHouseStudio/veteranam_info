@@ -7,12 +7,16 @@ class AdvancedFilterListWidget extends StatefulWidget {
     required this.list,
     required this.textKey,
     required this.title,
+    required this.value,
+    required this.onCancelWidgetPressed,
     super.key,
   });
   final bool isDesk;
   final Widget list;
   final Key textKey;
   final String title;
+  final FilterItem? value;
+  final void Function(String activeItem) onCancelWidgetPressed;
 
   @override
   State<AdvancedFilterListWidget> createState() =>
@@ -37,17 +41,51 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
       sliver: SliverMainAxisGroup(
         slivers: [
           SliverToBoxAdapter(
-            child: _AdvancedFilterHideButtonWidget(
-              isDesk: widget.isDesk,
-              textKey: widget.textKey,
-              text: widget.title,
-              onPressed: () => setState(
-                () => listShow = !listShow,
-              ),
-              listShow: listShow,
-            ),
+            child: widget.value != null
+                ? Wrap(
+                    runSpacing: KPadding.kPaddingSize16,
+                    spacing: KPadding.kPaddingSize8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      _AdvancedFilterHideButtonWidget(
+                        isDesk: widget.isDesk,
+                        textKey: widget.textKey,
+                        text: widget.title,
+                        onPressed: widget.value == null
+                            ? () => setState(
+                                  () => listShow = !listShow,
+                                )
+                            : null,
+                        listShow: widget.value == null && listShow,
+                      ),
+                      CancelChipWidget(
+                        widgetKey:
+                            KWidgetkeys.screen.discounts.appliedFilterItems,
+                        isDesk: widget.isDesk,
+                        labelText: widget.value!.value.getTrsnslation(context),
+                        onPressed: () {
+                          widget.onCancelWidgetPressed(
+                            widget.value!.value.uk,
+                          );
+                        },
+                        // width: KSize.kPixel160,
+                      ),
+                    ],
+                  )
+                : Align(
+                    alignment: Alignment.centerLeft,
+                    child: _AdvancedFilterHideButtonWidget(
+                      isDesk: widget.isDesk,
+                      textKey: widget.textKey,
+                      text: widget.title,
+                      onPressed: () => setState(
+                        () => listShow = !listShow,
+                      ),
+                      listShow: listShow,
+                    ),
+                  ),
           ),
-          if (listShow) widget.list,
+          if (widget.value == null && listShow) widget.list,
         ],
       ),
     );
@@ -65,41 +103,44 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
   final bool isDesk;
   final Key textKey;
   final String text;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final bool listShow;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: TextButton.icon(
-        label: Padding(
-          padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-          child: Text(
-            text,
-            key: textKey,
-            style: isDesk
-                ? AppTextStyle.materialThemeTitleLarge
-                : AppTextStyle.materialThemeTitleMedium,
+    return TextButton.icon(
+      label: Padding(
+        padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
+        child: Text(
+          text,
+          key: textKey,
+          style: onPressed == null
+              ? textStyle.copyWith(
+                  color: AppColors.materialThemeKeyColorsNeutralVariant,
+                )
+              : textStyle,
+        ),
+      ),
+      iconAlignment: IconAlignment.end,
+      style: const ButtonStyle(
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.only(
+            left: KPadding.kPaddingSize8,
           ),
         ),
-        iconAlignment: IconAlignment.end,
-        style: const ButtonStyle(
-          padding: WidgetStatePropertyAll(
-            EdgeInsets.only(
-              left: KPadding.kPaddingSize8,
-            ),
-          ),
-        ),
-        onPressed: onPressed,
-        icon: IconWidget(
-          icon: listShow ? KIcon.minus : KIcon.plus,
-          padding: KPadding.kPaddingSize8,
-          background: isDesk
-              ? AppColors.materialThemeKeyColorsNeutral
-              : AppColors.materialThemeWhite,
-        ),
+      ),
+      onPressed: onPressed,
+      icon: IconWidget(
+        icon: listShow ? KIcon.minus : KIcon.plus,
+        padding: KPadding.kPaddingSize8,
+        background: isDesk
+            ? AppColors.materialThemeKeyColorsNeutral
+            : AppColors.materialThemeWhite,
       ),
     );
   }
+
+  TextStyle get textStyle => isDesk
+      ? AppTextStyle.materialThemeTitleLarge
+      : AppTextStyle.materialThemeTitleMedium;
 }

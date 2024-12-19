@@ -59,29 +59,53 @@ ValueKey<String> _key({
   );
 }
 
-class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
-  // Constructor for the RowSliver widget
-  DiscountsDeskWidgetList({
-    required this.maxHeight,
-    super.key,
-  }) : super(
-          children: [
-            _AdvancedFilterDesk(
-              maxHeight: maxHeight,
-            ),
-            const _DiscountWidgetList(
-              isDesk: true,
-            ),
-          ],
-        );
+class DiscountsDeskWidgetList extends StatelessWidget {
+  const DiscountsDeskWidgetList({required this.maxHeight, super.key});
   final double maxHeight;
-
-  // Creates the render object for this widget
   @override
-  RenderRowSliver createRenderObject(BuildContext context) {
-    return RenderRowSliver(leftWidthPercent: 1 / 3);
+  Widget build(BuildContext context) {
+    return SliverCrossAxisGroup(
+      slivers: [
+        SliverCrossAxisExpanded(
+          flex: 1,
+          sliver: _AdvancedFilterDesk(
+            maxHeight: maxHeight,
+          ),
+        ),
+        const SliverCrossAxisExpanded(
+          flex: 2,
+          sliver: _DiscountWidgetList(
+            isDesk: true,
+          ),
+        ),
+      ],
+    );
   }
 }
+
+// class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
+//   // Constructor for the RowSliver widget
+//   DiscountsDeskWidgetList({
+//     required this.maxHeight,
+//     super.key,
+//   }) : super(
+//           children: [
+//             _AdvancedFilterDesk(
+//               maxHeight: maxHeight,
+//             ),
+//             const _DiscountWidgetList(
+//               isDesk: true,
+//             ),
+//           ],
+//         );
+//   final double maxHeight;
+
+//   // Creates the render object for this widget
+//   @override
+//   RenderRowSliver createRenderObject(BuildContext context) {
+//     return RenderRowSliver(leftWidthPercent: 1 / 3);
+//   }
+// }
 
 class _AdvancedFilterDesk extends StatelessWidget {
   const _AdvancedFilterDesk({

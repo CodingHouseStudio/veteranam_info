@@ -31,6 +31,7 @@ enum SignUpError {
   duplicate,
   error,
   network,
+  emailWrongFormat,
   send,
 }
 

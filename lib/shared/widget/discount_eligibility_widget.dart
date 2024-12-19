@@ -15,101 +15,87 @@ class EligibilityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (eligibility.isNotEmpty && eligibility.contains(EligibilityEnum.all)) {
-    //   final modifiableEligibility =
-    //       List<EligibilityEnum>.from(EligibilityEnum.valuesWithoutAll);
-    //   // return Wrap(
-    //   //   key: KWidgetkeys.widget.cityList.markdownFulllList,
-    //   //   children: _buildWidgets(
-    //   //     modifiableEligibility.length > 5
-    //   //         ? modifiableEligibility.take(5).toList()
-    //   //         : modifiableEligibility,
-    //   //     context,
-    //   //   ),
-    //   // );
-    // }
-    // } else {
-    //   return Wrap(
-    //     key: KWidgetkeys.widget.cityList.markdownFulllList,
-    //     children: _buildWidgets(
-    //       eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
-    //       context,
-    //     ),
+    // if (eligibility.isNotEmpty && eligibility.contains(EligibilityEnum.all))
+    {
+      //   final modifiableEligibility =
+      //       List<EligibilityEnum>.from(EligibilityEnum.valuesWithoutAll);
+      //   // return Wrap(
+      //   //   key: KWidgetkeys.widget.cityList.markdownFulllList,
+      //   //   children: _buildWidgets(
+      //   //     modifiableEligibility.length > 5
+      //   //         ? modifiableEligibility.take(5).toList()
+      //   //         : modifiableEligibility,
+      //   //     context,
+      //   //   ),
+      //   // );
+      // }
+      // } else {
+      //   return Wrap(
+      //     key: KWidgetkeys.widget.cityList.markdownFulllList,
+      //     children: _buildWidgets(
+      //       eligibility.length > 5 ? eligibility.take(5).toList() :
+      // eligibility,
+      //       context,
+      //     ),
 
-    //     // TextSpan(
-    //     //   style: AppTextStyle.materialThemeLabelLarge,
-    //     //   children: _buildTextSpans(
-    //     //     eligibility.length > 5 ? eligibility.take(5).toList()
-    //     // : eligibility,
-    //     //     context,
-    //     //   ),
-    //     // ),
-    //   );
-    // }
+      //     // TextSpan(
+      //     //   style: AppTextStyle.materialThemeLabelLarge,
+      //     //   children: _buildTextSpans(
+      //     //     eligibility.length > 5 ? eligibility.take(5).toList()
+      //     // : eligibility,
+      //     //     context,
+      //     //   ),
+      //     // ),
+      //   );
+      // }
 
-    if (eligibility.isNotEmpty) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: KPadding.kPaddingSize4,
-          right: KPadding.kPaddingSize8,
-        ),
-        child: Wrap(
-          key: ValueKey(eligibility),
-          runSpacing: KPadding.kPaddingSize12,
-          spacing: KPadding.kPaddingSize8,
-          children: <Widget>[
-            if (eligibility.contains(EligibilityEnum.all)) ...[
-              ...(EligibilityEnum.valuesWithoutAll.length > 5 && !showFullList
-                      ? EligibilityEnum.valuesWithoutAll.take(5)
-                      : EligibilityEnum.valuesWithoutAll)
-                  .map(
-                (eligibilityItem) => Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    eligibilityItem.eligibilityIcon,
-                    KSizedBox.kWidthSizedBox4,
-                    Text(
-                      eligibilityItem.getValue(context),
-                      style: AppTextStyle.materialThemeLabelMedium,
-                    ),
-                  ],
-                ),
-              ),
-            ] else
-              ...(eligibility.length > 5 && !showFullList
-                      ? eligibility.take(5)
-                      : eligibility)
-                  .map(
-                (eligibilityItem) => Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    eligibilityItem.eligibilityIcon,
-                    KSizedBox.kWidthSizedBox4,
-                    Text(
-                      eligibilityItem.getValue(context),
-                      style: AppTextStyle.materialThemeLabelMedium,
-                    ),
-                  ],
-                ),
-              ),
-            if (eligibility.length > 5 && !showFullList)
-              TextButton(
-                onPressed: moreButtonEvent,
-                child: Text(
-                  context.l10n.moreWhomGranted(eligibility.length - 5),
-                  style: AppTextStyle.materialThemeLabelLargeRef,
-                ),
-              ),
-          ],
-        ),
-      );
-    } else {
-      return const SizedBox.shrink();
+      if (eligibility.isNotEmpty) {
+        final list = eligibility.contains(EligibilityEnum.all)
+            ? EligibilityEnum.valuesWithoutAll
+            : eligibility;
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: KPadding.kPaddingSize4,
+            right: KPadding.kPaddingSize8,
+          ),
+          child: Wrap(
+            key: ValueKey(eligibility),
+            runSpacing: KPadding.kPaddingSize12,
+            spacing: KPadding.kPaddingSize8,
+            children: List.generate(
+              list.length > 5 && !showFullList ? 6 : list.length,
+              (index) {
+                if (5 > index || showFullList) {
+                  final item = list.elementAt(index);
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      item.eligibilityIcon,
+                      KSizedBox.kWidthSizedBox4,
+                      Text(
+                        item.getValue(context),
+                        style: AppTextStyle.materialThemeLabelMedium,
+                      ),
+                    ],
+                  );
+                }
+                return TextButton(
+                  onPressed: moreButtonEvent,
+                  child: Text(
+                    context.l10n.moreWhomGranted(list.length - 5),
+                    style: AppTextStyle.materialThemeLabelLargeRef,
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      } else {
+        return const SizedBox.shrink();
+      }
     }
   }
-}
 
 // class DiscountEligibilityExpandedWidget extends StatelessWidget {
 //   const DiscountEligibilityExpandedWidget({
@@ -175,4 +161,4 @@ class EligibilityWidget extends StatelessWidget {
 
 //   //   return widgets;
 //   // }
-// }
+}

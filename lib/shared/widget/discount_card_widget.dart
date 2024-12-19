@@ -26,6 +26,25 @@ class DiscountCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final children = [
+      _DiscountCardWithImage(
+        discountItem: discountItem,
+        borderRadious: isDesk
+            ? KBorderRadius.kBorderRadiusOnlyLeft
+            : KBorderRadius.kBorderRadiusOnlyTop,
+      ),
+      Flexible(
+        child: _DiscountCardDesciprtionWidget(
+          isDesk: isDesk,
+          descriptionMethod: descriptionMethod,
+          discountItem: discountItem,
+          closeWidget: closeWidget,
+          isBusiness: isBusiness,
+          share: share,
+          useSiteUrl: useSiteUrl,
+        ),
+      ),
+    ];
     return DecoratedBox(
       key: ValueKey(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
@@ -58,110 +77,10 @@ class DiscountCardWidget extends StatelessWidget {
                           : null,
                   child: isDesk
                       ? Row(
-                          children: [
-                            Flexible(
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft:
-                                          Radius.circular(KSize.kRadius32),
-                                      topLeft: Radius.circular(KSize.kRadius32),
-                                    ),
-                                    child: NetworkImageWidget(
-                                      imageUrl:
-                                          discountItem.images![0].downloadURL,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: KPadding.kPaddingSize16,
-                                    right: KPadding.kPaddingSize16,
-                                    child: DecoratedBox(
-                                      decoration:
-                                          KWidgetTheme.boxDecorationDiscount,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: KPadding.kPaddingSize8,
-                                          vertical: KPadding.kPaddingSize4,
-                                        ),
-                                        child: TextPointWidget(
-                                          discountItem.discount
-                                              .getDiscountString(context),
-                                          key: KWidgetkeys
-                                              .widget.discountCard.discount,
-                                          mainAxisSize: MainAxisSize.min,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Flexible(
-                              child: _DiscountCardDesciprtionWidget(
-                                isDesk: isDesk,
-                                descriptionMethod: descriptionMethod,
-                                discountItem: discountItem,
-                                closeWidget: closeWidget,
-                                isBusiness: isBusiness,
-                                share: share,
-                                useSiteUrl: useSiteUrl,
-                              ),
-                            ),
-                          ],
+                          children: children,
                         )
                       : Column(
-                          children: [
-                            Flexible(
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topRight:
-                                          Radius.circular(KSize.kRadius32),
-                                      topLeft: Radius.circular(KSize.kRadius32),
-                                    ),
-                                    child: NetworkImageWidget(
-                                      imageUrl:
-                                          discountItem.images![0].downloadURL,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: KPadding.kPaddingSize16,
-                                    right: KPadding.kPaddingSize16,
-                                    child: DecoratedBox(
-                                      decoration:
-                                          KWidgetTheme.boxDecorationDiscount,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: KPadding.kPaddingSize8,
-                                          vertical: KPadding.kPaddingSize4,
-                                        ),
-                                        child: TextPointWidget(
-                                          discountItem.discount
-                                              .getDiscountString(context),
-                                          key: KWidgetkeys
-                                              .widget.discountCard.discount,
-                                          mainAxisSize: MainAxisSize.min,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Flexible(
-                              child: _DiscountCardDesciprtionWidget(
-                                isDesk: isDesk,
-                                descriptionMethod: descriptionMethod,
-                                discountItem: discountItem,
-                                closeWidget: closeWidget,
-                                isBusiness: isBusiness,
-                                share: share,
-                                useSiteUrl: useSiteUrl,
-                              ),
-                            ),
-                          ],
+                          children: children,
                         ),
                 ),
               )
@@ -183,6 +102,50 @@ class DiscountCardWidget extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _DiscountCardWithImage extends StatelessWidget {
+  const _DiscountCardWithImage({
+    required this.discountItem,
+    required this.borderRadious,
+  });
+
+  final DiscountModel discountItem;
+  final BorderRadiusGeometry borderRadious;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: borderRadious,
+            child: NetworkImageWidget(
+              imageUrl: discountItem.images![0].downloadURL,
+            ),
+          ),
+          Positioned(
+            top: KPadding.kPaddingSize16,
+            right: KPadding.kPaddingSize16,
+            child: DecoratedBox(
+              decoration: KWidgetTheme.boxDecorationDiscount,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize8,
+                  vertical: KPadding.kPaddingSize4,
+                ),
+                child: TextPointWidget(
+                  discountItem.discount.getDiscountString(context),
+                  key: KWidgetkeys.widget.discountCard.discount,
+                  mainAxisSize: MainAxisSize.min,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

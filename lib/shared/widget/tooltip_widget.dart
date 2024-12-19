@@ -10,20 +10,24 @@ class TooltipWidget extends StatelessWidget {
     super.key,
     this.verticalOffset,
     this.margin,
+    this.child,
+    this.waitDuration = const Duration(milliseconds: 100),
   });
   final String description;
   final Duration duration;
+  final Duration waitDuration;
   final double? verticalOffset;
   final double? margin;
   final EdgeInsets? padding;
   final String text;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: description,
       triggerMode: TooltipTriggerMode.tap,
-      waitDuration: const Duration(milliseconds: 100),
+      waitDuration: waitDuration,
       showDuration: duration,
       preferBelow: true,
       decoration: KWidgetTheme.boxDecorationTooltip,
@@ -34,24 +38,25 @@ class TooltipWidget extends StatelessWidget {
       padding: const EdgeInsets.all(
         KPadding.kPaddingSize16,
       ),
-      child: Padding(
-        padding: padding ??
-            const EdgeInsets.only(
-              top: KPadding.kPaddingSize12,
-              bottom: KPadding.kPaddingSize12,
-              right: KPadding.kPaddingSize12,
+      child: child ??
+          Padding(
+            padding: padding ??
+                const EdgeInsets.only(
+                  top: KPadding.kPaddingSize12,
+                  bottom: KPadding.kPaddingSize12,
+                  right: KPadding.kPaddingSize12,
+                ),
+            child: Row(
+              children: [
+                Text(
+                  text,
+                  style: AppTextStyle.materialThemeTitleMedium,
+                ),
+                KSizedBox.kWidthSizedBox8,
+                KIcon.info,
+              ],
             ),
-        child: Row(
-          children: [
-            Text(
-              text,
-              style: AppTextStyle.materialThemeTitleMedium,
-            ),
-            KSizedBox.kWidthSizedBox8,
-            KIcon.info,
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

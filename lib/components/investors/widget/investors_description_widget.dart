@@ -22,7 +22,7 @@ class InvestorsDescriptionWidget extends StatelessWidget {
           InvestorsImagesWidget(isDesk: true),
         ],
       );
-    } else if (Config.isWeb) {
+    } else {
       return const Column(
         children: [
           _InvestorsSectionWidget(
@@ -32,7 +32,6 @@ class InvestorsDescriptionWidget extends StatelessWidget {
         ],
       );
     }
-    return const SizedBox.shrink();
   }
 }
 

@@ -9,6 +9,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     this.titleChildWidgetsFunction,
     this.mainPadding,
     this.mainDecorationPadding,
+    this.backButtonPathName,
     // this.loadDataAgain,
   });
   final List<Widget> Function({required bool isDesk})?
@@ -21,6 +22,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
   final EdgeInsetsGeometry Function({required bool isDesk})?
       mainDecorationPadding;
   final BoxDecoration? mainDecoration;
+  final String? backButtonPathName;
   // final void Function()? loadDataAgain;
 
   @override
@@ -71,6 +73,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                   NavigationBarWidget(
                     isDesk: isDesk,
                     isTablet: isTablet,
+                    backButtonPathName: backButtonPathName,
                   ),
 
                   if (titleChildWidgetsFunction != null)

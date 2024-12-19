@@ -101,12 +101,13 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       isTablet: isTablet,
                       pageName: context.l10n.discounts,
                     ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: DiscountTitleWidget(
-                        isDesk: isDesk,
+                    if (Config.isWeb)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: DiscountTitleWidget(
+                          isDesk: isDesk,
+                        ),
                       ),
-                    ),
                     if (!isDesk)
                       SliverPadding(
                         padding: padding,

@@ -259,8 +259,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!.uk,
+            DiscountsAddEvent.requirementsUpdate(
+              KTestText.blocSendDiscountModel.requirements!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -487,7 +487,7 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.exclusions.isValid &&
+              state.requirements.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -586,8 +586,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!.uk,
+            DiscountsAddEvent.requirementsUpdate(
+              KTestText.blocSendDiscountModel.requirements!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.back())
@@ -711,7 +711,7 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.exclusions.isValid &&
+              state.requirements.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -785,8 +785,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!.uk,
+            DiscountsAddEvent.requirementsUpdate(
+              KTestText.blocSendDiscountModel.requirements!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -844,7 +844,7 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.exclusions.isValid &&
+              state.requirements.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -1151,8 +1151,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.exclusionsUpdate(
-              KTestText.blocSendDiscountModel.exclusions!.uk,
+            DiscountsAddEvent.requirementsUpdate(
+              KTestText.blocSendDiscountModel.requirements!.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send());
@@ -1291,7 +1291,7 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.exclusions.isValid &&
+              state.requirements.isValid &&
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
