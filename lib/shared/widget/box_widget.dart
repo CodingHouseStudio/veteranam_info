@@ -106,6 +106,7 @@ class BoxWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.box.text,
                   style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
                   maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

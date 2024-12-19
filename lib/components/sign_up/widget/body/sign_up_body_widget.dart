@@ -141,36 +141,38 @@ class SignUpBodyWidget extends StatelessWidget {
                 ],
               ),
             ),
-            KSizedBox.kHeightSizedBox40,
-            const Divider(
-              color: AppColors.materialThemeKeyColorsNeutral,
-              height: KSize.kPixel1,
-              thickness: KSize.kPixel1,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox24,
-            TextPointWidget(
-              //key: ,
-              context.l10n.signUpInWith,
-              pointColor: AppColors.materialThemeKeyColorsPrimary,
-              textStyle: AppTextStyle.materialThemeTitleMedium,
-              mainAxisAlignment: MainAxisAlignment.start,
-            ),
-            KSizedBox.kHeightSizedBox16,
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child:
-            SignUpLoginServiceWidget(
-              // key: KWidgetkeys.widget.signUpBottomButtons.google,
-              // text: context.l10n.google,
-              // picture: KImage.google(),
-              // onPressed: () => context
-              //     .read<AuthenticationServicesCubit>()
-              //     .authenticationUseGoogle(),
-              isDesk: isDesk,
-            ),
+            if (Config.isWeb) ...[
+              KSizedBox.kHeightSizedBox40,
+              const Divider(
+                color: AppColors.materialThemeKeyColorsNeutral,
+                height: KSize.kPixel1,
+                thickness: KSize.kPixel1,
+              ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox40
+              else
+                KSizedBox.kHeightSizedBox24,
+              TextPointWidget(
+                //key: ,
+                context.l10n.signUpInWith,
+                pointColor: AppColors.materialThemeKeyColorsPrimary,
+                textStyle: AppTextStyle.materialThemeTitleMedium,
+                mainAxisAlignment: MainAxisAlignment.start,
+              ),
+              KSizedBox.kHeightSizedBox16,
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child:
+              SignUpLoginServiceWidget(
+                // key: KWidgetkeys.widget.signUpBottomButtons.google,
+                // text: context.l10n.google,
+                // picture: KImage.google(),
+                // onPressed: () => context
+                //     .read<AuthenticationServicesCubit>()
+                //     .authenticationUseGoogle(),
+                isDesk: isDesk,
+              ),
+            ],
             // ),
             if (!isDesk) KSizedBox.kHeightSizedBox24,
           ],
