@@ -41,7 +41,7 @@ jobs:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
     with:
       flutter_channel: stable
-      flutter_version: 3.24.1
+      flutter_version: 3.27.1
       min_coverage: 100
       format_directories: "lib test"
       coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}

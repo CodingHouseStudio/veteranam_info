@@ -17,5 +17,5 @@ jobs:
     secrets: inherit
     with:
       flutter_channel: stable
-      flutter_version: 3.24.1
+      flutter_version: 3.27.1
       # format_directories: "lib test"
