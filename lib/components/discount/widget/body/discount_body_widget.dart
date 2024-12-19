@@ -63,11 +63,12 @@ class DiscountBodyWidget extends StatelessWidget {
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
                     NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                      pageName: context.l10n.discounts,
-                    ),
+                    if (Config.isWeb)
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.discounts,
+                      ),
                     if (isDesk)
                       KSizedBox.kHeightSizedBox32.toSliver
                     else

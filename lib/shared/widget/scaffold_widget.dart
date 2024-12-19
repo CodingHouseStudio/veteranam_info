@@ -18,6 +18,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.isForm = false,
     this.bottomBarIndex,
     this.backButtonPathName,
+    this.showAppBar = true,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -38,6 +39,7 @@ class ScaffoldWidget extends StatelessWidget {
   final bool isForm;
   final int? bottomBarIndex;
   final String? backButtonPathName;
+  final bool showAppBar;
 
   @override
   Widget build(BuildContext context) {
@@ -101,14 +103,15 @@ class ScaffoldWidget extends StatelessWidget {
                   //physics: KTest.scroll,
                   slivers: [
                     NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                      pageName: pageName,
-                      showMobBackButton: showMobNawbarBackButton,
-                      backButtonPathName: backButtonPathName,
-                      // showMobileNawbar: showMobileNawbar,
-                    ),
+                    if (showAppBar)
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: pageName,
+                        showMobBackButton: showMobNawbarBackButton,
+                        backButtonPathName: backButtonPathName,
+                        // showMobileNawbar: showMobileNawbar,
+                      ),
 
                     if (titleChildWidgetsFunction != null)
                       SliverPadding(

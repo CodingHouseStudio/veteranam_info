@@ -118,14 +118,14 @@ class LineTitleIconWidget extends StatelessWidget {
   const LineTitleIconWidget({
     required this.title,
     required this.titleKey,
-    // required this.isDesk,
+    required this.isDesk,
     this.iconCrossAxisAlignment = CrossAxisAlignment.end,
     super.key,
     this.rightWidget,
   });
   final String title;
   final Key titleKey;
-  // final bool isDesk;
+  final bool isDesk;
   final Widget? rightWidget;
   final CrossAxisAlignment iconCrossAxisAlignment;
 
@@ -165,20 +165,32 @@ class LineTitleIconWidget extends StatelessWidget {
     );
   }
 
-  Widget get leftWidget => Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            key: titleKey,
-            style: AppTextStyle.materialThemeDisplayLarge,
-          ),
-          KSizedBox.kWidthSizedBox32,
-          const IconWidget(
-            // key: KWidgetkeys.screen.feedback.titleIcon,
-            icon: KIcon.arrowDownRight,
-          ),
-        ],
+  Widget get leftWidget => Align(
+        alignment: Alignment.centerLeft,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Text(
+                title,
+                key: titleKey,
+                style: isDesk
+                    ? AppTextStyle.materialThemeDisplayLarge
+                    : AppTextStyle.materialThemeDisplaySmall,
+              ),
+            ),
+            if (isDesk)
+              KSizedBox.kWidthSizedBox32
+            else
+              KSizedBox.kWidthSizedBox24,
+            IconWidget(
+              // key: KWidgetkeys.screen.feedback.titleIcon,
+              padding: isDesk ? null : KPadding.kPaddingSize12,
+              icon: isDesk ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
+            ),
+          ],
+        ),
       );
 }
 
