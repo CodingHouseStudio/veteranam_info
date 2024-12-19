@@ -120,9 +120,22 @@ class SharedIconListWidget extends StatelessWidget {
         ] else
           PopupMenuButtonWidget<int>(
             buttonText: context.l10n.login,
-            iconButton: KIcon.moreVert,
-            buttonStyle: KButtonStyles.borderWhiteButtonStyle,
-            textUnderButton: context.l10n.more,
+            buttonChild: Column(
+              children: [
+                const IconWidget(
+                  decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
+                  icon: KIcon.moreVert,
+                  padding: KPadding.kPaddingSize12,
+                ),
+                KSizedBox.kHeightSizedBox6,
+                Text(
+                  context.l10n.more,
+                  style: AppTextStyle.materialThemeLabelSmallBlack,
+                ),
+              ],
+            ),
+            showIndicatorIcon: false,
+            buttonStyle: KButtonStyles.noBackgroundOnHoverButtonStyle,
             menuItemsPadding: const EdgeInsets.only(
               top: KPadding.kPaddingSize16,
               bottom: KPadding.kPaddingSize16,

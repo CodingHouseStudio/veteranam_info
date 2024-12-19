@@ -221,9 +221,12 @@ abstract class KButtonStyles {
   );
 
   static const advancedButtonStyle = ButtonStyle(
-    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize12)),
     shape: WidgetStatePropertyAll(
       KWidgetTheme.outlineBorder,
+    ),
+    backgroundColor: WidgetStatePropertyAll(
+      AppColors.materialThemeKeyColorsNeutral,
     ),
   );
   static const advancedFilterButtonStyle = ButtonStyle(

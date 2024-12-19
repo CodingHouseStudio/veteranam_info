@@ -663,7 +663,7 @@
   "privacyPolicy": "Privacy policy",
   "@privacyPolicy": {
     "examples": "Text for the button that is in the Footer.",
-    "description": "Button used to open the PrivacyPolicy dialogue."
+    "description": "Button used to open the PrivacyPolicy dialoge."
   },
   "sections": "Sections",
   "@sections": {
@@ -797,7 +797,17 @@
   "advancedFilter": "Advanced filter",
   "@advancedFilter": {
     "examples": "Text for the button on the Discount page.",
-    "description": "The button is used to open an AdvancedFilter or open a dialogue with it."
+    "description": "The button is used to open an AdvancedFilter or open a dialoge with it."
+  },
+  "filter": "Filter",
+  "@filter": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to open filter dialoge."
+  },
+  "sort": "Sort",
+  "@sort": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to open the filter menu."
   },
   "specialOffers": "Special offers",
   "@specialOffers": {

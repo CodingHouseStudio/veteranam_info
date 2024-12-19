@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart'
-    show FontStyle, FontWeight, TextDecoration, TextStyle;
+    show FontStyle, FontWeight, TextDecoration, TextOverflow, TextStyle;
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 /// Text Styles
 
 abstract class AppTextStyle {
   static const text128 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont128,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -13,6 +14,7 @@ abstract class AppTextStyle {
   );
 
   static const text96 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont96,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -20,6 +22,7 @@ abstract class AppTextStyle {
   );
 
   static const text64 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont64,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -27,6 +30,7 @@ abstract class AppTextStyle {
   );
 
   static const text48 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont48,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -34,6 +38,7 @@ abstract class AppTextStyle {
   );
 
   static const text40 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont40,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -41,6 +46,7 @@ abstract class AppTextStyle {
   );
 
   static const text36 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont36,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -48,6 +54,7 @@ abstract class AppTextStyle {
   );
 
   static const text32 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont32,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -55,6 +62,7 @@ abstract class AppTextStyle {
   );
 
   static const text24 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont24,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -62,6 +70,7 @@ abstract class AppTextStyle {
   );
 
   static const text20 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont20,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -69,6 +78,7 @@ abstract class AppTextStyle {
   );
 
   static const text18 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont18,
     fontWeight: FontWeight.w400,
     fontFamily: 'Gilroy',
@@ -76,42 +86,49 @@ abstract class AppTextStyle {
   );
 
   static const text16 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont16,
     fontFamily: 'Gilroy',
     fontStyle: FontStyle.normal,
   );
 
   static const text14 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontSize: KSize.kFont14,
     fontFamily: 'Gilroy',
     fontStyle: FontStyle.normal,
   );
 
   static const hint16 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     fontSize: KSize.kFont16,
     fontWeight: FontWeight.w400,
   );
 
   static const hint20 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     fontSize: KSize.kFont20,
     fontWeight: FontWeight.w400,
   );
 
   static const hint24 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     fontSize: KSize.kFont24,
     fontWeight: FontWeight.w400,
   );
 
   static const hint14 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     fontSize: KSize.kFont14,
     fontWeight: FontWeight.w400,
   );
 
   static const error14 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     color: AppColors.materialThemeRefErrorError50,
     fontSize: KSize.kFont14,
     fontWeight: FontWeight.w400,
@@ -126,6 +143,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeDisplayLarge = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 57,
     height: 1.12,
@@ -142,6 +160,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeDisplayMedium = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 45,
     height: 1.16,
@@ -157,6 +176,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeDisplaySmall = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 36,
     height: 1.22,
@@ -172,6 +192,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeHeadlineLarge = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 32,
     height: 1.25,
@@ -187,12 +208,14 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeHeadlineMedium = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 28,
     height: 1.29,
     fontWeight: FontWeight.w500,
   );
   static const TextStyle materialThemeHeadlineMediumBold = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 28,
     height: 1.29,
@@ -208,6 +231,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeHeadlineSmall = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 24,
     height: 1.33,
@@ -223,6 +247,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeBodyLarge = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -230,6 +255,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.5,
   );
   static const TextStyle materialThemeBodyLargeNeutralVariant35 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -238,6 +264,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
   static const TextStyle materialThemeBodyLargeNeutralVariant50 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -246,6 +273,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeBodyLargeNeutralVariant60 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -254,6 +282,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant60,
   );
   static const TextStyle materialThemeBodyLargeNeutral = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -262,6 +291,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeKeyColorsNeutral,
   );
   static const TextStyle materialThemeBodyLargeBold = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -278,6 +308,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeBodyMedium = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -285,6 +316,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.25,
   );
   static const TextStyle materialThemeBodyMediumBold = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -292,6 +324,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.25,
   );
   static const TextStyle materialThemeBodyMediumNeutralVariant35 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -300,6 +333,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
   static const TextStyle materialThemeBodyMediumNeutralVariant50 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -308,6 +342,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeBodyMediumNeutralVariant60 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -316,6 +351,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant60,
   );
   static const TextStyle materialThemeBodyMediumNeutral = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -324,6 +360,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeKeyColorsNeutral,
   );
   static const TextStyle materialThemeBodyMediumError = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -341,6 +378,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeBodySmall = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 12,
     height: 1.33,
@@ -348,6 +386,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.4,
   );
   static const TextStyle materialThemeBodySmallNeutralVariant50 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 12,
     height: 1.33,
@@ -356,6 +395,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeBodySmallError = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 12,
     height: 1.33,
@@ -373,6 +413,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeLabelLarge = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -380,6 +421,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.1,
   );
   static const TextStyle materialThemeLabelLargeRef = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -389,6 +431,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefTertiaryTertiary40,
   );
   static const TextStyle materialThemeLabelLargeUnderLine = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -406,6 +449,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeLabelMedium = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 12,
     height: 1.33,
@@ -422,6 +466,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeLabelSmall = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 11,
     height: 1.45,
@@ -429,6 +474,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.5,
   );
   static const TextStyle materialThemeLabelSmallBlack = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 11,
     height: 1.45,
@@ -437,6 +483,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeBlack,
   );
   static const TextStyle materialThemeLabelSmallNeutralVariant35 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 11,
     height: 1.45,
@@ -445,6 +492,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
   static const TextStyle materialThemeLabelSmallNeutralVariant70 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 11,
     height: 1.45,
@@ -462,12 +510,14 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeTitleLarge = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 22,
     height: 1.27,
     fontWeight: FontWeight.w400,
   );
   static const TextStyle materialThemeTitleLargeBold = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 22,
     height: 1.27,
@@ -475,6 +525,7 @@ abstract class AppTextStyle {
   );
 
   static const TextStyle materialThemeTitleLargeNeutral80 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 22,
     height: 1.27,
@@ -491,6 +542,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeTitleMedium = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -499,6 +551,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeKeyColorsSecondary,
   );
   static const TextStyle materialThemeTitleMediumNeutral70 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -507,6 +560,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralNeutral70,
   );
   static const TextStyle materialThemeTitleMediumBlack = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     color: AppColors.materialThemeBlack,
@@ -515,6 +569,7 @@ abstract class AppTextStyle {
     letterSpacing: 0.15,
   );
   static const TextStyle materialThemeTitleMediumNeutralVariant35 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -523,6 +578,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
   static const TextStyle materialThemeTitleMediumNeutralVariant50 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -531,6 +587,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeTitleMediumNeutralVariant70 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -539,6 +596,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant70,
   );
   static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
@@ -556,6 +614,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle materialThemeTitleSmall = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -564,6 +623,7 @@ abstract class AppTextStyle {
   );
 
   static const TextStyle materialThemeTitleSmallNeutral = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -573,6 +633,7 @@ abstract class AppTextStyle {
   );
 
   static const TextStyle materialThemeTitleSmallNeutral80 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
@@ -590,6 +651,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle h1 = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 64,
     height: 1,
@@ -606,6 +668,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle h1Mob = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 36,
     height: 1.22,
@@ -621,6 +684,7 @@ abstract class AppTextStyle {
   /// fontStyle: none
   /// decoration: none
   static const TextStyle h1Tablet = TextStyle(
+    overflow: TextOverflow.ellipsis,
     fontFamily: 'Gilroy',
     fontSize: 48,
     height: 1.17,

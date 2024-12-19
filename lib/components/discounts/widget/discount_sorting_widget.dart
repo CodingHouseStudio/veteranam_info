@@ -34,7 +34,22 @@ class DiscountSortingWidget extends StatelessWidget {
             ),
             growable: false,
           ),
-          icon: isDesk ? null : KIcon.sort,
+          buttonChild: isDesk
+              ? null
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        context.l10n.sort,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                        maxLines: 1,
+                      ),
+                    ),
+                    KSizedBox.kWidthSizedBox8,
+                    KIcon.sort,
+                  ],
+                ),
           clipBehavior: Clip.hardEdge,
           initialValue: state.sortingBy,
           position: PopupMenuButtonPosition.bottomLeft,
