@@ -51,37 +51,29 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void didChangeDependencies() {
     if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
-      try {
-        precacheImage(
-          bytes == null
-              ? CachedNetworkImageProvider(
-                  widget.imageUrl!.getImageUrl, // widget.imageUrl,
-                  headers: const {
-                    'Cache-Control': 'max-age=3600',
-                  },
-                )
-              : MemoryImage(
-                  bytes!,
-                ),
-          context,
-          onError: (exception, stackTrace) {
-            log(
-              'Precache Image $exception',
-              error: exception,
-              stackTrace: stackTrace,
-              name: 'Cached Network Image',
-            );
-          },
-        );
-      } catch (e, stack) {
-        log(
-          'Image cache error',
-          error: e,
-          stackTrace: stack,
-          level: KDimensions.logLevelWarning,
-          name: 'precacheImage',
-        );
-      }
+      precacheImage(
+        bytes == null
+            ? CachedNetworkImageProvider(
+                widget.imageUrl!.getImageUrl, // widget.imageUrl,
+                headers: const {
+                  'Cache-Control': 'max-age=3600',
+                },
+              )
+            : MemoryImage(
+                bytes!,
+              ),
+        context,
+        onError: (exception, stackTrace) {
+          SomeFailure.serverError(
+            error: exception,
+            stack: stackTrace,
+            tag: 'PrecacheImage',
+            tagKey: ErrorText.imageKey,
+            errorLevel: ErrorLevelEnum.info,
+            data: 'URL: ${widget.imageUrl!.getImageUrl}',
+          );
+        },
+      );
     }
     super.didChangeDependencies();
   }
@@ -90,7 +82,11 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
     if (bytes == null && widget.imageUrl != null) {
-      if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+      // Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline
+      // CachedNetworkImage not work with new fluter version
+      // https://github.com/Baseflow/flutter_cached_network_image/issues/995
+      if (!Config.isWeb &&
+          context.read<MobOfflineModeCubit>().state.isOffline) {
         return getCachedNetworkImage(
           widget.imageUrl!.getImageUrl,
         );
@@ -106,15 +102,9 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           height: widget.size,
           width: widget.size,
           errorBuilder: (context, error, stack) {
-            log(
-              'Image memory error',
-              error: error,
-              stackTrace: stack,
-              level: KDimensions.logLevelError,
-              name: 'Image Length: ${bytes!.length}',
-            );
             SomeFailure.serverError(
               error: 'URL: ${widget.imageUrl}, Error: $error',
+              stack: stack,
               tag: 'Memory',
               tagKey: ErrorText.imageKey,
               errorLevel: ErrorLevelEnum.warning,
@@ -155,19 +145,16 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         fit: widget.fit,
         height: widget.size,
         width: widget.size,
+        filterQuality: widget.highQuality ?? false
+            ? FilterQuality.high
+            : FilterQuality.low,
         errorBuilder: (context, error, stack) {
           if (imageUrl != widget.imageUrl) {
             return getImageNetwork(widget.imageUrl);
           } else {
-            log(
-              'Image network error',
-              error: error,
-              stackTrace: stack,
-              level: KDimensions.logLevelError,
-              name: 'URL: ${widget.imageUrl}',
-            );
             SomeFailure.serverError(
               error: 'URL: ${widget.imageUrl}, Error: $error',
+              stack: stack,
               tag: 'Network',
               tagKey: ErrorText.imageKey,
               errorLevel: ErrorLevelEnum.warning,
@@ -199,12 +186,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           if (imageUrl != widget.imageUrl) {
             return getCachedNetworkImage(widget.imageUrl);
           } else {
-            log(
-              'Cached Network Image error with url : $url',
-              error: error,
-              name: 'URL: $url',
-              level: KDimensions.logLevelError,
-            );
             SomeFailure.serverError(
               error: error,
               tag: 'CachedNetworkImage',
