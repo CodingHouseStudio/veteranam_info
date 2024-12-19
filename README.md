@@ -8,7 +8,7 @@
       <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info/issues"><img src="https://img.shields.io/github/issues/CodingHouseStudio/veteranam_info?style=flat&label=issues&labelColor=333940&color=red&logo=github" alt="issues"></a>
-    <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=github" alt="license"></a>
+    <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-FSL--1.1--Apache--2.0-blue.svg?logo=github" alt="license"></a>
 </p>
 
 <p align="center">
