@@ -67,7 +67,7 @@ class CheckPointWidget extends StatelessWidget {
                       text ?? '',
                       key: KWidgetkeys.widget.checkPoint.text,
                       maxLines: maxLines,
-                      // overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.ellipsis,
                       style: textStyle ??
                           (isDesk
                               ? AppTextStyle.materialThemeBodyLarge

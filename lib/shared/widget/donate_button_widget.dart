@@ -84,6 +84,7 @@ class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
                     ? AppTextStyle.materialThemeTitleLarge
                     : AppTextStyle.materialThemeTitleMedium,
                 maxLines: KMinMaxSize.textMaxLineOne,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             TweenAnimationBuilder<double>(
@@ -151,6 +152,7 @@ class _DonateButtonWidgetMob extends StatelessWidget {
                 key: KWidgetkeys.widget.donateButton.text,
                 style: AppTextStyle.materialThemeTitleLarge,
                 maxLines: KMinMaxSize.textMaxLineOne,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             IconWidget(

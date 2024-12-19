@@ -44,6 +44,7 @@ class DiscountSortingWidget extends StatelessWidget {
                         context.l10n.sort,
                         style: AppTextStyle.materialThemeTitleMedium,
                         maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     KSizedBox.kWidthSizedBox8,
