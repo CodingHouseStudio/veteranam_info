@@ -24,53 +24,56 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
-      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-        buildWhen: (previous, current) =>
-            previous.discountFilterRepository.getActivityList !=
-                current.discountFilterRepository.getActivityList ||
-            previous.filterStatus != current.filterStatus,
-        builder: (context, state) {
-          if (state.discountFilterRepository.hasActivityItem) {
-            return SliverMainAxisGroup(
-              slivers: [
-                if (isDesk)
-                  SliverToBoxAdapter(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AdvancedFilterResetButton(
-                        isDesk: true,
-                        resetEvent: () => context
-                            .read<DiscountsWatcherBloc>()
-                            .add(const DiscountsWatcherEvent.filterReset()),
+      if (isDesk)
+        BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.discountFilterRepository.getActivityList !=
+                  current.discountFilterRepository.getActivityList ||
+              previous.filterStatus != current.filterStatus,
+          builder: (context, state) {
+            if (state.discountFilterRepository.hasActivityItem) {
+              return SliverMainAxisGroup(
+                slivers: [
+                  if (isDesk)
+                    SliverToBoxAdapter(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: AdvancedFilterResetButton(
+                          isDesk: true,
+                          resetEvent: () => context
+                              .read<DiscountsWatcherBloc>()
+                              .add(const DiscountsWatcherEvent.filterReset()),
+                        ),
+                      ),
+                    )
+                  else
+                    SliverToBoxAdapter(
+                      child: Text(
+                        context.l10n.filterApplied,
+                        key: KWidgetkeys.screen.discounts.appliedFilterText,
+                        style: AppTextStyle.materialThemeTitleMedium,
                       ),
                     ),
-                  )
-                else
-                  SliverToBoxAdapter(
-                    child: Text(
-                      context.l10n.filterApplied,
-                      key: KWidgetkeys.screen.discounts.appliedFilterText,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  SliverPadding(
+                    padding:
+                        const EdgeInsets.only(right: KPadding.kPaddingSize8),
+                    sliver: _ChooseItems(
+                      isDesk: isDesk,
+                      chosenItems:
+                          state.discountFilterRepository.getActivityList,
+                      categoriesLength: state
+                          .discountFilterRepository.activeCategoryMap.length,
+                      eligibilitiesLength: state
+                          .discountFilterRepository.activeEligibilityMap.length,
                     ),
                   ),
-                SliverPadding(
-                  padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-                  sliver: _ChooseItems(
-                    isDesk: isDesk,
-                    chosenItems: state.discountFilterRepository.getActivityList,
-                    categoriesLength:
-                        state.discountFilterRepository.activeCategoryMap.length,
-                    eligibilitiesLength: state
-                        .discountFilterRepository.activeEligibilityMap.length,
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const SliverToBoxAdapter();
-          }
-        },
-      ),
+                ],
+              );
+            } else {
+              return const SliverToBoxAdapter();
+            }
+          },
+        ),
       BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
         buildWhen: (previous, current) =>
             previous.discountFilterRepository.eligibilityMap !=
