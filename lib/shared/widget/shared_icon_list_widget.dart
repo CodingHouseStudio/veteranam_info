@@ -198,6 +198,7 @@ class _CardIconWidget extends StatelessWidget {
     super.key,
     this.onPressed,
     this.border,
+    // ignore: unused_element
     this.iconWidget,
   });
   final VoidCallback? onPressed;
@@ -236,94 +237,95 @@ class _CardIconWidget extends StatelessWidget {
   }
 }
 
-class _CardLikeIconWidget extends StatelessWidget {
-  const _CardLikeIconWidget({
-    required this.icon,
-    required this.label,
-    required this.background,
-    required this.countLike,
-  });
-  // final VoidCallback? onPressed;
-  final Icon icon;
-  final String label;
-  final Color background;
-  final int countLike;
+// class _CardLikeIconWidget extends StatelessWidget {
+//   const _CardLikeIconWidget({
+//     required this.icon,
+//     required this.label,
+//     required this.background,
+//     required this.countLike,
+//   });
+//   // final VoidCallback? onPressed;
+//   final Icon icon;
+//   final String label;
+//   final Color background;
+//   final int countLike;
 
-  @override
-  Widget build(BuildContext context) {
-    return _CardIconWidget(
-      background: background,
-      icon: icon,
-      label: label,
-      iconWidget: countLike > 0
-          ? Stack(
-              children: [
-                IconWidget(
-                  background: background,
-                  icon: icon,
-                  padding: KPadding.kPaddingSize12,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: KPadding.kPaddingSize36),
-                  child: DecoratedBox(
-                    decoration: KWidgetTheme.boxDecorationDiscount,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize8,
-                        vertical: KPadding.kPaddingSize4,
-                      ),
-                      child: Text(
-                        countLike.toString(),
-                        style: AppTextStyle.materialThemeLabelSmall,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : null,
-      // child: Column(
-      //   children: [
-      //     if (countLike > 0)
-      //       Stack(
-      //         children: [
-      //           IconWidget(
-      //             background: background,
-      //             icon: icon,
-      //             padding: KPadding.kPaddingSize12,
-      //           ),
-      //           Padding(
-      //             padding: const EdgeInsets.only(left: KPadding.
-      // kPaddingSize36),
-      //             child: DecoratedBox(
-      //               decoration: KWidgetTheme.boxDecorationDiscount,
-      //               child: Padding(
-      //                 padding: const EdgeInsets.symmetric(
-      //                   horizontal: KPadding.kPaddingSize8,
-      //                   vertical: KPadding.kPaddingSize4,
-      //                 ),
-      //                 child: Text(
-      //                   countLike.toString(),
-      //                   style: AppTextStyle.materialThemeLabelSmall,
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ],
-      //       )
-      //     else
-      //       IconWidget(
-      //         background: background,
-      //         icon: icon,
-      //         padding: KPadding.kPaddingSize12,
-      //       ),
-      //     KSizedBox.kHeightSizedBox6,
-      //     Text(
-      //       label,
-      //       style: AppTextStyle.materialThemeLabelSmallBlack,
-      //     ),
-      //   ],
-      // ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return _CardIconWidget(
+//       background: background,
+//       icon: icon,
+//       label: label,
+//       iconWidget: countLike > 0
+//           ? Stack(
+//               children: [
+//                 IconWidget(
+//                   background: background,
+//                   icon: icon,
+//                   padding: KPadding.kPaddingSize12,
+//                 ),
+//                 Padding(
+//                   padding: const EdgeInsets.only(left:
+// KPadding.kPaddingSize36),
+//                   child: DecoratedBox(
+//                     decoration: KWidgetTheme.boxDecorationDiscount,
+//                     child: Padding(
+//                       padding: const EdgeInsets.symmetric(
+//                         horizontal: KPadding.kPaddingSize8,
+//                         vertical: KPadding.kPaddingSize4,
+//                       ),
+//                       child: Text(
+//                         countLike.toString(),
+//                         style: AppTextStyle.materialThemeLabelSmall,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             )
+//           : null,
+//       // child: Column(
+//       //   children: [
+//       //     if (countLike > 0)
+//       //       Stack(
+//       //         children: [
+//       //           IconWidget(
+//       //             background: background,
+//       //             icon: icon,
+//       //             padding: KPadding.kPaddingSize12,
+//       //           ),
+//       //           Padding(
+//       //             padding: const EdgeInsets.only(left: KPadding.
+//       // kPaddingSize36),
+//       //             child: DecoratedBox(
+//       //               decoration: KWidgetTheme.boxDecorationDiscount,
+//       //               child: Padding(
+//       //                 padding: const EdgeInsets.symmetric(
+//       //                   horizontal: KPadding.kPaddingSize8,
+//       //                   vertical: KPadding.kPaddingSize4,
+//       //                 ),
+//       //                 child: Text(
+//       //                   countLike.toString(),
+//       //                   style: AppTextStyle.materialThemeLabelSmall,
+//       //                 ),
+//       //               ),
+//       //             ),
+//       //           ),
+//       //         ],
+//       //       )
+//       //     else
+//       //       IconWidget(
+//       //         background: background,
+//       //         icon: icon,
+//       //         padding: KPadding.kPaddingSize12,
+//       //       ),
+//       //     KSizedBox.kHeightSizedBox6,
+//       //     Text(
+//       //       label,
+//       //       style: AppTextStyle.materialThemeLabelSmallBlack,
+//       //     ),
+//       //   ],
+//       // ),
+//     );
+//   }
+// }

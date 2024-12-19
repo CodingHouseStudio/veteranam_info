@@ -84,7 +84,7 @@
 //     // Calculate the maximum scroll extent based on the children
 //     final maxScrollExtent =
 //         max(left.geometry!.scrollExtent, right.geometry!.scrollExtent);
-//     final paintExtent = min(constraints.remainingPaintExtent, 
+//     final paintExtent = min(constraints.remainingPaintExtent,
 // maxScrollExtent);
 
 //     // Set the sliver geometry based on the calculations
