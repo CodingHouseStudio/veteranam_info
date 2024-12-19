@@ -49,16 +49,16 @@ class InvestorsBodyWidget extends StatelessWidget {
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
                     NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                      pageName: context.l10n.provenFunds,
-                    ),
                     if (Config.isWeb)
-                      SliverPadding(
-                        padding: padding,
-                        sliver: InvestorsTitleWidget(isDesk: isDesk),
+                      NavigationBarWidget(
+                        isDesk: isDesk,
+                        isTablet: isTablet,
+                        pageName: context.l10n.provenFunds,
                       ),
+                    SliverPadding(
+                      padding: padding,
+                      sliver: InvestorsTitleWidget(isDesk: isDesk),
+                    ),
                     FundsWidgetList(
                       isDesk: isDesk,
                       padding: padding,

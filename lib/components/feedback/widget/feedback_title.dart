@@ -32,7 +32,7 @@ class FeedbackTitle extends StatelessWidget {
       else
         LineTitleIconWidget(
           title: title,
-          titleKey: KWidgetkeys.screen.feedback.title,
+          titleKey: KWidgetkeys.screen.feedback.title, isDesk: isDesk,
           // isDesk: isDesk,
         ),
       KSizedBox.kHeightSizedBox100,

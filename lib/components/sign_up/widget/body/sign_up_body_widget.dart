@@ -23,18 +23,17 @@ class SignUpBodyWidget extends StatelessWidget {
           ),
           isForm: true,
           pageName: context.l10n.signUp,
-          showMobNawbarBackButton: true,
-          backButtonPathName: KRoute.login.name,
-          showMobBottomNavigation: false,
+          showMobBottomNavigation: true,
+          bottomBarIndex: 3,
+          showAppBar: Config.isWeb,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (!isDesk) KSizedBox.kHeightSizedBox24,
-            if (Config.isWeb)
-              ShortTitleIconWidget(
-                title: context.l10n.signUp,
-                titleKey: KWidgetkeys.screen.signUp.title,
-                isDesk: isDesk,
-                expanded: isDesk,
-              ),
+            ShortTitleIconWidget(
+              title: context.l10n.signUp,
+              titleKey: KWidgetkeys.screen.signUp.title,
+              isDesk: isDesk,
+              expanded: isDesk,
+            ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else

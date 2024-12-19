@@ -19,6 +19,7 @@ class DiscountTitleWidget extends StatelessWidget {
           rightWidget:
               isDesk ? const DiscountSortingWidget(isDesk: true) : null,
           titleKey: KWidgetkeys.screen.discounts.title,
+          isDesk: isDesk,
         ),
       ),
     );

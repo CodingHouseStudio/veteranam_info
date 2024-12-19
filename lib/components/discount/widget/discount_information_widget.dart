@@ -107,7 +107,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               if (state.discountModel.requirements != null) ...[
                 KSizedBox.kHeightSizedBox32,
                 Text(
-                  '${context.l10n.toGetItYouNeed}:',
+                  context.l10n.toGetItYouNeed,
                   style: AppTextStyle.materialThemeHeadlineMedium,
                 ),
                 KSizedBox.kHeightSizedBox16,

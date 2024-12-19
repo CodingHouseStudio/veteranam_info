@@ -16,7 +16,6 @@ import 'package:veteranam/components/mob_faq/view/mob_faq_view.dart';
 import 'package:veteranam/components/mob_settings/view/mob_settings_view.dart';
 import 'package:veteranam/components/profile/view/profile_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
-import 'package:veteranam/components/user_role/view/user_role_view.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -30,7 +29,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 /// and convenient user experience.
 
 GoRouter router = GoRouter(
-  routerNeglect: true,
+  // routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) => const ErrorScreen(),
@@ -63,36 +62,24 @@ GoRouter router = GoRouter(
   },
   routes: [
     GoRoute(
-      name: KRoute.userRole.name,
-      path: KRoute.userRole.path,
+      name: KRoute.login.name,
+      path: '/${KRoute.login.path}',
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
         restorationId: state.pageKey.value,
-        child: const UserRoleScreen(),
+        child: const LoginScreen(),
       ),
-      routes: [
-        GoRoute(
-          name: KRoute.login.name,
-          path: KRoute.login.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const LoginScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.signUp.name,
-          path: KRoute.signUp.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            child: const SignUpScreen(),
-          ),
-        ),
-      ],
+    ),
+    GoRoute(
+      name: KRoute.signUp.name,
+      path: '/${KRoute.signUp.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const SignUpScreen(),
+      ),
     ),
     GoRoute(
       name: KRoute.settings.name,
