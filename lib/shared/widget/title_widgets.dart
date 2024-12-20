@@ -107,7 +107,7 @@ class TitleIconWidget extends StatelessWidget {
         ],
         KSizedBox.kHeightSizedBox32,
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
       ],
     );
@@ -122,12 +122,14 @@ class LineTitleIconWidget extends StatelessWidget {
     this.iconCrossAxisAlignment = CrossAxisAlignment.end,
     super.key,
     this.rightWidget,
+    this.preDividerWidget,
   });
   final String title;
   final Key titleKey;
   final bool isDesk;
   final Widget? rightWidget;
   final CrossAxisAlignment iconCrossAxisAlignment;
+  final Widget? preDividerWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -157,9 +159,15 @@ class LineTitleIconWidget extends StatelessWidget {
         //       ),
         //     ],
         //   ),
-        KSizedBox.kHeightSizedBox32,
+        if (preDividerWidget == null)
+          KSizedBox.kHeightSizedBox32
+        else ...[
+          KSizedBox.kHeightSizedBox16,
+          preDividerWidget!,
+          KSizedBox.kHeightSizedBox16,
+        ],
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
       ],
     );
@@ -314,7 +322,7 @@ class TitlePointWidget extends StatelessWidget {
         /// Spacer and divider below the content to separate the widget visually
         KSizedBox.kHeightSizedBox32,
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
       ],
     );

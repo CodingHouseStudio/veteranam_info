@@ -20,6 +20,11 @@ class DiscountTitleWidget extends StatelessWidget {
               isDesk ? const DiscountSortingWidget(isDesk: true) : null,
           titleKey: KWidgetkeys.screen.discounts.title,
           isDesk: isDesk,
+          preDividerWidget: isDesk
+              ? null
+              : DiscountsFilterMob(
+                  key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                ),
         ),
       ),
     );
