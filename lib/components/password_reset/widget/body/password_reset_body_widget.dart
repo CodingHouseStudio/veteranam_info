@@ -29,7 +29,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
           builder: (context, _) {
             return ScaffoldWidget(
               showMobBottomNavigation: false,
-              showAppBar: false,
+              showAppBar: Config.isWeb,
               titleChildWidgetsFunction: ({required isDesk}) => [
                 if (!Config.isWeb) ...[
                   KSizedBox.kHeightSizedBox8,

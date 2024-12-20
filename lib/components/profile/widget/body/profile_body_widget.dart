@@ -35,7 +35,7 @@ class ProfileBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
         // ],
       ],

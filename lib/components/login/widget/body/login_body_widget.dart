@@ -141,7 +141,7 @@ class LoginBodyWidget extends StatelessWidget {
             if (Config.isWeb) ...[
               KSizedBox.kHeightSizedBox40,
               const Divider(
-                color: AppColors.materialThemeKeyColorsNeutral,
+                color: AppColors.materialThemeRefNeutralNeutral90,
                 height: KSize.kPixel1,
                 thickness: KSize.kPixel1,
               ),

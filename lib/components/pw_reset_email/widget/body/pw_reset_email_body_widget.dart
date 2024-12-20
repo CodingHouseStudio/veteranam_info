@@ -16,7 +16,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
           titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
             precent: KDimensions.twentyPercent,
           ),
-          showAppBar: false,
+          showAppBar: Config.isWeb,
           showMobBottomNavigation: false,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (!Config.isWeb && !_.formState.isSended) ...[

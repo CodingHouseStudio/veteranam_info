@@ -57,7 +57,7 @@ class FeedbackTitle extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox32,
             const Divider(
-              color: AppColors.materialThemeKeyColorsNeutral,
+              color: AppColors.materialThemeRefNeutralNeutral90,
             ),
             KSizedBox.kHeightSizedBox24,
           ];
