@@ -6,14 +6,17 @@ import 'package:veteranam/shared/shared_dart.dart';
 class CheckVerificationCodeCubit extends Cubit<bool?> {
   CheckVerificationCodeCubit({
     required IAppAuthenticationRepository appAuthenticationRepository,
+    @factoryParam String? code,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
         super(
           null,
-        );
+        ) {
+    _started(code);
+  }
 
   final IAppAuthenticationRepository _appAuthenticationRepository;
 
-  Future<void> started(String? code) async {
+  Future<void> _started(String? code) async {
     final result =
         await _appAuthenticationRepository.checkVerificationCode(code);
 

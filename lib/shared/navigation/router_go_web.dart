@@ -105,8 +105,8 @@ GoRouter router = GoRouter(
           ),
           routes: [
             GoRoute(
-              name: KRoute.passwordReset.name,
-              path: KRoute.passwordReset.path,
+              name: KRoute.resetPassword.name,
+              path: KRoute.resetPassword.path,
               pageBuilder: (context, state) => NoTransitionPage(
                 key: state.pageKey,
                 name: state.name,
@@ -118,20 +118,18 @@ GoRouter router = GoRouter(
                       state.uri.queryParameters[UrlParameters.continueUrl],
                 ),
               ),
-              routes: [
-                GoRoute(
-                  name: KRoute.pwResetEmail.name,
-                  path: KRoute.pwResetEmail.path,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    key: state.pageKey,
-                    name: state.name,
-                    restorationId: state.pageKey.value,
-                    child: PwResetEmailScreen(
-                      email: state.uri.queryParameters[UrlParameters.email],
-                    ),
-                  ),
+            ),
+            GoRoute(
+              name: KRoute.forgotPassword.name,
+              path: KRoute.forgotPassword.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                child: PwResetEmailScreen(
+                  email: state.uri.queryParameters[UrlParameters.email],
                 ),
-              ],
+              ),
             ),
           ],
         ),

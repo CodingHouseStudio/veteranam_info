@@ -48,30 +48,19 @@ class FeedbackBodyWidget extends StatelessWidget {
                     NavigationBarWidget(
                       isDesk: isDesk,
                       isTablet: isTablet,
-                    )
-                  else
-                    BlocBuilder<FeedbackBloc, FeedbackState>(
-                      buildWhen: (previous, current) =>
-                          previous.formState != current.formState,
-                      builder: (context, state) {
-                        return NavigationBarWidget(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                          showMobBackButton: true,
-                          backButtonPathName: KRoute.settings.name,
-                          pageName:
-                              context.read<FeedbackBloc>().state.formState ==
-                                          FeedbackEnum.success ||
-                                      context
-                                              .read<FeedbackBloc>()
-                                              .state
-                                              .formState ==
-                                          FeedbackEnum.sendingMessage
-                                  ? context.l10n.thanks
-                                  : '${context.l10n.write} ${context.l10n.us}',
-                        );
-                      },
                     ),
+                  if (!Config.isWeb) ...[
+                    KSizedBox.kHeightSizedBox8.toSliver,
+                    SliverPadding(
+                      padding: padding,
+                      sliver: SliverToBoxAdapter(
+                        child: BackButtonWidget(
+                          backPageName: null,
+                          pathName: KRoute.settings.name,
+                        ),
+                      ),
+                    ),
+                  ],
                   SliverPadding(
                     padding: padding,
                     sliver: FeedbackFormStateWidget(

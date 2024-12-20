@@ -22,16 +22,11 @@ class FeedbackFormStateWidget extends StatelessWidget {
                 FeedbackEnum.sendingMessage) {
           return SliverMainAxisGroup(
             slivers: [
-              if (Config.isWeb)
-                FeedbackTitle(
-                  isDesk: isDesk,
-                  title: context.l10n.thanks,
-                  // secondText: context.l10n.thanks,
-                )
-              else
-                const SliverToBoxAdapter(
-                  child: KSizedBox.kHeightSizedBox24,
-                ),
+              FeedbackTitle(
+                isDesk: isDesk,
+                title: context.l10n.thanks,
+                // secondText: context.l10n.thanks,
+              ),
               SliverToBoxAdapter(
                 child: FeedbackBoxWidget(
                   isDesk: isDesk,
@@ -45,19 +40,13 @@ class FeedbackFormStateWidget extends StatelessWidget {
         } else {
           return SliverMainAxisGroup(
             slivers: [
-              if (Config.isWeb)
-                FeedbackTitle(
-                  isDesk: isDesk,
-                  title: context.l10n.write,
-                  titleSecondPart:
-                      '${context.l10n.us} ${context.l10n.aMessage}',
-                  // text: '${context.l10n.write} ${context.l10n.us}',
-                  // secondText: context.l10n.aMessage,
-                )
-              else
-                const SliverToBoxAdapter(
-                  child: KSizedBox.kHeightSizedBox24,
-                ),
+              FeedbackTitle(
+                isDesk: isDesk,
+                title: context.l10n.write,
+                titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
+                // text: '${context.l10n.write} ${context.l10n.us}',
+                // secondText: context.l10n.aMessage,
+              ),
               FormWidget(
                 isDesk: isDesk,
               ),

@@ -613,8 +613,8 @@
   "@discountsServicesSubtitle": {
     "examples": "Text on the Home page, discount subtitle"
   },
-  "toDiscount": "To Discounts",
-  "@toDiscount": {
+  "toDiscounts": "discounts",
+  "@toDiscounts": {
     "examples": "Text for a button on the Home page.",
     "description": "The button used to go to the Discounts page."
   },
@@ -1671,6 +1671,10 @@
   "moreDetails": "More Details",
   "@moreDetails": {
     "examples": "Button text on the Discounts page"
+  },
+  "to": "to",
+  "@to": {
+    "examples": "Text for back button"
   },
   "favorite": "Like",
   "@favorite": {

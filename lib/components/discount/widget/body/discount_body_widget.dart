@@ -67,7 +67,6 @@ class DiscountBodyWidget extends StatelessWidget {
                       NavigationBarWidget(
                         isDesk: isDesk,
                         isTablet: isTablet,
-                        pageName: context.l10n.discounts,
                       ),
                     if (isDesk)
                       KSizedBox.kHeightSizedBox32.toSliver
@@ -88,8 +87,11 @@ class DiscountBodyWidget extends StatelessWidget {
                           }
                           return SliverMainAxisGroup(
                             slivers: [
-                              const SliverToBoxAdapter(
-                                child: DiscountBackButton(),
+                              SliverToBoxAdapter(
+                                child: BackButtonWidget(
+                                  backPageName: context.l10n.toDiscounts,
+                                  pathName: KRoute.discounts.name,
+                                ),
                               ),
                               if (isDesk)
                                 KSizedBox.kHeightSizedBox32.toSliver

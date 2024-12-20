@@ -600,8 +600,8 @@
   "@discountsServicesSubtitle": {
     "examples": "Текст на сторінці Home, опис знижок"
   },
-  "toDiscount": "До знижок",
-  "@toDiscount": {
+  "toDiscounts": "знижок",
+  "@toDiscounts": {
     "examples": "Текст для кнопки на сторінці Home.",
     "description": "Кнопка використовується для переходу на сторінку Discounts."
   },
@@ -1679,6 +1679,10 @@
   "moreDetails": "Детальніше",
   "@moreDetails": {
     "examples": "Текст для кнопки на сторінці Discounts"
+  },
+  "to": "до",
+  "@to": {
+    "examples": "Текст для кнопки на назад"
   },
   "favorite": "Подобається",
   "@favorite": {
