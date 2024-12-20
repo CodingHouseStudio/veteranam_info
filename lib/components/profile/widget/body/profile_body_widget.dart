@@ -15,7 +15,7 @@ class ProfileBodyWidget extends StatelessWidget {
       ),
       showMobBottomNavigation: true,
       bottomBarIndex: 3,
-      showAppBar: false,
+      showAppBar: Config.isWeb,
       pageName: context.l10n.myProfileTitle,
       titleChildWidgetsFunction: ({required isDesk}) => [
         // if (Config.isWeb) ...[
