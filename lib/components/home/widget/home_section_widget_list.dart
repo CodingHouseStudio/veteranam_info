@@ -103,8 +103,8 @@ class _DiscountSectionWidget extends StatelessWidget {
       // textPoint: context.l10n.saveMoney,
       title: context.l10n.discountsServices,
       subtitle: context.l10n.discountsServicesSubtitle,
-      textButton:
-          '${context.l10n.to.toUpperCase()} ${context.l10n.toDiscounts}',
+      textButton: '${context.l10n.to[0].toUpperCase()}${context.l10n.to[1]}'
+          ' ${context.l10n.toDiscounts}',
       route: () => context.goNamed(KRoute.discounts.name),
       bottomWidget: KSizedBox.kHeightSizedBox90,
       isDesk: isTablet,
