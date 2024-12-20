@@ -380,6 +380,7 @@ class FirestoreService {
   Stream<List<DiscountModel>> getDiscounts(
       // List<String>? reportIdItems,
       {
+    required bool showOnlyBusinessDiscounts,
     String? userId,
   }) {
     var query = _db
@@ -399,6 +400,12 @@ class FirestoreService {
       );
     }
 
+    if (!Config.isWeb && showOnlyBusinessDiscounts) {
+      query = query.where(
+        DiscountModelJsonField.userName,
+        isNull: false,
+      );
+    }
     // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet
     //())
 
@@ -432,6 +439,7 @@ class FirestoreService {
 
   Future<DiscountModel> getDiscount({
     required String id,
+    required bool showOnlyBusinessDiscounts,
     String? companyId,
   }) async {
     final docSnapshot =
@@ -442,10 +450,15 @@ class FirestoreService {
       if (discount != null &&
           (Config.isDevelopment ||
               Config.isBusiness ||
-              discount['status'] == DiscountState.published.enumString)) {
+              discount[DiscountModelJsonField.status] ==
+                  DiscountState.published.enumString)) {
         if (companyId == null ||
             discount[DiscountModelJsonField.userId] == companyId) {
-          return DiscountModel.fromJson(docSnapshot.data()!);
+          if (!showOnlyBusinessDiscounts ||
+              !Config.isWeb &&
+                  discount[DiscountModelJsonField.userName] == null) {
+            return DiscountModel.fromJson(docSnapshot.data()!);
+          }
         }
       }
     }
