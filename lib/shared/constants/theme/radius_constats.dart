@@ -42,4 +42,10 @@ abstract class KBorderRadius {
     topRight: Radius.circular(KSize.kRadius32),
     topLeft: Radius.circular(KSize.kRadius32),
   );
+  static const kBorderRadiusExceptTopRight = BorderRadius.only(
+    bottomRight: Radius.circular(KSize.kRadius32),
+    bottomLeft: Radius.circular(KSize.kRadius32),
+    topLeft: Radius.circular(KSize.kRadius32),
+    topRight: Radius.circular(KSize.kRadius2),
+  );
 }

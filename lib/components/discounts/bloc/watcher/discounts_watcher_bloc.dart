@@ -27,7 +27,7 @@ class DiscountsWatcherBloc
           const _Initial(
             loadingStatus: LoadingStatus.initial,
             failure: null,
-            sortingBy: DiscountEnum.byDate,
+            sortingBy: DiscountEnum.featured,
             unmodifiedDiscountModelItems: [],
             discountFilterRepository: DiscountFilterRepository.empty(),
             filterDiscountModelList: [],
@@ -106,9 +106,24 @@ class DiscountsWatcherBloc
     final discountSortingList =
         _sorting(discountsList: event.discountItemsModel);
 
-    final discountFilterRepository = DiscountFilterRepository.init(
-      discountSortingList,
-    );
+    late IDiscountFilterRepository discountFilterRepository;
+    if (state.discountFilterRepository ==
+        const DiscountFilterRepository.empty()) {
+      discountFilterRepository = DiscountFilterRepository.init(
+        discountSortingList,
+      );
+    } else {
+      state.discountFilterRepository
+          .getFilterValuesFromDiscountItems(
+            event.discountItemsModel,
+          )
+          .fold(
+            (l) => discountFilterRepository = DiscountFilterRepository.init(
+              discountSortingList,
+            ),
+            (r) => discountFilterRepository = state.discountFilterRepository,
+          );
+    }
 
     final itemsNumber = getCurrentLoadNumber(
       sortingDiscountModelItems: discountSortingList,
@@ -468,6 +483,13 @@ class DiscountsWatcherBloc
       ..sort(
         (a, b) {
           switch (sortingBy ?? state.sortingBy) {
+            case DiscountEnum.featured:
+              if ((b.userName != null && a.userName != null) ||
+                  (b.userName == null && a.userName == null)) {
+                return b.dateVerified
+                    .compareTo(a.dateVerified); // Descending order
+              }
+              return b.userName != null ? 1 : -1;
             case DiscountEnum.largestSmallest:
               final maxDiscountA =
                   a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
