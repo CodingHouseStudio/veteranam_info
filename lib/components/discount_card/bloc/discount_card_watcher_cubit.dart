@@ -46,7 +46,10 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
       ),
     );
 
-    final result = await _discountRepository.getDiscount(id);
+    final result = await _discountRepository.getDiscount(
+      id: id,
+      showOnlyBusinessDiscounts: false,
+    );
 
     result.fold(
       (l) => emit(
