@@ -65,8 +65,7 @@ class AdvancedFilterMobButton extends StatelessWidget {
         // KSizedBox.kWidthSizedBox8,
         icon: KIcon.tune,
         onPressed: () async {
-          final contextValue = context;
-          final bloc = contextValue.read<DiscountsWatcherBloc>()
+          final bloc = context.read<DiscountsWatcherBloc>()
             ..add(
               const DiscountsWatcherEvent.mobSaveFilter(),
             );
