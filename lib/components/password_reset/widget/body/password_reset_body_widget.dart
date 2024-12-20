@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +30,16 @@ class PasswordResetBodyWidget extends StatelessWidget {
           },
           builder: (context, _) {
             return ScaffoldWidget(
+              showMobBottomNavigation: false,
+              showAppBar: false,
               titleChildWidgetsFunction: ({required isDesk}) => [
+                if (!Config.isWeb) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  BackButtonWidget(
+                    backPageName: null,
+                    pathName: KRoute.login.name,
+                  ),
+                ],
                 if (isDesk)
                   KSizedBox.kHeightSizedBox80
                 else
@@ -52,10 +63,11 @@ class PasswordResetBodyWidget extends StatelessWidget {
                 else
                   KSizedBox.kHeightSizedBox8,
                 if (!(codeIsValid ?? true))
-                  RichText(
+                  // Android not support RichText Widget
+                  Text.rich(
                     key: KWidgetkeys.screen.passwordReset.wrongLinkSubtitle,
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
-                    text: TextSpan(
+                    TextSpan(
                       children: [
                         TextSpan(
                           text: context.l10n.passwordResetWrongDescriptionFirst,
@@ -145,7 +157,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                               : () => context.read<PasswordResetBloc>().add(
                                     PasswordResetEvent.passwordReset(code),
                                   )
-                          : () => context.goNamed(KRoute.pwResetEmail.name),
+                          : () => context.goNamed(KRoute.forgotPassword.name),
                       isDesk: isDesk,
                       color: AppColors.materialThemeKeyColorsSecondary,
                       textColor: AppColors.materialThemeWhite,

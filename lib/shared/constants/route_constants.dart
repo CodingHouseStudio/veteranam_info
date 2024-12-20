@@ -62,13 +62,13 @@ abstract class KRoute {
     path: 'sign-up',
     name: 'SignUp',
   );
-  static const _RouteItem pwResetEmail = _RouteItem(
-    path: 'email',
-    name: 'PasswordResetEmail',
+  static const _RouteItem forgotPassword = _RouteItem(
+    path: 'forgot-password',
+    name: 'ForgotPassword',
   );
-  static const _RouteItem passwordReset = _RouteItem(
-    path: 'password-reset',
-    name: 'PasswordReset',
+  static const _RouteItem resetPassword = _RouteItem(
+    path: 'reset-password',
+    name: 'ResetPassword',
   );
   static const _RouteItem thanks = _RouteItem(
     path: '/thanks',

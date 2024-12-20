@@ -512,6 +512,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     String? code,
   ) async {
     try {
+      log('dfsdsfdsfdsffdsdfsdfsdfsfsd || $code');
       if (code == null) {
         return Left(
           SomeFailure.wrongVerifyCode(

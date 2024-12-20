@@ -24,6 +24,6 @@ Future<void> wrongCodeNavigationHelper({
   await tester.pumpAndSettle();
 
   verify(
-    () => mockGoRouter.goNamed(KRoute.pwResetEmail.name),
+    () => mockGoRouter.goNamed(KRoute.forgotPassword.name),
   ).called(1);
 }

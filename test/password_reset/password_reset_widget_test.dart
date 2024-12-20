@@ -63,7 +63,7 @@ void main() {
 
           await passwordResetWrongCodeHelper(tester);
         });
-        group('${KGroupText.goTo} ${KRoute.pwResetEmail.name}', () {
+        group('${KGroupText.goTo} ${KRoute.forgotPassword.name}', () {
           testWidgets('${KGroupText.initial} ', (tester) async {
             await passwordResetPumpAppHelper(
               tester: tester,

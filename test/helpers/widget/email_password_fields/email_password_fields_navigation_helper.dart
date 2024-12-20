@@ -27,7 +27,7 @@ Future<void> emailPasswordFieldsNavigationHelper({
 
   verify(
     () => mockGoRouter.goNamed(
-      KRoute.pwResetEmail.name,
+      KRoute.forgotPassword.name,
       queryParameters: {UrlParameters.email: KTestText.userEmail},
     ),
   ).called(1);
