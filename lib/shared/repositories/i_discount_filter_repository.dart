@@ -36,7 +36,6 @@ abstract class IDiscountFilterRepository {
   Either<SomeFailure, bool> addCategory({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   });
 
   /// Toggles an existing location filter.
@@ -45,7 +44,6 @@ abstract class IDiscountFilterRepository {
   Either<SomeFailure, bool> addLocation({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   });
 
   /// Toggles an existing eligibilities filter.
@@ -54,7 +52,6 @@ abstract class IDiscountFilterRepository {
   Either<SomeFailure, bool> addEligibility({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   });
 
   /// Serch location value in the location map.
@@ -62,10 +59,9 @@ abstract class IDiscountFilterRepository {
   Either<SomeFailure, bool> locationSearch(String? value);
 
   /// Clear values in the Activity map
-  Either<SomeFailure, bool> resetAll({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-  });
+  Either<SomeFailure, bool> resetAll(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  );
 
   /// Filters the given list of discount items based on the Activity filters.
   ///
@@ -74,10 +70,22 @@ abstract class IDiscountFilterRepository {
     List<DiscountModel> unmodifiedDiscountModelItems,
   );
 
+  /// Saves the current active filter state. The saved state can be reverted
+  /// using the [revertActiveFilter] method.
+  Either<SomeFailure, bool> saveActiveFilter();
+
+  /// Reverts the current active filter to the previously saved state using
+  /// the [saveActiveFilter] method.
+  Either<SomeFailure, bool> revertActiveFilter(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  );
+
   /// Checks if any filters are currently activity in any dimension.
   bool get hasActivityItem;
 
   bool get locationIsNotEpmty;
+
+  bool get saveFilterEqual;
 
   /// Combines all Activity filters into a single map.
   Map<String, FilterItem> get getActivityList;

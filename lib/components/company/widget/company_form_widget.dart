@@ -354,7 +354,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           subtitle: context.l10n.logOutProfileQuestion,
           confirmText: context.l10n.logOut,
           confirmButtonBackground: AppColors.materialThemeKeyColorsSecondary,
-          onPressed: () {
+          onAppliedPressed: () {
             context.read<AuthenticationBloc>().add(
                   AuthenticationLogoutRequested(),
                 );
@@ -406,7 +406,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                 subtitle: context.l10n.deleteProfileQuestion,
                 confirmText: context.l10n.delete,
                 confirmButtonBackground: AppColors.materialThemeRefErrorError60,
-                onPressed: () {
+                onAppliedPressed: () {
                   context.read<CompanyFormBloc>().add(
                         const CompanyFormEvent.deleteCompany(),
                       );

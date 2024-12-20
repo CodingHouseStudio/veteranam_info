@@ -254,6 +254,8 @@ abstract class AppColors {
   static const Color materialThemeSourceSeed = Color(0xffdcf264);
 
   static const Color materialThemeKeyColorsSecondary = Color(0xff090C00);
+  static const Color materialThemeKeyColorsSecondaryWithOpacity0_2 =
+      Color(0x33090C00);
 
   static const Color materialThemeKeyColorsTertiary = Color(0xffefefef);
 

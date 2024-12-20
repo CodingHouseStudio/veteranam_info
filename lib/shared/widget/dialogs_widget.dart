@@ -34,9 +34,12 @@ class _DialogsWidget {
     // EdgeInsets Function({required bool isDeskValue})? mobPadding,
     double? deskMaxWidth,
     double? mobMaxWidth,
+    void Function()? onAppliedPressed,
+    void Function()? onCancelPressed,
+    void Function()? onClosePressed,
   }) {
     if (isDesk) {
-      showDialog<void>(
+      showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
           return BackdropFilter(
@@ -67,9 +70,20 @@ class _DialogsWidget {
                 ),
           );
         },
+      ).then(
+        (value) {
+          switch (value) {
+            case true:
+              onAppliedPressed?.call();
+            case false:
+              onCancelPressed?.call();
+            case null:
+              onClosePressed?.call();
+          }
+        },
       );
     } else {
-      showModalBottomSheet<void>(
+      showModalBottomSheet<bool>(
         context: context,
         isScrollControlled: isScollable,
         useSafeArea: !Config.isWeb,
@@ -92,6 +106,17 @@ class _DialogsWidget {
                 maxWidth: mobMaxWidth,
                 isScollable: isScollable,
               );
+        },
+      ).then(
+        (value) {
+          switch (value) {
+            case true:
+              onAppliedPressed?.call();
+            case false:
+              onCancelPressed?.call();
+            case null:
+              onClosePressed?.call();
+          }
         },
       );
     }
@@ -182,26 +207,27 @@ class _DialogsWidget {
     required String title,
     required String subtitle,
     required String confirmText,
-    required void Function()? onPressed,
+    required void Function()? onAppliedPressed,
     required Color confirmButtonBackground,
     bool timer = false,
     String? unconfirmText,
+    void Function()? onCancelPressed,
+    void Function()? onClosePressed,
   }) {
-    Widget body({required bool isDeskValue}) => ConfirmDialog(
-          isDesk: isDeskValue,
-          title: title,
-          subtitle: subtitle,
-          confirmText: confirmText,
-          unconfirmText: unconfirmText,
-          confirmButtonBackground: confirmButtonBackground,
-          onPressed: onPressed,
-          timer: timer,
-        );
-
     _doubleDialog(
-      childWidget: ({required isDeskValue, required context}) =>
-          body(isDeskValue: isDeskValue),
+      childWidget: ({required isDeskValue, required context}) => ConfirmDialog(
+        isDesk: isDeskValue,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        timer: timer,
+      ),
       isDesk: isDesk,
+      onCancelPressed: onCancelPressed,
+      onClosePressed: onClosePressed,
+      onAppliedPressed: onAppliedPressed,
       deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
       mobMaxWidth: KSize.kPixel500,
       deskMaxWidth: KSize.kPixel500,
@@ -382,7 +408,7 @@ class _DialogsWidget {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      barrierColor: AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+      barrierColor: AppColors.materialThemeKeyColorsSecondaryWithOpacity0_2,
       shape: const RoundedRectangleBorder(
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),

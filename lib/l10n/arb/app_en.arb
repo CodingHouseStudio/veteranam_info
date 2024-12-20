@@ -1672,6 +1672,14 @@
   "@moreDetails": {
     "examples": "Button text on the Discounts page"
   },
+  "applySelectedFilter": "Apply the selected filter?",
+  "@applySelectedFilter": {
+    "examples": "Text for the dialog on the Discounts page when clicking outside the filter dialog boundaries on the mobile version"
+  },
+  "applySelectedFilterSubtitle": "You have selected filters but haven't applied them. Would you like to apply them?",
+  "@applySelectedFilterSubtitle": {
+    "examples": "Text for the dialog on the Discounts page when clicking outside the filter dialog boundaries on the mobile version"
+  },
   "to": "to",
   "@to": {
     "examples": "Text for back button"

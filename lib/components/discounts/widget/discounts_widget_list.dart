@@ -138,9 +138,11 @@ class _AdvancedFilterDesk extends StatelessWidget {
 }
 
 class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  DiscountsMobWidgetList(
-      {required this.padding, required this.isDesk, super.key})
-      : super(
+  DiscountsMobWidgetList({
+    required this.padding,
+    required this.isDesk,
+    super.key,
+  }) : super(
           child: _DiscountWidgetList(
             isDesk: isDesk,
           ),
