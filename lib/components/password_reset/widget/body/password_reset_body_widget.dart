@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:veteranam/components/password_reset/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -22,7 +21,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
               } else {
                 context.read<UrlCubit>().launchUrl(
                       url: continueUrl,
-                      mode: LaunchMode.externalApplication,
+                      openInCurrentWindow: true,
                     );
               }
             }

@@ -59,6 +59,7 @@ class UrlRepository extends IUrlRepository {
     required String url,
     String? scheme,
     url_launcher.LaunchMode? mode,
+    bool? openInCurrentWindow,
     // url_launcher.LaunchMode? mode,
   }) async {
     try {
@@ -74,7 +75,10 @@ class UrlRepository extends IUrlRepository {
       final linkParse = await url_launcher.canLaunchUrl(link);
       if (linkParse) {
         await url_launcher.launchUrl(
-          link, mode: mode ?? url_launcher.LaunchMode.platformDefault,
+          link,
+          mode: mode ?? url_launcher.LaunchMode.platformDefault,
+          webOnlyWindowName: openInCurrentWindow ?? false ? '_self' : null,
+
           // mode: mode ?? url_launcher.LaunchMode.platformDefault,
         );
         return const Right(true);
