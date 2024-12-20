@@ -5,8 +5,9 @@ import 'package:veteranam/components/password_reset/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class PasswordResetBodyWidget extends StatelessWidget {
-  const PasswordResetBodyWidget({super.key, this.code});
+  const PasswordResetBodyWidget({super.key, this.code, this.continueUrl});
   final String? code;
+  final String? continueUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +16,28 @@ class PasswordResetBodyWidget extends StatelessWidget {
         return BlocConsumer<PasswordResetBloc, PasswordResetState>(
           listener: (context, state) {
             if (state.formState == PasswordResetEnum.success) {
-              context.goNamed(KRoute.login.name);
+              if (continueUrl == null) {
+                context.goNamed(KRoute.login.name);
+              } else {
+                context.read<UrlCubit>().launchUrl(
+                      url: continueUrl,
+                      openInCurrentWindow: true,
+                    );
+              }
             }
           },
           builder: (context, _) {
             return ScaffoldWidget(
+              showMobBottomNavigation: false,
+              showAppBar: false,
               titleChildWidgetsFunction: ({required isDesk}) => [
+                if (!Config.isWeb) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  BackButtonWidget(
+                    backPageName: null,
+                    pathName: KRoute.login.name,
+                  ),
+                ],
                 if (isDesk)
                   KSizedBox.kHeightSizedBox80
                 else
@@ -44,10 +61,11 @@ class PasswordResetBodyWidget extends StatelessWidget {
                 else
                   KSizedBox.kHeightSizedBox8,
                 if (!(codeIsValid ?? true))
-                  RichText(
+                  // Android not support RichText Widget
+                  Text.rich(
                     key: KWidgetkeys.screen.passwordReset.wrongLinkSubtitle,
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
-                    text: TextSpan(
+                    TextSpan(
                       children: [
                         TextSpan(
                           text: context.l10n.passwordResetWrongDescriptionFirst,
@@ -137,7 +155,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                               : () => context.read<PasswordResetBloc>().add(
                                     PasswordResetEvent.passwordReset(code),
                                   )
-                          : () => context.goNamed(KRoute.pwResetEmail.name),
+                          : () => context.goNamed(KRoute.forgotPassword.name),
                       isDesk: isDesk,
                       color: AppColors.materialThemeKeyColorsSecondary,
                       textColor: AppColors.materialThemeWhite,

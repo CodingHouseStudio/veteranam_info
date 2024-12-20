@@ -12,9 +12,8 @@ class UrlRepository extends IUrlRepository {
     String url, {
     bool? useSiteUrl,
   }) async {
-    final baseUrl = (useSiteUrl ?? !Config.isWeb || KTest.isTest)
-        ? KAppText.site
-        : Uri.base.origin;
+    final baseUrl =
+        (useSiteUrl ?? false) ? KAppText.site : UriExtension.baseUrl;
     try {
       // if (Config.isWeb) {
       await Share.shareUri(
@@ -59,6 +58,8 @@ class UrlRepository extends IUrlRepository {
   Future<Either<SomeFailure, bool>> launchUrl({
     required String url,
     String? scheme,
+    url_launcher.LaunchMode? mode,
+    bool? openInCurrentWindow,
     // url_launcher.LaunchMode? mode,
   }) async {
     try {
@@ -75,6 +76,9 @@ class UrlRepository extends IUrlRepository {
       if (linkParse) {
         await url_launcher.launchUrl(
           link,
+          mode: mode ?? url_launcher.LaunchMode.platformDefault,
+          webOnlyWindowName: openInCurrentWindow ?? false ? '_self' : null,
+
           // mode: mode ?? url_launcher.LaunchMode.platformDefault,
         );
         return const Right(true);

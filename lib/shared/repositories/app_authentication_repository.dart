@@ -470,12 +470,14 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String email,
   }) async {
     try {
+      final baseUrl = UriExtension.baseUrl;
       await _firebaseAuth.sendPasswordResetEmail(
         email: email,
-        // actionCodeSettings: firebase_auth.ActionCodeSettings(
-        //   url: '${Uri.base.origin}/${KRoute.login.path}',
-        //   handleCodeInApp: true,
-        // ),
+        actionCodeSettings: baseUrl == KAppText.site
+            ? null
+            : firebase_auth.ActionCodeSettings(
+                url: '$baseUrl/${KRoute.login.path}',
+              ),
       );
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
@@ -510,6 +512,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     String? code,
   ) async {
     try {
+      log('dfsdsfdsfdsffdsdfsdfsdfsfsd || $code');
       if (code == null) {
         return Left(
           SomeFailure.wrongVerifyCode(

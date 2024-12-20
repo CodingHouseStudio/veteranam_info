@@ -33,7 +33,7 @@ void main() {
         ).thenAnswer(
           (realInvocation) async => const Right(true),
         );
-        await bloc.started(KTestText.code);
+        // await bloc.started(KTestText.code);
       },
       expect: () => [true],
     );
@@ -50,7 +50,7 @@ void main() {
           (realInvocation) async =>
               Left(SomeFailure.serverError(error: KGroupText.failure)),
         );
-        await bloc.started(KTestText.code);
+        // await bloc.started(KTestText.code);
       },
       expect: () => [false],
     );

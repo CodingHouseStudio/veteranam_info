@@ -22,7 +22,7 @@ class PasswordResetBlocprovider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              GetIt.I.get<CheckVerificationCodeCubit>()..started(code),
+              GetIt.I.get<CheckVerificationCodeCubit>(param1: code),
         ),
       ],
       child: childWidget,

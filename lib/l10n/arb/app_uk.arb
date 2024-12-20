@@ -600,8 +600,8 @@
   "@discountsServicesSubtitle": {
     "examples": "Текст на сторінці Home, опис знижок"
   },
-  "toDiscount": "До знижок",
-  "@toDiscount": {
+  "toDiscounts": "знижок",
+  "@toDiscounts": {
     "examples": "Текст для кнопки на сторінці Home.",
     "description": "Кнопка використовується для переходу на сторінку Discounts."
   },
@@ -1687,6 +1687,10 @@
   "applySelectedFilterSubtitle": "Ви обрали фільтри, але не застосували їх. Бажаєте застосувати їх?",
   "@applySelectedFilterSubtitle": {
     "examples": "Текст для діалогу на сторінці Discounts при натисканні поза меж ділогу фільтрації на мобільній версії"
+  },
+  "to": "до",
+  "@to": {
+    "examples": "Текст для кнопки на назад"
   },
   "favorite": "Подобається",
   "@favorite": {
