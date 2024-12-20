@@ -41,27 +41,23 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
       sliver: SliverMainAxisGroup(
         slivers: [
           SliverToBoxAdapter(
-            child: widget.value != null
+            child: widget.value != null && !widget.isDesk
                 ? Wrap(
                     runSpacing: KPadding.kPaddingSize16,
                     spacing: KPadding.kPaddingSize8,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       _AdvancedFilterHideButtonWidget(
-                        isDesk: widget.isDesk,
+                        isDesk: false,
                         textKey: widget.textKey,
                         text: widget.title,
-                        onPressed: widget.value == null
-                            ? () => setState(
-                                  () => listShow = !listShow,
-                                )
-                            : null,
-                        listShow: widget.value == null && listShow,
+                        onPressed: null,
+                        listShow: false,
                       ),
                       CancelChipWidget(
                         widgetKey:
                             KWidgetkeys.screen.discounts.appliedFilterItems,
-                        isDesk: widget.isDesk,
+                        isDesk: false,
                         labelText: widget.value!.value.getTrsnslation(context),
                         onPressed: () {
                           widget.onCancelWidgetPressed(
@@ -85,7 +81,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                     ),
                   ),
           ),
-          if (widget.value == null && listShow) widget.list,
+          if ((widget.value == null || widget.isDesk) && listShow) widget.list,
         ],
       ),
     );

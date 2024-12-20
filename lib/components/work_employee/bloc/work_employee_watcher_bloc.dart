@@ -91,7 +91,9 @@ class WorkEmployeeWatcherBloc
   ) {
     if (event.page > state.maxPage ||
         state.page == event.page ||
-        event.page <= 0) return;
+        event.page <= 0) {
+      return;
+    }
     final filterItems = _filter(
       city: state.city,
       category: state.category,

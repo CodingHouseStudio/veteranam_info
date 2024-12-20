@@ -130,6 +130,7 @@ class _ConfirmPublishDiscountDialogState
                               key: KWidgetkeys.widget.confirmPublishDiscount
                                   .termsAndConditionsText,
                               maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                               style: widget.isDesk
                                   ? AppTextStyle.materialThemeBodyLarge
                                   : AppTextStyle.materialThemeBodyMedium,

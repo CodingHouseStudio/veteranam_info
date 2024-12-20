@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:isolate';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -355,48 +353,33 @@ class DiscountsWatcherBloc
     _MobRevertFilter event,
     Emitter<DiscountsWatcherState> emit,
   ) {
-    debugPrint('TEFDSFDSF Start ||| ${DateTime.now()}');
-    // await Future.delayed(const Duration(minutes: 1));
-    state.discountFilterRepository
-        .revertActiveFilter(state.unmodifiedDiscountModelItems);
-
-    debugPrint('TEFDSFDSF END ||| ${DateTime.now()}');
-    // .fold(
-    //   (l) => emit(
-    //     state.copyWith(
-    //       failure: l._toDiscount(),
-    //       filterStatus: FilterStatus.error,
-    //     ),
-    //   ),
-    //   (r) => emit(
-    //     state.copyWith(
-    //       filterStatus: FilterStatus.filtered,
-    //     ),
-    //   ),
-    // );
-  }
-
-  double complexCalculation() {
-    double value = (100232 * 10203234234 * 213923190342);
-    value = value * value * value * value * value;
-    value = value * value * value / 2;
-    double i = value;
-    while (i > -value) {
-      i = log(i);
-    }
-    return i;
-  }
-
-  void _onMobSaveFilter(
-    _MobSaveFilter event,
-    Emitter<DiscountsWatcherState> emit,
-  ) {
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
       ),
     );
 
+    state.discountFilterRepository
+        .revertActiveFilter(state.unmodifiedDiscountModelItems)
+        .fold(
+          (l) => emit(
+            state.copyWith(
+              failure: l._toDiscount(),
+              filterStatus: FilterStatus.error,
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              filterStatus: FilterStatus.filtered,
+            ),
+          ),
+        );
+  }
+
+  void _onMobSaveFilter(
+    _MobSaveFilter event,
+    Emitter<DiscountsWatcherState> emit,
+  ) {
     state.discountFilterRepository.saveActiveFilter().fold(
           (l) => emit(
             state.copyWith(

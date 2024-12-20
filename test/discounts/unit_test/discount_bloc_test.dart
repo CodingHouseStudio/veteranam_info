@@ -552,7 +552,7 @@ void main() {
             const DiscountsWatcherEvent.loadNextItems(),
           )
           ..add(
-            const DiscountsWatcherEvent.setMobFilter(),
+            const DiscountsWatcherEvent.mobSetFilter(),
           );
       },
       expect: () => [

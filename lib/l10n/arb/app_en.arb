@@ -663,7 +663,7 @@
   "privacyPolicy": "Privacy policy",
   "@privacyPolicy": {
     "examples": "Text for the button that is in the Footer.",
-    "description": "Button used to open the PrivacyPolicy dialogue."
+    "description": "Button used to open the PrivacyPolicy dialoge."
   },
   "sections": "Sections",
   "@sections": {
@@ -797,7 +797,17 @@
   "advancedFilter": "Advanced filter",
   "@advancedFilter": {
     "examples": "Text for the button on the Discount page.",
-    "description": "The button is used to open an AdvancedFilter or open a dialogue with it."
+    "description": "The button is used to open an AdvancedFilter or open a dialoge with it."
+  },
+  "filter": "Filter",
+  "@filter": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to open filter dialoge."
+  },
+  "sort": "Sort",
+  "@sort": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to open the filter menu."
   },
   "specialOffers": "Special offers",
   "@specialOffers": {
@@ -1661,6 +1671,14 @@
   "moreDetails": "More Details",
   "@moreDetails": {
     "examples": "Button text on the Discounts page"
+  },
+  "applySelectedFilter": "Apply the selected filter?",
+  "@applySelectedFilter": {
+    "examples": "Text for the dialog on the Discounts page when clicking outside the filter dialog boundaries on the mobile version"
+  },
+  "applySelectedFilterSubtitle": "You have selected filters but haven't applied them. Would you like to apply them?",
+  "@applySelectedFilterSubtitle": {
+    "examples": "Text for the dialog on the Discounts page when clicking outside the filter dialog boundaries on the mobile version"
   },
   "favorite": "Like",
   "@favorite": {

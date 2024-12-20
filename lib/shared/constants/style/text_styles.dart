@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'
-    show FontStyle, FontWeight, TextDecoration, TextStyle;
+    show FontStyle, FontWeight, TextDecoration, TextOverflow, TextStyle;
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 /// Text Styles

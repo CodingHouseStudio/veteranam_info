@@ -34,9 +34,11 @@ class _DialogsWidget {
     // EdgeInsets Function({required bool isDeskValue})? mobPadding,
     double? deskMaxWidth,
     double? mobMaxWidth,
+    void Function()? onAppliedPressed,
+    void Function()? onCancelPressed,
   }) {
     if (isDesk) {
-      showDialog<void>(
+      showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
           return BackdropFilter(
@@ -66,6 +68,16 @@ class _DialogsWidget {
                   maxWidth: deskMaxWidth,
                 ),
           );
+        },
+      ).then(
+        (value) {
+          switch (value) {
+            case true:
+              onAppliedPressed?.call();
+            case false:
+            case null:
+              onCancelPressed?.call();
+          }
         },
       );
     } else {
@@ -186,21 +198,20 @@ class _DialogsWidget {
     required Color confirmButtonBackground,
     bool timer = false,
     String? unconfirmText,
+    void Function()? onCancelPressed,
   }) {
-    Widget body({required bool isDeskValue}) => ConfirmDialog(
-          isDesk: isDeskValue,
-          title: title,
-          subtitle: subtitle,
-          confirmText: confirmText,
-          unconfirmText: unconfirmText,
-          confirmButtonBackground: confirmButtonBackground,
-          onPressed: onPressed,
-          timer: timer,
-        );
-
     _doubleDialog(
-      childWidget: ({required isDeskValue, required context}) =>
-          body(isDeskValue: isDeskValue),
+      childWidget: ({required isDeskValue, required context}) => ConfirmDialog(
+        isDesk: isDeskValue,
+        title: title,
+        subtitle: subtitle,
+        confirmText: confirmText,
+        unconfirmText: unconfirmText,
+        confirmButtonBackground: confirmButtonBackground,
+        onPressed: onPressed,
+        timer: timer,
+        onCancelPressed: onCancelPressed,
+      ),
       isDesk: isDesk,
       deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
       mobMaxWidth: KSize.kPixel500,
@@ -382,7 +393,7 @@ class _DialogsWidget {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      barrierColor: AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+      barrierColor: AppColors.materialThemeKeyColorsSecondaryWithOpacity0_2,
       shape: const RoundedRectangleBorder(
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),

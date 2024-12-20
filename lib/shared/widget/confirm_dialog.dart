@@ -18,6 +18,7 @@ class ConfirmDialog extends StatelessWidget {
     this.unconfirmText,
     this.onPressed,
     super.key,
+    this.onCancelPressed,
   });
 
   final bool isDesk;
@@ -28,6 +29,7 @@ class ConfirmDialog extends StatelessWidget {
   final Color confirmButtonBackground;
   final String? unconfirmText;
   final bool timer;
+  final void Function()? onCancelPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class _CommonConfirmDialog extends StatelessWidget {
     this.onPressed,
     this.unconfirmText,
     this.timer,
+    this.onCancelPressed,
   });
 
   final bool isDesk;
@@ -75,6 +78,7 @@ class _CommonConfirmDialog extends StatelessWidget {
   final Color confirmButtonBackground;
   final String? unconfirmText;
   final Text? timer;
+  final void Function()? onCancelPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +197,10 @@ class _CommonConfirmDialog extends StatelessWidget {
   Widget unconfirmButton(BuildContext context) {
     return SecondaryButtonWidget(
       widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
-      onPressed: context.pop,
+      onPressed: () {
+        context.pop();
+        onCancelPressed?.call();
+      },
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize12,

@@ -21,7 +21,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
         const EdgeInsets.symmetric(vertical: KPadding.kPaddingSize8),
     this.menuItemsPadding =
         const EdgeInsets.symmetric(vertical: KPadding.kPaddingSize8),
-    this.icon,
+    this.buttonChild,
     this.enabled = true,
     this.shape = KWidgetTheme.outlineBorder,
     this.color = AppColors.materialThemeKeyColorsNeutral,
@@ -37,8 +37,8 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.iconAlignment = IconAlignment.start,
     this.closeIcon,
     this.showIcon,
-    this.iconButton,
-    this.textUnderButton,
+    this.showIndicatorIcon = true,
+    // this.textUnderButton,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.
@@ -108,9 +108,9 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final EdgeInsets menuItemsPadding;
 
-  /// If provided, the [icon] is used for this button
+  /// If provided, the [buttonChild] is used for this button
   /// and the button will behave like an.
-  final Widget? icon;
+  final Widget? buttonChild;
 
   /// The offset is applied relative to the initial position
   /// set by the [position].
@@ -217,9 +217,10 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final Widget? showIcon;
 
-  final Icon? iconButton;
+  // final Icon? iconButton;
+  final bool showIndicatorIcon;
 
-  final String? textUnderButton;
+  // final String? textUnderButton;
 
   @override
   PopupMenuButtonWidgetState<T> createState() =>
@@ -369,47 +370,51 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.iconButton != null
-        ? widget.textUnderButton != null
-            ? TextButton(
-                onPressed: widget.enabled ? showButtonMenu : null,
-                style: KButtonStyles.noBackgroundOnHoverButtonStyle,
-                child: Column(
-                  children: [
-                    IconWidget(
-                      decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
-                      icon: widget.iconButton!,
-                      padding: KPadding.kPaddingSize12,
-                    ),
-                    KSizedBox.kHeightSizedBox6,
-                    Text(
-                      widget.textUnderButton!,
-                      style: AppTextStyle.materialThemeLabelSmallBlack,
-                    ),
-                  ],
-                ),
-              )
-            : IconButton(
-                style: KButtonStyles.borderWhiteButtonStyle,
-                onPressed: widget.enabled ? showButtonMenu : null,
-                icon: KIcon.moreVert,
-                padding: const EdgeInsets.all(
-                  KPadding.kPaddingSize12,
-                ),
-              )
-        : TextButton.icon(
-            onPressed: widget.enabled ? showButtonMenu : null,
-            style: widget.buttonStyle,
-            icon: _showMenu
-                ? widget.closeIcon ?? KIcon.trailingUp
-                : widget.showIcon ?? KIcon.keyboardArrowDown,
-            iconAlignment: widget.iconAlignment,
-            label: widget.icon ??
-                Text(
-                  widget.buttonText,
-                  style: AppTextStyle.materialThemeTitleMedium,
-                ),
-          );
+    return
+        // widget.iconButton != null
+        // ? widget.textUnderButton != null
+        //     ? TextButton(
+        //         onPressed: widget.enabled ? showButtonMenu : null,
+        //         style: KButtonStyles.noBackgroundOnHoverButtonStyle,
+        //         child: Column(
+        //           children: [
+        //             IconWidget(
+        //               decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
+        //               icon: widget.iconButton!,
+        //               padding: KPadding.kPaddingSize12,
+        //             ),
+        //             KSizedBox.kHeightSizedBox6,
+        //             Text(
+        //               widget.textUnderButton!,
+        //               style: AppTextStyle.materialThemeLabelSmallBlack,
+        //             ),
+        //           ],
+        //         ),
+        //       )
+        //     : IconButton(
+        //         style: KButtonStyles.borderWhiteButtonStyle,
+        //         onPressed: widget.enabled ? showButtonMenu : null,
+        //         icon: KIcon.moreVert,
+        //         padding: const EdgeInsets.all(
+        //           KPadding.kPaddingSize12,
+        //         ),
+        //       )
+        // :
+        TextButton.icon(
+      onPressed: widget.enabled ? showButtonMenu : null,
+      style: widget.buttonStyle,
+      icon: widget.showIndicatorIcon
+          ? (_showMenu
+              ? widget.closeIcon ?? KIcon.trailingUp
+              : widget.showIcon ?? KIcon.keyboardArrowDown)
+          : null,
+      iconAlignment: widget.iconAlignment,
+      label: widget.buttonChild ??
+          Text(
+            widget.buttonText,
+            style: AppTextStyle.materialThemeTitleMedium,
+          ),
+    );
   }
 }
 

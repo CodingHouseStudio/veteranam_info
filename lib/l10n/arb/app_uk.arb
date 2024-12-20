@@ -786,6 +786,16 @@
     "examples": "Текст для кнопки на сторінці Discount.",
     "description": "Кнопка використовується для відриття AdvancedFilter або відкриття діалогу з ним."
   },
+  "filter": "Фільтр",
+  "@filter": {
+    "examples": "Текст для кнопки на сторінці Discount.",
+    "description": "Кнопка використовується для відриття діалогу фільтрації."
+  },
+  "sort": "Сортувати",
+  "@sort": {
+    "examples": "Текст для кнопки на сторінці Discount.",
+    "description": "Кнопка використовується для відриття меню фільтрації."
+  },
   "specialOffers": "Спеціальні пропозиції",
   "@specialOffers": {
     "examples": "Текст частини заголовку на сторінці Discount."
@@ -1669,6 +1679,14 @@
   "moreDetails": "Детальніше",
   "@moreDetails": {
     "examples": "Текст для кнопки на сторінці Discounts"
+  },
+  "applySelectedFilter": "Застосувати вибраний фільтр?",
+  "@applySelectedFilter": {
+    "examples": "Текст для діалогу на сторінці Discounts при натисканні поза меж ділогу фільтрації на мобільній версії"
+  },
+  "applySelectedFilterSubtitle": "Ви обрали фільтри, але не застосували їх. Бажаєте застосувати їх?",
+  "@applySelectedFilterSubtitle": {
+    "examples": "Текст для діалогу на сторінці Discounts при натисканні поза меж ділогу фільтрації на мобільній версії"
   },
   "favorite": "Подобається",
   "@favorite": {

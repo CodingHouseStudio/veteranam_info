@@ -57,6 +57,7 @@ class ButtonWidget extends StatelessWidget {
             Text(
               text,
               maxLines: textMaxLines,
+              overflow: TextOverflow.ellipsis,
               style: textStyle ??
                   (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
             ),

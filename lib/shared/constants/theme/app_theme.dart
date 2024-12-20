@@ -66,6 +66,7 @@ ThemeData themeData = ThemeData(
     ..apply(
       bodyColor: AppColors.materialThemeKeyColorsSecondary,
       displayColor: AppColors.materialThemeKeyColorsSecondary,
+      fontFamily: 'Gilroy',
     ),
   useMaterial3: true,
   buttonTheme: ButtonThemeData(
