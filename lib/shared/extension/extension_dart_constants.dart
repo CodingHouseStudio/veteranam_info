@@ -346,3 +346,8 @@ extension EligiblityEnumExtension on EligibilityEnum {
 extension CompanyModelExtension on CompanyModel {
   bool get isAdmin => id == KAppText.adminCompanyID;
 }
+
+extension UriExtension on Uri {
+  static String get baseUrl =>
+      Config.isWeb && !KTest.isTest ? Uri.base.origin : KAppText.site;
+}
