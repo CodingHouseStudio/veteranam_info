@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +65,8 @@ class AdvancedFilterMobButton extends StatelessWidget {
         // KSizedBox.kWidthSizedBox8,
         icon: KIcon.tune,
         onPressed: () async {
-          final bloc = context.read<DiscountsWatcherBloc>()
+          final contextValue = context;
+          final bloc = contextValue.read<DiscountsWatcherBloc>()
             ..add(
               const DiscountsWatcherEvent.mobSaveFilter(),
             );
@@ -84,26 +87,33 @@ class AdvancedFilterMobButton extends StatelessWidget {
               bloc: bloc,
             ),
           ).then(
-            (value) {
+            (value) async {
               switch (value) {
                 case true:
                   bloc.add(const DiscountsWatcherEvent.mobSetFilter());
                 case false:
                   bloc.add(const DiscountsWatcherEvent.filterReset());
                 case null:
-                  context.dialog.showConfirmationDialog(
-                    isDesk: false,
-                    title: context.l10n.applySelectedFilter,
-                    subtitle: context.l10n.applySelectedFilterSubtitle,
-                    confirmText: context.l10n.yes,
-                    unconfirmText: context.l10n.no,
-                    onPressed: () =>
-                        bloc.add(const DiscountsWatcherEvent.mobSetFilter()),
-                    confirmButtonBackground:
-                        AppColors.materialThemeKeyColorsSecondary,
-                    onCancelPressed: () =>
-                        bloc.add(const DiscountsWatcherEvent.mobRevertFilter()),
-                  );
+                  if (!bloc.state.discountFilterRepository.saveFilterEqual) {
+                    // Wait close showModalBottomSheet dialog
+                    // ignore: inference_failure_on_instance_creation
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    context.dialog.showConfirmationDialog(
+                      isDesk: true,
+                      title: context.l10n.applySelectedFilter,
+                      subtitle: context.l10n.applySelectedFilterSubtitle,
+                      confirmText: context.l10n.yes,
+                      unconfirmText: context.l10n.no,
+                      onAppliedPressed: () =>
+                          bloc.add(const DiscountsWatcherEvent.mobSetFilter()),
+                      confirmButtonBackground:
+                          AppColors.materialThemeKeyColorsSecondary,
+                      onCancelPressed: () => bloc
+                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
+                      onClosePressed: () => bloc
+                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
+                    );
+                  }
               }
             },
           );

@@ -36,6 +36,7 @@ class _DialogsWidget {
     double? mobMaxWidth,
     void Function()? onAppliedPressed,
     void Function()? onCancelPressed,
+    void Function()? onClosePressed,
   }) {
     if (isDesk) {
       showDialog<bool>(
@@ -75,13 +76,14 @@ class _DialogsWidget {
             case true:
               onAppliedPressed?.call();
             case false:
-            case null:
               onCancelPressed?.call();
+            case null:
+              onClosePressed?.call();
           }
         },
       );
     } else {
-      showModalBottomSheet<void>(
+      showModalBottomSheet<bool>(
         context: context,
         isScrollControlled: isScollable,
         useSafeArea: !Config.isWeb,
@@ -104,6 +106,17 @@ class _DialogsWidget {
                 maxWidth: mobMaxWidth,
                 isScollable: isScollable,
               );
+        },
+      ).then(
+        (value) {
+          switch (value) {
+            case true:
+              onAppliedPressed?.call();
+            case false:
+              onCancelPressed?.call();
+            case null:
+              onClosePressed?.call();
+          }
         },
       );
     }
@@ -194,11 +207,12 @@ class _DialogsWidget {
     required String title,
     required String subtitle,
     required String confirmText,
-    required void Function()? onPressed,
+    required void Function()? onAppliedPressed,
     required Color confirmButtonBackground,
     bool timer = false,
     String? unconfirmText,
     void Function()? onCancelPressed,
+    void Function()? onClosePressed,
   }) {
     _doubleDialog(
       childWidget: ({required isDeskValue, required context}) => ConfirmDialog(
@@ -208,11 +222,12 @@ class _DialogsWidget {
         confirmText: confirmText,
         unconfirmText: unconfirmText,
         confirmButtonBackground: confirmButtonBackground,
-        onPressed: onPressed,
         timer: timer,
-        onCancelPressed: onCancelPressed,
       ),
       isDesk: isDesk,
+      onCancelPressed: onCancelPressed,
+      onClosePressed: onClosePressed,
+      onAppliedPressed: onAppliedPressed,
       deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
       mobMaxWidth: KSize.kPixel500,
       deskMaxWidth: KSize.kPixel500,

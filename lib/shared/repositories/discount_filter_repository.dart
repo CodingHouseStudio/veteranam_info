@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
@@ -31,7 +29,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _mobSaveActiveLocationMap = const {},
         _eligibilityMap = const {},
         _activeEligibilityMap = const {},
-        _mobSaveActiveEligibilityMap = const {};
+        _mobSaveActiveEligibilityMap = const {},
+        _mapEquality = const MapEquality();
 
   /// Constructor to initialize maps.
   DiscountFilterRepository.init(
@@ -45,7 +44,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _mobSaveActiveLocationMap = {},
         _eligibilityMap = {},
         _activeEligibilityMap = {},
-        _mobSaveActiveEligibilityMap = {} {
+        _mobSaveActiveEligibilityMap = {},
+        _mapEquality = const MapEquality() {
     _getFilterValuesFromDiscountItems(
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       callMethodName: 'DiscountFilterRepository.init',
@@ -69,6 +69,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
 
   final Map<String, FilterItem> _locationMap;
   static var _locationSearchValue = '';
+  final MapEquality<String, FilterItem> _mapEquality;
 
   // Maps to store current available filters
   @override
@@ -98,6 +99,15 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
 
   @override
   bool get locationIsNotEpmty => _locationMap.isNotEmpty;
+
+  @override
+  bool get saveFilterEqual =>
+      _mapEquality.equals(_activeCategoryMap, _mobSaveActiveCategoryMap) &&
+      _mapEquality.equals(
+        _activeEligibilityMap,
+        _mobSaveActiveEligibilityMap,
+      ) &&
+      _mapEquality.equals(_activeLocationMap, _mobSaveActiveLocationMap);
 
   /// Combines all activity filters into a single map.
   @override
@@ -285,7 +295,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
     List<DiscountModel> unmodifiedDiscountModelItems,
   ) {
     try {
-      log('TEFDSFDSF TEFDSFDSF');
       _activeEligibilityMap
         ..clear()
         ..addAll(_mobSaveActiveEligibilityMap);

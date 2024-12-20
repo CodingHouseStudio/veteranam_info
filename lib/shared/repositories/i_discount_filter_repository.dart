@@ -85,6 +85,8 @@ abstract class IDiscountFilterRepository {
 
   bool get locationIsNotEpmty;
 
+  bool get saveFilterEqual;
+
   /// Combines all Activity filters into a single map.
   Map<String, FilterItem> get getActivityList;
 }
