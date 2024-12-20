@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:veteranam/components/password_reset/bloc/bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class PasswordResetBodyWidget extends StatelessWidget {
-  const PasswordResetBodyWidget({super.key, this.code});
+  const PasswordResetBodyWidget({super.key, this.code, this.continueUrl});
   final String? code;
+  final String? continueUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,14 @@ class PasswordResetBodyWidget extends StatelessWidget {
         return BlocConsumer<PasswordResetBloc, PasswordResetState>(
           listener: (context, state) {
             if (state.formState == PasswordResetEnum.success) {
-              context.goNamed(KRoute.login.name);
+              if (continueUrl == null) {
+                context.goNamed(KRoute.login.name);
+              } else {
+                context.read<UrlCubit>().launchUrl(
+                      url: continueUrl,
+                      mode: LaunchMode.externalApplication,
+                    );
+              }
             }
           },
           builder: (context, _) {

@@ -20,9 +20,11 @@ import 'package:veteranam/components/login/view/login_view.dart';
 import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
 import 'package:veteranam/components/my_story/view/my_story_view.dart';
 import 'package:veteranam/components/news_card/view/news_card_view.dart';
+import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 // import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 import 'package:veteranam/components/profile/view/profile_view.dart';
 import 'package:veteranam/components/profile_saves/view/profile_saves_view.dart';
+import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 // import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
 import 'package:veteranam/components/story/view/story_view.dart';
@@ -101,36 +103,37 @@ GoRouter router = GoRouter(
             restorationId: state.pageKey.value,
             child: const LoginScreen(),
           ),
-          // routes: [
-          //   GoRoute(
-          //     name: KRoute.passwordReset.name,
-          //     path: KRoute.passwordReset.path,
-          //     pageBuilder: (context, state) => NoTransitionPage(
-          //       key: state.pageKey,
-          //       name: state.name,
-          //       restorationId: state.pageKey.value,
-          //       child: PasswordResetScreen(
-          //         code:
-          //             state.uri.queryParameters[UrlParameters.
-          // verificationCode],
-          //       ),
-          //     ),
-          //     routes: [
-          //       GoRoute(
-          //         name: KRoute.pwResetEmail.name,
-          //         path: KRoute.pwResetEmail.path,
-          //         pageBuilder: (context, state) => NoTransitionPage(
-          //           key: state.pageKey,
-          //           name: state.name,
-          //           restorationId: state.pageKey.value,
-          //           child: PwResetEmailScreen(
-          //             email: state.uri.queryParameters[UrlParameters.email],
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ],
+          routes: [
+            GoRoute(
+              name: KRoute.passwordReset.name,
+              path: KRoute.passwordReset.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                child: PasswordResetScreen(
+                  code:
+                      state.uri.queryParameters[UrlParameters.verificationCode],
+                  continueUrl:
+                      state.uri.queryParameters[UrlParameters.continueUrl],
+                ),
+              ),
+              routes: [
+                GoRoute(
+                  name: KRoute.pwResetEmail.name,
+                  path: KRoute.pwResetEmail.path,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    restorationId: state.pageKey.value,
+                    child: PwResetEmailScreen(
+                      email: state.uri.queryParameters[UrlParameters.email],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.signUp.name,
