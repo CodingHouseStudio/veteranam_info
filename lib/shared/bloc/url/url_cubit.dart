@@ -30,7 +30,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
     required String? url,
     String? scheme,
     LaunchMode? mode,
-    // LaunchMode? mode,
+    bool? openInCurrentWindow,
   }) async {
     if (url == null) {
       return;
@@ -39,6 +39,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
       url: url,
       scheme: scheme,
       mode: mode,
+      openInCurrentWindow: openInCurrentWindow,
     );
     result.fold(
       (l) => emit(l.toUrl()),

@@ -8,6 +8,7 @@ abstract class IUrlRepository {
     required String url,
     String? scheme,
     LaunchMode? mode,
+    bool? openInCurrentWindow,
   });
   Future<Either<SomeFailure, bool>> copy(String text);
 }
