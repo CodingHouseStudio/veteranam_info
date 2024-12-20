@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/models/models.dart';
 
@@ -10,25 +12,41 @@ class DiscountModel with _$DiscountModel {
     required String id,
     // required DateTime date,
     required List<int> discount,
-    @TranslateConverter() required TranslateModel title,
-    @TranslateItemsConverter() required List<TranslateModel> category,
+    @JsonKey(name: DiscountModelJsonField.title)
+    @TranslateConverter()
+    required TranslateModel title,
+    @JsonKey(name: DiscountModelJsonField.category)
+    @TranslateItemsConverter()
+    required List<TranslateModel> category,
     // @TranslateItemsOrNullConverter() required List<TranslateModel>?
     // subcategory,
-    @TranslateConverter() required TranslateModel description,
-    @TranslateOrNullConverter() required TranslateModel? requirements,
+    @JsonKey(name: DiscountModelJsonField.description)
+    @TranslateConverter()
+    required TranslateModel description,
+    @JsonKey(name: DiscountModelJsonField.requirements)
+    @TranslateOrNullConverter()
+    required TranslateModel? requirements,
     // @TranslateOrNullConverter() required TranslateModel? territory,
     required DateTime dateVerified,
     required String? link,
     @Default([EligibilityEnum.all]) List<EligibilityEnum> eligibility,
-    @TranslateOrNullConverter() TranslateModel? exclusions,
+    @JsonKey(name: DiscountModelJsonField.exclusions)
+    @TranslateOrNullConverter()
+    TranslateModel? exclusions,
     String? phoneNumber,
-    @TranslateOrNullConverter() TranslateModel? expiration,
-    @TranslateItemsOrNullConverter() List<TranslateModel>? location,
+    @JsonKey(name: DiscountModelJsonField.expiration)
+    @TranslateOrNullConverter()
+    TranslateModel? expiration,
+    @JsonKey(name: DiscountModelJsonField.location)
+    @TranslateItemsOrNullConverter()
+    List<TranslateModel>? location,
     String? userId,
     // String? html,
     String? userName,
     @ImageConverter() ImageModel? userPhoto,
-    @TranslateOrNullConverter() TranslateModel? company,
+    @JsonKey(name: DiscountModelJsonField.company)
+    @TranslateOrNullConverter()
+    TranslateModel? company,
     @Default(DiscountState.isNew) DiscountState status,
     String? directLink,
     // @TranslateOrNullConverter() TranslateModel? additionalDetails,
@@ -91,27 +109,27 @@ enum DiscountState {
 abstract class DiscountModelJsonField {
   static const id = 'id';
   static const userId = 'userId';
-  static const company = 'company';
+  static const company = 'companyT';
   static const companyEN = 'companyEN';
   static const discount = 'discount';
-  static const title = 'title';
+  static const title = 'titleT';
   static const titleEN = 'titleEN';
-  static const category = 'category';
+  static const category = 'categoryT';
   static const categoryEN = 'categoryEN';
   // static const subcategory = 'subcategory';
   // static const subcategoryEN = 'subcategoryEN';
   static const eligibility = 'eligibility';
-  static const description = 'description';
+  static const description = 'descriptionT';
   static const descriptionEN = 'descriptionEN';
-  static const requirements = 'requirements';
+  static const requirements = 'requirementsT';
   static const requirementsEN = 'requirementsEN';
   // static const territory = 'territory';
   // static const territoryEN = 'territoryEN';
-  static const location = 'location';
+  static const location = 'locationT';
   static const locationEN = 'locationEN';
-  static const expiration = 'expiration';
+  static const expiration = 'expirationT';
   static const expirationEN = 'expirationEN';
-  static const exclusions = 'exclusions';
+  static const exclusions = 'exclusionsT';
   static const exclusionsEN = 'exclusionsEN';
   static const phoneNumber = 'phoneNumber';
   static const directLink = 'directLink';
