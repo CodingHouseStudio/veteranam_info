@@ -825,7 +825,7 @@
   "@filterApplied": {
     "examples": "Text on the Discount page for additional filters"
   },
-  "fromLargestToSmallest": "From the largest to the smallest",
+  "fromLargestToSmallest": "By biggest discount",
   "@fromLargestToSmallest": {
     "examples": "Text for the button on the Discount page for additional filters.",
     "description": "The button is used to apply and deactivate a filter by discount value."
@@ -1642,7 +1642,7 @@
   "@joinUs": {
     "examples": "Header for the mobile app on the User Role page"
   },
-  "sortByDate": "By Newest",
+  "sortByDate": "By newest",
   "@sortByDate": {
     "examples": "Text for the sorting button on the Discount page",
     "description": "The button is used to sort discounts by date. From newest to oldest."
@@ -1683,6 +1683,11 @@
   "to": "to",
   "@to": {
     "examples": "Text for back button"
+  },
+  "featured": "By default",
+  "@featured": {
+    "examples": "Text for the sorting button on the Discount page",
+    "description": "The button is used to sort discounts by date. From newest to oldest. The first discounts will be those added by the business."
   },
   "favorite": "Like",
   "@favorite": {

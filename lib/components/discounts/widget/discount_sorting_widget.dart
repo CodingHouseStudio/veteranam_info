@@ -17,13 +17,20 @@ class DiscountSortingWidget extends StatelessWidget {
             padding: const WidgetStatePropertyAll(
               EdgeInsets.all(KPadding.kPaddingSize12),
             ),
-            backgroundColor: isDesk
-                ? null
-                : const WidgetStatePropertyAll(
-                    AppColors.materialThemeKeyColorsNeutral,
-                  ),
+            backgroundColor:
+                // isDesk
+                //     ? null
+                //     :
+                const WidgetStatePropertyAll(
+              AppColors.materialThemeKeyColorsNeutral,
+            ),
           ),
-          buttonText: state.sortingBy.getValue(context),
+          shape: const OutlineInputBorder(
+            borderSide:
+                BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+            borderRadius: KBorderRadius.kBorderRadiusExceptTopRight,
+          ),
+          buttonText: '',
           iconAlignment: IconAlignment.end,
           items: List.generate(
             DiscountEnum.values.length,
@@ -34,23 +41,27 @@ class DiscountSortingWidget extends StatelessWidget {
             ),
             growable: false,
           ),
-          buttonChild: isDesk
-              ? null
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        context.l10n.sort,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox8,
-                    KIcon.sort,
-                  ],
+          buttonChild:
+              //  isDesk
+              //     ? null
+              //     :
+              Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  '${context.l10n.sort} '
+                  // ignore: lines_longer_than_80_chars
+                  '${isDesk ? state.sortingBy.getValue(context).toLowerCase() : ''}',
+                  style: AppTextStyle.materialThemeTitleMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              KSizedBox.kWidthSizedBox8,
+              KIcon.sort,
+            ],
+          ),
           clipBehavior: Clip.hardEdge,
           initialValue: state.sortingBy,
           position: PopupMenuButtonPosition.bottomLeft,

@@ -46,9 +46,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _activeEligibilityMap = {},
         _mobSaveActiveEligibilityMap = {},
         _mapEquality = const MapEquality() {
-    _getFilterValuesFromDiscountItems(
-      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
-      callMethodName: 'DiscountFilterRepository.init',
+    getFilterValuesFromDiscountItems(
+      unmodifiedDiscountModelItems,
     ).fold((l) => initError = l, Right.new);
   }
 
@@ -216,9 +215,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
     _activeEligibilityMap.clear();
     _activeLocationMap.clear();
 
-    return _getFilterValuesFromDiscountItems(
-      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
-      callMethodName: 'resetAll',
+    return getFilterValuesFromDiscountItems(
+      unmodifiedDiscountModelItems,
     );
   }
 
@@ -304,9 +302,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _activeLocationMap
         ..clear()
         ..addAll(_mobSaveActiveLocationMap);
-      return _getFilterValuesFromDiscountItems(
-        unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
-        callMethodName: 'revertActiveFilter',
+      return getFilterValuesFromDiscountItems(
+        unmodifiedDiscountModelItems,
       );
     } catch (e, stack) {
       return Left(
@@ -323,10 +320,10 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   }
 
   /// Set new values to map from List<DiscountModel>
-  Either<SomeFailure, bool> _getFilterValuesFromDiscountItems({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required String callMethodName,
-  }) {
+  @override
+  Either<SomeFailure, bool> getFilterValuesFromDiscountItems(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
     try {
       _eligibilityMap.clear();
       _categoryMap.clear();
@@ -367,7 +364,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: categoriesList,
         activityMap: _activeCategoryMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _categoryMap.addAll,
@@ -376,7 +373,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeCategoryMap,
         itemsMap: _categoryMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
       // Category. End:
 
@@ -384,7 +381,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getLocationFilterFromTranslateModel(
         list: locationList,
         activityMap: _activeLocationMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _locationMap.addAll,
@@ -393,7 +390,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeLocationMap,
         itemsMap: _locationMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
       _locationSearchMap.addAll(_locationMap);
       //Location. End.
@@ -402,13 +399,13 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: eligibilitiesList.getTranslateModels,
         activityMap: _activeEligibilityMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold((l) => failure = l, _eligibilityMap.addAll);
 
       _addActivityMapToItemsMap(
         activityMap: _activeEligibilityMap,
         itemsMap: _eligibilityMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
 
       // Eligibility. End:
@@ -424,8 +421,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           userSetting: _userRepository.currentUserSetting,
           tag: 'getFilterValuesFromDiscountItems',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-          tag2Key: ErrorText.callFrom,
-          tag2: callMethodName,
         ),
       );
     }

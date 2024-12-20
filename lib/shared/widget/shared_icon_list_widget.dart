@@ -120,6 +120,11 @@ class SharedIconListWidget extends StatelessWidget {
         ] else
           PopupMenuButtonWidget<int>(
             buttonText: context.l10n.login,
+            shape: const OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+              borderRadius: KBorderRadius.kBorderRadius16,
+            ),
             buttonChild: Column(
               children: [
                 const IconWidget(

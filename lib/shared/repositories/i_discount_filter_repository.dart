@@ -80,6 +80,10 @@ abstract class IDiscountFilterRepository {
     List<DiscountModel> unmodifiedDiscountModelItems,
   );
 
+  Either<SomeFailure, bool> getFilterValuesFromDiscountItems(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  );
+
   /// Checks if any filters are currently activity in any dimension.
   bool get hasActivityItem;
 
