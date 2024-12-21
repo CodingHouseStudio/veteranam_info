@@ -79,8 +79,11 @@ class DiscountsWatcherBloc
     await _discountItemsSubscription?.cancel();
     _discountItemsSubscription = _discountRepository
         .getDiscountItems(
-            // reportIdItems: reportItems?.getIdCard,
-            )
+      showOnlyBusinessDiscounts: _firebaseRemoteConfigProvider.getBool(
+        RemoteConfigKey.showOnlyBusinessDiscounts,
+      ),
+      // reportIdItems: reportItems?.getIdCard,
+    )
         .listen(
       (discount) {
         add(

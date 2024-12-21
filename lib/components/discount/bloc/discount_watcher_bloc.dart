@@ -12,9 +12,11 @@ class DiscountWatcherBloc
     extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
   DiscountWatcherBloc({
     required IDiscountRepository discountRepository,
+    required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
     @factoryParam required DiscountModel? discount,
     @factoryParam required String? discountId,
   })  : _discountRepository = discountRepository,
+        _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
           _Initial(
             discountModel: KMockText.discountModel,
@@ -30,6 +32,7 @@ class DiscountWatcherBloc
     );
   }
   final IDiscountRepository _discountRepository;
+  final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
   Future<void> _onStarted(
     _Started event,
     Emitter<DiscountWatcherState> emit,
@@ -42,7 +45,9 @@ class DiscountWatcherBloc
       discount = event.discount;
     } else if (event.discountId != null) {
       final result = await _discountRepository.getDiscount(
-        event.discountId!,
+        id: event.discountId!,
+        showOnlyBusinessDiscounts: _firebaseRemoteConfigProvider
+            .getBool(RemoteConfigKey.showOnlyBusinessDiscounts),
       );
       result.fold(
         (l) => emit(state.copyWith(failure: DiscountFailure.linkWrong)),
