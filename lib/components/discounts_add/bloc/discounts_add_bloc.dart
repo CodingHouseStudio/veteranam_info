@@ -118,7 +118,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       final periodIsNull = discount!.expiration == null ||
           discount!.expiration!.uk.isEmpty ||
           discount!.expiration!.uk.toLowerCase() == 'до кінця воєнного стану' ||
-          discount!.expiration!.uk.toLowerCase() == 'Щомісяця оновлюється';
+          discount!.expiration!.uk.toLowerCase() == 'щомісяця оновлюється';
       emit(
         state.copyWith(
           discount: discount,
