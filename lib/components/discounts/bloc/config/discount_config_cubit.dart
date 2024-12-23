@@ -18,6 +18,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
             loadingItems: KDimensions.loadItems,
             linkScrollCount: KDimensions.linkScrollCount,
             emailCloseDelay: KDimensions.emailCloseDelay,
+            mobFilterEnhancedMobile: false,
           ),
         );
 
@@ -29,6 +30,8 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
   static const linkScrollKey = '__link_scroll_count_key__';
   @visibleForTesting
   static const emailCloseDelayKey = '__email_close_delay_count_key__';
+  @visibleForTesting
+  static const mobFilterEnhancedMobileKey = '__mob_filter_enhanced_mobile__';
 
   static const loadingItemsKey = '__discount_loading_items_count_key__';
   void started() {
@@ -38,6 +41,8 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
     final loadingItems = _firebaseRemoteConfigProvider.getInt(loadingItemsKey);
     final emailCloseDelay =
         _firebaseRemoteConfigProvider.getInt(emailCloseDelayKey);
+    final mobFilterEnhancedMobile =
+        _firebaseRemoteConfigProvider.getBool(mobFilterEnhancedMobileKey);
     emit(
       DiscountConfigState(
         emailScrollCount: emailScrollCount > 0
@@ -48,6 +53,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
             linkScrollCount > 0 ? linkScrollCount : KDimensions.linkScrollCount,
         emailCloseDelay:
             emailCloseDelay > 0 ? emailCloseDelay : KDimensions.emailCloseDelay,
+        mobFilterEnhancedMobile: mobFilterEnhancedMobile,
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterListWidget extends StatefulWidget {
@@ -33,57 +35,70 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.only(
-        right: KPadding.kPaddingSize8,
-        bottom: KPadding.kPaddingSize8,
-      ),
-      sliver: SliverMainAxisGroup(
-        slivers: [
-          SliverToBoxAdapter(
-            child: widget.value != null && !widget.isDesk
-                ? Wrap(
-                    runSpacing: KPadding.kPaddingSize16,
-                    spacing: KPadding.kPaddingSize8,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      _AdvancedFilterHideButtonWidget(
-                        isDesk: false,
-                        textKey: widget.textKey,
-                        text: widget.title,
-                        onPressed: null,
-                        listShow: false,
-                      ),
-                      CancelChipWidget(
-                        widgetKey:
-                            KWidgetkeys.screen.discounts.appliedFilterItems,
-                        isDesk: false,
-                        labelText: widget.value!.value.getTrsnslation(context),
-                        onPressed: () {
-                          widget.onCancelWidgetPressed(
-                            widget.value!.value.uk,
-                          );
-                        },
-                        // width: KSize.kPixel160,
-                      ),
-                    ],
-                  )
-                : Align(
-                    alignment: Alignment.centerLeft,
-                    child: _AdvancedFilterHideButtonWidget(
-                      isDesk: widget.isDesk,
-                      textKey: widget.textKey,
-                      text: widget.title,
-                      onPressed: () => setState(
-                        () => listShow = !listShow,
-                      ),
-                      listShow: listShow,
-                    ),
-                  ),
+    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
+      buildWhen: (previous, current) =>
+          current.mobFilterEnhancedMobile != previous.mobFilterEnhancedMobile,
+      builder: (context, state) {
+        return SliverPadding(
+          padding: const EdgeInsets.only(
+            right: KPadding.kPaddingSize8,
+            bottom: KPadding.kPaddingSize8,
           ),
-          if ((widget.value == null || widget.isDesk) && listShow) widget.list,
-        ],
-      ),
+          sliver: SliverMainAxisGroup(
+            slivers: [
+              SliverToBoxAdapter(
+                child: widget.value != null &&
+                        !widget.isDesk &&
+                        !state.mobFilterEnhancedMobile
+                    ? Wrap(
+                        runSpacing: KPadding.kPaddingSize16,
+                        spacing: KPadding.kPaddingSize8,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          _AdvancedFilterHideButtonWidget(
+                            isDesk: false,
+                            textKey: widget.textKey,
+                            text: widget.title,
+                            onPressed: null,
+                            listShow: false,
+                          ),
+                          CancelChipWidget(
+                            widgetKey:
+                                KWidgetkeys.screen.discounts.appliedFilterItems,
+                            isDesk: false,
+                            labelText:
+                                widget.value!.value.getTrsnslation(context),
+                            onPressed: () {
+                              widget.onCancelWidgetPressed(
+                                widget.value!.value.uk,
+                              );
+                            },
+                            // width: KSize.kPixel160,
+                          ),
+                        ],
+                      )
+                    : Align(
+                        alignment: Alignment.centerLeft,
+                        child: _AdvancedFilterHideButtonWidget(
+                          isDesk: widget.isDesk,
+                          textKey: widget.textKey,
+                          text: widget.title,
+                          onPressed: () => setState(
+                            () => listShow = !listShow,
+                          ),
+                          listShow: listShow,
+                        ),
+                      ),
+              ),
+              if ((widget.value == null ||
+                      widget.isDesk ||
+                      state.mobFilterEnhancedMobile) &&
+                  listShow)
+                widget.list,
+            ],
+          ),
+        );
+      },
     );
   }
 }
