@@ -176,7 +176,7 @@ sentry:
 
   # set by env. var. SENTRY_AUTH_TOKEN
   # We need this variable only when push release build. Used only when upload_source_maps
-  auth_token:
+  auth_token: 
 
   # disabled by default
   # wait_for_processing: true
