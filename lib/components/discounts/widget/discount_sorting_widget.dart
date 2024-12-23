@@ -13,18 +13,7 @@ class DiscountSortingWidget extends StatelessWidget {
       buildWhen: (previous, current) => previous.sortingBy != current.sortingBy,
       builder: (context, state) {
         return PopupMenuButtonWidget<DiscountEnum>(
-          buttonStyle: KButtonStyles.transparentButtonStyle.copyWith(
-            padding: const WidgetStatePropertyAll(
-              EdgeInsets.all(KPadding.kPaddingSize12),
-            ),
-            backgroundColor:
-                // isDesk
-                //     ? null
-                //     :
-                const WidgetStatePropertyAll(
-              AppColors.materialThemeKeyColorsNeutral,
-            ),
-          ),
+          buttonStyle: KButtonStyles.neutralButtonStyle,
           shape: const OutlineInputBorder(
             borderSide:
                 BorderSide(color: AppColors.materialThemeKeyColorsNeutral),

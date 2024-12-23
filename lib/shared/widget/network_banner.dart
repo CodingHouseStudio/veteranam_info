@@ -95,9 +95,7 @@ class _NetworkStatusBannerState extends State<_NetworkStatusBanner> {
           KSizedBox.kWidthSizedBox10,
           Text(
             context.l10n.noInternet,
-            style: AppTextStyle.materialThemeLabelLarge.copyWith(
-              color: AppColors.materialThemeSysLightError,
-            ),
+            style: AppTextStyle.materialThemeLabelLargeError,
             textAlign: TextAlign.center,
           ),
         ],

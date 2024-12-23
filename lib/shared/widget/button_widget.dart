@@ -30,15 +30,11 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: textButtonStyle ??
-          (isDesk
-                  ? KButtonStyles.lightGrayButtonStyle
-                  : KButtonStyles.lightGrayButtonStyleWInf)
-              .copyWith(
-            backgroundColor: backgroundColor != null
-                ? WidgetStatePropertyAll(backgroundColor)
-                : null,
-          ),
+      style: backgroundColor == null
+          ? style
+          : style.copyWith(
+              backgroundColor: WidgetStatePropertyAll(backgroundColor),
+            ),
       child: Padding(
         padding: padding ??
             (isDesk
@@ -66,4 +62,10 @@ class ButtonWidget extends StatelessWidget {
       ),
     );
   }
+
+  ButtonStyle get style =>
+      textButtonStyle ??
+      (isDesk
+          ? KButtonStyles.lightGrayButtonStyle
+          : KButtonStyles.lightGrayButtonStyleWInf);
 }

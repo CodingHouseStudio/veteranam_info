@@ -105,10 +105,7 @@ class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
                 key: isHovering
                     ? KWidgetkeys.widget.donateButton.rotateIcon
                     : KWidgetkeys.widget.donateButton.icon,
-                icon: widget.icon ??
-                    KIcon.arrowUpRight.copyWith(
-                      color: AppColors.materialThemeWhite,
-                    ),
+                icon: widget.icon ?? KIcon.arrowUpRightWhite,
                 padding: KPadding.kPaddingSize12,
                 background: AppColors.materialThemeKeyColorsSecondary,
               ),
@@ -158,10 +155,7 @@ class _DonateButtonWidgetMob extends StatelessWidget {
             IconWidget(
               key: KWidgetkeys.widget.donateButton.icon,
               padding: KPadding.kPaddingSize12,
-              icon: icon ??
-                  KIcon.arrowUpRight.copyWith(
-                    color: AppColors.materialThemeKeyColorsNeutral,
-                  ),
+              icon: icon ?? KIcon.arrowUpRightNeutral,
               background: AppColors.materialThemeKeyColorsSecondary,
             ),
           ],

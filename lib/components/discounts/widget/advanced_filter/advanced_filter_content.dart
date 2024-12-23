@@ -492,11 +492,9 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
                 : AppColors.materialThemeWhite,
             child: Skeleton.leaf(
               child: DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationWidget.copyWith(
-                  color: isDesk
-                      ? AppColors.materialThemeKeyColorsNeutral
-                      : AppColors.materialThemeWhite,
-                ),
+                decoration: isDesk
+                    ? KWidgetTheme.boxDecorationWidget
+                    : KWidgetTheme.boxDecorationWhiteWidget,
                 // child: CheckPointAmountWidget(
                 //   key: itemKey,
                 //   maxLines: 1,

@@ -46,8 +46,7 @@ class ProfileBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
         DecoratedBox(
-          decoration: KWidgetTheme.boxDecorationHome
-              .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
+          decoration: KWidgetTheme.boxDecorationHomeNeutral,
           child: Padding(
             padding: isDesk
                 ? const EdgeInsets.symmetric(

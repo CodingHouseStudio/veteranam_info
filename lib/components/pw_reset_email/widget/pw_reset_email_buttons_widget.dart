@@ -77,8 +77,8 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
                       const PwResetEmailEvent.sendResetCode(),
                     ),
                 isDesk: widget.isDesk,
-                color: AppColors.materialThemeKeyColorsSecondary,
-                textColor: AppColors.materialThemeWhite,
+                // color: AppColors.materialThemeKeyColorsSecondary,
+                // textColor: AppColors.materialThemeWhite,
                 deskPadding: const EdgeInsets.symmetric(
                   horizontal: KPadding.kPaddingSize64,
                   vertical: KPadding.kPaddingSize12,

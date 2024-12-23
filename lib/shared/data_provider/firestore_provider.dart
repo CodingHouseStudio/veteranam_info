@@ -248,8 +248,10 @@ class FirestoreService {
     required UserSetting userSetting,
     required String userId,
   }) {
+    final userSettingJson = userSetting.toJson();
+    userSettingJson[UserSettingModelJsonField.id] = userId;
     return _db.collection(FirebaseCollectionName.userSettings).doc(userId).set(
-          userSetting.copyWith(id: userId).toJson(),
+          userSettingJson,
           setMergeOptions,
         );
   }

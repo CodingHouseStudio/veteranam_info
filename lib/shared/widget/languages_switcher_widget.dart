@@ -49,8 +49,10 @@ class LanguagesSwitcherWidget extends StatelessWidget {
         ),
         decoration: isSelected
             ? KWidgetTheme.boxDecorationBlackCircular
-            : KWidgetTheme.boxDecorationGrayCircular
-                .copyWith(color: unactiveIconColor),
+            : unactiveIconColor == null
+                ? KWidgetTheme.boxDecorationGrayCircular
+                : KWidgetTheme.boxDecorationGrayCircular
+                    .copyWith(color: unactiveIconColor),
         margin: const EdgeInsets.all(KPadding.kPaddingSize4),
         padding: const EdgeInsets.all(
           KPadding.kPaddingSize8,

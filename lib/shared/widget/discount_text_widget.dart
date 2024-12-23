@@ -37,9 +37,7 @@ class DiscountTextWidget extends StatelessWidget {
         if (eligibility != null) ...[
           Text(
             context.l10n.eligibility,
-            style: AppTextStyle.materialThemeLabelMedium.copyWith(
-              color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
-            ),
+            style: AppTextStyle.materialThemeLabelMediumVariant50,
           ),
           EligibilityWidget(
             eligibility: eligibility!,

@@ -20,9 +20,7 @@ class MobFaqBodyWidget extends StatelessWidget {
         final questionModelItems = isLoading
             ? List.generate(
                 KDimensions.shimmerQuestionItems,
-                (index) => KMockText.questionModel.copyWith(
-                  id: index.toString(),
-                ),
+                (index) => KMockText.questionModel,
               )
             : _.questionModelItems;
         return ScaffoldWidget(

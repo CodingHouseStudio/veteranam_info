@@ -62,6 +62,6 @@ class UserPhotoWidget extends StatelessWidget {
             // skeletonizerLoading: false,
           ),
         )
-      : (icon ?? KIcon.user)
-          .copyWith(color: AppColors.materialThemeKeyColorsSecondary);
+      : icon?.copyWith(color: AppColors.materialThemeKeyColorsSecondary) ??
+          KIcon.userSecondary;
 }

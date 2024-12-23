@@ -31,15 +31,10 @@ class DiscountTitleWidget extends StatelessWidget {
                           onPressed: () =>
                               context.read<ViewModeCubit>().setGridView(),
                           padding: KPadding.kPaddingSize12,
-                          buttonStyle: KButtonStyles
-                              .circularBorderNeutralButtonStyle
-                              .copyWith(
-                            backgroundColor: WidgetStatePropertyAll(
-                              state == ViewMode.grid
-                                  ? AppColors.materialThemeKeyColorsNeutral
-                                  : Colors.transparent,
-                            ),
-                          ),
+                          buttonStyle: state == ViewMode.grid
+                              ? KButtonStyles.circularBorderNeutralButtonStyle
+                              : KButtonStyles
+                                  .circularBorderTransparentButtonStyle,
                         ),
                         KSizedBox.kWidthSizedBox16,
                         IconButtonWidget(
@@ -47,15 +42,10 @@ class DiscountTitleWidget extends StatelessWidget {
                           onPressed: () =>
                               context.read<ViewModeCubit>().setListView(),
                           padding: KPadding.kPaddingSize12,
-                          buttonStyle: KButtonStyles
-                              .circularBorderNeutralButtonStyle
-                              .copyWith(
-                            backgroundColor: WidgetStatePropertyAll(
-                              state == ViewMode.list
-                                  ? AppColors.materialThemeKeyColorsNeutral
-                                  : Colors.transparent,
-                            ),
-                          ),
+                          buttonStyle: state == ViewMode.list
+                              ? KButtonStyles.circularBorderNeutralButtonStyle
+                              : KButtonStyles
+                                  .circularBorderTransparentButtonStyle,
                         ),
                       ],
                     );

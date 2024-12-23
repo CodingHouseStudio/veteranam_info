@@ -164,9 +164,7 @@ class _NavbarWidget extends StatelessWidget {
                   else
                     IconButtonWidget(
                       key: KWidgetkeys.widget.nawbar.menuButton,
-                      icon: KIcon.menu.copyWith(
-                        color: AppColors.materialThemeWhite,
-                      ),
+                      icon: KIcon.menuWhite,
                       background: AppColors.materialThemeKeyColorsSecondary,
                       onPressed: () async =>
                           context.dialog.showMobileMenuDialog(),
@@ -194,9 +192,7 @@ class _NavbarWidget extends StatelessWidget {
                             IconButtonWidget(
                               key: KWidgetkeys.widget.nawbar.loginIcon,
                               onPressed: () => context.goNamed(loginPath),
-                              icon: KIcon.person.copyWith(
-                                color: AppColors.materialThemeWhite,
-                              ),
+                              icon: KIcon.personWhite,
                               background:
                                   AppColors.materialThemeKeyColorsSecondary,
                             ),
@@ -221,14 +217,7 @@ class _NavbarWidget extends StatelessWidget {
                   children: [
                     IconButton(
                       key: KWidgetkeys.widget.nawbar.backButton,
-                      style: KButtonStyles.withoutStyle.copyWith(
-                        padding: const WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize12,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                        ),
-                      ),
+                      style: KButtonStyles.withoutStyleNavBar,
                       onPressed: () => context
                           .goNamed(backButtonPathName ?? KRoute.discounts.name),
                       icon: KIcon.arrowBack,

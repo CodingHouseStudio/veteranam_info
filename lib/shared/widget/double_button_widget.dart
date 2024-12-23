@@ -56,33 +56,66 @@ class DoubleButtonWidget extends StatelessWidget {
     }
   }
 
-  Widget get _body => isDesk
-      ? _DoubleButtonWidgetDesk(
-          text: text,
-          onPressed: onPressed,
-          color: color,
-          textColor: textColor,
-          widgetKey: widgetKey,
-          useBlackStyle: darkMode,
-          padding: deskPadding,
-          iconPadding: deskIconPadding,
-          textWidth: deskTextWidth,
-          icon: icon,
-          angle: angle,
-        )
-      : _DoubleButtonWidgetMob(
-          text: text,
-          onPressed: onPressed,
-          color: color,
-          textColor: textColor,
-          widgetKey: widgetKey,
-          verticalTextPadding: mobVerticalTextPadding,
-          horizontalTextPadding: mobHorizontalTextPadding,
-          textWidth: mobTextWidth,
-          iconPadding: mobIconPadding,
-          useBlackStyle: darkMode,
-          icon: icon,
-        );
+  Widget get _body {
+    final containerStyle = color == null
+        ? style
+        : style.copyWith(
+            color: color,
+          );
+    final textStyleValue = textColor == null
+        ? textStyle
+        : textStyle.copyWith(
+            color: textColor,
+          );
+    final iconWidget = icon ??
+        (textColor == null
+            ? iconStyle
+            : iconStyle.copyWith(
+                color: textColor,
+              ));
+    final background = color ??
+        (darkMode ?? false ? AppColors.materialThemeKeyColorsSecondary : null);
+    if (isDesk) {
+      return _DoubleButtonWidgetDesk(
+        text: text,
+        onPressed: onPressed,
+        widgetKey: widgetKey,
+        padding: deskPadding,
+        iconPadding: deskIconPadding,
+        textWidth: deskTextWidth,
+        angle: angle,
+        containerStyle: containerStyle,
+        textStyle: textStyleValue,
+        icon: iconWidget,
+        background: background,
+      );
+    } else {
+      return _DoubleButtonWidgetMob(
+        text: text,
+        onPressed: onPressed,
+        widgetKey: widgetKey,
+        verticalTextPadding: mobVerticalTextPadding,
+        horizontalTextPadding: mobHorizontalTextPadding,
+        textWidth: mobTextWidth,
+        iconPadding: mobIconPadding,
+        containerStyle: containerStyle,
+        textStyle: textStyleValue,
+        icon: iconWidget,
+        background: background,
+      );
+    }
+  }
+
+  BoxDecoration get style => darkMode ?? false
+      ? KWidgetTheme.boxDecorationBlack
+      : KWidgetTheme.boxDecorationGreen;
+
+  TextStyle get textStyle => darkMode ?? false
+      ? AppTextStyle.materialThemeTitleMediumWhite
+      : AppTextStyle.materialThemeTitleMedium;
+
+  Icon get iconStyle =>
+      darkMode ?? false ? KIcon.arrowUpRightWhite : KIcon.arrowUpRight;
 }
 
 class _DoubleButtonWidgetDesk extends StatefulWidget {
@@ -90,26 +123,26 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
     required this.text,
     required this.onPressed,
     required this.widgetKey,
-    this.textColor,
-    this.color,
-    this.useBlackStyle,
+    required this.icon,
+    required this.containerStyle,
+    required this.textStyle,
+    required this.background,
     this.padding,
     this.iconPadding,
     this.textWidth,
-    this.icon,
     this.angle,
   });
   final String text;
-  final Color? color;
-  final Color? textColor;
   final void Function()? onPressed;
   final Key widgetKey;
-  final bool? useBlackStyle;
   final EdgeInsets? padding;
   final double? iconPadding;
   final double? textWidth;
-  final Icon? icon;
   final double? angle;
+  final BoxDecoration containerStyle;
+  final TextStyle textStyle;
+  final Icon icon;
+  final Color? background;
 
   @override
   State<_DoubleButtonWidgetDesk> createState() =>
@@ -146,12 +179,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               child: Container(
                 width: widget.textWidth,
                 margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
-                decoration: KWidgetTheme.boxDecorationGreen.copyWith(
-                  color: widget.color ??
-                      (widget.useBlackStyle ?? false
-                          ? AppColors.materialThemeKeyColorsSecondary
-                          : null),
-                ),
+                decoration: widget.containerStyle,
                 padding: widget.padding ??
                     const EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize30,
@@ -160,12 +188,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                 child: Text(
                   widget.text,
                   key: KWidgetkeys.widget.doubleButton.text,
-                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                    color: widget.textColor ??
-                        (widget.useBlackStyle ?? false
-                            ? AppColors.materialThemeWhite
-                            : AppColors.materialThemeKeyColorsSecondary),
-                  ),
+                  style: widget.textStyle,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -188,17 +211,8 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                 key: isHovering
                     ? KWidgetkeys.widget.doubleButton.rotateIcon
                     : KWidgetkeys.widget.doubleButton.icon,
-                icon: widget.icon ??
-                    KIcon.arrowUpRight.copyWith(
-                      color: widget.textColor ??
-                          (widget.useBlackStyle ?? false
-                              ? AppColors.materialThemeWhite
-                              : AppColors.materialThemeKeyColorsSecondary),
-                    ),
-                background: widget.color ??
-                    (widget.useBlackStyle ?? false
-                        ? AppColors.materialThemeKeyColorsSecondary
-                        : null),
+                icon: widget.icon,
+                background: widget.background,
                 padding: widget.iconPadding ?? KPadding.kPaddingSize12,
               ),
             ),
@@ -214,26 +228,26 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.widgetKey,
-    this.verticalTextPadding,
-    this.textColor,
-    this.color,
-    this.textWidth,
-    this.iconPadding,
-    this.horizontalTextPadding,
-    this.useBlackStyle,
-    this.icon,
+    required this.textWidth,
+    required this.iconPadding,
+    required this.containerStyle,
+    required this.textStyle,
+    required this.icon,
+    required this.background,
+    required this.verticalTextPadding,
+    required this.horizontalTextPadding,
   });
   final String text;
-  final Color? color;
-  final Color? textColor;
   final void Function()? onPressed;
   final Key widgetKey;
+  final double? iconPadding;
+  final double? textWidth;
+  final BoxDecoration containerStyle;
+  final TextStyle textStyle;
+  final Icon icon;
+  final Color? background;
   final double? verticalTextPadding;
   final double? horizontalTextPadding;
-  final double? textWidth;
-  final double? iconPadding;
-  final bool? useBlackStyle;
-  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -253,12 +267,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
                   (iconPaddingValue * 2) -
                   KSize.kPixel8,
             ),
-            decoration: KWidgetTheme.boxDecorationGreen.copyWith(
-              color: color ??
-                  (useBlackStyle ?? false
-                      ? AppColors.materialThemeKeyColorsSecondary
-                      : null),
-            ),
+            decoration: containerStyle,
             padding: EdgeInsets.symmetric(
               horizontal: horizontalTextPadding ?? KPadding.kPaddingSize30,
               vertical: verticalTextPadding ?? KPadding.kPaddingSize8,
@@ -266,28 +275,14 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             child: Text(
               text,
               key: KWidgetkeys.widget.doubleButton.text,
-              style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                color: textColor ??
-                    (useBlackStyle ?? false
-                        ? AppColors.materialThemeWhite
-                        : AppColors.materialThemeKeyColorsSecondary),
-              ),
+              style: textStyle,
               textAlign: TextAlign.center,
             ),
           ),
           IconWidget(
             key: KWidgetkeys.widget.doubleButton.icon,
-            icon: icon ??
-                KIcon.arrowUpRight.copyWith(
-                  color: textColor ??
-                      (useBlackStyle ?? false
-                          ? AppColors.materialThemeWhite
-                          : AppColors.materialThemeKeyColorsSecondary),
-                ),
-            background: color ??
-                (useBlackStyle ?? false
-                    ? AppColors.materialThemeKeyColorsSecondary
-                    : null),
+            icon: icon,
+            background: background,
             padding: iconPaddingValue,
           ),
         ],

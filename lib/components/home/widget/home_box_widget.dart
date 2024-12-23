@@ -40,16 +40,10 @@ class HomeBoxWidget extends StatelessWidget {
           if (isDesk) KSizedBox.kHeightSizedBox8,
           DefaultTextStyle(
             style: isDesk
-                ? AppTextStyle.h1.copyWith(
-                    color: AppColors.materialThemeKeyColorsSecondary,
-                  )
+                ? AppTextStyle.h1
                 : isTablet
-                    ? AppTextStyle.h1Tablet.copyWith(
-                        color: AppColors.materialThemeKeyColorsSecondary,
-                      )
-                    : AppTextStyle.h1Mob.copyWith(
-                        color: AppColors.materialThemeKeyColorsSecondary,
-                      ),
+                    ? AppTextStyle.h1Tablet
+                    : AppTextStyle.h1Mob,
             child: RepaintBoundary(
               child: AnimatedTextKit(
                 repeatForever: true,
