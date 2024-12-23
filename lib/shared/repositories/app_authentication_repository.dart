@@ -607,9 +607,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     final resultUser = await updateUserSetting(
       currentUserSetting.copyWith(deletedOn: ExtendedDateTime.current),
     );
-    resultUser.fold(
+    resultUser.leftMap(
       (l) => failure = Left(l),
-      Right.new,
     );
 
     final result = await logOut();

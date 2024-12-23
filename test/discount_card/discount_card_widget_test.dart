@@ -23,8 +23,10 @@ void main() {
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(
-          mockDiscountRepository
-              .getDiscount(KTestText.discountModelItems.first.id),
+          mockDiscountRepository.getDiscount(
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
+          ),
         ).thenAnswer(
           (realInvocation) async =>
               Left(SomeFailure.serverError(error: KGroupText.failure)),
@@ -42,8 +44,10 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(
-          mockDiscountRepository
-              .getDiscount(KTestText.discountModelItems.first.id),
+          mockDiscountRepository.getDiscount(
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
+          ),
         ).thenAnswer(
           (realInvocation) async => Right(KTestText.discountModelItems.first),
         );
@@ -73,8 +77,10 @@ void main() {
           group('${KGroupText.failureGet} ', () {
             setUp(() {
               when(
-                mockDiscountRepository
-                    .getDiscount(KTestText.discountModelItems.first.id),
+                mockDiscountRepository.getDiscount(
+                  id: KTestText.discountModelItems.first.id,
+                  showOnlyBusinessDiscounts: false,
+                ),
               ).thenAnswer(
                 (realInvocation) async =>
                     Left(SomeFailure.notFound(error: KGroupText.failure)),

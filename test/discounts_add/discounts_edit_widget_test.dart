@@ -38,7 +38,9 @@ void main() {
       ).thenAnswer((invocation) async => const Right(true));
 
       when(
-        mockDiscountRepository.getDiscountItems(),
+        mockDiscountRepository.getDiscountItems(
+          showOnlyBusinessDiscounts: false,
+        ),
       ).thenAnswer((invocation) => Stream.value(KTestText.discountModelItems));
       when(
         mockCitiesRepository.getCities(),

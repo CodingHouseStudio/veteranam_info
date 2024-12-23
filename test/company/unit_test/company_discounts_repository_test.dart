@@ -31,6 +31,7 @@ void main() {
           mockFirestoreService.getDiscount(
             id: KTestText.userWithoutPhoto.id,
             companyId: KTestText.fullCompanyModel.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer((_) async => KTestText.discountModelItems.first);
 
@@ -75,6 +76,7 @@ void main() {
           mockFirestoreService.getDiscount(
             id: KTestText.userWithoutPhoto.id,
             companyId: KTestText.fullCompanyModel.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
           Exception(KGroupText.failure),
@@ -118,6 +120,7 @@ void main() {
           mockFirestoreService.getDiscount(
             id: KTestText.userWithoutPhoto.id,
             companyId: KTestText.fullCompanyModel.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
