@@ -74,6 +74,7 @@ enum PlatformEnum {
 }
 
 enum DiscountEnum {
+  featured,
   byDate,
   largestSmallest,
 }

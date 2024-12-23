@@ -35,7 +35,7 @@ class ProfileBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
         // ],
       ],
@@ -118,7 +118,7 @@ class ProfileBodyWidget extends StatelessWidget {
           subtitle: context.l10n.logOutProfileQuestion,
           confirmText: context.l10n.logOut,
           confirmButtonBackground: AppColors.materialThemeKeyColorsSecondary,
-          onPressed: () {
+          onAppliedPressed: () {
             context.read<AuthenticationBloc>().add(
                   AuthenticationLogoutRequested(),
                 );
@@ -164,7 +164,7 @@ class ProfileBodyWidget extends StatelessWidget {
           subtitle: context.l10n.deleteProfileQuestion,
           confirmText: context.l10n.delete,
           confirmButtonBackground: AppColors.materialThemeRefErrorError60,
-          onPressed: () {
+          onAppliedPressed: () {
             context.read<AuthenticationBloc>().add(
                   AuthenticationDeleteRequested(),
                 );

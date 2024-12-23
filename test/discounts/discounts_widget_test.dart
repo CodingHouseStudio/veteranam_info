@@ -73,8 +73,9 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscountItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
+            showOnlyBusinessDiscounts: false,
+            // reportIdItems: KTestText.reportItems.getIdCard,
+          ),
         ).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
         );
@@ -144,8 +145,9 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscountItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
+            showOnlyBusinessDiscounts: false,
+            // reportIdItems: KTestText.reportItems.getIdCard,
+          ),
         ).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );

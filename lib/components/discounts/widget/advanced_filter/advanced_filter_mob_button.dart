@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +7,8 @@ import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bl
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class AdvancedFilterButton extends StatelessWidget {
-  const AdvancedFilterButton({
+class AdvancedFilterMobButton extends StatelessWidget {
+  const AdvancedFilterMobButton({
     // required this.isDesk,
     // this.onPressed,
     super.key,
@@ -63,12 +65,15 @@ class AdvancedFilterButton extends StatelessWidget {
         // KSizedBox.kWidthSizedBox8,
         icon: KIcon.tune,
         onPressed: () async {
-          final bloc = context.read<DiscountsWatcherBloc>();
-          await showModalBottomSheet<void>(
+          final bloc = context.read<DiscountsWatcherBloc>()
+            ..add(
+              const DiscountsWatcherEvent.mobSaveFilter(),
+            );
+          await showModalBottomSheet<bool>(
             context: context,
             isScrollControlled: true,
             barrierColor:
-                AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+                AppColors.materialThemeKeyColorsSecondaryWithOpacity0_2,
             backgroundColor: AppColors.materialThemeKeyColorsNeutral,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -80,6 +85,36 @@ class AdvancedFilterButton extends StatelessWidget {
               childWidget: const _AdvancedFilterMobDialog(),
               bloc: bloc,
             ),
+          ).then(
+            (value) async {
+              switch (value) {
+                case true:
+                  bloc.add(const DiscountsWatcherEvent.mobSetFilter());
+                case false:
+                  bloc.add(const DiscountsWatcherEvent.filterReset());
+                case null:
+                  if (!bloc.state.discountFilterRepository.saveFilterEqual) {
+                    // Wait close showModalBottomSheet dialog
+                    // ignore: inference_failure_on_instance_creation
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    context.dialog.showConfirmationDialog(
+                      isDesk: true,
+                      title: context.l10n.applySelectedFilter,
+                      subtitle: context.l10n.applySelectedFilterSubtitle,
+                      confirmText: context.l10n.yes,
+                      unconfirmText: context.l10n.no,
+                      onAppliedPressed: () =>
+                          bloc.add(const DiscountsWatcherEvent.mobSetFilter()),
+                      confirmButtonBackground:
+                          AppColors.materialThemeKeyColorsSecondary,
+                      onCancelPressed: () => bloc
+                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
+                      onClosePressed: () => bloc
+                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
+                    );
+                  }
+              }
+            },
           );
         },
         //if (isDesk) KIcon.meil,
@@ -132,15 +167,10 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     builder: (context, state) {
                       return AdvancedFilterResetButton(
                         isDesk: false,
-                        resetEvent: state
-                                .discountFilterRepository.hasActivityItem
-                            ? () {
-                                context.pop();
-                                context.read<DiscountsWatcherBloc>().add(
-                                      const DiscountsWatcherEvent.filterReset(),
-                                    );
-                              }
-                            : null,
+                        resetEvent:
+                            state.discountFilterRepository.hasActivityItem
+                                ? () => context.pop(false)
+                                : null,
                       );
                     },
                   ),
@@ -148,12 +178,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     text: context.l10n.apply,
                     hasAlign: false,
                     isDesk: false,
-                    onPressed: () {
-                      context.pop();
-                      context
-                          .read<DiscountsWatcherBloc>()
-                          .add(const DiscountsWatcherEvent.setMobFilter());
-                    },
+                    onPressed: () => context.pop(true),
                     widgetKey: KWidgetkeys
                         .screen.discounts.advancedFilterMobAppliedButton,
                     darkMode: true,

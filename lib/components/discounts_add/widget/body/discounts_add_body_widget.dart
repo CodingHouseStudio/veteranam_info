@@ -465,7 +465,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   unconfirmText: context.l10n.continueWorking,
                   confirmButtonBackground:
                       AppColors.materialThemeKeyColorsSecondary,
-                  onPressed: () {
+                  onAppliedPressed: () {
                     context.goNamed(KRoute.myDiscounts.name);
                   },
                 )

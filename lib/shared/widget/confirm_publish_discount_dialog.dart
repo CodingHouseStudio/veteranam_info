@@ -69,9 +69,10 @@ class _ConfirmPublishDiscountDialogState
                   KSizedBox.kHeightSizedBox16
                 else
                   KSizedBox.kHeightSizedBox8,
-                RichText(
+                // Android not support RichText Widget
+                Text.rich(
                   key: KWidgetkeys.widget.confirmPublishDiscount.description,
-                  text: TextSpan(
+                  TextSpan(
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeBodyLarge
                         : AppTextStyle.materialThemeBodyMedium,

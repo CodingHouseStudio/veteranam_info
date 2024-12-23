@@ -52,7 +52,7 @@ class CompanyBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         ],
         const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
+          color: AppColors.materialThemeRefNeutralNeutral90,
         ),
       ],
       isForm: true,

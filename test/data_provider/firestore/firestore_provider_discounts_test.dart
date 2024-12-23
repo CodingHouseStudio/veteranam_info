@@ -138,8 +138,9 @@ void main() {
 
     test('get discounts', () async {
       await expectLater(
-        firestoreService.getDiscounts(//null
-            ),
+        firestoreService.getDiscounts(
+          showOnlyBusinessDiscounts: false, //null
+        ),
         emitsInOrder([
           [KTestText.discountModelItems.last],
         ]),

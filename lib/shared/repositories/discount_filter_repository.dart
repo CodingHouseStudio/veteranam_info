@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 /// A model for managing and filtering discount items by categories, locations,
@@ -17,33 +18,52 @@ import 'package:veteranam/shared/shared_dart.dart';
 /// containing metadata
 /// about the filter (e.g., whether it is selected).
 class DiscountFilterRepository implements IDiscountFilterRepository {
+  /// Constructor to initialize maps.
+  DiscountFilterRepository.init()
+      : _locationMap = {},
+        _categoryMap = {},
+        _activeCategoryMap = {},
+        _mobSaveActiveCategoryMap = {},
+        _locationSearchMap = {},
+        _activeLocationMap = {},
+        _mobSaveActiveLocationMap = {},
+        _eligibilityMap = {},
+        _activeEligibilityMap = {},
+        _mobSaveActiveEligibilityMap = {},
+        _mapEquality = const MapEquality();
+
   /// Constructor to initialize an empty maps.
   const DiscountFilterRepository.empty()
       : _locationMap = const {},
         _categoryMap = const {},
         _activeCategoryMap = const {},
+        _mobSaveActiveCategoryMap = const {},
         _locationSearchMap = const {},
         _activeLocationMap = const {},
+        _mobSaveActiveLocationMap = const {},
         _eligibilityMap = const {},
-        _activeEligibilityMap = const {};
+        _activeEligibilityMap = const {},
+        _mobSaveActiveEligibilityMap = const {},
+        _mapEquality = const MapEquality();
 
   /// Constructor to initialize maps.
-  DiscountFilterRepository.init({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-  })  : _categoryMap = {},
-        _activeCategoryMap = {},
-        _locationMap = {},
-        _locationSearchMap = {},
-        _activeLocationMap = {},
-        _eligibilityMap = {},
-        _activeEligibilityMap = {} {
-    _getFilterValuesFromDiscountItems(
-      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
-      isEnglish: isEnglish,
-      callMethodName: 'DiscountFilterRepository.init',
-    ).fold((l) => initError = l, Right.new);
-  }
+  // DiscountFilterRepository.init(
+  //   List<DiscountModel> unmodifiedDiscountModelItems,
+  // )   : _categoryMap = {},
+  //       _activeCategoryMap = {},
+  //       _mobSaveActiveCategoryMap = {},
+  //       _locationMap = {},
+  //       _locationSearchMap = {},
+  //       _activeLocationMap = {},
+  //       _mobSaveActiveLocationMap = {},
+  //       _eligibilityMap = {},
+  //       _activeEligibilityMap = {},
+  //       _mobSaveActiveEligibilityMap = {},
+  //       _mapEquality = const MapEquality() {
+  //   getFilterValuesFromDiscountItems(
+  //     unmodifiedDiscountModelItems,
+  //   ).fold((l) => initError = l, Right.new);
+  // }
 
   // Maps to store current available filters
   final Map<String, FilterItem> _eligibilityMap;
@@ -55,8 +75,14 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   final Map<String, FilterItem> _activeCategoryMap;
   final Map<String, FilterItem> _activeLocationMap;
 
+  // Maps to store current selected mobile filters
+  final Map<String, FilterItem> _mobSaveActiveEligibilityMap;
+  final Map<String, FilterItem> _mobSaveActiveCategoryMap;
+  final Map<String, FilterItem> _mobSaveActiveLocationMap;
+
   final Map<String, FilterItem> _locationMap;
   static var _locationSearchValue = '';
+  final MapEquality<String, FilterItem> _mapEquality;
 
   // Maps to store current available filters
   @override
@@ -74,7 +100,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   @override
   Map<String, FilterItem> get activeLocationMap => _activeLocationMap;
 
-  static SomeFailure? initError;
+  // static SomeFailure? initError;
+  static final UserRepository _userRepository = GetIt.I.get<UserRepository>();
 
   /// Checks if any filters are currently activity in any dimension.
   @override
@@ -85,6 +112,15 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
 
   @override
   bool get locationIsNotEpmty => _locationMap.isNotEmpty;
+
+  @override
+  bool get saveFilterEqual =>
+      _mapEquality.equals(_activeCategoryMap, _mobSaveActiveCategoryMap) &&
+      _mapEquality.equals(
+        _activeEligibilityMap,
+        _mobSaveActiveEligibilityMap,
+      ) &&
+      _mapEquality.equals(_activeLocationMap, _mobSaveActiveLocationMap);
 
   /// Combines all activity filters into a single map.
   @override
@@ -101,7 +137,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, bool> addCategory({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   }) {
     return _addFilterItem(
       valueUK: valueUK,
@@ -110,7 +145,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.category,
       callMethodName: 'addCategory',
-      isEnglish: isEnglish,
     );
   }
 
@@ -121,7 +155,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, bool> addLocation({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   }) {
     return _addFilterItem(
       valueUK: valueUK,
@@ -130,7 +163,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.location,
       callMethodName: 'addLocation',
-      isEnglish: isEnglish,
     );
   }
 
@@ -141,7 +173,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, bool> addEligibility({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
   }) {
     return _addFilterItem(
       valueUK: valueUK,
@@ -150,7 +181,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.eligibility,
       callMethodName: 'addEligibility',
-      isEnglish: isEnglish,
     );
   }
 
@@ -180,6 +210,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           data: value,
           tag: 'locationSearch',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
@@ -190,18 +222,15 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
 
   /// Clear values in the activity map
   @override
-  Either<SomeFailure, bool> resetAll({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-  }) {
+  Either<SomeFailure, bool> resetAll(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
     _activeCategoryMap.clear();
     _activeEligibilityMap.clear();
     _activeLocationMap.clear();
 
-    return _getFilterValuesFromDiscountItems(
-      unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
-      isEnglish: isEnglish,
-      callMethodName: 'resetAll',
+    return getFilterValuesFromDiscountItems(
+      unmodifiedDiscountModelItems,
     );
   }
 
@@ -233,6 +262,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           tag: 'getFilterList',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
         ),
@@ -240,12 +271,73 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
     }
   }
 
+  /// Saves the current active filter state. The saved state can be reverted
+  /// using the [revertActiveFilter] method.
+  @override
+  Either<SomeFailure, bool> saveActiveFilter() {
+    try {
+      _mobSaveActiveEligibilityMap
+        ..clear()
+        ..addAll(_activeEligibilityMap);
+      _mobSaveActiveCategoryMap
+        ..clear()
+        ..addAll(_activeCategoryMap);
+      _mobSaveActiveLocationMap
+        ..clear()
+        ..addAll(_activeLocationMap);
+      return const Right(true);
+    } catch (e, stack) {
+      return Left(
+        SomeFailure.filter(
+          error: e,
+          stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
+          tag: 'saveActiveFilter',
+          tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
+        ),
+      );
+    }
+  }
+
+  /// Reverts the current active filter to the previously saved state using
+  /// the [saveActiveFilter] method.
+  @override
+  Either<SomeFailure, bool> revertActiveFilter(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
+    try {
+      _activeEligibilityMap
+        ..clear()
+        ..addAll(_mobSaveActiveEligibilityMap);
+      _activeCategoryMap
+        ..clear()
+        ..addAll(_mobSaveActiveCategoryMap);
+      _activeLocationMap
+        ..clear()
+        ..addAll(_mobSaveActiveLocationMap);
+      return getFilterValuesFromDiscountItems(
+        unmodifiedDiscountModelItems,
+      );
+    } catch (e, stack) {
+      return Left(
+        SomeFailure.filter(
+          error: e,
+          stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
+          tag: 'saveActiveFilter',
+          tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
+        ),
+      );
+    }
+  }
+
   /// Set new values to map from List<DiscountModel>
-  Either<SomeFailure, bool> _getFilterValuesFromDiscountItems({
-    required List<DiscountModel> unmodifiedDiscountModelItems,
-    required bool isEnglish,
-    required String callMethodName,
-  }) {
+  @override
+  Either<SomeFailure, bool> getFilterValuesFromDiscountItems(
+    List<DiscountModel> unmodifiedDiscountModelItems,
+  ) {
     try {
       _eligibilityMap.clear();
       _categoryMap.clear();
@@ -286,7 +378,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: categoriesList,
         activityMap: _activeCategoryMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _categoryMap.addAll,
@@ -295,7 +387,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeCategoryMap,
         itemsMap: _categoryMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
       // Category. End:
 
@@ -303,8 +395,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getLocationFilterFromTranslateModel(
         list: locationList,
         activityMap: _activeLocationMap,
-        callMethodName: callMethodName,
-        isEnglish: isEnglish,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _locationMap.addAll,
@@ -313,7 +404,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeLocationMap,
         itemsMap: _locationMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
       _locationSearchMap.addAll(_locationMap);
       //Location. End.
@@ -322,13 +413,13 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: eligibilitiesList.getTranslateModels,
         activityMap: _activeEligibilityMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold((l) => failure = l, _eligibilityMap.addAll);
 
       _addActivityMapToItemsMap(
         activityMap: _activeEligibilityMap,
         itemsMap: _eligibilityMap,
-        callMethodName: callMethodName,
+        callMethodName: 'getFilterValuesFromDiscountItems',
       );
 
       // Eligibility. End:
@@ -340,11 +431,10 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
-          data: 'isEnglish: $isEnglish',
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           tag: 'getFilterValuesFromDiscountItems',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-          tag2Key: ErrorText.callFrom,
-          tag2: callMethodName,
         ),
       );
     }
@@ -357,7 +447,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required _FilterEnum filterEnum,
     required String callMethodName,
-    required bool isEnglish,
   }) {
     try {
       // Add New Filter Item To activity List and Change Is Selected For
@@ -379,7 +468,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       } else {
         activityFilter.remove(valueUK);
       }
-
       filter[valueUK] = filterItem;
       // Add New Filter Item To activity List and Change Is Selected For Item
       // With
@@ -474,7 +562,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           list: locationList,
           activityMap: _activeLocationMap,
           callMethodName: callMethodName,
-          isEnglish: isEnglish,
         ).fold(
           (l) => failure = l,
           (r) => _locationMap
@@ -512,6 +599,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           data: 'valueUK: $valueUK | activityFilter: $activityFilter '
               '| filterEnum: $filterEnum',
           tag: '_addFilterItem',
@@ -542,6 +631,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           data: 'activityMap: $activityMap',
           tag: '_addActivityMapToItemsMap',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
@@ -616,6 +707,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       SomeFailure.filter(
         error: e,
         stack: stack,
+        user: _userRepository.currentUser,
+        userSetting: _userRepository.currentUserSetting,
         data: 'activityFilter: $activityFilter',
         tag: '_activityListContainAnyValues',
         tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
@@ -673,6 +766,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         SomeFailure.filter(
           error: e,
           stack: stack,
+          user: _userRepository.currentUser,
+          userSetting: _userRepository.currentUserSetting,
           data: 'activityMap: $activityMap',
           tag: '_getFilterFromTranslateModel',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
@@ -691,7 +786,6 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getLocationFilterFromTranslateModel({
     required List<TranslateModel> list,
     required Map<String, FilterItem> activityMap,
-    required bool isEnglish,
     required String callMethodName,
   }) {
     return _getFilterFromTranslateModel(
@@ -713,7 +807,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           (a, b) {
             if (a.isEmpty) return 0;
             if (b.isEmpty) return 1;
-            if (isEnglish && groupList[a]!.first.en != null) {
+            if (_userRepository.isEnglish && groupList[a]!.first.en != null) {
               // sorting by english alphabet if isEnglish and item
               // contain english value
               return groupList[a]!

@@ -14,8 +14,12 @@ class DiscountRepository implements IDiscountRepository {
       : _firestoreService = firestoreService;
   final FirestoreService _firestoreService;
   @override
-  Stream<List<DiscountModel>> getDiscountItems() =>
-      _firestoreService.getDiscounts();
+  Stream<List<DiscountModel>> getDiscountItems({
+    required bool showOnlyBusinessDiscounts,
+  }) =>
+      _firestoreService.getDiscounts(
+        showOnlyBusinessDiscounts: showOnlyBusinessDiscounts,
+      );
 
   @override
   Future<void> addMockDiscountItems() async {
@@ -40,7 +44,10 @@ class DiscountRepository implements IDiscountRepository {
   Stream<List<DiscountModel>> getDiscountsByCompanyId(
     String companyId,
   ) =>
-      _firestoreService.getDiscounts(userId: companyId);
+      _firestoreService.getDiscounts(
+        userId: companyId,
+        showOnlyBusinessDiscounts: false,
+      );
 
   @override
   Future<Either<SomeFailure, bool>> deleteDiscountsById(
@@ -73,11 +80,15 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, DiscountModel>> getDiscount(
-    String id,
-  ) async {
+  Future<Either<SomeFailure, DiscountModel>> getDiscount({
+    required String id,
+    required bool showOnlyBusinessDiscounts,
+  }) async {
     try {
-      final discountModel = await _firestoreService.getDiscount(id: id);
+      final discountModel = await _firestoreService.getDiscount(
+        id: id,
+        showOnlyBusinessDiscounts: showOnlyBusinessDiscounts,
+      );
       return Right(discountModel);
     } on FirebaseException catch (e, stack) {
       return Left(
@@ -319,6 +330,7 @@ class DiscountRepository implements IDiscountRepository {
       final discountModel = await _firestoreService.getDiscount(
         id: id,
         companyId: companyId,
+        showOnlyBusinessDiscounts: false,
       );
       return Right(discountModel);
     } on FirebaseException catch (e, stack) {

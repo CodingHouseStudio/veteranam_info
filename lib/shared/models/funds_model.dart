@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/models/models.dart';
 
@@ -8,8 +10,12 @@ part 'funds_model.g.dart';
 class FundModel with _$FundModel {
   const factory FundModel({
     required String id,
-    @TranslateConverter() required TranslateModel title,
-    @TranslateConverter() required TranslateModel description,
+    @JsonKey(name: FundModelJsonField.title)
+    @TranslateConverter()
+    required TranslateModel title,
+    @JsonKey(name: FundModelJsonField.description)
+    @TranslateConverter()
+    required TranslateModel description,
     required String link,
     // required String domain,
     // String? registered,
@@ -28,9 +34,9 @@ class FundModel with _$FundModel {
 
 abstract class FundModelJsonField {
   static const id = 'id';
-  static const title = 'title';
+  static const title = 'titleT';
   static const titleEN = 'titleEN';
-  static const description = 'description';
+  static const description = 'descriptionT';
   static const descriptionEN = 'descriptionEN';
   static const link = 'link';
   static const image = 'image';

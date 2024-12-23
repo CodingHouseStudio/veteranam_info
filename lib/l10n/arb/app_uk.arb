@@ -600,8 +600,8 @@
   "@discountsServicesSubtitle": {
     "examples": "Текст на сторінці Home, опис знижок"
   },
-  "toDiscount": "До знижок",
-  "@toDiscount": {
+  "toDiscounts": "знижок",
+  "@toDiscounts": {
     "examples": "Текст для кнопки на сторінці Home.",
     "description": "Кнопка використовується для переходу на сторінку Discounts."
   },
@@ -812,7 +812,7 @@
   "@filterApplied": {
     "examples": "Текст на сторінці Discount для додаткових фільтрів"
   },
-  "fromLargestToSmallest": "Найбільші знижки зверху",
+  "fromLargestToSmallest": "Від найбільшої знижки",
   "@fromLargestToSmallest": {
     "examples": "Текст для кнопки на сторінці Discount для додаткових фільтрів",
     "description": "Кнопка використовується для застозування і деактивації фільтра за величиною знижки."
@@ -1679,6 +1679,23 @@
   "moreDetails": "Детальніше",
   "@moreDetails": {
     "examples": "Текст для кнопки на сторінці Discounts"
+  },
+  "applySelectedFilter": "Застосувати вибраний фільтр?",
+  "@applySelectedFilter": {
+    "examples": "Текст для діалогу на сторінці Discounts при натисканні поза меж ділогу фільтрації на мобільній версії"
+  },
+  "applySelectedFilterSubtitle": "Ви обрали фільтри, але не застосували їх. Бажаєте застосувати їх?",
+  "@applySelectedFilterSubtitle": {
+    "examples": "Текст для діалогу на сторінці Discounts при натисканні поза меж ділогу фільтрації на мобільній версії"
+  },
+  "to": "до",
+  "@to": {
+    "examples": "Текст для кнопки на назад"
+  },
+  "featured": "За зомовчуванням",
+  "@featured": {
+    "examples": "Текст для кнопки сортування на сторінці Discount",
+    "description": "Кнопка використовується для сортування знижок за датою. Від найновіших до найстаріших. Перші знижки будуть ті які додані бізнесом"
   },
   "favorite": "Подобається",
   "@favorite": {

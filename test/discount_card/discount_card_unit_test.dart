@@ -34,7 +34,8 @@ void main() {
       act: (bloc) async {
         when(
           mockdiscountRepository.getDiscount(
-            KTestText.discountModelItems.first.id,
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
           (_) async => Right(KTestText.discountModelItems.first),
@@ -73,7 +74,8 @@ void main() {
       act: (bloc) async {
         when(
           mockdiscountRepository.getDiscount(
-            KTestText.discountModelItems.first.id,
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),

@@ -16,7 +16,16 @@ class PwResetEmailBodyWidget extends StatelessWidget {
           titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
             precent: KDimensions.twentyPercent,
           ),
+          showAppBar: Config.isWeb,
+          showMobBottomNavigation: false,
           titleChildWidgetsFunction: ({required isDesk}) => [
+            if (!Config.isWeb && !_.formState.isSended) ...[
+              KSizedBox.kHeightSizedBox8,
+              BackButtonWidget(
+                backPageName: null,
+                pathName: KRoute.login.name,
+              ),
+            ],
             if (isDesk)
               KSizedBox.kHeightSizedBox80
             else
@@ -50,9 +59,10 @@ class PwResetEmailBodyWidget extends StatelessWidget {
                     )
                   : EdgeInsets.zero,
               child: _.formState.isSended
-                  ? RichText(
+                  // Android not support RichText Widget
+                  ? Text.rich(
                       key: KWidgetkeys.screen.pwResetEmail.resendSubtitle,
-                      text: TextSpan(
+                      TextSpan(
                         style: AppTextStyle.materialThemeBodyLarge,
                         children: [
                           TextSpan(
@@ -83,7 +93,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
             if (_.formState.isSended) ...[
               KSizedBox.kHeightSizedBox16,
               Align(
-                alignment: Alignment.topCenter,
+                alignment: isDesk ? Alignment.topCenter : Alignment.topLeft,
                 child: TextButton(
                   key: KWidgetkeys.screen.pwResetEmail.cancelButton,
                   onPressed: () => context

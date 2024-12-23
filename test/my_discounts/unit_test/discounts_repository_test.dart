@@ -30,6 +30,7 @@ void main() {
         when(
           mockFirestoreService.getDiscounts(
             userId: KTestText.userWithoutPhoto.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
           (_) => Stream.value(KTestText.discountModelItems),
@@ -101,6 +102,7 @@ void main() {
         when(
           mockFirestoreService.getDiscounts(
             userId: KTestText.userWithoutPhoto.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer((_) => Stream.error(KGroupText.failureGet));
         when(

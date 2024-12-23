@@ -79,6 +79,11 @@ class _DiscountTitleWidgetState extends State<DiscountTitleWidget> {
               : null,
           titleKey: KWidgetkeys.screen.discounts.title,
           isDesk: widget.isDesk,
+          preDividerWidget: widget.isDesk
+              ? null
+              : DiscountsFilterMob(
+                  key: KWidgetkeys.screen.discounts.advancedFilterMob,
+                ),
         ),
       ),
     );

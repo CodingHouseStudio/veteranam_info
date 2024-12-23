@@ -186,7 +186,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
         confirmText: context.l10n.delete,
         unconfirmText: context.l10n.continueWorking,
         confirmButtonBackground: AppColors.materialThemeKeyColorsSecondary,
-        onPressed: () {
+        onAppliedPressed: () {
           context.read<MyDiscountsWatcherBloc>().add(
                 MyDiscountsWatcherEvent.deleteDiscount(
                   widget.discountModel.id,

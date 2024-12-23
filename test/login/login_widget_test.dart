@@ -184,7 +184,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
-        testWidgets('${KRoute.pwResetEmail.name} ', (tester) async {
+        testWidgets('${KRoute.forgotPassword.name} ', (tester) async {
           Config.roleValue = Config.business;
           await loginPumpAppHelper(
             mockAuthenticationRepository: mockAuthenticationRepository,

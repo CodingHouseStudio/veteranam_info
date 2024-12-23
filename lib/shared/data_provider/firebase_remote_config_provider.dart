@@ -45,4 +45,14 @@ class FirebaseRemoteConfigProvider {
       return '';
     }
   }
+
+  bool getBool(String key) {
+    try {
+      return _firebaseRemoteConfig.getBool(
+        key,
+      );
+    } catch (e) {
+      return false;
+    }
+  }
 }

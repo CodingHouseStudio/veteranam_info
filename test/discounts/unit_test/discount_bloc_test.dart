@@ -32,8 +32,9 @@ void main() {
 
       when(
         mockdiscountRepository.getDiscountItems(
-            // reportIdItems: KTestText.reportItems.getIdCard,
-            ),
+          showOnlyBusinessDiscounts: false,
+          // reportIdItems: KTestText.reportItems.getIdCard,
+        ),
       ).thenAnswer(
         (_) => Stream.value(KTestText.discountModelItemsModify),
       );
@@ -59,8 +60,11 @@ void main() {
         // reportRepository: mockReportRepository,
         // appAuthenticationRepository: mockAppAuthenticationRepository,
         firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        userRepository: mockUserRepository,
       );
+      if (GetIt.I.isRegistered<UserRepository>()) {
+        GetIt.I.unregister<UserRepository>();
+      }
+      GetIt.I.registerSingleton<UserRepository>(mockUserRepository);
     });
 
     blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
@@ -84,8 +88,9 @@ void main() {
       act: (bloc) async {
         when(
           mockdiscountRepository.getDiscountItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
+            showOnlyBusinessDiscounts: false,
+            // reportIdItems: KTestText.reportItems.getIdCard,
+          ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
         );
@@ -527,7 +532,9 @@ void main() {
         //   ),
         // );
         when(
-          mockdiscountRepository.getDiscountItems(),
+          mockdiscountRepository.getDiscountItems(
+            showOnlyBusinessDiscounts: false,
+          ),
         ).thenAnswer(
           (_) => Stream.value([KTestText.discountModelItemsModify.first]),
         );
@@ -549,7 +556,7 @@ void main() {
             const DiscountsWatcherEvent.loadNextItems(),
           )
           ..add(
-            const DiscountsWatcherEvent.setMobFilter(),
+            const DiscountsWatcherEvent.mobSetFilter(),
           );
       },
       expect: () => [

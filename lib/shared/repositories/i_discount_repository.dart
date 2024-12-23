@@ -2,11 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 abstract class IDiscountRepository {
-  Stream<List<DiscountModel>> getDiscountItems(
-      //{List<String>? reportIdItems}
-      );
+  Stream<List<DiscountModel>> getDiscountItems({
+    required bool showOnlyBusinessDiscounts,
+  });
 
-  Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
+  Future<Either<SomeFailure, DiscountModel>> getDiscount({
+    required String id,
+    required bool showOnlyBusinessDiscounts,
+  });
 
   Future<Either<SomeFailure, DiscountModel>> getCompanyDiscount({
     required String id,
