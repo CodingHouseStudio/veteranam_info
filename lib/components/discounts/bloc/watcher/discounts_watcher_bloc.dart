@@ -71,6 +71,7 @@ class DiscountsWatcherBloc
       state.copyWith(
         loadingStatus: LoadingStatus.loading,
         filterStatus: FilterStatus.loading,
+        discountFilterRepository: DiscountFilterRepository.init(),
       ),
     );
 
@@ -109,30 +110,22 @@ class DiscountsWatcherBloc
     final discountSortingList =
         _sorting(discountsList: event.discountItemsModel);
 
+    SomeFailure? failure;
+
     late IDiscountFilterRepository discountFilterRepository;
-    if (state.discountFilterRepository ==
-        const DiscountFilterRepository.empty()) {
-      discountFilterRepository = DiscountFilterRepository.init(
-        discountSortingList,
-      );
-    } else {
-      state.discountFilterRepository
-          .getFilterValuesFromDiscountItems(
-            event.discountItemsModel,
-          )
-          .fold(
-            (l) => discountFilterRepository = DiscountFilterRepository.init(
-              discountSortingList,
-            ),
-            (r) => discountFilterRepository = state.discountFilterRepository,
-          );
-    }
+    state.discountFilterRepository
+        .getFilterValuesFromDiscountItems(
+          event.discountItemsModel,
+        )
+        .fold(
+          (l) => failure = l,
+          (r) => discountFilterRepository = state.discountFilterRepository,
+        );
 
     final itemsNumber = getCurrentLoadNumber(
       sortingDiscountModelItems: discountSortingList,
     );
 
-    var failure = DiscountFilterRepository.initError;
     var filterList = state.filterDiscountModelList;
 
     discountFilterRepository.getFilterList(discountSortingList).fold(

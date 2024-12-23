@@ -18,6 +18,20 @@ import 'package:veteranam/shared/shared_dart.dart';
 /// containing metadata
 /// about the filter (e.g., whether it is selected).
 class DiscountFilterRepository implements IDiscountFilterRepository {
+  /// Constructor to initialize maps.
+  DiscountFilterRepository.init()
+      : _locationMap = {},
+        _categoryMap = {},
+        _activeCategoryMap = {},
+        _mobSaveActiveCategoryMap = {},
+        _locationSearchMap = {},
+        _activeLocationMap = {},
+        _mobSaveActiveLocationMap = {},
+        _eligibilityMap = {},
+        _activeEligibilityMap = {},
+        _mobSaveActiveEligibilityMap = {},
+        _mapEquality = const MapEquality();
+
   /// Constructor to initialize an empty maps.
   const DiscountFilterRepository.empty()
       : _locationMap = const {},
@@ -33,23 +47,23 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _mapEquality = const MapEquality();
 
   /// Constructor to initialize maps.
-  DiscountFilterRepository.init(
-    List<DiscountModel> unmodifiedDiscountModelItems,
-  )   : _categoryMap = {},
-        _activeCategoryMap = {},
-        _mobSaveActiveCategoryMap = {},
-        _locationMap = {},
-        _locationSearchMap = {},
-        _activeLocationMap = {},
-        _mobSaveActiveLocationMap = {},
-        _eligibilityMap = {},
-        _activeEligibilityMap = {},
-        _mobSaveActiveEligibilityMap = {},
-        _mapEquality = const MapEquality() {
-    getFilterValuesFromDiscountItems(
-      unmodifiedDiscountModelItems,
-    ).fold((l) => initError = l, Right.new);
-  }
+  // DiscountFilterRepository.init(
+  //   List<DiscountModel> unmodifiedDiscountModelItems,
+  // )   : _categoryMap = {},
+  //       _activeCategoryMap = {},
+  //       _mobSaveActiveCategoryMap = {},
+  //       _locationMap = {},
+  //       _locationSearchMap = {},
+  //       _activeLocationMap = {},
+  //       _mobSaveActiveLocationMap = {},
+  //       _eligibilityMap = {},
+  //       _activeEligibilityMap = {},
+  //       _mobSaveActiveEligibilityMap = {},
+  //       _mapEquality = const MapEquality() {
+  //   getFilterValuesFromDiscountItems(
+  //     unmodifiedDiscountModelItems,
+  //   ).fold((l) => initError = l, Right.new);
+  // }
 
   // Maps to store current available filters
   final Map<String, FilterItem> _eligibilityMap;
@@ -86,7 +100,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   @override
   Map<String, FilterItem> get activeLocationMap => _activeLocationMap;
 
-  static SomeFailure? initError;
+  // static SomeFailure? initError;
   static final UserRepository _userRepository = GetIt.I.get<UserRepository>();
 
   /// Checks if any filters are currently activity in any dimension.
