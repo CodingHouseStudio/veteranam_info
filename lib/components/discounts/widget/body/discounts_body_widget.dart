@@ -19,16 +19,10 @@ class DiscountsBodyWidget extends StatelessWidget {
   }
 }
 
-class _DiscountsBodyWidget extends StatefulWidget {
+class _DiscountsBodyWidget extends StatelessWidget {
   const _DiscountsBodyWidget({required this.scrollController});
   final ScrollController? scrollController;
 
-  @override
-  State<_DiscountsBodyWidget> createState() => _DiscountsBodyWidgetState();
-}
-
-class _DiscountsBodyWidgetState extends State<_DiscountsBodyWidget> {
-  bool _isGridView = false;
   @override
   Widget build(BuildContext context) {
     return BlocListener<NetworkCubit, NetworkStatus>(
@@ -112,23 +106,23 @@ class _DiscountsBodyWidgetState extends State<_DiscountsBodyWidget> {
                       padding: padding,
                       sliver: DiscountTitleWidget(
                         isDesk: isDesk,
-                        onViewModeChanged: (bool isGridView) {
-                          setState(() {
-                            _isGridView = isGridView;
-                          });
-                        },
+                        onViewModeChanged: (bool isGridView) {},
                       ),
                     ),
                     if (isDesk)
-                      SliverPadding(
-                        padding: padding,
-                        sliver: _isGridView
-                            ? DiscountsDeskGridWidgetList(
-                                maxHeight: constraints.maxHeight,
-                              )
-                            : DiscountsDeskWidgetList(
-                                maxHeight: constraints.maxHeight,
-                              ),
+                      BlocBuilder<ViewModeCubit, ViewMode>(
+                        builder: (context, viewMode) {
+                          return SliverPadding(
+                            padding: padding,
+                            sliver: viewMode == ViewMode.grid
+                                ? DiscountsDeskGridWidgetList(
+                                    maxHeight: constraints.maxHeight,
+                                  )
+                                : DiscountsDeskWidgetList(
+                                    maxHeight: constraints.maxHeight,
+                                  ),
+                          );
+                        },
                       )
                     else
                       DiscountsMobWidgetList(
@@ -136,7 +130,7 @@ class _DiscountsBodyWidgetState extends State<_DiscountsBodyWidget> {
                         isDesk: isTablet,
                       ),
                   ],
-                  controller: widget.scrollController,
+                  controller: scrollController,
                   // semanticChildCount: null,
                 ),
               ),

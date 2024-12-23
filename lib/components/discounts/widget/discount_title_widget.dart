@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountTitleWidget extends StatefulWidget {
+class DiscountTitleWidget extends StatelessWidget {
   const DiscountTitleWidget({
     required this.isDesk,
     required this.onViewModeChanged,
@@ -13,47 +15,27 @@ class DiscountTitleWidget extends StatefulWidget {
   final ValueChanged<bool> onViewModeChanged;
 
   @override
-  State<DiscountTitleWidget> createState() => _DiscountTitleWidgetState();
-}
-
-class _DiscountTitleWidgetState extends State<DiscountTitleWidget> {
-  bool _isGridView = false;
-
-  void _setGridView() {
-    setState(() {
-      _isGridView = true;
-    });
-    widget.onViewModeChanged(true);
-  }
-
-  void _setListView() {
-    setState(() {
-      _isGridView = false;
-    });
-    widget.onViewModeChanged(false);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize24),
         child: LineTitleIconWidget(
           title: context.l10n.discounts,
-          rightWidget: widget.isDesk
+          rightWidget: isDesk
               ? Row(
                   children: [
                     const DiscountSortingWidget(isDesk: true),
                     KSizedBox.kWidthSizedBox16,
                     IconButtonWidget(
                       icon: KIcon.gridView,
-                      onPressed: _setGridView,
+                      onPressed: () =>
+                          context.read<ViewModeCubit>().setGridView(),
                       padding: KPadding.kPaddingSize12,
                       buttonStyle: KButtonStyles
                           .circularBorderNeutralButtonStyle
                           .copyWith(
                         backgroundColor: WidgetStatePropertyAll(
-                          _isGridView
+                          context.watch<ViewModeCubit>().state == ViewMode.grid
                               ? Colors.transparent
                               : AppColors.materialThemeKeyColorsNeutral,
                         ),
@@ -62,15 +44,16 @@ class _DiscountTitleWidgetState extends State<DiscountTitleWidget> {
                     KSizedBox.kWidthSizedBox16,
                     IconButtonWidget(
                       icon: KIcon.viewAgenda,
-                      onPressed: _setListView,
+                      onPressed: () =>
+                          context.read<ViewModeCubit>().setListView(),
                       padding: KPadding.kPaddingSize12,
                       buttonStyle: KButtonStyles
                           .circularBorderNeutralButtonStyle
                           .copyWith(
                         backgroundColor: WidgetStatePropertyAll(
-                          _isGridView
-                              ? AppColors.materialThemeKeyColorsNeutral
-                              : Colors.transparent,
+                          context.watch<ViewModeCubit>().state == ViewMode.list
+                              ? Colors.transparent
+                              : AppColors.materialThemeKeyColorsNeutral,
                         ),
                       ),
                     ),
@@ -78,8 +61,8 @@ class _DiscountTitleWidgetState extends State<DiscountTitleWidget> {
                 )
               : null,
           titleKey: KWidgetkeys.screen.discounts.title,
-          isDesk: widget.isDesk,
-          preDividerWidget: widget.isDesk
+          isDesk: isDesk,
+          preDividerWidget: isDesk
               ? null
               : DiscountsFilterMob(
                   key: KWidgetkeys.screen.discounts.advancedFilterMob,

@@ -3,3 +3,4 @@ export 'advanced_filter/advanced_filter_mob_cubit.dart';
 export 'config/config.dart';
 export 'link/link.dart';
 export 'watcher/watcher.dart';
+export 'view_mode_cubit.dart';
