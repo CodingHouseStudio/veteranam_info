@@ -106,7 +106,6 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       padding: padding,
                       sliver: DiscountTitleWidget(
                         isDesk: isDesk,
-                        onViewModeChanged: (bool isGridView) {},
                       ),
                     ),
                     if (isDesk)

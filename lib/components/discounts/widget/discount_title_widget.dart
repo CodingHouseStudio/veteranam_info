@@ -7,12 +7,10 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class DiscountTitleWidget extends StatelessWidget {
   const DiscountTitleWidget({
     required this.isDesk,
-    required this.onViewModeChanged,
     super.key,
   });
 
   final bool isDesk;
-  final ValueChanged<bool> onViewModeChanged;
 
   @override
   Widget build(BuildContext context) {
