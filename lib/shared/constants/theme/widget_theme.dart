@@ -212,7 +212,7 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeWhite,
     border: Border.fromBorderSide(
       BorderSide(
-        color: AppColors.materialThemeKeyColorsNeutral,
+        color: AppColors.materialThemeRefNeutralNeutral90,
       ),
     ),
   );
