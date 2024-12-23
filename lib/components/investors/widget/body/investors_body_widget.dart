@@ -45,6 +45,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             child: FocusTraversalGroup(
               child: Semantics(
                 child: CustomScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
                   key: KWidgetkeys.widget.scaffold.scroll,
                   cacheExtent: KDimensions.listCacheExtent,
                   slivers: [
