@@ -36,34 +36,32 @@ class DiscountSortingWidget extends StatelessWidget {
             DiscountEnum.values.length,
             (index) => getDropDownItem(
               discountEnum: DiscountEnum.values.elementAt(index),
-              currectDiscountEnum: state.sortingBy,
+              currectDiscountEnum: state.sortingBy ?? DiscountEnum.featured,
               context: context,
             ),
             growable: false,
           ),
           buttonChild:
-              //  isDesk
+              // isDesk
               //     ? null
               //     :
               Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              KIcon.sort,
+              KSizedBox.kWidthSizedBox8,
               Flexible(
                 child: Text(
-                  '${context.l10n.sort} '
-                  // ignore: lines_longer_than_80_chars
-                  '${isDesk ? state.sortingBy.getValue(context).toLowerCase() : ''}',
+                  state.sortingBy?.getValue(context) ?? context.l10n.sort,
                   style: AppTextStyle.materialThemeTitleMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              KSizedBox.kWidthSizedBox8,
-              KIcon.sort,
             ],
           ),
           clipBehavior: Clip.hardEdge,
-          initialValue: state.sortingBy,
+          initialValue: state.sortingBy ?? DiscountEnum.featured,
           position: PopupMenuButtonPosition.bottomLeft,
           showIcon: KIcon.arrowDropDown,
           closeIcon: KIcon.arrowDropUp,
