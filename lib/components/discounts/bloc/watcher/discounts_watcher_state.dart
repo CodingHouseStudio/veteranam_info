@@ -28,7 +28,7 @@ class DiscountsWatcherState with _$DiscountsWatcherState {
     required FilterStatus filterStatus,
     required List<DiscountModel> filterDiscountModelList,
     required List<DiscountModel> sortingDiscountModelList,
-    required DiscountEnum sortingBy,
+    required DiscountEnum? sortingBy,
     required bool isListLoadedFull,
     required DiscountFailure? failure,
     // required List<ReportModel> reportItems,
