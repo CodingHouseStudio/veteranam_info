@@ -57,6 +57,10 @@ abstract class KIcon {
 
   // static const Icon mic = Icon(Icons.mic_none_outlined);
   static const _KIcon person = _KIcon(Symbols.person_outline);
+  static const _KIcon personWhite = _KIcon(
+    Symbols.person_outline,
+    color: AppColors.materialThemeWhite,
+  );
   static const _KIcon search = _KIcon(Symbols.search);
   static const _KIcon plus = _KIcon(Symbols.add);
   static const _KIcon minus = _KIcon(Symbols.remove);
@@ -67,6 +71,14 @@ abstract class KIcon {
   static const _KIcon keyboardArrowDown = _KIcon(Symbols.keyboard_arrow_down);
   static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
+  static const _KIcon arrowUpRightNeutral = _KIcon(
+    Symbols.arrow_outward,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+  static const _KIcon arrowUpRightWhite = _KIcon(
+    Symbols.arrow_outward,
+    color: AppColors.materialThemeWhite,
+  );
   static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
   static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
@@ -95,6 +107,10 @@ abstract class KIcon {
   static const _KIcon check = _KIcon(
     Symbols.check,
   );
+  static const _KIcon checkWhite = _KIcon(
+    Symbols.check,
+    color: AppColors.materialThemeWhite,
+  );
   static const _KIcon checkSmall = _KIcon(
     Symbols.check,
     size: KSize.kSmallIconSize,
@@ -104,7 +120,15 @@ abstract class KIcon {
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
   static const _KIcon eyeOff = _KIcon(Symbols.visibility_off);
   static const _KIcon refresh = _KIcon(Symbols.cached);
+  static const _KIcon refreshWhite = _KIcon(
+    Symbols.cached,
+    color: AppColors.materialThemeWhite,
+  );
   static const _KIcon message = _KIcon(Symbols.chat_bubble);
+  static const _KIcon message32 = _KIcon(
+    Symbols.chat_bubble,
+    size: 32,
+  );
   static const _KIcon star = _KIcon(Symbols.star);
   static const _KIcon attachFile = _KIcon(Symbols.attach_file);
   static const _KIcon chevronLeft = _KIcon(Symbols.chevron_left);
@@ -118,6 +142,7 @@ abstract class KIcon {
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
   static const _KIcon close = _KIcon(Symbols.close);
+  static const _KIcon closeWeight300 = _KIcon(Symbols.close, weight: 300);
   static const _KIcon tune = _KIcon(Symbols.tune);
   static const _KIcon brightnessAlert = _KIcon(
     Symbols.brightness_alert,
@@ -127,11 +152,23 @@ abstract class KIcon {
   static const _KIcon distance = _KIcon(Symbols.distance);
   static const _KIcon captivePortal = _KIcon(Symbols.captive_portal);
   static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
+  static const _KIcon calendarClockVariant70 = _KIcon(
+    Symbols.calendar_clock,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant70,
+  );
   static const _KIcon user = _KIcon(Symbols.person);
+  static const _KIcon userSecondary = _KIcon(
+    Symbols.person,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
   static const _KIcon link = _KIcon(Symbols.link);
   static const _KIcon settings = _KIcon(Symbols.settings);
   static const _KIcon investors = _KIcon(Symbols.business);
   static const _KIcon menu = _KIcon(Symbols.menu);
+  static const _KIcon menuWhite = _KIcon(
+    Symbols.menu,
+    color: AppColors.materialThemeWhite,
+  );
   static const _KIcon info = _KIcon(
     Symbols.info,
   );
@@ -169,6 +206,10 @@ abstract class KIcon {
   static const logo = _KIcon(
     IconData(0xe1, fontFamily: KAppText.veteranamFontName),
     size: KSize.kFont48,
+  );
+  static const logo78 = _KIcon(
+    IconData(0xe1, fontFamily: KAppText.veteranamFontName),
+    size: KSize.kFont78,
   );
   static const google = _KIcon(
     IconData(0xe2, fontFamily: KAppText.veteranamFontName),
@@ -233,6 +274,10 @@ abstract class KIcon {
   static const _KIcon location = _KIcon(Symbols.location_on);
 
   static const _KIcon date = _KIcon(Symbols.date_range);
+
+  static const _KIcon gridView = _KIcon(Symbols.grid_view);
+
+  static const _KIcon viewAgenda = _KIcon(Symbols.view_agenda);
 
   static List<Icon> get pagesIcons => [
         KIcon.tag,

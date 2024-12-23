@@ -13,9 +13,12 @@ class FooterWidget extends SingleChildRenderObjectWidget {
   }) : super(
           child: SliverPadding(
             padding: isDesk
-                ? const EdgeInsets.all(
-                    KPadding.kPaddingSize32,
-                  ).copyWith(left: KPadding.kPaddingSize46)
+                ? const EdgeInsets.only(
+                    bottom: KPadding.kPaddingSize32,
+                    top: KPadding.kPaddingSize32,
+                    right: KPadding.kPaddingSize32,
+                    left: KPadding.kPaddingSize46,
+                  )
                 : isTablet
                     ? const EdgeInsets.all(
                         KPadding.kPaddingSize46,
@@ -81,7 +84,7 @@ class _FooterWidgetList extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                KIcon.logo.copyWith(size: KSize.kFont78),
+                KIcon.logo78,
                 Expanded(
                   child: Wrap(
                     spacing: KPadding.kPaddingSize8,
@@ -522,8 +525,9 @@ class _PrivacyPolice extends StatelessWidget {
     return TextButton(
       key: KWidgetkeys.widget.footer.privacyPolicy,
       onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
-      style: KButtonStyles.withoutStyle
-          .copyWith(alignment: isDesk ? Alignment.bottomLeft : null),
+      style: isDesk
+          ? KButtonStyles.withoutStyleAligmentBottomLeft
+          : KButtonStyles.withoutStyle,
       child: Text(
         context.l10n.privacyPolicy,
         textAlign: TextAlign.end,

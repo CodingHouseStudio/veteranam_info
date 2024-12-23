@@ -77,9 +77,21 @@ abstract class KWidgetTheme {
     //   BorderSide(color: AppColors.materialThemeKeyColorsNeutral,),
     // ),
   );
+
+  static const boxDecorationWhiteWidget = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    // border: Border.fromBorderSide(
+    //   BorderSide(color: AppColors.materialThemeKeyColorsNeutral,),
+    // ),
+  );
   static const boxDecorationCircular = BoxDecoration(
     shape: BoxShape.circle,
     color: AppColors.materialThemeSourceSeed,
+  );
+  static const boxDecorationCircularNeutralVarian = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
 
   static const boxDecorationGrayCircular = BoxDecoration(
@@ -94,6 +106,12 @@ abstract class KWidgetTheme {
   static const boxDecorationCard = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
+  static const boxDecorationCardShadow = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    boxShadow: KWidgetTheme.dropMenuboxShadow,
   );
   static const boxDecorationCardGrayBorder = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -129,6 +147,10 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeWhite,
   );
   static const boxDecorationBlackCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeBlack,
+  );
+  static const boxDecorationBlackCircularNeutralVariant70 = BoxDecoration(
     shape: BoxShape.circle,
     color: AppColors.materialThemeBlack,
   );
@@ -228,6 +250,10 @@ abstract class KWidgetTheme {
   static const boxDecorationHome = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsTertiary,
+  );
+  static const boxDecorationHomeNeutral = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
   static const boxDecorationDiscount = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,

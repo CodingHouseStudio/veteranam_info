@@ -60,12 +60,11 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             padding: KPadding.kPaddingSize12,
             background: AppColors.materialThemeWhite,
           ),
-          tilePadding: EdgeInsets.symmetric(
-            horizontal: widget.isDesk
+          tilePadding: EdgeInsets.only(
+            left: widget.isDesk
                 ? KPadding.kPaddingSize32
                 : KPadding.kPaddingSize16,
-            vertical: KPadding.kPaddingSize16,
-          ).copyWith(
+            top: KPadding.kPaddingSize16,
             bottom: KPadding.kPaddingSize16,
             right: widget.isDesk
                 ? KPadding.kPaddingSize16

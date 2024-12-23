@@ -51,7 +51,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                         url: '${KAppText.businessSite}/${KRoute.signUp.path}',
                       ),
                   color: AppColors.materialThemeKeyColorsPrimary,
-                  textColor: AppColors.materialThemeKeyColorsSecondary,
+                  // textColor: AppColors.materialThemeKeyColorsSecondary,
                   mobHorizontalTextPadding: KPadding.kPaddingSize40,
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
                   mobIconPadding: KPadding.kPaddingSize16,
@@ -122,16 +122,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   value: 2,
                 ),
               ],
-              buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.only(
-                    left: KPadding.kPaddingSize8,
-                    right: KPadding.kPaddingSize16,
-                    top: KPadding.kPaddingSize4,
-                    bottom: KPadding.kPaddingSize4,
-                  ),
-                ),
-              ),
+              buttonStyle: KButtonStyles.borderBlackUserRoleButtonStyle,
               position: isTablet
                   ? PopupMenuButtonPosition.bottomRight
                   : PopupMenuButtonPosition.bottomCenter,

@@ -110,9 +110,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
                 child: Text(
                   widget.text,
                   key: KWidgetkeys.widget.loadingButton.text,
-                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                    color: AppColors.materialThemeWhite,
-                  ),
+                  style: AppTextStyle.materialThemeTitleMediumWhite,
                 ),
               ),
             ),
@@ -130,9 +128,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
                 key: isHovering
                     ? KWidgetkeys.widget.loadingButton.loadingIcon
                     : KWidgetkeys.widget.loadingButton.icon,
-                icon: KIcon.refresh.copyWith(
-                  color: AppColors.materialThemeWhite,
-                ),
+                icon: KIcon.refreshWhite,
                 padding: KPadding.kPaddingSize12,
                 background: AppColors.materialThemeKeyColorsSecondary,
               ),
@@ -180,16 +176,12 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
             child: Text(
               text,
               key: KWidgetkeys.widget.loadingButton.text,
-              style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                color: AppColors.materialThemeWhite,
-              ),
+              style: AppTextStyle.materialThemeTitleMediumWhite,
             ),
           ),
           IconWidget(
             key: KWidgetkeys.widget.loadingButton.icon,
-            icon: KIcon.refresh.copyWith(
-              color: AppColors.materialThemeWhite,
-            ),
+            icon: KIcon.refreshWhite,
             padding: KPadding.kPaddingSize12,
             background: AppColors.materialThemeKeyColorsSecondary,
           ),

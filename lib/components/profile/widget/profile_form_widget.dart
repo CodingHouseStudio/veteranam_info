@@ -194,9 +194,10 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               DoubleButtonWidget(
                 widgetKey: KWidgetkeys.screen.profile.saveButton,
                 text: context.l10n.saveChangesProfile,
-                color: AppColors.materialThemeKeyColorsSecondary,
-                textColor: AppColors.materialThemeWhite,
-                icon: KIcon.check.copyWith(color: AppColors.materialThemeWhite),
+                darkMode: true,
+                // color: AppColors.materialThemeKeyColorsSecondary,
+                // textColor: AppColors.materialThemeWhite,
+                icon: KIcon.checkWhite,
                 deskPadding: const EdgeInsets.symmetric(
                   vertical: KPadding.kPaddingSize12,
                   horizontal: KPadding.kPaddingSize32,

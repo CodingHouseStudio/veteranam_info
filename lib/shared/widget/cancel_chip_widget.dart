@@ -26,14 +26,11 @@ class CancelChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       key: widgetKey,
-      style: (style ?? KButtonStyles.advancedFilterButtonStyle).copyWith(
-        padding: padding == null ? null : WidgetStatePropertyAll(padding),
-        // maximumSize: width == null
-        //     ? null
-        //     : WidgetStatePropertyAll(Size(width!, double.infinity)),
-        // minimumSize:
-        //     width == null ? null : WidgetStatePropertyAll(Size(width!, 0)),
-      ),
+      style: padding == null
+          ? buttonStyle
+          : buttonStyle.copyWith(
+              padding: WidgetStatePropertyAll(padding),
+            ),
       clipBehavior: Clip.hardEdge,
       onPressed: onPressed,
       child: Row(
@@ -51,6 +48,9 @@ class CancelChipWidget extends StatelessWidget {
       ),
     );
   }
+
+  ButtonStyle get buttonStyle =>
+      style ?? KButtonStyles.advancedFilterButtonStyle;
 
   Widget get textWidget => Text(
         labelText,

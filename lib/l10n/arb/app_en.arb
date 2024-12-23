@@ -1684,7 +1684,7 @@
   "@to": {
     "examples": "Text for back button"
   },
-  "featured": "By default",
+  "featured": "Featured",
   "@featured": {
     "examples": "Text for the sorting button on the Discount page",
     "description": "The button is used to sort discounts by date. From newest to oldest. The first discounts will be those added by the business."

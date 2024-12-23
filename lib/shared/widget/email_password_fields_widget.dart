@@ -136,9 +136,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                   ),
                   child: Text(
                     context.l10n.dontRememberPassword,
-                    style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
+                    style: AppTextStyle.materialThemeTitleMediumUnderline,
                   ),
                 ),
               ),

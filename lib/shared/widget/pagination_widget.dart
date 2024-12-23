@@ -102,11 +102,9 @@ class PaginationWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize16,
             vertical: KPadding.kPaddingSize6_5,
           ),
-          decoration: KWidgetTheme.boxDecorationCircular.copyWith(
-            color: currentPage == pageNumber
-                ? AppColors.materialThemeKeyColorsNeutralVariant
-                : null,
-          ),
+          decoration: currentPage == pageNumber
+              ? KWidgetTheme.boxDecorationCircularNeutralVarian
+              : KWidgetTheme.boxDecorationCircular,
           child: Text(
             pageNumber.toString(),
             textAlign: TextAlign.center,

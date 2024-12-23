@@ -13,18 +13,7 @@ class DiscountSortingWidget extends StatelessWidget {
       buildWhen: (previous, current) => previous.sortingBy != current.sortingBy,
       builder: (context, state) {
         return PopupMenuButtonWidget<DiscountEnum>(
-          buttonStyle: KButtonStyles.transparentButtonStyle.copyWith(
-            padding: const WidgetStatePropertyAll(
-              EdgeInsets.all(KPadding.kPaddingSize12),
-            ),
-            backgroundColor:
-                // isDesk
-                //     ? null
-                //     :
-                const WidgetStatePropertyAll(
-              AppColors.materialThemeKeyColorsNeutral,
-            ),
-          ),
+          buttonStyle: KButtonStyles.neutralButtonStyle,
           shape: const OutlineInputBorder(
             borderSide:
                 BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
@@ -36,34 +25,32 @@ class DiscountSortingWidget extends StatelessWidget {
             DiscountEnum.values.length,
             (index) => getDropDownItem(
               discountEnum: DiscountEnum.values.elementAt(index),
-              currectDiscountEnum: state.sortingBy,
+              currectDiscountEnum: state.sortingBy ?? DiscountEnum.featured,
               context: context,
             ),
             growable: false,
           ),
           buttonChild:
-              //  isDesk
+              // isDesk
               //     ? null
               //     :
               Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              KIcon.sort,
+              KSizedBox.kWidthSizedBox8,
               Flexible(
                 child: Text(
-                  '${context.l10n.sort} '
-                  // ignore: lines_longer_than_80_chars
-                  '${isDesk ? state.sortingBy.getValue(context).toLowerCase() : ''}',
+                  state.sortingBy?.getValue(context) ?? context.l10n.sort,
                   style: AppTextStyle.materialThemeTitleMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              KSizedBox.kWidthSizedBox8,
-              KIcon.sort,
             ],
           ),
           clipBehavior: Clip.hardEdge,
-          initialValue: state.sortingBy,
+          initialValue: state.sortingBy ?? DiscountEnum.featured,
           position: PopupMenuButtonPosition.bottomLeft,
           showIcon: KIcon.arrowDropDown,
           closeIcon: KIcon.arrowDropUp,

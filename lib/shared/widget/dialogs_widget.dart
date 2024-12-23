@@ -303,8 +303,11 @@ class _DialogsWidget {
               horizontal: KPadding.kPaddingSize16,
               vertical: KPadding.kPaddingSize32,
             ),
-      deskIconPadding:
-          const EdgeInsets.all(KPadding.kPaddingSize16).copyWith(bottom: 0),
+      deskIconPadding: const EdgeInsets.only(
+        left: KPadding.kPaddingSize16,
+        right: KPadding.kPaddingSize16,
+        top: KPadding.kPaddingSize16,
+      ),
     );
     // if (isDesk) {
     //   showDialog<void>(

@@ -65,17 +65,11 @@ class _PwResetEmailResendWidgetState extends State<PwResetEmailResendWidget> {
               onPressed: () => context.read<PwResetEmailBloc>().add(
                     const PwResetEmailEvent.sendResetCode(),
                   ),
-              style: KButtonStyles.withoutStyle.copyWith(
-                padding: const WidgetStatePropertyAll(
-                  EdgeInsets.all(KPadding.kPaddingSize8),
-                ),
-              ),
+              style: KButtonStyles.withoutStylePadding8,
               child: Text(
                 context.l10n.sendAgain,
-                style: AppTextStyle.materialThemeBodyMediumNeutralVariant50
-                    .copyWith(
-                  decoration: TextDecoration.underline,
-                ),
+                style: AppTextStyle
+                    .materialThemeBodyMediumNeutralVariant50UnderLine,
               ),
             ),
           ] else

@@ -43,7 +43,7 @@ class GetErrorDialogWidget extends StatelessWidget {
               ),
               KSizedBox.kWidthSizedBox12,
               IconButtonWidget(
-                icon: KIcon.close.copyWith(weight: 300),
+                icon: KIcon.closeWeight300,
                 onPressed: ScaffoldMessenger.of(context).hideCurrentSnackBar,
                 background: AppColors.materialThemeWhite,
                 padding: KPadding.kPaddingSize10,

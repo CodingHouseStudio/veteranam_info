@@ -73,8 +73,8 @@ class SignUpBodyWidget extends StatelessWidget {
                     const SignUpEvent.signUpSubmitted(),
                   ),
               isDesk: isDesk,
-              color: AppColors.materialThemeKeyColorsSecondary,
-              textColor: AppColors.materialThemeWhite,
+              // color: AppColors.materialThemeKeyColorsSecondary,
+              // textColor: AppColors.materialThemeWhite,
               deskPadding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize64,
                 vertical: KPadding.kPaddingSize12,

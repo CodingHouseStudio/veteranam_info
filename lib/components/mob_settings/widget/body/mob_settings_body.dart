@@ -153,8 +153,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         TextButton(
           key: KWidgetkeys.screen.mobSettings.privacyPolicy,
           onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
-          style: KButtonStyles.withoutStyle
-              .copyWith(alignment: Alignment.bottomLeft),
+          style: KButtonStyles.withoutStyleAligmentBottomLeft,
           child: Text(
             context.l10n.privacyPolicy,
             style: AppTextStyle.materialThemeTitleMediumNeutralVariant50,

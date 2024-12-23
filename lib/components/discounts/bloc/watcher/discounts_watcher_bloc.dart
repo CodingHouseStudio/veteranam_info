@@ -27,7 +27,7 @@ class DiscountsWatcherBloc
           const _Initial(
             loadingStatus: LoadingStatus.initial,
             failure: null,
-            sortingBy: DiscountEnum.featured,
+            sortingBy: null,
             unmodifiedDiscountModelItems: [],
             discountFilterRepository: DiscountFilterRepository.empty(),
             filterDiscountModelList: [],
@@ -477,6 +477,7 @@ class DiscountsWatcherBloc
       ..sort(
         (a, b) {
           switch (sortingBy ?? state.sortingBy) {
+            case null:
             case DiscountEnum.featured:
               if ((b.userName != null && a.userName != null) ||
                   (b.userName == null && a.userName == null)) {

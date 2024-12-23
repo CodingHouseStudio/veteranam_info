@@ -135,14 +135,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     child: TextButton(
                       key: KWidgetkeys.screen.discountsAdd.buttonWrongLink,
                       onPressed: () => context.goNamed(KRoute.myDiscounts.name),
-                      style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                        padding: const WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize4,
-                            horizontal: KPadding.kPaddingSize10,
-                          ),
-                        ),
-                      ),
+                      style: KButtonStyles.borderBlackDiscountAddButtonStyle,
                       child: Text(
                         context.l10n.back,
                         style: AppTextStyle.materialThemeTitleMedium,
@@ -337,24 +330,16 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                                   context.getDate(currecntDate: _.period.value),
                                 ),
                               ),
-                      style: KButtonStyles.footerButtonTransparent.copyWith(
-                        padding: const WidgetStatePropertyAll(
-                          EdgeInsets.zero,
-                        ),
-                      ),
+                      style: KButtonStyles.discountAddButtonTransparent,
                       child: TextFieldWidget(
                         widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
                         controller: periodController,
                         labelText: context.l10n.period,
                         onChanged: null,
                         isDesk: isDesk,
-                        suffixIcon: KIcon.calendarClock.copyWith(
-                          color: _.isIndefinitely
-                              ? AppColors
-                                  // ignore: lines_longer_than_80_chars
-                                  .materialThemeRefNeutralVariantNeutralVariant70
-                              : null,
-                        ),
+                        suffixIcon: _.isIndefinitely
+                            ? KIcon.calendarClock
+                            : KIcon.calendarClockVariant70,
                         disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
                         cursor: _.isIndefinitely
                             ? SystemMouseCursors.basic

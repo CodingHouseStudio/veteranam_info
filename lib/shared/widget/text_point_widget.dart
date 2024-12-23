@@ -45,7 +45,10 @@ class TextPointWidget extends StatelessWidget {
         Text(
           text,
           style: textStyle ??
-              AppTextStyle.materialThemeTitleSmall.copyWith(color: textColor),
+              (textColor == null
+                  ? AppTextStyle.materialThemeTitleSmall
+                  : AppTextStyle.materialThemeTitleSmall
+                      .copyWith(color: textColor)),
           textAlign: textAlign,
         ),
       ],

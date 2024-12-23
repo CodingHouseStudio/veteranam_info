@@ -64,6 +64,7 @@ void main() {
           loadingItems: KDimensions.loadItems,
           linkScrollCount: KDimensions.linkScrollCount,
           emailCloseDelay: KDimensions.emailCloseDelay,
+          mobFilterEnhancedMobile: false,
         ),
       ],
     );
@@ -105,6 +106,7 @@ void main() {
           loadingItems: number,
           linkScrollCount: number,
           emailCloseDelay: number,
+          mobFilterEnhancedMobile: false,
         ),
       ],
     );

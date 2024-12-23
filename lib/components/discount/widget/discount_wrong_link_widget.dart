@@ -33,14 +33,7 @@ class DiscountWrongLinkWidget extends StatelessWidget {
         child: TextButton(
           key: KWidgetkeys.screen.discountsAdd.buttonWrongLink,
           onPressed: () => context.goNamed(KRoute.discounts.name),
-          style: KButtonStyles.borderBlackButtonStyle.copyWith(
-            padding: const WidgetStatePropertyAll(
-              EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize4,
-                horizontal: KPadding.kPaddingSize10,
-              ),
-            ),
-          ),
+          style: KButtonStyles.borderBlackDiscountLinkButtonStyle,
           child: Text(
             context.l10n.back,
             style: AppTextStyle.materialThemeTitleMedium,
