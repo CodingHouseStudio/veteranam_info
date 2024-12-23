@@ -60,29 +60,29 @@ ValueKey<String> _key({
   );
 }
 
-class DiscountsDeskWidgetList extends StatelessWidget {
-  const DiscountsDeskWidgetList({required this.maxHeight, super.key});
-  final double maxHeight;
-  @override
-  Widget build(BuildContext context) {
-    return SliverCrossAxisGroup(
-      slivers: [
-        SliverCrossAxisExpanded(
-          flex: 1,
-          sliver: _AdvancedFilterDesk(
-            maxHeight: maxHeight,
-          ),
-        ),
-        const SliverCrossAxisExpanded(
-          flex: 2,
-          sliver: _DiscountWidgetList(
-            isDesk: true,
-          ),
-        ),
-      ],
-    );
-  }
-}
+// class DiscountsDeskWidgetList extends StatelessWidget {
+//   const DiscountsDeskWidgetList({required this.maxHeight, super.key});
+//   final double maxHeight;
+//   @override
+//   Widget build(BuildContext context) {
+//     return SliverCrossAxisGroup(
+//       slivers: [
+//         SliverCrossAxisExpanded(
+//           flex: 1,
+//           sliver: _AdvancedFilterDesk(
+//             maxHeight: maxHeight,
+//           ),
+//         ),
+//         const SliverCrossAxisExpanded(
+//           flex: 2,
+//           sliver: _DiscountWidgetList(
+//             isDesk: true,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 // class DiscountsDeskWidgetList extends MultiChildRenderObjectWidget {
 //   // Constructor for the RowSliver widget
@@ -313,8 +313,8 @@ class _DiscountsWidgetItem extends StatelessWidget {
   }
 }
 
-class DiscountsDeskGridWidgetList extends StatelessWidget {
-  const DiscountsDeskGridWidgetList({required this.maxHeight, super.key});
+class DiscountsDeskWidgetList extends StatelessWidget {
+  const DiscountsDeskWidgetList({required this.maxHeight, super.key});
   final double maxHeight;
   @override
   Widget build(BuildContext context) {
@@ -326,10 +326,21 @@ class DiscountsDeskGridWidgetList extends StatelessWidget {
             maxHeight: maxHeight,
           ),
         ),
-        const SliverCrossAxisExpanded(
+        SliverCrossAxisExpanded(
           flex: 2,
-          sliver: _DiscountGridWidgetList(
-            isDesk: true,
+          sliver: BlocBuilder<ViewModeCubit, ViewMode>(
+            builder: (context, state) {
+              switch (state) {
+                case ViewMode.grid:
+                  return const _DiscountGridWidgetList(
+                    isDesk: true,
+                  );
+                case ViewMode.list:
+                  return const _DiscountWidgetList(
+                    isDesk: true,
+                  );
+              }
+            },
           ),
         ),
       ],

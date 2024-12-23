@@ -109,19 +109,11 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       ),
                     ),
                     if (isDesk)
-                      BlocBuilder<ViewModeCubit, ViewMode>(
-                        builder: (context, viewMode) {
-                          return SliverPadding(
-                            padding: padding,
-                            sliver: viewMode == ViewMode.grid
-                                ? DiscountsDeskGridWidgetList(
-                                    maxHeight: constraints.maxHeight,
-                                  )
-                                : DiscountsDeskWidgetList(
-                                    maxHeight: constraints.maxHeight,
-                                  ),
-                          );
-                        },
+                      SliverPadding(
+                        padding: padding,
+                        sliver: DiscountsDeskWidgetList(
+                          maxHeight: constraints.maxHeight,
+                        ),
                       )
                     else
                       DiscountsMobWidgetList(

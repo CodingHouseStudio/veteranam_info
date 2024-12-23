@@ -20,42 +20,46 @@ class DiscountTitleWidget extends StatelessWidget {
         child: LineTitleIconWidget(
           title: context.l10n.discounts,
           rightWidget: isDesk
-              ? Row(
-                  children: [
-                    const DiscountSortingWidget(isDesk: true),
-                    KSizedBox.kWidthSizedBox16,
-                    IconButtonWidget(
-                      icon: KIcon.gridView,
-                      onPressed: () =>
-                          context.read<ViewModeCubit>().setGridView(),
-                      padding: KPadding.kPaddingSize12,
-                      buttonStyle: KButtonStyles
-                          .circularBorderNeutralButtonStyle
-                          .copyWith(
-                        backgroundColor: WidgetStatePropertyAll(
-                          context.watch<ViewModeCubit>().state == ViewMode.grid
-                              ? Colors.transparent
-                              : AppColors.materialThemeKeyColorsNeutral,
+              ? BlocBuilder<ViewModeCubit, ViewMode>(
+                  builder: (context, state) {
+                    return Row(
+                      children: [
+                        const DiscountSortingWidget(isDesk: true),
+                        KSizedBox.kWidthSizedBox16,
+                        IconButtonWidget(
+                          icon: KIcon.gridView,
+                          onPressed: () =>
+                              context.read<ViewModeCubit>().setGridView(),
+                          padding: KPadding.kPaddingSize12,
+                          buttonStyle: KButtonStyles
+                              .circularBorderNeutralButtonStyle
+                              .copyWith(
+                            backgroundColor: WidgetStatePropertyAll(
+                              state == ViewMode.grid
+                                  ? AppColors.materialThemeKeyColorsNeutral
+                                  : Colors.transparent,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox16,
-                    IconButtonWidget(
-                      icon: KIcon.viewAgenda,
-                      onPressed: () =>
-                          context.read<ViewModeCubit>().setListView(),
-                      padding: KPadding.kPaddingSize12,
-                      buttonStyle: KButtonStyles
-                          .circularBorderNeutralButtonStyle
-                          .copyWith(
-                        backgroundColor: WidgetStatePropertyAll(
-                          context.watch<ViewModeCubit>().state == ViewMode.list
-                              ? Colors.transparent
-                              : AppColors.materialThemeKeyColorsNeutral,
+                        KSizedBox.kWidthSizedBox16,
+                        IconButtonWidget(
+                          icon: KIcon.viewAgenda,
+                          onPressed: () =>
+                              context.read<ViewModeCubit>().setListView(),
+                          padding: KPadding.kPaddingSize12,
+                          buttonStyle: KButtonStyles
+                              .circularBorderNeutralButtonStyle
+                              .copyWith(
+                            backgroundColor: WidgetStatePropertyAll(
+                              state == ViewMode.list
+                                  ? AppColors.materialThemeKeyColorsNeutral
+                                  : Colors.transparent,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 )
               : null,
           titleKey: KWidgetkeys.screen.discounts.title,
