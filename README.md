@@ -121,6 +121,8 @@ A Flutter no-profit app supporting Ukraine's war veterans.
     </th>
   </tr>
 </table>
+
+
 ## Challenge
 
 The goal was to create an accessible, user-friendly app that centralizes discounts and offers for Ukraine's war veterans. The app needed to prioritize:
