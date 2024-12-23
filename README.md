@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://veteranam.info/"><img id="logo" src='assets/read_me_images/preview.png' width="100%"/></a>
+    <a href="https://veteranam.info/"><img id="logo" src='assets/read_me/images/preview.png' width="100%"/></a>
 </p>
 
 <p align="center">
@@ -35,7 +35,10 @@ A Flutter no-profit app supporting Ukraine's war veterans.
 
 ## Preview
 
-<!-- Add preview images/screenshots here -->
+| [Start Loading Animation For WEB](https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html) |  |  |
+| ------------- | ------------- | ------------- |
+| <img src="start_loading.gif" height="480"> |  |  |
+
 
 ## Challenge
 
