@@ -37,7 +37,7 @@ A Flutter no-profit app supporting Ukraine's war veterans.
 
 | [Start Loading Animation For WEB](https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html) |  |  |
 | ------------- | ------------- | ------------- |
-| <img src="start_loading.gif" height="480"> |  |  |
+| <img src="assets/read_me/gifs/start_loading.gif" height="480"> |  |  |
 
 
 ## Challenge
