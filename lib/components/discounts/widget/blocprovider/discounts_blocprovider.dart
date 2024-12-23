@@ -31,7 +31,8 @@ class DiscountsBlocprovider extends StatelessWidget {
           BlocProvider(
             create: (context) => GetIt.I.get<MobileRatingCubit>(),
           ),
-        BlocProvider(create: (_) => ViewModeCubit()),
+        if (Config.isWeb)
+          BlocProvider(create: (context) => GetIt.I.get<ViewModeCubit>()),
       ],
       child: childWidget,
     );
