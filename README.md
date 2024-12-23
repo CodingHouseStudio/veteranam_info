@@ -35,9 +35,9 @@ A Flutter no-profit app supporting Ukraine's war veterans.
 
 ## Preview
 
-| [Start Loading Animation For WEB](https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html) |  |  |
+| [Start Loading Animation For WEB](https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html) | [Skeletonizer Loading For Items](https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/skeletonizer_widget.dart) | [Language Switcher](https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/languages_switcher_widget.dart)/[Cubit](https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/bloc/language/language_cubit.dart) |
 | ------------- | ------------- | ------------- |
-| <img src="assets/read_me/gifs/start_loading.gif" height="480"> |  |  |
+| <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html"><img src="assets/read_me/gifs/start_loading.gif" height="480"></a> | <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/skeletonizer_widget.dart"><img src="assets/read_me/gifs/item_loading_animation.gif" height="480"></a> | <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/skeletonizer_widget.dart"><img src="assets/read_me/gifs/language.gif" height="480"></a> |
 
 
 ## Challenge
