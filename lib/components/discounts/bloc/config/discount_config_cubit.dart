@@ -31,7 +31,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
   @visibleForTesting
   static const emailCloseDelayKey = '__email_close_delay_count_key__';
   @visibleForTesting
-  static const mobFilterEnhancedMobileKey = 'mob_filter_enhanced_mobile';
+  static const mobFilterEnhancedMobileKey = '__mob_filter_enhanced_mobile__';
 
   static const loadingItemsKey = '__discount_loading_items_count_key__';
   void started() {
