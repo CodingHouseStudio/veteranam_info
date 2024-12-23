@@ -25,6 +25,7 @@ class BackButtonWidget extends StatelessWidget {
           KSizedBox.kWidthSizedBox8,
           Text(
             '${context.l10n.back}'
+            // ignore: lines_longer_than_80_chars
             '${backPageName != null ? ' ${context.l10n.to} $backPageName' : ''}',
             style: AppTextStyle.materialThemeTitleMedium,
           ),

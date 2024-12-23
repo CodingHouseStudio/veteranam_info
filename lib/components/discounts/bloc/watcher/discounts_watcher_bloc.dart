@@ -112,14 +112,12 @@ class DiscountsWatcherBloc
 
     SomeFailure? failure;
 
-    late IDiscountFilterRepository discountFilterRepository;
     state.discountFilterRepository
         .getFilterValuesFromDiscountItems(
           event.discountItemsModel,
         )
-        .fold(
+        .leftMap(
           (l) => failure = l,
-          (r) => discountFilterRepository = state.discountFilterRepository,
         );
 
     final itemsNumber = getCurrentLoadNumber(
@@ -128,7 +126,7 @@ class DiscountsWatcherBloc
 
     var filterList = state.filterDiscountModelList;
 
-    discountFilterRepository.getFilterList(discountSortingList).fold(
+    state.discountFilterRepository.getFilterList(discountSortingList).fold(
       (l) {
         failure = l;
         filterList = event.discountItemsModel;
@@ -139,7 +137,7 @@ class DiscountsWatcherBloc
     emit(
       _Initial(
         unmodifiedDiscountModelItems: event.discountItemsModel,
-        discountFilterRepository: discountFilterRepository,
+        discountFilterRepository: state.discountFilterRepository,
         sortingBy: state.sortingBy,
         loadingStatus: LoadingStatus.loaded,
         failure: failure?._toDiscount(),

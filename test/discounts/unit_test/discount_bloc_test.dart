@@ -32,8 +32,9 @@ void main() {
 
       when(
         mockdiscountRepository.getDiscountItems(
-            // reportIdItems: KTestText.reportItems.getIdCard,
-            ),
+          showOnlyBusinessDiscounts: false,
+          // reportIdItems: KTestText.reportItems.getIdCard,
+        ),
       ).thenAnswer(
         (_) => Stream.value(KTestText.discountModelItemsModify),
       );
@@ -87,8 +88,9 @@ void main() {
       act: (bloc) async {
         when(
           mockdiscountRepository.getDiscountItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
-              ),
+            showOnlyBusinessDiscounts: false,
+            // reportIdItems: KTestText.reportItems.getIdCard,
+          ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
         );
@@ -530,7 +532,9 @@ void main() {
         //   ),
         // );
         when(
-          mockdiscountRepository.getDiscountItems(),
+          mockdiscountRepository.getDiscountItems(
+            showOnlyBusinessDiscounts: false,
+          ),
         ).thenAnswer(
           (_) => Stream.value([KTestText.discountModelItemsModify.first]),
         );

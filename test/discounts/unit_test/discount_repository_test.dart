@@ -27,8 +27,9 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(
-          mockFirestoreService.getDiscounts(//null
-              ),
+          mockFirestoreService.getDiscounts(
+            showOnlyBusinessDiscounts: false, //null
+          ),
         ).thenAnswer(
           (_) => Stream.value(KTestText.repositoryDiscountModelItems),
         );
@@ -56,6 +57,7 @@ void main() {
         when(
           mockFirestoreService.getDiscount(
             id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
           (realInvocation) async => KTestText.discountModelItems.first,
@@ -74,7 +76,9 @@ void main() {
       });
       test('Discount get', () async {
         expect(
-          mockDiscountRepository.getDiscountItems(),
+          mockDiscountRepository.getDiscountItems(
+            showOnlyBusinessDiscounts: false,
+          ),
           emits(KTestText.repositoryDiscountModelItems),
         );
       });
@@ -149,8 +153,10 @@ void main() {
 
       test('Get Discount', () async {
         expect(
-          await mockDiscountRepository
-              .getDiscount(KTestText.discountModelItems.first.id),
+          await mockDiscountRepository.getDiscount(
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
+          ),
           isA<Right<SomeFailure, DiscountModel>>().having(
             (e) => e.value,
             'value',
@@ -174,8 +180,9 @@ void main() {
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.getDiscounts(//null
-              ),
+          mockFirestoreService.getDiscounts(
+            showOnlyBusinessDiscounts: false, //null
+          ),
         ).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
@@ -214,6 +221,7 @@ void main() {
         when(
           mockFirestoreService.getDiscount(
             id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
@@ -245,7 +253,9 @@ void main() {
       });
       test('Discount get', () async {
         expect(
-          mockDiscountRepository.getDiscountItems(),
+          mockDiscountRepository.getDiscountItems(
+            showOnlyBusinessDiscounts: false,
+          ),
           emitsError(KGroupText.failureGet),
         );
       });
@@ -295,8 +305,10 @@ void main() {
       });
       test('Get Discount', () async {
         expect(
-          await mockDiscountRepository
-              .getDiscount(KTestText.discountModelItems.first.id),
+          await mockDiscountRepository.getDiscount(
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
+          ),
           isA<Left<SomeFailure, DiscountModel>>(),
           // .having(
           //   (e) => e.value,
@@ -380,6 +392,7 @@ void main() {
         when(
           mockFirestoreService.getDiscount(
             id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
@@ -441,8 +454,10 @@ void main() {
       });
       test('Get Discount', () async {
         expect(
-          await mockDiscountRepository
-              .getDiscount(KTestText.discountModelItems.first.id),
+          await mockDiscountRepository.getDiscount(
+            id: KTestText.discountModelItems.first.id,
+            showOnlyBusinessDiscounts: false,
+          ),
           isA<Left<SomeFailure, DiscountModel>>(),
           // .having(
           //   (e) => e.value,

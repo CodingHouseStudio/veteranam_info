@@ -40,7 +40,9 @@ void main() {
       mockCitiesRepository = MockICitiesRepository();
 
       when(
-        mockDiscountsRepository.getDiscountItems(),
+        mockDiscountsRepository.getDiscountItems(
+          showOnlyBusinessDiscounts: false,
+        ),
       ).thenAnswer(
         (_) => Stream.value([KTestText.blocSendDiscountModel]),
       );
