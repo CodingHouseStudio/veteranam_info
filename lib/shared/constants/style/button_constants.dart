@@ -458,4 +458,14 @@ abstract class KButtonStyles {
       Colors.transparent,
     ),
   );
+
+  static const circularBorderNeutralButtonStyle = ButtonStyle(
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius48,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+  );
 }

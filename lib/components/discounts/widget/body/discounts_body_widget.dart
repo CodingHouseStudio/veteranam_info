@@ -19,10 +19,16 @@ class DiscountsBodyWidget extends StatelessWidget {
   }
 }
 
-class _DiscountsBodyWidget extends StatelessWidget {
+class _DiscountsBodyWidget extends StatefulWidget {
   const _DiscountsBodyWidget({required this.scrollController});
   final ScrollController? scrollController;
 
+  @override
+  State<_DiscountsBodyWidget> createState() => _DiscountsBodyWidgetState();
+}
+
+class _DiscountsBodyWidgetState extends State<_DiscountsBodyWidget> {
+  bool _isGridView = false;
   @override
   Widget build(BuildContext context) {
     return BlocListener<NetworkCubit, NetworkStatus>(
@@ -106,6 +112,11 @@ class _DiscountsBodyWidget extends StatelessWidget {
                       padding: padding,
                       sliver: DiscountTitleWidget(
                         isDesk: isDesk,
+                        onViewModeChanged: (bool isGridView) {
+                          setState(() {
+                            _isGridView = isGridView;
+                          });
+                        },
                       ),
                     ),
                     if (!isDesk)
@@ -120,9 +131,13 @@ class _DiscountsBodyWidget extends StatelessWidget {
                     if (isDesk)
                       SliverPadding(
                         padding: padding,
-                        sliver: DiscountsDeskWidgetList(
-                          maxHeight: constraints.maxHeight,
-                        ),
+                        sliver: _isGridView
+                            ? DiscountsDeskGridWidgetList(
+                                maxHeight: constraints.maxHeight,
+                              )
+                            : DiscountsDeskWidgetList(
+                                maxHeight: constraints.maxHeight,
+                              ),
                       )
                     else
                       DiscountsMobWidgetList(
@@ -130,7 +145,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                         isDesk: isTablet,
                       ),
                   ],
-                  controller: scrollController,
+                  controller: widget.scrollController,
                   // semanticChildCount: null,
                 ),
               ),

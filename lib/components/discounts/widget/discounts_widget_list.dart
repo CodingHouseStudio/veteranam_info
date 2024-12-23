@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -138,9 +139,11 @@ class _AdvancedFilterDesk extends StatelessWidget {
 }
 
 class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  DiscountsMobWidgetList(
-      {required this.padding, required this.isDesk, super.key})
-      : super(
+  DiscountsMobWidgetList({
+    required this.padding,
+    required this.isDesk,
+    super.key,
+  }) : super(
           child: _DiscountWidgetList(
             isDesk: isDesk,
           ),
@@ -306,6 +309,153 @@ class _DiscountsWidgetItem extends StatelessWidget {
       discountItem: discountItem,
       isDesk: isDesk,
       share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
+    );
+  }
+}
+
+class DiscountsDeskGridWidgetList extends StatelessWidget {
+  const DiscountsDeskGridWidgetList({required this.maxHeight, super.key});
+  final double maxHeight;
+  @override
+  Widget build(BuildContext context) {
+    return SliverCrossAxisGroup(
+      slivers: [
+        SliverCrossAxisExpanded(
+          flex: 1,
+          sliver: _AdvancedFilterDesk(
+            maxHeight: maxHeight,
+          ),
+        ),
+        const SliverCrossAxisExpanded(
+          flex: 2,
+          sliver: _DiscountGridWidgetList(
+            isDesk: true,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DiscountGridWidgetList extends StatelessWidget {
+  const _DiscountGridWidgetList({required this.isDesk});
+
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
+      builder: (context, config) {
+        return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
+          buildWhen: (previous, current) =>
+              previous.loadingStatus != current.loadingStatus ||
+              previous.filterDiscountModelList !=
+                  current.filterDiscountModelList,
+          builder: (context, state) {
+            final hasItems = state.filterDiscountModelList.isNotEmpty;
+            return SliverMainAxisGroup(
+              slivers: [
+                if (hasItems)
+                  SliverPadding(
+                    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+                    sliver: SliverMasonryGrid(
+                      crossAxisSpacing: KPadding.kPaddingSize24,
+                      mainAxisSpacing: KPadding.kPaddingSize24,
+                      gridDelegate:
+                          const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: KSize.kPixel500,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return DiscountCardWidget(
+                            discountItem:
+                                state.filterDiscountModelList.elementAt(index),
+                            isDesk: false,
+                            share:
+                                '${KRoute.home.path}${KRoute.discounts.path}/${state.filterDiscountModelList.elementAt(index).id}',
+                          );
+                        },
+                        childCount: state.filterDiscountModelList.length,
+                        findChildIndexCallback: (key) =>
+                            _findChildIndexCallback(
+                          key: key,
+                          state: state,
+                          config: config,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  SliverPrototypeExtentList.builder(
+                    itemCount: state.filterDiscountModelList.isEmpty
+                        ? config.loadingItems
+                        : KDimensions.shimmerDiscountsItems,
+                    prototypeItem: Padding(
+                      padding:
+                          const EdgeInsets.only(top: KPadding.kPaddingSize48),
+                      child: SkeletonizerWidget(
+                        isLoading: false,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: false,
+                          share: '',
+                        ),
+                      ),
+                    ),
+                    itemBuilder: (context, index) => Padding(
+                      key: const ValueKey('discount_mock_card'),
+                      padding:
+                          const EdgeInsets.only(top: KPadding.kPaddingSize48),
+                      child: SkeletonizerWidget(
+                        isLoading: true,
+                        child: DiscountCardWidget(
+                          key: KWidgetkeys.screen.discounts.card,
+                          discountItem: KMockText.discountModel,
+                          isDesk: false,
+                          share: '',
+                        ),
+                      ),
+                    ),
+                  ),
+                if (hasItems && state.isListLoadedFull)
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize48,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Center(
+                        child: Text(
+                          context.l10n.thatEndOfList,
+                          key: KWidgetkeys.screen.investors.endListText,
+                          style: AppTextStyle
+                              .materialThemeTitleMediumNeutralVariant70,
+                        ),
+                      ),
+                    ),
+                  )
+                else if (hasItems && !state.isListLoadedFull)
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize48,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: LoadingButtonWidget(
+                        widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+                        text: context.l10n.moreDiscounts,
+                        onPressed: () =>
+                            context.read<DiscountsWatcherBloc>().add(
+                                  const DiscountsWatcherEvent.loadNextItems(),
+                                ),
+                        isDesk: isDesk,
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

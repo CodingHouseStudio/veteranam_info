@@ -234,6 +234,10 @@ abstract class KIcon {
 
   static const _KIcon date = _KIcon(Symbols.date_range);
 
+  static const _KIcon gridView = _KIcon(Symbols.grid_view);
+
+  static const _KIcon viewAgenda = _KIcon(Symbols.view_agenda);
+
   static List<Icon> get pagesIcons => [
         KIcon.tag,
         KIcon.briefcase,

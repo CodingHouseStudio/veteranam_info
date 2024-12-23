@@ -233,7 +233,10 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             ? CrossAxisAlignment.stretch
             : CrossAxisAlignment.start,
         children: [
-          KSizedBox.kHeightSizedBox16,
+          if (isDesk)
+            KSizedBox.kHeightSizedBox16
+          else
+            KSizedBox.kHeightSizedBox8,
           _DescrptionTitleWidget(
             isDesk: isDesk,
             category: discountItem.category,
@@ -637,7 +640,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
               context,
             ),
           ),
-          KSizedBox.kHeightSizedBox8,
+          KSizedBox.kHeightSizedBox4,
           CityListWidget(
             key: KWidgetkeys.widget.discountCard.city,
             isDesk: false,
