@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
+import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -69,6 +69,7 @@ class AdvancedFilterMobButton extends StatelessWidget {
             ..add(
               const DiscountsWatcherEvent.mobSaveFilter(),
             );
+          final configBloc = context.read<DiscountConfigCubit>();
           await showModalBottomSheet<bool>(
             context: context,
             isScrollControlled: true,
@@ -84,6 +85,7 @@ class AdvancedFilterMobButton extends StatelessWidget {
             builder: (context) => AdvancedFilterMobBlocprovider(
               childWidget: const _AdvancedFilterMobDialog(),
               bloc: bloc,
+              configBloc: configBloc,
             ),
           ).then(
             (value) async {
