@@ -212,6 +212,14 @@ abstract class AppTextStyle {
     fontSize: 24,
     height: 1.33,
     fontWeight: FontWeight.w500,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const TextStyle materialThemeHeadlineSmallVariant = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 24,
+    height: 1.33,
+    fontWeight: FontWeight.w500,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
 
   /// materialThemeBodyLarge figma properties
@@ -307,6 +315,16 @@ abstract class AppTextStyle {
     letterSpacing: 0.25,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
+  static const TextStyle materialThemeBodyMediumNeutralVariant50UnderLine =
+      TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
+    decoration: TextDecoration.underline,
+  );
   static const TextStyle materialThemeBodyMediumNeutralVariant60 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,
@@ -378,6 +396,15 @@ abstract class AppTextStyle {
     height: 1.43,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const TextStyle materialThemeLabelLargeError = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    color: AppColors.materialThemeSysLightError,
   );
   static const TextStyle materialThemeLabelLargeRef = TextStyle(
     fontFamily: 'Gilroy',
@@ -411,6 +438,14 @@ abstract class AppTextStyle {
     height: 1.33,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
+  );
+  static const TextStyle materialThemeLabelMediumVariant50 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 12,
+    height: 1.33,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
 
   /// materialThemeLabelSmall figma properties
@@ -498,6 +533,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.15,
     color: AppColors.materialThemeKeyColorsSecondary,
   );
+  static const TextStyle materialThemeTitleMediumUnderline = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
   static const TextStyle materialThemeTitleMediumNeutral70 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
@@ -546,6 +589,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.15,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
+  static const TextStyle materialThemeTitleMediumWhite = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeWhite,
+  );
 
   /// materialThemeTitleSmall figma properties
   /// fontFamily: Gilroy
@@ -561,6 +612,7 @@ abstract class AppTextStyle {
     height: 1.43,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
 
   static const TextStyle materialThemeTitleSmallNeutral = TextStyle(
@@ -595,6 +647,7 @@ abstract class AppTextStyle {
     height: 1,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.25,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
 
   /// h1Mob figma properties
@@ -610,6 +663,7 @@ abstract class AppTextStyle {
     fontSize: 36,
     height: 1.22,
     fontWeight: FontWeight.w500,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
 
   /// h1Tablet figma properties
@@ -626,5 +680,6 @@ abstract class AppTextStyle {
     height: 1.17,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.25,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
 }

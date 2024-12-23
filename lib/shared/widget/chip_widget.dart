@@ -84,11 +84,9 @@ class ChipDeskWidgetState extends State<ChipDeskWidget> {
                   : AppColors.materialThemeBlack)
               : Colors.transparent,
         ),
-        textStyle: AppTextStyle.materialThemeHeadlineSmall.copyWith(
-          color: _isHovered && !widget.isSelected && !filterEmpty
-              ? AppColors.materialThemeKeyColorsNeutralVariant
-              : AppColors.materialThemeBlack,
-        ),
+        textStyle: _isHovered && !widget.isSelected && !filterEmpty
+            ? AppTextStyle.materialThemeHeadlineSmallVariant
+            : AppTextStyle.materialThemeHeadlineSmall,
         widgetKey: widget.widgetKey,
       ),
     );
@@ -135,10 +133,7 @@ class ChipImplementationWidget extends StatelessWidget {
             child: Text(
               filter.value.getTrsnslation(context),
               key: KWidgetkeys.widget.chip.text,
-              style: textStyle ??
-                  AppTextStyle.materialThemeLabelLarge.copyWith(
-                    color: AppColors.materialThemeBlack,
-                  ),
+              style: textStyle ?? AppTextStyle.materialThemeLabelLarge,
             ),
           ),
           if (!filterEmpty)

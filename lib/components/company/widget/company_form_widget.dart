@@ -83,8 +83,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           child: Column(
             children: [
               DecoratedBox(
-                decoration: KWidgetTheme.boxDecorationHome
-                    .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
+                decoration: KWidgetTheme.boxDecorationHomeNeutral,
                 child: Padding(
                   padding: widget.isDesk
                       ? const EdgeInsets.symmetric(
@@ -231,10 +230,10 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                 .isEmpty
                             ? context.l10n.createAccount
                             : context.l10n.saveChangesProfile,
-                        color: AppColors.materialThemeKeyColorsSecondary,
-                        textColor: AppColors.materialThemeWhite,
-                        icon: KIcon.check
-                            .copyWith(color: AppColors.materialThemeWhite),
+                        darkMode: true,
+                        // color: AppColors.materialThemeKeyColorsSecondary,
+                        // textColor: AppColors.materialThemeWhite,
+                        icon: KIcon.checkWhite,
                         deskPadding: const EdgeInsets.symmetric(
                           vertical: KPadding.kPaddingSize12,
                           horizontal: KPadding.kPaddingSize32,

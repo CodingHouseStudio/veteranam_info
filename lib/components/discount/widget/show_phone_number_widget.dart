@@ -28,11 +28,7 @@ class _ShowPhoneNumberWidgetState extends State<ShowPhoneNumberWidget> {
                 : context.read<UrlCubit>().launchUrl(url: widget.phoneNumber)
             : setState(() => showPhoneNumber = true),
         icon: KIcon.call,
-        style: KButtonStyles.transparentButtonStyle.copyWith(
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
-          ),
-        ),
+        style: KButtonStyles.transparentPhoneNumberButtonStyle,
         label: Text(
           showPhoneNumber ? widget.phoneNumber : context.l10n.showPhoneNumber,
           style: AppTextStyle.materialThemeLabelLargeUnderLine,

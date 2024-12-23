@@ -26,12 +26,9 @@ class SwitchOfflineWidget extends StatelessWidget {
               minHeight: KSize.kPixel40,
             ),
             decoration: isSelected
-                ? KWidgetTheme.boxDecorationBlackCircular.copyWith(
-                    color: onChanged == null
-                        ? AppColors
-                            .materialThemeRefNeutralVariantNeutralVariant70
-                        : null,
-                  )
+                ? onChanged == null
+                    ? KWidgetTheme.boxDecorationBlackCircularNeutralVariant70
+                    : KWidgetTheme.boxDecorationBlackCircular
                 : KWidgetTheme.boxDecorationWhiteCircular,
             margin: EdgeInsets.only(
               top: KPadding.kPaddingSize4,

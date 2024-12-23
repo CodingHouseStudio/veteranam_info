@@ -169,7 +169,8 @@ class _CommonConfirmDialog extends StatelessWidget {
       widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
       text: confirmText,
       color: confirmButtonBackground,
-      textColor: AppColors.materialThemeWhite,
+      darkMode: true,
+      // textColor: AppColors.materialThemeWhite,
       isDesk: isDesk,
       deskPadding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,

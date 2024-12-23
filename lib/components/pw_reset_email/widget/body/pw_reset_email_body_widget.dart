@@ -99,14 +99,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
                   onPressed: () => context
                       .read<PwResetEmailBloc>()
                       .add(const PwResetEmailEvent.resetStatus()),
-                  style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                    padding: const WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize4,
-                        horizontal: KPadding.kPaddingSize10,
-                      ),
-                    ),
-                  ),
+                  style: KButtonStyles.borderBlackButtonPwResetStyle,
                   child: Text(
                     context.l10n.back,
                     style: AppTextStyle.materialThemeTitleMedium,

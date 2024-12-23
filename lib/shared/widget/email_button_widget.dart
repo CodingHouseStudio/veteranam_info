@@ -18,12 +18,8 @@ class EmailButtonWidget extends StatelessWidget {
         key: KWidgetkeys.widget.emailButton.text,
         KAppText.email,
         style: isDesk
-            ? AppTextStyle.materialThemeTitleMedium.copyWith(
-                color: AppColors.materialThemeKeyColorsSecondary,
-              )
-            : AppTextStyle.materialThemeTitleSmall.copyWith(
-                color: AppColors.materialThemeKeyColorsSecondary,
-              ),
+            ? AppTextStyle.materialThemeTitleMedium
+            : AppTextStyle.materialThemeTitleSmall,
       ),
       icon: KIcon.copy.copyWith(
         key: KWidgetkeys.widget.emailButton.icon,

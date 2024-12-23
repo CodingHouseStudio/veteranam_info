@@ -10,8 +10,8 @@ class ChatBotButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: KBorderRadius.kBorderRadius32,
-      child: IconWidget(
-        icon: KIcon.message.copyWith(size: KSize.kPixel32),
+      child: const IconWidget(
+        icon: KIcon.message32,
         padding: KPadding.kPaddingSize20,
         background: AppColors.materialThemeKeyColorsNeutral,
       ),

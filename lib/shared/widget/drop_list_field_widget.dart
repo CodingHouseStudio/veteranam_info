@@ -259,9 +259,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
               top: KPadding.kPaddingSize4,
               bottom: KPadding.kPaddingSize8,
             ),
-            decoration: KWidgetTheme.boxDecorationCard.copyWith(
-              boxShadow: KWidgetTheme.dropMenuboxShadow,
-            ),
+            decoration: KWidgetTheme.boxDecorationCardShadow,
             clipBehavior: Clip.hardEdge,
             child: ListView.builder(
               key: KWidgetkeys.widget.dropListField.list,

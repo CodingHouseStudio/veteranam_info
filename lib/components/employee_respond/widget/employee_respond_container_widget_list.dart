@@ -78,9 +78,9 @@ List<Widget> _employeeRespondContainerWidgetList({
               ),
       style: KButtonStyles.borderButtonStyle,
       icon: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
-        ).copyWith(
+        padding: EdgeInsets.only(
+          top: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+          bottom: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
           left: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
         ),
         child: KIcon.attachFile,

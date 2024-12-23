@@ -14,16 +14,9 @@ class AdvancedFilterResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
-      style: KButtonStyles.borderBlackButtonStyle.copyWith(
-        padding: isDesk
-            ? null
-            : const WidgetStatePropertyAll(
-                EdgeInsets.symmetric(
-                  vertical: KPadding.kPaddingSize8,
-                  horizontal: KPadding.kPaddingSize24,
-                ),
-              ),
-      ),
+      style: isDesk
+          ? KButtonStyles.borderBlackButtonStyle
+          : KButtonStyles.borderBlackButtonAdvancedFilterStyle,
       onPressed: resetEvent,
       child: Text(
         context.l10n.resetAll,

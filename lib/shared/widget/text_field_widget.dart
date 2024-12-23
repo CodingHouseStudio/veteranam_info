@@ -154,13 +154,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           labelText: labelText,
           border: widget.border,
           enabledBorder: widget.enabledBorder ??
-              KWidgetTheme.outlineInputBorderEnabled.copyWith(
-                borderSide: _isHovered && widget.borderHoverColor != null
-                    ? BorderSide(
+              (_isHovered && widget.borderHoverColor != null
+                  ? KWidgetTheme.outlineInputBorderEnabled.copyWith(
+                      borderSide: BorderSide(
                         color: widget.borderHoverColor!,
-                      )
-                    : null,
-              ),
+                      ),
+                    )
+                  : KWidgetTheme.outlineInputBorderEnabled),
           hoverColor: widget.hoverColor,
           focusColor: widget.focusColor,
           focusedErrorBorder: widget.border,

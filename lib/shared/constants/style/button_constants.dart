@@ -53,6 +53,27 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const ButtonStyle neutralButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize12),
+    ),
+    backgroundColor: WidgetStatePropertyAll(
+      AppColors.materialThemeKeyColorsNeutral,
+    ),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder,
+    ),
+  );
+
+  static const ButtonStyle transparentPhoneNumberButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
+    ),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder,
+    ),
+  );
+
   static const whiteButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
     // minimumSize: WidgetStatePropertyAll(
@@ -89,6 +110,49 @@ abstract class KButtonStyles {
     ),
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    shape: WidgetStatePropertyAll(LinearBorder.none),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+  static const withoutStyleNavBar = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
+    alignment: Alignment.centerLeft,
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize12,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(LinearBorder.none),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+  static const withoutStyleAligmentBottomLeft = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
+    alignment: Alignment.bottomLeft,
+    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    shape: WidgetStatePropertyAll(LinearBorder.none),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+  static const withoutStylePadding8 = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
+    alignment: Alignment.bottomLeft,
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize8),
+    ),
     shape: WidgetStatePropertyAll(LinearBorder.none),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
@@ -297,6 +361,131 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const borderBlackUserRoleButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        left: KPadding.kPaddingSize8,
+        right: KPadding.kPaddingSize16,
+        top: KPadding.kPaddingSize4,
+        bottom: KPadding.kPaddingSize4,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
+  static const borderBlackButtonPwResetStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize10,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+  static const borderBlackMyDiscountsButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        top: KPadding.kPaddingSize20,
+        bottom: KPadding.kPaddingSize20,
+        right: KPadding.kPaddingSize16,
+        left: KPadding.kPaddingSize8,
+      ),
+    ),
+    alignment: Alignment.centerLeft,
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+  static const borderBlackMyDiscountsDeactivateButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        top: KPadding.kPaddingSize12,
+        bottom: KPadding.kPaddingSize12,
+        right: KPadding.kPaddingSize16,
+        left: KPadding.kPaddingSize8,
+      ),
+    ),
+    alignment: Alignment.centerLeft,
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+  static const borderBlackMyDiscountsTrashButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.all(
+        KPadding.kPaddingSize12,
+      ),
+    ),
+    alignment: Alignment.centerLeft,
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
+  static const borderBlackDiscountAddButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
+  static const borderBlackButtonAdvancedFilterStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
+        horizontal: KPadding.kPaddingSize24,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
+  static const borderBlackDiscountLinkButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize10,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
   static const circularBorderBlackButtonStyle = ButtonStyle(
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
@@ -331,6 +520,12 @@ abstract class KButtonStyles {
   );
   static const footerButtonTransparent = ButtonStyle(
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+  static const discountAddButtonTransparent = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.zero,
+    ),
   );
 
   static const blackButtonStyle = ButtonStyle(
@@ -421,6 +616,27 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const borderSecondaryExpandButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeRefSecondarySecondary70),
+      ),
+    ),
+    minimumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        0,
+      ),
+    ),
+  );
+
   static const blackDetailsButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
@@ -460,6 +676,16 @@ abstract class KButtonStyles {
   );
 
   static const circularBorderNeutralButtonStyle = ButtonStyle(
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius48,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+
+  static const circularBorderTransparentButtonStyle = ButtonStyle(
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius48,

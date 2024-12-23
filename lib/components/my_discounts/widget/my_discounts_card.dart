@@ -81,17 +81,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                         //         )
                         //       : null;
                         // },
-                        style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                          padding: const WidgetStatePropertyAll(
-                            EdgeInsets.only(
-                              top: KPadding.kPaddingSize20,
-                              bottom: KPadding.kPaddingSize20,
-                              right: KPadding.kPaddingSize16,
-                              left: KPadding.kPaddingSize8,
-                            ),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ),
+                        style: KButtonStyles.borderBlackMyDiscountsButtonStyle,
                         icon: KIcon.close,
                         label: Text(
                           key: KWidgetkeys.screen.myDiscounts.deactivate,
@@ -127,17 +117,8 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                           DiscountState.deactivated,
                     );
                   },
-                  style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                    padding: const WidgetStatePropertyAll(
-                      EdgeInsets.only(
-                        top: KPadding.kPaddingSize12,
-                        bottom: KPadding.kPaddingSize12,
-                        right: KPadding.kPaddingSize16,
-                        left: KPadding.kPaddingSize8,
-                      ),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
+                  style:
+                      KButtonStyles.borderBlackMyDiscountsDeactivateButtonStyle,
                   icon: KIcon.close,
                   label: Text(
                     widget.discountModel.status.isPublished
@@ -199,13 +180,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
       key: KWidgetkeys.screen.myDiscounts.iconTrash,
       padding: KPadding.kPaddingSize12,
       icon: KIcon.trash,
-      buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.all(
-            KPadding.kPaddingSize12,
-          ),
-        ),
-      ),
+      buttonStyle: KButtonStyles.borderBlackMyDiscountsTrashButtonStyle,
     );
   }
 }

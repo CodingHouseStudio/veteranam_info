@@ -26,13 +26,18 @@ class UserSetting with _$UserSetting {
 
   /// Empty userSetting which represents an unauthenticated user.
   static const empty = UserSetting(id: '');
+  static const _emptyEn = UserSetting(
+    id: '',
+    locale: Language.english,
+  );
 
   /// Convenience getter to determine whether the current user setting is empty.
-  bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);
+  bool get isEmpty => this == UserSetting.empty || this == UserSetting._emptyEn;
 
   /// Convenience getter to determine whether the current user setting is
   /// not empty.
-  bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
+  bool get isNotEmpty =>
+      this != UserSetting.empty && this != UserSetting._emptyEn;
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isDeviceEmpty =>

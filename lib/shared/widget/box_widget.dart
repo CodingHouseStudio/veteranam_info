@@ -35,10 +35,11 @@ class BoxWidget extends StatelessWidget {
     if (isDesk) {
       return TextButton(
         onPressed: onTap,
-        style: KButtonStyles.boxButtonStyle.copyWith(
-          backgroundColor:
-              background == null ? null : WidgetStatePropertyAll(background),
-        ),
+        style: background == null
+            ? KButtonStyles.boxButtonStyle
+            : KButtonStyles.boxButtonStyle.copyWith(
+                backgroundColor: WidgetStatePropertyAll(background),
+              ),
         clipBehavior: Clip.hardEdge,
         child: Padding(
           padding: padding ??
@@ -84,16 +85,17 @@ class BoxWidget extends StatelessWidget {
     } else {
       return TextButton(
         onPressed: onTap,
-        style: KButtonStyles.boxMobButtonStyle.copyWith(
-          backgroundColor:
-              background == null ? null : WidgetStatePropertyAll(background),
-          padding: WidgetStatePropertyAll(
-            padding ??
-                const EdgeInsets.all(
-                  KPadding.kPaddingSize8,
+        style: background == null
+            ? KButtonStyles.boxMobButtonStyle
+            : KButtonStyles.boxMobButtonStyle.copyWith(
+                backgroundColor: WidgetStatePropertyAll(background),
+                padding: WidgetStatePropertyAll(
+                  padding ??
+                      const EdgeInsets.all(
+                        KPadding.kPaddingSize8,
+                      ),
                 ),
-          ),
-        ),
+              ),
         child: Row(
           children: [
             Expanded(
