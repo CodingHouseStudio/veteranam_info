@@ -81,9 +81,14 @@ class AdvancedFilterMobButton extends StatelessWidget {
               ),
             ),
             showDragHandle: true,
-            builder: (context) => AdvancedFilterMobBlocprovider(
-              childWidget: const _AdvancedFilterMobDialog(),
-              bloc: bloc,
+            builder: (context) => Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.viewInsetsOf(context).bottom,
+              ), // padding if mobile keyboard open
+              child: AdvancedFilterMobBlocprovider(
+                childWidget: const _AdvancedFilterMobDialog(),
+                bloc: bloc,
+              ),
             ),
           ).then(
             (value) async {
