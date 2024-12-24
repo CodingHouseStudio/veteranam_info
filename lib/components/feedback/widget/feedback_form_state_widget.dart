@@ -13,13 +13,15 @@ class FeedbackFormStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeedbackBloc, FeedbackState>(
-      buildWhen: (previous, current) => previous.formState != current.formState,
+    return BlocSelector<FeedbackBloc, FeedbackState, bool>(
+      selector: (state) =>
+          context.read<FeedbackBloc>().state.formState ==
+              FeedbackEnum.success ||
+          context.read<FeedbackBloc>().state.formState ==
+              FeedbackEnum.sendingMessage,
+      // buildWhen: (previous, current) => previous.formState != current.formState,
       builder: (context, state) {
-        if (context.read<FeedbackBloc>().state.formState ==
-                FeedbackEnum.success ||
-            context.read<FeedbackBloc>().state.formState ==
-                FeedbackEnum.sendingMessage) {
+        if (state) {
           return SliverMainAxisGroup(
             slivers: [
               FeedbackTitle(

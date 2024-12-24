@@ -4,6 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
+import 'package:veteranam/shared/repositories/i_discount_filter_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterContent extends StatelessWidget {
@@ -25,13 +26,27 @@ class AdvancedFilterContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final body = [
       if (isDesk)
-        BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.discountFilterRepository.getActivityList !=
-                  current.discountFilterRepository.getActivityList ||
-              previous.filterStatus != current.filterStatus,
+        BlocSelector<
+            DiscountsWatcherBloc,
+            DiscountsWatcherState,
+            ({
+              Map<String, FilterItem> chosenItems,
+              int categoriesLength,
+              int eligibilitiesLength,
+            })>(
+          selector: (state) => (
+            chosenItems: state.discountFilterRepository.getActivityList,
+            categoriesLength:
+                state.discountFilterRepository.activeCategoryMap.length,
+            eligibilitiesLength:
+                state.discountFilterRepository.activeEligibilityMap.length,
+          ),
+          // buildWhen: (previous, current) =>
+          //     previous.discountFilterRepository.getActivityList !=
+          //         current.discountFilterRepository.getActivityList ||
+          //     previous.filterStatus != current.filterStatus,
           builder: (context, state) {
-            if (state.discountFilterRepository.hasActivityItem) {
+            if (state.chosenItems.isNotEmpty) {
               return SliverMainAxisGroup(
                 slivers: [
                   if (isDesk)
@@ -59,12 +74,9 @@ class AdvancedFilterContent extends StatelessWidget {
                         const EdgeInsets.only(right: KPadding.kPaddingSize8),
                     sliver: _ChooseItems(
                       isDesk: isDesk,
-                      chosenItems:
-                          state.discountFilterRepository.getActivityList,
-                      categoriesLength: state
-                          .discountFilterRepository.activeCategoryMap.length,
-                      eligibilitiesLength: state
-                          .discountFilterRepository.activeEligibilityMap.length,
+                      chosenItems: state.chosenItems,
+                      categoriesLength: state.categoriesLength,
+                      eligibilitiesLength: state.eligibilitiesLength,
                     ),
                   ),
                 ],
@@ -74,18 +86,30 @@ class AdvancedFilterContent extends StatelessWidget {
             }
           },
         ),
-      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-        buildWhen: (previous, current) =>
-            previous.discountFilterRepository.eligibilityMap !=
-                current.discountFilterRepository.eligibilityMap ||
-            previous.filterStatus != current.filterStatus,
+      BlocSelector<
+          DiscountsWatcherBloc,
+          DiscountsWatcherState,
+          ({
+            Map<String, FilterItem> eligibilityMap,
+            FilterItem? firstActiveItem,
+            bool isLoading,
+          })>(
+        selector: (state) => (
+          eligibilityMap: state.discountFilterRepository.eligibilityMap,
+          isLoading: state.filterStatus.isLoading,
+          firstActiveItem:
+              state.discountFilterRepository.activeEligibilityMap.first,
+        ),
+        // buildWhen: (previous, current) =>
+        //     previous.discountFilterRepository.eligibilityMap !=
+        //         current.discountFilterRepository.eligibilityMap ||
+        //     previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.eligibilityMap.isNotEmpty ||
-              state.filterStatus.isLoading) {
+          if (state.eligibilityMap.isNotEmpty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: _AdvancedListWidget(
-                filter: state.discountFilterRepository.eligibilityMap,
+                filter: state.eligibilityMap,
                 onChange: (value) => context.read<DiscountsWatcherBloc>().add(
                       DiscountsWatcherEvent.filterEligibilities(
                         eligibility: value,
@@ -94,11 +118,11 @@ class AdvancedFilterContent extends StatelessWidget {
                     ),
                 isDesk: isDesk,
                 itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
-                isLoading: state.filterStatus.isLoading,
+                isLoading: state.isLoading,
               ),
               textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
               title: context.l10n.eligibility,
-              value: state.discountFilterRepository.activeEligibilityMap.first,
+              value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
                   context.read<DiscountsWatcherBloc>().add(
                         DiscountsWatcherEvent.filterEligibilities(
@@ -106,25 +130,37 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
-              isLoading: state.filterStatus.isLoading,
+              isLoading: state.isLoading,
             );
           } else {
             return const SliverToBoxAdapter();
           }
         },
       ),
-      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-        buildWhen: (previous, current) =>
-            previous.discountFilterRepository.categoryMap !=
-                current.discountFilterRepository.categoryMap ||
-            previous.filterStatus != current.filterStatus,
+      BlocSelector<
+          DiscountsWatcherBloc,
+          DiscountsWatcherState,
+          ({
+            Map<String, FilterItem> categoryMap,
+            FilterItem? firstActiveItem,
+            bool isLoading,
+          })>(
+        selector: (state) => (
+          categoryMap: state.discountFilterRepository.categoryMap,
+          isLoading: state.filterStatus.isLoading,
+          firstActiveItem:
+              state.discountFilterRepository.activeCategoryMap.first,
+        ),
+        // buildWhen: (previous, current) =>
+        //     previous.discountFilterRepository.categoryMap !=
+        //         current.discountFilterRepository.categoryMap ||
+        //     previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.categoryMap.isNotEmpty ||
-              state.filterStatus.isLoading) {
+          if (state.categoryMap.isNotEmpty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: _AdvancedListWidget(
-                filter: state.discountFilterRepository.categoryMap,
+                filter: state.categoryMap,
                 onChange: (value) => context.read<DiscountsWatcherBloc>().add(
                       DiscountsWatcherEvent.filterCategory(
                         category: value,
@@ -133,11 +169,11 @@ class AdvancedFilterContent extends StatelessWidget {
                     ),
                 isDesk: isDesk,
                 itemKey: KWidgetkeys.screen.discounts.categoriesItems,
-                isLoading: state.filterStatus.isLoading,
+                isLoading: state.isLoading,
               ),
               textKey: KWidgetkeys.screen.discounts.categoriesText,
               title: context.l10n.category,
-              value: state.discountFilterRepository.activeCategoryMap.first,
+              value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
                   context.read<DiscountsWatcherBloc>().add(
                         DiscountsWatcherEvent.filterCategory(
@@ -145,26 +181,40 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
-              isLoading: state.filterStatus.isLoading,
+              isLoading: state.isLoading,
             );
           } else {
             return const SliverToBoxAdapter();
           }
         },
       ),
-      BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-        buildWhen: (previous, current) =>
-            previous.discountFilterRepository.locationMap !=
-                current.discountFilterRepository.locationMap ||
-            previous.filterStatus != current.filterStatus,
+      BlocSelector<
+          DiscountsWatcherBloc,
+          DiscountsWatcherState,
+          ({
+            Map<String, FilterItem> locationMap,
+            FilterItem? firstActiveItem,
+            bool isLoading,
+            bool locationIsNotEpmty,
+          })>(
+        selector: (state) => (
+          locationMap: state.discountFilterRepository.locationMap,
+          isLoading: state.filterStatus.isLoading,
+          firstActiveItem:
+              state.discountFilterRepository.activeLocationMap.first,
+          locationIsNotEpmty: state.discountFilterRepository.locationIsNotEpmty,
+        ),
+        // buildWhen: (previous, current) =>
+        //     previous.discountFilterRepository.locationMap !=
+        //         current.discountFilterRepository.locationMap ||
+        //     previous.filterStatus != current.filterStatus,
         builder: (context, state) {
-          if (state.discountFilterRepository.locationIsNotEpmty ||
-              state.filterStatus.isLoading) {
+          if (state.locationIsNotEpmty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
               list: SliverMainAxisGroup(
                 slivers: [
-                  if (!state.filterStatus.isLoading)
+                  if (!state.isLoading)
                     SliverToBoxAdapter(
                       child: Padding(
                         padding:
@@ -189,7 +239,7 @@ class AdvancedFilterContent extends StatelessWidget {
                       ),
                     ),
                   _AdvancedListWidget(
-                    filter: state.discountFilterRepository.locationMap,
+                    filter: state.locationMap,
                     onChange: (value) =>
                         context.read<DiscountsWatcherBloc>().add(
                               DiscountsWatcherEvent.filterLocation(
@@ -199,13 +249,13 @@ class AdvancedFilterContent extends StatelessWidget {
                             ),
                     isDesk: isDesk,
                     itemKey: KWidgetkeys.screen.discounts.cityItems,
-                    isLoading: state.filterStatus.isLoading,
+                    isLoading: state.isLoading,
                   ),
                 ],
               ),
               textKey: KWidgetkeys.screen.discounts.citiesText,
               title: context.l10n.city,
-              value: state.discountFilterRepository.activeLocationMap.first,
+              value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
                   context.read<DiscountsWatcherBloc>().add(
                         DiscountsWatcherEvent.filterLocation(
@@ -213,7 +263,7 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
-              isLoading: state.filterStatus.isLoading,
+              isLoading: state.isLoading,
             );
           } else {
             return const SliverToBoxAdapter();

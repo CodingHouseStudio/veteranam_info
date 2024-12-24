@@ -106,6 +106,7 @@ class _FaqListWidget extends StatelessWidget {
           top: KPadding.kPaddingSize24,
         ),
         child: SkeletonizerWidget(
+          key: KWidgetkeys.screen.home.faqSkeletonizer,
           isLoading: true,
           child: QuestionWidget(
             questionModel: KMockText.questionModel,

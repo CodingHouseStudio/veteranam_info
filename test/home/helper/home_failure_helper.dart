@@ -14,7 +14,8 @@ Future<void> homeFailureHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp250,
+    offset: KTestConstants.scrollingUp500,
+    itemKey: KWidgetkeys.screen.home.faqTitle,
   );
 
   await scrollingHelper(
@@ -24,12 +25,12 @@ Future<void> homeFailureHelper(
 
   expect(
     find.byKey(KWidgetkeys.screen.home.faqSkeletonizer),
-    findsWidgets,
+    findsNothing,
   );
 
   await loadingFailureHelper(
     tester: tester,
     card: KWidgetkeys.screen.home.faq,
-    buttonMock: KWidgetkeys.screen.home.buttonMock,
+    buttonMock: null,
   );
 }

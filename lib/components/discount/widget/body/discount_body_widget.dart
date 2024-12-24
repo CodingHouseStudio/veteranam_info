@@ -15,104 +15,106 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UrlCubit, UrlEnum?>(
-      listener: (context, state) async {
-        if (state != null) {
-          context.dialog.showSnackBardTextDialog(
-            state.value(
-              context: context,
-              copyMessage: context.l10n.copyPhoneNumber,
-            ),
-            duration: const Duration(milliseconds: 4000),
-          );
-          context.read<UrlCubit>().reset();
-        }
-      },
-      child: BlocListener<NetworkCubit, NetworkStatus>(
-        listener: (context, state) {
-          if (state == NetworkStatus.network) {
-            context.read<DiscountWatcherBloc>().add(
-                  DiscountWatcherEvent.started(
-                    discount: discount,
-                    discountId: discountId,
-                  ),
-                );
-          }
-        },
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final isDesk =
-                constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-            final isTablet = constraints.maxWidth >
-                KPlatformConstants.minWidthThresholdTablet;
-
-            final padding = EdgeInsets.symmetric(
-              horizontal: (isDesk
-                  ? KPadding.kPaddingSize90 +
-                      ((constraints.maxWidth >
-                              KPlatformConstants.maxWidthThresholdTablet)
-                          ? (constraints.maxWidth -
-                                  KPlatformConstants.maxWidthThresholdTablet) /
-                              2
-                          : 0)
-                  : KPadding.kPaddingSize16),
-            );
-            return FocusTraversalGroup(
-              child: Semantics(
-                child: CustomScrollView(
-                  cacheExtent: KDimensions.listCacheExtent,
-                  slivers: [
-                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    if (Config.isWeb)
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                      ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox32.toSliver
-                    else
-                      KSizedBox.kHeightSizedBox8.toSliver,
-                    SliverPadding(
-                      padding: padding,
-                      sliver: BlocBuilder<DiscountWatcherBloc,
-                          DiscountWatcherState>(
-                        buildWhen: (previous, current) =>
-                            current.failure == DiscountFailure.linkWrong &&
-                            previous.failure != DiscountFailure.linkWrong,
-                        builder: (context, state) {
-                          if (state.failure == DiscountFailure.linkWrong) {
-                            return DiscountWrongLinkWidget(
-                              isDesk: isDesk,
-                            );
-                          }
-                          return SliverMainAxisGroup(
-                            slivers: [
-                              SliverToBoxAdapter(
-                                child: BackButtonWidget(
-                                  backPageName: context.l10n.toDiscounts,
-                                  pathName: KRoute.discounts.name,
-                                ),
-                              ),
-                              if (isDesk)
-                                KSizedBox.kHeightSizedBox32.toSliver
-                              else
-                                KSizedBox.kHeightSizedBox8.toSliver,
-                              DiscountInformationWidget(
-                                isDesk: isDesk,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                    KSizedBox.kHeightSizedBox40.toSliver,
-                  ],
-                  // semanticChildCount: null,
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<UrlCubit, UrlEnum?>(
+          listener: (context, state) async {
+            if (state != null) {
+              context.dialog.showSnackBardTextDialog(
+                state.value(
+                  context: context,
+                  copyMessage: context.l10n.copyPhoneNumber,
                 ),
-              ),
-            );
+                duration: const Duration(milliseconds: 4000),
+              );
+              context.read<UrlCubit>().reset();
+            }
           },
         ),
+        BlocListener<NetworkCubit, NetworkStatus>(
+          listener: (context, state) {
+            if (state == NetworkStatus.network) {
+              context.read<DiscountWatcherBloc>().add(
+                    DiscountWatcherEvent.started(
+                      discount: discount,
+                      discountId: discountId,
+                    ),
+                  );
+            }
+          },
+        ),
+      ],
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final isDesk =
+              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+          final isTablet =
+              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+
+          final padding = EdgeInsets.symmetric(
+            horizontal: (isDesk
+                ? KPadding.kPaddingSize90 +
+                    ((constraints.maxWidth >
+                            KPlatformConstants.maxWidthThresholdTablet)
+                        ? (constraints.maxWidth -
+                                KPlatformConstants.maxWidthThresholdTablet) /
+                            2
+                        : 0)
+                : KPadding.kPaddingSize16),
+          );
+          return CustomScrollView(
+            cacheExtent: KDimensions.listCacheExtent,
+            slivers: [
+              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+              if (Config.isWeb)
+                NavigationBarWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox32.toSliver
+              else
+                KSizedBox.kHeightSizedBox8.toSliver,
+              SliverPadding(
+                padding: padding,
+                sliver: BlocSelector<DiscountWatcherBloc, DiscountWatcherState,
+                    bool>(
+                  selector: (state) =>
+                      state.failure == DiscountFailure.linkWrong,
+                  // buildWhen: (previous, current) =>
+                  //     current.failure == DiscountFailure.linkWrong &&
+                  //     previous.failure != DiscountFailure.linkWrong,
+                  builder: (context, state) {
+                    if (state) {
+                      return DiscountWrongLinkWidget(
+                        isDesk: isDesk,
+                      );
+                    }
+                    return SliverMainAxisGroup(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: BackButtonWidget(
+                            backPageName: context.l10n.toDiscounts,
+                            pathName: KRoute.discounts.name,
+                          ),
+                        ),
+                        if (isDesk)
+                          KSizedBox.kHeightSizedBox32.toSliver
+                        else
+                          KSizedBox.kHeightSizedBox8.toSliver,
+                        DiscountInformationWidget(
+                          isDesk: isDesk,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              KSizedBox.kHeightSizedBox40.toSliver,
+            ],
+            // semanticChildCount: null,
+          );
+        },
       ),
     );
   }
