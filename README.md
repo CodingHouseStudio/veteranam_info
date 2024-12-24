@@ -78,7 +78,9 @@ A Flutter no-profit app supporting Ukraine's war veterans.
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/repositories/discount_filter_repository.dart">Logic</a>
     </th>
     <th>
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/login">Login</a>
+         | 
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/sign_up">Sign Up</a>
     </th>
     <th>
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">Report</a>
@@ -93,9 +95,9 @@ A Flutter no-profit app supporting Ukraine's war veterans.
         </a>
     </th>
     <th>
-      <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">
-        <img src="assets/read_me/gifs/discount_separate page.gif" alt="Separate Page For Discount" />
-      </a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/login">
+            <img src="assets/read_me/gifs/sigh_up_log_in.gif" alt="Login & Sign Up"/>
+        </a>
     </th>
     <th>
       <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">
@@ -105,22 +107,39 @@ A Flutter no-profit app supporting Ukraine's war veterans.
   </tr>
 </table>
 
-
-</markdown-accessiblity-table>
 <table>
   <tr>
     <th>
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/body/discounts_body_widget.dart">Mobile Scroll Loading</a>
     </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">Add New Discount</a>
+    </th>
   </tr>
   <tr>
     <th>
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/body/discounts_body_widget.dart">
-            <img src="assets/read_me/gifs/feed.gif" alt="Filter" width="33.333%"/>
+            <img src="assets/read_me/gifs/feed.gif" alt="Filter"/>
         </a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">
+            <img src="assets/read_me/gifs/add_new_discount.gif" alt="Filter"/>
+        </a>
+    </th>
+    <th>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">
+        <img src="assets/read_me/gifs/discount_separate page.gif" alt="Separate Page For Discount" />
+      </a>
     </th>
   </tr>
 </table>
+
+</markdown-accessiblity-table>
+
 
 
 ## Challenge
