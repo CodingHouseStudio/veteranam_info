@@ -21,7 +21,7 @@ void main() {
       'appCodeName': 'CODENAME',
       'appName': 'NAME',
       'appVersion': 'VERSION',
-      'deviceMemory': 64,
+      'deviceMemory': 64.0,
       'language': 'en',
       'languages': ['en', 'es'],
       'platform': null,
