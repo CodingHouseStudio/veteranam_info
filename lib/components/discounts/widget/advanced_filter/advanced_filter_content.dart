@@ -106,12 +106,10 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
+              isLoading: state.filterStatus.isLoading,
             );
           } else {
-            return _AdvancedLoadingListWidget(
-              isDesk: isDesk,
-              itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
-            );
+            return const SliverToBoxAdapter();
           }
         },
       ),
@@ -147,6 +145,7 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
+              isLoading: state.filterStatus.isLoading,
             );
           } else {
             return const SliverToBoxAdapter();
@@ -184,8 +183,8 @@ class AdvancedFilterContent extends StatelessWidget {
                           enabledBorder: KWidgetTheme.outlineInputBorder,
                           focusColor:
                               AppColors.materialThemeKeyColorsNeutralVariant,
-                          hoverColor:
-                              AppColors.materialThemeRefNeutralNeutral95,
+                          hoverColor: AppColors
+                              .materialThemeSysLightOnBackgroundOpacity8,
                         ),
                       ),
                     ),
@@ -214,6 +213,7 @@ class AdvancedFilterContent extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       ),
+              isLoading: state.filterStatus.isLoading,
             );
           } else {
             return const SliverToBoxAdapter();
@@ -263,7 +263,9 @@ class _AdvancedListWidget extends StatelessWidget {
     }
     return SliverPrototypeExtentList.builder(
       prototypeItem: Padding(
-        padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+        padding: isDesk
+            ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
+            : const EdgeInsets.only(top: KPadding.kPaddingSize8),
         child: CheckPointAmountWidget(
           key: itemKey,
           isCheck: false,
@@ -291,20 +293,17 @@ class _AdvancedListWidget extends StatelessWidget {
       },
       itemBuilder: (context, index) {
         final value = filter[filter.keys.elementAt(index)]!;
-        return Padding(
+        return CheckPointAmountWidget(
           key: ValueKey(filter.keys.elementAt(index)),
-          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-          child: CheckPointAmountWidget(
-            key: itemKey,
-            onChanged: () => onChange(
-              value.value.uk,
-            ),
-            maxLines: 1,
-            isCheck: value.isSelected,
-            filterItem: value,
-            isDesk: isDesk,
-            amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
+          widgetKey: itemKey,
+          onChanged: () => onChange(
+            value.value.uk,
           ),
+          maxLines: 2,
+          isCheck: value.isSelected,
+          filterItem: value,
+          isDesk: isDesk,
+          amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
         );
       },
     );
@@ -332,59 +331,54 @@ class _ChooseItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.only(
-        bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Padding(
-          padding: isDesk
-              ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-              : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-          child: Wrap(
-            runSpacing: KPadding.kPaddingSize8,
-            spacing: KPadding.kPaddingSize8,
-            children: List.generate(
-              chosenItems.length,
-              (index) {
-                final chooseItem =
-                    chosenItems[chosenItems.keys.elementAt(index)]!;
-                return Padding(
-                  padding: isDesk
-                      ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-                      : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-                  child: CancelChipWidget(
-                    widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-                    isDesk: isDesk,
-                    labelText: chooseItem.value.getTrsnslation(context),
-                    onPressed: () {
-                      if (eligibilitiesLength > index) {
-                        context.read<DiscountsWatcherBloc>().add(
-                              DiscountsWatcherEvent.filterEligibilities(
-                                eligibility: chooseItem.value.uk,
-                                isDesk: isDesk,
-                              ),
-                            );
-                      } else if (eligibilitiesLength + categoriesLength >
-                          index) {
-                        context.read<DiscountsWatcherBloc>().add(
-                              DiscountsWatcherEvent.filterCategory(
-                                category: chooseItem.value.uk,
-                                isDesk: isDesk,
-                              ),
-                            );
-                      } else {
-                        context.read<DiscountsWatcherBloc>().add(
-                              DiscountsWatcherEvent.filterLocation(
-                                location: chooseItem.value.uk,
-                                isDesk: isDesk,
-                              ),
-                            );
-                      }
-                    },
-                  ),
-                );
-              },
+      padding: isDesk
+          ? const EdgeInsets.only(
+              top: KPadding.kPaddingSize16,
+              bottom: KPadding.kPaddingSize24,
+            )
+          : const EdgeInsets.only(
+              top: KPadding.kPaddingSize8,
+              bottom: KPadding.kPaddingSize8,
             ),
+      sliver: SliverToBoxAdapter(
+        child: Wrap(
+          runSpacing: KPadding.kPaddingSize8,
+          spacing: KPadding.kPaddingSize8,
+          children: List.generate(
+            chosenItems.length,
+            (index) {
+              final chooseItem =
+                  chosenItems[chosenItems.keys.elementAt(index)]!;
+              return CancelChipWidget(
+                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+                isDesk: isDesk,
+                labelText: chooseItem.value.getTrsnslation(context),
+                onPressed: () {
+                  if (eligibilitiesLength > index) {
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterEligibilities(
+                            eligibility: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
+                  } else if (eligibilitiesLength + categoriesLength > index) {
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterCategory(
+                            category: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
+                  } else {
+                    context.read<DiscountsWatcherBloc>().add(
+                          DiscountsWatcherEvent.filterLocation(
+                            location: chooseItem.value.uk,
+                            isDesk: isDesk,
+                          ),
+                        );
+                  }
+                },
+              );
+            },
           ),
         ),
       ),
@@ -480,8 +474,8 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: isDesk
-              ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
-              : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+              ? const EdgeInsets.only(top: KPadding.kPaddingSize24)
+              : const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: SkeletonizerWidget(
             isLoading: true,
             highlightColor: isDesk

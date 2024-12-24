@@ -307,6 +307,9 @@ abstract class AppColors {
 
   static const Color materialThemeSysLightOnBackground = Color(0xff1b1c15);
 
+  static const Color materialThemeSysLightOnBackgroundOpacity8 =
+      Color(0x141b1c15);
+
   static const Color materialThemeSysLightSurface = Color(0xfff5fbf7);
 
   static const Color materialThemeSysLightOnSurface = Color(0xff171d1b);

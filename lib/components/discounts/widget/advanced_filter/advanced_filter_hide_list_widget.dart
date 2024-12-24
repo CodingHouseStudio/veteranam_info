@@ -11,6 +11,7 @@ class AdvancedFilterListWidget extends StatefulWidget {
     required this.title,
     required this.value,
     required this.onCancelWidgetPressed,
+    required this.isLoading,
     super.key,
   });
   final bool isDesk;
@@ -19,6 +20,7 @@ class AdvancedFilterListWidget extends StatefulWidget {
   final String title;
   final FilterItem? value;
   final void Function(String activeItem) onCancelWidgetPressed;
+  final bool isLoading;
 
   @override
   State<AdvancedFilterListWidget> createState() =>
@@ -39,6 +41,10 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
       buildWhen: (previous, current) =>
           current.mobFilterEnhancedMobile != previous.mobFilterEnhancedMobile,
       builder: (context, state) {
+        final showList = widget.value == null ||
+            widget.isDesk ||
+            state.mobFilterEnhancedMobile ||
+            widget.isLoading;
         return SliverPadding(
           padding: const EdgeInsets.only(
             right: KPadding.kPaddingSize8,
@@ -47,9 +53,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
           sliver: SliverMainAxisGroup(
             slivers: [
               SliverToBoxAdapter(
-                child: widget.value != null &&
-                        !widget.isDesk &&
-                        !state.mobFilterEnhancedMobile
+                child: !showList
                     ? Wrap(
                         runSpacing: KPadding.kPaddingSize16,
                         spacing: KPadding.kPaddingSize8,
@@ -90,11 +94,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                         ),
                       ),
               ),
-              if ((widget.value == null ||
-                      widget.isDesk ||
-                      state.mobFilterEnhancedMobile) &&
-                  listShow)
-                widget.list,
+              if (showList && listShow) widget.list,
             ],
           ),
         );

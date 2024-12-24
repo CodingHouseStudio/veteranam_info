@@ -55,7 +55,7 @@ class CancelChipWidget extends StatelessWidget {
   Widget get textWidget => Text(
         labelText,
         textAlign: TextAlign.center,
-        maxLines: 1,
+        maxLines: 2,
         overflow: TextOverflow.ellipsis,
         style: textStyle ??
             (isDesk
