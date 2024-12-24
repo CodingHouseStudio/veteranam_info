@@ -24,60 +24,82 @@ void main() {
       when(mockCompanyRepository.company).thenAnswer(
         (realInvocation) => Stream.value(KTestText.fullCompanyModel),
       );
-      companyWatcherBloc =
-          CompanyWatcherBloc(companyRepository: mockCompanyRepository);
+      // companyWatcherBloc =
+      //     CompanyWatcherBloc(companyRepository: mockCompanyRepository);
     });
-    blocTest<CompanyWatcherBloc, CompanyWatcherState>(
+    group(
       'emits [CompanyWatcherState] when loaded user and updated'
       ' ${KGroupText.successful}',
-      build: () => companyWatcherBloc,
-      act: (bloc) async {
-        when(mockCompanyRepository.company).thenAnswer(
-          (realInvocation) => Stream.value(KTestText.fullCompanyModel),
+      () {
+        setUp(
+          () {
+            when(mockCompanyRepository.company).thenAnswer(
+              (realInvocation) => Stream.value(KTestText.fullCompanyModel),
+            );
+            companyWatcherBloc =
+                CompanyWatcherBloc(companyRepository: mockCompanyRepository);
+          },
         );
-        // bloc.add(
-        //   const CompanyWatcherEvent.started(),
-        // );
-        await expectLater(
-          bloc.stream,
-          emitsInOrder([
-            predicate<CompanyWatcherState>(
-              (state) => state.company.isNotEmpty,
+        blocTest<CompanyWatcherBloc, CompanyWatcherState>(
+          'emits [CompanyWatcherState] when loaded user and updated'
+          ' ${KGroupText.successful}',
+          build: () => companyWatcherBloc,
+          act: (bloc) async {
+            // bloc.add(
+            //   const CompanyWatcherEvent.started(),
+            // );
+            await expectLater(
+              bloc.stream,
+              emitsInOrder([
+                predicate<CompanyWatcherState>(
+                  (state) => state.company.isNotEmpty,
+                ),
+              ]),
+              reason: 'Wait for loading data',
+            );
+            bloc.add(
+                const CompanyWatcherEvent.updated(KTestText.pureCompanyModel));
+          },
+          expect: () async => [
+            const CompanyWatcherState(
+              company: KTestText.fullCompanyModel,
+              failure: null,
             ),
-          ]),
-          reason: 'Wait for loading data',
+            const CompanyWatcherState(
+              company: KTestText.pureCompanyModel,
+              failure: null,
+            ),
+          ],
         );
-        bloc.add(const CompanyWatcherEvent.updated(KTestText.pureCompanyModel));
       },
-      expect: () async => [
-        const CompanyWatcherState(
-          company: KTestText.fullCompanyModel,
-          failure: null,
-        ),
-        const CompanyWatcherState(
-          company: KTestText.pureCompanyModel,
-          failure: null,
-        ),
-      ],
     );
-    blocTest<CompanyWatcherBloc, CompanyWatcherState>(
-      'emits [CompanyWatcherState] when loaded user failure'
-      ' ${KGroupText.successful}',
-      build: () => companyWatcherBloc,
-      act: (bloc) async {
-        when(mockCompanyRepository.company).thenAnswer(
-          (realInvocation) => Stream.error(KGroupText.failureGet),
-        );
-        // bloc.add(
-        //   const CompanyWatcherEvent.started(),
-        // );
-      },
-      expect: () async => [
-        const CompanyWatcherState(
-          company: KTestText.pureCompanyModel,
-          failure: CompanyWatcherFailure.error,
-        ),
-      ],
-    );
+    group(
+        'emits [CompanyWatcherState] when loaded user failure'
+        ' ${KGroupText.successful}', () {
+      setUp(
+        () {
+          when(mockCompanyRepository.company).thenAnswer(
+            (realInvocation) => Stream.error(KGroupText.failureGet),
+          );
+          companyWatcherBloc =
+              CompanyWatcherBloc(companyRepository: mockCompanyRepository);
+        },
+      );
+      blocTest<CompanyWatcherBloc, CompanyWatcherState>(
+        'Bloc Test',
+        build: () => companyWatcherBloc,
+        act: (bloc) async {
+          // bloc.add(
+          //   const CompanyWatcherEvent.started(),
+          // );
+        },
+        expect: () async => [
+          const CompanyWatcherState(
+            company: KTestText.pureCompanyModel,
+            failure: CompanyWatcherFailure.error,
+          ),
+        ],
+      );
+    });
   });
 }
