@@ -64,61 +64,7 @@ class EligibilityWidget extends StatelessWidget {
             key: ValueKey(eligibility),
             runSpacing: KPadding.kPaddingSize12,
             spacing: KPadding.kPaddingSize8,
-            children: isDesk
-                ? List.generate(
-                    list.length > 5 && !showFullList ? 6 : list.length,
-                    (index) {
-                      if (5 > index || showFullList) {
-                        final item = list.elementAt(index);
-                        return Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            item.eligibilityIcon,
-                            KSizedBox.kWidthSizedBox4,
-                            Text(
-                              item.getValue(context),
-                              style: AppTextStyle.materialThemeLabelMedium,
-                            ),
-                          ],
-                        );
-                      }
-                      return TextButton(
-                        onPressed: moreButtonEvent,
-                        child: Text(
-                          context.l10n.moreWhomGranted(list.length - 5),
-                          style: AppTextStyle.materialThemeLabelLargeRef,
-                        ),
-                      );
-                    },
-                  )
-                : List.generate(
-                    list.length > 3 && !showFullList ? 4 : list.length,
-                    (index) {
-                      if (3 > index || showFullList) {
-                        final item = list.elementAt(index);
-                        return Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            item.eligibilityIcon,
-                            KSizedBox.kWidthSizedBox4,
-                            Text(
-                              item.getValue(context),
-                              style: AppTextStyle.materialThemeLabelMedium,
-                            ),
-                          ],
-                        );
-                      }
-                      return TextButton(
-                        onPressed: moreButtonEvent,
-                        child: Text(
-                          context.l10n.moreWhomGranted(list.length - 3),
-                          style: AppTextStyle.materialThemeLabelLargeRef,
-                        ),
-                      );
-                    },
-                  ),
+            children: eligibilityList(list, isDesk ? 5 : 3, context),
           ),
         );
       } else {
@@ -126,6 +72,41 @@ class EligibilityWidget extends StatelessWidget {
       }
     }
   }
+
+  List<Widget> eligibilityList(
+    List<EligibilityEnum> list,
+    int itemCount,
+    BuildContext context,
+  ) {
+    return List.generate(
+      list.length > itemCount && !showFullList ? itemCount + 1 : list.length,
+      (index) {
+        if ((isDesk ? 5 : 3) > index || showFullList) {
+          final item = list.elementAt(index);
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              item.eligibilityIcon,
+              KSizedBox.kWidthSizedBox4,
+              Text(
+                item.getValue(context),
+                style: AppTextStyle.materialThemeLabelMedium,
+              ),
+            ],
+          );
+        }
+        return TextButton(
+          onPressed: moreButtonEvent,
+          child: Text(
+            context.l10n.moreWhomGranted(list.length - itemCount),
+            style: AppTextStyle.materialThemeLabelLargeRef,
+          ),
+        );
+      },
+    );
+  }
+}
 
 // class DiscountEligibilityExpandedWidget extends StatelessWidget {
 //   const DiscountEligibilityExpandedWidget({
@@ -191,4 +172,3 @@ class EligibilityWidget extends StatelessWidget {
 
 //   //   return widgets;
 //   // }
-}
