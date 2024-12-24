@@ -7,6 +7,8 @@ import '../../test_dependency.dart';
 Future<void> homeFailureHelper(
   WidgetTester tester,
 ) async {
+  await dialogFailureGetHelper(tester: tester);
+
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
@@ -28,9 +30,14 @@ Future<void> homeFailureHelper(
     findsNothing,
   );
 
-  await loadingFailureHelper(
-    tester: tester,
-    card: KWidgetkeys.screen.home.faq,
-    buttonMock: null,
+  expect(
+    find.byKey(KWidgetkeys.screen.home.faq),
+    findsNothing,
   );
+
+  // await loadingFailureHelper(
+  //   tester: tester,
+  //   card: KWidgetkeys.screen.home.faq,
+  //   buttonMock: null,
+  // );
 }

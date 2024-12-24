@@ -4,7 +4,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
-import 'package:veteranam/shared/repositories/i_discount_filter_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class AdvancedFilterContent extends StatelessWidget {

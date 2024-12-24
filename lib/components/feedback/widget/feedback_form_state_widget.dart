@@ -19,7 +19,8 @@ class FeedbackFormStateWidget extends StatelessWidget {
               FeedbackEnum.success ||
           context.read<FeedbackBloc>().state.formState ==
               FeedbackEnum.sendingMessage,
-      // buildWhen: (previous, current) => previous.formState != current.formState,
+      // buildWhen: (previous, current) =>
+      // previous.formState != current.formState,
       builder: (context, state) {
         if (state) {
           return SliverMainAxisGroup(

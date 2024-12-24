@@ -27,12 +27,14 @@ Future<void> scrollingHelper({
   }
   if (itemKey != null) {
     final finder = find.byKey(itemKey);
+    final item = itemIndex != null
+        ? finder.at(itemIndex)
+        : first
+            ? finder.first
+            : finder.last;
+    expect(item, findsOneWidget);
     await tester.ensureVisible(
-      itemIndex != null
-          ? finder.at(itemIndex)
-          : first
-              ? finder.first
-              : finder.last,
+      item,
     );
     await tester.pumpAndSettle();
   }

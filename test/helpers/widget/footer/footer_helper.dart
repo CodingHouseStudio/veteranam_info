@@ -57,6 +57,11 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.facebookIcon), findsOneWidget);
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.footer.facebookIcon,
+  );
+
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
 
   await scrollingHelper(

@@ -110,9 +110,7 @@ void main() {
         Config.roleValue = Config.business;
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
+            await KTestConstants.serverErrorFailure,
           ),
         );
         await homePumpAppHelper(
@@ -131,7 +129,9 @@ void main() {
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => Left(
+            await KTestConstants.networkFailure,
+          ),
         );
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
@@ -149,7 +149,9 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(SomeFailure.get(error: null)),
+          (invocation) async => Left(
+            await KTestConstants.getFailure,
+          ),
         );
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,

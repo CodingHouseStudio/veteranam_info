@@ -7,21 +7,18 @@ class NetworkBanner extends StatelessWidget {
     required this.isDesk,
     required this.isTablet,
     super.key,
-    this.childWidget,
-    this.networkStatus,
   });
   final bool isDesk;
   final bool isTablet;
-  final Widget? childWidget;
-  final NetworkStatus? networkStatus;
 
   @override
   Widget build(BuildContext context) {
     if (!Config.isWeb) {
-      BlocBuilder<NetworkCubit, NetworkStatus>(
+      return BlocBuilder<NetworkCubit, NetworkStatus>(
         builder: (context, state) {
           if (state.isOffline) {
             return SliverPersistentHeader(
+              pinned: true,
               delegate: SliverHeaderWidget(
                 childWidget: ({
                   required overlapsContent,
@@ -37,7 +34,7 @@ class NetworkBanner extends StatelessWidget {
                           opacity: 1 - progress,
                           duration: const Duration(milliseconds: 250),
                           child: _NetworkStatusBanner(
-                            networkStatus: networkStatus!,
+                            networkStatus: state,
                           ),
                         ),
                         AnimatedOpacity(

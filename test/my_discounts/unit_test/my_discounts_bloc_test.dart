@@ -82,9 +82,9 @@ void main() {
           predicate<MyDiscountsWatcherState>(
             (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          // predicate<MyDiscountsWatcherState>(
-          //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          // ),
+          predicate<MyDiscountsWatcherState>(
+            (state) => state.isListLoadedFull,
+          ),
         ],
       );
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
@@ -126,10 +126,9 @@ void main() {
               predicate<MyDiscountsWatcherState>(
                 (state) => state.loadingStatus == LoadingStatus.loading,
               ),
-              // predicate<MyDiscountsWatcherState>(
-              //   (state) => state.loadingStatus ==
-              // LoadingStatus.listLoadedFull,
-              // ),
+              predicate<MyDiscountsWatcherState>(
+                (state) => state.isListLoadedFull,
+              ),
             ]),
             reason: 'Wait loading data',
           );
@@ -141,9 +140,9 @@ void main() {
           predicate<MyDiscountsWatcherState>(
             (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          // predicate<MyDiscountsWatcherState>(
-          //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          // ),
+          predicate<MyDiscountsWatcherState>(
+            (state) => state.isListLoadedFull,
+          ),
         ],
       );
     });
