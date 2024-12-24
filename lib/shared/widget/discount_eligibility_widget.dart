@@ -4,6 +4,7 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class EligibilityWidget extends StatelessWidget {
   const EligibilityWidget({
     required this.eligibility,
+    required this.isDesk,
     super.key,
     this.showFullList = false,
     this.moreButtonEvent,
@@ -11,10 +12,12 @@ class EligibilityWidget extends StatelessWidget {
 
   final List<EligibilityEnum> eligibility;
   final bool showFullList;
+  final bool isDesk;
   final void Function()? moreButtonEvent;
 
   @override
   Widget build(BuildContext context) {
+    final itemCount = isDesk ? 5 : 3;
     // if (eligibility.isNotEmpty && eligibility.contains(EligibilityEnum.all))
     {
       //   final modifiableEligibility =
@@ -63,9 +66,11 @@ class EligibilityWidget extends StatelessWidget {
             runSpacing: KPadding.kPaddingSize12,
             spacing: KPadding.kPaddingSize8,
             children: List.generate(
-              list.length > 5 && !showFullList ? 6 : list.length,
+              list.length > itemCount && !showFullList
+                  ? itemCount + 1
+                  : list.length,
               (index) {
-                if (5 > index || showFullList) {
+                if (itemCount > index || showFullList) {
                   final item = list.elementAt(index);
                   return Row(
                     mainAxisSize: MainAxisSize.min,
@@ -83,7 +88,7 @@ class EligibilityWidget extends StatelessWidget {
                 return TextButton(
                   onPressed: moreButtonEvent,
                   child: Text(
-                    context.l10n.moreWhomGranted(list.length - 5),
+                    context.l10n.moreWhomGranted(list.length - itemCount),
                     style: AppTextStyle.materialThemeLabelLargeRef,
                   ),
                 );
@@ -96,6 +101,7 @@ class EligibilityWidget extends StatelessWidget {
       }
     }
   }
+}
 
 // class DiscountEligibilityExpandedWidget extends StatelessWidget {
 //   const DiscountEligibilityExpandedWidget({
@@ -161,4 +167,3 @@ class EligibilityWidget extends StatelessWidget {
 
 //   //   return widgets;
 //   // }
-}

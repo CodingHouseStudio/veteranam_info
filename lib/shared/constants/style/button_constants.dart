@@ -692,6 +692,7 @@ abstract class KButtonStyles {
         side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
       ),
     ),
-    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
   );
 }
