@@ -18,5 +18,5 @@ Future<void> confirmDialogUnconfirmHelper({
 
   await tester.pumpAndSettle();
 
-  verify(() => mockGoRouter.pop()).called(1);
+  verify(() => mockGoRouter.pop(false)).called(1);
 }
