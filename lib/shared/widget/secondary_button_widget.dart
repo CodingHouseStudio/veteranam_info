@@ -39,17 +39,15 @@ class SecondaryButtonWidget extends StatelessWidget {
   Widget get _button => TextButton(
         key: widgetKey,
         style: (expanded
-                ? style
-                : style?.copyWith(
-                    minimumSize: expanded
-                        ? const WidgetStatePropertyAll(
-                            Size(
-                              KMinMaxSize.maxWidth328,
-                              0,
-                            ),
-                          )
-                        : null,
-                  )) ??
+                ? style?.copyWith(
+                    minimumSize: const WidgetStatePropertyAll(
+                      Size(
+                        KMinMaxSize.maxWidth328,
+                        0,
+                      ),
+                    ),
+                  )
+                : style) ??
             (expanded
                 ? KButtonStyles.borderSecondaryExpandButtonStyle
                 : KButtonStyles.borderSecondaryButtonStyle),
