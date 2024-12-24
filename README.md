@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://veteranam.info/"><img id="logo" src='assets/read_me_images/preview.png' width="100%"/></a>
+    <a href="https://veteranam.info/"><img id="logo" src='assets/read_me/images/preview.png' width="100%"/></a>
 </p>
 
 <p align="center">
@@ -35,7 +35,112 @@ A Flutter no-profit app supporting Ukraine's war veterans.
 
 ## Preview
 
-<!-- Add preview images/screenshots here -->
+<markdown-accessiblity-table>
+<table>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html">Start Loading Animation For WEB</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/skeletonizer_widget.dart">Skeletonizer Loading For Items</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/languages_switcher_widget.dart">Language Switcher</a>
+         | 
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/bloc/language/language_cubit.dart">Logic</a>
+    </th>
+  </tr>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/web/index.html">
+            <img src="assets/read_me/gifs/start_loading.gif" alt="Start Loading" />
+        </a>
+    </th>
+    <th>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/skeletonizer_widget.dart">
+        <img src="assets/read_me/gifs/item_loading_animation.gif" alt="Skeletonizer Loading" />
+      </a>
+    </th>
+    <th>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/languages_switcher_widget.dart">
+        <img src="assets/read_me/gifs/language.gif" alt="Language Switcher" />
+      </a>
+    </th>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/advanced_filter/advanced_filter_content.dart">Filter</a>
+         | 
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/repositories/discount_filter_repository.dart">Logic</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/login">Login</a>
+         | 
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/sign_up">Sign Up</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">Report</a>
+         | 
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/bloc/report/report_bloc.dart">Logic</a>
+    </th>
+  </tr>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/advanced_filter/advanced_filter_content.dart">
+            <img src="assets/read_me/gifs/discount_filter.gif" alt="Filter" />
+        </a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/login">
+            <img src="assets/read_me/gifs/sigh_up_log_in.gif" alt="Login & Sign Up"/>
+        </a>
+    </th>
+    <th>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">
+        <img src="assets/read_me/gifs/discount_report.gif" alt="Report" />
+      </a>
+    </th>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/body/discounts_body_widget.dart">Mobile Scroll Loading</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">Add New Discount</a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
+    </th>
+  </tr>
+  <tr>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/body/discounts_body_widget.dart">
+            <img src="assets/read_me/gifs/feed.gif" alt="Filter"/>
+        </a>
+    </th>
+    <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">
+            <img src="assets/read_me/gifs/add_new_discount.gif" alt="Filter"/>
+        </a>
+    </th>
+    <th>
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">
+        <img src="assets/read_me/gifs/discount_separate page.gif" alt="Separate Page For Discount" />
+      </a>
+    </th>
+  </tr>
+</table>
+
+</markdown-accessiblity-table>
+
+
 
 ## Challenge
 
