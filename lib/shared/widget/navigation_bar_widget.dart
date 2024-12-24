@@ -25,6 +25,7 @@ class NavigationBarWidget extends StatelessWidget {
   final String? backButtonPathName;
   @override
   Widget build(BuildContext context) {
+    if (Config.isWeb) return const SliverToBoxAdapter();
     return SliverPersistentHeader(
       delegate: SliverHeaderWidget(
         childWidget: ({required overlapsContent, required shrinkOffset}) =>

@@ -61,6 +61,7 @@ class DiscountBodyWidget extends StatelessWidget {
               child: Semantics(
                 child: CustomScrollView(
                   cacheExtent: KDimensions.listCacheExtent,
+                  physics: const NeverScrollableScrollPhysics(),
                   slivers: [
                     NetworkBanner(isDesk: isDesk, isTablet: isTablet),
                     if (Config.isWeb)

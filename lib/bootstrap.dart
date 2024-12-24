@@ -3,11 +3,12 @@ import 'dart:developer' show log;
 import 'dart:io' show Platform;
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart' show Colors, Widget, runApp;
+import 'package:flutter/material.dart' show Colors, Widget, runApp, runWidget;
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:veteranam/multi_view_app.dart';
 import 'package:veteranam/shared/helper/helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -66,6 +67,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   }
 
   // Add cross-flavor configuration here
-
-  runApp(await builder());
+  if (!Config.isWeb) {
+    runApp(await builder());
+  } else {
+    final widget = await builder();
+    runWidget(MultiViewApp(viewBuilder: (context) => widget));
+  }
 }
