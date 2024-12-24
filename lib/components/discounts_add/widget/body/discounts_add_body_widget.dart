@@ -38,52 +38,58 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
-      listener: (context, state) {
-        if (context.read<DiscountsAddBloc>().state.discount == null) {
-          context.read<DiscountsAddBloc>().add(
-                DiscountsAddEvent.loadedDiscount(
-                  discount: null,
-                  discountId: widget.discountId,
-                ),
-              );
-        }
-      },
-      listenWhen: (previous, current) =>
-          previous.company.id != current.company.id &&
-          widget.discountId != null,
-      child: BlocConsumer<DiscountsAddBloc, DiscountsAddState>(
-        listenWhen: (previous, current) =>
-            previous.formState != current.formState ||
-            previous.period != current.period ||
-            previous.discount == null,
-        listener: (context, state) {
-          if (state.formState == DiscountsAddEnum.success) {
-            context.goNamed(KRoute.myDiscounts.name);
-          }
-          if (state.formState.isDetail) {
-            periodController.text = state.period.value
-                    ?.toLocalDateString(context: context, showDay: true) ??
-                '';
-          }
-          if (state.formState == DiscountsAddEnum.initial &&
-              state.discount != null) {
-            titleController.text =
-                state.discount!.title.getTrsnslation(context);
-            linkController.text =
-                state.discount!.directLink ?? linkController.text;
-            // categoryController = TextEditingController();
-            // cityController = TextEditingController();
-            periodController.text =
-                state.discount!.expiration?.getTrsnslation(context) ??
-                    periodController.text;
-            exclusionController.text =
-                state.discount!.exclusions?.getTrsnslation(context) ??
-                    exclusionController.text;
-            descriptionController.text =
-                state.discount!.description.getTrsnslation(context);
-          }
-        },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
+          listener: (context, state) {
+            if (context.read<DiscountsAddBloc>().state.discount == null) {
+              context.read<DiscountsAddBloc>().add(
+                    DiscountsAddEvent.loadedDiscount(
+                      discount: null,
+                      discountId: widget.discountId,
+                    ),
+                  );
+            }
+          },
+          listenWhen: (previous, current) =>
+              previous.company.id != current.company.id &&
+              widget.discountId != null,
+        ),
+        BlocListener<DiscountsAddBloc, DiscountsAddState>(
+          listenWhen: (previous, current) =>
+              previous.formState != current.formState ||
+              previous.period != current.period ||
+              previous.discount == null,
+          listener: (context, state) {
+            if (state.formState == DiscountsAddEnum.success) {
+              context.goNamed(KRoute.myDiscounts.name);
+            }
+            if (state.formState.isDetail) {
+              periodController.text = state.period.value
+                      ?.toLocalDateString(context: context, showDay: true) ??
+                  '';
+            }
+            if (state.formState == DiscountsAddEnum.initial &&
+                state.discount != null) {
+              titleController.text =
+                  state.discount!.title.getTrsnslation(context);
+              linkController.text =
+                  state.discount!.directLink ?? linkController.text;
+              // categoryController = TextEditingController();
+              // cityController = TextEditingController();
+              periodController.text =
+                  state.discount!.expiration?.getTrsnslation(context) ??
+                      periodController.text;
+              exclusionController.text =
+                  state.discount!.exclusions?.getTrsnslation(context) ??
+                      exclusionController.text;
+              descriptionController.text =
+                  state.discount!.description.getTrsnslation(context);
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<DiscountsAddBloc, DiscountsAddState>(
         // Add because without it we have small lag when fast write some fields
         buildWhen: (previous, current) =>
             !(previous.link != current.link ||

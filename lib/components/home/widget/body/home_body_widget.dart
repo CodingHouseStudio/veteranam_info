@@ -28,75 +28,75 @@ class HomeBodyWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        return BlocListener<NetworkCubit, NetworkStatus>(
-          listener: (context, state) {
-            if (state == NetworkStatus.network) {
-              context.read<HomeWatcherBloc>().add(
-                    const HomeWatcherEvent.started(),
+        return MultiBlocListener(
+          listeners: [
+            BlocListener<NetworkCubit, NetworkStatus>(
+              listener: (context, state) {
+                if (state == NetworkStatus.network) {
+                  context.read<HomeWatcherBloc>().add(
+                        const HomeWatcherEvent.started(),
+                      );
+                }
+              },
+            ),
+            BlocListener<UrlCubit, UrlEnum?>(
+              listener: (context, state) async {
+                if (state != null) {
+                  context.dialog.showSnackBardTextDialog(
+                    state.value(context: context),
+                    duration: const Duration(milliseconds: 4000),
                   );
-            }
-          },
-          child: BlocListener<UrlCubit, UrlEnum?>(
-            listener: (context, state) async {
-              if (state != null) {
-                context.dialog.showSnackBardTextDialog(
-                  state.value(context: context),
-                  duration: const Duration(milliseconds: 4000),
-                );
-                context.read<UrlCubit>().reset();
-              }
-            },
-            child: BlocListener<HomeWatcherBloc, HomeWatcherState>(
+                  context.read<UrlCubit>().reset();
+                }
+              },
+            ),
+            BlocListener<HomeWatcherBloc, HomeWatcherState>(
               listener: (context, state) => context.dialog.showGetErrorDialog(
                 error: state.failure?.value(context),
                 onPressed: () => context
                     .read<HomeWatcherBloc>()
                     .add(const HomeWatcherEvent.started()),
               ),
-              child: FocusTraversalGroup(
-                child: Semantics(
-                  child: CustomScrollView(
-                    key: KWidgetkeys.widget.scaffold.scroll,
-                    cacheExtent: KDimensions.listCacheExtent,
-                    slivers: [
-                      NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                      ),
-                      SliverPadding(
-                        padding: padding,
-                        sliver: HomeSectionsWidget(
-                          isDesk: isDesk,
-                          isTablet: isTablet,
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: padding,
-                        sliver: isDesk
-                            ? const FAQSectionDeskWidget()
-                            : const FaqSectionMobWidget(),
-                      ),
-                      SliverToBoxAdapter(
-                        child: isDesk
-                            ? KSizedBox.kHeightSizedBox160
-                            : isTablet
-                                ? KSizedBox.kHeightSizedBox64
-                                : KSizedBox.kHeightSizedBox48,
-                      ),
-                      SliverPadding(
-                        padding: padding,
-                        sliver: FooterWidget(
-                          isTablet: isTablet,
-                          isDesk: isDesk,
-                        ),
-                      ),
-                      KSizedBox.kHeightSizedBox30.toSliver,
-                    ],
-                  ),
+            ),
+          ],
+          child: CustomScrollView(
+            key: KWidgetkeys.widget.scaffold.scroll,
+            cacheExtent: KDimensions.listCacheExtent,
+            slivers: [
+              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+              NavigationBarWidget(
+                isDesk: isDesk,
+                isTablet: isTablet,
+              ),
+              SliverPadding(
+                padding: padding,
+                sliver: HomeSectionsWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
                 ),
               ),
-            ),
+              SliverPadding(
+                padding: padding,
+                sliver: isDesk
+                    ? const FAQSectionDeskWidget()
+                    : const FaqSectionMobWidget(),
+              ),
+              SliverToBoxAdapter(
+                child: isDesk
+                    ? KSizedBox.kHeightSizedBox160
+                    : isTablet
+                        ? KSizedBox.kHeightSizedBox64
+                        : KSizedBox.kHeightSizedBox48,
+              ),
+              SliverPadding(
+                padding: padding,
+                sliver: FooterWidget(
+                  isTablet: isTablet,
+                  isDesk: isDesk,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox30.toSliver,
+            ],
           ),
         );
       },

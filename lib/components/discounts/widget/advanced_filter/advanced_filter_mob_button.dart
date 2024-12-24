@@ -26,13 +26,15 @@ class AdvancedFilterMobButton extends StatelessWidget {
     //     // KSizedBox.kWidthSizedBox8,
     //   );
     // } else {
-    return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-      buildWhen: (previous, current) =>
-          previous.filterStatus != current.filterStatus &&
-          (current.discountFilterRepository.getActivityList.length == 1 ||
-              current.discountFilterRepository.getActivityList.isEmpty),
+    return BlocSelector<DiscountsWatcherBloc, DiscountsWatcherState, bool>(
+      // buildWhen: (previous, current) =>
+      //     previous.filterStatus != current.filterStatus &&
+      //     (current.discountFilterRepository.getActivityList.length == 1 ||
+      //         current.discountFilterRepository.getActivityList.isEmpty),
+      selector: (state) =>
+          state.discountFilterRepository.getActivityList.isEmpty,
       builder: (context, state) {
-        if (state.discountFilterRepository.getActivityList.isEmpty) {
+        if (state) {
           return Align(
             alignment: Alignment.centerLeft, child: mobButton(context),
 

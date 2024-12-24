@@ -9,9 +9,10 @@ class DiscountSortingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-      buildWhen: (previous, current) => previous.sortingBy != current.sortingBy,
-      builder: (context, state) {
+    return BlocSelector<DiscountsWatcherBloc, DiscountsWatcherState,
+        DiscountEnum?>(
+      selector: (state) => state.sortingBy,
+      builder: (context, sortingBy) {
         return PopupMenuButtonWidget<DiscountEnum>(
           buttonStyle: KButtonStyles.neutralButtonStyle,
           shape: const OutlineInputBorder(
@@ -25,7 +26,7 @@ class DiscountSortingWidget extends StatelessWidget {
             DiscountEnum.values.length,
             (index) => getDropDownItem(
               discountEnum: DiscountEnum.values.elementAt(index),
-              currectDiscountEnum: state.sortingBy ?? DiscountEnum.featured,
+              currectDiscountEnum: sortingBy ?? DiscountEnum.featured,
               context: context,
             ),
             growable: false,
@@ -41,7 +42,7 @@ class DiscountSortingWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox8,
               Flexible(
                 child: Text(
-                  state.sortingBy?.getValue(context) ?? context.l10n.sort,
+                  sortingBy?.getValue(context) ?? context.l10n.sort,
                   style: AppTextStyle.materialThemeTitleMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -50,7 +51,7 @@ class DiscountSortingWidget extends StatelessWidget {
             ],
           ),
           clipBehavior: Clip.hardEdge,
-          initialValue: state.sortingBy ?? DiscountEnum.featured,
+          initialValue: sortingBy ?? DiscountEnum.featured,
           position: PopupMenuButtonPosition.bottomLeft,
           showIcon: KIcon.arrowDropDown,
           closeIcon: KIcon.arrowDropUp,

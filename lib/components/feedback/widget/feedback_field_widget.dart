@@ -46,12 +46,7 @@ class _DeskField extends StatelessWidget {
             Expanded(
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.feedback.nameField,
-                errorText: context
-                    .read<FeedbackBloc>()
-                    .state
-                    .name
-                    .error
-                    .value(context),
+                errorText: state.name.error.value(context),
                 isRequired: true,
                 showErrorText: state.formState == FeedbackEnum.invalidData,
                 onChanged: (value) => context.read<FeedbackBloc>().add(
@@ -67,12 +62,7 @@ class _DeskField extends StatelessWidget {
                 widgetKey: KWidgetkeys.screen.feedback.emailField,
                 showErrorText: state.formState == FeedbackEnum.invalidData,
                 isRequired: true,
-                errorText: context
-                    .read<FeedbackBloc>()
-                    .state
-                    .email
-                    .error
-                    .value(context),
+                errorText: state.email.error.value(context),
                 onChanged: (value) => context.read<FeedbackBloc>().add(
                       FeedbackEvent.emailUpdated(value),
                     ),

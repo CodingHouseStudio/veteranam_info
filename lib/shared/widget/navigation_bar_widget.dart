@@ -251,25 +251,27 @@ class _NavbarWidget extends StatelessWidget {
       Config.isBusiness ? KRoute.login.name : KRoute.userRole.name;
 
   Widget get getImageWidget => Config.isBusiness
-      ? BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.company.image != current.company.image,
-          builder: (context, state) {
+      ? BlocSelector<CompanyWatcherBloc, CompanyWatcherState, String?>(
+          // buildWhen: (previous, current) =>
+          //     previous.company.image != current.company.image,
+          selector: (state) => state.company.imageUrl,
+          builder: (context, imageUrl) {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
               onPressed: () => context.goNamed(KRoute.company.name),
-              imageUrl: state.company.imageUrl,
+              imageUrl: imageUrl,
             );
           },
         )
-      : BlocBuilder<UserWatcherBloc, UserWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.user.photo != current.user.photo,
-          builder: (context, state) {
+      : BlocSelector<UserWatcherBloc, UserWatcherState, String?>(
+          // buildWhen: (previous, current) =>
+          //     previous.user.photo != current.user.photo,
+          selector: (state) => state.user.photo,
+          builder: (context, photo) {
             return UserPhotoWidget(
               key: KWidgetkeys.widget.nawbar.loginIcon,
               onPressed: () => context.goNamed(KRoute.profile.name),
-              imageUrl: context.read<UserWatcherBloc>().state.user.photo,
+              imageUrl: photo,
             );
           },
         );

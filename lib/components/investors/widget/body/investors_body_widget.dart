@@ -27,51 +27,51 @@ class InvestorsBodyWidget extends StatelessWidget {
               : KPadding.kPaddingSize16),
         );
 
-        return BlocListener<NetworkCubit, NetworkStatus>(
-          listener: (context, state) {
-            if (state == NetworkStatus.network) {
-              context.read<InvestorsWatcherBloc>().add(
-                    const InvestorsWatcherEvent.started(),
-                  );
-            }
-          },
-          child: BlocListener<InvestorsWatcherBloc, InvestorsWatcherState>(
-            listener: (context, state) => context.dialog.showGetErrorDialog(
-              error: state.failure?.value(context),
-              onPressed: () => context
-                  .read<InvestorsWatcherBloc>()
-                  .add(const InvestorsWatcherEvent.started()),
+        return MultiBlocListener(
+          listeners: [
+            BlocListener<NetworkCubit, NetworkStatus>(
+              listener: (context, state) {
+                if (state == NetworkStatus.network) {
+                  context.read<InvestorsWatcherBloc>().add(
+                        const InvestorsWatcherEvent.started(),
+                      );
+                }
+              },
             ),
-            child: FocusTraversalGroup(
-              child: Semantics(
-                child: CustomScrollView(
-                  key: KWidgetkeys.widget.scaffold.scroll,
-                  cacheExtent: KDimensions.listCacheExtent,
-                  slivers: [
-                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    if (Config.isWeb)
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                        pageName: context.l10n.provenFunds,
-                      ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: InvestorsTitleWidget(isDesk: isDesk),
-                    ),
-                    FundsWidgetList(
-                      isDesk: isDesk,
-                      padding: padding,
-                    ),
-                    SliverToBoxAdapter(
-                      child: isDesk
-                          ? KSizedBox.kHeightSizedBox50
-                          : KSizedBox.kHeightSizedBox24,
-                    ),
-                  ],
-                ),
+            BlocListener<InvestorsWatcherBloc, InvestorsWatcherState>(
+              listener: (context, state) => context.dialog.showGetErrorDialog(
+                error: state.failure?.value(context),
+                onPressed: () => context
+                    .read<InvestorsWatcherBloc>()
+                    .add(const InvestorsWatcherEvent.started()),
               ),
             ),
+          ],
+          child: CustomScrollView(
+            key: KWidgetkeys.widget.scaffold.scroll,
+            cacheExtent: KDimensions.listCacheExtent,
+            slivers: [
+              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+              if (Config.isWeb)
+                NavigationBarWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                  pageName: context.l10n.provenFunds,
+                ),
+              SliverPadding(
+                padding: padding,
+                sliver: InvestorsTitleWidget(isDesk: isDesk),
+              ),
+              FundsWidgetList(
+                isDesk: isDesk,
+                padding: padding,
+              ),
+              SliverToBoxAdapter(
+                child: isDesk
+                    ? KSizedBox.kHeightSizedBox50
+                    : KSizedBox.kHeightSizedBox24,
+              ),
+            ],
           ),
         );
       },

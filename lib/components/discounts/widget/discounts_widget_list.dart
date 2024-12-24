@@ -7,11 +7,11 @@ import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 int _itemCount({
-  required DiscountsWatcherState state,
+  required List<DiscountModel> filterDiscountModelList,
   required DiscountConfigState config,
 }) =>
-    state.filterDiscountModelList.length +
-    (config.linkInt >= state.filterDiscountModelList.length ? 0 : 1);
+    filterDiscountModelList.length +
+    (config.linkInt >= filterDiscountModelList.length ? 0 : 1);
 
 extension LinkScrollExtension on DiscountConfigState {
   int get linkInt => (linkScrollCount + 1) * loadingItems;
@@ -27,7 +27,7 @@ extension LinkScrollExtension on DiscountConfigState {
 /// response. I need to read more articles to understand all the nuances.
 int? _findChildIndexCallback({
   required Key key,
-  required DiscountsWatcherState state,
+  required List<DiscountModel> filterDiscountModelList,
   required DiscountConfigState config,
 }) {
   if (key is ValueKey<String>) {
@@ -35,7 +35,7 @@ int? _findChildIndexCallback({
     if (valueKey.value == 'link_field') {
       return config.linkInt - 1;
     }
-    final index = state.filterDiscountModelList.indexWhere(
+    final index = filterDiscountModelList.indexWhere(
       (element) => element.id == valueKey.value,
     );
     if (index >= 0) {
@@ -46,7 +46,7 @@ int? _findChildIndexCallback({
 }
 
 ValueKey<String> _key({
-  required DiscountsWatcherState state,
+  required List<DiscountModel> filterDiscountModelList,
   required int index,
   required DiscountConfigState config,
 }) {
@@ -54,7 +54,7 @@ ValueKey<String> _key({
     return const ValueKey('link_field');
   }
   return ValueKey(
-    state.filterDiscountModelList
+    filterDiscountModelList
         .elementAt(index - (config.linkInt <= index ? 1 : 0))
         .id,
   );
@@ -168,11 +168,25 @@ class _DiscountWidgetList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.loadingStatus != current.loadingStatus ||
-              previous.filterDiscountModelList !=
-                  current.filterDiscountModelList,
+        return BlocSelector<
+            DiscountsWatcherBloc,
+            DiscountsWatcherState,
+            ({
+              LoadingStatus loadingStatus,
+              List<DiscountModel> filterDiscountModelList,
+              bool isListLoadedFull,
+              bool unmodifiedIsEmpty,
+            })>(
+          // buildWhen: (previous, current) =>
+          //     previous.loadingStatus != current.loadingStatus ||
+          //     previous.filterDiscountModelList !=
+          //         current.filterDiscountModelList,
+          selector: (state) => (
+            loadingStatus: state.loadingStatus,
+            filterDiscountModelList: state.filterDiscountModelList,
+            isListLoadedFull: state.isListLoadedFull,
+            unmodifiedIsEmpty: state.unmodifiedDiscountModelItems.isEmpty,
+          ),
           builder: (context, state) {
             return SliverMainAxisGroup(
               slivers: [
@@ -181,30 +195,38 @@ class _DiscountWidgetList extends StatelessWidget {
                   addRepaintBoundaries: false,
                   findChildIndexCallback: (key) => _findChildIndexCallback(
                     key: key,
-                    state: state,
+                    filterDiscountModelList: state.filterDiscountModelList,
                     config: config,
                   ),
                   itemCount: _itemCount(
-                    state: state,
+                    filterDiscountModelList: state.filterDiscountModelList,
                     config: config,
                   ),
                   itemBuilder: (context, index) => Padding(
-                    key: _key(state: state, index: index, config: config),
+                    key: _key(
+                      filterDiscountModelList: state.filterDiscountModelList,
+                      index: index,
+                      config: config,
+                    ),
                     padding: const EdgeInsets.only(
                       top: KPadding.kPaddingSize48,
                     ),
                     child: _DiscountsWidgetItem(
                       isDesk: isDesk,
-                      key: _key(state: state, index: index, config: config),
-                      state: state,
+                      key: _key(
+                        filterDiscountModelList: state.filterDiscountModelList,
+                        index: index,
+                        config: config,
+                      ),
+                      filterDiscountModelList: state.filterDiscountModelList,
                       index: index,
                       config: config,
                     ),
                   ),
                 ),
-                if ((!PlatformEnumFlutter.isWebDesktop &&
-                        !state.isListLoadedFull) ||
-                    state.unmodifiedDiscountModelItems.isEmpty)
+                if (!PlatformEnumFlutter.isWebDesktop &&
+                        !state.isListLoadedFull ||
+                    state.unmodifiedIsEmpty)
                   SliverPrototypeExtentList.builder(
                     itemCount: state.filterDiscountModelList.isEmpty
                         ? config.loadingItems
@@ -283,14 +305,14 @@ class _DiscountWidgetList extends StatelessWidget {
 
 class _DiscountsWidgetItem extends StatelessWidget {
   const _DiscountsWidgetItem({
-    required this.state,
     required this.index,
     required this.config,
     required this.isDesk,
+    required this.filterDiscountModelList,
     super.key,
   });
   final bool isDesk;
-  final DiscountsWatcherState state;
+  final List<DiscountModel> filterDiscountModelList;
   final int index;
   final DiscountConfigState config;
   @override
@@ -298,13 +320,13 @@ class _DiscountsWidgetItem extends StatelessWidget {
     var indexValue = index;
 
     if (config.linkInt <= index &&
-        state.filterDiscountModelList.length > config.linkInt) {
+        filterDiscountModelList.length > config.linkInt) {
       indexValue--;
     }
     if (config.linkInt == index + 1) {
       return DiscountLinkWidget(isDesk: isDesk);
     }
-    final discountItem = state.filterDiscountModelList.elementAt(indexValue);
+    final discountItem = filterDiscountModelList.elementAt(indexValue);
     return DiscountCardWidget(
       discountItem: discountItem,
       isDesk: isDesk,
@@ -357,11 +379,23 @@ class _DiscountGridWidgetList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-          buildWhen: (previous, current) =>
-              previous.loadingStatus != current.loadingStatus ||
-              previous.filterDiscountModelList !=
-                  current.filterDiscountModelList,
+        return BlocSelector<
+            DiscountsWatcherBloc,
+            DiscountsWatcherState,
+            ({
+              LoadingStatus loadingStatus,
+              List<DiscountModel> filterDiscountModelList,
+              bool isListLoadedFull,
+            })>(
+          // buildWhen: (previous, current) =>
+          //     previous.loadingStatus != current.loadingStatus ||
+          //     previous.filterDiscountModelList !=
+          //         current.filterDiscountModelList,
+          selector: (state) => (
+            loadingStatus: state.loadingStatus,
+            filterDiscountModelList: state.filterDiscountModelList,
+            isListLoadedFull: state.isListLoadedFull,
+          ),
           builder: (context, state) {
             final hasItems = state.filterDiscountModelList.isNotEmpty;
             return SliverMainAxisGroup(
@@ -390,7 +424,8 @@ class _DiscountGridWidgetList extends StatelessWidget {
                         findChildIndexCallback: (key) =>
                             _findChildIndexCallback(
                           key: key,
-                          state: state,
+                          filterDiscountModelList:
+                              state.filterDiscountModelList,
                           config: config,
                         ),
                       ),

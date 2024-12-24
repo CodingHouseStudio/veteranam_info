@@ -25,109 +25,113 @@ class _DiscountsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<NetworkCubit, NetworkStatus>(
-      listener: (context, state) {
-        if (state == NetworkStatus.network) {
-          context.read<DiscountsWatcherBloc>().add(
-                const DiscountsWatcherEvent.started(),
-              );
-        }
-      },
-      child: BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
-        listener: (context, state) {
-          if (state.failure != null) {
-            context.dialog.showGetErrorDialog(
-              error: state.failure!.value(context),
-              onPressed: state.failure == DiscountFailure.filter ? null : () {},
-              // I think this event is not necessary for Stream, but
-              // I think it's better to give
-              // the user imaginary control over it
-
-              // () => context
-              //     .read<DiscountWatcherBloc>()
-              //     .add(const DiscountWatcherEvent.started()),
-            );
-          }
-
-          if (state.filterDiscountModelList.length ==
-              (context.read<DiscountConfigCubit>().state.loadingItems *
-                  (context.read<DiscountConfigCubit>().state.emailScrollCount +
-                      1))) {
-            if (Config.isWeb) {
-              if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
-                if ((context.read<UserWatcherBloc>().state.user.email ?? '')
-                    .isEmpty) {
-                  context.dialog.showUserEmailDialog(
-                    context.read<DiscountConfigCubit>().state.emailCloseDelay,
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<NetworkCubit, NetworkStatus>(
+          listener: (context, state) {
+            if (state == NetworkStatus.network) {
+              context.read<DiscountsWatcherBloc>().add(
+                    const DiscountsWatcherEvent.started(),
                   );
-                }
-              }
-            } else {
-              context.read<MobileRatingCubit>().showDialog();
             }
-          }
-        },
-        listenWhen: (previous, current) =>
-            current.failure != null ||
-            previous.filterDiscountModelList.length !=
-                current.filterDiscountModelList.length,
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final isDesk =
-                constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-            final isTablet = constraints.maxWidth >
-                KPlatformConstants.minWidthThresholdTablet;
-
-            final padding = EdgeInsets.symmetric(
-              horizontal: (isDesk
-                  ? KPadding.kPaddingSize90 +
-                      ((constraints.maxWidth >
-                              KPlatformConstants.maxWidthThresholdTablet)
-                          ? (constraints.maxWidth -
-                                  KPlatformConstants.maxWidthThresholdTablet) /
-                              2
-                          : 0)
-                  : KPadding.kPaddingSize16),
-            );
-            return FocusTraversalGroup(
-              child: Semantics(
-                child: CustomScrollView(
-                  key: KWidgetkeys.widget.scaffold.scroll,
-                  cacheExtent: KDimensions.listCacheExtent,
-                  slivers: [
-                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-                    if (Config.isWeb)
-                      NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
-                        pageName: context.l10n.discounts,
-                      ),
-                    SliverPadding(
-                      padding: padding,
-                      sliver: DiscountTitleWidget(
-                        isDesk: isDesk,
-                      ),
-                    ),
-                    if (isDesk)
-                      SliverPadding(
-                        padding: padding,
-                        sliver: DiscountsDeskWidgetList(
-                          maxHeight: constraints.maxHeight,
-                        ),
-                      )
-                    else
-                      DiscountsMobWidgetList(
-                        padding: padding,
-                        isDesk: isTablet,
-                      ),
-                  ],
-                  controller: scrollController,
-                  // semanticChildCount: null,
-                ),
-              ),
-            );
           },
         ),
+        BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
+          listener: (context, state) {
+            if (state.failure != null) {
+              context.dialog.showGetErrorDialog(
+                error: state.failure!.value(context),
+                onPressed:
+                    state.failure == DiscountFailure.filter ? null : () {},
+                // I think this event is not necessary for Stream, but
+                // I think it's better to give
+                // the user imaginary control over it
+
+                // () => context
+                //     .read<DiscountWatcherBloc>()
+                //     .add(const DiscountWatcherEvent.started()),
+              );
+            }
+
+            if (state.filterDiscountModelList.length ==
+                (context.read<DiscountConfigCubit>().state.loadingItems *
+                    (context
+                            .read<DiscountConfigCubit>()
+                            .state
+                            .emailScrollCount +
+                        1))) {
+              if (Config.isWeb) {
+                if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
+                  if ((context.read<UserWatcherBloc>().state.user.email ?? '')
+                      .isEmpty) {
+                    context.dialog.showUserEmailDialog(
+                      context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                    );
+                  }
+                }
+              } else {
+                context.read<MobileRatingCubit>().showDialog();
+              }
+            }
+          },
+          listenWhen: (previous, current) =>
+              current.failure != null ||
+              previous.filterDiscountModelList.length !=
+                  current.filterDiscountModelList.length,
+        ),
+      ],
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final isDesk =
+              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+          final isTablet =
+              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+
+          final padding = EdgeInsets.symmetric(
+            horizontal: (isDesk
+                ? KPadding.kPaddingSize90 +
+                    ((constraints.maxWidth >
+                            KPlatformConstants.maxWidthThresholdTablet)
+                        ? (constraints.maxWidth -
+                                KPlatformConstants.maxWidthThresholdTablet) /
+                            2
+                        : 0)
+                : KPadding.kPaddingSize16),
+          );
+          return CustomScrollView(
+            key: KWidgetkeys.widget.scaffold.scroll,
+            cacheExtent: KDimensions.listCacheExtent,
+            slivers: [
+              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+              if (Config.isWeb)
+                NavigationBarWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                  pageName: context.l10n.discounts,
+                ),
+              SliverPadding(
+                padding: padding,
+                sliver: DiscountTitleWidget(
+                  isDesk: isDesk,
+                ),
+              ),
+              if (isDesk)
+                SliverPadding(
+                  padding: padding,
+                  sliver: DiscountsDeskWidgetList(
+                    maxHeight: constraints.maxHeight,
+                  ),
+                )
+              else
+                DiscountsMobWidgetList(
+                  padding: padding,
+                  isDesk: isTablet,
+                ),
+            ],
+            controller: scrollController,
+            // semanticChildCount: null,
+          );
+        },
       ),
     );
   }
