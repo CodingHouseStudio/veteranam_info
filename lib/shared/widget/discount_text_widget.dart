@@ -40,6 +40,7 @@ class DiscountTextWidget extends StatelessWidget {
             style: AppTextStyle.materialThemeLabelMediumVariant50,
           ),
           EligibilityWidget(
+            isDesk: isDesk,
             eligibility: eligibility!,
             moreButtonEvent: moreButtonEvent,
           ),

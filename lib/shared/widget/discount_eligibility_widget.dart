@@ -4,6 +4,7 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class EligibilityWidget extends StatelessWidget {
   const EligibilityWidget({
     required this.eligibility,
+    required this.isDesk,
     super.key,
     this.showFullList = false,
     this.moreButtonEvent,
@@ -11,6 +12,7 @@ class EligibilityWidget extends StatelessWidget {
 
   final List<EligibilityEnum> eligibility;
   final bool showFullList;
+  final bool isDesk;
   final void Function()? moreButtonEvent;
 
   @override
@@ -62,33 +64,61 @@ class EligibilityWidget extends StatelessWidget {
             key: ValueKey(eligibility),
             runSpacing: KPadding.kPaddingSize12,
             spacing: KPadding.kPaddingSize8,
-            children: List.generate(
-              list.length > 5 && !showFullList ? 6 : list.length,
-              (index) {
-                if (5 > index || showFullList) {
-                  final item = list.elementAt(index);
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      item.eligibilityIcon,
-                      KSizedBox.kWidthSizedBox4,
-                      Text(
-                        item.getValue(context),
-                        style: AppTextStyle.materialThemeLabelMedium,
-                      ),
-                    ],
-                  );
-                }
-                return TextButton(
-                  onPressed: moreButtonEvent,
-                  child: Text(
-                    context.l10n.moreWhomGranted(list.length - 5),
-                    style: AppTextStyle.materialThemeLabelLargeRef,
+            children: isDesk
+                ? List.generate(
+                    list.length > 5 && !showFullList ? 6 : list.length,
+                    (index) {
+                      if (5 > index || showFullList) {
+                        final item = list.elementAt(index);
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            item.eligibilityIcon,
+                            KSizedBox.kWidthSizedBox4,
+                            Text(
+                              item.getValue(context),
+                              style: AppTextStyle.materialThemeLabelMedium,
+                            ),
+                          ],
+                        );
+                      }
+                      return TextButton(
+                        onPressed: moreButtonEvent,
+                        child: Text(
+                          context.l10n.moreWhomGranted(list.length - 5),
+                          style: AppTextStyle.materialThemeLabelLargeRef,
+                        ),
+                      );
+                    },
+                  )
+                : List.generate(
+                    list.length > 3 && !showFullList ? 4 : list.length,
+                    (index) {
+                      if (3 > index || showFullList) {
+                        final item = list.elementAt(index);
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            item.eligibilityIcon,
+                            KSizedBox.kWidthSizedBox4,
+                            Text(
+                              item.getValue(context),
+                              style: AppTextStyle.materialThemeLabelMedium,
+                            ),
+                          ],
+                        );
+                      }
+                      return TextButton(
+                        onPressed: moreButtonEvent,
+                        child: Text(
+                          context.l10n.moreWhomGranted(list.length - 3),
+                          style: AppTextStyle.materialThemeLabelLargeRef,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         );
       } else {

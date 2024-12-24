@@ -91,6 +91,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               ),
               KSizedBox.kHeightSizedBox16,
               EligibilityWidget(
+                isDesk: isDesk,
                 eligibility: state.discountModel.eligibility,
                 showFullList: true,
               ),
