@@ -113,10 +113,10 @@ A Flutter no-profit app supporting Ukraine's war veterans.
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/components/discounts/widget/body/discounts_body_widget.dart">Mobile Scroll Loading</a>
     </th>
     <th>
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">Add New Discount</a>
     </th>
     <th>
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discounts_add">Add New Discount</a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
     </th>
   </tr>
   <tr>
