@@ -17,6 +17,7 @@ class EligibilityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final itemCount = isDesk ? 5 : 3;
     // if (eligibility.isNotEmpty && eligibility.contains(EligibilityEnum.all))
     {
       //   final modifiableEligibility =
@@ -64,47 +65,41 @@ class EligibilityWidget extends StatelessWidget {
             key: ValueKey(eligibility),
             runSpacing: KPadding.kPaddingSize12,
             spacing: KPadding.kPaddingSize8,
-            children: eligibilityList(list, isDesk ? 5 : 3, context),
+            children: List.generate(
+              list.length > itemCount && !showFullList
+                  ? itemCount + 1
+                  : list.length,
+              (index) {
+                if (itemCount > index || showFullList) {
+                  final item = list.elementAt(index);
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      item.eligibilityIcon,
+                      KSizedBox.kWidthSizedBox4,
+                      Text(
+                        item.getValue(context),
+                        style: AppTextStyle.materialThemeLabelMedium,
+                      ),
+                    ],
+                  );
+                }
+                return TextButton(
+                  onPressed: moreButtonEvent,
+                  child: Text(
+                    context.l10n.moreWhomGranted(list.length - itemCount),
+                    style: AppTextStyle.materialThemeLabelLargeRef,
+                  ),
+                );
+              },
+            ),
           ),
         );
       } else {
         return const SizedBox.shrink();
       }
     }
-  }
-
-  List<Widget> eligibilityList(
-    List<EligibilityEnum> list,
-    int itemCount,
-    BuildContext context,
-  ) {
-    return List.generate(
-      list.length > itemCount && !showFullList ? itemCount + 1 : list.length,
-      (index) {
-        if ((isDesk ? 5 : 3) > index || showFullList) {
-          final item = list.elementAt(index);
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              item.eligibilityIcon,
-              KSizedBox.kWidthSizedBox4,
-              Text(
-                item.getValue(context),
-                style: AppTextStyle.materialThemeLabelMedium,
-              ),
-            ],
-          );
-        }
-        return TextButton(
-          onPressed: moreButtonEvent,
-          child: Text(
-            context.l10n.moreWhomGranted(list.length - itemCount),
-            style: AppTextStyle.materialThemeLabelLargeRef,
-          ),
-        );
-      },
-    );
   }
 }
 
