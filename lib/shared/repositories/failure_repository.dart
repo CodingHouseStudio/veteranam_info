@@ -107,7 +107,6 @@ class FailureRepository {
                 // tracesSampleRate
                 // Setting to 1.0 will profile 100% of sampled transactions:
                 ..profilesSampleRate = 1.0
-                // ignore package error
                 ..reportPackages = false
                 // add information about threads
                 ..attachThreads = true

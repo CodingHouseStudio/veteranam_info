@@ -87,9 +87,10 @@ class FirestoreService {
         .collection(FirebaseCollectionName.feedback)
         .where(FeedbackModelJsonField.guestId, isEqualTo: userId)
         .get();
+    final items = snapshot.docs;
     return List.generate(
-      snapshot.docs.length,
-      (index) => FeedbackModel.fromJson(snapshot.docs.elementAt(index).data()),
+      items.length,
+      (index) => FeedbackModel.fromJson(items.elementAt(index).data()),
       growable: false,
     );
   }
@@ -109,10 +110,10 @@ class FirestoreService {
           .get(getOptions);
 
       // If the server fetch is successful, return the data
+      final items = docSnapshot.docs;
       return List.generate(
-        docSnapshot.docs.length,
-        (index) =>
-            QuestionModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        items.length,
+        (index) => QuestionModel.fromJson(items.elementAt(index).data()),
         growable: false,
       );
     } on FirebaseException catch (e) {
@@ -122,10 +123,11 @@ class FirestoreService {
             .collection(FirebaseCollectionName.questions)
             .get(getCacheOptions);
 
+        final items = docSnapshot.docs;
         return List.generate(
-          docSnapshot.docs.length,
+          items.length,
           (index) => QuestionModel.fromJson(
-            docSnapshot.docs.elementAt(index).data(),
+            items.elementAt(index).data(),
           ),
           growable: false,
         );
@@ -157,10 +159,11 @@ class FirestoreService {
             .get(getOptions);
       }
 
+      final items = docSnapshot.docs;
       // If the server fetch is successful, return the data
       return List.generate(
-        docSnapshot.docs.length,
-        (index) => FundModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        items.length,
+        (index) => FundModel.fromJson(items.elementAt(index).data()),
         growable: false,
       );
     } on FirebaseException catch (e) {
@@ -170,10 +173,10 @@ class FirestoreService {
             .collection(FirebaseCollectionName.funds)
             .get(getCacheOptions);
 
+        final items = docSnapshot.docs;
         return List.generate(
-          docSnapshot.docs.length,
-          (index) =>
-              FundModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+          items.length,
+          (index) => FundModel.fromJson(items.elementAt(index).data()),
           growable: false,
         );
       } else {
@@ -215,13 +218,16 @@ class FirestoreService {
           }
           return _tryCatchForCache(
             isFromCache: isFromCache,
-            event: () => List.generate(
-              snapshot.docs.length,
-              (index) => InformationModel.fromJson(
-                snapshot.docs.elementAt(index).data(),
-              ),
-              growable: false,
-            ),
+            event: () {
+              final items = snapshot.docs;
+              return List.generate(
+                items.length,
+                (index) => InformationModel.fromJson(
+                  items.elementAt(index).data(),
+                ),
+                growable: false,
+              );
+            },
           );
         },
       );
@@ -314,12 +320,14 @@ class FirestoreService {
             }
           }
           return _tryCatchForCache<WorkModel>(
-            event: () => List.generate(
-              snapshot.docs.length,
-              (index) =>
-                  WorkModel.fromJson(snapshot.docs.elementAt(index).data()),
-              growable: false,
-            ),
+            event: () {
+              final items = snapshot.docs;
+              return List.generate(
+                items.length,
+                (index) => WorkModel.fromJson(items.elementAt(index).data()),
+                growable: false,
+              );
+            },
             isFromCache: isFromCache,
           );
         },
@@ -348,12 +356,14 @@ class FirestoreService {
           }
           return _tryCatchForCache(
             isFromCache: isFromCache,
-            event: () => List.generate(
-              snapshot.docs.length,
-              (index) =>
-                  StoryModel.fromJson(snapshot.docs.elementAt(index).data()),
-              growable: false,
-            ),
+            event: () {
+              final items = snapshot.docs;
+              return List.generate(
+                items.length,
+                (index) => StoryModel.fromJson(items.elementAt(index).data()),
+                growable: false,
+              );
+            },
           );
         },
       );
@@ -371,10 +381,10 @@ class FirestoreService {
         .where(StoryModelJsonField.userId, isEqualTo: userId)
         .get();
 
+    final items = querySnapshot.docs;
     return List.generate(
-      querySnapshot.docs.length,
-      (index) =>
-          StoryModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      items.length,
+      (index) => StoryModel.fromJson(items.elementAt(index).data()),
       growable: false,
     );
   }
@@ -427,12 +437,14 @@ class FirestoreService {
         }
 
         return _tryCatchForCache<DiscountModel>(
-          event: () => List.generate(
-            snapshot.docs.length,
-            (index) =>
-                DiscountModel.fromJson(snapshot.docs.elementAt(index).data()),
-            growable: false,
-          ),
+          event: () {
+            final items = snapshot.docs;
+            return List.generate(
+              items.length,
+              (index) => DiscountModel.fromJson(items.elementAt(index).data()),
+              growable: false,
+            );
+          },
           isFromCache: isFromCache,
         );
       },
@@ -511,9 +523,10 @@ class FirestoreService {
         .where(LinkModelJsonField.userId, isEqualTo: userId)
         .get();
 
+    final items = querySnapshot.docs;
     return List.generate(
-      querySnapshot.docs.length,
-      (index) => LinkModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      items.length,
+      (index) => LinkModel.fromJson(items.elementAt(index).data()),
       growable: false,
     );
   }
@@ -526,10 +539,10 @@ class FirestoreService {
         .where(EmailModelJsonField.userId, isEqualTo: userId)
         .get();
 
+    final items = querySnapshot.docs;
     return List.generate(
-      querySnapshot.docs.length,
-      (index) =>
-          EmailModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+      items.length,
+      (index) => EmailModel.fromJson(items.elementAt(index).data()),
       growable: false,
     );
   }
@@ -576,10 +589,10 @@ class FirestoreService {
           .where(ReportModelJsonField.userId, isEqualTo: userId)
           .get(getOptions);
 
+      final items = querySnapshot.docs;
       return List.generate(
-        querySnapshot.docs.length,
-        (index) =>
-            ReportModel.fromJson(querySnapshot.docs.elementAt(index).data()),
+        items.length,
+        (index) => ReportModel.fromJson(items.elementAt(index).data()),
         growable: false,
       );
     } on FirebaseException catch (e) {
@@ -592,10 +605,11 @@ class FirestoreService {
             .where(ReportModelJsonField.userId, isEqualTo: userId)
             .get(getCacheOptions);
 
+        final items = cacheSnapshot.docs;
         return List.generate(
-          cacheSnapshot.docs.length,
+          items.length,
           (index) => ReportModel.fromJson(
-            cacheSnapshot.docs.elementAt(index).data(),
+            items.elementAt(index).data(),
           ),
           growable: false,
         );
@@ -636,10 +650,11 @@ class FirestoreService {
           .where('type', isEqualTo: 'CITY')
           .get(getOptions);
 
+      final items = docSnapshot.docs;
       // If the server fetch is successful, return the data
       return List.generate(
-        docSnapshot.docs.length,
-        (index) => CityModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+        items.length,
+        (index) => CityModel.fromJson(items.elementAt(index).data()),
         growable: false,
       );
     } on FirebaseException catch (e) {
@@ -649,10 +664,10 @@ class FirestoreService {
             .collection(FirebaseCollectionName.questions)
             .get(getCacheOptions);
 
+        final items = docSnapshot.docs;
         return List.generate(
-          docSnapshot.docs.length,
-          (index) =>
-              CityModel.fromJson(docSnapshot.docs.elementAt(index).data()),
+          items.length,
+          (index) => CityModel.fromJson(items.elementAt(index).data()),
           growable: false,
         );
       } else {

@@ -1,5 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -143,7 +141,8 @@ class _CommonConfirmDialog extends StatelessWidget {
                 //       if (widget.timer && !_isButtonEnabled) ...[
                 //         KSizedBox.kHeightSizedBox8,
                 //         Text(
-                //           '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+                //           '${context.l10n.enableButton} $_remainingTime
+                // ${context.l10n.seconds}',
                 //           style: AppTextStyle.materialThemeBodySmall,
                 //         ),
                 //       ],
@@ -265,7 +264,8 @@ class _ConfirmDialogWithTimerState extends State<_ConfirmDialogWithTimer> {
       unconfirmText: widget.unconfirmText,
       timer: !_isButtonEnabled
           ? Text(
-              '${context.l10n.enableButton} $_remainingTime ${context.l10n.seconds}',
+              '${context.l10n.enableButton} '
+              '$_remainingTime ${context.l10n.seconds}',
               key: KWidgetkeys.widget.confirmDialog.timer,
               style: AppTextStyle.materialThemeBodySmall,
             )

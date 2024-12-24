@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
@@ -53,7 +54,7 @@ class AppNetworkRepository implements IAppNetworkRepository {
   /// Updates the authentication status based on the cached connectivity
   /// results.
   void _updateAuthStatusBasedOnCache() {
-    // ignore: unused_local_variable
     final connectivityResults = currentConnectivityResults.isEmpty;
+    log('current connection - $connectivityResults');
   }
 }

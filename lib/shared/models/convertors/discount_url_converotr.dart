@@ -66,7 +66,6 @@
 //       if (jsonValue.isNotEmpty) {
 //         try {
 //           discountModel = DiscountModel.fromJson(jsonValue);
-//           // ignore: empty_catches
 //         } catch (e) {}
 //       }
 //     }

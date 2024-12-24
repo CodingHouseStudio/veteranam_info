@@ -616,7 +616,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     //   try {
     //     unawaited(_storageService.removeFile(currentUser.photo));
     //     // User can save own photo in another service
-    //     // ignore: empty_catches
     //   } catch (e) {}
     // }
     return failure ?? result;
@@ -726,8 +725,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           try {
             unawaited(_storageService.removeFile(currentUser.photo));
             // User can save own photo in another service
-            // ignore: empty_catches
-          } catch (e) {}
+          } catch (e) {
+            log('photo remove error - $e');
+          }
 
           await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
         }

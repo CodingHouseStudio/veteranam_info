@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unused_constructor_parameters
-
 import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/models/discount_model.dart';
 import 'package:veteranam/shared/models/failure_model/some_failure_model.dart';

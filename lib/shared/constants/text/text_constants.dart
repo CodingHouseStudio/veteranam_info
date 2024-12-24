@@ -1,10 +1,9 @@
-// ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
-
 import 'package:veteranam/shared/constants/constants_dart.dart';
 import 'package:veteranam/shared/extension/extension_constants.dart';
 import 'package:veteranam/shared/models/models.dart';
 
-/// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
+/// COMMENT: Variables with mock text. It's temporary data we change it when
+/// add firebase for this elements
 abstract class KMockText {
   static const dropDownList = [
     'Житомир',
@@ -25,7 +24,10 @@ abstract class KMockText {
   static const donateCardTitle = 'Благодійний фонд '
       '«ПОВЕРНИСЬ ЖИВИМ»';
   static const donateCardSubtitle =
-      '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а також громадська організація, яка займається аналітикою у секторі безпеки та оборони, реалізує проєкти з реабілітації ветеранів через спорт.';
+      '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а'
+      ' також громадська організація, яка займається аналітикою у секторі'
+      ' безпеки та оборони, реалізує проєкти з реабілітації ветеранів'
+      ' через спорт.';
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
   static const email = 'example@gmail.com';
@@ -140,19 +142,23 @@ abstract class KMockText {
     link: 'https://veteranam.info/',
     discount: [10],
     title: const TranslateModel(
-      uk: '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
-      en: '20% discount on tests for military personnel and internally displaced persons.',
+      uk: '20% знижки на аналізи для військових та людей, які внутрішньо '
+          'переміщені.',
+      en: '20% discount on tests for military personnel and internally'
+          ' displaced persons.',
     ),
     category: const [category],
     // subcategory: const [TranslateModel(uk: 'Аналізи', en: 'Analyses')],
     // eligibility: 'Військовослужбовці та ВПО',
     description: const TranslateModel(
-      uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test) лабораторії.',
+      uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test)'
+          ' лабораторії.',
       en: 'The offer is valid in all branches of the laboratory.',
     ),
     requirements: const TranslateModel(
       uk: 'Військовим - наявність документу, що підтверджує  професійну',
-      en: 'Military personnel - presence of a document confirming professional status',
+      en: 'Military personnel - presence of a document confirming professional'
+          ' status',
     ),
     // territory: const TranslateModel(
     //   uk: 'Всі відділення лабораторії.',
@@ -170,7 +176,8 @@ abstract class KMockText {
     ),
     exclusions: const TranslateModel(
       uk: '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
-      en: '- when ordering tests and paying for them online on the Esculab website;',
+      en: '- when ordering tests and paying for them online on the Esculab'
+          ' website;',
     ),
     eligibility: const [EligibilityEnum.veterans],
 
@@ -197,8 +204,12 @@ abstract class KMockText {
     id: '',
     title: TranslateModel(uk: 'PATRIOT UA', en: 'PATRIOT UA'),
     description: TranslateModel(
-      uk: 'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
-      en: 'A state institution under the management of the Ministry of Veterans Affairs. A state provider of services for reintegrating veterans into productive civilian life.',
+      uk: 'Державна установа у сфері управління Міністерства у справах'
+          ' ветеранів. Державний провайдер сервісу реінтеграції ветеранів'
+          ' до продуктивного цивільного життя.',
+      en: 'A state institution under the management of the Ministry of '
+          'Veterans Affairs. A state provider of services for reintegrating'
+          ' veterans into productive civilian life.',
     ),
     link: 'https://veteranfund.com.ua/',
     projectsLink: 'https://veteranfund.com.ua/projects/',

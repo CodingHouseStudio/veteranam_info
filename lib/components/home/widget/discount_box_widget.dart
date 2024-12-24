@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,114 +10,98 @@ class DiscountBoxwWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isTablet) {
-      return InkWell(
-        hoverColor: Colors.transparent,
-        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-        onTap: () => context.goNamed(KRoute.discounts.name),
-        child: DecoratedBox(
-          decoration: KWidgetTheme.boxDecorationDiscount,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize24,
-            ),
-            child: Column(
+      return TextButton(
+        style: KButtonStyles.discountBoxButtonStyle,
+        clipBehavior: Clip.hardEdge,
+        onPressed: () => context.goNamed(KRoute.discounts.name),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: KPadding.kPaddingSize16,
-                        ),
-                        child: Text(
-                          context.l10n.findYourDiscount,
-                          style: AppTextStyle.materialThemeBodySmall,
-                        ),
-                      ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize16,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(KPadding.kPaddingSize12),
-                      child: KIcon.arrowUpRight,
+                    child: Text(
+                      context.l10n.findYourDiscount,
+                      style: AppTextStyle.materialThemeBodySmall,
                     ),
-                  ],
+                  ),
                 ),
-                const Spacer(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: KPadding.kPaddingSize24,
-                        ),
-                        child: Text(
-                          context.l10n.discounts,
-                          style: AppTextStyle.materialThemeHeadlineLarge,
-                        ),
-                      ),
-                    ),
-                    const _DotPatternWidget(isTablet: true),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(KPadding.kPaddingSize12),
+                  child: KIcon.arrowUpRight,
                 ),
               ],
             ),
-          ),
+            const Spacer(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: KPadding.kPaddingSize24,
+                    ),
+                    child: Text(
+                      context.l10n.discounts,
+                      style: AppTextStyle.materialThemeHeadlineLarge,
+                    ),
+                  ),
+                ),
+                const _DotPatternWidget(isTablet: true),
+              ],
+            ),
+          ],
         ),
       );
     } else {
-      return InkWell(
-        hoverColor: Colors.transparent,
-        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-        onTap: () => context.goNamed(KRoute.discounts.name),
-        child: DecoratedBox(
-          decoration: KWidgetTheme.boxDecorationDiscount,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: KPadding.kPaddingSize16,
-            ),
-            child: Column(
+      return TextButton(
+        style: KButtonStyles.discountBoxButtonStyle,
+        clipBehavior: Clip.hardEdge,
+        onPressed: () => context.goNamed(KRoute.discounts.name),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: KPadding.kPaddingSize16,
-                        ),
-                        child: Text(
-                          context.l10n.findYourDiscount,
-                          style: AppTextStyle.materialThemeBodySmall,
-                        ),
-                      ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize16,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(KPadding.kPaddingSize12),
-                      child: KIcon.arrowUpRight,
+                    child: Text(
+                      context.l10n.findYourDiscount,
+                      style: AppTextStyle.materialThemeBodySmall,
                     ),
-                  ],
+                  ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: KPadding.kPaddingSize24,
-                        ),
-                        child: Text(
-                          context.l10n.discounts,
-                          style: AppTextStyle.materialThemeTitleLarge,
-                        ),
-                      ),
-                    ),
-                    const _DotPatternWidget(isTablet: false),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(KPadding.kPaddingSize12),
+                  child: KIcon.arrowUpRight,
                 ),
               ],
             ),
-          ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: KPadding.kPaddingSize24,
+                    ),
+                    child: Text(
+                      context.l10n.discounts,
+                      style: AppTextStyle.materialThemeTitleLarge,
+                    ),
+                  ),
+                ),
+                const _DotPatternWidget(isTablet: false),
+              ],
+            ),
+          ],
         ),
       );
     }
@@ -141,10 +124,10 @@ class _DotPatternWidget extends StatelessWidget {
 }
 
 class _DotPainter extends CustomPainter {
-  final bool isTablet;
   _DotPainter({
     required this.isTablet,
   });
+  final bool isTablet;
   @override
   void paint(Canvas canvas, Size size) {
     // ..color = Colors.white
@@ -155,13 +138,6 @@ class _DotPainter extends CustomPainter {
 
     for (var i = 0; i < 7; i++) {
       for (var j = 0; j < 7; j++) {
-        canvas.drawCircle(
-          Offset(i * spacing, j * spacing),
-          dotRadius,
-          Paint()
-            ..color = AppColors.materialThemeWhite
-            ..style = PaintingStyle.fill,
-        );
         if (i == 0 && j > 3 ||
             i == 1 && j > 4 ||
             i == 2 && j > 5 ||
@@ -172,14 +148,16 @@ class _DotPainter extends CustomPainter {
             (i == 4 && j == 6) ||
             (i == 5 && j > 4) ||
             (i == 6 && j > 3)) {
-          canvas.drawCircle(
-            Offset(i * spacing, j * spacing),
-            dotRadius,
-            Paint()
-              ..color = AppColors.materialThemeKeyColorsPrimary
-              ..style = PaintingStyle.fill,
-          );
+          continue;
         }
+
+        canvas.drawCircle(
+          Offset(i * spacing, j * spacing),
+          dotRadius,
+          Paint()
+            ..color = AppColors.materialThemeWhite
+            ..style = PaintingStyle.fill,
+        );
       }
     }
   }
