@@ -35,51 +35,46 @@ class BoxWidget extends StatelessWidget {
     if (isDesk) {
       return TextButton(
         onPressed: onTap,
-        style: background == null
+        style: background == null && padding == null
             ? KButtonStyles.boxButtonStyle
             : KButtonStyles.boxButtonStyle.copyWith(
-                backgroundColor: WidgetStatePropertyAll(background),
+                backgroundColor: background == null
+                    ? null
+                    : WidgetStatePropertyAll(background),
+                padding:
+                    padding == null ? null : WidgetStatePropertyAll(padding),
               ),
         clipBehavior: Clip.hardEdge,
-        child: Padding(
-          padding: padding ??
-              const EdgeInsets.only(
-                top: KPadding.kPaddingSize16,
-                right: KPadding.kPaddingSize24,
-                bottom: KPadding.kPaddingSize24,
-                left: KPadding.kPaddingSize24,
-              ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (iconText != null)
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        iconText!,
-                        style: AppTextStyle.materialThemeBodySmall,
-                      ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            if (iconText != null)
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      iconText!,
+                      style: AppTextStyle.materialThemeBodySmall,
                     ),
-                    getIcon,
-                  ],
-                )
-              else
-                getIcon,
-              textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(right: textRightPadding ?? 0),
-                  child: Text(
-                    text,
-                    key: KWidgetkeys.widget.box.text,
-                    style: textStyle ?? AppTextStyle.materialThemeHeadlineSmall,
                   ),
+                  getIcon,
+                ],
+              )
+            else
+              getIcon,
+            textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: EdgeInsets.only(right: textRightPadding ?? 0),
+                child: Text(
+                  text,
+                  key: KWidgetkeys.widget.box.text,
+                  style: textStyle ?? AppTextStyle.materialThemeHeadlineSmall,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     } else {

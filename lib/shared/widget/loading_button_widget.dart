@@ -117,8 +117,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
             AnimatedBuilder(
               animation: _animation,
               builder: (BuildContext context, Widget? child) {
-                // ignore: omit_local_variable_types
-                final double angle = _controller.value * 2 * pi;
+                final angle = _controller.value * 2 * pi;
                 return Transform.rotate(
                   angle: angle,
                   child: child,

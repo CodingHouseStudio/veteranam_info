@@ -126,6 +126,7 @@ void main() {
             await nawbarBackButtonHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
+              routeName: KRoute.settings.name,
             );
           });
         });

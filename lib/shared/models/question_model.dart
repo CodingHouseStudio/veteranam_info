@@ -7,7 +7,6 @@ part 'question_model.g.dart';
 class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
-    // ignore: invalid_annotation_target
     required String title,
     required String titleEN,
     required String subtitle,

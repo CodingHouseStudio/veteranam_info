@@ -1,5 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 part of '../widget_keys.dart';
 
 class _BusinessDashboardKeys {

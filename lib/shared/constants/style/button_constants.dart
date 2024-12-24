@@ -558,7 +558,30 @@ abstract class KButtonStyles {
       KWidgetTheme.outlineBorder,
     ),
     padding: WidgetStatePropertyAll(
-      EdgeInsets.zero,
+      EdgeInsets.only(
+        top: KPadding.kPaddingSize24,
+        right: KPadding.kPaddingSize24,
+        bottom: KPadding.kPaddingSize24,
+        left: KPadding.kPaddingSize24,
+      ),
+    ),
+  );
+  static const discountBoxButtonStyle = ButtonStyle(
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsPrimary),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder,
+    ),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        top: KPadding.kPaddingSize8,
+        // ignore: avoid_redundant_argument_values
+        right: 0,
+        // ignore: avoid_redundant_argument_values
+        bottom: 0,
+        // bottom: KPadding.kPaddingSize24,
+        left: KPadding.kPaddingSize24,
+      ),
     ),
   );
   static const closeDialogButtonStyle = ButtonStyle(

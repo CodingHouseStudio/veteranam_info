@@ -7,6 +7,7 @@ import '../../../test_dependency.dart';
 Future<void> nawbarBackButtonHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  required String routeName,
 }) async {
   expect(find.byKey(KWidgetkeys.widget.nawbar.backButton), findsOneWidget);
 
@@ -15,6 +16,6 @@ Future<void> nawbarBackButtonHelper({
   await tester.pumpAndSettle();
 
   verify(
-    () => mockGoRouter.pop(),
+    () => mockGoRouter.goNamed(routeName),
   ).called(1);
 }

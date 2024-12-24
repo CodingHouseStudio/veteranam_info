@@ -8,10 +8,8 @@ import 'package:veteranam/shared/constants/constants_flutter.dart';
 class _KIcon extends Icon {
   const _KIcon(
     super.icon, {
-    // ignore: unused_element
     super.weight = 200,
     super.fill,
-    // ignore: unused_element
     super.size = KSize.kIconSize,
     super.color,
     super.grade,
