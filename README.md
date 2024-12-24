@@ -78,12 +78,12 @@ A Flutter no-profit app supporting Ukraine's war veterans.
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/repositories/discount_filter_repository.dart">Logic</a>
     </th>
     <th>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
+    </th>
+    <th>
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">Report</a>
          | 
         <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/bloc/report/report_bloc.dart">Logic</a>
-    </th>
-    <th>
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">Separate Page For Discount</a>
     </th>
   </tr>
   <tr>
@@ -93,13 +93,13 @@ A Flutter no-profit app supporting Ukraine's war veterans.
         </a>
     </th>
     <th>
-      <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">
-        <img src="assets/read_me/gifs/discount_report.gif" alt="Report" />
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">
+        <img src="assets/read_me/gifs/discount_separate page.gif" alt="Separate Page For Discount" />
       </a>
     </th>
     <th>
-      <a href="https://github.com/CodingHouseStudio/veteranam_info/tree/main/lib/components/discount">
-        <img src="assets/read_me/gifs/discount_separate page.gif" alt="Separate Page For Discount" />
+      <a href="https://github.com/CodingHouseStudio/veteranam_info/blob/main/lib/shared/widget/report_dialog_widget.dart">
+        <img src="assets/read_me/gifs/discount_report.gif" alt="Report" />
       </a>
     </th>
   </tr>
