@@ -1,17 +1,17 @@
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:get_it/get_it.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 // import 'package:veteranam/shared/models/models.dart';
 
-// import '../../test_dependency.dart';
+import '../../test_dependency.dart';
 
-// void main() {
-//   setUp(configureFailureDependenciesTest);
+void main() {
+  setUp(configureFailureDependenciesTest);
 
-//   setupFirebaseAuthMocks();
+  setupFirebaseAuthMocks();
 
-//   setUpAll(setUpGlobal);
+  setUpAll(setUpGlobal);
 
-//   tearDown(GetIt.I.reset);
+  tearDown(GetIt.I.reset);
 //   group('${KScreenBlocName.investors} ${KGroupText.model} ', () {
 //     final fullJson = {
 //       FundModelJsonField.id: KTestText.fundItems.last.id,
@@ -224,4 +224,4 @@
 //       });
 //     });
 //   });
-// }
+}

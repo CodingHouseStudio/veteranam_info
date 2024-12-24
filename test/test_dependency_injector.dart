@@ -22,10 +22,12 @@ import 'test_dependency.dart';
 
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
+  final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
   // register logic if user id empty user setting is also empty
   initializeDateFormatting(Language.english.value.languageCode);
   initializeDateFormatting(Language.ukrain.value.languageCode);
-  userSetting();
+  userSetting(mockFirebaseFirestore);
+  discountInit(mockFirebaseFirestore);
   mobBuild();
   Config.testIsWeb = true;
   Config.falvourValue = Config.development;
@@ -36,6 +38,7 @@ void configureDependenciesTest() {
   // KTest.scroll = null;
   // Services
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  GetIt.I.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);
   GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
@@ -272,8 +275,9 @@ void configureDependenciesTest() {
 }
 
 void configureFailureDependenciesTest() {
+  final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
   // register logic if user id empty user setting is also empty
-  userSetting();
+  userSetting(mockFirebaseFirestore);
   initializeDateFormatting(Language.english.value.languageCode);
   initializeDateFormatting(Language.ukrain.value.languageCode);
   Config.testIsWeb = true;
@@ -282,6 +286,7 @@ void configureFailureDependenciesTest() {
   Config.isReleaseMode = true;
   // KTest.scroll = null;
   // Services
+  GetIt.I.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);
   GetIt.I.registerSingleton<Dio>(Dio());
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<ArtifactDownloadHelper>(

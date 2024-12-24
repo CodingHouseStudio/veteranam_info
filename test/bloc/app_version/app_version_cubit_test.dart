@@ -15,7 +15,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.build} ${KGroupText.cubit}', () {
-    late AppVersionCubit buildCubit;
+    // late AppVersionCubit buildCubit;
     late AppInfoRepository mockBuildRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
@@ -27,96 +27,132 @@ void main() {
       ).thenAnswer(
         (_) async => AppInfoRepository.defaultValue,
       );
-      buildCubit = AppVersionCubit(
-        buildRepository: mockBuildRepository,
-        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    });
+    group('emits [PackageInfo()] when initial', () {
+      setUp(
+        () {
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestText.build,
+          );
+        },
+      );
+      blocTest<AppVersionCubit, AppVersionState>(
+        'Bloc Test',
+        build: () => AppVersionCubit(
+          buildRepository: mockBuildRepository,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        ),
+        // act: (bloc) async {},
+        expect: () async => [
+          AppVersionState(
+            build: AppInfoRepository.defaultValue,
+            mobHasNewBuild: true,
+          ),
+        ],
       );
     });
-    blocTest<AppVersionCubit, AppVersionState>(
-      'emits [PackageInfo()] when initial',
-      build: () => buildCubit,
-      act: (bloc) async {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getString(AppVersionCubit.mobAppVersionKey),
-        ).thenAnswer(
-          (_) => KTestText.build,
-        );
-        // await bloc.started();
-      },
-      expect: () async => [
-        AppVersionState(
-          build: AppInfoRepository.defaultValue,
-          mobHasNewBuild: true,
+    group('emits [PackageInfo()] when initial equale version', () {
+      setUp(
+        () {
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestText.version,
+          );
+          when(
+            mockBuildRepository.getBuildInfo(),
+          ).thenAnswer(
+            (_) async => KTestText.packageInfo,
+          );
+        },
+      );
+      blocTest<AppVersionCubit, AppVersionState>(
+        'Bloc Test',
+        build: () => AppVersionCubit(
+          buildRepository: mockBuildRepository,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         ),
-      ],
-    );
-    blocTest<AppVersionCubit, AppVersionState>(
-      'emits [PackageInfo()] when initial equale version',
-      build: () => buildCubit,
-      act: (bloc) async {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getString(AppVersionCubit.mobAppVersionKey),
-        ).thenAnswer(
-          (_) => KTestText.version,
-        );
-        when(
-          mockBuildRepository.getBuildInfo(),
-        ).thenAnswer(
-          (_) async => KTestText.packageInfo,
-        );
-        // await bloc.started();
-      },
-      expect: () async => [
-        AppVersionState(
-          build: KTestText.packageInfo,
-          mobHasNewBuild: false,
+        // act: (bloc) async {
+        //   // await bloc.started();
+        // },
+        expect: () async => [
+          AppVersionState(
+            build: KTestText.packageInfo,
+            mobHasNewBuild: false,
+          ),
+        ],
+      );
+    });
+
+    group('emits [PackageInfo()] when initial config version low', () {
+      setUp(
+        () {
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestText.oldVersion,
+          );
+          when(
+            mockBuildRepository.getBuildInfo(),
+          ).thenAnswer(
+            (_) async => KTestText.packageInfo,
+          );
+          // buildCubit = AppVersionCubit(
+          //   buildRepository: mockBuildRepository,
+          //   firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          // );
+        },
+      );
+      blocTest<AppVersionCubit, AppVersionState>(
+        'Bloc Test',
+        build: () => AppVersionCubit(
+          buildRepository: mockBuildRepository,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         ),
-      ],
-    );
-    blocTest<AppVersionCubit, AppVersionState>(
-      'emits [PackageInfo()] when initial config version low',
-      build: () => buildCubit,
-      act: (bloc) async {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getString(AppVersionCubit.mobAppVersionKey),
-        ).thenAnswer(
-          (_) => KTestText.oldVersion,
-        );
-        when(
-          mockBuildRepository.getBuildInfo(),
-        ).thenAnswer(
-          (_) async => KTestText.packageInfo,
-        );
-        // await bloc.started();
-      },
-      expect: () async => [
-        AppVersionState(
-          build: KTestText.packageInfo,
-          mobHasNewBuild: false,
+        // act: (bloc) async {
+        //   // await bloc.started();
+        // },
+        expect: () async => [
+          AppVersionState(
+            build: KTestText.packageInfo,
+            mobHasNewBuild: false,
+          ),
+        ],
+      );
+    });
+
+    group('emits [PackageInfo()] when initial and config empty', () {
+      setUp(
+        () {
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => '',
+          );
+        },
+      );
+      blocTest<AppVersionCubit, AppVersionState>(
+        'Bloc Test',
+        build: () => AppVersionCubit(
+          buildRepository: mockBuildRepository,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         ),
-      ],
-    );
-    blocTest<AppVersionCubit, AppVersionState>(
-      'emits [PackageInfo()] when initial and config empty',
-      build: () => buildCubit,
-      act: (bloc) async {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getString(AppVersionCubit.mobAppVersionKey),
-        ).thenAnswer(
-          (_) => '',
-        );
-        // await bloc.started();
-      },
-      expect: () async => [
-        AppVersionState(
-          build: AppInfoRepository.defaultValue,
-          mobHasNewBuild: true,
-        ),
-      ],
-    );
+        // act: (bloc) async {
+        //   // await bloc.started();
+        // },
+        expect: () async => [
+          AppVersionState(
+            build: AppInfoRepository.defaultValue,
+            mobHasNewBuild: true,
+          ),
+        ],
+      );
+    });
   });
 }

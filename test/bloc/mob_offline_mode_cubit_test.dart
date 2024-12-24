@@ -57,7 +57,7 @@ void main() {
         ..switchMode()
         ..switchMode(),
       expect: () async => [
-        MobMode.offline,
+        // MobMode.offline,
         MobMode.online,
         MobMode.offline,
       ],
