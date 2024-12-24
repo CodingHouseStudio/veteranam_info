@@ -35,11 +35,11 @@ class NetworkCubit extends Cubit<NetworkStatus> {
     log('NetworkStatusChanged: $status');
     switch (status) {
       case NetworkStatus.network:
-        return emit(
+        emit(
           NetworkStatus.network,
         );
       case NetworkStatus.offline:
-        return emit(
+        emit(
           NetworkStatus.offline,
         );
     }

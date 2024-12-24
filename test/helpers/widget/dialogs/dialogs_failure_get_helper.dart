@@ -5,6 +5,7 @@ Future<void> dialogFailureGetHelper({
   required WidgetTester tester,
   bool isFailure = true,
 }) async {
+  await tester.pumpAndSettle();
   final matcher = isFailure ? findsOneWidget : findsNothing;
   expect(find.byKey(KWidgetkeys.widget.dialogs.failure), matcher);
 

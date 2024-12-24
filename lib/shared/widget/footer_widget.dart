@@ -84,7 +84,7 @@ class _FooterWidgetList extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                KIcon.logo78,
+                KIcon.logo78.copyWith(key: KWidgetkeys.widget.footer.logo),
                 Expanded(
                   child: Wrap(
                     spacing: KPadding.kPaddingSize8,

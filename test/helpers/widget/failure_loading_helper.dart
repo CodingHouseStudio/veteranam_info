@@ -23,5 +23,5 @@ Future<void> loadingFailureHelper({
     );
   }
 
-  await dialogSnackBarTextHelper(tester: tester);
+  await dialogFailureGetHelper(tester: tester);
 }
