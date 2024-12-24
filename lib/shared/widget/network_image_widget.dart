@@ -49,7 +49,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   void didChangeDependencies() {
-    if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+    if ((Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
+        (bytes?.isEmpty ?? true)) {
       precacheImage(
         bytes == null
             ? CachedNetworkImageProvider(
