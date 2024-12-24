@@ -97,6 +97,7 @@ class CheckPointAmountWidget extends StatelessWidget {
     this.amoutInactiveClor,
     this.maxLines = 3,
     this.textStyle,
+    this.widgetKey,
   });
   final bool isDesk;
   final void Function()? onChanged;
@@ -106,10 +107,12 @@ class CheckPointAmountWidget extends StatelessWidget {
   final Color? amoutInactiveClor;
   final int? maxLines;
   final TextStyle? textStyle;
+  final Key? widgetKey;
 
   @override
   Widget build(BuildContext context) {
     return CheckPointWidget(
+      key: widgetKey,
       onChanged: onChanged,
       isCheck: isCheck,
       text: filterItem.value.getTrsnslation(context),

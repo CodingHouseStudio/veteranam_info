@@ -389,19 +389,20 @@ class DiscountsWatcherBloc
     _MobSaveFilter event,
     Emitter<DiscountsWatcherState> emit,
   ) {
-    state.discountFilterRepository.saveActiveFilter().fold(
-          (l) => emit(
-            state.copyWith(
-              failure: l._toDiscount(),
-              filterStatus: FilterStatus.error,
-            ),
-          ),
-          (r) => emit(
-            state.copyWith(
-              filterStatus: FilterStatus.filtered,
-            ),
-          ),
-        );
+    state.discountFilterRepository.saveActiveFilter();
+    // .fold(
+    //       (l) => emit(
+    //         state.copyWith(
+    //           failure: l._toDiscount(),
+    //           filterStatus: FilterStatus.error,
+    //         ),
+    //       ),
+    //       (r) => emit(
+    //         state.copyWith(
+    //           filterStatus: state.filterStatus,
+    //         ),
+    //       ),
+    //     );
   }
 
   void _onSorting(
