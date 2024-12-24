@@ -1,6 +1,6 @@
 name: veteranam
 description: veteran
-version: 0.0.8+68
+version: 0.0.7+68
 publish_to: none
 
 environment:
