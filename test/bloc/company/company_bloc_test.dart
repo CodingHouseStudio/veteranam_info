@@ -58,7 +58,8 @@ void main() {
               reason: 'Wait for loading data',
             );
             bloc.add(
-                const CompanyWatcherEvent.updated(KTestText.pureCompanyModel));
+              const CompanyWatcherEvent.updated(KTestText.pureCompanyModel),
+            );
           },
           expect: () async => [
             const CompanyWatcherState(
