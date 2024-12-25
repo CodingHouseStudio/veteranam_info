@@ -171,7 +171,8 @@ void main() {
       //       mockDiscountRepository: mockDiscountRepository,
       //       mockGoRouter: mockGoRouter,
       //       mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //       mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      //       mockFirebaseRemoteConfigProvider:
+      // mockFirebaseRemoteConfigProvider,
       //       mockReportRepository: mockReportRepository,
       //       mockAuthenticationRepository: mockAuthenticationRepository,
       //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
