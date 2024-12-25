@@ -14,6 +14,7 @@ Future<void> emailButtonHelper(
     find.byKey(KWidgetkeys.widget.emailButton.icon),
     findsWidgets,
   );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.emailButton.text));
 
   await tester.pumpAndSettle();

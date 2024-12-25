@@ -6,7 +6,7 @@ class _DiscountCardKeys {
   final userName = const Key('discount_card_username');
   final date = const Key('discount_card_date');
   final description = const Key('discount_card_description');
-  final category = const Key('discount_card_category');
+  // final category = const Key('discount_card_category');
   final discountTitle = const Key('discount_card_title');
   final discount = const Key('discount');
   final expiration = const Key('discount_card_expiration');

@@ -19,7 +19,7 @@ class DiscountTitleWidget extends StatelessWidget {
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize24),
         child: LineTitleIconWidget(
           title: context.l10n.discounts,
-          rightWidget: isDesk
+          rightWidget: isDesk && Config.isWeb
               ? BlocBuilder<ViewModeCubit, ViewMode>(
                   builder: (context, state) {
                     return Row(

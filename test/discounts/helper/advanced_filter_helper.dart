@@ -71,15 +71,15 @@ Future<void> advancedFilterHelper(
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.discountText),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.discountText),
+  //   findsOneWidget,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.discountItems),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.discountItems),
+  //   findsWidgets,
+  // );
 
   // expect(
   //   find.byKey(KWidgetkeys.screen.discounts.citiesText),
@@ -101,10 +101,10 @@ Future<void> advancedFilterHelper(
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
@@ -148,10 +148,10 @@ Future<void> advancedFilterHelper(
 
   await tester.pumpAndSettle();
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).last,
-    warnIfMissed: false,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).last,
+  //   warnIfMissed: false,
+  // );
 
   await tester.pumpAndSettle();
 

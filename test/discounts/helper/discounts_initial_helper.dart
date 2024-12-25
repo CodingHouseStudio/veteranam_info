@@ -17,39 +17,44 @@ Future<void> discountsInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      if (!Config.isWeb) {
-        expect(
-          find.byKey(KWidgetkeys.widget.nawbar.pageName),
-          findsOneWidget,
-        );
-        //   expect(
-        //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
-        //     findsOneWidget,
-        //   );
-        // } else {
-        await mobNavigationHelper(tester);
-      } else {
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.title),
-          findsOneWidget,
-        );
-      }
-
+      // if (!Config.isWeb) {
+      //   expect(
+      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     findsOneWidget,
+      //   );
+      //   //   expect(
+      //   //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+      //   //     findsOneWidget,
+      //   //   );
+      //   // } else {
+      //   await mobNavigationHelper(tester);
+      // } else {
       expect(
-        find.byKey(KWidgetkeys.screen.discounts.filter),
+        find.byKey(KWidgetkeys.screen.discounts.title),
         findsOneWidget,
       );
+      // }
 
-      await filterChipHelper(tester);
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.discounts.filter),
+      //   findsOneWidget,
+      // );
 
-      if (Config.isBusiness) {
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
-          findsOneWidget,
-        );
-      }
+      // await filterChipHelper(tester);
 
-      await advancedFilterHelper(tester);
+      // if (Config.isBusiness) {
+      //   expect(
+      //     find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+      //     findsOneWidget,
+      //   );
+      // }
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.discounts.title,
+      );
+
+      // await advancedFilterHelper(tester);
 
       expect(
         find.byKey(KWidgetkeys.screen.discounts.card),

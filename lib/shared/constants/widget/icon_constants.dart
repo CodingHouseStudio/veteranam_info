@@ -202,7 +202,7 @@ abstract class KIcon {
   static const _KIcon call = _KIcon(Symbols.call);
 
   static const logo = _KIcon(
-    IconData(0x1, fontFamily: KAppText.veteranamFontName),
+    IconData(0xe1, fontFamily: KAppText.veteranamFontName),
     size: KSize.kFont48,
   );
   static const logo78 = _KIcon(

@@ -26,14 +26,30 @@ class FeedbackBodyWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16,
         );
-        return BlocListener<FeedbackBloc, FeedbackState>(
-          listener: (context, state) {
-            context.dialog.showSnackBardTextDialog(
-              state.failure?.value(context),
-            );
-          },
-          listenWhen: (previous, current) =>
-              current.failure != null || current.failure != previous.failure,
+        return MultiBlocListener(
+          listeners: [
+            BlocListener<FeedbackBloc, FeedbackState>(
+              listenWhen: (previous, current) =>
+                  current.failure != null ||
+                  current.failure != previous.failure,
+              listener: (context, state) {
+                context.dialog.showSnackBardTextDialog(
+                  state.failure?.value(context),
+                );
+              },
+            ),
+            BlocListener<UrlCubit, UrlEnum?>(
+              listener: (context, state) async {
+                if (state != null) {
+                  context.dialog.showSnackBardTextDialog(
+                    state.value(context: context),
+                    duration: const Duration(milliseconds: 4000),
+                  );
+                  context.read<UrlCubit>().reset();
+                }
+              },
+            ),
+          ],
           child: FocusTraversalGroup(
             child: Semantics(
               child: CustomScrollView(
