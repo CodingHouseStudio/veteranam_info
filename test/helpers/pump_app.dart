@@ -27,12 +27,12 @@ extension PumpApp on WidgetTester {
       MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => GetIt.I.get<DiscountsWatcherBloc>()
-              ..add(const DiscountsWatcherEvent.started()),
+            create: (context) => GetIt.I.get<DiscountsWatcherBloc>(),
+            // ..add(const DiscountsWatcherEvent.started()),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<InvestorsWatcherBloc>()
-              ..add(const InvestorsWatcherEvent.started()),
+            create: (context) => GetIt.I.get<InvestorsWatcherBloc>(),
+            // ..add(const InvestorsWatcherEvent.started()),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<AuthenticationBloc>(),
@@ -65,10 +65,10 @@ extension PumpApp on WidgetTester {
               create: (context) => GetIt.I.get<MobFeedbackBloc>(),
             ),
             BlocProvider(
-              create: (context) => GetIt.I.get<MobFaqWatcherBloc>()
-                ..add(
-                  const MobFaqWatcherEvent.started(),
-                ),
+              create: (context) => GetIt.I.get<MobFaqWatcherBloc>(),
+              // ..add(
+              //   const MobFaqWatcherEvent.started(),
+              // ),
             ),
             BlocProvider(
               create: (context) => GetIt.I.get<MobOfflineModeCubit>(),

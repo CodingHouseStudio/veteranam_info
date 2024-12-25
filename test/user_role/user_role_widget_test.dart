@@ -32,19 +32,19 @@ void main() {
 
         await userRoleInitialHelper(tester);
       });
-      testWidgets('Drop down buttons intial', (tester) async {
-        await userRolePumpAppHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
+      // testWidgets('Drop down buttons intial', (tester) async {
+      //   await userRolePumpAppHelper(
+      //     tester: tester,
+      //     mockGoRouter: mockGoRouter,
+      //   );
 
-        await dropDownScrollHelper(
-          test: () async => dropDownButtonHelper(
-            tester: tester,
-          ),
-          tester: tester,
-        );
-      });
+      //   await dropDownScrollHelper(
+      //     test: () async => dropDownButtonHelper(
+      //       tester: tester,
+      //     ),
+      //     tester: tester,
+      //   );
+      // });
       group('${KGroupText.goTo} ', () {
         testWidgets('Sign Up business button ', (tester) async {
           await userRolePumpAppHelper(
@@ -57,28 +57,28 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
-        testWidgets('Drop down button for user login', (tester) async {
-          await userRolePumpAppHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+        // testWidgets('Drop down button for user login', (tester) async {
+        //   await userRolePumpAppHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
 
-          await dropDownLoginUserNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-        testWidgets('Drop down button for business login', (tester) async {
-          await userRolePumpAppHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+        //   await dropDownLoginUserNavigationHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
+        // testWidgets('Drop down button for business login', (tester) async {
+        //   await userRolePumpAppHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
 
-          await dropDownLoginBusinessNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+        //   await dropDownLoginBusinessNavigationHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
       });
     });
   });

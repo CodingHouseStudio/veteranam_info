@@ -17,25 +17,24 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.mobFaq} ${KGroupText.bloc}', () {
-    late MobFaqWatcherBloc mobFaqWatcherBloc;
+    // late MobFaqWatcherBloc mobFaqWatcherBloc;
     late IFaqRepository mockFaqRepository;
     setUp(() {
       mockFaqRepository = MockIFaqRepository();
-      mobFaqWatcherBloc = MobFaqWatcherBloc(
-        faqRepository: mockFaqRepository,
+      when(mockFaqRepository.getQuestions()).thenAnswer(
+        (_) async => Right(KTestText.questionModelItems),
       );
     });
 
     blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
       'emits [MobFaqWatcherState.loading(), MobFaqWatcherState.success()]'
       ' when load questionModel list',
-      build: () => mobFaqWatcherBloc,
-      act: (bloc) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (_) async => Right(KTestText.questionModelItems),
-        );
-        bloc.add(const MobFaqWatcherEvent.started());
-      },
+      build: () => MobFaqWatcherBloc(
+        faqRepository: mockFaqRepository,
+      ),
+      // act: (bloc) async {
+      //   bloc.add(const MobFaqWatcherEvent.started());
+      // },
       expect: () async => [
         predicate<MobFaqWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
@@ -45,23 +44,29 @@ void main() {
         ),
       ],
     );
-    blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
-      'emits [MobFaqWatcherState.faulure()] when error',
-      build: () => mobFaqWatcherBloc,
-      act: (bloc) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
+    group('emits [MobFaqWatcherState.faulure()] when error', () {
+      setUp(
+        () => when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
-        );
-        bloc.add(const MobFaqWatcherEvent.started());
-      },
-      expect: () async => [
-        predicate<MobFaqWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
-        predicate<MobFaqWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.error,
+      );
+      blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
+        'Bloc Test',
+        build: () => MobFaqWatcherBloc(
+          faqRepository: mockFaqRepository,
         ),
-      ],
-    );
+        // act: (bloc) async {
+        //   bloc.add(const MobFaqWatcherEvent.started());
+        // },
+        expect: () async => [
+          predicate<MobFaqWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loading,
+          ),
+          predicate<MobFaqWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.error,
+          ),
+        ],
+      );
+    });
   });
 }

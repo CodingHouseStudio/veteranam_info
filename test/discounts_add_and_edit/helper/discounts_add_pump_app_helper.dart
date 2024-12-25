@@ -20,8 +20,8 @@ Future<void> discountsAddPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockCompanyRepository: mockCompanyRepository,
     mockCitiesRepository: mockCitiesRepository,
-    discount: discount,
-    discountId: discountId,
+    // discount: discount,
+    // discountId: discountId,
   );
 
   _registerCompanyWatcherBloc(mockCompanyRepository);
@@ -46,20 +46,28 @@ void _registerDiscountsAddBloc({
   required IDiscountRepository mockDiscountRepository,
   required ICompanyRepository mockCompanyRepository,
   required ICitiesRepository mockCitiesRepository,
-  required DiscountModel? discount,
-  required String? discountId,
+  // required DiscountModel? discount,
+  // required String? discountId,
 }) {
-  final discountsAddBloc = DiscountsAddBloc(
-    discountRepository: mockDiscountRepository,
-    companyRepository: mockCompanyRepository,
-    citiesRepository: mockCitiesRepository,
-    discount: discount,
-    discountId: discountId,
-  );
+  // final discountsAddBloc = DiscountsAddBloc(
+  //   discountRepository: mockDiscountRepository,
+  //   companyRepository: mockCompanyRepository,
+  //   citiesRepository: mockCitiesRepository,
+  //   discount: discount,
+  //   discountId: discountId,
+  // );
   if (GetIt.I.isRegistered<DiscountsAddBloc>()) {
     GetIt.I.unregister<DiscountsAddBloc>();
   }
-  GetIt.I.registerSingleton<DiscountsAddBloc>(discountsAddBloc);
+  GetIt.I.registerFactoryParam<DiscountsAddBloc, DiscountModel?, String?>(
+    (discount, discountId) => DiscountsAddBloc(
+      discountRepository: mockDiscountRepository,
+      companyRepository: mockCompanyRepository,
+      citiesRepository: mockCitiesRepository,
+      discount: discount,
+      discountId: discountId,
+    ),
+  );
 }
 
 void _registerCompanyWatcherBloc(

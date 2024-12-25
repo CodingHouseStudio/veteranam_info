@@ -33,6 +33,7 @@ class MyDiscountsWatcherBloc
     on<_ChangeDeactivate>(_onChangeDeactivate);
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
+    add(const MyDiscountsWatcherEvent.started());
   }
 
   final IDiscountRepository _discountRepository;

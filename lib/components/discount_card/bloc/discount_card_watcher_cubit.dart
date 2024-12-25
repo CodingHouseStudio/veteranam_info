@@ -20,29 +20,33 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
             failure: null,
           ),
         ) {
-    _onStarted(
+    onStarted(
       id: id,
       // emit: ,
     );
   }
   final IDiscountRepository _discountRepository;
-  Future<void> _onStarted({
+
+  @visibleForTesting
+  Future<void> onStarted({
     // required Emitter<DiscountCardWatcherState> emit,
     required String? id,
   }) async {
     if (id == null || id.isEmpty) {
       emit(
-        state.copyWith(
+        const _Initial(
           loadingStatus: LoadingStatus.error,
           failure: DiscountCardFailure.wrongID,
+          discountModel: null,
         ),
       );
       return;
     }
     emit(
-      state.copyWith(
+      const _Initial(
         loadingStatus: LoadingStatus.loading,
         failure: null,
+        discountModel: null,
       ),
     );
 
@@ -53,9 +57,10 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
 
     result.fold(
       (l) => emit(
-        state.copyWith(
+        _Initial(
           loadingStatus: LoadingStatus.error,
           failure: l._toDiscountCard(),
+          discountModel: null,
         ),
       ),
       (r) => emit(

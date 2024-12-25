@@ -51,13 +51,19 @@ void _registerPasswordResetBloc({
 void _registerCheckVerificationCodeCubit({
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
-  final checkVerificationCodeCubit = CheckVerificationCodeCubit(
-    appAuthenticationRepository: mockAppAuthenticationRepository,
-  );
+  // final checkVerificationCodeCubit = CheckVerificationCodeCubit(
+  //   appAuthenticationRepository: mockAppAuthenticationRepository,
+  // );
   if (GetIt.I.isRegistered<CheckVerificationCodeCubit>()) {
     GetIt.I.unregister<CheckVerificationCodeCubit>();
   }
-  GetIt.I.registerSingleton<CheckVerificationCodeCubit>(
-    checkVerificationCodeCubit,
+  GetIt.I.registerFactoryParam<CheckVerificationCodeCubit, String?, void>(
+    (code, voidValue) => CheckVerificationCodeCubit(
+      appAuthenticationRepository: mockAppAuthenticationRepository,
+      code: code,
+    ),
   );
+  // GetIt.I.registerSingleton<CheckVerificationCodeCubit>(
+  //   checkVerificationCodeCubit,
+  // );
 }

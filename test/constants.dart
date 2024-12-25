@@ -648,29 +648,9 @@ abstract class KTestConstants {
   static const englishIndex = 1;
   static const ukrainIndex = 0;
 
-  static Future<SomeFailure> get serverErrorFailure async {
-    // ignore: inference_failure_on_instance_creation
-    await Future.delayed(const Duration(microseconds: 1));
-    return SomeFailure.serverError(
-      error: null,
-    );
-  }
-
-  static Future<SomeFailure> get networkFailure async {
-    // ignore: inference_failure_on_instance_creation
-    await Future.delayed(const Duration(microseconds: 1));
-    return SomeFailure.network(
-      error: null,
-    );
-  }
-
-  static Future<SomeFailure> get getFailure async {
-    // ignore: inference_failure_on_instance_creation
-    await Future.delayed(const Duration(microseconds: 1));
-    return SomeFailure.get(
-      error: null,
-    );
-  }
+  static Future<void> get delay async =>
+      // ignore: inference_failure_on_instance_creation
+      Future.delayed(const Duration(microseconds: 1));
 }
 
 abstract class KScreenBlocName {

@@ -20,7 +20,6 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.myDiscounts} ${KGroupText.bloc}', () {
-    late MyDiscountsWatcherBloc myDiscountsWatcherBloc;
     late IDiscountRepository mockDiscountRepository;
     late ICompanyRepository mockCompanyRepository;
 
@@ -41,110 +40,134 @@ void main() {
       ).thenAnswer(
         (_) async => const Right(true),
       );
-
-      myDiscountsWatcherBloc = MyDiscountsWatcherBloc(
-        discountRepository: mockDiscountRepository,
-        companyRepository: mockCompanyRepository,
-      );
     });
 
-    group('Without ${KGroupText.stream}', () {
-      blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
+    group(
         'emits [MyDiscountsWatcherState()]'
-        ' when get report failure and load nex with listLoadedFull',
-        build: () => myDiscountsWatcherBloc,
-        act: (bloc) async {
-          when(
+        ' when get report failure and load nex with listLoadedFull', () {
+      group('Without ${KGroupText.stream}', () {
+        setUp(
+          () => when(
             mockDiscountRepository
                 .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
           ).thenAnswer(
             (_) => Stream.value([KTestText.discountModelItems.first]),
-          );
-          bloc.add(const MyDiscountsWatcherEvent.started());
-          await expectLater(
-            bloc.stream,
-            emitsInOrder([
-              predicate<MyDiscountsWatcherState>(
-                (state) => state.loadingStatus == LoadingStatus.loading,
-              ),
-              // predicate<MyDiscountsWatcherState>(
-              //   (state) => state.loadingStatus ==
-              // LoadingStatus.listLoadedFull,
-              // ),
-            ]),
-            reason: 'Wait loading data',
-          );
-          bloc.add(
-            const MyDiscountsWatcherEvent.loadNextItems(),
-          );
-        },
-        expect: () => [
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.isListLoadedFull,
+        );
+        blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
+          'Bloc Test',
+          build: () => MyDiscountsWatcherBloc(
+            discountRepository: mockDiscountRepository,
+            companyRepository: mockCompanyRepository,
           ),
-        ],
-      );
-      blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
-        'emits [loading, error] when there is an error during data loading',
-        build: () => myDiscountsWatcherBloc,
-        act: (bloc) async {
-          when(
+          act: (bloc) async {
+            // when(
+            //   mockDiscountRepository
+            //       .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
+            // ).thenAnswer(
+            //   (_) => Stream.value([KTestText.discountModelItems.first]),
+            // );
+            // bloc.add(const MyDiscountsWatcherEvent.started());
+            await expectLater(
+              bloc.stream,
+              emitsInOrder([
+                predicate<MyDiscountsWatcherState>(
+                  (state) => state.loadingStatus == LoadingStatus.loading,
+                ),
+                // predicate<MyDiscountsWatcherState>(
+                //   (state) => state.loadingStatus ==
+                // LoadingStatus.listLoadedFull,
+                // ),
+              ]),
+              reason: 'Wait loading data',
+            );
+            bloc.add(
+              const MyDiscountsWatcherEvent.loadNextItems(),
+            );
+          },
+          expect: () => [
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.isListLoadedFull,
+            ),
+          ],
+        );
+      });
+      group('emits [loading, error] when there is an error during data loading',
+          () {
+        setUp(
+          () => when(
             mockDiscountRepository
                 .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
           ).thenAnswer(
             (_) => Stream.error(KGroupText.failureGet),
-          );
-          bloc.add(const MyDiscountsWatcherEvent.started());
-        },
-        expect: () => [
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.error,
+        );
+        blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
+          'Bloc Test',
+          build: () => MyDiscountsWatcherBloc(
+            discountRepository: mockDiscountRepository,
+            companyRepository: mockCompanyRepository,
           ),
-        ],
-      );
-      blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
-        'emits [InvestorsWatcherState()]'
-        ' when get report failure and load nex with listLoadedFull',
-        build: () => myDiscountsWatcherBloc,
-        act: (bloc) async {
-          when(
+          // act: (bloc) async {
+          //   bloc.add(const MyDiscountsWatcherEvent.started());
+          // },
+          expect: () => [
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.error,
+            ),
+          ],
+        );
+      });
+      group(
+          'emits [InvestorsWatcherState()]'
+          ' when get report failure and load nex with listLoadedFull', () {
+        setUp(
+          () => when(
             mockDiscountRepository
                 .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
           ).thenAnswer(
             (_) => Stream.value([KTestText.discountModelItems.first]),
-          );
-          bloc.add(const MyDiscountsWatcherEvent.started());
-          await expectLater(
-            bloc.stream,
-            emitsInOrder([
-              predicate<MyDiscountsWatcherState>(
-                (state) => state.loadingStatus == LoadingStatus.loading,
-              ),
-              predicate<MyDiscountsWatcherState>(
-                (state) => state.isListLoadedFull,
-              ),
-            ]),
-            reason: 'Wait loading data',
-          );
-          bloc.add(
-            const MyDiscountsWatcherEvent.loadNextItems(),
-          );
-        },
-        expect: () => [
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
           ),
-          predicate<MyDiscountsWatcherState>(
-            (state) => state.isListLoadedFull,
+        );
+        blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
+          'Bloc Test',
+          build: () => MyDiscountsWatcherBloc(
+            discountRepository: mockDiscountRepository,
+            companyRepository: mockCompanyRepository,
           ),
-        ],
-      );
+          act: (bloc) async {
+            await expectLater(
+              bloc.stream,
+              emitsInOrder([
+                predicate<MyDiscountsWatcherState>(
+                  (state) => state.loadingStatus == LoadingStatus.loading,
+                ),
+                predicate<MyDiscountsWatcherState>(
+                  (state) => state.isListLoadedFull,
+                ),
+              ]),
+              reason: 'Wait loading data',
+            );
+            bloc.add(
+              const MyDiscountsWatcherEvent.loadNextItems(),
+            );
+          },
+          expect: () => [
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.isListLoadedFull,
+            ),
+          ],
+        );
+      });
     });
     group('${KGroupText.stream} ', () {
       late StreamController<List<DiscountModel>> discountsStreamController;
@@ -172,8 +195,12 @@ void main() {
       });
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits [loading, loaded] when data is successfully loaded',
-        build: () => myDiscountsWatcherBloc,
-        act: (bloc) async => bloc.add(const MyDiscountsWatcherEvent.started()),
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
+        // act: (bloc) async => bloc.add(const
+        // MyDiscountsWatcherEvent.started()),
         expect: () => [
           predicate<MyDiscountsWatcherState>(
             (state) => state.loadingStatus == LoadingStatus.loading,
@@ -187,9 +214,12 @@ void main() {
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits [MyDiscountsWatcherState()]'
         ' when load DiscountModel list and loadNextItems it',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
           await expectLater(
             bloc.stream,
             emitsInOrder([
@@ -238,9 +268,12 @@ void main() {
 
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits updated state when a discount is successfully deleted',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
           await expectLater(
             bloc.stream,
             emitsInOrder([
@@ -280,7 +313,10 @@ void main() {
 
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits error state when there is an error during discount deletion',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
           when(
             mockDiscountRepository
@@ -289,7 +325,7 @@ void main() {
             (_) async => Left(SomeFailure.serverError(error: null)),
           );
 
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
           await expectLater(
             bloc.stream,
             emitsInOrder([
@@ -323,9 +359,12 @@ void main() {
 
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits [MyDiscountsWatcherState()] when like',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
           await expectLater(
             bloc.stream,
             emitsInOrder([
@@ -356,9 +395,12 @@ void main() {
 
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits [MyDiscountsWatcherState()] when change like',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
 
           await expectLater(
             bloc.stream,
@@ -390,7 +432,10 @@ void main() {
 
       blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
         'emits [MyDiscountsWatcherState()] when change like failure',
-        build: () => myDiscountsWatcherBloc,
+        build: () => MyDiscountsWatcherBloc(
+          discountRepository: mockDiscountRepository,
+          companyRepository: mockCompanyRepository,
+        ),
         act: (bloc) async {
           when(
             mockDiscountRepository.deactivateDiscount(
@@ -400,7 +445,7 @@ void main() {
             (_) async => Left(SomeFailure.serverError(error: null)),
           );
 
-          bloc.add(const MyDiscountsWatcherEvent.started());
+          // bloc.add(const MyDiscountsWatcherEvent.started());
 
           await expectLater(
             bloc.stream,
