@@ -31,11 +31,17 @@ Future<void> discountCardPumpAppHelper({
 void _registerDiscountCardBloc({
   required IDiscountRepository mockDiscountRepository,
 }) {
-  final discountCardBloc = DiscountCardWatcherCubit(
-    discountRepository: mockDiscountRepository,
-  );
+  // final discountCardBloc = DiscountCardWatcherCubit(
+  //   discountRepository: mockDiscountRepository,
+  // );
   if (GetIt.I.isRegistered<DiscountCardWatcherCubit>()) {
     GetIt.I.unregister<DiscountCardWatcherCubit>();
   }
-  GetIt.I.registerSingleton<DiscountCardWatcherCubit>(discountCardBloc);
+  GetIt.I.registerFactoryParam<DiscountCardWatcherCubit, String?, void>(
+    (discountId, voidValue) => DiscountCardWatcherCubit(
+      discountRepository: mockDiscountRepository,
+      id: discountId,
+    ),
+  );
+  // GetIt.I.registerSingleton<DiscountCardWatcherCubit>(discountCardBloc);
 }

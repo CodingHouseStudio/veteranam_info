@@ -108,11 +108,12 @@ void main() {
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         Config.roleValue = Config.business;
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(
-            await KTestConstants.serverErrorFailure,
-          ),
-        );
+        when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
+          await KTestConstants.delay;
+          return Left(
+            SomeFailure.serverError(error: null),
+          );
+        });
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
@@ -128,11 +129,12 @@ void main() {
         await homeFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(
-            await KTestConstants.networkFailure,
-          ),
-        );
+        when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
+          await KTestConstants.delay;
+          return Left(
+            SomeFailure.network(error: null),
+          );
+        });
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
@@ -148,11 +150,12 @@ void main() {
         await homeFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Left(
-            await KTestConstants.getFailure,
-          ),
-        );
+        when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
+          await KTestConstants.delay;
+          return Left(
+            SomeFailure.get(error: null),
+          );
+        });
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,

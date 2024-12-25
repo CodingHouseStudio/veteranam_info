@@ -46,7 +46,7 @@ void main() {
         KMinMaxSize.subtitleMaxLength,
         (_) => KTestText.storyModelItems.last.story
             .split(KTestText.storyModelItems.last.story),
-      ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+      ).join(),
       StoryModelJsonField.date:
           KTestText.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: [

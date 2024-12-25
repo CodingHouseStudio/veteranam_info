@@ -13,46 +13,55 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.passwordReset} ${KGroupText.bloc}', () {
-    late CheckVerificationCodeCubit checkVerificationCodeCubit;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      checkVerificationCodeCubit = CheckVerificationCodeCubit(
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-      );
     });
-
-    blocTest<CheckVerificationCodeCubit, bool?>(
-      'emits [true] when verification code is valid',
-      build: () => checkVerificationCodeCubit,
-      act: (bloc) async {
-        when(
+    group('emits [true] when verification code is valid', () {
+      setUp(
+        () => when(
           mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(true),
-        );
-        // await bloc.started(KTestText.code);
-      },
-      expect: () => [true],
-    );
+        ),
+      );
+      blocTest<CheckVerificationCodeCubit, bool?>(
+        'Bloc Test',
+        build: () => CheckVerificationCodeCubit(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          code: KTestText.code,
+        ),
+        // act: (bloc) async {
+        //   // await bloc.started(KTestText.code);
+        // },
+        expect: () => [true],
+      );
+    });
 
-    blocTest<CheckVerificationCodeCubit, bool?>(
-      'emits [false] when verification code is not valid',
-      build: () => checkVerificationCodeCubit,
-      act: (bloc) async {
-        when(
+    group('emits [false] when verification code is not valid', () {
+      setUp(
+        () => when(
           mockAppAuthenticationRepository.checkVerificationCode(
             KTestText.code,
           ),
         ).thenAnswer(
           (realInvocation) async =>
               Left(SomeFailure.serverError(error: KGroupText.failure)),
-        );
-        // await bloc.started(KTestText.code);
-      },
-      expect: () => [false],
-    );
+        ),
+      );
+      blocTest<CheckVerificationCodeCubit, bool?>(
+        'emits [false] when verification code is not valid',
+        build: () => CheckVerificationCodeCubit(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          code: KTestText.code,
+        ),
+        // act: (bloc) async {
+        //   // await bloc.started(KTestText.code);
+        // },
+        expect: () => [false],
+      );
+    });
   });
 }

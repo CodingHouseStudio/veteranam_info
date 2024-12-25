@@ -17,51 +17,65 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KGroupText.bloc}', () {
-    late HomeWatcherBloc homeWatcherBloc;
     late IFaqRepository mockFaqRepository;
     setUp(() {
       mockFaqRepository = MockIFaqRepository();
-      homeWatcherBloc = HomeWatcherBloc(
-        faqRepository: mockFaqRepository,
-      );
     });
 
-    blocTest<HomeWatcherBloc, HomeWatcherState>(
-      'emits [HomeWatcherState.loading(), HomeWatcherState.success()]'
-      ' when load questionModel list',
-      build: () => homeWatcherBloc,
-      act: (bloc) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
+    group(
+        'emits [HomeWatcherState.loading(), HomeWatcherState.success()]'
+        ' when load questionModel list', () {
+      setUp(
+        () => when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => Right(KTestText.questionModelItems),
-        );
-        bloc.add(const HomeWatcherEvent.started());
-      },
-      expect: () async => [
-        predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
-        predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loaded,
+      );
+      blocTest<HomeWatcherBloc, HomeWatcherState>(
+        'Bloc Test',
+        build: () => HomeWatcherBloc(
+          faqRepository: mockFaqRepository,
         ),
-      ],
-    );
-    blocTest<HomeWatcherBloc, HomeWatcherState>(
-      'emits [HomeWatcherState.faulure()] when error',
-      build: () => homeWatcherBloc,
-      act: (bloc) async {
-        when(mockFaqRepository.getQuestions()).thenAnswer(
+        // act: (bloc) async {
+        // },
+        expect: () async => [
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loading,
+          ),
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loaded,
+          ),
+        ],
+      );
+    });
+    group('emits [HomeWatcherState.faulure()] when error', () {
+      setUp(
+        () => when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
-        );
-        bloc.add(const HomeWatcherEvent.started());
-      },
-      expect: () async => [
-        predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
-        predicate<HomeWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.error,
+      );
+      blocTest<HomeWatcherBloc, HomeWatcherState>(
+        'Bloc Test',
+        build: () => HomeWatcherBloc(
+          faqRepository: mockFaqRepository,
         ),
-      ],
-    );
+        act: (bloc) async {
+          bloc.add(const HomeWatcherEvent.started());
+        },
+        expect: () async => [
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loading,
+          ),
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.error,
+          ),
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loading,
+          ),
+          predicate<HomeWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.error,
+          ),
+        ],
+      );
+    });
   });
 }

@@ -80,13 +80,14 @@ void main() {
           mockInvestorsRepository.getFunds(
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
-        ).thenAnswer(
-          (invocation) async => Left(
+        ).thenAnswer((invocation) async {
+          await KTestConstants.delay;
+          return Left(
             SomeFailure.serverError(
               error: null,
             ),
-          ),
-        );
+          );
+        });
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
@@ -104,7 +105,10 @@ void main() {
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async {
+            await KTestConstants.delay;
+            return Left(SomeFailure.network(error: null));
+          },
         );
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -122,9 +126,10 @@ void main() {
           mockInvestorsRepository.getFunds(
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
-        ).thenAnswer(
-          (invocation) async => Left(SomeFailure.get(error: null)),
-        );
+        ).thenAnswer((invocation) async {
+          await KTestConstants.delay;
+          return Left(SomeFailure.get(error: null));
+        });
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,

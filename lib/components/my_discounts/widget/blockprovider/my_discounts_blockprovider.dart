@@ -10,10 +10,7 @@ class MyDiscountsBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.I.get<MyDiscountsWatcherBloc>()
-        ..add(
-          const MyDiscountsWatcherEvent.started(),
-        ),
+      create: (context) => GetIt.I.get<MyDiscountsWatcherBloc>(),
       child: childWidget,
     );
   }

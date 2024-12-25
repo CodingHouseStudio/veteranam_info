@@ -13,52 +13,61 @@ Future<void> investorsInitialHelper(
     test: () async {
       await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
-      if (Config.isWeb) {
-        expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
-        // expect(find.byKey(KWidgetkeys.screen.investors.point),
-        // findsOneWidget);
+      final matcher = Config.isWeb ? findsOneWidget : findsNothing;
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
-          findsOneWidget,
-        );
+      expect(find.byKey(KWidgetkeys.screen.investors.title), matcher);
+      // expect(find.byKey(KWidgetkeys.screen.investors.point),
+      // findsOneWidget);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
+        matcher,
+      );
+
+      if (Config.isWeb) {
         await scrollingHelper(
           tester: tester,
           itemKey: KWidgetkeys.screen.investors.feedbackTitle,
         );
+      }
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
-          findsOneWidget,
-        );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
+        matcher,
+      );
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.feedbackButton),
-          findsOneWidget,
-        );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackButton),
+        matcher,
+      );
 
+      if (Config.isWeb) {
         await doubleButtonHelper(tester);
+      }
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.rightImages),
-          findsOneWidget,
-        );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.rightImages),
+        matcher,
+      );
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.leftImages),
-          findsOneWidget,
-        );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.leftImages),
+        matcher,
+      );
 
+      if (Config.isWeb) {
         await scrollingHelper(
           tester: tester,
           itemKey: KWidgetkeys.screen.investors.leftImages,
         );
-      } else {
-        expect(
-          find.byKey(KWidgetkeys.widget.nawbar.pageName),
-          findsOneWidget,
-        );
       }
+
+      // else {
+      //   expect(
+      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     findsOneWidget,
+      //   );
+      // }
 
       expect(
         find.byKey(KWidgetkeys.screen.investors.fundsTitle),

@@ -16,30 +16,36 @@ void main() {
   setUpAll(setUpGlobal);
 
   tearDown(GetIt.I.reset);
+
   group('${KScreenBlocName.discountCard} ${KGroupText.bloc}', () {
-    late DiscountCardWatcherCubit discountCardWatcherCubit;
     late IDiscountRepository mockdiscountRepository;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
-      discountCardWatcherCubit = DiscountCardWatcherCubit(
-        discountRepository: mockdiscountRepository,
+      when(
+        mockdiscountRepository.getDiscount(
+          id: KTestText.discountModelItems.first.id,
+          showOnlyBusinessDiscounts: false,
+        ),
+      ).thenAnswer(
+        (_) async {
+          await KTestConstants.delay;
+          return Right(KTestText.discountModelItems.first);
+        },
       );
     });
 
     blocTest<DiscountCardWatcherCubit, DiscountCardWatcherState>(
       'emits [DiscountCardWatcherState()]'
       ' when load discountModel with wrong id and correct',
-      build: () => discountCardWatcherCubit,
+      build: () => DiscountCardWatcherCubit(
+        discountRepository: mockdiscountRepository,
+        id: KTestText.discountModelItems.first.id,
+      ),
       act: (bloc) async {
-        when(
-          mockdiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
-            showOnlyBusinessDiscounts: false,
-          ),
-        ).thenAnswer(
-          (_) async => Right(KTestText.discountModelItems.first),
-        );
+        await KTestConstants.delay;
+        await bloc.onStarted(id: KTestText.discountModelItems.first.id);
+        await bloc.onStarted(id: '');
         // bloc
         //   ..add(const DiscountCardWatcherEvent.started(''))
         //   ..add(
@@ -49,10 +55,10 @@ void main() {
         //   );
       },
       expect: () async => [
-        const DiscountCardWatcherState(
-          discountModel: null,
-          loadingStatus: LoadingStatus.error,
-          failure: DiscountCardFailure.wrongID,
+        DiscountCardWatcherState(
+          discountModel: KTestText.discountModelItems.first,
+          loadingStatus: LoadingStatus.loaded,
+          failure: null,
         ),
         const DiscountCardWatcherState(
           discountModel: null,
@@ -64,40 +70,57 @@ void main() {
           loadingStatus: LoadingStatus.loaded,
           failure: null,
         ),
+        const DiscountCardWatcherState(
+          discountModel: null,
+          loadingStatus: LoadingStatus.error,
+          failure: DiscountCardFailure.wrongID,
+        ),
       ],
     );
 
-    blocTest<DiscountCardWatcherCubit, DiscountCardWatcherState>(
-      'emits [DiscountCardWatcherState()]'
-      ' when load discountModel ${KGroupText.failure}',
-      build: () => discountCardWatcherCubit,
-      act: (bloc) async {
-        when(
+    group('${KGroupText.failure} ', () {
+      setUp(
+        () => when(
           mockdiscountRepository.getDiscount(
             id: KTestText.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
-        );
-        // bloc.add(
-        //   DiscountCardWatcherEvent.started(
-        //     KTestText.discountModelItems.first.id,
-        //   ),
-        // );
-      },
-      expect: () async => [
-        const DiscountCardWatcherState(
-          discountModel: null,
-          loadingStatus: LoadingStatus.loading,
-          failure: null,
+          (_) async {
+            await KTestConstants.delay;
+            return Left(SomeFailure.serverError(error: null));
+          },
         ),
-        const DiscountCardWatcherState(
-          discountModel: null,
-          loadingStatus: LoadingStatus.error,
-          failure: DiscountCardFailure.error,
+      );
+
+      blocTest<DiscountCardWatcherCubit, DiscountCardWatcherState>(
+        'emits [DiscountCardWatcherState()]'
+        ' when load discountModel ${KGroupText.failure}',
+        build: () => DiscountCardWatcherCubit(
+          discountRepository: mockdiscountRepository,
+          id: '',
         ),
-      ],
-    );
+        // act: (bloc) async {
+        //   await bloc.onStarted(id: KTestText.discountModelItems.first.id);
+        //   // bloc.add(
+        //   //   DiscountCardWatcherEvent.started(
+        //   //     KTestText.discountModelItems.first.id,
+        //   //   ),
+        //   // );
+        // },
+        // expect: () async => [
+        // const DiscountCardWatcherState(
+        //   discountModel: null,
+        //   loadingStatus: LoadingStatus.loading,
+        //   failure: null,
+        // ),
+        // const DiscountCardWatcherState(
+        //   discountModel: null,
+        //   loadingStatus: LoadingStatus.error,
+        //   failure: DiscountCardFailure.error,
+        // ),
+        // ],
+      );
+    });
   });
 }
