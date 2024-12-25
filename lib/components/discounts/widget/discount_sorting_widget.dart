@@ -15,11 +15,7 @@ class DiscountSortingWidget extends StatelessWidget {
       builder: (context, sortingBy) {
         return PopupMenuButtonWidget<DiscountEnum>(
           buttonStyle: KButtonStyles.neutralButtonStyle,
-          shape: const OutlineInputBorder(
-            borderSide:
-                BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
-            borderRadius: KBorderRadius.kBorderRadiusExceptTopRight,
-          ),
+          shape: KWidgetTheme.outlineBorderNutral16,
           buttonText: '',
           iconAlignment: IconAlignment.end,
           items: List.generate(

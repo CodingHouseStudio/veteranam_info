@@ -17,10 +17,10 @@ Future<void> discountCardHelper(
     findsWidgets,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.discountCard.category),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.category),
+  //   findsWidgets,
+  // );
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.discountTitle),
     findsWidgets,

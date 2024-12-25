@@ -19,6 +19,6 @@ Future<void> confirmDialogHelper({
   await tester.pumpAndSettle();
 
   if (isPop) {
-    verify(() => mockGoRouter.pop()).called(1);
+    verify(() => mockGoRouter.pop(true)).called(1);
   }
 }

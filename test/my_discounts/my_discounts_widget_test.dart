@@ -58,8 +58,10 @@ void main() {
       );
     });
     group('${KGroupText.failure} ', () {
+      late StreamController<List<DiscountModel>> failureStream;
       setUp(
         () {
+          failureStream = StreamController<List<DiscountModel>>()..add([]);
           when(
             mockCompanyRepository.currentUserCompany,
           ).thenAnswer(
@@ -73,10 +75,11 @@ void main() {
             mockDiscountRepository
                 .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
           ).thenAnswer(
-            (invocation) => Stream.error(KGroupText.failureGet),
+            (invocation) => failureStream.stream,
           );
         },
       );
+
       testWidgets('${KGroupText.error} ', (tester) async {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
@@ -86,8 +89,16 @@ void main() {
           tester: tester,
         );
 
+        failureStream.addError(KGroupText.failureGet);
+        await tester.pump(const Duration(seconds: 20));
+        await failureStream.close();
+        failureStream = StreamController<List<DiscountModel>>()..add([]);
+
         await myDiscountFailureHelper(tester);
       });
+      // tearDown(
+      //   () async => failureStream.close(),
+      // );
     });
     group('Get Small List', () {
       setUp(

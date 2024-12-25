@@ -65,6 +65,10 @@ abstract class KWidgetTheme {
   static const outlineBorder16 = RoundedRectangleBorder(
     borderRadius: KBorderRadius.kBorderRadius16,
   );
+  static const outlineBorderNutral16 = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius16,
+    side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+  );
   static const outlineBorderZero = RoundedRectangleBorder(
     // ignore: avoid_redundant_argument_values
     borderRadius: BorderRadius.zero,

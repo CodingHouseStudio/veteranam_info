@@ -127,9 +127,12 @@ class _AdvancedFilterDesk extends StatelessWidget {
             required overlapsContent,
             required shrinkOffset,
           }) =>
-              AdvancedFilterContent(
-            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
-            isDesk: true,
+              SizedBox(
+            height: double.infinity,
+            child: AdvancedFilterContent(
+              key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+              isDesk: true,
+            ),
           ),
           maxMinHeight: maxHeight,
         ),
@@ -271,7 +274,7 @@ class _DiscountWidgetList extends StatelessWidget {
                       child: Center(
                         child: Text(
                           context.l10n.thatEndOfList,
-                          key: KWidgetkeys.screen.investors.endListText,
+                          key: KWidgetkeys.screen.discounts.endListText,
                           style: AppTextStyle
                               .materialThemeTitleMediumNeutralVariant70,
                         ),
@@ -325,10 +328,13 @@ class _DiscountsWidgetItem extends StatelessWidget {
       indexValue--;
     }
     if (config.linkInt == index + 1) {
-      return DiscountLinkWidget(isDesk: isDesk);
+      return DiscountLinkWidget(
+        isDesk: isDesk,
+      );
     }
     final discountItem = filterDiscountModelList.elementAt(indexValue);
     return DiscountCardWidget(
+      key: KWidgetkeys.screen.discounts.card,
       discountItem: discountItem,
       isDesk: isDesk,
       share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
@@ -349,23 +355,28 @@ class DiscountsDeskWidgetList extends StatelessWidget {
             maxHeight: maxHeight,
           ),
         ),
-        SliverCrossAxisExpanded(
-          flex: 2,
-          sliver: BlocBuilder<ViewModeCubit, ViewMode>(
-            builder: (context, state) {
-              switch (state) {
-                case ViewMode.grid:
-                  return const _DiscountGridWidgetList(
-                    isDesk: true,
-                  );
-                case ViewMode.list:
-                  return const _DiscountWidgetList(
-                    isDesk: true,
-                  );
-              }
-            },
+        if (Config.isWeb)
+          SliverCrossAxisExpanded(
+            flex: 2,
+            sliver: BlocBuilder<ViewModeCubit, ViewMode>(
+              builder: (context, state) {
+                switch (state) {
+                  case ViewMode.grid:
+                    return const _DiscountGridWidgetList(
+                      isDesk: true,
+                    );
+                  case ViewMode.list:
+                    return const _DiscountWidgetList(
+                      isDesk: true,
+                    );
+                }
+              },
+            ),
+          )
+        else
+          const _DiscountWidgetList(
+            isDesk: true,
           ),
-        ),
       ],
     );
   }

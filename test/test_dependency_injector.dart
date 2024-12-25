@@ -12,6 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:veteranam/components/discounts/bloc/view_mode/view_mode_cubit.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
@@ -264,6 +265,9 @@ void configureDependenciesTest() {
       appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
       feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
     ),
+  );
+  GetIt.I.registerSingleton<ViewModeCubit>(
+    ViewModeCubit(),
   );
   // GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
   //   MyDiscountsWatcherBloc(

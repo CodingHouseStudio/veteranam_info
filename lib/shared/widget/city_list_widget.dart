@@ -74,9 +74,10 @@ class _CityWidgetListExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
-      mainAxisSize: MainAxisSize.min,
+      // mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Text(
           cityList.getCityString(

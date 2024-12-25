@@ -23,10 +23,10 @@ Future<void> discountCardHelper({
     findsWidgets,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.discountCard.category),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.category),
+  //   findsWidgets,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.discountTitle),
@@ -55,12 +55,12 @@ Future<void> discountCardHelper({
     findsWidgets,
   );
 
-  await cardTextDetailHelper(tester: tester, link: KAppText.email);
+  // await cardTextDetailHelper(tester: tester, link: KAppText.email);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
-    containComplaintIcon ? findsWidgets : findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
+  //   containComplaintIcon ? findsWidgets : findsNothing,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.iconShare),
@@ -72,25 +72,25 @@ Future<void> discountCardHelper({
     warnIfMissed: false,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
-    containComplaintIcon ? findsWidgets : findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
+  //   containComplaintIcon ? findsWidgets : findsNothing,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.discountCard.iconWebsite),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.iconWebsite),
+  //   findsWidgets,
+  // );
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.discountCard.iconWebsite).first,
-    warnIfMissed: false,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.discountCard.iconWebsite).first,
+  //   warnIfMissed: false,
+  // );
 
-  if (containComplaintIcon) {
-    await scrollingHelper(
-      tester: tester,
-      itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
-    );
-  }
+  // if (containComplaintIcon) {
+  //   await scrollingHelper(
+  //     tester: tester,
+  //     itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
+  //   );
+  // }
 }

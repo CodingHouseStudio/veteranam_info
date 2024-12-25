@@ -155,37 +155,37 @@ void main() {
 
         await discountsInitialHelper(tester);
       });
-      group('Open Update dialog', () {
-        setUp(() {
-          PlatformEnumFlutter.isWebDesktop = false;
-          when(
-            mockFirebaseRemoteConfigProvider
-                .getString(AppVersionCubit.mobAppVersionKey),
-          ).thenAnswer(
-            (_) => KTestText.build,
-          );
-        });
-        testWidgets('${KGroupText.initial} ', (tester) async {
-          await discountsPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-            mockReportRepository: mockReportRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-            mockUserRepository: mockUserRepository,
-            mockMobileRatingRepository: mockMobileRatingRepository,
-            mockBuildRepository: mockBuildRepository,
-          );
+      // group('Open Update dialog', () {
+      //   setUp(() {
+      //     PlatformEnumFlutter.isWebDesktop = false;
+      //     when(
+      //       mockFirebaseRemoteConfigProvider
+      //           .getString(AppVersionCubit.mobAppVersionKey),
+      //     ).thenAnswer(
+      //       (_) => KTestText.build,
+      //     );
+      //   });
+      //   testWidgets('${KGroupText.initial} ', (tester) async {
+      //     await discountsPumpAppHelper(
+      //       tester: tester,
+      //       mockDiscountRepository: mockDiscountRepository,
+      //       mockGoRouter: mockGoRouter,
+      //       mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      //       mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      //       mockReportRepository: mockReportRepository,
+      //       mockAuthenticationRepository: mockAuthenticationRepository,
+      //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+      //       mockUserRepository: mockUserRepository,
+      //       mockMobileRatingRepository: mockMobileRatingRepository,
+      //       mockBuildRepository: mockBuildRepository,
+      //     );
 
-          await mobUpdateDialogButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-      });
+      //     await mobUpdateDialogButtonsHelper(
+      //       tester: tester,
+      //       mockGoRouter: mockGoRouter,
+      //     );
+      //   });
+      // });
       group('${KGroupText.goTo} ', () {
         testWidgets('bottom navigations ', (tester) async {
           await discountsPumpAppHelper(

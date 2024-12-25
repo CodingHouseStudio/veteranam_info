@@ -22,6 +22,7 @@ class _DiscountsKeys {
       const Key('discounts_screen_advanced_filter_mob_applied_button');
   final advancedFilterButton =
       const Key('discounts_screen_advanced_filter_button');
+  final endListText = const Key('discounts_screen_end_list_text');
   // final advancedFilterButtonIcon =
   //     const Key('discounts_screen_advanced_filter_button_icon');
   // final advancedFilterButtonIconUp =
