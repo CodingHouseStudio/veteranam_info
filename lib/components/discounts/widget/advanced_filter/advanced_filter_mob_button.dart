@@ -31,16 +31,9 @@ class AdvancedFilterMobButton extends StatelessWidget {
       //     previous.filterStatus != current.filterStatus &&
       //     (current.discountFilterRepository.getActivityList.length == 1 ||
       //         current.discountFilterRepository.getActivityList.isEmpty),
-      selector: (state) =>
-          state.discountFilterRepository.getActivityList.isEmpty,
-      builder: (context, state) {
-        if (state) {
-          return Align(
-            alignment: Alignment.centerLeft, child: mobButton(context),
-
-            // KSizedBox.kWidthSizedBox8,
-          );
-        } else {
+      selector: (state) => state.discountFilterRepository.hasActivityItem,
+      builder: (context, hasActivityItem) {
+        if (hasActivityItem) {
           return Stack(
             alignment: Alignment.topRight,
             children: [
@@ -50,6 +43,12 @@ class AdvancedFilterMobButton extends StatelessWidget {
                 backgroundColor: AppColors.materialThemeSourceSeed,
               ),
             ],
+          );
+        } else {
+          return Align(
+            alignment: Alignment.centerLeft, child: mobButton(context),
+
+            // KSizedBox.kWidthSizedBox8,
           );
         }
       },

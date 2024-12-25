@@ -172,7 +172,7 @@ class _DiscountWidgetList extends StatelessWidget {
             DiscountsWatcherBloc,
             DiscountsWatcherState,
             ({
-              LoadingStatus loadingStatus,
+              // LoadingStatus loadingStatus,
               List<DiscountModel> filterDiscountModelList,
               bool isListLoadedFull,
               bool unmodifiedIsEmpty,
@@ -182,9 +182,10 @@ class _DiscountWidgetList extends StatelessWidget {
           //     previous.filterDiscountModelList !=
           //         current.filterDiscountModelList,
           selector: (state) => (
-            loadingStatus: state.loadingStatus,
+            // loadingStatus: state.loadingStatus,
             filterDiscountModelList: state.filterDiscountModelList,
-            isListLoadedFull: state.isListLoadedFull,
+            isListLoadedFull: state.isListLoadedFull &&
+                state.unmodifiedDiscountModelItems.isNotEmpty,
             unmodifiedIsEmpty: state.unmodifiedDiscountModelItems.isEmpty,
           ),
           builder: (context, state) {
@@ -224,8 +225,8 @@ class _DiscountWidgetList extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!PlatformEnumFlutter.isWebDesktop &&
-                        !state.isListLoadedFull ||
+                if (!(PlatformEnumFlutter.isWebDesktop ||
+                        state.isListLoadedFull) ||
                     state.unmodifiedIsEmpty)
                   SliverPrototypeExtentList.builder(
                     itemCount: state.filterDiscountModelList.isEmpty
@@ -383,7 +384,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
             DiscountsWatcherBloc,
             DiscountsWatcherState,
             ({
-              LoadingStatus loadingStatus,
+              // LoadingStatus loadingStatus,
               List<DiscountModel> filterDiscountModelList,
               bool isListLoadedFull,
             })>(
@@ -392,7 +393,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
           //     previous.filterDiscountModelList !=
           //         current.filterDiscountModelList,
           selector: (state) => (
-            loadingStatus: state.loadingStatus,
+            // loadingStatus: state.loadingStatus,
             filterDiscountModelList: state.filterDiscountModelList,
             isListLoadedFull: state.isListLoadedFull,
           ),

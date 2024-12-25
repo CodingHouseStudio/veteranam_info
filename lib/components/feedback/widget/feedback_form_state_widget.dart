@@ -21,8 +21,8 @@ class FeedbackFormStateWidget extends StatelessWidget {
               FeedbackEnum.sendingMessage,
       // buildWhen: (previous, current) =>
       // previous.formState != current.formState,
-      builder: (context, state) {
-        if (state) {
+      builder: (context, sended) {
+        if (sended) {
           return SliverMainAxisGroup(
             slivers: [
               FeedbackTitle(

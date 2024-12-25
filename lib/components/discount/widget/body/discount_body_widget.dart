@@ -84,8 +84,8 @@ class DiscountBodyWidget extends StatelessWidget {
                   // buildWhen: (previous, current) =>
                   //     current.failure == DiscountFailure.linkWrong &&
                   //     previous.failure != DiscountFailure.linkWrong,
-                  builder: (context, state) {
-                    if (state) {
+                  builder: (context, linkIsWrong) {
+                    if (linkIsWrong) {
                       return DiscountWrongLinkWidget(
                         isDesk: isDesk,
                       );

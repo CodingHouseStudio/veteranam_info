@@ -39,9 +39,11 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
   Widget build(BuildContext context) {
     return BlocSelector<DiscountConfigCubit, DiscountConfigState, bool>(
       selector: (state) => state.mobFilterEnhancedMobile,
-      builder: (context, state) {
-        final showList =
-            widget.value == null || widget.isDesk || state || widget.isLoading;
+      builder: (context, mobFilterEnhancedMobile) {
+        final showList = widget.value == null ||
+            widget.isDesk ||
+            mobFilterEnhancedMobile ||
+            widget.isLoading;
         return SliverPadding(
           padding: const EdgeInsets.only(
             right: KPadding.kPaddingSize8,
