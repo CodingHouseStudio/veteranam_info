@@ -104,6 +104,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               MarkdownLinkWidget(
                 text: state.discountModel.description.getTrsnslation(context),
                 textStyle: AppTextStyle.materialThemeBodyLarge,
+                isDesk: isDesk,
               ),
               if (state.discountModel.requirements != null) ...[
                 KSizedBox.kHeightSizedBox32,
@@ -116,6 +117,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
                   text:
                       state.discountModel.requirements!.getTrsnslation(context),
                   textStyle: AppTextStyle.materialThemeBodyLarge,
+                  isDesk: isDesk,
                 ),
               ],
               if (state.discountModel.exclusions != null) ...[
@@ -124,6 +126,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
                   text: state.discountModel.exclusions!.getTrsnslation(context),
                   textStyle:
                       AppTextStyle.materialThemeBodyLargeNeutralVariant50,
+                  isDesk: isDesk,
                 ),
               ],
             ];

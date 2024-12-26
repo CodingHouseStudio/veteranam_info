@@ -13,6 +13,7 @@ class ConfirmDialog extends StatelessWidget {
     required this.confirmText,
     required this.confirmButtonBackground,
     required this.timer,
+    required this.confirmWhiteText,
     this.unconfirmText,
     super.key,
   });
@@ -24,6 +25,7 @@ class ConfirmDialog extends StatelessWidget {
   final Color confirmButtonBackground;
   final String? unconfirmText;
   final bool timer;
+  final bool confirmWhiteText;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class ConfirmDialog extends StatelessWidget {
         confirmText: confirmText,
         unconfirmText: unconfirmText,
         confirmButtonBackground: confirmButtonBackground,
+        confirmWhiteText: confirmWhiteText,
       );
     } else {
       return _CommonConfirmDialog(
@@ -44,6 +47,7 @@ class ConfirmDialog extends StatelessWidget {
         confirmText: confirmText,
         unconfirmText: unconfirmText,
         confirmButtonBackground: confirmButtonBackground,
+        confirmWhiteText: confirmWhiteText,
       );
     }
   }
@@ -56,6 +60,7 @@ class _CommonConfirmDialog extends StatelessWidget {
     required this.subtitle,
     required this.confirmText,
     required this.confirmButtonBackground,
+    required this.confirmWhiteText,
     this.unconfirmText,
     this.timer,
   });
@@ -67,6 +72,7 @@ class _CommonConfirmDialog extends StatelessWidget {
   final Color confirmButtonBackground;
   final String? unconfirmText;
   final Text? timer;
+  final bool confirmWhiteText;
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +174,7 @@ class _CommonConfirmDialog extends StatelessWidget {
       widgetKey: KWidgetkeys.widget.confirmDialog.confirmButton,
       text: confirmText,
       color: confirmButtonBackground,
-      darkMode: true,
+      darkMode: confirmWhiteText,
       // textColor: AppColors.materialThemeWhite,
       isDesk: isDesk,
       deskPadding: const EdgeInsets.symmetric(
@@ -210,6 +216,7 @@ class _ConfirmDialogWithTimer extends StatefulWidget {
     required this.subtitle,
     required this.confirmText,
     required this.confirmButtonBackground,
+    required this.confirmWhiteText,
     this.unconfirmText,
   });
 
@@ -219,6 +226,7 @@ class _ConfirmDialogWithTimer extends StatefulWidget {
   final String confirmText;
   final Color confirmButtonBackground;
   final String? unconfirmText;
+  final bool confirmWhiteText;
 
   @override
   State<_ConfirmDialogWithTimer> createState() =>
@@ -270,6 +278,7 @@ class _ConfirmDialogWithTimerState extends State<_ConfirmDialogWithTimer> {
               style: AppTextStyle.materialThemeBodySmall,
             )
           : null,
+      confirmWhiteText: widget.confirmWhiteText,
     );
   }
 

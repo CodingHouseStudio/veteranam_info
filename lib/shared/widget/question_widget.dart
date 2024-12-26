@@ -88,6 +88,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               textStyle: widget.isDesk
                   ? AppTextStyle.materialThemeBodyLarge
                   : AppTextStyle.materialThemeBodyMedium,
+              isDesk: widget.isDesk,
+              showDialogForLink: false,
             ),
           ],
         ),

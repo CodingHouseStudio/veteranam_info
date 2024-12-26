@@ -1570,6 +1570,10 @@
   "@iAgreeWith": {
     "examples": "Text for the discount submission dialog on the Discount Add page."
   },
+  "iAgree": "I agree",
+  "@iAgree": {
+    "examples": "Text for the submission dialog ."
+  },
   "brandName": "Brand Name",
   "@brandName": {
     "examples": "Text for the field on the Company page.",
@@ -1694,6 +1698,14 @@
   "@featured": {
     "examples": "Text for the sorting button on the Discount page",
     "description": "The button is used to sort discounts by date. From newest to oldest. The first discounts will be those added by the business."
+  },
+  "websiteLinkDescription": "We are taking your to a 3rd party website. Please use information on this resource at your own risk.",
+  "@websiteLinkDescription": {
+    "examples": "Text with a description for the user's consent to go to a third-party website"
+  },
+  "websiteLinkTitle": "Attention! Redirecting to a third-party website",
+  "@websiteLinkTitle": {
+    "examples": "Dialog title text for user consent to proceed to a third-party website"
   },
   "favorite": "Like",
   "@favorite": {

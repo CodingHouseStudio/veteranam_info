@@ -249,6 +249,16 @@ extension ContextExtensions on BuildContext {
           const Duration(days: 365 * 4),
         ),
       );
+
+  void openLinkWithAgreeDialog({required bool isDesk, required String link}) =>
+      dialog.showConfirmationDialog(
+        isDesk: isDesk,
+        title: l10n.websiteLinkTitle,
+        subtitle: l10n.websiteLinkDescription,
+        confirmText: l10n.iAgree,
+        onAppliedPressed: () => read<UrlCubit>().launchUrl(url: link),
+        confirmButtonBackground: AppColors.materialThemeKeyColorsPrimary,
+      );
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

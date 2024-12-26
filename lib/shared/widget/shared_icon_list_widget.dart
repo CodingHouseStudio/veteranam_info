@@ -92,7 +92,8 @@ class SharedIconListWidget extends StatelessWidget {
             _CardIconWidget(
               background: iconBackground,
               icon: KIcon.captivePortal,
-              onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
+              onPressed: () =>
+                  context.openLinkWithAgreeDialog(isDesk: isDesk, link: link!),
               label: context.l10n.webSite,
               border: iconBorder ??
                   (isSeparatePage
@@ -142,7 +143,10 @@ class SharedIconListWidget extends StatelessWidget {
                   icon: KIcon.captivePortal,
                   padding: KPadding.kPaddingSize12,
                 ),
-                event: () => context.read<UrlCubit>().launchUrl(url: link),
+                event: () => context.openLinkWithAgreeDialog(
+                  isDesk: isDesk,
+                  link: link!,
+                ),
                 // padding: const EdgeInsets.only(
                 //   top: KPadding.kPaddingSize16,
                 //   bottom: KPadding.kPaddingSize8,
