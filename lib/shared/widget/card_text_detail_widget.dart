@@ -55,6 +55,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             key: KWidgetkeys.widget.cardTextDetail.text,
             text: widget.text
                 .markdownCard(isDesk: widget.isDesk, fullText: fullText),
+            isDesk: widget.isDesk,
           )
         else
           Text(
