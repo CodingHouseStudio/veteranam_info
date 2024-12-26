@@ -18,7 +18,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
             loadingItems: KDimensions.loadItems,
             linkScrollCount: KDimensions.linkScrollCount,
             emailCloseDelay: KDimensions.emailCloseDelay,
-            mobFilterEnhancedMobile: false,
+            mobFilterEnhancedMobile: true,
           ),
         );
 

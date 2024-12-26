@@ -190,7 +190,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, bool> locationSearch(String? value) {
     try {
       if (value != null) {
-        _locationSearchValue = value;
+        _locationSearchValue = value.toLowerCase();
       }
 
       _locationSearchMap.clear();
@@ -198,9 +198,16 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       if (_locationSearchValue.isEmpty) {
         _locationSearchMap.addAll(_locationMap);
       } else {
-        for (final key in _locationMap.keys.where(
-          (element) => element.toLowerCase().startsWith(_locationSearchValue),
-        )) {
+        final filterList = _locationMap.values.where(
+          (element) =>
+              element.value.uk.toLowerCase().startsWith(_locationSearchValue) ||
+              (element.value.en
+                      ?.toLowerCase()
+                      .startsWith(_locationSearchValue) ??
+                  false),
+        );
+        for (final value in filterList) {
+          final key = value.value.uk;
           _locationSearchMap.addAll({key: _locationMap[key]!});
         }
       }
