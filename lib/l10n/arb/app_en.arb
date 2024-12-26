@@ -158,11 +158,6 @@
   "@investorsSubtitle": {
     "examples": "Text to subtitle the Investors page"
   },
-  "writeYourEmail": "Email",
-  "@writeYourEmail": {
-    "examples": "Text for the field on the Login, SignUp pages.",
-    "description": "Field used to enter email."
-  },
   "feedback": "Feedback",
   "@feedback": {
     "examples": "Feedback page name."
@@ -196,8 +191,15 @@
     },
     "examples": "Error text for a field when its value at least is too short."
   },
-  "tooShortEmailPassword": "Too short, it must contain at least {number} characters",
-  "@tooShortEmailPassword": {
+  "tooShortEmail": "Too short, it must contain at least {number} characters",
+  "@tooShortEmail": {
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Error text for email and password fields when their value is too short."
+  },
+  "tooShortPassword": "Too short, it must contain at least {number} characters",
+  "@tooShortPassword": {
     "placeholders": {
       "number": {}
     },
@@ -209,6 +211,10 @@
   },
   "isWrongEmail": "is not properly formatted",
   "@isWrongEmail": {
+    "examples": "Error text for the email field if its value is incorrect."
+  },
+  "isWrongCode": "is not properly formatted",
+  "@isWrongCode": {
     "examples": "Error text for the email field if its value is incorrect."
   },
   "isWrongReport": "The message should contain only letters",

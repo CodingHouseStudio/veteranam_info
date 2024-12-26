@@ -70,7 +70,7 @@
     "examples": "Текст для кнопки, яка знаходиться на карточці роботи.",
     "description": "Кнопка використовується для переходу на сторінку Respond."
   },
-  "email": "E-mail",
+  "email": "Електронна пошта",
   "@email": {
     "examples": "Текст для полів та виводу помилок в них.",
     "description": "Поле використовується для вводу електронної пошти. Частина виведеної помилки, якщо дані в полі невірні."
@@ -153,11 +153,6 @@
   "@investorsSubtitle": {
     "examples": "Текст для опису сторінки Investors"
   },
-  "writeYourEmail": "Ваш e-mail",
-  "@writeYourEmail": {
-    "examples": "Текст для поля на сторінках Login, SignUp.",
-    "description": "Поле використовується для вводу електронної пошти."
-  },
   "feedback": "Зворотній зв'язок",
   "@feedback": {
     "examples": "Назва сторінки Feedback."
@@ -191,8 +186,15 @@
     },
     "examples": "Текст помилки для поля, якщо його значення занадто коротке."
   },
-  "tooShortEmailPassword": "Занадто короткий, він повинен містити не менше {number} символів",
-  "@tooShortEmailPassword": {
+  "tooShortEmail": "занадто коротка, вона повинен містити не менше {number} символів",
+  "@tooShortEmail": {
+    "placeholders": {
+      "number": {}
+    },
+    "examples": "Текст помилки для полів електронної адреси та паролю, якщо їх значення занадто коротке."
+  },
+  "tooShortPassword": "занадто короткий, він повинен містити не менше {number} символів",
+  "@tooShortPassword": {
     "placeholders": {
       "number": {}
     },
@@ -202,9 +204,13 @@
   "@isWrong": {
     "examples": "Текст помилки для поля, якщо його значення неправильне."
   },
-  "isWrongEmail": "Неправильний",
+  "isWrongEmail": "неправильна",
   "@isWrongEmail": {
     "examples": "Текст помилки для поля електронної адреси, якщо значення неправильне."
+  },
+  "isWrongCode": "неправильний",
+  "@isWrongCode": {
+    "examples": "Error text for the email field if its value is incorrect."
   },
   "isWrongReport": "Повідомлення повинно містити тільки літери",
   "@isWrongReport": {
@@ -694,7 +700,7 @@
   "@us": {
     "examples": "Текст частини заголовку на сторінці Feedback."
   },
-  "preferEmail": "Надаєте перевагу e-mail?",
+  "preferEmail": "Надаєте перевагу електронній пошті?",
   "@preferEmail": {
     "examples": "Текст сторінці Feedback, перед кнопкою email."
   },
