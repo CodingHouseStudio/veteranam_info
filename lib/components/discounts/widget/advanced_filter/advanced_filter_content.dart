@@ -92,12 +92,14 @@ class AdvancedFilterContent extends StatelessWidget {
             Map<String, FilterItem> eligibilityMap,
             FilterItem? firstActiveItem,
             bool isLoading,
+            FilterStatus filterStatus,
           })>(
         selector: (state) => (
           eligibilityMap: state.discountFilterRepository.eligibilityMap,
           isLoading: state.filterStatus.isLoading,
           firstActiveItem:
               state.discountFilterRepository.activeEligibilityMap.first,
+          filterStatus: state.filterStatus,
         ),
         // buildWhen: (previous, current) =>
         //     previous.discountFilterRepository.eligibilityMap !=
@@ -143,12 +145,14 @@ class AdvancedFilterContent extends StatelessWidget {
             Map<String, FilterItem> categoryMap,
             FilterItem? firstActiveItem,
             bool isLoading,
+            FilterStatus filterStatus,
           })>(
         selector: (state) => (
           categoryMap: state.discountFilterRepository.categoryMap,
           isLoading: state.filterStatus.isLoading,
           firstActiveItem:
               state.discountFilterRepository.activeCategoryMap.first,
+          filterStatus: state.filterStatus,
         ),
         // buildWhen: (previous, current) =>
         //     previous.discountFilterRepository.categoryMap !=
@@ -195,6 +199,7 @@ class AdvancedFilterContent extends StatelessWidget {
             FilterItem? firstActiveItem,
             bool isLoading,
             bool locationIsNotEpmty,
+            FilterStatus filterStatus,
           })>(
         selector: (state) => (
           locationMap: state.discountFilterRepository.locationMap,
@@ -202,6 +207,7 @@ class AdvancedFilterContent extends StatelessWidget {
           firstActiveItem:
               state.discountFilterRepository.activeLocationMap.first,
           locationIsNotEpmty: state.discountFilterRepository.locationIsNotEpmty,
+          filterStatus: state.filterStatus,
         ),
         // buildWhen: (previous, current) =>
         //     previous.discountFilterRepository.locationMap !=
