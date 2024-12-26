@@ -42,7 +42,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
       builder: (context, mobFilterEnhancedMobile) {
         final showList = widget.value == null ||
             widget.isDesk ||
-            mobFilterEnhancedMobile ||
+            !mobFilterEnhancedMobile ||
             widget.isLoading;
         return SliverPadding(
           padding: const EdgeInsets.only(
