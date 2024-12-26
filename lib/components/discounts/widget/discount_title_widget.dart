@@ -20,35 +20,46 @@ class DiscountTitleWidget extends StatelessWidget {
         child: LineTitleIconWidget(
           title: context.l10n.discounts,
           rightWidget: isDesk && Config.isWeb
-              ? BlocBuilder<ViewModeCubit, ViewMode>(
-                  builder: (context, state) {
-                    return Row(
-                      children: [
-                        const DiscountSortingWidget(isDesk: true),
-                        KSizedBox.kWidthSizedBox16,
-                        IconButtonWidget(
-                          icon: KIcon.gridView,
-                          onPressed: () =>
-                              context.read<ViewModeCubit>().setGridView(),
-                          padding: KPadding.kPaddingSize12,
-                          buttonStyle: state == ViewMode.grid
-                              ? KButtonStyles.circularBorderNeutralButtonStyle
-                              : KButtonStyles
-                                  .circularBorderTransparentButtonStyle,
-                        ),
-                        KSizedBox.kWidthSizedBox16,
-                        IconButtonWidget(
-                          icon: KIcon.viewAgenda,
-                          onPressed: () =>
-                              context.read<ViewModeCubit>().setListView(),
-                          padding: KPadding.kPaddingSize12,
-                          buttonStyle: state == ViewMode.list
-                              ? KButtonStyles.circularBorderNeutralButtonStyle
-                              : KButtonStyles
-                                  .circularBorderTransparentButtonStyle,
-                        ),
-                      ],
-                    );
+              ? BlocSelector<DiscountConfigCubit, DiscountConfigState, bool>(
+                  selector: (state) => state.enableVerticalDiscount,
+                  builder: (context, enableVerticalDiscount) {
+                    if (enableVerticalDiscount) {
+                      return BlocBuilder<ViewModeCubit, ViewMode>(
+                        builder: (context, state) {
+                          return Row(
+                            children: [
+                              const DiscountSortingWidget(isDesk: true),
+                              KSizedBox.kWidthSizedBox16,
+                              IconButtonWidget(
+                                icon: KIcon.gridView,
+                                onPressed: () =>
+                                    context.read<ViewModeCubit>().setGridView(),
+                                padding: KPadding.kPaddingSize12,
+                                buttonStyle: state == ViewMode.grid
+                                    ? KButtonStyles
+                                        .circularBorderNeutralButtonStyle
+                                    : KButtonStyles
+                                        .circularBorderTransparentButtonStyle,
+                              ),
+                              KSizedBox.kWidthSizedBox16,
+                              IconButtonWidget(
+                                icon: KIcon.viewAgenda,
+                                onPressed: () =>
+                                    context.read<ViewModeCubit>().setListView(),
+                                padding: KPadding.kPaddingSize12,
+                                buttonStyle: state == ViewMode.list
+                                    ? KButtonStyles
+                                        .circularBorderNeutralButtonStyle
+                                    : KButtonStyles
+                                        .circularBorderTransparentButtonStyle,
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      return const DiscountSortingWidget(isDesk: true);
+                    }
                   },
                 )
               : null,
