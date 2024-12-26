@@ -65,7 +65,7 @@ void main() {
           linkScrollCount: KDimensions.linkScrollCount,
           emailCloseDelay: KDimensions.emailCloseDelay,
           mobFilterEnhancedMobile: false,
-          enableVerticalDiscount: false,
+          enableVerticalDiscount: true,
         ),
       ],
     );
@@ -108,7 +108,7 @@ void main() {
           linkScrollCount: number,
           emailCloseDelay: number,
           mobFilterEnhancedMobile: false,
-          enableVerticalDiscount: false,
+          enableVerticalDiscount: true,
         ),
       ],
     );
