@@ -23,6 +23,7 @@ class DiscountConfigState extends Equatable {
         loadingItems,
         linkScrollCount,
         emailCloseDelay,
+        mobFilterEnhancedMobile,
         enableVerticalDiscount,
       ];
 }
