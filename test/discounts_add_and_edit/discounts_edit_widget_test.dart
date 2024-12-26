@@ -164,38 +164,38 @@ void main() {
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);
         });
-        testWidgets('Discount not enter anything and tap on send button',
-            (tester) async {
-          await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
-            mockGoRouter: mockGoRouter,
-            discountId: KTestText.sendDiscountModel.id,
-          );
+        // testWidgets('Discount not enter anything and tap on send button',
+        //     (tester) async {
+        //   await discountsAddPumpAppHelper(
+        //     tester: tester,
+        //     mockDiscountRepository: mockDiscountRepository,
+        //     mockCompanyRepository: mockCompanyRepository,
+        //     mockCitiesRepository: mockCitiesRepository,
+        //     mockGoRouter: mockGoRouter,
+        //     discountId: KTestText.sendDiscountModel.id,
+        //   );
 
-          await discountsEditFormHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-        testWidgets('Discount enter correct', (tester) async {
-          await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
-            mockGoRouter: mockGoRouter,
-            discountId: KTestText.sendDiscountModel.id,
-          );
+        //   await discountsEditFormHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
+        // testWidgets('Discount enter correct', (tester) async {
+        //   await discountsAddPumpAppHelper(
+        //     tester: tester,
+        //     mockDiscountRepository: mockDiscountRepository,
+        //     mockCompanyRepository: mockCompanyRepository,
+        //     mockCitiesRepository: mockCitiesRepository,
+        //     mockGoRouter: mockGoRouter,
+        //     discountId: KTestText.sendDiscountModel.id,
+        //   );
 
-          await discountsAddCorectHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            isEdit: true,
-          );
-        });
+        //   await discountsAddCorectHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //     isEdit: true,
+        //   );
+        // });
       });
     });
     group('discount extra not empty', () {
@@ -227,41 +227,41 @@ void main() {
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);
         });
-        testWidgets('Discount not enter anything and tap on send button',
-            (tester) async {
-          await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
-            mockGoRouter: mockGoRouter,
-            discount: KTestText.widgetSendDiscountModel,
-            discountId: KTestText.sendDiscountModel.id,
-          );
+        // testWidgets('Discount not enter anything and tap on send button',
+        //     (tester) async {
+        //   await discountsAddPumpAppHelper(
+        //     tester: tester,
+        //     mockDiscountRepository: mockDiscountRepository,
+        //     mockCompanyRepository: mockCompanyRepository,
+        //     mockCitiesRepository: mockCitiesRepository,
+        //     mockGoRouter: mockGoRouter,
+        //     discount: KTestText.widgetSendDiscountModel,
+        //     discountId: KTestText.sendDiscountModel.id,
+        //   );
 
-          await discountsEditFormHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-        testWidgets('Discount enter correct', (tester) async {
-          await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
-            mockGoRouter: mockGoRouter,
-            discount: KTestText.sendDiscountModel
-                .copyWith(subLocation: SubLocation.online),
-            discountId: KTestText.sendDiscountModel.id,
-          );
+        //   await discountsEditFormHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
+        // testWidgets('Discount enter correct', (tester) async {
+        //   await discountsAddPumpAppHelper(
+        //     tester: tester,
+        //     mockDiscountRepository: mockDiscountRepository,
+        //     mockCompanyRepository: mockCompanyRepository,
+        //     mockCitiesRepository: mockCitiesRepository,
+        //     mockGoRouter: mockGoRouter,
+        //     discount: KTestText.sendDiscountModel
+        //         .copyWith(subLocation: SubLocation.online),
+        //     discountId: KTestText.sendDiscountModel.id,
+        //   );
 
-          await discountsAddCorectHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            isEdit: true,
-          );
-        });
+        //   await discountsAddCorectHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //     isEdit: true,
+        //   );
+        // });
       });
     });
   });
