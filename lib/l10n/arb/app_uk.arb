@@ -818,7 +818,7 @@
   "@filterApplied": {
     "examples": "Текст на сторінці Discount для додаткових фільтрів"
   },
-  "fromLargestToSmallest": "Від найбільшої знижки",
+  "fromLargestToSmallest": "За спаданням",
   "@fromLargestToSmallest": {
     "examples": "Текст для кнопки на сторінці Discount для додаткових фільтрів",
     "description": "Кнопка використовується для застозування і деактивації фільтра за величиною знижки."

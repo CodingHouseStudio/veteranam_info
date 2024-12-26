@@ -831,7 +831,7 @@
   "@filterApplied": {
     "examples": "Text on the Discount page for additional filters"
   },
-  "fromLargestToSmallest": "By biggest discount",
+  "fromLargestToSmallest": "by descending",
   "@fromLargestToSmallest": {
     "examples": "Text for the button on the Discount page for additional filters.",
     "description": "The button is used to apply and deactivate a filter by discount value."
