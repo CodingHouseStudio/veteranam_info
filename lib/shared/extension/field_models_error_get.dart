@@ -13,7 +13,7 @@ extension EmailFieldModelValidationErrorEmpl
       case EmailFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case EmailFieldModelValidationError.invalidLength:
-        return '${context.l10n.email} ${context.l10n.tooShortEmailPassword(6)}';
+        return '${context.l10n.email} ${context.l10n.tooShortEmail(6)}';
       case EmailFieldModelValidationError.wrong:
         return '${context.l10n.email} ${context.l10n.isWrongEmail}';
       case null:
@@ -86,7 +86,7 @@ extension PasswordFieldModelValidationErrorEmpl
         return context.l10n.fieldCannotBeEmpty;
       case PasswordFieldModelValidationError.invalidLength:
         return '${context.l10n.password} '
-            '${context.l10n.tooShortEmailPassword(8)}';
+            '${context.l10n.tooShortPassword(8)}';
       case null:
         return null;
       case PasswordFieldModelValidationError.capitalLetter:
@@ -230,7 +230,7 @@ extension CompanyCodeFieldModelValidationErrorEmpl
       case CompanyCodeFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case CompanyCodeFieldModelValidationError.wrong:
-        return '${context.l10n.companyCode} ${context.l10n.isWrongEmail}';
+        return '${context.l10n.companyCode} ${context.l10n.isWrongCode}';
       case null:
         return null;
     }
