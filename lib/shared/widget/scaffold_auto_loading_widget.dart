@@ -239,7 +239,14 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               ),
             ),
           );
-          return Config.isWeb ? scaffold : SafeArea(child: scaffold);
+          return Config.isWeb
+              ? scaffold
+              : PlatformEnum.getPlatform.isIOS
+                  ? ColoredBox(
+                      color: AppColors.materialThemeWhite,
+                      child: SafeArea(child: scaffold),
+                    )
+                  : SafeArea(child: scaffold);
         },
       ),
     );
