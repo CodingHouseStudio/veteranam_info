@@ -713,7 +713,7 @@
   "@us": {
     "examples": "The text of the title part of the Feedback page."
   },
-  "preferEmail": "Prefer e-mail?",
+  "preferEmail": "Prefer email?",
   "@preferEmail": {
     "examples": "The text of the Feedback page, before the email button."
   },
@@ -967,7 +967,7 @@
   "@notFoundFailure": {
     "description": "error message when you try to log in to your account using incorrect data"
   },
-  "dublicateFailure": "The user with E-mail exist.",
+  "dublicateFailure": "The user with Email exist.",
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
   },
