@@ -53,10 +53,9 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
             slivers: [
               SliverToBoxAdapter(
                 child: !showList
-                    ? Wrap(
-                        runSpacing: KPadding.kPaddingSize16,
+                    ? Row(
                         spacing: KPadding.kPaddingSize8,
-                        crossAxisAlignment: WrapCrossAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           _AdvancedFilterHideButtonWidget(
                             isDesk: false,
@@ -64,19 +63,23 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                             text: widget.title,
                             onPressed: null,
                             listShow: false,
+                            showIcon: false,
                           ),
-                          CancelChipWidget(
-                            widgetKey:
-                                KWidgetkeys.screen.discounts.appliedFilterItems,
-                            isDesk: false,
-                            labelText:
-                                widget.value!.value.getTrsnslation(context),
-                            onPressed: () {
-                              widget.onCancelWidgetPressed(
-                                widget.value!.value.uk,
-                              );
-                            },
-                            // width: KSize.kPixel160,
+                          Flexible(
+                            child: CancelChipWidget(
+                              widgetKey: KWidgetkeys
+                                  .screen.discounts.appliedFilterItems,
+                              isDesk: false,
+                              maxLines: 1,
+                              labelText:
+                                  widget.value!.value.getTrsnslation(context),
+                              onPressed: () {
+                                widget.onCancelWidgetPressed(
+                                  widget.value!.value.uk,
+                                );
+                              },
+                              // width: KSize.kPixel160,
+                            ),
                           ),
                         ],
                       )
@@ -109,12 +112,14 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.listShow,
+    this.showIcon = true,
   });
   final bool isDesk;
   final Key textKey;
   final String text;
   final void Function()? onPressed;
   final bool listShow;
+  final bool showIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -140,13 +145,15 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      icon: IconWidget(
-        icon: listShow ? KIcon.minus : KIcon.plus,
-        padding: KPadding.kPaddingSize8,
-        background: isDesk
-            ? AppColors.materialThemeKeyColorsNeutral
-            : AppColors.materialThemeWhite,
-      ),
+      icon: showIcon
+          ? IconWidget(
+              icon: listShow ? KIcon.minus : KIcon.plus,
+              padding: KPadding.kPaddingSize8,
+              background: isDesk
+                  ? AppColors.materialThemeKeyColorsNeutral
+                  : AppColors.materialThemeWhite,
+            )
+          : null,
     );
   }
 

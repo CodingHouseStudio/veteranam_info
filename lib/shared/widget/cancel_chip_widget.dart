@@ -11,6 +11,7 @@ class CancelChipWidget extends StatelessWidget {
     this.style,
     this.textStyle,
     this.padding,
+    this.maxLines = 2,
     // this.width,
   });
   final Key widgetKey;
@@ -20,6 +21,7 @@ class CancelChipWidget extends StatelessWidget {
   final ButtonStyle? style;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
+  final int maxLines;
   // final double? width;
 
   @override
@@ -55,7 +57,7 @@ class CancelChipWidget extends StatelessWidget {
   Widget get textWidget => Text(
         labelText,
         textAlign: TextAlign.center,
-        maxLines: 2,
+        maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         style: textStyle ??
             (isDesk
