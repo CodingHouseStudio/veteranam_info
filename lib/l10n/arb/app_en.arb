@@ -1092,7 +1092,7 @@
   "@copyLink": {
     "examples": "Text of the copy dialog"
   },
-  "copyFailure": "Failed to copy email",
+  "copyFailure": "Error when copying",
   "@copyFailure": {
     "examples": "Error message when trying to copy mail."
   },

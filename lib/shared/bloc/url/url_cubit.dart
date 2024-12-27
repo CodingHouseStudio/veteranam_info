@@ -47,15 +47,23 @@ class UrlCubit extends Cubit<UrlEnum?> {
     );
   }
 
-  Future<void> copy(
-    String text,
-  ) async {
+  Future<void> copy({
+    required String text,
+    CopyEnum copyEnum = CopyEnum.email,
+  }) async {
     final result = await _urlRepository.copy(
       text,
     );
     result.fold(
       (l) => emit(l.toUrl()),
-      (r) => emit(UrlEnum.copySucceed),
+      (r) {
+        switch (copyEnum) {
+          case CopyEnum.email:
+            emit(UrlEnum.copyEmailSucceed);
+          case CopyEnum.phoneNumber:
+            emit(UrlEnum.copyPhoneNumberSucceed);
+        }
+      },
     );
   }
 
