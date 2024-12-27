@@ -6,7 +6,7 @@ import 'package:veteranam/shared/shared_dart.dart';
 class CheckVerificationCodeCubit extends Cubit<bool?> {
   CheckVerificationCodeCubit({
     required IAppAuthenticationRepository appAuthenticationRepository,
-    @factoryParam String? code,
+    @factoryParam required String? code,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
         super(
           null,

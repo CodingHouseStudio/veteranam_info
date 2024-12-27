@@ -6,10 +6,14 @@ class BackButtonWidget extends StatelessWidget {
   const BackButtonWidget({
     required this.pathName,
     required this.backPageName,
+    this.buttonKey,
+    this.textKey,
     super.key,
   });
   final String pathName;
   final String? backPageName;
+  final Key? buttonKey;
+  final Key? textKey;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,7 @@ class BackButtonWidget extends StatelessWidget {
       child: Row(
         children: [
           IconButtonWidget(
+            key: buttonKey,
             icon: KIcon.arrowBack,
             padding: KPadding.kPaddingSize8,
             background: AppColors.materialThemeKeyColorsPrimary,
@@ -25,6 +30,7 @@ class BackButtonWidget extends StatelessWidget {
           KSizedBox.kWidthSizedBox8,
           Text(
             '${context.l10n.back}${pageName(context)}',
+            key: textKey,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
         ],

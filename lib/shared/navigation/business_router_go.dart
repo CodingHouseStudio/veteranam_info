@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/view/company_view.dart';
-import 'package:veteranam/components/discount/view/discount_view_widget.dart';
+import 'package:veteranam/components/discount/view/discount_view.dart';
 import 'package:veteranam/components/discounts_add/view/discounts_add_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
 import 'package:veteranam/components/feedback/view/feedback_view.dart';
@@ -271,7 +271,7 @@ GoRouter businessRouter = GoRouter(
               key: state.pageKey,
               name: state.name,
               restorationId: state.pageKey.value,
-              child: DiscountScreenWidget(
+              child: DiscountScreen(
                 discount: discountModel,
                 discountId: state.pathParameters[UrlParameters.cardId],
               ),

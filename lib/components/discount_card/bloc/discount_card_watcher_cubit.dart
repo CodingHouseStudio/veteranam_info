@@ -11,7 +11,7 @@ part 'discount_card_watcher_cubit.freezed.dart';
 class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
   DiscountCardWatcherCubit({
     required IDiscountRepository discountRepository,
-    @factoryParam String? id,
+    @factoryParam required String? id,
   })  : _discountRepository = discountRepository,
         super(
           const _Initial(

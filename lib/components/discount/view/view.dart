@@ -1,1 +1,1 @@
-export 'discount_view_widget.dart';
+export 'discount_view.dart';

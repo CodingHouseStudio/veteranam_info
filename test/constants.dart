@@ -368,6 +368,8 @@ abstract class KTestVariables {
     eligibility: const [EligibilityEnum.all],
   );
 
+  static final fullDiscount = KMockText.discountModel;
+
   static final sendDiscountModel = discountModelItems.first.copyWith(
     // additionalDetails: null,
     // html: null,

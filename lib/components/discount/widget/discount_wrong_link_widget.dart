@@ -17,9 +17,7 @@ class DiscountWrongLinkWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox80 else KSizedBox.kHeightSizedBox24,
-      KIcon.found.copyWith(
-        key: KWidgetkeys.screen.discountsAdd.imageWrongLink,
-      ),
+      KIcon.found,
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discountNotFound,

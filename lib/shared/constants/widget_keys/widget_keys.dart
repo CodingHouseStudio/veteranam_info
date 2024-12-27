@@ -41,6 +41,7 @@ part 'screen/under_construction.dart';
 part 'screen/user_role.dart';
 part 'screen/work.dart';
 part 'screen/work_employee.dart';
+part 'screen/discount.dart';
 
 //WIDGET
 part 'widget/box.dart';

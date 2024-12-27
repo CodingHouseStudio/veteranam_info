@@ -95,6 +95,8 @@ class DiscountBodyWidget extends StatelessWidget {
                           child: BackButtonWidget(
                             backPageName: context.l10n.toDiscounts,
                             pathName: KRoute.discounts.name,
+                            buttonKey: KWidgetkeys.screen.discount.backButton,
+                            textKey: KWidgetkeys.screen.discount.backText,
                           ),
                         ),
                         if (isDesk)
