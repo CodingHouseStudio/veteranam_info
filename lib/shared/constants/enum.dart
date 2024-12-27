@@ -19,8 +19,14 @@ enum UrlEnum {
   linkError,
   copyError,
   error,
-  copySucceed,
+  copyEmailSucceed,
+  copyPhoneNumberSucceed,
   copyLinkSucceed,
+}
+
+enum CopyEnum {
+  email,
+  phoneNumber,
 }
 
 enum CategoryEnum { all }

@@ -229,7 +229,7 @@ extension ContextExtensions on BuildContext {
   }
 
   void copyEmail() => read<UrlCubit>().copy(
-        KAppText.email,
+        text: KAppText.email,
       );
 
   @visibleForTesting
@@ -284,7 +284,7 @@ extension CategoryEnumExtensions on CategoryEnum {
 }
 
 extension UrlEnumExtension on UrlEnum {
-  String value({required BuildContext context, String? copyMessage}) {
+  String value(BuildContext context) {
     switch (this) {
       case UrlEnum.error:
         return context.l10n.error;
@@ -294,8 +294,10 @@ extension UrlEnumExtension on UrlEnum {
         return context.l10n.linkFailure;
       case UrlEnum.copyError:
         return context.l10n.copyFailure;
-      case UrlEnum.copySucceed:
-        return copyMessage ?? context.l10n.copyEmail;
+      case UrlEnum.copyEmailSucceed:
+        return context.l10n.copyEmail;
+      case UrlEnum.copyPhoneNumberSucceed:
+        return context.l10n.copyPhoneNumber;
       case UrlEnum.copyLinkSucceed:
         return context.l10n.copyLink;
     }

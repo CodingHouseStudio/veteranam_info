@@ -24,7 +24,10 @@ class _ShowPhoneNumberWidgetState extends State<ShowPhoneNumberWidget> {
       child: TextButton.icon(
         onPressed: () => showPhoneNumber
             ? PlatformEnumFlutter.isWebDesktop
-                ? context.read<UrlCubit>().copy(widget.phoneNumber)
+                ? context.read<UrlCubit>().copy(
+                      text: widget.phoneNumber,
+                      copyEnum: CopyEnum.phoneNumber,
+                    )
                 : context.read<UrlCubit>().launchUrl(url: widget.phoneNumber)
             : setState(() => showPhoneNumber = true),
         icon: KIcon.call,

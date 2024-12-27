@@ -22,8 +22,7 @@ class DiscountBodyWidget extends StatelessWidget {
             if (state != null) {
               context.dialog.showSnackBardTextDialog(
                 state.value(
-                  context: context,
-                  copyMessage: context.l10n.copyPhoneNumber,
+                  context,
                 ),
                 duration: const Duration(milliseconds: 4000),
               );

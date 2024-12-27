@@ -61,9 +61,9 @@ void main() {
         'emits [discountWatcherState()]'
         ' when copy email',
         build: () => urlCubit,
-        act: (bloc) async => bloc.copy(KAppText.email),
+        act: (bloc) async => bloc.copy(text: KAppText.email),
         expect: () async => [
-          UrlEnum.copySucceed,
+          UrlEnum.copyPhoneNumberSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(
@@ -133,7 +133,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when copy email',
         build: () => urlCubit,
-        act: (bloc) async => bloc.copy(KAppText.email),
+        act: (bloc) async => bloc.copy(text: KAppText.email),
         expect: () async => [
           UrlEnum.copyError,
         ],

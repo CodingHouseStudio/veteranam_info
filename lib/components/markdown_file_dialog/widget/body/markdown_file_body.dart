@@ -49,7 +49,7 @@ class MarkdownFileBody extends StatelessWidget {
                             : AppTextStyle.materialThemeBodyMedium,
                       ),
                       onTapLink: (text, href, title) =>
-                          context.read<UrlCubit>().copy(text),
+                          context.read<UrlCubit>().copy(text: text),
                     ),
             ),
           ),
