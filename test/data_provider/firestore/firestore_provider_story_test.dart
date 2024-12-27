@@ -40,13 +40,14 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.storyModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.storyModelItems.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.storyModelItems.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -68,7 +69,10 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) => KTestText.storyModelItems.map((e) => e.toJson()).toList().first,
+        (_) => KTestVariables.storyModelItems
+            .map((e) => e.toJson())
+            .toList()
+            .first,
       );
 
       when(
@@ -97,7 +101,7 @@ void main() {
       when(
         mockCollectionReference.where(
           StoryModelJsonField.userId,
-          isEqualTo: KTestText.user.id,
+          isEqualTo: KTestVariables.user.id,
         ),
       ).thenAnswer(
         (_) => mockQuery,
@@ -115,23 +119,24 @@ void main() {
       );
     });
     test('add story', () async {
-      await firestoreService.addStory(KTestText.storyModelItems.first);
+      await firestoreService.addStory(KTestVariables.storyModelItems.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.storyModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.storyModelItems.first.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.storyModelItems.first.toJson()),
       ).called(1);
     });
     test('get stories', () async {
       await expectLater(
         firestoreService.getStories(),
         emitsInOrder([
-          [KTestText.storyModelItems.first],
+          [KTestVariables.storyModelItems.first],
         ]),
         reason: 'Wait for getting information',
       );
@@ -164,8 +169,8 @@ void main() {
     });
     test('Get User Story', () async {
       expect(
-        await firestoreService.getStoriesByUserId(KTestText.user.id),
-        [KTestText.storyModelItems.first],
+        await firestoreService.getStoriesByUserId(KTestVariables.user.id),
+        [KTestVariables.storyModelItems.first],
       );
 
       verify(
@@ -174,7 +179,7 @@ void main() {
       verify(
         mockCollectionReference.where(
           StoryModelJsonField.userId,
-          isEqualTo: KTestText.user.id,
+          isEqualTo: KTestVariables.user.id,
         ),
       ).called(1);
       verify(

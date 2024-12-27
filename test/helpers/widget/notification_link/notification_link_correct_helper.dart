@@ -8,10 +8,10 @@ Future<void> notificationLinkCorrectHelper(
 ) async {
   await notificationLinkSaveHelper(
     tester: tester,
-    link: KTestText.linkModel.link,
+    link: KTestVariables.linkModel.link,
   );
 
-  expect(find.text(KTestText.linkModel.link), findsNothing);
+  expect(find.text(KTestVariables.linkModel.link), findsNothing);
 
   expect(
     find.byKey(KWidgetkeys.widget.notificationLink.thankText),

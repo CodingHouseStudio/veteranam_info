@@ -14,17 +14,19 @@ void main() {
   tearDown(GetIt.I.reset);
   group('Email ${KGroupText.model} ', () {
     final fullJson = {
-      EmailModelJsonField.id: KTestText.emailModel.id,
-      EmailModelJsonField.date: KTestText.emailModel.date.toIso8601String(),
-      EmailModelJsonField.email: KTestText.emailModel.email,
-      EmailModelJsonField.userId: KTestText.emailModel.userId,
-      EmailModelJsonField.isValid: KTestText.emailModel.isValid,
+      EmailModelJsonField.id: KTestVariables.emailModel.id,
+      EmailModelJsonField.date:
+          KTestVariables.emailModel.date.toIso8601String(),
+      EmailModelJsonField.email: KTestVariables.emailModel.email,
+      EmailModelJsonField.userId: KTestVariables.emailModel.userId,
+      EmailModelJsonField.isValid: KTestVariables.emailModel.isValid,
     };
     final nullableJson = {
-      EmailModelJsonField.id: KTestText.emailModel.id,
-      EmailModelJsonField.date: KTestText.emailModel.date.toIso8601String(),
-      EmailModelJsonField.email: KTestText.emailModel.email,
-      EmailModelJsonField.userId: KTestText.emailModel.userId,
+      EmailModelJsonField.id: KTestVariables.emailModel.id,
+      EmailModelJsonField.date:
+          KTestVariables.emailModel.date.toIso8601String(),
+      EmailModelJsonField.email: KTestVariables.emailModel.email,
+      EmailModelJsonField.userId: KTestVariables.emailModel.userId,
       EmailModelJsonField.isValid: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -33,23 +35,23 @@ void main() {
 
         expect(
           emailModel.id,
-          KTestText.emailModel.id,
+          KTestVariables.emailModel.id,
         );
         expect(
           emailModel.date,
-          KTestText.emailModel.date,
+          KTestVariables.emailModel.date,
         );
         expect(
           emailModel.email,
-          KTestText.emailModel.email,
+          KTestVariables.emailModel.email,
         );
         expect(
           emailModel.userId,
-          KTestText.emailModel.userId,
+          KTestVariables.emailModel.userId,
         );
         expect(
           emailModel.isValid,
-          KTestText.emailModel.isValid,
+          KTestVariables.emailModel.isValid,
         );
       });
 
@@ -58,19 +60,19 @@ void main() {
 
         expect(
           emailModel.id,
-          KTestText.emailModel.id,
+          KTestVariables.emailModel.id,
         );
         expect(
           emailModel.date,
-          KTestText.emailModel.date,
+          KTestVariables.emailModel.date,
         );
         expect(
           emailModel.email,
-          KTestText.emailModel.email,
+          KTestVariables.emailModel.email,
         );
         expect(
           emailModel.userId,
-          KTestText.emailModel.userId,
+          KTestVariables.emailModel.userId,
         );
         expect(
           emailModel.isValid,
@@ -81,10 +83,10 @@ void main() {
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          EmailModelJsonField.date: KTestText.emailModel.date,
-          EmailModelJsonField.email: KTestText.emailModel.email,
-          EmailModelJsonField.userId: KTestText.emailModel.userId,
-          EmailModelJsonField.isValid: KTestText.emailModel.isValid,
+          EmailModelJsonField.date: KTestVariables.emailModel.date,
+          EmailModelJsonField.email: KTestVariables.emailModel.email,
+          EmailModelJsonField.userId: KTestVariables.emailModel.userId,
+          EmailModelJsonField.isValid: KTestVariables.emailModel.isValid,
         };
 
         expect(
@@ -95,7 +97,7 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final emailModelJson = KTestText.emailModel.toJson();
+        final emailModelJson = KTestVariables.emailModel.toJson();
 
         expect(emailModelJson, fullJson);
       });

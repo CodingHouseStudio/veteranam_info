@@ -22,7 +22,7 @@ void main() {
     setUp(() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (invocation) => KTestText.userSetting,
+        (invocation) => KTestVariables.userSetting,
       );
       privacyPolicyMarkdownCubit = MarkdownFileCubit(
         appAuthenticationRepository: mockAppAuthenticationRepository,

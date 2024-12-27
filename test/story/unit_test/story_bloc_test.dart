@@ -22,7 +22,7 @@ void main() {
     setUp(() {
       mockStoryRepository = MockIStoryRepository();
       when(mockStoryRepository.getStoryItems()).thenAnswer(
-        (_) => Stream.value(KTestText.storyModelItems),
+        (_) => Stream.value(KTestVariables.storyModelItems),
       );
       storyWatcherBloc = StoryWatcherBloc(
         storyRepository: mockStoryRepository,
@@ -120,7 +120,7 @@ void main() {
       build: () => storyWatcherBloc,
       act: (bloc) async {
         when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (_) => Stream.value([KTestText.storyModelItems.first]),
+          (_) => Stream.value([KTestVariables.storyModelItems.first]),
         );
         bloc.add(const StoryWatcherEvent.started());
         await expectLater(
@@ -181,7 +181,7 @@ void main() {
         );
         bloc.add(
           StoryWatcherEvent.updated(
-            KTestText.storyModelItems.sublist(0, KDimensions.loadItems),
+            KTestVariables.storyModelItems.sublist(0, KDimensions.loadItems),
           ),
         );
       },

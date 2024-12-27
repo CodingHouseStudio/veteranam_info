@@ -14,36 +14,38 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KGroupText.model} ', () {
     final fullJson = {
-      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-      QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
+      QuestionModelJsonField.title:
+          KTestVariables.questionModelItems.first.title,
       QuestionModelJsonField.titleEN:
-          KTestText.questionModelItems.first.titleEN,
+          KTestVariables.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
-          KTestText.questionModelItems.first.subtitle,
+          KTestVariables.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
-          KTestText.questionModelItems.first.subtitleEN,
+          KTestVariables.questionModelItems.first.subtitleEN,
       // QuestionModelJsonField.navigationLink:
       //     KTestText.questionModelItems.first.navigationLink,
     };
     final nullableJson = {
-      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-      QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
+      QuestionModelJsonField.title:
+          KTestVariables.questionModelItems.first.title,
       QuestionModelJsonField.titleEN:
-          KTestText.questionModelItems.first.titleEN,
+          KTestVariables.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
-          KTestText.questionModelItems.first.subtitle,
+          KTestVariables.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
-          KTestText.questionModelItems.first.subtitleEN,
+          KTestVariables.questionModelItems.first.subtitleEN,
       // QuestionModelJsonField.navigationLink: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
         final questionModel = QuestionModel.fromJson(fullJson);
 
-        expect(questionModel.id, KTestText.questionModelItems.first.id);
+        expect(questionModel.id, KTestVariables.questionModelItems.first.id);
         expect(
           questionModel.title,
-          KTestText.questionModelItems.first.title,
+          KTestVariables.questionModelItems.first.title,
         );
         // expect(
         //   questionModel.titleEN,
@@ -51,7 +53,7 @@ void main() {
         // );
         expect(
           questionModel.subtitle,
-          KTestText.questionModelItems.first.subtitle,
+          KTestVariables.questionModelItems.first.subtitle,
         );
         // expect(
         //   questionModel.subtitleEN,
@@ -66,10 +68,10 @@ void main() {
       test('${KGroupText.nullable} ', () {
         final questionModel = QuestionModel.fromJson(nullableJson);
 
-        expect(questionModel.id, KTestText.questionModelItems.first.id);
+        expect(questionModel.id, KTestVariables.questionModelItems.first.id);
         expect(
           questionModel.title,
-          KTestText.questionModelItems.first.title,
+          KTestVariables.questionModelItems.first.title,
         );
         // expect(
         //   questionModel.titleEN,
@@ -77,7 +79,7 @@ void main() {
         // );
         expect(
           questionModel.subtitle,
-          KTestText.questionModelItems.first.subtitle,
+          KTestVariables.questionModelItems.first.subtitle,
         );
         // expect(
         //   questionModel.subtitleEN,
@@ -88,12 +90,12 @@ void main() {
 
       test('${KGroupText.failure} ', () {
         final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
           // title is missing
           // QuestionModelJsonField.titleEN:
           //     KTestText.questionModelItems.first.titleEN,
           QuestionModelJsonField.subtitle:
-              KTestText.questionModelItems.first.subtitle,
+              KTestVariables.questionModelItems.first.subtitle,
           // QuestionModelJsonField.subtitleEN:
           //     KTestText.questionModelItems.first.subtitleEN,
           // QuestionModelJsonField.navigationLink:
@@ -160,13 +162,14 @@ void main() {
       // });
       group('${KGroupText.jsonModel} ', () {
         test('${KGroupText.full} ', () {
-          final questionModel = KTestText.questionModelItems.first.toJson();
+          final questionModel =
+              KTestVariables.questionModelItems.first.toJson();
 
           expect(questionModel, fullJson);
         });
 
         test('${KGroupText.nullable} ', () {
-          final questionModelJson = KTestText.questionModelItems.first
+          final questionModelJson = KTestVariables.questionModelItems.first
               // .copyWith(navigationLink: null)
               .toJson();
 

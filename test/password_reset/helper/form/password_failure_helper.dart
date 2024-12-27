@@ -12,8 +12,8 @@ Future<void> passwordFailureHelper({
 }) async {
   await passwordEnterHelper(
     tester: tester,
-    password: KTestText.passwordCorrect,
-    confirmPassword: KTestText.passwordCorrect,
+    password: KTestVariables.passwordCorrect,
+    confirmPassword: KTestVariables.passwordCorrect,
   );
 
   expect(

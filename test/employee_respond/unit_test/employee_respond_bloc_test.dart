@@ -23,11 +23,11 @@ void main() {
     late IWorkRepository mockWorkRepository;
     late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
-      ExtendedDateTime.id = KTestText.employeeRespondModelModel.id;
+      ExtendedDateTime.id = KTestVariables.employeeRespondModelModel.id;
       mockDataPickerRepository = MockIDataPickerRepository();
 
       when(mockDataPickerRepository.getFile).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       mockWorkRepository = MockIWorkRepository();
@@ -43,8 +43,8 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            file: KTestText.filePickerItem,
-            respond: KTestText.employeeRespondModel,
+            file: KTestVariables.filePickerItem,
+            respond: KTestVariables.employeeRespondModel,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
@@ -52,12 +52,12 @@ void main() {
         bloc
           ..add(
             EmployeeRespondEvent.emailUpdated(
-              KTestText.employeeRespondModelModel.email,
+              KTestVariables.employeeRespondModelModel.email,
             ),
           )
           ..add(
             EmployeeRespondEvent.phoneUpdated(
-              KTestText.employeeRespondModelModel.phoneNumber,
+              KTestVariables.employeeRespondModelModel.phoneNumber,
             ),
           )
           ..add(const EmployeeRespondEvent.loadResumeClicked());
@@ -81,7 +81,7 @@ void main() {
       expect: () async => [
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: const PhoneNumberFieldModel.pure(),
           resume: const ResumeFieldModel.pure(),
@@ -91,10 +91,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: false,
@@ -103,13 +103,13 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: ResumeFieldModel.dirty(
-            KTestText.filePickerItem,
+            KTestVariables.filePickerItem,
           ),
           noResume: false,
           formState: EmployeeRespondEnum.inProgress,
@@ -132,7 +132,7 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondWithoudResumeModel,
+            respond: KTestVariables.employeeRespondWithoudResumeModel,
             file: null,
           ),
         ).thenAnswer(
@@ -141,12 +141,12 @@ void main() {
         bloc
           ..add(
             EmployeeRespondEvent.emailUpdated(
-              KTestText.employeeRespondModelModel.email,
+              KTestVariables.employeeRespondModelModel.email,
             ),
           )
           ..add(
             EmployeeRespondEvent.phoneUpdated(
-              KTestText.employeeRespondModelModel.phoneNumber,
+              KTestVariables.employeeRespondModelModel.phoneNumber,
             ),
           )
           ..add(const EmployeeRespondEvent.noResumeChanged())
@@ -155,7 +155,7 @@ void main() {
       expect: () async => [
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: const PhoneNumberFieldModel.pure(),
           resume: const ResumeFieldModel.pure(),
@@ -165,10 +165,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: false,
@@ -177,10 +177,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: true,
@@ -204,7 +204,7 @@ void main() {
       act: (bloc) async {
         when(
           mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondWithoudResumeModel,
+            respond: KTestVariables.employeeRespondWithoudResumeModel,
             file: null,
           ),
         ).thenAnswer(
@@ -213,12 +213,12 @@ void main() {
         bloc
           ..add(
             EmployeeRespondEvent.emailUpdated(
-              KTestText.employeeRespondModelModel.email,
+              KTestVariables.employeeRespondModelModel.email,
             ),
           )
           ..add(
             EmployeeRespondEvent.phoneUpdated(
-              KTestText.employeeRespondModelModel.phoneNumber,
+              KTestVariables.employeeRespondModelModel.phoneNumber,
             ),
           )
           ..add(const EmployeeRespondEvent.noResumeChanged())
@@ -227,7 +227,7 @@ void main() {
       expect: () async => [
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: const PhoneNumberFieldModel.pure(),
           resume: const ResumeFieldModel.pure(),
@@ -237,10 +237,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: false,
@@ -249,10 +249,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: true,
@@ -261,10 +261,10 @@ void main() {
         ),
         EmployeeRespondState(
           email: EmailFieldModel.dirty(
-            KTestText.employeeRespondModelModel.email,
+            KTestVariables.employeeRespondModelModel.email,
           ),
           phoneNumber: PhoneNumberFieldModel.dirty(
-            KTestText.employeeRespondModelModel.phoneNumber,
+            KTestVariables.employeeRespondModelModel.phoneNumber,
           ),
           resume: const ResumeFieldModel.pure(),
           noResume: true,

@@ -22,7 +22,7 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IUrlRepository mockUrlRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       ExtendedDateTime.id = '';
       Config.testIsWeb = true;
 
@@ -45,14 +45,14 @@ void main() {
         (realInvocation) => UserSetting.empty,
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
       when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
       when(
         mockReportRepository.sendReport(
-          KTestText.reportModel
+          KTestVariables.reportModel
               .copyWith(reasonComplaint: ReasonComplaint.other),
         ),
       ).thenAnswer(
@@ -61,14 +61,14 @@ void main() {
       when(
         mockReportRepository.getCardReportById(
           cardEnum: CardEnum.funds,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
+        (invocation) async => Right(KTestVariables.reportItems),
       );
       when(
         mockUrlRepository.launchUrl(
-          url: KTestText.fundItems.first.projectsLink!,
+          url: KTestVariables.fundItems.first.projectsLink!,
         ),
       ).thenAnswer(
         (invocation) async => const Right(true),
@@ -182,7 +182,7 @@ void main() {
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
         ).thenAnswer(
-          (invocation) async => Right(KTestText.fundItems),
+          (invocation) async => Right(KTestVariables.fundItems),
         );
       });
 
@@ -365,7 +365,7 @@ void main() {
                 // reportIdItems: KTestText.reportItems.getIdCard,
                 ),
           ).thenAnswer(
-            (invocation) async => Right(KTestText.fundItems.sublist(0, 2)),
+            (invocation) async => Right(KTestVariables.fundItems.sublist(0, 2)),
           );
         });
         testWidgets('End list', (tester) async {

@@ -19,7 +19,7 @@ void main() {
         expect(result.error, NameFieldModelValidationError.empty);
       });
       test('${KGroupText.shouldBe} wrong', () {
-        const result = NameFieldModel.dirty(KTestText.field);
+        const result = NameFieldModel.dirty(KTestVariables.field);
         expect(result.error, NameFieldModelValidationError.wrong);
       });
     });
@@ -33,26 +33,26 @@ void main() {
         expect(result.error, EmailFieldModelValidationError.empty);
       });
       test('${KGroupText.shouldNotBe} ${KGroupText.empty}', () {
-        const result = EmailFieldModel.dirty(KTestText.field);
+        const result = EmailFieldModel.dirty(KTestVariables.field);
         expect(result.error, isNot(EmailFieldModelValidationError.empty));
       });
       test('${KGroupText.shouldBe} invalidLength', () {
-        const result = EmailFieldModel.dirty(KTestText.shortUserEmail);
+        const result = EmailFieldModel.dirty(KTestVariables.shortUserEmail);
         expect(result.error, EmailFieldModelValidationError.invalidLength);
       });
       test('${KGroupText.shouldNotBe} invalidLength', () {
-        const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
+        const result = EmailFieldModel.dirty(KTestVariables.userEmailIncorrect);
         expect(
           result.error,
           isNot(EmailFieldModelValidationError.invalidLength),
         );
       });
       test('${KGroupText.shouldBe} wrong', () {
-        const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
+        const result = EmailFieldModel.dirty(KTestVariables.userEmailIncorrect);
         expect(result.error, EmailFieldModelValidationError.wrong);
       });
       test('${KGroupText.shouldNotBe} invalidLength', () {
-        const result = EmailFieldModel.dirty(KTestText.userEmail);
+        const result = EmailFieldModel.dirty(KTestVariables.userEmail);
         expect(
           result.error,
           null,
@@ -69,7 +69,7 @@ void main() {
         expect(result.error, MessageFieldModelValidationError.empty);
       });
       test('${KGroupText.shouldNotBe} ${KGroupText.empty}', () {
-        const result = MessageFieldModel.dirty(KTestText.field);
+        const result = MessageFieldModel.dirty(KTestVariables.field);
         expect(result.error, isNot(MessageFieldModelValidationError.empty));
       });
     });

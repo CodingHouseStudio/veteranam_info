@@ -18,7 +18,7 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
@@ -45,7 +45,7 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (invocation) => Stream.value(KTestText.storyModelItems),
+          (invocation) => Stream.value(KTestVariables.storyModelItems),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {

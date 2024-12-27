@@ -67,6 +67,7 @@ void discountInit(FirebaseFirestore mockFirebaseFirestore) {
   when(
     mockQueryDocumentSnapshot.last.data(),
   ).thenAnswer(
-    (_) => KTestText.discountModelItems.map((e) => e.toJson()).toList().last,
+    (_) =>
+        KTestVariables.discountModelItems.map((e) => e.toJson()).toList().last,
   );
 }

@@ -24,13 +24,13 @@ void main() {
       mockdiscountRepository = MockIDiscountRepository();
       when(
         mockdiscountRepository.getDiscount(
-          id: KTestText.discountModelItems.first.id,
+          id: KTestVariables.discountModelItems.first.id,
           showOnlyBusinessDiscounts: false,
         ),
       ).thenAnswer(
         (_) async {
           await KTestConstants.delay;
-          return Right(KTestText.discountModelItems.first);
+          return Right(KTestVariables.discountModelItems.first);
         },
       );
     });
@@ -40,11 +40,11 @@ void main() {
       ' when load discountModel with wrong id and correct',
       build: () => DiscountCardWatcherCubit(
         discountRepository: mockdiscountRepository,
-        id: KTestText.discountModelItems.first.id,
+        id: KTestVariables.discountModelItems.first.id,
       ),
       act: (bloc) async {
         await KTestConstants.delay;
-        await bloc.onStarted(id: KTestText.discountModelItems.first.id);
+        await bloc.onStarted(id: KTestVariables.discountModelItems.first.id);
         await bloc.onStarted(id: '');
         // bloc
         //   ..add(const DiscountCardWatcherEvent.started(''))
@@ -56,7 +56,7 @@ void main() {
       },
       expect: () async => [
         DiscountCardWatcherState(
-          discountModel: KTestText.discountModelItems.first,
+          discountModel: KTestVariables.discountModelItems.first,
           loadingStatus: LoadingStatus.loaded,
           failure: null,
         ),
@@ -66,7 +66,7 @@ void main() {
           failure: null,
         ),
         DiscountCardWatcherState(
-          discountModel: KTestText.discountModelItems.first,
+          discountModel: KTestVariables.discountModelItems.first,
           loadingStatus: LoadingStatus.loaded,
           failure: null,
         ),
@@ -82,7 +82,7 @@ void main() {
       setUp(
         () => when(
           mockdiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(

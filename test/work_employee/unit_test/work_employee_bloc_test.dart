@@ -32,7 +32,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
       },
@@ -72,7 +72,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -89,7 +89,7 @@ void main() {
         );
         bloc.add(
           WorkEmployeeWatcherEvent.filterCities(
-            city: KTestText.workModelItems.first.city,
+            city: KTestVariables.workModelItems.first.city,
           ),
         );
       },
@@ -109,7 +109,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
               state.filteredWorkModelItems.first.city!.contains(
-                KTestText.workModelItems.first.city!,
+                KTestVariables.workModelItems.first.city!,
               ) &&
               state.category == null,
         ),
@@ -122,7 +122,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -162,7 +162,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -199,7 +199,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -215,7 +215,9 @@ void main() {
           reason: 'Wait loading data',
         );
         bloc.add(
-          WorkEmployeeWatcherEvent.loadPage(KTestText.workModelItems.length),
+          WorkEmployeeWatcherEvent.loadPage(
+            KTestVariables.workModelItems.length,
+          ),
         );
       },
       expect: () => [
@@ -235,7 +237,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -252,7 +254,7 @@ void main() {
         );
         bloc.add(
           WorkEmployeeWatcherEvent.filterCategories(
-            category: KTestText.workModelItems.first.category,
+            category: KTestVariables.workModelItems.first.category,
           ),
         );
       },
@@ -272,7 +274,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
               state.filteredWorkModelItems.first.category!.contains(
-                KTestText.workModelItems.first.category!,
+                KTestVariables.workModelItems.first.category!,
               ) &&
               state.city == null,
         ),
@@ -285,7 +287,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(
@@ -303,12 +305,12 @@ void main() {
         bloc
           ..add(
             WorkEmployeeWatcherEvent.filterCategories(
-              category: KTestText.workModelItems.first.category,
+              category: KTestVariables.workModelItems.first.category,
             ),
           )
           ..add(
             WorkEmployeeWatcherEvent.filterCities(
-              city: KTestText.workModelItems.first.city,
+              city: KTestVariables.workModelItems.first.city,
             ),
           )
           ..add(
@@ -331,7 +333,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
               state.filteredWorkModelItems.first.category!.contains(
-                KTestText.workModelItems.first.category!,
+                KTestVariables.workModelItems.first.category!,
               ) &&
               state.city == null,
         ),
@@ -340,10 +342,10 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
               state.filteredWorkModelItems.first.category!.contains(
-                KTestText.workModelItems.first.category!,
+                KTestVariables.workModelItems.first.category!,
               ) &&
               state.filteredWorkModelItems.first.city!.contains(
-                KTestText.workModelItems.first.city!,
+                KTestVariables.workModelItems.first.city!,
               ),
         ),
         predicate<WorkEmployeeWatcherState>(
@@ -362,7 +364,7 @@ void main() {
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {
         when(mockWorkRepository.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         bloc.add(const WorkEmployeeWatcherEvent.started());
         await expectLater(

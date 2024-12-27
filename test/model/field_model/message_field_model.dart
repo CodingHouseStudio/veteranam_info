@@ -21,7 +21,7 @@ void main() {
       expect(result.error, MessageFieldModelValidationError.empty);
     });
     test('${KGroupText.shouldNotBe} ${KGroupText.empty}', () {
-      const result = MessageFieldModel.dirty(KTestText.field);
+      const result = MessageFieldModel.dirty(KTestVariables.field);
       expect(result.error, isNot(MessageFieldModelValidationError.empty));
     });
   });

@@ -16,12 +16,13 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} ${KGroupText.model} ', () {
     final fullJson = {
-      DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
-      DiscountModelJsonField.userId: KTestText.discountModelItems.last.userId,
+      DiscountModelJsonField.id: KTestVariables.discountModelItems.last.id,
+      DiscountModelJsonField.userId:
+          KTestVariables.discountModelItems.last.userId,
       // DiscountModelJsonField.additionalDetails:
       //     KTestText.discountModelItems.last.additionalDetails,
       DiscountModelJsonField.category:
-          KTestText.discountModelItems.last.category
+          KTestVariables.discountModelItems.last.category
               .map(
                 (e) => e.toJson(),
               )
@@ -31,35 +32,35 @@ void main() {
       //   isEnglish: false,
       // ),
       DiscountModelJsonField.company:
-          KTestText.discountModelItems.last.company!.toJson(),
+          KTestVariables.discountModelItems.last.company!.toJson(),
       DiscountModelJsonField.dateVerified:
-          KTestText.discountModelItems.last.dateVerified.toIso8601String(),
+          KTestVariables.discountModelItems.last.dateVerified.toIso8601String(),
       DiscountModelJsonField.description:
-          KTestText.discountModelItems.last.description.toJson(),
+          KTestVariables.discountModelItems.last.description.toJson(),
       DiscountModelJsonField.directLink:
-          KTestText.discountModelItems.last.directLink,
+          KTestVariables.discountModelItems.last.directLink,
       DiscountModelJsonField.discount:
-          KTestText.discountModelItems.last.discount,
+          KTestVariables.discountModelItems.last.discount,
       // DiscountModelJsonField.eligibility:
       //     KTestText.discountModelItems.last.eligibility,
       DiscountModelJsonField.exclusions:
-          KTestText.discountModelItems.last.exclusions!.toJson(),
+          KTestVariables.discountModelItems.last.exclusions!.toJson(),
       DiscountModelJsonField.expiration:
-          KTestText.discountModelItems.last.expiration!.toJson(),
+          KTestVariables.discountModelItems.last.expiration!.toJson(),
       // DiscountModelJsonField.html: KTestText.discountModelItems.last.html,
-      DiscountModelJsonField.link: KTestText.discountModelItems.last.link,
+      DiscountModelJsonField.link: KTestVariables.discountModelItems.last.link,
       DiscountModelJsonField.location:
-          KTestText.discountModelItems.last.location!
+          KTestVariables.discountModelItems.last.location!
               .map(
                 (e) => e.toJson(),
               )
               .toList(),
       DiscountModelJsonField.phoneNumber:
-          KTestText.discountModelItems.last.phoneNumber,
+          KTestVariables.discountModelItems.last.phoneNumber,
       DiscountModelJsonField.requirements:
-          KTestText.discountModelItems.last.requirements?.toJson(),
+          KTestVariables.discountModelItems.last.requirements?.toJson(),
       DiscountModelJsonField.subLocation:
-          KTestText.discountModelItems.last.subLocation,
+          KTestVariables.discountModelItems.last.subLocation,
       // DiscountModelJsonField.subcategory:
       //     KTestText.discountModelItems.last.subcategory,
       // DiscountModelJsonField.subcategoryEN: KTestText
@@ -68,9 +69,9 @@ void main() {
       // DiscountModelJsonField.territory:
       //     KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title:
-          KTestText.discountModelItems.last.title.toJson(),
+          KTestVariables.discountModelItems.last.title.toJson(),
       DiscountModelJsonField.userName:
-          KTestText.discountModelItems.last.userName,
+          KTestVariables.discountModelItems.last.userName,
       // DiscountModelJsonField.titleEN:
       //     KTestText.discountModelItems.last.title.uk,
       // DiscountModelJsonField.locationEN: KTestText
@@ -93,11 +94,11 @@ void main() {
       // DiscountModelJsonField.additionalDetailsEN:
       //     KTestText.discountModelItems.last.additionalDetails?.uk,
       DiscountModelJsonField.userPhoto: [
-        KTestText.discountModelItems.last.userPhoto!.toJson(),
+        KTestVariables.discountModelItems.last.userPhoto!.toJson(),
       ],
       DiscountModelJsonField.status:
-          KTestText.discountModelItems.last.status.enumString,
-      DiscountModelJsonField.eligibility: KTestText
+          KTestVariables.discountModelItems.last.status.enumString,
+      DiscountModelJsonField.eligibility: KTestVariables
           .discountModelItems.last.eligibility
           .map((e) => _$EligibilityEnumEnumMap[e]!)
           .toList(),
@@ -113,10 +114,10 @@ void main() {
       //     KTestText.discountModelItems.last.date.toIso8601String(),
     };
     final nullableJson = {
-      DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
+      DiscountModelJsonField.id: KTestVariables.discountModelItems.last.id,
       DiscountModelJsonField.userId: null,
       DiscountModelJsonField.category:
-          KTestText.discountModelItems.last.category
+          KTestVariables.discountModelItems.last.category
               .map(
                 (e) => e.toJson(),
               )
@@ -124,12 +125,12 @@ void main() {
       // DiscountModelJsonField.categoryEN: null,
       DiscountModelJsonField.company: null,
       DiscountModelJsonField.dateVerified:
-          KTestText.discountModelItems.last.dateVerified.toIso8601String(),
+          KTestVariables.discountModelItems.last.dateVerified.toIso8601String(),
       DiscountModelJsonField.description:
-          KTestText.discountModelItems.last.description.toJson(),
-      DiscountModelJsonField.link: KTestText.discountModelItems.last.link,
+          KTestVariables.discountModelItems.last.description.toJson(),
+      DiscountModelJsonField.link: KTestVariables.discountModelItems.last.link,
       DiscountModelJsonField.discount:
-          KTestText.discountModelItems.last.discount,
+          KTestVariables.discountModelItems.last.discount,
       // DiscountModelJsonField.eligibility:
       //     KTestText.discountModelItems.last.eligibility,
       DiscountModelJsonField.exclusions: null,
@@ -141,7 +142,7 @@ void main() {
       // DiscountModelJsonField.territory:
       //     KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title:
-          KTestText.discountModelItems.last.title.toJson(),
+          KTestVariables.discountModelItems.last.title.toJson(),
       // DiscountModelJsonField.titleEN: null,
       // DiscountModelJsonField.territoryEN: null,
       // DiscountModelJsonField.exclusionsEN: null,
@@ -179,15 +180,15 @@ void main() {
 
         expect(
           discountModel.id,
-          KTestText.discountModelItems.last.id,
+          KTestVariables.discountModelItems.last.id,
         );
         expect(
           discountModel.title,
-          KTestText.discountModelItems.last.title,
+          KTestVariables.discountModelItems.last.title,
         );
         expect(
           discountModel.userId,
-          KTestText.discountModelItems.last.userId,
+          KTestVariables.discountModelItems.last.userId,
         );
         // expect(
         //   discountModel.additionalDetails,
@@ -195,7 +196,7 @@ void main() {
         // );
         expect(
           discountModel.category,
-          KTestText.discountModelItems.last.category,
+          KTestVariables.discountModelItems.last.category,
         );
         // expect(
         //   discountModel.categoryEN,
@@ -203,23 +204,23 @@ void main() {
         // );
         expect(
           discountModel.company,
-          KTestText.discountModelItems.last.company,
+          KTestVariables.discountModelItems.last.company,
         );
         expect(
           discountModel.dateVerified,
-          KTestText.discountModelItems.last.dateVerified,
+          KTestVariables.discountModelItems.last.dateVerified,
         );
         expect(
           discountModel.description,
-          KTestText.discountModelItems.last.description,
+          KTestVariables.discountModelItems.last.description,
         );
         expect(
           discountModel.directLink,
-          KTestText.discountModelItems.last.directLink,
+          KTestVariables.discountModelItems.last.directLink,
         );
         expect(
           discountModel.discount,
-          KTestText.discountModelItems.last.discount,
+          KTestVariables.discountModelItems.last.discount,
         );
         // expect(
         //   discountModel.eligibility,
@@ -227,11 +228,11 @@ void main() {
         // );
         expect(
           discountModel.exclusions,
-          KTestText.discountModelItems.last.exclusions,
+          KTestVariables.discountModelItems.last.exclusions,
         );
         expect(
           discountModel.expiration,
-          KTestText.discountModelItems.last.expiration,
+          KTestVariables.discountModelItems.last.expiration,
         );
         // expect(
         //   discountModel.html,
@@ -239,23 +240,23 @@ void main() {
         // );
         expect(
           discountModel.link,
-          KTestText.discountModelItems.last.link,
+          KTestVariables.discountModelItems.last.link,
         );
         expect(
           discountModel.location,
-          KTestText.discountModelItems.last.location,
+          KTestVariables.discountModelItems.last.location,
         );
         expect(
           discountModel.phoneNumber,
-          KTestText.discountModelItems.last.phoneNumber,
+          KTestVariables.discountModelItems.last.phoneNumber,
         );
         expect(
           discountModel.requirements,
-          KTestText.discountModelItems.last.requirements,
+          KTestVariables.discountModelItems.last.requirements,
         );
         expect(
           discountModel.subLocation,
-          KTestText.discountModelItems.last.subLocation,
+          KTestVariables.discountModelItems.last.subLocation,
         );
         // expect(
         //   discountModel.subcategory,
@@ -271,11 +272,11 @@ void main() {
         // );
         expect(
           discountModel.userName,
-          KTestText.discountModelItems.last.userName,
+          KTestVariables.discountModelItems.last.userName,
         );
         expect(
           discountModel.userPhoto,
-          KTestText.discountModelItems.last.userPhoto,
+          KTestVariables.discountModelItems.last.userPhoto,
         );
         // expect(
         //   discountModel.titleEN,
@@ -315,11 +316,11 @@ void main() {
         // );
         expect(
           discountModel.status,
-          KTestText.discountModelItems.last.status,
+          KTestVariables.discountModelItems.last.status,
         );
         expect(
           discountModel.eligibility,
-          KTestText.discountModelItems.last.eligibility,
+          KTestVariables.discountModelItems.last.eligibility,
         );
         // expect(
         //   discountModel.eligibilityEN,
@@ -336,11 +337,11 @@ void main() {
 
         expect(
           discountModel.id,
-          KTestText.discountModelItems.last.id,
+          KTestVariables.discountModelItems.last.id,
         );
         expect(
           discountModel.title,
-          KTestText.discountModelItems.last.title,
+          KTestVariables.discountModelItems.last.title,
         );
         expect(
           discountModel.userId,
@@ -352,7 +353,7 @@ void main() {
         // );
         expect(
           discountModel.category,
-          KTestText.discountModelItems.last.category,
+          KTestVariables.discountModelItems.last.category,
         );
         // expect(
         //   discountModel.categoryEN,
@@ -364,19 +365,19 @@ void main() {
         );
         expect(
           discountModel.dateVerified,
-          KTestText.discountModelItems.last.dateVerified,
+          KTestVariables.discountModelItems.last.dateVerified,
         );
         expect(
           discountModel.description,
-          KTestText.discountModelItems.last.description,
+          KTestVariables.discountModelItems.last.description,
         );
         expect(
           discountModel.link,
-          KTestText.discountModelItems.last.link,
+          KTestVariables.discountModelItems.last.link,
         );
         expect(
           discountModel.discount,
-          KTestText.discountModelItems.last.discount,
+          KTestVariables.discountModelItems.last.discount,
         );
         // expect(
         //   discountModel.eligibility,
@@ -491,48 +492,50 @@ void main() {
       test('${KGroupText.failure} ', () {
         // title is missing
         final json = {
-          DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
+          DiscountModelJsonField.id: KTestVariables.discountModelItems.last.id,
           // title is missing
           DiscountModelJsonField.userId:
-              KTestText.discountModelItems.last.userId,
+              KTestVariables.discountModelItems.last.userId,
           DiscountModelJsonField.userName:
-              KTestText.discountModelItems.last.userName,
+              KTestVariables.discountModelItems.last.userName,
           // DiscountModelJsonField.additionalDetails:
           //     KTestText.discountModelItems.last.additionalDetails,
           DiscountModelJsonField.category:
-              KTestText.discountModelItems.last.category.map(
+              KTestVariables.discountModelItems.last.category.map(
             (e) => e.toJson(),
           ),
           // DiscountModelJsonField.categoryEN: KTestText
           //     .discountModelItems.last.category
           //     .getTrsnslation(isEnglish: false),
           DiscountModelJsonField.company:
-              KTestText.discountModelItems.last.company,
-          DiscountModelJsonField.dateVerified:
-              KTestText.discountModelItems.last.dateVerified.toIso8601String(),
+              KTestVariables.discountModelItems.last.company,
+          DiscountModelJsonField.dateVerified: KTestVariables
+              .discountModelItems.last.dateVerified
+              .toIso8601String(),
           DiscountModelJsonField.description:
-              KTestText.discountModelItems.last.description.toJson(),
+              KTestVariables.discountModelItems.last.description.toJson(),
           DiscountModelJsonField.directLink:
-              KTestText.discountModelItems.last.directLink,
+              KTestVariables.discountModelItems.last.directLink,
           DiscountModelJsonField.discount:
-              KTestText.discountModelItems.last.discount,
+              KTestVariables.discountModelItems.last.discount,
           // DiscountModelJsonField.eligibility:
           //     KTestText.discountModelItems.last.eligibility,
           DiscountModelJsonField.exclusions:
-              KTestText.discountModelItems.last.exclusions!.toJson(),
+              KTestVariables.discountModelItems.last.exclusions!.toJson(),
           DiscountModelJsonField.expiration:
-              KTestText.discountModelItems.last.expiration!.toJson(),
+              KTestVariables.discountModelItems.last.expiration!.toJson(),
           // DiscountModelJsonField.html: KTestText.discountModelItems.last
           // .html,
-          DiscountModelJsonField.link: KTestText.discountModelItems.last.link,
+          DiscountModelJsonField.link:
+              KTestVariables.discountModelItems.last.link,
           DiscountModelJsonField.location:
-              KTestText.discountModelItems.last.location!.first.toJson(),
+              KTestVariables.discountModelItems.last.location!.first.toJson(),
           DiscountModelJsonField.phoneNumber:
-              KTestText.discountModelItems.last.phoneNumber,
+              KTestVariables.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
-              KTestText.discountModelItems.last.requirements?.toJson(),
+              KTestVariables.discountModelItems.last.requirements?.toJson(),
           DiscountModelJsonField.subLocation:
-              KTestText.discountModelItems.last.subLocation,
+              KTestVariables.discountModelItems.last.subLocation,
           // DiscountModelJsonField.subcategory:
           //     KTestText.discountModelItems.last.subcategory,
           // DiscountModelJsonField.subcategoryEN: KTestText
@@ -571,13 +574,15 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final discountModelJson = KTestText.discountModelItems.last.toJson();
+        final discountModelJson =
+            KTestVariables.discountModelItems.last.toJson();
 
         expect(discountModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final discountModelJson = KTestText.discountModelItems.last.copyWith(
+        final discountModelJson =
+            KTestVariables.discountModelItems.last.copyWith(
           directLink: null,
           // additionalDetails: null,
           // html: null,

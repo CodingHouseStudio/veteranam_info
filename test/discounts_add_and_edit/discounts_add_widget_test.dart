@@ -22,16 +22,16 @@ void main() {
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
       Config.roleValue = Config.business;
-      ExtendedDateTime.id = KTestText.discountModelItems.first.id;
-      ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
-      ContextExtensions.pickerDate = KTestText.nextDateTime;
+      ExtendedDateTime.id = KTestVariables.discountModelItems.first.id;
+      ExtendedDateTime.current = KTestVariables.sendDiscountModel.dateVerified;
+      ContextExtensions.pickerDate = KTestVariables.nextDateTime;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
 
       when(
         mockDiscountRepository.addDiscount(
-          KTestText.widgetSendDiscountModel,
+          KTestVariables.widgetSendDiscountModel,
         ),
       ).thenAnswer((invocation) async => const Right(true));
 
@@ -39,17 +39,19 @@ void main() {
         mockDiscountRepository.getDiscountItems(
           showOnlyBusinessDiscounts: false,
         ),
-      ).thenAnswer((invocation) => Stream.value(KTestText.discountModelItems));
+      ).thenAnswer(
+        (invocation) => Stream.value(KTestVariables.discountModelItems),
+      );
       when(
         mockCitiesRepository.getCities(),
       ).thenAnswer(
-        (_) async => Right(KTestText.cityModelItems),
+        (_) async => Right(KTestVariables.cityModelItems),
       );
 
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestText.fullCompanyModel,
+        (_) => KTestVariables.fullCompanyModel,
       );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {

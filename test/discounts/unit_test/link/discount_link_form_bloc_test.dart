@@ -23,22 +23,23 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
 
     setUp(() {
-      ExtendedDateTime.id = KTestText.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestVariables.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      when(mockdiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+      when(mockdiscountRepository.sendLink(KTestVariables.linkModel))
+          .thenAnswer(
         (_) async => const Right(true),
       );
       when(
         mockdiscountRepository.sendLink(
-          KTestText.linkModelWrong,
+          KTestVariables.linkModelWrong,
         ),
       ).thenAnswer(
         (_) async => Left(SomeFailure.serverError(error: null)),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
       discountLinkFormBloc = DiscountLinkFormBloc(
         discountRepository: mockdiscountRepository,
@@ -51,11 +52,11 @@ void main() {
       ' when load discountModel list',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
-        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
+        ..add(DiscountLinkFormEvent.updateLink(KTestVariables.linkModel.link))
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         // const DiscountLinkFormState(
@@ -63,7 +64,7 @@ void main() {
         //   formState: LinkEnum.sending,
         // ),
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -78,13 +79,17 @@ void main() {
       ' when load discountModel list',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
-        ..add(const DiscountLinkFormEvent.updateLink(KTestText.field))
+        ..add(const DiscountLinkFormEvent.updateLink(KTestVariables.field))
         ..add(const DiscountLinkFormEvent.sendLink())
-        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModelWrong.link))
+        ..add(
+          DiscountLinkFormEvent.updateLink(
+            KTestVariables.linkModelWrong.link,
+          ),
+        )
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         const DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.field),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.field),
           formState: LinkEnum.inProgress,
         ),
         // const DiscountLinkFormState(
@@ -92,16 +97,18 @@ void main() {
         //   formState: LinkEnum.invalidData,
         // ),
         const DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.field),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.field),
           formState: LinkEnum.success,
         ),
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          link:
+              DiscountLinkFieldModel.dirty(KTestVariables.linkModelWrong.link),
           formState: LinkEnum.inProgress,
         ),
 
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          link:
+              DiscountLinkFieldModel.dirty(KTestVariables.linkModelWrong.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -125,15 +132,15 @@ void main() {
       ' is provided',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
-        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
+        ..add(DiscountLinkFormEvent.updateLink(KTestVariables.linkModel.link))
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -148,15 +155,15 @@ void main() {
       ' is provided',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
-        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
+        ..add(DiscountLinkFormEvent.updateLink(KTestVariables.linkModel.link))
         ..add(const DiscountLinkFormEvent.sendLink()),
       expect: () async => [
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -175,12 +182,12 @@ void main() {
           const DiscountLinkFormEvent.sendLink(),
         ),
       seed: () => DiscountLinkFormState(
-        link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+        link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
         formState: LinkEnum.inProgress,
       ),
       expect: () async => [
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -196,15 +203,16 @@ void main() {
       build: () {
         // Set up the mock responses for the repository and current user
         when(mockAppAuthenticationRepository.currentUser)
-            .thenReturn(KTestText.user);
-        when(mockdiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+            .thenReturn(KTestVariables.user);
+        when(mockdiscountRepository.sendLink(KTestVariables.linkModel))
+            .thenAnswer(
           (_) async => const Right(true),
         );
 
         return discountLinkFormBloc;
       },
       seed: () => DiscountLinkFormState(
-        link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+        link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
         formState: LinkEnum.inProgress,
       ),
       act: (bloc) async {
@@ -213,7 +221,7 @@ void main() {
       },
       expect: () async => [
         DiscountLinkFormState(
-          link: DiscountLinkFieldModel.dirty(KTestText.linkModel.link),
+          link: DiscountLinkFieldModel.dirty(KTestVariables.linkModel.link),
           formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
@@ -223,7 +231,8 @@ void main() {
       ],
       verify: (_) {
         // Verify that the sendLink method is called with the correct LinkModel
-        verify(mockdiscountRepository.sendLink(KTestText.linkModel)).called(1);
+        verify(mockdiscountRepository.sendLink(KTestVariables.linkModel))
+            .called(1);
       },
     );
   });

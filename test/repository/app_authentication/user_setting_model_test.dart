@@ -13,11 +13,11 @@ void main() {
       ' ${KGroupText.model} User Setting', () {
     test('check is Empty ', () {
       expect(
-        KTestText.userSettingModel.isEmpty,
+        KTestVariables.userSettingModel.isEmpty,
         isFalse,
       );
 
-      expect(KTestText.userSettingModel.isDeviceEmpty, isFalse);
+      expect(KTestVariables.userSettingModel.isDeviceEmpty, isFalse);
 
       expect(
         UserSetting.empty.isEmpty,
@@ -31,7 +31,7 @@ void main() {
       expect(
         UserSetting.empty.copyWith(
           devicesInfo: [
-            KTestText.deviceInfoModel.copyWith(fcmToken: ''),
+            KTestVariables.deviceInfoModel.copyWith(fcmToken: ''),
           ],
         ).isDeviceEmpty,
         isTrue,
@@ -39,7 +39,7 @@ void main() {
     });
     test('check is not Empty ', () {
       expect(
-        KTestText.userSettingModel.isNotEmpty,
+        KTestVariables.userSettingModel.isNotEmpty,
         isTrue,
       );
 
@@ -49,26 +49,27 @@ void main() {
       );
     });
     final fullJson = {
-      UserSettingModelJsonField.id: KTestText.userSettingModel.id,
+      UserSettingModelJsonField.id: KTestVariables.userSettingModel.id,
       UserSettingModelJsonField.locale:
-          _$LanguageEnumMap[KTestText.userSettingModel.locale],
+          _$LanguageEnumMap[KTestVariables.userSettingModel.locale],
       UserSettingModelJsonField.userRole:
-          _$UserRoleEnumMap[KTestText.userSettingModel.userRole],
+          _$UserRoleEnumMap[KTestVariables.userSettingModel.userRole],
       UserSettingModelJsonField.roleIsConfirmed:
-          KTestText.userSettingModel.roleIsConfirmed,
+          KTestVariables.userSettingModel.roleIsConfirmed,
       UserSettingModelJsonField.devicesInfo: [
-        KTestText.userSettingModel.devicesInfo!.first.toJson(),
+        KTestVariables.userSettingModel.devicesInfo!.first.toJson(),
       ],
-      UserSettingModelJsonField.nickname: KTestText.nicknameCorrect,
-      UserSettingModelJsonField.deletedOn: KTestText.dateTime.toIso8601String(),
+      UserSettingModelJsonField.nickname: KTestVariables.nicknameCorrect,
+      UserSettingModelJsonField.deletedOn:
+          KTestVariables.dateTime.toIso8601String(),
     };
     final nullableJson = {
-      UserSettingModelJsonField.id: KTestText.userSettingModel.id,
+      UserSettingModelJsonField.id: KTestVariables.userSettingModel.id,
       UserSettingModelJsonField.locale:
-          _$LanguageEnumMap[KTestText.userSettingModel.locale],
+          _$LanguageEnumMap[KTestVariables.userSettingModel.locale],
       UserSettingModelJsonField.userRole: null,
       UserSettingModelJsonField.roleIsConfirmed:
-          KTestText.userSettingModel.roleIsConfirmed,
+          KTestVariables.userSettingModel.roleIsConfirmed,
       UserSettingModelJsonField.devicesInfo: null,
       UserSettingModelJsonField.nickname: null,
       UserSettingModelJsonField.deletedOn: null,
@@ -77,35 +78,38 @@ void main() {
       test('${KGroupText.full} ', () {
         final userSettingModel = UserSetting.fromJson(fullJson);
 
-        expect(userSettingModel.id, KTestText.userSettingModel.id);
-        expect(userSettingModel.locale, KTestText.userSettingModel.locale);
-        expect(userSettingModel.userRole, KTestText.userSettingModel.userRole);
+        expect(userSettingModel.id, KTestVariables.userSettingModel.id);
+        expect(userSettingModel.locale, KTestVariables.userSettingModel.locale);
+        expect(
+          userSettingModel.userRole,
+          KTestVariables.userSettingModel.userRole,
+        );
         expect(
           userSettingModel.roleIsConfirmed,
-          KTestText.userSettingModel.roleIsConfirmed,
+          KTestVariables.userSettingModel.roleIsConfirmed,
         );
         expect(
           userSettingModel.devicesInfo,
-          KTestText.userSettingModel.devicesInfo,
+          KTestVariables.userSettingModel.devicesInfo,
         );
         expect(
           userSettingModel.nickname,
-          KTestText.nicknameCorrect,
+          KTestVariables.nicknameCorrect,
         );
         expect(
           userSettingModel.deletedOn,
-          KTestText.dateTime,
+          KTestVariables.dateTime,
         );
       });
       test('${KGroupText.nullable} ', () {
         final userSettingModel = UserSetting.fromJson(nullableJson);
 
-        expect(userSettingModel.id, KTestText.userSettingModel.id);
-        expect(userSettingModel.locale, KTestText.userSettingModel.locale);
+        expect(userSettingModel.id, KTestVariables.userSettingModel.id);
+        expect(userSettingModel.locale, KTestVariables.userSettingModel.locale);
         expect(userSettingModel.userRole, isNull);
         expect(
           userSettingModel.roleIsConfirmed,
-          KTestText.userSettingModel.roleIsConfirmed,
+          KTestVariables.userSettingModel.roleIsConfirmed,
         );
         expect(userSettingModel.devicesInfo, isNull);
         expect(
@@ -121,14 +125,15 @@ void main() {
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          UserSettingModelJsonField.locale: KTestText.userSettingModel.locale,
+          UserSettingModelJsonField.locale:
+              KTestVariables.userSettingModel.locale,
           UserSettingModelJsonField.userRole:
-              KTestText.userSettingModel.userRole,
+              KTestVariables.userSettingModel.userRole,
           UserSettingModelJsonField.roleIsConfirmed:
-              KTestText.userSettingModel.roleIsConfirmed,
+              KTestVariables.userSettingModel.roleIsConfirmed,
           UserSettingModelJsonField.devicesInfo:
-              KTestText.userSettingModel.devicesInfo,
-          UserSettingModelJsonField.nickname: KTestText.nicknameCorrect,
+              KTestVariables.userSettingModel.devicesInfo,
+          UserSettingModelJsonField.nickname: KTestVariables.nicknameCorrect,
         };
 
         expect(
@@ -139,9 +144,9 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final userModelJson = KTestText.userSettingModel
+        final userModelJson = KTestVariables.userSettingModel
             .copyWith(
-              deletedOn: KTestText.dateTime,
+              deletedOn: KTestVariables.dateTime,
             )
             .toJson();
 
@@ -149,7 +154,7 @@ void main() {
       });
 
       test('${KGroupText.nullable} ', () {
-        final userModelJson = KTestText.userSettingModel
+        final userModelJson = KTestVariables.userSettingModel
             .copyWith(
               userRole: null,
               devicesInfo: null,

@@ -11,7 +11,7 @@ Future<void> userEmailCorrectHelper({
 
   await userEmailSaveHelper(
     tester: tester,
-    email: KTestText.emailModel.email,
+    email: KTestVariables.emailModel.email,
   );
 
   verify(

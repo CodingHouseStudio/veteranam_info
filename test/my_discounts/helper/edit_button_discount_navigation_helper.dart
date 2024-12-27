@@ -32,9 +32,9 @@ Future<void> editButtonDiscountsNavigationHelper({
           KRoute.discountsEdit.name,
           pathParameters: {
             UrlParameters.cardId:
-                KTestText.userDiscountModelItemsWidget.first.id,
+                KTestVariables.userDiscountModelItemsWidget.first.id,
           },
-          extra: KTestText.userDiscountModelItemsWidget.first,
+          extra: KTestVariables.userDiscountModelItemsWidget.first,
         ),
       ).called(1);
     },

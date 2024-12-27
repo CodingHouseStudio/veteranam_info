@@ -36,6 +36,8 @@ void configureDependenciesTest() {
   KTest.isTest = true;
   Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
+
+  ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
   // Services
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
@@ -288,6 +290,8 @@ void configureFailureDependenciesTest() {
   Config.falvourValue = Config.development;
   KTest.isTest = true;
   Config.isReleaseMode = true;
+
+  ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);

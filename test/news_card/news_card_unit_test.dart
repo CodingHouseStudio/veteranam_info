@@ -34,16 +34,16 @@ void main() {
       act: (bloc) async {
         when(
           mockInformationRepository.getInformation(
-            KTestText.informationModelItems.first.id,
+            KTestVariables.informationModelItems.first.id,
           ),
         ).thenAnswer(
-          (_) async => Right(KTestText.informationModelItems.first),
+          (_) async => Right(KTestVariables.informationModelItems.first),
         );
         bloc
           ..add(const NewsCardWatcherEvent.started(''))
           ..add(
             NewsCardWatcherEvent.started(
-              KTestText.informationModelItems.first.id,
+              KTestVariables.informationModelItems.first.id,
             ),
           );
       },
@@ -59,7 +59,7 @@ void main() {
           failure: null,
         ),
         NewsCardWatcherState(
-          informationModel: KTestText.informationModelItems.first,
+          informationModel: KTestVariables.informationModelItems.first,
           loadingStatus: LoadingStatus.loaded,
           failure: null,
         ),
@@ -73,14 +73,14 @@ void main() {
       act: (bloc) async {
         when(
           mockInformationRepository.getInformation(
-            KTestText.informationModelItems.first.id,
+            KTestVariables.informationModelItems.first.id,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         bloc.add(
           NewsCardWatcherEvent.started(
-            KTestText.informationModelItems.first.id,
+            KTestVariables.informationModelItems.first.id,
           ),
         );
       },

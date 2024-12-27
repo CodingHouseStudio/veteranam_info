@@ -34,13 +34,14 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.questionModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.questionModelItems.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.questionModelItems.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.questionModelItems.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -60,8 +61,10 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) =>
-            KTestText.questionModelItems.map((e) => e.toJson()).toList().first,
+        (_) => KTestVariables.questionModelItems
+            .map((e) => e.toJson())
+            .toList()
+            .first,
       );
 
       firestoreService = FirestoreService(
@@ -70,22 +73,24 @@ void main() {
       );
     });
     test('add question', () async {
-      await firestoreService.addQuestion(KTestText.questionModelItems.first);
+      await firestoreService
+          .addQuestion(KTestVariables.questionModelItems.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.questions),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.questionModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.questionModelItems.first.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.questionModelItems.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.questionModelItems.first.toJson()),
       ).called(1);
     });
     test('get questions', () async {
       expect(
         await firestoreService.getQuestions(),
-        [KTestText.questionModelItems.first],
+        [KTestVariables.questionModelItems.first],
       );
 
       verify(

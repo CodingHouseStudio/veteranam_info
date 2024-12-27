@@ -22,7 +22,7 @@ void main() {
     late StorageService mockStorageService;
     setUp(() {
       ExtendedDateTime.id = '';
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockFirestoreService = MockFirestoreService();
       mockStorageService = MockStorageService();
     });
@@ -30,26 +30,26 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.addStory(
-            KTestText.storyModelItems.last,
+            KTestVariables.storyModelItems.last,
           ),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
           mockFirestoreService.addStory(
-            KTestText.storyModelItems.first,
+            KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
-            id: KTestText.storyModelItems.last.id,
+            filePickerItem: KTestVariables.filePickerItem,
+            id: KTestVariables.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenAnswer(
-          (realInvocation) async => KTestText.downloadURL,
+          (realInvocation) async => KTestVariables.downloadURL,
         );
 
         mockStoryRepository = StoryRepository(
@@ -60,8 +60,8 @@ void main() {
       test('Add Story(has image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.last,
           ),
           isA<Right<SomeFailure, bool>>().having(
             (e) => e.value,
@@ -73,8 +73,8 @@ void main() {
       test('Add Story(without image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
           isA<Right<SomeFailure, bool>>().having(
             (e) => e.value,
@@ -88,20 +88,20 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.addStory(
-            KTestText.storyModelItems.last,
+            KTestVariables.storyModelItems.last,
           ),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
           mockFirestoreService.addStory(
-            KTestText.storyModelItems.first,
+            KTestVariables.storyModelItems.first,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
-            id: KTestText.storyModelItems.last.id,
+            filePickerItem: KTestVariables.filePickerItem,
+            id: KTestVariables.storyModelItems.last.id,
             collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
@@ -114,8 +114,8 @@ void main() {
       test('Add Story(has image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -128,8 +128,8 @@ void main() {
       test('Add Story(without image)', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.last,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

@@ -28,21 +28,21 @@ void main() {
 
     setUp(() {
       companyStreamController = StreamController<CompanyModel>()
-        ..add(KTestText.pureCompanyModel);
-      userStreamController = StreamController<User>()..add(KTestText.user);
+        ..add(KTestVariables.pureCompanyModel);
+      userStreamController = StreamController<User>()..add(KTestVariables.user);
 
       mockFirestoreService = MockFirestoreService();
       mockCache = MockCacheClient();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockStorageService = MockStorageService();
       when(
-        mockFirestoreService.getUserCompany(KTestText.user.email!),
+        mockFirestoreService.getUserCompany(KTestVariables.user.email!),
       ).thenAnswer(
         (_) => companyStreamController.stream,
       );
       when(
         mockFirestoreService.updateCompany(
-          KTestText.pureCompanyModel.copyWith(userEmails: []),
+          KTestVariables.pureCompanyModel.copyWith(userEmails: []),
         ),
       ).thenAnswer(
         (_) async {},
@@ -50,14 +50,14 @@ void main() {
       when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => KTestVariables.user,
       );
       when(
         mockCache.read<CompanyModel>(
           key: CompanyRepository.userCompanyCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.pureCompanyModel,
+        (_) => KTestVariables.pureCompanyModel,
       );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
@@ -90,15 +90,15 @@ void main() {
             key: CompanyRepository.userCompanyCacheKey,
           ),
         ).thenAnswer(
-          (_) => KTestText.pureCompanyModel
-              .copyWith(userEmails: [], deletedOn: KTestText.dateTime),
+          (_) => KTestVariables.pureCompanyModel
+              .copyWith(userEmails: [], deletedOn: KTestVariables.dateTime),
         );
         Timer(const Duration(milliseconds: 30), () async {
           await companyStreamController.close();
           companyStreamController = StreamController<CompanyModel>()
-            ..add(KTestText.fullCompanyModel);
+            ..add(KTestVariables.fullCompanyModel);
           userStreamController.add(
-            KTestText.profileUserWithoutPhoto,
+            KTestVariables.profileUserWithoutPhoto,
           );
         });
       });
@@ -107,7 +107,7 @@ void main() {
         await expectLater(
           stream,
           emitsInOrder(
-            [KTestText.pureCompanyModel],
+            [KTestVariables.pureCompanyModel],
           ),
         );
 
@@ -121,7 +121,7 @@ void main() {
         await expectLater(
           companyRepository.company,
           emitsInOrder(
-            [KTestText.pureCompanyModel],
+            [KTestVariables.pureCompanyModel],
           ),
         );
       });

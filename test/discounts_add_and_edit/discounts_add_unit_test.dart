@@ -29,14 +29,15 @@ void main() {
     late ICitiesRepository mockCitiesRepository;
 
     setUp(() {
-      LocalizedDateTime.enDateString = KTestText
+      LocalizedDateTime.enDateString = KTestVariables
           .blocSendDiscountModel.expiration!.en!
           .replaceAll('Up to ', '');
-      LocalizedDateTime.ukDateString =
-          KTestText.blocSendDiscountModel.expiration!.uk.replaceAll('До ', '');
-      StringDartExtension.date = KTestText.nextDateTime;
-      ExtendedDateTime.id = KTestText.blocSendDiscountModel.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      LocalizedDateTime.ukDateString = KTestVariables
+          .blocSendDiscountModel.expiration!.uk
+          .replaceAll('До ', '');
+      StringDartExtension.date = KTestVariables.nextDateTime;
+      ExtendedDateTime.id = KTestVariables.blocSendDiscountModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockDiscountsRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
@@ -46,22 +47,23 @@ void main() {
           showOnlyBusinessDiscounts: false,
         ),
       ).thenAnswer(
-        (_) => Stream.value([KTestText.blocSendDiscountModel]),
+        (_) => Stream.value([KTestVariables.blocSendDiscountModel]),
       );
 
       when(
         mockCitiesRepository.getCities(),
       ).thenAnswer(
-        (_) async => Right(KTestText.cityModelItems),
+        (_) async => Right(KTestVariables.cityModelItems),
       );
 
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestText.fullCompanyModel,
+        (_) => KTestVariables.fullCompanyModel,
       );
       when(
-        mockDiscountsRepository.addDiscount(KTestText.blocSendDiscountModel),
+        mockDiscountsRepository
+            .addDiscount(KTestVariables.blocSendDiscountModel),
       ).thenAnswer(
         (_) async => const Right(true),
       );

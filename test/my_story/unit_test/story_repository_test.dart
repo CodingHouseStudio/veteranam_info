@@ -26,9 +26,9 @@ void main() {
     });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+        when(mockFirestoreService.getStoriesByUserId(KTestVariables.user.id))
             .thenAnswer(
-          (_) async => KTestText.storyModelItems,
+          (_) async => KTestVariables.storyModelItems,
         );
 
         mockStoryRepository = StoryRepository(
@@ -38,15 +38,15 @@ void main() {
       });
       test('Get Story by id', () async {
         expect(
-          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          await mockStoryRepository.getStoriesByUserId(KTestVariables.user.id),
           isA<Right<SomeFailure, List<StoryModel>>>()
-              .having((e) => e.value, 'value', KTestText.storyModelItems),
+              .having((e) => e.value, 'value', KTestVariables.storyModelItems),
         );
       });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+        when(mockFirestoreService.getStoriesByUserId(KTestVariables.user.id))
             .thenThrow(
           FirebaseException(
             plugin: KGroupText.failureGet,
@@ -60,7 +60,7 @@ void main() {
       });
       test('Get Story by id', () async {
         expect(
-          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          await mockStoryRepository.getStoriesByUserId(KTestVariables.user.id),
           isA<Left<SomeFailure, List<StoryModel>>>(),
           // .having(
           //   (e) => e.value,

@@ -31,11 +31,11 @@ void main() {
             // reportIdItems: KTestText.reportItems.getIdCard,
             ),
       ).thenAnswer(
-        (_) => Stream.value(KTestText.informationModelItemsModify),
+        (_) => Stream.value(KTestVariables.informationModelItemsModify),
       );
       when(
         mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.first,
+          informationModel: KTestVariables.informationModelItems.first,
           isLiked: true,
         ),
       ).thenAnswer(
@@ -118,7 +118,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.filter(
-            KTestText.informationModelItemsModify.first.categoryUA.first,
+            KTestVariables.informationModelItemsModify.first.categoryUA.first,
           ),
         );
       },
@@ -136,7 +136,8 @@ void main() {
               // state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.every(
                 (element) => element.categoryUA.contains(
-                  KTestText.informationModelItemsModify.first.categoryUA.first,
+                  KTestVariables
+                      .informationModelItemsModify.first.categoryUA.first,
                 ),
               ) &&
               state.filters.isNotEmpty,
@@ -240,7 +241,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.categoryUA.first,
+              KTestVariables.informationModelItemsModify.first.categoryUA.first,
             ),
           );
       },
@@ -297,7 +298,7 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.categoryUA.first,
+              KTestVariables.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
@@ -305,7 +306,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.categoryUA.first,
+              KTestVariables.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
@@ -426,13 +427,13 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.like(
-              informationModel: KTestText.informationModelItems.first,
+              informationModel: KTestVariables.informationModelItems.first,
               isLiked: true,
             ),
           )
           ..add(
             InformationWatcherEvent.like(
-              informationModel: KTestText.informationModelItems.first,
+              informationModel: KTestVariables.informationModelItems.first,
               isLiked: false,
             ),
           );
@@ -467,7 +468,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.changeLike(
-            informationModel: KTestText.informationModelItems.first,
+            informationModel: KTestVariables.informationModelItems.first,
             isLiked: true,
           ),
         );
@@ -493,7 +494,7 @@ void main() {
       act: (bloc) async {
         when(
           mockInformationRepository.updateLikeCount(
-            informationModel: KTestText.informationModelItems.first,
+            informationModel: KTestVariables.informationModelItems.first,
             isLiked: true,
           ),
         ).thenAnswer(
@@ -516,7 +517,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.changeLike(
-            informationModel: KTestText.informationModelItems.first,
+            informationModel: KTestVariables.informationModelItems.first,
             isLiked: true,
           ),
         );
@@ -555,7 +556,8 @@ void main() {
         when(
           mockInformationRepository.getInformationItems(),
         ).thenAnswer(
-          (_) => Stream.value([KTestText.informationModelItemsModify.first]),
+          (_) =>
+              Stream.value([KTestVariables.informationModelItemsModify.first]),
         );
         bloc.add(const InformationWatcherEvent.started());
         await expectLater(

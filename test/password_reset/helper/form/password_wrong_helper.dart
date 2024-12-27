@@ -11,8 +11,8 @@ Future<void> passwordWrongHelper({
 }) async {
   await passwordEnterHelper(
     tester: tester,
-    password: KTestText.passwordIncorrect,
-    confirmPassword: KTestText.passwordIncorrectNumber,
+    password: KTestVariables.passwordIncorrect,
+    confirmPassword: KTestVariables.passwordIncorrectNumber,
   );
 
   verifyNever(
@@ -21,8 +21,8 @@ Future<void> passwordWrongHelper({
 
   await passwordEnterHelper(
     tester: tester,
-    password: KTestText.passwordIncorrect,
-    confirmPassword: KTestText.passwordIncorrect,
+    password: KTestVariables.passwordIncorrect,
+    confirmPassword: KTestVariables.passwordIncorrect,
   );
 
   verifyNever(

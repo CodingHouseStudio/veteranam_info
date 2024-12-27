@@ -29,7 +29,7 @@ Future<void> footerButtonsHelper({
 
         verify(
           () => mockGoRouter.goNamed(
-            KTestText.routes(hasAccount: false).elementAt(i),
+            KTestVariables.routes(hasAccount: false).elementAt(i),
           ),
         ).called(1);
       }

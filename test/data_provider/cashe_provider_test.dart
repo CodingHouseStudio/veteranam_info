@@ -16,12 +16,12 @@ void main() {
       });
 
       test('cashe client', () async {
-        cashe.write(key: KTestText.token, value: KTestText.field);
-        late var value = cashe.read(key: KTestText.token);
-        expect(value, KTestText.field);
+        cashe.write(key: KTestVariables.token, value: KTestVariables.field);
+        late var value = cashe.read(key: KTestVariables.token);
+        expect(value, KTestVariables.field);
         cashe.clear();
-        value = cashe.read(key: KTestText.token);
-        expect(value, isNot(KTestText.field));
+        value = cashe.read(key: KTestVariables.token);
+        expect(value, isNot(KTestVariables.field));
       });
     });
   });

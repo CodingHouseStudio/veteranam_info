@@ -30,27 +30,27 @@ void main() {
       mockDataPickerRepository = MockIDataPickerRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockDiscountRepository = MockIDiscountRepository();
-      companyStream = StreamController()..add(KTestText.pureCompanyModel);
+      companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.userWithoutPhoto,
+        (realInvocation) => KTestVariables.userWithoutPhoto,
       );
       when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestText.userSettingModel,
+        (realInvocation) => KTestVariables.userSettingModel,
       );
 
       when(mockCompanyRepository.currentUserCompany).thenAnswer(
-        (realInvocation) => KTestText.pureCompanyModel,
+        (realInvocation) => KTestVariables.pureCompanyModel,
       );
       when(mockCompanyRepository.company).thenAnswer(
         (realInvocation) => companyStream.stream,
       );
       when(
         mockCompanyRepository.updateCompany(
-          company: KTestText.fullCompanyModel,
-          imageItem: KTestText.filePickerItem,
+          company: KTestVariables.fullCompanyModel,
+          imageItem: KTestVariables.filePickerItem,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -62,7 +62,7 @@ void main() {
       );
       when(
         mockDiscountRepository
-            .companyHasDiscount(KTestText.pureCompanyModel.id),
+            .companyHasDiscount(KTestVariables.pureCompanyModel.id),
       ).thenAnswer(
         (realInvocation) async => false,
       );
@@ -75,7 +75,7 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       // when(mockUserRepository.isAnonymously).thenAnswer(
@@ -108,11 +108,11 @@ void main() {
 
     group('Company has Discounts', () {
       setUp(() {
-        companyStream.add(KTestText.fullCompanyModel);
+        companyStream.add(KTestVariables.fullCompanyModel);
 
         when(
           mockDiscountRepository
-              .companyHasDiscount(KTestText.pureCompanyModel.id),
+              .companyHasDiscount(KTestVariables.pureCompanyModel.id),
         ).thenAnswer(
           (realInvocation) async => true,
         );
@@ -216,13 +216,13 @@ void main() {
           mockDataPickerRepository: mockDataPickerRepository,
         );
 
-        companyStream.add(KTestText.pureCompanyModel.copyWith(id: 'none'));
+        companyStream.add(KTestVariables.pureCompanyModel.copyWith(id: 'none'));
 
         await companyFormsIncorrectSaveHelper(tester);
       });
 
       group('Delete button is Enabled', () {
-        setUp(() => companyStream.add(KTestText.fullCompanyModel));
+        setUp(() => companyStream.add(KTestVariables.fullCompanyModel));
 
         testWidgets('Delete account desk dialog unconfirm button pop',
             (tester) async {

@@ -24,55 +24,55 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => const Right(KTestText.userAnonymous),
+          (_) async => const Right(KTestVariables.userAnonymous),
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(KTestText.user),
+          (_) async => const Right(KTestVariables.user),
         );
         when(
           mockAppAuthenticationRepository.signUp(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(KTestText.user),
+          (_) async => const Right(KTestVariables.user),
         );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
-          (_) async => const Right(KTestText.user),
+          (_) async => const Right(KTestVariables.user),
         );
         when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
-          (_) async => const Right(KTestText.user),
+          (_) async => const Right(KTestVariables.user),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-          (_) => const UserSetting(id: KTestText.field),
+          (_) => const UserSetting(id: KTestVariables.field),
         );
         when(mockAppAuthenticationRepository.currentUser).thenAnswer(
           (_) => User.empty,
         );
         when(mockAppAuthenticationRepository.user).thenAnswer(
-          (_) => Stream.value(KTestText.user),
+          (_) => Stream.value(KTestVariables.user),
         );
         when(mockAppAuthenticationRepository.logOut()).thenAnswer(
           (_) async => const Right(true),
         );
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
         );
         when(
           mockAppAuthenticationRepository.updateUserSetting(
-            KTestText.userSetting,
+            KTestVariables.userSetting,
           ),
         ).thenAnswer(
-          (_) async => const Right(KTestText.repositoryUserSetting),
+          (_) async => const Right(KTestVariables.repositoryUserSetting),
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
@@ -95,31 +95,31 @@ void main() {
         // );
         when(
           mockAppAuthenticationRepository.updateUserData(
-            user: KTestText.profileUser,
-            image: KTestText.filePickerItem,
+            user: KTestVariables.profileUser,
+            image: KTestVariables.filePickerItem,
           ),
         ).thenAnswer(
-          (_) async => const Right(KTestText.profileUser),
+          (_) async => const Right(KTestVariables.profileUser),
         );
         when(
           mockAppAuthenticationRepository.updateUserData(
-            user: KTestText.profileUser,
+            user: KTestVariables.profileUser,
             image: null,
           ),
         ).thenAnswer(
-          (_) async => const Right(KTestText.profileUser),
+          (_) async => const Right(KTestVariables.profileUser),
         );
         when(
           mockAppAuthenticationRepository.checkVerificationCode(
-            KTestText.code,
+            KTestVariables.code,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
         );
         when(
           mockAppAuthenticationRepository.resetPasswordUseCode(
-            code: KTestText.code,
-            newPassword: KTestText.passwordCorrect,
+            code: KTestVariables.code,
+            newPassword: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => const Right(true),
@@ -132,8 +132,8 @@ void main() {
       test('Log in', () async {
         expect(
           await authenticationRepository.logIn(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -142,8 +142,8 @@ void main() {
       test('Log in', () async {
         expect(
           await authenticationRepository.signUp(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -313,16 +313,16 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockAppAuthenticationRepository.signUp(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -338,14 +338,14 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmailIncorrect,
+            email: KTestVariables.userEmailIncorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockAppAuthenticationRepository.updateUserSetting(
-            KTestText.userSettingModel,
+            KTestVariables.userSettingModel,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -356,27 +356,27 @@ void main() {
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-          (_) => KTestText.userSettingModelIncorrect,
+          (_) => KTestVariables.userSettingModelIncorrect,
         );
         when(
           mockAppAuthenticationRepository.updateUserData(
-            user: KTestText.profileUser,
-            image: KTestText.filePickerItem,
+            user: KTestVariables.profileUser,
+            image: KTestVariables.filePickerItem,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockAppAuthenticationRepository.checkVerificationCode(
-            KTestText.code,
+            KTestVariables.code,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockAppAuthenticationRepository.resetPasswordUseCode(
-            code: KTestText.code,
-            newPassword: KTestText.passwordCorrect,
+            code: KTestVariables.code,
+            newPassword: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -385,8 +385,8 @@ void main() {
       test('Log in', () async {
         expect(
           await authenticationRepository.logIn(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -399,8 +399,8 @@ void main() {
       test('Log in', () async {
         expect(
           await authenticationRepository.signUp(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

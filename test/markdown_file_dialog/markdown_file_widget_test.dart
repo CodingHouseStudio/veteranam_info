@@ -25,7 +25,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.currentUserSetting,
         ).thenAnswer(
-          (realInvocation) => KTestText.userSetting,
+          (realInvocation) => KTestVariables.userSetting,
         );
       },
     );

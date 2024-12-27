@@ -27,10 +27,11 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(mockFirestoreService.getQuestions()).thenAnswer(
-          (_) async => KTestText.questionModelItems,
+          (_) async => KTestVariables.questionModelItems,
         );
         when(
-          mockFirestoreService.addQuestion(KTestText.questionModelItems.first),
+          mockFirestoreService
+              .addQuestion(KTestVariables.questionModelItems.first),
         ).thenAnswer(
           (realInvocation) async {},
         );
@@ -40,8 +41,11 @@ void main() {
       test('questions', () async {
         expect(
           await faqRepository.getQuestions(),
-          isA<Right<SomeFailure, List<QuestionModel>>>()
-              .having((e) => e.value, 'value', KTestText.questionModelItems),
+          isA<Right<SomeFailure, List<QuestionModel>>>().having(
+            (e) => e.value,
+            'value',
+            KTestVariables.questionModelItems,
+          ),
         );
       });
       // test('mock', () async {

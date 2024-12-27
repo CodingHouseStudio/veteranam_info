@@ -14,7 +14,7 @@ Future<void> newsCardPumpAppHelper({
 }) async {
   _registerNewsCardBloc(mockNewsRepository: mockNewsRepository);
   await tester.pumpApp(
-    NewsCardDialog(id: KTestText.informationModelItems.first.id),
+    NewsCardDialog(id: KTestVariables.informationModelItems.first.id),
     mockGoRouter: mockGoRouter,
   );
 

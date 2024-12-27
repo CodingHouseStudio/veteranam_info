@@ -26,22 +26,22 @@ void main() {
       when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => KTestVariables.user,
       );
       when(
         mockCache.read<CompanyModel>(
           key: CompanyRepository.userCompanyCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.pureCompanyModel,
+        (_) => KTestVariables.pureCompanyModel,
       );
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(
           mockFirestoreService.updateCompany(
-            KTestText.fullCompanyModel.copyWith(
-              image: KTestText.imageModel,
+            KTestVariables.fullCompanyModel.copyWith(
+              image: KTestVariables.imageModel,
             ),
           ),
         ).thenAnswer(
@@ -49,7 +49,8 @@ void main() {
         );
         when(
           mockFirestoreService.updateCompany(
-            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+            KTestVariables.pureCompanyModel
+                .copyWith(deletedOn: KTestVariables.dateTime),
           ),
         ).thenAnswer(
           (_) async {},
@@ -63,12 +64,12 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
-            id: KTestText.fullCompanyModel.id,
+            filePickerItem: KTestVariables.filePickerItem,
+            id: KTestVariables.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
         ).thenAnswer(
-          (_) async => KTestText.imageModel.downloadURL,
+          (_) async => KTestVariables.imageModel.downloadURL,
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -89,8 +90,9 @@ void main() {
       test('Update company with image', () async {
         expect(
           await companyRepository.updateCompany(
-            company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.filePickerItem,
+            company:
+                KTestVariables.fullCompanyModel.copyWith(userEmails: const []),
+            imageItem: KTestVariables.filePickerItem,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -108,14 +110,15 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.updateCompany(
-            KTestText.fullCompanyModel.copyWith(
-              image: KTestText.imageModel,
+            KTestVariables.fullCompanyModel.copyWith(
+              image: KTestVariables.imageModel,
             ),
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
           mockFirestoreService.updateCompany(
-            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+            KTestVariables.pureCompanyModel
+                .copyWith(deletedOn: KTestVariables.dateTime),
           ),
         ).thenThrow(Exception(KGroupText.failure));
 
@@ -127,8 +130,8 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
-            id: KTestText.fullCompanyModel.id,
+            filePickerItem: KTestVariables.filePickerItem,
+            id: KTestVariables.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
@@ -151,8 +154,9 @@ void main() {
       test('Update company with image', () async {
         expect(
           await companyRepository.updateCompany(
-            company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.filePickerItem,
+            company:
+                KTestVariables.fullCompanyModel.copyWith(userEmails: const []),
+            imageItem: KTestVariables.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
         );
@@ -168,14 +172,15 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.updateCompany(
-            KTestText.fullCompanyModel.copyWith(
-              image: KTestText.imageModel,
+            KTestVariables.fullCompanyModel.copyWith(
+              image: KTestVariables.imageModel,
             ),
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
           mockFirestoreService.updateCompany(
-            KTestText.pureCompanyModel.copyWith(deletedOn: KTestText.dateTime),
+            KTestVariables.pureCompanyModel
+                .copyWith(deletedOn: KTestVariables.dateTime),
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
 
@@ -187,8 +192,8 @@ void main() {
 
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
-            id: KTestText.fullCompanyModel.id,
+            filePickerItem: KTestVariables.filePickerItem,
+            id: KTestVariables.fullCompanyModel.id,
             collecltionName: FirebaseCollectionName.companies,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
@@ -211,8 +216,9 @@ void main() {
       test('Update company with image', () async {
         expect(
           await companyRepository.updateCompany(
-            company: KTestText.fullCompanyModel.copyWith(userEmails: const []),
-            imageItem: KTestText.filePickerItem,
+            company:
+                KTestVariables.fullCompanyModel.copyWith(userEmails: const []),
+            imageItem: KTestVariables.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

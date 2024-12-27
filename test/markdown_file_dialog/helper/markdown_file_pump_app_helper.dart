@@ -19,7 +19,7 @@ Future<void> markdownFileDialogPumpAppHelper({
     const MarkdownFileDialog(
       ukFilePath: KAppText.ukPrivacyPolicyPath,
       enFilePath: KAppText.enPrivacyPolicyPath,
-      startText: KTestText.field,
+      startText: KTestVariables.field,
     ),
     mockGoRouter: mockGoRouter,
   );

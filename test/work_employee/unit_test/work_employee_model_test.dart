@@ -14,32 +14,32 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.workEmployee} ${KGroupText.model} ', () {
     final fullJson = {
-      WorkModelJsonField.id: KTestText.workModelItems.first.id,
-      WorkModelJsonField.title: KTestText.workModelItems.first.title,
-      WorkModelJsonField.price: KTestText.workModelItems.first.price,
+      WorkModelJsonField.id: KTestVariables.workModelItems.first.id,
+      WorkModelJsonField.title: KTestVariables.workModelItems.first.title,
+      WorkModelJsonField.price: KTestVariables.workModelItems.first.price,
       WorkModelJsonField.employerContact:
-          KTestText.workModelItems.first.employerContact,
+          KTestVariables.workModelItems.first.employerContact,
       WorkModelJsonField.companyName:
-          KTestText.workModelItems.first.companyName,
+          KTestVariables.workModelItems.first.companyName,
       WorkModelJsonField.description:
-          KTestText.workModelItems.first.description,
-      WorkModelJsonField.category: KTestText.workModelItems.first.category,
-      WorkModelJsonField.city: KTestText.workModelItems.first.city,
-      WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
+          KTestVariables.workModelItems.first.description,
+      WorkModelJsonField.category: KTestVariables.workModelItems.first.category,
+      WorkModelJsonField.city: KTestVariables.workModelItems.first.city,
+      WorkModelJsonField.remote: KTestVariables.workModelItems.first.remote,
     };
     final nullableJson = {
-      WorkModelJsonField.id: KTestText.workModelItems.first.id,
-      WorkModelJsonField.title: KTestText.workModelItems.first.title,
-      WorkModelJsonField.price: KTestText.workModelItems.first.price,
+      WorkModelJsonField.id: KTestVariables.workModelItems.first.id,
+      WorkModelJsonField.title: KTestVariables.workModelItems.first.title,
+      WorkModelJsonField.price: KTestVariables.workModelItems.first.price,
       WorkModelJsonField.employerContact:
-          KTestText.workModelItems.first.employerContact,
+          KTestVariables.workModelItems.first.employerContact,
       WorkModelJsonField.companyName:
-          KTestText.workModelItems.first.companyName,
+          KTestVariables.workModelItems.first.companyName,
       WorkModelJsonField.description:
-          KTestText.workModelItems.first.description,
+          KTestVariables.workModelItems.first.description,
       WorkModelJsonField.category: null,
       WorkModelJsonField.city: null,
-      WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
+      WorkModelJsonField.remote: KTestVariables.workModelItems.first.remote,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -47,39 +47,39 @@ void main() {
 
         expect(
           workModel.id,
-          KTestText.workModelItems.first.id,
+          KTestVariables.workModelItems.first.id,
         );
         expect(
           workModel.title,
-          KTestText.workModelItems.first.title,
+          KTestVariables.workModelItems.first.title,
         );
         expect(
           workModel.category,
-          KTestText.workModelItems.first.category,
+          KTestVariables.workModelItems.first.category,
         );
         expect(
           workModel.city,
-          KTestText.workModelItems.first.city,
+          KTestVariables.workModelItems.first.city,
         );
         expect(
           workModel.companyName,
-          KTestText.workModelItems.first.companyName,
+          KTestVariables.workModelItems.first.companyName,
         );
         expect(
           workModel.description,
-          KTestText.workModelItems.first.description,
+          KTestVariables.workModelItems.first.description,
         );
         expect(
           workModel.employerContact,
-          KTestText.workModelItems.first.employerContact,
+          KTestVariables.workModelItems.first.employerContact,
         );
         expect(
           workModel.price,
-          KTestText.workModelItems.first.price,
+          KTestVariables.workModelItems.first.price,
         );
         expect(
           workModel.remote,
-          KTestText.workModelItems.first.remote,
+          KTestVariables.workModelItems.first.remote,
         );
       });
 
@@ -88,11 +88,11 @@ void main() {
 
         expect(
           workModel.id,
-          KTestText.workModelItems.first.id,
+          KTestVariables.workModelItems.first.id,
         );
         expect(
           workModel.title,
-          KTestText.workModelItems.first.title,
+          KTestVariables.workModelItems.first.title,
         );
         expect(
           workModel.category,
@@ -104,19 +104,19 @@ void main() {
         );
         expect(
           workModel.companyName,
-          KTestText.workModelItems.first.companyName,
+          KTestVariables.workModelItems.first.companyName,
         );
         expect(
           workModel.description,
-          KTestText.workModelItems.first.description,
+          KTestVariables.workModelItems.first.description,
         );
         expect(
           workModel.employerContact,
-          KTestText.workModelItems.first.employerContact,
+          KTestVariables.workModelItems.first.employerContact,
         );
         expect(
           workModel.price,
-          KTestText.workModelItems.first.price,
+          KTestVariables.workModelItems.first.price,
         );
         expect(
           workModel.remote,
@@ -126,14 +126,14 @@ void main() {
 
       test('${KGroupText.failure} ', () {
         final json = {
-          WorkModelJsonField.title: KTestText.workModelItems.first.title,
-          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.title: KTestVariables.workModelItems.first.title,
+          WorkModelJsonField.price: KTestVariables.workModelItems.first.price,
           WorkModelJsonField.employerContact:
-              KTestText.workModelItems.first.employerContact,
+              KTestVariables.workModelItems.first.employerContact,
           WorkModelJsonField.companyName:
-              KTestText.workModelItems.first.companyName,
+              KTestVariables.workModelItems.first.companyName,
           WorkModelJsonField.description:
-              KTestText.workModelItems.first.description,
+              KTestVariables.workModelItems.first.description,
         };
 
         expect(
@@ -144,13 +144,13 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final workModelJson = KTestText.workModelItems.first.toJson();
+        final workModelJson = KTestVariables.workModelItems.first.toJson();
 
         expect(workModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final workModelJson = KTestText.workModelItems.first
+        final workModelJson = KTestVariables.workModelItems.first
             .copyWith(category: null, city: null)
             .toJson();
 

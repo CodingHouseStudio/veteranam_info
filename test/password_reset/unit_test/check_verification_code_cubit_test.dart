@@ -21,7 +21,7 @@ void main() {
       setUp(
         () => when(
           mockAppAuthenticationRepository.checkVerificationCode(
-            KTestText.code,
+            KTestVariables.code,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(true),
@@ -31,7 +31,7 @@ void main() {
         'Bloc Test',
         build: () => CheckVerificationCodeCubit(
           appAuthenticationRepository: mockAppAuthenticationRepository,
-          code: KTestText.code,
+          code: KTestVariables.code,
         ),
         // act: (bloc) async {
         //   // await bloc.started(KTestText.code);
@@ -44,7 +44,7 @@ void main() {
       setUp(
         () => when(
           mockAppAuthenticationRepository.checkVerificationCode(
-            KTestText.code,
+            KTestVariables.code,
           ),
         ).thenAnswer(
           (realInvocation) async =>
@@ -55,7 +55,7 @@ void main() {
         'emits [false] when verification code is not valid',
         build: () => CheckVerificationCodeCubit(
           appAuthenticationRepository: mockAppAuthenticationRepository,
-          code: KTestText.code,
+          code: KTestVariables.code,
         ),
         // act: (bloc) async {
         //   // await bloc.started(KTestText.code);

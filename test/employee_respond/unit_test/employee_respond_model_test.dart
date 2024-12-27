@@ -14,25 +14,27 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.employeeRespond} ${KGroupText.model} ', () {
     final fullJson = {
-      EmployeeRespondModelJsonField.id: KTestText.employeeRespondModelModel.id,
+      EmployeeRespondModelJsonField.id:
+          KTestVariables.employeeRespondModelModel.id,
       EmployeeRespondModelJsonField.email:
-          KTestText.employeeRespondModelModel.email,
+          KTestVariables.employeeRespondModelModel.email,
       EmployeeRespondModelJsonField.noResume:
-          KTestText.employeeRespondModelModel.noResume,
+          KTestVariables.employeeRespondModelModel.noResume,
       EmployeeRespondModelJsonField.phoneNumber:
-          KTestText.employeeRespondModelModel.phoneNumber,
+          KTestVariables.employeeRespondModelModel.phoneNumber,
       EmployeeRespondModelJsonField.resume: [
-        KTestText.employeeRespondModelModel.resume!.toJson(),
+        KTestVariables.employeeRespondModelModel.resume!.toJson(),
       ],
     };
     final nullableJson = {
-      EmployeeRespondModelJsonField.id: KTestText.employeeRespondModelModel.id,
+      EmployeeRespondModelJsonField.id:
+          KTestVariables.employeeRespondModelModel.id,
       EmployeeRespondModelJsonField.email:
-          KTestText.employeeRespondModelModel.email,
+          KTestVariables.employeeRespondModelModel.email,
       EmployeeRespondModelJsonField.noResume:
-          KTestText.employeeRespondModelModel.noResume,
+          KTestVariables.employeeRespondModelModel.noResume,
       EmployeeRespondModelJsonField.phoneNumber:
-          KTestText.employeeRespondModelModel.phoneNumber,
+          KTestVariables.employeeRespondModelModel.phoneNumber,
       EmployeeRespondModelJsonField.resume: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -41,23 +43,23 @@ void main() {
 
         expect(
           employeeRespondModel.id,
-          KTestText.employeeRespondModelModel.id,
+          KTestVariables.employeeRespondModelModel.id,
         );
         expect(
           employeeRespondModel.email,
-          KTestText.employeeRespondModelModel.email,
+          KTestVariables.employeeRespondModelModel.email,
         );
         expect(
           employeeRespondModel.phoneNumber,
-          KTestText.employeeRespondModelModel.phoneNumber,
+          KTestVariables.employeeRespondModelModel.phoneNumber,
         );
         expect(
           employeeRespondModel.noResume,
-          KTestText.employeeRespondModelModel.noResume,
+          KTestVariables.employeeRespondModelModel.noResume,
         );
         expect(
           employeeRespondModel.resume,
-          KTestText.employeeRespondModelModel.resume,
+          KTestVariables.employeeRespondModelModel.resume,
         );
       });
 
@@ -67,19 +69,19 @@ void main() {
 
         expect(
           employeeRespondModel.id,
-          KTestText.employeeRespondModelModel.id,
+          KTestVariables.employeeRespondModelModel.id,
         );
         expect(
           employeeRespondModel.email,
-          KTestText.employeeRespondModelModel.email,
+          KTestVariables.employeeRespondModelModel.email,
         );
         expect(
           employeeRespondModel.phoneNumber,
-          KTestText.employeeRespondModelModel.phoneNumber,
+          KTestVariables.employeeRespondModelModel.phoneNumber,
         );
         expect(
           employeeRespondModel.noResume,
-          KTestText.employeeRespondModelModel.noResume,
+          KTestVariables.employeeRespondModelModel.noResume,
         );
         expect(
           employeeRespondModel.resume,
@@ -91,13 +93,13 @@ void main() {
         final json = {
           // id is missing
           EmployeeRespondModelJsonField.email:
-              KTestText.employeeRespondModelModel.email,
+              KTestVariables.employeeRespondModelModel.email,
           EmployeeRespondModelJsonField.noResume:
-              KTestText.employeeRespondModelModel.noResume,
+              KTestVariables.employeeRespondModelModel.noResume,
           EmployeeRespondModelJsonField.phoneNumber:
-              KTestText.employeeRespondModelModel.phoneNumber,
+              KTestVariables.employeeRespondModelModel.phoneNumber,
           EmployeeRespondModelJsonField.resume: [
-            KTestText.employeeRespondModelModel.resume!.toJson(),
+            KTestVariables.employeeRespondModelModel.resume!.toJson(),
           ],
         };
 
@@ -110,14 +112,16 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
         final employeeRespondModelJson =
-            KTestText.employeeRespondModelModel.toJson();
+            KTestVariables.employeeRespondModelModel.toJson();
 
         expect(employeeRespondModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final employeeRespondModelJson =
-            KTestText.employeeRespondModelModel.copyWith(resume: null).toJson();
+        final employeeRespondModelJson = KTestVariables
+            .employeeRespondModelModel
+            .copyWith(resume: null)
+            .toJson();
 
         expect(employeeRespondModelJson, nullableJson);
       });

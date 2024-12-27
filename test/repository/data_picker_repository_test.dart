@@ -92,12 +92,12 @@ void main() {
         when(
           mockXFile.readAsBytes(),
         ).thenAnswer(
-          (_) async => KTestText.filePickerItem.bytes,
+          (_) async => KTestVariables.filePickerItem.bytes,
         );
         when(
           mockXFile.path,
         ).thenAnswer(
-          (_) => KTestText.filePickerItem.ref!,
+          (_) => KTestVariables.filePickerItem.ref!,
         );
 
         dataPickerRepository = DataPickerRepository(
@@ -109,7 +109,7 @@ void main() {
         when(
           mockXFile.name,
         ).thenAnswer(
-          (_) => KTestText.filePickerItem.name!,
+          (_) => KTestVariables.filePickerItem.name!,
         );
         final file = await dataPickerRepository.getImage;
         expect(
@@ -119,19 +119,19 @@ void main() {
         if (file == null) return;
         expect(
           file.bytes,
-          KTestText.filePickerItem.bytes,
+          KTestVariables.filePickerItem.bytes,
         );
         expect(
           file.name,
-          KTestText.filePickerItem.name,
+          KTestVariables.filePickerItem.name,
         );
         expect(
           file.ref,
-          KTestText.filePickerItem.ref,
+          KTestVariables.filePickerItem.ref,
         );
         expect(
           file.extension,
-          KTestText.filePickerItem.extension,
+          KTestVariables.filePickerItem.extension,
         );
       });
 
@@ -169,7 +169,7 @@ void main() {
         when(
           mockXFile.name,
         ).thenAnswer(
-          (_) => KTestText.filePickerPathItem.name!,
+          (_) => KTestVariables.filePickerPathItem.name!,
         );
         final file = await dataPickerRepository.getImage;
         expect(
@@ -179,19 +179,19 @@ void main() {
         if (file == null) return;
         expect(
           file.bytes,
-          KTestText.filePickerItem.bytes,
+          KTestVariables.filePickerItem.bytes,
         );
         expect(
           file.name,
-          KTestText.filePickerPathItem.name,
+          KTestVariables.filePickerPathItem.name,
         );
         expect(
           file.ref,
-          KTestText.filePickerPathItem.ref,
+          KTestVariables.filePickerPathItem.ref,
         );
         expect(
           file.extension,
-          KTestText.filePickerPathItem.extension,
+          KTestVariables.filePickerPathItem.extension,
         );
       });
 
@@ -246,28 +246,28 @@ void main() {
     group('Get Model', () {
       test('Get Image Model', () {
         final imageMdeol =
-            KTestText.filePickerItem.image(KTestText.downloadURL);
+            KTestVariables.filePickerItem.image(KTestVariables.downloadURL);
 
-        expect(imageMdeol.downloadURL, KTestText.downloadURL);
+        expect(imageMdeol.downloadURL, KTestVariables.downloadURL);
 
-        expect(imageMdeol.name, KTestText.filePickerItem.name);
+        expect(imageMdeol.name, KTestVariables.filePickerItem.name);
 
-        expect(imageMdeol.ref, KTestText.filePickerItem.ref);
+        expect(imageMdeol.ref, KTestVariables.filePickerItem.ref);
 
-        expect(imageMdeol.type, KTestText.filePickerItem.extension);
+        expect(imageMdeol.type, KTestVariables.filePickerItem.extension);
       });
 
       test('Get Resume Model', () {
         final imageMdeol =
-            KTestText.filePickerItem.resume(KTestText.downloadURL);
+            KTestVariables.filePickerItem.resume(KTestVariables.downloadURL);
 
-        expect(imageMdeol.downloadURL, KTestText.downloadURL);
+        expect(imageMdeol.downloadURL, KTestVariables.downloadURL);
 
-        expect(imageMdeol.name, KTestText.filePickerItem.name);
+        expect(imageMdeol.name, KTestVariables.filePickerItem.name);
 
-        expect(imageMdeol.ref, KTestText.filePickerItem.ref);
+        expect(imageMdeol.ref, KTestVariables.filePickerItem.ref);
 
-        expect(imageMdeol.type, KTestText.filePickerItem.extension);
+        expect(imageMdeol.type, KTestVariables.filePickerItem.extension);
       });
     });
   });

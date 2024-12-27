@@ -11,8 +11,8 @@ Future<void> passwordCorrectHelper({
 }) async {
   await passwordEnterHelper(
     tester: tester,
-    password: KTestText.passwordCorrect,
-    confirmPassword: KTestText.passwordCorrect,
+    password: KTestVariables.passwordCorrect,
+    confirmPassword: KTestVariables.passwordCorrect,
   );
 
   verify(

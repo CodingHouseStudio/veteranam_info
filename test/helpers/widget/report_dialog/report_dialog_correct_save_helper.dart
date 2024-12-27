@@ -33,7 +33,7 @@ Future<void> reportDialogCorrectSaveHelper({
       await reportDialogEnterTextHelper(
         tester: tester,
         // email: KTestText.userEmail,
-        message: KTestText.reportItems.first.message,
+        message: KTestVariables.reportItems.first.message,
       );
 
       verify(() => mockGoRouter.pop()).called(1);

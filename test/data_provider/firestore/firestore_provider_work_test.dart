@@ -38,13 +38,13 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.workModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.workModelItems.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.workModelItems.first.toJson()),
+        mockDocumentReference.set(KTestVariables.workModelItems.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -66,7 +66,8 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) => KTestText.workModelItems.map((e) => e.toJson()).toList().first,
+        (_) =>
+            KTestVariables.workModelItems.map((e) => e.toJson()).toList().first,
       );
 
       when(
@@ -99,23 +100,23 @@ void main() {
       );
     });
     test('add work', () async {
-      await firestoreService.addWork(KTestText.workModelItems.first);
+      await firestoreService.addWork(KTestVariables.workModelItems.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.work),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.workModelItems.first.id),
+        mockCollectionReference.doc(KTestVariables.workModelItems.first.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.workModelItems.first.toJson()),
+        mockDocumentReference.set(KTestVariables.workModelItems.first.toJson()),
       ).called(1);
     });
     test('get work', () async {
       await expectLater(
         firestoreService.getWorks(),
         emitsInOrder([
-          [KTestText.workModelItems.first],
+          [KTestVariables.workModelItems.first],
         ]),
         reason: 'Wait for getting work',
       );

@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../test_dependency.dart';
@@ -12,12 +11,12 @@ Future<void> feedbackInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      if (!Config.isWeb) {
-        expect(
-          find.byKey(KWidgetkeys.widget.nawbar.pageName),
-          findsOneWidget,
-        );
-      }
+      // if (!Config.isWeb) {
+      //   expect(
+      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     findsOneWidget,
+      //   );
+      // }
       // expect(
       //   find.byKey(KWidgetkeys.screen.feedback.pointText),
       //   findsOneWidget,

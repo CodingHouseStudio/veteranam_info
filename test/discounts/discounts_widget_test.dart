@@ -30,8 +30,8 @@ void main() {
     late UserRepository mockUserRepository;
     setUp(() {
       // KTest.animatioRepeat=1;
-      ExtendedDateTime.id = KTestText.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestVariables.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       PlatformEnumFlutter.isWebDesktop = true;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -50,23 +50,23 @@ void main() {
       // );
 
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
 
       when(
         mockReportRepository.getCardReportById(
           cardEnum: CardEnum.discount,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
+        (invocation) async => Right(KTestVariables.reportItems),
       );
 
-      when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+      when(mockDiscountRepository.userCanSendLink(KTestVariables.user.id))
           .thenAnswer(
         (invocation) async => const Right(true),
       );
-      when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
+      when(mockDiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
           .thenAnswer(
         (invocation) async => const Right(-1),
       );
@@ -161,12 +161,14 @@ void main() {
             // reportIdItems: KTestText.reportItems.getIdCard,
           ),
         ).thenAnswer(
-          (invocation) => Stream.value(KTestText.discountModelItemsModify),
+          (invocation) => Stream.value(KTestVariables.discountModelItemsModify),
         );
-        when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+        when(mockDiscountRepository.sendLink(KTestVariables.linkModel))
+            .thenAnswer(
           (invocation) async => const Right(true),
         );
-        when(mockDiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
+        when(mockDiscountRepository.sendEmail(KTestVariables.emailModel))
+            .thenAnswer(
           (invocation) async => const Right(true),
         );
       });

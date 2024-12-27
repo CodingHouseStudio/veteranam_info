@@ -21,14 +21,14 @@ void main() {
       expect(result.error, PasswordFieldModelValidationError.empty);
     });
     test('${KGroupText.shouldBe} invalidLength', () {
-      const result = PasswordFieldModel.dirty(KTestText.shortPassword);
+      const result = PasswordFieldModel.dirty(KTestVariables.shortPassword);
       expect(
         result.error,
         PasswordFieldModelValidationError.invalidLength,
       );
     });
     test('${KGroupText.shouldBe} capitalLetter', () {
-      const result = PasswordFieldModel.dirty(KTestText.passwordIncorrect);
+      const result = PasswordFieldModel.dirty(KTestVariables.passwordIncorrect);
       expect(
         result.error,
         PasswordFieldModelValidationError.capitalLetter,
@@ -36,14 +36,14 @@ void main() {
     });
     test('${KGroupText.shouldBe} capitalLetter', () {
       const result =
-          PasswordFieldModel.dirty(KTestText.passwordIncorrectNumber);
+          PasswordFieldModel.dirty(KTestVariables.passwordIncorrectNumber);
       expect(
         result.error,
         PasswordFieldModelValidationError.oneNumber,
       );
     });
     test('${KGroupText.shouldBe} correct', () {
-      const result = PasswordFieldModel.dirty(KTestText.passwordCorrect);
+      const result = PasswordFieldModel.dirty(KTestVariables.passwordCorrect);
       expect(
         result.error,
         null,

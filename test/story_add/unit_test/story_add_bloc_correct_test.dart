@@ -26,22 +26,22 @@ void main() {
     late IDataPickerRepository mockDataPickerRepository;
 
     setUp(() {
-      ExtendedDateTime.id = KTestText.storyModelItems.first.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestVariables.storyModelItems.first.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockDataPickerRepository = MockIDataPickerRepository();
 
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       mockStoryRepository = MockIStoryRepository();
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.filePickerItem,
-          storyModel: KTestText.storyModelItems.first.copyWith(
-            userPhoto: KTestText.userPhotoModel,
+          imageItem: KTestVariables.filePickerItem,
+          storyModel: KTestVariables.storyModelItems.first.copyWith(
+            userPhoto: KTestVariables.userPhotoModel,
           ),
         ),
       ).thenAnswer(
@@ -49,8 +49,8 @@ void main() {
       );
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.filePickerItem,
-          storyModel: KTestText.storyModelItems.first
+          imageItem: KTestVariables.filePickerItem,
+          storyModel: KTestVariables.storyModelItems.first
               .copyWith(userName: null, userPhoto: null),
         ),
       ).thenAnswer(
@@ -68,7 +68,7 @@ void main() {
       // );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
       storyAddBloc = StoryAddBloc(
         storyRepository: mockStoryRepository,
@@ -83,7 +83,9 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(
-            StoryAddEvent.storyUpdated(KTestText.storyModelItems.last.story),
+            StoryAddEvent.storyUpdated(
+              KTestVariables.storyModelItems.last.story,
+            ),
           )
           ..add(const StoryAddEvent.imageUpdated())
           ..add(const StoryAddEvent.save());
@@ -93,7 +95,7 @@ void main() {
           (state) =>
               state.story ==
                   MessageFieldModel.dirty(
-                    KTestText.storyModelItems.last.story,
+                    KTestVariables.storyModelItems.last.story,
                   ) &&
               state.formStatus == FormzSubmissionStatus.inProgress,
         ),
@@ -114,7 +116,9 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(
-            StoryAddEvent.storyUpdated(KTestText.storyModelItems.last.story),
+            StoryAddEvent.storyUpdated(
+              KTestVariables.storyModelItems.last.story,
+            ),
           )
           ..add(const StoryAddEvent.anonymouslyUpdated())
           ..add(const StoryAddEvent.imageUpdated())
@@ -125,7 +129,7 @@ void main() {
           (state) =>
               state.story ==
                   MessageFieldModel.dirty(
-                    KTestText.storyModelItems.last.story,
+                    KTestVariables.storyModelItems.last.story,
                   ) &&
               state.formStatus == FormzSubmissionStatus.inProgress,
         ),

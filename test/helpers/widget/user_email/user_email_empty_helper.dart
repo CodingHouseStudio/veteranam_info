@@ -8,7 +8,7 @@ Future<void> userEmailEmptyHelper(
 ) async {
   await userEmailHelper(tester: tester);
 
-  await userEmailSaveHelper(tester: tester, email: KTestText.fieldEmpty);
+  await userEmailSaveHelper(tester: tester, email: KTestVariables.fieldEmpty);
 
   expect(find.byKey(KWidgetkeys.widget.userEmailDialog.field), findsOneWidget);
 }

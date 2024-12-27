@@ -25,9 +25,9 @@ void main() {
 
     setUp(() {
       userStreamController = StreamController<User>()
-        ..add(KTestText.userAnonymous);
+        ..add(KTestVariables.userAnonymous);
       userSettingStreamController = StreamController<UserSetting>()
-        ..add(const UserSetting(id: KTestText.field));
+        ..add(const UserSetting(id: KTestVariables.field));
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
       when(mockAppAuthenticationRepository.user).thenAnswer(
@@ -35,7 +35,7 @@ void main() {
       );
 
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (_) => const UserSetting(id: KTestText.field),
+        (_) => const UserSetting(id: KTestVariables.field),
       );
 
       when(mockAppAuthenticationRepository.userSetting).thenAnswer(

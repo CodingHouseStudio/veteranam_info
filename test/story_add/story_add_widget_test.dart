@@ -20,8 +20,8 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IDataPickerRepository mockDataPickerRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.storyModelItems.first.date;
-      ExtendedDateTime.id = KTestText.storyModelItems.first.id;
+      ExtendedDateTime.current = KTestVariables.storyModelItems.first.date;
+      ExtendedDateTime.id = KTestVariables.storyModelItems.first.id;
       mockStoryRepository = MockIStoryRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
@@ -29,27 +29,27 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       when(
         mockStoryRepository.addStory(
-          imageItem: KTestText.filePickerItem,
-          storyModel: KTestText.storyModelItems.first,
+          imageItem: KTestVariables.filePickerItem,
+          storyModel: KTestVariables.storyModelItems.first,
         ),
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.userWithoutPhoto,
+        (invocation) => KTestVariables.userWithoutPhoto,
       );
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
           (invocation) async => Left(
@@ -70,8 +70,8 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.network(error: null)),
@@ -88,8 +88,8 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
           mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.send(error: null)),

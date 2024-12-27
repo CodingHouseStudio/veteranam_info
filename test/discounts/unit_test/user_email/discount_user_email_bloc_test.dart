@@ -22,35 +22,36 @@ void main() {
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
 
     setUp(() {
-      ExtendedDateTime.id = KTestText.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestVariables.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
 
-      when(mockdiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
+      when(mockdiscountRepository.sendEmail(KTestVariables.emailModel))
+          .thenAnswer(
         (_) async => const Right(true),
       );
-      when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+      when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
           .thenAnswer(
         (_) async => const Right(0),
       );
       when(
         mockdiscountRepository.sendEmail(
-          KTestText.emailModelWrong,
+          KTestVariables.emailModelWrong,
         ),
       ).thenAnswer(
         (_) async => Left(SomeFailure.serverError(error: null)),
       );
       when(
         mockdiscountRepository.sendEmail(
-          KTestText.emailModelWrong,
+          KTestVariables.emailModelWrong,
         ),
       ).thenAnswer(
         (_) async => Left(SomeFailure.serverError(error: null)),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
 
       userEmailFormBloc = UserEmailFormBloc(
@@ -68,8 +69,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => const Right(0),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -88,8 +91,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => const Right(1),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -107,8 +112,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => const Right(2),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -126,8 +133,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => const Right(5),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -145,8 +154,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => const Right(-1),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -164,8 +175,10 @@ void main() {
           'check need to show first time',
           build: () => userEmailFormBloc,
           act: (bloc) async {
-            when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-                .thenAnswer(
+            when(
+              mockdiscountRepository
+                  .userCanSendUserEmail(KTestVariables.user.id),
+            ).thenAnswer(
               (_) async => Left(SomeFailure.serverError(error: null)),
             );
             bloc.add(const UserEmailFormEvent.started());
@@ -183,8 +196,9 @@ void main() {
 
     group('Field', () {
       setUp(() {
-        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-            .thenAnswer(
+        when(
+          mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+        ).thenAnswer(
           (_) async => const Right(0),
         );
         userEmailFormBloc.add(const UserEmailFormEvent.started());
@@ -196,13 +210,13 @@ void main() {
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
-              KTestText.emailModel.email,
+              KTestVariables.emailModel.email,
             ),
           )
           ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
           UserEmailFormState(
-            email: EmailFieldModel.dirty(KTestText.emailModel.email),
+            email: EmailFieldModel.dirty(KTestVariables.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
@@ -221,7 +235,7 @@ void main() {
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
-              KTestText.emailModel.email,
+              KTestVariables.emailModel.email,
             ),
           )
           ..add(
@@ -232,7 +246,7 @@ void main() {
           ),
         expect: () async => [
           UserEmailFormState(
-            email: EmailFieldModel.dirty(KTestText.emailModel.email),
+            email: EmailFieldModel.dirty(KTestVariables.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
@@ -251,29 +265,29 @@ void main() {
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
-              KTestText.emailModelWrong.email,
+              KTestVariables.emailModelWrong.email,
             ),
           )
           ..add(const UserEmailFormEvent.sendEmail())
           ..add(
             UserEmailFormEvent.updatedEmail(
-              KTestText.emailModel.email,
+              KTestVariables.emailModel.email,
             ),
           )
           ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
           UserEmailFormState(
-            email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
+            email: EmailFieldModel.dirty(KTestVariables.emailModelWrong.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
           UserEmailFormState(
-            email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
+            email: EmailFieldModel.dirty(KTestVariables.emailModelWrong.email),
             formState: EmailEnum.invalidData,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),
           UserEmailFormState(
-            email: EmailFieldModel.dirty(KTestText.emailModel.email),
+            email: EmailFieldModel.dirty(KTestVariables.emailModel.email),
             formState: EmailEnum.inProgress,
             emailEnum: UserEmailEnum.discountEmailAbandon,
           ),

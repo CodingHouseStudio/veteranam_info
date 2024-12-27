@@ -65,8 +65,9 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockWorkRepository.getWorks())
-            .thenAnswer((invocation) => Stream.value(KTestText.workModelItems));
+        when(mockWorkRepository.getWorks()).thenAnswer(
+          (invocation) => Stream.value(KTestVariables.workModelItems),
+        );
       });
 
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -108,7 +109,7 @@ void main() {
         setUp(() {
           when(mockWorkRepository.getWorks()).thenAnswer(
             (invocation) =>
-                Stream.value(KTestText.workModelItems.sublist(0, 1)),
+                Stream.value(KTestVariables.workModelItems.sublist(0, 1)),
           );
         });
         testWidgets('Only one card', (tester) async {

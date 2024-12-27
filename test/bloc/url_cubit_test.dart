@@ -28,11 +28,11 @@ void main() {
 
     group('${KGroupText.successful} ', () {
       setUp(() {
-        when(mockUrlRepository.launchUrl(url: KTestText.downloadURL))
+        when(mockUrlRepository.launchUrl(url: KTestVariables.downloadURL))
             .thenAnswer(
           (invocation) async => const Right(true),
         );
-        when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.share(KTestVariables.downloadURL)).thenAnswer(
           (invocation) async => const Right(true),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
@@ -43,7 +43,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => urlCubit,
-        act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
+        act: (bloc) async => bloc.launchUrl(url: KTestVariables.downloadURL),
         expect: () async => [
           null,
         ],
@@ -52,7 +52,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => urlCubit,
-        act: (bloc) async => bloc.share(KTestText.downloadURL),
+        act: (bloc) async => bloc.share(KTestVariables.downloadURL),
         expect: () async => [
           null,
         ],
@@ -63,7 +63,7 @@ void main() {
         build: () => urlCubit,
         act: (bloc) async => bloc.copy(text: KAppText.email),
         expect: () async => [
-          UrlEnum.copyPhoneNumberSucceed,
+          UrlEnum.copyEmailSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(
@@ -79,7 +79,7 @@ void main() {
 
     group('${KGroupText.successful} FALSE', () {
       setUp(() {
-        when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.share(KTestVariables.downloadURL)).thenAnswer(
           (invocation) async => const Right(false),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
@@ -90,7 +90,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => urlCubit,
-        act: (bloc) async => bloc.share(KTestText.downloadURL),
+        act: (bloc) async => bloc.share(KTestVariables.downloadURL),
         expect: () async => [
           UrlEnum.copyLinkSucceed,
         ],
@@ -99,11 +99,11 @@ void main() {
 
     group('${KGroupText.failure} ', () {
       setUp(() {
-        when(mockUrlRepository.launchUrl(url: KTestText.downloadURL))
+        when(mockUrlRepository.launchUrl(url: KTestVariables.downloadURL))
             .thenAnswer(
           (invocation) async => Left(SomeFailure.link(error: null)),
         );
-        when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.share(KTestVariables.downloadURL)).thenAnswer(
           (invocation) async => Left(SomeFailure.share(error: null)),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
@@ -114,7 +114,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => urlCubit,
-        act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
+        act: (bloc) async => bloc.launchUrl(url: KTestVariables.downloadURL),
         expect: () async => [
           UrlEnum.linkError,
         ],
@@ -123,7 +123,7 @@ void main() {
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => urlCubit,
-        act: (bloc) async => bloc.share(KTestText.downloadURL),
+        act: (bloc) async => bloc.share(KTestVariables.downloadURL),
         expect: () async => [
           null,
           // UrlEnum.copyEmailSucceed,

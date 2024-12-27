@@ -28,24 +28,25 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(mockFirestoreService.getStories()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
+          (_) => Stream.value(KTestVariables.storyModelItems),
         );
-        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
-            .thenAnswer(
+        when(
+          mockFirestoreService.addStory(KTestVariables.storyModelItems.first),
+        ).thenAnswer(
           (_) async {},
         );
-        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+        when(mockFirestoreService.getStoriesByUserId(KTestVariables.user.id))
             .thenAnswer(
-          (_) async => KTestText.storyModelItems,
+          (_) async => KTestVariables.storyModelItems,
         );
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
+            filePickerItem: KTestVariables.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
-            id: KTestText.storyModelItems.first.id,
+            id: KTestVariables.storyModelItems.first.id,
           ),
         ).thenAnswer(
-          (_) async => KTestText.storyModelItems.first.image!.downloadURL,
+          (_) async => KTestVariables.storyModelItems.first.image!.downloadURL,
         );
 
         mockStoryRepository = StoryRepository(
@@ -56,21 +57,21 @@ void main() {
       test('Get Story', () async {
         expect(
           mockStoryRepository.getStoryItems(),
-          emits(KTestText.storyModelItems),
+          emits(KTestVariables.storyModelItems),
         );
       });
       test('Get Story by user id', () async {
         expect(
-          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          await mockStoryRepository.getStoriesByUserId(KTestVariables.user.id),
           isA<Right<SomeFailure, List<StoryModel>>>()
-              .having((e) => e.value, 'value', KTestText.storyModelItems),
+              .having((e) => e.value, 'value', KTestVariables.storyModelItems),
         );
       });
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.last,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.last,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -85,18 +86,19 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
+            filePickerItem: KTestVariables.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
-            id: KTestText.storyModelItems.first.id,
+            id: KTestVariables.storyModelItems.first.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failureSend),
         );
-        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
-            .thenThrow(
+        when(
+          mockFirestoreService.addStory(KTestVariables.storyModelItems.first),
+        ).thenThrow(
           Exception(KGroupText.failureSend),
         );
-        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+        when(mockFirestoreService.getStoriesByUserId(KTestVariables.user.id))
             .thenThrow(
           Exception(KGroupText.failureGet),
         );
@@ -114,15 +116,15 @@ void main() {
       });
       test('Get Story by user id', () async {
         expect(
-          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          await mockStoryRepository.getStoriesByUserId(KTestVariables.user.id),
           isA<Left<SomeFailure, List<StoryModel>>>(),
         );
       });
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
         );
@@ -137,18 +139,19 @@ void main() {
         );
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
+            filePickerItem: KTestVariables.filePickerItem,
             collecltionName: FirebaseCollectionName.stroies,
-            id: KTestText.storyModelItems.first.id,
+            id: KTestVariables.storyModelItems.first.id,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureSend),
         );
-        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
-            .thenThrow(
+        when(
+          mockFirestoreService.addStory(KTestVariables.storyModelItems.first),
+        ).thenThrow(
           FirebaseException(plugin: KGroupText.failureSend),
         );
-        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+        when(mockFirestoreService.getStoriesByUserId(KTestVariables.user.id))
             .thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
@@ -166,15 +169,15 @@ void main() {
       });
       test('Get Story by user id', () async {
         expect(
-          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          await mockStoryRepository.getStoriesByUserId(KTestVariables.user.id),
           isA<Left<SomeFailure, List<StoryModel>>>(),
         );
       });
       test('Add story', () async {
         expect(
           await mockStoryRepository.addStory(
-            imageItem: KTestText.filePickerItem,
-            storyModel: KTestText.storyModelItems.first,
+            imageItem: KTestVariables.filePickerItem,
+            storyModel: KTestVariables.storyModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
         );

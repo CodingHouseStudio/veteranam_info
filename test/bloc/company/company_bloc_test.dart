@@ -19,10 +19,10 @@ void main() {
     setUp(() {
       mockCompanyRepository = MockICompanyRepository();
       when(mockCompanyRepository.currentUserCompany).thenAnswer(
-        (realInvocation) => KTestText.pureCompanyModel,
+        (realInvocation) => KTestVariables.pureCompanyModel,
       );
       when(mockCompanyRepository.company).thenAnswer(
-        (realInvocation) => Stream.value(KTestText.fullCompanyModel),
+        (realInvocation) => Stream.value(KTestVariables.fullCompanyModel),
       );
       // companyWatcherBloc =
       //     CompanyWatcherBloc(companyRepository: mockCompanyRepository);
@@ -34,7 +34,7 @@ void main() {
         setUp(
           () {
             when(mockCompanyRepository.company).thenAnswer(
-              (realInvocation) => Stream.value(KTestText.fullCompanyModel),
+              (realInvocation) => Stream.value(KTestVariables.fullCompanyModel),
             );
             companyWatcherBloc =
                 CompanyWatcherBloc(companyRepository: mockCompanyRepository);
@@ -58,16 +58,18 @@ void main() {
               reason: 'Wait for loading data',
             );
             bloc.add(
-              const CompanyWatcherEvent.updated(KTestText.pureCompanyModel),
+              const CompanyWatcherEvent.updated(
+                KTestVariables.pureCompanyModel,
+              ),
             );
           },
           expect: () async => [
             const CompanyWatcherState(
-              company: KTestText.fullCompanyModel,
+              company: KTestVariables.fullCompanyModel,
               failure: null,
             ),
             const CompanyWatcherState(
-              company: KTestText.pureCompanyModel,
+              company: KTestVariables.pureCompanyModel,
               failure: null,
             ),
           ],
@@ -96,7 +98,7 @@ void main() {
         },
         expect: () async => [
           const CompanyWatcherState(
-            company: KTestText.pureCompanyModel,
+            company: KTestVariables.pureCompanyModel,
             failure: CompanyWatcherFailure.error,
           ),
         ],

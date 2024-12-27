@@ -10,7 +10,7 @@ Future<void> fieldUncorrectHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.screen.storyAdd.storyField), findsOneWidget);
 
-  await messageFieldHelper(tester: tester, message: KTestText.fieldEmpty);
+  await messageFieldHelper(tester: tester, message: KTestVariables.fieldEmpty);
 
   await scrollingHelper(
     tester: tester,
@@ -36,6 +36,6 @@ Future<void> fieldUncorrectHelper({
   await changeWindowSizeHelper(
     tester: tester,
     test: () async =>
-        messageFieldHelper(tester: tester, message: KTestText.fieldEmpty),
+        messageFieldHelper(tester: tester, message: KTestVariables.fieldEmpty),
   );
 }

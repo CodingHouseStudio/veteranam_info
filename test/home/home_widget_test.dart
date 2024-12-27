@@ -26,8 +26,8 @@ void main() {
     // late IFeedbackRepository mockFeedbackRepository;
     // late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
       PlatformEnumFlutter.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
       mockUserRepository = MockUserRepository();
@@ -92,7 +92,7 @@ void main() {
         mockFirebaseRemoteConfigProvider
             .getString(AppVersionCubit.mobAppVersionKey),
       ).thenAnswer(
-        (_) => KTestText.build,
+        (_) => KTestVariables.build,
       );
       // mockFeedbackRepository = MockIFeedbackRepository();
       // when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
@@ -204,7 +204,7 @@ void main() {
       setUp(() {
         Config.roleValue = Config.user;
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Right(KTestText.questionModelItems),
+          (invocation) async => Right(KTestVariables.questionModelItems),
         );
       });
 
@@ -489,7 +489,8 @@ void main() {
                   (realInvocation) => AuthenticationStatus.authenticated,
                 );
                 when(mockUserRepository.user).thenAnswer(
-                  (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+                  (realInvocation) =>
+                      Stream.value(KTestVariables.userWithoutPhoto),
                 );
               });
               testWidgets('${KRoute.profile.name} ', (tester) async {

@@ -19,33 +19,36 @@ void main() {
     setUp(() {
       mockFirestoreService = MockFirestoreService();
       mockStorageService = MockStorageService();
-      Uint8ListExtension.imagePickerItem = KTestText.filePickerItemFeedback;
+      Uint8ListExtension.imagePickerItem =
+          KTestVariables.filePickerItemFeedback;
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        when(mockFirestoreService.addFeedback(KTestText.feedbackModel))
+        when(mockFirestoreService.addFeedback(KTestVariables.feedbackModel))
             .thenAnswer(
           (_) async {},
         );
 
         when(
           mockStorageService.saveFile(
-            id: KTestText.feedbackImageModel.id,
+            id: KTestVariables.feedbackImageModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            filePickerItem: KTestText.filePickerItemFeedback,
+            filePickerItem: KTestVariables.filePickerItemFeedback,
           ),
         ).thenAnswer(
-          (_) async => KTestText.feedbackImageModel.image!.downloadURL,
+          (_) async => KTestVariables.feedbackImageModel.image!.downloadURL,
         );
 
-        when(mockFirestoreService.addMobFeedback(KTestText.feedbackImageModel))
-            .thenAnswer(
+        when(
+          mockFirestoreService
+              .addMobFeedback(KTestVariables.feedbackImageModel),
+        ).thenAnswer(
           (_) async {},
         );
         when(
-          mockFirestoreService.getUserFeedback(KTestText.user.id),
+          mockFirestoreService.getUserFeedback(KTestVariables.user.id),
         ).thenAnswer(
-          (_) async => [KTestText.feedbackModel],
+          (_) async => [KTestVariables.feedbackModel],
         );
 
         mockFeedbackRepository = FeedbackRepository(
@@ -55,7 +58,8 @@ void main() {
       });
       test('${KGroupText.successfulSet} feedback', () async {
         expect(
-          await mockFeedbackRepository.sendFeedback(KTestText.feedbackModel),
+          await mockFeedbackRepository
+              .sendFeedback(KTestVariables.feedbackModel),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -63,8 +67,8 @@ void main() {
       test('${KGroupText.successfulSet} mob feedback', () async {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
-            feedback: KTestText.feedbackImageModel,
-            image: KTestText.filePickerItemFeedback.bytes,
+            feedback: KTestVariables.feedbackImageModel,
+            image: KTestVariables.filePickerItemFeedback.bytes,
           ),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
@@ -73,7 +77,7 @@ void main() {
       test('${KGroupText.successfulGet} user feedback', () async {
         expect(
           await mockFeedbackRepository
-              .checkUserNeedShowFeedback(KTestText.user.id),
+              .checkUserNeedShowFeedback(KTestVariables.user.id),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -82,26 +86,27 @@ void main() {
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.addFeedback(KTestText.feedbackModelIncorect),
+          mockFirestoreService
+              .addFeedback(KTestVariables.feedbackModelIncorect),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
-          mockFirestoreService.getUserFeedback(KTestText.fieldEmpty),
+          mockFirestoreService.getUserFeedback(KTestVariables.fieldEmpty),
         ).thenThrow(Exception(KGroupText.failureGet));
         when(
           mockFirestoreService.addFeedback(
-            KTestText.feedbackModelIncorect
-                .copyWith(message: KTestText.fieldEmpty),
+            KTestVariables.feedbackModelIncorect
+                .copyWith(message: KTestVariables.fieldEmpty),
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
-          mockFirestoreService.getUserFeedback(KTestText.feedbackModel.id),
+          mockFirestoreService.getUserFeedback(KTestVariables.feedbackModel.id),
         ).thenThrow(Exception(KGroupText.failureGet));
 
         when(
           mockStorageService.saveFile(
-            id: KTestText.feedbackImageModel.id,
+            id: KTestVariables.feedbackImageModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            filePickerItem: KTestText.filePickerItemFeedback,
+            filePickerItem: KTestVariables.filePickerItemFeedback,
           ),
         ).thenThrow(Exception(KGroupText.failureSend));
 
@@ -113,7 +118,7 @@ void main() {
       test('${KGroupText.failureSend} feedback', () async {
         expect(
           await mockFeedbackRepository
-              .sendFeedback(KTestText.feedbackModelIncorect),
+              .sendFeedback(KTestVariables.feedbackModelIncorect),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -125,8 +130,8 @@ void main() {
       test('${KGroupText.failureSend} mob feedback', () async {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
-            feedback: KTestText.feedbackImageModel,
-            image: KTestText.filePickerItemFeedbackWrong.bytes,
+            feedback: KTestVariables.feedbackImageModel,
+            image: KTestVariables.filePickerItemFeedbackWrong.bytes,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -139,7 +144,7 @@ void main() {
       test('${KGroupText.failureGet} user feedback', () async {
         expect(
           await mockFeedbackRepository
-              .checkUserNeedShowFeedback(KTestText.fieldEmpty),
+              .checkUserNeedShowFeedback(KTestVariables.fieldEmpty),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -151,8 +156,8 @@ void main() {
       test('${KGroupText.failureSend} firebase feedback', () async {
         expect(
           await mockFeedbackRepository.sendFeedback(
-            KTestText.feedbackModelIncorect
-                .copyWith(message: KTestText.fieldEmpty),
+            KTestVariables.feedbackModelIncorect
+                .copyWith(message: KTestVariables.fieldEmpty),
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -165,7 +170,7 @@ void main() {
       test('${KGroupText.failureGet} firebase user feedback', () async {
         expect(
           await mockFeedbackRepository.checkUserNeedShowFeedback(
-            KTestText.feedbackModel.id,
+            KTestVariables.feedbackModel.id,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -179,26 +184,27 @@ void main() {
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.addFeedback(KTestText.feedbackModelIncorect),
+          mockFirestoreService
+              .addFeedback(KTestVariables.feedbackModelIncorect),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
-          mockFirestoreService.getUserFeedback(KTestText.fieldEmpty),
+          mockFirestoreService.getUserFeedback(KTestVariables.fieldEmpty),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
         when(
           mockFirestoreService.addFeedback(
-            KTestText.feedbackModelIncorect
-                .copyWith(message: KTestText.fieldEmpty),
+            KTestVariables.feedbackModelIncorect
+                .copyWith(message: KTestVariables.fieldEmpty),
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
-          mockFirestoreService.getUserFeedback(KTestText.feedbackModel.id),
+          mockFirestoreService.getUserFeedback(KTestVariables.feedbackModel.id),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
         when(
           mockStorageService.saveFile(
-            id: KTestText.feedbackModel.id,
+            id: KTestVariables.feedbackModel.id,
             collecltionName: FirebaseCollectionName.mobFeedback,
-            filePickerItem: KTestText.filePickerItemFeedback,
+            filePickerItem: KTestVariables.filePickerItemFeedback,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
 
@@ -210,7 +216,7 @@ void main() {
       test('${KGroupText.failureSend} feedback', () async {
         expect(
           await mockFeedbackRepository
-              .sendFeedback(KTestText.feedbackModelIncorect),
+              .sendFeedback(KTestVariables.feedbackModelIncorect),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -222,8 +228,8 @@ void main() {
       test('${KGroupText.failureSend} mob feedback', () async {
         expect(
           await mockFeedbackRepository.sendMobFeedback(
-            feedback: KTestText.feedbackImageModel,
-            image: KTestText.filePickerItemFeedbackWrong.bytes,
+            feedback: KTestVariables.feedbackImageModel,
+            image: KTestVariables.filePickerItemFeedbackWrong.bytes,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -236,7 +242,7 @@ void main() {
       test('${KGroupText.failureGet} user feedback', () async {
         expect(
           await mockFeedbackRepository
-              .checkUserNeedShowFeedback(KTestText.fieldEmpty),
+              .checkUserNeedShowFeedback(KTestVariables.fieldEmpty),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -248,8 +254,8 @@ void main() {
       test('${KGroupText.failureSend} firebase feedback', () async {
         expect(
           await mockFeedbackRepository.sendFeedback(
-            KTestText.feedbackModelIncorect
-                .copyWith(message: KTestText.fieldEmpty),
+            KTestVariables.feedbackModelIncorect
+                .copyWith(message: KTestVariables.fieldEmpty),
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -262,7 +268,7 @@ void main() {
       test('${KGroupText.failureGet} firebase user feedback', () async {
         expect(
           await mockFeedbackRepository.checkUserNeedShowFeedback(
-            KTestText.feedbackModel.id,
+            KTestVariables.feedbackModel.id,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

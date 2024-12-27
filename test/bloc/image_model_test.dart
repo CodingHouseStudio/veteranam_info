@@ -12,30 +12,33 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'downloadURL': KTestText.imageModel.downloadURL,
-          'lastModifiedTS': KTestText.imageModel.lastModifiedTS,
-          'name': KTestText.imageModel.name,
-          'ref': KTestText.imageModel.ref,
-          'type': KTestText.imageModel.type,
+          'downloadURL': KTestVariables.imageModel.downloadURL,
+          'lastModifiedTS': KTestVariables.imageModel.lastModifiedTS,
+          'name': KTestVariables.imageModel.name,
+          'ref': KTestVariables.imageModel.ref,
+          'type': KTestVariables.imageModel.type,
         };
 
         final imageModel = ImageModel.fromJson(json);
 
-        expect(imageModel.downloadURL, KTestText.imageModel.downloadURL);
-        expect(imageModel.lastModifiedTS, KTestText.imageModel.lastModifiedTS);
-        expect(imageModel.name, KTestText.imageModel.name);
-        expect(imageModel.ref, KTestText.imageModel.ref);
-        expect(imageModel.type, KTestText.imageModel.type);
+        expect(imageModel.downloadURL, KTestVariables.imageModel.downloadURL);
+        expect(
+          imageModel.lastModifiedTS,
+          KTestVariables.imageModel.lastModifiedTS,
+        );
+        expect(imageModel.name, KTestVariables.imageModel.name);
+        expect(imageModel.ref, KTestVariables.imageModel.ref);
+        expect(imageModel.type, KTestVariables.imageModel.type);
       });
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'downloadURL': KTestText.imageModel.downloadURL,
+          'downloadURL': KTestVariables.imageModel.downloadURL,
         };
 
         final imageModel = ImageModel.fromJson(json);
 
-        expect(imageModel.downloadURL, KTestText.imageModel.downloadURL);
+        expect(imageModel.downloadURL, KTestVariables.imageModel.downloadURL);
         expect(imageModel.lastModifiedTS, null);
         expect(imageModel.name, null);
         expect(imageModel.ref, null);
@@ -45,10 +48,10 @@ void main() {
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
           // downloadURL is missing
-          'lastModifiedTS': KTestText.imageModel.lastModifiedTS,
-          'name': KTestText.imageModel.name,
-          'ref': KTestText.imageModel.ref,
-          'type': KTestText.imageModel.type,
+          'lastModifiedTS': KTestVariables.imageModel.lastModifiedTS,
+          'name': KTestVariables.imageModel.name,
+          'ref': KTestVariables.imageModel.ref,
+          'type': KTestVariables.imageModel.type,
         };
 
         expect(
@@ -60,21 +63,21 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'downloadURL': KTestText.imageModel.downloadURL,
-          'lastModifiedTS': KTestText.imageModel.lastModifiedTS,
-          'name': KTestText.imageModel.name,
-          'ref': KTestText.imageModel.ref,
-          'type': KTestText.imageModel.type,
+          'downloadURL': KTestVariables.imageModel.downloadURL,
+          'lastModifiedTS': KTestVariables.imageModel.lastModifiedTS,
+          'name': KTestVariables.imageModel.name,
+          'ref': KTestVariables.imageModel.ref,
+          'type': KTestVariables.imageModel.type,
         };
 
-        final imageModelJson = KTestText.imageModel.toJson();
+        final imageModelJson = KTestVariables.imageModel.toJson();
 
         expect(imageModelJson, json);
       });
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'downloadURL': KTestText.imageModel.downloadURL,
+          'downloadURL': KTestVariables.imageModel.downloadURL,
           'lastModifiedTS': null,
           'name': null,
           'ref': null,
@@ -82,7 +85,8 @@ void main() {
         };
 
         final imageModelJson =
-            ImageModel(downloadURL: KTestText.imageModel.downloadURL).toJson();
+            ImageModel(downloadURL: KTestVariables.imageModel.downloadURL)
+                .toJson();
 
         expect(imageModelJson, json);
       });

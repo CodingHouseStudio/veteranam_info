@@ -72,7 +72,7 @@ abstract class KGroupText {
   static const authenticated = 'Authentication Status is Authenticated';
 }
 
-abstract class KTestText {
+abstract class KTestVariables {
   static const filter = 'filter_test';
   static const key = 'key_test';
   static const nickname = 'nickname';

@@ -21,7 +21,7 @@ void main() {
     late FirestoreService mockFirestoreService;
     setUp(() {
       ExtendedDateTime.id = '';
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockFirestoreService = MockFirestoreService();
     });
 
@@ -29,15 +29,15 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
             showOnlyBusinessDiscounts: false,
           ),
-        ).thenAnswer((_) async => KTestText.discountModelItems.first);
+        ).thenAnswer((_) async => KTestVariables.discountModelItems.first);
 
         when(
           mockFirestoreService.companyHasDiscounts(
-            KTestText.fullCompanyModel.id,
+            KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer((_) async => true);
 
@@ -48,20 +48,20 @@ void main() {
       test('Get company discounts', () async {
         expect(
           await mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
           ),
           isA<Right<SomeFailure, DiscountModel>>().having(
             (e) => e.value,
             'value',
-            KTestText.discountModelItems.first,
+            KTestVariables.discountModelItems.first,
           ),
         );
       });
 
       test('Company has discounts', () async {
         final result = await mockDiscountRepository.companyHasDiscount(
-          KTestText.fullCompanyModel.id,
+          KTestVariables.fullCompanyModel.id,
         );
         expect(
           result,
@@ -74,8 +74,8 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
@@ -84,7 +84,7 @@ void main() {
 
         when(
           mockFirestoreService.companyHasDiscounts(
-            KTestText.fullCompanyModel.id,
+            KTestVariables.fullCompanyModel.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failure),
@@ -97,8 +97,8 @@ void main() {
       test('Get company discounts failure', () async {
         expect(
           await mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
           ),
           isA<Left<SomeFailure, DiscountModel>>(),
         );
@@ -107,7 +107,7 @@ void main() {
       test('Company has discounts failure', () async {
         expect(
           await mockDiscountRepository.companyHasDiscount(
-            KTestText.fullCompanyModel.id,
+            KTestVariables.fullCompanyModel.id,
           ),
           isTrue,
         );
@@ -118,8 +118,8 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
@@ -133,8 +133,8 @@ void main() {
       test('Get company discounts firebaseError', () async {
         expect(
           await mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.userWithoutPhoto.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.userWithoutPhoto.id,
+            companyId: KTestVariables.fullCompanyModel.id,
           ),
           isA<Left<SomeFailure, DiscountModel>>(),
         );

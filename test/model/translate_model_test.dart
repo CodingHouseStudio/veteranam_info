@@ -14,8 +14,8 @@ void main() {
   tearDown(GetIt.I.reset);
   group('Transle ${KGroupText.model} ', () {
     final fullJson = {
-      TranslateModelJsonField.uk: KTestText.translateModel.uk,
-      TranslateModelJsonField.en: KTestText.translateModel.en,
+      TranslateModelJsonField.uk: KTestVariables.translateModel.uk,
+      TranslateModelJsonField.en: KTestVariables.translateModel.en,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -23,18 +23,18 @@ void main() {
 
         expect(
           transtlateModel.uk,
-          KTestText.translateModel.uk,
+          KTestVariables.translateModel.uk,
         );
         expect(
           transtlateModel.en,
-          KTestText.translateModel.en,
+          KTestVariables.translateModel.en,
         );
       });
 
       test('${KGroupText.failure} ', () {
         final json = {
           // uk is missing
-          TranslateModelJsonField.en: KTestText.translateModel.en,
+          TranslateModelJsonField.en: KTestVariables.translateModel.en,
         };
 
         expect(
@@ -45,7 +45,7 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final transtlateModelJson = KTestText.translateModel.toJson();
+        final transtlateModelJson = KTestVariables.translateModel.toJson();
 
         expect(transtlateModelJson, fullJson);
       });

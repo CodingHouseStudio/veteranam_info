@@ -27,7 +27,7 @@ void main() {
       'platform': null,
       'product': 'PRODUCT',
       'productSub': 'PRODUCTSUB',
-      'userAgent': KTestText.deviceId,
+      'userAgent': KTestVariables.deviceId,
       'vendor': 'VENDOR',
       'vendorSub': 'VENDORSUB',
       'hardwareConcurrency': 1,
@@ -50,7 +50,7 @@ void main() {
 
     final androidInfo = AndroidDeviceInfo.fromMap(
       <String, dynamic>{
-        'id': KTestText.deviceId,
+        'id': KTestVariables.deviceId,
         'host': 'host',
         'tags': 'tags',
         'type': 'type',
@@ -81,7 +81,7 @@ void main() {
     setUp(() {
       Config.isReleaseMode = true;
       Config.testIsWeb = false;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
 
       mockFirebaseMessaging = MockFirebaseMessaging();
       mockDeviceInfoPlugin = MockDeviceInfoPlugin();
@@ -96,12 +96,12 @@ void main() {
             sound: false,
           ),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         when(
           mockFirebaseMessaging.requestPermission(provisional: true),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
           (_) async => null,
@@ -111,17 +111,17 @@ void main() {
             vapidKey: KSecurityKeys.firebaseVapidKey,
           ),
         ).thenAnswer(
-          (_) async => KTestText.fcmToken,
+          (_) async => KTestVariables.fcmToken,
         );
         when(
           mockFirebaseMessaging.getAPNSToken(),
         ).thenAnswer(
-          (_) async => KTestText.aPNSToken,
+          (_) async => KTestVariables.aPNSToken,
         );
         when(
           mockFirebaseMessaging.getNotificationSettings(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         when(
           mockFirebaseMessaging.isSupported(),
@@ -159,7 +159,7 @@ void main() {
           isA<Right<SomeFailure, DeviceInfoModel?>>().having(
             (e) => e.value,
             'value',
-            KTestText.deviceInfoModel.copyWith(
+            KTestVariables.deviceInfoModel.copyWith(
               deviceId: webInfo.toString(),
               platform: PlatformEnum.unknown,
               build: AppInfoRepository.defaultValue.buildNumber,
@@ -227,7 +227,7 @@ void main() {
         expect(
           await deviceRepository.getDevice(
             initialList: [
-              KTestText.deviceInfoModel.copyWith(
+              KTestVariables.deviceInfoModel.copyWith(
                 deviceId: webInfo.toString(),
               ),
             ],
@@ -311,7 +311,7 @@ void main() {
         when(
           mockFirebaseMessaging.getNotificationSettings(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
@@ -322,7 +322,7 @@ void main() {
             sound: false,
           ),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
@@ -341,14 +341,14 @@ void main() {
         when(
           mockFirebaseMessaging.getNotificationSettings(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
         when(
           mockFirebaseMessaging.requestPermission(provisional: true),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.notDetermined,
           ),
         );
@@ -363,7 +363,7 @@ void main() {
       });
       test('Get FCM when permission denied', () async {
         when(mockFirebaseMessaging.getNotificationSettings()).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.denied,
           ),
         );
@@ -374,7 +374,7 @@ void main() {
             sound: false,
           ),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.denied,
           ),
         );
@@ -389,14 +389,14 @@ void main() {
       });
       test('Get FCM when permission provisional', () async {
         when(mockFirebaseMessaging.getNotificationSettings()).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.provisional,
           ),
         );
         when(
           mockFirebaseMessaging.requestPermission(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.provisional,
           ),
         );
@@ -405,7 +405,7 @@ void main() {
           isA<Right<SomeFailure, String?>>().having(
             (e) => e.value,
             'value',
-            KTestText.fcmToken,
+            KTestVariables.fcmToken,
           ),
         );
       });
@@ -429,7 +429,7 @@ void main() {
         when(
           mockFirebaseMessaging.getNotificationSettings(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(
+          (_) async => KTestVariables.notificationSettings(
             authorizationStatus: AuthorizationStatus.provisional,
           ),
         );
@@ -496,7 +496,7 @@ void main() {
             sound: false,
           ),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         when(
           mockFirebaseMessaging.requestPermission(
@@ -505,7 +505,7 @@ void main() {
             sound: false,
           ),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         when(
           mockDeviceInfoPlugin.deviceInfo,
@@ -543,7 +543,7 @@ void main() {
         when(
           mockFirebaseMessaging.getNotificationSettings(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings(),
+          (_) async => KTestVariables.notificationSettings(),
         );
         expect(
           await deviceRepository.getFcm(), isA<Left<SomeFailure, String?>>(),

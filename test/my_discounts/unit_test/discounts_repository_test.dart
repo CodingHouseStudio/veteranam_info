@@ -21,7 +21,7 @@ void main() {
     late FirestoreService mockFirestoreService;
     setUp(() {
       ExtendedDateTime.id = '';
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockFirestoreService = MockFirestoreService();
     });
 
@@ -29,29 +29,29 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getDiscounts(
-            userId: KTestText.userWithoutPhoto.id,
+            userId: KTestVariables.userWithoutPhoto.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (_) => Stream.value(KTestText.discountModelItems),
+          (_) => Stream.value(KTestVariables.discountModelItems),
         );
 
         when(
           mockFirestoreService.updateDiscountModel(
-            KTestText.discountModelItems.first
+            KTestVariables.discountModelItems.first
                 .copyWith(status: DiscountState.deactivated),
           ),
         ).thenAnswer((_) async {});
 
         when(
           mockFirestoreService.updateDiscountModel(
-            KTestText.discountModelItems.first,
+            KTestVariables.discountModelItems.first,
           ),
         ).thenAnswer((_) async {});
 
         when(
           mockFirestoreService
-              .deleteDiscountById(KTestText.discountModelItems.first.id),
+              .deleteDiscountById(KTestVariables.discountModelItems.first.id),
         ).thenAnswer(
           (_) async {},
         );
@@ -63,15 +63,15 @@ void main() {
       test('Get by user ID', () async {
         expect(
           mockDiscountRepository
-              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
-          emits(KTestText.discountModelItems),
+              .getDiscountsByCompanyId(KTestVariables.userWithoutPhoto.id),
+          emits(KTestVariables.discountModelItems),
         );
       });
 
       test('Delete by discount ID', () async {
         expect(
           await mockDiscountRepository.deleteDiscountsById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -80,7 +80,7 @@ void main() {
       test('Deactivate discount', () async {
         expect(
           await mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestText.discountModelItems.first,
+            discountModel: KTestVariables.discountModelItems.first,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -89,7 +89,7 @@ void main() {
       test('Deactivate discount', () async {
         expect(
           await mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestText.discountModelItems.first
+            discountModel: KTestVariables.discountModelItems.first
                 .copyWith(status: DiscountState.deactivated),
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
@@ -101,20 +101,20 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getDiscounts(
-            userId: KTestText.userWithoutPhoto.id,
+            userId: KTestVariables.userWithoutPhoto.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer((_) => Stream.error(KGroupText.failureGet));
         when(
           mockFirestoreService.deleteDiscountById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failure),
         );
         when(
           mockFirestoreService.updateDiscountModel(
-            KTestText.discountModelItems.first
+            KTestVariables.discountModelItems.first
                 .copyWith(status: DiscountState.deactivated),
           ),
         ).thenThrow(
@@ -128,7 +128,7 @@ void main() {
       test('Get by user ID Failure', () async {
         expect(
           mockDiscountRepository
-              .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
+              .getDiscountsByCompanyId(KTestVariables.userWithoutPhoto.id),
           emitsError(KGroupText.failureGet),
           // .having(
           //   (e) => e.value,
@@ -140,7 +140,7 @@ void main() {
       test('Delete by discount ID Failure', () async {
         expect(
           await mockDiscountRepository.deleteDiscountsById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -154,7 +154,7 @@ void main() {
       test('Deactivate discount failure', () async {
         expect(
           await mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestText.discountModelItems.first,
+            discountModel: KTestVariables.discountModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -170,14 +170,14 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.deleteDiscountById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
         );
         when(
           mockFirestoreService.updateDiscountModel(
-            KTestText.discountModelItems.first
+            KTestVariables.discountModelItems.first
                 .copyWith(status: DiscountState.deactivated),
           ),
         ).thenThrow(
@@ -191,7 +191,7 @@ void main() {
       test('Delete by discount ID Failure', () async {
         expect(
           await mockDiscountRepository.deleteDiscountsById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -205,7 +205,7 @@ void main() {
       test('Deactivate discount failure', () async {
         expect(
           await mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestText.discountModelItems.first,
+            discountModel: KTestVariables.discountModelItems.first,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

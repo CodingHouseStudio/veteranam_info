@@ -23,13 +23,14 @@ void main() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
       when(mockAppAuthenticationRepository.currentUser)
-          .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+          .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
     });
 
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
-          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+          mockStoryRepository
+              .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => Left(
             SomeFailure.serverError(
@@ -47,7 +48,8 @@ void main() {
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
-          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+          mockStoryRepository
+              .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.network(error: null)),
         );
@@ -61,7 +63,8 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(
-          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+          mockStoryRepository
+              .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.get(error: null)),
         );
@@ -78,10 +81,11 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(
-          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+          mockStoryRepository
+              .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => Right(
-            KTestText.storyModelItems,
+            KTestVariables.storyModelItems,
           ),
         );
       });

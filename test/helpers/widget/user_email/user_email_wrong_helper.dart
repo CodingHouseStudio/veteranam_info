@@ -9,7 +9,7 @@ Future<void> userEmailWrongHelper({
 }) async {
   await userEmailHelper(tester: tester);
 
-  await userEmailSaveHelper(tester: tester, email: KTestText.field);
+  await userEmailSaveHelper(tester: tester, email: KTestVariables.field);
 
   verifyNever(
     () => mockGoRouter.pop(),

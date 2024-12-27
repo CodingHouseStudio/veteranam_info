@@ -14,7 +14,7 @@ Future<void> loginFormNavigationHelper({
 
   await emailPasswordFieldsEmHelper(
     tester: tester,
-    email: KTestText.userEmail,
+    email: KTestVariables.userEmail,
   );
 
   await scrollingHelper(

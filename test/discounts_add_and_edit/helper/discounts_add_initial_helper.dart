@@ -47,7 +47,7 @@ Future<void> discountsAddInitialHelper({
 
       await multiDropFieldHelper(
         tester: tester,
-        text: KTestText.field,
+        text: KTestVariables.field,
         textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
         fieldIndex: 1,
         hasItem: isEdit,

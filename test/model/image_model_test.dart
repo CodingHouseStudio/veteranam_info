@@ -14,14 +14,15 @@ void main() {
   tearDown(GetIt.I.reset);
   group('Image ${KGroupText.model} ', () {
     final fullJson = {
-      ImageModelJsonField.downloadURL: KTestText.imageModel.downloadURL,
-      ImageModelJsonField.lastModifiedTS: KTestText.imageModel.lastModifiedTS,
-      ImageModelJsonField.name: KTestText.imageModel.name,
-      ImageModelJsonField.ref: KTestText.imageModel.ref,
-      ImageModelJsonField.type: KTestText.imageModel.type,
+      ImageModelJsonField.downloadURL: KTestVariables.imageModel.downloadURL,
+      ImageModelJsonField.lastModifiedTS:
+          KTestVariables.imageModel.lastModifiedTS,
+      ImageModelJsonField.name: KTestVariables.imageModel.name,
+      ImageModelJsonField.ref: KTestVariables.imageModel.ref,
+      ImageModelJsonField.type: KTestVariables.imageModel.type,
     };
     final nullableJson = {
-      ImageModelJsonField.downloadURL: KTestText.imageModel.downloadURL,
+      ImageModelJsonField.downloadURL: KTestVariables.imageModel.downloadURL,
       ImageModelJsonField.lastModifiedTS: null,
       ImageModelJsonField.name: null,
       ImageModelJsonField.ref: null,
@@ -33,23 +34,23 @@ void main() {
 
         expect(
           imageModel.downloadURL,
-          KTestText.imageModel.downloadURL,
+          KTestVariables.imageModel.downloadURL,
         );
         expect(
           imageModel.lastModifiedTS,
-          KTestText.imageModel.lastModifiedTS,
+          KTestVariables.imageModel.lastModifiedTS,
         );
         expect(
           imageModel.name,
-          KTestText.imageModel.name,
+          KTestVariables.imageModel.name,
         );
         expect(
           imageModel.ref,
-          KTestText.imageModel.ref,
+          KTestVariables.imageModel.ref,
         );
         expect(
           imageModel.type,
-          KTestText.imageModel.type,
+          KTestVariables.imageModel.type,
         );
       });
 
@@ -58,7 +59,7 @@ void main() {
 
         expect(
           imageModel.downloadURL,
-          KTestText.imageModel.downloadURL,
+          KTestVariables.imageModel.downloadURL,
         );
         expect(
           imageModel.lastModifiedTS,
@@ -82,10 +83,10 @@ void main() {
         final json = {
           // downloadURL is missing
           ImageModelJsonField.lastModifiedTS:
-              KTestText.imageModel.lastModifiedTS,
-          ImageModelJsonField.name: KTestText.imageModel.name,
-          ImageModelJsonField.ref: KTestText.imageModel.ref,
-          ImageModelJsonField.type: KTestText.imageModel.type,
+              KTestVariables.imageModel.lastModifiedTS,
+          ImageModelJsonField.name: KTestVariables.imageModel.name,
+          ImageModelJsonField.ref: KTestVariables.imageModel.ref,
+          ImageModelJsonField.type: KTestVariables.imageModel.type,
         };
 
         expect(
@@ -96,14 +97,14 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final imageModelJson = KTestText.imageModel.toJson();
+        final imageModelJson = KTestVariables.imageModel.toJson();
 
         expect(imageModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
         final imageModelJson = const ImageModel(
-          downloadURL: KTestText.image,
+          downloadURL: KTestVariables.image,
         ).toJson();
 
         expect(imageModelJson, nullableJson);

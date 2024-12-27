@@ -24,24 +24,24 @@ void main() {
     setUp(() {
       mockUserRepository = MockUserRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
-      profileStream = StreamController()..add(KTestText.pureUser);
+      profileStream = StreamController()..add(KTestVariables.pureUser);
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.userWithoutPhoto,
+        (realInvocation) => KTestVariables.userWithoutPhoto,
       );
       when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestText.userSettingModel,
+        (realInvocation) => KTestVariables.userSettingModel,
       );
       when(mockUserRepository.user).thenAnswer(
         (realInvocation) => profileStream.stream,
       );
       when(
         mockUserRepository.updateUserData(
-          nickname: KTestText.nicknameCorrect,
-          image: KTestText.filePickerItem,
-          user: KTestText.profileUserWithoutPhoto,
+          nickname: KTestVariables.nicknameCorrect,
+          image: KTestVariables.filePickerItem,
+          user: KTestVariables.profileUserWithoutPhoto,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -55,7 +55,7 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       // when(mockUserRepository.isAnonymously).thenAnswer(
@@ -217,7 +217,7 @@ void main() {
       group('Current user empty ', () {
         setUp(
           () => when(mockUserRepository.currentUser).thenAnswer(
-            (realInvocation) => KTestText.pureUser,
+            (realInvocation) => KTestVariables.pureUser,
           ),
         );
         testWidgets('Send incorrect profile data', (tester) async {
@@ -228,7 +228,7 @@ void main() {
             mockDataPickerRepository: mockDataPickerRepository,
           );
           profileStream.add(
-            KTestText.profileUserWithoutPhoto.copyWith(
+            KTestVariables.profileUserWithoutPhoto.copyWith(
               id: 'none',
               email: null,
             ),
