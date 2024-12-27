@@ -63,7 +63,7 @@ void main() {
         build: () => urlCubit,
         act: (bloc) async => bloc.copy(text: KAppText.email),
         expect: () async => [
-          UrlEnum.copyPhoneNumberSucceed,
+          UrlEnum.copyEmailSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(
