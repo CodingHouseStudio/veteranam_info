@@ -9,10 +9,10 @@ Future<void> companyFormsCorrectSaveHelper(
 ) async {
   await companyFormsEnterTextHelper(
     tester: tester,
-    companyCode: KTestText.fullCompanyModel.code!,
-    publicName: KTestText.fullCompanyModel.publicName!,
-    companyName: KTestText.fullCompanyModel.companyName!,
-    link: KTestText.fullCompanyModel.link,
+    companyCode: KTestVariables.fullCompanyModel.code!,
+    publicName: KTestVariables.fullCompanyModel.publicName!,
+    companyName: KTestVariables.fullCompanyModel.companyName!,
+    link: KTestVariables.fullCompanyModel.link,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.company.saveButton));

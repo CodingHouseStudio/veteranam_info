@@ -18,7 +18,7 @@ Future<void> pwResetEmailPumpAppHelper({
 
   await tester.pumpApp(
     const PwResetEmailScreen(
-      email: KTestText.userEmailIncorrect,
+      email: KTestVariables.userEmailIncorrect,
     ),
     mockGoRouter: mockGoRouter,
   );

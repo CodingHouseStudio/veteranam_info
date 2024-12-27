@@ -20,8 +20,8 @@ void main() {
     late IFaqRepository mockFaqRepository;
     setUp(() {
       Config.testIsWeb = false;
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
       PlatformEnumFlutter.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
     });
@@ -100,7 +100,7 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => Right(KTestText.questionModelItems),
+          (invocation) async => Right(KTestVariables.questionModelItems),
         );
       });
 

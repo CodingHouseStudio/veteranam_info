@@ -25,10 +25,11 @@ void main() {
       mockStoryRepository = MockIStoryRepository();
       mockAuthRepository = MockIAppAuthenticationRepository();
       when(mockAuthRepository.currentUser)
-          .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+          .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
       when(
-        mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
-      ).thenAnswer((_) async => Right(KTestText.storyModelItems));
+        mockStoryRepository
+            .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
+      ).thenAnswer((_) async => Right(KTestVariables.storyModelItems));
       myStoryWatcherBloc = MyStoryWatcherBloc(
         storyRepository: mockStoryRepository,
         appAuthenticationRepository: mockAuthRepository,
@@ -55,7 +56,8 @@ void main() {
       build: () => myStoryWatcherBloc,
       act: (bloc) async {
         when(
-          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+          mockStoryRepository
+              .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );

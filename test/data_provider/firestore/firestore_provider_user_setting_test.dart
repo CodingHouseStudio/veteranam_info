@@ -24,7 +24,7 @@ void main() {
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
     late CacheClient mockCache;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
       mockDocumentReference = MockDocumentReference();
@@ -39,19 +39,19 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.user.id),
+        mockCollectionReference.doc(KTestVariables.user.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
       when(
-        mockCollectionReference.doc(KTestText.fieldEmpty),
+        mockCollectionReference.doc(KTestVariables.fieldEmpty),
       ).thenAnswer(
         (_) => mockEmptyDocumentReference,
       );
 
       when(
         mockDocumentReference.set(
-          KTestText.userSetting.toJson(),
+          KTestVariables.userSetting.toJson(),
           FirestoreService.setMergeOptions,
         ),
       ).thenAnswer(
@@ -77,7 +77,7 @@ void main() {
       when(
         mockDocumentSnapshot.data(),
       ).thenAnswer(
-        (_) => KTestText.userSetting.toJson(),
+        (_) => KTestVariables.userSetting.toJson(),
       );
       when(
         mockDocumentSnapshot.exists,
@@ -91,7 +91,7 @@ void main() {
       );
 
       when(
-        mockCollectionReference.doc(KTestText.fieldEmpty),
+        mockCollectionReference.doc(KTestVariables.fieldEmpty),
       ).thenAnswer(
         (_) => mockEmptyDocumentReference,
       );
@@ -116,8 +116,8 @@ void main() {
 
       when(
         mockDocumentReference.update(
-          KTestText.userSetting
-              .copyWith(deletedOn: KTestText.dateTime)
+          KTestVariables.userSetting
+              .copyWith(deletedOn: KTestVariables.dateTime)
               .toJson(),
         ),
       ).thenAnswer(
@@ -131,9 +131,9 @@ void main() {
     });
     test('get user setting', () async {
       await expectLater(
-        firestoreService.getUserSetting(KTestText.user.id),
+        firestoreService.getUserSetting(KTestVariables.user.id),
         emitsInOrder([
-          KTestText.userSetting,
+          KTestVariables.userSetting,
         ]),
         reason: 'Wait for getting user setting',
       );
@@ -142,7 +142,7 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.user.id),
+        mockCollectionReference.doc(KTestVariables.user.id),
       ).called(1);
       verify(
         mockDocumentReference.snapshots(
@@ -169,7 +169,7 @@ void main() {
     });
     test('get empty user setting', () async {
       await expectLater(
-        firestoreService.getUserSetting(KTestText.fieldEmpty),
+        firestoreService.getUserSetting(KTestVariables.fieldEmpty),
         emitsInOrder([
           UserSetting.empty,
         ]),
@@ -180,7 +180,7 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.fieldEmpty),
+        mockCollectionReference.doc(KTestVariables.fieldEmpty),
       ).called(1);
       verify(
         mockEmptyDocumentReference.snapshots(
@@ -208,19 +208,19 @@ void main() {
 
     test('set user setting', () async {
       await firestoreService.setUserSetting(
-        userSetting: KTestText.userSetting,
-        userId: KTestText.user.id,
+        userSetting: KTestVariables.userSetting,
+        userId: KTestVariables.user.id,
       );
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.user.id),
+        mockCollectionReference.doc(KTestVariables.user.id),
       ).called(1);
       verify(
         mockDocumentReference.set(
-          KTestText.userSetting.toJson(),
+          KTestVariables.userSetting.toJson(),
           FirestoreService.setMergeOptions,
         ),
       ).called(1);

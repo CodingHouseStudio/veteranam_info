@@ -7,7 +7,7 @@ import '../helper.dart';
 Future<void> emailFailureHelper(
   WidgetTester tester,
 ) async {
-  await emailEnterHelper(tester: tester, email: KTestText.userEmail);
+  await emailEnterHelper(tester: tester, email: KTestVariables.userEmail);
 
   expect(
     find.byKey(KWidgetkeys.screen.pwResetEmail.submitingText),

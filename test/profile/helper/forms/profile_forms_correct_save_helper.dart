@@ -9,9 +9,9 @@ Future<void> profileFormsCorrectSaveHelper({
 }) async {
   await profileFormsEnterTextHelper(
     tester: tester,
-    name: KTestText.nameCorrect,
-    surname: KTestText.surnameCorrect,
-    nickname: KTestText.nicknameCorrect,
+    name: KTestVariables.nameCorrect,
+    surname: KTestVariables.surnameCorrect,
+    nickname: KTestVariables.nicknameCorrect,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));

@@ -13,7 +13,7 @@ void main() {
       ' ${KGroupText.model} User', () {
     test('check is Empty ', () {
       expect(
-        KTestText.user.isEmpty,
+        KTestVariables.user.isEmpty,
         isFalse,
       );
 
@@ -24,7 +24,7 @@ void main() {
     });
     test('check is not Empty ', () {
       expect(
-        KTestText.user.isNotEmpty,
+        KTestVariables.user.isNotEmpty,
         isTrue,
       );
 
@@ -34,14 +34,14 @@ void main() {
       );
     });
     final fullJson = {
-      UserModelJsonField.id: KTestText.user.id,
-      UserModelJsonField.email: KTestText.user.email,
-      UserModelJsonField.name: KTestText.user.name,
-      UserModelJsonField.photo: KTestText.user.photo,
-      UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
+      UserModelJsonField.id: KTestVariables.user.id,
+      UserModelJsonField.email: KTestVariables.user.email,
+      UserModelJsonField.name: KTestVariables.user.name,
+      UserModelJsonField.photo: KTestVariables.user.photo,
+      UserModelJsonField.phoneNumber: KTestVariables.user.phoneNumber,
     };
     final nullableJson = {
-      UserModelJsonField.id: KTestText.user.id,
+      UserModelJsonField.id: KTestVariables.user.id,
       UserModelJsonField.email: null,
       UserModelJsonField.name: null,
       UserModelJsonField.photo: null,
@@ -51,16 +51,16 @@ void main() {
       test('${KGroupText.full} ', () {
         final user = User.fromJson(fullJson);
 
-        expect(user.id, KTestText.user.id);
-        expect(user.email, KTestText.user.email);
-        expect(user.name, KTestText.user.name);
-        expect(user.phoneNumber, KTestText.user.phoneNumber);
-        expect(user.photo, KTestText.user.photo);
+        expect(user.id, KTestVariables.user.id);
+        expect(user.email, KTestVariables.user.email);
+        expect(user.name, KTestVariables.user.name);
+        expect(user.phoneNumber, KTestVariables.user.phoneNumber);
+        expect(user.photo, KTestVariables.user.photo);
       });
       test('${KGroupText.nullable} ', () {
         final user = User.fromJson(nullableJson);
 
-        expect(user.id, KTestText.user.id);
+        expect(user.id, KTestVariables.user.id);
         expect(user.email, isNull);
         expect(user.name, isNull);
         expect(user.phoneNumber, isNull);
@@ -70,10 +70,10 @@ void main() {
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          UserModelJsonField.email: KTestText.user.email,
-          UserModelJsonField.name: KTestText.user.name,
-          UserModelJsonField.photo: KTestText.user.photo,
-          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
+          UserModelJsonField.email: KTestVariables.user.email,
+          UserModelJsonField.name: KTestVariables.user.name,
+          UserModelJsonField.photo: KTestVariables.user.photo,
+          UserModelJsonField.phoneNumber: KTestVariables.user.phoneNumber,
         };
 
         expect(
@@ -84,13 +84,13 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final userModelJson = KTestText.user.toJson();
+        final userModelJson = KTestVariables.user.toJson();
 
         expect(userModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final userModelJson = User(id: KTestText.user.id).toJson();
+        final userModelJson = User(id: KTestVariables.user.id).toJson();
 
         expect(userModelJson, nullableJson);
       });

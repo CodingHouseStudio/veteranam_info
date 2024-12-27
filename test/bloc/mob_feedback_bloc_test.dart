@@ -20,15 +20,15 @@ void main() {
     late Uint8List image;
     late Uint8List wrongImage;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
       image = Uint8List(1);
       wrongImage = Uint8List(2);
       mockFeedbackRepository = MockIFeedbackRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(
         mockFeedbackRepository.sendMobFeedback(
-          feedback: KTestText.feedbackImageModel.copyWith(image: null),
+          feedback: KTestVariables.feedbackImageModel.copyWith(image: null),
           image: image,
         ),
       ).thenAnswer(
@@ -36,7 +36,7 @@ void main() {
       );
       when(
         mockFeedbackRepository.sendMobFeedback(
-          feedback: KTestText.feedbackImageModel.copyWith(image: null),
+          feedback: KTestVariables.feedbackImageModel.copyWith(image: null),
           image: wrongImage,
         ),
       ).thenAnswer(
@@ -47,10 +47,10 @@ void main() {
         ),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestText.userSetting,
+        (realInvocation) => KTestVariables.userSetting,
       );
       mobFeedbackBloc = MobFeedbackBloc(
         feedbackRepository: mockFeedbackRepository,
@@ -63,12 +63,12 @@ void main() {
       ' are changed and send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
-        ..add(const MobFeedbackEvent.messageUpdated(KTestText.field))
+        ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.field))
         ..add(MobFeedbackEvent.send(image)),
       expect: () => [
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: MessageFieldModel.dirty(KTestVariables.field),
           failure: null,
         ),
         const MobFeedbackState(
@@ -83,7 +83,7 @@ void main() {
       ' are changed and send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
-        ..add(const MobFeedbackEvent.messageUpdated(KTestText.fieldEmpty))
+        ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.fieldEmpty))
         ..add(MobFeedbackEvent.send(image)),
       expect: () => [
         const MobFeedbackState(
@@ -103,17 +103,17 @@ void main() {
       ' are changed and failure send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
-        ..add(const MobFeedbackEvent.messageUpdated(KTestText.field))
+        ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.field))
         ..add(MobFeedbackEvent.send(wrongImage)),
       expect: () => [
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: MessageFieldModel.dirty(KTestVariables.field),
           failure: null,
         ),
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: MessageFieldModel.dirty(KTestVariables.field),
           failure: MobFeedbackFailure.error,
         ),
       ],

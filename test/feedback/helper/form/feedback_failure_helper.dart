@@ -11,9 +11,9 @@ Future<void> feedbackFailureHelper(
     test: () async {
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.userEmail,
-        name: KTestText.nameCorrect,
-        field: KTestText.field,
+        email: KTestVariables.userEmail,
+        name: KTestVariables.nameCorrect,
+        field: KTestVariables.field,
       );
 
       await dialogSnackBarTextHelper(tester: tester);

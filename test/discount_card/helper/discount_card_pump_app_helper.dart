@@ -15,7 +15,7 @@ Future<void> discountCardPumpAppHelper({
   _registerDiscountCardBloc(mockDiscountRepository: mockDiscountRepository);
   await tester.pumpApp(
     DiscountCardDialog(
-      id: KTestText.discountModelItems.first.id,
+      id: KTestVariables.discountModelItems.first.id,
     ),
     mockGoRouter: mockGoRouter,
   );

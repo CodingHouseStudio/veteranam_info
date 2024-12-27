@@ -22,7 +22,7 @@ void main() {
     setUp(() {
       mockFaqRepository = MockIFaqRepository();
       when(mockFaqRepository.getQuestions()).thenAnswer(
-        (_) async => Right(KTestText.questionModelItems),
+        (_) async => Right(KTestVariables.questionModelItems),
       );
     });
 

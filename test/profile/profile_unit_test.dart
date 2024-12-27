@@ -23,27 +23,27 @@ void main() {
       mockDataPickerRepository = MockIDataPickerRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
 
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       when(
         mockUserRepository.updateUserData(
-          user: KTestText.profileUser,
-          image: KTestText.filePickerItem,
-          nickname: KTestText.nicknameCorrect,
+          user: KTestVariables.profileUser,
+          image: KTestVariables.filePickerItem,
+          nickname: KTestVariables.nicknameCorrect,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
 
       when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestText.userSettingModel,
+        (realInvocation) => KTestVariables.userSettingModel,
       );
 
       profileBloc = ProfileBloc(
@@ -56,11 +56,11 @@ void main() {
       'emits [ProfileState] when name is updated',
       build: () => profileBloc,
       act: (bloc) =>
-          bloc.add(const ProfileEvent.nameUpdated(KTestText.nameCorrect)),
+          bloc.add(const ProfileEvent.nameUpdated(KTestVariables.nameCorrect)),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -72,12 +72,13 @@ void main() {
     blocTest<ProfileBloc, ProfileState>(
       'emits [ProfileState] when surname is updated',
       build: () => profileBloc,
-      act: (bloc) =>
-          bloc.add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect)),
+      act: (bloc) => bloc.add(
+        const ProfileEvent.surnameUpdated(KTestVariables.surnameCorrect),
+      ),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.usernameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.usernameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -89,14 +90,15 @@ void main() {
     blocTest<ProfileBloc, ProfileState>(
       'emits [ProfileState] when nickname is updated',
       build: () => profileBloc,
-      act: (bloc) => bloc
-          .add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect)),
+      act: (bloc) => bloc.add(
+        const ProfileEvent.nicknameUpdated(KTestVariables.nicknameCorrect),
+      ),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.usernameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.usernameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.usernameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          nickname: NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
@@ -109,57 +111,61 @@ void main() {
         return profileBloc;
       },
       act: (bloc) async => bloc
-        ..add(const ProfileEvent.nameUpdated(KTestText.nameCorrect))
-        ..add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect))
-        ..add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect))
+        ..add(const ProfileEvent.nameUpdated(KTestVariables.nameCorrect))
+        ..add(const ProfileEvent.surnameUpdated(KTestVariables.surnameCorrect))
+        ..add(
+          const ProfileEvent.nicknameUpdated(KTestVariables.nicknameCorrect),
+        )
         ..add(const ProfileEvent.imageUpdated())
         ..add(const ProfileEvent.save()),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          nickname: NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          nickname: NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.success,
         ),
@@ -170,49 +176,53 @@ void main() {
       'emits [ProfileState] with failure when saving fails',
       build: () => profileBloc,
       act: (bloc) async => bloc
-        ..add(const ProfileEvent.nameUpdated(KTestText.nameIncorrect))
-        ..add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect))
-        ..add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect))
+        ..add(const ProfileEvent.nameUpdated(KTestVariables.nameIncorrect))
+        ..add(const ProfileEvent.surnameUpdated(KTestVariables.surnameCorrect))
+        ..add(
+          const ProfileEvent.nicknameUpdated(KTestVariables.nicknameCorrect),
+        )
         ..add(const ProfileEvent.imageUpdated())
         ..add(const ProfileEvent.save()),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameIncorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameIncorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameIncorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          nickname: NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameIncorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameIncorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.invalidData,
         ),
@@ -223,14 +233,14 @@ void main() {
       'emits [ProfileState] with unmodify success',
       build: () {
         when(mockUserRepository.currentUser).thenAnswer(
-          (realInvocation) => KTestText.profileUser,
+          (realInvocation) => KTestVariables.profileUser,
         );
 
         when(
           mockUserRepository.updateUserData(
-            user: KTestText.profileUser,
+            user: KTestVariables.profileUser,
             image: null,
-            nickname: KTestText.nicknameCorrect,
+            nickname: KTestVariables.nicknameCorrect,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(false),
@@ -243,24 +253,24 @@ void main() {
         ..add(const ProfileEvent.save()),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.initial,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.sendInProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -276,9 +286,9 @@ void main() {
       act: (bloc) {
         when(
           mockUserRepository.updateUserData(
-            user: KTestText.profileUser,
-            image: KTestText.filePickerItem,
-            nickname: KTestText.nicknameCorrect,
+            user: KTestVariables.profileUser,
+            image: KTestVariables.filePickerItem,
+            nickname: KTestVariables.nicknameCorrect,
           ),
         ).thenAnswer(
           (realInvocation) async => Left(
@@ -289,58 +299,67 @@ void main() {
         );
 
         bloc
-          ..add(const ProfileEvent.nameUpdated(KTestText.nameCorrect))
-          ..add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect))
-          ..add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect))
+          ..add(const ProfileEvent.nameUpdated(KTestVariables.nameCorrect))
+          ..add(
+            const ProfileEvent.surnameUpdated(KTestVariables.surnameCorrect),
+          )
+          ..add(
+            const ProfileEvent.nicknameUpdated(
+              KTestVariables.nicknameCorrect,
+            ),
+          )
           ..add(const ProfileEvent.imageUpdated())
           ..add(const ProfileEvent.save());
       },
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         const ProfileState(
-          name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          nickname: NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.sendInProgress,
         ),
         ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(KTestText.filePickerItem),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          name: const NameFieldModel.dirty(KTestVariables.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestVariables.surnameCorrect),
+          image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+          nickname:
+              const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
           failure: ProfileFailure.error,
           formState: ProfileEnum.initial,
         ),

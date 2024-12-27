@@ -54,7 +54,7 @@ void main() {
       when(
         mockCache.write(
           key: AppAuthenticationRepository.userCacheKey,
-          value: KTestText.user,
+          value: KTestVariables.user,
         ),
       ).thenAnswer(
         (_) {},
@@ -67,21 +67,21 @@ void main() {
         (_) => null,
       );
       when(
-        mockFirestoreService.getUserSetting(KTestText.fieldEmpty),
+        mockFirestoreService.getUserSetting(KTestVariables.fieldEmpty),
       ).thenAnswer(
         (_) => Stream.value(UserSetting.empty),
       );
       when(
         mockFirebaseAuth.createUserWithEmailAndPassword(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
       when(
         mockDeviceRepository.getDevice(
-          initialList: KTestText.userSetting.devicesInfo,
+          initialList: KTestVariables.userSetting.devicesInfo,
         ),
       ).thenAnswer(
         (_) async => const Right(null),
@@ -99,7 +99,8 @@ void main() {
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
       );
-      AppAuthenticationRepository.authCredential = KTestText.authCredential;
+      AppAuthenticationRepository.authCredential =
+          KTestVariables.authCredential;
     });
     test('User Setting', () async {
       await expectLater(
@@ -112,7 +113,7 @@ void main() {
       verifyNever(
         mockCache.write(
           key: AppAuthenticationRepository.userSettingCacheKey,
-          value: KTestText.userSetting,
+          value: KTestVariables.userSetting,
         ),
       );
       // expect(
@@ -131,7 +132,7 @@ void main() {
       verifyNever(
         mockCache.write(
           key: AppAuthenticationRepository.userCacheKey,
-          value: KTestText.user,
+          value: KTestVariables.user,
         ),
       );
       // expect(
@@ -164,7 +165,7 @@ void main() {
       verifyNever(
         mockFirestoreService.setUserSetting(
           userSetting: UserSetting.empty,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       );
       expect(
@@ -182,8 +183,8 @@ void main() {
     test('Sign up', () async {
       expect(
         await appAuthenticationRepository.signUp(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
         isA<Right<SomeFailure, User?>>()
             .having((e) => e.value, 'value', isNull),
@@ -194,7 +195,7 @@ void main() {
           .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
-          initialList: KTestText.userSetting.devicesInfo,
+          initialList: KTestVariables.userSetting.devicesInfo,
         ),
       ).called(1);
       expect(

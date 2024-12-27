@@ -13,9 +13,9 @@ Future<void> discountsAddCorectHelper({
 }) async {
   await discountsAddMainEnterHelper(
     tester: tester,
-    titleText: KTestText.sendDiscountModel.title.uk,
-    linkText: KTestText.sendDiscountModel.directLink!,
-    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
+    titleText: KTestVariables.sendDiscountModel.title.uk,
+    linkText: KTestVariables.sendDiscountModel.directLink!,
+    discountsText: KTestVariables.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true, isEdit: isEdit,
     // periodText: KTestText.sendDiscountModel.expiration!,
   );
@@ -24,8 +24,8 @@ Future<void> discountsAddCorectHelper({
 
   await discountsAddDetailEnterHelper(
     tester: tester,
-    categoryText: KTestText.sendDiscountModel.category.first.uk,
-    cityText: KTestText.sendDiscountModel.location!.first.uk,
+    categoryText: KTestVariables.sendDiscountModel.category.first.uk,
+    cityText: KTestVariables.sendDiscountModel.location!.first.uk,
     tapIndefinitely: !isEdit,
   );
 
@@ -33,8 +33,8 @@ Future<void> discountsAddCorectHelper({
 
   await discountsAddDescriptionEnterHelper(
     tester: tester,
-    descriptionText: KTestText.sendDiscountModel.description.uk,
-    exclusionsText: KTestText.sendDiscountModel.exclusions!.uk,
+    descriptionText: KTestVariables.sendDiscountModel.description.uk,
+    exclusionsText: KTestVariables.sendDiscountModel.exclusions!.uk,
   );
 
   if (!isEdit) {

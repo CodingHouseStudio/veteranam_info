@@ -9,7 +9,7 @@ Future<void> emailWrongHelper(
 ) async {
   await emailEnterHelper(
     tester: tester,
-    email: KTestText.emailModelWrong.email,
+    email: KTestVariables.emailModelWrong.email,
   );
 
   expect(

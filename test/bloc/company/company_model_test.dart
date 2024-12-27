@@ -11,78 +11,83 @@ void main() {
   group('${KScreenBlocName.company} ${KGroupText.model}', () {
     test('check is Empty ', () {
       expect(
-        KTestText.fullCompanyModel.isEmpty,
+        KTestVariables.fullCompanyModel.isEmpty,
         isFalse,
       );
 
       expect(
-        KTestText.pureCompanyModel.isEmpty,
+        KTestVariables.pureCompanyModel.isEmpty,
         isTrue,
       );
     });
     test('check is not Empty ', () {
       expect(
-        KTestText.fullCompanyModel.isNotEmpty,
+        KTestVariables.fullCompanyModel.isNotEmpty,
         isTrue,
       );
 
       expect(
-        KTestText.pureCompanyModel.isNotEmpty,
+        KTestVariables.pureCompanyModel.isNotEmpty,
         isFalse,
       );
     });
     final fullJson = {
-      CompanyModelJsonField.id: KTestText.fullCompanyModel.id,
-      CompanyModelJsonField.companyName: KTestText.fullCompanyModel.companyName,
-      CompanyModelJsonField.publicName: KTestText.fullCompanyModel.publicName,
-      CompanyModelJsonField.link: KTestText.fullCompanyModel.link,
-      CompanyModelJsonField.code: KTestText.fullCompanyModel.code,
-      CompanyModelJsonField.image: [KTestText.imageModel.toJson()],
-      CompanyModelJsonField.userEmails: KTestText.fullCompanyModel.userEmails,
-      CompanyModelJsonField.deletedOn: KTestText.dateTime.toIso8601String(),
+      CompanyModelJsonField.id: KTestVariables.fullCompanyModel.id,
+      CompanyModelJsonField.companyName:
+          KTestVariables.fullCompanyModel.companyName,
+      CompanyModelJsonField.publicName:
+          KTestVariables.fullCompanyModel.publicName,
+      CompanyModelJsonField.link: KTestVariables.fullCompanyModel.link,
+      CompanyModelJsonField.code: KTestVariables.fullCompanyModel.code,
+      CompanyModelJsonField.image: [KTestVariables.imageModel.toJson()],
+      CompanyModelJsonField.userEmails:
+          KTestVariables.fullCompanyModel.userEmails,
+      CompanyModelJsonField.deletedOn:
+          KTestVariables.dateTime.toIso8601String(),
     };
     final nullableJson = {
-      CompanyModelJsonField.id: KTestText.fullCompanyModel.id,
+      CompanyModelJsonField.id: KTestVariables.fullCompanyModel.id,
       CompanyModelJsonField.companyName: null,
       CompanyModelJsonField.publicName: null,
       CompanyModelJsonField.link: null,
       CompanyModelJsonField.image: null,
       CompanyModelJsonField.code: null,
-      CompanyModelJsonField.userEmails: KTestText.fullCompanyModel.userEmails,
+      CompanyModelJsonField.userEmails:
+          KTestVariables.fullCompanyModel.userEmails,
       CompanyModelJsonField.deletedOn: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
         final fullCompanyModel = CompanyModel.fromJson(fullJson);
 
-        expect(fullCompanyModel.id, KTestText.fullCompanyModel.id);
+        expect(fullCompanyModel.id, KTestVariables.fullCompanyModel.id);
         expect(
           fullCompanyModel.userEmails,
-          KTestText.fullCompanyModel.userEmails,
+          KTestVariables.fullCompanyModel.userEmails,
         );
         expect(
           fullCompanyModel.companyName,
-          KTestText.fullCompanyModel.companyName,
+          KTestVariables.fullCompanyModel.companyName,
         );
         expect(
           fullCompanyModel.code,
-          KTestText.fullCompanyModel.code,
+          KTestVariables.fullCompanyModel.code,
         );
         expect(
           fullCompanyModel.publicName,
-          KTestText.fullCompanyModel.publicName,
+          KTestVariables.fullCompanyModel.publicName,
         );
-        expect(fullCompanyModel.link, KTestText.fullCompanyModel.link);
-        expect(fullCompanyModel.image, KTestText.imageModel);
-        expect(fullCompanyModel.deletedOn, KTestText.dateTime);
+        expect(fullCompanyModel.link, KTestVariables.fullCompanyModel.link);
+        expect(fullCompanyModel.image, KTestVariables.imageModel);
+        expect(fullCompanyModel.deletedOn, KTestVariables.dateTime);
       });
       test('${KGroupText.nullable} ', () {
         final fullCompanyModel = CompanyModel.fromJson(nullableJson);
 
-        expect(fullCompanyModel.id, KTestText.fullCompanyModel.id);
+        expect(fullCompanyModel.id, KTestVariables.fullCompanyModel.id);
         expect(
           fullCompanyModel.userEmails,
-          KTestText.fullCompanyModel.userEmails,
+          KTestVariables.fullCompanyModel.userEmails,
         );
         expect(
           null,
@@ -101,14 +106,14 @@ void main() {
         final json = {
           // id is missing
           CompanyModelJsonField.companyName:
-              KTestText.fullCompanyModel.companyName,
+              KTestVariables.fullCompanyModel.companyName,
           CompanyModelJsonField.publicName:
-              KTestText.fullCompanyModel.publicName,
-          CompanyModelJsonField.link: KTestText.fullCompanyModel.link,
-          CompanyModelJsonField.image: KTestText.fullCompanyModel.image,
+              KTestVariables.fullCompanyModel.publicName,
+          CompanyModelJsonField.link: KTestVariables.fullCompanyModel.link,
+          CompanyModelJsonField.image: KTestVariables.fullCompanyModel.image,
           CompanyModelJsonField.userEmails:
-              KTestText.fullCompanyModel.userEmails,
-          CompanyModelJsonField.code: KTestText.fullCompanyModel.code,
+              KTestVariables.fullCompanyModel.userEmails,
+          CompanyModelJsonField.code: KTestVariables.fullCompanyModel.code,
         };
 
         expect(
@@ -119,10 +124,10 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final fullCompanyModelModelJson = KTestText.fullCompanyModel
+        final fullCompanyModelModelJson = KTestVariables.fullCompanyModel
             .copyWith(
-              image: KTestText.imageModel,
-              deletedOn: KTestText.dateTime,
+              image: KTestVariables.imageModel,
+              deletedOn: KTestVariables.dateTime,
             )
             .toJson();
 
@@ -131,8 +136,8 @@ void main() {
 
       test('${KGroupText.nullable} ', () {
         final pureCompanyModelModelJson = CompanyModel(
-          id: KTestText.fullCompanyModel.id,
-          userEmails: KTestText.fullCompanyModel.userEmails,
+          id: KTestVariables.fullCompanyModel.id,
+          userEmails: KTestVariables.fullCompanyModel.userEmails,
         ).toJson();
 
         expect(pureCompanyModelModelJson, nullableJson);

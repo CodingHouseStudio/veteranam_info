@@ -27,7 +27,7 @@ void main() {
         ' when load questionModel list', () {
       setUp(
         () => when(mockFaqRepository.getQuestions()).thenAnswer(
-          (_) async => Right(KTestText.questionModelItems),
+          (_) async => Right(KTestVariables.questionModelItems),
         ),
       );
       blocTest<HomeWatcherBloc, HomeWatcherState>(

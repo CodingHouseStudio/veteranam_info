@@ -19,9 +19,9 @@ Future<void> feedbackNavigationHelper({
 
   await feedbackEnterTextHelper(
     tester: tester,
-    email: KTestText.userEmail,
-    name: KTestText.nameCorrect,
-    field: KTestText.field,
+    email: KTestVariables.userEmail,
+    name: KTestVariables.nameCorrect,
+    field: KTestVariables.field,
   );
 
   await feedbackBoxNavigationHelper(

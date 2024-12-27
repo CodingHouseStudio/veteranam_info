@@ -50,10 +50,10 @@ void main() {
       //   (realInvocation) => KTestText.userSetting,
       // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
-        (invocation) async => Right(KTestText.questionModelItems),
+        (invocation) async => Right(KTestVariables.questionModelItems),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -69,11 +69,11 @@ void main() {
       //   (invocation) async => Right(KTestText.reportItems),
       // );
 
-      when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+      when(mockDiscountRepository.userCanSendLink(KTestVariables.user.id))
           .thenAnswer(
         (invocation) async => const Right(true),
       );
-      when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
+      when(mockDiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
           .thenAnswer(
         (invocation) async => const Right(-1),
       );
@@ -83,7 +83,7 @@ void main() {
           // reportIdItems: KTestText.reportItems.getIdCard,
         ),
       ).thenAnswer(
-        (invocation) => Stream.value(KTestText.discountModelItemsModify),
+        (invocation) => Stream.value(KTestVariables.discountModelItemsModify),
       );
 
       when(
@@ -91,7 +91,7 @@ void main() {
             // reportIdItems: KTestText.reportItems.getIdCard,
             ),
       ).thenAnswer(
-        (invocation) async => Right(KTestText.fundItems),
+        (invocation) async => Right(KTestVariables.fundItems),
       );
     });
 

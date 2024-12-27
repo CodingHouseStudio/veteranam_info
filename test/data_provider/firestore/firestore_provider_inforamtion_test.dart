@@ -47,14 +47,15 @@ void main() {
       ).thenAnswer((realInvocation) => mockQuery);
 
       when(
-        mockCollectionReference.doc(KTestText.informationModelItems.first.id),
+        mockCollectionReference
+            .doc(KTestVariables.informationModelItems.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
         mockDocumentReference
-            .set(KTestText.informationModelItems.first.toJson()),
+            .set(KTestVariables.informationModelItems.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -77,7 +78,7 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) => KTestText.informationModelItems
+        (_) => KTestVariables.informationModelItems
             .map((e) => e.toJson())
             .toList()
             .first,
@@ -114,24 +115,25 @@ void main() {
     });
     test('add information', () async {
       await firestoreService
-          .addInformation(KTestText.informationModelItems.first);
+          .addInformation(KTestVariables.informationModelItems.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.information),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.informationModelItems.first.id),
+        mockCollectionReference
+            .doc(KTestVariables.informationModelItems.first.id),
       ).called(1);
       verify(
         mockDocumentReference
-            .set(KTestText.informationModelItems.first.toJson()),
+            .set(KTestVariables.informationModelItems.first.toJson()),
       ).called(1);
     });
     test('get information', () async {
       await expectLater(
         firestoreService.getInformations(null),
         emitsInOrder([
-          [KTestText.informationModelItems.first],
+          [KTestVariables.informationModelItems.first],
         ]),
         reason: 'Wait for getting information',
       );
@@ -166,7 +168,7 @@ void main() {
 
       expect(
         firestoreService.getInformations(null),
-        emits([KTestText.informationModelItems.first]),
+        emits([KTestVariables.informationModelItems.first]),
       );
     });
   });

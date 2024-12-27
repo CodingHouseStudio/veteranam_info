@@ -21,7 +21,7 @@ void main() {
     late FirestoreService mockFirestoreService;
     setUp(() {
       ExtendedDateTime.id = '';
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       mockFirestoreService = MockFirestoreService();
     });
     group('${KGroupText.successful} ', () {
@@ -31,41 +31,41 @@ void main() {
             showOnlyBusinessDiscounts: false, //null
           ),
         ).thenAnswer(
-          (_) => Stream.value(KTestText.repositoryDiscountModelItems),
+          (_) => Stream.value(KTestVariables.repositoryDiscountModelItems),
         );
         when(
           mockFirestoreService.addDiscount(
-            KTestText.repositoryDiscountModelItems.first,
+            KTestVariables.repositoryDiscountModelItems.first,
           ),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
           mockFirestoreService.getUserDiscountsLink(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenAnswer(
-          (realInvocation) async => [KTestText.linkModel],
+          (realInvocation) async => [KTestVariables.linkModel],
         );
         when(
           mockFirestoreService.sendLink(
-            KTestText.linkModel,
+            KTestVariables.linkModel,
           ),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (realInvocation) async => KTestText.discountModelItems.first,
+          (realInvocation) async => KTestVariables.discountModelItems.first,
         );
 
         when(
           mockFirestoreService.sendEmail(
-            KTestText.emailModel,
+            KTestVariables.emailModel,
           ),
         ).thenAnswer(
           (realInvocation) async {},
@@ -79,26 +79,26 @@ void main() {
           mockDiscountRepository.getDiscountItems(
             showOnlyBusinessDiscounts: false,
           ),
-          emits(KTestText.repositoryDiscountModelItems),
+          emits(KTestVariables.repositoryDiscountModelItems),
         );
       });
       test('add mock', () async {
         mockDiscountRepository.addMockDiscountItems();
         verify(
           mockFirestoreService.addDiscount(
-            KTestText.repositoryDiscountModelItems.first,
+            KTestVariables.repositoryDiscountModelItems.first,
           ),
         ).called(1);
       });
       test('User Can Send Link', () async {
         expect(
-          await mockDiscountRepository.userCanSendLink(KTestText.user.id),
+          await mockDiscountRepository.userCanSendLink(KTestVariables.user.id),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
       test('Send Link', () async {
         expect(
-          await mockDiscountRepository.sendLink(KTestText.linkModel),
+          await mockDiscountRepository.sendLink(KTestVariables.linkModel),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
@@ -107,13 +107,14 @@ void main() {
         ExtendedDateTime.current = null;
         when(
           mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenAnswer(
-          (realInvocation) async => [KTestText.emailModel],
+          (realInvocation) async => [KTestVariables.emailModel],
         );
         expect(
-          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          await mockDiscountRepository
+              .userCanSendUserEmail(KTestVariables.user.id),
           isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', -1),
         );
       });
@@ -121,32 +122,34 @@ void main() {
         ExtendedDateTime.current = null;
         when(
           mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenAnswer(
-          (realInvocation) async => [KTestText.emailModelWrong],
+          (realInvocation) async => [KTestVariables.emailModelWrong],
         );
         expect(
-          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          await mockDiscountRepository
+              .userCanSendUserEmail(KTestVariables.user.id),
           isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', 1),
         );
       });
       test('User Can Send Email Wrong, last sending was today', () async {
         when(
           mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenAnswer(
-          (realInvocation) async => [KTestText.emailModelWrong],
+          (realInvocation) async => [KTestVariables.emailModelWrong],
         );
         expect(
-          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          await mockDiscountRepository
+              .userCanSendUserEmail(KTestVariables.user.id),
           isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', -1),
         );
       });
       test('Send Email', () async {
         expect(
-          await mockDiscountRepository.sendEmail(KTestText.emailModel),
+          await mockDiscountRepository.sendEmail(KTestVariables.emailModel),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
@@ -154,13 +157,13 @@ void main() {
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
           isA<Right<SomeFailure, DiscountModel>>().having(
             (e) => e.value,
             'value',
-            KTestText.discountModelItems.first,
+            KTestVariables.discountModelItems.first,
           ),
         );
       });
@@ -168,7 +171,7 @@ void main() {
       test('Add Discount', () async {
         expect(
           await mockDiscountRepository
-              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+              .addDiscount(KTestVariables.repositoryDiscountModelItems.first),
           isA<Right<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
@@ -191,14 +194,14 @@ void main() {
 
         when(
           mockFirestoreService.getUserDiscountsLink(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendLink(
-            KTestText.linkModel,
+            KTestVariables.linkModel,
           ),
         ).thenThrow(
           Exception(KGroupText.failureSend),
@@ -206,21 +209,21 @@ void main() {
 
         when(
           mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendEmail(
-            KTestText.emailModel,
+            KTestVariables.emailModel,
           ),
         ).thenThrow(
           Exception(KGroupText.failureSend),
         );
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
@@ -235,14 +238,14 @@ void main() {
         // );
         when(
           mockFirestoreService.deleteDiscountById(
-            KTestText.discountModelItems.first.id,
+            KTestVariables.discountModelItems.first.id,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
         when(
           mockFirestoreService.addDiscount(
-            KTestText.repositoryDiscountModelItems.first,
+            KTestVariables.repositoryDiscountModelItems.first,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
@@ -261,7 +264,7 @@ void main() {
       });
       test('User Can Send Link', () async {
         expect(
-          await mockDiscountRepository.userCanSendLink(KTestText.user.id),
+          await mockDiscountRepository.userCanSendLink(KTestVariables.user.id),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -272,7 +275,7 @@ void main() {
       });
       test('Send Link', () async {
         expect(
-          await mockDiscountRepository.sendLink(KTestText.linkModel),
+          await mockDiscountRepository.sendLink(KTestVariables.linkModel),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -283,7 +286,8 @@ void main() {
       });
       test('User Can Send Email', () async {
         expect(
-          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          await mockDiscountRepository
+              .userCanSendUserEmail(KTestVariables.user.id),
           isA<Left<SomeFailure, int>>(),
           // .having(
           //   (e) => e.value,
@@ -294,7 +298,7 @@ void main() {
       });
       test('Send Email', () async {
         expect(
-          await mockDiscountRepository.sendEmail(KTestText.emailModel),
+          await mockDiscountRepository.sendEmail(KTestVariables.emailModel),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -306,7 +310,7 @@ void main() {
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
           isA<Left<SomeFailure, DiscountModel>>(),
@@ -320,7 +324,7 @@ void main() {
       test('Delete discount', () async {
         expect(
           await mockDiscountRepository
-              .deleteDiscountsById(KTestText.discountModelItems.first.id),
+              .deleteDiscountsById(KTestVariables.discountModelItems.first.id),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -354,7 +358,7 @@ void main() {
       test('Add Discount', () async {
         expect(
           await mockDiscountRepository
-              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+              .addDiscount(KTestVariables.repositoryDiscountModelItems.first),
           isA<Left<SomeFailure, bool>>(),
         );
       });
@@ -363,35 +367,35 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.getUserDiscountsLink(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendLink(
-            KTestText.linkModel,
+            KTestVariables.linkModel,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureSend),
         );
         when(
           mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
+            KTestVariables.user.id,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendEmail(
-            KTestText.emailModel,
+            KTestVariables.emailModel,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureSend),
         );
         when(
           mockFirestoreService.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenThrow(
@@ -399,7 +403,7 @@ void main() {
         );
         when(
           mockFirestoreService.addDiscount(
-            KTestText.repositoryDiscountModelItems.first,
+            KTestVariables.repositoryDiscountModelItems.first,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
@@ -410,7 +414,7 @@ void main() {
       });
       test('User Can Send Link', () async {
         expect(
-          await mockDiscountRepository.userCanSendLink(KTestText.user.id),
+          await mockDiscountRepository.userCanSendLink(KTestVariables.user.id),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -421,7 +425,7 @@ void main() {
       });
       test('Send Link', () async {
         expect(
-          await mockDiscountRepository.sendLink(KTestText.linkModel),
+          await mockDiscountRepository.sendLink(KTestVariables.linkModel),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -432,7 +436,8 @@ void main() {
       });
       test('User Can Send Email', () async {
         expect(
-          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          await mockDiscountRepository
+              .userCanSendUserEmail(KTestVariables.user.id),
           isA<Left<SomeFailure, int>>(),
           // .having(
           //   (e) => e.value,
@@ -443,7 +448,7 @@ void main() {
       });
       test('Send Email', () async {
         expect(
-          await mockDiscountRepository.sendEmail(KTestText.emailModel),
+          await mockDiscountRepository.sendEmail(KTestVariables.emailModel),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -455,7 +460,7 @@ void main() {
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
           isA<Left<SomeFailure, DiscountModel>>(),
@@ -469,7 +474,7 @@ void main() {
       test('Add Discount', () async {
         expect(
           await mockDiscountRepository
-              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+              .addDiscount(KTestVariables.repositoryDiscountModelItems.first),
           isA<Left<SomeFailure, bool>>(),
         );
       });

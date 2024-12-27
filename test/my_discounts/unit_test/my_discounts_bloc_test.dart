@@ -30,12 +30,12 @@ void main() {
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestText.pureCompanyModel,
+        (_) => KTestVariables.pureCompanyModel,
       );
 
       when(
         mockDiscountRepository.deactivateDiscount(
-          discountModel: KTestText.discountModelItems.first,
+          discountModel: KTestVariables.discountModelItems.first,
         ),
       ).thenAnswer(
         (_) async => const Right(true),
@@ -49,9 +49,9 @@ void main() {
         setUp(
           () => when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
+                .getDiscountsByCompanyId(KTestVariables.pureCompanyModel.id),
           ).thenAnswer(
-            (_) => Stream.value([KTestText.discountModelItems.first]),
+            (_) => Stream.value([KTestVariables.discountModelItems.first]),
           ),
         );
         blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
@@ -100,7 +100,7 @@ void main() {
         setUp(
           () => when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
+                .getDiscountsByCompanyId(KTestVariables.pureCompanyModel.id),
           ).thenAnswer(
             (_) => Stream.error(KGroupText.failureGet),
           ),
@@ -130,9 +130,9 @@ void main() {
         setUp(
           () => when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.userWithoutPhoto.id),
+                .getDiscountsByCompanyId(KTestVariables.userWithoutPhoto.id),
           ).thenAnswer(
-            (_) => Stream.value([KTestText.discountModelItems.first]),
+            (_) => Stream.value([KTestVariables.discountModelItems.first]),
           ),
         );
         blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
@@ -173,21 +173,21 @@ void main() {
       late StreamController<List<DiscountModel>> discountsStreamController;
       setUp(() {
         discountsStreamController = StreamController<List<DiscountModel>>()
-          ..add(KTestText.discountModelItems);
+          ..add(KTestVariables.discountModelItems);
 
         when(
           mockDiscountRepository
-              .getDiscountsByCompanyId(KTestText.profileUser.id),
+              .getDiscountsByCompanyId(KTestVariables.profileUser.id),
         ).thenAnswer((_) => discountsStreamController.stream);
 
         when(
           mockDiscountRepository
-              .deleteDiscountsById(KTestText.discountModelItems.first.id),
+              .deleteDiscountsById(KTestVariables.discountModelItems.first.id),
         ).thenAnswer(
           (_) async {
             discountsStreamController.add(
-              KTestText.discountModelItems
-                  .sublist(1, KTestText.discountModelItems.length),
+              KTestVariables.discountModelItems
+                  .sublist(1, KTestVariables.discountModelItems.length),
             );
             return const Right(true);
           },
@@ -289,7 +289,7 @@ void main() {
 
           bloc.add(
             MyDiscountsWatcherEvent.deleteDiscount(
-              KTestText.discountModelItems.first.id,
+              KTestVariables.discountModelItems.first.id,
             ),
           );
         },
@@ -305,7 +305,7 @@ void main() {
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.discountsModelItems.any(
                   (discount) =>
-                      discount.id != KTestText.discountModelItems.first.id,
+                      discount.id != KTestVariables.discountModelItems.first.id,
                 ),
           ),
         ],
@@ -319,8 +319,9 @@ void main() {
         ),
         act: (bloc) async {
           when(
-            mockDiscountRepository
-                .deleteDiscountsById(KTestText.discountModelItems.first.id),
+            mockDiscountRepository.deleteDiscountsById(
+              KTestVariables.discountModelItems.first.id,
+            ),
           ).thenAnswer(
             (_) async => Left(SomeFailure.serverError(error: null)),
           );
@@ -340,7 +341,7 @@ void main() {
           );
           bloc.add(
             MyDiscountsWatcherEvent.deleteDiscount(
-              KTestText.discountModelItems.first.id,
+              KTestVariables.discountModelItems.first.id,
             ),
           );
         },
@@ -379,7 +380,7 @@ void main() {
           );
           bloc.add(
             MyDiscountsWatcherEvent.changeDeactivate(
-              KTestText.discountModelItems.first,
+              KTestVariables.discountModelItems.first,
             ),
           );
         },
@@ -416,7 +417,7 @@ void main() {
           );
           bloc.add(
             MyDiscountsWatcherEvent.changeDeactivate(
-              KTestText.discountModelItems.first,
+              KTestVariables.discountModelItems.first,
             ),
           );
         },
@@ -439,7 +440,7 @@ void main() {
         act: (bloc) async {
           when(
             mockDiscountRepository.deactivateDiscount(
-              discountModel: KTestText.discountModelItems.first,
+              discountModel: KTestVariables.discountModelItems.first,
             ),
           ).thenAnswer(
             (_) async => Left(SomeFailure.serverError(error: null)),
@@ -461,7 +462,7 @@ void main() {
           );
           bloc.add(
             MyDiscountsWatcherEvent.changeDeactivate(
-              KTestText.discountModelItems.first,
+              KTestVariables.discountModelItems.first,
             ),
           );
         },

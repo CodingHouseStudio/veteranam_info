@@ -33,18 +33,18 @@ void main() {
       companyStream = StreamController();
 
       when(mockUserRepository.currentUserSetting)
-          .thenAnswer((invocation) => KTestText.userSetting);
+          .thenAnswer((invocation) => KTestVariables.userSetting);
       for (var i = 0; i < 3; i++) {
         when(
           mockDiscountRepository.deleteDiscountsById(
-            KTestText.userDiscountModelItems.elementAt(i).id,
+            KTestVariables.userDiscountModelItems.elementAt(i).id,
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
         );
         when(
           mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestText.userDiscountModelItems.elementAt(i),
+            discountModel: KTestVariables.userDiscountModelItems.elementAt(i),
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
@@ -65,15 +65,15 @@ void main() {
           when(
             mockCompanyRepository.currentUserCompany,
           ).thenAnswer(
-            (_) => KTestText.fullCompanyModel,
+            (_) => KTestVariables.fullCompanyModel,
           );
-          companyStream.add(KTestText.fullCompanyModel);
+          companyStream.add(KTestVariables.fullCompanyModel);
 
           when(mockUserRepository.currentUser)
-              .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+              .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
           when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
+                .getDiscountsByCompanyId(KTestVariables.fullCompanyModel.id),
           ).thenAnswer(
             (invocation) => failureStream.stream,
           );
@@ -106,18 +106,18 @@ void main() {
           when(
             mockCompanyRepository.currentUserCompany,
           ).thenAnswer(
-            (_) => KTestText.fullCompanyModel,
+            (_) => KTestVariables.fullCompanyModel,
           );
-          companyStream.add(KTestText.fullCompanyModel);
+          companyStream.add(KTestVariables.fullCompanyModel);
 
           when(mockUserRepository.currentUser)
-              .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+              .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
           when(
             mockDiscountRepository
-                .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
+                .getDiscountsByCompanyId(KTestVariables.fullCompanyModel.id),
           ).thenAnswer(
             (invocation) =>
-                Stream.value(KTestText.discountModelItems.sublist(0, 3)),
+                Stream.value(KTestVariables.discountModelItems.sublist(0, 3)),
           );
         },
       );
@@ -139,17 +139,17 @@ void main() {
         when(
           mockCompanyRepository.currentUserCompany,
         ).thenAnswer(
-          (_) => KTestText.pureCompanyModel,
+          (_) => KTestVariables.pureCompanyModel,
         );
-        companyStream.add(KTestText.pureCompanyModel);
+        companyStream.add(KTestVariables.pureCompanyModel);
         when(mockUserRepository.currentUser)
-            .thenAnswer((invocation) => KTestText.userAnonymous);
+            .thenAnswer((invocation) => KTestVariables.userAnonymous);
         when(
           mockDiscountRepository.getDiscountsByCompanyId(
-            KTestText.pureCompanyModel.id,
+            KTestVariables.pureCompanyModel.id,
           ),
         ).thenAnswer(
-          (invocation) => Stream.value(KTestText.discountModelItems),
+          (invocation) => Stream.value(KTestVariables.discountModelItems),
         );
 
         if (GetIt.I.isRegistered<IDiscountRepository>()) {
@@ -225,15 +225,15 @@ void main() {
         when(
           mockCompanyRepository.currentUserCompany,
         ).thenAnswer(
-          (_) => KTestText.fullCompanyModel,
+          (_) => KTestVariables.fullCompanyModel,
         );
-        companyStream.add(KTestText.fullCompanyModel);
+        companyStream.add(KTestVariables.fullCompanyModel);
         when(mockUserRepository.currentUser)
-            .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+            .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
 
         when(
           mockDiscountRepository.getDiscountsByCompanyId(
-            KTestText.fullCompanyModel.id,
+            KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer(
           (invocation) => Stream.value([]),
@@ -300,16 +300,17 @@ void main() {
         when(
           mockCompanyRepository.currentUserCompany,
         ).thenAnswer(
-          (_) => KTestText.fullCompanyModel,
+          (_) => KTestVariables.fullCompanyModel,
         );
-        companyStream.add(KTestText.fullCompanyModel);
+        companyStream.add(KTestVariables.fullCompanyModel);
         when(mockUserRepository.currentUser)
-            .thenAnswer((invocation) => KTestText.userWithoutPhoto);
+            .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
         when(
           mockDiscountRepository
-              .getDiscountsByCompanyId(KTestText.fullCompanyModel.id),
+              .getDiscountsByCompanyId(KTestVariables.fullCompanyModel.id),
         ).thenAnswer(
-          (invocation) => Stream.value(KTestText.userDiscountModelItemsWidget),
+          (invocation) =>
+              Stream.value(KTestVariables.userDiscountModelItemsWidget),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -375,7 +376,8 @@ void main() {
               );
 
               companyStream.add(
-                KTestText.fullCompanyModel.copyWith(id: KTestText.secondId),
+                KTestVariables.fullCompanyModel
+                    .copyWith(id: KTestVariables.secondId),
               );
 
               await addDiscountsNavigationHelper(

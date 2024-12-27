@@ -24,16 +24,16 @@ void main() {
     late ICitiesRepository mockCitiesRepository;
     setUp(() {
       Config.roleValue = Config.business;
-      ExtendedDateTime.id = KTestText.discountModelItems.first.id;
-      ExtendedDateTime.current = KTestText.sendDiscountModel.dateVerified;
-      ContextExtensions.pickerDate = KTestText.nextDateTime;
+      ExtendedDateTime.id = KTestVariables.discountModelItems.first.id;
+      ExtendedDateTime.current = KTestVariables.sendDiscountModel.dateVerified;
+      ContextExtensions.pickerDate = KTestVariables.nextDateTime;
       mockDiscountRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockCitiesRepository = MockICitiesRepository();
 
       when(
         mockDiscountRepository.addDiscount(
-          KTestText.widgetSendDiscountModel,
+          KTestVariables.widgetSendDiscountModel,
         ),
       ).thenAnswer((invocation) async => const Right(true));
 
@@ -41,24 +41,26 @@ void main() {
         mockDiscountRepository.getDiscountItems(
           showOnlyBusinessDiscounts: false,
         ),
-      ).thenAnswer((invocation) => Stream.value(KTestText.discountModelItems));
+      ).thenAnswer(
+        (invocation) => Stream.value(KTestVariables.discountModelItems),
+      );
       when(
         mockCitiesRepository.getCities(),
       ).thenAnswer(
-        (_) async => Right(KTestText.cityModelItems),
+        (_) async => Right(KTestVariables.cityModelItems),
       );
 
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestText.fullCompanyModel,
+        (_) => KTestVariables.fullCompanyModel,
       );
     });
     group('Discount id wrong', () {
       late StreamController<CompanyModel> companyStreamController;
       setUp(() {
         companyStreamController = StreamController()
-          ..add(KTestText.fullCompanyModel);
+          ..add(KTestVariables.fullCompanyModel);
         when(
           mockCompanyRepository.company,
         ).thenAnswer(
@@ -66,16 +68,16 @@ void main() {
         );
         when(
           mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.sendDiscountModel.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.sendDiscountModel.id,
+            companyId: KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.secondId,
-            companyId: KTestText.pureCompanyModel.id,
+            id: KTestVariables.secondId,
+            companyId: KTestVariables.pureCompanyModel.id,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.serverError(error: null)),
@@ -87,11 +89,12 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
-          discountId: KTestText.sendDiscountModel.id,
+          discountId: KTestVariables.sendDiscountModel.id,
         );
 
-        companyStreamController
-            .add(KTestText.fullCompanyModel.copyWith(id: KTestText.secondId));
+        companyStreamController.add(
+          KTestVariables.fullCompanyModel.copyWith(id: KTestVariables.secondId),
+        );
 
         await discountsEditIdWrongInitialHelper(tester);
       });
@@ -105,7 +108,7 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockCitiesRepository: mockCitiesRepository,
             mockGoRouter: mockGoRouter,
-            discountId: KTestText.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountModel.id,
           );
 
           await discountsEditIdWrongInitialHelper(tester);
@@ -118,7 +121,7 @@ void main() {
               mockCompanyRepository: mockCompanyRepository,
               mockCitiesRepository: mockCitiesRepository,
               mockGoRouter: mockGoRouter,
-              discountId: KTestText.sendDiscountModel.id,
+              discountId: KTestVariables.sendDiscountModel.id,
             );
 
             await discountsEditIdWrongNavHelper(
@@ -133,10 +136,12 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getCompanyDiscount(
-            id: KTestText.sendDiscountModel.id,
-            companyId: KTestText.fullCompanyModel.id,
+            id: KTestVariables.sendDiscountModel.id,
+            companyId: KTestVariables.fullCompanyModel.id,
           ),
-        ).thenAnswer((invocation) async => Right(KTestText.sendDiscountModel));
+        ).thenAnswer(
+          (invocation) async => Right(KTestVariables.sendDiscountModel),
+        );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
@@ -144,7 +149,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
-          discountId: KTestText.sendDiscountModel.id,
+          discountId: KTestVariables.sendDiscountModel.id,
         );
 
         await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -159,7 +164,7 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockCitiesRepository: mockCitiesRepository,
             mockGoRouter: mockGoRouter,
-            discountId: KTestText.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountModel.id,
           );
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -205,8 +210,8 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockCompanyRepository: mockCompanyRepository,
           mockCitiesRepository: mockCitiesRepository,
-          discount: KTestText.sendDiscountModel.copyWith(link: ''),
-          discountId: KTestText.sendDiscountModel.id,
+          discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
+          discountId: KTestVariables.sendDiscountModel.id,
         );
 
         await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -221,8 +226,8 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockCitiesRepository: mockCitiesRepository,
             mockGoRouter: mockGoRouter,
-            discount: KTestText.sendDiscountModel.copyWith(link: ''),
-            discountId: KTestText.sendDiscountModel.id,
+            discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
+            discountId: KTestVariables.sendDiscountModel.id,
           );
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);

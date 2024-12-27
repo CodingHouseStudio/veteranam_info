@@ -12,7 +12,7 @@ Future<void> passwordResetPumpAppHelper({
   required WidgetTester tester,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   MockGoRouter? mockGoRouter,
-  String? code = KTestText.code,
+  String? code = KTestVariables.code,
 }) async {
   _registerPasswordResetBloc(
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,

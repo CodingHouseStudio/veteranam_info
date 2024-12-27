@@ -24,8 +24,8 @@ void main() {
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       Config.falvourValue = Config.production;
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
       mockFaqRepository = MockIFaqRepository();
       mockUserRepository = MockUserRepository();
       mockUrlRepository = MockIUrlRepository();
@@ -47,7 +47,7 @@ void main() {
       //   (realInvocation) => true,
       // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
-        (invocation) async => Right(KTestText.questionModelItems),
+        (invocation) async => Right(KTestVariables.questionModelItems),
       );
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
         (invocation) async => const Right(true),
@@ -59,7 +59,7 @@ void main() {
         mockFirebaseRemoteConfigProvider
             .getString(AppVersionCubit.mobAppVersionKey),
       ).thenAnswer(
-        (_) => KTestText.build,
+        (_) => KTestVariables.build,
       );
     });
 

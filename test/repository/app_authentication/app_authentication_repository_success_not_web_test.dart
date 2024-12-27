@@ -50,16 +50,16 @@ void main() {
       mockDeviceRepository = MockIDeviceRepository();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
-        (_) => KTestText.token,
+        (_) => KTestVariables.token,
       );
       when(mockGoogleSignInAuthentication.accessToken).thenAnswer(
-        (_) => KTestText.token,
+        (_) => KTestVariables.token,
       );
       when(mockGoogleSignInAccount.authentication).thenAnswer(
         (_) async => mockGoogleSignInAuthentication,
       );
       when(mockUserCredential.credential).thenAnswer(
-        (_) => KTestText.authCredential,
+        (_) => KTestVariables.authCredential,
       );
 
       when(mockUserCredential.user).thenAnswer(
@@ -71,7 +71,7 @@ void main() {
       when(mockFacebookAuth.login()).thenAnswer(
         (_) async => mockLoginResult,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestVariables.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
       );
@@ -80,8 +80,8 @@ void main() {
       );
       when(
         mockFirestoreService.setUserSetting(
-          userSetting: KTestText.userSetting,
-          userId: KTestText.user.id,
+          userSetting: KTestVariables.userSetting,
+          userId: KTestVariables.user.id,
         ),
       ).thenAnswer(
         (_) async {},
@@ -91,7 +91,7 @@ void main() {
           key: AppAuthenticationRepository.userCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => KTestVariables.user,
       );
 
       appAuthenticationRepository = AppAuthenticationRepository(
@@ -106,7 +106,8 @@ void main() {
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
       );
-      AppAuthenticationRepository.authCredential = KTestText.authCredential;
+      AppAuthenticationRepository.authCredential =
+          KTestVariables.authCredential;
     });
     test('Sign up with google', () async {
       expect(
@@ -119,11 +120,11 @@ void main() {
     test('Sign up with facebook', () async {
       when(mockLoginResult.accessToken).thenAnswer(
         (_) => LimitedToken(
-          userId: KTestText.user.id,
-          userName: KTestText.user.name!,
-          userEmail: KTestText.user.email,
-          nonce: KTestText.field,
-          tokenString: KTestText.token,
+          userId: KTestVariables.user.id,
+          userName: KTestVariables.user.name!,
+          userEmail: KTestVariables.user.email,
+          nonce: KTestVariables.field,
+          tokenString: KTestVariables.token,
         ),
       );
       expect(
@@ -145,7 +146,7 @@ void main() {
       verify(
         mockFirestoreService.setUserSetting(
           userSetting: UserSetting.empty,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       ).called(1);
       expect(

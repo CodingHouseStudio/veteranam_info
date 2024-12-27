@@ -18,12 +18,12 @@ void main() {
   group('${KScreenBlocName.login} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.current = KTestVariables.feedbackModel.timestamp;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(
         mockAuthenticationRepository.logIn(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (invocation) async => const Right(true),
@@ -44,8 +44,8 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockAuthenticationRepository.logIn(
-            email: KTestText.useremailWrong,
-            password: KTestText.passwordWrong,
+            email: KTestVariables.useremailWrong,
+            password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
           (invocation) async => Left(
@@ -64,8 +64,8 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockAuthenticationRepository.logIn(
-            email: KTestText.useremailWrong,
-            password: KTestText.passwordWrong,
+            email: KTestVariables.useremailWrong,
+            password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.network(error: null)),
@@ -80,8 +80,8 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
           mockAuthenticationRepository.logIn(
-            email: KTestText.useremailWrong,
-            password: KTestText.passwordWrong,
+            email: KTestVariables.useremailWrong,
+            password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.send(error: null)),
@@ -96,8 +96,8 @@ void main() {
       testWidgets('${KGroupText.failure} not found', (tester) async {
         when(
           mockAuthenticationRepository.logIn(
-            email: KTestText.useremailWrong,
-            password: KTestText.passwordWrong,
+            email: KTestVariables.useremailWrong,
+            password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.notFound(error: null)),

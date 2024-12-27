@@ -17,7 +17,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.firebaseFailure} ', () {
-    ExtendedDateTime.current = KTestText.dateTime;
+    ExtendedDateTime.current = KTestVariables.dateTime;
     late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
@@ -52,11 +52,11 @@ void main() {
           key: AppAuthenticationRepository.userCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => KTestVariables.user,
       );
 
       when(mockUserCredential.credential).thenAnswer(
-        (_) => KTestText.authCredential,
+        (_) => KTestVariables.authCredential,
       );
       when(mockFirebaseAuth.signInWithPopup(mockGoogleAuthProvider)).thenAnswer(
         (_) async => mockUserCredential,
@@ -66,7 +66,7 @@ void main() {
         (_) async => mockUserCredential,
       );
       when(
-        mockFirebaseAuth.signInWithCredential(KTestText.authCredential),
+        mockFirebaseAuth.signInWithCredential(KTestVariables.authCredential),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
           code: KGroupText.firebaseFailure,
@@ -74,8 +74,8 @@ void main() {
       );
       when(
         mockFirebaseAuth.signInWithEmailAndPassword(
-          email: KTestText.userEmailIncorrect,
-          password: KTestText.passwordIncorrect,
+          email: KTestVariables.userEmailIncorrect,
+          password: KTestVariables.passwordIncorrect,
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -84,8 +84,8 @@ void main() {
       );
       when(
         mockFirebaseAuth.createUserWithEmailAndPassword(
-          email: KTestText.userEmailIncorrect,
-          password: KTestText.passwordIncorrect,
+          email: KTestVariables.userEmailIncorrect,
+          password: KTestVariables.passwordIncorrect,
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -94,7 +94,7 @@ void main() {
       );
       when(
         mockFirebaseAuth.sendPasswordResetEmail(
-          email: KTestText.userEmailIncorrect,
+          email: KTestVariables.userEmailIncorrect,
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -137,8 +137,8 @@ void main() {
       );
       when(
         mockFirestoreService.setUserSetting(
-          userSetting: KTestText.userSetting,
-          userId: KTestText.user.id,
+          userSetting: KTestVariables.userSetting,
+          userId: KTestVariables.user.id,
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -160,9 +160,9 @@ void main() {
       );
       when(
         mockFirestoreService.setUserSetting(
-          userId: KTestText.userSetting.id,
+          userId: KTestVariables.userSetting.id,
           userSetting:
-              UserSetting.empty.copyWith(deletedOn: KTestText.dateTime),
+              UserSetting.empty.copyWith(deletedOn: KTestVariables.dateTime),
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -171,7 +171,7 @@ void main() {
       );
 
       when(
-        mockUser.updateDisplayName(KTestText.profileUser.name),
+        mockUser.updateDisplayName(KTestVariables.profileUser.name),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
           code: KGroupText.firebaseFailure,
@@ -179,7 +179,7 @@ void main() {
       );
 
       when(
-        mockFirebaseAuth.verifyPasswordResetCode(KTestText.code),
+        mockFirebaseAuth.verifyPasswordResetCode(KTestVariables.code),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
           code: KGroupText.firebaseFailure,
@@ -187,8 +187,8 @@ void main() {
       );
       when(
         mockFirebaseAuth.confirmPasswordReset(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
       ).thenThrow(
         firebase_auth.FirebaseAuthException(
@@ -208,7 +208,8 @@ void main() {
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
       );
-      AppAuthenticationRepository.authCredential = KTestText.authCredential;
+      AppAuthenticationRepository.authCredential =
+          KTestVariables.authCredential;
     });
     test('Sign up with google', () async {
       expect(
@@ -237,8 +238,8 @@ void main() {
     test('LogIn with email and password', () async {
       expect(
         await appAuthenticationRepository.logInWithEmailAndPassword(
-          email: KTestText.userEmailIncorrect,
-          password: KTestText.passwordIncorrect,
+          email: KTestVariables.userEmailIncorrect,
+          password: KTestVariables.passwordIncorrect,
         ),
         isA<Left<SomeFailure, User?>>(),
         // .having(
@@ -251,8 +252,8 @@ void main() {
     test('Sign up', () async {
       expect(
         await appAuthenticationRepository.signUp(
-          email: KTestText.userEmailIncorrect,
-          password: KTestText.passwordIncorrect,
+          email: KTestVariables.userEmailIncorrect,
+          password: KTestVariables.passwordIncorrect,
         ),
         isA<Left<SomeFailure, User?>>(),
         // .having(
@@ -266,7 +267,7 @@ void main() {
     test('Send verification code', () async {
       expect(
         await appAuthenticationRepository.sendVerificationCode(
-          email: KTestText.userEmailIncorrect,
+          email: KTestVariables.userEmailIncorrect,
         ),
         isA<Left<SomeFailure, bool>>(),
         // .having(
@@ -330,7 +331,7 @@ void main() {
     test('Update User Setting', () async {
       expect(
         await appAuthenticationRepository.updateUserSetting(
-          KTestText.userSetting,
+          KTestVariables.userSetting,
         ),
         isA<Left<SomeFailure, UserSetting>>(),
         // .having(
@@ -342,8 +343,8 @@ void main() {
     });
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
-        user: KTestText.profileUser,
-        image: KTestText.filePickerItem,
+        user: KTestVariables.profileUser,
+        image: KTestVariables.filePickerItem,
       );
       expect(
         result,
@@ -354,7 +355,7 @@ void main() {
     test('Check verification code', () async {
       expect(
         await appAuthenticationRepository.checkVerificationCode(
-          KTestText.code,
+          KTestVariables.code,
         ),
         isA<Left<SomeFailure, bool>>(),
       );
@@ -362,8 +363,8 @@ void main() {
     test('Reset password use code', () async {
       expect(
         await appAuthenticationRepository.resetPasswordUseCode(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
         isA<Left<SomeFailure, bool>>(),
       );

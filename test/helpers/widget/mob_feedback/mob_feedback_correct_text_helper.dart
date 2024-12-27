@@ -5,7 +5,7 @@ import '../../../test_dependency.dart';
 Future<void> mobFeedbackCorrectTextHelper(
   WidgetTester tester,
 ) async {
-  await mobFeedbackEnterTextHelper(tester: tester, text: KTestText.field);
+  await mobFeedbackEnterTextHelper(tester: tester, text: KTestVariables.field);
 
   // expect(find.byKey(KWidgetkeys.widget.mobFeedback.widget), findsNothing);
 }

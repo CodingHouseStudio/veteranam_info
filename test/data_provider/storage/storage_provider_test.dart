@@ -21,20 +21,20 @@ void main() {
       mockFirebaseStorage = MockFirebaseStorage();
       mockUploadTask = MockUploadTask();
       mockTaskSnapshot = MockTaskSnapshot();
-      ExtendedDateTime.id = KTestText.id;
+      ExtendedDateTime.id = KTestVariables.id;
       when(
         mockFirebaseStorage.ref(
           StoragePath.getFilePath(
             collection: FirebaseCollectionName.stroies,
-            modelId: KTestText.storyModelItems.last.id,
-            fileExtension: KTestText.filePickerItem.extension,
+            modelId: KTestVariables.storyModelItems.last.id,
+            fileExtension: KTestVariables.filePickerItem.extension,
             file: StoragePath.image,
             standartFileExtension: StoragePath.standartImageFileExtension,
           ),
         ),
       ).thenAnswer((realInvocation) => mockReference);
       when(
-        mockReference.putData(KTestText.filePickerItem.bytes),
+        mockReference.putData(KTestVariables.filePickerItem.bytes),
       ).thenAnswer(
         (realInvocation) {
           return mockUploadTask;
@@ -52,7 +52,7 @@ void main() {
         mockReference.getDownloadURL(),
       ).thenAnswer(
         (realInvocation) async =>
-            KTestText.storyModelItems.last.image!.downloadURL,
+            KTestVariables.storyModelItems.last.image!.downloadURL,
       );
       storageService = StorageService(storage: mockFirebaseStorage);
     });
@@ -88,15 +88,15 @@ void main() {
 
     test('save empty story image', () async {
       await storageService.saveFile(
-        filePickerItem: KTestText.filePickerItemEmpty,
-        id: KTestText.storyModelItems.last.id,
+        filePickerItem: KTestVariables.filePickerItemEmpty,
+        id: KTestVariables.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyNeverMethod(
         StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
-          modelId: KTestText.storyModelItems.last.id,
+          modelId: KTestVariables.storyModelItems.last.id,
           fileExtension: null, file: StoragePath.image,
           standartFileExtension: StoragePath.standartImageFileExtension,
           // imageName: KTestText.storyModelItems.last.image!.name,
@@ -105,15 +105,15 @@ void main() {
     });
     test('save story image', () async {
       await storageService.saveFile(
-        filePickerItem: KTestText.filePickerItem,
-        id: KTestText.storyModelItems.last.id,
+        filePickerItem: KTestVariables.filePickerItem,
+        id: KTestVariables.storyModelItems.last.id,
         collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyMethod(
         StoragePath.getFilePath(
           collection: FirebaseCollectionName.stroies,
-          modelId: KTestText.storyModelItems.last.id,
+          modelId: KTestVariables.storyModelItems.last.id,
           fileExtension: null, file: StoragePath.image,
           standartFileExtension: StoragePath.standartImageFileExtension,
           // imageName: KTestText.storyModelItems.last.image!.name,

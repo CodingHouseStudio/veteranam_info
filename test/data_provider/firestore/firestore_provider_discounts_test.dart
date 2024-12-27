@@ -53,7 +53,7 @@ void main() {
       ).thenAnswer((realInvocation) => mockQuery);
 
       when(
-        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
+        mockCollectionReference.doc(KTestVariables.discountModelItems.last.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
@@ -61,7 +61,7 @@ void main() {
       when(
         mockCollectionReference.where(
           DiscountModelJsonField.userId,
-          isEqualTo: KTestText.user.id,
+          isEqualTo: KTestVariables.user.id,
         ),
       ).thenAnswer(
         (_) => mockQuery,
@@ -101,8 +101,10 @@ void main() {
       when(
         mockQueryDocumentSnapshot.last.data(),
       ).thenAnswer(
-        (_) =>
-            KTestText.discountModelItems.map((e) => e.toJson()).toList().last,
+        (_) => KTestVariables.discountModelItems
+            .map((e) => e.toJson())
+            .toList()
+            .last,
       );
       when(
         mockQuerySnapshot.metadata,
@@ -117,7 +119,8 @@ void main() {
       );
 
       when(
-        mockDocumentReference.set(KTestText.discountModelItems.last.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.discountModelItems.last.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -140,7 +143,7 @@ void main() {
           showOnlyBusinessDiscounts: false, //null
         ),
         emitsInOrder([
-          [KTestText.discountModelItems.last],
+          [KTestVariables.discountModelItems.last],
         ]),
         reason: 'Wait for getting discounts',
       );
@@ -181,27 +184,29 @@ void main() {
       // );
     });
     test('add discount', () async {
-      await firestoreService.addDiscount(KTestText.discountModelItems.last);
+      await firestoreService
+          .addDiscount(KTestVariables.discountModelItems.last);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
+        mockCollectionReference.doc(KTestVariables.discountModelItems.last.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.discountModelItems.last.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.discountModelItems.last.toJson()),
       ).called(1);
     });
     test('add discount', () async {
       await firestoreService
-          .deleteDiscountById(KTestText.discountModelItems.last.id);
+          .deleteDiscountById(KTestVariables.discountModelItems.last.id);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
+        mockCollectionReference.doc(KTestVariables.discountModelItems.last.id),
       ).called(1);
       verify(
         mockDocumentReference.delete(),

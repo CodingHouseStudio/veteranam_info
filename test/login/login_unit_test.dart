@@ -16,12 +16,12 @@ void main() {
     late LoginBloc loginBloc;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.current = KTestVariables.feedbackModel.timestamp;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(
         mockAuthenticationRepository.logIn(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -36,32 +36,34 @@ void main() {
       ' are changed and valid',
       build: () => loginBloc,
       act: (bloc) => bloc
-        ..add(const LoginEvent.emailUpdated(KTestText.userEmail))
+        ..add(const LoginEvent.emailUpdated(KTestVariables.userEmail))
         ..add(const LoginEvent.loginSubmitted())
-        ..add(const LoginEvent.passwordUpdated(KTestText.passwordIncorrect))
+        ..add(
+          const LoginEvent.passwordUpdated(KTestVariables.passwordIncorrect),
+        )
         ..add(const LoginEvent.loginSubmitted()),
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.showPassword,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           failure: null,
           formState: LoginEnum.passwordInProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           failure: null,
           formState: LoginEnum.passwordInvalidData,
         ),
@@ -71,17 +73,17 @@ void main() {
       'emits [LoginState] when password invalid are changed, submited',
       build: () => loginBloc,
       act: (bloc) => bloc
-        ..add(const LoginEvent.emailUpdated(KTestText.userEmailIncorrect))
+        ..add(const LoginEvent.emailUpdated(KTestVariables.userEmailIncorrect))
         ..add(const LoginEvent.loginSubmitted()),
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.invalidData,
@@ -94,32 +96,32 @@ void main() {
       ' are changed valid and submited',
       build: () => loginBloc,
       act: (bloc) => bloc
-        ..add(const LoginEvent.emailUpdated(KTestText.userEmail))
+        ..add(const LoginEvent.emailUpdated(KTestVariables.userEmail))
         ..add(const LoginEvent.loginSubmitted())
-        ..add(const LoginEvent.passwordUpdated(KTestText.passwordCorrect))
+        ..add(const LoginEvent.passwordUpdated(KTestVariables.passwordCorrect))
         ..add(const LoginEvent.loginSubmitted()),
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.showPassword,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: LoginEnum.passwordInProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: LoginEnum.success,
         ),
@@ -139,8 +141,8 @@ void main() {
       act: (bloc) {
         when(
           mockAuthenticationRepository.logIn(
-            email: KTestText.userEmail,
-            password: KTestText.passwordCorrect,
+            email: KTestVariables.userEmail,
+            password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (realInvocation) async => Left(
@@ -150,39 +152,41 @@ void main() {
           ),
         );
         return bloc
-          ..add(const LoginEvent.emailUpdated(KTestText.userEmail))
+          ..add(const LoginEvent.emailUpdated(KTestVariables.userEmail))
           ..add(const LoginEvent.loginSubmitted())
-          ..add(const LoginEvent.passwordUpdated(KTestText.passwordCorrect))
+          ..add(
+            const LoginEvent.passwordUpdated(KTestVariables.passwordCorrect),
+          )
           ..add(const LoginEvent.loginSubmitted());
       },
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.showPassword,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: LoginEnum.passwordInProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: LoginEnum.success,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: LoginFailure.error,
           formState: LoginEnum.inProgress,
         ),
@@ -193,25 +197,25 @@ void main() {
       build: () => loginBloc,
       act: (bloc) {
         return bloc
-          ..add(const LoginEvent.emailUpdated(KTestText.userEmail))
+          ..add(const LoginEvent.emailUpdated(KTestVariables.userEmail))
           ..add(const LoginEvent.loginSubmitted())
           ..add(const LoginEvent.passwordFieldHide());
       },
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.showPassword,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
           formState: LoginEnum.inProgress,

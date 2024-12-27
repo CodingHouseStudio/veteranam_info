@@ -20,7 +20,7 @@ void main() {
     setUp(() {
       mockUserRepository = MockUserRepository();
       when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.userWithoutPhoto,
+        (realInvocation) => KTestVariables.userWithoutPhoto,
       );
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,

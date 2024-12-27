@@ -14,10 +14,10 @@ void main() {
   tearDown(GetIt.I.reset);
   group('Link ${KGroupText.model} ', () {
     final fullJson = {
-      LinkModelJsonField.id: KTestText.linkModel.id,
-      LinkModelJsonField.date: KTestText.linkModel.date.toIso8601String(),
-      LinkModelJsonField.link: KTestText.linkModel.link,
-      LinkModelJsonField.userId: KTestText.linkModel.userId,
+      LinkModelJsonField.id: KTestVariables.linkModel.id,
+      LinkModelJsonField.date: KTestVariables.linkModel.date.toIso8601String(),
+      LinkModelJsonField.link: KTestVariables.linkModel.link,
+      LinkModelJsonField.userId: KTestVariables.linkModel.userId,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -25,28 +25,28 @@ void main() {
 
         expect(
           linkModel.id,
-          KTestText.linkModel.id,
+          KTestVariables.linkModel.id,
         );
         expect(
           linkModel.date,
-          KTestText.linkModel.date,
+          KTestVariables.linkModel.date,
         );
         expect(
           linkModel.link,
-          KTestText.linkModel.link,
+          KTestVariables.linkModel.link,
         );
         expect(
           linkModel.userId,
-          KTestText.linkModel.userId,
+          KTestVariables.linkModel.userId,
         );
       });
 
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          LinkModelJsonField.date: KTestText.linkModel.date,
-          LinkModelJsonField.link: KTestText.linkModel.link,
-          LinkModelJsonField.userId: KTestText.linkModel.userId,
+          LinkModelJsonField.date: KTestVariables.linkModel.date,
+          LinkModelJsonField.link: KTestVariables.linkModel.link,
+          LinkModelJsonField.userId: KTestVariables.linkModel.userId,
         };
 
         expect(
@@ -57,7 +57,7 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final linkModelJson = KTestText.linkModel.toJson();
+        final linkModelJson = KTestVariables.linkModel.toJson();
 
         expect(linkModelJson, fullJson);
       });

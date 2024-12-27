@@ -15,45 +15,47 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.story} ${KGroupText.model} ', () {
     final fullJson = {
-      StoryModelJsonField.id: KTestText.storyModelItems.last.id,
-      StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
-      StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
-      StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+      StoryModelJsonField.id: KTestVariables.storyModelItems.last.id,
+      StoryModelJsonField.userName:
+          KTestVariables.storyModelItems.last.userName,
+      StoryModelJsonField.userId: KTestVariables.storyModelItems.last.userId,
+      StoryModelJsonField.story: KTestVariables.storyModelItems.last.story,
       StoryModelJsonField.date:
-          KTestText.storyModelItems.last.date.toIso8601String(),
+          KTestVariables.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: [
-        KTestText.storyModelItems.last.userPhoto!.toJson(),
+        KTestVariables.storyModelItems.last.userPhoto!.toJson(),
       ],
       StoryModelJsonField.image: [
-        KTestText.storyModelItems.last.image!.toJson(),
+        KTestVariables.storyModelItems.last.image!.toJson(),
       ],
     };
     final nullableJson = {
-      StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+      StoryModelJsonField.id: KTestVariables.storyModelItems.last.id,
       StoryModelJsonField.userName: null,
-      StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
-      StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+      StoryModelJsonField.userId: KTestVariables.storyModelItems.last.userId,
+      StoryModelJsonField.story: KTestVariables.storyModelItems.last.story,
       StoryModelJsonField.date:
-          KTestText.storyModelItems.last.date.toIso8601String(),
+          KTestVariables.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: null,
       StoryModelJsonField.image: null,
     };
     final convertorJson = {
-      StoryModelJsonField.id: KTestText.storyModelItems.last.id,
-      StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
-      StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+      StoryModelJsonField.id: KTestVariables.storyModelItems.last.id,
+      StoryModelJsonField.userName:
+          KTestVariables.storyModelItems.last.userName,
+      StoryModelJsonField.userId: KTestVariables.storyModelItems.last.userId,
       StoryModelJsonField.story: List.generate(
         KMinMaxSize.subtitleMaxLength,
-        (_) => KTestText.storyModelItems.last.story
-            .split(KTestText.storyModelItems.last.story),
+        (_) => KTestVariables.storyModelItems.last.story
+            .split(KTestVariables.storyModelItems.last.story),
       ).join(),
       StoryModelJsonField.date:
-          KTestText.storyModelItems.last.date.toIso8601String(),
+          KTestVariables.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: [
-        KTestText.storyModelItems.last.userPhoto!.toJson(),
+        KTestVariables.storyModelItems.last.userPhoto!.toJson(),
       ],
       StoryModelJsonField.image: [
-        KTestText.storyModelItems.last.image!.toJson(),
+        KTestVariables.storyModelItems.last.image!.toJson(),
       ],
     };
 
@@ -63,27 +65,27 @@ void main() {
 
         expect(
           storyModel.id,
-          KTestText.storyModelItems.last.id,
+          KTestVariables.storyModelItems.last.id,
         );
         expect(
           storyModel.userName,
-          KTestText.storyModelItems.last.userName,
+          KTestVariables.storyModelItems.last.userName,
         );
         expect(
           storyModel.story,
-          KTestText.storyModelItems.last.story,
+          KTestVariables.storyModelItems.last.story,
         );
         expect(
           storyModel.date,
-          KTestText.storyModelItems.last.date,
+          KTestVariables.storyModelItems.last.date,
         );
         expect(
           storyModel.image,
-          KTestText.storyModelItems.last.image,
+          KTestVariables.storyModelItems.last.image,
         );
         expect(
           storyModel.userPhoto,
-          KTestText.storyModelItems.last.userPhoto,
+          KTestVariables.storyModelItems.last.userPhoto,
         );
       });
 
@@ -92,7 +94,7 @@ void main() {
 
         expect(
           storyModel.id,
-          KTestText.storyModelItems.last.id,
+          KTestVariables.storyModelItems.last.id,
         );
         expect(
           storyModel.userName,
@@ -100,11 +102,11 @@ void main() {
         );
         expect(
           storyModel.story,
-          KTestText.storyModelItems.last.story,
+          KTestVariables.storyModelItems.last.story,
         );
         expect(
           storyModel.date,
-          KTestText.storyModelItems.last.date,
+          KTestVariables.storyModelItems.last.date,
         );
         expect(
           storyModel.image,
@@ -119,11 +121,13 @@ void main() {
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
-          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
-          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.userName:
+              KTestVariables.storyModelItems.last.userName,
+          StoryModelJsonField.userId:
+              KTestVariables.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestVariables.storyModelItems.last.story,
           StoryModelJsonField.date:
-              KTestText.storyModelItems.last.date.toIso8601String(),
+              KTestVariables.storyModelItems.last.date.toIso8601String(),
         };
 
         expect(
@@ -136,11 +140,11 @@ void main() {
 
         expect(
           storyModel.id,
-          KTestText.storyModelItems.last.id,
+          KTestVariables.storyModelItems.last.id,
         );
         expect(
           storyModel.userName,
-          KTestText.storyModelItems.last.userName,
+          KTestVariables.storyModelItems.last.userName,
         );
         expect(
           storyModel.story.length,
@@ -148,39 +152,39 @@ void main() {
         );
         expect(
           storyModel.date,
-          KTestText.storyModelItems.last.date,
+          KTestVariables.storyModelItems.last.date,
         );
         expect(
           storyModel.image,
-          KTestText.storyModelItems.last.image,
+          KTestVariables.storyModelItems.last.image,
         );
         expect(
           storyModel.userPhoto,
-          KTestText.storyModelItems.last.userPhoto,
+          KTestVariables.storyModelItems.last.userPhoto,
         );
       });
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final storyModelJson = KTestText.storyModelItems.last.toJson();
+        final storyModelJson = KTestVariables.storyModelItems.last.toJson();
 
         expect(storyModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final storyModelJson = KTestText.storyModelItems.last
+        final storyModelJson = KTestVariables.storyModelItems.last
             .copyWith(image: null, userPhoto: null, userName: null)
             .toJson();
 
         expect(storyModelJson, nullableJson);
       });
       test('${KGroupText.convertor} ', () {
-        final storyModelJson = KTestText.storyModelItems.last
+        final storyModelJson = KTestVariables.storyModelItems.last
             .copyWith(
               story: List.generate(
                 KMinMaxSize.subtitleMaxLength,
-                (_) => KTestText.storyModelItems.last.story
-                    .split(KTestText.storyModelItems.last.story),
+                (_) => KTestVariables.storyModelItems.last.story
+                    .split(KTestVariables.storyModelItems.last.story),
               ).join(),
             )
             .toJson();

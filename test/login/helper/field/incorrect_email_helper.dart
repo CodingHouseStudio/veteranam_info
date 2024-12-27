@@ -13,7 +13,7 @@ Future<void> incorrectEmailHelper(
 
   await emailPasswordFieldsEmHelper(
     tester: tester,
-    email: KTestText.userEmailIncorrect,
+    email: KTestVariables.userEmailIncorrect,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.login.button));

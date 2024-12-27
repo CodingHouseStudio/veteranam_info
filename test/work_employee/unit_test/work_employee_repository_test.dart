@@ -28,29 +28,30 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(mockFirestoreService.getWorks()).thenAnswer(
-          (_) => Stream.value(KTestText.workModelItems),
+          (_) => Stream.value(KTestVariables.workModelItems),
         );
         when(
-          mockFirestoreService.addWork(KTestText.workModelItems.first),
+          mockFirestoreService.addWork(KTestVariables.workModelItems.first),
         ).thenAnswer(
           (realInvocation) async {},
         );
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
+          mockFirestoreService
+              .sendRespond(KTestVariables.employeeRespondModelModel),
         ).thenAnswer(
           (realInvocation) async {},
         );
 
         when(
           mockStorageService.saveFile(
-            filePickerItem: KTestText.filePickerItem,
+            filePickerItem: KTestVariables.filePickerItem,
             collecltionName: FirebaseCollectionName.respond,
-            id: KTestText.employeeRespondModelModel.id,
+            id: KTestVariables.employeeRespondModelModel.id,
             file: StoragePath.resume,
             standartFileExtension: StoragePath.standartFileExtension,
           ),
         ).thenAnswer(
-          (realInvocation) async => KTestText.downloadURL,
+          (realInvocation) async => KTestVariables.downloadURL,
         );
 
         mockWorkRepository = WorkRepository(
@@ -61,20 +62,20 @@ void main() {
       test('Work', () async {
         expect(
           mockWorkRepository.getWorks(),
-          emits(KTestText.workModelItems),
+          emits(KTestVariables.workModelItems),
         );
       });
       test('mock', () async {
         mockWorkRepository.addMockWorks();
         verify(
-          mockFirestoreService.addWork(KTestText.workModelItems.first),
+          mockFirestoreService.addWork(KTestVariables.workModelItems.first),
         ).called(1);
       });
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModelModel,
-            file: KTestText.filePickerItem,
+            respond: KTestVariables.employeeRespondModelModel,
+            file: KTestVariables.filePickerItem,
           ),
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
@@ -88,7 +89,8 @@ void main() {
           ),
         );
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
+          mockFirestoreService
+              .sendRespond(KTestVariables.employeeRespondModelModel),
         ).thenThrow(
           Exception(KGroupText.failure),
         );
@@ -107,8 +109,8 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModelModel,
-            file: KTestText.filePickerItem,
+            respond: KTestVariables.employeeRespondModelModel,
+            file: KTestVariables.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -122,7 +124,8 @@ void main() {
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.sendRespond(KTestText.employeeRespondModelModel),
+          mockFirestoreService
+              .sendRespond(KTestVariables.employeeRespondModelModel),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
         );
@@ -135,8 +138,8 @@ void main() {
       test('send respond', () async {
         expect(
           await mockWorkRepository.sendRespond(
-            respond: KTestText.employeeRespondModelModel,
-            file: KTestText.filePickerItem,
+            respond: KTestVariables.employeeRespondModelModel,
+            file: KTestVariables.filePickerItem,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

@@ -20,23 +20,24 @@ void main() {
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        when(mockFirestoreService.addReport(KTestText.reportModel)).thenAnswer(
+        when(mockFirestoreService.addReport(KTestVariables.reportModel))
+            .thenAnswer(
           (_) async {},
         );
         when(
           mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
         ).thenAnswer(
-          (_) async => KTestText.reportItems,
+          (_) async => KTestVariables.reportItems,
         );
         reportRepository =
             ReportRepository(firestoreService: mockFirestoreService);
       });
       test('${KGroupText.successfulSet} ', () async {
         expect(
-          await reportRepository.sendReport(KTestText.reportModel),
+          await reportRepository.sendReport(KTestVariables.reportModel),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -45,22 +46,22 @@ void main() {
         expect(
           await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
           isA<Right<SomeFailure, List<ReportModel>>>()
-              .having((e) => e.value, 'value', KTestText.reportItems),
+              .having((e) => e.value, 'value', KTestVariables.reportItems),
         );
       });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(
-          mockFirestoreService.addReport(KTestText.reportModelIncorect),
+          mockFirestoreService.addReport(KTestVariables.reportModelIncorect),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
           mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
         ).thenThrow(Exception(KGroupText.failureGet));
 
@@ -69,7 +70,7 @@ void main() {
       });
       test('${KGroupText.failureSend} ', () async {
         expect(
-          await reportRepository.sendReport(KTestText.reportModelIncorect),
+          await reportRepository.sendReport(KTestVariables.reportModelIncorect),
           isA<Left<SomeFailure, bool>>(),
           // .having(
           //   (e) => e.value,
@@ -82,7 +83,7 @@ void main() {
         expect(
           await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
           isA<Left<SomeFailure, List<ReportModel>>>(),
           // .having(
@@ -97,8 +98,8 @@ void main() {
       setUp(() {
         when(
           mockFirestoreService.addReport(
-            KTestText.reportModelIncorect.copyWith(
-              message: KTestText.fieldEmpty,
+            KTestVariables.reportModelIncorect.copyWith(
+              message: KTestVariables.fieldEmpty,
               reasonComplaint: ReasonComplaint.other,
             ),
           ),
@@ -106,7 +107,7 @@ void main() {
         when(
           mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
@@ -116,8 +117,8 @@ void main() {
       test('${KGroupText.failureSend} ', () async {
         expect(
           await reportRepository.sendReport(
-            KTestText.reportModelIncorect.copyWith(
-              message: KTestText.fieldEmpty,
+            KTestVariables.reportModelIncorect.copyWith(
+              message: KTestVariables.fieldEmpty,
               reasonComplaint: ReasonComplaint.other,
             ),
           ),
@@ -133,7 +134,7 @@ void main() {
         expect(
           await reportRepository.getCardReportById(
             cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
+            userId: KTestVariables.user.id,
           ),
           isA<Left<SomeFailure, List<ReportModel>>>(),
           // .having(

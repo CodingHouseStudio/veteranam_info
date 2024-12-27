@@ -22,17 +22,19 @@ void main() {
     setUp(() {
       Config.testIsWeb = false;
       Config.falvourValue = Config.production;
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
 
       mockUrlRepository = MockIUrlRepository();
       mockFeedbackRepository = MockIFeedbackRepository();
-      when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+      when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
           .thenAnswer(
         (invocation) async => const Right(true),
       );
-      when(mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id))
-          .thenAnswer(
+      when(
+        mockFeedbackRepository
+            .checkUserNeedShowFeedback(KTestVariables.user.id),
+      ).thenAnswer(
         (invocation) async => const Right(true),
       );
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -40,7 +42,7 @@ void main() {
         (realInvocation) => UserSetting.empty,
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
         (invocation) async => const Right(true),
@@ -62,7 +64,7 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
-        when(mockUrlRepository.copy(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.copy(KTestVariables.downloadURL)).thenAnswer(
           (invocation) async => const Right(true),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(

@@ -47,7 +47,7 @@ void main() {
       mockStorageService = MockStorageService();
 
       when(mockUserCredential.credential).thenAnswer(
-        (_) => KTestText.authCredential,
+        (_) => KTestVariables.authCredential,
       );
       when(mockFirebaseAuth.signInWithPopup(mockGoogleAuthProvider)).thenAnswer(
         (_) async => mockUserCredential,
@@ -56,7 +56,7 @@ void main() {
           .thenAnswer(
         (_) async => mockUserCredential,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestVariables.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
       );
@@ -65,23 +65,23 @@ void main() {
       );
       when(
         mockFirebaseAuth.signInWithEmailAndPassword(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
       when(
         mockFirebaseAuth.createUserWithEmailAndPassword(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
       when(
         mockFirebaseAuth.sendPasswordResetEmail(
-          email: KTestText.userEmail,
+          email: KTestVariables.userEmail,
         ),
       ).thenAnswer(
         (_) async {},
@@ -96,22 +96,22 @@ void main() {
           keyItem: KAppText.usernameToken,
         ),
       ).thenAnswer(
-        (_) async => KTestText.token,
+        (_) async => KTestVariables.token,
       );
       when(mockUser.email).thenAnswer(
-        (_) => KTestText.user.email,
+        (_) => KTestVariables.user.email,
       );
       when(mockUser.uid).thenAnswer(
-        (_) => KTestText.user.id,
+        (_) => KTestVariables.user.id,
       );
       when(mockUser.displayName).thenAnswer(
-        (_) => KTestText.user.name,
+        (_) => KTestVariables.user.name,
       );
       when(mockUser.photoURL).thenAnswer(
-        (_) => KTestText.user.photo,
+        (_) => KTestVariables.user.photo,
       );
       when(mockUser.phoneNumber).thenAnswer(
-        (_) => KTestText.user.phoneNumber,
+        (_) => KTestVariables.user.phoneNumber,
       );
       when(
         mockFirebaseAuth.authStateChanges(),
@@ -121,7 +121,7 @@ void main() {
       when(
         mockCache.write(
           key: AppAuthenticationRepository.userCacheKey,
-          value: KTestText.user,
+          value: KTestVariables.user,
         ),
       ).thenAnswer(
         (_) {},
@@ -131,14 +131,14 @@ void main() {
           key: AppAuthenticationRepository.userCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.user,
+        (_) => KTestVariables.user,
       );
       when(
         mockCache.read<UserSetting>(
           key: AppAuthenticationRepository.userSettingCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.userSettingModel,
+        (_) => KTestVariables.userSettingModel,
       );
       when(
         mockCache.clear(),
@@ -166,9 +166,9 @@ void main() {
         (_) async {},
       );
       when(
-        mockFirestoreService.getUserSetting(KTestText.user.id),
+        mockFirestoreService.getUserSetting(KTestVariables.user.id),
       ).thenAnswer(
-        (_) => Stream.value(KTestText.userSettingModel),
+        (_) => Stream.value(KTestVariables.userSettingModel),
       );
       // when(
       //   mockFirestoreService.updateUserSetting(KTestText.userSettingModel),
@@ -178,7 +178,7 @@ void main() {
       when(
         mockFirestoreService.setUserSetting(
           userSetting: UserSetting.empty,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       ).thenAnswer(
         (_) async {},
@@ -186,10 +186,10 @@ void main() {
 
       when(
         mockDeviceRepository.getDevice(
-          initialList: KTestText.userSettingModel.devicesInfo,
+          initialList: KTestVariables.userSettingModel.devicesInfo,
         ),
       ).thenAnswer(
-        (_) async => Right(KTestText.deviceInfoModel),
+        (_) async => Right(KTestVariables.deviceInfoModel),
       );
 
       when(
@@ -209,34 +209,34 @@ void main() {
       );
       when(
         mockFirestoreService.setUserSetting(
-          userId: KTestText.userSetting.id,
-          userSetting:
-              KTestText.userSetting.copyWith(deletedOn: KTestText.dateTime),
+          userId: KTestVariables.userSetting.id,
+          userSetting: KTestVariables.userSetting
+              .copyWith(deletedOn: KTestVariables.dateTime),
         ),
       ).thenAnswer(
         (_) async {},
       );
 
       when(
-        mockUser.updateDisplayName(KTestText.profileUser.name),
+        mockUser.updateDisplayName(KTestVariables.profileUser.name),
       ).thenAnswer(
         (_) async {},
       );
       when(
-        mockUser.updatePhotoURL(KTestText.imageModels.downloadURL),
+        mockUser.updatePhotoURL(KTestVariables.imageModels.downloadURL),
       ).thenAnswer(
         (_) async {},
       );
 
       when(
-        mockFirebaseAuth.verifyPasswordResetCode(KTestText.code),
+        mockFirebaseAuth.verifyPasswordResetCode(KTestVariables.code),
       ).thenAnswer(
-        (_) async => KTestText.userEmail,
+        (_) async => KTestVariables.userEmail,
       );
       when(
         mockFirebaseAuth.confirmPasswordReset(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (_) async {},
@@ -245,11 +245,11 @@ void main() {
       when(
         mockStorageService.saveFile(
           collecltionName: FirebaseCollectionName.user,
-          filePickerItem: KTestText.filePickerItem,
-          id: KTestText.profileUser.id,
+          filePickerItem: KTestVariables.filePickerItem,
+          id: KTestVariables.profileUser.id,
         ),
       ).thenAnswer(
-        (_) async => KTestText.profileUser.photo,
+        (_) async => KTestVariables.profileUser.photo,
       );
 
       // when(
@@ -278,7 +278,8 @@ void main() {
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
       );
-      AppAuthenticationRepository.authCredential = KTestText.authCredential;
+      AppAuthenticationRepository.authCredential =
+          KTestVariables.authCredential;
     });
     test('Sign up with google', () async {
       expect(
@@ -319,8 +320,8 @@ void main() {
     test('LogIn with email and password', () async {
       expect(
         await appAuthenticationRepository.logInWithEmailAndPassword(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
         isA<Right<SomeFailure, User?>>()
             .having((e) => e.value, 'value', isNull),
@@ -329,8 +330,8 @@ void main() {
     test('Sign up', () async {
       expect(
         await appAuthenticationRepository.signUp(
-          email: KTestText.userEmail,
-          password: KTestText.passwordCorrect,
+          email: KTestVariables.userEmail,
+          password: KTestVariables.passwordCorrect,
         ),
         isA<Right<SomeFailure, User?>>()
             .having((e) => e.value, 'value', isNull),
@@ -345,7 +346,7 @@ void main() {
     test('Send verification code', () async {
       expect(
         await appAuthenticationRepository.sendVerificationCode(
-          email: KTestText.userEmail,
+          email: KTestVariables.userEmail,
         ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
@@ -359,21 +360,21 @@ void main() {
     test('Current User Setting', () async {
       expect(
         appAuthenticationRepository.currentUserSetting,
-        KTestText.userSettingModel,
+        KTestVariables.userSettingModel,
       );
     });
     test('User Setting', () async {
       await expectLater(
         appAuthenticationRepository.userSetting,
         emitsInOrder([
-          KTestText.userSettingModel,
+          KTestVariables.userSettingModel,
         ]),
         reason: 'Wait for getting user setting',
       );
       verify(
         mockCache.write(
           key: AppAuthenticationRepository.userSettingCacheKey,
-          value: KTestText.userSettingModel,
+          value: KTestVariables.userSettingModel,
         ),
       ).called(1);
       // expect(
@@ -384,21 +385,21 @@ void main() {
     test('Get User', () async {
       expect(
         await appAuthenticationRepository.getUser(),
-        KTestText.token,
+        KTestVariables.token,
       );
     });
     test('user', () async {
       await expectLater(
         appAuthenticationRepository.user,
         emitsInOrder([
-          KTestText.user,
+          KTestVariables.user,
         ]),
         reason: 'Wait for getting user',
       );
       verify(
         mockCache.write(
           key: AppAuthenticationRepository.userCacheKey,
-          value: KTestText.user,
+          value: KTestVariables.user,
         ),
       ).called(1);
       // expect(
@@ -409,7 +410,7 @@ void main() {
     test('Current User', () async {
       expect(
         appAuthenticationRepository.currentUser,
-        KTestText.user,
+        KTestVariables.user,
       );
     });
     test('Log Out', () async {
@@ -433,7 +434,7 @@ void main() {
     });
     test('Update user Setting', () async {
       final result = await appAuthenticationRepository.updateUserSetting(
-        KTestText.userSettingModel,
+        KTestVariables.userSettingModel,
       );
       // verifyNever(
       //   mockFirestoreService.setUserSetting(
@@ -443,14 +444,14 @@ void main() {
       // );
       verify(
         mockFirestoreService.setUserSetting(
-          userSetting: KTestText.userSettingModel,
-          userId: KTestText.user.id,
+          userSetting: KTestVariables.userSettingModel,
+          userId: KTestVariables.user.id,
         ),
       ).called(1);
       expect(
         result,
         isA<Right<SomeFailure, UserSetting>>()
-            .having((e) => e.value, 'value', KTestText.userSettingModel),
+            .having((e) => e.value, 'value', KTestVariables.userSettingModel),
       );
     });
     test('Log In Anonymously', () async {
@@ -476,7 +477,7 @@ void main() {
           .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
-          initialList: KTestText.userSettingModel.devicesInfo,
+          initialList: KTestVariables.userSettingModel.devicesInfo,
         ),
       ).called(1);
       expect(
@@ -493,14 +494,14 @@ void main() {
           key: AppAuthenticationRepository.userSettingCacheKey,
         ),
       ).thenAnswer(
-        (_) =>
-            KTestText.userSettingModel.copyWith(deletedOn: KTestText.dateTime),
+        (_) => KTestVariables.userSettingModel
+            .copyWith(deletedOn: KTestVariables.dateTime),
       );
       final result = await appAuthenticationRepository
           .createFcmUserSettingAndRemoveDeletePameter();
       verify(
         mockDeviceRepository.getDevice(
-          initialList: KTestText.userSettingModel.devicesInfo,
+          initialList: KTestVariables.userSettingModel.devicesInfo,
         ),
       ).called(1);
       expect(
@@ -511,8 +512,8 @@ void main() {
 
     test('Update user data', () async {
       final result = await appAuthenticationRepository.updateUserData(
-        user: KTestText.profileUser,
-        image: KTestText.filePickerItem,
+        user: KTestVariables.profileUser,
+        image: KTestVariables.filePickerItem,
       );
       expect(
         result,
@@ -524,7 +525,7 @@ void main() {
     test('Check verification code', () async {
       expect(
         await appAuthenticationRepository.checkVerificationCode(
-          KTestText.code,
+          KTestVariables.code,
         ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
@@ -532,8 +533,8 @@ void main() {
     test('Reset password use code', () async {
       expect(
         await appAuthenticationRepository.resetPasswordUseCode(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );

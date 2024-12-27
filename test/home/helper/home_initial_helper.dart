@@ -18,7 +18,7 @@ Future<void> homeInitialHelper(
         offset: KTestConstants.scrollingUp,
       );
 
-      await nawbarHelper(tester: tester, searchText: KTestText.field);
+      await nawbarHelper(tester: tester, searchText: KTestVariables.field);
 
       expect(
         find.byKey(KWidgetkeys.screen.home.box),

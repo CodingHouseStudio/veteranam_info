@@ -12,9 +12,9 @@ Future<void> discountsAddUncorectHelper({
 }) async {
   await discountsAddMainEnterHelper(
     tester: tester,
-    titleText: KTestText.fieldEmpty,
-    linkText: KTestText.sendDiscountModel.discount.first.toString(),
-    discountsText: KTestText.sendDiscountModel.link!,
+    titleText: KTestVariables.fieldEmpty,
+    linkText: KTestVariables.sendDiscountModel.discount.first.toString(),
+    discountsText: KTestVariables.sendDiscountModel.link!,
     eligibilityTap: false,
   );
 
@@ -24,9 +24,9 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddMainEnterHelper(
     tester: tester,
-    titleText: KTestText.sendDiscountModel.title.uk,
-    linkText: KTestText.sendDiscountModel.directLink!,
-    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
+    titleText: KTestVariables.sendDiscountModel.title.uk,
+    linkText: KTestVariables.sendDiscountModel.directLink!,
+    discountsText: KTestVariables.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true,
     // periodText: KTestText.sendDiscountModel.expiration!,
   );
@@ -37,8 +37,8 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddDetailEnterHelper(
     tester: tester,
-    categoryText: KTestText.fieldEmpty,
-    cityText: KTestText.fieldEmpty,
+    categoryText: KTestVariables.fieldEmpty,
+    cityText: KTestVariables.fieldEmpty,
     // periodText: KTestText.fieldEmpty,
     tapOnperiod: false,
     tapIndefinitely: true,
@@ -54,21 +54,21 @@ Future<void> discountsAddUncorectHelper({
 
   await tester.enterText(
     find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
-    KTestText.field,
+    KTestVariables.field,
   );
 
   await discountsAddDetailEnterHelper(
     tester: tester,
-    categoryText: KTestText.sendDiscountModel.category.first.uk,
-    cityText: KTestText.sendDiscountModel.location!.first.uk,
+    categoryText: KTestVariables.sendDiscountModel.category.first.uk,
+    cityText: KTestVariables.sendDiscountModel.location!.first.uk,
   );
 
   await discountsAddDetailHelper(tester: tester, hasField: false);
 
   await discountsAddDescriptionEnterHelper(
     tester: tester,
-    descriptionText: KTestText.fieldEmpty,
-    exclusionsText: KTestText.fieldEmpty,
+    descriptionText: KTestVariables.fieldEmpty,
+    exclusionsText: KTestVariables.fieldEmpty,
   );
 
   verifyNever(

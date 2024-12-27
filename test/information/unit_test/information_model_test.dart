@@ -14,46 +14,50 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.information} ${KGroupText.model} ', () {
     final fullJson = {
-      InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+      InformationModelJsonField.id:
+          KTestVariables.informationModelItems.last.id,
       InformationModelJsonField.title:
-          KTestText.informationModelItems.last.title,
-      InformationModelJsonField.news: KTestText.informationModelItems.last.news,
+          KTestVariables.informationModelItems.last.title,
+      InformationModelJsonField.news:
+          KTestVariables.informationModelItems.last.news,
       InformationModelJsonField.fetchDate:
-          KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          KTestVariables.informationModelItems.last.fetchDate.toIso8601String(),
       InformationModelJsonField.category:
-          KTestText.informationModelItems.last.category,
+          KTestVariables.informationModelItems.last.category,
       InformationModelJsonField.image: [
-        KTestText.informationModelItems.last.image!.toJson(),
+        KTestVariables.informationModelItems.last.image!.toJson(),
       ],
       InformationModelJsonField.categoryUA:
-          KTestText.informationModelItems.last.categoryUA,
+          KTestVariables.informationModelItems.last.categoryUA,
       InformationModelJsonField.topic:
-          KTestText.informationModelItems.last.topic,
+          KTestVariables.informationModelItems.last.topic,
       InformationModelJsonField.topicUA:
-          KTestText.informationModelItems.last.topicUA,
+          KTestVariables.informationModelItems.last.topicUA,
       InformationModelJsonField.status:
-          KTestText.informationModelItems.last.status,
+          KTestVariables.informationModelItems.last.status,
       InformationModelJsonField.likes:
-          KTestText.informationModelItems.last.likes,
+          KTestVariables.informationModelItems.last.likes,
     };
     final nullableJson = {
-      InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+      InformationModelJsonField.id:
+          KTestVariables.informationModelItems.last.id,
       InformationModelJsonField.title:
-          KTestText.informationModelItems.last.title,
-      InformationModelJsonField.news: KTestText.informationModelItems.last.news,
+          KTestVariables.informationModelItems.last.title,
+      InformationModelJsonField.news:
+          KTestVariables.informationModelItems.last.news,
       InformationModelJsonField.fetchDate:
-          KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          KTestVariables.informationModelItems.last.fetchDate.toIso8601String(),
       InformationModelJsonField.category:
-          KTestText.informationModelItems.last.category,
+          KTestVariables.informationModelItems.last.category,
       InformationModelJsonField.image: null,
       InformationModelJsonField.categoryUA:
-          KTestText.informationModelItems.last.categoryUA,
+          KTestVariables.informationModelItems.last.categoryUA,
       InformationModelJsonField.topic:
-          KTestText.informationModelItems.last.topic,
+          KTestVariables.informationModelItems.last.topic,
       InformationModelJsonField.topicUA:
-          KTestText.informationModelItems.last.topicUA,
+          KTestVariables.informationModelItems.last.topicUA,
       InformationModelJsonField.status:
-          KTestText.informationModelItems.last.status,
+          KTestVariables.informationModelItems.last.status,
       InformationModelJsonField.likes: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -62,47 +66,47 @@ void main() {
 
         expect(
           informationModel.id,
-          KTestText.informationModelItems.last.id,
+          KTestVariables.informationModelItems.last.id,
         );
         expect(
           informationModel.title,
-          KTestText.informationModelItems.last.title,
+          KTestVariables.informationModelItems.last.title,
         );
         expect(
           informationModel.news,
-          KTestText.informationModelItems.last.news,
+          KTestVariables.informationModelItems.last.news,
         );
         expect(
           informationModel.fetchDate,
-          KTestText.informationModelItems.last.fetchDate,
+          KTestVariables.informationModelItems.last.fetchDate,
         );
         expect(
           informationModel.image,
-          KTestText.informationModelItems.last.image,
+          KTestVariables.informationModelItems.last.image,
         );
         expect(
           informationModel.category,
-          KTestText.informationModelItems.last.category,
+          KTestVariables.informationModelItems.last.category,
         );
         expect(
           informationModel.categoryUA,
-          KTestText.informationModelItems.last.categoryUA,
+          KTestVariables.informationModelItems.last.categoryUA,
         );
         expect(
           informationModel.topic,
-          KTestText.informationModelItems.last.topic,
+          KTestVariables.informationModelItems.last.topic,
         );
         expect(
           informationModel.topicUA,
-          KTestText.informationModelItems.last.topicUA,
+          KTestVariables.informationModelItems.last.topicUA,
         );
         expect(
           informationModel.status,
-          KTestText.informationModelItems.last.status,
+          KTestVariables.informationModelItems.last.status,
         );
         expect(
           informationModel.likes,
-          KTestText.informationModelItems.last.likes,
+          KTestVariables.informationModelItems.last.likes,
         );
       });
 
@@ -111,19 +115,19 @@ void main() {
 
         expect(
           informationModel.id,
-          KTestText.informationModelItems.last.id,
+          KTestVariables.informationModelItems.last.id,
         );
         expect(
           informationModel.title,
-          KTestText.informationModelItems.last.title,
+          KTestVariables.informationModelItems.last.title,
         );
         expect(
           informationModel.news,
-          KTestText.informationModelItems.last.news,
+          KTestVariables.informationModelItems.last.news,
         );
         expect(
           informationModel.fetchDate,
-          KTestText.informationModelItems.last.fetchDate,
+          KTestVariables.informationModelItems.last.fetchDate,
         );
         expect(
           informationModel.image,
@@ -131,23 +135,23 @@ void main() {
         );
         expect(
           informationModel.category,
-          KTestText.informationModelItems.last.category,
+          KTestVariables.informationModelItems.last.category,
         );
         expect(
           informationModel.categoryUA,
-          KTestText.informationModelItems.last.categoryUA,
+          KTestVariables.informationModelItems.last.categoryUA,
         );
         expect(
           informationModel.topic,
-          KTestText.informationModelItems.last.topic,
+          KTestVariables.informationModelItems.last.topic,
         );
         expect(
           informationModel.topicUA,
-          KTestText.informationModelItems.last.topicUA,
+          KTestVariables.informationModelItems.last.topicUA,
         );
         expect(
           informationModel.status,
-          KTestText.informationModelItems.last.status,
+          KTestVariables.informationModelItems.last.status,
         );
         expect(
           informationModel.likes,
@@ -157,27 +161,29 @@ void main() {
 
       test('${KGroupText.failure} ', () {
         final json = {
-          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.id:
+              KTestVariables.informationModelItems.last.id,
           // title is missing
           InformationModelJsonField.news:
-              KTestText.informationModelItems.last.news,
-          InformationModelJsonField.fetchDate:
-              KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+              KTestVariables.informationModelItems.last.news,
+          InformationModelJsonField.fetchDate: KTestVariables
+              .informationModelItems.last.fetchDate
+              .toIso8601String(),
           InformationModelJsonField.category:
-              KTestText.informationModelItems.last.category,
+              KTestVariables.informationModelItems.last.category,
           InformationModelJsonField.categoryUA:
-              KTestText.informationModelItems.last.categoryUA,
+              KTestVariables.informationModelItems.last.categoryUA,
           InformationModelJsonField.image: [
-            KTestText.informationModelItems.last.image!.toJson(),
+            KTestVariables.informationModelItems.last.image!.toJson(),
           ],
           InformationModelJsonField.topic:
-              KTestText.informationModelItems.last.topic,
+              KTestVariables.informationModelItems.last.topic,
           InformationModelJsonField.topicUA:
-              KTestText.informationModelItems.last.topicUA,
+              KTestVariables.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
-              KTestText.informationModelItems.last.status,
+              KTestVariables.informationModelItems.last.status,
           InformationModelJsonField.likes:
-              KTestText.informationModelItems.last.likes,
+              KTestVariables.informationModelItems.last.likes,
         };
 
         expect(
@@ -189,13 +195,13 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
         final informationModelJson =
-            KTestText.informationModelItems.last.toJson();
+            KTestVariables.informationModelItems.last.toJson();
 
         expect(informationModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final informationModelJson = KTestText.informationModelItems.last
+        final informationModelJson = KTestVariables.informationModelItems.last
             .copyWith(image: null, likes: null)
             .toJson();
 

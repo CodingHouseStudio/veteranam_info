@@ -30,7 +30,7 @@ void main() {
             // reportIdItems: KTestText.reportItems.getIdCard,
             ),
       ).thenAnswer(
-        (_) async => Right(KTestText.fundItems),
+        (_) async => Right(KTestVariables.fundItems),
       );
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
       //   (invocation) => KTestText.user,

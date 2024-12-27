@@ -14,10 +14,11 @@ void main() {
   tearDown(GetIt.I.reset);
   group('City ${KGroupText.model} ', () {
     final fullJson = {
-      CitiesModelJsonField.id: KTestText.cityModelItems.first.id,
+      CitiesModelJsonField.id: KTestVariables.cityModelItems.first.id,
       CitiesModelJsonField.region:
-          KTestText.cityModelItems.first.region.toJson(),
-      CitiesModelJsonField.name: KTestText.cityModelItems.first.name.toJson(),
+          KTestVariables.cityModelItems.first.region.toJson(),
+      CitiesModelJsonField.name:
+          KTestVariables.cityModelItems.first.name.toJson(),
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -25,23 +26,24 @@ void main() {
 
         expect(
           cityModel.id,
-          KTestText.cityModelItems.first.id,
+          KTestVariables.cityModelItems.first.id,
         );
         expect(
           cityModel.region,
-          KTestText.cityModelItems.first.region,
+          KTestVariables.cityModelItems.first.region,
         );
         expect(
           cityModel.name,
-          KTestText.cityModelItems.first.name,
+          KTestVariables.cityModelItems.first.name,
         );
       });
 
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          CitiesModelJsonField.region: KTestText.cityModelItems.first.region,
-          CitiesModelJsonField.name: KTestText.cityModelItems.first.name,
+          CitiesModelJsonField.region:
+              KTestVariables.cityModelItems.first.region,
+          CitiesModelJsonField.name: KTestVariables.cityModelItems.first.name,
         };
 
         expect(
@@ -52,7 +54,7 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final cityModelJson = KTestText.cityModelItems.first.toJson();
+        final cityModelJson = KTestVariables.cityModelItems.first.toJson();
 
         expect(cityModelJson, fullJson);
       });

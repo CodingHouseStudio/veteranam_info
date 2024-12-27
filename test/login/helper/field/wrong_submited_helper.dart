@@ -9,8 +9,8 @@ Future<void> wrongSubmitedHelper(
 ) async {
   await loginFieldsHelper(
     tester: tester,
-    password: KTestText.passwordWrong,
-    email: KTestText.useremailWrong,
+    password: KTestVariables.passwordWrong,
+    email: KTestVariables.useremailWrong,
     dataIsCorrect: true,
   );
 

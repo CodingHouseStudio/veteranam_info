@@ -32,7 +32,7 @@ Future<void> storyAddInitialHelper(
 
       await messageFieldHelper(
         tester: tester,
-        message: KTestText.field,
+        message: KTestVariables.field,
       );
 
       expect(

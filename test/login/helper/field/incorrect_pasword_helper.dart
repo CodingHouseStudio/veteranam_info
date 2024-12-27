@@ -8,8 +8,8 @@ Future<void> incorrectPasswordHelper(
 ) async {
   await loginFieldsHelper(
     tester: tester,
-    password: KTestText.passwordIncorrect,
-    email: KTestText.userEmail,
+    password: KTestVariables.passwordIncorrect,
+    email: KTestVariables.userEmail,
     dataIsCorrect: false,
   );
 

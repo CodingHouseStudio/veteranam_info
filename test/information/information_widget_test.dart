@@ -23,7 +23,7 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.current = KTestVariables.dateTime;
       ExtendedDateTime.id = '';
       PlatformEnumFlutter.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
@@ -40,7 +40,7 @@ void main() {
       for (var i = 0; i < 5; i++) {
         when(
           mockInformationRepository.updateLikeCount(
-            informationModel: KTestText.informationModelItems.elementAt(i),
+            informationModel: KTestVariables.informationModelItems.elementAt(i),
             isLiked: true,
           ),
         ).thenAnswer(
@@ -48,7 +48,7 @@ void main() {
         );
         when(
           mockInformationRepository.updateLikeCount(
-            informationModel: KTestText.informationModelItems.elementAt(i),
+            informationModel: KTestVariables.informationModelItems.elementAt(i),
             isLiked: false,
           ),
         ).thenAnswer(
@@ -57,16 +57,16 @@ void main() {
       }
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
       mockReportRepository = MockIReportRepository();
       when(
         mockReportRepository.getCardReportById(
           cardEnum: CardEnum.information,
-          userId: KTestText.user.id,
+          userId: KTestVariables.user.id,
         ),
       ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
+        (invocation) async => Right(KTestVariables.reportItems),
       );
     });
     group('${KGroupText.failure} ', () {
@@ -138,7 +138,7 @@ void main() {
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
         ).thenAnswer(
-          (invocation) => Stream.value(KTestText.informationModelItems),
+          (invocation) => Stream.value(KTestVariables.informationModelItems),
         );
       });
 

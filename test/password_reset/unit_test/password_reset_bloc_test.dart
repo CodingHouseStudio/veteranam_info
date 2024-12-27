@@ -19,8 +19,8 @@ void main() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
         mockAppAuthenticationRepository.resetPasswordUseCode(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -37,31 +37,33 @@ void main() {
       act: (bloc) async => bloc
         ..add(
           const PasswordResetEvent.passwordUpdated(
-            KTestText.passwordCorrect,
+            KTestVariables.passwordCorrect,
           ),
         )
         ..add(
           const PasswordResetEvent.confirmPasswordUpdated(
-            KTestText.passwordCorrect,
+            KTestVariables.passwordCorrect,
           ),
         )
-        ..add(const PasswordResetEvent.passwordReset(KTestText.code)),
+        ..add(const PasswordResetEvent.passwordReset(KTestVariables.code)),
       expect: () => [
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           confirmPassword: PasswordFieldModel.pure(),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          confirmPassword: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
+          confirmPassword:
+              PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          confirmPassword: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
+          confirmPassword:
+              PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: PasswordResetEnum.sending,
         ),
@@ -81,53 +83,53 @@ void main() {
       act: (bloc) async => bloc
         ..add(
           const PasswordResetEvent.passwordUpdated(
-            KTestText.passwordIncorrect,
+            KTestVariables.passwordIncorrect,
           ),
         )
         ..add(
           const PasswordResetEvent.confirmPasswordUpdated(
-            KTestText.passwordIncorrectNumber,
+            KTestVariables.passwordIncorrectNumber,
           ),
         )
-        ..add(const PasswordResetEvent.passwordReset(KTestText.code))
+        ..add(const PasswordResetEvent.passwordReset(KTestVariables.code))
         ..add(
           const PasswordResetEvent.confirmPasswordUpdated(
-            KTestText.passwordIncorrect,
+            KTestVariables.passwordIncorrect,
           ),
         )
-        ..add(const PasswordResetEvent.passwordReset(KTestText.code)),
+        ..add(const PasswordResetEvent.passwordReset(KTestVariables.code)),
       expect: () => [
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           confirmPassword: PasswordFieldModel.pure(),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           confirmPassword:
-              PasswordFieldModel.dirty(KTestText.passwordIncorrectNumber),
+              PasswordFieldModel.dirty(KTestVariables.passwordIncorrectNumber),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           confirmPassword:
-              PasswordFieldModel.dirty(KTestText.passwordIncorrectNumber),
+              PasswordFieldModel.dirty(KTestVariables.passwordIncorrectNumber),
           failure: null,
           formState: PasswordResetEnum.passwordMismatch,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           confirmPassword:
-              PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+              PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           confirmPassword:
-              PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+              PasswordFieldModel.dirty(KTestVariables.passwordIncorrect),
           failure: null,
           formState: PasswordResetEnum.invalidData,
         ),
@@ -141,8 +143,8 @@ void main() {
       act: (bloc) async {
         when(
           mockAppAuthenticationRepository.resetPasswordUseCode(
-            code: KTestText.code,
-            newPassword: KTestText.passwordCorrect,
+            code: KTestVariables.code,
+            newPassword: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
           (realInvocation) async =>
@@ -151,38 +153,41 @@ void main() {
         bloc
           ..add(
             const PasswordResetEvent.passwordUpdated(
-              KTestText.passwordCorrect,
+              KTestVariables.passwordCorrect,
             ),
           )
           ..add(
             const PasswordResetEvent.confirmPasswordUpdated(
-              KTestText.passwordCorrect,
+              KTestVariables.passwordCorrect,
             ),
           )
-          ..add(const PasswordResetEvent.passwordReset(KTestText.code));
+          ..add(const PasswordResetEvent.passwordReset(KTestVariables.code));
       },
       expect: () => [
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           confirmPassword: PasswordFieldModel.pure(),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          confirmPassword: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
+          confirmPassword:
+              PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: PasswordResetEnum.inProgress,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          confirmPassword: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
+          confirmPassword:
+              PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: null,
           formState: PasswordResetEnum.sending,
         ),
         const PasswordResetState(
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          confirmPassword: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
+          confirmPassword:
+              PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           failure: PasswordResetFailure.error,
           formState: PasswordResetEnum.inProgress,
         ),

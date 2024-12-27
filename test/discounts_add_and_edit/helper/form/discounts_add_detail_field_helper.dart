@@ -25,7 +25,7 @@ Future<void> discountsAddDetailHelper({
   if (hasField && checkHelper) {
     await multiDropFieldHelper(
       tester: tester,
-      text: KTestText.field,
+      text: KTestVariables.field,
       textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
     );
   }
@@ -38,7 +38,7 @@ Future<void> discountsAddDetailHelper({
   if (hasField && checkHelper) {
     await citiesDropFieldHelper(
       tester: tester,
-      text: KTestText.field,
+      text: KTestVariables.field,
       textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
       fieldIndex: 1,
     );

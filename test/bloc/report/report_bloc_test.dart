@@ -16,13 +16,13 @@ void main() {
     late IReportRepository mockReportRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.reportModel.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
+      ExtendedDateTime.id = KTestVariables.reportModel.id;
       mockReportRepository = MockIReportRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(
         mockReportRepository.sendReport(
-          KTestText.reportModel.copyWith(card: CardEnum.discount),
+          KTestVariables.reportModel.copyWith(card: CardEnum.discount),
         ),
       ).thenAnswer(
         (realInvocation) async => Left(
@@ -33,9 +33,9 @@ void main() {
       );
       when(
         mockReportRepository.sendReport(
-          KTestText.reportModel.copyWith(
+          KTestVariables.reportModel.copyWith(
             reasonComplaint: ReasonComplaint.other,
-            message: KTestText.fieldEmpty,
+            message: KTestVariables.fieldEmpty,
           ),
         ),
       ).thenAnswer(
@@ -43,7 +43,7 @@ void main() {
       );
       when(
         mockReportRepository.sendReport(
-          KTestText.reportModel.copyWith(
+          KTestVariables.reportModel.copyWith(
             reasonComplaint: ReasonComplaint.other,
           ),
         ),
@@ -52,7 +52,7 @@ void main() {
       );
       when(
         mockReportRepository.sendReport(
-          KTestText.reportModel.copyWith(
+          KTestVariables.reportModel.copyWith(
             reasonComplaint: ReasonComplaint.fraudOrSpam,
             message: null,
           ),
@@ -61,7 +61,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestText.user,
+        (realInvocation) => KTestVariables.user,
       );
       when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
@@ -77,13 +77,13 @@ void main() {
       ' message are changed and not valid',
       build: () => reportBloc,
       act: (bloc) => bloc
-        ..add(const ReportEvent.started(KTestText.id))
+        ..add(const ReportEvent.started(KTestVariables.id))
         ..add(const ReportEvent.send(CardEnum.funds))
         ..add(const ReportEvent.reasonComplaintUpdated(ReasonComplaint.other))
         // ..add(
         //   const ReportEvent.emailUpdated(KTestText.userEmail),
         // )
-        ..add(const ReportEvent.messageUpdated(KTestText.fieldEmpty))
+        ..add(const ReportEvent.messageUpdated(KTestVariables.fieldEmpty))
         ..add(const ReportEvent.send(CardEnum.funds)),
       expect: () => [
         const ReportState(
@@ -92,7 +92,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.invalidData,
@@ -100,7 +100,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.inProgress,
@@ -108,7 +108,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         // const ReportState(
         //   formState: ReportEnum.nextInProgress,
@@ -124,7 +124,7 @@ void main() {
           // email: EmailFieldModel.dirty(KTestText.userEmail),
           message: ReportFieldModel.dirty(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.nextInvalidData,
@@ -132,7 +132,7 @@ void main() {
           // email: EmailFieldModel.dirty(KTestText.userEmail),
           message: ReportFieldModel.dirty(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
       ],
     );
@@ -141,7 +141,7 @@ void main() {
       ' are changed and send',
       build: () => reportBloc,
       act: (bloc) => bloc
-        ..add(const ReportEvent.started(KTestText.id))
+        ..add(const ReportEvent.started(KTestVariables.id))
         ..add(
           const ReportEvent.reasonComplaintUpdated(ReasonComplaint.fraudOrSpam),
         )
@@ -157,7 +157,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.inProgress,
@@ -165,7 +165,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         // const ReportState(
         //   formState: ReportEnum.nextInProgress,
@@ -189,7 +189,7 @@ void main() {
           // email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
       ],
     );
@@ -198,10 +198,14 @@ void main() {
       ' with correct credentials',
       build: () => reportBloc,
       act: (bloc) async => bloc
-        ..add(const ReportEvent.started(KTestText.id))
+        ..add(const ReportEvent.started(KTestVariables.id))
         ..add(const ReportEvent.reasonComplaintUpdated(ReasonComplaint.other))
         // ..add(const ReportEvent.emailUpdated(KTestText.userEmail))
-        ..add(ReportEvent.messageUpdated(KTestText.reportItems.first.message!))
+        ..add(
+          ReportEvent.messageUpdated(
+            KTestVariables.reportItems.first.message!,
+          ),
+        )
         ..add(const ReportEvent.send(CardEnum.funds)),
       expect: () => [
         const ReportState(
@@ -210,7 +214,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.inProgress,
@@ -218,7 +222,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         // const ReportState(
         //   formState: ReportEnum.nextInProgress,
@@ -232,17 +236,19 @@ void main() {
           formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: ReportFieldModel.dirty(KTestText.reportItems.first.message!),
+          message:
+              ReportFieldModel.dirty(KTestVariables.reportItems.first.message!),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         ReportState(
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: ReportFieldModel.dirty(KTestText.reportItems.first.message!),
+          message:
+              ReportFieldModel.dirty(KTestVariables.reportItems.first.message!),
           formState: ReportEnum.success,
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
       ],
     );
@@ -304,14 +310,14 @@ void main() {
       'with incorrect credentials',
       build: () => reportBloc,
       act: (bloc) async => bloc
-        ..add(const ReportEvent.started(KTestText.id))
+        ..add(const ReportEvent.started(KTestVariables.id))
         ..add(
           const ReportEvent.reasonComplaintUpdated(
             ReasonComplaint.fraudOrSpam,
           ),
         )
         // ..add(const ReportEvent.emailUpdated(KTestText.userEmail))
-        ..add(const ReportEvent.messageUpdated(KTestText.field))
+        ..add(const ReportEvent.messageUpdated(KTestVariables.field))
         ..add(const ReportEvent.send(CardEnum.discount)),
       expect: () => [
         const ReportState(
@@ -320,7 +326,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           formState: ReportEnum.inProgress,
@@ -328,7 +334,7 @@ void main() {
           // email: null,
           message: ReportFieldModel.pure(),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         // const ReportState(
         //   formState: ReportEnum.nextInProgress,
@@ -342,17 +348,17 @@ void main() {
           formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: ReportFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestVariables.field),
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
         const ReportState(
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: ReportFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestVariables.field),
           formState: ReportEnum.success,
           failure: null,
-          cardId: KTestText.id,
+          cardId: KTestVariables.id,
         ),
       ],
     );

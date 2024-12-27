@@ -14,12 +14,12 @@ void main() {
       () {
     test('check is Empty ', () {
       expect(
-        KTestText.deviceInfoModel.isEmpty,
+        KTestVariables.deviceInfoModel.isEmpty,
         isFalse,
       );
 
       expect(
-        KTestText.deviceInfoModel.copyWith(fcmToken: null).isEmpty,
+        KTestVariables.deviceInfoModel.copyWith(fcmToken: null).isEmpty,
         isTrue,
       );
     });
@@ -59,51 +59,55 @@ void main() {
       );
     });
     final fullJson = {
-      DeviceInfoModelJsonField.deviceId: KTestText.deviceInfoModel.deviceId,
-      DeviceInfoModelJsonField.build: KTestText.deviceInfoModel.build,
+      DeviceInfoModelJsonField.deviceId:
+          KTestVariables.deviceInfoModel.deviceId,
+      DeviceInfoModelJsonField.build: KTestVariables.deviceInfoModel.build,
       DeviceInfoModelJsonField.date:
-          KTestText.deviceInfoModel.date.toIso8601String(),
+          KTestVariables.deviceInfoModel.date.toIso8601String(),
       DeviceInfoModelJsonField.platform:
-          _$PlatformEnumEnumMap[KTestText.deviceInfoModel.platform],
-      DeviceInfoModelJsonField.fcmToken: KTestText.deviceInfoModel.fcmToken,
+          _$PlatformEnumEnumMap[KTestVariables.deviceInfoModel.platform],
+      DeviceInfoModelJsonField.fcmToken:
+          KTestVariables.deviceInfoModel.fcmToken,
     };
     final nullableJson = {
-      DeviceInfoModelJsonField.deviceId: KTestText.deviceInfoModel.deviceId,
-      DeviceInfoModelJsonField.build: KTestText.deviceInfoModel.build,
+      DeviceInfoModelJsonField.deviceId:
+          KTestVariables.deviceInfoModel.deviceId,
+      DeviceInfoModelJsonField.build: KTestVariables.deviceInfoModel.build,
       DeviceInfoModelJsonField.date:
-          KTestText.deviceInfoModel.date.toIso8601String(),
+          KTestVariables.deviceInfoModel.date.toIso8601String(),
       DeviceInfoModelJsonField.platform:
-          _$PlatformEnumEnumMap[KTestText.deviceInfoModel.platform],
+          _$PlatformEnumEnumMap[KTestVariables.deviceInfoModel.platform],
       DeviceInfoModelJsonField.fcmToken: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
         final deviceInfo = DeviceInfoModel.fromJson(fullJson);
 
-        expect(deviceInfo.deviceId, KTestText.deviceInfoModel.deviceId);
-        expect(deviceInfo.build, KTestText.deviceInfoModel.build);
-        expect(deviceInfo.date, KTestText.deviceInfoModel.date);
-        expect(deviceInfo.fcmToken, KTestText.deviceInfoModel.fcmToken);
-        expect(deviceInfo.platform, KTestText.deviceInfoModel.platform);
+        expect(deviceInfo.deviceId, KTestVariables.deviceInfoModel.deviceId);
+        expect(deviceInfo.build, KTestVariables.deviceInfoModel.build);
+        expect(deviceInfo.date, KTestVariables.deviceInfoModel.date);
+        expect(deviceInfo.fcmToken, KTestVariables.deviceInfoModel.fcmToken);
+        expect(deviceInfo.platform, KTestVariables.deviceInfoModel.platform);
       });
       test('${KGroupText.nullable} ', () {
         final deviceInfo = DeviceInfoModel.fromJson(nullableJson);
 
-        expect(deviceInfo.deviceId, KTestText.deviceInfoModel.deviceId);
-        expect(deviceInfo.build, KTestText.deviceInfoModel.build);
-        expect(deviceInfo.date, KTestText.deviceInfoModel.date);
-        expect(deviceInfo.platform, KTestText.deviceInfoModel.platform);
+        expect(deviceInfo.deviceId, KTestVariables.deviceInfoModel.deviceId);
+        expect(deviceInfo.build, KTestVariables.deviceInfoModel.build);
+        expect(deviceInfo.date, KTestVariables.deviceInfoModel.date);
+        expect(deviceInfo.platform, KTestVariables.deviceInfoModel.platform);
         expect(deviceInfo.fcmToken, isNull);
       });
 
       test('${KGroupText.failure} ', () {
         final json = {
           // deviceId is missing
-          DeviceInfoModelJsonField.build: KTestText.deviceInfoModel.build,
-          DeviceInfoModelJsonField.date: KTestText.deviceInfoModel.date,
+          DeviceInfoModelJsonField.build: KTestVariables.deviceInfoModel.build,
+          DeviceInfoModelJsonField.date: KTestVariables.deviceInfoModel.date,
           DeviceInfoModelJsonField.platform:
-              _$PlatformEnumEnumMap[KTestText.deviceInfoModel.platform],
-          DeviceInfoModelJsonField.fcmToken: KTestText.deviceInfoModel.fcmToken,
+              _$PlatformEnumEnumMap[KTestVariables.deviceInfoModel.platform],
+          DeviceInfoModelJsonField.fcmToken:
+              KTestVariables.deviceInfoModel.fcmToken,
         };
 
         expect(
@@ -114,14 +118,14 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final deviceInfoModelJson = KTestText.deviceInfoModel.toJson();
+        final deviceInfoModelJson = KTestVariables.deviceInfoModel.toJson();
 
         expect(deviceInfoModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
         final deviceInfoModelJson =
-            KTestText.deviceInfoModel.copyWith(fcmToken: null).toJson();
+            KTestVariables.deviceInfoModel.copyWith(fcmToken: null).toJson();
 
         expect(deviceInfoModelJson, nullableJson);
       });

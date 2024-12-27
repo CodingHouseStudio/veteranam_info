@@ -17,13 +17,14 @@ void main() {
       group('${KGroupText.successfulSet} ', () {
         setUp(() {
           mockFlutterSecureStorage = MockFlutterSecureStorage();
-          when(mockFlutterSecureStorage.read(key: KTestText.key)).thenAnswer(
-            (_) async => KTestText.key,
+          when(mockFlutterSecureStorage.read(key: KTestVariables.key))
+              .thenAnswer(
+            (_) async => KTestVariables.key,
           );
           when(
             mockFlutterSecureStorage.write(
-              key: KTestText.key,
-              value: KTestText.field,
+              key: KTestVariables.key,
+              value: KTestVariables.field,
             ),
           ).thenAnswer(
             (_) async {},
@@ -37,20 +38,20 @@ void main() {
         });
         test('read one', () async {
           expect(
-            await storage.readOne(keyItem: KTestText.key),
-            KTestText.key,
+            await storage.readOne(keyItem: KTestVariables.key),
+            KTestVariables.key,
           );
         });
         test('write one(true)', () async {
           final result = await storage.writeOne(
-            keyItem: KTestText.key,
-            valueItem: KTestText.field,
+            keyItem: KTestVariables.key,
+            valueItem: KTestVariables.field,
           );
 
           verify(
             mockFlutterSecureStorage.write(
-              key: KTestText.key,
-              value: KTestText.field,
+              key: KTestVariables.key,
+              value: KTestVariables.field,
             ),
           ).called(1);
 
@@ -61,14 +62,14 @@ void main() {
         });
         test('write one(false)', () async {
           final result = await storage.writeOne(
-            keyItem: KTestText.field,
-            valueItem: KTestText.field,
+            keyItem: KTestVariables.field,
+            valueItem: KTestVariables.field,
           );
 
           verify(
             mockFlutterSecureStorage.write(
-              key: KTestText.field,
-              value: KTestText.field,
+              key: KTestVariables.field,
+              value: KTestVariables.field,
             ),
           ).called(1);
 

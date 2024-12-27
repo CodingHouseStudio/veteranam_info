@@ -40,13 +40,14 @@ void main() {
       ).thenAnswer((realInvocation) => mockQuery);
 
       when(
-        mockCollectionReference.doc(KTestText.fundItemsWithImage.first.id),
+        mockCollectionReference.doc(KTestVariables.fundItemsWithImage.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.fundItemsWithImage.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.fundItemsWithImage.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -66,8 +67,10 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) =>
-            KTestText.fundItemsWithImage.map((e) => e.toJson()).toList().first,
+        (_) => KTestVariables.fundItemsWithImage
+            .map((e) => e.toJson())
+            .toList()
+            .first,
       );
 
       firestoreService = FirestoreService(
@@ -76,16 +79,17 @@ void main() {
       );
     });
     test('add fund', () async {
-      await firestoreService.addFund(KTestText.fundItemsWithImage.first);
+      await firestoreService.addFund(KTestVariables.fundItemsWithImage.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.fundItemsWithImage.first.id),
+        mockCollectionReference.doc(KTestVariables.fundItemsWithImage.first.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.fundItemsWithImage.first.toJson()),
+        mockDocumentReference
+            .set(KTestVariables.fundItemsWithImage.first.toJson()),
       ).called(1);
     });
 
@@ -93,7 +97,7 @@ void main() {
       expect(
         await firestoreService.getFunds(//null
             ),
-        [KTestText.fundItemsWithImage.first],
+        [KTestVariables.fundItemsWithImage.first],
       );
 
       verify(

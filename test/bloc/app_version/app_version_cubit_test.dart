@@ -35,7 +35,7 @@ void main() {
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
-            (_) => KTestText.build,
+            (_) => KTestVariables.build,
           );
         },
       );
@@ -61,12 +61,12 @@ void main() {
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
-            (_) => KTestText.version,
+            (_) => KTestVariables.version,
           );
           when(
             mockBuildRepository.getBuildInfo(),
           ).thenAnswer(
-            (_) async => KTestText.packageInfo,
+            (_) async => KTestVariables.packageInfo,
           );
         },
       );
@@ -81,7 +81,7 @@ void main() {
         // },
         expect: () async => [
           AppVersionState(
-            build: KTestText.packageInfo,
+            build: KTestVariables.packageInfo,
             mobHasNewBuild: false,
           ),
         ],
@@ -95,12 +95,12 @@ void main() {
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
-            (_) => KTestText.oldVersion,
+            (_) => KTestVariables.oldVersion,
           );
           when(
             mockBuildRepository.getBuildInfo(),
           ).thenAnswer(
-            (_) async => KTestText.packageInfo,
+            (_) async => KTestVariables.packageInfo,
           );
           // buildCubit = AppVersionCubit(
           //   buildRepository: mockBuildRepository,
@@ -119,7 +119,7 @@ void main() {
         // },
         expect: () async => [
           AppVersionState(
-            build: KTestText.packageInfo,
+            build: KTestVariables.packageInfo,
             mobHasNewBuild: false,
           ),
         ],

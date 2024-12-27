@@ -36,7 +36,7 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.feedbackModel.id),
+        mockCollectionReference.doc(KTestVariables.feedbackModel.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
@@ -44,14 +44,14 @@ void main() {
       when(
         mockCollectionReference.where(
           FeedbackModelJsonField.guestId,
-          isEqualTo: KTestText.user.id,
+          isEqualTo: KTestVariables.user.id,
         ),
       ).thenAnswer(
         (_) => mockQuery,
       );
 
       when(
-        mockDocumentReference.set(KTestText.feedbackModel.toJson()),
+        mockDocumentReference.set(KTestVariables.feedbackModel.toJson()),
       ).thenAnswer(
         (_) async {},
       );
@@ -71,7 +71,10 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) => [KTestText.feedbackModel].map((e) => e.toJson()).toList().first,
+        (_) => [KTestVariables.feedbackModel]
+            .map((e) => e.toJson())
+            .toList()
+            .first,
       );
 
       firestoreService = FirestoreService(
@@ -80,22 +83,22 @@ void main() {
       );
     });
     test('Add Feedback', () async {
-      await firestoreService.addFeedback(KTestText.feedbackModel);
+      await firestoreService.addFeedback(KTestVariables.feedbackModel);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.feedback),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.feedbackModel.id),
+        mockCollectionReference.doc(KTestVariables.feedbackModel.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.feedbackModel.toJson()),
+        mockDocumentReference.set(KTestVariables.feedbackModel.toJson()),
       ).called(1);
     });
     test('Get User Feedback', () async {
       expect(
-        await firestoreService.getUserFeedback(KTestText.user.id),
-        [KTestText.feedbackModel],
+        await firestoreService.getUserFeedback(KTestVariables.user.id),
+        [KTestVariables.feedbackModel],
       );
 
       verify(
@@ -104,7 +107,7 @@ void main() {
       verify(
         mockCollectionReference.where(
           FeedbackModelJsonField.guestId,
-          isEqualTo: KTestText.user.id,
+          isEqualTo: KTestVariables.user.id,
         ),
       ).called(1);
       verify(

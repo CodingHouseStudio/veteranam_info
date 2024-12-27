@@ -22,8 +22,8 @@ void main() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
         mockAppAuthenticationRepository.resetPasswordUseCode(
-          code: KTestText.code,
-          newPassword: KTestText.passwordCorrect,
+          code: KTestVariables.code,
+          newPassword: KTestVariables.passwordCorrect,
         ),
       ).thenAnswer(
         (invocation) async => const Right(true),
@@ -84,7 +84,7 @@ void main() {
       setUp(() {
         when(
           mockAppAuthenticationRepository.checkVerificationCode(
-            KTestText.code,
+            KTestVariables.code,
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
@@ -140,8 +140,8 @@ void main() {
           setUp(() {
             when(
               mockAppAuthenticationRepository.resetPasswordUseCode(
-                code: KTestText.code,
-                newPassword: KTestText.passwordCorrect,
+                code: KTestVariables.code,
+                newPassword: KTestVariables.passwordCorrect,
               ),
             ).thenAnswer(
               (invocation) async =>

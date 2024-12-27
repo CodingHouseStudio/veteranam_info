@@ -24,7 +24,7 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
@@ -45,11 +45,12 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscount(
-            id: KTestText.discountModelItems.first.id,
+            id: KTestVariables.discountModelItems.first.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (realInvocation) async => Right(KTestText.discountModelItems.first),
+          (realInvocation) async =>
+              Right(KTestVariables.discountModelItems.first),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -78,7 +79,7 @@ void main() {
             setUp(() {
               when(
                 mockDiscountRepository.getDiscount(
-                  id: KTestText.discountModelItems.first.id,
+                  id: KTestVariables.discountModelItems.first.id,
                   showOnlyBusinessDiscounts: false,
                 ),
               ).thenAnswer(

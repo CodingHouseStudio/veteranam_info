@@ -8,7 +8,7 @@ Future<void> hidePasswordHelper(
 ) async {
   await emailPasswordFieldsEmHelper(
     tester: tester,
-    email: KTestText.userEmail,
+    email: KTestVariables.userEmail,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.signUp.button));

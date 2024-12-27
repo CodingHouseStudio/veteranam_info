@@ -26,7 +26,7 @@ void main() {
       setUp(() {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (invocation) async =>
@@ -47,7 +47,7 @@ void main() {
       setUp(() {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),

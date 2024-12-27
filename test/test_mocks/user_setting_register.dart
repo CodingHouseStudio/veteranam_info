@@ -16,7 +16,7 @@ void userSetting(FirebaseFirestore mockFirebaseFirestore) {
   ).thenAnswer((realInvocation) => mockCollectionReference);
 
   when(
-    mockCollectionReference.doc(KTestText.fieldEmpty),
+    mockCollectionReference.doc(KTestVariables.fieldEmpty),
   ).thenAnswer(
     (_) => mockDocumentReference,
   );

@@ -24,7 +24,7 @@ void main() {
       setUp(() {
         when(
           mockInformationRepository
-              .getInformation(KTestText.informationModelItems.first.id),
+              .getInformation(KTestVariables.informationModelItems.first.id),
         ).thenAnswer(
           (realInvocation) async =>
               Left(SomeFailure.serverError(error: KGroupText.failure)),
@@ -43,10 +43,10 @@ void main() {
       setUp(() {
         when(
           mockInformationRepository
-              .getInformation(KTestText.informationModelItems.first.id),
+              .getInformation(KTestVariables.informationModelItems.first.id),
         ).thenAnswer(
           (realInvocation) async =>
-              Right(KTestText.informationModelItems.first),
+              Right(KTestVariables.informationModelItems.first),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -74,8 +74,9 @@ void main() {
           group('${KGroupText.failureGet} ', () {
             setUp(() {
               when(
-                mockInformationRepository
-                    .getInformation(KTestText.informationModelItems.first.id),
+                mockInformationRepository.getInformation(
+                  KTestVariables.informationModelItems.first.id,
+                ),
               ).thenAnswer(
                 (realInvocation) async =>
                     Left(SomeFailure.notFound(error: KGroupText.failure)),

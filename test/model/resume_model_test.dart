@@ -14,14 +14,15 @@ void main() {
   tearDown(GetIt.I.reset);
   group('Resume ${KGroupText.model} ', () {
     final fullJson = {
-      ResumeModelJsonField.downloadURL: KTestText.resumeModel.downloadURL,
-      ResumeModelJsonField.lastModifiedTS: KTestText.resumeModel.lastModifiedTS,
-      ResumeModelJsonField.name: KTestText.resumeModel.name,
-      ResumeModelJsonField.ref: KTestText.resumeModel.ref,
-      ResumeModelJsonField.type: KTestText.resumeModel.type,
+      ResumeModelJsonField.downloadURL: KTestVariables.resumeModel.downloadURL,
+      ResumeModelJsonField.lastModifiedTS:
+          KTestVariables.resumeModel.lastModifiedTS,
+      ResumeModelJsonField.name: KTestVariables.resumeModel.name,
+      ResumeModelJsonField.ref: KTestVariables.resumeModel.ref,
+      ResumeModelJsonField.type: KTestVariables.resumeModel.type,
     };
     final nullableJson = {
-      ResumeModelJsonField.downloadURL: KTestText.resumeModel.downloadURL,
+      ResumeModelJsonField.downloadURL: KTestVariables.resumeModel.downloadURL,
       ResumeModelJsonField.lastModifiedTS: null,
       ResumeModelJsonField.name: null,
       ResumeModelJsonField.ref: null,
@@ -33,23 +34,23 @@ void main() {
 
         expect(
           resumeModel.downloadURL,
-          KTestText.resumeModel.downloadURL,
+          KTestVariables.resumeModel.downloadURL,
         );
         expect(
           resumeModel.lastModifiedTS,
-          KTestText.resumeModel.lastModifiedTS,
+          KTestVariables.resumeModel.lastModifiedTS,
         );
         expect(
           resumeModel.name,
-          KTestText.resumeModel.name,
+          KTestVariables.resumeModel.name,
         );
         expect(
           resumeModel.ref,
-          KTestText.resumeModel.ref,
+          KTestVariables.resumeModel.ref,
         );
         expect(
           resumeModel.type,
-          KTestText.resumeModel.type,
+          KTestVariables.resumeModel.type,
         );
       });
 
@@ -58,7 +59,7 @@ void main() {
 
         expect(
           resumeModel.downloadURL,
-          KTestText.resumeModel.downloadURL,
+          KTestVariables.resumeModel.downloadURL,
         );
         expect(
           resumeModel.lastModifiedTS,
@@ -82,10 +83,10 @@ void main() {
         final json = {
           // downloadURL is missing
           ResumeModelJsonField.lastModifiedTS:
-              KTestText.resumeModel.lastModifiedTS,
-          ResumeModelJsonField.name: KTestText.resumeModel.name,
-          ResumeModelJsonField.ref: KTestText.resumeModel.ref,
-          ResumeModelJsonField.type: KTestText.resumeModel.type,
+              KTestVariables.resumeModel.lastModifiedTS,
+          ResumeModelJsonField.name: KTestVariables.resumeModel.name,
+          ResumeModelJsonField.ref: KTestVariables.resumeModel.ref,
+          ResumeModelJsonField.type: KTestVariables.resumeModel.type,
         };
 
         expect(
@@ -96,14 +97,14 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final resumeModelJson = KTestText.resumeModel.toJson();
+        final resumeModelJson = KTestVariables.resumeModel.toJson();
 
         expect(resumeModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
         final resumeModelJson = const ResumeModel(
-          downloadURL: KTestText.downloadURL,
+          downloadURL: KTestVariables.downloadURL,
         ).toJson();
 
         expect(resumeModelJson, nullableJson);

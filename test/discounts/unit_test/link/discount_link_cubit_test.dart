@@ -24,12 +24,12 @@ void main() {
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      when(mockdiscountRepository.userCanSendLink(KTestText.user.id))
+      when(mockdiscountRepository.userCanSendLink(KTestVariables.user.id))
           .thenAnswer(
         (_) async => const Right(true),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
+        (invocation) => KTestVariables.user,
       );
       discountLinkCubit = DiscountLinkCubit(
         discountRepository: mockdiscountRepository,
@@ -52,7 +52,7 @@ void main() {
       ' when load discountModel list',
       build: () => discountLinkCubit,
       act: (bloc) async {
-        when(mockdiscountRepository.userCanSendLink(KTestText.user.id))
+        when(mockdiscountRepository.userCanSendLink(KTestVariables.user.id))
             .thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );

@@ -29,40 +29,40 @@ void main() {
       act: (bloc) {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(true),
         );
         bloc
-          ..add(const PwResetEmailEvent.started(KTestText.userEmail))
-          ..add(const PwResetEmailEvent.emailUpdated(KTestText.userEmail))
+          ..add(const PwResetEmailEvent.started(KTestVariables.userEmail))
+          ..add(const PwResetEmailEvent.emailUpdated(KTestVariables.userEmail))
           ..add(const PwResetEmailEvent.sendResetCode())
           ..add(const PwResetEmailEvent.sendResetCode());
       },
       expect: () => [
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.inProgress,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.sending,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.success,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.resending,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.success,
         ),
@@ -75,35 +75,35 @@ void main() {
       act: (bloc) {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(true),
         );
         bloc
-          ..add(const PwResetEmailEvent.started(KTestText.userEmail))
-          ..add(const PwResetEmailEvent.emailUpdated(KTestText.userEmail))
+          ..add(const PwResetEmailEvent.started(KTestVariables.userEmail))
+          ..add(const PwResetEmailEvent.emailUpdated(KTestVariables.userEmail))
           ..add(const PwResetEmailEvent.sendResetCode())
           ..add(const PwResetEmailEvent.resetStatus());
       },
       expect: () => [
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.inProgress,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.sending,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.success,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.inProgress,
         ),
@@ -116,7 +116,7 @@ void main() {
       act: (bloc) {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (realInvocation) async => const Right(true),
@@ -125,7 +125,7 @@ void main() {
           ..add(const PwResetEmailEvent.started(null))
           ..add(
             const PwResetEmailEvent.emailUpdated(
-              KTestText.userEmailIncorrect,
+              KTestVariables.userEmailIncorrect,
             ),
           )
           ..add(const PwResetEmailEvent.sendResetCode())
@@ -133,12 +133,12 @@ void main() {
       },
       expect: () => [
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           failure: null,
           formState: PwResetEmailEnum.inProgress,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           failure: null,
           formState: PwResetEmailEnum.invalidData,
         ),
@@ -150,29 +150,29 @@ void main() {
       act: (bloc) {
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmail,
+            email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
           (realInvocation) async =>
               Left(SomeFailure.serverError(error: KGroupText.failureSend)),
         );
         bloc
-          ..add(const PwResetEmailEvent.emailUpdated(KTestText.userEmail))
+          ..add(const PwResetEmailEvent.emailUpdated(KTestVariables.userEmail))
           ..add(const PwResetEmailEvent.sendResetCode());
       },
       expect: () => [
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.inProgress,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
           formState: PwResetEmailEnum.sending,
         ),
         const PwResetEmailState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: PwResetEmailFailure.error,
           formState: PwResetEmailEnum.inProgress,
         ),

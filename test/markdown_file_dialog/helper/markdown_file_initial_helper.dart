@@ -22,7 +22,7 @@ Future<void> markdownFileDialogInitialHelper(
         findsOneWidget,
       );
 
-      await tester.tapOnTextCustom(text: KTestText.developerEmail);
+      await tester.tapOnTextCustom(text: KTestVariables.developerEmail);
 
       await tester.pumpAndSettle();
 

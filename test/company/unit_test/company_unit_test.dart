@@ -20,7 +20,7 @@ void main() {
     late ICompanyRepository mockCompanyRepository;
     late IDiscountRepository mockDiscountRepository;
     setUp(() async {
-      ExtendedDateTime.id = KTestText.id;
+      ExtendedDateTime.id = KTestVariables.id;
       mockCompanyRepository = MockICompanyRepository();
       mockDiscountRepository = MockIDiscountRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
@@ -28,13 +28,13 @@ void main() {
       when(
         mockDataPickerRepository.getImage,
       ).thenAnswer(
-        (realInvocation) async => KTestText.filePickerItem,
+        (realInvocation) async => KTestVariables.filePickerItem,
       );
 
       when(
         mockCompanyRepository.updateCompany(
-          company: KTestText.fullCompanyModel,
-          imageItem: KTestText.filePickerItem,
+          company: KTestVariables.fullCompanyModel,
+          imageItem: KTestVariables.filePickerItem,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -42,7 +42,7 @@ void main() {
 
       when(
         mockCompanyRepository.updateCompany(
-          company: KTestText.fullCompanyModel.copyWith(link: null),
+          company: KTestVariables.fullCompanyModel.copyWith(link: null),
           imageItem: null,
         ),
       ).thenAnswer(
@@ -53,12 +53,12 @@ void main() {
     group('Start company full', () {
       setUp(() async {
         when(mockCompanyRepository.currentUserCompany).thenAnswer(
-          (realInvocation) => KTestText.fullCompanyModel,
+          (realInvocation) => KTestVariables.fullCompanyModel,
         );
 
         when(
           mockDiscountRepository
-              .companyHasDiscount(KTestText.fullCompanyModel.id),
+              .companyHasDiscount(KTestVariables.fullCompanyModel.id),
         ).thenAnswer(
           (realInvocation) async => true,
         );
@@ -86,42 +86,49 @@ void main() {
         build: () => companyFormBloc,
         act: (bloc) async => bloc
           ..add(
-            const CompanyFormEvent.companyNameUpdated(KTestText.companyName),
+            const CompanyFormEvent.companyNameUpdated(
+              KTestVariables.companyName,
+            ),
           )
           ..add(
-            const CompanyFormEvent.publicNameUpdated(KTestText.companyName),
+            const CompanyFormEvent.publicNameUpdated(
+              KTestVariables.companyName,
+            ),
           )
-          ..add(const CompanyFormEvent.codeUpdated(KTestText.companyCode))
-          ..add(const CompanyFormEvent.linkUpdated(KTestText.link))
+          ..add(const CompanyFormEvent.codeUpdated(KTestVariables.companyCode))
+          ..add(const CompanyFormEvent.linkUpdated(KTestVariables.link))
           ..add(const CompanyFormEvent.save()),
         expect: () => [
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: false,
-            link: LinkFieldModel.dirty(KTestText.link),
+            link: LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.inProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: false,
-            link: LinkFieldModel.dirty(KTestText.link),
+            link: LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.sendInProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: false,
-            link: LinkFieldModel.dirty(KTestText.link),
+            link: LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.succesesUnmodified,
           ),
@@ -154,12 +161,13 @@ void main() {
         },
         expect: () => <CompanyFormState>[
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: false,
-            link: LinkFieldModel.dirty(KTestText.link),
+            link: LinkFieldModel.dirty(KTestVariables.link),
             failure: CompanyFormFailure.error,
             formState: CompanyFormEnum.initial,
           ),
@@ -170,12 +178,12 @@ void main() {
     group('Start company pure', () {
       setUp(() {
         when(mockCompanyRepository.currentUserCompany).thenAnswer(
-          (realInvocation) => KTestText.pureCompanyModel.copyWith(id: ''),
+          (realInvocation) => KTestVariables.pureCompanyModel.copyWith(id: ''),
         );
 
         when(
           mockDiscountRepository
-              .companyHasDiscount(KTestText.pureCompanyModel.id),
+              .companyHasDiscount(KTestVariables.pureCompanyModel.id),
         ).thenAnswer(
           (realInvocation) async => false,
         );
@@ -215,20 +223,26 @@ void main() {
           );
           bloc
             ..add(
-              const CompanyFormEvent.companyNameUpdated(KTestText.companyName),
+              const CompanyFormEvent.companyNameUpdated(
+                KTestVariables.companyName,
+              ),
             )
             ..add(
-              const CompanyFormEvent.publicNameUpdated(KTestText.companyName),
+              const CompanyFormEvent.publicNameUpdated(
+                KTestVariables.companyName,
+              ),
             )
-            ..add(const CompanyFormEvent.codeUpdated(KTestText.companyCode))
-            ..add(const CompanyFormEvent.linkUpdated(KTestText.link))
+            ..add(
+              const CompanyFormEvent.codeUpdated(KTestVariables.companyCode),
+            )
+            ..add(const CompanyFormEvent.linkUpdated(KTestVariables.link))
             ..add(const CompanyFormEvent.save());
         },
         expect: () => [
           CompanyFormState(
             companyName: const CompanyNameFieldModel.pure(),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -237,9 +251,9 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -248,9 +262,10 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -259,10 +274,11 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
             failure: null,
@@ -270,33 +286,36 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: const LinkFieldModel.dirty(KTestText.link),
+            link: const LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.inProgress,
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: const LinkFieldModel.dirty(KTestText.link),
+            link: const LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.sendInProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: LinkFieldModel.dirty(KTestText.link),
+            link: LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.success,
           ),
@@ -309,16 +328,21 @@ void main() {
         build: () => companyFormBloc,
         act: (bloc) async => bloc
           ..add(
-            const CompanyFormEvent.companyNameUpdated(KTestText.companyName),
+            const CompanyFormEvent.companyNameUpdated(
+              KTestVariables.companyName,
+            ),
           )
           ..add(
-            const CompanyFormEvent.publicNameUpdated(KTestText.companyName),
+            const CompanyFormEvent.publicNameUpdated(
+              KTestVariables.companyName,
+            ),
           )
-          ..add(const CompanyFormEvent.codeUpdated(KTestText.companyCode))
+          ..add(const CompanyFormEvent.codeUpdated(KTestVariables.companyCode))
           ..add(const CompanyFormEvent.save()),
         expect: () => [
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
             publicName: PublicNameFieldModel.pure(),
             image: ImageFieldModel.pure(),
             code: CompanyCodeFieldModel.pure(),
@@ -328,8 +352,9 @@ void main() {
             formState: CompanyFormEnum.inProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
             code: CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
@@ -338,30 +363,33 @@ void main() {
             formState: CompanyFormEnum.inProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: LinkFieldModel.pure(),
             failure: null,
             formState: CompanyFormEnum.inProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: LinkFieldModel.pure(),
             failure: null,
             formState: CompanyFormEnum.sendInProgress,
           ),
           const CompanyFormState(
-            companyName: CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: PublicNameFieldModel.dirty(KTestText.companyName),
+            companyName:
+                CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName: PublicNameFieldModel.dirty(KTestVariables.companyName),
             image: ImageFieldModel.pure(),
-            code: CompanyCodeFieldModel.dirty(KTestText.companyCode),
+            code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: LinkFieldModel.pure(),
             failure: null,
@@ -395,8 +423,8 @@ void main() {
         act: (bloc) async {
           when(
             mockCompanyRepository.updateCompany(
-              company: KTestText.fullCompanyModel,
-              imageItem: KTestText.filePickerItem,
+              company: KTestVariables.fullCompanyModel,
+              imageItem: KTestVariables.filePickerItem,
             ),
           ).thenAnswer(
             (realInvocation) async => Left(SomeFailure(error: null)),
@@ -413,20 +441,26 @@ void main() {
           );
           bloc
             ..add(
-              const CompanyFormEvent.companyNameUpdated(KTestText.companyName),
+              const CompanyFormEvent.companyNameUpdated(
+                KTestVariables.companyName,
+              ),
             )
             ..add(
-              const CompanyFormEvent.publicNameUpdated(KTestText.companyName),
+              const CompanyFormEvent.publicNameUpdated(
+                KTestVariables.companyName,
+              ),
             )
-            ..add(const CompanyFormEvent.codeUpdated(KTestText.companyCode))
-            ..add(const CompanyFormEvent.linkUpdated(KTestText.link))
+            ..add(
+              const CompanyFormEvent.codeUpdated(KTestVariables.companyCode),
+            )
+            ..add(const CompanyFormEvent.linkUpdated(KTestVariables.link))
             ..add(const CompanyFormEvent.save());
         },
         expect: () => [
           CompanyFormState(
             companyName: const CompanyNameFieldModel.pure(),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -435,9 +469,9 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
             publicName: const PublicNameFieldModel.pure(),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -446,9 +480,10 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
             code: const CompanyCodeFieldModel.pure(),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
@@ -457,10 +492,11 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.pure(),
             failure: null,
@@ -468,34 +504,37 @@ void main() {
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: const LinkFieldModel.dirty(KTestText.link),
+            link: const LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.inProgress,
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: const LinkFieldModel.dirty(KTestText.link),
+            link: const LinkFieldModel.dirty(KTestVariables.link),
             failure: null,
             formState: CompanyFormEnum.sendInProgress,
           ),
           CompanyFormState(
             companyName:
-                const CompanyNameFieldModel.dirty(KTestText.companyName),
-            publicName: const PublicNameFieldModel.dirty(KTestText.companyName),
-            image: ImageFieldModel.dirty(KTestText.filePickerItem),
-            code: const CompanyCodeFieldModel.dirty(KTestText.companyCode),
+                const CompanyNameFieldModel.dirty(KTestVariables.companyName),
+            publicName:
+                const PublicNameFieldModel.dirty(KTestVariables.companyName),
+            image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
+            code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
-            link: const LinkFieldModel.dirty(KTestText.link),
+            link: const LinkFieldModel.dirty(KTestVariables.link),
             failure: CompanyFormFailure.error,
             formState: CompanyFormEnum.initial,
           ),

@@ -8,8 +8,8 @@ Future<void> formIncorrectSendHelper(
 ) async {
   await formEnterTextHelper(
     tester: tester,
-    email: KTestText.userEmailIncorrect,
-    phoneNumber: KTestText.fieldEmpty,
+    email: KTestVariables.userEmailIncorrect,
+    phoneNumber: KTestVariables.fieldEmpty,
   );
 
   await formFieldHelper(tester);

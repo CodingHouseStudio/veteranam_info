@@ -9,8 +9,8 @@ Future<void> formWithoundResumeSendHelper(
 ) async {
   await formEnterTextHelper(
     tester: tester,
-    email: KTestText.userEmail,
-    phoneNumber: KTestText.phoneNumber,
+    email: KTestVariables.userEmail,
+    phoneNumber: KTestVariables.phoneNumber,
     addResume: false,
   );
 

@@ -10,7 +10,7 @@ Future<void> fieldCorrectHelper(
 
   await messageFieldHelper(
     tester: tester,
-    message: KTestText.storyModelItems.first.story,
+    message: KTestVariables.storyModelItems.first.story,
   );
 
   await scrollingHelper(

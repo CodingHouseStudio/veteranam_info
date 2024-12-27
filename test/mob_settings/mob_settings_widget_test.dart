@@ -20,8 +20,8 @@ void main() {
     // late BuildRepository mockBuildRepository;
     setUp(() {
       Config.testIsWeb = false;
-      ExtendedDateTime.id = KTestText.id;
-      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestVariables.id;
+      ExtendedDateTime.current = KTestVariables.dateTime;
 
       mockFeedbackRepository = MockIFeedbackRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -29,7 +29,7 @@ void main() {
 
       when(
         mockAppAuthenticationRepository.currentUser,
-      ).thenAnswer((realInvocation) => KTestText.user);
+      ).thenAnswer((realInvocation) => KTestVariables.user);
       // when(mockBuildRepository.getBuildInfo()).thenAnswer(
       //   (invocation) async => BuildRepository.defaultValue,
       // );

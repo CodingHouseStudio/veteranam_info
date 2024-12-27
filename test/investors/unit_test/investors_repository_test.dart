@@ -30,10 +30,10 @@ void main() {
           mockFirestoreService.getFunds(//null
               ),
         ).thenAnswer(
-          (_) async => KTestText.fundItems,
+          (_) async => KTestVariables.fundItems,
         );
         when(
-          mockFirestoreService.addFund(KTestText.fundItems.first),
+          mockFirestoreService.addFund(KTestVariables.fundItems.first),
         ).thenAnswer(
           (realInvocation) async {},
         );
@@ -45,14 +45,14 @@ void main() {
         expect(
           await investorsRepository.getFunds(),
           isA<Right<SomeFailure, List<FundModel>>>()
-              .having((e) => e.value, 'value', KTestText.fundItems),
+              .having((e) => e.value, 'value', KTestVariables.fundItems),
         );
       });
       test('mock', () async {
         investorsRepository.addMockFunds();
         verify(
           mockFirestoreService.addFund(
-            KTestText.fundItems.first,
+            KTestVariables.fundItems.first,
           ),
         ).called(1);
       });

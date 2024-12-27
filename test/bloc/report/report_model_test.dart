@@ -10,74 +10,76 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.report} ${KGroupText.model} ', () {
     final fullJson = {
-      ReportModelJsonField.id: KTestText.reportModel.id,
+      ReportModelJsonField.id: KTestVariables.reportModel.id,
       // ReportModelJsonField.email: KTestText.reportModel.email,
-      ReportModelJsonField.message: KTestText.reportModel.message,
-      ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
-      ReportModelJsonField.card: KTestText.reportModel.card.getValue,
+      ReportModelJsonField.message: KTestVariables.reportModel.message,
+      ReportModelJsonField.date:
+          KTestVariables.reportModel.date.toIso8601String(),
+      ReportModelJsonField.card: KTestVariables.reportModel.card.getValue,
       ReportModelJsonField.reasonComplaint:
-          _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
-      ReportModelJsonField.cardId: KTestText.reportModel.cardId,
-      ReportModelJsonField.userId: KTestText.reportModel.userId,
+          _$ReasonComplaintEnumMap[KTestVariables.reportModel.reasonComplaint],
+      ReportModelJsonField.cardId: KTestVariables.reportModel.cardId,
+      ReportModelJsonField.userId: KTestVariables.reportModel.userId,
       ReportModelJsonField.status:
-          _$ReportStatusEnumMap[KTestText.reportModel.status],
+          _$ReportStatusEnumMap[KTestVariables.reportModel.status],
     };
     final nullableJson = {
-      ReportModelJsonField.id: KTestText.reportModel.id,
+      ReportModelJsonField.id: KTestVariables.reportModel.id,
       // ReportModelJsonField.email: KTestText.reportModel.email,
       ReportModelJsonField.message: null,
-      ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
-      ReportModelJsonField.card: KTestText.reportModel.card.getValue,
+      ReportModelJsonField.date:
+          KTestVariables.reportModel.date.toIso8601String(),
+      ReportModelJsonField.card: KTestVariables.reportModel.card.getValue,
       ReportModelJsonField.reasonComplaint:
-          _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
-      ReportModelJsonField.cardId: KTestText.reportModel.cardId,
-      ReportModelJsonField.userId: KTestText.reportModel.userId,
+          _$ReasonComplaintEnumMap[KTestVariables.reportModel.reasonComplaint],
+      ReportModelJsonField.cardId: KTestVariables.reportModel.cardId,
+      ReportModelJsonField.userId: KTestVariables.reportModel.userId,
       ReportModelJsonField.status: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
         final reportModel = ReportModel.fromJson(fullJson);
 
-        expect(reportModel.id, KTestText.reportModel.id);
+        expect(reportModel.id, KTestVariables.reportModel.id);
         // expect(reportModel.email, KTestText.reportModel.email);
-        expect(reportModel.date, KTestText.reportModel.date);
-        expect(reportModel.card, KTestText.reportModel.card);
-        expect(reportModel.message, KTestText.reportModel.message);
+        expect(reportModel.date, KTestVariables.reportModel.date);
+        expect(reportModel.card, KTestVariables.reportModel.card);
+        expect(reportModel.message, KTestVariables.reportModel.message);
         expect(
           reportModel.reasonComplaint,
-          KTestText.reportModel.reasonComplaint,
+          KTestVariables.reportModel.reasonComplaint,
         );
-        expect(reportModel.userId, KTestText.reportModel.userId);
-        expect(reportModel.cardId, KTestText.reportModel.cardId);
-        expect(reportModel.status, KTestText.reportModel.status);
+        expect(reportModel.userId, KTestVariables.reportModel.userId);
+        expect(reportModel.cardId, KTestVariables.reportModel.cardId);
+        expect(reportModel.status, KTestVariables.reportModel.status);
       });
       test('${KGroupText.nullable} ', () {
         final reportModel = ReportModel.fromJson(nullableJson);
 
-        expect(reportModel.id, KTestText.reportModel.id);
+        expect(reportModel.id, KTestVariables.reportModel.id);
         // expect(reportModel.email, KTestText.reportModel.email);
-        expect(reportModel.date, KTestText.reportModel.date);
-        expect(reportModel.card, KTestText.reportModel.card);
+        expect(reportModel.date, KTestVariables.reportModel.date);
+        expect(reportModel.card, KTestVariables.reportModel.card);
         expect(reportModel.message, null);
         expect(
           reportModel.reasonComplaint,
-          KTestText.reportModel.reasonComplaint,
+          KTestVariables.reportModel.reasonComplaint,
         );
-        expect(reportModel.userId, KTestText.reportModel.userId);
-        expect(reportModel.cardId, KTestText.reportModel.cardId);
-        expect(reportModel.status, KTestText.reportModel.status);
+        expect(reportModel.userId, KTestVariables.reportModel.userId);
+        expect(reportModel.cardId, KTestVariables.reportModel.cardId);
+        expect(reportModel.status, KTestVariables.reportModel.status);
       });
 
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
           // ReportModelJsonField.email: KTestText.reportModel.email,
-          ReportModelJsonField.message: KTestText.reportModel.message,
+          ReportModelJsonField.message: KTestVariables.reportModel.message,
           ReportModelJsonField.date:
-              KTestText.reportModel.date.toIso8601String(),
-          ReportModelJsonField.card: KTestText.reportModel.card.getValue,
-          ReportModelJsonField.reasonComplaint:
-              _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
+              KTestVariables.reportModel.date.toIso8601String(),
+          ReportModelJsonField.card: KTestVariables.reportModel.card.getValue,
+          ReportModelJsonField.reasonComplaint: _$ReasonComplaintEnumMap[
+              KTestVariables.reportModel.reasonComplaint],
         };
 
         expect(
@@ -88,7 +90,7 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final reportModelJson = KTestText.reportModel.toJson();
+        final reportModelJson = KTestVariables.reportModel.toJson();
 
         expect(reportModelJson, fullJson);
       });
