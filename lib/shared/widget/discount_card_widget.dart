@@ -85,11 +85,11 @@ class DiscountCardWidget extends StatelessWidget {
                 ),
               )
             else
-              Container(
+              DecoratedBox(
                 decoration: discountItem.discount.getDiscountString(context) ==
                         context.l10n.free
                     ? KWidgetTheme.boxDecorationDiscountBorder
-                    : null,
+                    : const BoxDecoration(),
                 child: _DiscountCardDesciprtionWidget(
                   isDesk: isDesk,
                   descriptionMethod: descriptionMethod,
@@ -147,53 +147,6 @@ class _DiscountCardWithImage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class DiscountImageWidget extends StatelessWidget {
-  const DiscountImageWidget({
-    required this.images,
-    required this.discount,
-    super.key,
-    this.borderRadius,
-  });
-
-  final List<ImageModel> images;
-  final String discount;
-  final BorderRadius? borderRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: KBorderRadius.kBorderRadiusLeft32,
-          child: NetworkImageWidget(
-            imageUrl: images.first.downloadURL,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize16,
-            right: KPadding.kPaddingSize16,
-          ),
-          child: DecoratedBox(
-            decoration: KWidgetTheme.boxDecorationDiscount,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize8,
-                vertical: KPadding.kPaddingSize4,
-              ),
-              child: TextPointWidget(
-                discount,
-                key: KWidgetkeys.widget.discountCard.discount,
-                mainAxisSize: MainAxisSize.min,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

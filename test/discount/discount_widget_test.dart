@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
@@ -50,6 +51,36 @@ void main() {
 
         await discountInitialHelper(tester: tester, cardIsEmpty: true);
       });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.initial} ', (tester) async {
+          await discountPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          );
+
+          await discountInitialHelper(tester: tester, cardIsEmpty: true);
+        });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.discounts.name} ', (tester) async {
+            await discountPumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockDiscountRepository: mockDiscountRepository,
+              mockFirebaseRemoteConfigProvider:
+                  mockFirebaseRemoteConfigProvider,
+            );
+
+            await discountBackButtonHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              cardIsEmpty: true,
+            );
+          });
+        });
+      });
     });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
@@ -79,6 +110,28 @@ void main() {
         await discountInitialHelper(tester: tester);
       });
 
+      testWidgets('Copy Phone Number', (tester) async {
+        await discountPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        );
+
+        await discountShowPhoneNumberHelper(tester);
+      });
+
+      testWidgets('Call Phone Number', (tester) async {
+        PlatformEnumFlutter.isWebDesktop = false;
+
+        await discountPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        );
+
+        await discountShowPhoneNumberHelper(tester);
+      });
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
@@ -92,47 +145,23 @@ void main() {
 
           await discountInitialHelper(tester: tester);
         });
-        // group('${KGroupText.goTo} ', () {
-        //   group('${KGroupText.failureGet} ', () {
-        //     setUp(() {
-        //       when(
-        //         mockDiscountRepository.getDiscount(
-        //           id: KTestVariables.discountModelItems.first.id,
-        //           showOnlyBusinessDiscounts: false,
-        //         ),
-        //       ).thenAnswer(
-        //         (realInvocation) async =>
-        //             Left(SomeFailure.notFound(error: KGroupText.failure)),
-        //       );
-        //     });
-        //     testWidgets('Empty Card close', (tester) async {
-        //       await discountCardPumpAppHelper(
-        //         tester: tester,
-        //         mockDiscountRepository: mockDiscountRepository,
-        //         mockFirebaseRemoteConfigProvider:
-        //             mockFirebaseRemoteConfigProvider,
-        //         mockGoRouter: mockGoRouter,
-        //       );
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.discounts.name} ', (tester) async {
+            await discountPumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockDiscountRepository: mockDiscountRepository,
+              mockFirebaseRemoteConfigProvider:
+                  mockFirebaseRemoteConfigProvider,
+            );
 
-        //       await cardEmptyCloseHelper(
-        //         tester: tester,
-        //         mockGoRouter: mockGoRouter,
-        //         routeName: KRoute.discounts.name,
-        //       );
-        //     });
-        //   });
-        //   testWidgets('${KRoute.discounts.name} ', (tester) async {
-        //     await discountCardPumpAppHelper(
-        //       tester: tester,
-        //       mockGoRouter: mockGoRouter,
-        //       mockDiscountRepository: mockDiscountRepository,
-        //       mockFirebaseRemoteConfigProvider:
-        //           mockFirebaseRemoteConfigProvider,
-        //     );
-
-        //     await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
-        //   });
-        // });
+            await discountBackButtonHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              cardIsEmpty: false,
+            );
+          });
+        });
       });
     });
   });

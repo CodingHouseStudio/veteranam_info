@@ -114,17 +114,17 @@ Future<void> discountInitialHelper({
       if (cardIsEmpty) {
         expect(
           find.byKey(KWidgetkeys.screen.discount.invalidLinkTitle),
-          findsNothing,
+          findsOneWidget,
         );
 
         expect(
           find.byKey(KWidgetkeys.screen.discount.invalidLinkDescription),
-          findsNothing,
+          findsOneWidget,
         );
 
         expect(
           find.byKey(KWidgetkeys.screen.discount.invalidLinkBackButton),
-          findsNothing,
+          findsOneWidget,
         );
       }
       //   await cardEmptyHelper(tester);

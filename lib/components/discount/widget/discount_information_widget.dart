@@ -78,14 +78,13 @@ class DiscountInformationBodyWidget extends StatelessWidget {
         return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
           builder: (context, state) {
             final children = [
-              if (state.discountModel.hasImages)
-                DiscountImageWidget(
-                  key: KWidgetkeys.screen.discount.image,
-                  discount:
-                      state.discountModel.discount.getDiscountString(context),
-                  images: state.discountModel.images!,
-                  borderRadius: KBorderRadius.kBorderRadius32,
-                ),
+              DiscountImageWidget(
+                key: KWidgetkeys.screen.discount.image,
+                discount:
+                    state.discountModel.discount.getDiscountString(context),
+                images: state.discountModel.images,
+                borderRadius: KBorderRadius.kBorderRadius32,
+              ),
               Text(
                 '${context.l10n.eligibility}:',
                 key: KWidgetkeys.screen.discount.eligiblity,
