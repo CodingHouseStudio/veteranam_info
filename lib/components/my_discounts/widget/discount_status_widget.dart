@@ -15,6 +15,7 @@ class DiscountStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: KPadding.kPaddingSize4,
       children: [
         Align(
           alignment: Alignment.centerLeft,
@@ -28,31 +29,23 @@ class DiscountStatusWidget extends StatelessWidget {
                 horizontal: KPadding.kPaddingSize8,
                 vertical: KPadding.kPaddingSize4,
               ),
-              child: Column(
-                children: [
-                  TextPointWidget(
-                    status.text(context),
-                    textColor: status == DiscountState.deactivated
-                        ? AppColors
-                            .materialThemeRefNeutralVariantNeutralVariant40
-                        : AppColors.materialThemeKeyColorsSecondary,
-                    pointColor: status.pointColor,
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                  ),
-                ],
+              child: TextPointWidget(
+                status.text(context),
+                textColor: status == DiscountState.deactivated
+                    ? AppColors.materialThemeRefNeutralVariantNeutralVariant40
+                    : AppColors.materialThemeKeyColorsSecondary,
+                pointColor: status.pointColor,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
               ),
             ),
           ),
         ),
         if (isDesk && status == DiscountState.rejected)
-          Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize4),
-            child: Text(
-              key: KWidgetkeys.screen.myDiscounts.rejectedText,
-              context.l10n.descriptionForRejectedStatus,
-              style: AppTextStyle.materialThemeLabelSmall,
-            ),
+          Text(
+            key: KWidgetkeys.screen.myDiscounts.rejectedText,
+            context.l10n.descriptionForRejectedStatus,
+            style: AppTextStyle.materialThemeLabelSmall,
           ),
       ],
     );

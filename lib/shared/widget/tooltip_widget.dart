@@ -47,12 +47,12 @@ class TooltipWidget extends StatelessWidget {
                   right: KPadding.kPaddingSize12,
                 ),
             child: Row(
+              spacing: KPadding.kPaddingSize8,
               children: [
                 Text(
                   text,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
-                KSizedBox.kWidthSizedBox8,
                 KIcon.info,
               ],
             ),

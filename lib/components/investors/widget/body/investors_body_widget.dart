@@ -62,6 +62,10 @@ class InvestorsBodyWidget extends StatelessWidget {
                 padding: padding,
                 sliver: InvestorsTitleWidget(isDesk: isDesk),
               ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox32.toSliver
+              else
+                KSizedBox.kHeightSizedBox24.toSliver,
               FundsWidgetList(
                 isDesk: isDesk,
                 padding: padding,

@@ -27,6 +27,8 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing:
+          widget.isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       children: [
         DiscountCardWidget(
           discountItem: widget.discountModel,
@@ -42,10 +44,6 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           isBusiness: true,
         ),
         if (widget.isDesk)
-          KSizedBox.kHeightSizedBox24
-        else
-          KSizedBox.kHeightSizedBox16,
-        if (widget.isDesk)
           Row(
             //mainAxisAlignment: MainAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,39 +55,35 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
+                spacing: KPadding.kPaddingSize8,
                 children: [
                   trashButton(context),
-                  KSizedBox.kWidthSizedBox8,
                   editButton,
                   if (widget.discountModel.status.showDeactivateButton)
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: KPadding.kPaddingSize8),
-                      child: TextButton.icon(
-                        onPressed: () {
-                          widget.onDeactivate?.call(
-                            deactivate: widget.discountModel.status !=
-                                DiscountState.deactivated,
-                          );
-                        },
-                        // () {
-                        //   widget.discountModel.status ==
-                        // DiscountState.published
-                        //       ? widget.onDeactivate?.call(
-                        //           deactivate: widget.discountModel.status !=
-                        //               DiscountState.deactivated,
-                        //         )
-                        //       : null;
-                        // },
-                        style: KButtonStyles.borderBlackMyDiscountsButtonStyle,
-                        icon: KIcon.close,
-                        label: Text(
-                          key: KWidgetkeys.screen.myDiscounts.deactivate,
-                          widget.discountModel.status.isPublished
-                              ? context.l10n.deactivate
-                              : context.l10n.activate,
-                          style: AppTextStyle.materialThemeTitleMedium,
-                        ),
+                    TextButton.icon(
+                      onPressed: () {
+                        widget.onDeactivate?.call(
+                          deactivate: widget.discountModel.status !=
+                              DiscountState.deactivated,
+                        );
+                      },
+                      // () {
+                      //   widget.discountModel.status ==
+                      // DiscountState.published
+                      //       ? widget.onDeactivate?.call(
+                      //           deactivate: widget.discountModel.status !=
+                      //               DiscountState.deactivated,
+                      //         )
+                      //       : null;
+                      // },
+                      style: KButtonStyles.borderBlackMyDiscountsButtonStyle,
+                      icon: KIcon.close,
+                      label: Text(
+                        key: KWidgetkeys.screen.myDiscounts.deactivate,
+                        widget.discountModel.status.isPublished
+                            ? context.l10n.deactivate
+                            : context.l10n.activate,
+                        style: AppTextStyle.materialThemeTitleMedium,
                       ),
                     ),
                 ],
@@ -107,8 +101,9 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
             mainAxisAlignment: widget.discountModel.status.isPublished
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
+            spacing: KPadding.kPaddingSize8,
             children: [
-              if (widget.discountModel.status.showDeactivateButton) ...[
+              if (widget.discountModel.status.showDeactivateButton)
                 TextButton.icon(
                   key: KWidgetkeys.screen.myDiscounts.deactivate,
                   onPressed: () {
@@ -127,12 +122,10 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                 ),
-                KSizedBox.kWidthSizedBox8,
-              ],
               Row(
+                spacing: KPadding.kPaddingSize8,
                 children: [
                   trashButton(context),
-                  KSizedBox.kWidthSizedBox8,
                   editButton,
                 ],
               ),

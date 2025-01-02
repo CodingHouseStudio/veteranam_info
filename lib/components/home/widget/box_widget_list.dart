@@ -64,6 +64,7 @@ class _ProdBoxWidgets extends StatelessWidget {
     if (isTablet) {
       return IntrinsicHeight(
         child: Row(
+          spacing: KPadding.kPaddingSize24,
           children: [
             Expanded(
               flex: isDesk ? 3 : 2,
@@ -73,25 +74,23 @@ class _ProdBoxWidgets extends StatelessWidget {
                 isTablet: true,
               ),
             ),
-            KSizedBox.kWidthSizedBox24,
             const _HomeRightBoxWidgets(),
           ],
         ),
       );
     } else {
       return Column(
+        spacing: KPadding.kPaddingSize16,
         children: [
           HomeBoxWidget(
             aboutProjectKey: aboutProjectKey,
             isDesk: false,
             isTablet: false,
           ),
-          KSizedBox.kHeightSizedBox16,
           DiscountBoxwWidget(
             key: KWidgetkeys.screen.home.discountsBox,
             isTablet: false,
           ),
-          KSizedBox.kHeightSizedBox16,
           const DoubleBox(
             isTablet: false,
           ),
@@ -109,6 +108,7 @@ class _HomeRightBoxWidgets extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Column(
+        spacing: KPadding.kPaddingSize16,
         children: [
           Expanded(
             flex: 3,
@@ -117,11 +117,10 @@ class _HomeRightBoxWidgets extends StatelessWidget {
               isTablet: true,
             ),
           ),
-          KSizedBox.kHeightSizedBox16,
           const Expanded(
             flex: 2,
             child: DoubleBox(
-              textIconPaddingWidget: Spacer(),
+              useSoaccer: true,
               isTablet: true,
             ),
           ),
@@ -142,6 +141,7 @@ class _DevBoxWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isTablet) {
       return Row(
+        spacing: KPadding.kPaddingSize24,
         children: [
           Expanded(
             child: BoxWidget(
@@ -152,7 +152,6 @@ class _DevBoxWidgets extends StatelessWidget {
               icon: KIcon.globe,
             ),
           ),
-          KSizedBox.kWidthSizedBox24,
           Expanded(
             child: BoxWidget(
               key: KWidgetkeys.screen.home.storyBox,
@@ -162,7 +161,6 @@ class _DevBoxWidgets extends StatelessWidget {
               icon: KIcon.messageSquare,
             ),
           ),
-          KSizedBox.kWidthSizedBox24,
           Expanded(
             child: BoxWidget(
               key: KWidgetkeys.screen.home.workBox,
@@ -176,6 +174,7 @@ class _DevBoxWidgets extends StatelessWidget {
       );
     } else {
       return Column(
+        spacing: KPadding.kPaddingSize16,
         children: [
           BoxWidget(
             key: KWidgetkeys.screen.home.informationBox,
@@ -184,7 +183,6 @@ class _DevBoxWidgets extends StatelessWidget {
             isDesk: false,
             icon: KIcon.globe,
           ),
-          KSizedBox.kHeightSizedBox16,
           BoxWidget(
             key: KWidgetkeys.screen.home.storyBox,
             text: context.l10n.stories,
@@ -192,7 +190,6 @@ class _DevBoxWidgets extends StatelessWidget {
             isDesk: false,
             icon: KIcon.messageSquare,
           ),
-          KSizedBox.kHeightSizedBox16,
           BoxWidget(
             key: KWidgetkeys.screen.home.workBox,
             text: context.l10n.work,
@@ -210,23 +207,23 @@ class DoubleBox extends StatelessWidget {
   const DoubleBox({
     required this.isTablet,
     super.key,
-    this.textIconPaddingWidget,
+    this.useSoaccer = false,
   });
   final bool isTablet;
-  final Widget? textIconPaddingWidget;
+  final bool useSoaccer;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: KPadding.kPaddingSize16,
       children: [
         _InvestorBox(
           isTablet: isTablet,
-          textIconPaddingWidget: textIconPaddingWidget,
+          useSoaccer: useSoaccer,
         ),
-        KSizedBox.kWidthSizedBox16,
         _FeedbackBox(
           isTablet: isTablet,
-          textIconPaddingWidget: textIconPaddingWidget,
+          useSoaccer: useSoaccer,
         ),
       ],
     );
@@ -236,11 +233,11 @@ class DoubleBox extends StatelessWidget {
 class _InvestorBox extends StatelessWidget {
   const _InvestorBox({
     required this.isTablet,
-    this.textIconPaddingWidget,
+    this.useSoaccer = false,
   });
 
   final bool isTablet;
-  final Widget? textIconPaddingWidget;
+  final bool useSoaccer;
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +249,7 @@ class _InvestorBox extends StatelessWidget {
         onTap: () => context.goNamed(KRoute.support.name),
         isDesk: true,
         iconHasBackground: false,
-        textIconPaddingWidget: textIconPaddingWidget,
+        useSoaccer: useSoaccer,
         background: AppColors.materialThemeKeyColorsNeutralVariant,
         iconText: context.l10n.supportVeterans,
         textStyle: isTablet
@@ -274,11 +271,11 @@ class _InvestorBox extends StatelessWidget {
 class _FeedbackBox extends StatelessWidget {
   const _FeedbackBox({
     required this.isTablet,
-    this.textIconPaddingWidget,
+    this.useSoaccer = false,
   });
 
   final bool isTablet;
-  final Widget? textIconPaddingWidget;
+  final bool useSoaccer;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -290,7 +287,7 @@ class _FeedbackBox extends StatelessWidget {
         isDesk: true,
         icon: KIcon.fileText,
         iconHasBackground: false,
-        textIconPaddingWidget: textIconPaddingWidget,
+        useSoaccer: useSoaccer,
         iconText: context.l10n.haveQuestions,
         textStyle: isTablet
             ? AppTextStyle.materialThemeHeadlineSmall

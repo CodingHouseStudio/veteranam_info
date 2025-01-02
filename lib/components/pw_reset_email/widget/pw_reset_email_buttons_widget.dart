@@ -32,6 +32,8 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
       return const PwResetEmailResendWidget();
     } else {
       return Column(
+        spacing:
+            widget.isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
         children: [
           Padding(
             padding: widget.isDesk
@@ -58,10 +60,6 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
                   PwResetEmailEnum.invalidData,
             ),
           ),
-          if (widget.isDesk)
-            KSizedBox.kHeightSizedBox24
-          else
-            KSizedBox.kHeightSizedBox16,
           Padding(
             padding: widget.isDesk
                 ? const EdgeInsets.symmetric(

@@ -123,12 +123,12 @@ class ChipImplementationWidget extends StatelessWidget {
       labelPadding: EdgeInsets.zero,
       label: Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: KPadding.kPaddingSize10,
         children: [
           Padding(
             padding: EdgeInsets.only(
               left:
                   isSelected ? KPadding.kPaddingSize8 : KPadding.kPaddingSize10,
-              right: KPadding.kPaddingSize10,
             ),
             child: Text(
               filter.value.getTrsnslation(context),

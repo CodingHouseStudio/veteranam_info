@@ -54,6 +54,7 @@ class DiscountCardWidget extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
           children: [
             _DiscountCardTitleWidget(
               isDesk: isDesk,
@@ -63,10 +64,6 @@ class DiscountCardWidget extends StatelessWidget {
               category: discountItem.category,
               userPhoto: discountItem.userPhoto,
             ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox16
-            else
-              KSizedBox.kHeightSizedBox8,
             if (discountItem.hasImages)
               IntrinsicHeight(
                 child: Container(
@@ -341,6 +338,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
       if (!notImage) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: KPadding.kPaddingSize30,
           children: [
             Expanded(
               child: Text(
@@ -349,7 +347,6 @@ class _DescrptionTitleWidget extends StatelessWidget {
                 style: AppTextStyle.materialThemeHeadlineSmall,
               ),
             ),
-            KSizedBox.kWidthSizedBox30,
             DecoratedBox(
               decoration: KWidgetTheme.boxDecorationDiscount,
               child: Padding(
@@ -420,27 +417,12 @@ class _DiscountCardTitleWidget extends StatelessWidget {
         horizontal: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
       ),
       child: isDesk
-          ? Row(
-              // alignment: WrapAlignment.spaceBetween,
-              // crossAxisAlignment: WrapCrossAlignment.center,
-              // spacing: KPadding.kPaddingSize16,
-              // runSpacing: KPadding.kPaddingSize16,
-              children: [
-                Expanded(
-                  child: CompanyInfoWidget(
-                    dateVerified: dateVerified,
-                    category: category,
-                    company: company,
-                    userName: userName,
-                    userPhoto: userPhoto,
-                  ),
-                ),
-                // KSizedBox.kWidthSizedBox16,
-                // _CategoryWidget(
-                //   categories: category,
-                //   categoriesEn: categoryEN,
-                // ),
-              ],
+          ? CompanyInfoWidget(
+              dateVerified: dateVerified,
+              category: category,
+              company: company,
+              userName: userName,
+              userPhoto: userPhoto,
             )
           : CompanyInfoWidget(
               dateVerified: dateVerified,
@@ -490,13 +472,14 @@ class CompanyInfoWidget extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               Wrap(
+                spacing: KPadding.kPaddingSize8,
+                runSpacing: KPadding.kPaddingSize8,
                 children: [
                   Text(
                     key: KWidgetkeys.widget.discountCard.userName,
                     userName ?? KAppText.veteranamName,
                     style: AppTextStyle.materialThemeLabelSmall,
                   ),
-                  KSizedBox.kWidthSizedBox8,
                   Text(
                     key: KWidgetkeys.widget.discountCard.date,
                     dateVerified.toLocalDateString(context: context),
@@ -607,13 +590,13 @@ class _CitiesExpirationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return Row(
+        spacing: KPadding.kPaddingSize16,
         children: [
           ExpirationWidget(
             expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
-          KSizedBox.kWidthSizedBox16,
           Expanded(
             child: CityListWidget(
               key: KWidgetkeys.widget.discountCard.city,
@@ -634,13 +617,13 @@ class _CitiesExpirationWidget extends StatelessWidget {
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: KPadding.kPaddingSize4,
         children: [
           ExpirationWidget(
             expiration: discountItem.expiration?.getTrsnslation(
               context,
             ),
           ),
-          KSizedBox.kHeightSizedBox4,
           CityListWidget(
             key: KWidgetkeys.widget.discountCard.city,
             isDesk: false,
@@ -673,10 +656,10 @@ class ExpirationWidget extends StatelessWidget {
       //   horizontal: KPadding.kPaddingSize8,
       // ),
       child: Row(
+        spacing: KPadding.kPaddingSize8,
         mainAxisSize: MainAxisSize.min,
         children: [
           KIcon.date,
-          KSizedBox.kWidthSizedBox8,
           Padding(
             padding: const EdgeInsets.only(
               right: KPadding.kPaddingSize4,

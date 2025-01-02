@@ -42,6 +42,7 @@ class _DeskField extends StatelessWidget {
     return Column(
       children: [
         Row(
+          spacing: KPadding.kPaddingSize24,
           children: [
             Expanded(
               child: TextFieldWidget(
@@ -56,7 +57,6 @@ class _DeskField extends StatelessWidget {
                 isDesk: true,
               ),
             ),
-            KSizedBox.kWidthSizedBox24,
             Expanded(
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.feedback.emailField,

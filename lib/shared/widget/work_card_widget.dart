@@ -28,39 +28,37 @@ class WorkCardWidget extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: KPadding.kPaddingSize4,
           children: [
             Text(
               workModel.title,
               key: KWidgetkeys.widget.workCard.title,
               style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
-            KSizedBox.kHeightSizedBox4,
             Text(
               workModel.price,
               key: KWidgetkeys.widget.workCard.price,
               style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
-            KSizedBox.kHeightSizedBox4,
             Text(
               workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
               style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
-            KSizedBox.kHeightSizedBox4,
             Text(
               workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
               style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
-            KSizedBox.kHeightSizedBox16,
+            KSizedBox.kHeightSizedBox12,
             CardTextDetailWidget(
               text: workModel.description,
               maxLines: 3,
               icon: Row(
+                spacing: KPadding.kPaddingSize16,
                 children: [
                   KIcon.share
                       .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
-                  KSizedBox.kWidthSizedBox16,
                   if (isSaved)
                     KIcon.safe
                         .copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
@@ -72,7 +70,7 @@ class WorkCardWidget extends StatelessWidget {
               ),
               isDesk: isDesk,
             ),
-            KSizedBox.kHeightSizedBox16,
+            KSizedBox.kHeightSizedBox12,
             ButtonWidget(
               key: KWidgetkeys.widget.workCard.button,
               onPressed: () => context.goNamed(KRoute.employeeRespond.name),

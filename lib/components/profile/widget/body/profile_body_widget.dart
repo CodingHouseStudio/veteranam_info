@@ -73,6 +73,7 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox48,
         if (isDesk)
           Row(
+            spacing: KPadding.kPaddingSize40,
             children: [
               Expanded(
                 child: logoutButton(
@@ -80,7 +81,6 @@ class ProfileBodyWidget extends StatelessWidget {
                   isDesk: isDesk,
                 ),
               ),
-              KSizedBox.kWidthSizedBox40,
               Expanded(
                 child: deleteButton(
                   context: context,

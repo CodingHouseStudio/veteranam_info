@@ -30,14 +30,11 @@ class DiscountSection extends StatelessWidget {
       );
     } else {
       return Column(
+        spacing: isTablet ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
         children: [
           KImage.discountImage(
             key: KWidgetkeys.screen.home.discountImage,
           ),
-          if (isTablet)
-            KSizedBox.kHeightSizedBox48
-          else
-            KSizedBox.kHeightSizedBox16,
           _DiscountSectionWidget(isTablet: isTablet),
         ],
       );
@@ -72,14 +69,11 @@ class InformationSection extends StatelessWidget {
       );
     } else {
       return Column(
+        spacing: isTablet ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
         children: [
           KImage.inforamationImage(
             key: KWidgetkeys.screen.home.informationImage,
           ),
-          if (isTablet)
-            KSizedBox.kWidthSizedBox48
-          else
-            KSizedBox.kHeightSizedBox16,
           _InformationSectionWidget(isTablet: isTablet),
         ],
       );

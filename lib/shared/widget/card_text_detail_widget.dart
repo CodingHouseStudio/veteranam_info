@@ -49,6 +49,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     // especially when dealing with long lists or animations.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: KPadding.kPaddingSize16,
       children: [
         if (widget.hasMarkdown)
           MarkdownLinkWidget(
@@ -65,10 +66,11 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             style: AppTextStyle.materialThemeBodyLarge,
             overflow: TextOverflow.clip,
           ),
-        KSizedBox.kHeightSizedBox16,
         Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing:
+              widget.isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
           children: [
             if (isSmallText)
               const Spacer()
@@ -99,10 +101,6 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   ),
                 ),
               ),
-            if (widget.isDesk)
-              KSizedBox.kHeightSizedBox24
-            else
-              KSizedBox.kHeightSizedBox16,
             if (widget.icon != null) widget.icon!,
           ],
         ),

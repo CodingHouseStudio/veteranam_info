@@ -47,6 +47,7 @@ class WorkEmployeeFilters extends StatelessWidget {
       ),
     ];
     return Row(
+      spacing: KPadding.kPaddingSize24,
       children: [
         FilterPopupMenuWidget(
           key: KWidgetkeys.screen.workEmployee.resetFilter,
@@ -55,7 +56,6 @@ class WorkEmployeeFilters extends StatelessWidget {
               ),
           isDesk: isDesk,
         ),
-        KSizedBox.kWidthSizedBox24,
         Expanded(
           child: ScrollConfiguration(
             behavior: CustomScrollBehavior(),

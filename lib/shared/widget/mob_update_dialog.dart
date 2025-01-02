@@ -24,6 +24,7 @@ class MobUpdateDialog extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
+          spacing: KPadding.kPaddingSize8,
           children: [
             TextButton(
               key: KWidgetkeys.widget.mobUpdate.lateButton,
@@ -33,7 +34,6 @@ class MobUpdateDialog extends StatelessWidget {
                 style: AppTextStyle.materialThemeTitleMediumNeutral,
               ),
             ),
-            KSizedBox.kWidthSizedBox8,
             TextButton(
               key: KWidgetkeys.widget.mobUpdate.updateButton,
               onPressed: () {

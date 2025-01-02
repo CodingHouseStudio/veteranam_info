@@ -195,6 +195,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: KPadding.kPaddingSize8,
       children: [
         DropListFieldImplementationWidget<T>(
           isRequired: widget.isRequired,
@@ -229,8 +230,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
           },
           isLoading: widget.dropDownList.isEmpty,
         ),
-        if (selectedValueIsNotEmpty) ...[
-          KSizedBox.kHeightSizedBox8,
+        if (selectedValueIsNotEmpty)
           Wrap(
             spacing: KPadding.kPaddingSize8,
             runSpacing: KPadding.kPaddingSize8,
@@ -253,7 +253,6 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
               ),
             ),
           ),
-        ],
       ],
     );
   }

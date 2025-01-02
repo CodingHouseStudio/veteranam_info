@@ -101,57 +101,53 @@ class _CardTextDetailEvaluateWidgetState
                 KSizedBox.kHeightSizedBox16,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: KPadding.kPaddingSize8,
                 children: [
                   Column(
+                    spacing: KPadding.kPaddingSize3,
                     children: [
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            onPressed: () {
-                              setState(() {
-                                like = !like;
-                                // if (evaluation != EvaluationEnum.like) {
-                                //   evaluation = EvaluationEnum.like;
-                                // context.read<InformationWatcherBloc>().add(
-                                //       InformationWatcherEvent.like(
-                                //         widget.storyId,
-                                //         true,
-                                //       ),
-                                //     );
-                                // } else {
-                                //   evaluation = EvaluationEnum.none;
-                                // context.read<InformationWatcherBloc>().add(
-                                //       InformationWatcherEvent.like(
-                                //         widget.i,
-                                //         false,
-                                //       ),
-                                //     );
-                                // }
-                              });
-                              widget.onLikeChange?.call(like: like);
-                            },
-                            background: !like
-                                ? AppColors.materialThemeKeyColorsNeutral
-                                : AppColors.materialThemeBlack,
-                            padding: KPadding.kPaddingSize12,
-                            icon: like //evaluation == EvaluationEnum.like
-                                ? KIcon.activeLike.copyWith(
-                                    key: KWidgetkeys.widget
-                                        .cardTextDetailEvaluate.iconActiveLike,
-                                  )
-                                : KIcon.like.copyWith(
-                                    key: KWidgetkeys
-                                        .widget.cardTextDetailEvaluate.iconLike,
-                                  ),
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.useful,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      IconButtonWidget(
+                        onPressed: () {
+                          setState(() {
+                            like = !like;
+                            // if (evaluation != EvaluationEnum.like) {
+                            //   evaluation = EvaluationEnum.like;
+                            // context.read<InformationWatcherBloc>().add(
+                            //       InformationWatcherEvent.like(
+                            //         widget.storyId,
+                            //         true,
+                            //       ),
+                            //     );
+                            // } else {
+                            //   evaluation = EvaluationEnum.none;
+                            // context.read<InformationWatcherBloc>().add(
+                            //       InformationWatcherEvent.like(
+                            //         widget.i,
+                            //         false,
+                            //       ),
+                            //     );
+                            // }
+                          });
+                          widget.onLikeChange?.call(like: like);
+                        },
+                        background: !like
+                            ? AppColors.materialThemeKeyColorsNeutral
+                            : AppColors.materialThemeBlack,
+                        padding: KPadding.kPaddingSize12,
+                        icon: like //evaluation == EvaluationEnum.like
+                            ? KIcon.activeLike.copyWith(
+                                key: KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveLike,
+                              )
+                            : KIcon.like.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconLike,
+                              ),
                       ),
-                      KSizedBox.kWidthSizedBox8,
+                      Text(
+                        context.l10n.useful,
+                        style: AppTextStyle.materialThemeLabelSmall,
+                      ),
                     ],
                   ),
                   SharedIconListWidget(

@@ -72,8 +72,8 @@ class _FooterWidgetList extends StatelessWidget {
                 SocialMediaLinks(
                   isDesk: isTablet,
                   padding: isTablet
-                      ? KSizedBox.kHeightSizedBox24
-                      : KSizedBox.kWidthSizedBox16,
+                      ? KPadding.kPaddingSize24
+                      : KPadding.kPaddingSize16,
                   instagramKey: KWidgetkeys.widget.footer.instagramIcon,
                   linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
                   facebookKey: KWidgetkeys.widget.footer.facebookIcon,
@@ -88,6 +88,7 @@ class _FooterWidgetList extends StatelessWidget {
                 Expanded(
                   child: Wrap(
                     spacing: KPadding.kPaddingSize8,
+                    runSpacing: KPadding.kPaddingSize8,
                     alignment: WrapAlignment.end,
                     crossAxisAlignment: WrapCrossAlignment.end,
                     children: [
@@ -139,9 +140,8 @@ class _FooterWidgetList extends StatelessWidget {
             KSizedBox.kHeightSizedBox40,
             SocialMediaLinks(
               isDesk: isTablet,
-              padding: isTablet
-                  ? KSizedBox.kHeightSizedBox24
-                  : KSizedBox.kWidthSizedBox16,
+              padding:
+                  isTablet ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
               instagramKey: KWidgetkeys.widget.footer.instagramIcon,
               linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
               facebookKey: KWidgetkeys.widget.footer.facebookIcon,
@@ -208,6 +208,7 @@ class _Sections extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: isTablet ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
@@ -220,47 +221,31 @@ class _Sections extends StatelessWidget {
           ),
         ),
         if (isTablet)
-          KSizedBox.kHeightSizedBox16
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox8,
+          KSizedBox.kHeightSizedBox4,
         _Button(
           widgetKey: KWidgetkeys.widget.footer.discountsButton,
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox8
-        else
-          KSizedBox.kHeightSizedBox4,
         if (Config.isDevelopment)
           _Button(
             widgetKey: KWidgetkeys.widget.footer.informationButton,
             text: context.l10n.information,
             onPressed: () => context.goNamed(KRoute.information.name),
           ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox8
-        else
-          KSizedBox.kHeightSizedBox4,
         _Button(
           widgetKey: KWidgetkeys.widget.footer.investorsButton,
           text: context.l10n.investors,
           onPressed: () => context.goNamed(KRoute.support.name),
         ),
         if (Config.isDevelopment) ...[
-          if (isTablet)
-            KSizedBox.kHeightSizedBox8
-          else
-            KSizedBox.kHeightSizedBox4,
           _Button(
             widgetKey: KWidgetkeys.widget.footer.workButton,
             text: context.l10n.work,
             onPressed: () => context.goNamed(KRoute.work.name),
           ),
-          if (isTablet)
-            KSizedBox.kHeightSizedBox8
-          else
-            KSizedBox.kHeightSizedBox4,
           _Button(
             widgetKey: KWidgetkeys.widget.footer.storyButton,
             text: context.l10n.stories,
@@ -282,6 +267,7 @@ class _Information extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: isTablet ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
@@ -294,18 +280,14 @@ class _Information extends StatelessWidget {
           ),
         ),
         if (isTablet)
-          KSizedBox.kHeightSizedBox16
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox8,
+          KSizedBox.kHeightSizedBox4,
         _Button(
           widgetKey: KWidgetkeys.widget.footer.aboutUsButton,
           text: context.l10n.aboutUs,
           onPressed: () => context.goNamed(KRoute.aboutUs.name),
         ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox8
-        else
-          KSizedBox.kHeightSizedBox4,
         _Button(
           widgetKey: KWidgetkeys.widget.footer.profileButton,
           text: context.l10n.myProfile,
@@ -314,10 +296,6 @@ class _Information extends StatelessWidget {
               ? context.goNamed(KRoute.profile.name)
               : context.goNamed(KRoute.login.name),
         ),
-        if (isTablet)
-          KSizedBox.kHeightSizedBox8
-        else
-          KSizedBox.kHeightSizedBox4,
         _Button(
           widgetKey: KWidgetkeys.widget.footer.consultationOnlineButton,
           text: context.l10n.consultationOnline,
@@ -338,6 +316,7 @@ class _Contact extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: KPadding.kPaddingSize16,
       children: [
         Align(
           alignment: Alignment.centerLeft,
@@ -349,8 +328,6 @@ class _Contact extends StatelessWidget {
                 : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
-        KSizedBox.kHeightSizedBox16,
-        KSizedBox.kWidthSizedBox4,
         EmailButtonWidget(
           key: KWidgetkeys.widget.footer.emailButton,
           isDesk: isTablet,
@@ -370,6 +347,7 @@ class _Support extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: KPadding.kPaddingSize16,
       children: [
         Text(
           context.l10n.doYouWantSupportOurProject,
@@ -378,7 +356,6 @@ class _Support extends StatelessWidget {
               ? AppTextStyle.materialThemeDisplaySmall
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
-        KSizedBox.kHeightSizedBox16,
         // if (Config.isWeb)
         //   Align(
         //     alignment: Alignment.centerLeft,
@@ -423,15 +400,15 @@ class _Button extends StatelessWidget {
 class SocialMediaLinks extends StatelessWidget {
   const SocialMediaLinks({
     required this.isDesk,
-    required this.padding,
     required this.instagramKey,
     required this.linkedInKey,
     required this.facebookKey,
+    this.padding = KPadding.kPaddingSize24,
     super.key,
   });
 
   final bool isDesk;
-  final Widget padding;
+  final double padding;
   final Key instagramKey;
   final Key linkedInKey;
   final Key facebookKey;
@@ -441,19 +418,18 @@ class SocialMediaLinks extends StatelessWidget {
     if (isDesk) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        spacing: padding,
         children: [
           _SocialButton(
             widgetKey: linkedInKey,
             url: KAppText.linkedIn,
             image: KIcon.linkedIn,
           ),
-          padding,
           _SocialButton(
             widgetKey: instagramKey,
             url: KAppText.instagram,
             image: KIcon.instagram,
           ),
-          padding,
           _SocialButton(
             widgetKey: facebookKey,
             url: KAppText.facebook,
@@ -463,19 +439,19 @@ class SocialMediaLinks extends StatelessWidget {
       );
     } else {
       return Wrap(
+        spacing: padding,
+        runSpacing: padding,
         children: [
           _SocialButton(
             widgetKey: linkedInKey,
             url: KAppText.linkedIn,
             image: KIcon.linkedIn,
           ),
-          padding,
           _SocialButton(
             widgetKey: instagramKey,
             url: KAppText.instagram,
             image: KIcon.instagram,
           ),
-          padding,
           _SocialButton(
             widgetKey: facebookKey,
             url: KAppText.facebook,

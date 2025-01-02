@@ -106,19 +106,15 @@ class SharedIconListWidget extends StatelessWidget {
         ] else if (link != null && link!.isUrlValid)
           PopupMenuButtonWidget<int>(
             buttonText: context.l10n.login,
-            shape: const OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
-              borderRadius: KBorderRadius.kBorderRadius16,
-            ),
+            borderRadius: KBorderRadius.kBorderRadius16,
             buttonChild: Column(
+              spacing: KPadding.kPaddingSize6,
               children: [
                 const IconWidget(
                   decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
                   icon: KIcon.moreVert,
                   padding: KPadding.kPaddingSize12,
                 ),
-                KSizedBox.kHeightSizedBox6,
                 Text(
                   context.l10n.more,
                   style: AppTextStyle.materialThemeLabelSmallBlack,
@@ -127,12 +123,7 @@ class SharedIconListWidget extends StatelessWidget {
             ),
             showIndicatorIcon: false,
             buttonStyle: KButtonStyles.noBackgroundOnHoverButtonStyle,
-            menuItemsPadding: const EdgeInsets.only(
-              top: KPadding.kPaddingSize16,
-              bottom: KPadding.kPaddingSize16,
-              left: KPadding.kPaddingSize8,
-              right: KPadding.kPaddingSize8,
-            ),
+            buttonItemStyle: KButtonStyles.transparentSharedIconButtonStyle,
             items: [
               DropDownItem(
                 key: webSiteKey,
@@ -175,7 +166,7 @@ class SharedIconListWidget extends StatelessWidget {
                 // ),
               ),
             ],
-            position: PopupMenuButtonPosition.bottomLeft,
+            position: PopupMenuButtonPosition.bottomRight,
           )
         else
           complaintButton(context),
@@ -246,6 +237,7 @@ class _CardIconWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       child: Column(
+        spacing: KPadding.kPaddingSize6,
         children: [
           iconWidget ??
               IconWidget(
@@ -254,7 +246,6 @@ class _CardIconWidget extends StatelessWidget {
                 padding: KPadding.kPaddingSize12,
                 border: border,
               ),
-          KSizedBox.kHeightSizedBox6,
           Text(
             label,
             style: AppTextStyle.materialThemeLabelSmallBlack,

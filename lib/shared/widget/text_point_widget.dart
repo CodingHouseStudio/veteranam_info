@@ -27,12 +27,12 @@ class TextPointWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       mainAxisSize: mainAxisSize ?? MainAxisSize.max,
+      spacing: KPadding.kPaddingSize8,
       children: [
         CircleAvatar(
           radius: KSize.kPixel4,
           backgroundColor: pointColor,
         ),
-        KSizedBox.kWidthSizedBox8,
         // if (hasExpanded)
         //   Expanded(
         //     child: Text(

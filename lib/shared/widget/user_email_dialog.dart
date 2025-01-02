@@ -102,6 +102,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                 ),
               ),
               Row(
+                spacing: KPadding.kPaddingSize16,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconWidget(
@@ -110,10 +111,12 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                         ? KPadding.kPaddingSize20
                         : KPadding.kPaddingSize8,
                   ),
-                  KSizedBox.kWidthSizedBox16,
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: widget.isDesk
+                          ? KPadding.kPaddingSize16
+                          : KPadding.kPaddingSize8,
                       children: [
                         Text(
                           key: KWidgetkeys
@@ -123,10 +126,6 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                               ? AppTextStyle.materialThemeHeadlineLarge
                               : AppTextStyle.materialThemeHeadlineMedium,
                         ),
-                        if (widget.isDesk)
-                          KSizedBox.kHeightSizedBox16
-                        else
-                          KSizedBox.kHeightSizedBox8,
                         if (widget.isDesk)
                           Text(
                             key: KWidgetkeys
@@ -156,11 +155,11 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
               if (widget.isDesk)
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: KPadding.kPaddingSize16,
                   children: [
                     Expanded(
                       child: field(context),
                     ),
-                    KSizedBox.kWidthSizedBox16,
                     button(context),
                   ],
                 )

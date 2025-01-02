@@ -30,6 +30,7 @@ class SectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
+      spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
       children: [
         // if (textPoint != null) ...[
         //   TextPointWidget(
@@ -51,7 +52,6 @@ class SectionWidget extends StatelessWidget {
                 : AppTextStyle.materialThemeDisplaySmall,
           ),
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         Text(
           subtitle,
           key: subtitleKey,
@@ -59,7 +59,6 @@ class SectionWidget extends StatelessWidget {
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodyMedium,
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         DoubleButtonWidget(
           widgetKey: buttonKey,
           text: textButton,
