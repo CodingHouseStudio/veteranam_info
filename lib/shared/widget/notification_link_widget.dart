@@ -52,11 +52,11 @@ class NotificationLinkWidget extends StatelessWidget {
                 if (isDesk)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: KPadding.kPaddingSize24,
                     children: [
                       Expanded(
                         child: field(context),
                       ),
-                      KSizedBox.kWidthSizedBox24,
                       button(context),
                     ],
                   )

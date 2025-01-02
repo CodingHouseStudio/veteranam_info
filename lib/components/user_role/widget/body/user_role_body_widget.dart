@@ -97,13 +97,13 @@ class UserRoleBodyWidget extends StatelessWidget {
           key: KWidgetkeys.screen.userRole.loginButton,
           mainAxisAlignment:
               isDesk ? MainAxisAlignment.center : MainAxisAlignment.start,
+          spacing: KPadding.kPaddingSize16,
           children: [
             Text(
               context.l10n.doYouHavenAccount,
               key: KWidgetkeys.screen.signUp.loginText,
               style: AppTextStyle.materialThemeTitleMedium,
             ),
-            KSizedBox.kWidthSizedBox16,
             PopupMenuButtonWidget<int>(
               buttonText: context.l10n.login,
               items: [
@@ -122,10 +122,16 @@ class UserRoleBodyWidget extends StatelessWidget {
                   value: 2,
                 ),
               ],
+              menuPadding: const EdgeInsets.only(
+                left: KPadding.kPaddingSize4,
+                top: KPadding.kPaddingSize8,
+                bottom: KPadding.kPaddingSize8,
+                right: KPadding.kPaddingSize4,
+              ),
+              borderRadius: KBorderRadius.kBorderRadius16,
               buttonStyle: KButtonStyles.borderBlackUserRoleButtonStyle,
-              position: isTablet
-                  ? PopupMenuButtonPosition.bottomRight
-                  : PopupMenuButtonPosition.bottomCenter,
+              position: PopupMenuButtonPosition.bottomLeft,
+              buttonItemStyle: KButtonStyles.transparentPopupMenuButtonStyle,
             ),
           ],
         ),

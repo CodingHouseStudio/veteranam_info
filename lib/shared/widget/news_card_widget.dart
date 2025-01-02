@@ -32,6 +32,7 @@ class NewsCardWidget extends StatelessWidget {
       buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: isDesk ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
         children: [
           Text(
             informationItem.title,
@@ -40,10 +41,6 @@ class NewsCardWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeDisplaySmall
                 : AppTextStyle.materialThemeHeadlineSmall,
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox8
-          else
-            KSizedBox.kHeightSizedBox4,
           Text(
             informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
@@ -52,9 +49,9 @@ class NewsCardWidget extends StatelessWidget {
                 : AppTextStyle.materialThemeLabelSmall,
           ),
           if (isDesk)
-            KSizedBox.kHeightSizedBox24
+            KSizedBox.kHeightSizedBox16
           else
-            KSizedBox.kHeightSizedBox16,
+            KSizedBox.kHeightSizedBox12,
         ],
       ),
       bottom: Padding(

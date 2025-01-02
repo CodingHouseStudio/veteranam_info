@@ -109,61 +109,57 @@ class _ConfirmPublishDiscountDialogState
                   KSizedBox.kHeightSizedBox16
                 else
                   KSizedBox.kHeightSizedBox24,
-                Row(
-                  children: [
-                    Expanded(
-                      child: CheckPointWidget(
-                        key: KWidgetkeys.widget.confirmPublishDiscount
-                            .termsAndConditionsSwitcher,
-                        onChanged: () => setState(() {
-                          termsAndConditionsAgree = !termsAndConditionsAgree;
-                        }),
-                        isCheck: termsAndConditionsAgree,
-                        text: null,
-                        isDesk: widget.isDesk,
-                        textWidget: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          runSpacing: KPadding.kPaddingSize2,
-                          spacing: KPadding.kPaddingSize8,
-                          children: [
-                            Text(
-                              context.l10n.iAgreeWith,
-                              key: KWidgetkeys.widget.confirmPublishDiscount
-                                  .termsAndConditionsText,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: widget.isDesk
-                                  ? AppTextStyle.materialThemeBodyLarge
-                                  : AppTextStyle.materialThemeBodyMedium,
-                            ),
-                            InkWell(
-                              key: KWidgetkeys.widget.confirmPublishDiscount
-                                  .termsAndConditionsButton,
-                              onTap: () => context
-                                  .goNamed(KRoute.termsAndConditions.name),
-                              overlayColor: const WidgetStatePropertyAll(
-                                Colors.transparent,
-                              ),
-                              hoverColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: KPadding.kPaddingSize8,
-                                ),
-                                child: Text(
-                                  context.l10n.termsAndConditions,
-                                  style: widget.isDesk
-                                      ? AppTextStyle.materialThemeBodyLargeBold
-                                      : AppTextStyle
-                                          .materialThemeBodyMediumBold,
-                                ),
-                              ),
-                            ),
-                          ],
+                SizedBox(
+                  width: double.infinity,
+                  child: CheckPointWidget(
+                    key: KWidgetkeys.widget.confirmPublishDiscount
+                        .termsAndConditionsSwitcher,
+                    onChanged: () => setState(() {
+                      termsAndConditionsAgree = !termsAndConditionsAgree;
+                    }),
+                    isCheck: termsAndConditionsAgree,
+                    text: null,
+                    isDesk: widget.isDesk,
+                    textWidget: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      runSpacing: KPadding.kPaddingSize2,
+                      spacing: KPadding.kPaddingSize8,
+                      children: [
+                        Text(
+                          context.l10n.iAgreeWith,
+                          key: KWidgetkeys.widget.confirmPublishDiscount
+                              .termsAndConditionsText,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: widget.isDesk
+                              ? AppTextStyle.materialThemeBodyLarge
+                              : AppTextStyle.materialThemeBodyMedium,
                         ),
-                      ),
+                        InkWell(
+                          key: KWidgetkeys.widget.confirmPublishDiscount
+                              .termsAndConditionsButton,
+                          onTap: () =>
+                              context.goNamed(KRoute.termsAndConditions.name),
+                          overlayColor: const WidgetStatePropertyAll(
+                            Colors.transparent,
+                          ),
+                          hoverColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize8,
+                            ),
+                            child: Text(
+                              context.l10n.termsAndConditions,
+                              style: widget.isDesk
+                                  ? AppTextStyle.materialThemeBodyLargeBold
+                                  : AppTextStyle.materialThemeBodyMediumBold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
                 if (widget.isDesk)
                   KSizedBox.kHeightSizedBox32

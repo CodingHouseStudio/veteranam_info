@@ -15,16 +15,12 @@ class HomeScreenCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(right: rightPadding),
-      child: Column(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: leftWidget),
-              Expanded(
-                child: rightWidget,
-              ),
-            ],
+          Expanded(child: leftWidget),
+          Expanded(
+            child: rightWidget,
           ),
         ],
       ),

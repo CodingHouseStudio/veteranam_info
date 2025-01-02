@@ -186,6 +186,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
             return SkeletonizerWidget(
               isLoading: state.loadingStatus.isLoading,
               child: Column(
+                spacing: KPadding.kPaddingSize24,
                 children: [
                   DecoratedBox(
                     decoration: KWidgetTheme.boxDecorationDiscountContainer,
@@ -210,6 +211,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: KPadding.kPaddingSize4,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -222,7 +224,6 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                         .materialThemeHeadlineMedium,
                                   ),
                                 ),
-                                KSizedBox.kHeightSizedBox4,
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: KPadding.kPaddingSize16,
@@ -236,7 +237,6 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                     showFullText: true,
                                   ),
                                 ),
-                                KSizedBox.kHeightSizedBox4,
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: KPadding.kPaddingSize16,
@@ -246,9 +246,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                         ?.getTrsnslation(context),
                                   ),
                                 ),
-                                if (state.discountModel.phoneNumber !=
-                                    null) ...[
-                                  KSizedBox.kHeightSizedBox4,
+                                if (state.discountModel.phoneNumber != null)
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: KPadding.kPaddingSize8,
@@ -258,7 +256,6 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                           state.discountModel.phoneNumber!,
                                     ),
                                   ),
-                                ],
                               ],
                             ),
                           ),
@@ -266,7 +263,6 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  KSizedBox.kHeightSizedBox24,
                   Align(
                     alignment: Alignment.centerLeft,
                     child: SharedIconListWidget(

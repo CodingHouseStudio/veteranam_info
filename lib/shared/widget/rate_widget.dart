@@ -17,13 +17,13 @@ class RateWidget extends StatelessWidget {
       padding: const EdgeInsets.all(KPadding.kPaddingSize20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: KPadding.kPaddingSize8,
         children: [
           Text(
             context.l10n.rateOurSite,
             key: KWidgetkeys.widget.rate.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
-          KSizedBox.kHeightSizedBox8,
           RatingBar.builder(
             allowHalfRating: true,
             itemSize: KSize.kIconSize,

@@ -26,6 +26,7 @@ class WorkBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox64,
         if (isDesk)
           Row(
+            spacing: KPadding.kPaddingSize56,
             mainAxisAlignment: MainAxisAlignment.center,
             children: boxWidgets(context: context, isDesk: isDesk),
           )
@@ -51,7 +52,7 @@ class WorkBodyWidget extends StatelessWidget {
           isDesk: isDesk,
           textRightPadding: KPadding.kPaddingSize100,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox56 else KSizedBox.kHeightSizedBox40,
+        if (!isDesk) KSizedBox.kHeightSizedBox40,
         BoxWidget(
           key: KWidgetkeys.screen.work.boxEmployer,
           text: context.l10n.givingJob,

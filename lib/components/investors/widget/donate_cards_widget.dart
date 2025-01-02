@@ -25,6 +25,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: KPadding.kPaddingSize24,
       children: List.generate(
         KDimensions.donateCardsLine,
         (index) {
@@ -43,28 +44,21 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                     onExit: (event) => setState(() {
                       hasSubtitles[index] = false;
                     }),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        right: widget.fundItems.length + 1 != index
-                            ? KPadding.kPaddingSize24
-                            : 0,
-                      ),
-                      child: SkeletonizerWidget(
-                        isLoading: widget.isLoading,
-                        child: DonateCardWidget(
-                          key: KWidgetkeys.screen.investors.card,
-                          fundModel: widget.fundItems.elementAt(index),
-                          hasSubtitle: hasSubtitles.elementAt(index),
-                          titleStyle: hasSubtitles.contains(true) && changeSize
-                              ? AppTextStyle.text24
-                              : null,
-                          isDesk: true,
-                          // reportEvent: null,
-                          // () =>
-                          //     context.read<InvestorsWatcherBloc>().add(
-                          //           const InvestorsWatcherEvent.getReport(),
-                          //         ),
-                        ),
+                    child: SkeletonizerWidget(
+                      isLoading: widget.isLoading,
+                      child: DonateCardWidget(
+                        key: KWidgetkeys.screen.investors.card,
+                        fundModel: widget.fundItems.elementAt(index),
+                        hasSubtitle: hasSubtitles.elementAt(index),
+                        titleStyle: hasSubtitles.contains(true) && changeSize
+                            ? AppTextStyle.text24
+                            : null,
+                        isDesk: true,
+                        // reportEvent: null,
+                        // () =>
+                        //     context.read<InvestorsWatcherBloc>().add(
+                        //           const InvestorsWatcherEvent.getReport(),
+                        //         ),
                       ),
                     ),
                   )

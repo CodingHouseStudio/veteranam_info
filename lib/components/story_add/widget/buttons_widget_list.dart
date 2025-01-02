@@ -15,6 +15,7 @@ List<Widget> _buttonsWidgetList({
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        spacing: KPadding.kPaddingSize16,
                         children: [
                           SwitchWidget(
                             key: KWidgetkeys.screen.storyAdd.switchAnonymously,
@@ -26,7 +27,6 @@ List<Widget> _buttonsWidgetList({
                                   const StoryAddEvent.anonymouslyUpdated(),
                                 ),
                           ),
-                          KSizedBox.kWidthSizedBox16,
                           Expanded(
                             child: Text(
                               context.l10n.publishAnonymously,
@@ -52,6 +52,7 @@ List<Widget> _buttonsWidgetList({
           ]
         : [
             Row(
+              spacing: KPadding.kPaddingSize16,
               children: [
                 SwitchWidget(
                   key: KWidgetkeys.screen.storyAdd.switchAnonymously,
@@ -60,7 +61,6 @@ List<Widget> _buttonsWidgetList({
                       .read<StoryAddBloc>()
                       .add(const StoryAddEvent.anonymouslyUpdated()),
                 ),
-                KSizedBox.kWidthSizedBox16,
                 Expanded(
                   child: Text(
                     context.l10n.publishAnonymously,

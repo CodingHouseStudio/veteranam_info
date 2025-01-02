@@ -53,6 +53,7 @@ class FeedbackTitle extends StatelessWidget {
             Row(
               key: KWidgetkeys.screen.feedback.title,
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: KPadding.kPaddingSize16,
               children: Config.isWeb ? mobTitle : mobTitle.reversed.toList(),
             ),
             KSizedBox.kHeightSizedBox32,
@@ -75,7 +76,6 @@ class FeedbackTitle extends StatelessWidget {
         icon: Config.isWeb ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
         padding: KPadding.kPaddingSize12,
       ),
-      KSizedBox.kWidthSizedBox16,
       Expanded(
         child: Text(
           '$title $titleSecondPart',

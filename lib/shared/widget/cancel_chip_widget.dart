@@ -37,9 +37,9 @@ class CancelChipWidget extends StatelessWidget {
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: KPadding.kPaddingSize8,
         children: [
           KIcon.close,
-          KSizedBox.kWidthSizedBox8,
           // if (width == null)
           Flexible(child: textWidget),
           // else

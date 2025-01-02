@@ -35,12 +35,12 @@ class CompanyBodyWidget extends StatelessWidget {
               key: KWidgetkeys.screen.company.boxMyDiscounts,
               onPressed: () => myDiscountTap(context),
               child: Column(
+                spacing: KPadding.kPaddingSize4,
                 children: [
                   const IconWidget(
                     icon: KIcon.tag,
                     background: AppColors.materialThemeKeyColorsNeutral,
                   ),
-                  KSizedBox.kHeightSizedBox4,
                   Text(
                     context.l10n.myDiscounts,
                     style: AppTextStyle.materialThemeLabelSmall,
@@ -60,13 +60,13 @@ class CompanyBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox48,
         if (isDesk)
           Row(
+            spacing: KPadding.kPaddingSize32,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 3,
                 child: _form(isDesk: isDesk, context: context),
               ),
-              KSizedBox.kWidthSizedBox32,
               Expanded(
                 flex: 2,
                 child: BoxWidget(

@@ -172,41 +172,39 @@ class _NavbarWidget extends StatelessWidget {
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     return Row(
-                      children: [
-                        if (context.read<AuthenticationBloc>().state.status !=
-                                AuthenticationStatus.authenticated
-                            //      &&
-                            // (Config.isDevelopment || Config.isBusiness)
-                            ) ...[
-                          if (isDesk) ...[
-                            KSizedBox.kWidthSizedBox16,
-                            DoubleButtonWidget(
-                              widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                              onPressed: () => context.goNamed(loginPath),
-                              text: context.l10n.login,
-                              isDesk: true,
-                              darkMode: true,
-                            ),
-                          ] else ...[
-                            KSizedBox.kWidthSizedBox4,
-                            IconButtonWidget(
-                              key: KWidgetkeys.widget.nawbar.loginIcon,
-                              onPressed: () => context.goNamed(loginPath),
-                              icon: KIcon.personWhite,
-                              background:
-                                  AppColors.materialThemeKeyColorsSecondary,
-                            ),
-                          ],
-                        ]
-                        // if (context.read<AuthenticationBloc>()
-                        //.state.status ==
-                        //         AuthenticationStatus.authenticated &&
-                        //     (Config.isDevelopment || Config.isBusiness))
-                        else ...[
-                          KSizedBox.kWidthSizedBox8,
-                          getImageWidget,
-                        ],
-                      ],
+                      children: context
+                                  .read<AuthenticationBloc>()
+                                  .state
+                                  .status !=
+                              AuthenticationStatus.authenticated
+                          //      &&
+                          // (Config.isDevelopment || Config.isBusiness)
+                          ? isDesk
+                              ? [
+                                  KSizedBox.kWidthSizedBox16,
+                                  DoubleButtonWidget(
+                                    widgetKey:
+                                        KWidgetkeys.widget.nawbar.loginButton,
+                                    onPressed: () => context.goNamed(loginPath),
+                                    text: context.l10n.login,
+                                    isDesk: true,
+                                    darkMode: true,
+                                  ),
+                                ]
+                              : [
+                                  KSizedBox.kWidthSizedBox4,
+                                  IconButtonWidget(
+                                    key: KWidgetkeys.widget.nawbar.loginIcon,
+                                    onPressed: () => context.goNamed(loginPath),
+                                    icon: KIcon.personWhite,
+                                    background: AppColors
+                                        .materialThemeKeyColorsSecondary,
+                                  ),
+                                ]
+                          : [
+                              KSizedBox.kWidthSizedBox8,
+                              getImageWidget,
+                            ],
                     );
                   },
                 ),
@@ -299,6 +297,7 @@ class _NavigationCenterWebWidget extends StatelessWidget {
           // mainAxisSize: MainAxisSize.min,
           // mainAxisAlignment: MainAxisAlignment.center,
           alignment: WrapAlignment.center,
+          runSpacing: KPadding.kPaddingSize8,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             if (Config.isUser)

@@ -53,6 +53,35 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const ButtonStyle transparentSharedIconButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        right: KPadding.kPaddingSize8,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder,
+    ),
+    alignment: Alignment.centerLeft,
+  );
+
+  static const ButtonStyle transparentPopupMenuButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        right: KPadding.kPaddingSize60,
+        left: KPadding.kPaddingSize16,
+        top: KPadding.kPaddingSize8,
+        bottom: KPadding.kPaddingSize8,
+      ),
+    ),
+    iconColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
+    foregroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorder16,
+    ),
+    alignment: Alignment.centerLeft,
+  );
+
   static const ButtonStyle neutralButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.all(KPadding.kPaddingSize12),

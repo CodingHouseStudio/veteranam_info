@@ -116,6 +116,10 @@ class _DiscountsBodyWidget extends StatelessWidget {
                 ),
               ),
               if (isDesk)
+                KSizedBox.kHeightSizedBox40.toSliver
+              else
+                KSizedBox.kHeightSizedBox24.toSliver,
+              if (isDesk)
                 SliverPadding(
                   padding: padding,
                   sliver: DiscountsDeskWidgetList(

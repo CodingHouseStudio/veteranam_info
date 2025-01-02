@@ -23,7 +23,7 @@ abstract class KDimensions {
   static const shimmerFundsMobItems = 6;
   static const shimmerStoriesItems = 3;
   static const shimmerWorksItems = 3;
-  static const shimmerDiscountsItems = 1;
+  // static const shimmerDiscountsItems = 1;
   static const shimmerDiscountsFilterItems = 4;
   static const shimmerCategoryItems = 5;
 

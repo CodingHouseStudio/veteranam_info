@@ -19,13 +19,13 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: KPadding.kPaddingSize8,
       children: [
         Text(
           title,
           key: titleKey,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox8,
         Text(
           subtitle,
           key: subtitleKey,
@@ -55,16 +55,17 @@ class TitleIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: KPadding.kPaddingSize32,
       children: [
         if (isDesk)
           Row(
+            spacing: KPadding.kPaddingSize90,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const IconWidget(
                 // key: KWidgetkeys.screen.feedback.titleIcon,
                 icon: KIcon.arrowDownRight,
               ),
-              KSizedBox.kWidthSizedBox90,
               Expanded(
                 child: Column(
                   key: titleKey,
@@ -84,7 +85,7 @@ class TitleIconWidget extends StatelessWidget {
               ),
             ],
           )
-        else ...[
+        else
           Row(
             key: titleKey,
             crossAxisAlignment: iconCrossAxisAlignment,
@@ -104,8 +105,6 @@ class TitleIconWidget extends StatelessWidget {
               ),
             ],
           ),
-        ],
-        KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeRefNeutralNeutral90,
         ),
@@ -134,6 +133,9 @@ class LineTitleIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: preDividerWidget == null
+          ? KPadding.kPaddingSize32
+          : KPadding.kPaddingSize16,
       children: [
         // if (isDesk)
         if (rightWidget == null)
@@ -159,13 +161,7 @@ class LineTitleIconWidget extends StatelessWidget {
         //       ),
         //     ],
         //   ),
-        if (preDividerWidget == null)
-          KSizedBox.kHeightSizedBox32
-        else ...[
-          KSizedBox.kHeightSizedBox16,
-          preDividerWidget!,
-          KSizedBox.kHeightSizedBox16,
-        ],
+        if (preDividerWidget != null) preDividerWidget!,
         const Divider(
           color: AppColors.materialThemeRefNeutralNeutral90,
         ),
@@ -176,6 +172,7 @@ class LineTitleIconWidget extends StatelessWidget {
   Widget get leftWidget => Align(
         alignment: Alignment.centerLeft,
         child: Row(
+          spacing: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize24,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -188,10 +185,6 @@ class LineTitleIconWidget extends StatelessWidget {
                     : AppTextStyle.materialThemeDisplaySmall,
               ),
             ),
-            if (isDesk)
-              KSizedBox.kWidthSizedBox32
-            else
-              KSizedBox.kWidthSizedBox24,
             IconWidget(
               // key: KWidgetkeys.screen.feedback.titleIcon,
               padding: isDesk ? null : KPadding.kPaddingSize8,
@@ -257,6 +250,7 @@ class TitlePointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: KPadding.kPaddingSize32,
       children: [
         if (isDesk)
           Column(
@@ -274,6 +268,8 @@ class TitlePointWidget extends StatelessWidget {
                 padding: titleSecondPartPadding,
                 child: Wrap(
                   alignment: titleAlignment,
+                  runSpacing: KPadding.kPaddingSize8,
+                  spacing: KPadding.kPaddingSize24,
                   children: [
                     /// Displays the second part of the title text
                     /// in the column layout.
@@ -282,7 +278,6 @@ class TitlePointWidget extends StatelessWidget {
                       style: AppTextStyle.materialThemeDisplayLarge,
                       textAlign: textAlign,
                     ),
-                    KSizedBox.kWidthSizedBox24,
 
                     /// Displays an icon based on `isRightArrow`,
                     /// with the right or left direction.
@@ -318,9 +313,6 @@ class TitlePointWidget extends StatelessWidget {
               ),
             ],
           ),
-
-        /// Spacer and divider below the content to separate the widget visually
-        KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeRefNeutralNeutral90,
         ),
@@ -365,29 +357,27 @@ class ShortTitleIconWidget extends StatelessWidget {
         alignment: mainAxisAlignment == MainAxisAlignment.center
             ? WrapAlignment.center
             : WrapAlignment.start,
+        spacing: spacerGet,
+        runSpacing: spacerGet,
         children: _getList,
       );
     }
   }
 
   List<Widget> get _getList => [
-        if (firstIcon) ...[
-          iconWidget,
-          if (!expanded) spacerGet,
-        ],
+        if (firstIcon) iconWidget,
         if (expanded) Expanded(child: text) else text,
-        if (!expanded) spacerGet,
         if (!firstIcon) iconWidget,
       ];
 
-  Widget get spacerGet {
+  double get spacerGet {
     if (isDesk) {
-      return KSizedBox.kWidthSizedBox32;
+      return KPadding.kPaddingSize32;
     } else {
       if (firstIcon) {
-        return KSizedBox.kWidthSizedBox16;
+        return KPadding.kPaddingSize16;
       } else {
-        return KSizedBox.kWidthSizedBox24;
+        return KPadding.kPaddingSize24;
       }
     }
   }

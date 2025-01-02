@@ -14,13 +14,13 @@ class ChatInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
+      spacing: KPadding.kPaddingSize8,
       children: [
         IconWidget(
           key: KWidgetkeys.widget.chatInput.icon,
           icon: messageIcon,
           background: AppColors.materialThemeKeyColorsNeutral,
         ),
-        KSizedBox.kWidthSizedBox8,
         if (message != null)
           Container(
             decoration: KWidgetTheme.boxDecorChatMessage,
@@ -36,19 +36,18 @@ class ChatInputWidget extends StatelessWidget {
             decoration: KWidgetTheme.boxDecorChatMessage,
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Row(
+              spacing: KPadding.kPaddingSize8,
               children: [
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
                   decoration: KWidgetTheme.boxDecorationGrayCircular,
                 ),
-                KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
                   decoration: KWidgetTheme.boxDecorationGrayCircular,
                 ),
-                KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
