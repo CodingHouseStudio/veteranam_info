@@ -1,6 +1,5 @@
 import 'dart:async' show FutureOr;
 import 'dart:developer' show log;
-import 'dart:io' show Platform;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart' show Colors, Widget, runApp;
@@ -43,14 +42,12 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
   if (!Config.kIsWeb) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor:
-            Platform.isIOS ? Colors.transparent : AppColors.materialThemeWhite,
+      const SystemUiOverlayStyle(
+        // statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: AppColors.materialThemeKeyColorsNeutral,
-        systemNavigationBarDividerColor:
-            AppColors.materialThemeKeyColorsNeutral,
+        // systemNavigationBarColor: Colors.transparent,
+        // systemNavigationBarDividerColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
