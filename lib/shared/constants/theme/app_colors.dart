@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' show Color;
 
 abstract class AppColors {
   static const Color materialThemeWhite = Color(0xffffffff);
+  static const Color materialThemeWhite12 = Color(0xa0ffffff);
 
   static const Color materialThemeBlack = Color(0xff000000);
 
