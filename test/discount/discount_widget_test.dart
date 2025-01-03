@@ -20,10 +20,14 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late IUrlRepository mockUrlRepository;
+    late IReportRepository mockReportRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockUrlRepository = MockIUrlRepository();
+      mockReportRepository = MockIReportRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
       when(
         mockUrlRepository.copy(
@@ -36,6 +40,14 @@ void main() {
       when(
         mockUrlRepository.launchUrl(
           url: KTestVariables.fullDiscount.phoneNumber!,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+
+      when(
+        mockUrlRepository.share(
+          '/discounts/${KTestVariables.id}',
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
@@ -64,7 +76,9 @@ void main() {
         await discountPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
           mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
@@ -77,7 +91,9 @@ void main() {
           await discountPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
+            mockReportRepository: mockReportRepository,
             mockUrlRepository: mockUrlRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
           );
@@ -89,7 +105,9 @@ void main() {
             await discountPumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
+              mockReportRepository: mockReportRepository,
               mockUrlRepository: mockUrlRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockDiscountRepository: mockDiscountRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
@@ -127,7 +145,9 @@ void main() {
         await discountPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
           mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
@@ -140,7 +160,9 @@ void main() {
           pumpApp: () async => discountPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
+            mockReportRepository: mockReportRepository,
             mockUrlRepository: mockUrlRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           ),
         );
@@ -158,7 +180,9 @@ void main() {
         await discountPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
           mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
@@ -171,12 +195,63 @@ void main() {
         await discountPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
           mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
         await discountShowPhoneNumberHelper(tester);
       });
+
+      testWidgets('Share', (tester) async {
+        await discountPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
+          mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          discount: KTestVariables.fullDiscount,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        );
+
+        await discountShareHelper(
+          tester: tester,
+          mockUrlRepository: mockUrlRepository,
+        );
+      });
+
+      testWidgets('Complaint', (tester) async {
+        await discountPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockReportRepository: mockReportRepository,
+          mockUrlRepository: mockUrlRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          discount: KTestVariables.fullDiscount,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        );
+
+        await discountComplaintHelper(tester);
+      });
+
+      // TODO(test): fix this test
+      // testWidgets('Web Site', (tester) async {
+      //   await discountPumpAppHelper(
+      //     tester: tester,
+      //     mockDiscountRepository: mockDiscountRepository,
+      //   mockReportRepository: mockReportRepository,  mockUrlRepository:
+      // mockUrlRepository,
+      //     discount: KTestVariables.fullDiscount,
+      //   mockAppAuthenticationRepository:mockAppAuthenticationRepository,
+      // mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      //   );
+
+      //   await discountShareHelper(
+      //     tester: tester,
+      //     mockUrlRepository: mockUrlRepository,
+      //   );
+      // });
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
@@ -185,7 +260,9 @@ void main() {
           await discountPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockReportRepository: mockReportRepository,
             mockUrlRepository: mockUrlRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           );
@@ -197,7 +274,9 @@ void main() {
             await discountPumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
+              mockReportRepository: mockReportRepository,
               mockUrlRepository: mockUrlRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockDiscountRepository: mockDiscountRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,

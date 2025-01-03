@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_cubit.dart';
+import 'package:veteranam/components/discount/bloc/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
@@ -17,63 +17,91 @@ void main() {
 
   tearDown(GetIt.I.reset);
 
-  group('${KScreenBlocName.discountCard} ${KGroupText.bloc}', () {
+  group('${KScreenBlocName.discount} ${KGroupText.bloc}', () {
     late IDiscountRepository mockdiscountRepository;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+      when(
+        mockFirebaseRemoteConfigProvider.getBool(
+          RemoteConfigKey.showOnlyBusinessDiscounts,
+        ),
+      ).thenAnswer(
+        (_) => false,
+      );
       when(
         mockdiscountRepository.getDiscount(
-          id: KTestVariables.discountModelItems.first.id,
+          id: KTestVariables.id,
           showOnlyBusinessDiscounts: false,
         ),
       ).thenAnswer(
-        (_) async {
-          await KTestConstants.delay;
-          return Right(KTestVariables.discountModelItems.first);
-        },
+        (_) async => Right(KTestVariables.fullDiscount),
       );
     });
 
-    blocTest<DiscountCardWatcherCubit, DiscountCardWatcherState>(
-      'emits [DiscountCardWatcherState()]'
-      ' when load discountModel with wrong id and correct',
-      build: () => DiscountCardWatcherCubit(
+    blocTest<DiscountWatcherBloc, DiscountWatcherState>(
+      'emits [DiscountWatcherState()]'
+      ' when load discountModel correct',
+      build: () => DiscountWatcherBloc(
         discountRepository: mockdiscountRepository,
-        id: KTestVariables.discountModelItems.first.id,
+        discountId: KTestVariables.id,
+        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        discount: null,
       ),
       act: (bloc) async {
         await KTestConstants.delay;
-        await bloc.onStarted(id: KTestVariables.discountModelItems.first.id);
-        await bloc.onStarted(id: '');
+        bloc.add(
+          const DiscountWatcherEvent.started(
+            KTestVariables.id,
+          ),
+        );
         // bloc
-        //   ..add(const DiscountCardWatcherEvent.started(''))
+        //   ..add(const DiscountWatcherEvent.started(''))
         //   ..add(
-        //     DiscountCardWatcherEvent.started(
-        //       KTestText.discountModelItems.first.id,
+        //     DiscountWatcherEvent.started(
+        //       KTestText.fullDiscount.id,
         //     ),
         //   );
       },
       expect: () async => [
-        DiscountCardWatcherState(
-          discountModel: KTestVariables.discountModelItems.first,
-          loadingStatus: LoadingStatus.loaded,
-          failure: null,
-        ),
-        const DiscountCardWatcherState(
-          discountModel: null,
+        DiscountWatcherState(
+          discountModel: KMockText.discountModel,
           loadingStatus: LoadingStatus.loading,
-          failure: null,
         ),
-        DiscountCardWatcherState(
-          discountModel: KTestVariables.discountModelItems.first,
+        DiscountWatcherState(
+          discountModel: KTestVariables.fullDiscount,
           loadingStatus: LoadingStatus.loaded,
-          failure: null,
         ),
-        const DiscountCardWatcherState(
-          discountModel: null,
+        DiscountWatcherState(
+          discountModel: KTestVariables.fullDiscount,
+          loadingStatus: LoadingStatus.loading,
+        ),
+        DiscountWatcherState(
+          discountModel: KTestVariables.fullDiscount,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ],
+    );
+
+    blocTest<DiscountWatcherBloc, DiscountWatcherState>(
+      'emits [DiscountWatcherState()]'
+      ' when load discountModel with wrong id',
+      build: () => DiscountWatcherBloc(
+        discountRepository: mockdiscountRepository,
+        discountId: '',
+        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        discount: null,
+      ),
+      // act: (bloc) async {
+      //   await KTestConstants.delay;
+      // },
+      expect: () async => [
+        DiscountWatcherState(
+          discountModel: KMockText.discountModel,
           loadingStatus: LoadingStatus.error,
-          failure: DiscountCardFailure.wrongID,
+          failure: DiscountFailure.linkWrong,
         ),
       ],
     );
@@ -82,44 +110,34 @@ void main() {
       setUp(
         () => when(
           mockdiscountRepository.getDiscount(
-            id: KTestVariables.discountModelItems.first.id,
+            id: KTestVariables.id,
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (_) async {
-            await KTestConstants.delay;
-            return Left(SomeFailure.serverError(error: null));
-          },
+          (_) async => Left(SomeFailure.serverError(error: null)),
         ),
       );
 
-      blocTest<DiscountCardWatcherCubit, DiscountCardWatcherState>(
-        'emits [DiscountCardWatcherState()]'
+      blocTest<DiscountWatcherBloc, DiscountWatcherState>(
+        'emits [DiscountWatcherState()]'
         ' when load discountModel ${KGroupText.failure}',
-        build: () => DiscountCardWatcherCubit(
+        build: () => DiscountWatcherBloc(
           discountRepository: mockdiscountRepository,
-          id: '',
+          discountId: KTestVariables.id,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          discount: null,
         ),
-        // act: (bloc) async {
-        //   await bloc.onStarted(id: KTestText.discountModelItems.first.id);
-        //   // bloc.add(
-        //   //   DiscountCardWatcherEvent.started(
-        //   //     KTestText.discountModelItems.first.id,
-        //   //   ),
-        //   // );
-        // },
-        // expect: () async => [
-        // const DiscountCardWatcherState(
-        //   discountModel: null,
-        //   loadingStatus: LoadingStatus.loading,
-        //   failure: null,
-        // ),
-        // const DiscountCardWatcherState(
-        //   discountModel: null,
-        //   loadingStatus: LoadingStatus.error,
-        //   failure: DiscountCardFailure.error,
-        // ),
-        // ],
+        expect: () async => [
+          DiscountWatcherState(
+            discountModel: KMockText.discountModel,
+            loadingStatus: LoadingStatus.loading,
+          ),
+          DiscountWatcherState(
+            discountModel: KMockText.discountModel,
+            loadingStatus: LoadingStatus.error,
+            failure: DiscountFailure.linkWrong,
+          ),
+        ],
       );
     });
   });

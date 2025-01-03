@@ -1,4 +1,4 @@
-enum DiscountFailure {
+enum DiscountsFailure {
   error,
   filter,
   report;

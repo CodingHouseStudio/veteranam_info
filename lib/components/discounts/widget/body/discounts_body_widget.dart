@@ -42,7 +42,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
               context.dialog.showGetErrorDialog(
                 error: state.failure!.value(context),
                 onPressed:
-                    state.failure == DiscountFailure.filter ? null : () {},
+                    state.failure == DiscountsFailure.filter ? null : () {},
                 // I think this event is not necessary for Stream, but
                 // I think it's better to give
                 // the user imaginary control over it

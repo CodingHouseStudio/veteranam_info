@@ -19,17 +19,19 @@ class DiscountWatcherBloc
         _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
           _Initial(
-            discountModel: KMockText.discountModel,
-            loadingStatus: LoadingStatus.initial,
+            discountModel: discount ?? KMockText.discountModel,
+            loadingStatus:
+                discount == null ? LoadingStatus.initial : LoadingStatus.loaded,
           ),
         ) {
     on<_Started>(_onStarted);
-    add(
-      DiscountWatcherEvent.started(
-        discount: discount,
-        discountId: discountId,
-      ),
-    );
+    if (discount == null) {
+      add(
+        DiscountWatcherEvent.started(
+          discountId,
+        ),
+      );
+    }
   }
   final IDiscountRepository _discountRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
@@ -37,28 +39,34 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    if (event.discountId == null || event.discountId!.isEmpty) {
+      emit(
+        state.copyWith(
+          failure: DiscountFailure.linkWrong,
+          loadingStatus: LoadingStatus.error,
+        ),
+      );
+      return;
+    }
+
     emit(
       state.copyWith(loadingStatus: LoadingStatus.loading),
     );
-    DiscountModel? discount;
-    if (event.discount != null) {
-      discount = event.discount;
-    } else if (event.discountId != null) {
-      final result = await _discountRepository.getDiscount(
-        id: event.discountId!,
-        showOnlyBusinessDiscounts: _firebaseRemoteConfigProvider
-            .getBool(RemoteConfigKey.showOnlyBusinessDiscounts),
-      );
-      result.fold(
-        (l) => emit(state.copyWith(failure: DiscountFailure.linkWrong)),
-        (r) => discount = r,
-      );
-    }
-
-    if (discount != null) {
-      emit(
-        _Initial(discountModel: discount!, loadingStatus: LoadingStatus.loaded),
-      );
-    }
+    final result = await _discountRepository.getDiscount(
+      id: event.discountId!,
+      showOnlyBusinessDiscounts: _firebaseRemoteConfigProvider
+          .getBool(RemoteConfigKey.showOnlyBusinessDiscounts),
+    );
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: DiscountFailure.linkWrong,
+          loadingStatus: LoadingStatus.error,
+        ),
+      ),
+      (r) => emit(
+        _Initial(discountModel: r, loadingStatus: LoadingStatus.loaded),
+      ),
+    );
   }
 }

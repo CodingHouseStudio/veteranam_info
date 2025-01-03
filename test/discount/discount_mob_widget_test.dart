@@ -19,10 +19,14 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late IUrlRepository mockUrlRepository;
+    late IReportRepository mockReportRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockUrlRepository = MockIUrlRepository();
+      mockReportRepository = MockIReportRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       Config.testIsWeb = false;
 
       when(
@@ -65,6 +69,8 @@ void main() {
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
           mockUrlRepository: mockUrlRepository,
+          mockReportRepository: mockReportRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
@@ -78,6 +84,8 @@ void main() {
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
             mockUrlRepository: mockUrlRepository,
+            mockReportRepository: mockReportRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
           );
@@ -110,6 +118,8 @@ void main() {
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
           mockUrlRepository: mockUrlRepository,
+          mockReportRepository: mockReportRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
@@ -124,6 +134,8 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockUrlRepository: mockUrlRepository,
+            mockReportRepository: mockReportRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           );

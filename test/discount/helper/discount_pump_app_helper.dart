@@ -12,6 +12,8 @@ Future<void> discountPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   required IUrlRepository mockUrlRepository,
+  required IReportRepository mockReportRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
   String? discountId = KTestVariables.id,
   DiscountModel? discount,
   MockGoRouter? mockGoRouter,
@@ -21,6 +23,10 @@ Future<void> discountPumpAppHelper({
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerUrlCubit(mockUrlRepository);
+  _registerReportBloc(
+    mockReportRepository: mockReportRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
 
   await tester.pumpApp(
     DiscountScreen(
@@ -66,4 +72,18 @@ void _registerUrlCubit(
     GetIt.I.unregister<UrlCubit>();
   }
   GetIt.I.registerSingleton<UrlCubit>(urlCubit);
+}
+
+void _registerReportBloc({
+  required IReportRepository mockReportRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final reportBloc = ReportBloc(
+    reportRepository: mockReportRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<ReportBloc>()) {
+    GetIt.I.unregister<ReportBloc>();
+  }
+  GetIt.I.registerSingleton<ReportBloc>(reportBloc);
 }

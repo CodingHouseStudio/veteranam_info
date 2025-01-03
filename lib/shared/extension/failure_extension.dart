@@ -2,13 +2,13 @@ import 'package:flutter/material.dart' show BuildContext;
 import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-extension DiscountFailureValue on DiscountFailure {
+extension DiscountFailureValue on DiscountsFailure {
   String value(BuildContext context) {
     switch (this) {
-      case DiscountFailure.report:
-      case DiscountFailure.error:
+      case DiscountsFailure.report:
+      case DiscountsFailure.error:
         return context.l10n.error;
-      case DiscountFailure.filter:
+      case DiscountsFailure.filter:
         return context.l10n.discountFilterFailureMessage;
     }
   }
