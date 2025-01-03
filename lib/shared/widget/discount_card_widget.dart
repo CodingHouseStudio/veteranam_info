@@ -13,6 +13,7 @@ class DiscountCardWidget extends StatelessWidget {
     this.descriptionMethod,
     this.isBusiness = false,
     this.useSiteUrl,
+    this.dialogIsDesk,
   });
 
   final DiscountModel discountItem;
@@ -23,6 +24,7 @@ class DiscountCardWidget extends StatelessWidget {
   final String Function(String)? descriptionMethod;
   final bool isBusiness;
   final bool? useSiteUrl;
+  final bool? dialogIsDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class DiscountCardWidget extends StatelessWidget {
           isBusiness: isBusiness,
           share: share,
           useSiteUrl: useSiteUrl,
+          dialogIsDesk: dialogIsDesk,
         ),
       ),
     ];
@@ -95,6 +98,7 @@ class DiscountCardWidget extends StatelessWidget {
                   isBusiness: isBusiness,
                   share: share,
                   useSiteUrl: useSiteUrl,
+                  dialogIsDesk: dialogIsDesk,
                 ),
               ),
           ],
@@ -204,6 +208,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
     required this.share,
     required this.isBusiness,
     required this.useSiteUrl,
+    required this.dialogIsDesk,
   });
   final bool isDesk;
   final Widget? closeWidget;
@@ -212,6 +217,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
   final String? share;
   final bool isBusiness;
   final bool? useSiteUrl;
+  final bool? dialogIsDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +295,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             ),
             icon: SharedIconListWidget(
               isDesk: isDesk,
+              dialogIsDesk: dialogIsDesk,
               // if this is iOS and medical services, do not offer
               // pointing to the website
               link: discountItem.getLink,
