@@ -282,10 +282,8 @@ class AdvancedFilterContent extends StatelessWidget {
               right: KPadding.kPaddingSize16,
               top: KPadding.kPaddingSize8,
             )
-          : const EdgeInsets.only(
-              right: KPadding.kPaddingSize16,
-              left: KPadding.kPaddingSize16,
-              bottom: KPadding.kPaddingSize16,
+          : const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize16,
             ),
       child: CustomScrollView(
         key: KWidgetkeys.screen.discounts.advancedFilterList,

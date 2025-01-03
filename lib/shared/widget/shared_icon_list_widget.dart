@@ -160,7 +160,7 @@ class SharedIconListWidget extends StatelessWidget {
                   padding: KPadding.kPaddingSize12,
                 ),
                 event: () => context.dialog.showReportDialog(
-                  isDesk: isDesk,
+                  isDesk: dialogIsDesk ?? isDesk,
                   cardEnum: cardEnum,
                   cardId: cardId,
                 ),

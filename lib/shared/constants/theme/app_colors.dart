@@ -12,6 +12,8 @@ abstract class AppColors {
 
   static const Color materialThemeBlackOpacity20 = Color(0x20000000);
 
+  static const Color materialThemeBlackOpacity40 = Color(0x40000000);
+
   static const Color materialThemeBlackOpacity1 = Color(0x03000000);
 
   static const Color materialThemeBlackOpacity2 = Color(0x05000000);
