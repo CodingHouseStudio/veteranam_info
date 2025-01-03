@@ -243,7 +243,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               ? scaffold
               : PlatformEnum.getPlatform.isIOS
                   ? ColoredBox(
-                      color: AppColors.materialThemeWhite,
+                      color: Colors.transparent,
                       child: SafeArea(child: scaffold),
                     )
                   : SafeArea(child: scaffold);
