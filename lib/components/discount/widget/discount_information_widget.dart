@@ -78,19 +78,21 @@ class DiscountInformationBodyWidget extends StatelessWidget {
         return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
           builder: (context, state) {
             final children = [
-              if (state.discountModel.hasImages)
-                DiscountImageWidget(
-                  discount:
-                      state.discountModel.discount.getDiscountString(context),
-                  images: state.discountModel.images!,
-                  borderRadius: KBorderRadius.kBorderRadius32,
-                ),
+              DiscountImageWidget(
+                key: KWidgetkeys.screen.discount.image,
+                discount:
+                    state.discountModel.discount.getDiscountString(context),
+                images: state.discountModel.images,
+                borderRadius: KBorderRadius.kBorderRadius32,
+              ),
               Text(
                 '${context.l10n.eligibility}:',
+                key: KWidgetkeys.screen.discount.eligiblity,
                 style: AppTextStyle.materialThemeHeadlineMedium,
               ),
               KSizedBox.kHeightSizedBox16,
               EligibilityWidget(
+                key: KWidgetkeys.screen.discount.eligiblityList,
                 isDesk: isDesk,
                 eligibility: state.discountModel.eligibility,
                 showFullList: true,
@@ -98,10 +100,12 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox32,
               Text(
                 '${context.l10n.details}:',
+                key: KWidgetkeys.screen.discount.detail,
                 style: AppTextStyle.materialThemeHeadlineMedium,
               ),
               KSizedBox.kHeightSizedBox16,
               MarkdownLinkWidget(
+                key: KWidgetkeys.screen.discount.detailText,
                 text: state.discountModel.description.getTrsnslation(context),
                 textStyle: AppTextStyle.materialThemeBodyLarge,
                 isDesk: isDesk,
@@ -110,10 +114,12 @@ class DiscountInformationBodyWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox32,
                 Text(
                   context.l10n.toGetItYouNeed,
+                  key: KWidgetkeys.screen.discount.requirments,
                   style: AppTextStyle.materialThemeHeadlineMedium,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 MarkdownLinkWidget(
+                  key: KWidgetkeys.screen.discount.requirmentsText,
                   text:
                       state.discountModel.requirements!.getTrsnslation(context),
                   textStyle: AppTextStyle.materialThemeBodyLarge,
@@ -123,6 +129,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               if (state.discountModel.exclusions != null) ...[
                 KSizedBox.kHeightSizedBox32,
                 MarkdownLinkWidget(
+                  key: KWidgetkeys.screen.discount.exclusions,
                   text: state.discountModel.exclusions!.getTrsnslation(context),
                   textStyle:
                       AppTextStyle.materialThemeBodyLargeNeutralVariant50,
@@ -196,6 +203,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                           padding:
                               const EdgeInsets.all(KPadding.kPaddingSize16),
                           child: CompanyInfoWidget(
+                            key: KWidgetkeys.screen.discount.companyInfo,
                             dateVerified: state.discountModel.dateVerified,
                             category: state.discountModel.category,
                             company: state.discountModel.company,
@@ -220,6 +228,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                   child: Text(
                                     state.discountModel.title
                                         .getTrsnslation(context),
+                                    key: KWidgetkeys.screen.discount.title,
                                     style: AppTextStyle
                                         .materialThemeHeadlineMedium,
                                   ),
@@ -229,7 +238,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                     horizontal: KPadding.kPaddingSize16,
                                   ),
                                   child: CityListWidget(
-                                    key: KWidgetkeys.widget.discountCard.city,
+                                    key: KWidgetkeys.screen.discount.city,
                                     isDesk: false,
                                     location: state.discountModel.location,
                                     subLocation:
@@ -242,6 +251,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                     horizontal: KPadding.kPaddingSize16,
                                   ),
                                   child: ExpirationWidget(
+                                    key: KWidgetkeys.screen.discount.expiration,
                                     expiration: state.discountModel.expiration
                                         ?.getTrsnslation(context),
                                   ),
@@ -269,8 +279,9 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                       isDesk: isDesk,
                       cardEnum: CardEnum.discount,
                       cardId: state.discountModel.id,
-                      shareKey: const Key('share'),
-                      complaintKey: const Key('complaint'),
+                      shareKey: KWidgetkeys.screen.discount.shareButton,
+                      complaintKey: KWidgetkeys.screen.discount.complaintButton,
+                      webSiteKey: KWidgetkeys.screen.discount.websiteButton,
                       showShare: !Config.isBusiness ||
                           state.discountModel.status == DiscountState.published,
                       share:

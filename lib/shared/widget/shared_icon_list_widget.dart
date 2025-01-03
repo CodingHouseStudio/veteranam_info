@@ -10,9 +10,9 @@ class SharedIconListWidget extends StatelessWidget {
     required this.shareKey,
     required this.complaintKey,
     required this.share,
+    required this.webSiteKey,
     super.key,
     this.link,
-    this.webSiteKey,
     this.useSiteUrl,
     this.showComplaint = true,
     this.showShare = true,
@@ -92,6 +92,7 @@ class SharedIconListWidget extends StatelessWidget {
         if (isSeparatePage) ...[
           if (link != null && link!.isUrlValid)
             _CardIconWidget(
+              key: webSiteKey,
               background: iconBackground,
               icon: KIcon.captivePortal,
               onPressed: () => context.openLinkWithAgreeDialog(
@@ -234,7 +235,6 @@ class _CardIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      key: key,
       onTap: onPressed,
       hoverColor: Colors.transparent,
       focusColor: Colors.transparent,

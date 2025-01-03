@@ -1,7 +1,7 @@
 part of 'discount_watcher_bloc.dart';
 
 enum DiscountFailure {
-  error,
+  // error,
   linkWrong,
 }
 

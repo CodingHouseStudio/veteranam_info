@@ -38,4 +38,5 @@ class _ScreenKeys {
   final pwResetEmail = _PwResetEmailKeys();
   final passwordReset = _PasswordResetKeys();
   final company = _CompanyKeys();
+  final discount = _DiscountKeys();
 }

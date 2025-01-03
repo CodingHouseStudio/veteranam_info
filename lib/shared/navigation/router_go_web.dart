@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/about_us/view/about_us_view.dart';
 import 'package:veteranam/components/consultation/view/consultation_view.dart';
-import 'package:veteranam/components/discount/view/discount_view_widget.dart';
+import 'package:veteranam/components/discount/view/discount_view.dart';
 // import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
 import 'package:veteranam/components/discounts/view/discounts_view.dart';
 import 'package:veteranam/components/employee_respond/view/employee_respond_view.dart';
@@ -311,7 +311,7 @@ GoRouter router = GoRouter(
                   key: state.pageKey,
                   name: state.name,
                   restorationId: state.pageKey.value,
-                  child: DiscountScreenWidget(
+                  child: DiscountScreen(
                     discount: discountModel,
                     discountId: state.pathParameters[UrlParameters.cardId],
                   ),

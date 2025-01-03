@@ -29,6 +29,7 @@ export 'dialogs_widget.dart';
 export 'dilog_page_widget.dart';
 export 'discount_card_widget.dart';
 export 'discount_eligibility_widget.dart';
+export 'discount_image_widget.dart';
 export 'discount_text_widget.dart';
 export 'donate_button_widget.dart';
 export 'donate_card_widget.dart';

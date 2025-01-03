@@ -3,8 +3,8 @@ import 'package:veteranam/components/discount/widget/blocprovider/discount_blocp
 import 'package:veteranam/components/discount/widget/body/discount_body_widget.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class DiscountScreenWidget extends StatelessWidget {
-  const DiscountScreenWidget({super.key, this.discount, this.discountId});
+class DiscountScreen extends StatelessWidget {
+  const DiscountScreen({super.key, this.discount, this.discountId});
   final DiscountModel? discount;
   final String? discountId;
 
@@ -14,6 +14,7 @@ class DiscountScreenWidget extends StatelessWidget {
       discount: discount,
       discountId: discountId,
       childWidget: Scaffold(
+        key: KWidgetkeys.screen.discount.screen,
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb
             ? null

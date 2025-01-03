@@ -11,19 +11,17 @@ class DiscountWrongLinkWidget extends StatelessWidget {
     final children = [
       ShortTitleIconWidget(
         title: context.l10n.invalidLinkTitle,
-        titleKey: KWidgetkeys.screen.discountsAdd.title,
+        titleKey: KWidgetkeys.screen.discount.invalidLinkTitle,
         isDesk: isDesk,
         expanded: !isDesk,
         mainAxisAlignment: MainAxisAlignment.center,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox80 else KSizedBox.kHeightSizedBox24,
-      KIcon.found.copyWith(
-        key: KWidgetkeys.screen.discountsAdd.imageWrongLink,
-      ),
+      KIcon.found,
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discountNotFound,
-        key: KWidgetkeys.screen.discountsAdd.textWrongLink,
+        key: KWidgetkeys.screen.discount.invalidLinkDescription,
         style: AppTextStyle.materialThemeTitleMedium,
         textAlign: isDesk ? TextAlign.center : TextAlign.start,
       ),
@@ -31,7 +29,7 @@ class DiscountWrongLinkWidget extends StatelessWidget {
       Align(
         alignment: isDesk ? Alignment.center : Alignment.centerLeft,
         child: TextButton(
-          key: KWidgetkeys.screen.discountsAdd.buttonWrongLink,
+          key: KWidgetkeys.screen.discount.invalidLinkBackButton,
           onPressed: () => context.goNamed(KRoute.discounts.name),
           style: KButtonStyles.borderBlackDiscountLinkButtonStyle,
           child: Text(

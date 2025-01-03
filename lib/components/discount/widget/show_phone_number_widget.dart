@@ -22,6 +22,9 @@ class _ShowPhoneNumberWidgetState extends State<ShowPhoneNumberWidget> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: TextButton.icon(
+        key: showPhoneNumber
+            ? KWidgetkeys.screen.discount.phoneNumberButton
+            : KWidgetkeys.screen.discount.phoneNumberHideButton,
         onPressed: () => showPhoneNumber
             ? PlatformEnumFlutter.isWebDesktop
                 ? context.read<UrlCubit>().copy(
