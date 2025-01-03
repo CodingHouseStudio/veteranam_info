@@ -159,28 +159,38 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
               isDesk: false,
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize16,
-              ),
+          const Divider(
+            color: AppColors.materialThemeBlackOpacity40,
+            height: KSize.kPixel2,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize16,
+            ),
+            child: SizedBox(
+              width: double.infinity,
               child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
+                alignment: WrapAlignment.spaceAround,
                 spacing: KPadding.kPaddingSize8,
                 verticalDirection: VerticalDirection.up,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 runSpacing: KPadding.kPaddingSize8,
                 children: [
-                  BlocBuilder<DiscountsWatcherBloc, DiscountsWatcherState>(
-                    builder: (context, state) {
-                      return AdvancedFilterResetButton(
-                        isDesk: false,
-                        resetEvent:
-                            state.discountFilterRepository.hasActivityItem
-                                ? () => context.pop(false)
-                                : null,
-                      );
-                    },
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: KPadding.kPaddingSize16),
+                    child: BlocBuilder<DiscountsWatcherBloc,
+                        DiscountsWatcherState>(
+                      builder: (context, state) {
+                        return AdvancedFilterResetButton(
+                          isDesk: false,
+                          resetEvent:
+                              state.discountFilterRepository.hasActivityItem
+                                  ? () => context.pop(false)
+                                  : null,
+                        );
+                      },
+                    ),
                   ),
                   DoubleButtonWidget(
                     text: context.l10n.apply,
