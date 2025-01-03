@@ -448,6 +448,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
                             isDesk: false,
                             share:
                                 '${KRoute.home.path}${KRoute.discounts.path}/${state.filterDiscountModelList.elementAt(index).id}',
+                            dialogIsDesk: true,
                           );
                         },
                         childCount: state.filterDiscountModelList.length,

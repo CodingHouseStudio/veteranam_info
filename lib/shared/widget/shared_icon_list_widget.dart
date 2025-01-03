@@ -21,6 +21,7 @@ class SharedIconListWidget extends StatelessWidget {
     this.likeKey,
     this.isSeparatePage = false,
     this.iconBorder,
+    this.dialogIsDesk,
   });
   final bool isDesk;
   final String? link;
@@ -38,6 +39,7 @@ class SharedIconListWidget extends StatelessWidget {
   final int? numberLikes;
   final bool isSeparatePage;
   final BoxBorder? iconBorder;
+  final bool? dialogIsDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +94,10 @@ class SharedIconListWidget extends StatelessWidget {
             _CardIconWidget(
               background: iconBackground,
               icon: KIcon.captivePortal,
-              onPressed: () =>
-                  context.openLinkWithAgreeDialog(isDesk: isDesk, link: link!),
+              onPressed: () => context.openLinkWithAgreeDialog(
+                isDesk: dialogIsDesk ?? isDesk,
+                link: link!,
+              ),
               label: context.l10n.webSite,
               border: iconBorder ??
                   (isSeparatePage
@@ -135,7 +139,7 @@ class SharedIconListWidget extends StatelessWidget {
                   padding: KPadding.kPaddingSize12,
                 ),
                 event: () => context.openLinkWithAgreeDialog(
-                  isDesk: isDesk,
+                  isDesk: dialogIsDesk ?? isDesk,
                   link: link!,
                 ),
                 // padding: const EdgeInsets.only(
