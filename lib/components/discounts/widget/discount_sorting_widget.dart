@@ -16,7 +16,7 @@ class DiscountSortingWidget extends StatelessWidget {
         return PopupMenuButtonWidget<DiscountEnum>(
           buttonStyle: KButtonStyles.neutralButtonStyle,
           borderRadius: KBorderRadius.kBorderRadius16,
-          buttonText: '',
+          buttonText: null,
           iconAlignment: IconAlignment.end,
           items: List.generate(
             DiscountEnum.values.length,
@@ -71,6 +71,5 @@ class DiscountSortingWidget extends StatelessWidget {
               ),
             ),
         key: null,
-        icon: discountEnum == currectDiscountEnum ? KIcon.check : null,
       );
 }

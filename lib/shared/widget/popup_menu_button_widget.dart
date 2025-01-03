@@ -28,7 +28,11 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.currentValue,
     this.iconSpace = KPadding.kPaddingSize16,
     // this.textUnderButton,
-  });
+  }) : assert(
+          !(buttonChild == null && buttonText == null),
+          'If you set null for [buttonText] you should'
+          ' set value for [buttonChild]',
+        );
 
   /// Called when the button is pressed to create the items to show in the menu.
   final List<DropDownItem<T>> items;
@@ -61,7 +65,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final ButtonStyle buttonStyle;
 
-  final String buttonText;
+  final String? buttonText;
 
   final double menuTopSpace;
 
@@ -348,7 +352,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
           iconAlignment: widget.iconAlignment,
           label: widget.buttonChild ??
               Text(
-                widget.buttonText,
+                widget.buttonText!,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
         ),

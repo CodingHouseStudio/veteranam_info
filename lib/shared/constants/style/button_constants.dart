@@ -9,6 +9,8 @@ import 'package:flutter/material.dart'
         LinearBorderEdge,
         RoundedRectangleBorder,
         Size,
+        WidgetState,
+        WidgetStateProperty,
         WidgetStatePropertyAll;
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
@@ -65,8 +67,8 @@ abstract class KButtonStyles {
     alignment: Alignment.centerLeft,
   );
 
-  static const ButtonStyle transparentPopupMenuButtonStyle = ButtonStyle(
-    padding: WidgetStatePropertyAll(
+  static final ButtonStyle transparentPopupMenuButtonStyle = ButtonStyle(
+    padding: const WidgetStatePropertyAll(
       EdgeInsets.only(
         right: KPadding.kPaddingSize60,
         left: KPadding.kPaddingSize16,
@@ -74,12 +76,26 @@ abstract class KButtonStyles {
         bottom: KPadding.kPaddingSize8,
       ),
     ),
-    iconColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
-    foregroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
-    shape: WidgetStatePropertyAll(
+    shape: const WidgetStatePropertyAll(
       KWidgetTheme.outlineBorder16,
     ),
     alignment: Alignment.centerLeft,
+    foregroundColor: WidgetStateProperty.resolveWith(
+      (states) {
+        if (states.contains(WidgetState.disabled)) {
+          return AppColors.materialThemeBlackOpacity88;
+        }
+        return AppColors.materialThemeBlack;
+      },
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (states) {
+        if (states.contains(WidgetState.disabled)) {
+          return AppColors.materialThemeRefNeutralNeutral90;
+        }
+        return Colors.transparent;
+      },
+    ),
   );
 
   static const ButtonStyle neutralButtonStyle = ButtonStyle(
