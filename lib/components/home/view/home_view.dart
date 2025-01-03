@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
     }
     if (PlatformEnum.getPlatform.isIOS) {
       return ColoredBox(
-        color: AppColors.materialThemeWhite,
+        color: Colors.transparent,
         child: SafeArea(child: scaffold),
       );
     } else {
