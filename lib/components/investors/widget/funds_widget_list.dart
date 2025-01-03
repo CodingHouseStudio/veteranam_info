@@ -45,23 +45,28 @@ class _FundsWidgetList extends StatelessWidget {
               SliverList.builder(
                 addAutomaticKeepAlives: false,
                 addRepaintBoundaries: false,
-                itemCount: listLength,
-                itemBuilder: (context, index) => Padding(
-                  key: ValueKey(
-                    isDesk
-                        ? '${_.deskFundItems.elementAt(index).first.id}_desk'
-                        : _.mobFundItems.elementAt(index).id,
-                  ),
-                  padding: const EdgeInsets.only(
-                    top: KPadding.kPaddingSize48,
-                  ),
-                  child: _FundWidget(
-                    isDesk: isDesk,
-                    fundDesk:
-                        isDesk ? _.deskFundItems.elementAt(index) : const [],
-                    fundMob: _.mobFundItems.elementAt(index),
-                  ),
-                ),
+                itemCount: listLength * 2,
+                itemBuilder: (context, index) {
+                  if (index.isEven) {
+                    final indexValue = (index / 2).toInt();
+                    final keyValue = isDesk
+                        ? '${_.deskFundItems.elementAt(indexValue).first.id}'
+                            '_desk'
+                        : _.mobFundItems.elementAt(indexValue).id;
+                    return _FundWidget(
+                      key: ValueKey(
+                        keyValue,
+                      ),
+                      isDesk: isDesk,
+                      fundDesk: isDesk
+                          ? _.deskFundItems.elementAt(indexValue)
+                          : const [],
+                      fundMob: _.mobFundItems.elementAt(indexValue),
+                    );
+                  } else {
+                    return KSizedBox.kHeightSizedBox48;
+                  }
+                },
               ),
               SliverPadding(
                 padding: const EdgeInsets.only(
@@ -84,22 +89,24 @@ class _FundsWidgetList extends StatelessWidget {
           return SliverList.builder(
             addAutomaticKeepAlives: false,
             addRepaintBoundaries: false,
-            itemCount: isDesk
-                ? KDimensions.shimmerFundsDeskItems
-                : KDimensions.shimmerFundsMobItems,
-            itemBuilder: (context, index) => SkeletonizerWidget(
-              isLoading: true,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: KPadding.kPaddingSize48,
-                ),
-                child: _FundWidget(
-                  isDesk: isDesk,
-                  fundMob: KMockText.fundModel,
-                  fundDesk: KMockText.fundDesk,
-                ),
-              ),
-            ),
+            itemCount: (isDesk
+                    ? KDimensions.shimmerFundsDeskItems
+                    : KDimensions.shimmerFundsMobItems) *
+                2,
+            itemBuilder: (context, index) {
+              if (index.isEven) {
+                return SkeletonizerWidget(
+                  isLoading: true,
+                  child: _FundWidget(
+                    isDesk: isDesk,
+                    fundMob: KMockText.fundModel,
+                    fundDesk: KMockText.fundDesk,
+                  ),
+                );
+              } else {
+                return KSizedBox.kHeightSizedBox48;
+              }
+            },
           );
         }
       },
@@ -112,6 +119,7 @@ class _FundWidget extends StatelessWidget {
     required this.isDesk,
     required this.fundMob,
     required this.fundDesk,
+    super.key,
   });
 
   final bool isDesk;

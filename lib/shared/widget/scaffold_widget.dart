@@ -197,12 +197,10 @@ class ScaffoldWidget extends StatelessWidget {
           );
           return Config.isWeb
               ? scaffold
-              : PlatformEnum.getPlatform.isIOS
-                  ? ColoredBox(
-                      color: AppColors.materialThemeWhite,
-                      child: SafeArea(child: scaffold),
-                    )
-                  : SafeArea(child: scaffold);
+              : ColoredBox(
+                  color: AppColors.materialThemeWhite,
+                  child: SafeArea(child: scaffold),
+                );
         },
       ),
     );

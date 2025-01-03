@@ -15,7 +15,7 @@ class DiscountSortingWidget extends StatelessWidget {
       builder: (context, sortingBy) {
         return PopupMenuButtonWidget<DiscountEnum>(
           buttonStyle: KButtonStyles.neutralButtonStyle,
-          shape: KWidgetTheme.outlineBorderNutral16,
+          borderRadius: KBorderRadius.kBorderRadius16,
           buttonText: '',
           iconAlignment: IconAlignment.end,
           items: List.generate(
@@ -32,10 +32,10 @@ class DiscountSortingWidget extends StatelessWidget {
               //     ? null
               //     :
               Row(
+            spacing: KPadding.kPaddingSize8,
             mainAxisSize: MainAxisSize.min,
             children: [
               KIcon.sort,
-              KSizedBox.kWidthSizedBox8,
               Flexible(
                 child: Text(
                   sortingBy?.getValue(context) ?? context.l10n.sort,
@@ -46,11 +46,12 @@ class DiscountSortingWidget extends StatelessWidget {
               ),
             ],
           ),
-          clipBehavior: Clip.hardEdge,
-          initialValue: sortingBy ?? DiscountEnum.featured,
-          position: PopupMenuButtonPosition.bottomLeft,
+          // clipBehavior: Clip.hardEdge,
+          currentValue: sortingBy ?? DiscountEnum.featured,
           showIcon: KIcon.arrowDropDown,
           closeIcon: KIcon.arrowDropUp,
+          buttonItemStyle: KButtonStyles.transparentPopupMenuButtonStyle,
+          iconSpace: KPadding.kPaddingSize4,
         );
       },
     );
@@ -70,5 +71,6 @@ class DiscountSortingWidget extends StatelessWidget {
               ),
             ),
         key: null,
+        icon: discountEnum == currectDiscountEnum ? KIcon.check : null,
       );
 }

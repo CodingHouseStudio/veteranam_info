@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-100%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
+        <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-??%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
         <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
       <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>

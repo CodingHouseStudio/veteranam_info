@@ -32,6 +32,7 @@ class _BuildDesktopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final widgets = [
       Row(
+        spacing: KPadding.kPaddingSize46,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Left Column
@@ -47,6 +48,8 @@ class _BuildDesktopLayout extends StatelessWidget {
                 KSizedBox.kHeightSizedBox32,
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: KPadding.kPaddingSize4,
+                  runSpacing: KPadding.kPaddingSize8,
                   children: [
                     Text(
                       context.l10n.preferEmail,
@@ -54,7 +57,6 @@ class _BuildDesktopLayout extends StatelessWidget {
                       style:
                           AppTextStyle.materialThemeBodyLargeNeutralVariant60,
                     ),
-                    KSizedBox.kWidthSizedBox4,
                     EmailButtonWidget(
                       key: KWidgetkeys.screen.feedback.emailButton,
                       isDesk: true,
@@ -70,7 +72,6 @@ class _BuildDesktopLayout extends StatelessWidget {
                 KSizedBox.kHeightSizedBox8,
                 SocialMediaLinks(
                   isDesk: false,
-                  padding: KSizedBox.kWidthSizedBox24,
                   instagramKey: KWidgetkeys.screen.feedback.instagram,
                   linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
                   facebookKey: KWidgetkeys.screen.feedback.facebook,
@@ -78,7 +79,6 @@ class _BuildDesktopLayout extends StatelessWidget {
               ],
             ),
           ),
-          KSizedBox.kWidthSizedBox45,
           const Expanded(
             flex: 2,
             child: FieldWidget(
@@ -117,13 +117,14 @@ class _BuildMobileLayout extends StatelessWidget {
       KSizedBox.kHeightSizedBox32,
       Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: KPadding.kPaddingSize4,
+        runSpacing: KPadding.kPaddingSize8,
         children: [
           Text(
             context.l10n.preferEmail,
             key: KWidgetkeys.screen.feedback.emailText,
             style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
-          KSizedBox.kWidthSizedBox4,
           EmailButtonWidget(
             key: KWidgetkeys.screen.feedback.emailButton,
             isDesk: false,
@@ -139,7 +140,6 @@ class _BuildMobileLayout extends StatelessWidget {
       KSizedBox.kHeightSizedBox8,
       SocialMediaLinks(
         isDesk: false,
-        padding: KSizedBox.kWidthSizedBox24,
         instagramKey: KWidgetkeys.screen.feedback.instagram,
         linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
         facebookKey: KWidgetkeys.screen.feedback.facebook,

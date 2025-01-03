@@ -67,20 +67,15 @@ List<Widget> _textFieldWidgetList({
         padding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
         child: Row(
+          spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize10,
           children: [
             SwitchWidgetWithoutBloc(
               key: KWidgetkeys.screen.employer.switchWidget,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left:
-                    isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize10,
-              ),
-              child: Text(
-                key: KWidgetkeys.screen.employer.textSwitchWidget,
-                context.l10n.remotely,
-                style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-              ),
+            Text(
+              key: KWidgetkeys.screen.employer.textSwitchWidget,
+              context.l10n.remotely,
+              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
             ),
           ],
         ),

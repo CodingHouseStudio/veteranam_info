@@ -85,11 +85,11 @@ class _NetworkStatusBannerState extends State<_NetworkStatusBanner> {
       child: Row(
         key: KWidgetkeys.widget.networkBanner.widget,
         mainAxisAlignment: MainAxisAlignment.center,
+        spacing: KPadding.kPaddingSize10,
         children: [
           KIcon.noInternet.copyWith(
             key: KWidgetkeys.widget.networkBanner.iconNoInternet,
           ),
-          KSizedBox.kWidthSizedBox10,
           Text(
             context.l10n.noInternet,
             style: AppTextStyle.materialThemeLabelLargeError,

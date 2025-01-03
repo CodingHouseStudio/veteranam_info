@@ -40,10 +40,10 @@ class CardEmptyWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: KPadding.kPaddingSize24,
                   children: [
                     KIcon.found
                         .copyWith(key: KWidgetkeys.widget.cardEmpty.image),
-                    KSizedBox.kHeightSizedBox24,
                     Text(
                       context.l10n.cardNotFoundCardLink,
                       key: KWidgetkeys.widget.cardEmpty.text,

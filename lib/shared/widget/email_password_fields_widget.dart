@@ -85,7 +85,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                 textButtonStyle: KButtonStyles.lightGrayButtonStyle,
                 // backgroundColor: AppColors.white,
                 icon: KIcon.arrowBackIOS,
-                iconRightMerge: KSizedBox.kWidthSizedBox8,
+                iconSpacing: KPadding.kPaddingSize8,
                 textStyle: AppTextStyle.materialThemeTitleMedium,
               ),
             ),

@@ -124,7 +124,6 @@ class MobSettingsBodyWidget extends StatelessWidget {
           ),
           child: SocialMediaLinks(
             isDesk: false,
-            padding: KSizedBox.kWidthSizedBox24,
             instagramKey: KWidgetkeys.screen.mobSettings.instagramIcon,
             linkedInKey: KWidgetkeys.screen.mobSettings.linkedInIcon,
             facebookKey: KWidgetkeys.screen.mobSettings.facebookIcon,

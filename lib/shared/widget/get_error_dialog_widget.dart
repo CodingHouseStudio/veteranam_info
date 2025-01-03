@@ -23,6 +23,7 @@ class GetErrorDialogWidget extends StatelessWidget {
         ),
         Expanded(
           child: Row(
+            spacing: KPadding.kPaddingSize12,
             children: [
               Expanded(
                 child: Align(
@@ -41,7 +42,6 @@ class GetErrorDialogWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              KSizedBox.kWidthSizedBox12,
               IconButtonWidget(
                 icon: KIcon.closeWeight300,
                 onPressed: ScaffoldMessenger.of(context).hideCurrentSnackBar,

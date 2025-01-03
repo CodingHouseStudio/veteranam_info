@@ -26,11 +26,11 @@ class CityListWidget extends StatelessWidget {
     return Row(
       key: ValueKey(cityList),
       mainAxisSize: MainAxisSize.min,
+      spacing: KPadding.kPaddingSize8,
       children: [
         KIcon.location.copyWith(
           key: KWidgetkeys.widget.cityList.icon,
         ),
-        KSizedBox.kWidthSizedBox8,
         if (cityList.isNotEmpty)
           Expanded(
             child: Padding(
@@ -77,6 +77,7 @@ class _CityWidgetListExpanded extends StatelessWidget {
     return Wrap(
       key: KWidgetkeys.widget.cityList.markdownFulllList,
       // mainAxisSize: MainAxisSize.min,
+      runSpacing: KPadding.kPaddingSize8,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Text(

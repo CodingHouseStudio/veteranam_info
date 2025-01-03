@@ -16,6 +16,7 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
     if (isTablet) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: KPadding.kPaddingSize16,
         children: [
           Expanded(
             child: Text(
@@ -25,16 +26,15 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
                   : AppTextStyle.materialThemeTitleLargeBold,
             ),
           ),
-          KSizedBox.kWidthSizedBox16,
           _cancelButton(context),
         ],
       );
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        spacing: KPadding.kPaddingSize8,
         children: [
           _cancelButton(context),
-          KSizedBox.kHeightSizedBox8,
           Text(
             title,
             style: isTablet

@@ -128,11 +128,11 @@ List<Widget> _employeeRespondContainerWidgetList({
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     if (isDesk)
       Row(
+        spacing: KPadding.kPaddingSize72,
         children: [
           Expanded(
             child: sendButton(context: context, isDesk: true),
           ),
-          KSizedBox.kWidthSizedBox72,
           Expanded(
             child: cancelButton(context: context, isDesk: true),
           ),

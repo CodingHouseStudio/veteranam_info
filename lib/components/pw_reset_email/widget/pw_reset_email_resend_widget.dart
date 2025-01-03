@@ -49,40 +49,40 @@ class _PwResetEmailResendWidgetState extends State<PwResetEmailResendWidget> {
           }
         }
       },
-      child: Wrap(
-        runSpacing: KPadding.kPaddingSize8,
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          if (remainingSeconds == 0) ...[
-            Text(
-              context.l10n.notReceiveLetter,
-              key: KWidgetkeys.screen.pwResetEmail.resendText,
-              style: AppTextStyle.materialThemeBodyMediumNeutralVariant50,
-            ),
-            TextButton(
-              key: KWidgetkeys.screen.pwResetEmail.resendButton,
-              onPressed: () => context.read<PwResetEmailBloc>().add(
-                    const PwResetEmailEvent.sendResetCode(),
+      child: remainingSeconds == 0
+          ? Wrap(
+              runSpacing: KPadding.kPaddingSize8,
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  context.l10n.notReceiveLetter,
+                  key: KWidgetkeys.screen.pwResetEmail.resendText,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant50,
+                ),
+                TextButton(
+                  key: KWidgetkeys.screen.pwResetEmail.resendButton,
+                  onPressed: () => context.read<PwResetEmailBloc>().add(
+                        const PwResetEmailEvent.sendResetCode(),
+                      ),
+                  style: KButtonStyles.withoutStylePadding8,
+                  child: Text(
+                    context.l10n.sendAgain,
+                    style: AppTextStyle
+                        .materialThemeBodyMediumNeutralVariant50UnderLine,
                   ),
-              style: KButtonStyles.withoutStylePadding8,
-              child: Text(
-                context.l10n.sendAgain,
-                style: AppTextStyle
-                    .materialThemeBodyMediumNeutralVariant50UnderLine,
-              ),
-            ),
-          ] else
-            Padding(
+                ),
+              ],
+            )
+          : Padding(
               padding: const EdgeInsets.all(KPadding.kPaddingSize8),
               child: Text(
                 context.l10n.resendWait(remainingSeconds),
                 key: KWidgetkeys.screen.pwResetEmail.delayText,
+                textAlign: TextAlign.center,
                 style: AppTextStyle.materialThemeBodyMediumNeutralVariant50,
               ),
             ),
-        ],
-      ),
     );
   }
 

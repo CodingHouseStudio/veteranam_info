@@ -6,7 +6,7 @@ class ButtonWidget extends StatelessWidget {
     required this.text,
     required this.isDesk,
     required this.onPressed,
-    this.iconRightMerge,
+    this.iconSpacing,
     super.key,
     this.icon,
     this.textStyle,
@@ -22,7 +22,7 @@ class ButtonWidget extends StatelessWidget {
   final bool isDesk;
   final Color? backgroundColor;
   final EdgeInsets? padding;
-  final Widget? iconRightMerge;
+  final double? iconSpacing;
   final int? textMaxLines;
   final ButtonStyle? textButtonStyle;
 
@@ -47,9 +47,10 @@ class ButtonWidget extends StatelessWidget {
                   )),
         child: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: iconSpacing ?? 0,
+          runSpacing: KPadding.kPaddingSize8,
           children: [
             if (icon != null) icon!,
-            if (iconRightMerge != null) iconRightMerge!,
             Text(
               text,
               maxLines: textMaxLines,

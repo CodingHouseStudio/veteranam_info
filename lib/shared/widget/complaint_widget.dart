@@ -26,6 +26,7 @@ class ComplaintWidget extends StatelessWidget {
         cardId: cardId,
       ),
       child: Column(
+        spacing: KPadding.kPaddingSize6,
         children: [
           IconWidget(
             key: KWidgetkeys.widget.reportDialog.button,
@@ -33,7 +34,6 @@ class ComplaintWidget extends StatelessWidget {
             background: background ?? AppColors.materialThemeWhite,
             padding: KPadding.kPaddingSize12,
           ),
-          KSizedBox.kHeightSizedBox6,
           Text(
             context.l10n.complaint,
             style: AppTextStyle.materialThemeLabelSmall,

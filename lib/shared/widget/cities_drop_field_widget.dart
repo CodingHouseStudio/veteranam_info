@@ -55,6 +55,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
       },
       unfocusSufixIcon: KIcon.distance,
       item: (CityModel element) => Column(
+        spacing: KPadding.kPaddingSize4,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -62,13 +63,12 @@ class CitiesDropFieldWidget extends StatelessWidget {
             key: KWidgetkeys.widget.citiesDropField.city,
             style: AppTextStyle.materialThemeBodyLarge,
           ),
-          KSizedBox.kHeightSizedBox4,
           Text(
             element.region.getTrsnslation(context),
             key: KWidgetkeys.widget.citiesDropField.region,
             style: AppTextStyle.materialThemeLabelSmallNeutralVariant70,
           ),
-          KSizedBox.kHeightSizedBox4,
+          const SizedBox.shrink(),
         ],
       ),
       getItemText: (CityModel value) =>

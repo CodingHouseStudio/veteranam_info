@@ -30,19 +30,25 @@ int? _findChildIndexCallback({
   required List<DiscountModel> filterDiscountModelList,
   required DiscountConfigState config,
 }) {
+  final int? index;
   if (key is ValueKey<String>) {
     final valueKey = key;
     if (valueKey.value == 'link_field') {
-      return config.linkInt - 1;
+      index = config.linkInt - 1;
+    } else {
+      final indexValue = filterDiscountModelList.indexWhere(
+        (element) => element.id == valueKey.value,
+      );
+      if (indexValue >= 0) {
+        index = indexValue + (config.linkInt <= indexValue ? 1 : 0);
+      } else {
+        index = null;
+      }
     }
-    final index = filterDiscountModelList.indexWhere(
-      (element) => element.id == valueKey.value,
-    );
-    if (index >= 0) {
-      return index + (config.linkInt <= index ? 1 : 0);
-    }
+  } else {
+    index = null;
   }
-  return null;
+  return index != null ? (index * 2) : null;
 }
 
 ValueKey<String> _key({
@@ -116,26 +122,21 @@ class _AdvancedFilterDesk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.only(
-        top: KPadding.kPaddingSize48,
-      ),
-      sliver: SliverPersistentHeader(
-        pinned: true,
-        delegate: SliverHeaderWidget(
-          childWidget: ({
-            required overlapsContent,
-            required shrinkOffset,
-          }) =>
-              SizedBox(
-            height: double.infinity,
-            child: AdvancedFilterContent(
-              key: KWidgetkeys.screen.discounts.advancedFilterDesk,
-              isDesk: true,
-            ),
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: SliverHeaderWidget(
+        childWidget: ({
+          required overlapsContent,
+          required shrinkOffset,
+        }) =>
+            SizedBox(
+          height: double.infinity,
+          child: AdvancedFilterContent(
+            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+            isDesk: true,
           ),
-          maxMinHeight: maxHeight,
         ),
+        maxMinHeight: maxHeight,
       ),
     );
   }
@@ -202,45 +203,77 @@ class _DiscountWidgetList extends StatelessWidget {
                     filterDiscountModelList: state.filterDiscountModelList,
                     config: config,
                   ),
-                  itemCount: _itemCount(
-                    filterDiscountModelList: state.filterDiscountModelList,
-                    config: config,
-                  ),
-                  itemBuilder: (context, index) => Padding(
-                    key: _key(
-                      filterDiscountModelList: state.filterDiscountModelList,
-                      index: index,
-                      config: config,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: KPadding.kPaddingSize48,
-                    ),
-                    child: _DiscountsWidgetItem(
-                      isDesk: isDesk,
-                      key: _key(
+                  itemCount: (_itemCount(
+                            filterDiscountModelList:
+                                state.filterDiscountModelList,
+                            config: config,
+                          ) *
+                          2) -
+                      1,
+                  itemBuilder: (context, index) {
+                    if (index.isEven) {
+                      final indexValue = (index / 2).toInt();
+                      return _DiscountsWidgetItem(
+                        isDesk: isDesk,
+                        key: _key(
+                          filterDiscountModelList:
+                              state.filterDiscountModelList,
+                          index: indexValue,
+                          config: config,
+                        ),
                         filterDiscountModelList: state.filterDiscountModelList,
-                        index: index,
+                        index: indexValue,
                         config: config,
-                      ),
-                      filterDiscountModelList: state.filterDiscountModelList,
-                      index: index,
-                      config: config,
-                    ),
-                  ),
+                      );
+                    } else {
+                      return KSizedBox.kHeightSizedBox48;
+                    }
+                  },
                 ),
                 if (!(PlatformEnumFlutter.isWebDesktop ||
                         state.isListLoadedFull) ||
                     state.unmodifiedIsEmpty)
-                  SliverPrototypeExtentList.builder(
-                    itemCount: state.filterDiscountModelList.isEmpty
-                        ? config.loadingItems
-                        : KDimensions.shimmerDiscountsItems,
-                    prototypeItem: Padding(
-                      padding: const EdgeInsets.only(
-                        top: KPadding.kPaddingSize48,
-                      ),
-                      child: SkeletonizerWidget(
-                        isLoading: false,
+                  if (state.filterDiscountModelList.isEmpty)
+                    SliverList.builder(
+                      itemCount:
+                          //  (state.filterDiscountModelList.isEmpty
+                          //         ?
+                          config.loadingItems
+                              // : KDimensions.shimmerDiscountsItems)
+                              *
+                              2,
+                      // prototypeItem: SkeletonizerWidget(
+                      //   isLoading: false,
+                      //   child: DiscountCardWidget(
+                      //     key: KWidgetkeys.screen.discounts.card,
+                      //     discountItem: KMockText.discountModel,
+                      //     isDesk: isDesk,
+                      //     share: '',
+                      //   ),
+                      // ),
+                      itemBuilder: (context, index) {
+                        if (index.isEven) {
+                          return SkeletonizerWidget(
+                            key: const ValueKey('discount_mock_card'),
+                            isLoading: true,
+                            child: DiscountCardWidget(
+                              key: KWidgetkeys.screen.discounts.card,
+                              discountItem: KMockText.discountModel,
+                              isDesk: isDesk,
+                              share: '',
+                            ),
+                          );
+                        } else {
+                          return KSizedBox.kHeightSizedBox48;
+                        }
+                      },
+                    )
+                  else ...[
+                    KSizedBox.kHeightSizedBox48.toSliver,
+                    SkeletonizerWidget(
+                      isLoading: true,
+                      isSliver: true,
+                      child: SliverToBoxAdapter(
                         child: DiscountCardWidget(
                           key: KWidgetkeys.screen.discounts.card,
                           discountItem: KMockText.discountModel,
@@ -249,22 +282,7 @@ class _DiscountWidgetList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    itemBuilder: (context, index) => Padding(
-                      key: const ValueKey('discount_mock_card'),
-                      padding: const EdgeInsets.only(
-                        top: KPadding.kPaddingSize48,
-                      ),
-                      child: SkeletonizerWidget(
-                        isLoading: true,
-                        child: DiscountCardWidget(
-                          key: KWidgetkeys.screen.discounts.card,
-                          discountItem: KMockText.discountModel,
-                          isDesk: isDesk,
-                          share: '',
-                        ),
-                      ),
-                    ),
-                  )
+                  ]
                 else if (state.isListLoadedFull)
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(
@@ -430,6 +448,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
                             isDesk: false,
                             share:
                                 '${KRoute.home.path}${KRoute.discounts.path}/${state.filterDiscountModelList.elementAt(index).id}',
+                            dialogIsDesk: true,
                           );
                         },
                         childCount: state.filterDiscountModelList.length,
@@ -444,37 +463,24 @@ class _DiscountGridWidgetList extends StatelessWidget {
                     ),
                   )
                 else
-                  SliverPrototypeExtentList.builder(
-                    itemCount: state.filterDiscountModelList.isEmpty
-                        ? config.loadingItems
-                        : KDimensions.shimmerDiscountsItems,
-                    prototypeItem: Padding(
-                      padding:
-                          const EdgeInsets.only(top: KPadding.kPaddingSize48),
-                      child: SkeletonizerWidget(
-                        isLoading: false,
-                        child: DiscountCardWidget(
-                          key: KWidgetkeys.screen.discounts.card,
-                          discountItem: KMockText.discountModel,
-                          isDesk: false,
-                          share: '',
-                        ),
-                      ),
-                    ),
-                    itemBuilder: (context, index) => Padding(
-                      key: const ValueKey('discount_mock_card'),
-                      padding:
-                          const EdgeInsets.only(top: KPadding.kPaddingSize48),
-                      child: SkeletonizerWidget(
-                        isLoading: true,
-                        child: DiscountCardWidget(
-                          key: KWidgetkeys.screen.discounts.card,
-                          discountItem: KMockText.discountModel,
-                          isDesk: false,
-                          share: '',
-                        ),
-                      ),
-                    ),
+                  SliverList.builder(
+                    itemCount: config.loadingItems * 2,
+                    itemBuilder: (context, index) {
+                      if (index.isEven) {
+                        return SkeletonizerWidget(
+                          key: const ValueKey('discount_mock_card'),
+                          isLoading: true,
+                          child: DiscountCardWidget(
+                            key: KWidgetkeys.screen.discounts.card,
+                            discountItem: KMockText.discountModel,
+                            isDesk: isDesk,
+                            share: '',
+                          ),
+                        );
+                      } else {
+                        return KSizedBox.kHeightSizedBox48;
+                      }
+                    },
                   ),
                 if (hasItems && state.isListLoadedFull)
                   SliverPadding(

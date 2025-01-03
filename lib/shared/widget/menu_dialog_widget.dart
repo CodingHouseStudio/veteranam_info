@@ -11,6 +11,7 @@ class MenuDialogWidget extends StatelessWidget {
       key: KWidgetkeys.widget.menuDialog.dialog,
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: KPadding.kPaddingSize32,
       children: [
         SizedBox(
           width: double.infinity,
@@ -32,31 +33,28 @@ class MenuDialogWidget extends StatelessWidget {
             style: KButtonStyles.withoutStyle,
           ),
         ),
-        KSizedBox.kHeightSizedBox32,
         _button(
           key: KWidgetkeys.widget.menuDialog.investorsButton,
           context: context,
           routeName: KRoute.support.name,
           text: context.l10n.investors,
         ),
-        KSizedBox.kHeightSizedBox32,
         _button(
           key: KWidgetkeys.widget.menuDialog.feedbackButton,
           context: context,
           routeName: KRoute.feedback.name,
           text: context.l10n.contact,
         ),
-        KSizedBox.kHeightSizedBox32,
         Wrap(
           runSpacing: KPadding.kPaddingSize10,
+          spacing: KPadding.kPaddingSize30,
           children: [
             LanguagesSwitcherWidget(
               key: KWidgetkeys.widget.menuDialog.languageSwitcher,
             ),
-            KSizedBox.kWidthSizedBox30,
             SocialMediaLinks(
               isDesk: false,
-              padding: KSizedBox.kWidthSizedBox8,
+              padding: KPadding.kPaddingSize8,
               instagramKey: KWidgetkeys.widget.menuDialog.instagram,
               linkedInKey: KWidgetkeys.widget.menuDialog.linkedIn,
               facebookKey: KWidgetkeys.widget.menuDialog.facebook,

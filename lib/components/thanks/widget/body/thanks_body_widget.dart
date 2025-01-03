@@ -23,6 +23,7 @@ class ThanksBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox56,
         if (isDesk)
           Row(
+            spacing: KPadding.kPaddingSize56,
             mainAxisAlignment: MainAxisAlignment.center,
             children: _buildBoxWidgets(context, isDesk),
           )
@@ -45,7 +46,7 @@ class ThanksBodyWidget extends StatelessWidget {
         onTap: () => context.goNamed(KRoute.profile.name),
         textRightPadding: KPadding.kPaddingSize100,
       ),
-      if (isDesk) KSizedBox.kWidthSizedBox56 else KSizedBox.kHeightSizedBox40,
+      if (!isDesk) KSizedBox.kHeightSizedBox40,
       BoxWidget(
         key: KWidgetkeys.screen.thanks.homeBox,
         text: context.l10n.mainScreen,

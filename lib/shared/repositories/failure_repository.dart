@@ -69,9 +69,8 @@ class FailureRepository {
               errorString.contains('network-request') ||
               errorString.contains('resource limit exceeded') ||
               errorString.contains('permission-denied') ||
-              errorString.contains(
-                '[cloud_firestore/failed-precondition] The client has already been terminated.',
-              )) {
+              errorString.contains('offline') ||
+              errorString.contains('failed-precondition')) {
         // Info level for network-related issues or resource constraints
         errorLevelValue = ErrorLevelEnum.info;
       } else if (error is AssertionError ||

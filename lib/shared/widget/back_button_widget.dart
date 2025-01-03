@@ -17,24 +17,22 @@ class BackButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      child: Row(
-        children: [
-          IconButtonWidget(
-            key: buttonKey,
-            icon: KIcon.arrowBack,
-            padding: KPadding.kPaddingSize8,
-            background: AppColors.materialThemeKeyColorsPrimary,
-            onPressed: () => context.goNamed(pathName),
-          ),
-          KSizedBox.kWidthSizedBox8,
-          Text(
-            '${context.l10n.back}${pageName(context)}',
-            key: textKey,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-        ],
-      ),
+    return Row(
+      spacing: KPadding.kPaddingSize8,
+      children: [
+        IconButtonWidget(
+          key: buttonKey,
+          icon: KIcon.arrowBack,
+          padding: KPadding.kPaddingSize8,
+          background: AppColors.materialThemeKeyColorsPrimary,
+          onPressed: () => context.goNamed(pathName),
+        ),
+        Text(
+          '${context.l10n.back}${pageName(context)}',
+          key: textKey,
+          style: AppTextStyle.materialThemeTitleMedium,
+        ),
+      ],
     );
   }
 

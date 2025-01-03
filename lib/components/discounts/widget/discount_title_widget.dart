@@ -27,9 +27,9 @@ class DiscountTitleWidget extends StatelessWidget {
                       return BlocBuilder<ViewModeCubit, ViewMode>(
                         builder: (context, state) {
                           return Row(
+                            spacing: KPadding.kPaddingSize16,
                             children: [
                               const DiscountSortingWidget(isDesk: true),
-                              KSizedBox.kWidthSizedBox16,
                               IconButtonWidget(
                                 icon: KIcon.gridView,
                                 onPressed: () =>

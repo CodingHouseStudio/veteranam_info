@@ -112,13 +112,13 @@ class LoginBodyWidget extends StatelessWidget {
                 horizontal: KPadding.kPaddingSize16,
               ),
               child: Row(
+                spacing: KPadding.kPaddingSize16,
                 children: [
                   Text(
                     context.l10n.donotYouHavenAccount,
                     key: KWidgetkeys.screen.login.signUpText,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
-                  KSizedBox.kWidthSizedBox16,
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerLeft,

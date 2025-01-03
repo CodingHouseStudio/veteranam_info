@@ -18,9 +18,9 @@ class StoryCardWidget extends StatelessWidget {
       text: storyModel.story,
       titleTopMob: true,
       titleWidget: Row(
+        spacing: KPadding.kPaddingSize8,
         children: [
           storyModel.getImage,
-          KSizedBox.kWidthSizedBox8,
           Text(
             storyModel.userName ?? context.l10n.anonymous,
             key: KWidgetkeys.widget.storyCard.userName,

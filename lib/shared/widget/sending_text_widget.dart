@@ -29,25 +29,22 @@ class SendingTextWidget extends StatelessWidget {
         successTextValue == null) {
       return const SizedBox.shrink();
     } else {
-      return Column(
-        children: [
-          KSizedBox.kHeightSizedBox16,
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
-            ),
-            child: Text(
-              (failureText ?? sendingTextValue ?? successTextValue)!,
-              key: textKey,
-              textAlign: showSuccessText
-                  ? successTextAlign ?? TextAlign.center
-                  : TextAlign.center,
-              style: failureText != null
-                  ? AppTextStyle.materialThemeBodyMediumError
-                  : AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-            ),
-          ),
-        ],
+      return Padding(
+        padding: const EdgeInsets.only(
+          right: KPadding.kPaddingSize16,
+          left: KPadding.kPaddingSize16,
+          top: KPadding.kPaddingSize16,
+        ),
+        child: Text(
+          (failureText ?? sendingTextValue ?? successTextValue)!,
+          key: textKey,
+          textAlign: showSuccessText
+              ? successTextAlign ?? TextAlign.center
+              : TextAlign.center,
+          style: failureText != null
+              ? AppTextStyle.materialThemeBodyMediumError
+              : AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+        ),
       );
     }
   }

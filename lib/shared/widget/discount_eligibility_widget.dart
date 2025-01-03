@@ -75,9 +75,9 @@ class EligibilityWidget extends StatelessWidget {
                   return Row(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    spacing: KPadding.kPaddingSize4,
                     children: [
                       item.eligibilityIcon,
-                      KSizedBox.kWidthSizedBox4,
                       Text(
                         item.getValue(context),
                         style: AppTextStyle.materialThemeLabelMedium,

@@ -228,6 +228,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       selectedCities: _.city.value,
                     ),
                     Row(
+                      spacing: KPadding.kPaddingSize16,
                       children: [
                         SwitchWidget(
                           key: KWidgetkeys.screen.discountsAdd.onlineSwitcher,
@@ -236,7 +237,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                               ),
                           isSelected: _.isOnline,
                         ),
-                        KSizedBox.kWidthSizedBox16,
                         Expanded(
                           child: Text(
                             context.l10n.online,
@@ -366,6 +366,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       ),
                     ),
                     Row(
+                      spacing: KPadding.kPaddingSize16,
                       children: [
                         SwitchWidget(
                           key: KWidgetkeys
@@ -375,7 +376,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                               ),
                           isSelected: _.isIndefinitely,
                         ),
-                        KSizedBox.kWidthSizedBox16,
                         Expanded(
                           child: Text(
                             context.l10n.indefinitely,
@@ -412,6 +412,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   if (!_.formState.isDescription) KSizedBox.kHeightSizedBox40,
                   if (isDesk)
                     Row(
+                      spacing: KPadding.kPaddingSize40,
                       children: _buttons(context: context, isDesk: true),
                     )
                   else
@@ -432,7 +433,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           Expanded(child: _cancelButton(context: context, isDesk: isDesk))
         else
           _cancelButton(context: context, isDesk: isDesk),
-        if (isDesk) KSizedBox.kWidthSizedBox40 else KSizedBox.kHeightSizedBox24,
+        if (!isDesk) KSizedBox.kHeightSizedBox24,
         if (isDesk)
           Expanded(
             child: _sendButton(context: context, isDesk: isDesk),

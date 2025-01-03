@@ -34,13 +34,9 @@ class DiscountScreen extends StatelessWidget {
     if (Config.isWeb) {
       return scaffold;
     }
-    if (PlatformEnum.getPlatform.isIOS) {
-      return ColoredBox(
-        color: AppColors.materialThemeWhite,
-        child: SafeArea(child: scaffold),
-      );
-    } else {
-      return SafeArea(child: scaffold);
-    }
+    return ColoredBox(
+      color: AppColors.materialThemeWhite,
+      child: SafeArea(child: scaffold),
+    );
   }
 }

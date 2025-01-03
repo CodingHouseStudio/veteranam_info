@@ -19,21 +19,24 @@ class DiscountsScreen extends StatelessWidget {
           backgroundColor: AppColors.materialThemeWhite,
           toolbarHeight: KSize.kAppBarHeight,
         ),
-        body: DiscountsBodyWidget(
-          key: KWidgetkeys.screen.discounts.screen,
+        body: ColoredBox(
+          color: AppColors.materialThemeWhite,
+          child: DiscountsBodyWidget(
+            key: KWidgetkeys.screen.discounts.screen,
+          ),
         ),
       ),
     );
     if (Config.isWeb) {
       return scaffold;
     }
-    if (PlatformEnum.getPlatform.isIOS) {
-      return ColoredBox(
-        color: AppColors.materialThemeWhite,
-        child: SafeArea(child: scaffold),
-      );
-    } else {
-      return SafeArea(child: scaffold);
-    }
+    // if (PlatformEnum.getPlatform.isIOS) {
+    return ColoredBox(
+      color: AppColors.materialThemeWhite,
+      child: SafeArea(child: scaffold),
+    );
+    // } else {
+    //   return SafeArea(child: scaffold);
+    // }
   }
 }

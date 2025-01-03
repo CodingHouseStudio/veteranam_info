@@ -8,7 +8,7 @@ class BoxWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.textRightPadding,
-    this.textIconPaddingWidget,
+    this.useSoaccer = false,
     this.icon,
     this.iconText,
     this.iconHasBackground = true,
@@ -24,7 +24,7 @@ class BoxWidget extends StatelessWidget {
   final double? textRightPadding;
   final Icon? icon;
   final bool iconHasBackground;
-  final Widget? textIconPaddingWidget;
+  final bool useSoaccer;
   final Color? background;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
@@ -47,6 +47,7 @@ class BoxWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          spacing: useSoaccer ? 0 : KPadding.kPaddingSize24,
           children: [
             if (iconText != null)
               Row(
@@ -62,7 +63,7 @@ class BoxWidget extends StatelessWidget {
               )
             else
               getIcon,
-            textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
+            if (useSoaccer) const Spacer(),
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(

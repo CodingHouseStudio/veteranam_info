@@ -257,6 +257,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                 KSizedBox.kHeightSizedBox48,
               if (widget.isDesk)
                 Row(
+                  spacing: KPadding.kPaddingSize40,
                   children: [
                     Expanded(
                       child: logoutButton(
@@ -264,7 +265,6 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                         isDesk: widget.isDesk,
                       ),
                     ),
-                    KSizedBox.kWidthSizedBox40,
                     Expanded(
                       child: deleteButton(
                         context: context,

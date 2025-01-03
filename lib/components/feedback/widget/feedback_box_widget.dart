@@ -28,6 +28,7 @@ class _FeedbackBoxDesk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: KPadding.kPaddingSize100,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,24 +40,23 @@ class _FeedbackBoxDesk extends StatelessWidget {
             ),
             SocialMediaLinks(
               isDesk: false,
-              padding: KSizedBox.kWidthSizedBox24,
               instagramKey: KWidgetkeys.screen.feedback.instagram,
               linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
               facebookKey: KWidgetkeys.screen.feedback.facebook,
             ),
           ],
         ),
-        KSizedBox.kWidthSizedBox100,
         Expanded(
           child: Column(
+            spacing: KPadding.kPaddingSize24,
             children: [
               Text(
                 context.l10n.feedbackSent,
                 key: KWidgetkeys.screen.feedback.boxText,
                 style: AppTextStyle.materialThemeDisplaySmall,
               ),
-              KSizedBox.kHeightSizedBox24,
               Row(
+                spacing: KPadding.kPaddingSize24,
                 children: [
                   DoubleButtonWidget(
                     widgetKey: KWidgetkeys.screen.feedback.boxBackButton,
@@ -66,7 +66,6 @@ class _FeedbackBoxDesk extends StatelessWidget {
                     align: Alignment.center,
                     darkMode: true,
                   ),
-                  KSizedBox.kWidthSizedBox24,
                   TextButton(
                     key: KWidgetkeys.screen.feedback.boxButton,
                     onPressed: sendAgain,
@@ -144,7 +143,6 @@ class _FeedbackBoxMob extends StatelessWidget {
         KSizedBox.kHeightSizedBox8,
         SocialMediaLinks(
           isDesk: false,
-          padding: KSizedBox.kWidthSizedBox24,
           instagramKey: KWidgetkeys.screen.feedback.instagram,
           linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
           facebookKey: KWidgetkeys.screen.feedback.facebook,

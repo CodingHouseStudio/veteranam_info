@@ -21,6 +21,7 @@ class SharedIconListWidget extends StatelessWidget {
     this.likeKey,
     this.isSeparatePage = false,
     this.iconBorder,
+    this.dialogIsDesk,
   });
   final bool isDesk;
   final String? link;
@@ -38,6 +39,7 @@ class SharedIconListWidget extends StatelessWidget {
   final int? numberLikes;
   final bool isSeparatePage;
   final BoxBorder? iconBorder;
+  final bool? dialogIsDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +95,10 @@ class SharedIconListWidget extends StatelessWidget {
               key: webSiteKey,
               background: iconBackground,
               icon: KIcon.captivePortal,
-              onPressed: () =>
-                  context.openLinkWithAgreeDialog(isDesk: isDesk, link: link!),
+              onPressed: () => context.openLinkWithAgreeDialog(
+                isDesk: dialogIsDesk ?? isDesk,
+                link: link!,
+              ),
               label: context.l10n.webSite,
               border: iconBorder ??
                   (isSeparatePage
@@ -107,19 +111,15 @@ class SharedIconListWidget extends StatelessWidget {
         ] else if (link != null && link!.isUrlValid)
           PopupMenuButtonWidget<int>(
             buttonText: context.l10n.login,
-            shape: const OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
-              borderRadius: KBorderRadius.kBorderRadius16,
-            ),
+            borderRadius: KBorderRadius.kBorderRadius16,
             buttonChild: Column(
+              spacing: KPadding.kPaddingSize6,
               children: [
                 const IconWidget(
                   decoration: KWidgetTheme.boxDecorationPopupMenuBorder,
                   icon: KIcon.moreVert,
                   padding: KPadding.kPaddingSize12,
                 ),
-                KSizedBox.kHeightSizedBox6,
                 Text(
                   context.l10n.more,
                   style: AppTextStyle.materialThemeLabelSmallBlack,
@@ -128,12 +128,7 @@ class SharedIconListWidget extends StatelessWidget {
             ),
             showIndicatorIcon: false,
             buttonStyle: KButtonStyles.noBackgroundOnHoverButtonStyle,
-            menuItemsPadding: const EdgeInsets.only(
-              top: KPadding.kPaddingSize16,
-              bottom: KPadding.kPaddingSize16,
-              left: KPadding.kPaddingSize8,
-              right: KPadding.kPaddingSize8,
-            ),
+            buttonItemStyle: KButtonStyles.transparentSharedIconButtonStyle,
             items: [
               DropDownItem(
                 key: webSiteKey,
@@ -145,7 +140,7 @@ class SharedIconListWidget extends StatelessWidget {
                   padding: KPadding.kPaddingSize12,
                 ),
                 event: () => context.openLinkWithAgreeDialog(
-                  isDesk: isDesk,
+                  isDesk: dialogIsDesk ?? isDesk,
                   link: link!,
                 ),
                 // padding: const EdgeInsets.only(
@@ -176,7 +171,7 @@ class SharedIconListWidget extends StatelessWidget {
                 // ),
               ),
             ],
-            position: PopupMenuButtonPosition.bottomLeft,
+            position: PopupMenuButtonPosition.bottomRight,
           )
         else
           complaintButton(context),
@@ -246,6 +241,7 @@ class _CardIconWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       child: Column(
+        spacing: KPadding.kPaddingSize6,
         children: [
           iconWidget ??
               IconWidget(
@@ -254,7 +250,6 @@ class _CardIconWidget extends StatelessWidget {
                 padding: KPadding.kPaddingSize12,
                 border: border,
               ),
-          KSizedBox.kHeightSizedBox6,
           Text(
             label,
             style: AppTextStyle.materialThemeLabelSmallBlack,

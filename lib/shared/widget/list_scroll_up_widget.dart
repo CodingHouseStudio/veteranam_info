@@ -8,6 +8,7 @@ class ListScrollUpWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: KPadding.kPaddingSize24,
       children: [
         Center(
           child: Text(
@@ -16,7 +17,6 @@ class ListScrollUpWidget extends StatelessWidget {
             style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
           ),
         ),
-        KSizedBox.kHeightSizedBox24,
         Center(
           child: TextButton(
             key: KWidgetkeys.widget.scaffold.endListButton,

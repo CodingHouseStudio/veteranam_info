@@ -37,6 +37,7 @@ class CheckPointWidget extends StatelessWidget {
           onPressed: onChanged,
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            spacing: KPadding.kPaddingSize16,
             children: [
               DecoratedBox(
                 decoration: isCheck
@@ -60,7 +61,6 @@ class CheckPointWidget extends StatelessWidget {
                         ),
                 ),
               ),
-              KSizedBox.kWidthSizedBox16,
               Flexible(
                 child: textWidget ??
                     Text(
@@ -74,10 +74,7 @@ class CheckPointWidget extends StatelessWidget {
                               : AppTextStyle.materialThemeBodyMedium),
                     ),
               ),
-              if (ammountWidget != null) ...[
-                KSizedBox.kWidthSizedBox16,
-                ammountWidget!,
-              ],
+              if (ammountWidget != null) ammountWidget!,
             ],
           ),
         ),

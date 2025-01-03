@@ -82,13 +82,13 @@ List<Widget> _formWidgetList({
             left: KPadding.kPaddingSize16,
           ),
           child: Row(
+            spacing: KPadding.kPaddingSize4,
             children: [
               Text(
                 context.l10n.addPhoto,
                 key: KWidgetkeys.screen.storyAdd.photoText,
                 style: AppTextStyle.text24,
               ),
-              KSizedBox.kWidthSizedBox4,
               Expanded(
                 child: Text(
                   context.l10n.notNecessarily,
