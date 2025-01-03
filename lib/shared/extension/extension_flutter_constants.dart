@@ -258,6 +258,7 @@ extension ContextExtensions on BuildContext {
         confirmText: l10n.iAgree,
         onAppliedPressed: () => read<UrlCubit>().launchUrl(url: link),
         confirmButtonBackground: AppColors.materialThemeKeyColorsPrimary,
+        confirmWhiteText: false,
       );
 }
 
