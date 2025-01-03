@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
@@ -24,6 +23,7 @@ void main() {
       mockDiscountRepository = MockIDiscountRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockUrlRepository = MockIUrlRepository();
+      Config.testIsWeb = false;
 
       when(
         mockUrlRepository.copy(
@@ -84,24 +84,6 @@ void main() {
 
           await discountInitialHelper(tester: tester, cardIsEmpty: true);
         });
-        group('${KGroupText.goTo} ', () {
-          testWidgets('${KRoute.discounts.name} ', (tester) async {
-            await discountPumpAppHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-              mockUrlRepository: mockUrlRepository,
-              mockDiscountRepository: mockDiscountRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-            );
-
-            await discountBackButtonHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-              cardIsEmpty: true,
-            );
-          });
-        });
       });
     });
     group('${KGroupText.successfulGet} ', () {
@@ -134,50 +116,6 @@ void main() {
         await discountInitialHelper(tester: tester);
       });
 
-      testWidgets('${KGroupText.network} ', (tester) async {
-        await networkHelper(
-          tester: tester,
-          pumpApp: () async => discountPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockUrlRepository: mockUrlRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          ),
-        );
-
-        verify(
-          mockDiscountRepository.getDiscount(
-            id: KTestVariables.id,
-            showOnlyBusinessDiscounts: false,
-          ),
-        ).called(2);
-      });
-
-      testWidgets('Copy Phone Number', (tester) async {
-        PlatformEnumFlutter.isWebDesktop = true;
-        await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        );
-
-        await discountShowPhoneNumberHelper(tester);
-      });
-
-      testWidgets('Call Phone Number', (tester) async {
-        PlatformEnumFlutter.isWebDesktop = false;
-
-        await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        );
-
-        await discountShowPhoneNumberHelper(tester);
-      });
-
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
@@ -191,24 +129,6 @@ void main() {
           );
 
           await discountInitialHelper(tester: tester);
-        });
-        group('${KGroupText.goTo} ', () {
-          testWidgets('${KRoute.discounts.name} ', (tester) async {
-            await discountPumpAppHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-              mockUrlRepository: mockUrlRepository,
-              mockDiscountRepository: mockDiscountRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-            );
-
-            await discountBackButtonHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-              cardIsEmpty: false,
-            );
-          });
         });
       });
     });

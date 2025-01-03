@@ -11,6 +11,7 @@ Future<void> discountPumpAppHelper({
   required WidgetTester tester,
   required IDiscountRepository mockDiscountRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+  required IUrlRepository mockUrlRepository,
   String? discountId = KTestVariables.id,
   DiscountModel? discount,
   MockGoRouter? mockGoRouter,
@@ -19,6 +20,8 @@ Future<void> discountPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
+  _registerUrlCubit(mockUrlRepository);
+
   await tester.pumpApp(
     DiscountScreen(
       discountId: discountId,
@@ -51,4 +54,16 @@ void _registerDiscountWatcherBloc({
     ),
   );
   // GetIt.I.registerSingleton<DiscountCardWatcherCubit>(discountCardBloc);
+}
+
+void _registerUrlCubit(
+  IUrlRepository mockUrlRepository,
+) {
+  final urlCubit = UrlCubit(
+    urlRepository: mockUrlRepository,
+  );
+  if (GetIt.I.isRegistered<UrlCubit>()) {
+    GetIt.I.unregister<UrlCubit>();
+  }
+  GetIt.I.registerSingleton<UrlCubit>(urlCubit);
 }
