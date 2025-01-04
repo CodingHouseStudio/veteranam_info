@@ -23,7 +23,7 @@ enum ReportFailure {
 class ReportState with _$ReportState {
   const factory ReportState({
     required ReasonComplaint? reasonComplaint,
-    // required EmailFieldModel? email,
+    required EmailFieldModel email,
     required ReportFieldModel message,
     required ReportEnum formState,
     required ReportFailure? failure,
@@ -39,6 +39,7 @@ enum ReportEnum {
   next,
   nextInProgress,
   nextInvalidData,
+  trySuccessWithoutEmail,
 }
 
 extension ReportEnumExtension on ReportEnum {

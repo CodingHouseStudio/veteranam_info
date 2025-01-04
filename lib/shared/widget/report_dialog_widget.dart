@@ -42,9 +42,65 @@ class ReportDialogWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
-            if (_.formState.isNext) ...[
+            if (_.formState == ReportEnum.trySuccessWithoutEmail) ...[
               Text(
-                context.l10n.addComment,
+                'test',
+                key: KWidgetkeys.widget.confirmDialog.subtitle,
+                style: isDesk
+                    ? AppTextStyle.materialThemeBodyLarge
+                    : AppTextStyle.materialThemeBodyMedium,
+              ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox24,
+              // if (widget.isDesk)
+              // Wrap(
+              //   spacing: KPadding.kPaddingSize24,
+              //   runSpacing: KPadding.kPaddingSize16,
+              //   children: [
+              //     DoubleButtonWidget(
+              //       widgetKey:
+              //           KWidgetkeys.widget.confirmDialog.confirmButton,
+              //       text: 'test',
+              //       darkMode: true,
+              //       // textColor: AppColors.materialThemeWhite,
+              //       isDesk: isDesk,
+              //       deskPadding: const EdgeInsets.symmetric(
+              //         vertical: KPadding.kPaddingSize12,
+              //         horizontal: KPadding.kPaddingSize30,
+              //       ),
+              //       mobTextWidth: double.infinity,
+              //       mobVerticalTextPadding: KPadding.kPaddingSize16,
+              //       mobIconPadding: KPadding.kPaddingSize16,
+              //       onPressed: () => context.pop(true),
+              //       align: Alignment.center,
+              //       hasAlign: !isDesk,
+              //     ),
+              //     SecondaryButtonWidget(
+              //       widgetKey:
+              //           KWidgetkeys.widget.confirmDialog.unconfirmButton,
+              //       onPressed: () {
+              //         context.pop(false);
+              //       },
+              //       padding: const EdgeInsets.symmetric(
+              //         vertical: KPadding.kPaddingSize12,
+              //         horizontal: KPadding.kPaddingSize12,
+              //       ),
+              //       expanded: !isDesk,
+              //       isDesk: isDesk,
+              //       text: context.l10n.cancel,
+              //       hasAlign: !isDesk,
+              //       align: Alignment.center,
+              //     ),
+              //   ],
+              // ),
+              // if (!isDesk) KSizedBox.kHeightSizedBox16,
+            ] else if (_.formState.isNext) ...[
+              Text(
+                _.reasonComplaint?.isOther ?? true
+                    ? context.l10n.addComment
+                    : context.l10n.addEmail,
                 key: KWidgetkeys.widget.reportDialog.subtitle,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
@@ -60,45 +116,36 @@ class ReportDialogWidget extends StatelessWidget {
                     .toText(context),
                 isDesk: isDesk,
               ),
-              // KSizedBox.kHeightSizedBox16,
-              // TextFieldWidget(
-              //   widgetKey: KWidgetkeys.widget.reportDialog.emailField,
-              //   onChanged: (text) => context
-              //       .read<ReportBloc>()
-              //       .add(ReportEvent.emailUpdated(text)),
-              //   isDesk: isDesk,
-              //   labelText: '${context.l10n.email}*',
-              //   enabled: context
-              //           .read<AuthenticationBloc>()
-              //           .state
-              //           .user
-              //           ?.isAnonymously ??
-              //       false,
-              //   errorText: _.email?.error.value(context) ??
-              //       context.l10n.fieldCannotBeEmpty,
-              //   showErrorText: _.formState == ReportEnum.nextInvalidData &&
-              //       (context
-              //               .read<AuthenticationBloc>()
-              //               .state
-              //               .user
-              //               ?.isAnonymously ??
-              //           true),
-              //   text: context.read<AuthenticationBloc>().state.user?.email,
-              //   inputFormatterList: [EmailInputFormatter()],
-              // ),
-              KSizedBox.kHeightSizedBox16,
-              MessageFieldWidget(
-                key: KWidgetkeys.widget.reportDialog.messageField,
-                changeMessage: (text) => context
-                    .read<ReportBloc>()
-                    .add(ReportEvent.messageUpdated(text)),
-                isRequired: _.reasonComplaint == ReasonComplaint.other,
-                isDesk: isDesk,
-                labelText: context.l10n.writeYourMessage,
-                errorText: _.message.error.value(context),
-                showErrorText: _.formState == ReportEnum.nextInvalidData,
-                errorMaxLines: 3,
-              ),
+              if (!context.userHasEmail) ...[
+                KSizedBox.kHeightSizedBox16,
+                TextFieldWidget(
+                  widgetKey: KWidgetkeys.widget.reportDialog.emailField,
+                  onChanged: (text) => context
+                      .read<ReportBloc>()
+                      .add(ReportEvent.emailUpdated(text)),
+                  isDesk: isDesk,
+                  labelText: '${context.l10n.email}'
+                      '${_.reasonComplaint?.isOther ?? true ? '*' : ''}',
+                  errorText: _.email.error.value(context) ??
+                      context.l10n.fieldCannotBeEmpty,
+                  showErrorText: _.formState == ReportEnum.nextInvalidData,
+                ),
+              ],
+              if (_.reasonComplaint?.isOther ?? true) ...[
+                KSizedBox.kHeightSizedBox16,
+                MessageFieldWidget(
+                  key: KWidgetkeys.widget.reportDialog.messageField,
+                  changeMessage: (text) => context
+                      .read<ReportBloc>()
+                      .add(ReportEvent.messageUpdated(text)),
+                  isRequired: true,
+                  isDesk: isDesk,
+                  labelText: context.l10n.writeYourMessage,
+                  errorText: _.message.error.value(context),
+                  showErrorText: _.formState == ReportEnum.nextInvalidData,
+                  errorMaxLines: 3,
+                ),
+              ],
             ] else ...[
               Text(
                 context.l10n.specifyReasonForComplaint,
@@ -140,26 +187,58 @@ class ReportDialogWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox32,
-            DoubleButtonWidget(
-              widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
-              text: _.formState.isNext ? context.l10n.send : context.l10n.next,
-              isDesk: isDesk,
-              onPressed: _.formState == ReportEnum.success
-                  ? null
-                  : () => context
-                      .read<ReportBloc>()
-                      .add(ReportEvent.send(cardEnum)),
-              darkMode: true,
-              hasAlign: isDesk,
-              mobTextWidth: double.infinity,
-              mobVerticalTextPadding: KPadding.kPaddingSize16,
-              mobIconPadding: KPadding.kPaddingSize16,
-            ),
+            if (_.formState == ReportEnum.trySuccessWithoutEmail)
+              Wrap(
+                spacing: KPadding.kPaddingSize24,
+                runSpacing: KPadding.kPaddingSize16,
+                children: [
+                  button(context: context, state: _),
+                  SecondaryButtonWidget(
+                    widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
+                    onPressed: () {
+                      context.pop(false);
+                    },
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize12,
+                      horizontal: KPadding.kPaddingSize12,
+                    ),
+                    expanded: !isDesk,
+                    isDesk: isDesk,
+                    text: context.l10n.cancel,
+                    hasAlign: !isDesk,
+                    align: Alignment.center,
+                  ),
+                ],
+              )
+            else
+              button(context: context, state: _),
           ],
         ),
       ),
     );
   }
+
+  Widget button({
+    required BuildContext context,
+    required ReportState state,
+  }) =>
+      DoubleButtonWidget(
+        widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
+        text: state.formState.isNext ||
+                (context.userHasEmail &&
+                    !(state.reasonComplaint?.isOther ?? true))
+            ? context.l10n.send
+            : context.l10n.next,
+        isDesk: isDesk,
+        onPressed: state.formState == ReportEnum.success
+            ? null
+            : () => context.read<ReportBloc>().add(ReportEvent.send(cardEnum)),
+        darkMode: true,
+        hasAlign: isDesk,
+        mobTextWidth: double.infinity,
+        mobVerticalTextPadding: KPadding.kPaddingSize16,
+        mobIconPadding: KPadding.kPaddingSize16,
+      );
 
   Widget _reportCheckPoint({
     required BuildContext context,

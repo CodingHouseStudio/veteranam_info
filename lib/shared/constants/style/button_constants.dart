@@ -360,6 +360,7 @@ abstract class KButtonStyles {
     ),
     foregroundColor:
         WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
+    iconColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
     alignment: Alignment.centerLeft,
   );
 

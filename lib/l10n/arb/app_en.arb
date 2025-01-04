@@ -888,6 +888,10 @@
   "@addComment": {
     "examples": "Text before the comment input field."
   },
+  "addEmail": "Add a email (optional):",
+  "@addEmail": {
+    "examples": "Text before the email input field"
+  },
   "checkPointError": "Please select one of the following answers",
   "@checkPointError": {
     "examples": "Error text for the Report dialog when the complaint type is not selected."

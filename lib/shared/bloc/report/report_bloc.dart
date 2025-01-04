@@ -19,7 +19,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         super(
           const ReportState(
             reasonComplaint: null,
-            // email: null,
+            email: EmailFieldModel.pure(),
             message: ReportFieldModel.pure(),
             formState: ReportEnum.initial,
             failure: null,
@@ -27,7 +27,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           ),
         ) {
     on<_Started>(_onStarted);
-    // on<_EmailUpdated>(_onEmailUpdated);
+    on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
     on<_Send>(_onSend);
@@ -39,10 +39,13 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Started event,
     Emitter<ReportState> emit,
   ) {
+    final email = _appAuthenticationRepository.currentUser.email;
     emit(
       ReportState(
         reasonComplaint: null,
-        // email: null,
+        email: email == null || email.isEmpty
+            ? const EmailFieldModel.pure()
+            : EmailFieldModel.dirty(email),
         message: const ReportFieldModel.pure(),
         formState: ReportEnum.initial,
         failure: null,
@@ -51,19 +54,19 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     );
   }
 
-  // void _onEmailUpdated(
-  //   _EmailUpdated event,
-  //   Emitter<ReportState> emit,
-  // ) {
-  //   final emailFieldModel = EmailFieldModel.dirty(event.email);
-  //   emit(
-  //     state.copyWith(
-  //       email: emailFieldModel,
-  //       formState: ReportEnum.nextInProgress,
-  //       failure: null,
-  //     ),
-  //   );
-  // }
+  void _onEmailUpdated(
+    _EmailUpdated event,
+    Emitter<ReportState> emit,
+  ) {
+    final emailFieldModel = EmailFieldModel.dirty(event.email);
+    emit(
+      state.copyWith(
+        email: emailFieldModel,
+        formState: ReportEnum.nextInProgress,
+        failure: null,
+      ),
+    );
+  }
 
   void _onMessageUpdated(
     _MessageUpdated event,
@@ -96,9 +99,14 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Send event,
     Emitter<ReportState> emit,
   ) {
-    if (!state.formState.isNext &&
-            state.reasonComplaint == ReasonComplaint.other ||
-        state.reasonComplaint == null) {
+    if (state.reasonComplaint == null ||
+            (!state.formState.isNext &&
+                (_appAuthenticationRepository.currentUser.email?.isEmpty ??
+                    true))
+        //&&
+        //     state.reasonComplaint == ReasonComplaint.other ||
+        // state.reasonComplaint == null
+        ) {
       if (state.reasonComplaint != null) {
         emit(state.copyWith(formState: ReportEnum.next, failure: null));
       } else {
@@ -113,12 +121,21 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {
-    if (state.reasonComplaint == ReasonComplaint.other &&
-        (state.message.isNotValid)) {
+    if (state.reasonComplaint?.isOther ??
+        true && (state.message.isNotValid || (state.email.isNotValid))) {
       emit(
         state.copyWith(
           failure: null,
           formState: ReportEnum.nextInvalidData,
+        ),
+      );
+      return;
+    }
+    if (state.email.isNotValid) {
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.trySuccessWithoutEmail,
         ),
       );
       return;
@@ -135,9 +152,9 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
-          // email: state.email?.value.isEmpty ?? true
-          //     ? _appAuthenticationRepository.currentUser.email!
-          //     : state.email!.value,
+          email: state.email.value.isEmpty
+              ? _appAuthenticationRepository.currentUser.email!
+              : state.email.value,
           message: state.message.value.isEmpty ? null : state.message.value,
           date: ExtendedDateTime.current,
           card: event.card,

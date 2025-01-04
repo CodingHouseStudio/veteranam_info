@@ -211,6 +211,9 @@ extension TranslateModelExtension on TranslateModel {
 extension ContextExtensions on BuildContext {
   bool get isEnglish => read<LanguageCubit>().state.isEnglish;
 
+  bool get userHasEmail =>
+      read<UserWatcherBloc>().state.user.email?.isNotEmpty ?? false;
+
   Future<void> onMobFeedback(UserFeedback feedback) async =>
       read<MobFeedbackBloc>().add(MobFeedbackEvent.send(feedback.screenshot));
 
