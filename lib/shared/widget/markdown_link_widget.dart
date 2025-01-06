@@ -19,8 +19,7 @@ class MarkdownLinkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MarkdownBody(
-      data: text,
-
+      data: text.replaceAll('\n', '\\\n'),
       // selectable: true,
       styleSheet: MarkdownStyleSheet(
         a: textStyle ?? AppTextStyle.materialThemeBodyLarge,

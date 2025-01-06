@@ -433,6 +433,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
 
     emit(
       state.copyWith(
+        failure: null,
         formState: discountsAddEnum,
       ),
     );

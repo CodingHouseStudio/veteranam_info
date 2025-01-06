@@ -19,19 +19,19 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   // late TextEditingController categoryController;
   // late TextEditingController cityController;
   late TextEditingController periodController;
-  late TextEditingController exclusionController;
+  late TextEditingController requirmentsController;
   late TextEditingController descriptionController;
   // late TextEditingController eligibilityController;
   @override
   void initState() {
     // discountsController = TextEditingController();
-    titleController = TextEditingController();
-    linkController = TextEditingController();
+    titleController = TextEditingController(text: '');
+    linkController = TextEditingController(text: '');
     // categoryController = TextEditingController();
     // cityController = TextEditingController();
-    periodController = TextEditingController();
-    exclusionController = TextEditingController();
-    descriptionController = TextEditingController();
+    periodController = TextEditingController(text: '');
+    requirmentsController = TextEditingController(text: '');
+    descriptionController = TextEditingController(text: '');
     // eligibilityController = TextEditingController();
     super.initState();
   }
@@ -80,9 +80,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               periodController.text =
                   state.discount!.expiration?.getTrsnslation(context) ??
                       periodController.text;
-              exclusionController.text =
-                  state.discount!.exclusions?.getTrsnslation(context) ??
-                      exclusionController.text;
+              requirmentsController.text =
+                  state.discount!.requirements?.getTrsnslation(context) ??
+                      requirmentsController.text;
               descriptionController.text =
                   state.discount!.description.getTrsnslation(context);
             }
@@ -96,7 +96,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 previous.title != current.title ||
                 previous.description != current.description ||
                 previous.requirements != current.requirements) ||
-            (current.discount != previous.discount),
+            (current.discount != previous.discount) ||
+            current.formState != previous.formState,
         builder: (context, _) => ScaffoldWidget(
           titleDeskPadding: _.failure.linkIsWrong
               ? null
@@ -277,7 +278,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   else
                     MessageFieldWidget(
                       key: KWidgetkeys.screen.discountsAdd.exclusionField,
-                      controller: exclusionController,
+                      controller: requirmentsController,
                       isDesk: isDesk,
                       labelText: context.l10n.getYouNeed,
                       description: context.l10n.getYouNeedDescription,
@@ -523,7 +524,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     // categoryController.dispose();
     // cityController.dispose();
     periodController.dispose();
-    exclusionController.dispose();
+    requirmentsController.dispose();
     descriptionController.dispose();
     // eligibilityController.dispose();
   }

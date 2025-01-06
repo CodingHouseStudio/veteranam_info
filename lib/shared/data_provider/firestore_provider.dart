@@ -471,7 +471,7 @@ class FirestoreService {
           if (!showOnlyBusinessDiscounts ||
               !Config.isWeb &&
                   discount[DiscountModelJsonField.userName] == null) {
-            return DiscountModel.fromJson(docSnapshot.data()!);
+            return DiscountModel.fromJson(discount);
           }
         }
       }
