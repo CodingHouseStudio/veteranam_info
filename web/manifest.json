@@ -3,11 +3,18 @@
     "short_name": "Veteranam",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
     "description": "Veteran UA",
     "orientation": "portrait-primary",
-    "prefer_related_applications": false,
+    "lang": "uk-UA",
+    "prefer_related_applications": true,
+    "related_applications": [
+        {
+            "platform": "play",
+            "id": "info.veteranam"
+        }
+    ],
     "icons": [
         {
             "src": "icons/logo-192.svg",
