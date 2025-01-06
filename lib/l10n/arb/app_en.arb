@@ -1711,7 +1711,7 @@
   "@websiteLinkTitle": {
     "examples": "Dialog title text for user consent to proceed to a third-party website"
   },
-  "reportWithoutEmailDescriptionPart1": "We may need your email to contact you. If you",
+  "reportWithoutEmailDescriptionPart1": "We might need your email address to contact you. If you",
   "@reportWithoutEmailDescriptionPart1": {
     "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
   },
@@ -1719,7 +1719,7 @@
   "@reportWithoutEmailDescriptionPart2": {
     "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
   },
-  "reportWithoutEmailDescriptionPart3": "we will use the email associated with your account to contact you.",
+  "reportWithoutEmailDescriptionPart3": "we will be able to contact you via the email address on your account.",
   "@reportWithoutEmailDescriptionPart3": {
     "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
   },

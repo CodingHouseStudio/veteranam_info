@@ -131,7 +131,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     // ) {
     if ((state.reasonComplaint?.isOther ?? true)
         ? !Formz.validate([state.email, state.message])
-        : state.email.value.isNotEmpty && state.email.isNotValid) {
+        : (state.triedSentWithoutEmail || state.email.value.isNotEmpty) &&
+            state.email.isNotValid) {
       emit(
         state.copyWith(
           failure: null,
@@ -140,8 +141,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       );
       return;
     }
-    if (state.email.isNotValid &&
-        state.formState != ReportEnum.sumbittedWithoutEmail) {
+    if (state.email.isNotValid) {
       emit(
         state.copyWith(
           failure: null,
@@ -194,6 +194,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     emit(
       state.copyWith(
         formState: ReportEnum.nextInProgress,
+        triedSentWithoutEmail: true,
       ),
     );
   }

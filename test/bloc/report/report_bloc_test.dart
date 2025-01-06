@@ -168,6 +168,11 @@ void main() {
           const ReportEvent.emailUpdated(''),
         )
         ..add(const ReportEvent.send())
+        ..add(const ReportEvent.cancel())
+        ..add(const ReportEvent.send())
+        ..add(
+          const ReportEvent.emailUpdated(KTestVariables.userEmail),
+        )
         ..add(const ReportEvent.send()),
       expect: () => [
         // ReportState(
@@ -234,13 +239,44 @@ void main() {
           card: CardEnum.funds,
         ),
         const ReportState(
-          formState: ReportEnum.success,
+          formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           email: EmailFieldModel.dirty(),
           message: ReportFieldModel.dirty(KTestVariables.field),
           failure: null,
           cardId: KTestVariables.id,
           card: CardEnum.funds,
+          triedSentWithoutEmail: true,
+        ),
+        const ReportState(
+          formState: ReportEnum.nextInvalidData,
+          reasonComplaint: ReasonComplaint.fraudOrSpam,
+          email: EmailFieldModel.dirty(),
+          message: ReportFieldModel.dirty(KTestVariables.field),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+          triedSentWithoutEmail: true,
+        ),
+        const ReportState(
+          formState: ReportEnum.nextInProgress,
+          reasonComplaint: ReasonComplaint.fraudOrSpam,
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          message: ReportFieldModel.dirty(KTestVariables.field),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+          triedSentWithoutEmail: true,
+        ),
+        const ReportState(
+          formState: ReportEnum.success,
+          reasonComplaint: ReasonComplaint.fraudOrSpam,
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          message: ReportFieldModel.dirty(KTestVariables.field),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+          triedSentWithoutEmail: true,
         ),
       ],
     );

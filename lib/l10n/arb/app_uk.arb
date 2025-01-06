@@ -1727,7 +1727,7 @@
   "@reportWithoutEmailDescriptionPart2": {
     "examples": "Текст для діалогу Report коли користувач пробує надіслати скаргу без елетронного адресу"
   },
-  "reportWithoutEmailDescriptionPart3": "ми використаємо електроний адрес, прив’язаний до вашого акаунта, щоб зв’язатися.",
+  "reportWithoutEmailDescriptionPart3": "ми зможемо зв’язатися з вами через електронну пошту, вказану у вашому акаунті.",
   "@reportWithoutEmailDescriptionPart3": {
     "examples": "Текст для діалогу Report коли користувач пробує надіслати скаргу без елетронного адресу"
   },

@@ -29,6 +29,7 @@ class ReportState with _$ReportState {
     required ReportFailure? failure,
     required String cardId,
     required CardEnum card,
+    @Default(false) bool triedSentWithoutEmail,
   }) = _Initial;
 }
 
