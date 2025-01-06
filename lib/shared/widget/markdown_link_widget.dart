@@ -19,7 +19,7 @@ class MarkdownLinkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MarkdownBody(
-      data: text.replaceAll('\n', '\\\n'),
+      data: textValue,
       // selectable: true,
       styleSheet: MarkdownStyleSheet(
         a: textStyle ?? AppTextStyle.materialThemeBodyLarge,
@@ -32,4 +32,9 @@ class MarkdownLinkWidget extends StatelessWidget {
               : context.read<UrlCubit>().launchUrl(url: href),
     );
   }
+
+  String get textValue => text.replaceAllMapped(
+        RegExp(r'\n(?![\n-])'),
+        (match) => '\\\n',
+      );
 }
