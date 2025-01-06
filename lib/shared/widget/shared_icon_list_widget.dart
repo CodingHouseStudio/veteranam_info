@@ -107,7 +107,7 @@ class SharedIconListWidget extends StatelessWidget {
                         )
                       : null),
             ),
-          complaintButton(context),
+          if (Config.isUser) complaintButton(context),
         ] else if (link != null && link!.isUrlValid)
           PopupMenuButtonWidget<int>(
             buttonText: context.l10n.login,
@@ -150,30 +150,31 @@ class SharedIconListWidget extends StatelessWidget {
                 //   right: KPadding.kPaddingSize16,
                 // ),
               ),
-              DropDownItem(
-                key: complaintKey,
-                value: 2,
-                text: context.l10n.complaint,
-                icon: IconWidget(
-                  background: iconBackground,
-                  icon: KIcon.brightnessAlert,
-                  padding: KPadding.kPaddingSize12,
+              if (Config.isUser)
+                DropDownItem(
+                  key: complaintKey,
+                  value: 2,
+                  text: context.l10n.complaint,
+                  icon: IconWidget(
+                    background: iconBackground,
+                    icon: KIcon.brightnessAlert,
+                    padding: KPadding.kPaddingSize12,
+                  ),
+                  event: () => context.dialog.showReportDialog(
+                    isDesk: dialogIsDesk ?? isDesk,
+                    cardEnum: cardEnum,
+                    cardId: cardId,
+                  ),
+                  // padding: const EdgeInsets.only(
+                  //   bottom: KPadding.kPaddingSize16,
+                  //   left: KPadding.kPaddingSize16,
+                  //   right: KPadding.kPaddingSize16,
+                  // ),
                 ),
-                event: () => context.dialog.showReportDialog(
-                  isDesk: dialogIsDesk ?? isDesk,
-                  cardEnum: cardEnum,
-                  cardId: cardId,
-                ),
-                // padding: const EdgeInsets.only(
-                //   bottom: KPadding.kPaddingSize16,
-                //   left: KPadding.kPaddingSize16,
-                //   right: KPadding.kPaddingSize16,
-                // ),
-              ),
             ],
             position: PopupMenuButtonPosition.bottomRight,
           )
-        else
+        else if (Config.isUser)
           complaintButton(context),
         // if (widget.showComplaint) ...[
         //   if (widget.isDesk)
