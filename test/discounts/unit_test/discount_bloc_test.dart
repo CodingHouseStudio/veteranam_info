@@ -1,6 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 // import 'package:bloc_test/bloc_test.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -69,52 +70,67 @@ void main() {
       GetIt.I.registerSingleton<UserRepository>(mockUserRepository);
     });
 
-    // blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
-    //   'emits [discountWatcherState()]'
-    //   ' when load discountModel list',
-    //   build: () => discountWatcherBloc,
-    //   act: (bloc) async => bloc.add(const DiscountsWatcherEvent.started()),
-    //   expect: () async => [
-    //     predicate<DiscountsWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatus.loading,
-    //     ),
-    //     predicate<DiscountsWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatus.loaded,
-    //     ),
-    //   ],
-    // );
+    blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
+      'emits [discountWatcherState()]'
+      ' when load discountModel list',
+      build: () => DiscountsWatcherBloc(
+        discountRepository: mockdiscountRepository,
+        // reportRepository: mockReportRepository,
+        // appAuthenticationRepository: mockAppAuthenticationRepository,
+        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      ),
+      // act: (bloc) async => bloc.add(const DiscountsWatcherEvent.started()),
+      expect: () async => [
+        predicate<DiscountsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<DiscountsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
+      ],
+    );
 
-    // blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
-    //   'emits [discountWatcherState()] when error',
-    //   build: () => discountWatcherBloc,
-    //   act: (bloc) async {
-    //     when(
-    //       mockdiscountRepository.getDiscountItems(
-    //         showOnlyBusinessDiscounts: false,
-    //         // reportIdItems: KTestText.reportItems.getIdCard,
-    //       ),
-    //     ).thenAnswer(
-    //       (_) => Stream.error(KGroupText.failureGet),
-    //     );
-    //     bloc.add(const DiscountsWatcherEvent.started());
-    //   },
-    //   expect: () async => [
-    //     predicate<DiscountsWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatus.loading,
-    //     ),
-    //     predicate<DiscountsWatcherState>(
-    //       (state) =>
-    //           state.loadingStatus == LoadingStatus.error &&
-    //           state.failure != null,
-    //     ),
-    //   ],
-    // );
+    group('emits [discountWatcherState()] when error', () {
+      setUp(
+        () => when(
+          mockdiscountRepository.getDiscountItems(
+            showOnlyBusinessDiscounts: false,
+            // reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
+          (_) => Stream.error(KGroupText.failureGet),
+        ),
+      );
+      blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
+        'Bloc Test',
+        build: () => DiscountsWatcherBloc(
+          discountRepository: mockdiscountRepository,
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        ),
+        // act: (bloc) async {
+        //   bloc.add(const DiscountsWatcherEvent.started());
+        // },
+        expect: () async => [
+          predicate<DiscountsWatcherState>(
+            (state) => state.loadingStatus == LoadingStatus.loading,
+          ),
+          predicate<DiscountsWatcherState>(
+            (state) =>
+                state.loadingStatus == LoadingStatus.error &&
+                state.failure != null,
+          ),
+        ],
+      );
+    });
     // blocTest<DiscountsWatcherBloc, DiscountsWatcherState>(
     //   'emits [discountWatcherState()] when loading'
     //   ' discountModel list and filtering category it',
-    //   build: () => discountWatcherBloc,
+    //   build: () => DiscountsWatcherBloc(
+    //     discountRepository: mockdiscountRepository,
+    //     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+    //   ),
     //   act: (bloc) async {
-    //     bloc.add(const DiscountsWatcherEvent.started());
+    //     // bloc.add(const DiscountsWatcherEvent.started());
     //     await expectLater(
     //       bloc.stream,
     //       emitsInOrder([
