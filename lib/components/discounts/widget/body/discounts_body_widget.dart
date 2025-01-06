@@ -60,18 +60,18 @@ class _DiscountsBodyWidget extends StatelessWidget {
                             .state
                             .emailScrollCount +
                         1))) {
-              if (Config.isWeb) {
-                if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
-                  if ((context.read<UserWatcherBloc>().state.user.email ?? '')
-                      .isEmpty) {
-                    context.dialog.showUserEmailDialog(
-                      context.read<DiscountConfigCubit>().state.emailCloseDelay,
-                    );
-                  }
+              // if (Config.isWeb) {
+              if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
+                if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
+                    true) {
+                  context.dialog.showUserEmailDialog(
+                    context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                  );
                 }
-              } else {
-                context.read<MobileRatingCubit>().showDialog();
               }
+              // } else {
+              //   context.read<MobileRatingCubit>().showDialog();
+              // }
             }
           },
           listenWhen: (previous, current) =>
