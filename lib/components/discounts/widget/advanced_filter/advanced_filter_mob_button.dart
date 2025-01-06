@@ -171,14 +171,14 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
               width: double.infinity,
               child: Wrap(
                 alignment: WrapAlignment.spaceAround,
-                spacing: KPadding.kPaddingSize8,
+                // spacing: KPadding.kPaddingSize8,
                 verticalDirection: VerticalDirection.up,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 runSpacing: KPadding.kPaddingSize8,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(right: KPadding.kPaddingSize16),
+                        const EdgeInsets.only(right: KPadding.kPaddingSize8),
                     child: BlocBuilder<DiscountsWatcherBloc,
                         DiscountsWatcherState>(
                       builder: (context, state) {
