@@ -77,7 +77,7 @@ ThemeData themeData = ThemeData(
   ),
 );
 
-AppBar? get  appBar => Config.isWeb
+AppBar? get appBar => Config.isWeb
     ? AppBar(
         backgroundColor: AppColors.materialThemeWhite,
         toolbarHeight: KSize.kAppBarHeight,

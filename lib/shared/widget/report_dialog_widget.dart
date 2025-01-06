@@ -41,7 +41,7 @@ class ReportDialogWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
-            if (showSubmisionWithoutEmail(_)) ...[
+            if (_.formState == ReportEnum.sumbittedWithoutEmail) ...[
               Text.rich(
                 TextSpan(
                   text: '${context.l10n.reportWithoutEmailDescriptionPart1} ',
@@ -140,7 +140,7 @@ class ReportDialogWidget extends StatelessWidget {
                       .read<ReportBloc>()
                       .add(ReportEvent.emailUpdated(text)),
                   isDesk: isDesk,
-                  isRequired: _.reasonComplaint?.isOther ?? true,
+                  isRequired: true,
                   labelText: context.l10n.email,
                   errorText: _.email.error.value(context),
                   showErrorText: _.formState == ReportEnum.nextInvalidData,
@@ -203,64 +203,35 @@ class ReportDialogWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox32,
-            if (showSubmisionWithoutEmail(_))
-              Wrap(
-                spacing: KPadding.kPaddingSize24,
-                runSpacing: KPadding.kPaddingSize16,
-                alignment: WrapAlignment.spaceBetween,
-                // runAlignment: WrapAlignment.center,
-                // direction: isDesk ? Axis.horizontal : Axis.vertical,
-                children: [
-                  button(context: context, state: _),
-                  SecondaryButtonWidget(
-                    widgetKey: KWidgetkeys.widget.confirmDialog.unconfirmButton,
-                    onPressed: () => context
-                        .read<ReportBloc>()
-                        .add(const ReportEvent.cancel()),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize12,
-                      horizontal: KPadding.kPaddingSize12,
-                    ),
-                    expanded: !isDesk,
-                    isDesk: isDesk,
-                    text: context.l10n.cancel,
-                    hasAlign: !isDesk,
-                    align: Alignment.center,
-                  ),
-                ],
-              )
-            else
-              button(context: context, state: _),
+            DoubleButtonWidget(
+              widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
+              text: _.formState == ReportEnum.sumbittedWithoutEmail
+                  ? context.l10n.cancel
+                  : _.formState.isNext
+                      ? context.l10n.send
+                      : context.l10n.next,
+              isDesk: isDesk,
+              onPressed: _.formState == ReportEnum.success
+                  ? null
+                  : () => _.formState == ReportEnum.sumbittedWithoutEmail
+                      ? context
+                          .read<ReportBloc>()
+                          .add(const ReportEvent.cancel())
+                      : context
+                          .read<ReportBloc>()
+                          .add(const ReportEvent.send()),
+              darkMode: true,
+              hasAlign: !isDesk,
+              mobTextWidth: double.infinity,
+              mobVerticalTextPadding: KPadding.kPaddingSize16,
+              mobIconPadding: KPadding.kPaddingSize16,
+              align: Alignment.center,
+            ),
           ],
         ),
       ),
     );
   }
-
-  bool showSubmisionWithoutEmail(
-    ReportState state,
-  ) =>
-      state.formState == ReportEnum.sumbittedWithoutEmail ||
-      (state.formState == ReportEnum.success && state.email.isNotValid);
-
-  Widget button({
-    required BuildContext context,
-    required ReportState state,
-  }) =>
-      DoubleButtonWidget(
-        widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
-        text: state.formState.isNext ? context.l10n.send : context.l10n.next,
-        isDesk: isDesk,
-        onPressed: state.formState == ReportEnum.success
-            ? null
-            : () => context.read<ReportBloc>().add(const ReportEvent.send()),
-        darkMode: true,
-        hasAlign: !showSubmisionWithoutEmail(state) || !isDesk,
-        mobTextWidth: double.infinity,
-        mobVerticalTextPadding: KPadding.kPaddingSize16,
-        mobIconPadding: KPadding.kPaddingSize16,
-        align: Alignment.center,
-      );
 
   Widget _reportCheckPoint({
     required BuildContext context,
