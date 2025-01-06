@@ -260,13 +260,12 @@ class _DialogsWidget {
     _doubleDialog(
       preLayoutWidget: ({required layoutBuilder}) => BlocProvider(
         create: (context) =>
-            GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
+            GetIt.I.get<ReportBloc>(param1: cardId, param2: cardEnum),
         child: layoutBuilder,
       ),
       childWidget: ({required isDeskValue, required context}) => isDesk
           ? ReportDialogWidget(
               isDesk: isDeskValue,
-              cardEnum: cardEnum,
               // afterEvent: afterEvent,
             )
           : Padding(
@@ -282,7 +281,6 @@ class _DialogsWidget {
                   width: double.infinity,
                   child: ReportDialogWidget(
                     isDesk: isDeskValue,
-                    cardEnum: cardEnum,
                     // afterEvent: afterEvent,
                   ),
                 ),

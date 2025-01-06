@@ -541,7 +541,7 @@ abstract class KTestVariables {
   static final reportModel = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    // email: userEmail,
+    email: userEmail,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
@@ -554,7 +554,7 @@ abstract class KTestVariables {
       ReportModel(
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
-        // email: userEmail,
+        email: userEmail,
         message: field + field + field + field,
         date: dateTime,
         card: CardEnum.discount,
@@ -566,7 +566,7 @@ abstract class KTestVariables {
   static final reportModelIncorect = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    // email: userEmailIncorrect,
+    email: userEmailIncorrect,
     message: field,
     date: dateTime,
     card: CardEnum.funds,

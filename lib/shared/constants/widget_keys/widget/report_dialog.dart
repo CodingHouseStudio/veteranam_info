@@ -8,7 +8,7 @@ class _ReportDialogKeys {
   final subtitle = const Key('report_dialog_subtitle');
   final checkPoint = const Key('report_dialog_check_point');
   final checkPointError = const Key('report_dialog_check_point_error');
-  // final emailField = const Key('report_dialog_email_field');
+  final emailField = const Key('report_dialog_email_field');
   final messageField = const Key('report_dialog_message_field');
   final cancel = const Key('report_dialog_cancel');
 }

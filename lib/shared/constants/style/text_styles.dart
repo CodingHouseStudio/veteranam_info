@@ -276,6 +276,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
   );
+  static const TextStyle materialThemeBodyLargeBolcUnderLine = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.underline,
+    letterSpacing: 0.5,
+  );
 
   /// materialThemeBodyMedium figma properties
   /// fontFamily: Gilroy
@@ -296,6 +304,14 @@ abstract class AppTextStyle {
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+  );
+  static const TextStyle materialThemeBodyMediumBoldUnderLine = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    decoration: TextDecoration.underline,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.25,
   );

@@ -444,7 +444,7 @@
   "@mainInformation": {
     "examples": "Текст на сторінці Empolyer."
   },
-  "position": "Посада*",
+  "position": "Посада",
   "@position": {
     "examples": "Текст над полем вводу посади на сторінці Empolyer."
   },
@@ -453,7 +453,7 @@
     "examples": "Текст для поля на сторінці Empolyer.",
     "description": "Поле використовується для вводу посади."
   },
-  "wage": "Заробітна плата*",
+  "wage": "Заробітна плата",
   "@wage": {
     "examples": "Текст над полем вводу заробітньої плати на сторінці Empolyer."
   },
@@ -462,7 +462,7 @@
     "examples": "Текст для поля на сторінці Empolyer.",
     "description": "Поле використовується для вводу заробітньої плати."
   },
-  "selectCityOfWork": "Виберіть місто роботи*",
+  "selectCityOfWork": "Виберіть місто роботи",
   "@selectCityOfWork": {
     "examples": "Текст над полем вибору міста на сторінці Empolyer."
   },
@@ -871,9 +871,13 @@
     "examples": "Текст для кнопки в діалозі Report.",
     "description": "Кнопка використовується для вибору типу скарги."
   },
-  "addComment": "Додайте коментар (необовʼязково):",
+  "addComment": "Додайте коментар:",
   "@addComment": {
     "examples": "Текст перед полем вводу коментаря."
+  },
+  "addEmailAndMessage": "Додайте електроний адрес та коментар (необовʼязково):",
+  "@addEmail": {
+    "examples": "Текст перед полем вводу електронної адреси."
   },
   "checkPointError": "Будь ласка виберіть одну з вище наведених відповідей",
   "@checkPointError": {
@@ -1714,6 +1718,18 @@
   "websiteLinkTitle": "Увага! Перехід на сторонній ресурс",
   "@websiteLinkTitle": {
     "examples": "Текст заголовку для ділогу згоди користувача щоб перейти на сторонній веб сайт"
+  },
+  "reportWithoutEmailDescriptionPart1": "Можливо, нам знадобиться ваша електронна пошта, щоб зв’язатися з вами. Якщо ви",
+  "@reportWithoutEmailDescriptionPart1": {
+    "examples": "Текст для діалогу Report коли користувач пробує надіслати скаргу без елетронного адресу"
+  },
+  "reportWithoutEmailDescriptionPart2": "зареєструєтеся",
+  "@reportWithoutEmailDescriptionPart2": {
+    "examples": "Текст для діалогу Report коли користувач пробує надіслати скаргу без елетронного адресу"
+  },
+  "reportWithoutEmailDescriptionPart3": "ми використаємо електроний адрес, прив’язаний до вашого акаунта, щоб зв’язатися.",
+  "@reportWithoutEmailDescriptionPart3": {
+    "examples": "Текст для діалогу Report коли користувач пробує надіслати скаргу без елетронного адресу"
   },
   "favorite": "Подобається",
   "@favorite": {

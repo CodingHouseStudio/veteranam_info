@@ -15,6 +15,8 @@ enum ReasonComplaint {
   fakeNewsOrDisinformation,
   offensiveOrHatefulContent,
   other;
+
+  bool get isOther => this == ReasonComplaint.other;
 }
 
 enum CardEnum {
@@ -29,7 +31,7 @@ class ReportModel with _$ReportModel {
   const factory ReportModel({
     required String id,
     required ReasonComplaint reasonComplaint,
-    // required String email,
+    required String? email,
     required String? message,
     required DateTime date,
     required CardEnum card,
@@ -45,7 +47,7 @@ class ReportModel with _$ReportModel {
 abstract class ReportModelJsonField {
   static const id = 'id';
   static const date = 'date';
-  // static const email = 'email';
+  static const email = 'email';
   static const message = 'message';
   static const reasonComplaint = 'reasonComplaint';
   static const card = 'card';

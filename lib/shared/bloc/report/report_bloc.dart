@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -14,56 +15,66 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   ReportBloc({
     required IReportRepository reportRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
+    @factoryParam required String cardId,
+    @factoryParam required CardEnum card,
   })  : _reportRepository = reportRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const ReportState(
             reasonComplaint: null,
-            // email: null,
+            email: EmailFieldModel.pure(),
             message: ReportFieldModel.pure(),
             formState: ReportEnum.initial,
             failure: null,
             cardId: '',
+            card: CardEnum.discount,
           ),
         ) {
-    on<_Started>(_onStarted);
-    // on<_EmailUpdated>(_onEmailUpdated);
+    // on<_Started>(_onStarted);
+    on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
     on<_Send>(_onSend);
+    on<_Cancel>(_onCancel);
+    _onStarted(cardId: cardId, card: card);
   }
   final IReportRepository _reportRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
 
-  void _onStarted(
-    _Started event,
-    Emitter<ReportState> emit,
-  ) {
+  void _onStarted({
+    required String cardId,
+    required CardEnum card,
+  }) {
+    final email = _appAuthenticationRepository.currentUser.email;
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(
       ReportState(
         reasonComplaint: null,
-        // email: null,
+        email: email == null || email.isEmpty
+            ? const EmailFieldModel.pure()
+            : EmailFieldModel.dirty(email),
         message: const ReportFieldModel.pure(),
         formState: ReportEnum.initial,
         failure: null,
-        cardId: event.cardId,
+        cardId: cardId,
+        card: card,
       ),
     );
   }
 
-  // void _onEmailUpdated(
-  //   _EmailUpdated event,
-  //   Emitter<ReportState> emit,
-  // ) {
-  //   final emailFieldModel = EmailFieldModel.dirty(event.email);
-  //   emit(
-  //     state.copyWith(
-  //       email: emailFieldModel,
-  //       formState: ReportEnum.nextInProgress,
-  //       failure: null,
-  //     ),
-  //   );
-  // }
+  void _onEmailUpdated(
+    _EmailUpdated event,
+    Emitter<ReportState> emit,
+  ) {
+    final emailFieldModel = EmailFieldModel.dirty(event.email);
+    emit(
+      state.copyWith(
+        email: emailFieldModel,
+        formState: ReportEnum.nextInProgress,
+        failure: null,
+      ),
+    );
+  }
 
   void _onMessageUpdated(
     _MessageUpdated event,
@@ -96,9 +107,14 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Send event,
     Emitter<ReportState> emit,
   ) {
-    if (!state.formState.isNext &&
-            state.reasonComplaint == ReasonComplaint.other ||
-        state.reasonComplaint == null) {
+    if (state.reasonComplaint == null ||
+            (!state.formState.isNext &&
+                (_appAuthenticationRepository.currentUser.email?.isEmpty ??
+                    true))
+        //&&
+        //     state.reasonComplaint == ReasonComplaint.other ||
+        // state.reasonComplaint == null
+        ) {
       if (state.reasonComplaint != null) {
         emit(state.copyWith(formState: ReportEnum.next, failure: null));
       } else {
@@ -113,12 +129,23 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {
-    if (state.reasonComplaint == ReasonComplaint.other &&
-        (state.message.isNotValid)) {
+    if ((state.reasonComplaint?.isOther ?? true)
+        ? !Formz.validate([state.email, state.message])
+        : state.email.value.isNotEmpty && state.email.isNotValid) {
       emit(
         state.copyWith(
           failure: null,
           formState: ReportEnum.nextInvalidData,
+        ),
+      );
+      return;
+    }
+    if (state.email.isNotValid &&
+        state.formState != ReportEnum.sumbittedWithoutEmail) {
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.sumbittedWithoutEmail,
         ),
       );
       return;
@@ -135,12 +162,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
-          // email: state.email?.value.isEmpty ?? true
-          //     ? _appAuthenticationRepository.currentUser.email!
-          //     : state.email!.value,
+          email: state.email.isNotValid ? null : state.email.value,
           message: state.message.value.isEmpty ? null : state.message.value,
           date: ExtendedDateTime.current,
-          card: event.card,
+          card: state.card,
           userId: _appAuthenticationRepository.currentUser.id,
           cardId: state.cardId,
         ),
@@ -160,5 +185,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //     state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),
     //   );
     // }
+  }
+
+  void _onCancel(
+    _Cancel event,
+    Emitter<ReportState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        formState: ReportEnum.nextInProgress,
+      ),
+    );
   }
 }
