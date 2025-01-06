@@ -42,15 +42,13 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
       bytes = ArtifactDownloadHelper.getBytestExist(
         widget.imageName ?? widget.imageUrl!,
       );
-    } else {
-      bytes = widget.imageBytes;
     }
   }
 
   @override
   void didChangeDependencies() {
     if ((Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
-        (bytes?.isEmpty ?? true)) {
+        (bytes?.isEmpty ?? true && (widget.imageBytes?.isEmpty ?? true))) {
       precacheImage(
         bytes == null
             ? CachedNetworkImageProvider(
@@ -81,7 +79,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
-    if (bytes == null && widget.imageUrl != null) {
+    if (bytes == null && widget.imageBytes == null && widget.imageUrl != null) {
       // Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline
       // CachedNetworkImage not work with new fluter version
       // https://github.com/Baseflow/flutter_cached_network_image/issues/995
@@ -94,10 +92,10 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         return getImageNetwork(widget.imageUrl!.getImageUrl);
       }
     } else {
-      if (bytes != null) {
+      if (widget.imageBytes != null || bytes != null) {
         return Image.memory(
-          key: ValueKey(bytes),
-          bytes!,
+          key: ValueKey(widget.imageBytes ?? bytes),
+          (widget.imageBytes ?? bytes)!,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
@@ -108,7 +106,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
               tag: 'Memory',
               tagKey: ErrorText.imageKey,
               errorLevel: ErrorLevelEnum.warning,
-              data: 'Image Length: ${bytes!.length}',
+              data: 'Image Length: ${(widget.imageBytes ?? bytes)!.length}',
             );
             return KIcon.error;
           },
