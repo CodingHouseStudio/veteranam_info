@@ -59,14 +59,17 @@ void _registerReportBloc({
   required IReportRepository mockReportRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
-  final reportBloc = ReportBloc(
-    reportRepository: mockReportRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
-  );
   if (GetIt.I.isRegistered<ReportBloc>()) {
     GetIt.I.unregister<ReportBloc>();
   }
-  GetIt.I.registerSingleton<ReportBloc>(reportBloc);
+  GetIt.I.registerFactoryParam<ReportBloc, String, CardEnum>(
+    (cardId, card) => ReportBloc(
+      reportRepository: mockReportRepository,
+      appAuthenticationRepository: mockAppAuthenticationRepository,
+      cardId: KTestVariables.id,
+      card: CardEnum.funds,
+    ),
+  );
 }
 
 void _registerUserWatcherBloc(

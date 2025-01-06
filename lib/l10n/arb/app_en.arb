@@ -457,7 +457,7 @@
   "@mainInformation": {
     "examples": "Text on the Empolyer page."
   },
-  "position": "Position*",
+  "position": "Position",
   "@position": {
     "examples": "The text above the position input field on the Empolyer page."
   },
@@ -466,7 +466,7 @@
     "examples": "Text for a field on the Empolyer page.",
     "description": "Field used to enter a position."
   },
-  "wage": "Salary*",
+  "wage": "Salary",
   "@wage": {
     "examples": "The text above the wage input field on the Empolyer page."
   },
@@ -475,7 +475,7 @@
     "examples": "Text for a field on the Empolyer page.",
     "description": "Field used to enter a salary."
   },
-  "selectCityOfWork": "Select the city of work*",
+  "selectCityOfWork": "Select the city of work",
   "@selectCityOfWork": {
     "examples": "Text above the city of work selection field on the Empolyer page."
   },
@@ -888,7 +888,7 @@
   "@addComment": {
     "examples": "Text before the comment input field."
   },
-  "addEmail": "Add a email (optional):",
+  "addEmailAndMessage": "Add a email and message (optional):",
   "@addEmail": {
     "examples": "Text before the email input field"
   },
@@ -1620,7 +1620,7 @@
     "examples": "Text on the Discount Add page in the dialog for the button.",
     "description": "The button is used to navigate to the Terms and Conditions page."
   },
-  "changesNotSaved": "Changes\n are not saved*",
+  "changesNotSaved": "Changes\n are not saved",
   "@changesNotSaved": {
     "examples": "Text on the Company and Profile pages below the image when it is selected but changes are not saved."
   },
@@ -1710,6 +1710,18 @@
   "websiteLinkTitle": "Attention! Redirecting to a third-party website",
   "@websiteLinkTitle": {
     "examples": "Dialog title text for user consent to proceed to a third-party website"
+  },
+  "reportWithoutEmailDescriptionPart1": "We may need your email to contact you. If you",
+  "@reportWithoutEmailDescriptionPart1": {
+    "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
+  },
+  "reportWithoutEmailDescriptionPart2": "sign up",
+  "@reportWithoutEmailDescriptionPart2": {
+    "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
+  },
+  "reportWithoutEmailDescriptionPart3": "we will use the email associated with your account to contact you.",
+  "@reportWithoutEmailDescriptionPart3": {
+    "examples": "Text for the Report dialog when the user tries to submit a complaint without an email address"
   },
   "favorite": "Like",
   "@favorite": {

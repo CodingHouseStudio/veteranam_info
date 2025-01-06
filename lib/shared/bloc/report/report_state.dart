@@ -28,6 +28,7 @@ class ReportState with _$ReportState {
     required ReportEnum formState,
     required ReportFailure? failure,
     required String cardId,
+    required CardEnum card,
   }) = _Initial;
 }
 
@@ -39,12 +40,14 @@ enum ReportEnum {
   next,
   nextInProgress,
   nextInvalidData,
-  trySuccessWithoutEmail,
+  sumbittedWithoutEmail,
 }
 
 extension ReportEnumExtension on ReportEnum {
   bool get isNext =>
       this == ReportEnum.next ||
       this == ReportEnum.nextInProgress ||
-      this == ReportEnum.nextInvalidData;
+      this == ReportEnum.nextInvalidData ||
+      this == ReportEnum.success ||
+      this == ReportEnum.sumbittedWithoutEmail;
 }

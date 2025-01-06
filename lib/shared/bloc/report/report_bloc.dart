@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -14,6 +15,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   ReportBloc({
     required IReportRepository reportRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
+    @factoryParam required String cardId,
+    @factoryParam required CardEnum card,
   })  : _reportRepository = reportRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
         super(
@@ -24,22 +27,26 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
             formState: ReportEnum.initial,
             failure: null,
             cardId: '',
+            card: CardEnum.discount,
           ),
         ) {
-    on<_Started>(_onStarted);
+    // on<_Started>(_onStarted);
     on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
     on<_Send>(_onSend);
+    on<_Cancel>(_onCancel);
+    _onStarted(cardId: cardId, card: card);
   }
   final IReportRepository _reportRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
 
-  void _onStarted(
-    _Started event,
-    Emitter<ReportState> emit,
-  ) {
+  void _onStarted({
+    required String cardId,
+    required CardEnum card,
+  }) {
     final email = _appAuthenticationRepository.currentUser.email;
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(
       ReportState(
         reasonComplaint: null,
@@ -49,7 +56,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         message: const ReportFieldModel.pure(),
         formState: ReportEnum.initial,
         failure: null,
-        cardId: event.cardId,
+        cardId: cardId,
+        card: card,
       ),
     );
   }
@@ -121,8 +129,9 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {
-    if (state.reasonComplaint?.isOther ??
-        true && (state.message.isNotValid || (state.email.isNotValid))) {
+    if ((state.reasonComplaint?.isOther ?? true)
+        ? !Formz.validate([state.email, state.message])
+        : state.email.value.isNotEmpty && state.email.isNotValid) {
       emit(
         state.copyWith(
           failure: null,
@@ -131,11 +140,12 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       );
       return;
     }
-    if (state.email.isNotValid) {
+    if (state.email.isNotValid &&
+        state.formState != ReportEnum.sumbittedWithoutEmail) {
       emit(
         state.copyWith(
           failure: null,
-          formState: ReportEnum.trySuccessWithoutEmail,
+          formState: ReportEnum.sumbittedWithoutEmail,
         ),
       );
       return;
@@ -152,12 +162,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
-          email: state.email.value.isEmpty
-              ? _appAuthenticationRepository.currentUser.email!
-              : state.email.value,
+          email: state.email.isNotValid ? null : state.email.value,
           message: state.message.value.isEmpty ? null : state.message.value,
           date: ExtendedDateTime.current,
-          card: event.card,
+          card: state.card,
           userId: _appAuthenticationRepository.currentUser.id,
           cardId: state.cardId,
         ),
@@ -177,5 +185,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //     state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),
     //   );
     // }
+  }
+
+  void _onCancel(
+    _Cancel event,
+    Emitter<ReportState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        formState: ReportEnum.nextInProgress,
+      ),
+    );
   }
 }

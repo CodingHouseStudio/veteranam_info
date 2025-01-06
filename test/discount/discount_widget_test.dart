@@ -52,6 +52,12 @@ void main() {
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
+
+      when(
+        mockAppAuthenticationRepository.currentUser,
+      ).thenAnswer(
+        (realInvocation) => KTestVariables.userWithoutPhoto,
+      );
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
