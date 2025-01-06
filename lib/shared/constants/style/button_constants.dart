@@ -108,6 +108,7 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       KWidgetTheme.outlineBorder,
     ),
+    maximumSize: WidgetStatePropertyAll(Size.fromWidth(210)),
   );
 
   static const ButtonStyle transparentPhoneNumberButtonStyle = ButtonStyle(
