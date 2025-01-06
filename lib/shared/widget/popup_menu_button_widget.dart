@@ -27,6 +27,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
     this.borderRadius,
     this.currentValue,
     this.iconSpace = KPadding.kPaddingSize16,
+    this.menuColor = AppColors.materialThemeKeyColorsNeutral,
     // this.textUnderButton,
   }) : assert(
           !(buttonChild == null && buttonText == null),
@@ -90,6 +91,8 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
 
   final double iconSpace;
 
+  final Color menuColor;
+
   // final String? textUnderButton;
 
   @override
@@ -108,6 +111,9 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   // This Controller don't have discpose method
   late OverlayPortalController _controller;
   late LayerLink _optionsLayerLink;
+  late double? menuHeight;
+  late GlobalKey _menuKey;
+  late GlobalKey _anchorKey;
 
   @override
   void initState() {
@@ -116,6 +122,10 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
     _optionsLayerLink = LayerLink();
 
     _showMenu = false;
+    menuHeight = null;
+
+    _menuKey = GlobalKey();
+    _anchorKey = GlobalKey();
   }
 
   // List<PopupMenuEntry<T>> _getItems(double? width) => List.generate(
@@ -154,71 +164,146 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
     });
   }
 
-  Widget _getMenuWidget(BuildContext context) => CompositedTransformFollower(
-        link: _optionsLayerLink,
-        showWhenUnlinked: false,
-        targetAnchor: getMenuPosition,
-        followerAnchor: getContentPosition,
-        child: Align(
-          alignment: getContentPosition,
-          child: Padding(
-            padding: EdgeInsets.only(top: widget.menuTopSpace),
-            child: TapRegion(
-              onTapOutside: (event) => showHideButtonMenu(),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: AppColors.materialThemeKeyColorsNeutral,
-                  borderRadius: widget.borderRadius,
-                ),
-                child: Padding(
-                  padding: widget.menuPadding ?? const EdgeInsets.all(8),
-                  child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      spacing: KPadding.kPaddingSize8,
-                      children: List.generate(widget.items.length, (index) {
-                        final item = widget.items.elementAt(index);
-                        final isSelected = widget.currentValue != null &&
-                            widget.currentValue == item.value;
-                        return TextButton(
-                          style: widget.buttonItemStyle,
-                          onPressed: item.event == null || isSelected
-                              ? null
-                              : () {
-                                  item.event!();
-                                  showHideButtonMenu();
-                                },
-                          child: item.icon != null
-                              ? Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  spacing: widget.iconSpace,
-                                  children: [
-                                    item.icon!,
-                                    Flexible(
-                                      child: Text(
-                                        item.text,
-                                        textAlign: TextAlign.start,
-                                        style: widget.menuTextStyle,
-                                      ),
+  void setMenuHeight() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = _menuKey.currentContext;
+      if (context != null) {
+        final box = context.findRenderObject()! as RenderBox;
+        if (box.hasSize) {
+          setState(() {
+            menuHeight = box.size.height;
+          });
+        }
+      }
+    });
+  }
+
+  double get getHeight {
+    final context = _anchorKey.currentContext;
+    if (context != null) {
+      final box = context.findRenderObject()! as RenderBox;
+      return box.hasSize ? box.size.height : 0;
+    }
+    return 0;
+  }
+
+  PopupMenuButtonPosition get positionCalculate {
+    if (menuHeight == null) {
+      return widget.position;
+    }
+    if (context.findRenderObject() == null) {
+      return widget.position;
+    }
+
+    final renderBox = context.findRenderObject()! as RenderBox;
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    final availableHeight =
+        screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
+    // +
+    //     (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
+    final hasBottomPlace = availableHeight > menuHeight!;
+
+    if (hasBottomPlace) {
+      switch (widget.position) {
+        case PopupMenuButtonPosition.bottomCenter:
+        case PopupMenuButtonPosition.bottomLeft:
+        case PopupMenuButtonPosition.bottomRight:
+          return widget.position;
+        case PopupMenuButtonPosition.topCenter:
+          return PopupMenuButtonPosition.bottomCenter;
+        case PopupMenuButtonPosition.topLeft:
+          return PopupMenuButtonPosition.bottomLeft;
+        case PopupMenuButtonPosition.topRight:
+          return PopupMenuButtonPosition.bottomRight;
+      }
+    } else {
+      switch (widget.position) {
+        case PopupMenuButtonPosition.topCenter:
+        case PopupMenuButtonPosition.topLeft:
+        case PopupMenuButtonPosition.topRight:
+          return widget.position;
+        case PopupMenuButtonPosition.bottomCenter:
+          return PopupMenuButtonPosition.topCenter;
+        case PopupMenuButtonPosition.bottomLeft:
+          return PopupMenuButtonPosition.topLeft;
+        case PopupMenuButtonPosition.bottomRight:
+          return PopupMenuButtonPosition.topRight;
+      }
+    }
+    // ? OptionsViewOpenDirection.down
+    // : OptionsViewOpenDirection.up;
+  }
+
+  Widget _getMenuWidget(BuildContext context) {
+    final positionValue = positionCalculate;
+    if (menuHeight == null) setMenuHeight();
+    return CompositedTransformFollower(
+      link: _optionsLayerLink,
+      showWhenUnlinked: false,
+      targetAnchor: getMenuPosition(positionValue),
+      followerAnchor: getContentPosition(positionValue),
+      child: Align(
+        alignment: getContentPosition(positionValue),
+        child: Padding(
+          padding: EdgeInsets.only(top: widget.menuTopSpace),
+          child: TapRegion(
+            onTapOutside: (event) => showHideButtonMenu(),
+            child: DecoratedBox(
+              key: _menuKey,
+              decoration: BoxDecoration(
+                color: widget.menuColor,
+                borderRadius: widget.borderRadius,
+              ),
+              child: Padding(
+                padding: widget.menuPadding ?? const EdgeInsets.all(8),
+                child: IntrinsicWidth(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: KPadding.kPaddingSize8,
+                    children: List.generate(widget.items.length, (index) {
+                      final item = widget.items.elementAt(index);
+                      final isSelected = widget.currentValue != null &&
+                          widget.currentValue == item.value;
+                      return TextButton(
+                        style: widget.buttonItemStyle,
+                        onPressed: item.event == null || isSelected
+                            ? null
+                            : () {
+                                item.event!();
+                                showHideButtonMenu();
+                              },
+                        child: item.icon != null
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                spacing: widget.iconSpace,
+                                children: [
+                                  item.icon!,
+                                  Flexible(
+                                    child: Text(
+                                      item.text,
+                                      textAlign: TextAlign.start,
+                                      style: widget.menuTextStyle,
                                     ),
-                                  ],
-                                )
-                              : Text(
-                                  item.text,
-                                  textAlign: TextAlign.start,
-                                  style: widget.menuTextStyle,
-                                ),
-                        );
-                      }),
-                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(
+                                item.text,
+                                textAlign: TextAlign.start,
+                                style: widget.menuTextStyle,
+                              ),
+                      );
+                    }),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
   // if (widget.getMenuWidthFromButton && itemsWidthFunction != null) {
   //   menuWidth = getWidth;
   //   items = itemsWidthFunction!(menuWidth);
@@ -303,25 +388,37 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   //   });
   // }
 
-  Alignment get getContentPosition {
-    switch (widget.position) {
+  Alignment getContentPosition(PopupMenuButtonPosition position) {
+    switch (position) {
       case PopupMenuButtonPosition.bottomCenter:
         return Alignment.topCenter;
       case PopupMenuButtonPosition.bottomLeft:
         return Alignment.topLeft;
       case PopupMenuButtonPosition.bottomRight:
         return Alignment.topRight;
+      case PopupMenuButtonPosition.topCenter:
+        return Alignment.bottomCenter;
+      case PopupMenuButtonPosition.topLeft:
+        return Alignment.bottomLeft;
+      case PopupMenuButtonPosition.topRight:
+        return Alignment.bottomRight;
     }
   }
 
-  Alignment get getMenuPosition {
-    switch (widget.position) {
+  Alignment getMenuPosition(PopupMenuButtonPosition position) {
+    switch (position) {
       case PopupMenuButtonPosition.bottomCenter:
         return Alignment.bottomCenter;
       case PopupMenuButtonPosition.bottomLeft:
         return Alignment.bottomLeft;
       case PopupMenuButtonPosition.bottomRight:
         return Alignment.bottomRight;
+      case PopupMenuButtonPosition.topCenter:
+        return Alignment.topCenter;
+      case PopupMenuButtonPosition.topLeft:
+        return Alignment.topLeft;
+      case PopupMenuButtonPosition.topRight:
+        return Alignment.topRight;
     }
   }
 
@@ -333,6 +430,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
       child: CompositedTransformTarget(
         link: _optionsLayerLink,
         child: TextButton.icon(
+          key: _anchorKey,
           onPressed: _showMenu ? null : showHideButtonMenu,
           style: _showMenu
               ? widget.buttonStyle.copyWith(
@@ -365,6 +463,9 @@ enum PopupMenuButtonPosition {
   bottomCenter,
   bottomRight,
   bottomLeft,
+  topCenter,
+  topRight,
+  topLeft,
 }
 
 // class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
