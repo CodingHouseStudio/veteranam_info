@@ -36,12 +36,13 @@ class DiscountSortingWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               KIcon.sort,
-              Flexible(
+              Expanded(
                 child: Text(
                   sortingBy?.getValue(context) ?? context.l10n.sort,
                   style: AppTextStyle.materialThemeTitleMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],
