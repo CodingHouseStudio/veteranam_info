@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'
     show
+        AppBar,
         AppBarTheme,
         BottomNavigationBarThemeData,
         Brightness,
@@ -75,6 +76,13 @@ ThemeData themeData = ThemeData(
     ),
   ),
 );
+
+AppBar? get  appBar => Config.isWeb
+    ? AppBar(
+        backgroundColor: AppColors.materialThemeWhite,
+        toolbarHeight: KSize.kAppBarHeight,
+      )
+    : null;
 
 // WidgetStateProperty<MouseCursor?> get _buttonMouseCursor =>
 //     WidgetStateProperty.resolveWith((states) {

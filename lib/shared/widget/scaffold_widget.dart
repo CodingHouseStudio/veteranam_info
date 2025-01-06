@@ -94,10 +94,7 @@ class ScaffoldWidget extends StatelessWidget {
                         : MobNavigationWidget(
                             index: bottomBarIndex ?? 2,
                           ),
-                appBar: AppBar(
-                  backgroundColor: AppColors.materialThemeWhite,
-                  toolbarHeight: KSize.kAppBarHeight,
-                ),
+                appBar: appBar,
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,

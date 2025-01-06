@@ -21,10 +21,7 @@ class DiscountScreen extends StatelessWidget {
             : const MobNavigationWidget(
                 index: 0,
               ),
-        appBar: AppBar(
-          backgroundColor: AppColors.materialThemeWhite,
-          toolbarHeight: KSize.kAppBarHeight,
-        ),
+        appBar: appBar,
         body: DiscountBodyWidget(
           discount: discount,
           discountId: discountId,

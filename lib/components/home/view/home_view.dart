@@ -16,10 +16,7 @@ class HomeScreen extends StatelessWidget {
             : const MobNavigationWidget(
                 index: 0,
               ),
-        appBar: AppBar(
-          backgroundColor: AppColors.materialThemeWhite,
-          toolbarHeight: KSize.kAppBarHeight,
-        ),
+        appBar: appBar,
         body: const HomeBodyWidget(),
       ),
     );

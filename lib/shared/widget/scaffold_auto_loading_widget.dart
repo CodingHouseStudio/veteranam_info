@@ -158,10 +158,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                                 ? 0
                                 : 1,
                           ),
-                    appBar: AppBar(
-                      backgroundColor: AppColors.materialThemeWhite,
-                      toolbarHeight: KSize.kAppBarHeight,
-                    ),
+                    appBar: appBar,
                     body: KeyboardScrollView(
                       widgetKey: KWidgetkeys.widget.scaffold.scroll,
                       // physics: KTest.scroll,

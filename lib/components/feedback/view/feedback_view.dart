@@ -11,10 +11,7 @@ class FeedbackScreen extends StatelessWidget {
       key: KWidgetkeys.screen.feedback.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          backgroundColor: AppColors.materialThemeWhite,
-          toolbarHeight: KSize.kAppBarHeight,
-        ),
+        appBar: appBar,
         body: const FeedbackBodyWidget(),
       ),
     );

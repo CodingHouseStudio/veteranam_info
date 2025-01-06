@@ -14,10 +14,7 @@ class InvestorsScreen extends StatelessWidget {
           : const MobNavigationWidget(
               index: 1,
             ),
-      appBar: AppBar(
-        backgroundColor: AppColors.materialThemeWhite,
-        toolbarHeight: KSize.kAppBarHeight,
-      ),
+      appBar: appBar,
       body: InvestorsBodyWidget(key: KWidgetkeys.screen.investors.screen),
     );
     if (Config.isWeb) {
