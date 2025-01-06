@@ -145,7 +145,7 @@ void main() {
         ).thenAnswer(
           (realInvocation) async => Right(KTestVariables.fullDiscount),
         );
-        Config.roleValue = Config.business;
+        // Config.roleValue = Config.business;
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountPumpAppHelper(

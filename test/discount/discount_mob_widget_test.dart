@@ -28,6 +28,7 @@ void main() {
       mockReportRepository = MockIReportRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       Config.testIsWeb = false;
+      Config.roleValue = Config.business;
 
       when(
         mockUrlRepository.copy(
