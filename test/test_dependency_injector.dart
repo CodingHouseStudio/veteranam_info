@@ -36,8 +36,8 @@ void configureDependenciesTest() {
   KTest.isTest = true;
   Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
-
   ExtendedDateTime.current = KTestVariables.dateTime;
+
   // KTest.scroll = null;
   // Services
   // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
