@@ -39,13 +39,14 @@ jobs:
       - spell-check
       - get_coverage_excludes
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
+    secrets: inherit
     with:
       flutter_channel: stable
       flutter_version: 3.27.1
       min_coverage: 89
       format_directories: "lib test"
       coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}
-      branch: ${{ github.ref_name }}
+      branch: ${{ github.head_ref }}
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main

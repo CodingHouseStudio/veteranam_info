@@ -10,6 +10,25 @@ import 'package:veteranam/shared/shared_flutter.dart';
 extension DiaglogExtention on BuildContext {
   // ignore: library_private_types_in_public_api
   _DialogsWidget get dialog => _DialogsWidget.of(this);
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _showSnackBar({
+    required Widget child,
+    Color backgroundColor = AppColors.materialThemeKeyColorsSecondary,
+    Key? key,
+    Duration duration = const Duration(minutes: 1),
+  }) {
+    if (ScaffoldMessenger.of(this).mounted) {
+      ScaffoldMessenger.of(this).hideCurrentSnackBar();
+    }
+    return ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        key: key,
+        backgroundColor: backgroundColor,
+        content: child,
+        duration: duration,
+      ),
+    );
+  }
 }
 
 class _DialogsWidget {
@@ -438,13 +457,9 @@ class _DialogsWidget {
       if (onPressed == null) {
         showSnackBardTextDialog(error);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            key: KWidgetkeys.widget.dialogs.failure,
-            backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-            content: GetErrorDialogWidget(onPressed: onPressed, error: error),
-            duration: const Duration(minutes: 1),
-          ),
+        context._showSnackBar(
+          key: KWidgetkeys.widget.dialogs.failure,
+          child: GetErrorDialogWidget(onPressed: onPressed, error: error),
         );
       }
     }
@@ -455,17 +470,14 @@ class _DialogsWidget {
     Duration duration = const Duration(minutes: 1),
   }) {
     if (text != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-          // key: KWidgetkeys.widget.dialogs.failure,
-          content: Text(
-            text,
-            key: KWidgetkeys.widget.dialogs.snackBarText,
-            style: AppTextStyle.materialThemeBodyLargeNeutral,
-          ),
-          duration: duration,
+      context._showSnackBar(
+        // key: KWidgetkeys.widget.dialogs.failure,
+        child: Text(
+          text,
+          key: KWidgetkeys.widget.dialogs.snackBarText,
+          style: AppTextStyle.materialThemeBodyLargeNeutral,
         ),
+        duration: duration,
       );
     }
   }
