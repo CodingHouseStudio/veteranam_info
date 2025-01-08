@@ -3,7 +3,6 @@
 </p>
 
 <p align="center">
-        <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/badge/coverage-??%25-E0F179?label=coverage&labelColor=333940&logo=github&color=E0F179" alt="coverage"></a>
         <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/stars/CodingHouseStudio/veteranam_info?style=flat&label=stars&labelColor=333940&color=8957e5&logo=github" alt="github"></a>
       <a href="https://github.com/CodingHouseStudio/veteranam_info/actions/workflows/ci_build_and_test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/CodingHouseStudio/veteranam_info/ci_build_and_test.yaml?branch=main&label=tests&labelColor=333940&logo=github&color=E0F179" alt="tests"></a>
     <a href="https://github.com/CodingHouseStudio/veteranam_info"><img src="https://img.shields.io/github/contributors/CodingHouseStudio/veteranam_info?logo=github&labelColor=333940&color=E0F179" alt="contributors"></a>
@@ -14,7 +13,7 @@
 
 <p align="center">
   <a href="https://app.veteranam.info">Web</a> •
-  <a href="#">Design</a> •
+  <a href="https://www.figma.com/design/W9Xbu0ajz9LTH1hxXpQFgy/Veteran?node-id=10-102&t=tmTCARhVUFUOLwCh-1">Design</a> •
   <a href="https://apps.apple.com/us/app/veteranam-info/id6584519009">IOS</a> •
   <a href="https://play.google.com/store/apps/details?id=info.veteranam&hl=uk_UA">Android</a> •
   <a href="https://business.veteranam.info">Web-site for business</a> •
