@@ -30,7 +30,7 @@ class TextFieldWidget extends StatefulWidget {
     this.focusedBorder,
     this.errorMaxLines = 3,
     this.readOnly,
-    this.disposeFocusNode = true,
+    // this.disposeFocusNode = true,
     this.expands = false,
     this.minLines,
     this.hintStyle,
@@ -73,7 +73,7 @@ class TextFieldWidget extends StatefulWidget {
   final InputBorder? focusedBorder;
   final int? errorMaxLines;
   final bool? readOnly;
-  final bool disposeFocusNode;
+  // final bool disposeFocusNode;
   final bool expands;
   final String? labelText;
   final TextStyle? hintStyle;
@@ -191,9 +191,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    if (widget.disposeFocusNode) {
-      widget.focusNode?.dispose();
-    }
+    // if (widget.disposeFocusNode) {
+    //   widget.focusNode?.dispose();
+    // }
     statesController
       ..removeListener(_hover)
       ..dispose();

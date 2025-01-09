@@ -12,7 +12,7 @@ class PasswordFieldWidget extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.showErrorText,
-    this.disposeFocusNode,
+    // this.disposeFocusNode,
     this.enabled,
   });
   final void Function(String) onChanged;
@@ -21,7 +21,7 @@ class PasswordFieldWidget extends StatefulWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final bool? showErrorText;
-  final bool? disposeFocusNode;
+  // final bool? disposeFocusNode;
   final Key widgetKey;
   final String labelText;
   final bool? enabled;
@@ -62,7 +62,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
         onPressed: () => setState(() => obscurePassword = !obscurePassword),
       ),
       focusNode: widget.focusNode,
-      disposeFocusNode: widget.disposeFocusNode ?? true,
+      // disposeFocusNode: widget.disposeFocusNode ?? true,
       obscureText: obscurePassword,
       showErrorText: widget.showErrorText,
     );

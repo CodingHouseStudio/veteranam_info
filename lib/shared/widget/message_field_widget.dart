@@ -11,7 +11,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.controller,
     this.errorText,
     this.focusNode,
-    this.disposeFocusNode = true,
+    // this.disposeFocusNode = true,
     this.labelText,
     this.showErrorText,
     this.errorMaxLines,
@@ -25,7 +25,7 @@ class MessageFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final String? errorText;
   final FocusNode? focusNode;
-  final bool disposeFocusNode;
+  // final bool disposeFocusNode;
   final TextStyle? hintStyle;
   final bool isDesk;
   final bool? showErrorText;
@@ -39,7 +39,7 @@ class MessageFieldWidget extends StatelessWidget {
     return TextFieldWidget(
       widgetKey: KWidgetkeys.widget.messageField.widget,
       focusNode: focusNode, isRequired: isRequired,
-      disposeFocusNode: disposeFocusNode,
+      // disposeFocusNode: disposeFocusNode,
       errorText: errorText,
       controller: controller,
       onChanged: changeMessage,

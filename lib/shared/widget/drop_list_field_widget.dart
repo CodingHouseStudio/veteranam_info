@@ -317,7 +317,6 @@ class _DropListFieldImplementationWidgetState<T extends Object>
         showErrorText: widget.showErrorText,
         errorText: widget.errorText,
         suffixIconPadding: widget.suffixIconPadding,
-        disposeFocusNode: false,
         isDesk: widget.isDesk, textStyle: widget.textStyle,
         readOnly: widget.isButton,
         cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,

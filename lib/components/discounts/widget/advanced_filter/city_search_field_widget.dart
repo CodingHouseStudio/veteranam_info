@@ -20,13 +20,13 @@ class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
   late Widget icon;
   @override
   void initState() {
-    super.initState();
     _focusNode = FocusNode();
     _controller = TextEditingController();
     icon = _icon;
     _focusNode.addListener(
       iconListener,
     );
+    super.initState();
   }
 
   void iconListener() {
@@ -60,6 +60,7 @@ class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
       focusNode: _focusNode,
       controller: _controller,
       labelText: context.l10n.search,
+      // disposeFocusNode: false,
       suffixIcon: _icon,
       fillColor: widget.isDesk ? AppColors.materialThemeKeyColorsNeutral : null,
       enabledBorder: KWidgetTheme.outlineInputBorder,
