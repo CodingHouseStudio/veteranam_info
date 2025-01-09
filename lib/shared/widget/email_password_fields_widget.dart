@@ -112,7 +112,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
             isDesk: widget.isDesk,
             controller: passwordController,
             focusNode: passwordFocusNode,
-            disposeFocusNode: false,
+            // disposeFocusNode: false,
             showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
