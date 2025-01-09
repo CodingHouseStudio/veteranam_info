@@ -224,22 +224,8 @@ class AdvancedFilterContent extends StatelessWidget {
                       child: Padding(
                         padding:
                             const EdgeInsets.only(top: KPadding.kPaddingSize16),
-                        child: TextFieldWidget(
-                          widgetKey: const Key('value1'),
-                          onChanged: (value) => context
-                              .read<DiscountsWatcherBloc>()
-                              .add(DiscountsWatcherEvent.searchLocation(value)),
+                        child: CitySearchFieldWidget(
                           isDesk: isDesk,
-                          labelText: context.l10n.search,
-                          suffixIcon: KIcon.search,
-                          fillColor: isDesk
-                              ? AppColors.materialThemeKeyColorsNeutral
-                              : null,
-                          enabledBorder: KWidgetTheme.outlineInputBorder,
-                          focusColor:
-                              AppColors.materialThemeKeyColorsNeutralVariant,
-                          hoverColor: AppColors
-                              .materialThemeSysLightOnBackgroundOpacity8,
                         ),
                       ),
                     ),
