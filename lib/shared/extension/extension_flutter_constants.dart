@@ -62,45 +62,45 @@ extension DiscountModelLocation on DiscountModel {
   //       if (location != null) ...location!,
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
-  String getDescription(BuildContext context) =>
-      '${description.getTrsnslation(context)}'
-              '${requirements != null ? _getMarkdownToGetIfYouNeed(
-                  context,
-                ) : ''}'
-              '${requirements != null ? _getMarkdownRequirements(context) : ''}'
-              '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
-              // '${additionalDetails != null ? _getMarkdownAdditionalDetails(
-              //     context,
-              //   ) : ''}'
-              '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
-          .replaceAll('*', '')
-          .replaceAll('\n\n', '\n')
-          .trim();
+  String getDescription(BuildContext context) => description
+      .getTrsnslation(context)
+      // '${requirements != null ? _getMarkdownToGetIfYouNeed(
+      //     context,
+      //   ) : ''}'
+      // '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+      // '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+      // // '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+      // //     context,
+      // //   ) : ''}'
+      // '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}'
+      .replaceAll('*', '')
+      // .replaceAll('\n\n', '\n')
+      .trim();
 
   // String _getMarkdownAdditionalDetails(BuildContext context) =>
   //     '\n\n${additionalDetails?.getTrsnslation(
   //           context,
   //         ) ?? ''}';
 
-  String _getMarkdownPhoneNumber(BuildContext context) =>
-      '\n\n***${context.l10n.callForDetails}:***'
-      ' ${PlatformEnumFlutter.isWebDesktop ? '***' : '['}'
-      '$phoneNumber'
-      '${PlatformEnumFlutter.isWebDesktop ? '***' : '](tel:'
-          '${phoneNumber!.replaceAll('(', '').replaceAll(
-                ')',
-                '',
-              ).replaceAll(' ', '')})'}';
-  String _getMarkdownExclusions(BuildContext context) => '\n\n'
-      '${exclusions?.getTrsnslation(
-            context,
-          ) ?? ''}';
-  String _getMarkdownRequirements(BuildContext context) => '\n\n- '
-      '${requirements?.getTrsnslation(
-            context,
-          ) ?? ''}';
-  String _getMarkdownToGetIfYouNeed(BuildContext context) =>
-      '\n\n***${context.l10n.toGetItYouNeed}***';
+  // String _getMarkdownPhoneNumber(BuildContext context) =>
+  //     '\n\n***${context.l10n.callForDetails}:***'
+  //     ' ${PlatformEnumFlutter.isWebDesktop ? '***' : '['}'
+  //     '$phoneNumber'
+  //     '${PlatformEnumFlutter.isWebDesktop ? '***' : '](tel:'
+  //         '${phoneNumber!.replaceAll('(', '').replaceAll(
+  //               ')',
+  //               '',
+  //             ).replaceAll(' ', '')})'}';
+  // String _getMarkdownExclusions(BuildContext context) => '\n\n'
+  //     '${exclusions?.getTrsnslation(
+  //           context,
+  //         ) ?? ''}';
+  // String _getMarkdownRequirements(BuildContext context) => '\n\n- '
+  //     '${requirements?.getTrsnslation(
+  //           context,
+  //         ) ?? ''}';
+  // String _getMarkdownToGetIfYouNeed(BuildContext context) =>
+  //     '\n\n***${context.l10n.toGetItYouNeed}***';
 
   String? get getLink => PlatformEnum.getPlatform.isIOS
       ? category

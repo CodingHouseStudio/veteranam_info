@@ -27,7 +27,7 @@ class DiscountTextWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          description,
+          '$description\n',
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines ?? 2,
           style: AppTextStyle.materialThemeBodyLarge,
