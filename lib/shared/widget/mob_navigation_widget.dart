@@ -25,9 +25,7 @@ class MobNavigationWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: KSize.kPixel80),
-          child: BlocBuilder<UserWatcherBloc, UserWatcherState>(
-            buildWhen: (previous, current) =>
-                previous.user.photo != current.user.photo,
+          child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               return BottomNavigationBar(
                 key: KWidgetkeys.widget.mobNavigation.widget,
@@ -42,27 +40,19 @@ class MobNavigationWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(
                           top: KPadding.kPaddingSize8,
                         ),
-                        child: showProfile(state: state, index: index)
-                            ? UserPhotoWidget(
-                                onPressed: null,
-                                imageUrl: state.user.photo,
-                                imageSize: KSize.kIconSize,
-                              )
+                        child: showProfile(state: state.status, index: index)
+                            ? userPhoto
                             : KIcon.pagesIcons[index],
                       ),
                     ),
-                    activeIcon: showProfile(state: state, index: index)
-                        ? UserPhotoWidget(
-                            onPressed: null,
-                            imageUrl: state.user.photo,
-                            imageSize: KSize.kbottomNavigationUserPhoto,
-                          )
+                    activeIcon: showProfile(state: state.status, index: index)
+                        ? userPhoto
                         : IconWidget(
                             icon: KIcon.pagesIcons[index],
                             background: AppColors.materialThemeKeyColorsPrimary,
                             padding: KPadding.kPaddingSize8,
                           ),
-                    label: showProfile(state: state, index: index)
+                    label: showProfile(state: state.status, index: index)
                         ? context.l10n.myProfile
                         : labels[index],
                   );
@@ -74,7 +64,7 @@ class MobNavigationWidget extends StatelessWidget {
                 showSelectedLabels: true,
                 currentIndex: index,
                 onTap: (i) => context.goNamed(
-                  showProfile(state: state, index: i)
+                  showProfile(state: state.status, index: i)
                       ? KRoute.profile.name
                       : KAppText.routes[i],
                 ),
@@ -87,9 +77,21 @@ class MobNavigationWidget extends StatelessWidget {
     );
   }
 
+  Widget get userPhoto =>
+      BlocSelector<UserWatcherBloc, UserWatcherState, String?>(
+        selector: (state) => state.user.photo,
+        builder: (context, userPhoto) {
+          return UserPhotoWidget(
+            onPressed: null,
+            imageUrl: userPhoto,
+            imageSize: KSize.kbottomNavigationUserPhoto,
+          );
+        },
+      );
+
   bool showProfile({
-    required UserWatcherState state,
+    required AuthenticationStatus state,
     required int index,
   }) =>
-      (state.user.email?.isNotEmpty ?? false) && index == 3;
+      state.isAuthenticated && index == 3;
 }

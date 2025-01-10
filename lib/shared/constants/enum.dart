@@ -34,7 +34,9 @@ enum CategoryEnum { all }
 enum AuthenticationStatus {
   unknown,
   anonymous,
-  authenticated,
+  authenticated;
+
+  bool get isAuthenticated => this == AuthenticationStatus.authenticated;
 } //unauthenticated
 
 enum MobMode {
