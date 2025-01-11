@@ -41,14 +41,14 @@ void main() {
           KTestVariables.emailModelWrong,
         ),
       ).thenAnswer(
-        (_) async => Left(SomeFailure.serverError(error: null)),
+        (_) async => const Left(SomeFailure.serverError),
       );
       when(
         mockdiscountRepository.sendEmail(
           KTestVariables.emailModelWrong,
         ),
       ).thenAnswer(
-        (_) async => Left(SomeFailure.serverError(error: null)),
+        (_) async => const Left(SomeFailure.serverError),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestVariables.user,
@@ -179,7 +179,7 @@ void main() {
               mockdiscountRepository
                   .userCanSendUserEmail(KTestVariables.user.id),
             ).thenAnswer(
-              (_) async => Left(SomeFailure.serverError(error: null)),
+              (_) async => const Left(SomeFailure.serverError),
             );
             bloc.add(const UserEmailFormEvent.started());
           },

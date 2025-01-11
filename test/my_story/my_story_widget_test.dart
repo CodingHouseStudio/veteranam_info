@@ -32,11 +32,7 @@ void main() {
           mockStoryRepository
               .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
@@ -51,7 +47,7 @@ void main() {
           mockStoryRepository
               .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => const Left(SomeFailure.network),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
@@ -66,7 +62,7 @@ void main() {
           mockStoryRepository
               .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.get(error: null)),
+          (invocation) async => const Left(SomeFailure.get),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,

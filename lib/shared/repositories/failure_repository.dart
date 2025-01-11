@@ -3,7 +3,7 @@ import 'dart:developer' show log;
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'
     deferred as firebase_crashlytics;
-import 'package:injectable/injectable.dart';
+// import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
     show
         Sentry,
@@ -15,40 +15,16 @@ import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
 import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-@LazySingleton(order: -2)
+// @LazySingleton(order: -2)
 class FailureRepository {
-  void sendError(SomeFailure failure) {
-    if (KTest.isTest) return;
-    final error = failure.error;
-    if (error ==
-        '[cloud_firestore/failed-precondition] The client has already been terminated.') {
-      return;
-    }
-    if (error != null) {
-      onError(
-        error: error,
-        stack: failure.stack,
-        reason: null,
-        information: null,
-        errorLevel: failure.errorLevel,
-        tag: failure.tag,
-        tagKey: failure.tagKey,
-        data: failure.data,
-        tag2: failure.tag2,
-        tag2Key: failure.tag2Key,
-      );
-    }
-  }
-
   static FutureOr<void> onError({
     required Object error,
     required StackTrace? stack,
     required String? reason,
     required Iterable<Object>? information,
-    required ErrorLevelEnum? errorLevel,
+    required ErrorLevelEnum errorLevel,
     required String? tag,
     required String? tagKey,
-    bool? isInfo,
     String? tag2,
     String? tag2Key,
     String? data,
@@ -56,42 +32,11 @@ class FailureRepository {
     UserSetting? userSetting,
   }) async {
     // Define the variable for error level categorization
-    var errorLevelValue = errorLevel;
-    if (errorLevelValue == null) {
-      final errorString = error.toString().toLowerCase();
-
-      // Determine the error level based on the exception type or error content
-      if (isInfo ??
-          false ||
-              errorString.contains('timeout') ||
-              errorString.contains('connection refused') ||
-              errorString.contains('no internet') ||
-              errorString.contains('network-request') ||
-              errorString.contains('resource limit exceeded') ||
-              errorString.contains('permission-denied') ||
-              errorString.contains('offline') ||
-              errorString.contains('failed-precondition')) {
-        // Info level for network-related issues or resource constraints
-        errorLevelValue = ErrorLevelEnum.info;
-      } else if (error is AssertionError ||
-          errorString.contains('outofmemoryerror')) {
-        // Fatal level for critical asynchronous issues that cause crashes
-        errorLevelValue = ErrorLevelEnum.fatal;
-      } else if (errorString.contains('deprecated') ||
-          errorString.contains('slow') ||
-          errorString.contains('performance')) {
-        // Warning level for performance concerns or deprecated code usage
-        errorLevelValue = ErrorLevelEnum.warning;
-      } else {
-        // Default error level for general asynchronous issues
-        errorLevelValue = ErrorLevelEnum.error;
-      }
-    }
 
     if (Config.isReleaseMode && Config.isProduction) {
       if (Config.isWeb) {
         await sentry.loadLibrary();
-        hasError = true;
+        // hasError = true;
         if (!sentry.Sentry.isEnabled) {
           await sentry.SentryFlutter.init(
             (options) {
@@ -132,7 +77,7 @@ class FailureRepository {
           error,
           stackTrace: stack,
           withScope: (scope) async {
-            switch (errorLevelValue) {
+            switch (errorLevel) {
               case ErrorLevelEnum.error:
                 scope.level = sentry.SentryLevel.error;
               case ErrorLevelEnum.fatal:
@@ -141,7 +86,6 @@ class FailureRepository {
                 scope.level = sentry.SentryLevel.info;
               case ErrorLevelEnum.warning:
                 scope.level = sentry.SentryLevel.warning;
-              case null:
             }
             if (tag != null) {
               await scope.setTag(tagKey ?? ErrorText.standartKey, tag);
@@ -167,10 +111,10 @@ class FailureRepository {
         await firebase_crashlytics.FirebaseCrashlytics.instance.recordError(
           error,
           stack,
-          reason: reason ?? errorLevel?.getString,
+          reason: reason ?? errorLevel.getString,
           information: information ?? const [],
           printDetails: information == null,
-          fatal: errorLevelValue == ErrorLevelEnum.fatal,
+          fatal: errorLevel == ErrorLevelEnum.fatal,
         );
         if (tag != null) {
           await firebase_crashlytics.FirebaseCrashlytics.instance.setCustomKey(
@@ -202,8 +146,8 @@ class FailureRepository {
     );
   }
 
-  static bool hasError = false;
+  // static bool hasError = false;
 
-  @disposeMethod
-  void dispose() => Config.isWeb && hasError ? sentry.Sentry.close() : null;
+  // @disposeMethod
+  // void dispose() => Config.isWeb && hasError ? sentry.Sentry.close() : null;
 }

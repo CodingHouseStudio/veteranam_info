@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -20,19 +20,9 @@ class FeedbackRepository implements IFeedbackRepository {
     try {
       await _firestoreService.addFeedback(feedback);
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(sendFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Feedback: $feedback',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Feedback(sendFeedback)',
@@ -55,19 +45,9 @@ class FeedbackRepository implements IFeedbackRepository {
       );
       await _firestoreService.addMobFeedback(feedbackModel);
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(sendMobFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Feedback: $feedback| ${image.getErrorData}',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Feedback(sendMobFeedback)',
@@ -93,20 +73,9 @@ class FeedbackRepository implements IFeedbackRepository {
       } else {
         return const Right(true);
       }
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(checkUserNeedShowFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(id: userId),
-          data: 'User ID: $userId',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Feedback(checkUserNeedShowFeedback)',

@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -14,18 +14,9 @@ class FaqRepository implements IFaqRepository {
     try {
       final questionItems = await _firestoreService.getQuestions();
       return Right(questionItems);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'FAQ(getQuestions)',
-          tagKey: ErrorText.repositoryKey,
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'FAQ(getQuestions)',

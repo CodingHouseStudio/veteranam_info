@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -57,19 +57,9 @@ class WorkRepository implements IWorkRepository {
       await _firestoreService.sendRespond(methodRespond);
 
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Work(sendRespond)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Employee Respond Model: $respond| ${file.getErrorData}',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Work(sendRespond)',

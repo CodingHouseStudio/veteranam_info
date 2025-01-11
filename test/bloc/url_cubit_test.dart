@@ -101,13 +101,13 @@ void main() {
       setUp(() {
         when(mockUrlRepository.launchUrl(url: KTestVariables.downloadURL))
             .thenAnswer(
-          (invocation) async => Left(SomeFailure.link(error: null)),
+          (invocation) async => const Left(SomeFailure.link),
         );
         when(mockUrlRepository.share(KTestVariables.downloadURL)).thenAnswer(
-          (invocation) async => Left(SomeFailure.share(error: null)),
+          (invocation) async => const Left(SomeFailure.share),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
-          (invocation) async => Left(SomeFailure.copy(error: null)),
+          (invocation) async => const Left(SomeFailure.copy),
         );
       });
       blocTest<UrlCubit, UrlEnum?>(

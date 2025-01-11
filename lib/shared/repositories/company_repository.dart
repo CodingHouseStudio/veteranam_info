@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
+// import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:injectable/injectable.dart';
@@ -147,25 +147,9 @@ class CompanyRepository implements ICompanyRepository {
       await _firestoreService.updateCompany(methodCompanyModel);
       _userCompanyController.add(methodCompanyModel);
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          user: User(
-            id: currentUserCompany.id,
-            name: currentUserCompany.companyName,
-            email: _appAuthenticationRepository.currentUser.email,
-          ),
-          userSetting: _appAuthenticationRepository.currentUserSetting,
-          tag: 'Company(updateCompany)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Compnay: $company| ${imageItem.getErrorData}',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Company(updateCompany)',
@@ -199,24 +183,9 @@ class CompanyRepository implements ICompanyRepository {
       // }
 
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          user: User(
-            id: currentUserCompany.id,
-            name: currentUserCompany.companyName,
-            email: _appAuthenticationRepository.currentUser.email,
-          ),
-          userSetting: _appAuthenticationRepository.currentUserSetting,
-          tag: 'Company(deleteCompany)',
-          tagKey: ErrorText.repositoryKey,
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Company(deleteCompany)',

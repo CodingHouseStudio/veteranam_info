@@ -42,7 +42,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
       openInCurrentWindow: openInCurrentWindow,
     );
     result.fold(
-      (l) => emit(l.toUrl()),
+      (l) => emit(UrlEnum.linkError),
       (r) => emit(null),
     );
   }
@@ -55,7 +55,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
       text,
     );
     result.fold(
-      (l) => emit(l.toUrl()),
+      (l) => emit(UrlEnum.copyError),
       (r) {
         switch (copyEnum) {
           case CopyEnum.email:

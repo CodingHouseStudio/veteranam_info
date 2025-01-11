@@ -75,7 +75,7 @@ void main() {
               // reportIdItems: KTestText.reportItems.getIdCard,
               ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         bloc.add(const InvestorsWatcherEvent.started());
       },

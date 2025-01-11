@@ -1,17 +1,17 @@
 part of 'investors_watcher_bloc.dart';
 
-extension InvestorsFailureExtension on SomeFailure {
-  InvestorsFailure _toInvestors() {
-    switch (this) {
-      case FailureGet():
-        return InvestorsFailure.get;
-      case FailureNetwork():
-        return InvestorsFailure.network;
-      default:
-        return InvestorsFailure.error;
-    }
-  }
-}
+// extension InvestorsFailureExtension on SomeFailure {
+//   InvestorsFailure _toInvestors() {
+//     switch (this) {
+//       case FailureGet():
+//         return InvestorsFailure.get;
+//       case FailureNetwork():
+//         return InvestorsFailure.network;
+//       default:
+//         return InvestorsFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class InvestorsWatcherState with _$InvestorsWatcherState {
@@ -23,6 +23,6 @@ class InvestorsWatcherState with _$InvestorsWatcherState {
     // required bool loadedFull,
     // required int itemsLoaded,
     // required List<ReportModel> reportItems,
-    required InvestorsFailure? failure,
+    required SomeFailure? failure,
   }) = _Initial;
 }

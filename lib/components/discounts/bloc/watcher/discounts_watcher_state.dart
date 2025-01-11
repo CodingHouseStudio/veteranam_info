@@ -1,11 +1,11 @@
 part of 'discounts_watcher_bloc.dart';
 
-extension DiscountFailureExtension on SomeFailure {
-  DiscountsFailure _toDiscount() {
-    if (this is FailureFilter) return DiscountsFailure.filter;
-    return DiscountsFailure.error;
-  }
-}
+// extension DiscountFailureExtension on SomeFailure {
+//   DiscountsFailure _toDiscount() {
+//     if (this is FailureFilter) return DiscountsFailure.filter;
+//     return DiscountsFailure.error;
+//   }
+// }
 
 enum FilterStatus {
   initial,
@@ -30,7 +30,7 @@ class DiscountsWatcherState with _$DiscountsWatcherState {
     required List<DiscountModel> sortingDiscountModelList,
     required DiscountEnum? sortingBy,
     required bool isListLoadedFull,
-    required DiscountsFailure? failure,
+    required SomeFailure? failure,
     // required List<ReportModel> reportItems,
   }) = _Initial;
 }

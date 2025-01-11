@@ -47,8 +47,7 @@ void main() {
             KTestVariables.code,
           ),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failure)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         ),
       );
       blocTest<CheckVerificationCodeCubit, bool?>(

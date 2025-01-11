@@ -147,8 +147,7 @@ void main() {
             newPassword: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
         bloc
           ..add(
@@ -188,7 +187,7 @@ void main() {
           password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
           confirmPassword:
               PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
-          failure: PasswordResetFailure.error,
+          failure: SomeFailure.serverError,
           formState: PasswordResetEnum.inProgress,
         ),
       ],

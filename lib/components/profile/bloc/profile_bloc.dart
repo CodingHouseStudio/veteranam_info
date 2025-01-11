@@ -158,7 +158,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l._toProfileError(),
+            failure: l,
             formState: ProfileEnum.initial,
           ),
         ),

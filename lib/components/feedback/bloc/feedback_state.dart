@@ -1,17 +1,17 @@
 part of 'feedback_bloc.dart';
 
-extension FeedbackFailureExtension on SomeFailure {
-  FeedbackFailure _toFeedback() {
-    switch (this) {
-      case FailureSend():
-        return FeedbackFailure.send;
-      case FailureNetwork():
-        return FeedbackFailure.network;
-      default:
-        return FeedbackFailure.error;
-    }
-  }
-}
+// extension FeedbackFailureExtension on SomeFailure {
+//   FeedbackFailure _toFeedback() {
+//     switch (this) {
+//       case FailureSend():
+//         return FeedbackFailure.send;
+//       case FailureNetwork():
+//         return FeedbackFailure.network;
+//       default:
+//         return FeedbackFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class FeedbackState with _$FeedbackState {
@@ -20,7 +20,7 @@ class FeedbackState with _$FeedbackState {
     required EmailFieldModel email,
     required MessageFieldModel message,
     required FeedbackEnum formState,
-    required FeedbackFailure? failure,
+    required SomeFailure? failure,
   }) = _FeedbackState;
 }
 

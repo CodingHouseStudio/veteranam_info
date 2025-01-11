@@ -51,10 +51,8 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
             .thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
+          (invocation) async => const Left(
+            SomeFailure.serverError,
           ),
         );
         await feedbackPumpAppHelper(
@@ -69,7 +67,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
             .thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => const Left(SomeFailure.network),
         );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,
@@ -83,7 +81,7 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
             .thenAnswer(
-          (invocation) async => Left(SomeFailure.send(error: null)),
+          (invocation) async => const Left(SomeFailure.send),
         );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,
@@ -162,7 +160,7 @@ void main() {
           (invocation) async => const Right(true),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
-          (invocation) async => Left(SomeFailure.copy(error: null)),
+          (invocation) async => const Left(SomeFailure.copy),
         );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,

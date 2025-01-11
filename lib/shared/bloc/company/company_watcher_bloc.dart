@@ -40,7 +40,7 @@ class CompanyWatcherBloc
           ),
         );
       },
-      onError: (dynamic error, StackTrace stack) {
+      onError: (Object error, StackTrace stack) {
         add(CompanyWatcherEvent.failure(error: error, stack: stack));
       },
     );
@@ -60,7 +60,7 @@ class CompanyWatcherBloc
     emit(
       _Initial(
         company: _companyRepository.currentUserCompany,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'Company ${ErrorText.watcherBloc}',
@@ -70,7 +70,7 @@ class CompanyWatcherBloc
             email: _companyRepository.currentUserCompany.userEmails.first,
             name: _companyRepository.currentUserCompany.companyName,
           ),
-        )._toCompany(),
+        ),
       ),
     );
   }

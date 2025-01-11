@@ -51,7 +51,7 @@ void main() {
         const NewsCardWatcherState(
           informationModel: null,
           loadingStatus: LoadingStatus.error,
-          failure: NewsCardFailure.wrongID,
+          failure: SomeFailure.wrongID,
         ),
         const NewsCardWatcherState(
           informationModel: null,
@@ -76,7 +76,7 @@ void main() {
             KTestVariables.informationModelItems.first.id,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         bloc.add(
           NewsCardWatcherEvent.started(
@@ -93,7 +93,7 @@ void main() {
         const NewsCardWatcherState(
           informationModel: null,
           loadingStatus: LoadingStatus.error,
-          failure: NewsCardFailure.error,
+          failure: SomeFailure.serverError,
         ),
       ],
     );

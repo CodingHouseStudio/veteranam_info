@@ -29,8 +29,7 @@ void main() {
             email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('Enter correct email', (tester) async {

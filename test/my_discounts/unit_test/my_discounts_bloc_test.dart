@@ -323,7 +323,7 @@ void main() {
               KTestVariables.discountModelItems.first.id,
             ),
           ).thenAnswer(
-            (_) async => Left(SomeFailure.serverError(error: null)),
+            (_) async => const Left(SomeFailure.serverError),
           );
 
           // bloc.add(const MyDiscountsWatcherEvent.started());
@@ -443,7 +443,7 @@ void main() {
               discountModel: KTestVariables.discountModelItems.first,
             ),
           ).thenAnswer(
-            (_) async => Left(SomeFailure.serverError(error: null)),
+            (_) async => const Left(SomeFailure.serverError),
           );
 
           // bloc.add(const MyDiscountsWatcherEvent.started());

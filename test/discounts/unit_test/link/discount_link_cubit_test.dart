@@ -54,7 +54,7 @@ void main() {
       act: (bloc) async {
         when(mockdiscountRepository.userCanSendLink(KTestVariables.user.id))
             .thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         await bloc.started();
       },

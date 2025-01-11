@@ -63,7 +63,7 @@ void main() {
         when(
           mockAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         await cubit.authenticationUseGoogle();
       },
@@ -79,7 +79,7 @@ void main() {
         when(
           mockAuthenticationRepository.signUpWithFacebook(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         await cubit.authenticationUseFacebook();
       },

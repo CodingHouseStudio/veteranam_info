@@ -26,8 +26,7 @@ void main() {
           mockInformationRepository
               .getInformation(KTestVariables.informationModelItems.first.id),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failure)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -78,8 +77,7 @@ void main() {
                   KTestVariables.informationModelItems.first.id,
                 ),
               ).thenAnswer(
-                (realInvocation) async =>
-                    Left(SomeFailure.notFound(error: KGroupText.failure)),
+                (realInvocation) async => const Left(SomeFailure.dataNotFound),
               );
             });
             testWidgets('Empty Card close', (tester) async {

@@ -986,7 +986,7 @@ void main() {
     //         companyId: KTestText.fullCompanyModel.id,
     //       ),
     //     ).thenAnswer(
-    //       (_) async => Left(SomeFailure.serverError(error: null)),
+    //       (_) async => const Left(SomeFailure.serverError),
     //     ),
     //   );
     //   blocTest<DiscountsAddBloc, DiscountsAddState>(
@@ -1086,7 +1086,7 @@ void main() {
     //       mockDiscountsRepository.addDiscount(KTestText.blocSendDiscountModel),
     //     ).thenAnswer(
     //       (_) async =>
-    //           Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+    //           Left(SomeFailure.serverError),
     //     );
 
     //     when(

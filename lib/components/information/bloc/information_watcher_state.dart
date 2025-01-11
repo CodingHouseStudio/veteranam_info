@@ -1,10 +1,10 @@
 part of 'information_watcher_bloc.dart';
 
-extension InformationFailureExtension on SomeFailure {
-  InformationFailure _toInformation() {
-    return InformationFailure.error;
-  }
-}
+// extension InformationFailureExtension on SomeFailure {
+//   InformationFailure _toInformation() {
+//     return InformationFailure.error;
+//   }
+// }
 
 @freezed
 class InformationWatcherState with _$InformationWatcherState {
@@ -14,7 +14,7 @@ class InformationWatcherState with _$InformationWatcherState {
     required List<dynamic> filters,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
-    required InformationFailure? failure,
+    required SomeFailure? failure,
     required bool isListLoadedFull,
     // required List<int> likeIndex,
     // required List<ReportModel> reportItems,

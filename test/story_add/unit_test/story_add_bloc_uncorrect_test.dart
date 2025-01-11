@@ -39,7 +39,7 @@ void main() {
           ),
         ),
       ).thenAnswer(
-        (realInvocation) async => Left(SomeFailure.serverError(error: null)),
+        (realInvocation) async => const Left(SomeFailure.serverError),
       );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
@@ -173,7 +173,7 @@ void main() {
               state.formStatus == FormzSubmissionStatus.inProgress,
         ),
         predicate<StoryAddState>(
-          (state) => state.failure == StoryAddFailure.error,
+          (state) => state.failure == SomeFailure.serverError,
         ),
       ],
     );

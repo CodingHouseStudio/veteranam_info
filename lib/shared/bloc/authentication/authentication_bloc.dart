@@ -92,12 +92,12 @@ class AuthenticationBloc
     emit(
       AuthenticationState._(
         status: state.status,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'Authentication Bloc',
           tagKey: ErrorText.streamBlocKey,
-        )._toAuthentication(),
+        ),
       ),
     );
   }

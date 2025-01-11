@@ -1,10 +1,10 @@
 part of 'user_email_form_bloc.dart';
 
-enum UserEmailFormFailure {
-  error,
-  send,
-  network,
-}
+// enum UserEmailFormFailure {
+//   error,
+//   send,
+//   network,
+// }
 
 // extension DiscountUserEmailFormFailureExtension on SomeFailure {
 //   DiscountUserEmailFormFailure _toDiscountUserEmailForm() {
@@ -26,7 +26,7 @@ class UserEmailFormState with _$UserEmailFormState {
     required EmailEnum formState,
     required UserEmailEnum emailEnum,
     // int? count,
-    //DiscountUserEmailFormFailure? failure,
+    // SomeFailure? failure,
   }) = _Initial;
 }
 

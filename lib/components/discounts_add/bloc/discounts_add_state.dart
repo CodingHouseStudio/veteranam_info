@@ -1,21 +1,21 @@
 part of 'discounts_add_bloc.dart';
 
-extension DiscountsAddFailureGetter on DiscountsAddFailure? {
-  bool get linkIsWrong => this == DiscountsAddFailure.linkWrong;
-}
+// extension DiscountsAddFailureGetter on DiscountsAddFailure? {
+//   bool get linkIsWrong => this == DiscountsAddFailure.linkWrong;
+// }
 
-extension DiscountsAddFailureExtension on SomeFailure {
-  DiscountsAddFailure _toDiscountsAdd() {
-    switch (this) {
-      case FailureSend():
-        return DiscountsAddFailure.send;
-      case FailureNetwork():
-        return DiscountsAddFailure.network;
-      default:
-        return DiscountsAddFailure.error;
-    }
-  }
-}
+// extension DiscountsAddFailureExtension on SomeFailure {
+//   DiscountsAddFailure _toDiscountsAdd() {
+//     switch (this) {
+//       case FailureSend():
+//         return DiscountsAddFailure.send;
+//       case FailureNetwork():
+//         return DiscountsAddFailure.network;
+//       default:
+//         return DiscountsAddFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class DiscountsAddState with _$DiscountsAddState {
@@ -35,7 +35,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required MessageFieldModel requirements,
     required DiscountsAddEnum formState,
     required bool isIndefinitely,
-    DiscountsAddFailure? failure,
+    SomeFailure? failure,
   }) = _Initial;
 }
 

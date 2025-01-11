@@ -145,11 +145,7 @@ void main() {
             password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (realInvocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
         return bloc
           ..add(const LoginEvent.emailUpdated(KTestVariables.userEmail))
@@ -187,7 +183,7 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestVariables.userEmail),
           password: PasswordFieldModel.dirty(KTestVariables.passwordCorrect),
-          failure: LoginFailure.error,
+          failure: SomeFailure.serverError,
           formState: LoginEnum.inProgress,
         ),
       ],

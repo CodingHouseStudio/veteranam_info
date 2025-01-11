@@ -82,11 +82,7 @@ void main() {
               ),
         ).thenAnswer((invocation) async {
           await KTestConstants.delay;
-          return Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          );
+          return const Left(SomeFailure.serverError);
         });
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -107,7 +103,7 @@ void main() {
         ).thenAnswer(
           (invocation) async {
             await KTestConstants.delay;
-            return Left(SomeFailure.network(error: null));
+            return const Left(SomeFailure.network);
           },
         );
         await investorsPumpAppHelper(
@@ -128,7 +124,7 @@ void main() {
               ),
         ).thenAnswer((invocation) async {
           await KTestConstants.delay;
-          return Left(SomeFailure.get(error: null));
+          return const Left(SomeFailure.get);
         });
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

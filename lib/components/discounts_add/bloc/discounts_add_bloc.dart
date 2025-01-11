@@ -88,7 +88,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
 
     result.fold(
       // ignore: invalid_use_of_visible_for_testing_member
-      (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
+      (l) => emit(state.copyWith(failure: l)),
       // ignore: invalid_use_of_visible_for_testing_member
       (r) => emit(state.copyWith(citiesList: r)),
     );
@@ -108,7 +108,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           id: event.discountId!,
         );
         result.fold(
-          (l) => emit(state.copyWith(failure: DiscountsAddFailure.linkWrong)),
+          (l) => emit(state.copyWith(failure: SomeFailure.linkWrong)),
           (r) => discount = r,
         );
       }
@@ -534,7 +534,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         discount.copyWith(dateVerified: ExtendedDateTime.current),
       );
       result.fold(
-        (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
+        (l) => emit(state.copyWith(failure: l)),
         (r) => emit(
           state.copyWith(
             formState: DiscountsAddEnum.success,

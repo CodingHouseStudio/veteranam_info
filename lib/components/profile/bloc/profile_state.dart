@@ -1,17 +1,17 @@
 part of 'profile_bloc.dart';
 
-extension ProfileFailureExtension on SomeFailure {
-  ProfileFailure _toProfileError() {
-    switch (this) {
-      case FailureSend():
-        return ProfileFailure.send;
-      case FailureNetwork():
-        return ProfileFailure.network;
-      default:
-        return ProfileFailure.error;
-    }
-  }
-}
+// extension ProfileFailureExtension on SomeFailure {
+//   ProfileFailure _toProfileError() {
+//     switch (this) {
+//       case FailureSend():
+//         return ProfileFailure.send;
+//       case FailureNetwork():
+//         return ProfileFailure.network;
+//       default:
+//         return ProfileFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class ProfileState with _$ProfileState {
@@ -20,7 +20,7 @@ class ProfileState with _$ProfileState {
     required SurnameFieldModel surname,
     required ImageFieldModel image,
     required NicknameFieldModel nickname,
-    required ProfileFailure? failure,
+    required SomeFailure? failure,
     required ProfileEnum formState,
   }) = _ProfileState;
 }

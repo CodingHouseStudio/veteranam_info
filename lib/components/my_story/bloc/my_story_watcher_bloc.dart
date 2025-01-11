@@ -40,7 +40,7 @@ class MyStoryWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toMyStory(),
+          failure: l,
           loadingStatus: LoadingStatus.error,
         ),
       ),

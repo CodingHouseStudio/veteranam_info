@@ -40,10 +40,8 @@ void main() {
           image: wrongImage,
         ),
       ).thenAnswer(
-        (realInvocation) async => Left(
-          SomeFailure.serverError(
-            error: null,
-          ),
+        (realInvocation) async => const Left(
+          SomeFailure.serverError,
         ),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
@@ -114,7 +112,7 @@ void main() {
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
           message: MessageFieldModel.dirty(KTestVariables.field),
-          failure: MobFeedbackFailure.error,
+          failure: SomeFailure.serverError,
         ),
       ],
     );

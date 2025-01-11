@@ -25,10 +25,8 @@ void main() {
           KTestVariables.reportModel.copyWith(card: CardEnum.discount),
         ),
       ).thenAnswer(
-        (realInvocation) async => Left(
-          SomeFailure.serverError(
-            error: null,
-          ),
+        (realInvocation) async => const Left(
+          SomeFailure.serverError,
         ),
       );
       when(

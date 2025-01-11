@@ -36,7 +36,7 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
       emit(
         const _Initial(
           loadingStatus: LoadingStatus.error,
-          failure: DiscountCardFailure.wrongID,
+          failure: SomeFailure.wrongID,
           discountModel: null,
         ),
       );
@@ -59,7 +59,7 @@ class DiscountCardWatcherCubit extends Cubit<DiscountCardWatcherState> {
       (l) => emit(
         _Initial(
           loadingStatus: LoadingStatus.error,
-          failure: l._toDiscountCard(),
+          failure: l,
           discountModel: null,
         ),
       ),

@@ -22,7 +22,7 @@ class MobileRatingRepository {
       }
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Mobile Rating(showRatingDialog)',

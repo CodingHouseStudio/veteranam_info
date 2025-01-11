@@ -28,9 +28,13 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   void _onStarted() {
     userSettingSubscription = _userRepository.userSetting.listen(
       (userSetting) => add(UserWatcherEvent.userSettingChanged(userSetting)),
+      onError: (Object error, StackTrace stack) =>
+          add(UserWatcherEvent.userSettingFailure(stack: stack, error: error)),
     );
     userSubscription = _userRepository.user.listen(
       (user) => add(UserWatcherEvent.userChanged(user)),
+      onError: (Object error, StackTrace stack) =>
+          add(UserWatcherEvent.userFailure(stack: stack, error: error)),
     );
   }
 
@@ -54,12 +58,12 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   ) {
     emit(
       state.copyWith(
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'User ${ErrorText.watcherBloc}',
           tagKey: 'User ${ErrorText.streamBlocKey}',
-        )._toUserWatcher(),
+        ),
       ),
     );
   }
@@ -70,12 +74,12 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   ) {
     emit(
       state.copyWith(
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'User ${ErrorText.watcherBloc}',
           tagKey: 'User Setting ${ErrorText.streamBlocKey}',
-        )._toUserWatcher(),
+        ),
       ),
     );
   }

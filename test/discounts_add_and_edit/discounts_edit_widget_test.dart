@@ -72,7 +72,7 @@ void main() {
             companyId: KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.serverError(error: null)),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
         when(
           mockDiscountRepository.getCompanyDiscount(
@@ -80,7 +80,7 @@ void main() {
             companyId: KTestVariables.pureCompanyModel.id,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.serverError(error: null)),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {

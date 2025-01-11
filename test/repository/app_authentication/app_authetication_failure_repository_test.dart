@@ -167,7 +167,7 @@ void main() {
           initialList: KTestVariables.userSetting.devicesInfo,
         ),
       ).thenAnswer(
-        (_) async => Left(SomeFailure.serverError(error: null)),
+        (_) async => const Left(SomeFailure.serverError),
       );
 
       when(
@@ -212,7 +212,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -223,7 +223,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -237,7 +237,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -251,7 +251,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -264,7 +264,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -299,7 +299,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -313,7 +313,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -324,7 +324,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -337,7 +337,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });
@@ -354,7 +354,7 @@ void main() {
         // .having(
         //   (e) => e.value,
         //   'value',
-        //   SomeFailure.serverError(error: null),
+        //   SomeFailure.serverError,
         // ),
       );
     });

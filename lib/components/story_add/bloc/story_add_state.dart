@@ -1,17 +1,17 @@
 part of 'story_add_bloc.dart';
 
-extension StoryAddFailureExtension on SomeFailure {
-  StoryAddFailure _toStoryAdd() {
-    switch (this) {
-      case FailureSend():
-        return StoryAddFailure.send;
-      case FailureNetwork():
-        return StoryAddFailure.network;
-      default:
-        return StoryAddFailure.error;
-    }
-  }
-}
+// extension StoryAddFailureExtension on SomeFailure {
+//   StoryAddFailure _toStoryAdd() {
+//     switch (this) {
+//       case FailureSend():
+//         return StoryAddFailure.send;
+//       case FailureNetwork():
+//         return StoryAddFailure.network;
+//       default:
+//         return StoryAddFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class StoryAddState with _$StoryAddState {
@@ -20,6 +20,6 @@ class StoryAddState with _$StoryAddState {
     required ImageFieldModel image,
     required bool isAnonymously,
     required FormzSubmissionStatus formStatus,
-    required StoryAddFailure? failure,
+    required SomeFailure? failure,
   }) = _Initial;
 }

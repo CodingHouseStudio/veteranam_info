@@ -31,7 +31,7 @@ class NewsCardWatcherBloc
       emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,
-          failure: NewsCardFailure.wrongID,
+          failure: SomeFailure.wrongID,
         ),
       );
       return;
@@ -49,7 +49,7 @@ class NewsCardWatcherBloc
       (l) => emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,
-          failure: l._toNewsCard(),
+          failure: l,
         ),
       ),
       (r) => emit(

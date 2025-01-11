@@ -166,7 +166,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toCompanyError(),
+          failure: l,
         ),
       ),
       (r) => emit(
@@ -213,7 +213,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         result.fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toCompanyError(),
+              failure: l,
               formState: CompanyFormEnum.initial,
             ),
           ),

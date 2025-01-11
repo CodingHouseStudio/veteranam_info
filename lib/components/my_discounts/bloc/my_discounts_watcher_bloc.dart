@@ -101,7 +101,7 @@ class MyDiscountsWatcherBloc
             ),
           );
         },
-        onError: (dynamic error, StackTrace stack) {
+        onError: (Object error, StackTrace stack) {
           add(MyDiscountsWatcherEvent.failure(error: error, stack: stack));
         },
       );
@@ -145,7 +145,7 @@ class MyDiscountsWatcherBloc
     deleteResult.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toMyDiscount(),
+          failure: l,
           // loadingStatus: LoadingStatus.error,
         ),
       ),
@@ -266,7 +266,7 @@ class MyDiscountsWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'My Discount ${ErrorText.watcherBloc}',
@@ -276,7 +276,7 @@ class MyDiscountsWatcherBloc
             name: _companyRepository.currentUserCompany.companyName,
             email: _companyRepository.currentUserCompany.userEmails.first,
           ),
-        )._toMyDiscount(),
+        ),
       ),
     );
   }

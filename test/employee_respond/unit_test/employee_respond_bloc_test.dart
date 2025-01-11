@@ -208,7 +208,7 @@ void main() {
             file: null,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         bloc
           ..add(
@@ -269,7 +269,7 @@ void main() {
           resume: const ResumeFieldModel.pure(),
           noResume: true,
           formState: EmployeeRespondEnum.inProgress,
-          failure: EmployeeRespondFailure.error,
+          failure: SomeFailure.serverError,
         ),
       ],
     );

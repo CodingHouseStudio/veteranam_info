@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -39,19 +39,9 @@ class StoryRepository implements IStoryRepository {
       }
       await _firestoreService.addStory(methodStoryModel);
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Story(addStory)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Story Model: $storyModel| ${imageItem.getErrorData}',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Story(addStory)',
@@ -71,20 +61,9 @@ class StoryRepository implements IStoryRepository {
           await _firestoreService.getStoriesByUserId(userId);
 
       return Right(userStoriesItems);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Story(getStoriesByUserId)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'User ID: $userId',
-          user: User(id: userId),
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Story(getStoriesByUserId)',

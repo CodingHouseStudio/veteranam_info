@@ -28,8 +28,7 @@ void main() {
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failure)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -83,8 +82,7 @@ void main() {
                   showOnlyBusinessDiscounts: false,
                 ),
               ).thenAnswer(
-                (realInvocation) async =>
-                    Left(SomeFailure.notFound(error: KGroupText.failure)),
+                (realInvocation) async => const Left(SomeFailure.dataNotFound),
               );
             });
             testWidgets('Empty Card close', (tester) async {

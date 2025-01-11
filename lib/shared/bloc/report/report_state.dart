@@ -1,10 +1,10 @@
 part of 'report_bloc.dart';
 
-enum ReportFailure {
-  error,
-  // network,
-  // send,
-}
+// enum ReportFailure {
+//   error,
+//   // network,
+//   // send,
+// }
 
 // extension ReportFailureExtension on SomeFailure {
 //   ReportFailure _toReport() {
@@ -26,7 +26,7 @@ class ReportState with _$ReportState {
     required EmailFieldModel email,
     required ReportFieldModel message,
     required ReportEnum formState,
-    required ReportFailure? failure,
+    required SomeFailure? failure,
     required String cardId,
     required CardEnum card,
     @Default(false) bool triedSentWithoutEmail,

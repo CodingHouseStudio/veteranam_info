@@ -86,7 +86,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(
         result.fold(
           (l) => state.copyWith(
-            failure: l._toSignUpError(),
+            failure: l,
             formState: SignUpEnum.inProgress,
           ),
           (r) => const SignUpState(

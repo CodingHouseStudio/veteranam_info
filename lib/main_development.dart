@@ -12,6 +12,7 @@ import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
+import 'package:veteranam/shared/models/failure_model/some_failure.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
 
 /// COMMENT: DEV main file
@@ -92,15 +93,12 @@ void main() async {
 // Async exceptions handling
   PlatformDispatcher.instance.onError = (error, stack) {
     // Log the error details to FailureRepository with specified level and tags
-    FailureRepository.onError(
+    SomeFailure.value(
       error: error,
       stack: stack,
-      reason: null, // No specific reason provided for async errors
-      information: null, // No additional information for async errors
       tag: ErrorText.async, // Tag to identify async exceptions
       tagKey:
           ErrorText.mainFileKey, // Key for identifying error location/source
-      errorLevel: null,
     );
 
     return true; // Return true to indicate the error has been handled

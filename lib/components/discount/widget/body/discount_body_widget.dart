@@ -18,7 +18,7 @@ class DiscountBodyWidget extends StatelessWidget {
     return MultiBlocListener(
       listeners: [
         BlocListener<UrlCubit, UrlEnum?>(
-          listener: (context, state) async {
+          listener: (context, state) {
             if (state != null) {
               context.dialog.showSnackBardTextDialog(
                 state.value(
@@ -77,8 +77,7 @@ class DiscountBodyWidget extends StatelessWidget {
                 padding: padding,
                 sliver: BlocSelector<DiscountWatcherBloc, DiscountWatcherState,
                     bool>(
-                  selector: (state) =>
-                      state.failure == DiscountFailure.linkWrong,
+                  selector: (state) => state.failure.linkIsWrong,
                   // buildWhen: (previous, current) =>
                   //     current.failure == DiscountFailure.linkWrong &&
                   //     previous.failure != DiscountFailure.linkWrong,

@@ -99,7 +99,7 @@ void main() {
         expect: () async => [
           const CompanyWatcherState(
             company: KTestVariables.pureCompanyModel,
-            failure: CompanyWatcherFailure.error,
+            failure: SomeFailure.serverError,
           ),
         ],
       );

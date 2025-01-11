@@ -101,7 +101,7 @@ void main() {
         DiscountWatcherState(
           discountModel: KMockText.discountModel,
           loadingStatus: LoadingStatus.error,
-          failure: DiscountFailure.linkWrong,
+          failure: SomeFailure.linkWrong,
         ),
       ],
     );
@@ -114,7 +114,7 @@ void main() {
             showOnlyBusinessDiscounts: false,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         ),
       );
 
@@ -135,7 +135,7 @@ void main() {
           DiscountWatcherState(
             discountModel: KMockText.discountModel,
             loadingStatus: LoadingStatus.error,
-            failure: DiscountFailure.linkWrong,
+            failure: SomeFailure.linkWrong,
           ),
         ],
       );

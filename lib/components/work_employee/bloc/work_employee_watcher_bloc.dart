@@ -49,7 +49,7 @@ class WorkEmployeeWatcherBloc
           work,
         ),
       ),
-      onError: (dynamic error, StackTrace stack) {
+      onError: (Object error, StackTrace stack) {
         add(WorkEmployeeWatcherEvent.failure(error: error, stack: stack));
       },
     );
@@ -244,12 +244,12 @@ class WorkEmployeeWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'Work Employee ${ErrorText.watcherBloc}',
           tagKey: ErrorText.streamBlocKey,
-        )._toWork(),
+        ),
       ),
     );
   }

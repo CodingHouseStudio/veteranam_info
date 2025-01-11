@@ -47,7 +47,7 @@ void main() {
     group('emits [MobFaqWatcherState.faulure()] when error', () {
       setUp(
         () => when(mockFaqRepository.getQuestions()).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         ),
       );
       blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
