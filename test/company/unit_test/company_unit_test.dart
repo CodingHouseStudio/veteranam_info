@@ -152,8 +152,7 @@ void main() {
         build: () => companyFormBloc,
         act: (bloc) async {
           when(mockCompanyRepository.deleteCompany()).thenAnswer(
-            (realInvocation) async =>
-                Left(SomeFailure.serverError(error: null)),
+            (realInvocation) async => const Left(SomeFailure.serverError),
           );
           bloc.add(
             const CompanyFormEvent.deleteCompany(),
@@ -168,7 +167,7 @@ void main() {
             code: CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: false,
             link: LinkFieldModel.dirty(KTestVariables.link),
-            failure: CompanyFormFailure.error,
+            failure: SomeFailure.serverError,
             formState: CompanyFormEnum.initial,
           ),
         ],
@@ -427,7 +426,7 @@ void main() {
               imageItem: KTestVariables.filePickerItem,
             ),
           ).thenAnswer(
-            (realInvocation) async => Left(SomeFailure(error: null)),
+            (realInvocation) async => const Left(SomeFailure.serverError),
           );
           bloc.add(const CompanyFormEvent.imageUpdated());
           await expectLater(
@@ -535,7 +534,7 @@ void main() {
             code: const CompanyCodeFieldModel.dirty(KTestVariables.companyCode),
             deleteIsPossible: null,
             link: const LinkFieldModel.dirty(KTestVariables.link),
-            failure: CompanyFormFailure.error,
+            failure: SomeFailure.serverError,
             formState: CompanyFormEnum.initial,
           ),
         ],

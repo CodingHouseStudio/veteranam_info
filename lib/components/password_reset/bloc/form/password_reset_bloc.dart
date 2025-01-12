@@ -72,7 +72,7 @@ class PasswordResetBloc extends Bloc<PasswordResetEvent, PasswordResetState> {
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l._toPasswordResetError(),
+            failure: l,
             formState: PasswordResetEnum.inProgress,
           ),
         ),

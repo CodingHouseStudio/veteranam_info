@@ -93,7 +93,7 @@ class DiscountsWatcherBloc
           ),
         );
       },
-      onError: (dynamic error, StackTrace stack) {
+      onError: (Object error, StackTrace stack) {
         add(DiscountsWatcherEvent.failure(error: error, stack: stack));
       },
     );
@@ -140,7 +140,7 @@ class DiscountsWatcherBloc
         discountFilterRepository: state.discountFilterRepository,
         sortingBy: state.sortingBy,
         loadingStatus: LoadingStatus.loaded,
-        failure: failure?._toDiscount(),
+        failure: failure,
         filterDiscountModelList: filterList.take(itemsNumber).toList(),
         filterStatus:
             failure != null ? FilterStatus.error : FilterStatus.filtered,
@@ -161,7 +161,7 @@ class DiscountsWatcherBloc
         .fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toDiscount(),
+          failure: l,
           filterStatus: FilterStatus.error,
         ),
       ),
@@ -208,7 +208,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -243,7 +243,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -269,7 +269,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -295,7 +295,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -321,7 +321,7 @@ class DiscountsWatcherBloc
           (l) => emit(
             state.copyWith(
               filterStatus: FilterStatus.error,
-              failure: l._toDiscount(),
+              failure: l,
             ),
           ),
           (r) => emit(
@@ -345,7 +345,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -373,7 +373,7 @@ class DiscountsWatcherBloc
         .fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -393,7 +393,7 @@ class DiscountsWatcherBloc
     // .fold(
     //       (l) => emit(
     //         state.copyWith(
-    //           failure: l._toDiscount(),
+    //           failure: l,
     //           filterStatus: FilterStatus.error,
     //         ),
     //       ),
@@ -417,7 +417,7 @@ class DiscountsWatcherBloc
     state.discountFilterRepository.getFilterList(discountSortingList).fold(
           (l) => emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           ),
@@ -444,7 +444,7 @@ class DiscountsWatcherBloc
         (l) {
           emit(
             state.copyWith(
-              failure: l._toDiscount(),
+              failure: l,
               filterStatus: FilterStatus.error,
             ),
           );
@@ -526,12 +526,12 @@ class DiscountsWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'Discount ${ErrorText.watcherBloc}',
           tagKey: ErrorText.streamBlocKey,
-        )._toDiscount(),
+        ),
       ),
     );
   }

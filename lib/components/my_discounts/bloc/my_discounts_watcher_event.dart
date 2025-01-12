@@ -17,7 +17,7 @@ class MyDiscountsWatcherEvent with _$MyDiscountsWatcherEvent {
     List<DiscountModel> discountItemsModel,
   ) = _Updated;
   const factory MyDiscountsWatcherEvent.failure({
-    required Object? error,
+    required Object error,
     required StackTrace stack,
   }) = _Failure;
 }

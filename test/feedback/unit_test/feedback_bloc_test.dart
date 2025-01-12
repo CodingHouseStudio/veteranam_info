@@ -141,10 +141,8 @@ void main() {
           mockFeedbackRepository
               .checkUserNeedShowFeedback(KTestVariables.user.id),
         ).thenAnswer(
-          (realInvocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
+          (realInvocation) async => const Left(
+            SomeFailure.serverError,
           ),
         );
         bloc
@@ -160,7 +158,7 @@ void main() {
           name: NameFieldModel.pure(),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
-          failure: FeedbackFailure.error,
+          failure: SomeFailure.serverError,
         ),
         const FeedbackState(
           formState: FeedbackEnum.inProgress,
@@ -311,7 +309,7 @@ void main() {
         when(
           mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         bloc
           ..add(const FeedbackEvent.nameUpdated(KTestVariables.nameCorrect))
@@ -353,7 +351,7 @@ void main() {
           name: NameFieldModel.dirty(KTestVariables.nameCorrect),
           email: EmailFieldModel.dirty(KTestVariables.userEmail),
           message: MessageFieldModel.dirty(KTestVariables.field),
-          failure: FeedbackFailure.error,
+          failure: SomeFailure.serverError,
         ),
       ],
     );
@@ -365,7 +363,7 @@ void main() {
     //     when(
     //       mockFeedbackRepository.sendFeedback(KTestText.feedbackModel),
     //     ).thenAnswer(
-    //       (_) async => Left(SomeFailure.serverError(error: null)),
+    //       (_) async => const Left(SomeFailure.serverError),
     //     );
     //     bloc
     //       ..add(const FeedbackEvent.nameUpdated(KTestText.field))

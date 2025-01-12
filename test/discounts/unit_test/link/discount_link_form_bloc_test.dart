@@ -36,7 +36,7 @@ void main() {
           KTestVariables.linkModelWrong,
         ),
       ).thenAnswer(
-        (_) async => Left(SomeFailure.serverError(error: null)),
+        (_) async => const Left(SomeFailure.serverError),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestVariables.user,

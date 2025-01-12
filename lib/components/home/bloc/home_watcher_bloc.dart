@@ -34,7 +34,7 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toHome(),
+          failure: l,
           loadingStatus: LoadingStatus.error,
         ),
       ),

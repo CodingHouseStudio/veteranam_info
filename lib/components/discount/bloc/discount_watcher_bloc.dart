@@ -42,7 +42,7 @@ class DiscountWatcherBloc
     if (event.discountId == null || event.discountId!.isEmpty) {
       emit(
         state.copyWith(
-          failure: DiscountFailure.linkWrong,
+          failure: SomeFailure.linkWrong,
           loadingStatus: LoadingStatus.error,
         ),
       );
@@ -60,7 +60,7 @@ class DiscountWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: DiscountFailure.linkWrong,
+          failure: SomeFailure.linkWrong,
           loadingStatus: LoadingStatus.error,
         ),
       ),

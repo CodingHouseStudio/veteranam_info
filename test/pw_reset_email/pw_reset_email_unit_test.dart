@@ -153,8 +153,7 @@ void main() {
             email: KTestVariables.userEmail,
           ),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
         bloc
           ..add(const PwResetEmailEvent.emailUpdated(KTestVariables.userEmail))
@@ -173,7 +172,7 @@ void main() {
         ),
         const PwResetEmailState(
           email: EmailFieldModel.dirty(KTestVariables.userEmail),
-          failure: PwResetEmailFailure.error,
+          failure: SomeFailure.serverError,
           formState: PwResetEmailEnum.inProgress,
         ),
       ],

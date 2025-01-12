@@ -20,7 +20,7 @@ class CitiesRepository implements ICitiesRepository {
       return Right(srotedCities);
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Cities(getCities)',

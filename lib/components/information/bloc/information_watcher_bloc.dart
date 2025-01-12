@@ -67,7 +67,7 @@ class InformationWatcherBloc
           // reportItems: reportItems,
         ),
       ),
-      onError: (dynamic error, StackTrace stack) {
+      onError: (Object error, StackTrace stack) {
         add(InformationWatcherEvent.failure(error: error, stack: stack));
       },
     );
@@ -265,7 +265,7 @@ class InformationWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: InformationFailure.error,
+          failure: l,
           loadingStatus: LoadingStatus.error,
         ),
       ),
@@ -319,12 +319,12 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: SomeFailure.serverError(
+        failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
           tag: 'Information ${ErrorText.watcherBloc}',
           tagKey: ErrorText.streamBlocKey,
-        )._toInformation(),
+        ),
       ),
     );
   }

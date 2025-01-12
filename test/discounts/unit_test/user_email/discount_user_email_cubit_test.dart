@@ -139,7 +139,7 @@ void main() {
   //     act: (bloc) async {
   //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
   //           .thenAnswer(
-  //         (_) async => Left(SomeFailure.serverError(error: null)),
+  //         (_) async => const Left(SomeFailure.serverError),
   //       );
   //       await bloc.started();
   //     },

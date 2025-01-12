@@ -73,7 +73,7 @@ void main() {
         const DiscountCardWatcherState(
           discountModel: null,
           loadingStatus: LoadingStatus.error,
-          failure: DiscountCardFailure.wrongID,
+          failure: SomeFailure.wrongID,
         ),
       ],
     );
@@ -88,7 +88,7 @@ void main() {
         ).thenAnswer(
           (_) async {
             await KTestConstants.delay;
-            return Left(SomeFailure.serverError(error: null));
+            return const Left(SomeFailure.serverError);
           },
         ),
       );

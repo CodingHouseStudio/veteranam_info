@@ -159,7 +159,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -172,7 +172,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -209,7 +209,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -222,7 +222,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });

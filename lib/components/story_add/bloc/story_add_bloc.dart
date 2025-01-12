@@ -106,7 +106,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
       imageItem: state.image.value,
     );
     result.fold(
-      (l) => emit(state.copyWith(failure: l._toStoryAdd())),
+      (l) => emit(state.copyWith(failure: l)),
       (r) => emit(
         state.copyWith(
           formStatus: FormzSubmissionStatus.success,

@@ -1,10 +1,10 @@
 part of 'story_watcher_bloc.dart';
 
-extension StoryFailureExtension on SomeFailure {
-  StoryFailure _toStory() {
-    return StoryFailure.error;
-  }
-}
+// extension StoryFailureExtension on SomeFailure {
+//   StoryFailure _toStory() {
+//     return StoryFailure.error;
+//   }
+// }
 
 @freezed
 class StoryWatcherState with _$StoryWatcherState {
@@ -13,7 +13,7 @@ class StoryWatcherState with _$StoryWatcherState {
     required List<StoryModel> loadingStoryModelItems,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
-    required StoryFailure? failure,
+    required SomeFailure? failure,
     required bool isListLoadedFull,
   }) = _Initial;
 }

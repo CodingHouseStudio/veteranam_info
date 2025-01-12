@@ -85,7 +85,7 @@ class EmployeeRespondBloc
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l.toEmployeeRespond(),
+            failure: l,
           ),
         ),
         (r) => emit(

@@ -306,7 +306,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         authenticationRepository = AuthenticationRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
@@ -317,7 +317,7 @@ void main() {
             password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.signUp(
@@ -325,35 +325,35 @@ void main() {
             password: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(mockAppAuthenticationRepository.logOut()).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.sendVerificationCode(
             email: KTestVariables.userEmailIncorrect,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.updateUserSetting(
             KTestVariables.userSettingModel,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
           (_) => KTestVariables.userSettingModelIncorrect,
@@ -364,14 +364,14 @@ void main() {
             image: KTestVariables.filePickerItem,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.checkVerificationCode(
             KTestVariables.code,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         when(
           mockAppAuthenticationRepository.resetPasswordUseCode(
@@ -379,7 +379,7 @@ void main() {
             newPassword: KTestVariables.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
       });
       test('Log in', () async {
@@ -392,7 +392,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -412,7 +412,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -429,7 +429,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -442,7 +442,7 @@ void main() {
       //     // .having(
       //     //   (e) => e.value,
       //     //   'value',
-      //     //   SomeFailure.serverError(error: null),
+      //     //   SomeFailure.serverError,
       //     // ),
       //   );
       // });
@@ -455,7 +455,7 @@ void main() {
       //     // .having(
       //     //   (e) => e.value,
       //     //   'value',
-      //     //   SomeFailure.serverError(error: null),
+      //     //   SomeFailure.serverError,
       //     // ),
       //   );
       // });
@@ -466,7 +466,7 @@ void main() {
           // .having(
           //   (e) => e.value,
           //   'value',
-          //   SomeFailure.serverError(error: null),
+          //   SomeFailure.serverError,
           // ),
         );
       });
@@ -479,7 +479,7 @@ void main() {
       //       ),
       //     ),
       //   ).thenAnswer(
-      //     (_) async => Left(SomeFailure.serverError(error: null)),
+      //     (_) async => const Left(SomeFailure.serverError),
       //   );
       //   expect(
       //     await authenticationRepository.updateUserData(

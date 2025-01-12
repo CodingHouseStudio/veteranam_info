@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
-import 'package:veteranam/shared/constants/failure_enum.dart';
+// import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsBodyWidget extends StatelessWidget {
@@ -36,13 +36,26 @@ class _DiscountsBodyWidget extends StatelessWidget {
             }
           },
         ),
+        BlocListener<UrlCubit, UrlEnum?>(
+          listener: (context, state) {
+            if (state != null) {
+              context.dialog.showSnackBardTextDialog(
+                state.value(
+                  context,
+                ),
+                duration: const Duration(milliseconds: 4000),
+              );
+              context.read<UrlCubit>().reset();
+            }
+          },
+        ),
         BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
           listener: (context, state) {
             if (state.failure != null) {
               context.dialog.showGetErrorDialog(
                 error: state.failure!.value(context),
                 onPressed:
-                    state.failure == DiscountsFailure.filter ? null : () {},
+                    state.filterStatus == FilterStatus.error ? null : () {},
                 // I think this event is not necessary for Stream, but
                 // I think it's better to give
                 // the user imaginary control over it

@@ -60,7 +60,7 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
         image: event.image!,
       );
       result.fold(
-        (l) => emit(state.copyWith(failure: l._toMobFeedback())),
+        (l) => emit(state.copyWith(failure: l)),
         (r) => emit(
           const MobFeedbackState(
             message: MessageFieldModel.pure(),

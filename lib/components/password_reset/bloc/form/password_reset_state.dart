@@ -1,17 +1,17 @@
 part of 'password_reset_bloc.dart';
 
-extension AuthFailureToPasswordResetFailure on SomeFailure {
-  PasswordResetFailure _toPasswordResetError() {
-    switch (this) {
-      case FailureSend():
-        return PasswordResetFailure.send;
-      case FailureNetwork():
-        return PasswordResetFailure.network;
-      default:
-        return PasswordResetFailure.error;
-    }
-  }
-}
+// extension AuthFailureToPasswordResetFailure on SomeFailure {
+//   PasswordResetFailure _toPasswordResetError() {
+//     switch (this) {
+//       case FailureSend():
+//         return PasswordResetFailure.send;
+//       case FailureNetwork():
+//         return PasswordResetFailure.network;
+//       default:
+//         return PasswordResetFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class PasswordResetState with _$PasswordResetState {
@@ -19,7 +19,7 @@ class PasswordResetState with _$PasswordResetState {
     required PasswordFieldModel password,
     required PasswordFieldModel confirmPassword,
     required PasswordResetEnum formState,
-    required PasswordResetFailure? failure,
+    required SomeFailure? failure,
   }) = _Initial;
 }
 

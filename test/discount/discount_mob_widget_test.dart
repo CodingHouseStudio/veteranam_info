@@ -61,8 +61,7 @@ void main() {
             showOnlyBusinessDiscounts: true,
           ),
         ).thenAnswer(
-          (realInvocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failure)),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {

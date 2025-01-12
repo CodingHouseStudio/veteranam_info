@@ -62,7 +62,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
               ),
         context,
         onError: (exception, stackTrace) {
-          SomeFailure.serverError(
+          SomeFailure.value(
             error: exception,
             stack: stackTrace,
             tag: 'PrecacheImage',
@@ -100,7 +100,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           height: widget.size,
           width: widget.size,
           errorBuilder: (context, error, stack) {
-            SomeFailure.serverError(
+            SomeFailure.value(
               error: 'URL: ${widget.imageUrl}, Error: $error',
               stack: stack,
               tag: 'Memory',
@@ -150,7 +150,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           if (imageUrl != widget.imageUrl) {
             return getImageNetwork(widget.imageUrl);
           } else {
-            SomeFailure.serverError(
+            SomeFailure.value(
               error: 'URL: ${widget.imageUrl}, Error: $error',
               stack: stack,
               tag: 'Network',
@@ -184,7 +184,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           if (imageUrl != widget.imageUrl) {
             return getCachedNetworkImage(widget.imageUrl);
           } else {
-            SomeFailure.serverError(
+            SomeFailure.value(
               error: error,
               tag: 'CachedNetworkImage',
               tagKey: ErrorText.imageKey,

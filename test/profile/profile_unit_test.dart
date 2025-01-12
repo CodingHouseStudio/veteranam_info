@@ -291,11 +291,7 @@ void main() {
             nickname: KTestVariables.nicknameCorrect,
           ),
         ).thenAnswer(
-          (realInvocation) async => Left(
-            SomeFailure.serverError(
-              error: KGroupText.failureSend,
-            ),
-          ),
+          (realInvocation) async => const Left(SomeFailure.serverError),
         );
 
         bloc
@@ -360,7 +356,7 @@ void main() {
           image: ImageFieldModel.dirty(KTestVariables.filePickerItem),
           nickname:
               const NicknameFieldModel.dirty(KTestVariables.nicknameCorrect),
-          failure: ProfileFailure.error,
+          failure: SomeFailure.serverError,
           formState: ProfileEnum.initial,
         ),
       ],

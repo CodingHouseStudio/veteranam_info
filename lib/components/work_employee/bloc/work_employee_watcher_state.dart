@@ -1,10 +1,10 @@
 part of 'work_employee_watcher_bloc.dart';
 
-extension WorkFailureExtension on SomeFailure {
-  WorkFailure _toWork() {
-    return WorkFailure.error;
-  }
-}
+// extension WorkFailureExtension on SomeFailure {
+//   WorkFailure _toWork() {
+//     return WorkFailure.error;
+//   }
+// }
 
 @freezed
 class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
@@ -16,7 +16,7 @@ class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
     required LoadingStatus loadingStatus,
     required int page,
     required int maxPage,
-    required WorkFailure? failure,
+    required SomeFailure? failure,
   }) = _Initial;
 }
 

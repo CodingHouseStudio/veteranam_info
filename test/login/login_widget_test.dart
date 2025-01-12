@@ -48,11 +48,7 @@ void main() {
             password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,
@@ -68,7 +64,7 @@ void main() {
             password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => const Left(SomeFailure.network),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,
@@ -84,7 +80,7 @@ void main() {
             password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.send(error: null)),
+          (invocation) async => const Left(SomeFailure.send),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,
@@ -100,7 +96,7 @@ void main() {
             password: KTestVariables.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.notFound(error: null)),
+          (invocation) async => const Left(SomeFailure.dataNotFound),
         );
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,

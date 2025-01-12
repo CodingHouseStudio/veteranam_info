@@ -129,7 +129,7 @@ void main() {
     //       mockAppAuthenticationRepository
     //           .createFcmUserSettingAndRemoveDeletePameter(),
     //     ).thenAnswer(
-    //       (_) async => Left(SomeFailure.serverError(error: null)),
+    //       (_) async => const Left(SomeFailure.serverError),
     //     );
     //   });
 
@@ -151,7 +151,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
       });
 

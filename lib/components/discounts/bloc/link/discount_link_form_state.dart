@@ -1,10 +1,10 @@
 part of 'discount_link_form_bloc.dart';
 
-enum DiscountLinkFormFailure {
-  error,
-  send,
-  network,
-}
+// enum DiscountLinkFormFailure {
+//   error,
+//   send,
+//   network,
+// }
 
 // extension DiscountLinkFormFailureExtension on SomeFailure {
 //   DiscountLinkFormFailure _toDiscountLinkForm() {
@@ -24,7 +24,7 @@ class DiscountLinkFormState with _$DiscountLinkFormState {
   const factory DiscountLinkFormState({
     required DiscountLinkFieldModel link,
     required LinkEnum formState,
-    DiscountLinkFormFailure? failure,
+    SomeFailure? failure,
   }) = _Initial;
 }
 

@@ -1,12 +1,12 @@
 part of 'employee_respond_bloc.dart';
 
-enum EmployeeRespondFailure { error }
+// enum EmployeeRespondFailure { error }
 
-extension EmployeeRespondFailureExtension on SomeFailure {
-  EmployeeRespondFailure toEmployeeRespond() {
-    return EmployeeRespondFailure.error;
-  }
-}
+// extension EmployeeRespondFailureExtension on SomeFailure {
+//   EmployeeRespondFailure toEmployeeRespond() {
+//     return EmployeeRespondFailure.error;
+//   }
+// }
 
 @freezed
 class EmployeeRespondState with _$EmployeeRespondState {
@@ -16,7 +16,7 @@ class EmployeeRespondState with _$EmployeeRespondState {
     required ResumeFieldModel resume,
     required bool noResume,
     required EmployeeRespondEnum formState,
-    required EmployeeRespondFailure? failure,
+    required SomeFailure? failure,
   }) = _EmployeeRespondState;
 }
 

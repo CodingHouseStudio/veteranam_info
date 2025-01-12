@@ -498,7 +498,7 @@ void main() {
             isLiked: true,
           ),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
 
         bloc.add(const InformationWatcherEvent.started());
@@ -532,7 +532,7 @@ void main() {
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.error &&
-              state.failure == InformationFailure.error,
+              state.failure == SomeFailure.serverError,
         ),
       ],
     );

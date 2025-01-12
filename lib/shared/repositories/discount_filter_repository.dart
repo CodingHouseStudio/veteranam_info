@@ -144,7 +144,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       activityFilter: _activeCategoryMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.category,
-      callMethodName: 'addCategory',
+      // callMethodName: 'addCategory',
     );
   }
 
@@ -162,7 +162,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       activityFilter: _activeLocationMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.location,
-      callMethodName: 'addLocation',
+      // callMethodName: 'addLocation',
     );
   }
 
@@ -180,7 +180,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       activityFilter: _activeEligibilityMap,
       unmodifiedDiscountModelItems: unmodifiedDiscountModelItems,
       filterEnum: _FilterEnum.eligibility,
-      callMethodName: 'addEligibility',
+      // callMethodName: 'addEligibility',
     );
   }
 
@@ -214,7 +214,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -256,7 +256,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           (filterEnum) => _activityListContainAnyValuesWithFilterEnum(
             filterEnum: filterEnum,
             discount: discount,
-            callMethodName: 'getFilterList',
+            // callMethodName: 'getFilterList',
           ),
         )) {
           filterList.add(discount);
@@ -266,7 +266,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return Right(filterList);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -295,7 +295,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -328,7 +328,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       );
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -385,7 +385,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: categoriesList,
         activityMap: _activeCategoryMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _categoryMap.addAll,
@@ -394,7 +394,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeCategoryMap,
         itemsMap: _categoryMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       );
       // Category. End:
 
@@ -402,7 +402,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getLocationFilterFromTranslateModel(
         list: locationList,
         activityMap: _activeLocationMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold(
         (l) => failure = l,
         _locationMap.addAll,
@@ -411,7 +411,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _addActivityMapToItemsMap(
         activityMap: _activeLocationMap,
         itemsMap: _locationMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       );
       _locationSearchMap.addAll(_locationMap);
       //Location. End.
@@ -420,13 +420,13 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getFilterFromTranslateModel(
         list: eligibilitiesList.getTranslateModels,
         activityMap: _activeEligibilityMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       ).fold((l) => failure = l, _eligibilityMap.addAll);
 
       _addActivityMapToItemsMap(
         activityMap: _activeEligibilityMap,
         itemsMap: _eligibilityMap,
-        callMethodName: 'getFilterValuesFromDiscountItems',
+        // callMethodName: 'getFilterValuesFromDiscountItems',
       );
 
       // Eligibility. End:
@@ -435,7 +435,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -453,7 +453,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
     required Map<String, FilterItem> activityFilter,
     required List<DiscountModel> unmodifiedDiscountModelItems,
     required _FilterEnum filterEnum,
-    required String callMethodName,
+    // required String callMethodName,
   }) {
     try {
       // Add New Filter Item To activity List and Change Is Selected For
@@ -489,7 +489,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         if (_activityListContainAnyValuesWithFilterEnum(
           filterEnum: filterEnum,
           discount: discount,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         )) {
           // Add Eligibility
           // discount contain category and call from add Location method
@@ -500,7 +500,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
                 ? _FilterEnum.location
                 : _FilterEnum.category,
             discount: discount,
-            callMethodName: callMethodName,
+            // callMethodName: callMethodName,
           )) {
             if (discount.eligibility.contains(EligibilityEnum.all)) {
               eligibilitiesList
@@ -519,7 +519,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
                 ? _FilterEnum.eligibility
                 : _FilterEnum.category,
             discount: discount,
-            callMethodName: callMethodName,
+            // callMethodName: callMethodName,
           )) {
             if (discount.location != null) {
               locationList.addAll(discount.location!);
@@ -538,7 +538,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
                 ? _FilterEnum.eligibility
                 : _FilterEnum.location,
             discount: discount,
-            callMethodName: callMethodName,
+            // callMethodName: callMethodName,
           )) {
             categoriesList.addAll(discount.category);
           }
@@ -552,7 +552,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _getFilterFromTranslateModel(
           list: eligibilitiesList,
           activityMap: _activeEligibilityMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         ).fold(
           (l) => failure = l,
           (r) => _eligibilityMap
@@ -568,7 +568,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _getLocationFilterFromTranslateModel(
           list: locationList,
           activityMap: _activeLocationMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         ).fold(
           (l) => failure = l,
           (r) => _locationMap
@@ -584,7 +584,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         _getFilterFromTranslateModel(
           list: categoriesList,
           activityMap: _activeCategoryMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         ).fold(
           (l) => failure = l,
           (r) => _categoryMap
@@ -603,7 +603,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -612,8 +612,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
               '| filterEnum: $filterEnum',
           tag: '_addFilterItem',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-          tag2Key: ErrorText.callFrom,
-          tag2: callMethodName,
+          // tag2Key: ErrorText.callFrom,
+          // tag2: callMethodName,
         ),
       );
     }
@@ -622,7 +622,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, bool> _addActivityMapToItemsMap({
     required Map<String, FilterItem> activityMap,
     required Map<String, FilterItem> itemsMap,
-    required String callMethodName,
+    // required String callMethodName,
   }) {
     try {
       if (activityMap.isNotEmpty) {
@@ -635,7 +635,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -643,8 +643,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           data: 'activityMap: $activityMap',
           tag: '_addActivityMapToItemsMap',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-          tag2Key: ErrorText.callFrom,
-          tag2: callMethodName,
+          // tag2Key: ErrorText.callFrom,
+          // tag2: callMethodName,
         ),
       );
     }
@@ -655,14 +655,14 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   bool _activityListContainAnyValuesWithFilterEnum({
     required _FilterEnum filterEnum,
     required DiscountModel discount,
-    required String callMethodName,
+    // required String callMethodName,
   }) {
     switch (filterEnum) {
       case _FilterEnum.category:
         return _activityListContainAnyValues(
           values: discount.category,
           activityFilter: _activeCategoryMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         );
       case _FilterEnum.location:
         return _activityListContainAnyValues(
@@ -673,13 +673,13 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
                   if (discount.subLocation != null) KAppText.sublocation,
                 ],
           activityFilter: _activeLocationMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         );
       case _FilterEnum.eligibility:
         return _activityListContainAnyValues(
           values: discount.eligibility.getTranslateModels,
           activityFilter: _activeEligibilityMap,
-          callMethodName: callMethodName,
+          // callMethodName: callMethodName,
         );
     }
   }
@@ -696,7 +696,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   bool _activityListContainAnyValues({
     required List<TranslateModel>? values,
     required Map<String, FilterItem> activityFilter,
-    required String callMethodName,
+    // required String callMethodName,
   }) {
     try {
       if (activityFilter.isEmpty) {
@@ -711,7 +711,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         );
       }
     } catch (e, stack) {
-      SomeFailure.filter(
+      SomeFailure.value(
         error: e,
         stack: stack,
         user: _userRepository.currentUser,
@@ -719,8 +719,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
         data: 'activityFilter: $activityFilter',
         tag: '_activityListContainAnyValues',
         tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-        tag2Key: ErrorText.callFrom,
-        tag2: callMethodName,
+        // tag2Key: ErrorText.callFrom,
+        // tag2: callMethodName,
       );
       return true;
     }
@@ -731,7 +731,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
   Either<SomeFailure, Map<String, FilterItem>> _getFilterFromTranslateModel({
     required List<TranslateModel> list,
     required Map<String, FilterItem> activityMap,
-    required String callMethodName,
+    // required String callMethodName,
     List<String> Function(Map<String, List<TranslateModel>> list)?
         sortingMethod,
   }) {
@@ -770,7 +770,7 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       return Right(filters);
     } catch (e, stack) {
       return Left(
-        SomeFailure.filter(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: _userRepository.currentUser,
@@ -778,8 +778,8 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
           data: 'activityMap: $activityMap',
           tag: '_getFilterFromTranslateModel',
           tagKey: 'Discount Filter ${ErrorText.repositoryKey}',
-          tag2Key: ErrorText.callFrom,
-          tag2: callMethodName,
+          // tag2Key: ErrorText.callFrom,
+          // tag2: callMethodName,
         ),
       );
     }
@@ -793,12 +793,12 @@ class DiscountFilterRepository implements IDiscountFilterRepository {
       _getLocationFilterFromTranslateModel({
     required List<TranslateModel> list,
     required Map<String, FilterItem> activityMap,
-    required String callMethodName,
+    // required String callMethodName,
   }) {
     return _getFilterFromTranslateModel(
       list: list,
       activityMap: activityMap,
-      callMethodName: callMethodName,
+      // callMethodName: callMethodName,
       sortingMethod: (groupList) {
         // not srting first five value because when get value
         // from _getFilterFromTranslateModel it sorting by number

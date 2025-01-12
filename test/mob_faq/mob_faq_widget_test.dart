@@ -29,11 +29,7 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
           await KTestConstants.delay;
-          return Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          );
+          return const Left(SomeFailure.serverError);
         });
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
@@ -45,11 +41,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
           await KTestConstants.delay;
-          return Left(
-            SomeFailure.network(
-              error: null,
-            ),
-          );
+          return const Left(SomeFailure.network);
         });
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
@@ -61,11 +53,7 @@ void main() {
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
           await KTestConstants.delay;
-          return Left(
-            SomeFailure.get(
-              error: null,
-            ),
-          );
+          return const Left(SomeFailure.get);
         });
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,

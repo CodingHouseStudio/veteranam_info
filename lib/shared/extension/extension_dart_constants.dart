@@ -218,20 +218,21 @@ extension DateFieldModelDart on DateFieldModel {
       );
 }
 
-extension UrlFailureExtension on SomeFailure {
-  UrlEnum toUrl() {
-    switch (this) {
-      case FailureShare():
-        return UrlEnum.shareError;
-      case FailureLink():
-        return UrlEnum.linkError;
-      case FailureCopy():
-        return UrlEnum.copyError;
-      default:
-        return UrlEnum.error;
-    }
-  }
-}
+// extension UrlFailureExtension on SomeFailure {
+//   UrlEnum toUrl() {
+//     switch (this) {
+//       case SomeFailure.share:
+//         return UrlEnum.shareError;
+//       case SomeFailure.link:
+//         return UrlEnum.linkError;
+//       case SomeFailure.copy:
+//         return UrlEnum.copyError;
+//       // ignore: no_default_cases
+//       default:
+//         return UrlEnum.error;
+//     }
+//   }
+// }
 
 extension ErrorLevelEnumExtension on ErrorLevelEnum? {
   String get getString {

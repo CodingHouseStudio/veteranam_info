@@ -54,7 +54,7 @@ class InvestorsWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toInvestors(),
+          failure: l,
           loadingStatus: LoadingStatus.error,
         ),
       ),

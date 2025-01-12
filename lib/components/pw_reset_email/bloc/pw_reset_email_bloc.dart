@@ -91,7 +91,7 @@ class PwResetEmailBloc extends Bloc<PwResetEmailEvent, PwResetEmailState> {
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l._toPwResetEmailError(),
+            failure: l,
             formState: PwResetEmailEnum.inProgress,
           ),
         ),

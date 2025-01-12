@@ -3,7 +3,7 @@ import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
+// import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
@@ -138,30 +138,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return Right(userCredentional.user?.toUser);
       }
       return const Right(null);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      final failure = SignUpWithGoogleFailure.fromCode(
-        error: e,
-        stack: stack,
-        user: currentUser,
-        userSetting: currentUserSetting,
-        tag: 'signUpWithGoogle(${ErrorText.fromCode})',
-        tagKey: ErrorText.appAuthenticationKey,
-      ).status;
-      if (failure != null) {
-        return Left(
-          failure,
-        );
-      }
-      return const Right(null);
-    } catch (_, stack) {
+    } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
-          error: _,
+        SomeFailure.value(
+          error: e,
           stack: stack,
-          tag: 'signUpWithGoogle(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
+          tag: 'signUpWithGoogle(${ErrorText.fromCode})',
+          tagKey: ErrorText.appAuthenticationKey,
         ),
       );
     } finally {
@@ -211,27 +196,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return Right(userCredentional.user?.toUser);
       }
       return const Right(null);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      final failure = SignUpWithFacebookFailure.fromCode(
-        error: e,
-        stack: stack,
-        user: currentUser,
-        userSetting: currentUserSetting,
-        tag: 'signUpWithFacebook(${ErrorText.fromCode})',
-        tagKey: ErrorText.appAuthenticationKey,
-      ).status;
-      if (failure != null) {
-        return Left(
-          failure,
-        );
-      }
-      return const Right(null);
     } catch (_, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: _,
           stack: stack,
-          tag: 'signUpWithFacebook(${ErrorText.serverError})',
+          tag: 'signUpWithFacebook',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
@@ -274,8 +244,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   /// Signs in with the provided [email] and [password].
-  ///
-  /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
   @override
   Future<Either<SomeFailure, User?>> logInWithEmailAndPassword({
     required String email,
@@ -286,7 +254,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           email: email,
           password: password,
         ),
-        ({required error, stack}) => LogInWithEmailAndPasswordFailure.fromCode(
+        ({required error, stack}) => SomeFailure.value(
           error: error,
           stack: stack,
           user: currentUser,
@@ -294,29 +262,25 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           data: 'Email: $email | Password: $password',
           tag: 'logInWithEmailAndPassword(${ErrorText.fromCode})',
           tagKey: ErrorText.appAuthenticationKey,
-        ).status,
+        ),
       );
 
   /// Signs in with the anonymously.
-  ///
-  /// Throws a [SendFailure] if an exception occurs.
   @override
   Future<Either<SomeFailure, User?>> logInAnonymously() async =>
       _handleAuthOperation(
         () async => _firebaseAuth.signInAnonymously(),
-        ({required error, stack}) => SendFailure.fromCode(
+        ({required error, stack}) => SomeFailure.value(
           error: error,
           stack: stack,
           user: currentUser,
           userSetting: currentUserSetting,
           tag: 'logInAnonymously(${ErrorText.fromCode})',
           tagKey: ErrorText.appAuthenticationKey,
-        ).status,
+        ),
       );
 
   /// Creates a new user with the provided [email] and [password].
-  ///
-  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
   @override
   Future<Either<SomeFailure, User?>> signUp({
     required String email,
@@ -342,7 +306,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
             );
           }
         },
-        ({required error, stack}) => SignUpWithEmailAndPasswordFailure.fromCode(
+        ({required error, stack}) => SomeFailure.value(
           error: error,
           stack: stack,
           user: currentUser,
@@ -350,7 +314,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           tag: 'signUp(${ErrorText.fromCode})',
           data: 'Email: $email | Password: $password',
           tagKey: ErrorText.appAuthenticationKey,
-        ).status,
+        ),
       );
 
   @override
@@ -363,8 +327,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   /// Signs out the current user which will emit
   /// [User.empty] from the [user] Stream.
-  ///
-  /// Throws a [LogOutFailure] if an exception occurs.
   @override
   Future<Either<SomeFailure, bool>> logOut() async {
     try {
@@ -377,23 +339,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       ]);
       unawaited(logInAnonymously());
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        LogOutFailure.fromCode(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'logOut(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
-          tag: 'logOut(${ErrorText.serverError})',
+          tag: 'logOut',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
@@ -417,30 +368,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, User?>> _handleAuthOperation(
     Future<firebase_auth.UserCredential> Function() operation,
     SomeFailure Function({
-      required firebase_auth.FirebaseAuthException error,
+      required Object error,
       StackTrace? stack,
     }) exception,
   ) async {
     try {
       final userCredentional = await operation();
       return Right(userCredentional.user?.toUser);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+    } catch (e, stack) {
       return Left(
         exception(
           error: e,
           stack: stack,
-        ),
-      );
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: '_handleAuthOperation operation(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'Operation: $operation',
         ),
       );
     } finally {
@@ -480,24 +419,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
               ),
       );
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SomeFailure.emailSendingFailed(
-          error: e,
-          stack: stack,
-          tag: 'sendVerificationCode(emailSendingFailed)',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'Email: $email',
-        ),
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
-          tag: 'sendVerificationCode(${ErrorText.serverError})',
+          tag: 'sendVerificationCode',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
@@ -512,17 +439,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     String? code,
   ) async {
     try {
-      log('dfsdsfdsfdsffdsdfsdfsdfsfsd || $code');
       if (code == null) {
         return Left(
-          SomeFailure.wrongVerifyCode(
+          SomeFailure.value(
             error: 'Code is null',
             tag: 'checkVerificationCode(${ErrorText.wrongVerifyCodeError})',
             tagKey: ErrorText.appAuthenticationKey,
             user: currentUser,
             userSetting: currentUserSetting,
             data: 'Code: $code',
-            errorLevel: ErrorLevelEnum.info,
           ),
         );
       }
@@ -534,24 +459,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         // ),
       );
       return Right(email.isNotEmpty);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        VerifyCodeFailure.fromCode(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'checkVerificationCode(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-          data: 'Code: $code',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
-          tag: 'checkVerificationCode(${ErrorText.serverError})',
+          tag: 'checkVerificationCode',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
@@ -572,23 +485,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         newPassword: newPassword,
       );
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'resetPasswordUseCode(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
-          tag: 'resetPasswordUseCode(${ErrorText.serverError})',
+          tag: 'resetPasswordUseCode',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,
@@ -645,21 +547,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return Right(userSetting);
       }
       return Right(userSetting);
-    } on firebase_core.FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'updateUserSetting(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-          data: 'User Setting: $userSetting',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           user: currentUser,
@@ -734,24 +624,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       }
 
       return Right(user.copyWith(photo: userPhoto));
-    } on firebase_auth.FirebaseAuthException catch (e, stack) {
-      return Left(
-        SomeFailure.serverError(
-          error: e,
-          stack: stack,
-          tag: 'updateUserData(${ErrorText.serverError})',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'User: $user| ${image.getErrorData}',
-        ),
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
-          tag: 'updateUserData(${ErrorText.serverError})',
+          tag: 'updateUserData',
           tagKey: ErrorText.appAuthenticationKey,
           user: currentUser,
           userSetting: currentUserSetting,

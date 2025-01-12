@@ -1027,10 +1027,6 @@
   "@shareFailure": {
     "en-US": "error message when trying to share user data."
   },
-  "linkFailure": "An error occurred while navigating to the page. Please try again later.",
-  "@linkFailure": {
-    "examples": "an error message when trying to follow a link."
-  },
   "apply": "Apply",
   "@apply": {
     "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"
@@ -1095,10 +1091,6 @@
   "copyLink": "Link copied",
   "@copyLink": {
     "examples": "Text of the copy dialog"
-  },
-  "copyFailure": "Error when copying",
-  "@copyFailure": {
-    "examples": "Error message when trying to copy mail."
   },
   "thanks": "Thank You!!",
   "@thanks": {
@@ -1727,5 +1719,133 @@
   "@favorite": {
     "examples": "Text on card pages under the like button",
     "description": "The button is used to like the card data."
+  },
+  "unauthorizedFailure": "You are not authorized. Please check your login credentials.",
+  "@unauthorizedFailure": {
+    "examples": "Error message when the user is not authorized to perform the action"
+  },
+  "userNotFoundFailure": "User not found. Please verify your entered data.",
+  "@userNotFoundFailure": {
+    "examples": "Error message when no user is found with the provided data"
+  },
+  "userDuplicateFailure": "This user already exists. Please try using a different email address.",
+  "@userDuplicateFailure": {
+    "examples": "Error message when the user already exists with the provided email"
+  },
+  "requiresRecentLoginFailure": "Requirement: You need to re-login to proceed.",
+  "@requiresRecentLoginFailure": {
+    "examples": "Error message when the system requires a recent login"
+  },
+  "userEmailDuplicateFailure": "This email is already registered. Please try a different one.",
+  "@userEmailDuplicateFailure": {
+    "examples": "Error message when the email is already in use"
+  },
+  "tooManyRequestsFailure": "Too many requests. Please try again later.",
+  "@tooManyRequestsFailure": {
+    "examples": "Error message when the system detects too many requests in a short time"
+  },
+  "permissionFailure": "You do not have permission to perform this action.",
+  "@permissionFailure": {
+    "examples": "Error message when the user lacks permission to execute the operation"
+  },
+  "emailSendingFailedFailure": "Failed to send email. Please try again.",
+  "@emailSendingFailedFailure": {
+    "examples": "Error message when email sending fails"
+  },
+  "linkFailure": "Error with the link. Please check the URL and try again.",
+  "@linkFailure": {
+    "examples": "Error message when the provided URL is invalid"
+  },
+  "copyFailure": "Failed to copy data.",
+  "@copyFailure": {
+    "examples": "Error message when the copy action fails"
+  },
+  "wrongVerifyCodeFailure": "Invalid verification code.",
+  "@wrongVerifyCodeFailure": {
+    "examples": "Error message when the verification code is incorrect"
+  },
+  "invalidInputFailure": "Invalid input. Please check the entered data.",
+  "@invalidInputFailure": {
+    "examples": "Error message when the user enters invalid data"
+  },
+  "browserNotSupportPopupDialogFailure": "Your browser does not support pop-up windows.",
+  "@browserNotSupportPopupDialogFailure": {
+    "examples": "Error message when the browser does not support pop-ups"
+  },
+  "emailInvalidFormatFailure": "Invalid email format. Please check the entered email.",
+  "@emailInvalidFormatFailure": {
+    "examples": "Error message when the email format is incorrect"
+  },
+  "passwordWrongFailure": "Incorrect password.",
+  "@passwordWrongFailure": {
+    "examples": "Error message when the password entered by the user is incorrect"
+  },
+  "passwordWeakFailure": "Password is too weak. Please try using a stronger one.",
+  "@passwordWeakFailure": {
+    "examples": "Error message when the user's password is too weak"
+  },
+  "userDisableFailure": "Your account has been disabled. Please contact support.",
+  "@userDisableFailure": {
+    "examples": "Error message when the user's account is disabled"
+  },
+  "dataNotFoundFailure": "Data not found. Please try again later.",
+  "@dataNotFoundFailure": {
+    "examples": "Error message when no data is found"
+  },
+  "wrongIDFailure": "Invalid ID. Please check the entered data.",
+  "@wrongIDFailure": {
+    "examples": "Error message when the provided ID is incorrect"
+  },
+  "linkWrongFailure": "Incorrect link. Please check it and try again.",
+  "@linkWrongFailure": {
+    "examples": "Error message when the link provided is invalid"
+  },
+  "timeoutFailure": "The request timed out. Please try again.",
+  "@timeoutFailure": {
+    "examples": "Error message when a timeout occurs"
+  },
+  "unkownError": "Unknown error.",
+  "@unkownError": {
+    "examples": "General fallback error when no specific description is available"
+  },
+  "serverErrorFailure": "Unknown error.",
+  "@serverErrorFailure": {
+    "examples": "Generic error message for server-side issues"
+  },
+  "noSuchMethodErrorFailure": "Unknown error.",
+  "@noSuchMethodErrorFailure": {
+    "examples": "Error message when a method is not found"
+  },
+  "typeFailure": "Data type mismatch. Please check the entered values.",
+  "@typeFailure": {
+    "examples": "Error message when a data type does not match the expected value in the code"
+  },
+  "assertionFailure": "An error occurred during validation. Please try again.",
+  "@assertionFailure": {
+    "examples": "Error message when an assertion fails in the code"
+  },
+  "unimplementedFeatureFailure": "This feature has not been implemented yet.",
+  "@unimplementedFeatureFailure": {
+    "examples": "Error message when trying to access an unimplemented feature"
+  },
+  "formatFailure": "Invalid data format. Please check the entered values.",
+  "@formatFailure": {
+    "examples": "Error message when the data format is incorrect"
+  },
+  "maxRetriesFailure": "Maximum retry attempts reached. Please try again later.",
+  "@maxRetriesFailure": {
+    "examples": "Error message when the maximum number of retries is exceeded"
+  },
+  "loadFileCancelFailure": "File download cancelled.",
+  "@loadFileCancelFailure": {
+    "examples": "Error message when a file download is cancelled"
+  },
+  "cancelledFailure": "Operation has been cancelled.",
+  "@cancelledFailure": {
+    "examples": "Error message when an operation is cancelled"
+  },
+  "fcmFailure": "Error while loading data. Please reload the page or contact us if the issue persists.",
+  "@fcmFailure": {
+    "examples": "Error message when an issue occurs during FCM data retrieval"
   }
 }

@@ -42,7 +42,7 @@ class DiscountsWatcherEvent with _$DiscountsWatcherEvent {
   const factory DiscountsWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountsWatcherEvent.failure({
-    required Object? error,
+    required Object error,
     required StackTrace stack,
   }) = _Failure;
 

@@ -59,7 +59,7 @@ void main() {
           mockStoryRepository
               .getStoriesByUserId(KTestVariables.userWithoutPhoto.id),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
         bloc.add(const MyStoryWatcherEvent.started());
       },

@@ -52,11 +52,7 @@ void main() {
             storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
         await storyAddPumpAppHelper(
           tester: tester,
@@ -74,7 +70,7 @@ void main() {
             storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.network(error: null)),
+          (invocation) async => const Left(SomeFailure.network),
         );
         await storyAddPumpAppHelper(
           tester: tester,
@@ -92,7 +88,7 @@ void main() {
             storyModel: KTestVariables.storyModelItems.first,
           ),
         ).thenAnswer(
-          (invocation) async => Left(SomeFailure.send(error: null)),
+          (invocation) async => const Left(SomeFailure.send),
         );
         await storyAddPumpAppHelper(
           tester: tester,

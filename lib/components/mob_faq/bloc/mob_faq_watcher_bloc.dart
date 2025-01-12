@@ -31,7 +31,7 @@ class MobFaqWatcherBloc extends Bloc<MobFaqWatcherEvent, MobFaqWatcherState> {
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toMobFAQ(),
+          failure: l,
           loadingStatus: LoadingStatus.error,
         ),
       ),

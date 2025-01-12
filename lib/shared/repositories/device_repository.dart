@@ -102,7 +102,7 @@ class DeviceRepository implements IDeviceRepository {
       return Right(deviceId);
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Device(getDeviceId)',
@@ -173,19 +173,19 @@ class DeviceRepository implements IDeviceRepository {
 
       return Right(fcmToken);
     } catch (e, stack) {
-      final failure = FcmTokenGetFailure.fromCode(
+      final failure = SomeFailure.value(
         error: e,
         stack: stack,
         tag: 'Device(getFcm)',
         tagKey: ErrorText.repositoryKey,
         data: 'Platform: $platformValue',
-      ).status;
-      if (failure != null) {
-        return Left(
-          failure,
-        );
-      }
-      return const Right(null);
+      );
+      // if (failure != null) {
+      return Left(
+        failure,
+      );
+      // }
+      // return const Right(null);
     }
   }
 

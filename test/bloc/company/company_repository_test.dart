@@ -125,7 +125,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logOut(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
 
         when(
@@ -187,7 +187,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logOut(),
         ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
+          (_) async => const Left(SomeFailure.serverError),
         );
 
         when(

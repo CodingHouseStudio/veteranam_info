@@ -18,7 +18,7 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   // const factory InformationWatcherEvent.filterReset() = _FilterReset;
 
   const factory InformationWatcherEvent.failure({
-    required Object? error,
+    required Object error,
     required StackTrace stack,
   }) = _Failure;
 

@@ -68,7 +68,7 @@ void main() {
           (invocation) async => const Right(true),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
-          (invocation) async => Left(SomeFailure.copy(error: null)),
+          (invocation) async => const Left(SomeFailure.copy),
         );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,

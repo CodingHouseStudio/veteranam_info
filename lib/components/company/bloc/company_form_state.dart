@@ -1,8 +1,8 @@
 part of 'company_form_bloc.dart';
 
-extension CompanyFormFailureExtension on SomeFailure {
-  CompanyFormFailure _toCompanyError() => CompanyFormFailure.error;
-}
+// extension CompanyFormFailureExtension on SomeFailure {
+//   CompanyFormFailure _toCompanyError() => CompanyFormFailure.error;
+// }
 
 @freezed
 class CompanyFormState with _$CompanyFormState {
@@ -12,7 +12,7 @@ class CompanyFormState with _$CompanyFormState {
     required CompanyCodeFieldModel code,
     required ImageFieldModel image,
     required LinkFieldModel link,
-    required CompanyFormFailure? failure,
+    required SomeFailure? failure,
     required CompanyFormEnum formState,
     required bool? deleteIsPossible,
   }) = _CompanyFormState;

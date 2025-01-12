@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -44,19 +44,9 @@ class InformationRepository implements IInformationRepository {
         ),
       );
       return const Right(true);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        SendFailure.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Information(updateLikeCount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Information Model: $informationModel, Is Liked: $isLiked',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Information(updateLikeCount)',
@@ -74,19 +64,9 @@ class InformationRepository implements IInformationRepository {
     try {
       final informationModel = await _firestoreService.getInformation(id);
       return Right(informationModel);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Information(getInformation)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Information ID: $id',
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Information(getInformation)',

@@ -1,26 +1,26 @@
 part of 'pw_reset_email_bloc.dart';
 
-extension AuthFailureToPwResetEmailFailure on SomeFailure {
-  PwResetEmailFailure _toPwResetEmailError() {
-    switch (this) {
-      case FailureSend():
-        return PwResetEmailFailure.send;
-      case FailureNotFound():
-        return PwResetEmailFailure.notFound;
-      case FailureNetwork():
-        return PwResetEmailFailure.network;
-      default:
-        return PwResetEmailFailure.error;
-    }
-  }
-}
+// extension AuthFailureToPwResetEmailFailure on SomeFailure {
+//   PwResetEmailFailure _toPwResetEmailError() {
+//     switch (this) {
+//       case FailureSend():
+//         return PwResetEmailFailure.send;
+//       case FailureUserNotFound():
+//         return PwResetEmailFailure.notFound;
+//       case FailureNetwork():
+//         return PwResetEmailFailure.network;
+//       default:
+//         return PwResetEmailFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class PwResetEmailState with _$PwResetEmailState {
   const factory PwResetEmailState({
     required EmailFieldModel email,
     required PwResetEmailEnum formState,
-    required PwResetEmailFailure? failure,
+    required SomeFailure? failure,
   }) = _Initial;
 }
 

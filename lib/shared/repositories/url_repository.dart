@@ -31,17 +31,17 @@ class UrlRepository extends IUrlRepository {
           e.toString().contains('canceled')) {
         return const Right(true);
       }
-      final error = ShareFailure.fromCode(
+      final error = SomeFailure.value(
         error: e,
         stack: stack,
         tag: 'Url(share)',
         tagKey: ErrorText.repositoryKey,
         data: 'Url: $url| Used Site Url - $useSiteUrl',
-      ).status;
-      if (error == null) {
+      );
+      if (error == SomeFailure.shareInProgress) {
         return const Right(false);
       }
-      if (error is FailureShareUnavailable) {
+      if (error == SomeFailure.shareUnavailable) {
         final resault = await copy(
           baseUrl + url,
         );
@@ -86,7 +86,7 @@ class UrlRepository extends IUrlRepository {
       return const Right(false);
     } catch (e, stack) {
       return Left(
-        SomeFailure.link(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Url(launchUrl)',
@@ -107,7 +107,7 @@ class UrlRepository extends IUrlRepository {
       return const Right(true);
     } catch (e, stack) {
       return Left(
-        SomeFailure.copy(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Url(copy)',

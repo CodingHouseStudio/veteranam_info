@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -19,18 +19,9 @@ class InvestorsRepository implements IInvestorsRepository {
           //reportIdItems
           );
       return Right(fundItems);
-    } on FirebaseException catch (e, stack) {
-      return Left(
-        GetFailur.fromCode(
-          error: e,
-          stack: stack,
-          tag: 'Investors(getFunds)',
-          tagKey: ErrorText.repositoryKey,
-        ).status,
-      );
     } catch (e, stack) {
       return Left(
-        SomeFailure.serverError(
+        SomeFailure.value(
           error: e,
           stack: stack,
           tag: 'Investors(getFunds)',

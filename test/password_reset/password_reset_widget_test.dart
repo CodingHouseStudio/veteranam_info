@@ -36,8 +36,7 @@ void main() {
             null,
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Left(SomeFailure.serverError(error: KGroupText.failure)),
+          (invocation) async => const Left(SomeFailure.serverError),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
@@ -144,8 +143,7 @@ void main() {
                 newPassword: KTestVariables.passwordCorrect,
               ),
             ).thenAnswer(
-              (invocation) async =>
-                  Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+              (invocation) async => const Left(SomeFailure.serverError),
             );
           });
           testWidgets('Enter correct password', (tester) async {
