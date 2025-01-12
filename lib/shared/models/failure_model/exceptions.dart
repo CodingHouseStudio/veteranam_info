@@ -122,7 +122,6 @@ mixin _Exception {
           failure = SomeFailure.tooManyRequests;
         case 'unauthorized':
         case 'unauthenticated':
-        case 'permission-denied':
           errorLevelValue = ErrorLevelEnum.info;
           failure = SomeFailure.permission;
         case 'max-retries':
@@ -144,6 +143,7 @@ mixin _Exception {
         case 'mismatched-credential':
         case 'invalid-registration-token':
         case 'message-rate-exceeded':
+        case 'permission-denied':
           errorLevelValue = ErrorLevelEnum.info;
           failure = SomeFailure.fcm;
         case 'deadline-exceeded':
