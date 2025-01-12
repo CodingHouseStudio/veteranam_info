@@ -89,12 +89,15 @@ mixin _Exception {
         case 'network-request-failed':
           errorLevelValue = ErrorLevelEnum.info;
           failure = SomeFailure.network;
+        case 'popup-blocked':
+          errorLevelValue = ErrorLevelEnum.info;
+          failure = SomeFailure.browserNotSupportPopupDialog;
         case 'provider-already-linked':
+        case 'popup-closed-by-user':
           errorLevelValue = ErrorLevelEnum.info;
           failure = SomeFailure.providerAlreadyLinked;
         case 'internal-error':
         case 'permission-denied':
-        case 'operation-not-allowed':
         default:
           errorLevelValue = null;
           failure = SomeFailure.serverError;
