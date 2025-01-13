@@ -4,12 +4,12 @@ import 'package:veteranam/shared/shared_flutter.dart';
 
 class NetworkBanner extends StatelessWidget {
   const NetworkBanner({
-    required this.isDesk,
-    required this.isTablet,
+    // required this.isDesk,
+    // required this.isTablet,
     super.key,
   });
-  final bool isDesk;
-  final bool isTablet;
+  // final bool isDesk;
+  // final bool isTablet;
 
   @override
   Widget build(BuildContext context) {

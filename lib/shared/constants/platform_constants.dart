@@ -6,7 +6,7 @@ abstract class KPlatformConstants {
   // static const minWidthThresholdMobile = 800; // Example threshold for mobile
   static const minWidthThresholdDesk = 1024; // Existing threshold for tablet
   static const minWidthThresholdTablet = 768; // Existing threshold for tablet
-  static const maxWidthThresholdTablet = 1440; // Existing threshold for tablet
+  static const maxWidthThresholdDesk = 1440.00; // Existing threshold for tablet
   // static const minWidthThresholdDesktop =
   //     1400; // Existing threshold for desktop
   // static const mobilePaddingKoefficient = 0.25;

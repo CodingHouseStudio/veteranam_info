@@ -25,125 +25,44 @@ class _DiscountsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<NetworkCubit, NetworkStatus>(
-          listener: (context, state) {
-            if (state == NetworkStatus.network) {
-              context.read<DiscountsWatcherBloc>().add(
-                    const DiscountsWatcherEvent.started(),
-                  );
-            }
-          },
-        ),
-        BlocListener<UrlCubit, UrlEnum?>(
-          listener: (context, state) {
-            if (state != null) {
-              context.dialog.showSnackBardTextDialog(
-                state.value(
-                  context,
-                ),
-                duration: const Duration(milliseconds: 4000),
-              );
-              context.read<UrlCubit>().reset();
-            }
-          },
-        ),
-        BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
-          listener: (context, state) {
-            if (state.failure != null) {
-              context.dialog.showGetErrorDialog(
-                error: state.failure!.value(context),
-                onPressed:
-                    state.filterStatus == FilterStatus.error ? null : () {},
-                // I think this event is not necessary for Stream, but
-                // I think it's better to give
-                // the user imaginary control over it
-
-                // () => context
-                //     .read<DiscountWatcherBloc>()
-                //     .add(const DiscountWatcherEvent.started()),
-              );
-            }
-
-            if (state.filterDiscountModelList.length ==
-                (context.read<DiscountConfigCubit>().state.loadingItems *
-                    (context
-                            .read<DiscountConfigCubit>()
-                            .state
-                            .emailScrollCount +
-                        1))) {
-              // if (Config.isWeb) {
-              if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
-                if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
-                    true) {
-                  context.dialog.showUserEmailDialog(
-                    context.read<DiscountConfigCubit>().state.emailCloseDelay,
-                  );
-                }
-              }
-              // } else {
-              //   context.read<MobileRatingCubit>().showDialog();
-              // }
-            }
-          },
-          listenWhen: (previous, current) =>
-              current.failure != null ||
-              previous.filterDiscountModelList.length !=
-                  current.filterDiscountModelList.length,
-        ),
-      ],
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDesk =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-          final isTablet =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-
+    return DiscountsBlocListener(
+      childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
+        buildWhen: (previous, current) => previous.isDesk != current.isDesk,
+        builder: (context, state) {
           final padding = EdgeInsets.symmetric(
-            horizontal: (isDesk
-                ? KPadding.kPaddingSize90 +
-                    ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
-                        ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
-                            2
-                        : 0)
-                : KPadding.kPaddingSize16),
+            horizontal: state.isDesk
+                ? AppVersionEnum.desk.horizontalPadding
+                : AppVersionEnum.mobile.horizontalPadding,
           );
           return CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
-              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-              if (Config.isWeb)
-                NavigationBarWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
-                  pageName: context.l10n.discounts,
-                ),
+              const NetworkBanner(),
+              if (Config.isWeb) const NavigationBarWidget(),
               SliverPadding(
                 padding: padding,
-                sliver: DiscountTitleWidget(
-                  isDesk: isDesk,
+                sliver: SliverConstrainedCrossAxis(
+                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      DiscountTitleWidget(
+                        isDesk: state.isDesk,
+                      ),
+                      if (state.isDesk)
+                        KSizedBox.kHeightSizedBox40.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox24.toSliver,
+                      if (state.isDesk)
+                        const DiscountsDeskWidgetList()
+                      else
+                        DiscountWidgetList(
+                          isDesk: state.isTablet,
+                        ),
+                    ],
+                  ),
                 ),
               ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox40.toSliver
-              else
-                KSizedBox.kHeightSizedBox24.toSliver,
-              if (isDesk)
-                SliverPadding(
-                  padding: padding,
-                  sliver: DiscountsDeskWidgetList(
-                    maxHeight: constraints.maxHeight,
-                  ),
-                )
-              else
-                DiscountsMobWidgetList(
-                  padding: padding,
-                  isDesk: isTablet,
-                ),
             ],
             controller: scrollController,
             // semanticChildCount: null,

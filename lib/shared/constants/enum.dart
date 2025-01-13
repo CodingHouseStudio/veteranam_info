@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/dimensions/padding_constants.dart';
 
 enum LoadingStatus {
   initial,
@@ -92,4 +93,17 @@ enum ErrorLevelEnum {
   error,
   info,
   warning;
+}
+
+enum AppVersionEnum {
+  desk(KPadding.kPaddingSize90),
+  mobile(KPadding.kPaddingSize16),
+  tablet(KPadding.kPaddingSize32);
+
+  const AppVersionEnum(this.horizontalPadding);
+
+  final double horizontalPadding;
+
+  bool get isDesk => this == AppVersionEnum.desk;
+  bool get isTablet => this != AppVersionEnum.mobile;
 }
