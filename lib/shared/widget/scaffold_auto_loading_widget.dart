@@ -71,8 +71,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-          final isTablet =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+          // final isTablet =
+          //     constraints.maxWidth > KPlatformConstants.
+          // minWidthThresholdTablet;
 
           final titleChildWidget =
               widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
@@ -138,9 +139,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             horizontal: (isDesk
                 ? KPadding.kPaddingSize90 +
                     ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
+                            KPlatformConstants.maxWidthThresholdDesk)
                         ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
+                                KPlatformConstants.maxWidthThresholdDesk) /
                             2
                         : 0)
                 : KPadding.kPaddingSize16),
@@ -163,11 +164,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       widgetKey: KWidgetkeys.widget.scaffold.scroll,
                       // physics: KTest.scroll,
                       slivers: [
-                        NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                        const NetworkBanner(),
                         if (Config.isWeb || widget.pageName != null)
                           NavigationBarWidget(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
                             pageName: widget.pageName,
                             // showMobileNawbar: widget.showMobileNawbar,
                           ),

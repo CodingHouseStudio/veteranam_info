@@ -377,7 +377,7 @@ extension DoubleExtensions on double {
     double? horizontalPadding,
     bool notUseHorizontal = true,
   }) {
-    const threshold = KPlatformConstants.maxWidthThresholdTablet;
+    const threshold = KPlatformConstants.maxWidthThresholdDesk;
     final horizontalPaddingValue = this <= threshold
         ? this * precent
         : threshold * precent + ((this - threshold) / 2);

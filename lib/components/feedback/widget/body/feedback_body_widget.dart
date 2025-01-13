@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart';
 import 'package:veteranam/components/feedback/feedback.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -9,62 +8,23 @@ class FeedbackBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final padding = EdgeInsets.symmetric(
-          horizontal: isDesk
-              ? KPadding.kPaddingSize90 +
-                  ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
-                      ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
-                          2
-                      : 0)
-              : KPadding.kPaddingSize16,
-        );
-        return MultiBlocListener(
-          listeners: [
-            BlocListener<FeedbackBloc, FeedbackState>(
-              listenWhen: (previous, current) =>
-                  current.failure != null ||
-                  current.failure != previous.failure,
-              listener: (context, state) {
-                context.dialog.showSnackBardTextDialog(
-                  state.failure?.value(context),
-                );
-              },
-            ),
-            BlocListener<UrlCubit, UrlEnum?>(
-              listener: (context, state) async {
-                if (state != null) {
-                  context.dialog.showSnackBardTextDialog(
-                    state.value(context),
-                    duration: const Duration(milliseconds: 4000),
-                  );
-                  context.read<UrlCubit>().reset();
-                }
-              },
-            ),
-          ],
-          child: FocusTraversalGroup(
+    return FeedbackBlocListener(
+      childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
+        buildWhen: (previous, current) => previous.isDesk != current.isDesk,
+        builder: (context, state) {
+          final padding = EdgeInsets.symmetric(
+            horizontal: state.isDesk
+                ? AppVersionEnum.desk.horizontalPadding
+                : AppVersionEnum.mobile.horizontalPadding,
+          );
+          return FocusTraversalGroup(
             child: Semantics(
               child: CustomScrollView(
                 key: KWidgetkeys.widget.scaffold.scroll,
                 cacheExtent: KDimensions.listCacheExtent,
                 slivers: [
-                  NetworkBanner(
-                    isDesk: isDesk,
-                    isTablet: isTablet,
-                  ),
-                  if (Config.isWeb)
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                    ),
+                  const NetworkBanner(),
+                  if (Config.isWeb) const NavigationBarWidget(),
                   if (!Config.isWeb) ...[
                     KSizedBox.kHeightSizedBox8.toSliver,
                     SliverPadding(
@@ -80,20 +40,20 @@ class FeedbackBodyWidget extends StatelessWidget {
                   SliverPadding(
                     padding: padding,
                     sliver: FeedbackFormStateWidget(
-                      isDesk: isDesk,
+                      isDesk: state.isDesk,
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: isDesk
+                    child: state.isDesk
                         ? KSizedBox.kHeightSizedBox100
                         : KSizedBox.kHeightSizedBox32,
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

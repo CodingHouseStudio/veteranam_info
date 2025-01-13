@@ -42,34 +42,20 @@ class DiscountBodyWidget extends StatelessWidget {
           },
         ),
       ],
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDesk =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-          final isTablet =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-
+      child: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
+        buildWhen: (previous, current) => previous.isDesk != current.isDesk,
+        builder: (context, state) {
           final padding = EdgeInsets.symmetric(
-            horizontal: (isDesk
-                ? KPadding.kPaddingSize90 +
-                    ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
-                        ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
-                            2
-                        : 0)
-                : KPadding.kPaddingSize16),
+            horizontal: state.isDesk
+                ? AppVersionEnum.desk.horizontalPadding
+                : AppVersionEnum.mobile.horizontalPadding,
           );
           return CustomScrollView(
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
-              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-              if (Config.isWeb)
-                NavigationBarWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
-                ),
-              if (isDesk)
+              const NetworkBanner(),
+              if (Config.isWeb) const NavigationBarWidget(),
+              if (state.isDesk)
                 KSizedBox.kHeightSizedBox32.toSliver
               else
                 KSizedBox.kHeightSizedBox8.toSliver,
@@ -84,7 +70,7 @@ class DiscountBodyWidget extends StatelessWidget {
                   builder: (context, linkIsWrong) {
                     if (linkIsWrong) {
                       return DiscountWrongLinkWidget(
-                        isDesk: isDesk,
+                        isDesk: state.isDesk,
                       );
                     }
                     return SliverMainAxisGroup(
@@ -97,12 +83,12 @@ class DiscountBodyWidget extends StatelessWidget {
                             textKey: KWidgetkeys.screen.discount.backText,
                           ),
                         ),
-                        if (isDesk)
+                        if (state.isDesk)
                           KSizedBox.kHeightSizedBox32.toSliver
                         else
                           KSizedBox.kHeightSizedBox8.toSliver,
                         DiscountInformationWidget(
-                          isDesk: isDesk,
+                          isDesk: state.isDesk,
                         ),
                       ],
                     );

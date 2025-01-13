@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/home/home.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -11,95 +10,50 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final padding = EdgeInsets.symmetric(
-          horizontal: (isDesk
-              ? KPadding.kPaddingSize90 +
-                  ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
-                      ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
-                          2
-                      : 0)
-              : KPadding.kPaddingSize16),
-        );
-        return MultiBlocListener(
-          listeners: [
-            BlocListener<NetworkCubit, NetworkStatus>(
-              listener: (context, state) {
-                if (state == NetworkStatus.network) {
-                  context.read<HomeWatcherBloc>().add(
-                        const HomeWatcherEvent.started(),
-                      );
-                }
-              },
-            ),
-            BlocListener<UrlCubit, UrlEnum?>(
-              listener: (context, state) async {
-                if (state != null) {
-                  context.dialog.showSnackBardTextDialog(
-                    state.value(context),
-                    duration: const Duration(milliseconds: 4000),
-                  );
-                  context.read<UrlCubit>().reset();
-                }
-              },
-            ),
-            BlocListener<HomeWatcherBloc, HomeWatcherState>(
-              listener: (context, state) => context.dialog.showGetErrorDialog(
-                error: state.failure?.value(context),
-                onPressed: () => context
-                    .read<HomeWatcherBloc>()
-                    .add(const HomeWatcherEvent.started()),
-              ),
-            ),
-          ],
-          child: CustomScrollView(
+    return HomeBlocListener(
+      childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
+        builder: (context, state) {
+          final padding = EdgeInsets.symmetric(
+            horizontal: state.horizontalPadding,
+          );
+          return CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
-              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-              NavigationBarWidget(
-                isDesk: isDesk,
-                isTablet: isTablet,
-              ),
+              const NetworkBanner(),
+              const NavigationBarWidget(),
               SliverPadding(
                 padding: padding,
                 sliver: HomeSectionsWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
+                  isDesk: state.isDesk,
+                  isTablet: state.isTablet,
                 ),
               ),
               SliverPadding(
                 padding: padding,
-                sliver: isDesk
+                sliver: state.isDesk
                     ? const FAQSectionDeskWidget()
                     : const FaqSectionMobWidget(),
               ),
               SliverToBoxAdapter(
-                child: isDesk
+                child: state.isDesk
                     ? KSizedBox.kHeightSizedBox160
-                    : isTablet
+                    : state.isTablet
                         ? KSizedBox.kHeightSizedBox64
                         : KSizedBox.kHeightSizedBox48,
               ),
               SliverPadding(
                 padding: padding,
                 sliver: FooterWidget(
-                  isTablet: isTablet,
-                  isDesk: isDesk,
+                  isTablet: state.isTablet,
+                  isDesk: state.isDesk,
                 ),
               ),
               KSizedBox.kHeightSizedBox30.toSliver,
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

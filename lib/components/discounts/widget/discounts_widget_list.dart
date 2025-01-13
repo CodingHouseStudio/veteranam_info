@@ -115,10 +115,10 @@ ValueKey<String> _key({
 // }
 
 class _AdvancedFilterDesk extends StatelessWidget {
-  const _AdvancedFilterDesk({
-    required this.maxHeight,
-  });
-  final double maxHeight;
+  const _AdvancedFilterDesk(
+      // required this.maxHeight,
+      );
+  // final double maxHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -136,35 +136,14 @@ class _AdvancedFilterDesk extends StatelessWidget {
             isDesk: true,
           ),
         ),
-        maxMinHeight: maxHeight,
+        maxMinHeight: MediaQuery.sizeOf(context).height,
       ),
     );
   }
 }
 
-class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  DiscountsMobWidgetList({
-    required this.padding,
-    required this.isDesk,
-    super.key,
-  }) : super(
-          child: _DiscountWidgetList(
-            isDesk: isDesk,
-          ),
-        );
-  final EdgeInsets padding;
-  final bool isDesk;
-  @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderSliverPadding(
-      padding: padding,
-      textDirection: Directionality.of(context),
-    );
-  }
-}
-
-class _DiscountWidgetList extends StatelessWidget {
-  const _DiscountWidgetList({required this.isDesk});
+class DiscountWidgetList extends StatelessWidget {
+  const DiscountWidgetList({required this.isDesk, super.key});
 
   final bool isDesk;
 
@@ -361,17 +340,16 @@ class _DiscountsWidgetItem extends StatelessWidget {
 }
 
 class DiscountsDeskWidgetList extends StatelessWidget {
-  const DiscountsDeskWidgetList({required this.maxHeight, super.key});
-  final double maxHeight;
+  const DiscountsDeskWidgetList({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverCrossAxisGroup(
       slivers: [
-        SliverCrossAxisExpanded(
+        const SliverCrossAxisExpanded(
           flex: 1,
           sliver: _AdvancedFilterDesk(
-            maxHeight: maxHeight,
-          ),
+              // maxHeight: maxHeight,
+              ),
         ),
         if (Config.isWeb)
           SliverCrossAxisExpanded(
@@ -384,7 +362,7 @@ class DiscountsDeskWidgetList extends StatelessWidget {
                       isDesk: true,
                     );
                   case ViewMode.list:
-                    return const _DiscountWidgetList(
+                    return const DiscountWidgetList(
                       isDesk: true,
                     );
                 }
@@ -392,7 +370,7 @@ class DiscountsDeskWidgetList extends StatelessWidget {
             ),
           )
         else
-          const _DiscountWidgetList(
+          const DiscountWidgetList(
             isDesk: true,
           ),
       ],
