@@ -87,7 +87,7 @@ dev_dependencies:
   injectable_generator: ^2.6.2 # Used for dependency injection for get_it
   integration_test:
     sdk: flutter
-  intl_utils: ^2.8.7
+  intl_utils: ^2.8.8
   json_annotation: ^4.9.0 # Defines the annotations used by json_serializable
   mockito: ^5.4.5 # Used for mocking classes
   mocktail: ^1.0.4
