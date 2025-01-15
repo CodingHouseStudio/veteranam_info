@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _NawbarKeys {
+  const _NawbarKeys();
   final widget = const Key('nawbar');
   final logo = const Key('nawbar_logo');
   // final field = const Key('nawbar_field');

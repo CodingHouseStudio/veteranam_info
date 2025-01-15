@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _ProfileKeys {
+  const _ProfileKeys();
   final screen = const Key('profile_screen');
   final title = const Key('profile_title');
   final photo = const Key('profile_photo');

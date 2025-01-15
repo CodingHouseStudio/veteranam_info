@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _InvestorsKeys {
+  const _InvestorsKeys();
   final screen = const Key('investors_screen');
   // final buttonMock = const Key('investors_screen_button_mock');
   // final point = const Key('investors_screen_point');

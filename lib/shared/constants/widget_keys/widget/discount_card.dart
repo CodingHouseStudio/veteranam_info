@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _DiscountCardKeys {
+  const _DiscountCardKeys();
   final discountCard = const Key('discount_card');
   final service = const Key('discount_card_service');
   final userName = const Key('discount_card_username');

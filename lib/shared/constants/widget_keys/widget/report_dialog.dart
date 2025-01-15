@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _ReportDialogKeys {
+  const _ReportDialogKeys();
   final widget = const Key('report_dialog');
   final title = const Key('report_dialog_title');
   final button = const Key('report_dialog_button');

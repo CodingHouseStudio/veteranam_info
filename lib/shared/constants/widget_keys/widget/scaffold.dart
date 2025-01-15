@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _ScaffoldKeys {
+  const _ScaffoldKeys();
   final scroll = const Key('scaffold_scroll');
   final loadingButton = const Key('scaffold_loading_button');
   final endListText = const Key('scaffold_end_list_text');

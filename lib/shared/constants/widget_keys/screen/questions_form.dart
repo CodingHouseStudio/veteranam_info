@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _QuestionsFormKeys {
+  const _QuestionsFormKeys();
   final screen = const Key('questions_form_screen');
   final title = const Key('questions_form_screen_title');
   final subtitle = const Key('questions_form_screen_subtitle');

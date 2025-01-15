@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _UserRoleKeys {
+  const _UserRoleKeys();
   final screen = const Key('user_role_screen');
   final title = const Key('user_role_screen_title');
   final subtitle = const Key('user_role_screen_subtitle');

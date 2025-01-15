@@ -1,6 +1,8 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
 part of '../widget_keys.dart';
 
 class _HomeKeys {
+  const _HomeKeys();
   final screen = const Key('home_screen');
   final buttonMock = const Key('home_screen_button_mock');
   final box = const Key('home_screen_box');

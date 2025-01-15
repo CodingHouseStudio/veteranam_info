@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _FooterKeys {
+  const _FooterKeys();
   final widget = const Key('footer');
   final title = const Key('footer_title');
   final button = const Key('footer_button');

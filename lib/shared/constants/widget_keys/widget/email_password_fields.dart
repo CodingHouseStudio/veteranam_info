@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _EmailPasswordFieldsKeys {
+  const _EmailPasswordFieldsKeys();
   final fieldEmail = const Key('email_passwords_fields_field_email');
   final fieldPassword =
       const Key('email_passwords_fields_email_field_password');

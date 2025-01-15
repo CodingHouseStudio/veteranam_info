@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _MyDiscountsKeys {
+  const _MyDiscountsKeys();
   final screen = const Key('my_discounts_screen');
   final title = const Key('my_discounts_screen_title');
   final iconAdd = const Key('my_discounts_screen_icon_add');

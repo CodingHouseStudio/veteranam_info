@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _MenuDialogKeys {
+  const _MenuDialogKeys();
   final dialog = const Key('menu_dialog');
   final discountsButton = const Key('menu_dialog_discounts_button');
   final investorsButton = const Key('menu_dialog_investors_button');
