@@ -22,6 +22,7 @@ void main() {
     late IDataPickerRepository mockDataPickerRepository;
     late ICompanyRepository mockCompanyRepository;
     late IDiscountRepository mockDiscountRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late StreamController<CompanyModel> companyStream;
     // late XFile image;
     setUp(() {
@@ -30,9 +31,10 @@ void main() {
       mockDataPickerRepository = MockIDataPickerRepository();
       mockCompanyRepository = MockICompanyRepository();
       mockDiscountRepository = MockIDiscountRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
       // image = XFile(KTestText.imageModels.downloadURL);
-      // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      // mockAuthenticationRepository = MockAuthenticationRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(
         (realInvocation) => KTestVariables.userWithoutPhoto,
@@ -78,6 +80,23 @@ void main() {
         (realInvocation) async => KTestVariables.filePickerItem,
       );
 
+      when(mockAuthenticationRepository.status).thenAnswer(
+        (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
+      );
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.authenticated,
+      );
+      when(mockAuthenticationRepository.logOut()).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      when(mockAuthenticationRepository.deleteUser()).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+
+      // when(mockAuthenticationRepository.isAuthenticated).thenAnswer(
+      //   (realInvocation) => true,
+      // );
+
       // when(mockUserRepository.isAnonymously).thenAnswer(
       //   (realInvocation) => false,
       // );
@@ -89,6 +108,7 @@ void main() {
         mockDiscountRepository: mockDiscountRepository,
         mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await companyInitialHelper(tester);
@@ -101,6 +121,7 @@ void main() {
         mockDiscountRepository: mockDiscountRepository,
         mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await companyLogOutHelper(tester);
@@ -124,6 +145,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await companyInitialHelper(tester);
@@ -141,6 +163,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await companyInitialHelper(tester);
@@ -154,12 +177,12 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
         await logOutUnconfirmButtonlHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
           icon: false,
-          deskOpen: true,
         );
       });
       testWidgets('Log out mob dialog cancel icon pop', (tester) async {
@@ -170,6 +193,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutUnconfirmButtonlHelper(
@@ -187,6 +211,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockDataPickerRepository: mockDataPickerRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutConfirmButtonlHelper(
@@ -202,6 +227,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await companyFormsCorrectSaveHelper(tester);
@@ -214,6 +240,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         companyStream.add(KTestVariables.pureCompanyModel.copyWith(id: 'none'));
@@ -233,6 +260,7 @@ void main() {
             mockDataPickerRepository: mockDataPickerRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountUnconfirmButtonlHelper(
@@ -251,6 +279,7 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockDataPickerRepository: mockDataPickerRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountUnconfirmButtonlHelper(
@@ -268,6 +297,7 @@ void main() {
             mockDataPickerRepository: mockDataPickerRepository,
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountConfirmButtonlHelper(
@@ -286,6 +316,7 @@ void main() {
             mockCompanyRepository: mockCompanyRepository,
             mockDiscountRepository: mockDiscountRepository,
             mockDataPickerRepository: mockDataPickerRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await companyMyDiscountsHelper(

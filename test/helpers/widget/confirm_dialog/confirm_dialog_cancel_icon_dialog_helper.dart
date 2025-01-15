@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
-
 import '../../../test_dependency.dart';
 
 Future<void> confirmDialogCancelIconHelper({
@@ -17,5 +15,10 @@ Future<void> confirmDialogCancelIconHelper({
 
   await tester.pumpAndSettle();
 
-  verify(() => mockGoRouter.pop()).called(1);
+  expect(
+    find.byKey(ConfirmDialogKeys.cancelIcon),
+    findsNothing,
+  );
+
+  // verify(() => mockGoRouter.pop()).called(1);
 }

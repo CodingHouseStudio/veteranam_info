@@ -46,7 +46,7 @@ jobs:
       min_coverage: 85
       format_directories: "lib test"
       coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}
-      branch: ${{ github.head_ref }}
+      pull_request: ${{ github.event.pull_request.title }}
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main

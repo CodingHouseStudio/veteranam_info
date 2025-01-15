@@ -22,7 +22,7 @@ class ReportDialogWidget extends StatelessWidget {
       child: BlocConsumer<ReportBloc, ReportState>(
         listener: (context, state) {
           if (state.formState == ReportEnum.success) {
-            context.pop();
+            context.popDialog();
             // afterEvent?.call();
           }
         },

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -86,7 +85,7 @@ class _CommonConfirmDialog extends StatelessWidget {
             child: IconButton(
               key: ConfirmDialogKeys.cancelIcon,
               style: KButtonStyles.circularButtonStyle,
-              onPressed: context.pop,
+              onPressed: context.popDialog,
               icon: KIcon.close,
             ),
           ),
@@ -184,7 +183,7 @@ class _CommonConfirmDialog extends StatelessWidget {
       mobTextWidth: double.infinity,
       mobVerticalTextPadding: KPadding.kPaddingSize16,
       mobIconPadding: KPadding.kPaddingSize16,
-      onPressed: () => context.pop(true),
+      onPressed: () => context.popDialog(value: true),
       align: Alignment.center,
       hasAlign: !isDesk,
     );
@@ -194,7 +193,7 @@ class _CommonConfirmDialog extends StatelessWidget {
     return SecondaryButtonWidget(
       widgetKey: ConfirmDialogKeys.unconfirmButton,
       onPressed: () {
-        context.pop(false);
+        context.popDialog(value: false);
       },
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,

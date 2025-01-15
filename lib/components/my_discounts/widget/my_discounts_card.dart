@@ -166,7 +166,6 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                   widget.discountModel.id,
                 ),
               );
-          context.pop();
         },
         timer: true,
       ),

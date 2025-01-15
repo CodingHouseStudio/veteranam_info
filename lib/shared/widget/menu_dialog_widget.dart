@@ -18,7 +18,7 @@ class MenuDialogWidget extends StatelessWidget {
           child: TextButton.icon(
             key: MenuDialogKeys.discountsButton,
             onPressed: () => context
-              ..pop()
+              ..popDialog()
               ..goNamed(KRoute.discounts.name),
             iconAlignment: IconAlignment.end,
             icon: const IconWidget(
@@ -76,7 +76,7 @@ class MenuDialogWidget extends StatelessWidget {
         child: TextButton(
           key: key,
           onPressed: () => context
-            ..pop()
+            ..popDialog()
             ..goNamed(routeName),
           style: KButtonStyles.withoutStyle,
           child: Text(

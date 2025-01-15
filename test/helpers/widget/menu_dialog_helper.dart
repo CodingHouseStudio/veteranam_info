@@ -22,6 +22,15 @@ Future<void> menuDialogHelper({
     () => mockGoRouter.goNamed(KRoute.discounts.name),
   ).called(1);
 
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(MenuDialogKeys.discountsButton),
+    findsNothing,
+  );
+
+  await openNawbarMenuHelper(tester: tester, mockGoRouter: mockGoRouter);
+
   expect(
     find.byKey(MenuDialogKeys.investorsButton),
     findsOneWidget,
@@ -33,6 +42,15 @@ Future<void> menuDialogHelper({
     () => mockGoRouter.goNamed(KRoute.support.name),
   ).called(1);
 
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(MenuDialogKeys.investorsButton),
+    findsNothing,
+  );
+
+  await openNawbarMenuHelper(tester: tester, mockGoRouter: mockGoRouter);
+
   expect(
     find.byKey(MenuDialogKeys.feedbackButton),
     findsOneWidget,
@@ -43,6 +61,15 @@ Future<void> menuDialogHelper({
   verify(
     () => mockGoRouter.goNamed(KRoute.feedback.name),
   ).called(1);
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(MenuDialogKeys.feedbackButton),
+    findsNothing,
+  );
+
+  await openNawbarMenuHelper(tester: tester, mockGoRouter: mockGoRouter);
 
   expect(
     find.byKey(MenuDialogKeys.languageSwitcher),

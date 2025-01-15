@@ -2,19 +2,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 Future<void> reportDialogHelper(
-  WidgetTester tester,
-) async {
-  expect(find.byKey(ReportDialogKeys.title), findsOneWidget);
+  WidgetTester tester, {
+  bool openedDialog = true,
+}) async {
+  final matcher = openedDialog ? findsOneWidget : findsNothing;
+  expect(find.byKey(ReportDialogKeys.title), matcher);
 
-  expect(find.byKey(ReportDialogKeys.subtitle), findsOneWidget);
+  expect(find.byKey(ReportDialogKeys.subtitle), matcher);
 
-  expect(find.byKey(ReportDialogKeys.checkPoint), findsWidgets);
+  expect(
+    find.byKey(ReportDialogKeys.checkPoint),
+    openedDialog ? findsWidgets : findsNothing,
+  );
 
   // await chekPointHelper(tester: tester,twiceTap=false);
 
   expect(
     find.byKey(ReportDialogKeys.sendButton),
-    findsOneWidget,
+    matcher,
   );
 
   // expect(find.byKey(ReportDialogKeys.emailField),
