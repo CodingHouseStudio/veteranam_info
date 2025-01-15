@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _PwResetEmailKeys {
+  const _PwResetEmailKeys();
   final screen = const Key('pw_reset_email_screen');
   final title = const Key('pw_reset_email_title');
   final subtitle = const Key('pw_reset_email_subtitle');

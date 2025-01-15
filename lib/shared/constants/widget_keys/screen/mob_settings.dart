@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _MobSettingsKeys {
+  const _MobSettingsKeys();
   final screen = const Key('mob_settings_screen');
   final title = const Key('mob_settings_screen_title');
   final faq = const Key('mob_settings_screen_faq');

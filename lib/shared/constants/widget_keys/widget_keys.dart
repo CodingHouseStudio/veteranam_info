@@ -32,7 +32,7 @@ part 'screen/questions_form.dart';
 part 'screen/pw_reset_email.dart';
 part 'screen/password_reset.dart';
 part 'screen/company.dart';
-part 'screen/screen.dart';
+part 'screen.dart';
 part 'screen/sign_up.dart';
 part 'screen/story.dart';
 part 'screen/story_add.dart';
@@ -96,14 +96,14 @@ part 'widget/story_card.dart';
 part 'widget/switch.dart';
 part 'widget/switch_offline.dart';
 part 'widget/user_email_dialog.dart';
-part 'widget/widget.dart';
+part 'widget.dart';
 part 'widget/work_card.dart';
 part 'widget/work_request_card.dart';
 part 'widget/confirm_publish_discount.dart';
 part 'widget/confirm_dialog.dart';
 
 abstract class KWidgetkeys {
-  static _ScreenKeys get screen => _ScreenKeys();
+  static const screen = _ScreenKeys();
 
-  static _WidgetKeys get widget => _WidgetKeys();
+  static const widget = _WidgetKeys();
 }

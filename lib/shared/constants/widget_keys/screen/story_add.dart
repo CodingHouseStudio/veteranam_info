@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _StoryAddKeys {
+  const _StoryAddKeys();
   final screen = const Key('story_add_screen');
   final title = const Key('story_add_screen_title');
   final subtitle = const Key('story_add_screen_subtitle');

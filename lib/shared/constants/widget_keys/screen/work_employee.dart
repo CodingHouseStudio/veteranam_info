@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _WorkEmployeeKeys {
+  const _WorkEmployeeKeys();
   final screen = const Key('work_employee_screen');
   final title = const Key('work_employee_screen_title');
   final subtitle = const Key('work_employee_screen_subtitle');

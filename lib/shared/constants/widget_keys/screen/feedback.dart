@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
 class _FeedbackKeys {
+  const _FeedbackKeys();
   final screen = const Key('feedback_screen');
   // final pointText = const Key('feedback_screen_point_text');
   final title = const Key('feedback_screen_title');
