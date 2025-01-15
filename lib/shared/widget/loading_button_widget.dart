@@ -178,7 +178,7 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
               style: AppTextStyle.materialThemeTitleMediumWhite,
             ),
           ),
-          IconWidget(
+          const IconWidget(
             key: LoadingButtonKeys.icon,
             icon: KIcon.refreshWhite,
             padding: KPadding.kPaddingSize12,

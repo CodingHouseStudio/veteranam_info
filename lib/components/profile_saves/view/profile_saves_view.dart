@@ -7,7 +7,7 @@ class ProfileSavesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileSavesBody(
+    return const ProfileSavesBody(
       key: ProfileSavesKeys.screen,
     );
   }

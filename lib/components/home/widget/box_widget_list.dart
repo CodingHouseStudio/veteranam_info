@@ -87,7 +87,7 @@ class _ProdBoxWidgets extends StatelessWidget {
             isDesk: false,
             isTablet: false,
           ),
-          DiscountBoxwWidget(
+          const DiscountBoxwWidget(
             key: HomeKeys.discountsBox,
             isTablet: false,
           ),
@@ -105,7 +105,7 @@ class _HomeRightBoxWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       flex: 2,
       child: Column(
         spacing: KPadding.kPaddingSize16,
@@ -117,7 +117,7 @@ class _HomeRightBoxWidgets extends StatelessWidget {
               isTablet: true,
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: DoubleBox(
               useSoaccer: true,

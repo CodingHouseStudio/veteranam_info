@@ -363,7 +363,7 @@ extension StoryExtensions on StoryModel {
         fit: BoxFit.contain,
         size: KSize.kUserPhoto,
       ) ??
-      IconWidget(
+      const IconWidget(
         key: StoryCardKeys.userIcon,
         icon: KIcon.person,
         background: AppColors.materialThemeKeyColorsNeutralVariant,

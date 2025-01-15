@@ -57,7 +57,7 @@ class _BuildDesktopLayout extends StatelessWidget {
                       style:
                           AppTextStyle.materialThemeBodyLargeNeutralVariant60,
                     ),
-                    EmailButtonWidget(
+                    const EmailButtonWidget(
                       key: FeedbackKeys.emailButton,
                       isDesk: true,
                     ),
@@ -70,7 +70,7 @@ class _BuildDesktopLayout extends StatelessWidget {
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
                 KSizedBox.kHeightSizedBox8,
-                SocialMediaLinks(
+                const SocialMediaLinks(
                   isDesk: false,
                   instagramKey: FeedbackKeys.instagram,
                   linkedInKey: FeedbackKeys.linkedIn,
@@ -125,7 +125,7 @@ class _BuildMobileLayout extends StatelessWidget {
             key: FeedbackKeys.emailText,
             style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
-          EmailButtonWidget(
+          const EmailButtonWidget(
             key: FeedbackKeys.emailButton,
             isDesk: false,
           ),
@@ -138,7 +138,7 @@ class _BuildMobileLayout extends StatelessWidget {
         style: AppTextStyle.materialThemeTitleMedium,
       ),
       KSizedBox.kHeightSizedBox8,
-      SocialMediaLinks(
+      const SocialMediaLinks(
         isDesk: false,
         instagramKey: FeedbackKeys.instagram,
         linkedInKey: FeedbackKeys.linkedIn,

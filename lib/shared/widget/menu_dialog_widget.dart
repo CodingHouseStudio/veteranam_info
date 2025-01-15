@@ -45,7 +45,7 @@ class MenuDialogWidget extends StatelessWidget {
           routeName: KRoute.feedback.name,
           text: context.l10n.contact,
         ),
-        Wrap(
+        const Wrap(
           runSpacing: KPadding.kPaddingSize10,
           spacing: KPadding.kPaddingSize30,
           children: [

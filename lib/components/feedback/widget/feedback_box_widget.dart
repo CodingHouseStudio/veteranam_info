@@ -38,7 +38,7 @@ class _FeedbackBoxDesk extends StatelessWidget {
               context.l10n.ourSocialNetworks,
               style: AppTextStyle.materialThemeTitleMedium,
             ),
-            SocialMediaLinks(
+            const SocialMediaLinks(
               isDesk: false,
               instagramKey: FeedbackKeys.instagram,
               linkedInKey: FeedbackKeys.linkedIn,
@@ -141,7 +141,7 @@ class _FeedbackBoxMob extends StatelessWidget {
           style: AppTextStyle.materialThemeTitleMedium,
         ),
         KSizedBox.kHeightSizedBox8,
-        SocialMediaLinks(
+        const SocialMediaLinks(
           isDesk: false,
           instagramKey: FeedbackKeys.instagram,
           linkedInKey: FeedbackKeys.linkedIn,

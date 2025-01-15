@@ -69,7 +69,7 @@ List<Widget> _textFieldWidgetList({
         child: Row(
           spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize10,
           children: [
-            SwitchWidgetWithoutBloc(
+            const SwitchWidgetWithoutBloc(
               key: EmployerKeys.switchWidget,
             ),
             Text(

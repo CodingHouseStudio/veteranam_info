@@ -22,7 +22,8 @@ abstract class FeedbackKeys {
   static const boxText = Key('feedback_screen_box_text');
   static const boxBackButton = Key('feedback_screen_box_back_button');
   static const boxButton = Key('feedback_screen_box_button');
-  // static const boxInformationBox = Key('feedback_screen_box_information_box');
+  // static const boxInformationBox =
+  // Key('feedback_screen_box_information_box');
   // static const boxInvestorsBox = Key('feedback_screen_box_investors_box');
   // static const boxStoryBox = Key('feedback_screen_box_story_box');
 }

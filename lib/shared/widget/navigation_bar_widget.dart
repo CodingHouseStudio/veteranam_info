@@ -158,7 +158,7 @@ class _NavbarWidget extends StatelessWidget {
                 //   ),
                 if (!Config.isBusiness)
                   if (isTablet)
-                    LanguagesSwitcherWidget(
+                    const LanguagesSwitcherWidget(
                       key: NawbarKeys.language,
                     )
                   else

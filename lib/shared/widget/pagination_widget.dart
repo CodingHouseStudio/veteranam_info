@@ -35,7 +35,7 @@ class PaginationWidget extends StatelessWidget {
               key: PaginationKeys.firstNumber,
             ),
             if (pages > 10 && currentPage >= 6)
-              Text(
+              const Text(
                 '...',
                 key: PaginationKeys.firstThreePoint,
               ),
@@ -58,7 +58,7 @@ class PaginationWidget extends StatelessWidget {
             ),
           ],
           if (pages - currentPage > 3)
-            Text(
+            const Text(
               '...',
               key: PaginationKeys.lastThreePoint,
             ),

@@ -7,8 +7,8 @@ class EmployeeRespondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EmployeeRespondBlocprovider(
-      childWidget: const EmployeeRespondBodyWidget(),
+    return const EmployeeRespondBlocprovider(
+      childWidget: EmployeeRespondBodyWidget(),
       key: EmployeeRespondKeys.screen,
     );
   }
