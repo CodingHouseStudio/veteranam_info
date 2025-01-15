@@ -6,40 +6,35 @@ import '../../test_dependency.dart';
 Future<void> additionalButtonHelper(
   WidgetTester tester,
 ) async {
-  final isDesk = find
-      .byKey(KWidgetkeys.widget.buttonAdditional.desk)
-      .evaluate()
-      .isNotEmpty;
+  final isDesk = find.byKey(ButtonAdditionalKeys.desk).evaluate().isNotEmpty;
 
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.desk),
+    find.byKey(ButtonAdditionalKeys.desk),
     isDesk ? findsWidgets : findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.mob),
+    find.byKey(ButtonAdditionalKeys.mob),
     isDesk ? findsNothing : findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: isDesk
-        ? KWidgetkeys.widget.buttonAdditional.desk
-        : KWidgetkeys.widget.buttonAdditional.mob,
+    itemKey: isDesk ? ButtonAdditionalKeys.desk : ButtonAdditionalKeys.mob,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.icon),
+    find.byKey(ButtonAdditionalKeys.icon),
     findsWidgets,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.text),
+    find.byKey(ButtonAdditionalKeys.text),
     findsWidgets,
   );
 
   if (isDesk) {
     await hoverHelper(
       tester: tester,
-      key: KWidgetkeys.widget.buttonAdditional.text,
+      key: ButtonAdditionalKeys.text,
     );
   }
 }

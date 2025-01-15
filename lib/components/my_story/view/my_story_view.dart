@@ -8,7 +8,7 @@ class ProfileMyStoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyStoryBlocprovider(
-      key: KWidgetkeys.screen.myStory.screen,
+      key: MyStoryKeys.screen,
       childWidget: const ProfileMyStoryBodyWidget(),
     );
   }

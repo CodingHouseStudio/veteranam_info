@@ -8,7 +8,7 @@ Future<void> confirmDialogChangesHelper({
   bool hasTimer = false,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.confirmDialog.timer),
+    find.byKey(ConfirmDialogKeys.timer),
     hasTimer ? findsOneWidget : findsNothing,
   );
   if (hasTimer) {
@@ -16,7 +16,7 @@ Future<void> confirmDialogChangesHelper({
       const Duration(seconds: KDimensions.confirmdialogTimerDelay * 2),
     );
     expect(
-      find.byKey(KWidgetkeys.widget.confirmDialog.timer),
+      find.byKey(ConfirmDialogKeys.timer),
       findsNothing,
     );
   }
@@ -27,27 +27,27 @@ Future<void> confirmDialogChangesHelper({
     size: KTestConstants.windowVerySmallSize,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon),
+        find.byKey(ConfirmDialogKeys.cancelIcon),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.title),
+        find.byKey(ConfirmDialogKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.subtitle),
+        find.byKey(ConfirmDialogKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton),
+        find.byKey(ConfirmDialogKeys.confirmButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmDialog.unconfirmButton),
+        find.byKey(ConfirmDialogKeys.unconfirmButton),
         findsOneWidget,
       );
     },

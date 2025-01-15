@@ -84,7 +84,7 @@ class _FaqListWidget extends StatelessWidget {
                     top: KPadding.kPaddingSize24,
                   ),
                   child: QuestionWidget(
-                    key: KWidgetkeys.screen.home.faq,
+                    key: HomeKeys.faq,
                     questionModel: state.questionModelItems.elementAt(index),
                     isDesk: isDesk,
                   ),
@@ -106,7 +106,7 @@ class _FaqListWidget extends StatelessWidget {
           top: KPadding.kPaddingSize24,
         ),
         child: SkeletonizerWidget(
-          key: KWidgetkeys.screen.home.faqSkeletonizer,
+          key: HomeKeys.faqSkeletonizer,
           isLoading: true,
           child: QuestionWidget(
             questionModel: KMockText.questionModel,
@@ -130,7 +130,7 @@ class _GetFAQSection extends StatelessWidget {
       children: [
         Text(
           context.l10n.answersYourQuestions,
-          key: KWidgetkeys.screen.home.faqTitle,
+          key: HomeKeys.faqTitle,
           style: isDesk
               ? AppTextStyle.materialThemeDisplayLarge
               : AppTextStyle.materialThemeDisplaySmall,
@@ -138,14 +138,14 @@ class _GetFAQSection extends StatelessWidget {
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.questionSubtitle,
-          key: KWidgetkeys.screen.home.faqSubtitle,
+          key: HomeKeys.faqSubtitle,
           style: isDesk
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodyMedium,
         ),
         KSizedBox.kHeightSizedBox16,
         DoubleButtonWidget(
-          widgetKey: KWidgetkeys.screen.home.faqButton,
+          widgetKey: HomeKeys.faqButton,
           text: context.l10n.writeMessage,
           onPressed: () => context.goNamed(KRoute.feedback.name),
           isDesk: isDesk,

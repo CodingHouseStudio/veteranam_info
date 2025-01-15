@@ -16,7 +16,7 @@ class DiscountsFilterMob extends StatelessWidget {
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AdvancedFilterMobButton(
-            //   key: KWidgetkeys.screen.discounts.advancedFilterButton,
+            //   key: DiscountsKeys.advancedFilterButton,
             //   style: KButtonStyles.advancedButtonStyle,
             //   label: Text(
             //     context.l10n.advancedFilter,

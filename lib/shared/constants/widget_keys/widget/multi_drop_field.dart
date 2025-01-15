@@ -1,5 +1,5 @@
 part of '../widget_keys.dart';
 
-class _MultiDropFieldKeys {
-  final chips = const Key('multi_drop_field_chips');
+abstract class MultiDropFieldKeys {
+  static const chips = Key('multi_drop_field_chips');
 }

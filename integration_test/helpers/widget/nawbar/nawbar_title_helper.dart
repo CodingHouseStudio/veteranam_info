@@ -5,13 +5,13 @@ Future<void> nawbarTitleHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.logo),
+    find.byKey(NawbarKeys.logo),
     findsOneWidget,
   );
 
   // for (var i = 0; i < 10; i++) {
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.logo),
+    find.byKey(NawbarKeys.logo),
     warnIfMissed: false,
   );
   // }

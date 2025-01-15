@@ -8,68 +8,68 @@ Future<void> feedbackFormInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.subtitle),
+    find.byKey(FeedbackKeys.subtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.nameField),
+    find.byKey(FeedbackKeys.nameField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.nameField,
+    itemKey: FeedbackKeys.nameField,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.feedback.emailButton),
+  //   find.byKey(FeedbackKeys.emailButton),
   //   findsOneWidget,
   // );
 
   await emailButtonHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.messageField),
+    find.byKey(FeedbackKeys.messageField),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.buttonText),
+    find.byKey(FeedbackKeys.buttonText),
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.button), findsOneWidget);
+  expect(find.byKey(FeedbackKeys.button), findsOneWidget);
 
   await doubleButtonHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.emailText),
+    find.byKey(FeedbackKeys.emailText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.emailButton),
+    find.byKey(FeedbackKeys.emailButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.socialText),
+    find.byKey(FeedbackKeys.socialText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.linkedIn),
+    find.byKey(FeedbackKeys.linkedIn),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.instagram),
+    find.byKey(FeedbackKeys.instagram),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.facebook),
+    find.byKey(FeedbackKeys.facebook),
     findsOneWidget,
   );
 

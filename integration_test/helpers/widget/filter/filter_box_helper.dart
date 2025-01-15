@@ -12,7 +12,7 @@
 
 //   await dropChipHelper(
 //     tester: tester,
-//     dropChipKey: KWidgetkeys.widget.dropChip.widget,
-//     buttonKey: KWidgetkeys.widget.dropChip.buttons,
+//     dropChipKey: DropChipKeys.widget,
+//     buttonKey: DropChipKeys.buttons,
 //   );
 // }

@@ -13,12 +13,12 @@ Future<void> discountsAddDetailHelper({
   if (hasField) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
+      itemKey: DiscountsAddKeys.categoryField,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
+    find.byKey(DiscountsAddKeys.categoryField),
     matcher,
   );
 
@@ -26,12 +26,12 @@ Future<void> discountsAddDetailHelper({
     await multiDropFieldHelper(
       tester: tester,
       text: KTestVariables.field,
-      textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
+      textFieldKey: DiscountsAddKeys.categoryField,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
+    find.byKey(DiscountsAddKeys.cityField),
     matcher,
   );
 
@@ -39,24 +39,24 @@ Future<void> discountsAddDetailHelper({
     await citiesDropFieldHelper(
       tester: tester,
       text: KTestVariables.field,
-      textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
+      textFieldKey: DiscountsAddKeys.cityField,
       fieldIndex: 1,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
+    find.byKey(DiscountsAddKeys.periodField),
     matcher,
   );
 
   if (hasField && checkHelper) {
     expect(
-      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
+      find.byKey(DiscountsAddKeys.indefinitelySwitcher),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelyText),
+      find.byKey(DiscountsAddKeys.indefinitelyText),
       findsOneWidget,
     );
 

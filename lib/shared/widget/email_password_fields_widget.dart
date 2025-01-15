@@ -69,7 +69,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: ButtonWidget(
-                key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
+                key: EmailPasswordFieldsKeys.buttonHidePassword,
                 onPressed: () {
                   widget.backPassword();
                   passwordFocusNode.requestFocus();
@@ -95,8 +95,8 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
         //   widget.showPassword ? context.l10n.password
         //: context.l10n.fullEmail,
         //   key: widget.showPassword
-        //       ? KWidgetkeys.widget.emailPasswordFields.textPassword
-        //       : KWidgetkeys.widget.emailPasswordFields.textEmail,
+        //       ? EmailPasswordFieldsKeys.textPassword
+        //       : EmailPasswordFieldsKeys.textEmail,
         //   style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         // ),
         // if (widget.isDesk)
@@ -105,7 +105,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
         //   KSizedBox.kHeightSizedBox8,
         if (widget.showPassword) ...[
           PasswordFieldWidget(
-            widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldPassword,
+            widgetKey: EmailPasswordFieldsKeys.fieldPassword,
             onChanged: widget.onChangedPassword,
             errorText: widget.errorTextPassword,
             labelText: context.l10n.password,
@@ -128,7 +128,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                         left: KPadding.kPaddingSize16,
                       ),
                 child: TextButton(
-                  key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
+                  key: EmailPasswordFieldsKeys.recoveryButton,
                   style: KButtonStyles.withoutStyle,
                   onPressed: () => context.goNamed(
                     KRoute.forgotPassword.name,
@@ -143,7 +143,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
             ),
         ] else
           TextFieldWidget(
-            widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
+            widgetKey: EmailPasswordFieldsKeys.fieldEmail,
             onChanged: widget.onChangedEmail,
             isRequired: true,
             errorText: widget.errorTextEmail,

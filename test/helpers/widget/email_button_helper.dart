@@ -7,15 +7,15 @@ Future<void> emailButtonHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.emailButton.text),
+    find.byKey(EmailButtonKeys.text),
     findsWidgets,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.emailButton.icon),
+    find.byKey(EmailButtonKeys.icon),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.emailButton.text));
+  await tester.tap(find.byKey(EmailButtonKeys.text));
 
   await tester.pumpAndSettle();
 

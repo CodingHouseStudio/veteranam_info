@@ -112,7 +112,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                 : KPadding.kPaddingSize16),
           );
           return CustomScrollView(
-            key: KWidgetkeys.widget.scaffold.scroll,
+            key: ScaffoldKeys.scroll,
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
               NetworkBanner(isDesk: isDesk, isTablet: isTablet),

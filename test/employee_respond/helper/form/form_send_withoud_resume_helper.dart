@@ -15,17 +15,17 @@ Future<void> formWithoundResumeSendHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.checkWithoutResume),
+    find.byKey(EmployeeRespondKeys.checkWithoutResume),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.checkWithoutResume,
+    itemKey: EmployeeRespondKeys.checkWithoutResume,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.employeeRespond.checkWithoutResume),
+    find.byKey(EmployeeRespondKeys.checkWithoutResume),
     warnIfMissed: false,
   );
 
@@ -33,10 +33,10 @@ Future<void> formWithoundResumeSendHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.sendButton,
+    itemKey: EmployeeRespondKeys.sendButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.employeeRespond.sendButton));
+  await tester.tap(find.byKey(EmployeeRespondKeys.sendButton));
 
   await tester.pumpAndSettle();
 }

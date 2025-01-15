@@ -1,13 +1,13 @@
 part of '../widget_keys.dart';
 
-class _UserRoleKeys {
-  final screen = const Key('user_role_screen');
-  final title = const Key('user_role_screen_title');
-  final subtitle = const Key('user_role_screen_subtitle');
-  final signUpBusinessButton = const Key('user_role_screen_business_button');
-  final signUpUserButton = const Key('user_role_screen_user_button');
-  final loginButton = const Key('user_role_screen_login_button');
-  final loginUserButton = const Key('user_role_screen_login_user_button');
-  final loginBusinessButton =
-      const Key('user_role_screen_login_business_button');
+abstract class UserRoleKeys {
+  static const screen = Key('user_role_screen');
+  static const title = Key('user_role_screen_title');
+  static const subtitle = Key('user_role_screen_subtitle');
+  static const signUpBusinessButton = Key('user_role_screen_business_button');
+  static const signUpUserButton = Key('user_role_screen_user_button');
+  static const loginButton = Key('user_role_screen_login_button');
+  static const loginUserButton = Key('user_role_screen_login_user_button');
+  static const loginBusinessButton =
+      Key('user_role_screen_login_business_button');
 }

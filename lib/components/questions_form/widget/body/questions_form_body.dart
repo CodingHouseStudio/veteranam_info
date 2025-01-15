@@ -23,19 +23,19 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
           mainChildWidgetsFunction: ({required isDesk}) => [
             Text(
               context.l10n.fillInForm,
-              key: KWidgetkeys.screen.questionsForm.title,
+              key: QuestionsFormKeys.title,
               style: isDesk ? AppTextStyle.text64 : AppTextStyle.text32,
             ),
             KSizedBox.kHeightSizedBox8,
             Text(
               context.l10n.questionsFormSubtitle,
-              key: KWidgetkeys.screen.questionsForm.subtitle,
+              key: QuestionsFormKeys.subtitle,
               style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
             ),
             KSizedBox.kHeightSizedBox56,
             Text(
               context.l10n.selectAppropriateOne,
-              key: KWidgetkeys.screen.questionsForm.roleTitle,
+              key: QuestionsFormKeys.roleTitle,
               style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
             if (isDesk)
@@ -64,9 +64,8 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
                     isCheck: state.userRole == role,
                     textStyle:
                         isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                    // key: KWidgetkeys.screen.questionsForm.roleVeteranText,
-                    key: KWidgetkeys.screen.questionsForm.roleKeyes
-                        .elementAt(index),
+                    // key: QuestionsFormKeys.roleVeteranText,
+                    key: QuestionsFormKeys.roleKeyes.elementAt(index),
                     isDesk: isDesk,
                   ),
                 );
@@ -79,7 +78,7 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
             Align(
               alignment: Alignment.centerLeft,
               child: ButtonWidget(
-                key: KWidgetkeys.screen.questionsForm.button,
+                key: QuestionsFormKeys.button,
                 isDesk: isDesk,
                 onPressed: () => context
                     .read<UserRoleBloc>()

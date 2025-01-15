@@ -21,7 +21,7 @@ Future<void> discountsEditFormHelper({
   await discountsAddSendHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
+    find.byKey(DiscountsAddKeys.submitingText),
     findsOneWidget,
   );
 

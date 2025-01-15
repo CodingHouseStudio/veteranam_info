@@ -15,20 +15,20 @@ Future<void> scaffoldEmptyScrollHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsOneWidget);
+  expect(find.byKey(ScaffoldKeys.endListText), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListButton), findsOneWidget);
+  expect(find.byKey(ScaffoldKeys.endListButton), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.scaffold.endListButton,
+    itemKey: ScaffoldKeys.endListButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.endListButton));
+  await tester.tap(find.byKey(ScaffoldKeys.endListButton));
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListText), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListButton), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListButton), findsNothing);
 }

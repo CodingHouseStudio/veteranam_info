@@ -10,17 +10,17 @@ Future<void> profileSavesInitialHelper(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.profileSaves.title),
+        find.byKey(ProfileSavesKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profileSaves.subtitle),
+        find.byKey(ProfileSavesKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profileSaves.discountCard),
+        find.byKey(ProfileSavesKeys.discountCard),
         findsOneWidget,
       );
     },

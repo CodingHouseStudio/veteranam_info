@@ -7,19 +7,19 @@ Future<void> workEmployeeMockButtonHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.information.card),
+    find.byKey(InformationKeys.card),
     findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.workEmployee.buttonMock,
+    itemKey: WorkEmployeeKeys.buttonMock,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.workEmployee.buttonMock),
+    find.byKey(WorkEmployeeKeys.buttonMock),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.workEmployee.buttonMock));
+  await tester.tap(find.byKey(WorkEmployeeKeys.buttonMock));
 }

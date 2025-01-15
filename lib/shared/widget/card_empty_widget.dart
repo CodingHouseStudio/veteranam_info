@@ -19,7 +19,7 @@ class CardEmptyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (cardIsEmpty) {
       return SizedBox(
-        key: KWidgetkeys.widget.cardEmpty.widget,
+        key: CardEmptyKeys.widget,
         height: height ?? KSize.kPixel460,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -29,7 +29,7 @@ class CardEmptyWidget extends StatelessWidget {
               child: CancelWidget(
                 // color: Colors.black,
                 onPressed: () => context.goNamed(popRouteName),
-                widgetKey: KWidgetkeys.widget.cardEmpty.closeButton,
+                widgetKey: CardEmptyKeys.closeButton,
               ),
             ),
             Expanded(
@@ -42,11 +42,10 @@ class CardEmptyWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   spacing: KPadding.kPaddingSize24,
                   children: [
-                    KIcon.found
-                        .copyWith(key: KWidgetkeys.widget.cardEmpty.image),
+                    KIcon.found.copyWith(key: CardEmptyKeys.image),
                     Text(
                       context.l10n.cardNotFoundCardLink,
-                      key: KWidgetkeys.widget.cardEmpty.text,
+                      key: CardEmptyKeys.text,
                       style: AppTextStyle.materialThemeTitleMedium,
                       textAlign: TextAlign.center,
                     ),

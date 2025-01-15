@@ -11,11 +11,11 @@ Future<void> backButtonResetEmailNavigationHelper({
   await emailCorrectHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.cancelButton),
+    find.byKey(PwResetEmailKeys.cancelButton),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.pwResetEmail.cancelButton));
+  await tester.tap(find.byKey(PwResetEmailKeys.cancelButton));
 
   await tester.pumpAndSettle();
 }

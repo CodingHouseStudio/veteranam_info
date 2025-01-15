@@ -9,11 +9,11 @@ Future<void> feedbackEmailTapHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.subtitle,
+    itemKey: FeedbackKeys.subtitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.emailText),
+    find.byKey(FeedbackKeys.emailText),
     findsOneWidget,
   );
 

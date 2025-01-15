@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileBlocprovider(
       childWidget: ProfileBodyWidget(
-        key: KWidgetkeys.screen.profile.screen,
+        key: ProfileKeys.screen,
       ),
     );
   }

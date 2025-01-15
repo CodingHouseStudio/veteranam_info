@@ -10,22 +10,22 @@ Future<void> thanksInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.title),
+        find.byKey(ThanksKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.subtitle),
+        find.byKey(ThanksKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.myProfielBox),
+        find.byKey(ThanksKeys.myProfielBox),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.homeBox),
+        find.byKey(ThanksKeys.homeBox),
         findsOneWidget,
       );
     },

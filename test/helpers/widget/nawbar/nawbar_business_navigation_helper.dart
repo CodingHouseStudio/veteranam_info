@@ -15,12 +15,12 @@ Future<void> nawbarBusinessNavigationHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.logo),
+    find.byKey(NawbarKeys.logo),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.logo),
+    find.byKey(NawbarKeys.logo),
   );
 
   await tester.pumpAndSettle();
@@ -32,12 +32,12 @@ Future<void> nawbarBusinessNavigationHelper({
   ).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.myDiscountsButton),
+    find.byKey(NawbarKeys.myDiscountsButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.myDiscountsButton),
+    find.byKey(NawbarKeys.myDiscountsButton),
   );
 
   await tester.pumpAndSettle();

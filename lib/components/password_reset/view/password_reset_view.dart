@@ -12,7 +12,7 @@ class PasswordResetScreen extends StatelessWidget {
     return PasswordResetBlocprovider(
       code: code,
       childWidget: PasswordResetBodyWidget(
-        key: KWidgetkeys.screen.passwordReset.screen,
+        key: PasswordResetKeys.screen,
         code: code,
         continueUrl: continueUrl,
       ),

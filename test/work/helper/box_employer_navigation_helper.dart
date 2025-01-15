@@ -11,11 +11,11 @@ Future<void> boxEmployerNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.work.boxEmployer),
+    find.byKey(WorkKeys.boxEmployer),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.work.boxEmployer));
+  await tester.tap(find.byKey(WorkKeys.boxEmployer));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.employer.name),

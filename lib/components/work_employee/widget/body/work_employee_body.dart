@@ -35,9 +35,9 @@ class WorkEmployeeBody extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           TitleWidget(
             title: context.l10n.work,
-            titleKey: KWidgetkeys.screen.workEmployee.title,
+            titleKey: WorkEmployeeKeys.title,
             subtitle: context.l10n.workSubtitle,
-            subtitleKey: KWidgetkeys.screen.workEmployee.subtitle,
+            subtitleKey: WorkEmployeeKeys.subtitle,
             isDesk: isDesk,
           ),
           if (isDesk)
@@ -55,7 +55,7 @@ class WorkEmployeeBody extends StatelessWidget {
           if (_.loadingStatus == LoadingStatus.loaded &&
               _.workModelItems.isNotEmpty)
             WorkEmployeeFilters(
-              key: KWidgetkeys.screen.workEmployee.filter,
+              key: WorkEmployeeKeys.filter,
               cities: _.workModelItems.overallCities,
               categories: _.workModelItems.overallCategories,
               isDesk: isDesk,
@@ -68,7 +68,7 @@ class WorkEmployeeBody extends StatelessWidget {
               _.loadingStatus == LoadingStatus.loaded &&
               Config.isDevelopment)
             MockButtonWidget(
-              key: KWidgetkeys.screen.workEmployee.buttonMock,
+              key: WorkEmployeeKeys.buttonMock,
               onPressed: () {
                 GetIt.I.get<IWorkRepository>().addMockWorks();
                 context
@@ -83,7 +83,7 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           WorkRequestCardWidget(
-            key: KWidgetkeys.screen.workEmployee.requestCard,
+            key: WorkEmployeeKeys.requestCard,
             isDesk: isDesk,
           ),
           if (isDesk)
@@ -92,7 +92,7 @@ class WorkEmployeeBody extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           Center(
             child: PaginationWidget(
-              key: KWidgetkeys.screen.workEmployee.pagination,
+              key: WorkEmployeeKeys.pagination,
               currentPage: _.page,
               pages: _.maxPage,
               changePage: (int page) {

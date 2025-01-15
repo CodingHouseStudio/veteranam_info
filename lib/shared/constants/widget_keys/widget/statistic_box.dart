@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _StatisticBoxKeys {
-  final title = const Key('statistic_box_title');
-  final icon = const Key('statistic_box_icon');
-  final subtitle = const Key('statistic_box_subtitle');
+abstract class StatisticBoxKeys {
+  static const title = Key('statistic_box_title');
+  static const icon = Key('statistic_box_icon');
+  static const subtitle = Key('statistic_box_subtitle');
 }

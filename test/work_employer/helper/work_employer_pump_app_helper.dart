@@ -11,7 +11,7 @@ Future<void> employerPumpAppHelper({
   await tester.pumpApp(const WorkEmployerScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.employer.screen),
+    find.byKey(EmployerKeys.screen),
     findsOneWidget,
   );
 

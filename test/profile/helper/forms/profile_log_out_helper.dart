@@ -12,16 +12,16 @@ Future<void> profileLogOutHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.logOutButton),
+    find.byKey(ProfileKeys.logOutButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.logOutButton,
+    itemKey: ProfileKeys.logOutButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.logOutButton));
+  await tester.tap(find.byKey(ProfileKeys.logOutButton));
 
   await tester.pumpAndSettle();
 

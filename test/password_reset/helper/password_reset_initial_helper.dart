@@ -11,27 +11,27 @@ Future<void> passwordResetInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.title),
+        find.byKey(PasswordResetKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.subtitle),
+        find.byKey(PasswordResetKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.passwordField),
+        find.byKey(PasswordResetKeys.passwordField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.confirmPasswordField),
+        find.byKey(PasswordResetKeys.confirmPasswordField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.confirmButton),
+        find.byKey(PasswordResetKeys.confirmButton),
         findsOneWidget,
       );
     },

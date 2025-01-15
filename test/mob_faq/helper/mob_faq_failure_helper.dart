@@ -8,7 +8,7 @@ Future<void> mobFaqFailureHelper(
 ) async {
   await loadingFailureHelper(
     tester: tester,
-    card: KWidgetkeys.screen.mobFaq.list,
-    buttonMock: KWidgetkeys.screen.mobFaq.buttonMock,
+    card: MobFaqKeys.list,
+    buttonMock: MobFaqKeys.buttonMock,
   );
 }

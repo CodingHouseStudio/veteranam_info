@@ -12,20 +12,20 @@ Future<void> companyFormsEnterTextHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.photo,
+    itemKey: CompanyKeys.photo,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.company.photo));
+  await tester.tap(find.byKey(CompanyKeys.photo));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.companyNameField,
+    itemKey: CompanyKeys.companyNameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.company.companyNameField),
+    find.byKey(CompanyKeys.companyNameField),
     companyName,
   );
 
@@ -33,11 +33,11 @@ Future<void> companyFormsEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.publicNameField,
+    itemKey: CompanyKeys.publicNameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.company.publicNameField),
+    find.byKey(CompanyKeys.publicNameField),
     publicName,
   );
 
@@ -45,11 +45,11 @@ Future<void> companyFormsEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.companyCodeField,
+    itemKey: CompanyKeys.companyCodeField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.company.companyCodeField),
+    find.byKey(CompanyKeys.companyCodeField),
     companyCode,
   );
 
@@ -57,17 +57,17 @@ Future<void> companyFormsEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.linkField,
+    itemKey: CompanyKeys.linkField,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.linkField,
+    itemKey: CompanyKeys.linkField,
   );
 
   if (link != null) {
     await tester.enterText(
-      find.byKey(KWidgetkeys.screen.company.linkField),
+      find.byKey(CompanyKeys.linkField),
       link,
     );
 

@@ -11,33 +11,33 @@ Future<void> chekPointSignleTapHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.widget),
+    find.byKey(CheckPointKeys.widget),
     findsWidgets,
   );
 
   if (!customText) {
     expect(
-      find.byKey(KWidgetkeys.widget.checkPoint.text),
+      find.byKey(CheckPointKeys.text),
       findsWidgets,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    find.byKey(CheckPointKeys.ammount),
     hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
     itemIndex: index,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).at(index));
+  await tester.tap(find.byKey(CheckPointKeys.widget).at(index));
 
   await tester.pumpAndSettle();
 }

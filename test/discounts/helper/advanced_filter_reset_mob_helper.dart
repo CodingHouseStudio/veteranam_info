@@ -8,33 +8,31 @@ Future<void> advancedFilterResetMobHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  final isMobile = tester
-      .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterMob))
-      .isNotEmpty;
+  final isMobile =
+      tester.widgetList(find.byKey(DiscountsKeys.advancedFilterMob)).isNotEmpty;
 
   await scrollingHelper(
     tester: tester,
     itemKey: isMobile
-        ? KWidgetkeys.screen.discounts.advancedFilterMob
-        : KWidgetkeys.screen.discounts.advancedFilterDesk,
+        ? DiscountsKeys.advancedFilterMob
+        : DiscountsKeys.advancedFilterDesk,
   );
 
   expect(
     find.byKey(
       isMobile
-          ? KWidgetkeys.screen.discounts.advancedFilterMob
-          : KWidgetkeys.screen.discounts.advancedFilterDesk,
+          ? DiscountsKeys.advancedFilterMob
+          : DiscountsKeys.advancedFilterDesk,
     ),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+    find.byKey(DiscountsKeys.advancedFilterButton),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  await tester.tap(find.byKey(DiscountsKeys.advancedFilterButton));
 
   await tester.pumpAndSettle();
 
@@ -56,23 +54,23 @@ Future<void> advancedFilterResetMobHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
+    find.byKey(DiscountsKeys.appliedFilterItems),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton),
+    find.byKey(DiscountsKeys.advancedFilterResetButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton),
+    find.byKey(DiscountsKeys.advancedFilterResetButton),
   );
 
   await tester.pumpAndSettle();
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
+  //   find.byKey(DiscountsKeys.appliedFilterItems),
   //   findsNothing,
   // );
 

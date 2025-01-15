@@ -9,33 +9,33 @@ Future<void> reportDialogCheckFailureHelper(
   await reportDialogOpenHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
+    find.byKey(ReportDialogKeys.checkPointError),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPoint),
+    find.byKey(ReportDialogKeys.checkPoint),
     findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.checkPoint.icon), findsNothing);
+  expect(find.byKey(CheckPointKeys.icon), findsNothing);
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+    find.byKey(ReportDialogKeys.sendButton),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.sendButton,
+    itemKey: ReportDialogKeys.sendButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.sendButton));
+  await tester.tap(find.byKey(ReportDialogKeys.sendButton));
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
+    find.byKey(ReportDialogKeys.checkPointError),
     findsOneWidget,
   );
 }

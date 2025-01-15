@@ -5,22 +5,22 @@ Future<void> cardEmptyHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.cardEmpty.widget),
+    find.byKey(CardEmptyKeys.widget),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.cardEmpty.closeButton),
+    find.byKey(CardEmptyKeys.closeButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.cardEmpty.image),
+    find.byKey(CardEmptyKeys.image),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.cardEmpty.text),
+    find.byKey(CardEmptyKeys.text),
     findsOneWidget,
   );
 }

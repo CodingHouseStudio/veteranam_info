@@ -25,7 +25,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: KWidgetkeys.widget.question.widget,
+      key: QuestionKeys.widget,
       decoration: KWidgetTheme.boxDecorationWidget,
       clipBehavior: Clip.hardEdge,
       child: Material(
@@ -41,7 +41,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             context.isEnglish
                 ? widget.questionModel.titleEN
                 : widget.questionModel.title,
-            key: KWidgetkeys.widget.question.title,
+            key: QuestionKeys.title,
             style: widget.isDesk
                 ? AppTextStyle.materialThemeHeadlineSmall
                 : AppTextStyle.materialThemeTitleLarge,
@@ -52,10 +52,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           trailing: IconWidget(
             icon: openQuestion
                 ? KIcon.minus.copyWith(
-                    key: KWidgetkeys.widget.question.iconMinus,
+                    key: QuestionKeys.iconMinus,
                   )
                 : KIcon.plus.copyWith(
-                    key: KWidgetkeys.widget.question.iconPlus,
+                    key: QuestionKeys.iconPlus,
                   ),
             padding: KPadding.kPaddingSize12,
             background: AppColors.materialThemeWhite,
@@ -81,7 +81,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           ),
           children: [
             MarkdownLinkWidget(
-              key: KWidgetkeys.widget.question.subtitle,
+              key: QuestionKeys.subtitle,
               text: context.isEnglish
                   ? widget.questionModel.subtitleEN
                   : widget.questionModel.subtitle,

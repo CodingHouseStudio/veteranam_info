@@ -74,9 +74,9 @@ class _FooterWidgetList extends StatelessWidget {
                   padding: isTablet
                       ? KPadding.kPaddingSize24
                       : KPadding.kPaddingSize16,
-                  instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                  linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                  facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                  instagramKey: FooterKeys.instagramIcon,
+                  linkedInKey: FooterKeys.likedInIcon,
+                  facebookKey: FooterKeys.facebookIcon,
                 ),
               ],
             ),
@@ -84,7 +84,7 @@ class _FooterWidgetList extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                KIcon.logo78.copyWith(key: KWidgetkeys.widget.footer.logo),
+                KIcon.logo78.copyWith(key: FooterKeys.logo),
                 Expanded(
                   child: Wrap(
                     spacing: KPadding.kPaddingSize8,
@@ -94,7 +94,7 @@ class _FooterWidgetList extends StatelessWidget {
                     children: [
                       Text(
                         '${KAppText.madeBy}  |',
-                        key: KWidgetkeys.widget.footer.madeBy,
+                        key: FooterKeys.madeBy,
                         style:
                             AppTextStyle.materialThemeBodyLargeNeutralVariant35,
                         textAlign: TextAlign.end,
@@ -142,20 +142,20 @@ class _FooterWidgetList extends StatelessWidget {
               isDesk: isTablet,
               padding:
                   isTablet ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
-              instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-              linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-              facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+              instagramKey: FooterKeys.instagramIcon,
+              linkedInKey: FooterKeys.likedInIcon,
+              facebookKey: FooterKeys.facebookIcon,
             ),
             KSizedBox.kHeightSizedBox40,
             Align(
-              key: KWidgetkeys.widget.footer.logo,
+              key: FooterKeys.logo,
               alignment: Alignment.centerLeft,
               child: KIcon.logo,
             ),
             KSizedBox.kHeightSizedBox24,
             Text(
               '${KAppText.madeBy}  | ',
-              key: KWidgetkeys.widget.footer.madeBy,
+              key: FooterKeys.madeBy,
               style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
             ),
             KSizedBox.kHeightSizedBox4,
@@ -192,7 +192,7 @@ class _FooterRightsReservedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '${context.l10n.allRightsReserved}  |',
-      key: KWidgetkeys.widget.footer.rightReserved,
+      key: FooterKeys.rightReserved,
       style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
     );
   }
@@ -214,7 +214,7 @@ class _Sections extends StatelessWidget {
           padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
           child: Text(
             context.l10n.sections,
-            key: KWidgetkeys.widget.footer.sections,
+            key: FooterKeys.sections,
             style: isTablet
                 ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
                 : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
@@ -225,29 +225,29 @@ class _Sections extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox4,
         _Button(
-          widgetKey: KWidgetkeys.widget.footer.discountsButton,
+          widgetKey: FooterKeys.discountsButton,
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
         if (Config.isDevelopment)
           _Button(
-            widgetKey: KWidgetkeys.widget.footer.informationButton,
+            widgetKey: FooterKeys.informationButton,
             text: context.l10n.information,
             onPressed: () => context.goNamed(KRoute.information.name),
           ),
         _Button(
-          widgetKey: KWidgetkeys.widget.footer.investorsButton,
+          widgetKey: FooterKeys.investorsButton,
           text: context.l10n.investors,
           onPressed: () => context.goNamed(KRoute.support.name),
         ),
         if (Config.isDevelopment) ...[
           _Button(
-            widgetKey: KWidgetkeys.widget.footer.workButton,
+            widgetKey: FooterKeys.workButton,
             text: context.l10n.work,
             onPressed: () => context.goNamed(KRoute.work.name),
           ),
           _Button(
-            widgetKey: KWidgetkeys.widget.footer.storyButton,
+            widgetKey: FooterKeys.storyButton,
             text: context.l10n.stories,
             onPressed: () => context.goNamed(KRoute.stories.name),
           ),
@@ -273,7 +273,7 @@ class _Information extends StatelessWidget {
           padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
           child: Text(
             context.l10n.information,
-            key: KWidgetkeys.widget.footer.information,
+            key: FooterKeys.information,
             style: isTablet
                 ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
                 : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
@@ -284,12 +284,12 @@ class _Information extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox4,
         _Button(
-          widgetKey: KWidgetkeys.widget.footer.aboutUsButton,
+          widgetKey: FooterKeys.aboutUsButton,
           text: context.l10n.aboutUs,
           onPressed: () => context.goNamed(KRoute.aboutUs.name),
         ),
         _Button(
-          widgetKey: KWidgetkeys.widget.footer.profileButton,
+          widgetKey: FooterKeys.profileButton,
           text: context.l10n.myProfile,
           onPressed: () => context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated
@@ -297,7 +297,7 @@ class _Information extends StatelessWidget {
               : context.goNamed(KRoute.login.name),
         ),
         _Button(
-          widgetKey: KWidgetkeys.widget.footer.consultationOnlineButton,
+          widgetKey: FooterKeys.consultationOnlineButton,
           text: context.l10n.consultationOnline,
           onPressed: () => context.goNamed(KRoute.consultation.name),
         ),
@@ -322,14 +322,14 @@ class _Contact extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             context.l10n.contacts,
-            key: KWidgetkeys.widget.footer.contact,
+            key: FooterKeys.contact,
             style: isTablet
                 ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
                 : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
         EmailButtonWidget(
-          key: KWidgetkeys.widget.footer.emailButton,
+          key: FooterKeys.emailButton,
           isDesk: isTablet,
         ),
       ],
@@ -351,7 +351,7 @@ class _Support extends StatelessWidget {
       children: [
         Text(
           context.l10n.doYouWantSupportOurProject,
-          key: KWidgetkeys.widget.footer.title,
+          key: FooterKeys.title,
           style: isTablet
               ? AppTextStyle.materialThemeDisplaySmall
               : AppTextStyle.materialThemeHeadlineMedium,
@@ -360,12 +360,12 @@ class _Support extends StatelessWidget {
         //   Align(
         //     alignment: Alignment.centerLeft,
         //     child: BuyMeACoffeeWidget(
-        //       key: KWidgetkeys.widget.footer.button,
+        //       key: FooterKeys.button,
         //     ),
         //   )
         // else
         DoubleButtonWidget(
-          widgetKey: KWidgetkeys.widget.footer.button,
+          widgetKey: FooterKeys.button,
           text: context.l10n.contact,
           onPressed: () => context.goNamed(KRoute.feedback.name),
           isDesk: isTablet,
@@ -499,7 +499,7 @@ class _PrivacyPolice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      key: KWidgetkeys.widget.footer.privacyPolicy,
+      key: FooterKeys.privacyPolicy,
       onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
       style: isDesk
           ? KButtonStyles.withoutStyleAligmentBottomLeft

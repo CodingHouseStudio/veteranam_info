@@ -17,7 +17,7 @@ class GetErrorDialogWidget extends StatelessWidget {
         Expanded(
           child: Text(
             error,
-            key: KWidgetkeys.widget.dialogs.snackBarText,
+            key: DialogsKeys.snackBarText,
             style: AppTextStyle.materialThemeTitleMediumNeutral,
           ),
         ),
@@ -29,7 +29,7 @@ class GetErrorDialogWidget extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    key: KWidgetkeys.widget.dialogs.failureButton,
+                    key: DialogsKeys.failureButton,
                     style: KButtonStyles.whiteSnackBarButtonStyle,
                     onPressed: () {
                       onPressed?.call();

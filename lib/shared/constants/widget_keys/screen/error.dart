@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _ErrorKeys {
-  final screen = const Key('error_screen');
-  final button = const Key('error_button');
-  final title = const Key('error_text');
+abstract class ErrorKeys {
+  static const screen = Key('error_screen');
+  static const button = Key('error_button');
+  static const title = Key('error_text');
 }

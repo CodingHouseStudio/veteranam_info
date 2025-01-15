@@ -9,9 +9,9 @@ class MobFaqScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return
         // MobFaqBlocprovider(
-        //   key: KWidgetkeys.screen.mobFaq.screen,
+        //   key: MobFaqKeys.screen,
         //   childWidget:
-        MobFaqBodyWidget(key: KWidgetkeys.screen.mobFaq.screen);
+        MobFaqBodyWidget(key: MobFaqKeys.screen);
     // );
   }
 }

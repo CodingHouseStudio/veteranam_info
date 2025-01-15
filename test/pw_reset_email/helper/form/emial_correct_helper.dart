@@ -10,68 +10,68 @@ Future<void> emailCorrectHelper(
   await emailEnterHelper(tester: tester, email: KTestVariables.userEmail);
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendSubtitle),
+    find.byKey(PwResetEmailKeys.resendSubtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.cancelButton),
+    find.byKey(PwResetEmailKeys.cancelButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
+    find.byKey(PwResetEmailKeys.delayText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsNothing,
   );
 
   await tester.pumpAndSettle(const Duration(minutes: 2));
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendText),
+    find.byKey(PwResetEmailKeys.resendText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
+    find.byKey(PwResetEmailKeys.delayText),
     findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.pwResetEmail.cancelButton,
+    itemKey: PwResetEmailKeys.cancelButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton));
+  await tester.tap(find.byKey(PwResetEmailKeys.resendButton));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.pwResetEmail.cancelButton,
+    itemKey: PwResetEmailKeys.cancelButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
+    find.byKey(PwResetEmailKeys.delayText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsNothing,
   );
 }

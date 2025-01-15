@@ -13,7 +13,7 @@ class SwitchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Switch(
-      key: KWidgetkeys.widget.switchKeys.widget,
+      key: SwitchKeys.widget,
       value: isSelected,
       onChanged: (value) => onChanged?.call(),
       trackColor: const WidgetStatePropertyAll(
@@ -30,14 +30,14 @@ class SwitchWidget extends StatelessWidget {
       ),
     );
     // return IconButton(
-    //   key: KWidgetkeys.widget.switchKeys.widget,
+    //   key: SwitchKeys.widget,
     //   style: KButtonStyles.withoutStyle,
     //   onPressed: onChanged,
     //   icon: DecoratedBox(
     //     decoration: KWidgetTheme.boxDecorationNawbar,
     //     child: AnimatedContainer(
     //       duration: const Duration(milliseconds: 200),
-    //       // key: KWidgetkeys.widget.switchKeys.item,
+    //       // key: SwitchKeys.item,
     //       constraints: const BoxConstraints(
     //         minWidth: KSize.kPixel40,
     //         minHeight: KSize.kPixel40,
@@ -60,7 +60,7 @@ class SwitchWidget extends StatelessWidget {
     //         KPadding.kPaddingSize8,
     //       ),
     //       child: KIcon.modeOffOn.copyWith(
-    //         key: isSelected ? KWidgetkeys.widget.switchKeys.active : null,
+    //         key: isSelected ? SwitchKeys.active : null,
     //         color: isSelected
     //             ? onChanged == null
     //                 ? AppColors.materialThemeKeyColorsNeutral

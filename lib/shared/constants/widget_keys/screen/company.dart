@@ -1,20 +1,20 @@
 part of '../widget_keys.dart';
 
-class _CompanyKeys {
-  final screen = const Key('company_screen');
-  final title = const Key('company_title');
-  final photo = const Key('company_photo');
-  final companyNameField = const Key('company_name_field');
-  final publicNameField = const Key('public_name_field');
-  final companyCodeField = const Key('company_code_field');
-  final userEmailField = const Key('company_user_email_field');
-  final linkField = const Key('link_field');
-  final editText = const Key('company_edit_text');
-  final imageEditText = const Key('company_image_edit_text');
-  final saveButton = const Key('company_save_button');
-  final deleteButton = const Key('company_delete_button');
-  final logOutButton = const Key('company_log_out_button');
-  final boxMyDiscounts = const Key('company_box_discounts');
-  final submitingText = const Key('company_card_submiting_text');
-  final deleteNotEnabledText = const Key('company_delete_not_enabled_text');
+abstract class CompanyKeys {
+  static const screen = Key('company_screen');
+  static const title = Key('company_title');
+  static const photo = Key('company_photo');
+  static const companyNameField = Key('company_name_field');
+  static const publicNameField = Key('public_name_field');
+  static const companyCodeField = Key('company_code_field');
+  static const userEmailField = Key('company_user_email_field');
+  static const linkField = Key('link_field');
+  static const editText = Key('company_edit_text');
+  static const imageEditText = Key('company_image_edit_text');
+  static const saveButton = Key('company_save_button');
+  static const deleteButton = Key('company_delete_button');
+  static const logOutButton = Key('company_log_out_button');
+  static const boxMyDiscounts = Key('company_box_discounts');
+  static const submitingText = Key('company_card_submiting_text');
+  static const deleteNotEnabledText = Key('company_delete_not_enabled_text');
 }

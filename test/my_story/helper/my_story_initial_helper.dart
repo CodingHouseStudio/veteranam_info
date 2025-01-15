@@ -11,17 +11,17 @@ Future<void> myStoryInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.myStory.title),
+        find.byKey(MyStoryKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myStory.subtitle),
+        find.byKey(MyStoryKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myStory.card),
+        find.byKey(MyStoryKeys.card),
         findsWidgets,
       );
 

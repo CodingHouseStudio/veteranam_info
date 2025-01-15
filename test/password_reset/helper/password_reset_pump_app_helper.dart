@@ -29,7 +29,7 @@ Future<void> passwordResetPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.screen),
+    find.byKey(PasswordResetKeys.screen),
     findsOneWidget,
   );
 

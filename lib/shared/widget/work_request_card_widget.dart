@@ -20,16 +20,16 @@ class WorkRequestCardWidget extends StatelessWidget {
         children: [
           Text(
             context.l10n.didNotFindYourVacancy,
-            key: KWidgetkeys.widget.workRequestCard.title,
+            key: WorkRequestCardKeys.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
           ),
           Text(
             context.l10n.workRequestSubtitle,
-            key: KWidgetkeys.widget.workRequestCard.subtitle,
+            key: WorkRequestCardKeys.subtitle,
             style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
           ),
           ButtonWidget(
-            key: KWidgetkeys.widget.workRequestCard.button,
+            key: WorkRequestCardKeys.button,
             isDesk: isDesk,
             text: context.l10n.leaveRequest,
             onPressed: null,

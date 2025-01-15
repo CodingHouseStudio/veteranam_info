@@ -9,11 +9,11 @@ Future<void> confirmDialogCancelIconHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon),
+    find.byKey(ConfirmDialogKeys.cancelIcon),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.confirmDialog.cancelIcon));
+  await tester.tap(find.byKey(ConfirmDialogKeys.cancelIcon));
 
   await tester.pumpAndSettle();
 

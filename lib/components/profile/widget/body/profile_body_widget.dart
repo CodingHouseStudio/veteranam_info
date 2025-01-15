@@ -25,7 +25,7 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         ShortTitleIconWidget(
           title: context.l10n.myProfileTitle,
-          titleKey: KWidgetkeys.screen.profile.title,
+          titleKey: ProfileKeys.title,
           isDesk: isDesk,
           icon: KIcon.arrowDownRight,
           firstIcon: !isDesk,
@@ -107,7 +107,7 @@ class ProfileBodyWidget extends StatelessWidget {
     required bool isDesk,
   }) =>
       ButtonAdditionalWidget(
-        key: KWidgetkeys.screen.profile.logOutButton,
+        key: ProfileKeys.logOutButton,
         text: context.l10n.logOut,
         picture: KIcon.logOut,
         align: Alignment.center,
@@ -149,7 +149,7 @@ class ProfileBodyWidget extends StatelessWidget {
     required bool isDesk,
   }) =>
       SecondaryButtonWidget(
-        widgetKey: KWidgetkeys.screen.profile.deleteButton,
+        widgetKey: ProfileKeys.deleteButton,
         isDesk: isDesk,
         align: Alignment.center,
         style: KButtonStyles.borderNeutralButtonStyle,

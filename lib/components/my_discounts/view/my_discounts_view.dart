@@ -9,7 +9,7 @@ class MyDiscountsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyDiscountsBlocprovider(
       childWidget: MyDiscountsBodyWidget(
-        key: KWidgetkeys.screen.myDiscounts.screen,
+        key: MyDiscountsKeys.screen,
       ),
     );
   }

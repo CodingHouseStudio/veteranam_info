@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _NetworkBannerKeys {
-  final widget = const Key('network_banner');
-  final iconNoInternet = const Key('network_banner_icon_no_internet');
-  final iconSlowInternet = const Key('network_banner_icon_slow_internet');
+abstract class NetworkBannerKeys {
+  static const widget = Key('network_banner');
+  static const iconNoInternet = Key('network_banner_icon_no_internet');
+  static const iconSlowInternet = Key('network_banner_icon_slow_internet');
 }

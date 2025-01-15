@@ -9,66 +9,66 @@ Future<void> menuDialogHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.menuDialog.dialog), findsOneWidget);
+  expect(find.byKey(MenuDialogKeys.dialog), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.discountsButton),
+    find.byKey(MenuDialogKeys.discountsButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.discountsButton));
+  await tester.tap(find.byKey(MenuDialogKeys.discountsButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.discounts.name),
   ).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.investorsButton),
+    find.byKey(MenuDialogKeys.investorsButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.investorsButton));
+  await tester.tap(find.byKey(MenuDialogKeys.investorsButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.support.name),
   ).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.feedbackButton),
+    find.byKey(MenuDialogKeys.feedbackButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.feedbackButton));
+  await tester.tap(find.byKey(MenuDialogKeys.feedbackButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.feedback.name),
   ).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.languageSwitcher),
+    find.byKey(MenuDialogKeys.languageSwitcher),
     findsOneWidget,
   );
 
   await languageSwitcherHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.linkedIn),
+    find.byKey(MenuDialogKeys.linkedIn),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.linkedIn));
+  await tester.tap(find.byKey(MenuDialogKeys.linkedIn));
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.facebook),
+    find.byKey(MenuDialogKeys.facebook),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.facebook));
+  await tester.tap(find.byKey(MenuDialogKeys.facebook));
 
   expect(
-    find.byKey(KWidgetkeys.widget.menuDialog.instagram),
+    find.byKey(MenuDialogKeys.instagram),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.instagram));
+  await tester.tap(find.byKey(MenuDialogKeys.instagram));
 }

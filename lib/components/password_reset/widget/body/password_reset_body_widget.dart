@@ -47,7 +47,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                       ? const EdgeInsets.only(left: KPadding.kPaddingSize60)
                       : EdgeInsets.zero,
                   child: ShortTitleIconWidget(
-                    titleKey: KWidgetkeys.screen.passwordReset.title,
+                    titleKey: PasswordResetKeys.title,
                     title: (codeIsValid ?? false)
                         ? context.l10n.successfully
                         : context.l10n.passwordReset,
@@ -63,7 +63,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                 if (!(codeIsValid ?? true))
                   // Android not support RichText Widget
                   Text.rich(
-                    key: KWidgetkeys.screen.passwordReset.wrongLinkSubtitle,
+                    key: PasswordResetKeys.wrongLinkSubtitle,
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
                     TextSpan(
                       children: [
@@ -84,7 +84,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                     codeIsValid == null
                         ? context.l10n.passwordResetWaiting
                         : context.l10n.successfullyDescruption,
-                    key: KWidgetkeys.screen.passwordReset.subtitle,
+                    key: PasswordResetKeys.subtitle,
                     style: AppTextStyle.materialThemeBodyLarge,
                     textAlign: isDesk ? TextAlign.center : TextAlign.start,
                   ),
@@ -97,7 +97,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                 if (codeIsValid ?? false) ...[
                   KSizedBox.kHeightSizedBox40,
                   PasswordFieldWidget(
-                    widgetKey: KWidgetkeys.screen.passwordReset.passwordField,
+                    widgetKey: PasswordResetKeys.passwordField,
                     onChanged: (text) => context
                         .read<PasswordResetBloc>()
                         .add(PasswordResetEvent.passwordUpdated(text)),
@@ -111,8 +111,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                   else
                     KSizedBox.kHeightSizedBox16,
                   PasswordFieldWidget(
-                    widgetKey:
-                        KWidgetkeys.screen.passwordReset.confirmPasswordField,
+                    widgetKey: PasswordResetKeys.confirmPasswordField,
                     onChanged: (text) => context
                         .read<PasswordResetBloc>()
                         .add(PasswordResetEvent.confirmPasswordUpdated(text)),
@@ -127,7 +126,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                   ),
                 ],
                 SendingTextWidget(
-                  textKey: KWidgetkeys.screen.passwordReset.submitingText,
+                  textKey: PasswordResetKeys.submitingText,
                   failureText: _.failure?.value(context),
                   sendingText: context.l10n.changePasswordWaiting,
                   successText: context.l10n.changedPassword,
@@ -144,7 +143,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                     alignment:
                         codeIsValid ? Alignment.centerLeft : Alignment.center,
                     child: DoubleButtonWidget(
-                      widgetKey: KWidgetkeys.screen.passwordReset.confirmButton,
+                      widgetKey: PasswordResetKeys.confirmButton,
                       align: codeIsValid ? null : Alignment.center,
                       text: codeIsValid
                           ? context.l10n.confirm
@@ -173,7 +172,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                 else
                   Center(
                     child: CircularProgressIndicator(
-                      key: KWidgetkeys.screen.passwordReset.loadingIndicator,
+                      key: PasswordResetKeys.loadingIndicator,
                       backgroundColor: AppColors.materialThemeKeyColorsNeutral,
                       color: AppColors.materialThemeKeyColorsNeutralVariant,
                     ),

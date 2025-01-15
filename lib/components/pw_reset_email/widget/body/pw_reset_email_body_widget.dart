@@ -36,7 +36,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
                   : EdgeInsets.zero,
               child: ShortTitleIconWidget(
                 title: context.l10n.passwordReset,
-                titleKey: KWidgetkeys.screen.pwResetEmail.title,
+                titleKey: PwResetEmailKeys.title,
                 isDesk: isDesk,
                 titleAlign: isDesk ? TextAlign.center : TextAlign.start,
                 expanded: true,
@@ -61,7 +61,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
               child: _.formState.isSended
                   // Android not support RichText Widget
                   ? Text.rich(
-                      key: KWidgetkeys.screen.pwResetEmail.resendSubtitle,
+                      key: PwResetEmailKeys.resendSubtitle,
                       TextSpan(
                         style: AppTextStyle.materialThemeBodyLarge,
                         children: [
@@ -85,7 +85,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
                     )
                   : Text(
                       context.l10n.passwordResetDescription,
-                      key: KWidgetkeys.screen.pwResetEmail.subtitle,
+                      key: PwResetEmailKeys.subtitle,
                       style: AppTextStyle.materialThemeBodyLarge,
                       textAlign: isDesk ? TextAlign.center : TextAlign.start,
                     ),
@@ -95,7 +95,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
               Align(
                 alignment: isDesk ? Alignment.topCenter : Alignment.topLeft,
                 child: TextButton(
-                  key: KWidgetkeys.screen.pwResetEmail.cancelButton,
+                  key: PwResetEmailKeys.cancelButton,
                   onPressed: () => context
                       .read<PwResetEmailBloc>()
                       .add(const PwResetEmailEvent.resetStatus()),
@@ -116,7 +116,7 @@ class PwResetEmailBodyWidget extends StatelessWidget {
               email: email,
             ),
             SendingTextWidget(
-              textKey: KWidgetkeys.screen.pwResetEmail.submitingText,
+              textKey: PwResetEmailKeys.submitingText,
               failureText: _.failure?.value(context),
               sendingText: context.l10n.passwordResetCodeSending,
               successText: null,

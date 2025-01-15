@@ -27,7 +27,7 @@ Future<void> incorrectSaveHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp1000,
-    itemKey: KWidgetkeys.screen.feedback.title,
+    itemKey: FeedbackKeys.title,
   );
 
   await feedbackInitialHelper(tester);

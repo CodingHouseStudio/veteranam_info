@@ -17,7 +17,7 @@ class ChatInputWidget extends StatelessWidget {
       spacing: KPadding.kPaddingSize8,
       children: [
         IconWidget(
-          key: KWidgetkeys.widget.chatInput.icon,
+          key: ChatInputKeys.icon,
           icon: messageIcon,
           background: AppColors.materialThemeKeyColorsNeutral,
         ),
@@ -27,7 +27,7 @@ class ChatInputWidget extends StatelessWidget {
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Text(
               message!,
-              key: KWidgetkeys.widget.chatInput.message,
+              key: ChatInputKeys.message,
               style: AppTextStyle.text16,
             ),
           )

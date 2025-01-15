@@ -14,34 +14,34 @@ Future<void> discountsAddMainEnterHelper({
   bool isEdit = false,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.titleField),
+    find.byKey(DiscountsAddKeys.titleField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.titleField,
+    itemKey: DiscountsAddKeys.titleField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.titleField),
+    find.byKey(DiscountsAddKeys.titleField),
     titleText,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.discountsField),
+    find.byKey(DiscountsAddKeys.discountsField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.discountsField,
+    itemKey: DiscountsAddKeys.discountsField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.discountsField),
+    find.byKey(DiscountsAddKeys.discountsField),
     discountsText,
   );
 
@@ -52,19 +52,19 @@ Future<void> discountsAddMainEnterHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.eligibilityField),
+    find.byKey(DiscountsAddKeys.eligibilityField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+    itemKey: DiscountsAddKeys.eligibilityField,
   );
 
   if (eligibilityTap) {
     await dropListFieldItemHelper(
       tester: tester,
-      textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+      textFieldKey: DiscountsAddKeys.eligibilityField,
       hasMultiChoice: true,
       hasValue: isEdit,
     );
@@ -77,17 +77,17 @@ Future<void> discountsAddMainEnterHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.linkField),
+    find.byKey(DiscountsAddKeys.linkField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.linkField,
+    itemKey: DiscountsAddKeys.linkField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.linkField),
+    find.byKey(DiscountsAddKeys.linkField),
     linkText,
   );
 

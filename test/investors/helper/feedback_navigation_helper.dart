@@ -15,20 +15,20 @@ Future<void> feedbackNavigationHelper({
     test: () async {
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+        itemKey: InvestorsKeys.feedbackTitle,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.investors.feedbackButton,
+        itemKey: InvestorsKeys.feedbackButton,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackButton),
+        find.byKey(InvestorsKeys.feedbackButton),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.investors.feedbackButton));
+      await tester.tap(find.byKey(InvestorsKeys.feedbackButton));
 
       verify(
         () => mockGoRouter.goNamed(

@@ -1,18 +1,20 @@
+// ignore_for_file: avoid_field_initializers_in_const_classes
+
 part of '../widget_keys.dart';
 
-class _NawbarKeys {
-  final widget = const Key('nawbar');
-  final logo = const Key('nawbar_logo');
-  // final field = const Key('nawbar_field');
-  final language = const Key('nawbar_language');
-  // final iconMic = const Key('nawbar_micro_icon');
-  final loginButton = const Key('nawbar_login_button');
-  final loginIcon = const Key('nawbar_login_icon');
-  final discountsButton = const Key('nawbar_discounts_button');
-  final myDiscountsButton = const Key('nawbar_my_discounts_button');
-  final investorsButton = const Key('nawbar_investors_button');
-  final feedbackButton = const Key('nawbar_feedback_button');
-  final menuButton = const Key('nawbar_menu_button');
-  final pageName = const Key('nawbar_page_name');
-  final backButton = const Key('nawbar_back_button');
+abstract class NawbarKeys {
+  static const widget = Key('nawbar');
+  static const logo = Key('nawbar_logo');
+  // static const field = Key('nawbar_field');
+  static const language = Key('nawbar_language');
+  // static const iconMic = Key('nawbar_micro_icon');
+  static const loginButton = Key('nawbar_login_button');
+  static const loginIcon = Key('nawbar_login_icon');
+  static const discountsButton = Key('nawbar_discounts_button');
+  static const myDiscountsButton = Key('nawbar_my_discounts_button');
+  static const investorsButton = Key('nawbar_investors_button');
+  static const feedbackButton = Key('nawbar_feedback_button');
+  static const menuButton = Key('nawbar_menu_button');
+  static const pageName = Key('nawbar_page_name');
+  static const backButton = Key('nawbar_back_button');
 }

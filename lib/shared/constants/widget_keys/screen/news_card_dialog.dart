@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _NewsCardDialogKeys {
-  final dialog = const Key('news_card_dialog');
-  final widget = const Key('news_card_dialog_widget');
-  final closeButton = const Key('news_card_dialog_close_button');
+abstract class NewsCardDialogKeys {
+  static const dialog = Key('news_card_dialog');
+  static const widget = Key('news_card_dialog_widget');
+  static const closeButton = Key('news_card_dialog_close_button');
 }

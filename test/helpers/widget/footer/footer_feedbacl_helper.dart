@@ -15,16 +15,16 @@ Future<void> footerFeedbackHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.footer.button),
+    find.byKey(FooterKeys.button),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.footer.button,
+    itemKey: FooterKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.footer.button));
+  await tester.tap(find.byKey(FooterKeys.button));
 
   verify(
     () => mockGoRouter.goNamed(

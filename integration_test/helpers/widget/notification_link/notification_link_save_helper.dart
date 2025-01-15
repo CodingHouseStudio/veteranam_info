@@ -7,19 +7,19 @@ Future<void> notificationLinkSaveHelper({
   required WidgetTester tester,
   required String link,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.notificationLink.field), findsOneWidget);
+  expect(find.byKey(NotificationLinkKeys.field), findsOneWidget);
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.notificationLink.field,
+    itemKey: NotificationLinkKeys.field,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.notificationLink.field),
+    find.byKey(NotificationLinkKeys.field),
     link,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.notificationLink.button));
+  await tester.tap(find.byKey(NotificationLinkKeys.button));
 
   await tester.pumpAndSettle();
 }

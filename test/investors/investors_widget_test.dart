@@ -224,7 +224,7 @@ void main() {
       //     mockUrlRepository: mockUrlRepository,
       //     tester: tester,
       //   ),
-      //   // lastCard: KWidgetkeys.screen.investors.cardLast,
+      //   // lastCard: InvestorsKeys.cardLast,
       // );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(

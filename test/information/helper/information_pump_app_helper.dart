@@ -30,7 +30,7 @@ Future<void> informationPumpAppHelper({
   await tester.pumpApp(const InformationScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.information.screen),
+    find.byKey(InformationKeys.screen),
     findsOneWidget,
   );
 

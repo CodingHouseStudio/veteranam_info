@@ -23,10 +23,7 @@ Future<void> deleteAccountUnconfirmButtonlHelper({
     tester: tester,
     windowsTest: true,
     test: () async {
-      if (find
-          .byKey(KWidgetkeys.widget.confirmDialog.cancelIcon)
-          .evaluate()
-          .isEmpty) {
+      if (find.byKey(ConfirmDialogKeys.cancelIcon).evaluate().isEmpty) {
         await deleteAccountDialoglHelper(tester);
       }
       if (icon) {

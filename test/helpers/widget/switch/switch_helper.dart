@@ -11,63 +11,61 @@ Future<void> switchHelper({
   int elementIndex = 0,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.switchKeys.widget),
+    find.byKey(SwitchKeys.widget),
     findsWidgets,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.switchKeys.icon),
+  //   find.byKey(SwitchKeys.icon),
   //   findsOneWidget,
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.switchKeys.item),
+  //   find.byKey(SwitchKeys.item),
   //   findsWidgets,
   // );
 
   expect(
     tester
         .widget<Switch>(
-          find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+          find.byKey(SwitchKeys.widget).at(elementIndex),
         )
         .value,
     isActive ? isTrue : isFalse,
   );
 
   // late var switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget)
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget)
   // );
 
   // expect(switchWidget.value, isFalse);
   if (enabled) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.widget.switchKeys.widget,
+      itemKey: SwitchKeys.widget,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex));
+    await tester.tap(find.byKey(SwitchKeys.widget).at(elementIndex));
 
     await tester.pumpAndSettle();
 
     expect(
       tester
           .widget<Switch>(
-            find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+            find.byKey(SwitchKeys.widget).at(elementIndex),
           )
           .value,
       isActive ? isFalse : isTrue,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex));
+    await tester.tap(find.byKey(SwitchKeys.widget).at(elementIndex));
 
     await tester.pumpAndSettle();
 
     expect(
       tester
           .widget<Switch>(
-            find.byKey(KWidgetkeys.widget.switchKeys.widget).at(elementIndex),
+            find.byKey(SwitchKeys.widget).at(elementIndex),
           )
           .value,
       isActive ? isTrue : isFalse,
@@ -75,22 +73,22 @@ Future<void> switchHelper({
   }
 
   // switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget
   // ));
 
   // expect(switchWidget.value, isTrue);
 
   // await scrollingHelper(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.widget.switchKeys.widget,
+  //   itemKey: SwitchKeys.widget,
   // );
 
-  // await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+  // await tester.tap(find.byKey(SwitchKeys.widget));
 
   // await tester.pumpAndSettle();
 
   // switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget
   // ));
 
   // expect(switchWidget.value, isFalse);

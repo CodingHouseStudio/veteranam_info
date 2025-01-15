@@ -15,28 +15,28 @@ Future<void> nawbarBusinessProfileNavigationHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.logo),
+    find.byKey(NawbarKeys.logo),
     findsOneWidget,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.nawbar.myDiscountsButton),
+  //   find.byKey(NawbarKeys.myDiscountsButton),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+    find.byKey(NawbarKeys.loginIcon),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    itemKey: KWidgetkeys.widget.nawbar.loginIcon,
+    itemKey: NawbarKeys.loginIcon,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+    find.byKey(NawbarKeys.loginIcon),
   );
 
   await tester.pumpAndSettle();

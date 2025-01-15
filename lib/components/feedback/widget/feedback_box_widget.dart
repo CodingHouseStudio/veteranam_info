@@ -34,15 +34,15 @@ class _FeedbackBoxDesk extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              key: KWidgetkeys.screen.feedback.boxSocialMedia,
+              key: FeedbackKeys.boxSocialMedia,
               context.l10n.ourSocialNetworks,
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             SocialMediaLinks(
               isDesk: false,
-              instagramKey: KWidgetkeys.screen.feedback.instagram,
-              linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-              facebookKey: KWidgetkeys.screen.feedback.facebook,
+              instagramKey: FeedbackKeys.instagram,
+              linkedInKey: FeedbackKeys.linkedIn,
+              facebookKey: FeedbackKeys.facebook,
             ),
           ],
         ),
@@ -52,14 +52,14 @@ class _FeedbackBoxDesk extends StatelessWidget {
             children: [
               Text(
                 context.l10n.feedbackSent,
-                key: KWidgetkeys.screen.feedback.boxText,
+                key: FeedbackKeys.boxText,
                 style: AppTextStyle.materialThemeDisplaySmall,
               ),
               Row(
                 spacing: KPadding.kPaddingSize24,
                 children: [
                   DoubleButtonWidget(
-                    widgetKey: KWidgetkeys.screen.feedback.boxBackButton,
+                    widgetKey: FeedbackKeys.boxBackButton,
                     text: context.l10n.toTheMainPage,
                     isDesk: true,
                     onPressed: () => _navMain(context),
@@ -67,7 +67,7 @@ class _FeedbackBoxDesk extends StatelessWidget {
                     darkMode: true,
                   ),
                   TextButton(
-                    key: KWidgetkeys.screen.feedback.boxButton,
+                    key: FeedbackKeys.boxButton,
                     onPressed: sendAgain,
                     //() =>
                     //context.goNamed(KRoute.feedback.name),
@@ -105,12 +105,12 @@ class _FeedbackBoxMob extends StatelessWidget {
       children: [
         Text(
           context.l10n.feedbackSent,
-          key: KWidgetkeys.screen.feedback.boxText,
+          key: FeedbackKeys.boxText,
           style: AppTextStyle.materialThemeHeadlineSmall,
         ),
         KSizedBox.kHeightSizedBox24,
         DoubleButtonWidget(
-          widgetKey: KWidgetkeys.screen.feedback.boxBackButton,
+          widgetKey: FeedbackKeys.boxBackButton,
           text: context.l10n.toTheMainPage,
           isDesk: false,
           onPressed: () => _navMain(context),
@@ -121,7 +121,7 @@ class _FeedbackBoxMob extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox16,
         TextButton(
-          key: KWidgetkeys.screen.feedback.boxButton,
+          key: FeedbackKeys.boxButton,
           onPressed: sendAgain, //() => context.goNamed(KRoute.feedback.name),
           style: KButtonStyles.borderBlackButtonStyle,
           child: Padding(
@@ -137,15 +137,15 @@ class _FeedbackBoxMob extends StatelessWidget {
         KSizedBox.kHeightSizedBox32,
         Text(
           context.l10n.ourSocialNetworks,
-          key: KWidgetkeys.screen.feedback.boxSocialMedia,
+          key: FeedbackKeys.boxSocialMedia,
           style: AppTextStyle.materialThemeTitleMedium,
         ),
         KSizedBox.kHeightSizedBox8,
         SocialMediaLinks(
           isDesk: false,
-          instagramKey: KWidgetkeys.screen.feedback.instagram,
-          linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-          facebookKey: KWidgetkeys.screen.feedback.facebook,
+          instagramKey: FeedbackKeys.instagram,
+          linkedInKey: FeedbackKeys.linkedIn,
+          facebookKey: FeedbackKeys.facebook,
         ),
       ],
     );

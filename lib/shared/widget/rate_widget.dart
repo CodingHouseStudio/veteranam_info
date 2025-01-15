@@ -21,15 +21,15 @@ class RateWidget extends StatelessWidget {
         children: [
           Text(
             context.l10n.rateOurSite,
-            key: KWidgetkeys.widget.rate.title,
+            key: RateKeys.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           RatingBar.builder(
             allowHalfRating: true,
             itemSize: KSize.kIconSize,
             itemPadding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-            itemBuilder: (context, index) => KIcon.star
-                .copyWith(key: KWidgetkeys.widget.rate.ratingBarIcons),
+            itemBuilder: (context, index) =>
+                KIcon.star.copyWith(key: RateKeys.ratingBarIcons),
             onRatingUpdate: onRatingUpdate ?? (double rating) {},
           ),
         ],

@@ -19,12 +19,12 @@ class NewsCardBody extends StatelessWidget {
             chilcWidget: SkeletonizerWidget(
               isLoading: _.loadingStatus != LoadingStatus.loaded,
               child: NewsCardWidget(
-                key: KWidgetkeys.screen.newsCard.widget,
+                key: NewsCardDialogKeys.widget,
                 informationItem:
                     _.informationModel ?? KMockText.informationModel,
                 isDesk: isDesk,
                 closeWidget: CloseButtonWidget(
-                  widgetKey: KWidgetkeys.screen.newsCard.closeButton,
+                  widgetKey: NewsCardDialogKeys.closeButton,
                   isDesk: isDesk,
                   routeName: KRoute.information.name,
                 ),

@@ -8,7 +8,7 @@ class ConsultationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConsultationBodyWidget(
-      key: KWidgetkeys.screen.consultation.screen,
+      key: ConsultationKeys.screen,
     );
   }
 }

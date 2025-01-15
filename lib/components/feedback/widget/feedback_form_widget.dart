@@ -42,7 +42,7 @@ class _BuildDesktopLayout extends StatelessWidget {
               children: [
                 Text(
                   context.l10n.feedbackSubtitle,
-                  key: KWidgetkeys.screen.feedback.subtitle,
+                  key: FeedbackKeys.subtitle,
                   style: AppTextStyle.materialThemeBodyLarge,
                 ),
                 KSizedBox.kHeightSizedBox32,
@@ -53,12 +53,12 @@ class _BuildDesktopLayout extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.preferEmail,
-                      key: KWidgetkeys.screen.feedback.emailText,
+                      key: FeedbackKeys.emailText,
                       style:
                           AppTextStyle.materialThemeBodyLargeNeutralVariant60,
                     ),
                     EmailButtonWidget(
-                      key: KWidgetkeys.screen.feedback.emailButton,
+                      key: FeedbackKeys.emailButton,
                       isDesk: true,
                     ),
                   ],
@@ -66,15 +66,15 @@ class _BuildDesktopLayout extends StatelessWidget {
                 KSizedBox.kHeightSizedBox32,
                 Text(
                   context.l10n.ourSocialNetworks,
-                  key: KWidgetkeys.screen.feedback.socialText,
+                  key: FeedbackKeys.socialText,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
                 KSizedBox.kHeightSizedBox8,
                 SocialMediaLinks(
                   isDesk: false,
-                  instagramKey: KWidgetkeys.screen.feedback.instagram,
-                  linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-                  facebookKey: KWidgetkeys.screen.feedback.facebook,
+                  instagramKey: FeedbackKeys.instagram,
+                  linkedInKey: FeedbackKeys.linkedIn,
+                  facebookKey: FeedbackKeys.facebook,
                 ),
               ],
             ),
@@ -107,7 +107,7 @@ class _BuildMobileLayout extends StatelessWidget {
     final widgets = [
       Text(
         context.l10n.feedbackSubtitle,
-        key: KWidgetkeys.screen.feedback.subtitle,
+        key: FeedbackKeys.subtitle,
         style: AppTextStyle.materialThemeBodyMedium,
       ),
       KSizedBox.kHeightSizedBox32,
@@ -122,11 +122,11 @@ class _BuildMobileLayout extends StatelessWidget {
         children: [
           Text(
             context.l10n.preferEmail,
-            key: KWidgetkeys.screen.feedback.emailText,
+            key: FeedbackKeys.emailText,
             style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
           EmailButtonWidget(
-            key: KWidgetkeys.screen.feedback.emailButton,
+            key: FeedbackKeys.emailButton,
             isDesk: false,
           ),
         ],
@@ -134,15 +134,15 @@ class _BuildMobileLayout extends StatelessWidget {
       KSizedBox.kHeightSizedBox32,
       Text(
         context.l10n.ourSocialNetworks,
-        key: KWidgetkeys.screen.feedback.socialText,
+        key: FeedbackKeys.socialText,
         style: AppTextStyle.materialThemeTitleMedium,
       ),
       KSizedBox.kHeightSizedBox8,
       SocialMediaLinks(
         isDesk: false,
-        instagramKey: KWidgetkeys.screen.feedback.instagram,
-        linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
-        facebookKey: KWidgetkeys.screen.feedback.facebook,
+        instagramKey: FeedbackKeys.instagram,
+        linkedInKey: FeedbackKeys.linkedIn,
+        facebookKey: FeedbackKeys.facebook,
       ),
       KSizedBox.kHeightSizedBox32,
     ];

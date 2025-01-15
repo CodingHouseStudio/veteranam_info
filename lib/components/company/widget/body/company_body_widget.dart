@@ -20,7 +20,7 @@ class CompanyBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         ShortTitleIconWidget(
           title: context.l10n.myCompany,
-          titleKey: KWidgetkeys.screen.company.title,
+          titleKey: CompanyKeys.title,
           isDesk: isDesk,
           icon: KIcon.arrowDownRight,
           firstIcon: !isDesk,
@@ -32,7 +32,7 @@ class CompanyBodyWidget extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
-              key: KWidgetkeys.screen.company.boxMyDiscounts,
+              key: CompanyKeys.boxMyDiscounts,
               onPressed: () => myDiscountTap(context),
               child: Column(
                 spacing: KPadding.kPaddingSize4,
@@ -70,7 +70,7 @@ class CompanyBodyWidget extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: BoxWidget(
-                  key: KWidgetkeys.screen.company.boxMyDiscounts,
+                  key: CompanyKeys.boxMyDiscounts,
                   text: context.l10n.myDiscounts,
                   onTap: () => myDiscountTap(context),
                   isDesk: isDesk,

@@ -9,50 +9,50 @@ Future<void> passwordEnterHelper({
   required String confirmPassword,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.passwordField),
+    find.byKey(PasswordResetKeys.passwordField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.passwordReset.passwordField,
+    itemKey: PasswordResetKeys.passwordField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.passwordReset.passwordField),
+    find.byKey(PasswordResetKeys.passwordField),
     password,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.confirmPasswordField),
+    find.byKey(PasswordResetKeys.confirmPasswordField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.passwordReset.confirmPasswordField,
+    itemKey: PasswordResetKeys.confirmPasswordField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.passwordReset.confirmPasswordField),
+    find.byKey(PasswordResetKeys.confirmPasswordField),
     confirmPassword,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.confirmButton),
+    find.byKey(PasswordResetKeys.confirmButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.passwordReset.confirmButton,
+    itemKey: PasswordResetKeys.confirmButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.passwordReset.confirmButton));
+  await tester.tap(find.byKey(PasswordResetKeys.confirmButton));
 
   await tester.pumpAndSettle();
 

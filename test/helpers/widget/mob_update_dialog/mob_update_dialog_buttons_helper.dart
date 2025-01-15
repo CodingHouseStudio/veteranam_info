@@ -10,15 +10,15 @@ Future<void> mobUpdateDialogButtonsHelper({
 }) async {
   await mobUpdateDialogHelper(tester);
 
-  expect(find.byKey(KWidgetkeys.widget.mobUpdate.lateButton), findsWidgets);
+  expect(find.byKey(MobUpdateKeys.lateButton), findsWidgets);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobUpdate.lateButton));
+  await tester.tap(find.byKey(MobUpdateKeys.lateButton));
 
   verify(() => mockGoRouter.pop()).called(1);
 
-  expect(find.byKey(KWidgetkeys.widget.mobUpdate.updateButton), findsWidgets);
+  expect(find.byKey(MobUpdateKeys.updateButton), findsWidgets);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobUpdate.updateButton));
+  await tester.tap(find.byKey(MobUpdateKeys.updateButton));
 
   verify(() => mockGoRouter.pop()).called(1);
 }

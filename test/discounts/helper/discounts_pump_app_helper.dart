@@ -65,7 +65,7 @@ Future<void> discountsPumpAppHelper({
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.screen),
+    find.byKey(DiscountsKeys.screen),
     findsOneWidget,
   );
 

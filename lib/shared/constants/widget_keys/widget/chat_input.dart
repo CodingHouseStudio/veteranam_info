@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _ChatInputKeys {
-  final icon = const Key('chat_input_icon');
-  final message = const Key('chat_input_message');
+abstract class ChatInputKeys {
+  static const icon = Key('chat_input_icon');
+  static const message = Key('chat_input_message');
 }

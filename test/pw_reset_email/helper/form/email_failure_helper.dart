@@ -10,22 +10,22 @@ Future<void> emailFailureHelper(
   await emailEnterHelper(tester: tester, email: KTestVariables.userEmail);
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.submitingText),
+    find.byKey(PwResetEmailKeys.submitingText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendSubtitle),
+    find.byKey(PwResetEmailKeys.resendSubtitle),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
+    find.byKey(PwResetEmailKeys.delayText),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsNothing,
   );
 }

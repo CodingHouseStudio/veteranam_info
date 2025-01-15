@@ -12,11 +12,11 @@ Future<void> footerPrivacyPolicyHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.footer.privacyPolicy),
+    find.byKey(FooterKeys.privacyPolicy),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.footer.privacyPolicy));
+  await tester.tap(find.byKey(FooterKeys.privacyPolicy));
 
   // verify(
   //   () => mockGoRouter.goNamed(

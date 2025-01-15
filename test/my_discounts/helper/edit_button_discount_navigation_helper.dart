@@ -18,12 +18,11 @@ Future<void> editButtonDiscountsNavigationHelper({
       await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
+        find.byKey(MyDiscountsKeys.iconEdit),
         findsWidgets,
       );
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit).first);
+      await tester.tap(find.byKey(MyDiscountsKeys.iconEdit).first);
 
       await tester.pumpAndSettle();
 

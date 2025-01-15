@@ -8,12 +8,12 @@ Future<void> reportDialogOpenHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.button,
+    itemKey: ReportDialogKeys.button,
     offset: KTestConstants.scrollingDown,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.reportDialog.button).first,
+    find.byKey(ReportDialogKeys.button).first,
     warnIfMissed: false,
   );
 

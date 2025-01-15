@@ -8,8 +8,8 @@ Future<void> rateHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.rate.title,
+    itemKey: RateKeys.title,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.rate.ratingBarIcons), findsWidgets);
+  expect(find.byKey(RateKeys.ratingBarIcons), findsWidgets);
 }

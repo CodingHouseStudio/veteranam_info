@@ -47,7 +47,7 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
   }
 
   Widget _cancelButton(BuildContext context) => CancelWidget(
-        widgetKey: KWidgetkeys.screen.privacyPolicy.closeIcon,
+        widgetKey: PrivacyPolicyDialogKeys.closeIcon,
         onPressed: () {
           if (context.canPop()) {
             context.pop();

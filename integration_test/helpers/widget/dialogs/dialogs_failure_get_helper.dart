@@ -6,9 +6,9 @@ Future<void> dialogFailureGetHelper({
   bool isFailure = true,
 }) async {
   final matcher = isFailure ? findsOneWidget : findsNothing;
-  expect(find.byKey(KWidgetkeys.widget.dialogs.failure), matcher);
+  expect(find.byKey(DialogsKeys.failure), matcher);
 
-  expect(find.byKey(KWidgetkeys.widget.dialogs.failureButton), matcher);
+  expect(find.byKey(DialogsKeys.failureButton), matcher);
 
-  expect(find.byKey(KWidgetkeys.widget.dialogs.snackBarText), matcher);
+  expect(find.byKey(DialogsKeys.snackBarText), matcher);
 }

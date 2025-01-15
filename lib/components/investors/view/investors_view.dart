@@ -15,7 +15,7 @@ class InvestorsScreen extends StatelessWidget {
               index: 1,
             ),
       appBar: appBar,
-      body: InvestorsBodyWidget(key: KWidgetkeys.screen.investors.screen),
+      body: InvestorsBodyWidget(key: InvestorsKeys.screen),
     );
     if (Config.isWeb) {
       return scaffold;

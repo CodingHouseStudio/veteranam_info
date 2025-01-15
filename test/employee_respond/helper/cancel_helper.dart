@@ -11,20 +11,20 @@ Future<void> cancelHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
+    itemKey: EmployeeRespondKeys.phoneNumberField,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.cancelButton),
+    find.byKey(EmployeeRespondKeys.cancelButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.cancelButton,
+    itemKey: EmployeeRespondKeys.cancelButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.employeeRespond.cancelButton));
+  await tester.tap(find.byKey(EmployeeRespondKeys.cancelButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.workEmployee.name),

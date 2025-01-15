@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _DoubleButtonKeys {
-  final desk = const Key('double_button_desk');
-  final mob = const Key('double_button_mob');
-  final text = const Key('double_button_text');
-  final icon = const Key('double_button_icon');
-  final rotateIcon = const Key('double_button_rotate_icon');
+abstract class DoubleButtonKeys {
+  static const desk = Key('double_button_desk');
+  static const mob = Key('double_button_mob');
+  static const text = Key('double_button_text');
+  static const icon = Key('double_button_icon');
+  static const rotateIcon = Key('double_button_rotate_icon');
 }

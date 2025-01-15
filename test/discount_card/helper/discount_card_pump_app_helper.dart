@@ -21,7 +21,7 @@ Future<void> discountCardPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountCard.dialog),
+    find.byKey(DiscountCardDialogKeys.dialog),
     findsOneWidget,
   );
 

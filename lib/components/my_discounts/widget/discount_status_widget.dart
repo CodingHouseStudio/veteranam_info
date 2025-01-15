@@ -43,7 +43,7 @@ class DiscountStatusWidget extends StatelessWidget {
         ),
         if (isDesk && status == DiscountState.rejected)
           Text(
-            key: KWidgetkeys.screen.myDiscounts.rejectedText,
+            key: MyDiscountsKeys.rejectedText,
             context.l10n.descriptionForRejectedStatus,
             style: AppTextStyle.materialThemeLabelSmall,
           ),

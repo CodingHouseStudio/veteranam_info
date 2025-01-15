@@ -10,11 +10,11 @@ Future<void> cardEmptyCloseHelper({
   required String routeName,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.cardEmpty.closeButton),
+    find.byKey(CardEmptyKeys.closeButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.cardEmpty.closeButton));
+  await tester.tap(find.byKey(CardEmptyKeys.closeButton));
 
   verify(
     () => mockGoRouter.goNamed(routeName),

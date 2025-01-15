@@ -4,18 +4,18 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 Future<void> leftCardHelper(
   WidgetTester tester,
 ) async {
-  if (find.byKey(KWidgetkeys.widget.leftCard.mob).evaluate().isNotEmpty) {
+  if (find.byKey(LeftCardKeys.mob).evaluate().isNotEmpty) {
     expect(
-      find.byKey(KWidgetkeys.widget.leftCard.mob),
+      find.byKey(LeftCardKeys.mob),
       findsOneWidget,
     );
 
-    expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsNothing);
+    expect(find.byKey(LeftCardKeys.desk), findsNothing);
   } else {
-    expect(find.byKey(KWidgetkeys.widget.leftCard.mob), findsNothing);
+    expect(find.byKey(LeftCardKeys.mob), findsNothing);
 
-    // expect(find.byKey(KWidgetkeys.widget.leftCard.image), findsNothing);z
+    // expect(find.byKey(LeftCardKeys.image), findsNothing);z
 
-    // expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsOneWidget);
+    // expect(find.byKey(LeftCardKeys.desk), findsOneWidget);
   }
 }

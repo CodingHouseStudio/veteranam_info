@@ -64,7 +64,7 @@ class AdvancedFilterContent extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: Text(
                         context.l10n.filterApplied,
-                        key: KWidgetkeys.screen.discounts.appliedFilterText,
+                        key: DiscountsKeys.appliedFilterText,
                         style: AppTextStyle.materialThemeTitleMedium,
                       ),
                     ),
@@ -118,10 +118,10 @@ class AdvancedFilterContent extends StatelessWidget {
                       ),
                     ),
                 isDesk: isDesk,
-                itemKey: KWidgetkeys.screen.discounts.eligibilitiesItems,
+                itemKey: DiscountsKeys.eligibilitiesItems,
                 isLoading: state.isLoading,
               ),
-              textKey: KWidgetkeys.screen.discounts.eligibilitiesText,
+              textKey: DiscountsKeys.eligibilitiesText,
               title: context.l10n.eligibility,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -171,10 +171,10 @@ class AdvancedFilterContent extends StatelessWidget {
                       ),
                     ),
                 isDesk: isDesk,
-                itemKey: KWidgetkeys.screen.discounts.categoriesItems,
+                itemKey: DiscountsKeys.categoriesItems,
                 isLoading: state.isLoading,
               ),
-              textKey: KWidgetkeys.screen.discounts.categoriesText,
+              textKey: DiscountsKeys.categoriesText,
               title: context.l10n.category,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -239,12 +239,12 @@ class AdvancedFilterContent extends StatelessWidget {
                               ),
                             ),
                     isDesk: isDesk,
-                    itemKey: KWidgetkeys.screen.discounts.cityItems,
+                    itemKey: DiscountsKeys.cityItems,
                     isLoading: state.isLoading,
                   ),
                 ],
               ),
-              textKey: KWidgetkeys.screen.discounts.citiesText,
+              textKey: DiscountsKeys.citiesText,
               title: context.l10n.city,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -272,7 +272,7 @@ class AdvancedFilterContent extends StatelessWidget {
               horizontal: KPadding.kPaddingSize16,
             ),
       child: CustomScrollView(
-        key: KWidgetkeys.screen.discounts.advancedFilterList,
+        key: DiscountsKeys.advancedFilterList,
         primary: true,
         slivers: body,
         shrinkWrap: isDesk,
@@ -389,7 +389,7 @@ class _ChooseItems extends StatelessWidget {
               final chooseItem =
                   chosenItems[chosenItems.keys.elementAt(index)]!;
               return CancelChipWidget(
-                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+                widgetKey: DiscountsKeys.appliedFilterItems,
                 isDesk: isDesk,
                 labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
@@ -427,7 +427,7 @@ class _ChooseItems extends StatelessWidget {
       //         ? const EdgeInsets.only(top: KPadding.kPaddingSize16)
       //         : const EdgeInsets.only(top: KPadding.kPaddingSize8),
       //     child: CancelChipWidget(
-      //       widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+      //       widgetKey: DiscountsKeys.appliedFilterItems,
       //       isDesk: isDesk,
       //       labelText: KMockText.category.getTrsnslation(context),
       //       onPressed: null,
@@ -446,7 +446,7 @@ class _ChooseItems extends StatelessWidget {
       //       child: Align(
       //         alignment: Alignment.centerLeft,
       //         child: CancelChipWidget(
-      //           widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+      //           widgetKey: DiscountsKeys.appliedFilterItems,
       //           isDesk: isDesk,
       //           labelText: chooseItem.value.getTrsnslation(context),
       //           onPressed: () {
@@ -563,7 +563,7 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
 //       prototypeItem: Padding(
 //         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
 //         child: CheckPointWidget(
-//           key: KWidgetkeys.screen.discounts.discountItems,
+//           key: DiscountsKeys.discountItems,
 //           onChanged: null,
 //           isCheck: false,
 //           text: KMockText.category,
@@ -576,7 +576,7 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
 //       itemBuilder: (context, index) => Padding(
 //         padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
 //         child: CheckPointWidget(
-//           key: KWidgetkeys.screen.discounts.discountItems,
+//           key: DiscountsKeys.discountItems,
 //           onChanged: () => onChangeSorting(sorting.elementAt(index).value),
 //           isCheck: sorting.elementAt(index).isSelected,
 //           text: sorting.elementAt(index).value.getValue(context),

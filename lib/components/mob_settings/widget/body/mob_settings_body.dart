@@ -13,12 +13,12 @@ class MobSettingsBodyWidget extends StatelessWidget {
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox16,
         Text(
-          key: KWidgetkeys.screen.mobSettings.title,
+          key: MobSettingsKeys.title,
           context.l10n.general,
           style: AppTextStyle.materialThemeTitleMediumNeutralVariant50,
         ),
         BoxWidget(
-          key: KWidgetkeys.screen.mobSettings.faq,
+          key: MobSettingsKeys.faq,
           isDesk: false,
           onTap: () => context.goNamed(KRoute.mobFAQ.name),
           text: context.l10n.faq,
@@ -42,7 +42,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
               LanguagesSwitcherWidget(
-                key: KWidgetkeys.screen.mobSettings.languagesSwitcher,
+                key: MobSettingsKeys.languagesSwitcher,
                 decoration: KWidgetTheme.boxDecorationNawbar,
                 unactiveIconColor: AppColors.materialThemeWhite,
               ),
@@ -58,7 +58,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TooltipWidget(
-                key: KWidgetkeys.screen.mobSettings.offlinesTitle,
+                key: MobSettingsKeys.offlinesTitle,
                 description: context.l10n.mobOfflineHint,
                 text: context.l10n.offline,
                 duration: const Duration(seconds: 8),
@@ -66,7 +66,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
               ),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
                 builder: (context, _) => SwitchOfflineWidget(
-                  key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
+                  key: MobSettingsKeys.offlinesSwitcher,
                   isSelected: _.isOffline,
                   onChanged: null,
                   //  () =>
@@ -78,7 +78,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox24,
         Text(
-          key: KWidgetkeys.screen.mobSettings.subtitle,
+          key: MobSettingsKeys.subtitle,
           context.l10n.contacts,
           style: AppTextStyle.materialThemeTitleMediumNeutralVariant50,
         ),
@@ -92,7 +92,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  key: KWidgetkeys.screen.mobSettings.email,
+                  key: MobSettingsKeys.email,
                   KAppText.email,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
@@ -107,7 +107,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize16,
           ),
           child: DoubleButtonWidget(
-            widgetKey: KWidgetkeys.screen.mobSettings.feedbackButton,
+            widgetKey: MobSettingsKeys.feedbackButton,
             text: context.l10n.contact,
             onPressed: () => context.goNamed(KRoute.feedback.name),
             darkMode: true,
@@ -124,14 +124,14 @@ class MobSettingsBodyWidget extends StatelessWidget {
           ),
           child: SocialMediaLinks(
             isDesk: false,
-            instagramKey: KWidgetkeys.screen.mobSettings.instagramIcon,
-            linkedInKey: KWidgetkeys.screen.mobSettings.linkedInIcon,
-            facebookKey: KWidgetkeys.screen.mobSettings.facebookIcon,
+            instagramKey: MobSettingsKeys.instagramIcon,
+            linkedInKey: MobSettingsKeys.linkedInIcon,
+            facebookKey: MobSettingsKeys.facebookIcon,
           ),
         ),
         KSizedBox.kHeightSizedBox8,
         BoxWidget(
-          key: KWidgetkeys.screen.mobSettings.bugButton,
+          key: MobSettingsKeys.bugButton,
           isDesk: false,
           onTap: () async => context.dialog.showMobFeedback(),
           text: context.l10n.reportBugs,
@@ -150,7 +150,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox8,
         TextButton(
-          key: KWidgetkeys.screen.mobSettings.privacyPolicy,
+          key: MobSettingsKeys.privacyPolicy,
           onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
           style: KButtonStyles.withoutStyleAligmentBottomLeft,
           child: Text(

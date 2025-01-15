@@ -30,7 +30,7 @@ List<Widget> _storiesWidgetList({
       child: SkeletonizerWidget(
         isLoading: isLoading,
         child: StoryCardWidget(
-          key: KWidgetkeys.screen.myStory.card,
+          key: MyStoryKeys.card,
           storyModel: storyModelItems.elementAt(index),
           isDesk: isDesk,
         ),

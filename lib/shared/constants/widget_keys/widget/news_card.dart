@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _NewsCardKeys {
-  final title = const Key('news_card_title');
-  final date = const Key('news_card_date');
-  final tags = const Key('news_card_tag');
+abstract class NewsCardKeys {
+  static const title = Key('news_card_title');
+  static const date = Key('news_card_date');
+  static const tags = Key('news_card_tag');
 }

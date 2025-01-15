@@ -17,21 +17,21 @@ Future<void> cardsScreenHelper({
     test: () async {
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.boxButton,
+        itemKey: HomeKeys.boxButton,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.home.boxButton),
+        find.byKey(HomeKeys.boxButton),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.boxButton));
+      await tester.tap(find.byKey(HomeKeys.boxButton));
 
       await tester.pumpAndSettle();
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.aboutProjecSubtitle,
+        itemKey: HomeKeys.aboutProjecSubtitle,
       );
 
       await scrollingHelper(
@@ -41,25 +41,25 @@ Future<void> cardsScreenHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.discountImage,
+        itemKey: HomeKeys.discountImage,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.discountTitle,
+        itemKey: HomeKeys.discountTitle,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.discountButton,
+        itemKey: HomeKeys.discountButton,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.home.discountButton),
+        find.byKey(HomeKeys.discountButton),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.discountButton));
+      await tester.tap(find.byKey(HomeKeys.discountButton));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -69,20 +69,20 @@ Future<void> cardsScreenHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationImage,
+        itemKey: HomeKeys.informationImage,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationTitle,
+        itemKey: HomeKeys.informationTitle,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationButton,
+        itemKey: HomeKeys.informationButton,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.informationButton));
+      await tester.tap(find.byKey(HomeKeys.informationButton));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -92,10 +92,10 @@ Future<void> cardsScreenHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.faqButton,
+        itemKey: HomeKeys.faqButton,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.faqButton));
+      await tester.tap(find.byKey(HomeKeys.faqButton));
 
       verify(
         () => mockGoRouter.goNamed(

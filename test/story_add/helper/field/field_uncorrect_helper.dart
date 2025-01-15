@@ -8,26 +8,26 @@ Future<void> fieldUncorrectHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  expect(find.byKey(KWidgetkeys.screen.storyAdd.storyField), findsOneWidget);
+  expect(find.byKey(StoryAddKeys.storyField), findsOneWidget);
 
   await messageFieldHelper(tester: tester, message: KTestVariables.fieldEmpty);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.storyAdd.photoButton,
+    itemKey: StoryAddKeys.photoButton,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.storyAdd.switchText,
+    itemKey: StoryAddKeys.switchText,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.storyAdd.button,
+    itemKey: StoryAddKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.button));
+  await tester.tap(find.byKey(StoryAddKeys.button));
 
   verifyNever(
     () => mockGoRouter.goNamed(KRoute.stories.name),

@@ -23,7 +23,7 @@ Future<void> profilePumpAppHelper({
   await tester.pumpApp(const ProfileScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
+    find.byKey(ProfileKeys.screen),
     findsOneWidget,
   );
 

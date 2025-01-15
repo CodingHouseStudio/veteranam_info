@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _PrivacyPolicyDialogKeys {
-  final dialog = const Key('privacy_policy_dialog');
-  final text = const Key('privacy_policy_dialog_text');
-  final closeIcon = const Key('privacy_policy_dialog_close_icon');
+abstract class PrivacyPolicyDialogKeys {
+  static const dialog = Key('privacy_policy_dialog');
+  static const text = Key('privacy_policy_dialog_text');
+  static const closeIcon = Key('privacy_policy_dialog_close_icon');
 }

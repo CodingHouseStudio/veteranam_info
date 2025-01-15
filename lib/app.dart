@@ -98,7 +98,7 @@ class AppWidget extends StatelessWidget {
   }
 
   Widget body(Locale localeValue) => MaterialApp.router(
-        key: KWidgetkeys.screen.app.screen,
+        key: AppKeys.screen,
         themeAnimationDuration: Duration.zero,
         theme: themeData,
         restorationScopeId: KAppText.logo,

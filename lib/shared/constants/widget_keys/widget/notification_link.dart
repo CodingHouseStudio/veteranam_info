@@ -1,8 +1,8 @@
 part of '../widget_keys.dart';
 
-class _NotificationLinkKeys {
-  final text = const Key('notification_link_text');
-  final field = const Key('notification_link_field');
-  final button = const Key('notification_link_button');
-  final thankText = const Key('notification_link_tank_text');
+abstract class NotificationLinkKeys {
+  static const text = Key('notification_link_text');
+  static const field = Key('notification_link_field');
+  static const button = Key('notification_link_button');
+  static const thankText = Key('notification_link_tank_text');
 }

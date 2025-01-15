@@ -7,7 +7,7 @@ Future<void> incorrectEmailHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.login.fields),
+    find.byKey(LoginKeys.fields),
     findsOneWidget,
   );
 
@@ -16,7 +16,7 @@ Future<void> incorrectEmailHelper(
     email: KTestVariables.userEmailIncorrect,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
+  await tester.tap(find.byKey(LoginKeys.button));
 
   await tester.pumpAndSettle();
 

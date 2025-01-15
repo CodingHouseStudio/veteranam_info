@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _UserEmailDialogKeys {
-  final icon = const Key('user_email_dialog_icon');
-  final emailDialogTitle = const Key('user_email_dialog_title');
-  final emailDialogSubtitle = const Key('user_email_dialog_subtitle');
-  final field = const Key('user_email_dialog_field');
-  final button = const Key('user_email_dialog_button');
+abstract class UserEmailDialogKeys {
+  static const icon = Key('user_email_dialog_icon');
+  static const emailDialogTitle = Key('user_email_dialog_title');
+  static const emailDialogSubtitle = Key('user_email_dialog_subtitle');
+  static const field = Key('user_email_dialog_field');
+  static const button = Key('user_email_dialog_button');
 }

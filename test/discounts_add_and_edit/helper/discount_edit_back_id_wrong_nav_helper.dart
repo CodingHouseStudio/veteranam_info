@@ -10,11 +10,11 @@ Future<void> discountsEditIdWrongNavHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.buttonWrongLink),
+    find.byKey(DiscountsAddKeys.buttonWrongLink),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.buttonWrongLink));
+  await tester.tap(find.byKey(DiscountsAddKeys.buttonWrongLink));
 
   await tester.pumpAndSettle();
 

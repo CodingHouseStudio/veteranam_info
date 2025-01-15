@@ -10,51 +10,51 @@ Future<void> paginationTest(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.buttonPrevious),
+        find.byKey(PaginationKeys.buttonPrevious),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.buttonNext),
+        find.byKey(PaginationKeys.buttonNext),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.sixthNumber),
+        find.byKey(PaginationKeys.sixthNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
 
       await scrollingHelperInt(
         tester: tester,
-        itemKey: KWidgetkeys.widget.pagination.sixthNumber,
+        itemKey: PaginationKeys.sixthNumber,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.pagination.sixthNumber));
+      await tester.tap(find.byKey(PaginationKeys.sixthNumber));
 
       await tester.pumpAndSettle();
 
@@ -64,42 +64,41 @@ Future<void> paginationTest(
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.sixthNumber),
+        find.byKey(PaginationKeys.sixthNumber),
         findsWidgets,
       );
 
       await scrollingHelperInt(
         tester: tester,
-        itemKey: KWidgetkeys.widget.pagination.buttonPrevious,
+        itemKey: PaginationKeys.buttonPrevious,
       );
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.widget.pagination.buttonPrevious));
+      await tester.tap(find.byKey(PaginationKeys.buttonPrevious));
 
       await tester.pumpAndSettle();
 
@@ -109,41 +108,41 @@ Future<void> paginationTest(
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.sixthNumber),
+        find.byKey(PaginationKeys.sixthNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
 
       await scrollingHelperInt(
         tester: tester,
-        itemKey: KWidgetkeys.widget.pagination.buttonNext,
+        itemKey: PaginationKeys.buttonNext,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.pagination.buttonNext));
+      await tester.tap(find.byKey(PaginationKeys.buttonNext));
 
       await tester.pumpAndSettle();
 
@@ -153,41 +152,41 @@ Future<void> paginationTest(
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.sixthNumber),
+        find.byKey(PaginationKeys.sixthNumber),
         findsWidgets,
       );
 
       await scrollingHelperInt(
         tester: tester,
-        itemKey: KWidgetkeys.widget.pagination.lastNumber,
+        itemKey: PaginationKeys.lastNumber,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.pagination.lastNumber));
+      await tester.tap(find.byKey(PaginationKeys.lastNumber));
 
       await tester.pumpAndSettle();
 
@@ -197,36 +196,36 @@ Future<void> paginationTest(
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
 
       await scrollingHelperInt(
         tester: tester,
-        itemKey: KWidgetkeys.widget.pagination.firstNumber,
+        itemKey: PaginationKeys.firstNumber,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.pagination.firstNumber));
+      await tester.tap(find.byKey(PaginationKeys.firstNumber));
 
       await tester.pumpAndSettle();
 
@@ -236,27 +235,27 @@ Future<void> paginationTest(
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstNumber),
+        find.byKey(PaginationKeys.firstNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.firstThreePoint),
+        find.byKey(PaginationKeys.firstThreePoint),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastNumber),
+        find.byKey(PaginationKeys.lastNumber),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.lastThreePoint),
+        find.byKey(PaginationKeys.lastThreePoint),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.pagination.numbers),
+        find.byKey(PaginationKeys.numbers),
         findsWidgets,
       );
     },

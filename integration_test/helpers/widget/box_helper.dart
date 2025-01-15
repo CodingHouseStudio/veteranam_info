@@ -8,12 +8,12 @@ Future<void> boxHelper(
 ) async {
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.box.text,
+    itemKey: BoxKeys.text,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.box.text), findsWidgets);
+  expect(find.byKey(BoxKeys.text), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.box.icon), findsWidgets);
+  expect(find.byKey(BoxKeys.icon), findsWidgets);
 }
 
 /// FOLDER FILES COMMENT: Files for widgets test

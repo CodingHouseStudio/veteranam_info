@@ -93,7 +93,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                 alignment: Alignment.topRight,
                 child: IconButtonWidget(
                   icon: KIcon.close,
-                  key: KWidgetkeys.widget.userEmailDialog.icon,
+                  key: UserEmailDialogKeys.icon,
                   onPressed:
                       _isCloseEnabled ? () => context.pop<bool>(false) : null,
                   padding: 0,
@@ -119,8 +119,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                           : KPadding.kPaddingSize8,
                       children: [
                         Text(
-                          key: KWidgetkeys
-                              .widget.userEmailDialog.emailDialogTitle,
+                          key: UserEmailDialogKeys.emailDialogTitle,
                           context.l10n.aboutNewDiscounts,
                           style: widget.isDesk
                               ? AppTextStyle.materialThemeHeadlineLarge
@@ -128,8 +127,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                         ),
                         if (widget.isDesk)
                           Text(
-                            key: KWidgetkeys
-                                .widget.userEmailDialog.emailDialogSubtitle,
+                            key: UserEmailDialogKeys.emailDialogSubtitle,
                             _text(context),
                             style: widget.isDesk
                                 ? AppTextStyle.materialThemeBodyLarge
@@ -142,7 +140,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
               ),
               if (!widget.isDesk)
                 Text(
-                  key: KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle,
+                  key: UserEmailDialogKeys.emailDialogSubtitle,
                   _text(context),
                   style: widget.isDesk
                       ? AppTextStyle.materialThemeBodyLarge
@@ -184,7 +182,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
     BuildContext context,
   ) =>
       TextFieldWidget(
-        widgetKey: KWidgetkeys.widget.userEmailDialog.field,
+        widgetKey: UserEmailDialogKeys.field,
         onChanged: widget.onChanged,
         isRequired: true,
         isDesk: widget.isDesk,
@@ -202,7 +200,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                 EmailEnum.success
             ? null
             : widget.sendOnPressed,
-        widgetKey: KWidgetkeys.widget.userEmailDialog.button,
+        widgetKey: UserEmailDialogKeys.button,
         darkMode: true,
         hasAlign: widget.isDesk,
         mobTextWidth: double.infinity,

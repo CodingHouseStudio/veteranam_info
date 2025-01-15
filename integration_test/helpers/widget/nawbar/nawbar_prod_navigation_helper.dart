@@ -10,12 +10,12 @@ Future<void> nawbarProdNavigationHelper(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
+        find.byKey(NawbarKeys.discountsButton),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
+        find.byKey(NawbarKeys.discountsButton),
       );
 
       // verify(
@@ -25,12 +25,12 @@ Future<void> nawbarProdNavigationHelper(
       // ).called(1);
 
       expect(
-        find.byKey(KWidgetkeys.widget.nawbar.investorsButton),
+        find.byKey(NawbarKeys.investorsButton),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.widget.nawbar.investorsButton),
+        find.byKey(NawbarKeys.investorsButton),
       );
 
       // verify(
@@ -40,12 +40,12 @@ Future<void> nawbarProdNavigationHelper(
       // ).called(1);
 
       expect(
-        find.byKey(KWidgetkeys.widget.nawbar.feedbackButton),
+        find.byKey(NawbarKeys.feedbackButton),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.widget.nawbar.feedbackButton),
+        find.byKey(NawbarKeys.feedbackButton),
       );
 
       // verify(

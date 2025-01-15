@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _CheckPointSingleKeys {
-  final widget = const Key('check_point_single');
-  final icon = const Key('check_point_single_icon');
+abstract class CheckPointSingleKeys {
+  static const widget = Key('check_point_single');
+  static const icon = Key('check_point_single_icon');
 }

@@ -11,57 +11,57 @@ Future<void> profileInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.profile.title),
+        find.byKey(ProfileKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.photo),
+        find.byKey(ProfileKeys.photo),
         findsOneWidget,
       );
 
       // await scrollingHelper(
       //   tester: tester,
-      //   itemKey: KWidgetkeys.screen.profile.subtitle,
+      //   itemKey: ProfileKeys.subtitle,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.nameField),
+        find.byKey(ProfileKeys.nameField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.emailFied),
+        find.byKey(ProfileKeys.emailFied),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.lastNameField),
+        find.byKey(ProfileKeys.lastNameField),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+      //   find.byKey(ProfileKeys.nickNameField),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.saveButton),
+        find.byKey(ProfileKeys.saveButton),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.profile.saveButton,
+        itemKey: ProfileKeys.saveButton,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.profile.deleteButton),
+      //   find.byKey(ProfileKeys.deleteButton),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.logOutButton),
+        find.byKey(ProfileKeys.logOutButton),
         findsOneWidget,
       );
 

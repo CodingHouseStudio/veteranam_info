@@ -14,46 +14,45 @@ Future<void> formEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.emailField,
+    itemKey: EmployeeRespondKeys.emailField,
   );
 
   if (email != null) {
     await tester.enterText(
-      find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
+      find.byKey(EmployeeRespondKeys.emailField),
       email,
     );
   }
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
+    itemKey: EmployeeRespondKeys.phoneNumberField,
   );
 
   if (phoneNumber != null) {
     await tester.enterText(
-      find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
+      find.byKey(EmployeeRespondKeys.phoneNumberField),
       phoneNumber,
     );
   }
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.resumeButton,
+    itemKey: EmployeeRespondKeys.resumeButton,
   );
 
   if (addResume) {
-    await tester
-        .tap(find.byKey(KWidgetkeys.screen.employeeRespond.resumeButton));
+    await tester.tap(find.byKey(EmployeeRespondKeys.resumeButton));
 
     await tester.pumpAndSettle();
   }
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.sendButton,
+    itemKey: EmployeeRespondKeys.sendButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.employeeRespond.sendButton));
+  await tester.tap(find.byKey(EmployeeRespondKeys.sendButton));
 
   await tester.pumpAndSettle();
 }

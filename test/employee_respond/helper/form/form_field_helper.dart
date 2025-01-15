@@ -7,32 +7,32 @@ Future<void> formFieldHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
+    find.byKey(EmployeeRespondKeys.emailField),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.resumeButton),
+    find.byKey(EmployeeRespondKeys.phoneNumberField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.employeeRespond.resumeButton,
+    itemKey: EmployeeRespondKeys.phoneNumberField,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.sendButton),
+    find.byKey(EmployeeRespondKeys.resumeButton),
+    findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: EmployeeRespondKeys.resumeButton,
+  );
+
+  expect(
+    find.byKey(EmployeeRespondKeys.sendButton),
     findsOneWidget,
   );
 

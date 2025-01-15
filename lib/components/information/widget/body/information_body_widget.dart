@@ -40,7 +40,7 @@ class InformationBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
           TitleIconWidget(
             title: context.l10n.verifiedInformation,
-            titleKey: KWidgetkeys.screen.information.title,
+            titleKey: InformationKeys.title,
             isDesk: isDesk,
             titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
           ),
@@ -79,7 +79,7 @@ class InformationBodyWidget extends StatelessWidget {
               _.loadingStatus == LoadingStatus.loaded &&
               Config.isDevelopment)
             MockButtonWidget(
-              key: KWidgetkeys.screen.information.buttonMock,
+              key: InformationKeys.buttonMock,
               onPressed: () {
                 GetIt.I.get<IInformationRepository>().addMockInformationItems();
                 context
@@ -97,7 +97,7 @@ class InformationBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           // LoadingButton(
-          //   widgetKey: KWidgetkeys.screen.information.button,
+          //   widgetKey: InformationKeys.button,
           //   isDesk: isDesk,
           //   onPressed: () => context.read<InformationWatcherBloc>().add(
           //         const InformationWatcherEvent.loadNextItems(),
@@ -119,7 +119,7 @@ class InformationBodyWidget extends StatelessWidget {
 
   Widget _filter({required bool isDesk, required BuildContext context}) =>
       FilterChipBodyWidget(
-        key: KWidgetkeys.screen.information.filter,
+        key: InformationKeys.filter,
         filtersItems: context
             .read<InformationWatcherBloc>()
             .state

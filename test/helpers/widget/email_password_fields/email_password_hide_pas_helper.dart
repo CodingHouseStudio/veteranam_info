@@ -5,12 +5,12 @@ Future<void> emailPasswordFieldsHidePasHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
+    find.byKey(EmailPasswordFieldsKeys.buttonHidePassword),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
+    find.byKey(EmailPasswordFieldsKeys.buttonHidePassword),
   );
 
   await tester.pumpAndSettle();

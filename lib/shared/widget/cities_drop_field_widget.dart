@@ -29,7 +29,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiDropFieldImplementationWidget<CityModel>(
-      key: KWidgetkeys.widget.citiesDropField.widget,
+      key: CitiesDropFieldKeys.widget,
       textFieldKey: textFieldKey,
       labelText: context.l10n.city, isRequired: isRequired,
       dropDownList: citiesList,
@@ -60,12 +60,12 @@ class CitiesDropFieldWidget extends StatelessWidget {
         children: [
           Text(
             getCityName(cityModel: element, context: context),
-            key: KWidgetkeys.widget.citiesDropField.city,
+            key: CitiesDropFieldKeys.city,
             style: AppTextStyle.materialThemeBodyLarge,
           ),
           Text(
             element.region.getTrsnslation(context),
-            key: KWidgetkeys.widget.citiesDropField.region,
+            key: CitiesDropFieldKeys.region,
             style: AppTextStyle.materialThemeLabelSmallNeutralVariant70,
           ),
           const SizedBox.shrink(),

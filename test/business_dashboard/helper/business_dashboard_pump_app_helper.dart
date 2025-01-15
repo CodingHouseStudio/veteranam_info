@@ -14,7 +14,7 @@ Future<void> businessDashboardPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.businessDashboard.screen),
+    find.byKey(BusinessDashboardKeys.screen),
     findsOneWidget,
   );
 

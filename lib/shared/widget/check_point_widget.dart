@@ -32,7 +32,7 @@ class CheckPointWidget extends StatelessWidget {
         waitDuration: const Duration(seconds: 1),
         text: '',
         child: TextButton(
-          key: KWidgetkeys.widget.checkPoint.widget,
+          key: CheckPointKeys.widget,
           style: KButtonStyles.additionalButtonStyle,
           onPressed: onChanged,
           child: Row(
@@ -49,7 +49,7 @@ class CheckPointWidget extends StatelessWidget {
                 //   bottom: KPadding.kPaddingSize8,
                 // ),
                 child: Padding(
-                  key: isCheck ? KWidgetkeys.widget.checkPoint.icon : null,
+                  key: isCheck ? CheckPointKeys.icon : null,
                   padding: const EdgeInsets.all(
                     KPadding.kPaddingSize4,
                   ),
@@ -65,7 +65,7 @@ class CheckPointWidget extends StatelessWidget {
                 child: textWidget ??
                     Text(
                       text ?? '',
-                      key: KWidgetkeys.widget.checkPoint.text,
+                      key: CheckPointKeys.text,
                       maxLines: maxLines,
                       overflow: TextOverflow.ellipsis,
                       style: textStyle ??
@@ -115,7 +115,7 @@ class CheckPointAmountWidget extends StatelessWidget {
       text: filterItem.value.getTrsnslation(context),
       isDesk: isDesk,
       ammountWidget: AmountWidget(
-        key: KWidgetkeys.widget.checkPoint.ammount,
+        key: CheckPointKeys.ammount,
         background: isCheck
             ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
             : amoutInactiveClor ?? AppColors.materialThemeKeyColorsNeutral,

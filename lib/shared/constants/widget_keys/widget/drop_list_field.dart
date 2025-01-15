@@ -1,11 +1,11 @@
 part of '../widget_keys.dart';
 
-class _DropListFieldKeys {
-  final widget = const Key('drop_list_field');
-  // final field = const Key('drop_list_field_text');
-  final item = const Key('drop_list_field_item');
-  final list = const Key('drop_list_field_list');
-  final itemText = const Key('drop_list_field_item_text');
-  final icon = const Key('drop_list_field_icon');
-  final activeIcon = const Key('drop_list_field_active_icon');
+abstract class DropListFieldKeys {
+  static const widget = Key('drop_list_field');
+  // static const field = Key('drop_list_field_text');
+  static const item = Key('drop_list_field_item');
+  static const list = Key('drop_list_field_list');
+  static const itemText = Key('drop_list_field_item_text');
+  static const icon = Key('drop_list_field_icon');
+  static const activeIcon = Key('drop_list_field_active_icon');
 }

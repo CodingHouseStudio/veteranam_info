@@ -6,32 +6,32 @@ import '../../test_dependency.dart';
 Future<void> workEmployeeFilterHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.workEmployee.filter), findsOneWidget);
+  expect(find.byKey(WorkEmployeeKeys.filter), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.screen.workEmployee.resetFilter),
+    find.byKey(WorkEmployeeKeys.resetFilter),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.workEmployee.citiesFilter),
-    findsOneWidget,
-  );
-
-  await dropChipHelper(
-    tester: tester,
-    dropChipKey: KWidgetkeys.screen.workEmployee.citiesFilter,
-    buttonKey: KWidgetkeys.screen.workEmployee.citiesFilterbuttons,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workEmployee.categoriesFilter),
+    find.byKey(WorkEmployeeKeys.citiesFilter),
     findsOneWidget,
   );
 
   await dropChipHelper(
     tester: tester,
-    dropChipKey: KWidgetkeys.screen.workEmployee.categoriesFilter,
-    buttonKey: KWidgetkeys.screen.workEmployee.categoriesFilterButtons,
+    dropChipKey: WorkEmployeeKeys.citiesFilter,
+    buttonKey: WorkEmployeeKeys.citiesFilterbuttons,
+  );
+
+  expect(
+    find.byKey(WorkEmployeeKeys.categoriesFilter),
+    findsOneWidget,
+  );
+
+  await dropChipHelper(
+    tester: tester,
+    dropChipKey: WorkEmployeeKeys.categoriesFilter,
+    buttonKey: WorkEmployeeKeys.categoriesFilterButtons,
   );
 }

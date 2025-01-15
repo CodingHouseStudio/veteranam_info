@@ -1,21 +1,21 @@
 part of '../widget_keys.dart';
 
-class _DiscountCardKeys {
-  final discountCard = const Key('discount_card');
-  final service = const Key('discount_card_service');
-  final userName = const Key('discount_card_username');
-  final date = const Key('discount_card_date');
-  final description = const Key('discount_card_description');
-  // final category = const Key('discount_card_category');
-  final discountTitle = const Key('discount_card_title');
-  final discount = const Key('discount');
-  final expiration = const Key('discount_card_expiration');
-  final city = const Key('discount_card_city');
+abstract class DiscountCardKeys {
+  static const discountCard = Key('discount_card');
+  static const service = Key('discount_card_service');
+  static const userName = Key('discount_card_username');
+  static const date = Key('discount_card_date');
+  static const description = Key('discount_card_description');
+  // static const category = Key('discount_card_category');
+  static const discountTitle = Key('discount_card_title');
+  static const discount = Key('discount');
+  static const expiration = Key('discount_card_expiration');
+  static const city = Key('discount_card_city');
 
-  // final description = const Key('discount_card_description');
-  // final shareButtons = const Key('discount_card_share_buttons');
-  final iconComplaint = const Key('discount_card_icon_complaint');
-  final iconShare = const Key('discount_card_icon_share');
-  final iconWebsite = const Key('discount_card_icon_website');
-  final iconLike = const Key('discount_card_icon_like');
+  // static const description = Key('discount_card_description');
+  // static const shareButtons = Key('discount_card_share_buttons');
+  static const iconComplaint = Key('discount_card_icon_complaint');
+  static const iconShare = Key('discount_card_icon_share');
+  static const iconWebsite = Key('discount_card_icon_website');
+  static const iconLike = Key('discount_card_icon_like');
 }

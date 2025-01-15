@@ -11,22 +11,22 @@ Future<void> workInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.work.boxEmployer),
+        find.byKey(WorkKeys.boxEmployer),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.work.boxEmployee),
+        find.byKey(WorkKeys.boxEmployee),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.work.subtitle),
+        find.byKey(WorkKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.work.title),
+        find.byKey(WorkKeys.title),
         findsOneWidget,
       );
 

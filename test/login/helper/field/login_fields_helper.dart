@@ -10,7 +10,7 @@ Future<void> loginFieldsHelper({
   required bool dataIsCorrect,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.login.fields),
+    find.byKey(LoginKeys.fields),
     findsOneWidget,
   );
 
@@ -21,10 +21,10 @@ Future<void> loginFieldsHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.login.button,
+    itemKey: LoginKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
+  await tester.tap(find.byKey(LoginKeys.button));
 
   await tester.pumpAndSettle();
 
@@ -40,21 +40,21 @@ Future<void> loginFieldsHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.login.button,
+    itemKey: LoginKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
+  await tester.tap(find.byKey(LoginKeys.button));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp1000);
 
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+    find.byKey(EmailPasswordFieldsKeys.fieldEmail),
     dataIsCorrect ? findsOneWidget : findsNothing,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
+    find.byKey(EmailPasswordFieldsKeys.fieldPassword),
     dataIsCorrect ? findsNothing : findsOneWidget,
   );
 }

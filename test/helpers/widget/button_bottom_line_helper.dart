@@ -7,15 +7,15 @@ Future<void> buttonBottomLineHelper({
   required WidgetTester tester,
   required bool isDesk,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.buttonBottomLine.text), findsWidgets);
+  expect(find.byKey(ButtonBottomLineKeys.text), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.buttonBottomLine.line), findsWidgets);
+  expect(find.byKey(ButtonBottomLineKeys.line), findsWidgets);
 
   if (isDesk) {
     await hoverHelper(
       tester: tester,
-      key: KWidgetkeys.widget.buttonBottomLine.text,
-      // hoverElement: KWidgetkeys.widget.buttonBottomLine.line,
+      key: ButtonBottomLineKeys.text,
+      // hoverElement: ButtonBottomLineKeys.line,
     );
   }
 }

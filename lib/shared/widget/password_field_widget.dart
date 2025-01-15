@@ -51,13 +51,13 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
       enabled: widget.enabled,
       controller: widget.controller,
       suffixIcon: IconButton(
-        key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
+        key: EmailPasswordFieldsKeys.iconHidePassword,
         icon: obscurePassword
             ? KIcon.eyeOff.copyWith(
-                key: KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
+                key: EmailPasswordFieldsKeys.iconEyeOff,
               )
             : KIcon.eye.copyWith(
-                key: KWidgetkeys.widget.emailPasswordFields.iconEye,
+                key: EmailPasswordFieldsKeys.iconEye,
               ),
         onPressed: () => setState(() => obscurePassword = !obscurePassword),
       ),

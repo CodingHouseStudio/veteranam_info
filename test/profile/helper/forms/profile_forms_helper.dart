@@ -7,53 +7,53 @@ Future<void> profileFormsHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.profile.photo),
+    find.byKey(ProfileKeys.photo),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.nameField),
+    find.byKey(ProfileKeys.nameField),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.lastNameField),
+    find.byKey(ProfileKeys.lastNameField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.lastNameField,
+    itemKey: ProfileKeys.lastNameField,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.emailFied),
+    find.byKey(ProfileKeys.emailFied),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.emailFied,
+    itemKey: ProfileKeys.emailFied,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+  //   find.byKey(ProfileKeys.nickNameField),
   //   findsOneWidget,
   // );
 
   // await scrollingHelper(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  //   itemKey: ProfileKeys.nickNameField,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.saveButton),
+    find.byKey(ProfileKeys.saveButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.saveButton,
+    itemKey: ProfileKeys.saveButton,
   );
 
   await scrollingHelper(

@@ -17,7 +17,7 @@ Future<void> passwordFailureHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.submitingText),
+    find.byKey(PasswordResetKeys.submitingText),
     findsOneWidget,
   );
 

@@ -14,7 +14,7 @@ Future<void> consultationPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.consultation.screen),
+    find.byKey(ConsultationKeys.screen),
     findsOneWidget,
   );
 

@@ -11,90 +11,90 @@ Future<void> employerInitialHelper(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.employer.title),
+        find.byKey(EmployerKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.subtitle),
+        find.byKey(EmployerKeys.subtitle),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.employer.subtitle,
+        itemKey: EmployerKeys.subtitle,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.mainInformation),
+        find.byKey(EmployerKeys.mainInformation),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.textPosition),
+        find.byKey(EmployerKeys.textPosition),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.fieldPosition),
+        find.byKey(EmployerKeys.fieldPosition),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.textWage),
+        find.byKey(EmployerKeys.textWage),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.fieldWage),
+        find.byKey(EmployerKeys.fieldWage),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.textCity),
+        find.byKey(EmployerKeys.textCity),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.fieldCity),
+        find.byKey(EmployerKeys.fieldCity),
         findsOneWidget,
       );
 
       await dropListFieldHelper(
         tester: tester,
         text: KMockText.dropDownList.first,
-        textFieldKey: KWidgetkeys.screen.employer.fieldCity,
+        textFieldKey: EmployerKeys.fieldCity,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.employer.fieldCity,
+        itemKey: EmployerKeys.fieldCity,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.switchWidget),
+        find.byKey(EmployerKeys.switchWidget),
         findsOneWidget,
       );
 
       await switchHelper(tester: tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.textSwitchWidget),
+        find.byKey(EmployerKeys.textSwitchWidget),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.textContact),
+        find.byKey(EmployerKeys.textContact),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.fieldContact),
+        find.byKey(EmployerKeys.fieldContact),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employer.button),
+        find.byKey(EmployerKeys.button),
         findsOneWidget,
       );
     },

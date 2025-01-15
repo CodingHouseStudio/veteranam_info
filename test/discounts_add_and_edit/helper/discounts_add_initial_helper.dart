@@ -14,27 +14,27 @@ Future<void> discountsAddInitialHelper({
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.textWrongLink),
+        find.byKey(DiscountsAddKeys.textWrongLink),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.imageWrongLink),
+        find.byKey(DiscountsAddKeys.imageWrongLink),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.buttonWrongLink),
+        find.byKey(DiscountsAddKeys.buttonWrongLink),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.title),
+        find.byKey(DiscountsAddKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.pageIndicator),
+        find.byKey(DiscountsAddKeys.pageIndicator),
         findsOneWidget,
       );
 
@@ -42,20 +42,20 @@ Future<void> discountsAddInitialHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.discountsAdd.titleField,
+        itemKey: DiscountsAddKeys.titleField,
       );
 
       await multiDropFieldHelper(
         tester: tester,
         text: KTestVariables.field,
-        textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
+        textFieldKey: DiscountsAddKeys.discountsField,
         fieldIndex: 1,
         hasItem: isEdit,
       );
 
       await dropListFieldItemHelper(
         tester: tester,
-        textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+        textFieldKey: DiscountsAddKeys.eligibilityField,
         fieldIndex: isEdit ? 4 : 2,
         hasMultiChoice: true,
         hasValue: isEdit,
@@ -68,12 +68,12 @@ Future<void> discountsAddInitialHelper({
       await multiDropFieldRemoveHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.widget.dropListField.list),
+        find.byKey(DropListFieldKeys.list),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton),
+        find.byKey(DiscountsAddKeys.cancelButton),
         findsOneWidget,
       );
     },

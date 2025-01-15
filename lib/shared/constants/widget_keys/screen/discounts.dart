@@ -1,43 +1,46 @@
 part of '../widget_keys.dart';
 
-class _DiscountsKeys {
-  final screen = const Key('discounts_screen');
-  final filter = const Key('discounts_screen_filter');
-  final card = const Key('discounts_screen_card');
-  // final cardLast = const Key('discounts_screen_card_last');
-  // final button = const Key('discount_screen_button');
-  final buttonIcon = const Key('discount_screen_button_icon');
-  final title = const Key('discount_title');
-  final subtitleKey = const Key('discount_subtitleKey');
-  final addDiscountButton = const Key('discount_add_discount_button');
-  // final titlePoint = const Key('discount_title_point');
-  final advancedFilterDesk = const Key('discounts_screen_advanced_filter_desk');
-  final advancedFilterMob = const Key('discounts_screen_advanced_filter_mob');
-  final advancedFilterDialog =
-      const Key('discounts_screen_advanced_filter_dialog');
-  final advancedFilterList = const Key('discounts_screen_advanced_filter_list');
-  final advancedFilterResetButton =
-      const Key('discounts_screen_advanced_filter_reset_button');
-  final advancedFilterMobAppliedButton =
-      const Key('discounts_screen_advanced_filter_mob_applied_button');
-  final advancedFilterButton =
-      const Key('discounts_screen_advanced_filter_button');
-  final endListText = const Key('discounts_screen_end_list_text');
-  // final advancedFilterButtonIcon =
-  //     const Key('discounts_screen_advanced_filter_button_icon');
-  // final advancedFilterButtonIconUp =
-  //     const Key('discounts_screen_advanced_filter_button_icon_up');
-  final appliedFilterText = const Key('discounts_screen_applied_filter_text');
-  final appliedFilterItems = const Key('discounts_screen_applied_filter_items');
-  final discountText = const Key('discounts_screen_discountText');
-  final discountItems = const Key('discounts_screen_discount_items');
-  final citiesText = const Key('discounts_screen_cities_text');
-  final categoriesText = const Key('discounts_screen_categories_text');
-  final eligibilitiesText = const Key('discounts_screen_eligibilities_text');
-  final cityItems = const Key('discounts_screen_city_items');
-  final categoriesItems = const Key('discounts_screen_categories_items');
-  final eligibilitiesItems = const Key('discounts_screen_eligibilities_items');
-  final userEmailDialog = const Key('discounts_screen_user_email_dialog');
-  // final cancelIcon = const Key('discounts_screen_cancel_icon');
-  // final cancelText = const Key('discounts_screen_cancel_text');
+abstract class DiscountsKeys {
+  static const screen = Key('discounts_screen');
+  static const filter = Key('discounts_screen_filter');
+  static const card = Key('discounts_screen_card');
+  // static const cardLast = Key('discounts_screen_card_last');
+  // static const button = Key('discount_screen_button');
+  static const buttonIcon = Key('discount_screen_button_icon');
+  static const title = Key('discount_title');
+  static const subtitleKey = Key('discount_subtitleKey');
+  static const addDiscountButton = Key('discount_add_discount_button');
+  // static const titlePoint = Key('discount_title_point');
+  static const advancedFilterDesk =
+      Key('discounts_screen_advanced_filter_desk');
+  static const advancedFilterMob = Key('discounts_screen_advanced_filter_mob');
+  static const advancedFilterDialog =
+      Key('discounts_screen_advanced_filter_dialog');
+  static const advancedFilterList =
+      Key('discounts_screen_advanced_filter_list');
+  static const advancedFilterResetButton =
+      Key('discounts_screen_advanced_filter_reset_button');
+  static const advancedFilterMobAppliedButton =
+      Key('discounts_screen_advanced_filter_mob_applied_button');
+  static const advancedFilterButton =
+      Key('discounts_screen_advanced_filter_button');
+  static const endListText = Key('discounts_screen_end_list_text');
+  // static const advancedFilterButtonIcon =
+  //     Key('discounts_screen_advanced_filter_button_icon');
+  // static const advancedFilterButtonIconUp =
+  //     Key('discounts_screen_advanced_filter_button_icon_up');
+  static const appliedFilterText = Key('discounts_screen_applied_filter_text');
+  static const appliedFilterItems =
+      Key('discounts_screen_applied_filter_items');
+  static const discountText = Key('discounts_screen_discountText');
+  static const discountItems = Key('discounts_screen_discount_items');
+  static const citiesText = Key('discounts_screen_cities_text');
+  static const categoriesText = Key('discounts_screen_categories_text');
+  static const eligibilitiesText = Key('discounts_screen_eligibilities_text');
+  static const cityItems = Key('discounts_screen_city_items');
+  static const categoriesItems = Key('discounts_screen_categories_items');
+  static const eligibilitiesItems = Key('discounts_screen_eligibilities_items');
+  static const userEmailDialog = Key('discounts_screen_user_email_dialog');
+  // static const cancelIcon = Key('discounts_screen_cancel_icon');
+  // static const cancelText = Key('discounts_screen_cancel_text');
 }

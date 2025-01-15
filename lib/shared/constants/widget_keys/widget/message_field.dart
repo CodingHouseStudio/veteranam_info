@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _MessageFieldKeys {
-  final widget = const Key('message_field');
-  // final icon = const Key('message_field_icon');
+abstract class MessageFieldKeys {
+  static const widget = Key('message_field');
+  // static const icon = Key('message_field_icon');
 }

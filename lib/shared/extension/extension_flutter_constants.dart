@@ -347,7 +347,7 @@ extension FundExtensions on FundModel {
   Widget get getImage {
     return image.getImage(
           parent: (child) => Expanded(child: child),
-          key: KWidgetkeys.widget.donateCard.image,
+          key: DonateCardKeys.image,
         ) ??
         const Spacer();
   }
@@ -364,7 +364,7 @@ extension StoryExtensions on StoryModel {
         size: KSize.kUserPhoto,
       ) ??
       IconWidget(
-        key: KWidgetkeys.widget.storyCard.userIcon,
+        key: StoryCardKeys.userIcon,
         icon: KIcon.person,
         background: AppColors.materialThemeKeyColorsNeutralVariant,
       );

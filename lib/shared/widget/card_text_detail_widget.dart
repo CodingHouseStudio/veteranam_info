@@ -53,7 +53,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownLinkWidget(
-            key: KWidgetkeys.widget.cardTextDetail.text,
+            key: CardTextDetailKeys.text,
             text: widget.text
                 .markdownCard(isDesk: widget.isDesk, fullText: fullText),
             isDesk: widget.isDesk,
@@ -61,7 +61,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         else
           Text(
             widget.text,
-            key: KWidgetkeys.widget.cardTextDetail.text,
+            key: CardTextDetailKeys.text,
             maxLines: fullText ? null : widget.maxLines ?? 2,
             style: AppTextStyle.materialThemeBodyLarge,
             overflow: TextOverflow.clip,
@@ -79,7 +79,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: TextButton(
-                    key: KWidgetkeys.widget.cardTextDetail.button,
+                    key: CardTextDetailKeys.button,
                     onPressed: () => setState(() {
                       fullText = !fullText;
                     }),
@@ -92,7 +92,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                                 context.l10n.hide
                             : widget.buttonText?.elementAt(0) ??
                                 context.l10n.more,
-                        key: KWidgetkeys.widget.cardTextDetail.buttonText,
+                        key: CardTextDetailKeys.buttonText,
                         style: widget.isDesk
                             ? AppTextStyle.materialThemeTitleMedium
                             : AppTextStyle.materialThemeTitleSmall,

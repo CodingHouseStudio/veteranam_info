@@ -9,23 +9,23 @@ Future<void> donateCardHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.donateCard.widget,
+    itemKey: DonateCardKeys.widget,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.widget), findsWidgets);
+  expect(find.byKey(DonateCardKeys.widget), findsWidgets);
 
   await tester.pumpAndSettle();
 
-  // expect(find.byKey(KWidgetkeys.widget.donateCard.image), findsWidgets);
+  // expect(find.byKey(DonateCardKeys.image), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.title), findsWidgets);
+  expect(find.byKey(DonateCardKeys.title), findsWidgets);
 
   expect(
-    find.byKey(KWidgetkeys.widget.donateCard.subtitle),
+    find.byKey(DonateCardKeys.subtitle),
     isDesk ? findsNothing : findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.button), findsWidgets);
+  expect(find.byKey(DonateCardKeys.button), findsWidgets);
 
   await donateButtonHelper(tester: tester, tap: false, isDesk: isDesk);
 }

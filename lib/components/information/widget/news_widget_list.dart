@@ -11,7 +11,7 @@ List<Widget> _newsWidgetList({
           .state
           .filteredInformationModelItems,
       cardWidget: ({required modelItem, required isLoading}) => NewsCardWidget(
-        key: KWidgetkeys.screen.information.card,
+        key: InformationKeys.card,
         informationItem: modelItem,
         isDesk: isDesk,
         onLikeChange: ({required like}) =>

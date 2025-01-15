@@ -11,41 +11,41 @@ Future<void> signUpInitialHelper(
     windowsTest: true,
     test: () async {
       // expect(
-      //   find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
+      //   find.byKey(SignUpKeys.bottomButtons),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.button),
+        find.byKey(SignUpKeys.button),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.card),
+        find.byKey(SignUpKeys.card),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.fields),
+        find.byKey(SignUpKeys.fields),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.loginButton),
+        find.byKey(SignUpKeys.loginButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.loginText),
+        find.byKey(SignUpKeys.loginText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.signUp.title),
+        find.byKey(SignUpKeys.title),
         findsOneWidget,
       );
 
-      expect(find.byKey(KWidgetkeys.screen.signUp.submitingText), findsNothing);
+      expect(find.byKey(SignUpKeys.submitingText), findsNothing);
 
       // await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 

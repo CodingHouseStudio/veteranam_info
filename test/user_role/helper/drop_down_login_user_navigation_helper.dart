@@ -15,11 +15,11 @@ Future<void> dropDownLoginUserNavigationHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.loginUserButton),
+    find.byKey(UserRoleKeys.loginUserButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.userRole.loginUserButton));
+  await tester.tap(find.byKey(UserRoleKeys.loginUserButton));
 
   await tester.pumpAndSettle();
 

@@ -83,12 +83,12 @@ class _NetworkStatusBannerState extends State<_NetworkStatusBanner> {
     return Padding(
       padding: const EdgeInsets.only(top: KPadding.kPaddingSize10),
       child: Row(
-        key: KWidgetkeys.widget.networkBanner.widget,
+        key: NetworkBannerKeys.widget,
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: KPadding.kPaddingSize10,
         children: [
           KIcon.noInternet.copyWith(
-            key: KWidgetkeys.widget.networkBanner.iconNoInternet,
+            key: NetworkBannerKeys.iconNoInternet,
           ),
           Text(
             context.l10n.noInternet,

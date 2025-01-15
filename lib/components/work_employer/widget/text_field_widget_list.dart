@@ -11,14 +11,14 @@ List<Widget> _textFieldWidgetList({
               isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ),
         child: Text(
-          key: KWidgetkeys.screen.employer.textPosition,
+          key: EmployerKeys.textPosition,
           context.l10n.position,
           style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
-        widgetKey: KWidgetkeys.screen.employer.fieldPosition,
+        widgetKey: EmployerKeys.fieldPosition,
         labelText: context.l10n.writeProposedPosition,
         onChanged: null,
         isDesk: isDesk,
@@ -30,14 +30,14 @@ List<Widget> _textFieldWidgetList({
               isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ),
         child: Text(
-          key: KWidgetkeys.screen.employer.textWage,
+          key: EmployerKeys.textWage,
           context.l10n.wage,
           style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
-        widgetKey: KWidgetkeys.screen.employer.fieldWage,
+        widgetKey: EmployerKeys.fieldWage,
         labelText: context.l10n.writeTheWage,
         onChanged: null,
         isDesk: isDesk,
@@ -49,14 +49,14 @@ List<Widget> _textFieldWidgetList({
               isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ),
         child: Text(
-          key: KWidgetkeys.screen.employer.textCity,
+          key: EmployerKeys.textCity,
           context.l10n.selectCityOfWork,
           style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       DropListFieldWidget(
-        textFieldKey: KWidgetkeys.screen.employer.fieldCity,
+        textFieldKey: EmployerKeys.fieldCity,
         onChanged: null,
         labelText: context.l10n.selectCity,
         dropDownList: KMockText.dropDownList,
@@ -70,10 +70,10 @@ List<Widget> _textFieldWidgetList({
           spacing: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize10,
           children: [
             SwitchWidgetWithoutBloc(
-              key: KWidgetkeys.screen.employer.switchWidget,
+              key: EmployerKeys.switchWidget,
             ),
             Text(
-              key: KWidgetkeys.screen.employer.textSwitchWidget,
+              key: EmployerKeys.textSwitchWidget,
               context.l10n.remotely,
               style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
             ),
@@ -87,14 +87,14 @@ List<Widget> _textFieldWidgetList({
               isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ),
         child: Text(
-          key: KWidgetkeys.screen.employer.textContact,
+          key: EmployerKeys.textContact,
           '${context.l10n.contacts}*',
           style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       TextFieldWidget(
-        widgetKey: KWidgetkeys.screen.employer.fieldContact,
+        widgetKey: EmployerKeys.fieldContact,
         labelText: context.l10n.howToContactYou,
         onChanged: null,
         isDesk: isDesk,

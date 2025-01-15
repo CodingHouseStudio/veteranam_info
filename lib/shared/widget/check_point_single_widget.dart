@@ -36,13 +36,13 @@
 //         }
 //       },
 //       icon: DecoratedBox(
-//         key: KWidgetkeys.widget.checkPointSingle.widget,
+//         key: CheckPointSingleKeys.widget,
 //         decoration: isCheck
 //             ? KWidgetTheme.boxDecorCheckPointFalse
 //             : KWidgetTheme.boxDecorCheckPointTrue,
 //         child: isCheck
 //             ? KIcon.check.copyWith(
-//                 key: KWidgetkeys.widget.checkPointSingle.icon,
+//                 key: CheckPointSingleKeys.icon,
 //               )
 //             : const SizedBox(
 //                 width: KSize.kIconSize,

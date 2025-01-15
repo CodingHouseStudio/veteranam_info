@@ -39,7 +39,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
     return Align(
       alignment: align ?? Alignment.centerLeft,
       child: TextButton(
-        key: KWidgetkeys.widget.buttonAdditional.desk,
+        key: ButtonAdditionalKeys.desk,
         style: KButtonStyles.additionalButtonStyle.copyWith(
           maximumSize: isDesk
               ? null
@@ -64,7 +64,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
           mainAxisSize: isDesk ? MainAxisSize.min : MainAxisSize.max,
           children: [
             IconWidget(
-              key: KWidgetkeys.widget.buttonAdditional.icon,
+              key: ButtonAdditionalKeys.icon,
               icon: picture,
               padding: iconPadding ?? KPadding.kPaddingSize12,
               background: AppColors.materialThemeKeyColorsSecondary,
@@ -102,7 +102,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
   Text get textWidget {
     return Text(
       text,
-      key: KWidgetkeys.widget.buttonAdditional.text,
+      key: ButtonAdditionalKeys.text,
       style: AppTextStyle.materialThemeTitleMedium,
       //textAlign: TextAlign.center,
     );
@@ -124,7 +124,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return TextButton(
-//       key: KWidgetkeys.widget.buttonAdditional.mob,
+//       key: ButtonAdditionalKeys.mob,
 //       style: KButtonStyles.additionalButtonStyle.copyWith(
 //         backgroundColor: WidgetStatePropertyAll(backgroundColor),
 //       ),
@@ -135,7 +135,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
 //             AspectRatio(
 //               aspectRatio: 1,
 //               child: CircleAvatar(
-//                 key: KWidgetkeys.widget.buttonAdditional.icon,
+//                 key: ButtonAdditionalKeys.icon,
 //                 child: picture,
 //               ),
 //             ),
@@ -146,7 +146,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
 //                 ),
 //                 child: Text(
 //                   text,
-//                   key: KWidgetkeys.widget.buttonAdditional.text,
+//                   key: ButtonAdditionalKeys.text,
 //                   style: AppTextStyle.materialThemeTitleMedium,
 //                   textAlign: TextAlign.center,
 //                 ),

@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _LeftCardKeys {
-  final desk = const Key('left_card_desk');
-  final mob = const Key('left_card_mob');
-  // final image = const Key('left_card_image');
+abstract class LeftCardKeys {
+  static const desk = Key('left_card_desk');
+  static const mob = Key('left_card_mob');
+  // static const image = Key('left_card_image');
 }

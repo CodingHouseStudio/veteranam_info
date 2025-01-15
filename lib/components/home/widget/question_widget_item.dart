@@ -58,14 +58,14 @@
 //       return SkeletonizerWidget(
 //         isLoading: true,
 //         child: QuestionWidget(
-//           key: KWidgetkeys.screen.home.faqSkeletonizer,
+//           key: HomeKeys.faqSkeletonizer,
 //           questionModel: questionModel,
 //           isDesk: isDesk,
 //         ),
 //       );
 //     } else {
 //       return QuestionWidget(
-//         key: KWidgetkeys.screen.home.faq,
+//         key: HomeKeys.faq,
 //         questionModel: questionModel,
 //         isDesk: isDesk,
 //       );

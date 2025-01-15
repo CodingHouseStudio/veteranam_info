@@ -33,7 +33,7 @@ class MobFaqBodyWidget extends StatelessWidget {
             //     _.loadingStatus == LoadingStatus.loaded &&
             //     Config.isDevelopment)
             //   MockButtonWidget(
-            //     key: KWidgetkeys.screen.mobFaq.buttonMock,
+            //     key: MobFaqKeys.buttonMock,
             //     onPressed: () {
             //       GetIt.I.get<IFaqRepository>().addMockQuestions();
             //       context.read<MobFaqWatcherBloc>().add(
@@ -51,7 +51,7 @@ class MobFaqBodyWidget extends StatelessWidget {
                 child: SkeletonizerWidget(
                   isLoading: isLoading,
                   child: QuestionWidget(
-                    key: KWidgetkeys.screen.mobFaq.list,
+                    key: MobFaqKeys.list,
                     questionModel: questionModelItems.elementAt(index),
                     isDesk: false,
                   ),

@@ -13,11 +13,11 @@ Future<void> dropDownLoginBusinessNavigationHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.loginBusinessButton),
+    find.byKey(UserRoleKeys.loginBusinessButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.userRole.loginBusinessButton));
+  await tester.tap(find.byKey(UserRoleKeys.loginBusinessButton));
 
   await tester.pumpAndSettle();
 }

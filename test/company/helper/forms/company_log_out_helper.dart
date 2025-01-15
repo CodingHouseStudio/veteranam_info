@@ -12,16 +12,16 @@ Future<void> companyLogOutHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.logOutButton),
+    find.byKey(CompanyKeys.logOutButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.logOutButton,
+    itemKey: CompanyKeys.logOutButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.company.logOutButton));
+  await tester.tap(find.byKey(CompanyKeys.logOutButton));
 
   await tester.pumpAndSettle();
 

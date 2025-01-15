@@ -21,7 +21,7 @@ class HomeSectionsWidget extends StatelessWidget {
       ),
       Text(
         context.l10n.aboutProject,
-        key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+        key: HomeKeys.aboutProjecSubtitle,
         style: isDesk
             ? AppTextStyle.materialThemeDisplayMedium
             : isTablet

@@ -10,16 +10,16 @@ Future<void> discountShareHelper({
   required IUrlRepository mockUrlRepository,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discount.shareButton),
+    find.byKey(DiscountKeys.shareButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discount.shareButton,
+    itemKey: DiscountKeys.shareButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discount.shareButton));
+  await tester.tap(find.byKey(DiscountKeys.shareButton));
 
   await tester.pumpAndSettle();
 

@@ -1,8 +1,8 @@
 part of '../widget_keys.dart';
 
-class _MyStoryKeys {
-  final screen = const Key('my_story_screen');
-  final title = const Key('my_story_screen_title');
-  final subtitle = const Key('my_story_screen_subtitle');
-  final card = const Key('my_story_screen_card');
+abstract class MyStoryKeys {
+  static const screen = Key('my_story_screen');
+  static const title = Key('my_story_screen_title');
+  static const subtitle = Key('my_story_screen_subtitle');
+  static const card = Key('my_story_screen_card');
 }

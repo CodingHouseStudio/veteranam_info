@@ -13,13 +13,13 @@ class ListScrollUpWidget extends StatelessWidget {
         Center(
           child: Text(
             context.l10n.thatEndOfList,
-            key: KWidgetkeys.widget.scaffold.endListText,
+            key: ScaffoldKeys.endListText,
             style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
           ),
         ),
         Center(
           child: TextButton(
-            key: KWidgetkeys.widget.scaffold.endListButton,
+            key: ScaffoldKeys.endListButton,
             style: KButtonStyles.endListButtonStyle,
             onPressed: () => scrollController.animateTo(
               0,

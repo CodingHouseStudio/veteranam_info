@@ -13,32 +13,32 @@ Future<void> discountsAddDetailEnterHelper({
   bool tapIndefinitely = false,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
+    find.byKey(DiscountsAddKeys.categoryField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
+    itemKey: DiscountsAddKeys.categoryField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
+    find.byKey(DiscountsAddKeys.categoryField),
     categoryText,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
+    find.byKey(DiscountsAddKeys.cityField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cityField,
+    itemKey: DiscountsAddKeys.cityField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
+    find.byKey(DiscountsAddKeys.cityField),
     cityText,
   );
 
@@ -50,36 +50,36 @@ Future<void> discountsAddDetailEnterHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.onlineSwitcher,
+    itemKey: DiscountsAddKeys.onlineSwitcher,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.discountsAdd.onlineSwitcher),
+    find.byKey(DiscountsAddKeys.onlineSwitcher),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.discountsAdd.onlineSwitcher),
+    find.byKey(DiscountsAddKeys.onlineSwitcher),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
+    find.byKey(DiscountsAddKeys.periodField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.periodField,
+    itemKey: DiscountsAddKeys.periodField,
   );
 
   if (tapIndefinitely) {
     await tester.tap(
-      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
+      find.byKey(DiscountsAddKeys.indefinitelySwitcher),
       warnIfMissed: false,
     );
 
@@ -88,7 +88,7 @@ Future<void> discountsAddDetailEnterHelper({
 
   if (tapOnperiod) {
     await tester.tap(
-      find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
+      find.byKey(DiscountsAddKeys.periodField),
     );
 
     await tester.pumpAndSettle();

@@ -13,7 +13,7 @@ class NewsCardDialog extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         return AlertDialog(
-          key: KWidgetkeys.screen.newsCard.dialog,
+          key: NewsCardDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
           insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,

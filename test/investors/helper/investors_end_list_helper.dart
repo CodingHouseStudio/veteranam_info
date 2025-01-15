@@ -11,5 +11,5 @@ Future<void> investorsEndListHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.investors.endListText), findsOneWidget);
+  expect(find.byKey(InvestorsKeys.endListText), findsOneWidget);
 }

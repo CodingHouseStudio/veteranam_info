@@ -10,5 +10,5 @@ Future<void> userEmailEmptyHelper(
 
   await userEmailSaveHelper(tester: tester, email: KTestVariables.fieldEmpty);
 
-  expect(find.byKey(KWidgetkeys.widget.userEmailDialog.field), findsOneWidget);
+  expect(find.byKey(UserEmailDialogKeys.field), findsOneWidget);
 }

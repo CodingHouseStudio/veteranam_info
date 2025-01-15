@@ -4,17 +4,17 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 Future<void> mobNavigationHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.mobNavigation.widget), findsOneWidget);
+  expect(find.byKey(MobNavigationKeys.widget), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobNavigation.discounts),
+    find.byKey(MobNavigationKeys.discounts),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobNavigation.investors),
+    find.byKey(MobNavigationKeys.investors),
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.mobNavigation.settings), findsOneWidget);
+  expect(find.byKey(MobNavigationKeys.settings), findsOneWidget);
 }

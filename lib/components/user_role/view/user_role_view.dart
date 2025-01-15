@@ -7,6 +7,6 @@ class UserRoleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UserRoleBodyWidget(key: KWidgetkeys.screen.userRole.screen);
+    return UserRoleBodyWidget(key: UserRoleKeys.screen);
   }
 }

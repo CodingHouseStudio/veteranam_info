@@ -11,20 +11,20 @@ Future<void> profileFormsEnterTextHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.photo,
+    itemKey: ProfileKeys.photo,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.photo));
+  await tester.tap(find.byKey(ProfileKeys.photo));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nameField,
+    itemKey: ProfileKeys.nameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.nameField),
+    find.byKey(ProfileKeys.nameField),
     name,
   );
 
@@ -32,11 +32,11 @@ Future<void> profileFormsEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.lastNameField,
+    itemKey: ProfileKeys.lastNameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.lastNameField),
+    find.byKey(ProfileKeys.lastNameField),
     surname,
   );
 
@@ -44,16 +44,16 @@ Future<void> profileFormsEnterTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.emailFied,
+    itemKey: ProfileKeys.emailFied,
   );
 
   // await scrollingHelper(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  //   itemKey: ProfileKeys.nickNameField,
   // );
 
   // await tester.enterText(
-  //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+  //   find.byKey(ProfileKeys.nickNameField),
   //   nickname,
   // );
 
@@ -61,6 +61,6 @@ Future<void> profileFormsEnterTextHelper({
 
   // await scrollingHelper(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.screen.profile.nickNameField,
+  //   itemKey: ProfileKeys.nickNameField,
   // );
 }

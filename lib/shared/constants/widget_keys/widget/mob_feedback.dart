@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _MobFeedbackKeys {
-  final widget = const Key('mob_feedback');
-  final title = const Key('mob_feedback_title');
-  final field = const Key('mob_feedback_field');
-  // final icon = const Key('mob_feedback_icon');
-  final button = const Key('mob_feedback_button');
+abstract class MobFeedbackKeys {
+  static const widget = Key('mob_feedback');
+  static const title = Key('mob_feedback_title');
+  static const field = Key('mob_feedback_field');
+  // static const icon = Key('mob_feedback_icon');
+  static const button = Key('mob_feedback_button');
 }

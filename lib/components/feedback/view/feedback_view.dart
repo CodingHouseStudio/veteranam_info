@@ -8,7 +8,7 @@ class FeedbackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffold = FeedbackBlocprovider(
-      key: KWidgetkeys.screen.feedback.screen,
+      key: FeedbackKeys.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: appBar,

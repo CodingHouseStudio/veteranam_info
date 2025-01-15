@@ -8,7 +8,7 @@ class StoryAddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoryAddBlocprovider(
-      key: KWidgetkeys.screen.storyAdd.screen,
+      key: StoryAddKeys.screen,
       childWidget: const StoryAddBody(),
     );
   }

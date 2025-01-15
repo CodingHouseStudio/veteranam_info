@@ -8,16 +8,16 @@ Future<void> reportDialogOpenHelper(
 ) async {
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.button,
+    itemKey: ReportDialogKeys.button,
     offset: KTestConstants.scrollingDown,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.reportDialog.button).first,
+    find.byKey(ReportDialogKeys.button).first,
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.widget), findsOneWidget);
+  expect(find.byKey(ReportDialogKeys.widget), findsOneWidget);
 }

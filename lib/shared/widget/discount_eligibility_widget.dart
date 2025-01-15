@@ -23,7 +23,7 @@ class EligibilityWidget extends StatelessWidget {
       //   final modifiableEligibility =
       //       List<EligibilityEnum>.from(EligibilityEnum.valuesWithoutAll);
       //   // return Wrap(
-      //   //   key: KWidgetkeys.widget.cityList.markdownFulllList,
+      //   //   key: CityListKeys.markdownFulllList,
       //   //   children: _buildWidgets(
       //   //     modifiableEligibility.length > 5
       //   //         ? modifiableEligibility.take(5).toList()
@@ -34,7 +34,7 @@ class EligibilityWidget extends StatelessWidget {
       // }
       // } else {
       //   return Wrap(
-      //     key: KWidgetkeys.widget.cityList.markdownFulllList,
+      //     key: CityListKeys.markdownFulllList,
       //     children: _buildWidgets(
       //       eligibility.length > 5 ? eligibility.take(5).toList() :
       // eligibility,
@@ -114,7 +114,7 @@ class EligibilityWidget extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Wrap(
-//       key: KWidgetkeys.widget.cityList.markdownFulllList,
+//       key: CityListKeys.markdownFulllList,
 //       children: _buildWidgets(
 //         eligibility.length > 5 ? eligibility.take(5).toList() : eligibility,
 //         context,
