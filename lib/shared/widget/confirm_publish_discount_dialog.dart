@@ -230,7 +230,7 @@ class _ConfirmPublishDiscountDialogState
     return SecondaryButtonWidget(
       widgetKey: ConfirmPublishDiscountKeys.continueButton,
       align: widget.isDesk ? null : Alignment.center,
-      onPressed: () => context.pop(),
+      onPressed: () => context.popDialog(),
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize12,
         horizontal: KPadding.kPaddingSize12,

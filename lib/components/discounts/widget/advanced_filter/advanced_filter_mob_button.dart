@@ -1,8 +1,5 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -71,6 +68,21 @@ class AdvancedFilterMobButton extends StatelessWidget {
               const DiscountsWatcherEvent.mobSaveFilter(),
             );
           final configBloc = context.read<DiscountConfigCubit>();
+          void showConfirmDialog() => context.dialog.showConfirmationDialog(
+                isDesk: true,
+                title: context.l10n.applySelectedFilter,
+                subtitle: context.l10n.applySelectedFilterSubtitle,
+                confirmText: context.l10n.yes,
+                unconfirmText: context.l10n.no,
+                onAppliedPressed: () =>
+                    bloc.add(const DiscountsWatcherEvent.mobSetFilter()),
+                confirmButtonBackground:
+                    AppColors.materialThemeKeyColorsSecondary,
+                onCancelPressed: () =>
+                    bloc.add(const DiscountsWatcherEvent.mobRevertFilter()),
+                onClosePressed: () =>
+                    bloc.add(const DiscountsWatcherEvent.mobRevertFilter()),
+              );
           await showModalBottomSheet<bool>(
             context: context,
             isScrollControlled: true,
@@ -105,21 +117,7 @@ class AdvancedFilterMobButton extends StatelessWidget {
                     // Wait close showModalBottomSheet dialog
                     // ignore: inference_failure_on_instance_creation
                     await Future.delayed(const Duration(milliseconds: 200));
-                    context.dialog.showConfirmationDialog(
-                      isDesk: true,
-                      title: context.l10n.applySelectedFilter,
-                      subtitle: context.l10n.applySelectedFilterSubtitle,
-                      confirmText: context.l10n.yes,
-                      unconfirmText: context.l10n.no,
-                      onAppliedPressed: () =>
-                          bloc.add(const DiscountsWatcherEvent.mobSetFilter()),
-                      confirmButtonBackground:
-                          AppColors.materialThemeKeyColorsSecondary,
-                      onCancelPressed: () => bloc
-                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
-                      onClosePressed: () => bloc
-                          .add(const DiscountsWatcherEvent.mobRevertFilter()),
-                    );
+                    showConfirmDialog();
                   }
               }
             },
@@ -186,7 +184,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                           isDesk: false,
                           resetEvent:
                               state.discountFilterRepository.hasActivityItem
-                                  ? () => context.pop(false)
+                                  ? () => context.popDialog(value: false)
                                   : null,
                         );
                       },
@@ -196,7 +194,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     text: context.l10n.apply,
                     hasAlign: false,
                     isDesk: false,
-                    onPressed: () => context.pop(true),
+                    onPressed: () => context.popDialog(value: true),
                     widgetKey: DiscountsKeys.advancedFilterMobAppliedButton,
                     darkMode: true,
                   ),

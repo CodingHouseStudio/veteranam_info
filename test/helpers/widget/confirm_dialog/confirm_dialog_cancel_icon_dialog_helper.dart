@@ -17,5 +17,10 @@ Future<void> confirmDialogCancelIconHelper({
 
   await tester.pumpAndSettle();
 
-  verify(() => mockGoRouter.pop()).called(1);
+  expect(
+    find.byKey(ConfirmDialogKeys.cancelIcon),
+    findsNothing,
+  );
+
+  // verify(() => mockGoRouter.pop()).called(1);
 }

@@ -13,6 +13,7 @@ Future<void> companyPumpAppHelper({
   required IDataPickerRepository mockDataPickerRepository,
   required ICompanyRepository mockCompanyRepository,
   required IDiscountRepository mockDiscountRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerUserWatcherBloc(mockUserRepository);
@@ -26,6 +27,8 @@ Future<void> companyPumpAppHelper({
     mockDataPickerRepository: mockDataPickerRepository,
     mockDiscountRepository: mockDiscountRepository,
   );
+
+  _registerAuthenticationBloc(mockAuthenticationRepository);
 
   await tester.pumpApp(const CompanyScreen(), mockGoRouter: mockGoRouter);
 
@@ -75,4 +78,16 @@ void _registerCompanyFormBloc({
     GetIt.I.unregister<CompanyFormBloc>();
   }
   GetIt.I.registerSingleton<CompanyFormBloc>(companyFormBloc);
+}
+
+void _registerAuthenticationBloc(
+  AuthenticationRepository mockAuthenticationRepository,
+) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }

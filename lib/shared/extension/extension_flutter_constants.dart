@@ -12,6 +12,7 @@ import 'package:flutter/material.dart'
         EdgeInsetsGeometry,
         Expanded,
         MouseCursor,
+        Navigator,
         SizedBox,
         SliverToBoxAdapter,
         Spacer,
@@ -216,6 +217,8 @@ extension ContextExtensions on BuildContext {
 
   Future<void> onMobFeedback(UserFeedback feedback) async =>
       read<MobFeedbackBloc>().add(MobFeedbackEvent.send(feedback.screenshot));
+
+  void popDialog({bool? value}) => Navigator.of(this).pop(value);
 
   // void copyText(String text, String? href, String? title) =>
   //     read<UrlCubit>().copy(text);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobUpdateDialog extends StatelessWidget {
@@ -28,7 +27,7 @@ class MobUpdateDialog extends StatelessWidget {
           children: [
             TextButton(
               key: MobUpdateKeys.lateButton,
-              onPressed: () => context.pop(),
+              onPressed: () => context.popDialog(),
               child: Text(
                 context.l10n.later,
                 style: AppTextStyle.materialThemeTitleMediumNeutral,
@@ -42,7 +41,7 @@ class MobUpdateDialog extends StatelessWidget {
                           ? KAppText.androidInstallUrl
                           : KAppText.iphoneInstallUrl,
                     );
-                context.pop();
+                context.popDialog();
               },
               style: KButtonStyles.whiteButtonStyle,
               child: Text(

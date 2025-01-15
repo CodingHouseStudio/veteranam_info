@@ -36,7 +36,7 @@ Future<void> reportDialogCorrectSaveHelper({
         message: KTestVariables.reportItems.first.message,
       );
 
-      verify(() => mockGoRouter.pop()).called(1);
+      await reportDialogHelper(tester, openedDialog: false);
     },
   );
 }
