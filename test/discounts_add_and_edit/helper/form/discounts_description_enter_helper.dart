@@ -10,34 +10,34 @@ Future<void> discountsAddDescriptionEnterHelper({
   required String exclusionsText,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.descriptionField),
+    find.byKey(DiscountsAddKeys.descriptionField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.descriptionField,
+    itemKey: DiscountsAddKeys.descriptionField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.descriptionField),
+    find.byKey(DiscountsAddKeys.descriptionField),
     descriptionText,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.exclusionField),
+    find.byKey(DiscountsAddKeys.exclusionField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.exclusionField,
+    itemKey: DiscountsAddKeys.exclusionField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.exclusionField),
+    find.byKey(DiscountsAddKeys.exclusionField),
     exclusionsText,
   );
 

@@ -10,14 +10,14 @@ Future<void> appHelper(WidgetTester tester) async {
 
   log('Loading App...', name: 'Integation Tests');
 
-  while (find.byKey(KWidgetkeys.screen.app.screen).evaluate().isEmpty) {
+  while (find.byKey(AppKeys.screen).evaluate().isEmpty) {
     await tester.pumpAndSettle();
   }
 
   log('App Loaded', name: 'Integation Tests');
 
   expect(
-    find.byKey(KWidgetkeys.screen.app.screen),
+    find.byKey(AppKeys.screen),
     findsOneWidget,
   );
 }

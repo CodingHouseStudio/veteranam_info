@@ -7,31 +7,31 @@ Future<void> mobNavigationButtonsHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.mobNavigation.discounts),
+    find.byKey(MobNavigationKeys.discounts),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.mobNavigation.discounts,
+    itemKey: MobNavigationKeys.discounts,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobNavigation.discounts));
+  await tester.tap(find.byKey(MobNavigationKeys.discounts));
 
   // verify(() => mockGoRouter.goNamed(KRoute.discounts.name)).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobNavigation.investors),
+    find.byKey(MobNavigationKeys.investors),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobNavigation.investors));
+  await tester.tap(find.byKey(MobNavigationKeys.investors));
 
   // verify(() => mockGoRouter.goNamed(KRoute.investors.name)).called(1);
 
-  expect(find.byKey(KWidgetkeys.widget.mobNavigation.settings), findsOneWidget);
+  expect(find.byKey(MobNavigationKeys.settings), findsOneWidget);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobNavigation.settings));
+  await tester.tap(find.byKey(MobNavigationKeys.settings));
 
   // verify(() => mockGoRouter.goNamed(KRoute.home.name)).called(1);
 }

@@ -1,28 +1,29 @@
 part of '../widget_keys.dart';
 
-class _FeedbackKeys {
-  final screen = const Key('feedback_screen');
-  // final pointText = const Key('feedback_screen_point_text');
-  final title = const Key('feedback_screen_title');
-  // final titleIcon = const Key('feedback_screen_title_icon');
-  final subtitle = const Key('feedback_screen_subtitle');
-  final emailText = const Key('feedback_screen_email_text');
-  final emailButton = const Key('feedback_screen_email_button');
-  final socialText = const Key('feedback_screen_social_text');
-  final instagram = const Key('feedback_screen_instagram');
-  final facebook = const Key('feedback_screen_facebook');
-  final linkedIn = const Key('feedback_screen_linked_in');
-  final nameField = const Key('feedback_screen_name_field');
-  final emailField = const Key('feedback_screen_email_field');
-  final messageField = const Key('feedback_screen_message_field');
-  final buttonText = const Key('feedback_screen_button_text');
-  final button = const Key('feedback_screen_button');
+abstract class FeedbackKeys {
+  static const screen = Key('feedback_screen');
+  // static const pointText = Key('feedback_screen_point_text');
+  static const title = Key('feedback_screen_title');
+  // static const titleIcon = Key('feedback_screen_title_icon');
+  static const subtitle = Key('feedback_screen_subtitle');
+  static const emailText = Key('feedback_screen_email_text');
+  static const emailButton = Key('feedback_screen_email_button');
+  static const socialText = Key('feedback_screen_social_text');
+  static const instagram = Key('feedback_screen_instagram');
+  static const facebook = Key('feedback_screen_facebook');
+  static const linkedIn = Key('feedback_screen_linked_in');
+  static const nameField = Key('feedback_screen_name_field');
+  static const emailField = Key('feedback_screen_email_field');
+  static const messageField = Key('feedback_screen_message_field');
+  static const buttonText = Key('feedback_screen_button_text');
+  static const button = Key('feedback_screen_button');
 
-  final boxSocialMedia = const Key('feedback_screen_box_social_media');
-  final boxText = const Key('feedback_screen_box_text');
-  final boxBackButton = const Key('feedback_screen_box_back_button');
-  final boxButton = const Key('feedback_screen_box_button');
-  // final boxInformationBox = const Key('feedback_screen_box_information_box');
-  // final boxInvestorsBox = const Key('feedback_screen_box_investors_box');
-  // final boxStoryBox = const Key('feedback_screen_box_story_box');
+  static const boxSocialMedia = Key('feedback_screen_box_social_media');
+  static const boxText = Key('feedback_screen_box_text');
+  static const boxBackButton = Key('feedback_screen_box_back_button');
+  static const boxButton = Key('feedback_screen_box_button');
+  // static const boxInformationBox =
+  // Key('feedback_screen_box_information_box');
+  // static const boxInvestorsBox = Key('feedback_screen_box_investors_box');
+  // static const boxStoryBox = Key('feedback_screen_box_story_box');
 }

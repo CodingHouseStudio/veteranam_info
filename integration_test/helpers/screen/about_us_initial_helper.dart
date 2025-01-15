@@ -4,7 +4,7 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 import '../../test_dependency.dart';
 
 Future<void> aboutUsInitialHelper(WidgetTester tester) async {
-  expect(find.byKey(KWidgetkeys.screen.aboutUs.screen), findsOneWidget);
+  expect(find.byKey(AboutUsKeys.screen), findsOneWidget);
 
   await rateHelper(tester);
 

@@ -10,11 +10,11 @@ Future<void> buttonHelper({
   required String routeName,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.error.button),
+    find.byKey(ErrorKeys.button),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.error.button));
+  await tester.tap(find.byKey(ErrorKeys.button));
 
   verify(
     () => mockGoRouter.goNamed(

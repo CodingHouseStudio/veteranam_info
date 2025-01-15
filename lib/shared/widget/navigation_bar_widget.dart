@@ -65,7 +65,7 @@ class _NavbarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: KWidgetkeys.widget.nawbar.widget,
+      key: NawbarKeys.widget,
       decoration: KWidgetTheme.boxDecorationNawbar,
       margin: EdgeInsets.only(
         top: KPadding.kPaddingSize24,
@@ -110,7 +110,7 @@ class _NavbarWidget extends StatelessWidget {
                     },
                   ),
                   icon: KIcon.logo.copyWith(
-                    key: KWidgetkeys.widget.nawbar.logo,
+                    key: NawbarKeys.logo,
                     // width: 78,
                   ),
                 ),
@@ -123,7 +123,7 @@ class _NavbarWidget extends StatelessWidget {
                 //   Expanded(
                 //     child: TextFieldWidget(
                 //       key: _formKey,
-                //       widgetKey: KWidgetkeys.widget.nawbar.field,
+                //       widgetKey: NawbarKeys.field,
                 //       labelTextStyle: widget.isDesk
                 //           ? AppTextStyle.text24
                 //           : AppTextStyle.text16,
@@ -134,7 +134,7 @@ class _NavbarWidget extends StatelessWidget {
                 //       // suffixIcon: widget.isDesk || !widget.hasMicrophone
                 //       //     ? null
                 //       //     : KIcon.mic.setIconKey(
-                //       //         KWidgetkeys.widget.nawbar.iconMic,
+                //       //         NawbarKeys.iconMic,
                 //       //       ),
                 //       isDesk: widget.isDesk,
                 //       contentPadding: widget.isDesk
@@ -152,18 +152,18 @@ class _NavbarWidget extends StatelessWidget {
                 //     padding: const EdgeInsets.only(right:
                 // KPadding.kPaddingSize32),
                 //     child: IconWidget(
-                //       key: KWidgetkeys.widget.nawbar.iconMic,
+                //       key: NawbarKeys.iconMic,
                 //       icon: KIcon.mic,
                 //     ),
                 //   ),
                 if (!Config.isBusiness)
                   if (isTablet)
-                    LanguagesSwitcherWidget(
-                      key: KWidgetkeys.widget.nawbar.language,
+                    const LanguagesSwitcherWidget(
+                      key: NawbarKeys.language,
                     )
                   else
                     IconButtonWidget(
-                      key: KWidgetkeys.widget.nawbar.menuButton,
+                      key: NawbarKeys.menuButton,
                       icon: KIcon.menuWhite,
                       background: AppColors.materialThemeKeyColorsSecondary,
                       onPressed: () async =>
@@ -183,8 +183,7 @@ class _NavbarWidget extends StatelessWidget {
                               ? [
                                   KSizedBox.kWidthSizedBox16,
                                   DoubleButtonWidget(
-                                    widgetKey:
-                                        KWidgetkeys.widget.nawbar.loginButton,
+                                    widgetKey: NawbarKeys.loginButton,
                                     onPressed: () => context.goNamed(loginPath),
                                     text: context.l10n.login,
                                     isDesk: true,
@@ -194,7 +193,7 @@ class _NavbarWidget extends StatelessWidget {
                               : [
                                   KSizedBox.kWidthSizedBox4,
                                   IconButtonWidget(
-                                    key: KWidgetkeys.widget.nawbar.loginIcon,
+                                    key: NawbarKeys.loginIcon,
                                     onPressed: () => context.goNamed(loginPath),
                                     icon: KIcon.personWhite,
                                     background: AppColors
@@ -214,7 +213,7 @@ class _NavbarWidget extends StatelessWidget {
               ? Row(
                   children: [
                     IconButton(
-                      key: KWidgetkeys.widget.nawbar.backButton,
+                      key: NawbarKeys.backButton,
                       style: KButtonStyles.withoutStyleNavBar,
                       onPressed: () => context
                           .goNamed(backButtonPathName ?? KRoute.discounts.name),
@@ -223,7 +222,7 @@ class _NavbarWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         '$pageName',
-                        key: KWidgetkeys.widget.nawbar.pageName,
+                        key: NawbarKeys.pageName,
                         style: AppTextStyle.materialThemeTitleMedium,
                         textAlign: TextAlign.center,
                       ),
@@ -237,7 +236,7 @@ class _NavbarWidget extends StatelessWidget {
                   ),
                   child: Text(
                     '$pageName',
-                    key: KWidgetkeys.widget.nawbar.pageName,
+                    key: NawbarKeys.pageName,
                     style: AppTextStyle.materialThemeTitleMedium,
                     textAlign: TextAlign.center,
                   ),
@@ -255,7 +254,7 @@ class _NavbarWidget extends StatelessWidget {
           selector: (state) => state.company.imageUrl,
           builder: (context, imageUrl) {
             return UserPhotoWidget(
-              key: KWidgetkeys.widget.nawbar.loginIcon,
+              key: NawbarKeys.loginIcon,
               onPressed: () => context.goNamed(KRoute.company.name),
               imageUrl: imageUrl,
             );
@@ -267,7 +266,7 @@ class _NavbarWidget extends StatelessWidget {
           selector: (state) => state.user.photo,
           builder: (context, photo) {
             return UserPhotoWidget(
-              key: KWidgetkeys.widget.nawbar.loginIcon,
+              key: NawbarKeys.loginIcon,
               onPressed: () => context.goNamed(KRoute.profile.name),
               imageUrl: photo,
             );
@@ -302,7 +301,7 @@ class _NavigationCenterWebWidget extends StatelessWidget {
           children: [
             if (Config.isUser)
               _button(
-                key: KWidgetkeys.widget.nawbar.discountsButton,
+                key: NawbarKeys.discountsButton,
                 ruoteName: KRoute.discounts.name,
                 text: context.l10n.discounts,
                 icon: const IconWidget(
@@ -319,7 +318,7 @@ class _NavigationCenterWebWidget extends StatelessWidget {
                 context.read<AuthenticationBloc>().state.status ==
                     AuthenticationStatus.authenticated)
               _button(
-                key: KWidgetkeys.widget.nawbar.myDiscountsButton,
+                key: NawbarKeys.myDiscountsButton,
                 ruoteName: KRoute.myDiscounts.name,
                 text: context.l10n.myDiscounts,
                 icon: const IconWidget(
@@ -348,7 +347,7 @@ class _NavigationCenterWebWidget extends StatelessWidget {
               else
                 KSizedBox.kWidthSizedBox16,
               _button(
-                key: KWidgetkeys.widget.nawbar.investorsButton,
+                key: NawbarKeys.investorsButton,
                 ruoteName: KRoute.support.name,
                 text: context.l10n.investors,
                 context: context,
@@ -374,7 +373,7 @@ class _NavigationCenterWebWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox16,
             if (Config.isUser || Config.isBusiness)
               _button(
-                key: KWidgetkeys.widget.nawbar.feedbackButton,
+                key: NawbarKeys.feedbackButton,
                 ruoteName: KRoute.feedback.name,
                 text: context.l10n.contacts,
                 context: context,

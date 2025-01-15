@@ -11,7 +11,7 @@ Future<void> hidePasswordHelper(
     email: KTestVariables.userEmail,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.signUp.button));
+  await tester.tap(find.byKey(SignUpKeys.button));
 
   await tester.pumpAndSettle();
 

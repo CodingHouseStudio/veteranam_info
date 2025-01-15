@@ -1,8 +1,8 @@
 part of '../widget_keys.dart';
 
-class _CityListKeys {
-  final text = const Key('city_list_text');
-  final longText = const Key('city_list_long_text');
-  final markdownFulllList = const Key('city_list_markdown_full_list');
-  final icon = const Key('city_list_icon');
+abstract class CityListKeys {
+  static const text = Key('city_list_text');
+  static const longText = Key('city_list_long_text');
+  static const markdownFulllList = Key('city_list_markdown_full_list');
+  static const icon = Key('city_list_icon');
 }

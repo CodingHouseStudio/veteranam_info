@@ -24,7 +24,7 @@ class DiscountSection extends StatelessWidget {
           child: _DiscountSectionWidget(isTablet: true),
         ),
         leftWidget: KImage.discountImage(
-          key: KWidgetkeys.screen.home.discountImage,
+          key: HomeKeys.discountImage,
         ),
         rightPadding: KPadding.kPaddingSize84,
       );
@@ -33,7 +33,7 @@ class DiscountSection extends StatelessWidget {
         spacing: isTablet ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
         children: [
           KImage.discountImage(
-            key: KWidgetkeys.screen.home.discountImage,
+            key: HomeKeys.discountImage,
           ),
           _DiscountSectionWidget(isTablet: isTablet),
         ],
@@ -63,7 +63,7 @@ class InformationSection extends StatelessWidget {
           child: _InformationSectionWidget(isTablet: true),
         ),
         rightWidget: KImage.inforamationImage(
-          key: KWidgetkeys.screen.home.informationImage,
+          key: HomeKeys.informationImage,
         ),
         rightPadding: KPadding.kPaddingSize32,
       );
@@ -72,7 +72,7 @@ class InformationSection extends StatelessWidget {
         spacing: isTablet ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
         children: [
           KImage.inforamationImage(
-            key: KWidgetkeys.screen.home.informationImage,
+            key: HomeKeys.informationImage,
           ),
           _InformationSectionWidget(isTablet: isTablet),
         ],
@@ -90,10 +90,10 @@ class _DiscountSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionWidget(
-      buttonKey: KWidgetkeys.screen.home.discountButton,
-      // prefixKey: KWidgetkeys.screen.home.discountPrefix,
-      titleKey: KWidgetkeys.screen.home.discountTitle,
-      subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
+      buttonKey: HomeKeys.discountButton,
+      // prefixKey: HomeKeys.discountPrefix,
+      titleKey: HomeKeys.discountTitle,
+      subtitleKey: HomeKeys.discountSubtitle,
       // textPoint: context.l10n.saveMoney,
       title: context.l10n.discountsServices,
       subtitle: context.l10n.discountsServicesSubtitle,
@@ -115,10 +115,10 @@ class _InformationSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionWidget(
-      buttonKey: KWidgetkeys.screen.home.informationButton,
-      // prefixKey: KWidgetkeys.screen.home.informationPrefix,
-      subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-      titleKey: KWidgetkeys.screen.home.informationTitle,
+      buttonKey: HomeKeys.informationButton,
+      // prefixKey: HomeKeys.informationPrefix,
+      subtitleKey: HomeKeys.informationSubtitle,
+      titleKey: HomeKeys.informationTitle,
       // textPoint: context.l10n.findOut,
       title: context.l10n.informationNews,
       subtitle: context.l10n.informationNewsSubtitle,

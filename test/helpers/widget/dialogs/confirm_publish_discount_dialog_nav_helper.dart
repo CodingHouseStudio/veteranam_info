@@ -16,23 +16,23 @@ Future<void> confirmPublishDiscountDialogNavHelper({
     size: KTestConstants.windowSmallSize,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.title),
+        find.byKey(ConfirmPublishDiscountKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon),
+        find.byKey(ConfirmPublishDiscountKeys.closeIcon),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        scrollKey: KWidgetkeys.widget.dialogs.scroll,
-        itemKey: KWidgetkeys.widget.confirmPublishDiscount.closeIcon,
+        scrollKey: DialogsKeys.scroll,
+        itemKey: ConfirmPublishDiscountKeys.closeIcon,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.closeIcon),
+        find.byKey(ConfirmPublishDiscountKeys.closeIcon),
       );
 
       await tester.pumpAndSettle();
@@ -42,27 +42,27 @@ Future<void> confirmPublishDiscountDialogNavHelper({
       ).called(1);
 
       expect(
-        find.byKey(KWidgetkeys.widget.confirmPublishDiscount.description),
+        find.byKey(ConfirmPublishDiscountKeys.description),
         findsOneWidget,
       );
 
       expect(
         find.byKey(
-          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsSwitcher,
+          ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
         ),
         findsOneWidget,
       );
 
       expect(
         find.byKey(
-          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsText,
+          ConfirmPublishDiscountKeys.termsAndConditionsText,
         ),
         findsOneWidget,
       );
 
       expect(
         find.byKey(
-          KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsButton,
+          ConfirmPublishDiscountKeys.termsAndConditionsButton,
         ),
         findsOneWidget,
       );
@@ -71,13 +71,13 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.dialogs.scroll,
-    itemKey: KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsButton,
+    scrollKey: DialogsKeys.scroll,
+    itemKey: ConfirmPublishDiscountKeys.termsAndConditionsButton,
   );
 
   await tester.tap(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsButton,
+      ConfirmPublishDiscountKeys.termsAndConditionsButton,
     ),
   );
 
@@ -89,14 +89,14 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   expect(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.continueButton,
+      ConfirmPublishDiscountKeys.continueButton,
     ),
     findsOneWidget,
   );
 
   await tester.tap(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.continueButton,
+      ConfirmPublishDiscountKeys.continueButton,
     ),
   );
 
@@ -108,14 +108,14 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   expect(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.sendButton,
+      ConfirmPublishDiscountKeys.sendButton,
     ),
     findsOneWidget,
   );
 
   await tester.tap(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.sendButton,
+      ConfirmPublishDiscountKeys.sendButton,
     ),
     warnIfMissed: false,
   );
@@ -124,20 +124,19 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.dialogs.scroll,
-    itemKey:
-        KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsSwitcher,
+    scrollKey: DialogsKeys.scroll,
+    itemKey: ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
   );
 
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.dialogs.scroll,
+    scrollKey: DialogsKeys.scroll,
     offset: KTestConstants.scrollingUp150,
   );
 
   await tester.tap(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.termsAndConditionsText,
+      ConfirmPublishDiscountKeys.termsAndConditionsText,
     ),
   );
 
@@ -145,13 +144,13 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.dialogs.scroll,
-    itemKey: KWidgetkeys.widget.confirmPublishDiscount.sendButton,
+    scrollKey: DialogsKeys.scroll,
+    itemKey: ConfirmPublishDiscountKeys.sendButton,
   );
 
   await tester.tap(
     find.byKey(
-      KWidgetkeys.widget.confirmPublishDiscount.sendButton,
+      ConfirmPublishDiscountKeys.sendButton,
     ),
     warnIfMissed: false,
   );

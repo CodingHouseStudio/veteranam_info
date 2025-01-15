@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _UnderConstructionKeys {
-  final screen = const Key('under_construction_screen');
-  final text = const Key('under_construction_screen_text');
+abstract class UnderConstructionKeys {
+  static const screen = Key('under_construction_screen');
+  static const text = Key('under_construction_screen_text');
 }

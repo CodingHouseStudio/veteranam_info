@@ -10,22 +10,22 @@ Future<void> homeInitialHelper(
   await nawbarHelper(tester: tester, searchText: KTestText.field);
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.box),
+    find.byKey(HomeKeys.box),
     findsOneWidget,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.home.boxIcon),
+  //   find.byKey(HomeKeys.boxIcon),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.boxSubtitle),
+    find.byKey(HomeKeys.boxSubtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.boxTitle),
+    find.byKey(HomeKeys.boxTitle),
     findsOneWidget,
   );
 
@@ -33,23 +33,23 @@ Future<void> homeInitialHelper(
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.box.text,
+    itemKey: BoxKeys.text,
     first: false,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.home.aboutProjecPrefix),
+  //   find.byKey(HomeKeys.aboutProjecPrefix),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.aboutProjecSubtitle),
+    find.byKey(HomeKeys.aboutProjecSubtitle),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.aboutProjecSubtitle,
+    itemKey: HomeKeys.aboutProjecSubtitle,
   );
 
   await scrollingHelperInt(
@@ -58,119 +58,119 @@ Future<void> homeInitialHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.discountImage),
+    find.byKey(HomeKeys.discountImage),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.discountImage,
+    itemKey: HomeKeys.discountImage,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.home.discountPrefix),
+  //   find.byKey(HomeKeys.discountPrefix),
   //   findsOneWidget,
   // );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.discountTitle,
+    itemKey: HomeKeys.discountTitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.discountTitle),
+    find.byKey(HomeKeys.discountTitle),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.discountTitle,
+    itemKey: HomeKeys.discountTitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.discountSubtitle),
+    find.byKey(HomeKeys.discountSubtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.discountButton),
+    find.byKey(HomeKeys.discountButton),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.discountButton,
+    itemKey: HomeKeys.discountButton,
   );
 
   if (Config.isDevelopment) {
     expect(
-      find.byKey(KWidgetkeys.screen.home.informationImage),
+      find.byKey(HomeKeys.informationImage),
       findsOneWidget,
     );
 
     await scrollingHelperInt(
       tester: tester,
-      itemKey: KWidgetkeys.screen.home.informationImage,
+      itemKey: HomeKeys.informationImage,
     );
 
     // expect(
-    //   find.byKey(KWidgetkeys.screen.home.informationPrefix),
+    //   find.byKey(HomeKeys.informationPrefix),
     //   findsOneWidget,
     // );
 
     expect(
-      find.byKey(KWidgetkeys.screen.home.informationTitle),
+      find.byKey(HomeKeys.informationTitle),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.screen.home.informationSubtitle),
+      find.byKey(HomeKeys.informationSubtitle),
       findsOneWidget,
     );
 
     await scrollingHelperInt(
       tester: tester,
-      itemKey: KWidgetkeys.screen.home.informationSubtitle,
+      itemKey: HomeKeys.informationSubtitle,
     );
 
     expect(
-      find.byKey(KWidgetkeys.screen.home.informationButton),
+      find.byKey(HomeKeys.informationButton),
       findsOneWidget,
     );
   }
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.home.faqPrefix),
+  //   find.byKey(HomeKeys.faqPrefix),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.faqTitle),
+    find.byKey(HomeKeys.faqTitle),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.faqTitle,
+    itemKey: HomeKeys.faqTitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.faqSubtitle),
+    find.byKey(HomeKeys.faqSubtitle),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.faqSubtitle,
+    itemKey: HomeKeys.faqSubtitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.buttonMock),
+    find.byKey(HomeKeys.buttonMock),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.faq),
+    find.byKey(HomeKeys.faq),
     findsWidgets,
   );
 

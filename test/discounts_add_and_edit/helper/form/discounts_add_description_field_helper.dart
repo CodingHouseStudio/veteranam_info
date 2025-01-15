@@ -12,16 +12,16 @@ Future<void> discountsAddDescriptionHelper({
   if (hasField) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discountsAdd.descriptionField,
+      itemKey: DiscountsAddKeys.descriptionField,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.descriptionField),
+    find.byKey(DiscountsAddKeys.descriptionField),
     matcher,
   );
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.exclusionField),
+    find.byKey(DiscountsAddKeys.exclusionField),
     matcher,
   );
 }

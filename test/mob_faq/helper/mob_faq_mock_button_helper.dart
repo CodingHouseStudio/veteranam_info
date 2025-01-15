@@ -14,12 +14,12 @@ Future<void> mobFaqMockButtonHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp1000,
-    itemKey: KWidgetkeys.screen.mobFaq.buttonMock,
+    itemKey: MobFaqKeys.buttonMock,
   );
 
   await mockButtonHelper(
     tester: tester,
-    card: KWidgetkeys.screen.mobFaq.list,
-    buttonMock: KWidgetkeys.screen.mobFaq.buttonMock,
+    card: MobFaqKeys.list,
+    buttonMock: MobFaqKeys.buttonMock,
   );
 }

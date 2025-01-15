@@ -16,34 +16,34 @@ Future<void> reportDialogEnterTextHelper({
 
   // await scrollingHelperInt(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.widget.reportDialog.emailField,
+  //   itemKey: ReportDialogKeys.emailField,
   // );
 
   // if (email != null) {
   //   await tester.enterText(
-  //     find.byKey(KWidgetkeys.widget.reportDialog.emailField),
+  //     find.byKey(ReportDialogKeys.emailField),
   //     email,
   //   );
   // }
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.messageField,
+    itemKey: ReportDialogKeys.messageField,
   );
 
   if (message != null) {
     await tester.enterText(
-      find.byKey(KWidgetkeys.widget.reportDialog.messageField),
+      find.byKey(ReportDialogKeys.messageField),
       message,
     );
   }
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.sendButton,
+    itemKey: ReportDialogKeys.sendButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.sendButton));
+  await tester.tap(find.byKey(ReportDialogKeys.sendButton));
 
   await tester.pumpAndSettle();
 }

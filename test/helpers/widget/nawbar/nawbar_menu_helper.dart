@@ -7,9 +7,9 @@ Future<void> nawbarMenuHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.nawbar.menuButton), findsOneWidget);
+  expect(find.byKey(NawbarKeys.menuButton), findsOneWidget);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.menuButton));
+  await tester.tap(find.byKey(NawbarKeys.menuButton));
 
   await tester.pumpAndSettle();
 

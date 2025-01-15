@@ -70,7 +70,7 @@ class BoxWidget extends StatelessWidget {
                 padding: EdgeInsets.only(right: textRightPadding ?? 0),
                 child: Text(
                   text,
-                  key: KWidgetkeys.widget.box.text,
+                  key: BoxKeys.text,
                   style: textStyle ?? AppTextStyle.materialThemeHeadlineSmall,
                 ),
               ),
@@ -101,7 +101,7 @@ class BoxWidget extends StatelessWidget {
                 ),
                 child: Text(
                   text,
-                  key: KWidgetkeys.widget.box.text,
+                  key: BoxKeys.text,
                   style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -118,7 +118,7 @@ class BoxWidget extends StatelessWidget {
   Widget get getIcon {
     if (iconHasBackground) {
       return IconWidget(
-        key: KWidgetkeys.widget.box.icon,
+        key: BoxKeys.icon,
         icon: icon ?? KIcon.arrowUpRight,
         padding: KPadding.kPaddingSize20,
         background: AppColors.materialThemeWhite,
@@ -126,7 +126,7 @@ class BoxWidget extends StatelessWidget {
     } else {
       return icon ??
           KIcon.arrowUpRight.copyWith(
-            key: KWidgetkeys.widget.box.icon,
+            key: BoxKeys.icon,
           );
     }
   }

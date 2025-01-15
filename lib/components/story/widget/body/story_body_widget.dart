@@ -37,9 +37,9 @@ class StoryBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
             TitleWidget(
               title: context.l10n.stories,
-              titleKey: KWidgetkeys.screen.story.title,
+              titleKey: StoryKeys.title,
               subtitle: context.l10n.storySubtitle,
-              subtitleKey: KWidgetkeys.screen.story.subtitle,
+              subtitleKey: StoryKeys.subtitle,
               isDesk: isDesk,
             ),
             if (isDesk)
@@ -52,7 +52,7 @@ class StoryBodyWidget extends StatelessWidget {
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             SecondaryButtonWidget(
-              widgetKey: KWidgetkeys.screen.story.seccondaryButton,
+              widgetKey: StoryKeys.seccondaryButton,
               isDesk: isDesk,
               text: context.l10n.addYourStory,
               onPressed: context.read<AuthenticationBloc>().state.status ==
@@ -72,7 +72,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
             // LoadingButton(
-            //   widgetKey: KWidgetkeys.screen.story.button,
+            //   widgetKey: StoryKeys.button,
             //   isDesk: isDesk,
             //   onPressed: () => context.read<StoryWatcherBloc>().add(
             //         const StoryWatcherEvent.loadNextItems(),

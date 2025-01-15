@@ -1,8 +1,8 @@
 part of '../widget_keys.dart';
 
-class _SwitchOfflineKeys {
-  final widget = const Key('switch_offline');
-  final icon = const Key('switch_offline_icon');
-  // final item = const Key('switch_item');
-  final active = const Key('switch_offline_active');
+abstract class SwitchOfflineKeys {
+  static const widget = Key('switch_offline');
+  static const icon = Key('switch_offline_icon');
+  // static const item = Key('switch_item');
+  static const active = Key('switch_offline_active');
 }

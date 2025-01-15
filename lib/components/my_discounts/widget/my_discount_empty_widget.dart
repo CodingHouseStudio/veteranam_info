@@ -16,7 +16,7 @@ class MyDiscountEmptyWidget extends StatelessWidget {
     return Column(
       children: [
         KIcon.myDiscountEmpty.copyWith(
-          key: KWidgetkeys.screen.myDiscounts.iconEmpty,
+          key: MyDiscountsKeys.iconEmpty,
         ),
         KSizedBox.kHeightSizedBox16,
         Text(
@@ -31,7 +31,7 @@ class MyDiscountEmptyWidget extends StatelessWidget {
           isDesk: isDesk,
           onPressed: () => context.goNamed(KRoute.discountsAdd.name),
           icon: KIcon.plus,
-          widgetKey: KWidgetkeys.screen.myDiscounts.buttonAdd,
+          widgetKey: MyDiscountsKeys.buttonAdd,
           deskPadding: const EdgeInsets.symmetric(
             vertical: KPadding.kPaddingSize16,
             horizontal: KPadding.kPaddingSize64,

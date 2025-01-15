@@ -8,60 +8,60 @@ Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.pageName),
+    find.byKey(NawbarKeys.pageName),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.title),
+    find.byKey(MobSettingsKeys.title),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.faq),
+    find.byKey(MobSettingsKeys.faq),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.languagesSwitcher),
+    find.byKey(MobSettingsKeys.languagesSwitcher),
     findsOneWidget,
   );
 
   await languageSwitcherHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.offlinesSwitcher),
+    find.byKey(MobSettingsKeys.offlinesSwitcher),
     findsOneWidget,
   );
 
   await switchOfflineHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.offlinesTitle),
+    find.byKey(MobSettingsKeys.offlinesTitle),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.mobSettings.offlinesTitle),
+    find.byKey(MobSettingsKeys.offlinesTitle),
     // warnIfMissed: false,
   );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.subtitle),
+    find.byKey(MobSettingsKeys.subtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.email),
+    find.byKey(MobSettingsKeys.email),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.email));
+  await tester.tap(find.byKey(MobSettingsKeys.email));
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton),
+    find.byKey(MobSettingsKeys.feedbackButton),
     findsOneWidget,
   );
 
@@ -69,40 +69,40 @@ Future<void> mobSettingsInitialHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
+    itemKey: MobSettingsKeys.feedbackButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.linkedInIcon),
+    find.byKey(MobSettingsKeys.linkedInIcon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.instagramIcon),
+    find.byKey(MobSettingsKeys.instagramIcon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.facebookIcon),
+    find.byKey(MobSettingsKeys.facebookIcon),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.facebookIcon,
+    itemKey: MobSettingsKeys.facebookIcon,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.privacyPolicy),
+    find.byKey(MobSettingsKeys.privacyPolicy),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.bugButton),
+    find.byKey(MobSettingsKeys.bugButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.bugButton));
+  await tester.tap(find.byKey(MobSettingsKeys.bugButton));
 
   await tester.pumpAndSettle();
 

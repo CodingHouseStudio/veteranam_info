@@ -7,17 +7,16 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 import '../../../test_dependency.dart';
 
 Future<void> chipHelper(WidgetTester tester) async {
-  final isDesk = find.byKey(KWidgetkeys.widget.chip.desk).evaluate().isNotEmpty;
-  final widgetKey =
-      isDesk ? KWidgetkeys.widget.chip.desk : KWidgetkeys.widget.chip.mob;
+  final isDesk = find.byKey(ChipKeys.desk).evaluate().isNotEmpty;
+  final widgetKey = isDesk ? ChipKeys.desk : ChipKeys.mob;
 
   expect(
-    find.byKey(KWidgetkeys.widget.chip.desk),
+    find.byKey(ChipKeys.desk),
     isDesk ? findsWidgets : findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.chip.mob),
+    find.byKey(ChipKeys.mob),
     isDesk ? findsNothing : findsWidgets,
   );
 
@@ -37,12 +36,12 @@ Future<void> chipHelper(WidgetTester tester) async {
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.chip.text),
+    find.byKey(ChipKeys.text),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.chip.amount),
+    find.byKey(ChipKeys.amount),
     findsWidgets,
   );
 
@@ -71,7 +70,7 @@ Future<void> chipHelper(WidgetTester tester) async {
   if (isDesk) {
     for (var i = 0; i < 1; i++) {
       final widgetLocation = tester.getCenter(
-        find.byKey(KWidgetkeys.widget.chip.text).at(i),
+        find.byKey(ChipKeys.text).at(i),
       );
 
       final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);

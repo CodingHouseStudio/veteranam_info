@@ -73,7 +73,7 @@ class MultiDropFieldWidget extends StatelessWidget {
       },
       item: (element) => Text(
         element,
-        key: KWidgetkeys.widget.dropListField.itemText,
+        key: DropListFieldKeys.itemText,
         style: AppTextStyle.materialThemeBodyLarge,
       ),
       description: description,
@@ -237,7 +237,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
             children: List.generate(
               widget.values?.length ?? (widget.allElemts != null ? 1 : 0),
               (index) => CancelChipWidget(
-                widgetKey: KWidgetkeys.widget.multiDropField.chips,
+                widgetKey: MultiDropFieldKeys.chips,
                 isDesk: widget.isDesk,
                 labelText: getValue(index),
                 padding: const EdgeInsets.symmetric(

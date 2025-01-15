@@ -11,17 +11,17 @@ Future<void> passwordResetWrongCodeHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.title),
+        find.byKey(PasswordResetKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.wrongLinkSubtitle),
+        find.byKey(PasswordResetKeys.wrongLinkSubtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.passwordReset.confirmButton),
+        find.byKey(PasswordResetKeys.confirmButton),
         findsOneWidget,
       );
     },

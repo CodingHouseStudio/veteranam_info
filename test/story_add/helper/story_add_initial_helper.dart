@@ -11,22 +11,22 @@ Future<void> storyAddInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.title),
+        find.byKey(StoryAddKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.subtitle),
+        find.byKey(StoryAddKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.storyText),
+        find.byKey(StoryAddKeys.storyText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.storyField),
+        find.byKey(StoryAddKeys.storyField),
         findsOneWidget,
       );
 
@@ -36,44 +36,44 @@ Future<void> storyAddInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.photoText),
+        find.byKey(StoryAddKeys.photoText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.photoDesciption),
+        find.byKey(StoryAddKeys.photoDesciption),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.photoButton),
+        find.byKey(StoryAddKeys.photoButton),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.storyAdd.photoButton,
+        itemKey: StoryAddKeys.photoButton,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.switchAnonymously),
+        find.byKey(StoryAddKeys.switchAnonymously),
         findsOneWidget,
       );
 
       await switchHelper(tester: tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.switchText),
+        find.byKey(StoryAddKeys.switchText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.switchDescription),
+        find.byKey(StoryAddKeys.switchDescription),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.storyAdd.button),
+        find.byKey(StoryAddKeys.button),
         findsOneWidget,
       );
     },

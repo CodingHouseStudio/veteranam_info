@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _LanguageSwitcherKeys {
-  final widget = const Key('language_switcher');
-  final text = const Key('language_switcher_text');
-  // final item = const Key('language_switcher_item');
+abstract class LanguageSwitcherKeys {
+  static const widget = Key('language_switcher');
+  static const text = Key('language_switcher_text');
+  // static const item = Key('language_switcher_item');
 }

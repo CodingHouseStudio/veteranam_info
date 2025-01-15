@@ -1,30 +1,30 @@
 part of '../widget_keys.dart';
 
-class _DiscountKeys {
-  final screen = const Key('discount_screen');
-  final backButton = const Key('discount_screen_back_button');
-  final backText = const Key('discount_screen_back_text');
-  final companyInfo = const Key('discount_screen_company_info');
-  final eligiblity = const Key('discount_screen_eligiblity');
-  final eligiblityList = const Key('discount_screen_eligiblity_list');
-  final detail = const Key('discount_screen_detail');
-  final detailText = const Key('discount_screen_detail_text');
-  final requirments = const Key('discount_screen_requirments');
-  final requirmentsText = const Key('discount_screen_requirments_text');
-  final exclusions = const Key('discount_screen_exclusions');
-  final title = const Key('discount_screen_title');
-  final city = const Key('discount_screen_city');
-  final expiration = const Key('discount_screen_expiration');
-  final phoneNumberHideButton =
-      const Key('discount_screen_phone_number_hide_button');
-  final phoneNumberButton = const Key('discount_screen_phone_number_button');
-  final shareButton = const Key('discount_screen_share_button');
-  final complaintButton = const Key('discount_screen_compaint_button');
-  final websiteButton = const Key('discount_screen_website_button');
-  final image = const Key('discount_screen_image');
-  final invalidLinkTitle = const Key('discount_screen_invalid_link_title');
-  final invalidLinkDescription =
-      const Key('discount_screen_invalid_link_descrpiton');
-  final invalidLinkBackButton =
-      const Key('discount_screen_invalid_link_back_button');
+abstract class DiscountKeys {
+  static const screen = Key('discount_screen');
+  static const backButton = Key('discount_screen_back_button');
+  static const backText = Key('discount_screen_back_text');
+  static const companyInfo = Key('discount_screen_company_info');
+  static const eligiblity = Key('discount_screen_eligiblity');
+  static const eligiblityList = Key('discount_screen_eligiblity_list');
+  static const detail = Key('discount_screen_detail');
+  static const detailText = Key('discount_screen_detail_text');
+  static const requirments = Key('discount_screen_requirments');
+  static const requirmentsText = Key('discount_screen_requirments_text');
+  static const exclusions = Key('discount_screen_exclusions');
+  static const title = Key('discount_screen_title');
+  static const city = Key('discount_screen_city');
+  static const expiration = Key('discount_screen_expiration');
+  static const phoneNumberHideButton =
+      Key('discount_screen_phone_number_hide_button');
+  static const phoneNumberButton = Key('discount_screen_phone_number_button');
+  static const shareButton = Key('discount_screen_share_button');
+  static const complaintButton = Key('discount_screen_compaint_button');
+  static const websiteButton = Key('discount_screen_website_button');
+  static const image = Key('discount_screen_image');
+  static const invalidLinkTitle = Key('discount_screen_invalid_link_title');
+  static const invalidLinkDescription =
+      Key('discount_screen_invalid_link_descrpiton');
+  static const invalidLinkBackButton =
+      Key('discount_screen_invalid_link_back_button');
 }

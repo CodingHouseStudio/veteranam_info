@@ -25,13 +25,13 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           Text(
             context.l10n.myStory,
-            key: KWidgetkeys.screen.myStory.title,
+            key: MyStoryKeys.title,
             style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
           ),
           KSizedBox.kHeightSizedBox8,
           Text(
             context.l10n.myStoryDetails,
-            key: KWidgetkeys.screen.myStory.subtitle,
+            key: MyStoryKeys.subtitle,
             style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
           ),
           if (isDesk)

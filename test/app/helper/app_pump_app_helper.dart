@@ -55,7 +55,7 @@ Future<void> appPumpAppHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.app.screen),
+    find.byKey(AppKeys.screen),
     findsOneWidget,
   );
 }

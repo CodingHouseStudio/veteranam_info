@@ -9,15 +9,15 @@ Future<void> mobFeedbackOpenHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
+    itemKey: MobSettingsKeys.feedbackButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.bugButton),
+    find.byKey(MobSettingsKeys.bugButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.bugButton));
+  await tester.tap(find.byKey(MobSettingsKeys.bugButton));
 
   await tester.pumpAndSettle();
 

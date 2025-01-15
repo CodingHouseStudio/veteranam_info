@@ -12,13 +12,13 @@ class InvestorsImagesWidget extends StatelessWidget {
         spacing: KPadding.kPaddingSize24,
         children: [
           Column(
-            key: KWidgetkeys.screen.investors.leftImages,
+            key: InvestorsKeys.leftImages,
             crossAxisAlignment: CrossAxisAlignment.end,
             spacing: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
             children: _leftImage(isDesk: isDesk),
           ),
           Column(
-            key: KWidgetkeys.screen.investors.rightImages,
+            key: InvestorsKeys.rightImages,
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
             children: _rightImage(isDesk: isDesk),
@@ -31,7 +31,7 @@ class InvestorsImagesWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              key: KWidgetkeys.screen.investors.rightImages,
+              key: InvestorsKeys.rightImages,
               crossAxisAlignment: CrossAxisAlignment.end,
               spacing:
                   isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
@@ -40,7 +40,7 @@ class InvestorsImagesWidget extends StatelessWidget {
           ),
           Expanded(
             child: Column(
-              key: KWidgetkeys.screen.investors.leftImages,
+              key: InvestorsKeys.leftImages,
               spacing:
                   isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
               crossAxisAlignment: CrossAxisAlignment.start,

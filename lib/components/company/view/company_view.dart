@@ -7,9 +7,9 @@ class CompanyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CompanyBlocprovider(
+    return const CompanyBlocprovider(
       childWidget: CompanyBodyWidget(
-        key: KWidgetkeys.screen.company.screen,
+        key: CompanyKeys.screen,
       ),
     );
   }

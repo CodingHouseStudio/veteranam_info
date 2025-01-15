@@ -3,13 +3,13 @@ part of 'body/story_add_body.dart';
 Widget _imageWidget(BuildContext context) {
   if (context.read<StoryAddBloc>().state.image.value != null) {
     return InkWell(
-      key: KWidgetkeys.screen.storyAdd.photoButton,
+      key: StoryAddKeys.photoButton,
       onTap: () =>
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),
       child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationImage,
         child: NetworkImageWidget(
-          key: KWidgetkeys.widget.cardAddImage.widget,
+          key: CardAddImageKeys.widget,
           imageBytes: context.read<StoryAddBloc>().state.image.value?.bytes,
           fit: BoxFit.cover,
           imageUrl: null,
@@ -18,7 +18,7 @@ Widget _imageWidget(BuildContext context) {
     );
   } else {
     return IconButton(
-      key: KWidgetkeys.screen.storyAdd.photoButton,
+      key: StoryAddKeys.photoButton,
       style: KButtonStyles.imageButton,
       icon: KIcon.addImage,
       onPressed: () =>
@@ -32,7 +32,7 @@ Widget _message({
   required bool isDesk,
 }) =>
     MessageFieldWidget(
-      key: KWidgetkeys.screen.storyAdd.storyField,
+      key: StoryAddKeys.storyField,
       isRequired: true,
       changeMessage: (text) => context.read<StoryAddBloc>().add(
             StoryAddEvent.storyUpdated(text),

@@ -13,7 +13,7 @@ class InvestorsTitleWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox24,
         TitlePointWidget(
           title: context.l10n.provideSuggestionsFromBusinesses,
-          titleKey: KWidgetkeys.screen.investors.title,
+          titleKey: InvestorsKeys.title,
           titleSecondPart: context.l10n.orDonateHere,
           isDesk: isDesk,
           isRightArrow: false,
@@ -32,7 +32,7 @@ class InvestorsTitleWidget extends StatelessWidget {
       Center(
         child: Text(
           context.l10n.provenFunds,
-          key: KWidgetkeys.screen.investors.fundsTitle,
+          key: InvestorsKeys.fundsTitle,
           textAlign: TextAlign.center,
           style: AppTextStyle.materialThemeDisplayMedium,
         ),

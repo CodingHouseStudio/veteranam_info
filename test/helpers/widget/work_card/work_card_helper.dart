@@ -6,29 +6,29 @@ import '../../../test_dependency.dart';
 Future<void> workCardHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.workCard.title), findsWidgets);
+  expect(find.byKey(WorkCardKeys.title), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.workCard.city), findsWidgets);
+  expect(find.byKey(WorkCardKeys.city), findsWidgets);
 
   expect(
-    find.byKey(KWidgetkeys.widget.workCard.employer),
+    find.byKey(WorkCardKeys.employer),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.workCard.iconSafe),
+    find.byKey(WorkCardKeys.iconSafe),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.workCard.iconShare),
+    find.byKey(WorkCardKeys.iconShare),
     findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.workCard.price), findsWidgets);
+  expect(find.byKey(WorkCardKeys.price), findsWidgets);
 
   expect(
-    find.byKey(KWidgetkeys.widget.workCard.button),
+    find.byKey(WorkCardKeys.button),
     findsWidgets,
   );
 

@@ -10,78 +10,72 @@ Future<void> switchHelper({
   bool isActive = false,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.switchKeys.widget),
+    find.byKey(SwitchKeys.widget),
     findsOneWidget,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.switchKeys.icon),
+  //   find.byKey(SwitchKeys.icon),
   //   findsOneWidget,
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.switchKeys.item),
+  //   find.byKey(SwitchKeys.item),
   //   findsWidgets,
   // );
 
   expect(
-    tester
-        .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
-        .value,
+    tester.widget<Switch>(find.byKey(SwitchKeys.widget)).value,
     isActive ? isTrue : isFalse,
   );
 
   // late var switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget)
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget)
   // );
 
   // expect(switchWidget.value, isFalse);
   if (enabled) {
     await scrollingHelperInt(
       tester: tester,
-      itemKey: KWidgetkeys.widget.switchKeys.widget,
+      itemKey: SwitchKeys.widget,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+    await tester.tap(find.byKey(SwitchKeys.widget));
 
     await tester.pumpAndSettle();
 
     expect(
-      tester
-          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
-          .value,
+      tester.widget<Switch>(find.byKey(SwitchKeys.widget)).value,
       isTrue,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+    await tester.tap(find.byKey(SwitchKeys.widget));
 
     await tester.pumpAndSettle();
 
     expect(
-      tester
-          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
-          .value,
+      tester.widget<Switch>(find.byKey(SwitchKeys.widget)).value,
       isFalse,
     );
   }
 
   // switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget
   // ));
 
   // expect(switchWidget.value, isTrue);
 
   // await scrollingHelper(
   //   tester: tester,
-  //   itemKey: KWidgetkeys.widget.switchKeys.widget,
+  //   itemKey: SwitchKeys.widget,
   // );
 
-  // await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
+  // await tester.tap(find.byKey(SwitchKeys.widget));
 
   // await tester.pumpAndSettle();
 
   // switchWidget =
-  //     tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget
+  //     tester.widget<Switch>(find.byKey(SwitchKeys.widget
   // ));
 
   // expect(switchWidget.value, isFalse);

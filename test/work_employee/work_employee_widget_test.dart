@@ -119,7 +119,7 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.screen.workEmployee.cards),
+            find.byKey(WorkEmployeeKeys.cards),
             findsOneWidget,
           );
         });

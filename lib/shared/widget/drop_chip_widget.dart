@@ -23,7 +23,7 @@ class DropChipWidget extends StatelessWidget {
     return DecoratedBox(
       decoration: KWidgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
-        key: widgetKey ?? KWidgetkeys.widget.dropChip.widget,
+        key: widgetKey ?? DropChipKeys.widget,
         // focusColor: AppColors.transparent,
         isDense: true,
         padding: const EdgeInsetsDirectional.symmetric(
@@ -37,7 +37,7 @@ class DropChipWidget extends StatelessWidget {
         items: filters
             .map<DropdownMenuItem<String?>>(
               (String? value) => DropdownMenuItem<String?>(
-                key: buttonKey ?? KWidgetkeys.widget.dropChip.buttons,
+                key: buttonKey ?? DropChipKeys.buttons,
                 value: value,
                 child: Text(value.toString()),
               ),

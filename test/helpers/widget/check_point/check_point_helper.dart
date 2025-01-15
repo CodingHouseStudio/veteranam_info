@@ -11,59 +11,59 @@ Future<void> chekPointHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.widget),
+    find.byKey(CheckPointKeys.widget),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.icon),
+    find.byKey(CheckPointKeys.icon),
     isEmpty ? findsNothing : findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.text),
+    find.byKey(CheckPointKeys.text),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    find.byKey(CheckPointKeys.ammount),
     hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+  await tester.tap(find.byKey(CheckPointKeys.widget).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.icon),
+    find.byKey(CheckPointKeys.icon),
     findsOneWidget,
   );
 
   if (twiceTap) {
-    await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+    await tester.tap(find.byKey(CheckPointKeys.widget).first);
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.checkPoint.icon),
+      find.byKey(CheckPointKeys.icon),
       findsNothing,
     );
   } else {
-    await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+    await tester.tap(find.byKey(CheckPointKeys.widget).first);
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.checkPoint.icon),
+      find.byKey(CheckPointKeys.icon),
       findsOneWidget,
     );
   }

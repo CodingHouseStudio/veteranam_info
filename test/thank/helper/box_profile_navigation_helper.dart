@@ -11,11 +11,11 @@ Future<void> boxProfileNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.thanks.myProfielBox),
+    find.byKey(ThanksKeys.myProfielBox),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.thanks.myProfielBox));
+  await tester.tap(find.byKey(ThanksKeys.myProfielBox));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.profile.name),

@@ -44,7 +44,7 @@ Future<void> discountsAddCorectHelper({
     );
   }
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.submitingText),
+    find.byKey(DiscountsAddKeys.submitingText),
     findsOneWidget,
   );
 

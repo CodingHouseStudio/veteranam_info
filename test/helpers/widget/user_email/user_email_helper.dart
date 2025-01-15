@@ -11,33 +11,33 @@ Future<void> userEmailHelper({
   //   tester: tester,
   //   test: () async {
   expect(
-    find.byKey(KWidgetkeys.widget.userEmailDialog.icon),
+    find.byKey(UserEmailDialogKeys.icon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.userEmailDialog.emailDialogTitle),
+    find.byKey(UserEmailDialogKeys.emailDialogTitle),
     findsOneWidget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle),
+    find.byKey(UserEmailDialogKeys.emailDialogSubtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.userEmailDialog.field),
+    find.byKey(UserEmailDialogKeys.field),
     findsOneWidget,
   );
 
   if (hover) {
     await hoverHelper(
       tester: tester,
-      key: KWidgetkeys.widget.userEmailDialog.field,
+      key: UserEmailDialogKeys.field,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.widget.userEmailDialog.button),
+    find.byKey(UserEmailDialogKeys.button),
     findsOneWidget,
   );
   //   },

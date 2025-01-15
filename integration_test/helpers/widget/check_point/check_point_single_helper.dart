@@ -9,45 +9,43 @@ Future<void> chekPointSingleHelper({
 }) async {
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPointSingle.widget,
+    itemKey: CheckPointSingleKeys.widget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.checkPointSingle.widget),
+    find.byKey(CheckPointSingleKeys.widget),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
+    find.byKey(CheckPointSingleKeys.icon),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    find.byKey(CheckPointKeys.ammount),
     hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPointSingle.widget,
+    itemKey: CheckPointSingleKeys.widget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.checkPointSingle.widget).first);
+  await tester.tap(find.byKey(CheckPointSingleKeys.widget).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
+    find.byKey(CheckPointSingleKeys.icon),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.checkPointSingle.widget).first);
+  await tester.tap(find.byKey(CheckPointSingleKeys.widget).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
+    find.byKey(CheckPointSingleKeys.icon),
     findsNothing,
   );
 }

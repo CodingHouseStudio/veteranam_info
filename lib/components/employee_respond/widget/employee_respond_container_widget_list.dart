@@ -6,7 +6,7 @@ List<Widget> _employeeRespondContainerWidgetList({
 }) {
   return [
     Text(
-      key: KWidgetkeys.screen.employeeRespond.username,
+      key: EmployeeRespondKeys.username,
       KMockText.userName,
       style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
     ),
@@ -14,14 +14,14 @@ List<Widget> _employeeRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.employeeRespond.emailText,
+        key: EmployeeRespondKeys.emailText,
         context.l10n.email,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
-      widgetKey: KWidgetkeys.screen.employeeRespond.emailField,
+      widgetKey: EmployeeRespondKeys.emailField,
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.emailUpdated(value),
           ),
@@ -37,14 +37,14 @@ List<Widget> _employeeRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.employeeRespond.phoneNumberText,
+        key: EmployeeRespondKeys.phoneNumberText,
         context.l10n.phoneNumber,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
-      widgetKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
+      widgetKey: EmployeeRespondKeys.phoneNumberField,
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.phoneUpdated(value),
           ),
@@ -63,14 +63,14 @@ List<Widget> _employeeRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.employeeRespond.resumeText,
+        key: EmployeeRespondKeys.resumeText,
         context.l10n.resume,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
-      key: KWidgetkeys.screen.employeeRespond.resumeButton,
+      key: EmployeeRespondKeys.resumeButton,
       onPressed: context.read<EmployeeRespondBloc>().state.noResume
           ? null
           : () => context.read<EmployeeRespondBloc>().add(
@@ -109,7 +109,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     //       ),
     //       child:
     CheckPointWidget(
-      key: KWidgetkeys.screen.employeeRespond.checkWithoutResume,
+      key: EmployeeRespondKeys.checkWithoutResume,
       isCheck: context.read<EmployeeRespondBloc>().state.noResume,
       onChanged: () => context.read<EmployeeRespondBloc>().add(
             const EmployeeRespondEvent.noResumeChanged(),
@@ -119,7 +119,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     ),
     // ),
     //     Text(
-    //       key: KWidgetkeys.screen.employeeRespond.noResume,
+    //       key: EmployeeRespondKeys.noResume,
     //       context.l10n.noResume,
     //       style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
     //     ),
@@ -148,7 +148,7 @@ List<Widget> _employeeRespondContainerWidgetList({
 
 Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.employeeRespond.cancelButton,
+      key: EmployeeRespondKeys.cancelButton,
       text: context.l10n.cancel,
       onPressed: () => context.goNamed(KRoute.workEmployee.name),
       isDesk: isDesk,
@@ -156,7 +156,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     );
 Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.employeeRespond.sendButton,
+      key: EmployeeRespondKeys.sendButton,
       text: context.l10n.send,
       onPressed: () => context.read<EmployeeRespondBloc>().add(
             const EmployeeRespondEvent.save(),

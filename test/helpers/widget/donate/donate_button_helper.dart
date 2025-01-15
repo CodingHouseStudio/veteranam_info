@@ -13,20 +13,20 @@ Future<void> donateButtonHelper({
     await scrollingHelper(tester: tester, offset: KTestConstants.scrollingDown);
   }
 
-  expect(find.byKey(KWidgetkeys.widget.donateButton.icon), findsWidgets);
+  expect(find.byKey(DonateButtonKeys.icon), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.donateButton.text), findsWidgets);
+  expect(find.byKey(DonateButtonKeys.text), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.donateButton.rotateIcon), findsNothing);
+  expect(find.byKey(DonateButtonKeys.rotateIcon), findsNothing);
 
   if (tap) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.widget.donateButton.text,
+      itemKey: DonateButtonKeys.text,
     );
 
     await tester.tap(
-      find.byKey(KWidgetkeys.widget.donateButton.text).first,
+      find.byKey(DonateButtonKeys.text).first,
       warnIfMissed: false,
     );
   }
@@ -34,8 +34,8 @@ Future<void> donateButtonHelper({
   if (isDesk) {
     await hoverHelper(
       tester: tester,
-      key: KWidgetkeys.widget.donateButton.text,
-      hoverElement: KWidgetkeys.widget.donateButton.rotateIcon,
+      key: DonateButtonKeys.text,
+      hoverElement: DonateButtonKeys.rotateIcon,
     );
   }
 }

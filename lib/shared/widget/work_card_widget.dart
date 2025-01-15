@@ -32,22 +32,22 @@ class WorkCardWidget extends StatelessWidget {
           children: [
             Text(
               workModel.title,
-              key: KWidgetkeys.widget.workCard.title,
+              key: WorkCardKeys.title,
               style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
             Text(
               workModel.price,
-              key: KWidgetkeys.widget.workCard.price,
+              key: WorkCardKeys.price,
               style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
             Text(
               workModel.city ?? '',
-              key: KWidgetkeys.widget.workCard.city,
+              key: WorkCardKeys.city,
               style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
             Text(
               workModel.companyName,
-              key: KWidgetkeys.widget.workCard.employer,
+              key: WorkCardKeys.employer,
               style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox12,
@@ -57,14 +57,12 @@ class WorkCardWidget extends StatelessWidget {
               icon: Row(
                 spacing: KPadding.kPaddingSize16,
                 children: [
-                  KIcon.share
-                      .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
+                  KIcon.share.copyWith(key: WorkCardKeys.iconShare),
                   if (isSaved)
-                    KIcon.safe
-                        .copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
+                    KIcon.safe.copyWith(key: WorkCardKeys.iconSafe)
                   else
                     KIcon.saved.copyWith(
-                      key: KWidgetkeys.widget.workCard.iconSafe,
+                      key: WorkCardKeys.iconSafe,
                     ),
                 ],
               ),
@@ -72,7 +70,7 @@ class WorkCardWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox12,
             ButtonWidget(
-              key: KWidgetkeys.widget.workCard.button,
+              key: WorkCardKeys.button,
               onPressed: () => context.goNamed(KRoute.employeeRespond.name),
               text: context.l10n.respond,
               isDesk: isDesk,

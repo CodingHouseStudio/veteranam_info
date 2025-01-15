@@ -20,7 +20,7 @@ class PaginationWidget extends StatelessWidget {
       child: Row(
         children: [
           TextButton.icon(
-            key: KWidgetkeys.widget.pagination.buttonPrevious,
+            key: PaginationKeys.buttonPrevious,
             label: Text(context.l10n.previous),
             onPressed:
                 currentPage > 1 ? () => changePage(currentPage - 1) : null,
@@ -32,12 +32,12 @@ class PaginationWidget extends StatelessWidget {
             _buildPageButton(
               context: context,
               pageNumber: 1,
-              key: KWidgetkeys.widget.pagination.firstNumber,
+              key: PaginationKeys.firstNumber,
             ),
             if (pages > 10 && currentPage >= 6)
-              Text(
+              const Text(
                 '...',
-                key: KWidgetkeys.widget.pagination.firstThreePoint,
+                key: PaginationKeys.firstThreePoint,
               ),
             ...List.generate(
               7,
@@ -50,26 +50,26 @@ class PaginationWidget extends StatelessWidget {
                 return _buildPageButton(
                   pageNumber: number,
                   key: number == 6
-                      ? KWidgetkeys.widget.pagination.sixthNumber
-                      : KWidgetkeys.widget.pagination.numbers,
+                      ? PaginationKeys.sixthNumber
+                      : PaginationKeys.numbers,
                   context: context,
                 );
               },
             ),
           ],
           if (pages - currentPage > 3)
-            Text(
+            const Text(
               '...',
-              key: KWidgetkeys.widget.pagination.lastThreePoint,
+              key: PaginationKeys.lastThreePoint,
             ),
           _buildPageButton(
             context: context,
             pageNumber: pages,
-            key: KWidgetkeys.widget.pagination.lastNumber,
+            key: PaginationKeys.lastNumber,
           ),
           KSizedBox.kWidthSizedBox8,
           TextButton(
-            key: KWidgetkeys.widget.pagination.buttonNext,
+            key: PaginationKeys.buttonNext,
             onPressed:
                 pages > currentPage ? () => changePage(currentPage + 1) : null,
             style: KButtonStyles.transparentButtonStyle,

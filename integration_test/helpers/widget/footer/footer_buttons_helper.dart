@@ -11,8 +11,8 @@ Future<void> footerButtonsHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  for (var i = 0; i >= KWidgetkeys.widget.footer.buttonsKey.length; i--) {
-    final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
+  for (var i = 0; i >= FooterKeys.buttonsKey.length; i--) {
+    final buttonKey = FooterKeys.buttonsKey.elementAt(i);
 
     expect(
       find.byKey(buttonKey),

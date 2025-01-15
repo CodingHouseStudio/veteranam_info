@@ -22,7 +22,7 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox32,
             Text(
-              key: KWidgetkeys.screen.employeeRespond.title,
+              key: EmployeeRespondKeys.title,
               context.l10n.respond,
               style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
             ),
@@ -31,7 +31,7 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
               children: [
                 KIcon.chevronLeft,
                 Text(
-                  key: KWidgetkeys.screen.employeeRespond.subtitle,
+                  key: EmployeeRespondKeys.subtitle,
                   KMockText.workTitle,
                   style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
                 ),

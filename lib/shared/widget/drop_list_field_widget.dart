@@ -47,7 +47,7 @@ class DropListFieldWidget extends StatelessWidget {
       isButton: isButton,
       items: (element) => Text(
         element,
-        key: KWidgetkeys.widget.dropListField.itemText,
+        key: DropListFieldKeys.itemText,
         style: AppTextStyle.materialThemeBodyLarge,
       ),
       focusNode: focusNode,
@@ -235,7 +235,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
   @override
   Widget build(BuildContext context) {
     return RawAutocomplete<T>(
-      key: KWidgetkeys.widget.dropListField.widget,
+      key: DropListFieldKeys.widget,
       optionsBuilder: (textEditingValue) => widget.optionsBuilder(
         TextEditingValue(text: textEditingValue.text.trim()),
       ),
@@ -262,7 +262,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
             decoration: KWidgetTheme.boxDecorationCardShadow,
             clipBehavior: Clip.hardEdge,
             child: ListView.builder(
-              key: KWidgetkeys.widget.dropListField.list,
+              key: DropListFieldKeys.list,
               shrinkWrap: true,
               addAutomaticKeepAlives: false,
               addRepaintBoundaries: false,
@@ -281,7 +281,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
                       ? EdgeInsets.zero
                       : const EdgeInsets.only(top: KPadding.kPaddingSize8),
                   child: TextButton(
-                    key: KWidgetkeys.widget.dropListField.item,
+                    key: DropListFieldKeys.item,
                     onPressed: buttonEnabled(option)
                         ? () {
                             focusNode.unfocus();
@@ -306,7 +306,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) =>
               TextFieldWidget(
-        key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
+        key: _anchorKey, //DropListFieldKeys.field,
         widgetKey: widget.textFieldKey,
         isRequired: widget.isRequired,
         controller: controller,
@@ -328,12 +328,12 @@ class _DropListFieldImplementationWidgetState<T extends Object>
 
   Widget get _suffixIcon => showActiveIcon
       ? IconButton(
-          key: KWidgetkeys.widget.dropListField.activeIcon,
+          key: DropListFieldKeys.activeIcon,
           icon: KIcon.close,
           onPressed: focusNode.unfocus,
         )
       : (widget.unfocusSufixIcon ?? KIcon.trailing).copyWith(
-          key: KWidgetkeys.widget.dropListField.icon,
+          key: DropListFieldKeys.icon,
         );
 
   @override

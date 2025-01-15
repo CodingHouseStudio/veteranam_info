@@ -15,11 +15,11 @@ class MobFeedbackWidget extends StatelessWidget {
     return BlocBuilder<MobFeedbackBloc, MobFeedbackState>(
       builder: (context, _) {
         return ListView(
-          key: KWidgetkeys.widget.mobFeedback.widget,
+          key: MobFeedbackKeys.widget,
           padding: const EdgeInsets.all(KPadding.kPaddingSize16),
           children: [
             TooltipWidget(
-              key: KWidgetkeys.widget.mobFeedback.title,
+              key: MobFeedbackKeys.title,
               description: context.l10n.mobFeedbackHint,
               text: context.l10n.whatIsWrong,
               duration: const Duration(seconds: 15),
@@ -30,7 +30,7 @@ class MobFeedbackWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox8,
             TextFieldWidget(
-              widgetKey: KWidgetkeys.widget.mobFeedback.field,
+              widgetKey: MobFeedbackKeys.field,
               // controller: controller,
               labelText: context.l10n.writeMessage, isRequired: true,
               // textInputAction: TextInputAction.done,
@@ -45,7 +45,7 @@ class MobFeedbackWidget extends StatelessWidget {
             // if (widget.scrollController != null)
             //   const FeedbackSheetDragHandle(),
             DoubleButtonWidget(
-              widgetKey: KWidgetkeys.widget.mobFeedback.button,
+              widgetKey: MobFeedbackKeys.button,
               text: context.l10n.send, darkMode: true,
               isDesk: false, mobVerticalTextPadding: KPadding.kPaddingSize12,
               mobIconPadding: KPadding.kPaddingSize12,

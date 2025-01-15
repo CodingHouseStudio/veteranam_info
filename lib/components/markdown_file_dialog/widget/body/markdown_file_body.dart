@@ -38,7 +38,7 @@ class MarkdownFileBody extends StatelessWidget {
                       ),
                     )
                   : MarkdownBody(
-                      key: KWidgetkeys.screen.privacyPolicy.text,
+                      key: PrivacyPolicyDialogKeys.text,
                       data: _,
                       styleSheet: MarkdownStyleSheet(
                         horizontalRuleDecoration: const BoxDecoration(

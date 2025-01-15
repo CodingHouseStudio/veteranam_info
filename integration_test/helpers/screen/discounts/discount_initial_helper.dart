@@ -7,28 +7,28 @@ import '../../../test_dependency.dart';
 Future<void> discountsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.discounts.screen), findsOneWidget);
+  expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
 
   if (!Config.isWeb) {
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      find.byKey(NawbarKeys.pageName),
       findsOneWidget,
     );
     //   expect(
-    //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+    //     find.byKey(DiscountsKeys.titlePoint),
     //     findsOneWidget,
     //   );
     // } else {
     await mobNavigationHelper(tester);
   } else {
     expect(
-      find.byKey(KWidgetkeys.screen.discounts.title),
+      find.byKey(DiscountsKeys.title),
       findsOneWidget,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.filter),
+    find.byKey(DiscountsKeys.filter),
     findsOneWidget,
   );
 
@@ -36,7 +36,7 @@ Future<void> discountsInitialHelper(
 
   if (Config.isDevelopment) {
     expect(
-      find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+      find.byKey(DiscountsKeys.addDiscountButton),
       findsOneWidget,
     );
   }
@@ -44,7 +44,7 @@ Future<void> discountsInitialHelper(
   await advancedFilterHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.card),
+    find.byKey(DiscountsKeys.card),
     findsWidgets,
   );
 
@@ -52,11 +52,11 @@ Future<void> discountsInitialHelper(
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discounts.card,
+    itemKey: DiscountsKeys.card,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.buttonMock),
+  //   find.byKey(DiscountsKeys.buttonMock),
   //   findsNothing,
   // );
 }

@@ -13,12 +13,12 @@ class FilterPopupMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      key: KWidgetkeys.widget.filterPopupMenu.widget,
+      key: FilterPopupMenuKeys.widget,
       icon: KIcon.filter,
       itemBuilder: (BuildContext context) {
         return [
           PopupMenuItem<String>(
-            key: KWidgetkeys.widget.filterPopupMenu.resetAll,
+            key: FilterPopupMenuKeys.resetAll,
             value: context.l10n.resetAll,
             child: ListTile(
               title: Text(

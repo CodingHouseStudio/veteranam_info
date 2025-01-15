@@ -18,7 +18,7 @@ Future<void> mobFaqPumpAppHelper({
     mockGoRouter: mockGoRouter,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.mobFaq.screen), findsOneWidget);
+  expect(find.byKey(MobFaqKeys.screen), findsOneWidget);
 
   await tester.pumpAndSettle();
 }

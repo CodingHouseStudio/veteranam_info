@@ -15,7 +15,7 @@ class SignUpBodyWidget extends StatelessWidget {
       // ),
       builder: (context, _) {
         return ScaffoldWidget(
-          key: KWidgetkeys.screen.signUp.card,
+          key: SignUpKeys.card,
           mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
             precent: KDimensions.thirtyPercent,
             verticalPadding: KPadding.kPaddingSize80,
@@ -30,7 +30,7 @@ class SignUpBodyWidget extends StatelessWidget {
             if (!isDesk) KSizedBox.kHeightSizedBox24,
             ShortTitleIconWidget(
               title: context.l10n.signUp,
-              titleKey: KWidgetkeys.screen.signUp.title,
+              titleKey: SignUpKeys.title,
               isDesk: isDesk,
               expanded: isDesk,
             ),
@@ -39,7 +39,7 @@ class SignUpBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
             EmailPasswordFieldsWidget(
-              key: KWidgetkeys.screen.signUp.fields,
+              key: SignUpKeys.fields,
               isDesk: isDesk,
               showPassword: showPassword(_.formState),
               onChangedEmail: (value) => context
@@ -58,14 +58,14 @@ class SignUpBodyWidget extends StatelessWidget {
               showErrorText: _.formState == SignUpEnum.invalidData ||
                   _.formState == SignUpEnum.passwordInvalidData,
               // bottomError: _.failure?.value(context),
-              // bottomTextKey: KWidgetkeys.screen.signUp.errorText,
+              // bottomTextKey: SignUpKeys.errorText,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
             DoubleButtonWidget(
-              widgetKey: KWidgetkeys.screen.signUp.button,
+              widgetKey: SignUpKeys.button,
               text: showPassword(_.formState)
                   ? context.l10n.register
                   : context.l10n.next,
@@ -86,7 +86,7 @@ class SignUpBodyWidget extends StatelessWidget {
               darkMode: true,
             ),
             SendingTextWidget(
-              textKey: KWidgetkeys.screen.signUp.submitingText,
+              textKey: SignUpKeys.submitingText,
               failureText: _.failure?.value(context),
               sendingText: context.l10n.signingUpWait,
               successText: null,
@@ -100,7 +100,7 @@ class SignUpBodyWidget extends StatelessWidget {
             //     ),
             //     child: Text(
             //       context.l10n.loggingInWait,
-            //       key: KWidgetkeys.screen.signUp.loadingText,
+            //       key: SignUpKeys.loadingText,
             //       style:
             // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
             //     ),
@@ -119,14 +119,14 @@ class SignUpBodyWidget extends StatelessWidget {
                 children: [
                   Text(
                     context.l10n.doYouHavenAccount,
-                    key: KWidgetkeys.screen.signUp.loginText,
+                    key: SignUpKeys.loginText,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
-                        key: KWidgetkeys.screen.signUp.loginButton,
+                        key: SignUpKeys.loginButton,
                         onPressed: () => context.goNamed(KRoute.login.name),
                         style: KButtonStyles.borderBlackButtonStyle,
                         child: Text(
@@ -164,7 +164,7 @@ class SignUpBodyWidget extends StatelessWidget {
               //   alignment: Alignment.centerLeft,
               //   child:
               SignUpLoginServiceWidget(
-                // key: KWidgetkeys.widget.signUpBottomButtons.google,
+                // key: SignUpBottomButtonsKeys.google,
                 // text: context.l10n.google,
                 // picture: KImage.google(),
                 // onPressed: () => context

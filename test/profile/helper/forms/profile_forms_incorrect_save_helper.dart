@@ -14,12 +14,12 @@ Future<void> profileFormsIncorrectSaveHelper({
     nickname: KTestVariables.fieldEmpty,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
+  await tester.tap(find.byKey(ProfileKeys.saveButton));
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.submitingText),
+    find.byKey(ProfileKeys.submitingText),
     findsNothing,
   );
 }

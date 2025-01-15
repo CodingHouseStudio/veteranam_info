@@ -12,16 +12,16 @@ Future<void> myDiscountDialogHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
+    find.byKey(MyDiscountsKeys.iconTrash),
     findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
+    itemKey: MyDiscountsKeys.iconTrash,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
+  await tester.tap(find.byKey(MyDiscountsKeys.iconTrash).first);
 
   await tester.pumpAndSettle();
 

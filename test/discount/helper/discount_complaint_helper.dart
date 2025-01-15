@@ -7,16 +7,16 @@ Future<void> discountComplaintHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discount.complaintButton),
+    find.byKey(DiscountKeys.complaintButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discount.complaintButton,
+    itemKey: DiscountKeys.complaintButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discount.complaintButton));
+  await tester.tap(find.byKey(DiscountKeys.complaintButton));
 
   await tester.pumpAndSettle();
 

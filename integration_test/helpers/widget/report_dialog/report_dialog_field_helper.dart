@@ -5,17 +5,17 @@ Future<void> reportDialogFieldHelper(
   WidgetTester tester,
 ) async {
   // expect(
-  //   find.byKey(KWidgetkeys.widget.reportDialog.emailField),
+  //   find.byKey(ReportDialogKeys.emailField),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.messageField),
+    find.byKey(ReportDialogKeys.messageField),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+    find.byKey(ReportDialogKeys.sendButton),
     findsOneWidget,
   );
 }

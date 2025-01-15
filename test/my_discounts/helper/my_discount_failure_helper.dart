@@ -7,12 +7,12 @@ Future<void> myDiscountFailureHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.card),
+    find.byKey(DiscountsKeys.card),
     findsNothing,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.buttonMock),
+  //   find.byKey(DiscountsKeys.buttonMock),
   //   findsNothing,
   // );
 

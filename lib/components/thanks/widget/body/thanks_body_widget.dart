@@ -12,9 +12,9 @@ class ThanksBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         TitleWidget(
           title: '${context.l10n.thankYou}!',
-          titleKey: KWidgetkeys.screen.thanks.title,
+          titleKey: ThanksKeys.title,
           subtitle: context.l10n.thankYouDescription,
-          subtitleKey: KWidgetkeys.screen.thanks.subtitle,
+          subtitleKey: ThanksKeys.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
@@ -40,7 +40,7 @@ class ThanksBodyWidget extends StatelessWidget {
   List<Widget> _buildBoxWidgets(BuildContext context, bool isDesk) {
     return [
       BoxWidget(
-        key: KWidgetkeys.screen.thanks.myProfielBox,
+        key: ThanksKeys.myProfielBox,
         text: context.l10n.myProfile,
         isDesk: isDesk,
         onTap: () => context.goNamed(KRoute.profile.name),
@@ -48,7 +48,7 @@ class ThanksBodyWidget extends StatelessWidget {
       ),
       if (!isDesk) KSizedBox.kHeightSizedBox40,
       BoxWidget(
-        key: KWidgetkeys.screen.thanks.homeBox,
+        key: ThanksKeys.homeBox,
         text: context.l10n.mainScreen,
         isDesk: isDesk,
         onTap: () => context.goNamed(KRoute.home.name),

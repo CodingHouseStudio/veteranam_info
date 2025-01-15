@@ -42,7 +42,7 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
                   )
                 : EdgeInsets.zero,
             child: TextFieldWidget(
-              widgetKey: KWidgetkeys.screen.pwResetEmail.emailField,
+              widgetKey: PwResetEmailKeys.emailField,
               onChanged: (text) => context
                   .read<PwResetEmailBloc>()
                   .add(PwResetEmailEvent.emailUpdated(text)),
@@ -69,7 +69,7 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: DoubleButtonWidget(
-                widgetKey: KWidgetkeys.screen.pwResetEmail.sendButton,
+                widgetKey: PwResetEmailKeys.sendButton,
                 text: context.l10n.next,
                 onPressed: () => context.read<PwResetEmailBloc>().add(
                       const PwResetEmailEvent.sendResetCode(),

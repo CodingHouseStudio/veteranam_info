@@ -9,7 +9,7 @@ Future<void> deleteAccountConfirmButtonlHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
+    find.byKey(ProfileKeys.screen),
     findsOneWidget,
   );
 

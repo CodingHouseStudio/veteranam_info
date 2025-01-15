@@ -9,12 +9,11 @@ Future<void> confirmDialogUnconfirmHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.confirmDialog.unconfirmButton),
+    find.byKey(ConfirmDialogKeys.unconfirmButton),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.confirmDialog.unconfirmButton));
+  await tester.tap(find.byKey(ConfirmDialogKeys.unconfirmButton));
 
   await tester.pumpAndSettle();
 

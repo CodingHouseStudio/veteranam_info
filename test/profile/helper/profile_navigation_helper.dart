@@ -13,45 +13,45 @@
 //     windowsTest: true,
 //     test: () async {
 //       expect(
-//         find.byKey(KWidgetkeys.screen.profile.boxSaves),
+//         find.byKey(ProfileKeys.boxSaves),
 //         findsOneWidget,
 //       );
 
 //       await scrollingHelper(
 //         tester: tester,
-//         itemKey: KWidgetkeys.screen.profile.boxSaves,
+//         itemKey: ProfileKeys.boxSaves,
 //       );
 
-//       await tester.tap(find.byKey(KWidgetkeys.screen.profile.boxSaves));
+//       await tester.tap(find.byKey(ProfileKeys.boxSaves));
 
 //       verify(() => mockGoRouter.goNamed(KRoute.profileSaves.name)).called(1);
 
 //       expect(
-//         find.byKey(KWidgetkeys.screen.profile.boxStory),
+//         find.byKey(ProfileKeys.boxStory),
 //         findsOneWidget,
 //       );
 
 //       await scrollingHelper(
 //         tester: tester,
-//         itemKey: KWidgetkeys.screen.profile.boxStory,
+//         itemKey: ProfileKeys.boxStory,
 //       );
 
-//       await tester.tap(find.byKey(KWidgetkeys.screen.profile.boxStory));
+//       await tester.tap(find.byKey(ProfileKeys.boxStory));
 
 //       verify(() => mockGoRouter.goNamed(KRoute.profileMyStory.name))
 // .called(1);
 
 //       expect(
-//         find.byKey(KWidgetkeys.screen.profile.boxFeedback),
+//         find.byKey(ProfileKeys.boxFeedback),
 //         findsOneWidget,
 //       );
 
 //       await scrollingHelper(
 //         tester: tester,
-//         itemKey: KWidgetkeys.screen.profile.boxFeedback,
+//         itemKey: ProfileKeys.boxFeedback,
 //       );
 
-//       await tester.tap(find.byKey(KWidgetkeys.screen.profile.boxFeedback));
+//       await tester.tap(find.byKey(ProfileKeys.boxFeedback));
 
 //       verify(() => mockGoRouter.goNamed(KRoute.feedback.name)).called(1);
 //     },

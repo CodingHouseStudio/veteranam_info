@@ -8,33 +8,33 @@ Future<void> emailEnterHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.emailField),
+    find.byKey(PwResetEmailKeys.emailField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.pwResetEmail.emailField,
+    itemKey: PwResetEmailKeys.emailField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.emailField),
+    find.byKey(PwResetEmailKeys.emailField),
     email,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.sendButton),
+    find.byKey(PwResetEmailKeys.sendButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.pwResetEmail.sendButton,
+    itemKey: PwResetEmailKeys.sendButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.pwResetEmail.sendButton));
+  await tester.tap(find.byKey(PwResetEmailKeys.sendButton));
 
   await tester.pumpAndSettle();
 

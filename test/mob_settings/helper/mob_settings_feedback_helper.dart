@@ -10,11 +10,11 @@ Future<void> mobSettingsFeedbackHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton),
+    find.byKey(MobSettingsKeys.feedbackButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton));
+  await tester.tap(find.byKey(MobSettingsKeys.feedbackButton));
 
   verify(() => mockGoRouter.goNamed(KRoute.feedback.name)).called(1);
 }

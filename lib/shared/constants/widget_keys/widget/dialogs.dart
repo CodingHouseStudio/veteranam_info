@@ -1,8 +1,8 @@
 part of '../widget_keys.dart';
 
-class _DialogsKeys {
-  final failure = const Key('dialogs_failure');
-  final snackBarText = const Key('dialogs_snack_bar_text');
-  final failureButton = const Key('dialogs_failure_button');
-  final scroll = const Key('dialog_scroll');
+abstract class DialogsKeys {
+  static const failure = Key('dialogs_failure');
+  static const snackBarText = Key('dialogs_snack_bar_text');
+  static const failureButton = Key('dialogs_failure_button');
+  static const scroll = Key('dialog_scroll');
 }

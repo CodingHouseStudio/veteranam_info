@@ -65,7 +65,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
               resizeToAvoidBottomInset: true,
               appBar: appBar,
               body: KeyboardScrollView(
-                widgetKey: KWidgetkeys.widget.scaffold.scroll,
+                widgetKey: ScaffoldKeys.scroll,
                 slivers: [
                   NavigationBarWidget(
                     isDesk: isDesk,
@@ -127,7 +127,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                   //               horizontal: KPadding.kPaddingSize16,
                   //             ),
                   //       sliver: SliverList.builder(
-                  //         key: KWidgetkeys.widget.footer.widget,
+                  //         key: FooterKeys.widget,
                   //         addAutomaticKeepAlives: false,
                   //         addRepaintBoundaries: false,
                   //         itemBuilder: (context, index) =>

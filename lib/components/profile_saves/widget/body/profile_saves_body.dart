@@ -14,9 +14,9 @@ class ProfileSavesBody extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         TitleWidget(
           title: context.l10n.saved,
-          titleKey: KWidgetkeys.screen.profileSaves.title,
+          titleKey: ProfileSavesKeys.title,
           subtitle: context.l10n.savesSubtitle,
-          subtitleKey: KWidgetkeys.screen.profileSaves.subtitle,
+          subtitleKey: ProfileSavesKeys.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
@@ -28,7 +28,7 @@ class ProfileSavesBody extends StatelessWidget {
           maxWidth.screenPadding(precent: KDimensions.fifteenPercent),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         DiscountCardWidget(
-          key: KWidgetkeys.screen.profileSaves.discountCard,
+          key: ProfileSavesKeys.discountCard,
           isDesk: isDesk,
           discountItem: KMockText.discountModel,
           // reportEvent: null,
@@ -41,7 +41,7 @@ class ProfileSavesBody extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         WorkCardWidget(
           isSaved: false,
-          key: KWidgetkeys.screen.profileSaves.workCard,
+          key: ProfileSavesKeys.workCard,
           workModel: const WorkModel(
             id: '',
             title: KMockText.workTitle,

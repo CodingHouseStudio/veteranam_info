@@ -5,7 +5,7 @@ Future<void> notificationLinkThankTextHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.thankText),
+    find.byKey(NotificationLinkKeys.thankText),
     findsOneWidget,
   );
 }

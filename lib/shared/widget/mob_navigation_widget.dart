@@ -28,10 +28,10 @@ class MobNavigationWidget extends StatelessWidget {
           child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               return BottomNavigationBar(
-                key: KWidgetkeys.widget.mobNavigation.widget,
+                key: MobNavigationKeys.widget,
                 items: List.generate(KIcon.pagesIcons.length, (index) {
                   return BottomNavigationBarItem(
-                    key: KWidgetkeys.widget.mobNavigation.navButtonsKey[index],
+                    key: MobNavigationKeys.navButtonsKey[index],
                     icon: Padding(
                       padding: const EdgeInsets.only(
                         bottom: KPadding.kPaddingSize8,

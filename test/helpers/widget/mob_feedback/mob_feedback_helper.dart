@@ -5,22 +5,22 @@ Future<void> mobFeedbackHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.widget),
+    find.byKey(MobFeedbackKeys.widget),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.title),
+    find.byKey(MobFeedbackKeys.title),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.field),
+    find.byKey(MobFeedbackKeys.field),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.button),
+    find.byKey(MobFeedbackKeys.button),
     findsOneWidget,
   );
 }

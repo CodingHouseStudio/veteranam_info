@@ -11,12 +11,11 @@ Future<void> boxMyDiscountsNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.businessDashboard.myDiscountsBox),
+    find.byKey(BusinessDashboardKeys.myDiscountsBox),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.businessDashboard.myDiscountsBox));
+  await tester.tap(find.byKey(BusinessDashboardKeys.myDiscountsBox));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.myDiscounts.name),

@@ -14,7 +14,7 @@ class DiscountsAddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DiscountsAddBlocprovider(
-      key: KWidgetkeys.screen.discountsAdd.screen,
+      key: DiscountsAddKeys.screen,
       childWidget: DiscountsAddBodyWidget(
         discountId: discountId,
       ),

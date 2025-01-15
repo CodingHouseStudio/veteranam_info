@@ -8,39 +8,39 @@ Future<void> mobFeedbackEnterTextHelper({
   required String text,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.title),
+    find.byKey(MobFeedbackKeys.title),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.mobFeedback.title),
+    find.byKey(MobFeedbackKeys.title),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.field),
+    find.byKey(MobFeedbackKeys.field),
     findsOneWidget,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.mobFeedback.field),
+    find.byKey(MobFeedbackKeys.field),
     text,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.button),
+    find.byKey(MobFeedbackKeys.button),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.mobFeedback.button,
+    itemKey: MobFeedbackKeys.button,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.mobFeedback.button),
+    find.byKey(MobFeedbackKeys.button),
     // warnIfMissed: false,
   );
 

@@ -25,7 +25,7 @@ Future<void> signUpPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.signUp.screen),
+    find.byKey(SignUpKeys.screen),
     findsOneWidget,
   );
 

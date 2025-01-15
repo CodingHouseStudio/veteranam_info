@@ -21,7 +21,7 @@ class DonateCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        key: KWidgetkeys.widget.donateCard.widget,
+        key: DonateCardKeys.widget,
         decoration: KWidgetTheme.boxDecorationCard,
         constraints: const BoxConstraints(
           minHeight: KMinMaxSize.minHeight640,
@@ -51,7 +51,7 @@ class DonateCardWidget extends StatelessWidget {
                   : EdgeInsets.zero,
               child: Text(
                 fundModel.title.getTrsnslation(context),
-                key: KWidgetkeys.widget.donateCard.title,
+                key: DonateCardKeys.title,
                 style: titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
               ),
             ),
@@ -65,7 +65,7 @@ class DonateCardWidget extends StatelessWidget {
                   fundModel.description.getTrsnslation(
                     context,
                   ),
-                  key: KWidgetkeys.widget.donateCard.subtitle,
+                  key: DonateCardKeys.subtitle,
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
@@ -73,7 +73,7 @@ class DonateCardWidget extends StatelessWidget {
               ),
             KSizedBox.kHeightSizedBox16,
             DonateButtonWidget(
-              key: KWidgetkeys.widget.donateCard.button,
+              key: DonateCardKeys.button,
               text: context.l10n.support,
               onPressed: () => context.openLinkWithAgreeDialog(
                 isDesk: isDesk,

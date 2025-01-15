@@ -46,7 +46,7 @@ class _DeskField extends StatelessWidget {
           children: [
             Expanded(
               child: TextFieldWidget(
-                widgetKey: KWidgetkeys.screen.feedback.nameField,
+                widgetKey: FeedbackKeys.nameField,
                 errorText: state.name.error.value(context),
                 isRequired: true,
                 showErrorText: state.formState == FeedbackEnum.invalidData,
@@ -59,7 +59,7 @@ class _DeskField extends StatelessWidget {
             ),
             Expanded(
               child: TextFieldWidget(
-                widgetKey: KWidgetkeys.screen.feedback.emailField,
+                widgetKey: FeedbackKeys.emailField,
                 showErrorText: state.formState == FeedbackEnum.invalidData,
                 isRequired: true,
                 errorText: state.email.error.value(context),
@@ -90,7 +90,7 @@ class _MobField extends StatelessWidget {
     return Column(
       children: [
         TextFieldWidget(
-          widgetKey: KWidgetkeys.screen.feedback.nameField,
+          widgetKey: FeedbackKeys.nameField,
           showErrorText: state.formState == FeedbackEnum.invalidData,
           errorText: state.name.error.value(context),
           isRequired: true,
@@ -102,7 +102,7 @@ class _MobField extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox16,
         TextFieldWidget(
-          widgetKey: KWidgetkeys.screen.feedback.emailField,
+          widgetKey: FeedbackKeys.emailField,
           showErrorText: state.formState == FeedbackEnum.invalidData,
           errorText: state.email.error.value(context),
           isRequired: true,
@@ -136,7 +136,7 @@ class _MessagePart extends StatelessWidget {
       children: [
         KSizedBox.kHeightSizedBox16,
         MessageFieldWidget(
-          key: KWidgetkeys.screen.feedback.messageField,
+          key: FeedbackKeys.messageField,
           showErrorText: state.formState == FeedbackEnum.invalidData,
           errorText: state.message.error.value(context),
           changeMessage: (value) => context.read<FeedbackBloc>().add(
@@ -147,12 +147,12 @@ class _MessagePart extends StatelessWidget {
         ),
         Text(
           context.l10n.feedbackFormSubtitle,
-          key: KWidgetkeys.screen.feedback.buttonText,
+          key: FeedbackKeys.buttonText,
           style: AppTextStyle.materialThemeBodySmall,
         ),
         KSizedBox.kHeightSizedBox16,
         DoubleButtonWidget(
-          widgetKey: KWidgetkeys.screen.feedback.button,
+          widgetKey: FeedbackKeys.button,
           text: context.l10n.sendMessage,
           isDesk: isDesk,
           onPressed: () =>

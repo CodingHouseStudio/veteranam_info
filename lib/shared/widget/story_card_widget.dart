@@ -23,19 +23,19 @@ class StoryCardWidget extends StatelessWidget {
           storyModel.getImage,
           Text(
             storyModel.userName ?? context.l10n.anonymous,
-            key: KWidgetkeys.widget.storyCard.userName,
+            key: StoryCardKeys.userName,
             style: AppTextStyle.text14,
           ),
         ],
       ),
       titleDate: Text(
         storyModel.date.localeTime,
-        key: KWidgetkeys.widget.storyCard.date,
+        key: StoryCardKeys.date,
         style: AppTextStyle.hint16,
       ),
       isDesk: isDesk,
       titleIcon: KIcon.trash.copyWith(
-        key: KWidgetkeys.widget.storyCard.trashIcon,
+        key: StoryCardKeys.trashIcon,
       ),
       cardId: storyModel.id,
       cardEnum: CardEnum.story,

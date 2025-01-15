@@ -1,5 +1,5 @@
 part of '../widget_keys.dart';
 
-class _CardAddImageKeys {
-  final widget = const Key('card_add_image');
+abstract class CardAddImageKeys {
+  static const widget = Key('card_add_image');
 }

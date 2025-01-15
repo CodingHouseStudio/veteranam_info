@@ -13,7 +13,7 @@ class SwitchOfflineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      key: KWidgetkeys.widget.switchOffline.widget,
+      key: SwitchOfflineKeys.widget,
       style: KButtonStyles.withoutStyle,
       onPressed: onChanged,
       icon: DecoratedBox(
@@ -41,8 +41,8 @@ class SwitchOfflineWidget extends StatelessWidget {
             ),
             child: KIcon.modeOffOn.copyWith(
               key: isSelected
-                  ? KWidgetkeys.widget.switchOffline.active
-                  : KWidgetkeys.widget.switchOffline.icon,
+                  ? SwitchOfflineKeys.active
+                  : SwitchOfflineKeys.icon,
               color: isSelected
                   ? onChanged == null
                       ? AppColors.materialThemeKeyColorsNeutral

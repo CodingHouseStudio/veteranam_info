@@ -35,7 +35,7 @@ List<Widget> worksWidgetList({
       child: SkeletonizerWidget(
         isLoading: isLoading,
         child: WorkCardWidget(
-          key: KWidgetkeys.screen.workEmployee.cards,
+          key: WorkEmployeeKeys.cards,
           firstItemIsFirst: index == 0,
           workModel: workModelItems.elementAt(index),
           isDesk: isDesk,

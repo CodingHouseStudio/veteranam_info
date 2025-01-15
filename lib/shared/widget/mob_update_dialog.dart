@@ -9,17 +9,17 @@ class MobUpdateDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: KWidgetkeys.widget.mobUpdate.dialog,
+      key: MobUpdateKeys.dialog,
       children: [
         Text(
           context.l10n.appUpdateAvailable,
-          key: KWidgetkeys.widget.mobUpdate.title,
+          key: MobUpdateKeys.title,
           style: AppTextStyle.materialThemeTitleMediumNeutral,
         ),
         KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.appUpdateAvailableDescription,
-          key: KWidgetkeys.widget.mobUpdate.description,
+          key: MobUpdateKeys.description,
           style: AppTextStyle.materialThemeBodyMediumNeutral,
         ),
         Row(
@@ -27,7 +27,7 @@ class MobUpdateDialog extends StatelessWidget {
           spacing: KPadding.kPaddingSize8,
           children: [
             TextButton(
-              key: KWidgetkeys.widget.mobUpdate.lateButton,
+              key: MobUpdateKeys.lateButton,
               onPressed: () => context.pop(),
               child: Text(
                 context.l10n.later,
@@ -35,7 +35,7 @@ class MobUpdateDialog extends StatelessWidget {
               ),
             ),
             TextButton(
-              key: KWidgetkeys.widget.mobUpdate.updateButton,
+              key: MobUpdateKeys.updateButton,
               onPressed: () {
                 context.read<UrlCubit>().launchUrl(
                       url: PlatformEnum.getPlatform.isAndroid

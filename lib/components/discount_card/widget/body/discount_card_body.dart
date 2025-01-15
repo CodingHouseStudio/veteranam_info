@@ -18,12 +18,12 @@ class DiscountCardBody extends StatelessWidget {
           chilcWidget: SkeletonizerWidget(
             isLoading: _.loadingStatus != LoadingStatus.loaded,
             child: DiscountCardWidget(
-              key: KWidgetkeys.screen.discountCard.widget,
+              key: DiscountCardDialogKeys.widget,
               isDesk: isDesk,
               discountItem: _.discountModel ?? KMockText.discountModel,
               // reportEvent: null,
               closeWidget: CloseButtonWidget(
-                widgetKey: KWidgetkeys.screen.discountCard.closeButton,
+                widgetKey: DiscountCardDialogKeys.closeButton,
                 isDesk: isDesk,
                 routeName: KRoute.discounts.name,
               ),

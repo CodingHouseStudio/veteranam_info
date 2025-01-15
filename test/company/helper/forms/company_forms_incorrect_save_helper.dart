@@ -15,7 +15,7 @@ Future<void> companyFormsIncorrectSaveHelper(
     link: KTestVariables.field,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.company.saveButton));
+  await tester.tap(find.byKey(CompanyKeys.saveButton));
 
   await tester.pumpAndSettle();
 }

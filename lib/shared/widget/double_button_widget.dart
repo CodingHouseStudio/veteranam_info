@@ -166,7 +166,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
       onHover: (value) => setState(() => isHovering = value),
       child: RepaintBoundary(
         child: Stack(
-          key: KWidgetkeys.widget.doubleButton.desk,
+          key: DoubleButtonKeys.desk,
           alignment: Alignment.centerRight,
           children: [
             AnimatedPadding(
@@ -187,7 +187,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                     ),
                 child: Text(
                   widget.text,
-                  key: KWidgetkeys.widget.doubleButton.text,
+                  key: DoubleButtonKeys.text,
                   style: widget.textStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -209,8 +209,8 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               },
               child: IconWidget(
                 key: isHovering
-                    ? KWidgetkeys.widget.doubleButton.rotateIcon
-                    : KWidgetkeys.widget.doubleButton.icon,
+                    ? DoubleButtonKeys.rotateIcon
+                    : DoubleButtonKeys.icon,
                 icon: widget.icon,
                 background: widget.background,
                 padding: widget.iconPadding ?? KPadding.kPaddingSize12,
@@ -257,7 +257,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
       onPressed: onPressed,
       style: KButtonStyles.withoutStyle,
       child: Stack(
-        key: KWidgetkeys.widget.doubleButton.mob,
+        key: DoubleButtonKeys.mob,
         alignment: Alignment.centerRight,
         children: [
           Container(
@@ -274,13 +274,13 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             ),
             child: Text(
               text,
-              key: KWidgetkeys.widget.doubleButton.text,
+              key: DoubleButtonKeys.text,
               style: textStyle,
               textAlign: TextAlign.center,
             ),
           ),
           IconWidget(
-            key: KWidgetkeys.widget.doubleButton.icon,
+            key: DoubleButtonKeys.icon,
             icon: icon,
             background: background,
             padding: iconPaddingValue,

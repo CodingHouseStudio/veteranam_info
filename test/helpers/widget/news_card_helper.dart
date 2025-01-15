@@ -7,9 +7,9 @@ Future<void> newsCardHelper({
   required WidgetTester tester,
   String? image,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.newsCard.date), findsWidgets);
+  expect(find.byKey(NewsCardKeys.date), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsWidgets);
+  expect(find.byKey(NewsCardKeys.title), findsWidgets);
 
   if (image != null) {
     await cardAddImageHelper(

@@ -10,16 +10,16 @@ Future<void> mobFaqNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.faq),
+    find.byKey(MobSettingsKeys.faq),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.faq,
+    itemKey: MobSettingsKeys.faq,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.faq));
+  await tester.tap(find.byKey(MobSettingsKeys.faq));
 
   await tester.pumpAndSettle();
 

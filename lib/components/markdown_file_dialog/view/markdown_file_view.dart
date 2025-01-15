@@ -19,7 +19,7 @@ class MarkdownFileDialog extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isTablet = constraints.maxWidth > KMinMaxSize.maxWidth640;
         return AlertDialog(
-          key: KWidgetkeys.screen.privacyPolicy.dialog,
+          key: PrivacyPolicyDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           clipBehavior: Clip.hardEdge,

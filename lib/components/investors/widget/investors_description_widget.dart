@@ -45,11 +45,11 @@ class _InvestorsSectionWidget extends StatelessWidget {
       isDesk: isDesk,
       route: () => context.goNamed(KRoute.feedback.name),
       title: context.l10n.supportOurVeterans,
-      buttonKey: KWidgetkeys.screen.investors.feedbackButton,
+      buttonKey: InvestorsKeys.feedbackButton,
       subtitle: context.l10n.investorsSubtitle,
-      subtitleKey: KWidgetkeys.screen.investors.feedbackSubtitle,
+      subtitleKey: InvestorsKeys.feedbackSubtitle,
       textButton: context.l10n.writeMessage,
-      titleKey: KWidgetkeys.screen.investors.feedbackTitle,
+      titleKey: InvestorsKeys.feedbackTitle,
     );
   }
 }

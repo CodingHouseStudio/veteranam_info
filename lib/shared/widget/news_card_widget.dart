@@ -36,14 +36,14 @@ class NewsCardWidget extends StatelessWidget {
         children: [
           Text(
             informationItem.title,
-            key: KWidgetkeys.widget.newsCard.title,
+            key: NewsCardKeys.title,
             style: isDesk
                 ? AppTextStyle.materialThemeDisplaySmall
                 : AppTextStyle.materialThemeHeadlineSmall,
           ),
           Text(
             informationItem.fetchDate.localeTime,
-            key: KWidgetkeys.widget.newsCard.date,
+            key: NewsCardKeys.date,
             style: isDesk
                 ? AppTextStyle.materialThemeLabelMedium
                 : AppTextStyle.materialThemeLabelSmall,
@@ -63,7 +63,7 @@ class NewsCardWidget extends StatelessWidget {
           children: [
             Expanded(
               child: Wrap(
-                key: KWidgetkeys.widget.newsCard.tags,
+                key: NewsCardKeys.tags,
                 spacing: KSize.kWrapSpacing8,
                 runSpacing: KSize.kWrapRunSpacing4,
                 children: informationItem.categoryUA

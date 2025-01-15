@@ -11,7 +11,7 @@
 
 //   await mockButtonHelper(
 //     tester: tester,
-//     card: KWidgetkeys.screen.information.card,
-//     buttonMock: KWidgetkeys.screen.investors.buttonMock,
+//     card: InformationKeys.card,
+//     buttonMock: InvestorsKeys.buttonMock,
 //   );
 // }

@@ -18,7 +18,7 @@ List<Widget> _buttonsWidgetList({
                         spacing: KPadding.kPaddingSize16,
                         children: [
                           SwitchWidget(
-                            key: KWidgetkeys.screen.storyAdd.switchAnonymously,
+                            key: StoryAddKeys.switchAnonymously,
                             isSelected: context
                                 .read<StoryAddBloc>()
                                 .state
@@ -30,7 +30,7 @@ List<Widget> _buttonsWidgetList({
                           Expanded(
                             child: Text(
                               context.l10n.publishAnonymously,
-                              key: KWidgetkeys.screen.storyAdd.switchText,
+                              key: StoryAddKeys.switchText,
                               style: AppTextStyle.text24,
                             ),
                           ),
@@ -39,7 +39,7 @@ List<Widget> _buttonsWidgetList({
                       KSizedBox.kHeightSizedBox16,
                       Text(
                         context.l10n.publishAnonymouslyStorySubtitle,
-                        key: KWidgetkeys.screen.storyAdd.switchDescription,
+                        key: StoryAddKeys.switchDescription,
                         style: AppTextStyle.hint24,
                       ),
                       KSizedBox.kHeightSizedBox40,
@@ -55,7 +55,7 @@ List<Widget> _buttonsWidgetList({
               spacing: KPadding.kPaddingSize16,
               children: [
                 SwitchWidget(
-                  key: KWidgetkeys.screen.storyAdd.switchAnonymously,
+                  key: StoryAddKeys.switchAnonymously,
                   isSelected: context.read<StoryAddBloc>().state.isAnonymously,
                   onChanged: () => context
                       .read<StoryAddBloc>()
@@ -64,7 +64,7 @@ List<Widget> _buttonsWidgetList({
                 Expanded(
                   child: Text(
                     context.l10n.publishAnonymously,
-                    key: KWidgetkeys.screen.storyAdd.switchText,
+                    key: StoryAddKeys.switchText,
                     style: AppTextStyle.text16,
                   ),
                 ),
@@ -73,7 +73,7 @@ List<Widget> _buttonsWidgetList({
             KSizedBox.kHeightSizedBox16,
             Text(
               context.l10n.publishAnonymouslyStorySubtitle,
-              key: KWidgetkeys.screen.storyAdd.switchDescription,
+              key: StoryAddKeys.switchDescription,
               style: AppTextStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox24,
@@ -85,7 +85,7 @@ Widget _button({
   required bool isDesk,
 }) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.storyAdd.button,
+      key: StoryAddKeys.button,
       text: context.l10n.publish,
       isDesk: isDesk,
       onPressed: () =>

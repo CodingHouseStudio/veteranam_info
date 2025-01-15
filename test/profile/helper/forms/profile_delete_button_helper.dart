@@ -12,16 +12,16 @@ Future<void> profileDeleteButtonHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.deleteButton),
+    find.byKey(ProfileKeys.deleteButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.deleteButton,
+    itemKey: ProfileKeys.deleteButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.deleteButton));
+  await tester.tap(find.byKey(ProfileKeys.deleteButton));
 
   await tester.pumpAndSettle();
 

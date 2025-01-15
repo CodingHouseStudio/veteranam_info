@@ -19,11 +19,11 @@ Future<void> footerProfileHelper({
     // windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.footer.profileButton),
+        find.byKey(FooterKeys.profileButton),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.footer.profileButton));
+      await tester.tap(find.byKey(FooterKeys.profileButton));
 
       verify(
         () => mockGoRouter.goNamed(

@@ -10,61 +10,61 @@ Future<void> feedbackEnterTextHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.nameField),
+    find.byKey(FeedbackKeys.nameField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.nameField,
+    itemKey: FeedbackKeys.nameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.feedback.nameField),
+    find.byKey(FeedbackKeys.nameField),
     name,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.emailField),
+    find.byKey(FeedbackKeys.emailField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.emailField,
+    itemKey: FeedbackKeys.emailField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.feedback.emailField),
+    find.byKey(FeedbackKeys.emailField),
     email,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.messageField),
+    find.byKey(FeedbackKeys.messageField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.messageField,
+    itemKey: FeedbackKeys.messageField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.feedback.messageField),
+    find.byKey(FeedbackKeys.messageField),
     field,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.button),
+    find.byKey(FeedbackKeys.button),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.feedback.button,
+    itemKey: FeedbackKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.feedback.button));
+  await tester.tap(find.byKey(FeedbackKeys.button));
 
   await tester.pumpAndSettle();
 }

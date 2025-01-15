@@ -24,7 +24,7 @@
 //           backgroundColor:
 //               isDesk ? AppColors.materialThemeKeyColorsNeutral : null,
 //           body: CustomScrollView(
-//             key: KWidgetkeys.widget.scaffold.scroll,
+//             key: ScaffoldKeys.scroll,
 //             slivers: [
 //               SliverPersistentHeader(
 //                 delegate: NawbarWidget(isDesk: isDesk, isTablet: isTablet),
@@ -57,7 +57,7 @@
 //                               bottom: KPadding.kPaddingSize92,
 //                             ),
 //                             sliver: SliverList.builder(
-//                               key: KWidgetkeys.widget.leftCard.desk,
+//                               key: LeftCardKeys.desk,
 //                               addAutomaticKeepAlives: false,
 //                               addRepaintBoundaries: false,
 //                               itemCount: widgetList.length,
@@ -69,7 +69,7 @@
 //                         ),
 //                       )
 //                     : SliverList.builder(
-//                         key: KWidgetkeys.widget.leftCard.mob,
+//                         key: LeftCardKeys.mob,
 //                         addAutomaticKeepAlives: false,
 //                         addRepaintBoundaries: false,
 //                         itemCount: widgetList.length,
@@ -80,7 +80,7 @@
 //               // Expanded(
 //               //   child: image != null
 //               //       ? ImageWidget(
-//               //           key: KWidgetkeys.widget.leftCard.image,
+//               //           key: LeftCardKeys.image,
 //               //           imageUrl: KMockText.image,
 //               //           fit: BoxFit.fill,
 //               //         )

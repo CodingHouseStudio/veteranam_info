@@ -14,14 +14,14 @@
 //     offset: KTestConstants.scrollingDown,
 //   );
 
-//   expect(find.byKey(KWidgetkeys.screen.investors.cardLast), findsNothing);
+//   expect(find.byKey(InvestorsKeys.cardLast), findsNothing);
 
 //   await scrollingHelper(
 //     tester: tester,
 //     offset: KTestConstants.scrollingDown,
 //   );
 
-//   expect(find.byKey(KWidgetkeys.screen.investors.cardLast), findsNothing);
+//   expect(find.byKey(InvestorsKeys.cardLast), findsNothing);
 //   //   },
 //   // );
 // }

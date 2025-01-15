@@ -11,27 +11,27 @@ Future<void> discountsEditIdWrongInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.title),
+        find.byKey(DiscountsAddKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.textWrongLink),
+        find.byKey(DiscountsAddKeys.textWrongLink),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.imageWrongLink),
+        find.byKey(DiscountsAddKeys.imageWrongLink),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.pageIndicator),
+        find.byKey(DiscountsAddKeys.pageIndicator),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.buttonWrongLink),
+        find.byKey(DiscountsAddKeys.buttonWrongLink),
         findsOneWidget,
       );
     },

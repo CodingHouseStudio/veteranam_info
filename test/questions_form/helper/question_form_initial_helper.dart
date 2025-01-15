@@ -11,73 +11,73 @@ Future<void> questionForminitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.title),
+        find.byKey(QuestionsFormKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.subtitle),
+        find.byKey(QuestionsFormKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleTitle),
+        find.byKey(QuestionsFormKeys.roleTitle),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.questionsForm.roleVeteranText),
+      //   find.byKey(QuestionsFormKeys.roleVeteranText),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleVeteran),
+        find.byKey(QuestionsFormKeys.roleVeteran),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.questionsForm
+      //   find.byKey(QuestionsFormKeys
       // .roleRelativeOfVeteranText),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleRelativeOfVeteran),
+        find.byKey(QuestionsFormKeys.roleRelativeOfVeteran),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.questionsForm.roleCivilianText),
+      //   find.byKey(QuestionsFormKeys.roleCivilianText),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleCivilian),
+        find.byKey(QuestionsFormKeys.roleCivilian),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.questionsForm.roleBusinessmenText),
+      //   find.byKey(QuestionsFormKeys.roleBusinessmenText),
       //   findsOneWidget,
       // );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.questionsForm.roleCivilian,
+        itemKey: QuestionsFormKeys.roleCivilian,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleBusinessmen),
+        find.byKey(QuestionsFormKeys.roleBusinessmen),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.questionsForm.roleBusinessmen,
+        itemKey: QuestionsFormKeys.roleBusinessmen,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.button),
+        find.byKey(QuestionsFormKeys.button),
         findsOneWidget,
       );
     },

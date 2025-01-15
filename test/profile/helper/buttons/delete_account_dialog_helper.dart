@@ -7,7 +7,7 @@ Future<void> deleteAccountDialoglHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
+    find.byKey(ProfileKeys.screen),
     findsOneWidget,
   );
 

@@ -8,17 +8,17 @@ Future<void> discountsAddSendHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.sendButton,
+    itemKey: DiscountsAddKeys.sendButton,
     offset: KTestConstants.scrollingDown,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),
+    find.byKey(DiscountsAddKeys.sendButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),
+    find.byKey(DiscountsAddKeys.sendButton),
     warnIfMissed: false,
   );
 

@@ -11,22 +11,22 @@ Future<void> myDiscountsEmptyProfilePageHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.title),
+        find.byKey(MyDiscountsKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
+        find.byKey(MyDiscountsKeys.iconAdd),
         findsNothing,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.emptyProfileText),
+        find.byKey(MyDiscountsKeys.emptyProfileText),
         findsWidgets,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.buttonProfile),
+        find.byKey(MyDiscountsKeys.buttonProfile),
         findsWidgets,
       );
     },

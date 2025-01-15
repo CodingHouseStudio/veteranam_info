@@ -11,12 +11,11 @@ Future<void> boxProfileNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.businessDashboard.myProfielBox),
+    find.byKey(BusinessDashboardKeys.myProfielBox),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.businessDashboard.myProfielBox));
+  await tester.tap(find.byKey(BusinessDashboardKeys.myProfielBox));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.profile.name),

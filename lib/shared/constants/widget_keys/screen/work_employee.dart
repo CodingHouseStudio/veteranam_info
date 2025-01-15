@@ -1,19 +1,19 @@
 part of '../widget_keys.dart';
 
-class _WorkEmployeeKeys {
-  final screen = const Key('work_employee_screen');
-  final title = const Key('work_employee_screen_title');
-  final subtitle = const Key('work_employee_screen_subtitle');
-  final filter = const Key('work_employee_screen_filter');
-  final citiesFilter = const Key('work_employee_screen_cities_filter');
-  final citiesFilterbuttons =
-      const Key('work_employee_screen_cities_filter_buttons');
-  final categoriesFilter = const Key('work_employee_screen_categories_filter');
-  final categoriesFilterButtons =
-      const Key('work_employee_screen_categories_filter_buttons');
-  final resetFilter = const Key('work_employee_screen_reset_filter');
-  final cards = const Key('work_employee_screen_cards');
-  final buttonMock = const Key('work_employee_screen_button_mock');
-  final pagination = const Key('work_employee_screen_pagination');
-  final requestCard = const Key('work_employee_screen_request_card');
+abstract class WorkEmployeeKeys {
+  static const screen = Key('work_employee_screen');
+  static const title = Key('work_employee_screen_title');
+  static const subtitle = Key('work_employee_screen_subtitle');
+  static const filter = Key('work_employee_screen_filter');
+  static const citiesFilter = Key('work_employee_screen_cities_filter');
+  static const citiesFilterbuttons =
+      Key('work_employee_screen_cities_filter_buttons');
+  static const categoriesFilter = Key('work_employee_screen_categories_filter');
+  static const categoriesFilterButtons =
+      Key('work_employee_screen_categories_filter_buttons');
+  static const resetFilter = Key('work_employee_screen_reset_filter');
+  static const cards = Key('work_employee_screen_cards');
+  static const buttonMock = Key('work_employee_screen_button_mock');
+  static const pagination = Key('work_employee_screen_pagination');
+  static const requestCard = Key('work_employee_screen_request_card');
 }

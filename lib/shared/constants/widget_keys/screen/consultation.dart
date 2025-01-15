@@ -1,5 +1,5 @@
 part of '../widget_keys.dart';
 
-class _ConsultationKeys {
-  final screen = const Key('consultation_screen');
+abstract class ConsultationKeys {
+  static const screen = Key('consultation_screen');
 }

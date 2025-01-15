@@ -22,7 +22,7 @@ Future<void> feedbackPumpAppHelper({
   await tester.pumpApp(const FeedbackScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.feedback.screen),
+    find.byKey(FeedbackKeys.screen),
     findsOneWidget,
   );
 

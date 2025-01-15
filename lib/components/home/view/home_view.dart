@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffold = HomeBlocprovider(
-      key: KWidgetkeys.screen.home.screen,
+      key: HomeKeys.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb

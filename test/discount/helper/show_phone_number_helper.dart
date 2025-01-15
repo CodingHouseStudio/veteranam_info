@@ -8,35 +8,34 @@ Future<void> discountShowPhoneNumberHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discount.phoneNumberHideButton,
+    itemKey: DiscountKeys.phoneNumberHideButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discount.phoneNumberHideButton),
+    find.byKey(DiscountKeys.phoneNumberHideButton),
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discount.phoneNumberHideButton));
+  await tester.tap(find.byKey(DiscountKeys.phoneNumberHideButton));
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discount.phoneNumberHideButton),
+    find.byKey(DiscountKeys.phoneNumberHideButton),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discount.phoneNumberButton),
+    find.byKey(DiscountKeys.phoneNumberButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discount.phoneNumberButton));
+  await tester.tap(find.byKey(DiscountKeys.phoneNumberButton));
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.discount.phoneNumberButton),
+    find.byKey(DiscountKeys.phoneNumberButton),
     findsOneWidget,
   );
 }

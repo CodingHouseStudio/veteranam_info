@@ -108,7 +108,7 @@ void main() {
 
         await loadingFailureHelper(
           tester: tester,
-          card: KWidgetkeys.screen.discounts.card,
+          card: DiscountsKeys.card,
           buttonMock: null,
           hasShimmer: true,
         );
@@ -148,8 +148,8 @@ void main() {
 
     //     await mockButtonHelper(
     //       tester: tester,
-    //       card: KWidgetkeys.screen.discounts.card,
-    //       buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+    //       card: DiscountsKeys.card,
+    //       buttonMock: DiscountsKeys.buttonMock,
     //     );
     //   });
     // });
@@ -202,7 +202,7 @@ void main() {
           mockMobileRatingRepository: null,
           mockUserRepository: mockUserRepository,
         ),
-        // lastCard: KWidgetkeys.screen.discounts.cardLast,
+        // lastCard: DiscountsKeys.cardLast,
       );
 
       // testWidgets('Report Dialog Check Point Failure', (tester) async {
@@ -284,9 +284,9 @@ void main() {
       //       );
       //       await discountsScrollHelper(
       //         tester: tester,
-      //         // itemKey: KWidgetkeys.widget.notificationLink.limitText,
+      //         // itemKey: NotificationLinkKeys.limitText,
       //         test: (WidgetTester tester) async => expect(
-      //           find.byKey(KWidgetkeys.widget.notificationLink.thankText),
+      //           find.byKey(NotificationLinkKeys.thankText),
       //           findsOneWidget,
       //         ),
       //       );

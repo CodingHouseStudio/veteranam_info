@@ -11,21 +11,21 @@ Future<void> businessDashboardInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.businessDashboard.title),
+        find.byKey(BusinessDashboardKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.businessDashboard.subtitle),
+        find.byKey(BusinessDashboardKeys.subtitle),
         findsOneWidget,
       );
       expect(
-        find.byKey(KWidgetkeys.screen.businessDashboard.myProfielBox),
+        find.byKey(BusinessDashboardKeys.myProfielBox),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.businessDashboard.myDiscountsBox),
+        find.byKey(BusinessDashboardKeys.myDiscountsBox),
         findsOneWidget,
       );
     },

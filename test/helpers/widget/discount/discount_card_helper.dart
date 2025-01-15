@@ -9,88 +9,88 @@ Future<void> discountCardHelper({
   bool containComplaintIcon = true,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.service),
+    find.byKey(DiscountCardKeys.service),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.userName),
+    find.byKey(DiscountCardKeys.userName),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.date),
+    find.byKey(DiscountCardKeys.date),
     findsWidgets,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.discountCard.category),
+  //   find.byKey(DiscountCardKeys.category),
   //   findsWidgets,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.discountTitle),
+    find.byKey(DiscountCardKeys.discountTitle),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.discount),
+    find.byKey(DiscountCardKeys.discount),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.expiration),
+    find.byKey(DiscountCardKeys.expiration),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.city),
+    find.byKey(DiscountCardKeys.city),
     findsWidgets,
   );
 
   await cityListHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.description),
+    find.byKey(DiscountCardKeys.description),
     findsWidgets,
   );
 
   // await cardTextDetailHelper(tester: tester, link: KAppText.email);
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
+  //   find.byKey(DiscountCardKeys.iconComplaint),
   //   containComplaintIcon ? findsWidgets : findsNothing,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.iconShare),
+    find.byKey(DiscountCardKeys.iconShare),
     findsWidgets,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.discountCard.iconShare).first,
+    find.byKey(DiscountCardKeys.iconShare).first,
     warnIfMissed: false,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
+  //   find.byKey(DiscountCardKeys.iconComplaint),
   //   containComplaintIcon ? findsWidgets : findsNothing,
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.discountCard.iconWebsite),
+  //   find.byKey(DiscountCardKeys.iconWebsite),
   //   findsWidgets,
   // );
 
   // await tester.tap(
-  //   find.byKey(KWidgetkeys.widget.discountCard.iconWebsite).first,
+  //   find.byKey(DiscountCardKeys.iconWebsite).first,
   //   warnIfMissed: false,
   // );
 
   // if (containComplaintIcon) {
   //   await scrollingHelper(
   //     tester: tester,
-  //     itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
+  //     itemKey: DiscountCardKeys.iconComplaint,
   //   );
   // }
 }

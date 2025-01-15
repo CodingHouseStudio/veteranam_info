@@ -26,21 +26,21 @@ Future<void> networkMobHelper({
   await pumpApp();
 
   expect(
-    find.byKey(KWidgetkeys.widget.networkBanner.widget),
+    find.byKey(NetworkBannerKeys.widget),
     findsOneWidget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
+    find.byKey(NetworkBannerKeys.iconNoInternet),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.widget.nawbar.widget,
+    scrollKey: NawbarKeys.widget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
+    find.byKey(NetworkBannerKeys.iconNoInternet),
     findsOneWidget,
   );
 
@@ -50,11 +50,11 @@ Future<void> networkMobHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.networkBanner.widget),
+    find.byKey(NetworkBannerKeys.widget),
     findsOneWidget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
+    find.byKey(NetworkBannerKeys.iconNoInternet),
     findsOneWidget,
   );
 }

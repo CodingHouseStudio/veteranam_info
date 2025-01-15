@@ -38,7 +38,7 @@ class DiscountImageWidget extends StatelessWidget {
               ),
               child: TextPointWidget(
                 discount,
-                key: KWidgetkeys.widget.discountCard.discount,
+                key: DiscountCardKeys.discount,
                 mainAxisSize: MainAxisSize.min,
               ),
             ),

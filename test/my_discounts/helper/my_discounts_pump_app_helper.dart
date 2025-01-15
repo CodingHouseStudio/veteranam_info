@@ -35,7 +35,7 @@ Future<void> myDiscountsPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.myDiscounts.screen),
+    find.byKey(MyDiscountsKeys.screen),
     findsOneWidget,
   );
 

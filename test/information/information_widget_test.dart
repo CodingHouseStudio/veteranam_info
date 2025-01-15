@@ -90,8 +90,8 @@ void main() {
 
         await loadingFailureHelper(
           tester: tester,
-          card: KWidgetkeys.screen.information.card,
-          buttonMock: KWidgetkeys.screen.information.buttonMock,
+          card: InformationKeys.card,
+          buttonMock: InformationKeys.buttonMock,
         );
       });
     });
@@ -126,8 +126,8 @@ void main() {
 
         await mockButtonHelper(
           tester: tester,
-          card: KWidgetkeys.screen.information.card,
-          buttonMock: KWidgetkeys.screen.information.buttonMock,
+          card: InformationKeys.card,
+          buttonMock: InformationKeys.buttonMock,
         );
       });
     });
@@ -162,7 +162,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           tester: tester,
         ),
-        // lastCard: KWidgetkeys.screen.information.cardLast,
+        // lastCard: InformationKeys.cardLast,
       );
 
       testWidgets('News list load and filter', (tester) async {

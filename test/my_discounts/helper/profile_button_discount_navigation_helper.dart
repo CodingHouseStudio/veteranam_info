@@ -10,16 +10,16 @@ Future<void> profileButtonDiscountsNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.myDiscounts.buttonProfile),
+    find.byKey(MyDiscountsKeys.buttonProfile),
     findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.myDiscounts.buttonProfile,
+    itemKey: MyDiscountsKeys.buttonProfile,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.myDiscounts.buttonProfile));
+  await tester.tap(find.byKey(MyDiscountsKeys.buttonProfile));
 
   await tester.pumpAndSettle();
 

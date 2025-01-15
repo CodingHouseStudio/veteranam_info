@@ -14,12 +14,12 @@ Future<void> newsCardInitialHelper({
     test: () async {
       final matcher = cardIsEmpty ? findsNothing : findsOneWidget;
       expect(
-        find.byKey(KWidgetkeys.screen.newsCard.widget),
+        find.byKey(NewsCardDialogKeys.widget),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.newsCard.closeButton),
+        find.byKey(NewsCardDialogKeys.closeButton),
         matcher,
       );
 

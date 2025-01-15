@@ -1,7 +1,7 @@
 part of '../widget_keys.dart';
 
-class _WorkRequestCardKeys {
-  final title = const Key('work_request_card_title');
-  final subtitle = const Key('work_request_card_subtitle');
-  final button = const Key('work_request_card_button');
+abstract class WorkRequestCardKeys {
+  static const title = Key('work_request_card_title');
+  static const subtitle = Key('work_request_card_subtitle');
+  static const button = Key('work_request_card_button');
 }

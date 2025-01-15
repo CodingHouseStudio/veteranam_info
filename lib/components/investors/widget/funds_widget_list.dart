@@ -76,7 +76,7 @@ class _FundsWidgetList extends StatelessWidget {
                   child: Center(
                     child: Text(
                       context.l10n.thatEndOfList,
-                      key: KWidgetkeys.screen.investors.endListText,
+                      key: InvestorsKeys.endListText,
                       style:
                           AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                     ),
@@ -130,12 +130,12 @@ class _FundWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return DonatesCardsWidget(
-        key: KWidgetkeys.screen.investors.cards,
+        key: InvestorsKeys.cards,
         fundItems: fundDesk,
       );
     } else {
       return DonateCardWidget(
-        key: KWidgetkeys.screen.investors.card,
+        key: InvestorsKeys.card,
         hasSubtitle: true,
         fundModel: fundMob,
         isDesk: false,

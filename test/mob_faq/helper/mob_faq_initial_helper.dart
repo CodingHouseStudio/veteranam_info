@@ -7,17 +7,17 @@ Future<void> mobFaqInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.pageName),
+    find.byKey(NawbarKeys.pageName),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobFaq.buttonMock),
+    find.byKey(MobFaqKeys.buttonMock),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobFaq.list),
+    find.byKey(MobFaqKeys.list),
     findsWidgets,
   );
 

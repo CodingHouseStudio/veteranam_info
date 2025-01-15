@@ -47,7 +47,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                     child: SkeletonizerWidget(
                       isLoading: widget.isLoading,
                       child: DonateCardWidget(
-                        key: KWidgetkeys.screen.investors.card,
+                        key: InvestorsKeys.card,
                         fundModel: widget.fundItems.elementAt(index),
                         hasSubtitle: hasSubtitles.elementAt(index),
                         titleStyle: hasSubtitles.contains(true) && changeSize

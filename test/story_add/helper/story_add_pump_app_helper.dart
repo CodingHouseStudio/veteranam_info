@@ -22,7 +22,7 @@ Future<void> storyAddPumpAppHelper({
   await tester.pumpApp(const StoryAddScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.storyAdd.screen),
+    find.byKey(StoryAddKeys.screen),
     findsOneWidget,
   );
 

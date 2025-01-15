@@ -10,16 +10,16 @@ Future<void> storyAddNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.story.seccondaryButton),
+    find.byKey(StoryKeys.seccondaryButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.story.seccondaryButton,
+    itemKey: StoryKeys.seccondaryButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.story.seccondaryButton));
+  await tester.tap(find.byKey(StoryKeys.seccondaryButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.storyAdd.name),

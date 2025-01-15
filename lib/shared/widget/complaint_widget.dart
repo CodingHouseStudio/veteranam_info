@@ -29,7 +29,7 @@ class ComplaintWidget extends StatelessWidget {
         spacing: KPadding.kPaddingSize6,
         children: [
           IconWidget(
-            key: KWidgetkeys.widget.reportDialog.button,
+            key: ReportDialogKeys.button,
             icon: KIcon.brightnessAlert,
             background: background ?? AppColors.materialThemeWhite,
             padding: KPadding.kPaddingSize12,

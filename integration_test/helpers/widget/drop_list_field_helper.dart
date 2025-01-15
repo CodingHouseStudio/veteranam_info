@@ -10,7 +10,7 @@ Future<void> dropListFieldBoxHelper({
   required Key fieldKey,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.widget),
+    find.byKey(DropListFieldKeys.widget),
     findsOneWidget,
   );
 
@@ -20,7 +20,7 @@ Future<void> dropListFieldBoxHelper({
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   find.byKey(DropListFieldKeys.list),
   //   findsNothing,
   // );
 
@@ -30,19 +30,19 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.icon),
+    find.byKey(DropListFieldKeys.icon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
+    find.byKey(DropListFieldKeys.activeIcon),
     findsNothing,
   );
 
   // expect(
   //   find.descendant(
-  //     of: find.byKey(KWidgetkeys.widget.dropListField.list),
-  //     matching: find.byKey(KWidgetkeys.widget.dropListField.item),
+  //     of: find.byKey(DropListFieldKeys.list),
+  //     matching: find.byKey(DropListFieldKeys.item),
   //   ),
   //   findsNothing,
   // );
@@ -64,7 +64,7 @@ Future<void> dropListFieldBoxHelper({
   await tester.pumpAndSettle();
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   find.byKey(DropListFieldKeys.list),
   //   findsOneWidget,
   // );
 
@@ -74,17 +74,17 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
+    find.byKey(DropListFieldKeys.activeIcon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.icon),
+    find.byKey(DropListFieldKeys.icon),
     findsNothing,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.item),
+  //   find.byKey(DropListFieldKeys.item),
   //   findsWidgets,
   // );
 
@@ -99,7 +99,7 @@ Future<void> dropListFieldBoxHelper({
   await tester.pumpAndSettle();
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   find.byKey(DropListFieldKeys.list),
   //   findsNothing,
   // );
 
@@ -111,7 +111,7 @@ Future<void> dropListFieldBoxHelper({
   if (textWidget.data != null) return;
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+      of: find.byKey(DropListFieldKeys.widget),
       matching: find.text(textWidget.data!),
     ),
     findsOneWidget,
@@ -130,7 +130,7 @@ Future<void> dropListFieldBoxHelper({
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+      of: find.byKey(DropListFieldKeys.widget),
       matching: find.text(text),
     ),
     findsWidgets,
@@ -148,7 +148,7 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
   // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.item),
+  //   find.byKey(DropListFieldKeys.item),
   //   findsNothing,
   // );
 }

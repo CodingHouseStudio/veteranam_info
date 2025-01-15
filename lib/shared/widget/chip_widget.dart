@@ -18,14 +18,14 @@ class ChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return ChipDeskWidget(
-        widgetKey: KWidgetkeys.widget.chip.desk,
+        widgetKey: ChipKeys.desk,
         filter: filter,
         isSelected: isSelected,
         onSelected: onSelected,
       );
     } else {
       return ChipImplementationWidget(
-        widgetKey: KWidgetkeys.widget.chip.mob,
+        widgetKey: ChipKeys.mob,
         filter: filter,
         isSelected: isSelected,
         onSelected: onSelected,
@@ -132,13 +132,13 @@ class ChipImplementationWidget extends StatelessWidget {
             ),
             child: Text(
               filter.value.getTrsnslation(context),
-              key: KWidgetkeys.widget.chip.text,
+              key: ChipKeys.text,
               style: textStyle ?? AppTextStyle.materialThemeLabelLarge,
             ),
           ),
           if (!filterEmpty)
             AmountWidget(
-              key: KWidgetkeys.widget.chip.amount,
+              key: ChipKeys.amount,
               background: isSelected
                   ? AppColors.materialThemeBlack
                   : AppColors.materialThemeKeyColorsPrimary,

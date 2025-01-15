@@ -13,7 +13,7 @@ class DiscountCardDialog extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         return AlertDialog(
-          key: KWidgetkeys.screen.discountCard.dialog,
+          key: DiscountCardDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
           clipBehavior: Clip.hardEdge,
           insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),

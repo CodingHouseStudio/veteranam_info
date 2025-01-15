@@ -1,20 +1,20 @@
 part of '../widget_keys.dart';
 
-class _InvestorsKeys {
-  final screen = const Key('investors_screen');
-  // final buttonMock = const Key('investors_screen_button_mock');
-  // final point = const Key('investors_screen_point');
-  final title = const Key('investors_screen_title');
-  final feedbackTitle = const Key('investors_screen_feedback_title');
-  final feedbackSubtitle = const Key('investors_screen_feedback_subtitle');
-  final feedbackButton = const Key('investors_screen_feedback_button');
-  final rightImages = const Key('investors_screen_right_images');
-  final leftImages = const Key('investors_screen_left_images');
-  // final fundsPoint = const Key('investors_screen_funds_point');
-  final fundsTitle = const Key('investors_screen_funds_title');
-  final card = const Key('investors_screen_card');
-  // final cardLast = const Key('investors_screen_card_last');
-  final cards = const Key('investors_screen_cards');
-  final loadingButton = const Key('investors_screen_loading_button');
-  final endListText = const Key('investors_screen_end_list_text');
+abstract class InvestorsKeys {
+  static const screen = Key('investors_screen');
+  // static const buttonMock = Key('investors_screen_button_mock');
+  // static const point = Key('investors_screen_point');
+  static const title = Key('investors_screen_title');
+  static const feedbackTitle = Key('investors_screen_feedback_title');
+  static const feedbackSubtitle = Key('investors_screen_feedback_subtitle');
+  static const feedbackButton = Key('investors_screen_feedback_button');
+  static const rightImages = Key('investors_screen_right_images');
+  static const leftImages = Key('investors_screen_left_images');
+  // static const fundsPoint = Key('investors_screen_funds_point');
+  static const fundsTitle = Key('investors_screen_funds_title');
+  static const card = Key('investors_screen_card');
+  // static const cardLast = Key('investors_screen_card_last');
+  static const cards = Key('investors_screen_cards');
+  static const loadingButton = Key('investors_screen_loading_button');
+  static const endListText = Key('investors_screen_end_list_text');
 }

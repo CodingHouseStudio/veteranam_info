@@ -29,7 +29,7 @@ class _ConfirmPublishDiscountDialogState
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      key: KWidgetkeys.widget.confirmPublishDiscount.dialog,
+      key: ConfirmPublishDiscountKeys.dialog,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.minHeight640),
       child: Stack(
         alignment: Alignment.topRight,
@@ -37,7 +37,7 @@ class _ConfirmPublishDiscountDialogState
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize8),
             child: IconButton(
-              key: KWidgetkeys.widget.confirmPublishDiscount.closeIcon,
+              key: ConfirmPublishDiscountKeys.closeIcon,
               style: KButtonStyles.circularButtonStyle,
               onPressed: context.pop,
               icon: KIcon.close,
@@ -59,7 +59,7 @@ class _ConfirmPublishDiscountDialogState
                       const EdgeInsets.only(right: KPadding.kPaddingSize24),
                   child: Text(
                     '${context.l10n.send} ${context.l10n.verification}?',
-                    key: KWidgetkeys.widget.confirmPublishDiscount.title,
+                    key: ConfirmPublishDiscountKeys.title,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineLarge
                         : AppTextStyle.materialThemeHeadlineSmall,
@@ -71,7 +71,7 @@ class _ConfirmPublishDiscountDialogState
                   KSizedBox.kHeightSizedBox8,
                 // Android not support RichText Widget
                 Text.rich(
-                  key: KWidgetkeys.widget.confirmPublishDiscount.description,
+                  key: ConfirmPublishDiscountKeys.description,
                   TextSpan(
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeBodyLarge
@@ -112,8 +112,7 @@ class _ConfirmPublishDiscountDialogState
                 SizedBox(
                   width: double.infinity,
                   child: CheckPointWidget(
-                    key: KWidgetkeys.widget.confirmPublishDiscount
-                        .termsAndConditionsSwitcher,
+                    key: ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
                     onChanged: () => setState(() {
                       termsAndConditionsAgree = !termsAndConditionsAgree;
                     }),
@@ -127,8 +126,8 @@ class _ConfirmPublishDiscountDialogState
                       children: [
                         Text(
                           context.l10n.iAgreeWith,
-                          key: KWidgetkeys.widget.confirmPublishDiscount
-                              .termsAndConditionsText,
+                          key:
+                              ConfirmPublishDiscountKeys.termsAndConditionsText,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: widget.isDesk
@@ -136,7 +135,7 @@ class _ConfirmPublishDiscountDialogState
                               : AppTextStyle.materialThemeBodyMedium,
                         ),
                         InkWell(
-                          key: KWidgetkeys.widget.confirmPublishDiscount
+                          key: ConfirmPublishDiscountKeys
                               .termsAndConditionsButton,
                           onTap: () =>
                               context.goNamed(KRoute.termsAndConditions.name),
@@ -204,7 +203,7 @@ class _ConfirmPublishDiscountDialogState
 
   DoubleButtonWidget get confirmButton {
     return DoubleButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmPublishDiscount.sendButton,
+      widgetKey: ConfirmPublishDiscountKeys.sendButton,
       text: '${context.l10n.send} ${context.l10n.verification}',
       // color: background,
       isDesk: widget.isDesk,
@@ -229,7 +228,7 @@ class _ConfirmPublishDiscountDialogState
 
   Widget get unconfirmButton {
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.widget.confirmPublishDiscount.continueButton,
+      widgetKey: ConfirmPublishDiscountKeys.continueButton,
       align: widget.isDesk ? null : Alignment.center,
       onPressed: () => context.pop(),
       padding: const EdgeInsets.symmetric(

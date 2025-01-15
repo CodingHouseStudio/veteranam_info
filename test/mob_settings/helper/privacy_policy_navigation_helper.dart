@@ -11,20 +11,20 @@ Future<void> privacyPolicyNavigationHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
+    itemKey: MobSettingsKeys.feedbackButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.privacyPolicy),
+    find.byKey(MobSettingsKeys.privacyPolicy),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.privacyPolicy,
+    itemKey: MobSettingsKeys.privacyPolicy,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.privacyPolicy));
+  await tester.tap(find.byKey(MobSettingsKeys.privacyPolicy));
 
   await tester.pumpAndSettle();
 

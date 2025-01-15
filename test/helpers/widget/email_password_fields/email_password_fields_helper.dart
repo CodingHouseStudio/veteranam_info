@@ -7,112 +7,110 @@ Future<void> emailPasswordFieldsHelper({
 }) async {
   if (showPassword) {
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+      find.byKey(EmailPasswordFieldsKeys.fieldEmail),
       findsNothing,
     );
 
     // expect(
-    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+    //   find.byKey(EmailPasswordFieldsKeys.textEmail),
     //   findsNothing,
     // );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
+      find.byKey(EmailPasswordFieldsKeys.fieldPassword),
       findsOneWidget,
     );
 
     // expect(
-    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+    //   find.byKey(EmailPasswordFieldsKeys.textPassword),
     //   findsOneWidget,
     // );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
+      find.byKey(EmailPasswordFieldsKeys.buttonHidePassword),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
+      find.byKey(EmailPasswordFieldsKeys.iconHidePassword),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      find.byKey(EmailPasswordFieldsKeys.iconEyeOff),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      find.byKey(EmailPasswordFieldsKeys.iconEye),
       findsNothing,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff));
+    await tester.tap(find.byKey(EmailPasswordFieldsKeys.iconEyeOff));
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      find.byKey(EmailPasswordFieldsKeys.iconEye),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      find.byKey(EmailPasswordFieldsKeys.iconEyeOff),
       findsNothing,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye));
+    await tester.tap(find.byKey(EmailPasswordFieldsKeys.iconEye));
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      find.byKey(EmailPasswordFieldsKeys.iconEyeOff),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      find.byKey(EmailPasswordFieldsKeys.iconEye),
       findsNothing,
     );
   } else {
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+      find.byKey(EmailPasswordFieldsKeys.fieldEmail),
       findsOneWidget,
     );
 
     // expect(
-    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+    //   find.byKey(EmailPasswordFieldsKeys.textEmail),
     //   findsOneWidget,
     // );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
+      find.byKey(EmailPasswordFieldsKeys.fieldPassword),
       findsNothing,
     );
 
     // expect(
-    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+    //   find.byKey(EmailPasswordFieldsKeys.textPassword),
     //   findsNothing,
     // );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
+      find.byKey(EmailPasswordFieldsKeys.buttonHidePassword),
       findsNothing,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      find.byKey(EmailPasswordFieldsKeys.iconEyeOff),
       findsNothing,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      find.byKey(EmailPasswordFieldsKeys.iconEye),
       findsNothing,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
+      find.byKey(EmailPasswordFieldsKeys.iconHidePassword),
       findsNothing,
     );
   }

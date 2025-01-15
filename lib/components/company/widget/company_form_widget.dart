@@ -106,7 +106,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                                     left: KPadding.kPaddingSize24,
                                   ),
                             child: UserPhotoWidget(
-                              key: KWidgetkeys.screen.company.photo,
+                              key: CompanyKeys.photo,
                               imageBytes: _.image.value?.bytes,
                               onPressed: () => context
                                   .read<CompanyFormBloc>()
@@ -127,7 +127,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                           Expanded(
                             child: Text(
                               context.l10n.dataEditing,
-                              key: KWidgetkeys.screen.company.editText,
+                              key: CompanyKeys.editText,
                               style: widget.isDesk
                                   ? AppTextStyle.materialThemeHeadlineLarge
                                   : AppTextStyle.materialThemeHeadlineSmall,
@@ -140,14 +140,14 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       if (_.image.value != null)
                         Text(
                           context.l10n.changesNotSaved,
-                          key: KWidgetkeys.screen.company.imageEditText,
+                          key: CompanyKeys.imageEditText,
                           textAlign: TextAlign.center,
                           style: AppTextStyle
                               .materialThemeBodyMediumNeutralVariant60,
                         ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
-                        fieldKey: KWidgetkeys.screen.company.publicNameField,
+                        fieldKey: CompanyKeys.publicNameField,
                         controller: publicNameController,
                         labelText: context.l10n.brandName,
                         isRequired: true,
@@ -160,7 +160,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
-                        fieldKey: KWidgetkeys.screen.company.companyNameField,
+                        fieldKey: CompanyKeys.companyNameField,
                         controller: companyNameController,
                         isRequired: true,
                         description: context.l10n.companyNameDescription,
@@ -173,7 +173,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
-                        fieldKey: KWidgetkeys.screen.company.companyCodeField,
+                        fieldKey: CompanyKeys.companyCodeField,
                         controller: codeController,
                         isRequired: true,
                         labelText: context.l10n.companyCode,
@@ -186,7 +186,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
-                        fieldKey: KWidgetkeys.screen.company.userEmailField,
+                        fieldKey: CompanyKeys.userEmailField,
                         controller: emailController,
                         isRequired: true,
                         labelText: KMockText.email,
@@ -197,7 +197,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox32,
                       _textField(
-                        fieldKey: KWidgetkeys.screen.company.linkField,
+                        fieldKey: CompanyKeys.linkField,
                         controller: linkController,
                         labelText: context.l10n.linkOnWebsite,
                         onChanged: (text) => context
@@ -208,7 +208,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox16,
                       SendingTextWidget(
-                        textKey: KWidgetkeys.screen.company.submitingText,
+                        textKey: CompanyKeys.submitingText,
                         failureText: _.failure?.value(context),
                         sendingText: context.l10n.changesSendInProgress,
                         successText: _.formState == CompanyFormEnum.success
@@ -222,7 +222,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       ),
                       KSizedBox.kHeightSizedBox16,
                       DoubleButtonWidget(
-                        widgetKey: KWidgetkeys.screen.company.saveButton,
+                        widgetKey: CompanyKeys.saveButton,
                         text: context
                                 .read<CompanyWatcherBloc>()
                                 .state
@@ -282,12 +282,12 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
               if (context.read<CompanyWatcherBloc>().state.company.isEmpty)
                 Text(
                   context.l10n.deleteCompanyEmptyMessage,
-                  key: KWidgetkeys.screen.company.deleteNotEnabledText,
+                  key: CompanyKeys.deleteNotEnabledText,
                   style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
                 )
               else
                 SendingTextWidget(
-                  textKey: KWidgetkeys.screen.company.deleteNotEnabledText,
+                  textKey: CompanyKeys.deleteNotEnabledText,
                   failureText: null,
                   sendingText: context.l10n.deleteCompanyLoadingMessage,
                   successText: context.l10n.deleteCompanyMessage,
@@ -343,7 +343,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     required bool isDesk,
   }) =>
       ButtonAdditionalWidget(
-        key: KWidgetkeys.screen.company.logOutButton,
+        key: CompanyKeys.logOutButton,
         text: context.l10n.logOut,
         picture: KIcon.logOut,
         align: Alignment.center,
@@ -384,7 +384,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
         (context.read<CompanyFormBloc>().state.deleteIsPossible ?? false) &&
             context.read<CompanyWatcherBloc>().state.company.isNotEmpty;
     return SecondaryButtonWidget(
-      widgetKey: KWidgetkeys.screen.company.deleteButton,
+      widgetKey: CompanyKeys.deleteButton,
       isDesk: isDesk,
       align: Alignment.center,
       style: KButtonStyles.borderNeutralButtonStyle.copyWith(

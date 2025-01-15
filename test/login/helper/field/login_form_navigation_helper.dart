@@ -8,7 +8,7 @@ Future<void> loginFormNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.login.fields),
+    find.byKey(LoginKeys.fields),
     findsOneWidget,
   );
 
@@ -19,10 +19,10 @@ Future<void> loginFormNavigationHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.login.button,
+    itemKey: LoginKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
+  await tester.tap(find.byKey(LoginKeys.button));
 
   await tester.pumpAndSettle();
 

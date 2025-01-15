@@ -37,7 +37,7 @@ class MessageFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
-      widgetKey: KWidgetkeys.widget.messageField.widget,
+      widgetKey: MessageFieldKeys.widget,
       focusNode: focusNode, isRequired: isRequired,
       // disposeFocusNode: disposeFocusNode,
       errorText: errorText,

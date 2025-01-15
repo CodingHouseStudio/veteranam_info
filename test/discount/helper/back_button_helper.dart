@@ -13,28 +13,27 @@ Future<void> discountBackButtonHelper({
   if (cardIsEmpty) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discount.invalidLinkBackButton,
+      itemKey: DiscountKeys.invalidLinkBackButton,
     );
 
     expect(
-      find.byKey(KWidgetkeys.screen.discount.invalidLinkBackButton),
+      find.byKey(DiscountKeys.invalidLinkBackButton),
       findsWidgets,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.screen.discount.invalidLinkBackButton));
+    await tester.tap(find.byKey(DiscountKeys.invalidLinkBackButton));
   } else {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discount.backButton,
+      itemKey: DiscountKeys.backButton,
     );
 
     expect(
-      find.byKey(KWidgetkeys.screen.discount.backButton),
+      find.byKey(DiscountKeys.backButton),
       findsWidgets,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.screen.discount.backButton));
+    await tester.tap(find.byKey(DiscountKeys.backButton));
   }
 
   await tester.pumpAndSettle();

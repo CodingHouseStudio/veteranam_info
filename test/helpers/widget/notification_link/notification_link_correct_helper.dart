@@ -14,7 +14,7 @@ Future<void> notificationLinkCorrectHelper(
   expect(find.text(KTestVariables.linkModel.link), findsNothing);
 
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.thankText),
+    find.byKey(NotificationLinkKeys.thankText),
     findsOneWidget,
   );
 }

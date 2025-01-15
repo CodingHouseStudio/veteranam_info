@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _DoanteCardKeys {
-  final widget = const Key('donate_card');
-  final image = const Key('donate_card_image');
-  final title = const Key('donate_card_title');
-  final subtitle = const Key('donate_card_subtitle');
-  final button = const Key('donate_card_button');
+abstract class DonateCardKeys {
+  static const widget = Key('donate_card');
+  static const image = Key('donate_card_image');
+  static const title = Key('donate_card_title');
+  static const subtitle = Key('donate_card_subtitle');
+  static const button = Key('donate_card_button');
 }

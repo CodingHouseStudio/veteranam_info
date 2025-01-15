@@ -18,25 +18,25 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     // return Column(
     //   crossAxisAlignment:
     //       isDesk ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-    //   //key: KWidgetkeys.widget.signUpBottomButtons.desk,
+    //   //key: SignUpBottomButtonsKeys.desk,
     //   children: [
     // Row(
     //   children: [
     //     const Expanded(
     //       child: Divider(
-    //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+    //           //key: SignUpBottomButtonsKeys.divider,
     //           ),
     //     ),
     //     KSizedBox.kWidthSizedBox32,
     //     Text(
     //       context.l10n.or,
-    //       key: KWidgetkeys.widget.signUpBottomButtons.or,
+    //       key: SignUpBottomButtonsKeys.or,
     //       style: AppTextStyle.hint14,
     //     ),
     //     KSizedBox.kWidthSizedBox32,
     //     const Expanded(
     //       child: Divider(
-    //           //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+    //           //key: SignUpBottomButtonsKeys.divider,
     //           ),
     //     ),
     //   ],
@@ -44,7 +44,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     // KSizedBox.kHeightSizedBox40,
     // Text(
     //   title,
-    //   key: KWidgetkeys.widget.signUpBottomButtons.title,
+    //   key: SignUpBottomButtonsKeys.title,
     //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
     // ),
     // KSizedBox.kHeightSizedBox16,
@@ -60,7 +60,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     // KSizedBox.kWidthSizedBox16,
     // Expanded(
     //   child: buildBottomButton(
-    //     key: KWidgetkeys.widget.signUpBottomButtons.apple,
+    //     key: SignUpBottomButtonsKeys.apple,
     //     text: context.l10n.apple,
     //     icon: KImage.apple(),
     //   ),
@@ -71,17 +71,17 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     // );
     // } else {
     //   return Column(
-    // key: KWidgetkeys.widget.signUpBottomButtons.mob,
+    // key: SignUpBottomButtonsKeys.mob,
     // children: [
     // Text(
     //   context.l10n.or,
-    //   key: KWidgetkeys.widget.signUpBottomButtons.or,
+    //   key: SignUpBottomButtonsKeys.or,
     //   style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
     // ),
     // KSizedBox.kHeightSizedBox16,
     // Text(
     //   context.l10n.signUpWith,
-    //   key: KWidgetkeys.widget.signUpBottomButtons.title,
+    //   key: SignUpBottomButtonsKeys.title,
     //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
     // ),
     // KSizedBox.kHeightSizedBox16,
@@ -96,7 +96,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     // ),
     // KSizedBox.kHeightSizedBox16,
     // buildBottomButton(
-    //   key: KWidgetkeys.widget.signUpBottomButtons.apple,
+    //   key: SignUpBottomButtonsKeys.apple,
     //   text: context.l10n.apple,
     //   icon: KImage.apple(),
     // ),
@@ -110,7 +110,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     required bool isDesk,
   }) =>
       _button(
-        key: KWidgetkeys.widget.signUpBottomButtons.google,
+        key: SignUpBottomButtonsKeys.google,
         context: context,
         isDesk: isDesk,
         text: context.l10n.google,
@@ -125,7 +125,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
   //   required bool isDesk,
   // }) =>
   //     _button(
-  //       key: KWidgetkeys.widget.signUpBottomButtons.facebook,
+  //       key: SignUpBottomButtonsKeys.facebook,
   //       context: context,
   //       isDesk: isDesk,
   //       text: context.l10n.facebook,

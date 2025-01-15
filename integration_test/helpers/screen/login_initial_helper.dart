@@ -6,7 +6,7 @@ import '../../test_dependency.dart';
 Future<void> loginInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.login.screen), findsOneWidget);
+  expect(find.byKey(LoginKeys.screen), findsOneWidget);
 
   await scrollingHelperInt(
     tester: tester,
@@ -14,17 +14,17 @@ Future<void> loginInitialHelper(
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.login.bottomButtons),
+  //   find.byKey(LoginKeys.bottomButtons),
   //   findsOneWidget,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.button),
+    find.byKey(LoginKeys.button),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.card),
+    find.byKey(LoginKeys.card),
     findsOneWidget,
   );
 
@@ -34,22 +34,22 @@ Future<void> loginInitialHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.fields),
+    find.byKey(LoginKeys.fields),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.signUpButton),
+    find.byKey(LoginKeys.signUpButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.signUpText),
+    find.byKey(LoginKeys.signUpText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.title),
+    find.byKey(LoginKeys.title),
     findsOneWidget,
   );
 

@@ -63,12 +63,12 @@ class DiscountTitleWidget extends StatelessWidget {
                   },
                 )
               : null,
-          titleKey: KWidgetkeys.screen.discounts.title,
+          titleKey: DiscountsKeys.title,
           isDesk: isDesk,
           preDividerWidget: isDesk
               ? null
-              : DiscountsFilterMob(
-                  key: KWidgetkeys.screen.discounts.advancedFilterMob,
+              : const DiscountsFilterMob(
+                  key: DiscountsKeys.advancedFilterMob,
                 ),
         ),
       ),

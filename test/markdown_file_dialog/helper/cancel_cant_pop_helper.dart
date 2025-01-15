@@ -11,11 +11,11 @@ Future<void> cancelCanNotPopHelper({
   required bool business,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon),
+    find.byKey(PrivacyPolicyDialogKeys.closeIcon),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon));
+  await tester.tap(find.byKey(PrivacyPolicyDialogKeys.closeIcon));
   if (business) {
     verify(
       () => mockGoRouter.goNamed(KRoute.discountsAdd.name),
