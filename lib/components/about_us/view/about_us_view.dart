@@ -7,7 +7,7 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AboutUsBodyWidget(
+    return const AboutUsBodyWidget(
       key: AboutUsKeys.screen,
     );
   }

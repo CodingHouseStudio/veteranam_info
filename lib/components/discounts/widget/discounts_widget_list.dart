@@ -129,7 +129,7 @@ class _AdvancedFilterDesk extends StatelessWidget {
           required overlapsContent,
           required shrinkOffset,
         }) =>
-            SizedBox(
+            const SizedBox(
           height: double.infinity,
           child: AdvancedFilterContent(
             key: DiscountsKeys.advancedFilterDesk,

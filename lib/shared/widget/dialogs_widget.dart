@@ -559,19 +559,19 @@ class _DialogsWidget {
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return const AlertDialog(
             key: DiscountCardDialogKeys.dialog,
-            insetPadding: const EdgeInsets.symmetric(
+            insetPadding: EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize20,
             ),
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: KBorderRadius.kBorderRadius32,
             ),
             backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+            contentPadding: EdgeInsets.all(KPadding.kPaddingSize16),
             scrollable: true,
             clipBehavior: Clip.hardEdge,
-            content: const MobUpdateDialog(),
+            content: MobUpdateDialog(),
           );
         },
       );

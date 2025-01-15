@@ -7,9 +7,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginBlocprovider(
+    return const LoginBlocprovider(
       key: LoginKeys.screen,
-      childWidget: const LoginBodyWidget(),
+      childWidget: LoginBodyWidget(),
     );
   }
 }

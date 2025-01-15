@@ -11,7 +11,7 @@ class MobFaqScreen extends StatelessWidget {
         // MobFaqBlocprovider(
         //   key: MobFaqKeys.screen,
         //   childWidget:
-        MobFaqBodyWidget(key: MobFaqKeys.screen);
+        const MobFaqBodyWidget(key: MobFaqKeys.screen);
     // );
   }
 }

@@ -7,7 +7,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBlocprovider(
+    return const ProfileBlocprovider(
       childWidget: ProfileBodyWidget(
         key: ProfileKeys.screen,
       ),

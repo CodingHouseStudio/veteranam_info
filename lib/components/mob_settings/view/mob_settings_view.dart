@@ -7,7 +7,7 @@ class MobSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MobSettingsBodyWidget(
+    return const MobSettingsBodyWidget(
       key: MobSettingsKeys.screen,
     );
   }

@@ -7,7 +7,7 @@ class ConsultationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConsultationBodyWidget(
+    return const ConsultationBodyWidget(
       key: ConsultationKeys.screen,
     );
   }

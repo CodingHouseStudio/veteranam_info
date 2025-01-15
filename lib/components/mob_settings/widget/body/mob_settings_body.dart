@@ -41,7 +41,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
                 context.l10n.language,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
-              LanguagesSwitcherWidget(
+              const LanguagesSwitcherWidget(
                 key: MobSettingsKeys.languagesSwitcher,
                 decoration: KWidgetTheme.boxDecorationNawbar,
                 unactiveIconColor: AppColors.materialThemeWhite,
@@ -88,7 +88,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
           ),
           child: TextButton(
             onPressed: context.copyEmail,
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -118,8 +118,8 @@ class MobSettingsBodyWidget extends StatelessWidget {
           ),
         ),
         KSizedBox.kHeightSizedBox16,
-        Padding(
-          padding: const EdgeInsets.symmetric(
+        const Padding(
+          padding: EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize16,
           ),
           child: SocialMediaLinks(

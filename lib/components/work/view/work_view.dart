@@ -7,6 +7,6 @@ class WorkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WorkBodyWidget(key: WorkKeys.screen);
+    return const WorkBodyWidget(key: WorkKeys.screen);
   }
 }

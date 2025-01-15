@@ -7,6 +7,6 @@ class UserRoleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UserRoleBodyWidget(key: UserRoleKeys.screen);
+    return const UserRoleBodyWidget(key: UserRoleKeys.screen);
   }
 }

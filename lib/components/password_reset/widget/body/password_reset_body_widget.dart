@@ -170,7 +170,7 @@ class PasswordResetBodyWidget extends StatelessWidget {
                     ),
                   )
                 else
-                  Center(
+                  const Center(
                     child: CircularProgressIndicator(
                       key: PasswordResetKeys.loadingIndicator,
                       backgroundColor: AppColors.materialThemeKeyColorsNeutral,

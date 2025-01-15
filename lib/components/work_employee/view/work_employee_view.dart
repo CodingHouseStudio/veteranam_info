@@ -7,9 +7,9 @@ class WorkEmployeeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WorkEmployeeBlocprovider(
+    return const WorkEmployeeBlocprovider(
       key: WorkEmployeeKeys.screen,
-      childWidget: const WorkEmployeeBody(),
+      childWidget: WorkEmployeeBody(),
     );
   }
 }

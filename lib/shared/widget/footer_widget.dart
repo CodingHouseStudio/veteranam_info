@@ -92,7 +92,7 @@ class _FooterWidgetList extends StatelessWidget {
                     alignment: WrapAlignment.end,
                     crossAxisAlignment: WrapCrossAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         '${KAppText.madeBy}  |',
                         key: FooterKeys.madeBy,
                         style:
@@ -147,13 +147,13 @@ class _FooterWidgetList extends StatelessWidget {
               facebookKey: FooterKeys.facebookIcon,
             ),
             KSizedBox.kHeightSizedBox40,
-            Align(
+            const Align(
               key: FooterKeys.logo,
               alignment: Alignment.centerLeft,
               child: KIcon.logo,
             ),
             KSizedBox.kHeightSizedBox24,
-            Text(
+            const Text(
               '${KAppText.madeBy}  | ',
               key: FooterKeys.madeBy,
               style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
