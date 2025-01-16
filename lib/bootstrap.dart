@@ -40,6 +40,13 @@ class AppBlocObserver extends BlocObserver {
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
+
+// Set only Vertical orientation
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   if (!Config.kIsWeb) {
     if (PlatformEnum.getPlatform.isAndroid) {
       SystemChrome.setSystemUIOverlayStyle(
