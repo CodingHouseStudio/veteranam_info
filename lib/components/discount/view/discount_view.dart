@@ -14,7 +14,7 @@ class DiscountScreen extends StatelessWidget {
       discount: discount,
       discountId: discountId,
       childWidget: Scaffold(
-        key: KWidgetkeys.screen.discount.screen,
+        key: DiscountKeys.screen,
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Config.isWeb
             ? null

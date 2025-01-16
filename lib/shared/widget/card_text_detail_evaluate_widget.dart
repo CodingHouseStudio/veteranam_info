@@ -78,7 +78,7 @@ class _CardTextDetailEvaluateWidgetState
       filters: widget.bottom,
       image: widget.image,
       childWidget: Center(
-        key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
+        key: CardTextDetailEvaluateKeys.widget,
         child: ConstrainedBox(
           constraints: const BoxConstraints(
             maxWidth: KMinMaxSize.maxWidth640,
@@ -136,12 +136,10 @@ class _CardTextDetailEvaluateWidgetState
                         padding: KPadding.kPaddingSize12,
                         icon: like //evaluation == EvaluationEnum.like
                             ? KIcon.activeLike.copyWith(
-                                key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                    .iconActiveLike,
+                                key: CardTextDetailEvaluateKeys.iconActiveLike,
                               )
                             : KIcon.like.copyWith(
-                                key: KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconLike,
+                                key: CardTextDetailEvaluateKeys.iconLike,
                               ),
                       ),
                       Text(
@@ -158,19 +156,16 @@ class _CardTextDetailEvaluateWidgetState
                     cardId: widget.cardId,
                     iconBackground: AppColors.materialThemeKeyColorsNeutral,
                     share: widget.share,
-                    complaintKey:
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconComplaint,
-                    shareKey:
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
-                    webSiteKey:
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
+                    complaintKey: CardTextDetailEvaluateKeys.iconComplaint,
+                    shareKey: CardTextDetailEvaluateKeys.iconShare,
+                    webSiteKey: CardTextDetailEvaluateKeys.iconWebsite,
                   ),
                   // [
                   //   if (widget.link != null)
                   //     buildIcon(
                   //       icon: KIcon.website.copyWith(
                   // key:
-                  // KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite,
+                  // CardTextDetailEvaluateKeys.iconWebsite,
                   //       ),
                   //       text: context.l10n.website,
                   //       onPressed: null,

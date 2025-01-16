@@ -24,7 +24,7 @@ Future<void> myStoryPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.myStory.screen),
+    find.byKey(MyStoryKeys.screen),
     findsOneWidget,
   );
 

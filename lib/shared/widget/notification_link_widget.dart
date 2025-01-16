@@ -40,7 +40,7 @@ class NotificationLinkWidget extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  key: KWidgetkeys.widget.notificationLink.text,
+                  key: NotificationLinkKeys.text,
                   style: isDesk
                       ? AppTextStyle.materialThemeTitleLarge
                       : AppTextStyle.materialThemeTitleMedium,
@@ -85,7 +85,7 @@ class NotificationLinkWidget extends StatelessWidget {
           showThankText
               ? context.l10n.linkThankMessage
               : context.l10n.linkLimitMessage,
-          key: KWidgetkeys.widget.notificationLink.thankText,
+          key: NotificationLinkKeys.thankText,
           style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           textAlign: TextAlign.center,
         ),
@@ -97,7 +97,7 @@ class NotificationLinkWidget extends StatelessWidget {
     BuildContext context,
   ) =>
       TextFieldWidget(
-        widgetKey: KWidgetkeys.widget.notificationLink.field,
+        widgetKey: NotificationLinkKeys.field,
         onChanged: onChanged,
         isDesk: isDesk,
         suffixIcon: KIcon.link,
@@ -110,7 +110,7 @@ class NotificationLinkWidget extends StatelessWidget {
         text: context.l10n.send,
         isDesk: isDesk,
         onPressed: sendOnPressed,
-        widgetKey: KWidgetkeys.widget.notificationLink.button,
+        widgetKey: NotificationLinkKeys.button,
         hasAlign: isDesk,
         mobTextWidth: double.infinity,
       );

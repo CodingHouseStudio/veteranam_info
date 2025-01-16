@@ -11,22 +11,22 @@ Future<void> myDiscountsInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.title),
+        find.byKey(MyDiscountsKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
+        find.byKey(MyDiscountsKeys.iconAdd),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.myDiscounts.subtitle),
+      //   find.byKey(MyDiscountsKeys.subtitle),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.card),
+        find.byKey(MyDiscountsKeys.card),
         findsWidgets,
       );
 
@@ -36,52 +36,50 @@ Future<void> myDiscountsInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.status),
+        find.byKey(MyDiscountsKeys.status),
         findsWidgets,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.myDiscounts.status,
+        itemKey: MyDiscountsKeys.status,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
+        find.byKey(MyDiscountsKeys.iconTrash),
         findsWidgets,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
+        itemKey: MyDiscountsKeys.iconTrash,
       );
 
       // await tester
-      //     .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
+      //     .tap(find.byKey(MyDiscountsKeys.iconTrash).first);
 
       // await tester.pumpAndSettle();
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
+        find.byKey(MyDiscountsKeys.iconEdit),
         findsWidgets,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.myDiscounts.deactivate,
+        itemKey: MyDiscountsKeys.deactivate,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.deactivate),
+        find.byKey(MyDiscountsKeys.deactivate),
         findsWidgets,
       );
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.deactivate).first);
+      await tester.tap(find.byKey(MyDiscountsKeys.deactivate).first);
 
       await tester.pumpAndSettle();
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.deactivate).first);
+      await tester.tap(find.byKey(MyDiscountsKeys.deactivate).first);
 
       await tester.pumpAndSettle();
 

@@ -23,7 +23,7 @@ Future<void> mobSettingsPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.screen),
+    find.byKey(MobSettingsKeys.screen),
     findsOneWidget,
   );
 

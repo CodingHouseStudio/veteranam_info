@@ -96,14 +96,14 @@ abstract class KTestText {
     // properties of an object (e.g., routeName) in constant expressions within
     // a switch case.
     final routeKeys = <String, Key>{
-      KRoute.aboutUs.name: KWidgetkeys.screen.aboutUs.screen,
-      KRoute.support.name: KWidgetkeys.screen.investors.screen,
-      KRoute.stories.name: KWidgetkeys.screen.story.screen,
-      KRoute.discounts.name: KWidgetkeys.screen.discounts.screen,
-      KRoute.login.name: KWidgetkeys.screen.login.screen,
-      KRoute.work.name: KWidgetkeys.screen.work.screen,
-      KRoute.information.name: KWidgetkeys.screen.information.screen,
-      KRoute.consultation.name: KWidgetkeys.screen.consultation.screen,
+      KRoute.aboutUs.name: AboutUsKeys.screen,
+      KRoute.support.name: InvestorsKeys.screen,
+      KRoute.stories.name: StoryKeys.screen,
+      KRoute.discounts.name: DiscountsKeys.screen,
+      KRoute.login.name: LoginKeys.screen,
+      KRoute.work.name: WorkKeys.screen,
+      KRoute.information.name: InformationKeys.screen,
+      KRoute.consultation.name: ConsultationKeys.screen,
     };
 
     return routeKeys[routeName] ?? const Key('');
@@ -115,8 +115,8 @@ abstract class KTestText {
     // properties of an object (e.g., routeName) in constant expressions within
     // a switch case.
     final routeKeys = <String, Key>{
-      KRoute.support.name: KWidgetkeys.widget.mobNavigation.investors,
-      KRoute.home.name: KWidgetkeys.widget.mobNavigation.settings,
+      KRoute.support.name: MobNavigationKeys.investors,
+      KRoute.home.name: MobNavigationKeys.settings,
     };
 
     return routeKeys[routeName] ?? const Key('');

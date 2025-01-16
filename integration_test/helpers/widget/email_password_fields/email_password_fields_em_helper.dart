@@ -6,27 +6,27 @@ Future<void> emailPasswordFieldsEmHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+    find.byKey(EmailPasswordFieldsKeys.fieldEmail),
     findsWidgets,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+  //   find.byKey(EmailPasswordFieldsKeys.textEmail),
   //   findsWidgets,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
+    find.byKey(EmailPasswordFieldsKeys.fieldPassword),
     findsNothing,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+  //   find.byKey(EmailPasswordFieldsKeys.textPassword),
   //   findsNothing,
   // );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+    find.byKey(EmailPasswordFieldsKeys.fieldEmail),
     email,
   );
 

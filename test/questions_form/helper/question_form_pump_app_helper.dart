@@ -19,7 +19,7 @@ Future<void> questionFormPumpAppHelper({
   await tester.pumpApp(const QuestionsFormScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.questionsForm.screen),
+    find.byKey(QuestionsFormKeys.screen),
     findsOneWidget,
   );
 

@@ -10,17 +10,17 @@ Future<void> workCardNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.workCard.button),
+    find.byKey(WorkCardKeys.button),
     findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.workCard.button,
+    itemKey: WorkCardKeys.button,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.workCard.button).first,
+    find.byKey(WorkCardKeys.button).first,
     warnIfMissed: false,
   );
 

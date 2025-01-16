@@ -5,34 +5,34 @@ Future<void> dropDownButtonHelper({
   required WidgetTester tester,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.dropDownButton.widget),
+    find.byKey(DropDownButtonKeys.widget),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropDownButton.loginButton),
+    find.byKey(DropDownButtonKeys.loginButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropDownButton.loginButton),
+    find.byKey(DropDownButtonKeys.loginButton),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.loginBusinessButton),
+    find.byKey(UserRoleKeys.loginBusinessButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.loginUserButton),
+    find.byKey(UserRoleKeys.loginUserButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropDownButton.loginButton),
+    find.byKey(DropDownButtonKeys.loginButton),
     warnIfMissed: false,
   );
 

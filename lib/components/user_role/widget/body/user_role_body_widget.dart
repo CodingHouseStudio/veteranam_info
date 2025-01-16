@@ -24,7 +24,7 @@ class UserRoleBodyWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  key: KWidgetkeys.screen.userRole.title,
+                  key: UserRoleKeys.title,
                   context.l10n.userRole,
                   style: isDesk
                       ? AppTextStyle.materialThemeHeadlineLarge
@@ -33,7 +33,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                 ),
                 KSizedBox.kHeightSizedBox16,
                 Text(
-                  key: KWidgetkeys.screen.userRole.subtitle,
+                  key: UserRoleKeys.subtitle,
                   context.l10n.userRoleSubtitle,
                   style: AppTextStyle.materialThemeBodyLarge,
                   textAlign: isDesk ? TextAlign.center : TextAlign.start,
@@ -44,7 +44,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox32,
                 DoubleButtonWidget(
                   align: Alignment.center,
-                  widgetKey: KWidgetkeys.screen.userRole.signUpBusinessButton,
+                  widgetKey: UserRoleKeys.signUpBusinessButton,
                   text: context.l10n.signUpBusiness,
                   isDesk: isDesk,
                   onPressed: () => context.read<UrlCubit>().launchUrl(
@@ -64,7 +64,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox24,
                 Center(
                   child: TextButton(
-                    key: KWidgetkeys.screen.userRole.signUpUserButton,
+                    key: UserRoleKeys.signUpUserButton,
                     onPressed: () => context.goNamed(KRoute.signUp.name),
                     style: KButtonStyles.borderBlackButtonStyle,
                     child: Padding(
@@ -94,14 +94,14 @@ class UserRoleBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox32,
         Row(
-          key: KWidgetkeys.screen.userRole.loginButton,
+          key: UserRoleKeys.loginButton,
           mainAxisAlignment:
               isDesk ? MainAxisAlignment.center : MainAxisAlignment.start,
           spacing: KPadding.kPaddingSize16,
           children: [
             Text(
               context.l10n.doYouHavenAccount,
-              key: KWidgetkeys.screen.signUp.loginText,
+              key: SignUpKeys.loginText,
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             PopupMenuButtonWidget<int>(
@@ -112,13 +112,13 @@ class UserRoleBodyWidget extends StatelessWidget {
                   event: () => context.read<UrlCubit>().launchUrl(
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
-                  key: KWidgetkeys.screen.userRole.loginBusinessButton,
+                  key: UserRoleKeys.loginBusinessButton,
                   value: 1,
                 ),
                 DropDownItem(
                   text: context.l10n.asUser,
                   event: () => context.goNamed(KRoute.login.name),
-                  key: KWidgetkeys.screen.userRole.loginUserButton,
+                  key: UserRoleKeys.loginUserButton,
                   value: 2,
                 ),
               ],

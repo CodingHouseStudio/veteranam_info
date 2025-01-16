@@ -17,13 +17,13 @@ class LanguagesSwitcherWidget extends StatelessWidget {
     return BlocBuilder<LanguageCubit, Language>(
       buildWhen: (previous, current) => previous.value != current.value,
       builder: (context, language) => IconButton(
-        key: KWidgetkeys.widget.languageSwitcher.widget,
+        key: LanguageSwitcherKeys.widget,
         style: KButtonStyles.withoutStyle,
         onPressed: () => context.read<LanguageCubit>().languageChanged(),
         icon: DecoratedBox(
           decoration: decoration ?? KWidgetTheme.boxDecorationWhiteMain,
           child: Row(
-            // key: KWidgetkeys.widget.languageSwitcher.item,
+            // key: LanguageSwitcherKeys.item,
             mainAxisSize: MainAxisSize.min,
             children: List.generate(
               Language.values.length,
@@ -59,7 +59,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
         ),
         child: Text(
           languageName,
-          key: KWidgetkeys.widget.languageSwitcher.text,
+          key: LanguageSwitcherKeys.text,
           style: isSelected
               ? AppTextStyle.materialThemeTitleMediumNeutral
               : AppTextStyle.materialThemeTitleMedium,

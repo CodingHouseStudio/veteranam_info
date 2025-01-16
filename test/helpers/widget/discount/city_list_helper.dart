@@ -8,24 +8,24 @@ Future<void> cityListHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.cityList.icon,
+    itemKey: CityListKeys.icon,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.cityList.icon),
+    find.byKey(CityListKeys.icon),
     findsWidgets,
   );
 
-  if (find.byKey(KWidgetkeys.widget.cityList.text).evaluate().isNotEmpty) {
+  if (find.byKey(CityListKeys.text).evaluate().isNotEmpty) {
     expect(
-      find.byKey(KWidgetkeys.widget.cityList.text),
+      find.byKey(CityListKeys.text),
       findsWidgets,
     );
   }
 
-  if (find.byKey(KWidgetkeys.widget.cityList.longText).evaluate().isNotEmpty) {
+  if (find.byKey(CityListKeys.longText).evaluate().isNotEmpty) {
     expect(
-      find.byKey(KWidgetkeys.widget.cityList.longText),
+      find.byKey(CityListKeys.longText),
       findsWidgets,
     );
 

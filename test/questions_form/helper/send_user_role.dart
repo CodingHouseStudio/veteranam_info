@@ -17,10 +17,10 @@ Future<void> sendUserRoleHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.questionsForm.button,
+    itemKey: QuestionsFormKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.questionsForm.button));
+  await tester.tap(find.byKey(QuestionsFormKeys.button));
 
   await tester.pumpAndSettle();
 

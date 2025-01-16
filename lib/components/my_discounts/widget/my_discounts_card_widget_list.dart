@@ -11,7 +11,7 @@ List<Widget> _myDiscountsCardWidgetList({
           .state
           .loadedDiscountsModelItems,
       cardWidget: ({required modelItem, required isLoading}) => MyDiscountsCard(
-        key: KWidgetkeys.screen.myDiscounts.card,
+        key: MyDiscountsKeys.card,
         discountModel: modelItem,
         isDesk: isDesk,
         isLoading: isLoading,

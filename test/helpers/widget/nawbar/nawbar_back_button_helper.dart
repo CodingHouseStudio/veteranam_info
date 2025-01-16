@@ -9,9 +9,9 @@ Future<void> nawbarBackButtonHelper({
   required MockGoRouter mockGoRouter,
   required String routeName,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.nawbar.backButton), findsOneWidget);
+  expect(find.byKey(NawbarKeys.backButton), findsOneWidget);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.backButton));
+  await tester.tap(find.byKey(NawbarKeys.backButton));
 
   await tester.pumpAndSettle();
 

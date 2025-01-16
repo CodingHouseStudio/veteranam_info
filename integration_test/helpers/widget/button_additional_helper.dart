@@ -8,39 +8,34 @@ import '../../test_dependency.dart';
 Future<void> additionalButtonHelper(
   WidgetTester tester,
 ) async {
-  final isDesk = find
-      .byKey(KWidgetkeys.widget.buttonAdditional.desk)
-      .evaluate()
-      .isNotEmpty;
+  final isDesk = find.byKey(ButtonAdditionalKeys.desk).evaluate().isNotEmpty;
 
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.desk),
+    find.byKey(ButtonAdditionalKeys.desk),
     isDesk ? findsOneWidget : findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.mob),
+    find.byKey(ButtonAdditionalKeys.mob),
     isDesk ? findsNothing : findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: isDesk
-        ? KWidgetkeys.widget.buttonAdditional.desk
-        : KWidgetkeys.widget.buttonAdditional.mob,
+    itemKey: isDesk ? ButtonAdditionalKeys.desk : ButtonAdditionalKeys.mob,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.icon),
+    find.byKey(ButtonAdditionalKeys.icon),
     findsOneWidget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.buttonAdditional.text),
+    find.byKey(ButtonAdditionalKeys.text),
     findsOneWidget,
   );
 
   if (isDesk) {
     final widgetLocation = tester.getCenter(
-      find.byKey(KWidgetkeys.widget.buttonAdditional.text).first,
+      find.byKey(ButtonAdditionalKeys.text).first,
     );
 
     final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);

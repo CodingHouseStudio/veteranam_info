@@ -19,24 +19,24 @@ Future<void> discountsInitialHelper(
     test: () async {
       // if (!Config.isWeb) {
       //   expect(
-      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     find.byKey(NawbarKeys.pageName),
       //     findsOneWidget,
       //   );
       //   //   expect(
-      //   //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+      //   //     find.byKey(DiscountsKeys.titlePoint),
       //   //     findsOneWidget,
       //   //   );
       //   // } else {
       //   await mobNavigationHelper(tester);
       // } else {
       expect(
-        find.byKey(KWidgetkeys.screen.discounts.title),
+        find.byKey(DiscountsKeys.title),
         findsOneWidget,
       );
       // }
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.discounts.filter),
+      //   find.byKey(DiscountsKeys.filter),
       //   findsOneWidget,
       // );
 
@@ -44,20 +44,20 @@ Future<void> discountsInitialHelper(
 
       // if (Config.isBusiness) {
       //   expect(
-      //     find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+      //     find.byKey(DiscountsKeys.addDiscountButton),
       //     findsOneWidget,
       //   );
       // }
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.discounts.title,
+        itemKey: DiscountsKeys.title,
       );
 
       // await advancedFilterHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.discounts.card),
+        find.byKey(DiscountsKeys.card),
         findsWidgets,
       );
 
@@ -65,11 +65,11 @@ Future<void> discountsInitialHelper(
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.discounts.card,
+        itemKey: DiscountsKeys.card,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.discounts.buttonMock),
+      //   find.byKey(DiscountsKeys.buttonMock),
       //   findsNothing,
       // );
 
@@ -79,21 +79,21 @@ Future<void> discountsInitialHelper(
       // );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.discounts.button),
+      //   find.byKey(DiscountsKeys.button),
       //   findsOneWidget,
       // );
     },
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //   find.byKey(DiscountsKeys.buttonIcon),
   //   findsNothing,
   // );
 
   // await changeWindowSizeHelper(
   //   tester: tester,
   //   test: () async => expect(
-  //     find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //     find.byKey(DiscountsKeys.buttonIcon),
   //     findsOneWidget,
   //   ),
   // );

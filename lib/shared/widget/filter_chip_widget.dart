@@ -27,7 +27,7 @@ class FilterChipBodyWidget extends StatelessWidget {
         child: SizedBox(
           height: KSize.kPixel48,
           child: ListView.builder(
-            key: KWidgetkeys.widget.filterChip.widget,
+            key: FilterChipKeys.widget,
             scrollDirection: Axis.horizontal,
             addAutomaticKeepAlives: false,
             addRepaintBoundaries: false,
@@ -140,7 +140,7 @@ class _FilterChipItemWidget extends StatelessWidget {
             right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
           ),
           child: ChipWidget(
-            key: KWidgetkeys.widget.filterChip.chips,
+            key: FilterChipKeys.chips,
             filter: filterItem,
             onSelected: (isSelected) => onSelected(filterItem.value),
             isSelected: filterItem.isSelected,

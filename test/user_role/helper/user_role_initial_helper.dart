@@ -11,31 +11,31 @@ Future<void> userRoleInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.title),
+        find.byKey(UserRoleKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.subtitle),
+        find.byKey(UserRoleKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.signUpBusinessButton),
+        find.byKey(UserRoleKeys.signUpBusinessButton),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.userRole.signUpUserButton,
+        itemKey: UserRoleKeys.signUpUserButton,
       );
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.signUpUserButton),
+        find.byKey(UserRoleKeys.signUpUserButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.loginButton),
+        find.byKey(UserRoleKeys.loginButton),
         findsOneWidget,
       );
     },

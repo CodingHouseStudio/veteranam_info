@@ -7,12 +7,12 @@ Future<void> dialogSnackBarTextHelper({
 }) async {
   //final matcher = showDialog ? findsOneWidget : findsNothing;
 
-  // expect(find.byKey(KWidgetkeys.widget.dialogs.failure), matcher);
+  // expect(find.byKey(DialogsKeys.failure), matcher);
 
-  // expect(find.byKey(KWidgetkeys.widget.dialogs.failureButton), findsNothing);
+  // expect(find.byKey(DialogsKeys.failureButton), findsNothing);
 
   expect(
-    find.byKey(KWidgetkeys.widget.dialogs.snackBarText),
+    find.byKey(DialogsKeys.snackBarText),
     showDialog ? findsOneWidget : findsNothing,
   );
 }

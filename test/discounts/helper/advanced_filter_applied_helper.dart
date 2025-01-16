@@ -12,7 +12,7 @@ Future<void> advancedFilterAppliedHelper({
   await advancedFilterHelper(tester);
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterMobAppliedButton),
+    find.byKey(DiscountsKeys.advancedFilterMobAppliedButton),
   );
 
   await tester.pumpAndSettle();

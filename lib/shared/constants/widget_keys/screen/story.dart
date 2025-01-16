@@ -1,13 +1,13 @@
 part of '../widget_keys.dart';
 
-class _StoryKeys {
-  final screen = const Key('story_screen');
-  final title = const Key('story_screen_title');
-  final subtitle = const Key('story_screen_subtitle');
-  final seccondaryButton = const Key('story_screen_filter');
-  final card = const Key('story_screen_card');
-  final buttonMock = const Key('story_screen_button_mock');
-  // final cardLast = const Key('story_screen_card_last');
-  // final button = const Key('story_screen_button');
-  // final buttonIcon = const Key('story_screen_button_icon');
+abstract class StoryKeys {
+  static const screen = Key('story_screen');
+  static const title = Key('story_screen_title');
+  static const subtitle = Key('story_screen_subtitle');
+  static const seccondaryButton = Key('story_screen_filter');
+  static const card = Key('story_screen_card');
+  static const buttonMock = Key('story_screen_button_mock');
+  // static const cardLast = Key('story_screen_card_last');
+  // static const button = Key('story_screen_button');
+  // static const buttonIcon = Key('story_screen_button_icon');
 }

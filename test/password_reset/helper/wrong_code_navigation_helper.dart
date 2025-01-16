@@ -10,16 +10,16 @@ Future<void> wrongCodeNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.passwordReset.confirmButton),
+    find.byKey(PasswordResetKeys.confirmButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.passwordReset.confirmButton,
+    itemKey: PasswordResetKeys.confirmButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.passwordReset.confirmButton));
+  await tester.tap(find.byKey(PasswordResetKeys.confirmButton));
 
   await tester.pumpAndSettle();
 

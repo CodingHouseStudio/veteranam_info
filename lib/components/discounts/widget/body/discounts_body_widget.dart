@@ -35,7 +35,7 @@ class _DiscountsBodyWidget extends StatelessWidget {
                 : AppVersionEnum.mobile.horizontalPadding,
           );
           return CustomScrollView(
-            key: KWidgetkeys.widget.scaffold.scroll,
+            key: ScaffoldKeys.scroll,
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
               const NetworkBanner(),

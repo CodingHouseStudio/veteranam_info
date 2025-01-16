@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobUpdateDialog extends StatelessWidget {
@@ -9,17 +8,17 @@ class MobUpdateDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: KWidgetkeys.widget.mobUpdate.dialog,
+      key: MobUpdateKeys.dialog,
       children: [
         Text(
           context.l10n.appUpdateAvailable,
-          key: KWidgetkeys.widget.mobUpdate.title,
+          key: MobUpdateKeys.title,
           style: AppTextStyle.materialThemeTitleMediumNeutral,
         ),
         KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.appUpdateAvailableDescription,
-          key: KWidgetkeys.widget.mobUpdate.description,
+          key: MobUpdateKeys.description,
           style: AppTextStyle.materialThemeBodyMediumNeutral,
         ),
         Row(
@@ -27,22 +26,22 @@ class MobUpdateDialog extends StatelessWidget {
           spacing: KPadding.kPaddingSize8,
           children: [
             TextButton(
-              key: KWidgetkeys.widget.mobUpdate.lateButton,
-              onPressed: () => context.pop(),
+              key: MobUpdateKeys.lateButton,
+              onPressed: () => context.popDialog(),
               child: Text(
                 context.l10n.later,
                 style: AppTextStyle.materialThemeTitleMediumNeutral,
               ),
             ),
             TextButton(
-              key: KWidgetkeys.widget.mobUpdate.updateButton,
+              key: MobUpdateKeys.updateButton,
               onPressed: () {
                 context.read<UrlCubit>().launchUrl(
                       url: PlatformEnum.getPlatform.isAndroid
                           ? KAppText.androidInstallUrl
                           : KAppText.iphoneInstallUrl,
                     );
-                context.pop();
+                context.popDialog();
               },
               style: KButtonStyles.whiteButtonStyle,
               child: Text(

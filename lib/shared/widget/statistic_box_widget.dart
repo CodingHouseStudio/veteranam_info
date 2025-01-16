@@ -35,7 +35,7 @@
 //               children: [
 //                 Text(
 //                   title,
-//                   key: KWidgetkeys.widget.statisticBox.title,
+//                   key: StatisticBoxKeys.title,
 //                   style: AppTextStyle.text40,
 //                   maxLines: 1,
 //                 ),
@@ -45,7 +45,7 @@
 //                     Expanded(
 //                       child: Text(
 //                         subtitle,
-//                         key: KWidgetkeys.widget.statisticBox.subtitle,
+//                         key: StatisticBoxKeys.subtitle,
 //                         style: AppTextStyle.text16,
 //                         maxLines: 1,
 //                       ),
@@ -59,7 +59,7 @@
 //               children: [
 //                 Text(
 //                   title,
-//                   key: KWidgetkeys.widget.statisticBox.title,
+//                   key: StatisticBoxKeys.title,
 //                   style: AppTextStyle.text24,
 //                   maxLines: 1,
 //                 ),
@@ -69,7 +69,7 @@
 //                     Expanded(
 //                       child: Text(
 //                         subtitle,
-//                         key: KWidgetkeys.widget.statisticBox.subtitle,
+//                         key: StatisticBoxKeys.subtitle,
 //                         style: AppTextStyle.text14,
 //                         maxLines: 1,
 //                       ),

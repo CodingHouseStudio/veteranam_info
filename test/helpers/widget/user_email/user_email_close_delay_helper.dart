@@ -16,11 +16,11 @@ Future<void> userEmailCloseDelayHelper({
       await userEmailHelper(tester: tester, hover: false);
 
       expect(
-        find.byKey(KWidgetkeys.widget.userEmailDialog.icon),
+        find.byKey(UserEmailDialogKeys.icon),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
+      await tester.tap(find.byKey(UserEmailDialogKeys.icon));
 
       await tester.pump();
 
@@ -32,7 +32,7 @@ Future<void> userEmailCloseDelayHelper({
         const Duration(seconds: KDimensions.emailCloseDelay * 2),
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
+      await tester.tap(find.byKey(UserEmailDialogKeys.icon));
 
       await tester.pumpAndSettle();
 

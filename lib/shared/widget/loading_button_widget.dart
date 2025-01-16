@@ -90,7 +90,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
       onHover: _handleHover,
       child: RepaintBoundary(
         child: Stack(
-          key: KWidgetkeys.widget.loadingButton.desk,
+          key: LoadingButtonKeys.desk,
           alignment: Alignment.centerRight,
           children: [
             AnimatedPadding(
@@ -109,7 +109,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
                 ),
                 child: Text(
                   widget.text,
-                  key: KWidgetkeys.widget.loadingButton.text,
+                  key: LoadingButtonKeys.text,
                   style: AppTextStyle.materialThemeTitleMediumWhite,
                 ),
               ),
@@ -125,8 +125,8 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
               },
               child: IconWidget(
                 key: isHovering
-                    ? KWidgetkeys.widget.loadingButton.loadingIcon
-                    : KWidgetkeys.widget.loadingButton.icon,
+                    ? LoadingButtonKeys.loadingIcon
+                    : LoadingButtonKeys.icon,
                 icon: KIcon.refreshWhite,
                 padding: KPadding.kPaddingSize12,
                 background: AppColors.materialThemeKeyColorsSecondary,
@@ -162,7 +162,7 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
       onPressed: onPressed,
       style: KButtonStyles.withoutStyle,
       child: Stack(
-        key: KWidgetkeys.widget.loadingButton.mob,
+        key: LoadingButtonKeys.mob,
         alignment: Alignment.centerRight,
         children: [
           Container(
@@ -174,12 +174,12 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
             ),
             child: Text(
               text,
-              key: KWidgetkeys.widget.loadingButton.text,
+              key: LoadingButtonKeys.text,
               style: AppTextStyle.materialThemeTitleMediumWhite,
             ),
           ),
-          IconWidget(
-            key: KWidgetkeys.widget.loadingButton.icon,
+          const IconWidget(
+            key: LoadingButtonKeys.icon,
             icon: KIcon.refreshWhite,
             padding: KPadding.kPaddingSize12,
             background: AppColors.materialThemeKeyColorsSecondary,

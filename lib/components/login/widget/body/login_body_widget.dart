@@ -15,7 +15,7 @@ class LoginBodyWidget extends StatelessWidget {
       // ),
       builder: (context, _) {
         return ScaffoldWidget(
-          key: KWidgetkeys.screen.login.card,
+          key: LoginKeys.card,
           mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
             precent: KDimensions.thirtyPercent,
             verticalPadding: KPadding.kPaddingSize80,
@@ -30,7 +30,7 @@ class LoginBodyWidget extends StatelessWidget {
             if (!isDesk) KSizedBox.kHeightSizedBox24,
             ShortTitleIconWidget(
               title: context.l10n.login,
-              titleKey: KWidgetkeys.screen.login.title,
+              titleKey: LoginKeys.title,
               isDesk: isDesk,
             ),
             if (isDesk)
@@ -38,7 +38,7 @@ class LoginBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
             EmailPasswordFieldsWidget(
-              key: KWidgetkeys.screen.login.fields,
+              key: LoginKeys.fields,
               isDesk: isDesk,
               showPassword: showPassword(_.formState),
               onChangedEmail: (value) =>
@@ -62,7 +62,7 @@ class LoginBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox16,
             DoubleButtonWidget(
-              widgetKey: KWidgetkeys.screen.login.button,
+              widgetKey: LoginKeys.button,
               text: showPassword(_.formState)
                   ? context.l10n.login
                   : context.l10n.next,
@@ -83,7 +83,7 @@ class LoginBodyWidget extends StatelessWidget {
               darkMode: true,
             ),
             SendingTextWidget(
-              textKey: KWidgetkeys.screen.login.submitingText,
+              textKey: LoginKeys.submitingText,
               failureText: _.failure?.value(context),
               sendingText: context.l10n.loggingInWait,
               successText: null,
@@ -97,7 +97,7 @@ class LoginBodyWidget extends StatelessWidget {
             //     ),
             //     child: Text(
             //       context.l10n.loggingInWait,
-            //       key: KWidgetkeys.screen.login.loadingText,
+            //       key: LoginKeys.loadingText,
             //       style:
             // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
             //     ),
@@ -116,14 +116,14 @@ class LoginBodyWidget extends StatelessWidget {
                 children: [
                   Text(
                     context.l10n.donotYouHavenAccount,
-                    key: KWidgetkeys.screen.login.signUpText,
+                    key: LoginKeys.signUpText,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
-                        key: KWidgetkeys.screen.login.signUpButton,
+                        key: LoginKeys.signUpButton,
                         onPressed: () => context.goNamed(KRoute.signUp.name),
                         style: KButtonStyles.borderBlackButtonStyle,
                         child: Text(
@@ -161,7 +161,7 @@ class LoginBodyWidget extends StatelessWidget {
               //   alignment: Alignment.centerLeft,
               //   child:
               SignUpLoginServiceWidget(
-                // key: KWidgetkeys.widget.signUpBottomButtons.google,
+                // key: SignUpBottomButtonsKeys.google,
                 // text: context.l10n.google,
                 // picture: KImage.google(),
                 // onPressed: () => context

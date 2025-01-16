@@ -13,17 +13,17 @@ Future<void> emailWrongHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendSubtitle),
+    find.byKey(PwResetEmailKeys.resendSubtitle),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.delayText),
+    find.byKey(PwResetEmailKeys.delayText),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.resendButton),
+    find.byKey(PwResetEmailKeys.resendButton),
     findsNothing,
   );
 }

@@ -1,14 +1,14 @@
 part of '../widget_keys.dart';
 
-class _ReportDialogKeys {
-  final widget = const Key('report_dialog');
-  final title = const Key('report_dialog_title');
-  final button = const Key('report_dialog_button');
-  final sendButton = const Key('report_dialog_send_button');
-  final subtitle = const Key('report_dialog_subtitle');
-  final checkPoint = const Key('report_dialog_check_point');
-  final checkPointError = const Key('report_dialog_check_point_error');
-  final emailField = const Key('report_dialog_email_field');
-  final messageField = const Key('report_dialog_message_field');
-  final cancel = const Key('report_dialog_cancel');
+abstract class ReportDialogKeys {
+  static const widget = Key('report_dialog');
+  static const title = Key('report_dialog_title');
+  static const button = Key('report_dialog_button');
+  static const sendButton = Key('report_dialog_send_button');
+  static const subtitle = Key('report_dialog_subtitle');
+  static const checkPoint = Key('report_dialog_check_point');
+  static const checkPointError = Key('report_dialog_check_point_error');
+  static const emailField = Key('report_dialog_email_field');
+  static const messageField = Key('report_dialog_message_field');
+  static const cancel = Key('report_dialog_cancel');
 }

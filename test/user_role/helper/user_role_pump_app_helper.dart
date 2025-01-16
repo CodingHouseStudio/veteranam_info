@@ -11,7 +11,7 @@ Future<void> userRolePumpAppHelper({
   await tester.pumpApp(const UserRoleScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.screen),
+    find.byKey(UserRoleKeys.screen),
     findsOneWidget,
   );
 

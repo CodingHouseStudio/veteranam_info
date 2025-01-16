@@ -11,17 +11,16 @@ Future<void> signUpButtonsNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.signUpBusinessButton),
+    find.byKey(UserRoleKeys.signUpBusinessButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.userRole.signUpBusinessButton,
+    itemKey: UserRoleKeys.signUpBusinessButton,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.userRole.signUpBusinessButton));
+  await tester.tap(find.byKey(UserRoleKeys.signUpBusinessButton));
 
   await tester.pumpAndSettle();
 
@@ -31,11 +30,11 @@ Future<void> signUpButtonsNavigationHelper({
   // ).called(1);
 
   expect(
-    find.byKey(KWidgetkeys.screen.userRole.signUpUserButton),
+    find.byKey(UserRoleKeys.signUpUserButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.userRole.signUpUserButton));
+  await tester.tap(find.byKey(UserRoleKeys.signUpUserButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.signUp.name),

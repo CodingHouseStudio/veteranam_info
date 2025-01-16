@@ -29,7 +29,7 @@ class CityListWidget extends StatelessWidget {
       spacing: KPadding.kPaddingSize8,
       children: [
         KIcon.location.copyWith(
-          key: KWidgetkeys.widget.cityList.icon,
+          key: CityListKeys.icon,
         ),
         if (cityList.isNotEmpty)
           Expanded(
@@ -44,7 +44,7 @@ class CityListWidget extends StatelessWidget {
                         showFullText: showFullText,
                         context: context,
                       ),
-                      key: KWidgetkeys.widget.cityList.text,
+                      key: CityListKeys.text,
                       style: AppTextStyle.materialThemeLabelLarge,
                     )
                   : _CityWidgetListExpanded(
@@ -75,7 +75,7 @@ class _CityWidgetListExpanded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      key: KWidgetkeys.widget.cityList.markdownFulllList,
+      key: CityListKeys.markdownFulllList,
       // mainAxisSize: MainAxisSize.min,
       runSpacing: KPadding.kPaddingSize8,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -100,7 +100,7 @@ class _CityWidgetListExpanded extends StatelessWidget {
     );
 
     // RichText(
-    //   key: KWidgetkeys.widget.cityList.markdownFulllList,
+    //   key: CityListKeys.markdownFulllList,
     //   text: TextSpan(
     //     text: cityList.getCityString(
     //       context: context,
@@ -130,8 +130,8 @@ class _CityWidgetListExpanded extends StatelessWidget {
     // );
     // return MarkdownBody(
     //   key: isExpanded
-    //       ? KWidgetkeys.widget.cityList.markdownFulllList
-    //       : KWidgetkeys.widget.cityList.markdown,
+    //       ? CityListKeys.markdownFulllList
+    //       : CityListKeys.markdown,
     //   data: widget.cityList
     //       .getCityList(showFullText: !isExpanded, context: context),
     //   onTapLink: (text, href, title) => setState(() {

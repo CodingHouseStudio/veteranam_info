@@ -12,26 +12,26 @@ Future<void> workEmployeeInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.title),
+        find.byKey(WorkEmployeeKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.subtitle),
+        find.byKey(WorkEmployeeKeys.subtitle),
         findsOneWidget,
       );
 
       await workEmployeeFilterHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.cards),
+        find.byKey(WorkEmployeeKeys.cards),
         findsWidgets,
       );
 
       await workCardHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.buttonMock),
+        find.byKey(WorkEmployeeKeys.buttonMock),
         findsNothing,
       );
 
@@ -46,7 +46,7 @@ Future<void> workEmployeeInitialHelper(
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.requestCard),
+        find.byKey(WorkEmployeeKeys.requestCard),
         findsOneWidget,
       );
 
@@ -54,11 +54,11 @@ Future<void> workEmployeeInitialHelper(
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.widget.workRequestCard.button,
+        itemKey: WorkRequestCardKeys.button,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workEmployee.pagination),
+        find.byKey(WorkEmployeeKeys.pagination),
         findsOneWidget,
       );
 

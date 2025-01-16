@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _LoadingButtonKeys {
-  final desk = const Key('loading_button_desk');
-  final mob = const Key('loading_button_mob');
-  final text = const Key('loading_button_text');
-  final icon = const Key('loading_button_icon');
-  final loadingIcon = const Key('loading_button_loading_icon');
+abstract class LoadingButtonKeys {
+  static const desk = Key('loading_button_desk');
+  static const mob = Key('loading_button_mob');
+  static const text = Key('loading_button_text');
+  static const icon = Key('loading_button_icon');
+  static const loadingIcon = Key('loading_button_loading_icon');
 }

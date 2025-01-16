@@ -20,7 +20,7 @@ class FeedbackBodyWidget extends StatelessWidget {
           return FocusTraversalGroup(
             child: Semantics(
               child: CustomScrollView(
-                key: KWidgetkeys.widget.scaffold.scroll,
+                key: ScaffoldKeys.scroll,
                 cacheExtent: KDimensions.listCacheExtent,
                 slivers: [
                   const NetworkBanner(),

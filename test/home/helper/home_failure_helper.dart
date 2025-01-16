@@ -17,27 +17,27 @@ Future<void> homeFailureHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp500,
-    itemKey: KWidgetkeys.screen.home.faqTitle,
+    itemKey: HomeKeys.faqTitle,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.faqSubtitle,
+    itemKey: HomeKeys.faqSubtitle,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.faqSkeletonizer),
+    find.byKey(HomeKeys.faqSkeletonizer),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.home.faq),
+    find.byKey(HomeKeys.faq),
     findsNothing,
   );
 
   // await loadingFailureHelper(
   //   tester: tester,
-  //   card: KWidgetkeys.screen.home.faq,
+  //   card: HomeKeys.faq,
   //   buttonMock: null,
   // );
 }

@@ -10,11 +10,11 @@ Future<void> cancelHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.newsCard.closeButton),
+    find.byKey(NewsCardDialogKeys.closeButton),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.newsCard.closeButton));
+  await tester.tap(find.byKey(NewsCardDialogKeys.closeButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.information.name),

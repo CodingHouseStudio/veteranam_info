@@ -12,16 +12,16 @@ Future<void> discountsAddDialogHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton),
+    find.byKey(DiscountsAddKeys.cancelButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cancelButton,
+    itemKey: DiscountsAddKeys.cancelButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton));
+  await tester.tap(find.byKey(DiscountsAddKeys.cancelButton));
 
   await tester.pumpAndSettle();
 

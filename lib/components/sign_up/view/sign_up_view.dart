@@ -7,9 +7,9 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SignUpBlocprovider(
-      key: KWidgetkeys.screen.signUp.screen,
-      childWidget: const SignUpBodyWidget(),
+    return const SignUpBlocprovider(
+      key: SignUpKeys.screen,
+      childWidget: SignUpBodyWidget(),
     );
   }
 }

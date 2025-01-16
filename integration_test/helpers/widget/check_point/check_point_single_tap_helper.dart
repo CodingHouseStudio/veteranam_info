@@ -10,30 +10,30 @@ Future<void> chekPointSignleTapHelper({
 }) async {
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.widget),
+    find.byKey(CheckPointKeys.widget),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.text),
+    find.byKey(CheckPointKeys.text),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    find.byKey(CheckPointKeys.ammount),
     hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemKey: CheckPointKeys.widget,
     itemIndex: 3,
   );
-  final keys = find.byKey(KWidgetkeys.widget.checkPoint.widget);
+  final keys = find.byKey(CheckPointKeys.widget);
 
   await tester.tap(tapItemLast ? keys.at(3) : keys.first);
 }

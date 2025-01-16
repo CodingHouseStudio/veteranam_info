@@ -15,12 +15,12 @@ Future<void> discountCardInitialHelper({
       final matcher = cardIsEmpty ? findsNothing : findsOneWidget;
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountCard.widget),
+        find.byKey(DiscountCardDialogKeys.widget),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discountCard.closeButton),
+        find.byKey(DiscountCardDialogKeys.closeButton),
         matcher,
       );
 

@@ -95,16 +95,16 @@ Future<void> _deskLoadingHelper(
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.loadingButton),
+    find.byKey(ScaffoldKeys.loadingButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+  await tester.tap(find.byKey(ScaffoldKeys.loadingButton));
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.endListText),
+    find.byKey(ScaffoldKeys.endListText),
     findsNothing,
   );
 }
@@ -119,12 +119,12 @@ Future<void> _mobileLoadingHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.loadingButton),
+    find.byKey(ScaffoldKeys.loadingButton),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.endListText),
+    find.byKey(ScaffoldKeys.endListText),
     findsNothing,
   );
 
@@ -134,7 +134,7 @@ Future<void> _mobileLoadingHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.endListText),
+    find.byKey(ScaffoldKeys.endListText),
     findsNothing,
   );
 }

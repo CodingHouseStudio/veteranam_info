@@ -1,13 +1,13 @@
 part of '../widget_keys.dart';
 
-class _InformationKeys {
-  final screen = const Key('information_screen');
-  final title = const Key('information_screen_title');
-  // final subtitle = const Key('information_screen_subtitle');
-  final filter = const Key('information_screen_filter');
-  final card = const Key('information_screen_card');
-  // final cardLast = const Key('information_screen_card_last');
-  final buttonMock = const Key('information_screen_button_mock');
-  // final button = const Key('information_screen_button');
-  // final buttonIcon = const Key('information_screen_button_icon');
+abstract class InformationKeys {
+  static const screen = Key('information_screen');
+  static const title = Key('information_screen_title');
+  // static const subtitle = Key('information_screen_subtitle');
+  static const filter = Key('information_screen_filter');
+  static const card = Key('information_screen_card');
+  // static const cardLast = Key('information_screen_card_last');
+  static const buttonMock = Key('information_screen_button_mock');
+  // static const button = Key('information_screen_button');
+  // static const buttonIcon = Key('information_screen_button_icon');
 }

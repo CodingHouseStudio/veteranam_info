@@ -5,12 +5,12 @@ Future<void> errorInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.error.title),
+    find.byKey(ErrorKeys.title),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.error.button),
+    find.byKey(ErrorKeys.button),
     findsOneWidget,
   );
 }

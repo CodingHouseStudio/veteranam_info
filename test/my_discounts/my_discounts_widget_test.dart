@@ -360,7 +360,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
           ),
-          // lastCard: KWidgetkeys.screen.discounts.cardLast,
+          // lastCard: DiscountsKeys.cardLast,
         );
         group(
           '${KGroupText.goTo} ',

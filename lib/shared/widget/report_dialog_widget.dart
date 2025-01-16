@@ -17,12 +17,12 @@ class ReportDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      key: KWidgetkeys.widget.reportDialog.widget,
+      key: ReportDialogKeys.widget,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth460),
       child: BlocConsumer<ReportBloc, ReportState>(
         listener: (context, state) {
           if (state.formState == ReportEnum.success) {
-            context.pop();
+            context.popDialog();
             // afterEvent?.call();
           }
         },
@@ -32,7 +32,7 @@ class ReportDialogWidget extends StatelessWidget {
           children: [
             Text(
               context.l10n.reportPublication,
-              key: KWidgetkeys.widget.reportDialog.title,
+              key: ReportDialogKeys.title,
               style: isDesk
                   ? AppTextStyle.materialThemeHeadlineLarge
                   : AppTextStyle.materialThemeHeadlineSmall,
@@ -61,7 +61,7 @@ class ReportDialogWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                key: KWidgetkeys.widget.confirmDialog.subtitle,
+                key: ConfirmDialogKeys.subtitle,
                 style: isDesk
                     ? AppTextStyle.materialThemeBodyLarge
                     : AppTextStyle.materialThemeBodyMedium,
@@ -77,7 +77,7 @@ class ReportDialogWidget extends StatelessWidget {
               //   children: [
               //     DoubleButtonWidget(
               //       widgetKey:
-              //           KWidgetkeys.widget.confirmDialog.confirmButton,
+              //           ConfirmDialogKeys.confirmButton,
               //       text: 'test',
               //       darkMode: true,
               //       // textColor: AppColors.materialThemeWhite,
@@ -95,7 +95,7 @@ class ReportDialogWidget extends StatelessWidget {
               //     ),
               //     SecondaryButtonWidget(
               //       widgetKey:
-              //           KWidgetkeys.widget.confirmDialog.unconfirmButton,
+              //           ConfirmDialogKeys.unconfirmButton,
               //       onPressed: () {
               //         context.pop(false);
               //       },
@@ -117,12 +117,12 @@ class ReportDialogWidget extends StatelessWidget {
                 _.reasonComplaint?.isOther ?? true
                     ? context.l10n.addComment
                     : context.l10n.addEmailAndMessage,
-                key: KWidgetkeys.widget.reportDialog.subtitle,
+                key: ReportDialogKeys.subtitle,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
               KSizedBox.kHeightSizedBox24,
               CheckPointWidget(
-                key: KWidgetkeys.widget.reportDialog.checkPoint,
+                key: ReportDialogKeys.checkPoint,
                 onChanged: null,
                 isCheck: true,
                 text: context
@@ -135,7 +135,7 @@ class ReportDialogWidget extends StatelessWidget {
               if (!context.userHasEmail) ...[
                 KSizedBox.kHeightSizedBox16,
                 TextFieldWidget(
-                  widgetKey: KWidgetkeys.widget.reportDialog.emailField,
+                  widgetKey: ReportDialogKeys.emailField,
                   onChanged: (text) => context
                       .read<ReportBloc>()
                       .add(ReportEvent.emailUpdated(text)),
@@ -149,7 +149,7 @@ class ReportDialogWidget extends StatelessWidget {
               // if (_.reasonComplaint?.isOther ?? true) ...[
               KSizedBox.kHeightSizedBox16,
               MessageFieldWidget(
-                key: KWidgetkeys.widget.reportDialog.messageField,
+                key: ReportDialogKeys.messageField,
                 changeMessage: (text) => context
                     .read<ReportBloc>()
                     .add(ReportEvent.messageUpdated(text)),
@@ -165,7 +165,7 @@ class ReportDialogWidget extends StatelessWidget {
             ] else ...[
               Text(
                 context.l10n.specifyReasonForComplaint,
-                key: KWidgetkeys.widget.reportDialog.subtitle,
+                key: ReportDialogKeys.subtitle,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
               if (isDesk)
@@ -191,8 +191,7 @@ class ReportDialogWidget extends StatelessWidget {
                           KSizedBox.kHeightSizedBox16,
                           Text(
                             context.l10n.checkPointError,
-                            key:
-                                KWidgetkeys.widget.reportDialog.checkPointError,
+                            key: ReportDialogKeys.checkPointError,
                             style: AppTextStyle.materialThemeBodySmallError,
                           ),
                         ]
@@ -204,7 +203,7 @@ class ReportDialogWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox32,
             DoubleButtonWidget(
-              widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
+              widgetKey: ReportDialogKeys.sendButton,
               text: _.formState == ReportEnum.sumbittedWithoutEmail
                   ? context.l10n.cancel
                   : _.formState.isNext
@@ -239,7 +238,7 @@ class ReportDialogWidget extends StatelessWidget {
     required bool isDesk,
   }) =>
       CheckPointWidget(
-        key: KWidgetkeys.widget.reportDialog.checkPoint,
+        key: ReportDialogKeys.checkPoint,
         onChanged: () => context
             .read<ReportBloc>()
             .add(ReportEvent.reasonComplaintUpdated(reasonComplaint)),

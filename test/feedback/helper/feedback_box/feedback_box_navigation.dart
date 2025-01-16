@@ -16,15 +16,15 @@ Future<void> feedbackBoxNavigationHelper({
     test: () async {
       // await scrollingHelper(
       //   tester: tester,
-      //   itemKey: KWidgetkeys.screen.feedback.boxSubtitle,
+      //   itemKey: FeedbackKeys.boxSubtitle,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.feedback.boxBackButton),
+        find.byKey(FeedbackKeys.boxBackButton),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxBackButton));
+      await tester.tap(find.byKey(FeedbackKeys.boxBackButton));
 
       if (Config.isWeb) {
         verify(
@@ -42,11 +42,11 @@ Future<void> feedbackBoxNavigationHelper({
 
       // await scrollingHelper(
       //   tester: tester,
-      //   itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
+      //   itemKey: FeedbackKeys.boxInformationBox,
       // );
 
       // await tester
-      //     .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
+      //     .tap(find.byKey(FeedbackKeys.boxInformationBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -55,7 +55,7 @@ Future<void> feedbackBoxNavigationHelper({
       // ).called(1);
 
       // await tester.tap(find.byKey(
-      // KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // FeedbackKeys.boxInvestorsBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -63,7 +63,7 @@ Future<void> feedbackBoxNavigationHelper({
       //   ),
       // ).called(1);
 
-      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
+      // await tester.tap(find.byKey(FeedbackKeys.boxStoryBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -73,11 +73,11 @@ Future<void> feedbackBoxNavigationHelper({
 
       // await scrollingHelper(
       //   tester: tester,
-      //   itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
+      //   itemKey: FeedbackKeys.boxInformationBox,
       // );
 
       // await tester
-      //     .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
+      //     .tap(find.byKey(FeedbackKeys.boxInformationBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -86,7 +86,7 @@ Future<void> feedbackBoxNavigationHelper({
       // ).called(1);
 
       // await tester.tap(find.byKey(
-      // KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // FeedbackKeys.boxInvestorsBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -94,7 +94,7 @@ Future<void> feedbackBoxNavigationHelper({
       //   ),
       // ).called(1);
 
-      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
+      // await tester.tap(find.byKey(FeedbackKeys.boxStoryBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(

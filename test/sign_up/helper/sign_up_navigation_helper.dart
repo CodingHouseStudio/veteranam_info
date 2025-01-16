@@ -10,11 +10,11 @@ Future<void> signUpNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.signUp.loginButton),
+    find.byKey(SignUpKeys.loginButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.signUp.loginButton));
+  await tester.tap(find.byKey(SignUpKeys.loginButton));
 
   verify(() => mockGoRouter.goNamed(KRoute.login.name)).called(1);
 }

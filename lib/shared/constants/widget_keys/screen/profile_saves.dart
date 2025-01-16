@@ -1,9 +1,9 @@
 part of '../widget_keys.dart';
 
-class _ProfileSavesKeys {
-  final screen = const Key('profile_saves_screen');
-  final title = const Key('profile_saves_screen_title');
-  final subtitle = const Key('profile_saves_screen_subtitle');
-  final discountCard = const Key('profile_saves_screen_discount_card');
-  final workCard = const Key('profile_saves_screen_work_card');
+abstract class ProfileSavesKeys {
+  static const screen = Key('profile_saves_screen');
+  static const title = Key('profile_saves_screen_title');
+  static const subtitle = Key('profile_saves_screen_subtitle');
+  static const discountCard = Key('profile_saves_screen_discount_card');
+  static const workCard = Key('profile_saves_screen_work_card');
 }

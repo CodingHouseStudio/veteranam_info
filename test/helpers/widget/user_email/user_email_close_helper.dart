@@ -15,11 +15,11 @@ Future<void> userEmailCloseHelper({
       await userEmailHelper(tester: tester, hover: false);
 
       expect(
-        find.byKey(KWidgetkeys.widget.userEmailDialog.icon),
+        find.byKey(UserEmailDialogKeys.icon),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
+      await tester.tap(find.byKey(UserEmailDialogKeys.icon));
 
       await tester.pumpAndSettle();
 

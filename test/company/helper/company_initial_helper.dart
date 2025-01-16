@@ -12,29 +12,29 @@ Future<void> companyInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.company.title),
+        find.byKey(CompanyKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.company.photo),
+        find.byKey(CompanyKeys.photo),
         findsOneWidget,
       );
 
       await companyFormsHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.company.logOutButton),
+        find.byKey(CompanyKeys.logOutButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.company.deleteButton),
+        find.byKey(CompanyKeys.deleteButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.company.deleteNotEnabledText),
+        find.byKey(CompanyKeys.deleteNotEnabledText),
         findsOneWidget,
       );
     },

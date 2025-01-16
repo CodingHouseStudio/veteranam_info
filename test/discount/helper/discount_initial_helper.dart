@@ -16,117 +16,117 @@ Future<void> discountInitialHelper({
       final matcher = cardIsEmpty ? findsNothing : findsOneWidget;
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.backButton),
+        find.byKey(DiscountKeys.backButton),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.backText),
+        find.byKey(DiscountKeys.backText),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.companyInfo),
+        find.byKey(DiscountKeys.companyInfo),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.title),
+        find.byKey(DiscountKeys.title),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.city),
+        find.byKey(DiscountKeys.city),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.expiration),
+        find.byKey(DiscountKeys.expiration),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.phoneNumberHideButton),
+        find.byKey(DiscountKeys.phoneNumberHideButton),
         matcher,
       );
 
       if (Config.isUser) {
         expect(
-          find.byKey(KWidgetkeys.screen.discount.complaintButton),
+          find.byKey(DiscountKeys.complaintButton),
           matcher,
         );
       }
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.websiteButton),
+        find.byKey(DiscountKeys.websiteButton),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.shareButton),
+        find.byKey(DiscountKeys.shareButton),
         matcher,
       );
 
       if (!cardIsEmpty) {
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.discount.shareButton,
+          itemKey: DiscountKeys.shareButton,
         );
       }
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.eligiblity),
+        find.byKey(DiscountKeys.eligiblity),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.eligiblity),
+        find.byKey(DiscountKeys.eligiblity),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.detail),
+        find.byKey(DiscountKeys.detail),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.detailText),
+        find.byKey(DiscountKeys.detailText),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.requirments),
+        find.byKey(DiscountKeys.requirments),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.requirmentsText),
+        find.byKey(DiscountKeys.requirmentsText),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.exclusions),
+        find.byKey(DiscountKeys.exclusions),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.discount.image),
+        find.byKey(DiscountKeys.image),
         findsNothing,
       );
 
       if (cardIsEmpty) {
         expect(
-          find.byKey(KWidgetkeys.screen.discount.invalidLinkTitle),
+          find.byKey(DiscountKeys.invalidLinkTitle),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.discount.invalidLinkDescription),
+          find.byKey(DiscountKeys.invalidLinkDescription),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.discount.invalidLinkBackButton),
+          find.byKey(DiscountKeys.invalidLinkBackButton),
           findsOneWidget,
         );
       }

@@ -67,8 +67,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                           ),
                           Flexible(
                             child: CancelChipWidget(
-                              widgetKey: KWidgetkeys
-                                  .screen.discounts.appliedFilterItems,
+                              widgetKey: DiscountsKeys.appliedFilterItems,
                               isDesk: false,
                               maxLines: 1,
                               labelText:

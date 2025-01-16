@@ -13,19 +13,19 @@ Future<void> feedbackInitialHelper(
     test: () async {
       // if (!Config.isWeb) {
       //   expect(
-      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     find.byKey(NawbarKeys.pageName),
       //     findsOneWidget,
       //   );
       // }
       // expect(
-      //   find.byKey(KWidgetkeys.screen.feedback.pointText),
+      //   find.byKey(FeedbackKeys.pointText),
       //   findsOneWidget,
       // );
 
-      expect(find.byKey(KWidgetkeys.screen.feedback.title), findsOneWidget);
+      expect(find.byKey(FeedbackKeys.title), findsOneWidget);
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.feedback.titleIcon),
+      //   find.byKey(FeedbackKeys.titleIcon),
       //   findsOneWidget,
       // );
 

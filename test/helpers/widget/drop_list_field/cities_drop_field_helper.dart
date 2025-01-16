@@ -12,10 +12,10 @@ Future<void> citiesDropFieldHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.citiesDropField.widget,
+    itemKey: CitiesDropFieldKeys.widget,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.citiesDropField.widget), findsWidgets);
+  expect(find.byKey(CitiesDropFieldKeys.widget), findsWidgets);
 
   await multiDropFieldHelper(
     tester: tester,
@@ -24,26 +24,26 @@ Future<void> citiesDropFieldHelper({
     fieldIndex: fieldIndex,
     itemTextWidget: () => tester
         .widget<Text>(
-          find.byKey(KWidgetkeys.widget.citiesDropField.city).first,
+          find.byKey(CitiesDropFieldKeys.city).first,
         )
         .data,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.widget).at(fieldIndex),
+    find.byKey(DropListFieldKeys.widget).at(fieldIndex),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.citiesDropField.city), findsWidgets);
+  expect(find.byKey(CitiesDropFieldKeys.city), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.citiesDropField.region), findsWidgets);
+  expect(find.byKey(CitiesDropFieldKeys.region), findsWidgets);
 
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.activeIcon).first,
+    find.byKey(DropListFieldKeys.activeIcon).first,
     warnIfMissed: false,
   );
 }

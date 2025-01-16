@@ -10,20 +10,20 @@ Future<void> nawbarHelper({
 }) async {
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.widget), findsOneWidget);
+  expect(find.byKey(NawbarKeys.widget), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.nawbar.widget,
+    itemKey: NawbarKeys.widget,
   );
   late FinderResult<Element> language;
 
   // if (Config.isDevelopment) {
-  //   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  //   expect(find.byKey(NawbarKeys.field), findsOneWidget);
 
   //   final textField = tester.widget<TextField>(
   //     find.byKey(
-  //       KWidgetkeys.widget.nawbar.field,
+  //       NawbarKeys.field,
   //     ),
   //   );
 
@@ -31,15 +31,15 @@ Future<void> nawbarHelper({
 
   //   await tester.pumpAndSettle();
 
-  //   language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+  //   language = find.byKey(NawbarKeys.language).evaluate();
 
   //   if (language.isNotEmpty) {
-  //     expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
+  //     expect(find.byKey(NawbarKeys.language), findsOneWidget);
 
   //     await languageSwitcherHelper(tester);
   //   }
   // } else {
-  language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+  language = find.byKey(NawbarKeys.language).evaluate();
 
   if (language.isNotEmpty) {
     await buttonBottomLineHelper(
@@ -47,58 +47,58 @@ Future<void> nawbarHelper({
       isDesk: true,
     );
 
-    expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
+    expect(find.byKey(NawbarKeys.language), findsOneWidget);
 
     await languageSwitcherHelper(tester);
 
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
+      find.byKey(NawbarKeys.discountsButton),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.investorsButton),
+      find.byKey(NawbarKeys.investorsButton),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.feedbackButton),
+      find.byKey(NawbarKeys.feedbackButton),
       findsOneWidget,
     );
   }
   // }
-  expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
+  expect(find.byKey(NawbarKeys.logo), findsOneWidget);
 
   if (language.isEmpty ||
-      find.byKey(KWidgetkeys.widget.nawbar.loginButton).evaluate().isEmpty) {
+      find.byKey(NawbarKeys.loginButton).evaluate().isEmpty) {
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.loginButton),
+      find.byKey(NawbarKeys.loginButton),
       findsNothing,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+      find.byKey(NawbarKeys.loginIcon),
       findsOneWidget,
     );
   } else {
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.loginButton),
+      find.byKey(NawbarKeys.loginButton),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
+      find.byKey(NawbarKeys.loginIcon),
       findsNothing,
     );
   }
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+  //   find.byKey(NawbarKeys.iconMic),
   //   hasMic ? findsOneWidget : findsNothing,
   // );
   // if (Config.isDevelopment) {
   //   await tester.enterText(
-  //     find.byKey(KWidgetkeys.widget.nawbar.field),
+  //     find.byKey(NawbarKeys.field),
   //     searchText,
   //   );
 
@@ -106,26 +106,26 @@ Future<void> nawbarHelper({
 
   //   expect(
   //     find.descendant(
-  //       of: find.byKey(KWidgetkeys.widget.nawbar.field),
+  //       of: find.byKey(NawbarKeys.field),
   //       matching: find.text(searchText),
   //     ),
   //     findsOneWidget,
   //   );
 
   //   // expect(
-  //   //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+  //   //   find.byKey(NawbarKeys.iconMic),
   //   //   hasMic ? findsOneWidget : findsNothing,
   //   // );
   //   if (language.isEmpty) {
-  //     expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsNothing);
+  //     expect(find.byKey(NawbarKeys.logo), findsNothing);
 
-  //     expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  //     expect(find.byKey(NawbarKeys.field), findsOneWidget);
 
-  //     expect(find.byKey(KWidgetkeys.widget.nawbar.loginIcon), findsNothing);
+  //     expect(find.byKey(NawbarKeys.loginIcon), findsNothing);
 
   //     final textField = tester.widget<TextField>(
   //       find.byKey(
-  //         KWidgetkeys.widget.nawbar.field,
+  //         NawbarKeys.field,
   //       ),
   //     );
 
@@ -134,8 +134,8 @@ Future<void> nawbarHelper({
   //     await tester.pumpAndSettle();
   //   }
 
-  //   expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
+  //   expect(find.byKey(NawbarKeys.logo), findsOneWidget);
 
-  //   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  //   expect(find.byKey(NawbarKeys.field), findsOneWidget);
   // }
 }

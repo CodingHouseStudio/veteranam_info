@@ -7,8 +7,8 @@ class BusinessDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BusinessDashboardBodyWidget(
-      key: KWidgetkeys.screen.businessDashboard.screen,
+    return const BusinessDashboardBodyWidget(
+      key: BusinessDashboardKeys.screen,
     );
   }
 }

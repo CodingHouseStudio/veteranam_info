@@ -11,18 +11,18 @@ class EmailButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      key: KWidgetkeys.widget.emailButton.widget,
+      key: EmailButtonKeys.widget,
       style: KButtonStyles.withoutStyle,
       onPressed: context.copyEmail,
       label: Text(
-        key: KWidgetkeys.widget.emailButton.text,
+        key: EmailButtonKeys.text,
         KAppText.email,
         style: isDesk
             ? AppTextStyle.materialThemeTitleMedium
             : AppTextStyle.materialThemeTitleSmall,
       ),
       icon: KIcon.copy.copyWith(
-        key: KWidgetkeys.widget.emailButton.icon,
+        key: EmailButtonKeys.icon,
       ),
     );
   }

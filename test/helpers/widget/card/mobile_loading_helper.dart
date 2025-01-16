@@ -25,7 +25,7 @@ Future<void> mobileLoadingHelper({
       );
 
       expect(
-        find.byKey(KWidgetkeys.widget.scaffold.loadingButton),
+        find.byKey(ScaffoldKeys.loadingButton),
         findsNothing,
       );
 

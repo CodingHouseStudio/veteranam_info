@@ -7,8 +7,8 @@ class ThanksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ThanksBodyWidget(
-      key: KWidgetkeys.screen.thanks.screen,
+    return const ThanksBodyWidget(
+      key: ThanksKeys.screen,
     );
   }
 }

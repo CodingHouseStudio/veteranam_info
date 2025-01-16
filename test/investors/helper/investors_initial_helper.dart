@@ -15,29 +15,29 @@ Future<void> investorsInitialHelper(
 
       final matcher = Config.isWeb ? findsOneWidget : findsNothing;
 
-      expect(find.byKey(KWidgetkeys.screen.investors.title), matcher);
-      // expect(find.byKey(KWidgetkeys.screen.investors.point),
+      expect(find.byKey(InvestorsKeys.title), matcher);
+      // expect(find.byKey(InvestorsKeys.point),
       // findsOneWidget);
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
+        find.byKey(InvestorsKeys.feedbackTitle),
         matcher,
       );
 
       if (Config.isWeb) {
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+          itemKey: InvestorsKeys.feedbackTitle,
         );
       }
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
+        find.byKey(InvestorsKeys.feedbackSubtitle),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackButton),
+        find.byKey(InvestorsKeys.feedbackButton),
         matcher,
       );
 
@@ -46,51 +46,51 @@ Future<void> investorsInitialHelper(
       }
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.rightImages),
+        find.byKey(InvestorsKeys.rightImages),
         matcher,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.leftImages),
+        find.byKey(InvestorsKeys.leftImages),
         matcher,
       );
 
       if (Config.isWeb) {
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.investors.leftImages,
+          itemKey: InvestorsKeys.leftImages,
         );
       }
 
       // else {
       //   expect(
-      //     find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      //     find.byKey(NawbarKeys.pageName),
       //     findsOneWidget,
       //   );
       // }
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.fundsTitle),
+        find.byKey(InvestorsKeys.fundsTitle),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.investors.fundsTitle,
+        itemKey: InvestorsKeys.fundsTitle,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.fundsTitle),
+        find.byKey(InvestorsKeys.fundsTitle),
         findsOneWidget,
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.investors.buttonMock),
+      //   find.byKey(InvestorsKeys.buttonMock),
       //   findsNothing,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.card),
+        find.byKey(InvestorsKeys.card),
         findsWidgets,
       );
 
@@ -102,13 +102,10 @@ Future<void> investorsInitialHelper(
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.investors.button),
+      //   find.byKey(InvestorsKeys.button),
       //   findsWidgets,
       // );
-      if (find
-          .byKey(KWidgetkeys.widget.donateCard.subtitle)
-          .evaluate()
-          .isNotEmpty) {
+      if (find.byKey(DonateCardKeys.subtitle).evaluate().isNotEmpty) {
         await donateCardHelper(tester: tester, isDesk: false);
       } else {
         await donatesCardHelper(tester);

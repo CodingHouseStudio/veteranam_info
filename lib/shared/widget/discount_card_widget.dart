@@ -140,7 +140,7 @@ class _DiscountCardWithImage extends StatelessWidget {
                 ),
                 child: TextPointWidget(
                   discountItem.discount.getDiscountString(context),
-                  key: KWidgetkeys.widget.discountCard.discount,
+                  key: DiscountCardKeys.discount,
                   mainAxisSize: MainAxisSize.min,
                 ),
               ),
@@ -204,7 +204,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox8,
             Text(
               discountItem.title.getTrsnslation(context),
-              key: KWidgetkeys.widget.discountCard.discountTitle,
+              key: DiscountCardKeys.discountTitle,
               style: AppTextStyle.materialThemeHeadlineSmall,
               overflow: TextOverflow.clip,
             ),
@@ -216,7 +216,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox16,
           DiscountTextWidget(
-            key: KWidgetkeys.widget.discountCard.description,
+            key: DiscountCardKeys.description,
             description: descriptionMethod == null
                 ? discountItem.getDescription(context)
                 : descriptionMethod!(
@@ -232,7 +232,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               extra: discountItem,
             ),
             button: TextButton(
-              key: KWidgetkeys.screen.company.boxMyDiscounts,
+              key: CompanyKeys.boxMyDiscounts,
               onPressed: () => context.goNamed(
                 KRoute.discount.name,
                 pathParameters: {
@@ -258,10 +258,10 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               // afterEvent: reportEvent,
               cardId: discountItem.id,
               share: share,
-              complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
-              shareKey: KWidgetkeys.widget.discountCard.iconShare,
-              likeKey: KWidgetkeys.widget.discountCard.iconLike,
-              webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
+              complaintKey: DiscountCardKeys.iconComplaint,
+              shareKey: DiscountCardKeys.iconShare,
+              likeKey: DiscountCardKeys.iconLike,
+              webSiteKey: DiscountCardKeys.iconWebsite,
               showComplaint: !isBusiness,
               showShare:
                   !isBusiness || discountItem.status == DiscountState.published,
@@ -303,7 +303,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 title.getTrsnslation(context),
-                key: KWidgetkeys.widget.discountCard.discountTitle,
+                key: DiscountCardKeys.discountTitle,
                 style: AppTextStyle.materialThemeHeadlineSmall,
               ),
             ),
@@ -316,7 +316,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
                 ),
                 child: TextPointWidget(
                   discount.getDiscountString(context),
-                  key: KWidgetkeys.widget.discountCard.discount,
+                  key: DiscountCardKeys.discount,
                   mainAxisSize: MainAxisSize.min,
                 ),
               ),
@@ -327,7 +327,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
         return Expanded(
           child: Text(
             title.getTrsnslation(context),
-            key: KWidgetkeys.widget.discountCard.discountTitle,
+            key: DiscountCardKeys.discountTitle,
             style: AppTextStyle.materialThemeHeadlineSmall,
           ),
         );
@@ -344,7 +344,7 @@ class _DescrptionTitleWidget extends StatelessWidget {
             ),
             child: TextPointWidget(
               discount.getDiscountString(context),
-              key: KWidgetkeys.widget.discountCard.discount,
+              key: DiscountCardKeys.discount,
               mainAxisSize: MainAxisSize.min,
             ),
           ),
@@ -424,7 +424,7 @@ class CompanyInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                key: KWidgetkeys.widget.discountCard.service,
+                key: DiscountCardKeys.service,
                 company?.getTrsnslation(context) ??
                     context.l10n.companyIsHidden,
                 style: AppTextStyle.materialThemeTitleMedium,
@@ -436,12 +436,12 @@ class CompanyInfoWidget extends StatelessWidget {
                 runSpacing: KPadding.kPaddingSize8,
                 children: [
                   Text(
-                    key: KWidgetkeys.widget.discountCard.userName,
+                    key: DiscountCardKeys.userName,
                     userName ?? KAppText.veteranamName,
                     style: AppTextStyle.materialThemeLabelSmall,
                   ),
                   Text(
-                    key: KWidgetkeys.widget.discountCard.date,
+                    key: DiscountCardKeys.date,
                     dateVerified.toLocalDateString(context: context),
                     style: AppTextStyle.materialThemeLabelSmall,
                   ),
@@ -471,7 +471,7 @@ class CompanyInfoWidget extends StatelessWidget {
 //       crossAxisAlignment: CrossAxisAlignment.start,
 //       children: [
 //         Text(
-//           key: KWidgetkeys.widget.discountCard.service,
+//           key: DiscountCardKeys.service,
 //           company?.getTrsnslation(context) ?? context.l10n.companyIsHidden,
 //           style: AppTextStyle.materialThemeTitleMedium,
 //           overflow: TextOverflow.clip,
@@ -480,13 +480,13 @@ class CompanyInfoWidget extends StatelessWidget {
 //         Wrap(
 //           children: [
 //             Text(
-//               key: KWidgetkeys.widget.discountCard.userName,
+//               key: DiscountCardKeys.userName,
 //               userName ?? KAppText.veteranamName,
 //               style: AppTextStyle.materialThemeLabelSmall,
 //             ),
 //             KSizedBox.kWidthSizedBox8,
 //             Text(
-//               key: KWidgetkeys.widget.discountCard.date,
+//               key: DiscountCardKeys.date,
 //               dateVerified.toLocalDateString(context: context),
 //               style: AppTextStyle.materialThemeLabelSmall,
 //             ),
@@ -526,7 +526,7 @@ class CompanyInfoWidget extends StatelessWidget {
 //                   right: KPadding.kPaddingSize5,
 //                 ),
 //                 child: Text(
-//                   key: KWidgetkeys.widget.discountCard.category,
+//                   key: DiscountCardKeys.category,
 //                   categories.elementAt(index).getTrsnslation(context),
 //                   style: AppTextStyle.materialThemeLabelLarge,
 //                 ),
@@ -559,7 +559,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
           ),
           Expanded(
             child: CityListWidget(
-              key: KWidgetkeys.widget.discountCard.city,
+              key: DiscountCardKeys.city,
               location: discountItem.location,
               subLocation: discountItem.subLocation,
               moreButtonEvent: () => context.goNamed(
@@ -585,7 +585,7 @@ class _CitiesExpirationWidget extends StatelessWidget {
             ),
           ),
           CityListWidget(
-            key: KWidgetkeys.widget.discountCard.city,
+            key: DiscountCardKeys.city,
             isDesk: false,
             moreButtonEvent: () => context.goNamed(
               KRoute.discount.name,
@@ -628,7 +628,7 @@ class ExpirationWidget extends StatelessWidget {
               ((expiration == null || expiration!.isEmpty)
                   ? context.l10n.itIsValidAllTime
                   : expiration!),
-              key: KWidgetkeys.widget.discountCard.expiration,
+              key: DiscountCardKeys.expiration,
               style: AppTextStyle.materialThemeLabelLarge,
             ),
           ),

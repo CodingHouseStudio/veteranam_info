@@ -1,21 +1,21 @@
 part of '../widget_keys.dart';
 
-class _ProfileKeys {
-  final screen = const Key('profile_screen');
-  final title = const Key('profile_title');
-  final photo = const Key('profile_photo');
-  final nameField = const Key('profile_name_field');
-  final emailFied = const Key('profile_email_field');
-  final lastNameField = const Key('profile_last_name_field');
-  final nickNameField = const Key('profile_nick_field');
-  final saveButton = const Key('profile_save_button');
-  final deleteButton = const Key('profile_delete_button');
-  final logOutButton = const Key('profile_log_out_button');
-  final subtitle = const Key('profile_subtitle');
-  final boxSaves = const Key('profile_box_saves');
-  final boxStory = const Key('profile_box_story');
-  final boxFeedback = const Key('profile_box_feedback');
-  // final boxMyDiscounts = const Key('profile_box_discounts');
-  final submitingText = const Key('profile_card_submiting_text');
-  final editText = const Key('profile_edit_text');
+abstract class ProfileKeys {
+  static const screen = Key('profile_screen');
+  static const title = Key('profile_title');
+  static const photo = Key('profile_photo');
+  static const nameField = Key('profile_name_field');
+  static const emailFied = Key('profile_email_field');
+  static const lastNameField = Key('profile_last_name_field');
+  static const nickNameField = Key('profile_nick_field');
+  static const saveButton = Key('profile_save_button');
+  static const deleteButton = Key('profile_delete_button');
+  static const logOutButton = Key('profile_log_out_button');
+  static const subtitle = Key('profile_subtitle');
+  static const boxSaves = Key('profile_box_saves');
+  static const boxStory = Key('profile_box_story');
+  static const boxFeedback = Key('profile_box_feedback');
+  // static const boxMyDiscounts = Key('profile_box_discounts');
+  static const submitingText = Key('profile_card_submiting_text');
+  static const editText = Key('profile_edit_text');
 }

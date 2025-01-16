@@ -90,11 +90,11 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
           children: [
             Text(
               widget.text,
-              key: KWidgetkeys.widget.buttonBottomLine.text,
+              key: ButtonBottomLineKeys.text,
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             AnimatedContainer(
-              key: KWidgetkeys.widget.buttonBottomLine.line,
+              key: ButtonBottomLineKeys.line,
               duration: const Duration(milliseconds: 300),
               width: _isHovered ? textWidth : 0,
               height: 1,
@@ -128,7 +128,7 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
 //       style: KButtonStyles.withoutStyle,
 //       icon: Text(
 //         text,
-//         key: KWidgetkeys.widget.buttonBottomLine.text,
+//         key: ButtonBottomLineKeys.text,
 //         style: AppTextStyle.materialThemeTitleMedium,
 //       ),
 //       label: icon != null ? icon! : const SizedBox.shrink(),

@@ -4,25 +4,25 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 Future<void> workInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.work.screen), findsOneWidget);
+  expect(find.byKey(WorkKeys.screen), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.screen.work.boxEmployer),
+    find.byKey(WorkKeys.boxEmployer),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.work.boxEmployee),
+    find.byKey(WorkKeys.boxEmployee),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.work.subtitle),
+    find.byKey(WorkKeys.subtitle),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.work.title),
+    find.byKey(WorkKeys.title),
     findsOneWidget,
   );
 

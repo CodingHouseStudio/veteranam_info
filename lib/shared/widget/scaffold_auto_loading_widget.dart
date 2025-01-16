@@ -95,8 +95,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                             isDesk: isDesk,
                             onPressed: widget.loadFunction,
                             text: widget.loadingButtonText,
-                            widgetKey:
-                                KWidgetkeys.widget.scaffold.loadingButton,
+                            widgetKey: ScaffoldKeys.loadingButton,
                           ),
 
                         //     ...[
@@ -105,7 +104,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         //   Center(
                         //     child: Text(
                         //       context.l10n.cardListEmptyText,
-                        //       key: KWidgetkeys.widget.scaffold.emptyListText,
+                        //       key: ScaffoldKeys.emptyListText,
                         //       style:
                         //           AppTextStyle.
                         // materialThemeTitleMediumNeutralVariant70
@@ -161,7 +160,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           ),
                     appBar: appBar,
                     body: KeyboardScrollView(
-                      widgetKey: KWidgetkeys.widget.scaffold.scroll,
+                      widgetKey: ScaffoldKeys.scroll,
                       // physics: KTest.scroll,
                       slivers: [
                         const NetworkBanner(),

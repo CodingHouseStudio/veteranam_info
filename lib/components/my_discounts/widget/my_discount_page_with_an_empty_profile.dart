@@ -20,7 +20,7 @@ class MyDiscountPageWithEmptyProfileWidget extends StatelessWidget {
         spacing: KPadding.kPaddingSize40,
         children: [
           Text(
-            key: KWidgetkeys.screen.myDiscounts.emptyProfileText,
+            key: MyDiscountsKeys.emptyProfileText,
             context.l10n.profileNotFilledOut,
             textAlign: TextAlign.center,
             style: isDesk
@@ -28,7 +28,7 @@ class MyDiscountPageWithEmptyProfileWidget extends StatelessWidget {
                 : AppTextStyle.materialThemeTitleSmall,
           ),
           DoubleButtonWidget(
-            widgetKey: KWidgetkeys.screen.myDiscounts.buttonProfile,
+            widgetKey: MyDiscountsKeys.buttonProfile,
             text: context.l10n.toProfile,
             isDesk: isDesk,
             darkMode: true,

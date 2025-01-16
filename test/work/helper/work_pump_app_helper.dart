@@ -11,7 +11,7 @@ Future<void> workPumpAppHelper({
   await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.work.screen),
+    find.byKey(WorkKeys.screen),
     findsOneWidget,
   );
 

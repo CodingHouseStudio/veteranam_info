@@ -22,7 +22,7 @@ class _SwitchWidgetWithoutBlocState extends State<SwitchWidgetWithoutBloc> {
   @override
   Widget build(BuildContext context) {
     return SwitchWidget(
-      // key: KWidgetkeys.widget.switchKeys.widget,
+      // key: SwitchKeys.widget,
       // thumbColor: MaterialStatePropertyAll(
       // isSelected ? AppColors.black : AppColors.white,
       // ),

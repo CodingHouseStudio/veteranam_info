@@ -6,21 +6,21 @@ import '../../test_dependency.dart';
 Future<void> listLoadFilterHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsWidgets);
+  expect(find.byKey(NewsCardKeys.title), findsWidgets);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
@@ -29,7 +29,7 @@ Future<void> listLoadFilterHelper(
 
   await filterChipHelper(tester);
 
-  // expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
+  // expect(find.byKey(NewsCardKeys.title), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
@@ -37,7 +37,7 @@ Future<void> listLoadFilterHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.scaffold.endListText),
+    find.byKey(ScaffoldKeys.endListText),
     findsNothing,
   );
 }

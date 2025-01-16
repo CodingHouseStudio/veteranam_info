@@ -21,7 +21,7 @@ Future<void> loginPumpAppHelper({
   await tester.pumpApp(const LoginScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.login.screen),
+    find.byKey(LoginKeys.screen),
     findsOneWidget,
   );
 

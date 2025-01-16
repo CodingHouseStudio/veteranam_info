@@ -7,6 +7,6 @@ class WorkEmployerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WorkEmployerBodyWidget(key: KWidgetkeys.screen.employer.screen);
+    return const WorkEmployerBodyWidget(key: EmployerKeys.screen);
   }
 }

@@ -22,13 +22,13 @@ dependencies:
   equatable: ^2.0.7
   feedback: ^3.1.0
   file_picker: ^8.1.7
-  firebase_analytics: ^11.3.6
-  firebase_app_check: ^0.3.1
-  firebase_auth: ^5.3.4
+  firebase_analytics: ^11.4.0
+  firebase_app_check: ^0.3.2
+  firebase_auth: ^5.4.0
   firebase_core: ^3.9.0
-  firebase_crashlytics: ^4.2.0
+  firebase_crashlytics: ^4.3.0
   firebase_messaging: ^15.1.6
-  firebase_performance: ^0.10.0
+  firebase_performance: ^0.10.1
   firebase_remote_config: ^5.2.0
   firebase_storage: ^12.3.7
   flutter:
@@ -45,7 +45,7 @@ dependencies:
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3 # Used for dependency injection
-  go_router: ^14.6.2 # Decoupled routing  package which is a must for any app
+  go_router: ^14.6.3 # Decoupled routing  package which is a must for any app
   google_sign_in: ^6.2.2
   image_picker: ^1.1.2
   in_app_review: ^2.0.10

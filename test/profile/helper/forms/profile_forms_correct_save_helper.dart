@@ -14,17 +14,17 @@ Future<void> profileFormsCorrectSaveHelper({
     nickname: KTestVariables.nicknameCorrect,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
+  await tester.tap(find.byKey(ProfileKeys.saveButton));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.saveButton,
+    itemKey: ProfileKeys.saveButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.submitingText),
+    find.byKey(ProfileKeys.submitingText),
     findsOneWidget,
   );
 

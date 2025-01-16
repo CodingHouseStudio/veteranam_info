@@ -16,17 +16,17 @@ Future<void> loginInitialHelper(
       );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.login.bottomButtons),
+      //   find.byKey(LoginKeys.bottomButtons),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.button),
+        find.byKey(LoginKeys.button),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.card),
+        find.byKey(LoginKeys.card),
         findsOneWidget,
       );
 
@@ -36,26 +36,26 @@ Future<void> loginInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.fields),
+        find.byKey(LoginKeys.fields),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.signUpButton),
+        find.byKey(LoginKeys.signUpButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.signUpText),
+        find.byKey(LoginKeys.signUpText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.login.title),
+        find.byKey(LoginKeys.title),
         findsOneWidget,
       );
 
-      expect(find.byKey(KWidgetkeys.screen.login.submitingText), findsNothing);
+      expect(find.byKey(LoginKeys.submitingText), findsNothing);
       // await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 
       await leftCardHelper(tester);

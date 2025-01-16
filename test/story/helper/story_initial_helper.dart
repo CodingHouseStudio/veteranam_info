@@ -11,24 +11,24 @@ Future<void> storyInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.story.title),
+        find.byKey(StoryKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.story.subtitle),
+        find.byKey(StoryKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.story.card),
+        find.byKey(StoryKeys.card),
         findsWidgets,
       );
 
       await storyCardHelper(tester: tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.story.buttonMock),
+        find.byKey(StoryKeys.buttonMock),
         findsNothing,
       );
 
@@ -43,21 +43,21 @@ Future<void> storyInitialHelper(
       // );
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.story.button),
+      //   find.byKey(StoryKeys.button),
       //   findsOneWidget,
       // );
     },
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //   find.byKey(StoryKeys.buttonIcon),
   //   findsNothing,
   // );
 
   // await changeWindowSizeHelper(
   //   tester: tester,
   //   test: () async => expect(
-  //     find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //     find.byKey(StoryKeys.buttonIcon),
   //     findsOneWidget,
   //   ),
   // );

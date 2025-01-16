@@ -12,16 +12,16 @@ Future<void> reportDialogcorrectSaveHelper(
       await reportDialogOpenHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.widget.reportDialog.cancel),
+        find.byKey(ReportDialogKeys.cancel),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.cancel));
+      await tester.tap(find.byKey(ReportDialogKeys.cancel));
 
       await tester.pumpAndSettle();
 
       // expect(
-      //   find.byKey(KWidgetkeys.widget.reportDialog.cancel),
+      //   find.byKey(ReportDialogKeys.cancel),
       //   findsNothing,
       // );
       // await reportDialogOpenHelper(tester);

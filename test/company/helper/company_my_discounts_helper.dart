@@ -14,16 +14,16 @@ Future<void> companyMyDiscountsHelper({
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.company.boxMyDiscounts),
+        find.byKey(CompanyKeys.boxMyDiscounts),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.company.boxMyDiscounts,
+        itemKey: CompanyKeys.boxMyDiscounts,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.company.boxMyDiscounts));
+      await tester.tap(find.byKey(CompanyKeys.boxMyDiscounts));
 
       verify(() => mockGoRouter.goNamed(KRoute.myDiscounts.name)).called(1);
     },

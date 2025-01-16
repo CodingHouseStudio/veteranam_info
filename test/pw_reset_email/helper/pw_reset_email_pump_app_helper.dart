@@ -24,7 +24,7 @@ Future<void> pwResetEmailPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.pwResetEmail.screen),
+    find.byKey(PwResetEmailKeys.screen),
     findsOneWidget,
   );
 

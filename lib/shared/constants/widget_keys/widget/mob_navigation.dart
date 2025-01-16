@@ -1,16 +1,16 @@
 part of '../widget_keys.dart';
 
-class _MobNavigationKeys {
-  final widget = const Key('mob_navigation');
-  final discounts = const Key('mob_navigation_discounts');
-  final investors = const Key('mob_navigation_investors');
-  final settings = const Key('mob_navigation_settings');
-  final login = const Key('mob_navigation_login');
+abstract class MobNavigationKeys {
+  static const widget = Key('mob_navigation');
+  static const discounts = Key('mob_navigation_discounts');
+  static const investors = Key('mob_navigation_investors');
+  static const settings = Key('mob_navigation_settings');
+  static const login = Key('mob_navigation_login');
 
-  List<Key> get navButtonsKey => [
-        discounts,
-        investors,
-        settings,
-        login,
-      ];
+  static const navButtonsKey = [
+    discounts,
+    investors,
+    settings,
+    login,
+  ];
 }

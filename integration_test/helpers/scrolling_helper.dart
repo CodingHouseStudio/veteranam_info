@@ -19,7 +19,7 @@ Future<void> scrollingHelperInt({
 }) async {
   if (offset != null) {
     await tester.drag(
-      find.byKey(scrollKey ?? KWidgetkeys.widget.scaffold.scroll),
+      find.byKey(scrollKey ?? ScaffoldKeys.scroll),
       offset,
       warnIfMissed: false,
     );

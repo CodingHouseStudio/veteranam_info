@@ -15,9 +15,9 @@ class WorkBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         TitleWidget(
           title: context.l10n.work,
-          titleKey: KWidgetkeys.screen.work.title,
+          titleKey: WorkKeys.title,
           subtitle: context.l10n.workSubtitle,
-          subtitleKey: KWidgetkeys.screen.work.subtitle,
+          subtitleKey: WorkKeys.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
@@ -46,7 +46,7 @@ class WorkBodyWidget extends StatelessWidget {
   }) =>
       [
         BoxWidget(
-          key: KWidgetkeys.screen.work.boxEmployee,
+          key: WorkKeys.boxEmployee,
           text: context.l10n.lookingForJob,
           onTap: () => context.goNamed(KRoute.workEmployee.name),
           isDesk: isDesk,
@@ -54,7 +54,7 @@ class WorkBodyWidget extends StatelessWidget {
         ),
         if (!isDesk) KSizedBox.kHeightSizedBox40,
         BoxWidget(
-          key: KWidgetkeys.screen.work.boxEmployer,
+          key: WorkKeys.boxEmployer,
           text: context.l10n.givingJob,
           onTap: () => context.goNamed(KRoute.employer.name),
           isDesk: isDesk,

@@ -11,11 +11,11 @@ Future<void> boxHomeNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.thanks.homeBox),
+    find.byKey(ThanksKeys.homeBox),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.thanks.homeBox));
+  await tester.tap(find.byKey(ThanksKeys.homeBox));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.home.name),

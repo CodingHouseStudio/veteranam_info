@@ -9,16 +9,16 @@ Future<void> donatesCardHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.investors.cards),
+    find.byKey(InvestorsKeys.cards),
     findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.investors.card), findsWidgets);
+  expect(find.byKey(InvestorsKeys.card), findsWidgets);
 
   await donateCardHelper(tester: tester, isDesk: true);
 
   final widgetLocation =
-      tester.getCenter(find.byKey(KWidgetkeys.widget.donateCard.widget).first);
+      tester.getCenter(find.byKey(DonateCardKeys.widget).first);
 
   final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
 
@@ -27,7 +27,7 @@ Future<void> donatesCardHelper(
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.donateCard.subtitle),
+    find.byKey(DonateCardKeys.subtitle),
     findsOneWidget,
   );
 }

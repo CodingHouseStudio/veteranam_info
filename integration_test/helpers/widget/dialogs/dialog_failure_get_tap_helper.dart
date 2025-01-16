@@ -7,14 +7,14 @@ Future<void> dialogFailureGetTapHelper({
   required WidgetTester tester,
   bool isFailure = true,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.dialogs.failureButton), findsOneWidget);
+  expect(find.byKey(DialogsKeys.failureButton), findsOneWidget);
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dialogs.failureButton,
+    itemKey: DialogsKeys.failureButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.dialogs.failureButton));
+  await tester.tap(find.byKey(DialogsKeys.failureButton));
 
   await tester.pumpAndSettle();
 }

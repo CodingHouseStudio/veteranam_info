@@ -17,10 +17,10 @@ Future<void> boxexHelper({
     test: () async {
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.discountsBox,
+        itemKey: HomeKeys.discountsBox,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.discountsBox));
+      await tester.tap(find.byKey(HomeKeys.discountsBox));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -28,7 +28,7 @@ Future<void> boxexHelper({
         ),
       ).called(1);
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.investorsBox));
+      await tester.tap(find.byKey(HomeKeys.investorsBox));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -36,7 +36,7 @@ Future<void> boxexHelper({
         ),
       ).called(1);
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.feedbackBox));
+      await tester.tap(find.byKey(HomeKeys.feedbackBox));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -46,10 +46,10 @@ Future<void> boxexHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationBox,
+        itemKey: HomeKeys.informationBox,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.informationBox));
+      await tester.tap(find.byKey(HomeKeys.informationBox));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -59,10 +59,10 @@ Future<void> boxexHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.storyBox,
+        itemKey: HomeKeys.storyBox,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.storyBox));
+      await tester.tap(find.byKey(HomeKeys.storyBox));
 
       verify(
         () => mockGoRouter.goNamed(
@@ -72,10 +72,10 @@ Future<void> boxexHelper({
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.workBox,
+        itemKey: HomeKeys.workBox,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.workBox));
+      await tester.tap(find.byKey(HomeKeys.workBox));
 
       verify(
         () => mockGoRouter.goNamed(

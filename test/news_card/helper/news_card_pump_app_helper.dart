@@ -19,7 +19,7 @@ Future<void> newsCardPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.newsCard.dialog),
+    find.byKey(NewsCardDialogKeys.dialog),
     findsOneWidget,
   );
 

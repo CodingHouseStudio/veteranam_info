@@ -13,12 +13,12 @@ Future<void> markdownFileDialogInitialHelper(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.privacyPolicy.text),
+        find.byKey(PrivacyPolicyDialogKeys.text),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon),
+        find.byKey(PrivacyPolicyDialogKeys.closeIcon),
         findsOneWidget,
       );
 

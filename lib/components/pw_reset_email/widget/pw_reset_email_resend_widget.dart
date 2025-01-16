@@ -57,11 +57,11 @@ class _PwResetEmailResendWidgetState extends State<PwResetEmailResendWidget> {
               children: [
                 Text(
                   context.l10n.notReceiveLetter,
-                  key: KWidgetkeys.screen.pwResetEmail.resendText,
+                  key: PwResetEmailKeys.resendText,
                   style: AppTextStyle.materialThemeBodyMediumNeutralVariant50,
                 ),
                 TextButton(
-                  key: KWidgetkeys.screen.pwResetEmail.resendButton,
+                  key: PwResetEmailKeys.resendButton,
                   onPressed: () => context.read<PwResetEmailBloc>().add(
                         const PwResetEmailEvent.sendResetCode(),
                       ),
@@ -78,7 +78,7 @@ class _PwResetEmailResendWidgetState extends State<PwResetEmailResendWidget> {
               padding: const EdgeInsets.all(KPadding.kPaddingSize8),
               child: Text(
                 context.l10n.resendWait(remainingSeconds),
-                key: KWidgetkeys.screen.pwResetEmail.delayText,
+                key: PwResetEmailKeys.delayText,
                 textAlign: TextAlign.center,
                 style: AppTextStyle.materialThemeBodyMediumNeutralVariant50,
               ),

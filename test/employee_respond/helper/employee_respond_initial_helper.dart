@@ -11,74 +11,74 @@ Future<void> employeeRespondInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.title),
+        find.byKey(EmployeeRespondKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.subtitle),
+        find.byKey(EmployeeRespondKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.username),
+        find.byKey(EmployeeRespondKeys.username),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.emailText),
+        find.byKey(EmployeeRespondKeys.emailText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
+        find.byKey(EmployeeRespondKeys.emailField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberText),
+        find.byKey(EmployeeRespondKeys.phoneNumberText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
+        find.byKey(EmployeeRespondKeys.phoneNumberField),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
+        itemKey: EmployeeRespondKeys.phoneNumberField,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.resumeText),
+        find.byKey(EmployeeRespondKeys.resumeText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.resumeButton),
+        find.byKey(EmployeeRespondKeys.resumeButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.checkWithoutResume),
+        find.byKey(EmployeeRespondKeys.checkWithoutResume),
         findsOneWidget,
       );
 
       await chekPointHelper(tester: tester);
 
       // expect(
-      //   find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
+      //   find.byKey(EmployeeRespondKeys.noResume),
       //   findsOneWidget,
       // );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.sendButton),
+        find.byKey(EmployeeRespondKeys.sendButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.cancelButton),
+        find.byKey(EmployeeRespondKeys.cancelButton),
         findsOneWidget,
       );
     },

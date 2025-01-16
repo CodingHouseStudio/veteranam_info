@@ -25,13 +25,13 @@ void main() {
     }
     final buttonsKey = Config.isWeb
         ? Config.isDevelopment
-            ? KWidgetkeys.widget.footer.buttonsKey
-            : KWidgetkeys.widget.footer.buttonsProdKey
-        : KWidgetkeys.widget.mobNavigation.navButtonsKey.sublist(1);
+            ? FooterKeys.buttonsKey
+            : FooterKeys.buttonsProdKey
+        : MobNavigationKeys.navButtonsKey.sublist(1);
 
     for (var i = 0; i < buttonsKey.length; i++) {
       // if (i == 5) {
-      // await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
+      // await tester.tap(find.byKey(NawbarKeys.logo));
 
       // await Future.delayed(const Duration(milliseconds: 500));
 
@@ -72,7 +72,7 @@ void main() {
           offset: KTestConstants.scrollingUp,
         );
 
-        await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
+        await tester.tap(find.byKey(NawbarKeys.logo));
 
         await tester.pumpAndSettle();
       } else {

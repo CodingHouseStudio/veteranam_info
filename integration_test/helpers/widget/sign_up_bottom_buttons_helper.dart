@@ -6,51 +6,51 @@ import '../../test_dependency.dart';
 Future<void> signUpBottomButtonsHelper(
   WidgetTester tester,
 ) async {
-  //expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
+  //expect(find.byKey(SignUpBottomButtonsKeys.mob),
   //findsWidgets);
 
-  // expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
+  // expect(find.byKey(SignUpBottomButtonsKeys.desk),
   // findsNothing);
 
   expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.or),
+    find.byKey(SignUpBottomButtonsKeys.or),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.title),
+    find.byKey(SignUpBottomButtonsKeys.title),
     findsWidgets,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
+  //   find.byKey(SignUpBottomButtonsKeys.mob),
   //   findsNothing,
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
+    find.byKey(SignUpBottomButtonsKeys.google),
     findsWidgets,
   );
 
   await additionalButtonHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
+    find.byKey(SignUpBottomButtonsKeys.facebook),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.apple),
+    find.byKey(SignUpBottomButtonsKeys.apple),
     findsWidgets,
   );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
+  //   find.byKey(SignUpBottomButtonsKeys.divider),
   //   findsWidgets,
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
+  //   find.byKey(SignUpBottomButtonsKeys.desk),
   //   findsOneWidget,
   // );
 }

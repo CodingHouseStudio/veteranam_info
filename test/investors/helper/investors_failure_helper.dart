@@ -8,22 +8,22 @@ Future<void> investorsFailureHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+    itemKey: InvestorsKeys.feedbackTitle,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.leftImages,
+    itemKey: InvestorsKeys.leftImages,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.fundsTitle,
+    itemKey: InvestorsKeys.fundsTitle,
   );
 
   await loadingFailureHelper(
     tester: tester,
-    card: KWidgetkeys.screen.information.card,
+    card: InformationKeys.card,
     buttonMock: null,
   );
 }

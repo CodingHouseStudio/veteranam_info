@@ -13,9 +13,9 @@ class BusinessDashboardBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         TitleWidget(
           title: '${context.l10n.businessDashboard}!',
-          titleKey: KWidgetkeys.screen.businessDashboard.title,
+          titleKey: BusinessDashboardKeys.title,
           subtitle: context.l10n.businessDashboardDescription,
-          subtitleKey: KWidgetkeys.screen.businessDashboard.subtitle,
+          subtitleKey: BusinessDashboardKeys.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
@@ -41,7 +41,7 @@ class BusinessDashboardBodyWidget extends StatelessWidget {
   List<Widget> _buildBoxWidgets(BuildContext context, bool isDesk) {
     return [
       BoxWidget(
-        key: KWidgetkeys.screen.businessDashboard.myProfielBox,
+        key: BusinessDashboardKeys.myProfielBox,
         text: context.l10n.myProfile,
         isDesk: isDesk,
         onTap: () => context.goNamed(KRoute.profile.name),
@@ -49,7 +49,7 @@ class BusinessDashboardBodyWidget extends StatelessWidget {
       ),
       if (!isDesk) KSizedBox.kHeightSizedBox40,
       BoxWidget(
-        key: KWidgetkeys.screen.businessDashboard.myDiscountsBox,
+        key: BusinessDashboardKeys.myDiscountsBox,
         text: context.l10n.myDiscounts,
         isDesk: isDesk,
         onTap: () => context.goNamed(KRoute.myDiscounts.name),

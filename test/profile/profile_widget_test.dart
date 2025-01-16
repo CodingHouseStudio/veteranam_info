@@ -19,11 +19,13 @@ void main() {
   group('${KScreenBlocName.profile} ', () {
     late UserRepository mockUserRepository;
     late IDataPickerRepository mockDataPickerRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late StreamController<User> profileStream;
     // late XFile image;
     setUp(() {
       mockUserRepository = MockUserRepository();
       mockDataPickerRepository = MockIDataPickerRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       profileStream = StreamController()..add(KTestVariables.pureUser);
       // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -58,15 +60,25 @@ void main() {
         (realInvocation) async => KTestVariables.filePickerItem,
       );
 
-      // when(mockUserRepository.isAnonymously).thenAnswer(
-      //   (realInvocation) => false,
-      // );
+      when(mockAuthenticationRepository.status).thenAnswer(
+        (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
+      );
+      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
+        (realInvocation) => AuthenticationStatus.authenticated,
+      );
+      when(mockAuthenticationRepository.logOut()).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      when(mockAuthenticationRepository.deleteUser()).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await profilePumpAppHelper(
         tester: tester,
         mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await profileInitialHelper(tester);
@@ -93,6 +105,7 @@ void main() {
         tester: tester,
         mockUserRepository: mockUserRepository,
         mockDataPickerRepository: mockDataPickerRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await profileLogOutHelper(tester);
@@ -107,6 +120,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await profileInitialHelper(tester);
@@ -118,12 +132,13 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
         await logOutUnconfirmButtonlHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
           icon: false,
-          deskOpen: true,
+          // deskOpen: true,
         );
       });
       testWidgets('Log out mob dialog cancel icon pop', (tester) async {
@@ -132,6 +147,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutUnconfirmButtonlHelper(
@@ -147,6 +163,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockDataPickerRepository: mockDataPickerRepository,
           mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutConfirmButtonlHelper(
@@ -162,6 +179,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -178,6 +196,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -193,6 +212,7 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountConfirmButtonlHelper(
@@ -207,6 +227,7 @@ void main() {
           //mockGoRouter: mockGoRouter,
           mockUserRepository: mockUserRepository,
           mockDataPickerRepository: mockDataPickerRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await profileFormsCorrectSaveHelper(
@@ -226,6 +247,7 @@ void main() {
             //mockGoRouter: mockGoRouter,
             mockUserRepository: mockUserRepository,
             mockDataPickerRepository: mockDataPickerRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
           profileStream.add(
             KTestVariables.profileUserWithoutPhoto.copyWith(

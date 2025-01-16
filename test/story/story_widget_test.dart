@@ -64,7 +64,7 @@ void main() {
           mockStoryRepository: mockStoryRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         ),
-        // lastCard: KWidgetkeys.screen.story.cardLast,
+        // lastCard: StoryKeys.cardLast,
       );
 
       testWidgets('Stories list load ', (tester) async {

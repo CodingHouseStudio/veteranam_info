@@ -7,65 +7,65 @@ Future<void> questionHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.question.widget),
+    find.byKey(QuestionKeys.widget),
     findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.question.title), findsWidgets);
+  expect(find.byKey(QuestionKeys.title), findsWidgets);
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.subtitle),
+    find.byKey(QuestionKeys.subtitle),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.iconPlus),
+    find.byKey(QuestionKeys.iconPlus),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.iconMinus),
+    find.byKey(QuestionKeys.iconMinus),
     findsNothing,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.question.title,
+    itemKey: QuestionKeys.title,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.question.title).first);
+  await tester.tap(find.byKey(QuestionKeys.title).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.iconMinus),
+    find.byKey(QuestionKeys.iconMinus),
     findsOneWidget,
   );
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.question.title).first,
-      matching: find.byKey(KWidgetkeys.widget.question.iconPlus),
+      of: find.byKey(QuestionKeys.title).first,
+      matching: find.byKey(QuestionKeys.iconPlus),
     ),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.subtitle),
+    find.byKey(QuestionKeys.subtitle),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.question.title).first);
+  await tester.tap(find.byKey(QuestionKeys.title).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.iconMinus),
+    find.byKey(QuestionKeys.iconMinus),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.question.subtitle),
+    find.byKey(QuestionKeys.subtitle),
     findsNothing,
   );
 }

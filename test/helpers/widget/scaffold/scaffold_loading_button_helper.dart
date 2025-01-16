@@ -7,7 +7,7 @@ Future<void> scaffoldLoadingButtonHelper({
   required WidgetTester tester,
   bool hoverOnButton = false,
 }) async {
-  expect(find.byKey(KWidgetkeys.widget.scaffold.loadingButton), findsOneWidget);
+  expect(find.byKey(ScaffoldKeys.loadingButton), findsOneWidget);
 
   if (hoverOnButton) {
     await loadingButtonHelper(tester);
@@ -15,10 +15,10 @@ Future<void> scaffoldLoadingButtonHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.scaffold.loadingButton,
+    itemKey: ScaffoldKeys.loadingButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+  await tester.tap(find.byKey(ScaffoldKeys.loadingButton));
 
   await tester.pumpAndSettle();
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
@@ -129,10 +128,10 @@ class _AdvancedFilterDesk extends StatelessWidget {
           required overlapsContent,
           required shrinkOffset,
         }) =>
-            SizedBox(
+            const SizedBox(
           height: double.infinity,
           child: AdvancedFilterContent(
-            key: KWidgetkeys.screen.discounts.advancedFilterDesk,
+            key: DiscountsKeys.advancedFilterDesk,
             isDesk: true,
           ),
         ),
@@ -224,7 +223,7 @@ class DiscountWidgetList extends StatelessWidget {
                       // prototypeItem: SkeletonizerWidget(
                       //   isLoading: false,
                       //   child: DiscountCardWidget(
-                      //     key: KWidgetkeys.screen.discounts.card,
+                      //     key: DiscountsKeys.card,
                       //     discountItem: KMockText.discountModel,
                       //     isDesk: isDesk,
                       //     share: '',
@@ -236,7 +235,7 @@ class DiscountWidgetList extends StatelessWidget {
                             key: const ValueKey('discount_mock_card'),
                             isLoading: true,
                             child: DiscountCardWidget(
-                              key: KWidgetkeys.screen.discounts.card,
+                              key: DiscountsKeys.card,
                               discountItem: KMockText.discountModel,
                               isDesk: isDesk,
                               share: '',
@@ -254,7 +253,7 @@ class DiscountWidgetList extends StatelessWidget {
                       isSliver: true,
                       child: SliverToBoxAdapter(
                         child: DiscountCardWidget(
-                          key: KWidgetkeys.screen.discounts.card,
+                          key: DiscountsKeys.card,
                           discountItem: KMockText.discountModel,
                           isDesk: isDesk,
                           share: '',
@@ -271,7 +270,7 @@ class DiscountWidgetList extends StatelessWidget {
                       child: Center(
                         child: Text(
                           context.l10n.thatEndOfList,
-                          key: KWidgetkeys.screen.discounts.endListText,
+                          key: DiscountsKeys.endListText,
                           style: AppTextStyle
                               .materialThemeTitleMediumNeutralVariant70,
                         ),
@@ -285,7 +284,7 @@ class DiscountWidgetList extends StatelessWidget {
                     ),
                     sliver: SliverToBoxAdapter(
                       child: LoadingButtonWidget(
-                        widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+                        widgetKey: ScaffoldKeys.loadingButton,
                         text: context.l10n.moreDiscounts,
                         onPressed: () =>
                             context.read<DiscountsWatcherBloc>().add(
@@ -331,7 +330,7 @@ class _DiscountsWidgetItem extends StatelessWidget {
     }
     final discountItem = filterDiscountModelList.elementAt(indexValue);
     return DiscountCardWidget(
-      key: KWidgetkeys.screen.discounts.card,
+      key: DiscountsKeys.card,
       discountItem: discountItem,
       isDesk: isDesk,
       share: '${KRoute.home.path}${KRoute.discounts.path}/${discountItem.id}',
@@ -449,7 +448,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
                           key: const ValueKey('discount_mock_card'),
                           isLoading: true,
                           child: DiscountCardWidget(
-                            key: KWidgetkeys.screen.discounts.card,
+                            key: DiscountsKeys.card,
                             discountItem: KMockText.discountModel,
                             isDesk: isDesk,
                             share: '',
@@ -469,7 +468,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
                       child: Center(
                         child: Text(
                           context.l10n.thatEndOfList,
-                          key: KWidgetkeys.screen.investors.endListText,
+                          key: InvestorsKeys.endListText,
                           style: AppTextStyle
                               .materialThemeTitleMediumNeutralVariant70,
                         ),
@@ -483,7 +482,7 @@ class _DiscountGridWidgetList extends StatelessWidget {
                     ),
                     sliver: SliverToBoxAdapter(
                       child: LoadingButtonWidget(
-                        widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+                        widgetKey: ScaffoldKeys.loadingButton,
                         text: context.l10n.moreDiscounts,
                         onPressed: () =>
                             context.read<DiscountsWatcherBloc>().add(

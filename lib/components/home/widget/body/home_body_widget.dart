@@ -17,7 +17,7 @@ class HomeBodyWidget extends StatelessWidget {
             horizontal: state.horizontalPadding,
           );
           return CustomScrollView(
-            key: KWidgetkeys.widget.scaffold.scroll,
+            key: ScaffoldKeys.scroll,
             cacheExtent: KDimensions.listCacheExtent,
             slivers: [
               const NetworkBanner(),

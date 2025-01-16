@@ -25,15 +25,15 @@ class FeedbackTitle extends StatelessWidget {
               TitlePointWidget(
                 isDesk: true,
                 //pointText: context.l10n.feedback,
-                // pointKey: KWidgetkeys.screen.feedback.pointText,
+                // pointKey: FeedbackKeys.pointText,
                 title: title,
                 titleSecondPart: titleSecondPart!,
-                titleKey: KWidgetkeys.screen.feedback.title,
+                titleKey: FeedbackKeys.title,
               )
             else
               LineTitleIconWidget(
                 title: title,
-                titleKey: KWidgetkeys.screen.feedback.title, isDesk: isDesk,
+                titleKey: FeedbackKeys.title, isDesk: isDesk,
                 // isDesk: isDesk,
               ),
             KSizedBox.kHeightSizedBox100,
@@ -42,7 +42,7 @@ class FeedbackTitle extends StatelessWidget {
             // KSizedBox.kHeightSizedBox24,
             // TextPointWidget(
             //   context.l10n.feedback,
-            //   key: KWidgetkeys.screen.feedback.pointText,
+            //   key: FeedbackKeys.pointText,
             // ),
             KSizedBox.kHeightSizedBox16,
             // if (text != null)
@@ -51,7 +51,7 @@ class FeedbackTitle extends StatelessWidget {
             //     style: AppTextStyle.materialThemeDisplaySmall,
             //   ),
             Row(
-              key: KWidgetkeys.screen.feedback.title,
+              key: FeedbackKeys.title,
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: KPadding.kPaddingSize16,
               children: Config.isWeb ? mobTitle : mobTitle.reversed.toList(),

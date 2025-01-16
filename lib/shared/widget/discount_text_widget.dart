@@ -28,7 +28,7 @@ class DiscountTextWidget extends StatelessWidget {
       children: [
         Text(
           '$description\n',
-          key: KWidgetkeys.widget.cardTextDetail.text,
+          key: CardTextDetailKeys.text,
           maxLines: maxLines ?? 2,
           style: AppTextStyle.materialThemeBodyLarge,
           overflow: TextOverflow.ellipsis,

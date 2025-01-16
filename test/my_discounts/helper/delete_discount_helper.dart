@@ -11,29 +11,29 @@ Future<void> deleteDiscountHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.card),
+        find.byKey(MyDiscountsKeys.card),
         findsWidgets,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.myDiscounts.card,
+        itemKey: MyDiscountsKeys.card,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
+        find.byKey(MyDiscountsKeys.iconTrash),
         findsWidgets,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first,
+        find.byKey(MyDiscountsKeys.iconTrash).first,
         warnIfMissed: false,
       );
 
       await tester.pumpAndSettle();
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.card),
+        find.byKey(MyDiscountsKeys.card),
         findsWidgets,
       );
     },

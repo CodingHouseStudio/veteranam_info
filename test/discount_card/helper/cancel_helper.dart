@@ -11,15 +11,15 @@ Future<void> cancelHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountCard.closeButton,
+    itemKey: DiscountCardDialogKeys.closeButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountCard.closeButton),
+    find.byKey(DiscountCardDialogKeys.closeButton),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountCard.closeButton));
+  await tester.tap(find.byKey(DiscountCardDialogKeys.closeButton));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.discounts.name),

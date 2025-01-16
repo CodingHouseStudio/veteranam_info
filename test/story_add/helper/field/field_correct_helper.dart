@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> fieldCorrectHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.storyAdd.storyField), findsOneWidget);
+  expect(find.byKey(StoryAddKeys.storyField), findsOneWidget);
 
   await messageFieldHelper(
     tester: tester,
@@ -15,17 +15,17 @@ Future<void> fieldCorrectHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.storyAdd.photoButton,
+    itemKey: StoryAddKeys.photoButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.photoButton));
+  await tester.tap(find.byKey(StoryAddKeys.photoButton));
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.storyAdd.button,
+    itemKey: StoryAddKeys.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.button));
+  await tester.tap(find.byKey(StoryAddKeys.button));
 
   await tester.pumpAndSettle();
 }

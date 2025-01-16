@@ -8,7 +8,7 @@ class MenuDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: KWidgetkeys.widget.menuDialog.dialog,
+      key: MenuDialogKeys.dialog,
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: KPadding.kPaddingSize32,
@@ -16,9 +16,9 @@ class MenuDialogWidget extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: TextButton.icon(
-            key: KWidgetkeys.widget.menuDialog.discountsButton,
+            key: MenuDialogKeys.discountsButton,
             onPressed: () => context
-              ..pop()
+              ..popDialog()
               ..goNamed(KRoute.discounts.name),
             iconAlignment: IconAlignment.end,
             icon: const IconWidget(
@@ -34,30 +34,30 @@ class MenuDialogWidget extends StatelessWidget {
           ),
         ),
         _button(
-          key: KWidgetkeys.widget.menuDialog.investorsButton,
+          key: MenuDialogKeys.investorsButton,
           context: context,
           routeName: KRoute.support.name,
           text: context.l10n.investors,
         ),
         _button(
-          key: KWidgetkeys.widget.menuDialog.feedbackButton,
+          key: MenuDialogKeys.feedbackButton,
           context: context,
           routeName: KRoute.feedback.name,
           text: context.l10n.contact,
         ),
-        Wrap(
+        const Wrap(
           runSpacing: KPadding.kPaddingSize10,
           spacing: KPadding.kPaddingSize30,
           children: [
             LanguagesSwitcherWidget(
-              key: KWidgetkeys.widget.menuDialog.languageSwitcher,
+              key: MenuDialogKeys.languageSwitcher,
             ),
             SocialMediaLinks(
               isDesk: false,
               padding: KPadding.kPaddingSize8,
-              instagramKey: KWidgetkeys.widget.menuDialog.instagram,
-              linkedInKey: KWidgetkeys.widget.menuDialog.linkedIn,
-              facebookKey: KWidgetkeys.widget.menuDialog.facebook,
+              instagramKey: MenuDialogKeys.instagram,
+              linkedInKey: MenuDialogKeys.linkedIn,
+              facebookKey: MenuDialogKeys.facebook,
             ),
           ],
         ),
@@ -76,7 +76,7 @@ class MenuDialogWidget extends StatelessWidget {
         child: TextButton(
           key: key,
           onPressed: () => context
-            ..pop()
+            ..popDialog()
             ..goNamed(routeName),
           style: KButtonStyles.withoutStyle,
           child: Text(

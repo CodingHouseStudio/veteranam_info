@@ -41,7 +41,7 @@
 //                   filterWidget,
 //                   KSizedBox.kHeightSizedBox24,
 //                   AdvancedFilterMob(
-//                     key: KWidgetkeys.screen.discounts.advancedFilterMob,
+//                     key: DiscountsKeys.advancedFilterMob,
 //                   ),
 //                 ],
 //               );

@@ -16,7 +16,7 @@ List<Widget> _formWidgetList({
                 ),
                 child: Text(
                   context.l10n.yourStory,
-                  key: KWidgetkeys.screen.storyAdd.storyText,
+                  key: StoryAddKeys.storyText,
                   style: AppTextStyle.text40,
                 ),
               ),
@@ -32,7 +32,7 @@ List<Widget> _formWidgetList({
           padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
           child: Text(
             context.l10n.yourStory,
-            key: KWidgetkeys.screen.storyAdd.storyText,
+            key: StoryAddKeys.storyText,
             style: AppTextStyle.text24,
           ),
         ),
@@ -55,12 +55,12 @@ List<Widget> _formWidgetList({
                   children: [
                     Text(
                       context.l10n.addPhoto,
-                      key: KWidgetkeys.screen.storyAdd.photoText,
+                      key: StoryAddKeys.photoText,
                       style: AppTextStyle.text40,
                     ),
                     Text(
                       context.l10n.notNecessarily,
-                      key: KWidgetkeys.screen.storyAdd.photoDesciption,
+                      key: StoryAddKeys.photoDesciption,
                       style: AppTextStyle.hint20,
                     ),
                   ],
@@ -86,13 +86,13 @@ List<Widget> _formWidgetList({
             children: [
               Text(
                 context.l10n.addPhoto,
-                key: KWidgetkeys.screen.storyAdd.photoText,
+                key: StoryAddKeys.photoText,
                 style: AppTextStyle.text24,
               ),
               Expanded(
                 child: Text(
                   context.l10n.notNecessarily,
-                  key: KWidgetkeys.screen.storyAdd.photoDesciption,
+                  key: StoryAddKeys.photoDesciption,
                   style: AppTextStyle.hint16,
                 ),
               ),

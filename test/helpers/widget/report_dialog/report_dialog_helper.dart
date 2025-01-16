@@ -2,26 +2,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 Future<void> reportDialogHelper(
-  WidgetTester tester,
-) async {
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.title), findsOneWidget);
+  WidgetTester tester, {
+  bool openedDialog = true,
+}) async {
+  final matcher = openedDialog ? findsOneWidget : findsNothing;
+  expect(find.byKey(ReportDialogKeys.title), matcher);
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.subtitle), findsOneWidget);
+  expect(find.byKey(ReportDialogKeys.subtitle), matcher);
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsWidgets);
+  expect(
+    find.byKey(ReportDialogKeys.checkPoint),
+    openedDialog ? findsWidgets : findsNothing,
+  );
 
   // await chekPointHelper(tester: tester,twiceTap=false);
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
-    findsOneWidget,
+    find.byKey(ReportDialogKeys.sendButton),
+    matcher,
   );
 
-  // expect(find.byKey(KWidgetkeys.widget.reportDialog.emailField),
+  // expect(find.byKey(ReportDialogKeys.emailField),
   // findsNothing);
 
   expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.messageField),
+    find.byKey(ReportDialogKeys.messageField),
     findsNothing,
   );
 
@@ -29,20 +34,20 @@ Future<void> reportDialogHelper(
 
   // await tester.pumpAndSettle();
 
-  // expect(find.byKey(KWidgetkeys.widget.reportDialog.title), findsNothing);
+  // expect(find.byKey(ReportDialogKeys.title), findsNothing);
 
-  // expect(find.byKey(KWidgetkeys.widget.reportDialog.subtitle), findsNothing);
+  // expect(find.byKey(ReportDialogKeys.subtitle), findsNothing);
 
-  // expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsNothing
+  // expect(find.byKey(ReportDialogKeys.checkPoint), findsNothing
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+  //   find.byKey(ReportDialogKeys.sendButton),
   //   findsNothing,
   // );
 
   // expect(
-  //   find.byKey(KWidgetkeys.widget.reportDialog.widget),
+  //   find.byKey(ReportDialogKeys.widget),
   //   findsNothing,
   // );
 }

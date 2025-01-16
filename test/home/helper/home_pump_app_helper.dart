@@ -39,7 +39,7 @@ Future<void> homePumpAppHelper({
     mockGoRouter: mockGoRouter,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+  expect(find.byKey(HomeKeys.screen), findsOneWidget);
 
   await tester.pumpAndSettle();
 }

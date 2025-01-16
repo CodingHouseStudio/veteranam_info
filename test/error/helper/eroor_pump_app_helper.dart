@@ -32,7 +32,7 @@ Future<void> errorPumpAppHelper({
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.error.screen),
+    find.byKey(ErrorKeys.screen),
     findsOneWidget,
   );
 

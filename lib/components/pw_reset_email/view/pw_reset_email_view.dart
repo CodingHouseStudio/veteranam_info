@@ -11,7 +11,7 @@ class PwResetEmailScreen extends StatelessWidget {
     return PwResetEmailBlocprovider(
       email: email,
       childWidget: PwResetEmailBodyWidget(
-        key: KWidgetkeys.screen.pwResetEmail.screen,
+        key: PwResetEmailKeys.screen,
         email: email,
       ),
     );

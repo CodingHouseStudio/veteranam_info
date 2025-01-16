@@ -7,12 +7,12 @@ Future<void> workEmployeeFailureHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.information.card),
+    find.byKey(InformationKeys.card),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.workEmployee.buttonMock),
+    find.byKey(WorkEmployeeKeys.buttonMock),
     findsNothing,
   );
 

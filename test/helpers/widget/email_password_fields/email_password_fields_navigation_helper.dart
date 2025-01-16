@@ -11,17 +11,16 @@ Future<void> emailPasswordFieldsNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.recoveryButton),
+    find.byKey(EmailPasswordFieldsKeys.recoveryButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
+    itemKey: EmailPasswordFieldsKeys.recoveryButton,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.emailPasswordFields.recoveryButton));
+  await tester.tap(find.byKey(EmailPasswordFieldsKeys.recoveryButton));
 
   await tester.pumpAndSettle();
 

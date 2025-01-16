@@ -32,7 +32,7 @@ Future<void> investorsPumpAppHelper({
   await tester.pumpApp(const InvestorsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.investors.screen),
+    find.byKey(InvestorsKeys.screen),
     findsOneWidget,
   );
 

@@ -96,7 +96,7 @@ class ScaffoldWidget extends StatelessWidget {
                           ),
                 appBar: appBar,
                 body: KeyboardScrollView(
-                  widgetKey: KWidgetkeys.widget.scaffold.scroll,
+                  widgetKey: ScaffoldKeys.scroll,
                   //physics: KTest.scroll,
                   slivers: [
                     const NetworkBanner(),
@@ -172,7 +172,7 @@ class ScaffoldWidget extends StatelessWidget {
                     //                     horizontal: KPadding.kPaddingSize16,
                     //                   ),
                     //         sliver: SliverList.builder(
-                    //           key: KWidgetkeys.widget.footer.widget,
+                    //           key: FooterKeys.widget,
                     //           addAutomaticKeepAlives: false,
                     //           addRepaintBoundaries: false,
                     //           itemBuilder: (context, index) =>

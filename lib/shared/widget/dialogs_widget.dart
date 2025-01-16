@@ -160,7 +160,7 @@ class _DialogsWidget {
           final isDeskValue = constraints.maxWidth >
               (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
           return AlertDialog(
-            key: KWidgetkeys.widget.dialogs.scroll,
+            key: DialogsKeys.scroll,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
             ),
@@ -212,7 +212,7 @@ class _DialogsWidget {
           );
           if (isScollable) {
             return SingleChildScrollView(
-              key: KWidgetkeys.widget.dialogs.scroll,
+              key: DialogsKeys.scroll,
               child: paddingWidget,
             );
           } else {
@@ -308,7 +308,7 @@ class _DialogsWidget {
       isDesk: isDesk,
       deskInsetPadding: EdgeInsets.zero,
       deskIcon: (context) => CancelWidget(
-        widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+        widgetKey: ReportDialogKeys.cancel,
         onPressed: context.pop,
       ),
       deskActionsOverflowAlignment: OverflowBarAlignment.center,
@@ -346,7 +346,7 @@ class _DialogsWidget {
     //               scrollable: true,
     //               insetPadding: EdgeInsets.zero,
     //               icon: CancelWidget(
-    //                 widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+    //                 widgetKey: ReportDialogKeys.cancel,
     //                 onPressed: () => context.pop(),
     //               ),
     //               iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
@@ -458,7 +458,7 @@ class _DialogsWidget {
         showSnackBardTextDialog(error);
       } else {
         context._showSnackBar(
-          key: KWidgetkeys.widget.dialogs.failure,
+          key: DialogsKeys.failure,
           child: GetErrorDialogWidget(onPressed: onPressed, error: error),
         );
       }
@@ -471,10 +471,10 @@ class _DialogsWidget {
   }) {
     if (text != null) {
       context._showSnackBar(
-        // key: KWidgetkeys.widget.dialogs.failure,
+        // key: DialogsKeys.failure,
         child: Text(
           text,
-          key: KWidgetkeys.widget.dialogs.snackBarText,
+          key: DialogsKeys.snackBarText,
           style: AppTextStyle.materialThemeBodyLargeNeutral,
         ),
         duration: duration,
@@ -500,7 +500,7 @@ class _DialogsWidget {
               final isTablet = constraints.maxWidth >
                   KPlatformConstants.minWidthThresholdTablet;
               return AlertDialog(
-                key: KWidgetkeys.screen.discountCard.dialog,
+                key: DiscountCardDialogKeys.dialog,
                 insetPadding: const EdgeInsets.symmetric(
                   horizontal: KPadding.kPaddingSize20,
                 ),
@@ -512,7 +512,7 @@ class _DialogsWidget {
                 scrollable: true,
                 clipBehavior: Clip.hardEdge,
                 content: UserEmailDialog(
-                  key: KWidgetkeys.screen.discounts.userEmailDialog,
+                  key: DiscountsKeys.userEmailDialog,
                   isDesk: isTablet,
                   sendOnPressed: () => context.read<UserEmailFormBloc>().add(
                         const UserEmailFormEvent.sendEmail(),
@@ -559,19 +559,19 @@ class _DialogsWidget {
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            key: KWidgetkeys.screen.discountCard.dialog,
-            insetPadding: const EdgeInsets.symmetric(
+          return const AlertDialog(
+            key: DiscountCardDialogKeys.dialog,
+            insetPadding: EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize20,
             ),
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: KBorderRadius.kBorderRadius32,
             ),
             backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+            contentPadding: EdgeInsets.all(KPadding.kPaddingSize16),
             scrollable: true,
             clipBehavior: Clip.hardEdge,
-            content: const MobUpdateDialog(),
+            content: MobUpdateDialog(),
           );
         },
       );

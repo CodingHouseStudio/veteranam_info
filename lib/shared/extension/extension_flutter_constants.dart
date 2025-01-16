@@ -12,6 +12,7 @@ import 'package:flutter/material.dart'
         EdgeInsetsGeometry,
         Expanded,
         MouseCursor,
+        Navigator,
         SizedBox,
         SliverToBoxAdapter,
         Spacer,
@@ -217,6 +218,8 @@ extension ContextExtensions on BuildContext {
   Future<void> onMobFeedback(UserFeedback feedback) async =>
       read<MobFeedbackBloc>().add(MobFeedbackEvent.send(feedback.screenshot));
 
+  void popDialog({bool? value}) => Navigator.of(this).pop(value);
+
   // void copyText(String text, String? href, String? title) =>
   //     read<UrlCubit>().copy(text);
 
@@ -347,7 +350,7 @@ extension FundExtensions on FundModel {
   Widget get getImage {
     return image.getImage(
           parent: (child) => Expanded(child: child),
-          key: KWidgetkeys.widget.donateCard.image,
+          key: DonateCardKeys.image,
         ) ??
         const Spacer();
   }
@@ -363,8 +366,8 @@ extension StoryExtensions on StoryModel {
         fit: BoxFit.contain,
         size: KSize.kUserPhoto,
       ) ??
-      IconWidget(
-        key: KWidgetkeys.widget.storyCard.userIcon,
+      const IconWidget(
+        key: StoryCardKeys.userIcon,
         icon: KIcon.person,
         background: AppColors.materialThemeKeyColorsNeutralVariant,
       );

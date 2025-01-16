@@ -5,11 +5,11 @@ Future<void> dialogConfirmHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton),
+    find.byKey(ConfirmDialogKeys.confirmButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.confirmDialog.confirmButton));
+  await tester.tap(find.byKey(ConfirmDialogKeys.confirmButton));
 
   await tester.pumpAndSettle();
 

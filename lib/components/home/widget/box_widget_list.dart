@@ -87,8 +87,8 @@ class _ProdBoxWidgets extends StatelessWidget {
             isDesk: false,
             isTablet: false,
           ),
-          DiscountBoxwWidget(
-            key: KWidgetkeys.screen.home.discountsBox,
+          const DiscountBoxwWidget(
+            key: HomeKeys.discountsBox,
             isTablet: false,
           ),
           const DoubleBox(
@@ -105,7 +105,7 @@ class _HomeRightBoxWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       flex: 2,
       child: Column(
         spacing: KPadding.kPaddingSize16,
@@ -113,11 +113,11 @@ class _HomeRightBoxWidgets extends StatelessWidget {
           Expanded(
             flex: 3,
             child: DiscountBoxwWidget(
-              key: KWidgetkeys.screen.home.discountsBox,
+              key: HomeKeys.discountsBox,
               isTablet: true,
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: DoubleBox(
               useSoaccer: true,
@@ -145,7 +145,7 @@ class _DevBoxWidgets extends StatelessWidget {
         children: [
           Expanded(
             child: BoxWidget(
-              key: KWidgetkeys.screen.home.informationBox,
+              key: HomeKeys.informationBox,
               text: context.l10n.information,
               onTap: () => context.goNamed(KRoute.information.name),
               isDesk: true,
@@ -154,7 +154,7 @@ class _DevBoxWidgets extends StatelessWidget {
           ),
           Expanded(
             child: BoxWidget(
-              key: KWidgetkeys.screen.home.storyBox,
+              key: HomeKeys.storyBox,
               text: context.l10n.stories,
               onTap: () => context.goNamed(KRoute.stories.name),
               isDesk: true,
@@ -163,7 +163,7 @@ class _DevBoxWidgets extends StatelessWidget {
           ),
           Expanded(
             child: BoxWidget(
-              key: KWidgetkeys.screen.home.workBox,
+              key: HomeKeys.workBox,
               text: context.l10n.work,
               onTap: () => context.goNamed(KRoute.work.name),
               isDesk: true,
@@ -177,21 +177,21 @@ class _DevBoxWidgets extends StatelessWidget {
         spacing: KPadding.kPaddingSize16,
         children: [
           BoxWidget(
-            key: KWidgetkeys.screen.home.informationBox,
+            key: HomeKeys.informationBox,
             text: context.l10n.information,
             onTap: () => context.goNamed(KRoute.information.name),
             isDesk: false,
             icon: KIcon.globe,
           ),
           BoxWidget(
-            key: KWidgetkeys.screen.home.storyBox,
+            key: HomeKeys.storyBox,
             text: context.l10n.stories,
             onTap: () => context.goNamed(KRoute.stories.name),
             isDesk: false,
             icon: KIcon.messageSquare,
           ),
           BoxWidget(
-            key: KWidgetkeys.screen.home.workBox,
+            key: HomeKeys.workBox,
             text: context.l10n.work,
             onTap: () => context.goNamed(KRoute.work.name),
             isDesk: false,
@@ -244,7 +244,7 @@ class _InvestorBox extends StatelessWidget {
     return Expanded(
       flex: isTablet ? 5 : 4,
       child: BoxWidget(
-        key: KWidgetkeys.screen.home.investorsBox,
+        key: HomeKeys.investorsBox,
         text: context.l10n.investors,
         onTap: () => context.goNamed(KRoute.support.name),
         isDesk: true,
@@ -281,7 +281,7 @@ class _FeedbackBox extends StatelessWidget {
     return Expanded(
       flex: 4,
       child: BoxWidget(
-        key: KWidgetkeys.screen.home.feedbackBox,
+        key: HomeKeys.feedbackBox,
         text: context.l10n.contacts,
         onTap: () => context.goNamed(KRoute.feedback.name),
         isDesk: true,

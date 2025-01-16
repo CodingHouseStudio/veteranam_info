@@ -7,42 +7,42 @@ Future<void> companyFormsHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.company.editText),
+    find.byKey(CompanyKeys.editText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.photo),
+    find.byKey(CompanyKeys.photo),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.companyNameField),
+    find.byKey(CompanyKeys.companyNameField),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.publicNameField),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.company.companyCodeField,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.company.userEmailField),
+    find.byKey(CompanyKeys.publicNameField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.linkField,
+    itemKey: CompanyKeys.companyCodeField,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.saveButton),
+    find.byKey(CompanyKeys.userEmailField),
+    findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: CompanyKeys.linkField,
+  );
+
+  expect(
+    find.byKey(CompanyKeys.saveButton),
     findsOneWidget,
   );
 }

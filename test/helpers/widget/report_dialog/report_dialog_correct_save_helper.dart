@@ -14,18 +14,18 @@ Future<void> reportDialogCorrectSaveHelper({
       await reportDialogOpenHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.widget.reportDialog.cancel),
+        find.byKey(ReportDialogKeys.cancel),
         findsOneWidget,
       );
 
-      await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.cancel));
+      await tester.tap(find.byKey(ReportDialogKeys.cancel));
 
       await tester.pumpAndSettle();
 
       verify(() => mockGoRouter.pop()).called(1);
 
       // expect(
-      //   find.byKey(KWidgetkeys.widget.reportDialog.cancel),
+      //   find.byKey(ReportDialogKeys.cancel),
       //   findsNothing,
       // );
       // await reportDialogOpenHelper(tester);
@@ -36,7 +36,7 @@ Future<void> reportDialogCorrectSaveHelper({
         message: KTestVariables.reportItems.first.message,
       );
 
-      verify(() => mockGoRouter.pop()).called(1);
+      await reportDialogHelper(tester, openedDialog: false);
     },
   );
 }

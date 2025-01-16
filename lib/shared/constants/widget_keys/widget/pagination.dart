@@ -1,12 +1,12 @@
 part of '../widget_keys.dart';
 
-class _PaginationKeys {
-  final buttonPrevious = const Key('pagination_button_previous');
-  final buttonNext = const Key('pagination_button_next');
-  final numbers = const Key('pagination_number');
-  final firstThreePoint = const Key('pagination_first_three_poinst');
-  final lastThreePoint = const Key('pagination_last_three_poinst');
-  final firstNumber = const Key('pagination_first_number');
-  final lastNumber = const Key('pagination_last_number');
-  final sixthNumber = const Key('pagination_sixth_number');
+abstract class PaginationKeys {
+  static const buttonPrevious = Key('pagination_button_previous');
+  static const buttonNext = Key('pagination_button_next');
+  static const numbers = Key('pagination_number');
+  static const firstThreePoint = Key('pagination_first_three_poinst');
+  static const lastThreePoint = Key('pagination_last_three_poinst');
+  static const firstNumber = Key('pagination_first_number');
+  static const lastNumber = Key('pagination_last_number');
+  static const sixthNumber = Key('pagination_sixth_number');
 }

@@ -48,12 +48,12 @@ Future<void> discountsAddUncorectHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cityField,
+    itemKey: DiscountsAddKeys.cityField,
     offset: KTestConstants.scrollingUp,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
+    find.byKey(DiscountsAddKeys.cityField),
     KTestVariables.field,
   );
 
@@ -79,11 +79,11 @@ Future<void> discountsAddUncorectHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cancelButton,
+    itemKey: DiscountsAddKeys.cancelButton,
     offset: KTestConstants.scrollingDown,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton));
+  await tester.tap(find.byKey(DiscountsAddKeys.cancelButton));
 
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
@@ -91,11 +91,11 @@ Future<void> discountsAddUncorectHelper({
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discountsAdd.cancelButton,
+    itemKey: DiscountsAddKeys.cancelButton,
     offset: KTestConstants.scrollingDown,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.cancelButton));
+  await tester.tap(find.byKey(DiscountsAddKeys.cancelButton));
 
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 

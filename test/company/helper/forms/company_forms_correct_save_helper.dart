@@ -15,17 +15,17 @@ Future<void> companyFormsCorrectSaveHelper(
     link: KTestVariables.fullCompanyModel.link,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.company.saveButton));
+  await tester.tap(find.byKey(CompanyKeys.saveButton));
 
   await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.company.saveButton,
+    itemKey: CompanyKeys.saveButton,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.company.submitingText),
+    find.byKey(CompanyKeys.submitingText),
     findsOneWidget,
   );
 

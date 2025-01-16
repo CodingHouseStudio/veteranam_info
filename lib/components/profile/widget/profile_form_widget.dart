@@ -103,7 +103,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                         ? EdgeInsets.zero
                         : const EdgeInsets.only(left: KPadding.kPaddingSize24),
                     child: UserPhotoWidget(
-                      key: KWidgetkeys.screen.profile.photo,
+                      key: ProfileKeys.photo,
                       onPressed: () => context
                           .read<ProfileBloc>()
                           .add(const ProfileEvent.imageUpdated()),
@@ -120,7 +120,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                   Expanded(
                     child: Text(
                       context.l10n.dataEditing,
-                      key: KWidgetkeys.screen.profile.editText,
+                      key: ProfileKeys.editText,
                       style: widget.isDesk
                           ? AppTextStyle.materialThemeHeadlineLarge
                           : AppTextStyle.materialThemeHeadlineSmall,
@@ -138,7 +138,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                 ),
               KSizedBox.kHeightSizedBox32,
               _textField(
-                fieldKey: KWidgetkeys.screen.profile.nameField,
+                fieldKey: ProfileKeys.nameField,
                 controller: nameController,
                 hint: context.l10n.writeYouName,
                 onChanged: (text) => context
@@ -149,7 +149,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               ),
               KSizedBox.kHeightSizedBox32,
               _textField(
-                fieldKey: KWidgetkeys.screen.profile.lastNameField,
+                fieldKey: ProfileKeys.lastNameField,
                 controller: surnameController,
                 hint: context.l10n.writeYouLastName,
                 onChanged: (text) => context
@@ -160,7 +160,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               ),
               KSizedBox.kHeightSizedBox32,
               _textField(
-                fieldKey: KWidgetkeys.screen.profile.emailFied,
+                fieldKey: ProfileKeys.emailFied,
                 controller: emailController,
                 hint: KMockText.email,
                 enabled: false,
@@ -170,7 +170,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               ),
               // KSizedBox.kHeightSizedBox32,
               // _textField(
-              //   fieldKey: KWidgetkeys.screen.profile.nickNameField,
+              //   fieldKey: ProfileKeys.nickNameField,
               //   hint: KAppText.nickname,
               //   controller: nicknameController,
               //   onChanged: (text) => context
@@ -180,7 +180,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               // ),
               KSizedBox.kHeightSizedBox16,
               SendingTextWidget(
-                textKey: KWidgetkeys.screen.profile.submitingText,
+                textKey: ProfileKeys.submitingText,
                 failureText: _.failure?.value(context),
                 sendingText: context.l10n.changesSendInProgress,
                 successText: _.formState == ProfileEnum.success
@@ -192,7 +192,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               ),
               KSizedBox.kHeightSizedBox16,
               DoubleButtonWidget(
-                widgetKey: KWidgetkeys.screen.profile.saveButton,
+                widgetKey: ProfileKeys.saveButton,
                 text: context.l10n.saveChangesProfile,
                 darkMode: true,
                 // color: AppColors.materialThemeKeyColorsSecondary,

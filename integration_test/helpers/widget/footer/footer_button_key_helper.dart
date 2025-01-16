@@ -15,7 +15,7 @@ Future<void> footerButtonHelper({
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.footer.title,
+    itemKey: FooterKeys.title,
     offset: KTestConstants.scrollingUp200,
   );
 

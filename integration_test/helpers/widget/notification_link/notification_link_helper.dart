@@ -5,22 +5,22 @@ Future<void> notificationLinkHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.text),
+    find.byKey(NotificationLinkKeys.text),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.field),
+    find.byKey(NotificationLinkKeys.field),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.button),
+    find.byKey(NotificationLinkKeys.button),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.thankText),
+    find.byKey(NotificationLinkKeys.thankText),
     findsNothing,
   );
 }

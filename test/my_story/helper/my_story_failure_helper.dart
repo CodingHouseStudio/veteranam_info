@@ -7,7 +7,7 @@ Future<void> myStoryFailureHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.myStory.card),
+    find.byKey(MyStoryKeys.card),
     findsNothing,
   );
 

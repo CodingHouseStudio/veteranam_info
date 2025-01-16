@@ -6,19 +6,19 @@ import '../../test_dependency.dart';
 Future<void> listLoadHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.storyCard.userName), findsWidgets);
+  expect(find.byKey(StoryCardKeys.userName), findsWidgets);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
+  expect(find.byKey(ScaffoldKeys.endListText), findsNothing);
 }

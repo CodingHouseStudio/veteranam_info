@@ -25,7 +25,7 @@ Future<void> markdownFileDialogPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.privacyPolicy.dialog),
+    find.byKey(PrivacyPolicyDialogKeys.dialog),
     findsOneWidget,
   );
 

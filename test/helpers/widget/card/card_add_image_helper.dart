@@ -7,13 +7,13 @@ Future<void> cardAddImageHelper({
   required String image,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.cardAddImage.widget),
+    find.byKey(CardAddImageKeys.widget),
     findsOneWidget,
   );
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.cardAddImage.widget),
+      of: find.byKey(CardAddImageKeys.widget),
       matching: find.image(
         CachedNetworkImageProvider(
           image,

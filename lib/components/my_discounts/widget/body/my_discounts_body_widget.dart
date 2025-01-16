@@ -48,7 +48,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             mainChildWidgetsFunction: ({required isDesk}) => [
               if (companyState.company.isEmpty)
                 Text(
-                  key: KWidgetkeys.screen.myDiscounts.title,
+                  key: MyDiscountsKeys.title,
                   context.l10n.myPublications,
                   style: isDesk
                       ? AppTextStyle.materialThemeDisplayLarge
@@ -58,9 +58,9 @@ class MyDiscountsBodyWidget extends StatelessWidget {
               else
                 LineTitleIconButtonWidget(
                   title: context.l10n.myPublications,
-                  titleKey: KWidgetkeys.screen.myDiscounts.title,
+                  titleKey: MyDiscountsKeys.title,
                   icon: KIcon.plus,
-                  iconButtonKey: KWidgetkeys.screen.myDiscounts.iconAdd,
+                  iconButtonKey: MyDiscountsKeys.iconAdd,
                   isDesk: isDesk,
                   onPressed: () => context.goNamed(KRoute.discountsAdd.name),
                 ),

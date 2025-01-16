@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _DropDownButtonKeys {
-  final widget = const Key('drop_down_button_widget');
-  final loginButton = const Key('drop_down_button_widget_login_button');
+abstract class DropDownButtonKeys {
+  static const widget = Key('drop_down_button_widget');
+  static const loginButton = Key('drop_down_button_widget_login_button');
 }

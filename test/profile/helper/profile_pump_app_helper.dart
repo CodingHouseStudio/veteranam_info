@@ -11,6 +11,7 @@ Future<void> profilePumpAppHelper({
   required WidgetTester tester,
   required UserRepository mockUserRepository,
   required IDataPickerRepository mockDataPickerRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerUserWatcherBloc(mockUserRepository);
@@ -19,11 +20,16 @@ Future<void> profilePumpAppHelper({
     mockUserRepository: mockUserRepository,
     mockDataPickerRepository: mockDataPickerRepository,
   );
+  _registerAuthenticationBloc(
+    mockUserRepository: mockUserRepository,
+    mockDataPickerRepository: mockDataPickerRepository,
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
 
   await tester.pumpApp(const ProfileScreen(), mockGoRouter: mockGoRouter);
 
   expect(
-    find.byKey(KWidgetkeys.screen.profile.screen),
+    find.byKey(ProfileKeys.screen),
     findsOneWidget,
   );
 
@@ -54,4 +60,18 @@ void _registerProfileBloc({
     GetIt.I.unregister<ProfileBloc>();
   }
   GetIt.I.registerSingleton<ProfileBloc>(profileBloc);
+}
+
+void _registerAuthenticationBloc({
+  required UserRepository mockUserRepository,
+  required IDataPickerRepository mockDataPickerRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }

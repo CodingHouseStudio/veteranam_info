@@ -9,41 +9,41 @@ Future<void> switchOfflineHelper({
   bool isActive = false,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.switchOffline.widget),
+    find.byKey(SwitchOfflineKeys.widget),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.switchOffline.icon),
+    find.byKey(SwitchOfflineKeys.icon),
     isActive ? findsNothing : findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.switchOffline.active),
+    find.byKey(SwitchOfflineKeys.active),
     isActive ? findsOneWidget : findsNothing,
   );
 
   if (enabled) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.widget.switchOffline.widget,
+      itemKey: SwitchOfflineKeys.widget,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchOffline.widget));
+    await tester.tap(find.byKey(SwitchOfflineKeys.widget));
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.switchOffline.active),
+      find.byKey(SwitchOfflineKeys.active),
       isActive ? findsNothing : findsOneWidget,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.widget.switchOffline.widget));
+    await tester.tap(find.byKey(SwitchOfflineKeys.widget));
 
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.switchOffline.active),
+      find.byKey(SwitchOfflineKeys.active),
       isActive ? findsOneWidget : findsNothing,
     );
   }

@@ -14,7 +14,7 @@ Future<void> profileSavesPumpAppHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.profileSaves.screen),
+    find.byKey(ProfileSavesKeys.screen),
     findsOneWidget,
   );
 

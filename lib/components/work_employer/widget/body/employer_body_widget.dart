@@ -18,9 +18,9 @@ class WorkEmployerBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         TitleWidget(
           title: context.l10n.work,
-          titleKey: KWidgetkeys.screen.employer.title,
+          titleKey: EmployerKeys.title,
           subtitle: context.l10n.employerSubtitle,
-          subtitleKey: KWidgetkeys.screen.employer.subtitle,
+          subtitleKey: EmployerKeys.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
@@ -29,7 +29,7 @@ class WorkEmployerBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         Text(
           context.l10n.mainInformation,
-          key: KWidgetkeys.screen.employer.mainInformation,
+          key: EmployerKeys.mainInformation,
           style: isDesk ? AppTextStyle.text64 : AppTextStyle.text32,
         ),
         if (isDesk)
@@ -40,7 +40,7 @@ class WorkEmployerBodyWidget extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: ButtonWidget(
-            key: KWidgetkeys.screen.employer.button,
+            key: EmployerKeys.button,
             text: context.l10n.next,
             onPressed: null,
             isDesk: isDesk,

@@ -8,22 +8,22 @@ Future<void> filterPopupMenuHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.filterPopupMenu.widget,
+    itemKey: FilterPopupMenuKeys.widget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.filterPopupMenu.widget),
+    find.byKey(FilterPopupMenuKeys.widget),
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+    find.byKey(FilterPopupMenuKeys.resetAll),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+    find.byKey(FilterPopupMenuKeys.resetAll),
   );
 
   await tester.pumpAndSettle();

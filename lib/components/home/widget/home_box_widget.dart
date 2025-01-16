@@ -19,7 +19,7 @@ class HomeBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: KWidgetkeys.screen.home.box,
+      key: HomeKeys.box,
       padding: EdgeInsets.all(
         isTablet ? KPadding.kPaddingSize40 : KPadding.kPaddingSize16,
       ),
@@ -29,7 +29,7 @@ class HomeBoxWidget extends StatelessWidget {
         children: [
           Text(
             context.l10n.thankYou,
-            key: KWidgetkeys.screen.home.boxTitle,
+            key: HomeKeys.boxTitle,
             style: isDesk
                 ? AppTextStyle.h1
                 : isTablet
@@ -77,7 +77,7 @@ class HomeBoxWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox16,
           Text(
             context.l10n.homeSubtitle,
-            key: KWidgetkeys.screen.home.boxSubtitle,
+            key: HomeKeys.boxSubtitle,
             style: isDesk
                 ? AppTextStyle.materialThemeTitleLarge
                 : AppTextStyle.materialThemeBodyLarge,
@@ -87,7 +87,7 @@ class HomeBoxWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox16,
           DoubleButtonWidget(
-            widgetKey: KWidgetkeys.screen.home.boxButton,
+            widgetKey: HomeKeys.boxButton,
             text: context.l10n.detail,
             onPressed: () => Scrollable.ensureVisible(
               aboutProjectKey.currentContext!,
@@ -108,7 +108,7 @@ class HomeBoxWidget extends StatelessWidget {
           //             children: [
           //               Text(
           //                 context.l10n.hello,
-          //                 key: KWidgetkeys.screen.home.boxHi,
+          //                 key: HomeKeys.boxHi,
           //                 style: AppTextStyle.materialThemeTitleMedium,
           //               ),
           //               KSizedBox.kWidthSizedBox8,
@@ -118,12 +118,12 @@ class HomeBoxWidget extends StatelessWidget {
           //           KSizedBox.kHeightSizedBox24,
           //           Text(
           //             context.l10n.thisServiceForVeteransSubtitle,
-          //             key: KWidgetkeys.screen.home.boxSubtitle,
+          //             key: HomeKeys.boxSubtitle,
           //             style: AppTextStyle.materialThemeBodyLarge,
           //           ),
           //           KSizedBox.kHeightSizedBox16,
           //           DoubleButtonWidget(
-          //             widgetKey: KWidgetkeys.screen.home.boxButton,
+          //             widgetKey: HomeKeys.boxButton,
           //             text: context.l10n.detail,useBlackStyle: true,
           //             onPressed: () => Scrollable.ensureVisible(
           //               aboutProjectKey.currentContext!,
@@ -161,7 +161,7 @@ class HomeBoxWidget extends StatelessWidget {
 
     //  else {
     //   return Stack(
-    //     key: KWidgetkeys.screen.home.box,
+    //     key: HomeKeys.box,
     //     alignment: Alignment.bottomRight,
     //     children: [
     //       Column(
@@ -175,7 +175,7 @@ class HomeBoxWidget extends StatelessWidget {
     //               children: [
     //                 Text(
     //                   context.l10n.hello,
-    //                   key: KWidgetkeys.screen.home.boxHi,
+    //                   key: HomeKeys.boxHi,
     //                   style: AppTextStyle.materialThemeTitleSmall,
     //                 ),
     //                 KSizedBox.kWidthSizedBox8,
@@ -190,7 +190,7 @@ class HomeBoxWidget extends StatelessWidget {
     //   ),
     //   child: Text(
     //     context.l10n.thisServiceForVeterans,
-    //     key: KWidgetkeys.screen.home.boxTitle,
+    //     key: HomeKeys.boxTitle,
     //     style: AppTextStyle.h1Mob,
     //   ),
     // ),
@@ -208,7 +208,7 @@ class HomeBoxWidget extends StatelessWidget {
     //                   ),
     //                   child: Text(
     //                     context.l10n.thisServiceForVeteransSubtitle,
-    //                     key: KWidgetkeys.screen.home.boxSubtitle,
+    //                     key: HomeKeys.boxSubtitle,
     //                     style: AppTextStyle.materialThemeBodyMedium,
     //                   ),
     //                 ),
@@ -219,7 +219,7 @@ class HomeBoxWidget extends StatelessWidget {
     //                   ),
     //                   alignment: Alignment.bottomLeft,
     //                   child: DoubleButtonWidget(
-    //                     widgetKey: KWidgetkeys.screen.home.boxButton,
+    //                     widgetKey: HomeKeys.boxButton,
     //                     text: context.l10n.detail,
     // useBlackStyle:true,
     //                     onPressed: () => Scrollable.ensureVisible(

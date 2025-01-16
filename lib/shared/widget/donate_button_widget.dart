@@ -79,7 +79,7 @@ class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
             Expanded(
               child: Text(
                 widget.text,
-                key: KWidgetkeys.widget.donateButton.text,
+                key: DonateButtonKeys.text,
                 style: widget.isDesk
                     ? AppTextStyle.materialThemeTitleLarge
                     : AppTextStyle.materialThemeTitleMedium,
@@ -103,8 +103,8 @@ class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
               },
               child: IconWidget(
                 key: isHovering
-                    ? KWidgetkeys.widget.donateButton.rotateIcon
-                    : KWidgetkeys.widget.donateButton.icon,
+                    ? DonateButtonKeys.rotateIcon
+                    : DonateButtonKeys.icon,
                 icon: widget.icon ?? KIcon.arrowUpRightWhite,
                 padding: KPadding.kPaddingSize12,
                 background: AppColors.materialThemeKeyColorsSecondary,
@@ -146,14 +146,14 @@ class _DonateButtonWidgetMob extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                key: KWidgetkeys.widget.donateButton.text,
+                key: DonateButtonKeys.text,
                 style: AppTextStyle.materialThemeTitleLarge,
                 maxLines: KMinMaxSize.textMaxLineOne,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.widget.donateButton.icon,
+              key: DonateButtonKeys.icon,
               padding: KPadding.kPaddingSize12,
               icon: icon ?? KIcon.arrowUpRightNeutral,
               background: AppColors.materialThemeKeyColorsSecondary,

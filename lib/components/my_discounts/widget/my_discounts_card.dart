@@ -49,7 +49,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DiscountStatusWidget(
-                key: KWidgetkeys.screen.myDiscounts.status,
+                key: MyDiscountsKeys.status,
                 status: widget.discountModel.status,
                 isDesk: widget.isDesk,
               ),
@@ -79,7 +79,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                       style: KButtonStyles.borderBlackMyDiscountsButtonStyle,
                       icon: KIcon.close,
                       label: Text(
-                        key: KWidgetkeys.screen.myDiscounts.deactivate,
+                        key: MyDiscountsKeys.deactivate,
                         widget.discountModel.status.isPublished
                             ? context.l10n.deactivate
                             : context.l10n.activate,
@@ -92,7 +92,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           )
         else ...[
           DiscountStatusWidget(
-            key: KWidgetkeys.screen.myDiscounts.status,
+            key: MyDiscountsKeys.status,
             status: widget.discountModel.status,
             isDesk: widget.isDesk,
           ),
@@ -105,7 +105,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
             children: [
               if (widget.discountModel.status.showDeactivateButton)
                 TextButton.icon(
-                  key: KWidgetkeys.screen.myDiscounts.deactivate,
+                  key: MyDiscountsKeys.deactivate,
                   onPressed: () {
                     widget.onDeactivate?.call(
                       deactivate: widget.discountModel.status !=
@@ -137,7 +137,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
   }
 
   Widget get editButton => IconButtonWidget(
-        key: KWidgetkeys.screen.myDiscounts.iconEdit,
+        key: MyDiscountsKeys.iconEdit,
         onPressed: () {
           context.goNamed(
             KRoute.discountsEdit.name,
@@ -166,11 +166,10 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                   widget.discountModel.id,
                 ),
               );
-          context.pop();
         },
         timer: true,
       ),
-      key: KWidgetkeys.screen.myDiscounts.iconTrash,
+      key: MyDiscountsKeys.iconTrash,
       padding: KPadding.kPaddingSize12,
       icon: KIcon.trash,
       buttonStyle: KButtonStyles.borderBlackMyDiscountsTrashButtonStyle,

@@ -11,24 +11,24 @@ Future<void> pwResetEmailInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.pwResetEmail.title),
+        find.byKey(PwResetEmailKeys.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.pwResetEmail.subtitle),
+        find.byKey(PwResetEmailKeys.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.pwResetEmail.emailField),
+        find.byKey(PwResetEmailKeys.emailField),
         findsOneWidget,
       );
 
       expect(find.text(KTestVariables.userEmailIncorrect), findsOneWidget);
 
       expect(
-        find.byKey(KWidgetkeys.screen.pwResetEmail.sendButton),
+        find.byKey(PwResetEmailKeys.sendButton),
         findsOneWidget,
       );
     },
