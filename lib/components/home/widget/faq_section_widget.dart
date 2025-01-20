@@ -64,7 +64,8 @@ class _FaqListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language>(
+    return BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+      selector: (state) => state.userSetting.locale,
       builder: (context, language) {
         return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
           builder: (context, state) {

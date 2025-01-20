@@ -193,11 +193,11 @@ void configureDependenciesTest() {
       userRepository: GetIt.I.get<UserRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<LanguageCubit>(
-    LanguageCubit(
-      userRepository: GetIt.I.get<UserRepository>(),
-    ),
-  );
+  // GetIt.I.registerSingleton<LanguageBloc>(
+  //   LanguageBloc(
+  //     userRepository: GetIt.I.get<UserRepository>(),
+  //   ),
+  // );
   GetIt.I.registerSingleton<MobOfflineModeCubit>(
     MobOfflineModeCubit(
       firestoreService: GetIt.I.get<FirestoreService>(),

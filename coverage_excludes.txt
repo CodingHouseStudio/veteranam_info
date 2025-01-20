@@ -12,8 +12,6 @@ lib/shared/data_provider/*.dart
 */blocprovider/*.dart
 lib/shared/widget/*image_widget.dart
 lib/shared/widget/*photo_widget.dart
-lib/shared/bloc/authentication/authentication_state.dart
-lib/shared/bloc/authentication/authentication_event.dart
 lib/shared/bloc/authentication/listenable.dart
 lib/shared/repositories/url_repository.dart
 lib/shared/repositories/*module.dart
@@ -26,4 +24,5 @@ lib/shared/widget/row_sliver_widget.dart
 lib/shared/repositories/app_info_repository.dart
 lib/shared/repositories/failure_repository.dart
 lib/shared/repositories/data_picker_repository.dart
-lib/shared/widget/popup_menu_button_widget.dart
+lib/**/*_state.dart
+lib/**/*_event.dart

@@ -28,6 +28,14 @@ class AuthenticationState extends Equatable {
           status: AuthenticationStatus.anonymous,
         );
 
+  const AuthenticationState.failure({
+    required SomeFailure failure,
+    required AuthenticationStatus previousStatus,
+  }) : this._(
+          status: previousStatus,
+          failure: failure,
+        );
+
   final AuthenticationStatus status;
 
   final SomeFailure? failure;

@@ -131,7 +131,7 @@ class SharedIconListWidget extends StatelessWidget {
             buttonItemStyle: KButtonStyles.transparentSharedIconButtonStyle,
             menuColor: AppColors.materialThemeKeyColorsTertiary,
             items: [
-              DropDownItem(
+              PopupMenuCustomItem(
                 key: webSiteKey,
                 value: 1,
                 text: context.l10n.webSite,
@@ -152,7 +152,7 @@ class SharedIconListWidget extends StatelessWidget {
                 // ),
               ),
               if (Config.isUser)
-                DropDownItem(
+                PopupMenuCustomItem(
                   key: complaintKey,
                   value: 2,
                   text: context.l10n.complaint,

@@ -21,26 +21,25 @@ void main() {
     late AuthenticationRepository authenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late StreamController<User> userStreamController;
-    late StreamController<UserSetting> userSettingStreamController;
+    // late StreamController<UserSetting> userSettingStreamController;
 
     setUp(() {
-      userStreamController = StreamController<User>()
-        ..add(KTestVariables.userAnonymous);
-      userSettingStreamController = StreamController<UserSetting>()
-        ..add(const UserSetting(id: KTestVariables.field));
+      userStreamController = StreamController<User>()..add(User.empty);
+      // userSettingStreamController = StreamController<UserSetting>()
+      //   ..add(const UserSetting(id: KTestVariables.field));
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
       when(mockAppAuthenticationRepository.user).thenAnswer(
         (_) => userStreamController.stream,
       );
 
-      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (_) => const UserSetting(id: KTestVariables.field),
-      );
+      // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+      //   (_) => const UserSetting(id: KTestVariables.field),
+      // );
 
-      when(mockAppAuthenticationRepository.userSetting).thenAnswer(
-        (_) => userSettingStreamController.stream,
-      );
+      // when(mockAppAuthenticationRepository.userSetting).thenAnswer(
+      //   (_) => userSettingStreamController.stream,
+      // );
 
       when(
         mockAppAuthenticationRepository
@@ -49,32 +48,88 @@ void main() {
         (_) async => const Right(true),
       );
 
+      when(
+        mockAppAuthenticationRepository.logInAnonymously(),
+      ).thenAnswer(
+        (_) async => const Left(SomeFailure.serverError),
+      );
+
       authenticationRepository = AuthenticationRepository(
         appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
-    // group('authenticated', () {
-    //   setUp(() async {
-    //     Timer(
-    //       const Duration(milliseconds: 30),
-    //       () {
-    //         userSettingStreamController = StreamController<UserSetting>()
-    //           ..add(const UserSetting(id: KTestText.field));
-    //         userStreamController.add(KTestText.user);
-    //       },
-    //     );
-    //   });
+    group('authenticated', () {
+      late Timer timer;
+      setUp(() async {
+        timer = Timer(
+          const Duration(milliseconds: 3),
+          () {
+            // userSettingStreamController = StreamController<UserSetting>()
+            //   ..add(const UserSetting(id: KTestText.field));
+            userStreamController.add(KTestVariables.user);
+          },
+        );
+      });
 
-    //   test('user ${KGroupText.stream}', () async {
-    //     await expectLater(
-    //       authenticationRepository.user,
-    //       emitsInOrder([
-    //         KTestText.userAnonymous,
-    //         KTestText.user,
-    //       ]),
-    //     );
-    //   });
-    // });
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.unknown,
+            AuthenticationStatus.authenticated,
+          ]),
+        );
+      });
+      tearDown(() => timer.cancel());
+    });
+    group('anonymously', () {
+      late Timer timer;
+      setUp(() async {
+        when(
+          mockAppAuthenticationRepository.isAnonymously,
+        ).thenAnswer(
+          (_) => true,
+        );
+        timer = Timer(
+          const Duration(milliseconds: 3),
+          () {
+            // userSettingStreamController = StreamController<UserSetting>()
+            //   ..add(const UserSetting(id: KTestText.field));
+            userStreamController.add(KTestVariables.user);
+          },
+        );
+      });
+
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.unknown,
+            AuthenticationStatus.anonymous,
+          ]),
+        );
+      });
+      tearDown(() => timer.cancel());
+    });
+    group('unkown', () {
+      setUp(() async {
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
+        ).thenAnswer(
+          (_) async => const Right(KTestVariables.userAnonymous),
+        );
+      });
+
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.unknown,
+            AuthenticationStatus.anonymous,
+          ]),
+        );
+      });
+    });
     // group('test anonymously when user change', () {
     //   setUp(() {
     //     userStreamController.add(User.empty);
@@ -167,7 +222,7 @@ void main() {
 
     tearDown(() async {
       await userStreamController.close();
-      await userSettingStreamController.close();
+      // await userSettingStreamController.close();
       authenticationRepository.dispose();
     });
   });

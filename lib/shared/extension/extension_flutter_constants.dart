@@ -3,6 +3,7 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart' show Key, defaultTargetPlatform;
 import 'package:flutter/material.dart'
     show
+        Alignment,
         BorderRadius,
         BoxFit,
         BuildContext,
@@ -41,7 +42,13 @@ extension LocalizedDateTime on DateTime {
     required BuildContext? context,
     bool showDay = false,
   }) {
-    final locale = context?.read<LanguageCubit>().state.value.languageCode ??
+    final locale = context
+            ?.read<UserWatcherBloc>()
+            .state
+            .userSetting
+            .locale
+            .value
+            .languageCode ??
         Language.ukrain.value.languageCode;
     // initializeDateFormatting(locale);
     if (ukDateString != null && enDateString != null) {
@@ -210,7 +217,8 @@ extension TranslateModelExtension on TranslateModel {
 }
 
 extension ContextExtensions on BuildContext {
-  bool get isEnglish => read<LanguageCubit>().state.isEnglish;
+  bool get isEnglish =>
+      read<UserWatcherBloc>().state.userSetting.locale.isEnglish;
 
   bool get userHasEmail =>
       read<UserWatcherBloc>().state.user.email?.isNotEmpty ?? false;
@@ -591,4 +599,71 @@ extension EligibilityEnumExtension on EligibilityEnum {
 
 extension SizedBoxExtension on SizedBox {
   Widget get toSliver => SliverToBoxAdapter(child: this);
+}
+
+extension PopupMenuButtonPositionExtension on PopupMenuButtonPosition {
+  PopupMenuButtonPosition positionCalculate({required bool? hasBottomPlace}) {
+    if (hasBottomPlace == null) return this;
+    if (hasBottomPlace) {
+      switch (this) {
+        case PopupMenuButtonPosition.bottomCenter:
+        case PopupMenuButtonPosition.bottomLeft:
+        case PopupMenuButtonPosition.bottomRight:
+          return this;
+        case PopupMenuButtonPosition.topCenter:
+          return PopupMenuButtonPosition.bottomCenter;
+        case PopupMenuButtonPosition.topLeft:
+          return PopupMenuButtonPosition.bottomLeft;
+        case PopupMenuButtonPosition.topRight:
+          return PopupMenuButtonPosition.bottomRight;
+      }
+    } else {
+      switch (this) {
+        case PopupMenuButtonPosition.topCenter:
+        case PopupMenuButtonPosition.topLeft:
+        case PopupMenuButtonPosition.topRight:
+          return this;
+        case PopupMenuButtonPosition.bottomCenter:
+          return PopupMenuButtonPosition.topCenter;
+        case PopupMenuButtonPosition.bottomLeft:
+          return PopupMenuButtonPosition.topLeft;
+        case PopupMenuButtonPosition.bottomRight:
+          return PopupMenuButtonPosition.topRight;
+      }
+    }
+  }
+
+  Alignment get getContentPosition {
+    switch (this) {
+      case PopupMenuButtonPosition.bottomCenter:
+        return Alignment.topCenter;
+      case PopupMenuButtonPosition.bottomLeft:
+        return Alignment.topLeft;
+      case PopupMenuButtonPosition.bottomRight:
+        return Alignment.topRight;
+      case PopupMenuButtonPosition.topCenter:
+        return Alignment.bottomCenter;
+      case PopupMenuButtonPosition.topLeft:
+        return Alignment.bottomLeft;
+      case PopupMenuButtonPosition.topRight:
+        return Alignment.bottomRight;
+    }
+  }
+
+  Alignment get getMenuPosition {
+    switch (this) {
+      case PopupMenuButtonPosition.bottomCenter:
+        return Alignment.bottomCenter;
+      case PopupMenuButtonPosition.bottomLeft:
+        return Alignment.bottomLeft;
+      case PopupMenuButtonPosition.bottomRight:
+        return Alignment.bottomRight;
+      case PopupMenuButtonPosition.topCenter:
+        return Alignment.topCenter;
+      case PopupMenuButtonPosition.topLeft:
+        return Alignment.topLeft;
+      case PopupMenuButtonPosition.topRight:
+        return Alignment.topRight;
+    }
+  }
 }

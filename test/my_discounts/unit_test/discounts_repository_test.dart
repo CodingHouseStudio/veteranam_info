@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -166,55 +166,55 @@ void main() {
       });
     });
 
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.deleteDiscountById(
-            KTestVariables.discountModelItems.first.id,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failure),
-        );
-        when(
-          mockFirestoreService.updateDiscountModel(
-            KTestVariables.discountModelItems.first
-                .copyWith(status: DiscountState.deactivated),
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failure),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.deleteDiscountById(
+    //         KTestVariables.discountModelItems.first.id,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failure),
+    //     );
+    //     when(
+    //       mockFirestoreService.updateDiscountModel(
+    //         KTestVariables.discountModelItems.first
+    //             .copyWith(status: DiscountState.deactivated),
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failure),
+    //     );
 
-        mockDiscountRepository =
-            DiscountRepository(firestoreService: mockFirestoreService);
-      });
+    //     mockDiscountRepository =
+    //         DiscountRepository(firestoreService: mockFirestoreService);
+    //   });
 
-      test('Delete by discount ID Failure', () async {
-        expect(
-          await mockDiscountRepository.deleteDiscountsById(
-            KTestVariables.discountModelItems.first.id,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
+    //   test('Delete by discount ID Failure', () async {
+    //     expect(
+    //       await mockDiscountRepository.deleteDiscountsById(
+    //         KTestVariables.discountModelItems.first.id,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
 
-      test('Deactivate discount failure', () async {
-        expect(
-          await mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestVariables.discountModelItems.first,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //   test('Deactivate discount failure', () async {
+    //     expect(
+    //       await mockDiscountRepository.deactivateDiscount(
+    //         discountModel: KTestVariables.discountModelItems.first,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }

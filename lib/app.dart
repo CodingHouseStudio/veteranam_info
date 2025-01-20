@@ -31,9 +31,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => GetIt.I.get<UserWatcherBloc>(),
         ),
-        BlocProvider(
-          create: (context) => GetIt.I.get<LanguageCubit>(),
-        ),
+        // BlocProvider(
+        //   create: (context) => GetIt.I.get<LanguageBloc>(),
+        // ),
         BlocProvider(
           create: (context) => GetIt.I.get<UrlCubit>(),
         ),
@@ -71,25 +71,30 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LanguageCubit, Language>(
+    return BlocConsumer<UserWatcherBloc, UserWatcherState>(
       listenWhen: (previous, current) =>
-          previous.value.languageCode != current.value.languageCode,
-      listener: (context, language) => unawaited(
-        initializeDateFormatting(language.value.languageCode),
+          previous.userSetting.locale.value.languageCode !=
+          current.userSetting.locale.value.languageCode,
+      listener: (context, state) => unawaited(
+        initializeDateFormatting(state.userSetting.locale.value.languageCode),
       ),
-      builder: (context, language) {
+      buildWhen: (previous, current) =>
+          previous.userSetting.locale.value.languageCode !=
+          current.userSetting.locale.value.languageCode,
+      builder: (context, state) {
+        final language = state.userSetting.locale.value;
         return Config.isWeb
-            ? body(language.value)
+            ? body(language)
             : BetterFeedback(
                 localizationsDelegates: locale,
-                localeOverride: language.value,
+                localeOverride: language,
                 themeMode: ThemeMode.light,
                 mode: FeedbackMode.navigate,
                 feedbackBuilder: (context, onSubmit, scrollController) =>
                     MobFeedbackWidget(onSubmit: onSubmit),
                 child: BlocBuilder<MobOfflineModeCubit, MobMode>(
                   builder: (context, _) {
-                    return body(language.value);
+                    return body(language);
                   },
                 ),
               );

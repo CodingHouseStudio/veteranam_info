@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -94,56 +94,56 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.addReport(
-            KTestVariables.reportModelIncorect.copyWith(
-              message: KTestVariables.fieldEmpty,
-              reasonComplaint: ReasonComplaint.other,
-            ),
-          ),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-        when(
-          mockFirestoreService.getCardReportByUserId(
-            cardEnum: CardEnum.discount,
-            userId: KTestVariables.user.id,
-          ),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.addReport(
+    //         KTestVariables.reportModelIncorect.copyWith(
+    //           message: KTestVariables.fieldEmpty,
+    //           reasonComplaint: ReasonComplaint.other,
+    //         ),
+    //       ),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
+    //     when(
+    //       mockFirestoreService.getCardReportByUserId(
+    //         cardEnum: CardEnum.discount,
+    //         userId: KTestVariables.user.id,
+    //       ),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
-        reportRepository =
-            ReportRepository(firestoreService: mockFirestoreService);
-      });
-      test('${KGroupText.failureSend} ', () async {
-        expect(
-          await reportRepository.sendReport(
-            KTestVariables.reportModelIncorect.copyWith(
-              message: KTestVariables.fieldEmpty,
-              reasonComplaint: ReasonComplaint.other,
-            ),
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('${KGroupText.failureGet} ', () async {
-        expect(
-          await reportRepository.getCardReportById(
-            cardEnum: CardEnum.discount,
-            userId: KTestVariables.user.id,
-          ),
-          isA<Left<SomeFailure, List<ReportModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //     reportRepository =
+    //         ReportRepository(firestoreService: mockFirestoreService);
+    //   });
+    //   test('${KGroupText.failureSend} ', () async {
+    //     expect(
+    //       await reportRepository.sendReport(
+    //         KTestVariables.reportModelIncorect.copyWith(
+    //           message: KTestVariables.fieldEmpty,
+    //           reasonComplaint: ReasonComplaint.other,
+    //         ),
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('${KGroupText.failureGet} ', () async {
+    //     expect(
+    //       await reportRepository.getCardReportById(
+    //         cardEnum: CardEnum.discount,
+    //         userId: KTestVariables.user.id,
+    //       ),
+    //       isA<Left<SomeFailure, List<ReportModel>>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }

@@ -14,12 +14,13 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language>(
-      buildWhen: (previous, current) => previous.value != current.value,
+    return BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+      selector: (state) => state.userSetting.locale,
       builder: (context, language) => IconButton(
         key: LanguageSwitcherKeys.widget,
         style: KButtonStyles.withoutStyle,
-        onPressed: () => context.read<LanguageCubit>().languageChanged(),
+        onPressed: () =>
+            context.read<UserWatcherBloc>().add(const LanguageChangedEvent()),
         icon: DecoratedBox(
           decoration: decoration ?? KWidgetTheme.boxDecorationWhiteMain,
           child: Row(

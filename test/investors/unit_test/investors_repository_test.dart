@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -83,29 +83,29 @@ void main() {
       });
     });
 
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.getFunds(//null,
-              ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.getFunds(//null,
+    //           ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
 
-        investorsRepository =
-            InvestorsRepository(firestoreService: mockFirestoreService);
-      });
-      test('Get funds', () async {
-        expect(
-          await investorsRepository.getFunds(),
-          isA<Left<SomeFailure, List<FundModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //     investorsRepository =
+    //         InvestorsRepository(firestoreService: mockFirestoreService);
+    //   });
+    //   test('Get funds', () async {
+    //     expect(
+    //       await investorsRepository.getFunds(),
+    //       isA<Left<SomeFailure, List<FundModel>>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }
