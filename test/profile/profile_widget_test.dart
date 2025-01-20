@@ -252,7 +252,8 @@ void main() {
           profileStream.add(
             KTestVariables.profileUserWithoutPhoto.copyWith(
               id: 'none',
-              email: null,
+              email: KTestVariables.userEmail,
+              name: null,
             ),
           );
 
