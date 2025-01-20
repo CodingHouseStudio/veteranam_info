@@ -49,12 +49,13 @@ class FeedbackBodyWidget extends StatelessWidget {
                 }
               },
             ),
-            BlocListener<AppVersionCubit, AppVersionState>(
-              listener: (context, state) =>
-                  context.dialog.showMobUpdateAppDialog(
-                hasNewVersion: state.mobHasNewBuild,
+            if (!Config.isWeb)
+              BlocListener<AppVersionCubit, AppVersionState>(
+                listener: (context, state) =>
+                    context.dialog.showMobUpdateAppDialog(
+                  hasNewVersion: state.mobHasNewBuild,
+                ),
               ),
-            ),
           ],
           child: FocusTraversalGroup(
             child: Semantics(

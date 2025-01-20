@@ -46,12 +46,13 @@ class InvestorsBodyWidget extends StatelessWidget {
                     .add(const InvestorsWatcherEvent.started()),
               ),
             ),
-            BlocListener<AppVersionCubit, AppVersionState>(
-              listener: (context, state) =>
-                  context.dialog.showMobUpdateAppDialog(
-                hasNewVersion: state.mobHasNewBuild,
+            if (!Config.isWeb)
+              BlocListener<AppVersionCubit, AppVersionState>(
+                listener: (context, state) =>
+                    context.dialog.showMobUpdateAppDialog(
+                  hasNewVersion: state.mobHasNewBuild,
+                ),
               ),
-            ),
           ],
           child: CustomScrollView(
             key: ScaffoldKeys.scroll,
