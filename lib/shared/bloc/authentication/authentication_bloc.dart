@@ -11,7 +11,7 @@ part 'authentication_state.dart';
 
 @Singleton()
 class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+    extends Bloc<_AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
@@ -20,11 +20,11 @@ class AuthenticationBloc
             status: authenticationRepository.currectAuthenticationStatus,
           ),
         ) {
-    on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
+    on<_AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
     // on<AuthenticationInitialized>(_onAuthenticationInitialized);
-    on<AuthenticationFailureEvent>(_onAuthenticationFailure);
+    on<_AuthenticationFailureEvent>(_onAuthenticationFailure);
     _onAuthenticationInitialized();
   }
 
@@ -41,7 +41,7 @@ class AuthenticationBloc
   }
 
   void _onAuthenticationStatusChanged(
-    AuthenticationStatusChanged event,
+    _AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
   ) {
     log('${KAppText.authChange} ${event.status}');
@@ -79,19 +79,19 @@ class AuthenticationBloc
       // Emitter<AuthenticationState> emit,
       ) {
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
-      (status) => add(AuthenticationStatusChanged(status)),
+      (status) => add(_AuthenticationStatusChanged(status)),
       onError: (Object error, StackTrace stack) =>
-          add(AuthenticationFailureEvent(stack: stack, error: error)),
+          add(_AuthenticationFailureEvent(stack: stack, error: error)),
     );
   }
 
   void _onAuthenticationFailure(
-    AuthenticationFailureEvent event,
+    _AuthenticationFailureEvent event,
     Emitter<AuthenticationState> emit,
   ) {
     emit(
-      AuthenticationState._(
-        status: state.status,
+      AuthenticationState.failure(
+        previousStatus: state.status,
         failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
@@ -103,6 +103,6 @@ class AuthenticationBloc
   }
 }
 
-extension UserChecker on User? {
-  bool get hasValue => this != null && this!.isNotEmpty;
-}
+// extension UserChecker on User? {
+//   bool get hasValue => this != null && this!.isNotEmpty;
+// }
