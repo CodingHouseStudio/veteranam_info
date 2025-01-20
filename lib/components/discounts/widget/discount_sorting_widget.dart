@@ -20,7 +20,7 @@ class DiscountSortingWidget extends StatelessWidget {
           iconAlignment: IconAlignment.end,
           items: List.generate(
             DiscountEnum.values.length,
-            (index) => getDropDownItem(
+            (index) => getPopupMenuCustomItem(
               discountEnum: DiscountEnum.values.elementAt(index),
               currectDiscountEnum: sortingBy ?? DiscountEnum.featured,
               context: context,
@@ -58,12 +58,12 @@ class DiscountSortingWidget extends StatelessWidget {
     );
   }
 
-  DropDownItem<DiscountEnum> getDropDownItem({
+  PopupMenuCustomItem<DiscountEnum> getPopupMenuCustomItem({
     required DiscountEnum discountEnum,
     required DiscountEnum currectDiscountEnum,
     required BuildContext context,
   }) =>
-      DropDownItem<DiscountEnum>(
+      PopupMenuCustomItem<DiscountEnum>(
         value: discountEnum,
         text: discountEnum.getValue(context),
         event: () => context.read<DiscountsWatcherBloc>().add(
