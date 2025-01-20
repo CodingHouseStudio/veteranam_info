@@ -92,6 +92,11 @@ class _DiscountsBodyWidget extends StatelessWidget {
               previous.filterDiscountModelList.length !=
                   current.filterDiscountModelList.length,
         ),
+        BlocListener<AppVersionCubit, AppVersionState>(
+          listener: (context, state) => context.dialog.showMobUpdateAppDialog(
+            hasNewVersion: state.mobHasNewBuild,
+          ),
+        ),
       ],
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
