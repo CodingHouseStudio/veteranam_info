@@ -7,7 +7,7 @@ import '../../test_dependency.dart';
 Future<void> homeFailureHelper(
   WidgetTester tester,
 ) async {
-  await dialogFailureGetHelper(tester: tester);
+  await dialogFailureGetTapHelper(tester: tester);
 
   await scrollingHelper(
     tester: tester,

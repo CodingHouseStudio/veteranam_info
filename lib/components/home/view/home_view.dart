@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scaffold = HomeBlocprovider(
+    return HomeBlocprovider(
       key: HomeKeys.screen,
       childWidget: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -19,13 +19,6 @@ class HomeScreen extends StatelessWidget {
         appBar: appBar,
         body: const HomeBodyWidget(),
       ),
-    );
-    if (Config.isWeb) {
-      return scaffold;
-    }
-    return ColoredBox(
-      color: AppColors.materialThemeWhite,
-      child: SafeArea(child: scaffold),
     );
   }
 }
