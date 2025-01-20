@@ -6,11 +6,26 @@ part of 'user_watcher_bloc.dart';
 //   }
 // }
 
-@freezed
-class UserWatcherState with _$UserWatcherState {
-  const factory UserWatcherState({
-    required User user,
-    required UserSetting userSetting,
-    SomeFailure? failure,
-  }) = _Initial;
+class UserWatcherState extends Equatable {
+  const UserWatcherState({
+    required this.user,
+    required this.userSetting,
+    this.failure,
+  });
+
+  final User user;
+  final UserSetting userSetting;
+  final SomeFailure? failure;
+
+  @override
+  List<Object?> get props => [user, userSetting, failure];
+  UserWatcherState copyWith({
+    User? user,
+    UserSetting? userSetting,
+  }) =>
+      UserWatcherState(
+        user: user ?? this.user,
+        userSetting: userSetting ?? this.userSetting,
+        failure: failure,
+      );
 }

@@ -700,6 +700,7 @@ abstract class KScreenBlocName {
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';
   static const authentication = ' Authentication';
+  static const user = ' User';
   static const network = ' Network';
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';

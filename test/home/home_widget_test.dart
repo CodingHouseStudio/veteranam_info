@@ -204,6 +204,21 @@ void main() {
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => Right(KTestVariables.questionModelItems),
         );
+
+        when(
+          mockUserRepository.updateUserSetting(
+            userSetting: UserSetting.empty.copyWith(locale: Language.english),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+        when(
+          mockUserRepository.updateUserSetting(
+            userSetting: UserSetting.empty.copyWith(locale: Language.ukrain),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
       });
 
       testWidgets('${KGroupText.initial} ', (tester) async {

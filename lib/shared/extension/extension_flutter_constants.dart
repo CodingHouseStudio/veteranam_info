@@ -42,7 +42,13 @@ extension LocalizedDateTime on DateTime {
     required BuildContext? context,
     bool showDay = false,
   }) {
-    final locale = context?.read<LanguageCubit>().state.value.languageCode ??
+    final locale = context
+            ?.read<UserWatcherBloc>()
+            .state
+            .userSetting
+            .locale
+            .value
+            .languageCode ??
         Language.ukrain.value.languageCode;
     // initializeDateFormatting(locale);
     if (ukDateString != null && enDateString != null) {
@@ -211,7 +217,8 @@ extension TranslateModelExtension on TranslateModel {
 }
 
 extension ContextExtensions on BuildContext {
-  bool get isEnglish => read<LanguageCubit>().state.isEnglish;
+  bool get isEnglish =>
+      read<UserWatcherBloc>().state.userSetting.locale.isEnglish;
 
   bool get userHasEmail =>
       read<UserWatcherBloc>().state.user.email?.isNotEmpty ?? false;
