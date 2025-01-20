@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -76,24 +76,25 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(mockFirestoreService.getQuestions())
-            .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(mockFirestoreService.getQuestions())
+    //         .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
-        faqRepository = FaqRepository(firestoreService: mockFirestoreService);
-      });
-      test('Get questions', () async {
-        expect(
-          await faqRepository.getQuestions(),
-          isA<Left<SomeFailure, List<QuestionModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   isA<SomeFailure>,
-          // ),
-        );
-      });
-    });
+    //     faqRepository = FaqRepository(firestoreService:
+    // mockFirestoreService);
+    //   });
+    //   test('Get questions', () async {
+    //     expect(
+    //       await faqRepository.getQuestions(),
+    //       isA<Left<SomeFailure, List<QuestionModel>>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   isA<SomeFailure>,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }

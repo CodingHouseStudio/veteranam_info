@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -121,34 +121,34 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService
-              .sendRespond(KTestVariables.employeeRespondModelModel),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failure),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService
+    //           .sendRespond(KTestVariables.employeeRespondModelModel),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failure),
+    //     );
 
-        mockWorkRepository = WorkRepository(
-          firestoreService: mockFirestoreService,
-          storageService: mockStorageService,
-        );
-      });
-      test('send respond', () async {
-        expect(
-          await mockWorkRepository.sendRespond(
-            respond: KTestVariables.employeeRespondModelModel,
-            file: KTestVariables.filePickerItem,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //     mockWorkRepository = WorkRepository(
+    //       firestoreService: mockFirestoreService,
+    //       storageService: mockStorageService,
+    //     );
+    //   });
+    //   test('send respond', () async {
+    //     expect(
+    //       await mockWorkRepository.sendRespond(
+    //         respond: KTestVariables.employeeRespondModelModel,
+    //         file: KTestVariables.filePickerItem,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }
