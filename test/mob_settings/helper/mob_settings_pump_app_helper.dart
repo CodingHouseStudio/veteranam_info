@@ -10,11 +10,15 @@ Future<void> mobSettingsPumpAppHelper({
   required WidgetTester tester,
   required IFeedbackRepository mockFeedbackRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required UserRepository mockUserRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerMobFeedbackBloc(
     mockFeedbackRepository: mockFeedbackRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  _registerUserWatcherBloc(
+    mockUserRepository: mockUserRepository,
   );
   await tester.pumpApp(
     const MobSettingsScreen(),
@@ -44,4 +48,16 @@ void _registerMobFeedbackBloc({
   GetIt.I.registerSingleton<MobFeedbackBloc>(
     mobFeedbackBloc,
   );
+}
+
+void _registerUserWatcherBloc({
+  required UserRepository mockUserRepository,
+}) {
+  final userWatcherBloc = UserWatcherBloc(
+    userRepository: mockUserRepository,
+  );
+  if (GetIt.I.isRegistered<UserWatcherBloc>()) {
+    GetIt.I.unregister<UserWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<UserWatcherBloc>(userWatcherBloc);
 }

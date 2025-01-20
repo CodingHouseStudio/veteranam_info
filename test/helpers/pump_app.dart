@@ -46,9 +46,9 @@ extension PumpApp on WidgetTester {
             //   const UserWatcherEvent.started(),
             // ),
           ),
-          BlocProvider(
-            create: (context) => GetIt.I.get<LanguageCubit>(),
-          ),
+          // BlocProvider(
+          //   create: (context) => GetIt.I.get<LanguageBloc>(),
+          // ),
           BlocProvider(
             create: (context) => GetIt.I.get<UrlCubit>(),
           ),
@@ -78,12 +78,13 @@ extension PumpApp on WidgetTester {
             ),
           ],
         ],
-        child: BlocBuilder<LanguageCubit, Language>(
-          builder: (context, state) {
+        child: BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+          selector: (state) => state.userSetting.locale,
+          builder: (context, language) {
             if (mockGoRouter == null) {
               return _body(
                 widget: widget,
-                currentLocale: state.value,
+                currentLocale: language.value,
                 addFeedback: addFeedback,
               );
             } else {
@@ -91,7 +92,7 @@ extension PumpApp on WidgetTester {
                 goRouter: mockGoRouter,
                 child: _body(
                   widget: widget,
-                  currentLocale: state.value,
+                  currentLocale: language.value,
                   addFeedback: addFeedback,
                 ),
               );
