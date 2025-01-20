@@ -607,6 +607,7 @@ abstract class KTestVariables {
         timeSensitive: AppleNotificationSetting.disabled,
         criticalAlert: AppleNotificationSetting.disabled,
         sound: AppleNotificationSetting.disabled,
+        providesAppNotificationSettings: AppleNotificationSetting.disabled,
       );
   static final linkModel = LinkModel(
     id: id,
