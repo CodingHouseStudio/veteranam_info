@@ -43,7 +43,7 @@ jobs:
     with:
       flutter_channel: stable
       flutter_version: 3.27.1
-      min_coverage: 89
+      min_coverage: 90
       format_directories: "lib test"
       coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}
       pull_request: ${{ github.event.pull_request.title }}
