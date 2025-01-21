@@ -77,12 +77,12 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   state.discount!.directLink ?? linkController.text;
               // categoryController = TextEditingController();
               // cityController = TextEditingController();
-              periodController.text =
-                  state.discount!.expiration?.getTrsnslation(context) ??
-                      periodController.text;
-              requirmentsController.text =
-                  state.discount!.requirements?.getTrsnslation(context) ??
-                      requirmentsController.text;
+              periodController.setNewText(
+                state.discount!.expiration?.getTrsnslation(context),
+              );
+              requirmentsController.setNewText(
+                state.discount!.requirements?.getTrsnslation(context),
+              );
               descriptionController.text =
                   state.discount!.description.getTrsnslation(context);
             }
@@ -444,22 +444,24 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
       SecondaryButtonWidget(
         widgetKey: DiscountsAddKeys.cancelButton,
         align: Alignment.center,
-        onPressed: context.read<DiscountsAddBloc>().state.formState.isMain
-            ? () => context.dialog.showConfirmationDialog(
-                  isDesk: isDesk,
-                  title: context.l10n.cancelChanges,
-                  subtitle: context.l10n.cancelChangesQuestion,
-                  confirmText: context.l10n.cancel,
-                  unconfirmText: context.l10n.continueWorking,
-                  confirmButtonBackground:
-                      AppColors.materialThemeKeyColorsSecondary,
-                  onAppliedPressed: () {
-                    context.goNamed(KRoute.myDiscounts.name);
-                  },
-                )
-            : () => context.read<DiscountsAddBloc>().add(
-                  const DiscountsAddEvent.back(),
-                ),
+        onPressed: context.read<DiscountsAddBloc>().state.formState.isLoading
+            ? null
+            : context.read<DiscountsAddBloc>().state.formState.isMain
+                ? () => context.dialog.showConfirmationDialog(
+                      isDesk: isDesk,
+                      title: context.l10n.cancelChanges,
+                      subtitle: context.l10n.cancelChangesQuestion,
+                      confirmText: context.l10n.cancel,
+                      unconfirmText: context.l10n.continueWorking,
+                      confirmButtonBackground:
+                          AppColors.materialThemeKeyColorsSecondary,
+                      onAppliedPressed: () {
+                        context.goNamed(KRoute.myDiscounts.name);
+                      },
+                    )
+                : () => context.read<DiscountsAddBloc>().add(
+                      const DiscountsAddEvent.back(),
+                    ),
         text: context.read<DiscountsAddBloc>().state.formState.isMain
             ? context.l10n.cancel
             : context.l10n.back,

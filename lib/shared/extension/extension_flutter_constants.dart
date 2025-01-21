@@ -20,6 +20,7 @@ import 'package:flutter/material.dart'
         SystemMouseCursors,
         TargetPlatform,
         TextDirection,
+        TextEditingController,
         TextPainter,
         TextSpan,
         TextStyle,
@@ -125,6 +126,12 @@ extension DiscountModelLocation on DiscountModel {
 
   bool get hasImages {
     return images != null && images!.isNotEmpty;
+  }
+}
+
+extension TextEditingControllerExtension on TextEditingController {
+  void setNewText(String? value) {
+    text = value ?? text;
   }
 }
 

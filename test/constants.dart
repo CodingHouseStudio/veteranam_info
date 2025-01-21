@@ -364,9 +364,7 @@ abstract class KTestVariables {
     eligibility: [EligibilityEnum.all],
   );
 
-  static final blocSendDiscountModel = sendDiscountModel.copyWith(
-    eligibility: const [EligibilityEnum.all],
-  );
+  static final blocSendDiscountModel = sendDiscountModel;
 
   static final fullDiscount = KMockText.discountModel.copyWith(
     id: id,
@@ -384,8 +382,14 @@ abstract class KTestVariables {
     subLocation: null,
     userPhoto: null,
     phoneNumber: null,
-    requirements: null,
+    category: [TranslateModel(uk: KMockText.category.uk)],
+    location: [TranslateModel(uk: KMockText.location.uk)],
+    description: TranslateModel(uk: KMockText.discountDescription.uk),
+    requirements: TranslateModel(uk: KMockText.requirements.uk),
+    title: TranslateModel(uk: KMockText.discountTitle.uk),
+    // requirements: null,
     status: DiscountState.isNew,
+    exclusions: null,
     // subcategory: null,
     dateVerified: dateTime,
   );

@@ -68,7 +68,7 @@ Future<void> discountsAddUncorectHelper({
   await discountsAddDescriptionEnterHelper(
     tester: tester,
     descriptionText: KTestVariables.fieldEmpty,
-    exclusionsText: KTestVariables.fieldEmpty,
+    requirmentsText: KTestVariables.fieldEmpty,
   );
 
   verifyNever(

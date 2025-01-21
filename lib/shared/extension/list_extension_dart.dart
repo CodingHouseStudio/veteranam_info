@@ -76,7 +76,7 @@ extension ListStringNullableExtensions on List<String>? {
     if (this == null) {
       return listValue;
     } else {
-      late List<String> list;
+      final List<String> list;
       if (this!.contains(text) || listValue.isEmpty) {
         list = this!;
       } else {
