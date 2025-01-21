@@ -171,12 +171,6 @@ void main() {
       );
 
       when(
-        mockUser.updateDisplayName(KTestVariables.profileUser.name),
-      ).thenThrow(
-        Exception(KGroupText.failure),
-      );
-
-      when(
         mockFirebaseAuth.verifyPasswordResetCode(KTestVariables.code),
       ).thenThrow(
         Exception(KGroupText.failure),
@@ -185,6 +179,13 @@ void main() {
         mockFirebaseAuth.confirmPasswordReset(
           code: KTestVariables.code,
           newPassword: KTestVariables.passwordCorrect,
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+      when(
+        mockStorageService.removeFile(
+          KTestVariables.image,
         ),
       ).thenThrow(
         Exception(KGroupText.failure),
@@ -359,6 +360,43 @@ void main() {
       );
     });
     test('Update user data', () async {
+      when(
+        mockUser.updateDisplayName(KTestVariables.profileUser.name),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+
+      final result = await appAuthenticationRepository.updateUserData(
+        user: KTestVariables.profileUser,
+        image: KTestVariables.filePickerItem,
+      );
+      expect(
+        result,
+        isA<Left<SomeFailure, User>>(),
+      );
+    });
+
+    test('Update user data(photo delete failure)', () async {
+      when(
+        mockStorageService.saveFile(
+          collecltionName: FirebaseCollectionName.user,
+          filePickerItem: KTestVariables.filePickerItem,
+          id: KTestVariables.profileUser.id,
+        ),
+      ).thenAnswer(
+        (_) async => KTestVariables.profileUser.photo,
+      );
+      when(
+        mockUser.updateDisplayName(KTestVariables.profileUser.name),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockUser.updatePhotoURL(KTestVariables.imageModels.downloadURL),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+
       final result = await appAuthenticationRepository.updateUserData(
         user: KTestVariables.profileUser,
         image: KTestVariables.filePickerItem,

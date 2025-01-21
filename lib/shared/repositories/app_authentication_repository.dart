@@ -557,6 +557,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         await _firebaseAuth.currentUser?.updateDisplayName(user.name);
 
         if (image != null) {
+          log(currentUser.name.toString());
           userPhoto = await _updatePhoto(image: image, userId: user.id);
           if (userPhoto != null && userPhoto.isNotEmpty) {
             try {

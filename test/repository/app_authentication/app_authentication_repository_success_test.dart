@@ -82,6 +82,16 @@ void main() {
       when(
         mockFirebaseAuth.sendPasswordResetEmail(
           email: KTestVariables.userEmail,
+          actionCodeSettings: firebase_auth.ActionCodeSettings(
+            url: '/${KRoute.login.path}',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockFirebaseAuth.sendPasswordResetEmail(
+          email: KTestVariables.userEmail,
         ),
       ).thenAnswer(
         (_) async {},
@@ -344,6 +354,16 @@ void main() {
       );
     });
     test('Send verification code', () async {
+      UriExtension.testUrl = null;
+      expect(
+        await appAuthenticationRepository.sendVerificationCode(
+          email: KTestVariables.userEmail,
+        ),
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Send verification code(from not base url)', () async {
+      UriExtension.testUrl = KTestVariables.fieldEmpty;
       expect(
         await appAuthenticationRepository.sendVerificationCode(
           email: KTestVariables.userEmail,

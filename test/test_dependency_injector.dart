@@ -36,6 +36,7 @@ void configureDependenciesTest() {
   KTest.isTest = true;
   Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
+  UriExtension.testUrl = null;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
@@ -290,6 +291,7 @@ void configureFailureDependenciesTest() {
   Config.falvourValue = Config.development;
   KTest.isTest = true;
   Config.isReleaseMode = true;
+  UriExtension.testUrl = null;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
