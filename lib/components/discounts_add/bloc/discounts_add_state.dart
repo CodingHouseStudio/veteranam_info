@@ -94,6 +94,7 @@ enum DiscountsAddEnum {
       case DiscountsAddEnum.descriptionInProgress:
       case DiscountsAddEnum.descriptionInvalidData:
       case DiscountsAddEnum.success:
+      case DiscountsAddEnum.sendInProgress:
         return true;
       // ignore: no_default_cases
       default:

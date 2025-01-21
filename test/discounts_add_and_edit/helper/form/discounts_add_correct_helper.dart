@@ -34,13 +34,14 @@ Future<void> discountsAddCorectHelper({
   await discountsAddDescriptionEnterHelper(
     tester: tester,
     descriptionText: KTestVariables.sendDiscountModel.description.uk,
-    exclusionsText: KTestVariables.sendDiscountModel.exclusions!.uk,
+    requirmentsText: KTestVariables.sendDiscountModel.requirements!.uk,
   );
 
   if (!isEdit) {
     await confirmPublishDiscountDialogNavHelper(
       tester: tester,
       mockGoRouter: mockGoRouter,
+      openEvent: () async => discountsAddSendHelper(tester),
     );
   }
   expect(

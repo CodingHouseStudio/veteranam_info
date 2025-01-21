@@ -138,7 +138,25 @@ abstract class KMockText {
     en: 'Kyiv',
   );
 
+  static const discountDescription = TranslateModel(
+    uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test)'
+        ' лабораторії.',
+    en: 'The offer is valid in all branches of the laboratory.',
+  );
+
   static const filterItem = FilterItem(KMockText.category, number: 10);
+
+  static const requirements = TranslateModel(
+    uk: 'Військовим - наявність документу, що підтверджує  професійну',
+    en: 'Military personnel - presence of a document confirming professional'
+        ' status',
+  );
+  static const discountTitle = TranslateModel(
+    uk: '20% знижки на аналізи для військових та людей, які внутрішньо '
+        'переміщені.',
+    en: '20% discount on tests for military personnel and internally'
+        ' displaced persons.',
+  );
 
   static final discountModel = DiscountModel(
     id: '',
@@ -146,25 +164,12 @@ abstract class KMockText {
     company: const TranslateModel(uk: 'Ескулаб', en: 'Ecsculab'),
     link: 'https://veteranam.info/',
     discount: [10],
-    title: const TranslateModel(
-      uk: '20% знижки на аналізи для військових та людей, які внутрішньо '
-          'переміщені.',
-      en: '20% discount on tests for military personnel and internally'
-          ' displaced persons.',
-    ),
+    title: discountTitle,
     category: const [category],
     // subcategory: const [TranslateModel(uk: 'Аналізи', en: 'Analyses')],
     // eligibility: 'Військовослужбовці та ВПО',
-    description: const TranslateModel(
-      uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test)'
-          ' лабораторії.',
-      en: 'The offer is valid in all branches of the laboratory.',
-    ),
-    requirements: const TranslateModel(
-      uk: 'Військовим - наявність документу, що підтверджує  професійну',
-      en: 'Military personnel - presence of a document confirming professional'
-          ' status',
-    ),
+    description: discountDescription,
+    requirements: requirements,
     // territory: const TranslateModel(
     //   uk: 'Всі відділення лабораторії.',
     //   en: 'All branches of the laboratory.',
