@@ -35,7 +35,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _storageService = storageService,
         _googleAuthProvider = googleAuthProvider,
         _facebookAuthProvider = facebookAuthProvider {
-    _updateAuthStatusBasedOnCache();
+    _updateUserBasedOnCache();
     _updateUserSettingBasedOnCache();
   }
 
@@ -129,30 +129,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// Throws a [signUpWithGoogle] if an exception occurs.
   @override
   Future<Either<SomeFailure, User?>> signUpWithGoogle() async {
-    try {
-      final credential = await _getGoogleAuthCredential();
-      if (credential != null) {
-        final userCredentional = await _firebaseAuth
-            .signInWithCredential(authCredential ?? credential);
+    return eitherFutureHelper(
+      () async {
+        final credential = await _getGoogleAuthCredential();
+        if (credential != null) {
+          final userCredentional = await _firebaseAuth
+              .signInWithCredential(authCredential ?? credential);
 
-        return Right(userCredentional.user?.toUser);
-      }
-      return const Right(null);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'signUpWithGoogle(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ),
-      );
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
-    }
+          return Right(userCredentional.user?.toUser);
+        }
+        return const Right(null);
+      },
+      methodName: 'signUpWithGoogle',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: () {
+        _updateUserBasedOnCache();
+        _updateUserSettingBasedOnCache();
+      },
+    );
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredential() async {
@@ -187,30 +183,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// Throws a [signUpWithFacebook] if an exception occurs.
   @override
   Future<Either<SomeFailure, User?>> signUpWithFacebook() async {
-    try {
-      final credential = await _getFacebookAuthCredential();
-      if (credential != null) {
-        final userCredentional = await _firebaseAuth
-            .signInWithCredential(authCredential ?? credential);
+    return eitherFutureHelper(
+      () async {
+        final credential = await _getFacebookAuthCredential();
+        if (credential != null) {
+          final userCredentional = await _firebaseAuth
+              .signInWithCredential(authCredential ?? credential);
 
-        return Right(userCredentional.user?.toUser);
-      }
-      return const Right(null);
-    } catch (_, stack) {
-      return Left(
-        SomeFailure.value(
-          error: _,
-          stack: stack,
-          tag: 'signUpWithFacebook',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
-    }
+          return Right(userCredentional.user?.toUser);
+        }
+        return const Right(null);
+      },
+      methodName: 'signUpWithFacebook',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: () {
+        _updateUserBasedOnCache();
+        _updateUserSettingBasedOnCache();
+      },
+    );
   }
 
   Future<firebase_auth.AuthCredential?> _getFacebookAuthCredential() async {
@@ -250,34 +242,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String password,
   }) async =>
       _handleAuthOperation(
-        () => _firebaseAuth.signInWithEmailAndPassword(
+        operation: () async => _firebaseAuth.signInWithEmailAndPassword(
           email: email,
           password: password,
         ),
-        ({required error, stack}) => SomeFailure.value(
-          error: error,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'Email: $email | Password: $password',
-          tag: 'logInWithEmailAndPassword(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ),
+        methodName: 'logInWithEmailAndPassword',
+        data: 'Email: $email | Password: $password',
       );
 
   /// Signs in with the anonymously.
   @override
   Future<Either<SomeFailure, User?>> logInAnonymously() async =>
       _handleAuthOperation(
-        () async => _firebaseAuth.signInAnonymously(),
-        ({required error, stack}) => SomeFailure.value(
-          error: error,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'logInAnonymously(${ErrorText.fromCode})',
-          tagKey: ErrorText.appAuthenticationKey,
-        ),
+        operation: () async => _firebaseAuth.signInAnonymously(),
+        methodName: 'logInAnonymously',
       );
 
   /// Creates a new user with the provided [email] and [password].
@@ -287,7 +265,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String password,
   }) async =>
       _handleAuthOperation(
-        () async {
+        operation: () async {
           if (currentUser.isEmpty) {
             return _firebaseAuth.createUserWithEmailAndPassword(
               email: email,
@@ -306,15 +284,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
             );
           }
         },
-        ({required error, stack}) => SomeFailure.value(
-          error: error,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          tag: 'signUp(${ErrorText.fromCode})',
-          data: 'Email: $email | Password: $password',
-          tagKey: ErrorText.appAuthenticationKey,
-        ),
+        methodName: 'signUp',
+        data: 'Email: $email | Password: $password',
       );
 
   @override
@@ -329,28 +300,23 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// [User.empty] from the [user] Stream.
   @override
   Future<Either<SomeFailure, bool>> logOut() async {
-    try {
-      _cache.clear();
-      await Future.wait([
-        _firebaseAuth.signOut(),
-        _googleSignIn.signOut(),
-        _facebookSignIn.logOut(),
-        _secureStorageRepository.deleteAll(),
-      ]);
-      unawaited(logInAnonymously());
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'logOut',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        _cache.clear();
+        await Future.wait([
+          _firebaseAuth.signOut(),
+          _googleSignIn.signOut(),
+          _facebookSignIn.logOut(),
+          _secureStorageRepository.deleteAll(),
+        ]);
+        unawaited(logInAnonymously());
+        return const Right(true);
+      },
+      methodName: 'logOut',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+    );
     // finally {
     //   _updateAuthStatusBasedOnCache();
     //   _updateUserSettingBasedOnCache();
@@ -365,30 +331,29 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return token;
   }
 
-  Future<Either<SomeFailure, User?>> _handleAuthOperation(
-    Future<firebase_auth.UserCredential> Function() operation,
-    SomeFailure Function({
-      required Object error,
-      StackTrace? stack,
-    }) exception,
-  ) async {
-    try {
-      final userCredentional = await operation();
-      return Right(userCredentional.user?.toUser);
-    } catch (e, stack) {
-      return Left(
-        exception(
-          error: e,
-          stack: stack,
-        ),
-      );
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
-    }
+  Future<Either<SomeFailure, User?>> _handleAuthOperation({
+    required Future<firebase_auth.UserCredential> Function() operation,
+    required String methodName,
+    String? data,
+  }) async {
+    return eitherFutureHelper(
+      () async {
+        final userCredentional = await operation();
+        return Right(userCredentional.user?.toUser);
+      },
+      methodName: methodName,
+      className: ErrorText.appAuthenticationKey,
+      data: data,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: () {
+        _updateUserBasedOnCache();
+        _updateUserSettingBasedOnCache();
+      },
+    );
   }
 
-  void _updateAuthStatusBasedOnCache() {
+  void _updateUserBasedOnCache() {
     log('Updating auth status based on cache');
     final user = currentUser.isEmpty;
     log('Current user inside '
@@ -408,70 +373,60 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> sendVerificationCode({
     required String email,
   }) async {
-    try {
-      final baseUrl = UriExtension.baseUrl;
-      await _firebaseAuth.sendPasswordResetEmail(
-        email: email,
-        actionCodeSettings: baseUrl == KAppText.site
-            ? null
-            : firebase_auth.ActionCodeSettings(
-                url: '$baseUrl/${KRoute.login.path}',
-              ),
-      );
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'sendVerificationCode',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'Email: $email',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final baseUrl = UriExtension.baseUrl;
+        await _firebaseAuth.sendPasswordResetEmail(
+          email: email,
+          actionCodeSettings: baseUrl == KAppText.site
+              ? null
+              : firebase_auth.ActionCodeSettings(
+                  url: '$baseUrl/${KRoute.login.path}',
+                ),
+        );
+        return const Right(true);
+      },
+      methodName: 'sendVerificationCode',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      data: 'Email: $email',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> checkVerificationCode(
     String? code,
   ) async {
-    try {
-      if (code == null) {
-        return Left(
-          SomeFailure.value(
-            error: 'Code is null',
-            tag: 'checkVerificationCode(${ErrorText.wrongVerifyCodeError})',
-            tagKey: ErrorText.appAuthenticationKey,
-            user: currentUser,
-            userSetting: currentUserSetting,
-            data: 'Code: $code',
-          ),
+    return eitherFutureHelper(
+      () async {
+        if (code == null) {
+          return Left(
+            SomeFailure.value(
+              error: 'Code is null',
+              tag: 'checkVerificationCode(${ErrorText.wrongVerifyCodeError})',
+              tagKey: ErrorText.appAuthenticationKey,
+              user: currentUser,
+              userSetting: currentUserSetting,
+              data: 'Code: $code',
+            ),
+          );
+        }
+        final email = await _firebaseAuth.verifyPasswordResetCode(
+          code,
+          // actionCodeSettings: firebase_auth.ActionCodeSettings(
+          //   url: '${Uri.base.origin}/${KRoute.login.path}',
+          //   handleCodeInApp: true,
+          // ),
         );
-      }
-      final email = await _firebaseAuth.verifyPasswordResetCode(
-        code,
-        // actionCodeSettings: firebase_auth.ActionCodeSettings(
-        //   url: '${Uri.base.origin}/${KRoute.login.path}',
-        //   handleCodeInApp: true,
-        // ),
-      );
-      return Right(email.isNotEmpty);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'checkVerificationCode',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'Code: $code',
-        ),
-      );
-    }
+        return Right(email.isNotEmpty);
+      },
+      methodName: 'checkVerificationCode',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      data: 'Code: $code',
+    );
   }
 
   @override
@@ -479,24 +434,19 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String code,
     required String newPassword,
   }) async {
-    try {
-      await _firebaseAuth.confirmPasswordReset(
-        code: code,
-        newPassword: newPassword,
-      );
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'resetPasswordUseCode',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firebaseAuth.confirmPasswordReset(
+          code: code,
+          newPassword: newPassword,
+        );
+        return const Right(true);
+      },
+      methodName: 'resetPasswordUseCode',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+    );
   }
 
   @override
@@ -531,35 +481,31 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, UserSetting>> updateUserSetting(
     UserSetting userSetting,
   ) async {
-    try {
-      if (currentUser.isNotEmpty) {
-        // if (currentUserSetting.id.isEmpty ||
-        //     currentUserSetting.id != currentUser.id) {
-        await _firestoreService.setUserSetting(
-          userSetting: userSetting,
-          userId: currentUser.id,
-        );
-        // } else {
-        //   await _firestoreService.updateUserSetting(
-        //     userSetting,
-        //   );
-        // }
+    return eitherFutureHelper(
+      () async {
+        if (currentUser.isNotEmpty) {
+          // if (currentUserSetting.id.isEmpty ||
+          //     currentUserSetting.id != currentUser.id) {
+          await _firestoreService.setUserSetting(
+            userSetting: userSetting,
+            userId: currentUser.id,
+          );
+          // } else {
+          //   await _firestoreService.updateUserSetting(
+          //     userSetting,
+          //   );
+          // }
+          return Right(userSetting);
+        }
         return Right(userSetting);
-      }
-      return Right(userSetting);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'User Setting: $userSetting',
-        ),
-      );
-    } finally {
-      _updateUserSettingBasedOnCache();
-    }
+      },
+      methodName: 'updateUserSetting',
+      data: 'User Setting: $userSetting',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: _updateUserSettingBasedOnCache,
+    );
   }
 
   @override
@@ -605,40 +551,34 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required User user,
     required FilePickerItem? image,
   }) async {
-    try {
-      late var userPhoto = user.photo;
-      await _firebaseAuth.currentUser?.updateDisplayName(user.name);
+    return eitherFutureHelper(
+      () async {
+        late var userPhoto = user.photo;
+        await _firebaseAuth.currentUser?.updateDisplayName(user.name);
 
-      if (image != null) {
-        userPhoto = await _updatePhoto(image: image, userId: user.id);
-        if (userPhoto != null && userPhoto.isNotEmpty) {
-          try {
-            unawaited(_storageService.removeFile(currentUser.photo));
-            // User can save own photo in another service
-          } catch (e) {
-            log('photo remove error - $e');
+        if (image != null) {
+          userPhoto = await _updatePhoto(image: image, userId: user.id);
+          if (userPhoto != null && userPhoto.isNotEmpty) {
+            try {
+              unawaited(_storageService.removeFile(currentUser.photo));
+              // User can save own photo in another service
+            } catch (e) {
+              log('photo remove error - $e');
+            }
+
+            await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
           }
-
-          await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
         }
-      }
 
-      return Right(user.copyWith(photo: userPhoto));
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'updateUserData',
-          tagKey: ErrorText.appAuthenticationKey,
-          user: currentUser,
-          userSetting: currentUserSetting,
-          data: 'User: $user| ${image.getErrorData}',
-        ),
-      );
-    } finally {
-      _updateAuthStatusBasedOnCache();
-    }
+        return Right(user.copyWith(photo: userPhoto));
+      },
+      methodName: 'updateUserData',
+      data: 'User: $user| ${image.getErrorData}',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: _updateUserBasedOnCache,
+    );
   }
 
   Future<String?> _updatePhoto({

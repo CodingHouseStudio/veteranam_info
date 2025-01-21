@@ -269,6 +269,9 @@ mixin _Exception {
         case NoSuchMethodError:
           failure = SomeFailure.noSuchMethodError;
           errorLevelValue = ErrorLevelEnum.error;
+        case UnsupportedError:
+          failure = SomeFailure.unsupported;
+          errorLevelValue = ErrorLevelEnum.error;
         default:
           failure = SomeFailure.serverError;
           errorLevelValue = ErrorLevelEnum.fatal;

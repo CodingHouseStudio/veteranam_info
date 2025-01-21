@@ -236,7 +236,7 @@ class DiscountsWatcherBloc
     );
 
     state.discountFilterRepository
-        .addEligibility(
+        .addRemoveEligibility(
           valueUK: event.eligibility,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
         )
@@ -262,7 +262,7 @@ class DiscountsWatcherBloc
     );
 
     state.discountFilterRepository
-        .addCategory(
+        .addRemoveCategory(
           valueUK: event.category,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
         )
@@ -288,7 +288,7 @@ class DiscountsWatcherBloc
     );
 
     state.discountFilterRepository
-        .addLocation(
+        .addRemoveLocation(
           valueUK: event.location,
           unmodifiedDiscountModelItems: state.sortingDiscountModelList,
         )

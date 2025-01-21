@@ -27,6 +27,7 @@ abstract class ErrorText {
   static const noSuchMethodError = 'No Such Method Error';
   static const invalidInput = 'Invalid Input';
   static const serviceWorkerRegistration = 'Service Worker Registration';
+  static const unsupportedError = 'Unsupported Error';
   static const providerAlreadyLinked = 'Provider Already Linked';
   static const format = 'Format Error';
   static const unimplementedFeature = 'Unimplemented Feature';

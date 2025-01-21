@@ -10,25 +10,20 @@ class MobileRatingRepository {
   }) : _inAppReview = inAppReview;
   final InAppReview _inAppReview;
   Future<Either<SomeFailure, bool>> showRatingDialog() async {
-    try {
-      if (await _inAppReview.isAvailable()) {
-        await _inAppReview.requestReview();
-        return const Right(true);
-      } else {
-        await _inAppReview.openStoreListing(
-          appStoreId: KAppText.appStoreId,
-        );
-        return const Right(false);
-      }
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Mobile Rating(showRatingDialog)',
-          tagKey: ErrorText.repositoryKey,
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        if (await _inAppReview.isAvailable()) {
+          await _inAppReview.requestReview();
+          return const Right(true);
+        } else {
+          await _inAppReview.openStoreListing(
+            appStoreId: KAppText.appStoreId,
+          );
+          return const Right(false);
+        }
+      },
+      methodName: 'Mobile Rating(showRatingDialog)',
+      className: ErrorText.repositoryKey,
+    );
   }
 }
