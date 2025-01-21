@@ -14,20 +14,15 @@ class ReportRepository implements IReportRepository {
 
   @override
   Future<Either<SomeFailure, bool>> sendReport(ReportModel report) async {
-    try {
-      await _firestoreService.addReport(report);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Report(sendReport)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Report Model: $report',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.addReport(report);
+        return const Right(true);
+      },
+      methodName: 'Report(sendReport)',
+      className: ErrorText.repositoryKey,
+      data: 'Report Model: $report',
+    );
   }
 
   @override
@@ -35,23 +30,19 @@ class ReportRepository implements IReportRepository {
     required CardEnum cardEnum,
     required String userId,
   }) async {
-    try {
-      final userDiscountsItems = await _firestoreService.getCardReportByUserId(
-        cardEnum: cardEnum,
-        userId: userId,
-      );
+    return eitherFutureHelper(
+      () async {
+        final userDiscountsItems =
+            await _firestoreService.getCardReportByUserId(
+          cardEnum: cardEnum,
+          userId: userId,
+        );
 
-      return Right(userDiscountsItems);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Report(getCardReportById)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Card Enum ${cardEnum.getValue}| User ID: $userId',
-        ),
-      );
-    }
+        return Right(userDiscountsItems);
+      },
+      methodName: 'Report(getCardReportById)',
+      className: ErrorText.repositoryKey,
+      data: 'Card Enum ${cardEnum.getValue}| User ID: $userId',
+    );
   }
 }

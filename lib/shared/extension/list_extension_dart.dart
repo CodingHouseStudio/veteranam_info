@@ -1,4 +1,4 @@
-import 'package:collection/collection.dart' show groupBy;
+import 'package:collection/collection.dart' show IterableExtension, groupBy;
 import 'package:connectivity_plus/connectivity_plus.dart'
     show ConnectivityResult;
 import 'package:veteranam/shared/shared_dart.dart';
@@ -41,6 +41,32 @@ extension ListReportModelExtensions on List<ReportModel> {
   List<String> get getIdCard => map(
         (e) => e.cardId,
       ).toList();
+}
+
+extension ListStringExtensions on Iterable<String> {
+  Iterable<String> locationSorted({
+    required Map<String, List<TranslateModel>> groupList,
+    required bool isEnglish,
+  }) {
+    if (isEmpty) return this;
+    return sorted(
+      (a, b) {
+        if (a.isEmpty) return 0;
+        if (b.isEmpty) return 1;
+        if (isEnglish && groupList[a]!.first.en != null) {
+          // sorting by english alphabet if isEnglish and item
+          // contain english value
+          return groupList[a]!
+              .first
+              .en!
+              .compareTo(groupList[b]!.first.en.toString().toLowerCase());
+        } else {
+          // sorting by ukrain aphabet
+          return groupList[a]!.first.uk.compareUkrain(groupList[b]!.first.uk);
+        }
+      },
+    );
+  }
 }
 
 extension ListStringNullableExtensions on List<String>? {

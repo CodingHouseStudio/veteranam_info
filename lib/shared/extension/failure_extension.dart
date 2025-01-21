@@ -81,6 +81,10 @@ extension SomeFailureValue on SomeFailure {
       case SomeFailure.shareInProgress:
       case SomeFailure.serviceWorkerRegistration:
         return null;
+      case SomeFailure.filter:
+        return context.l10n.discountFilterFailureMessage;
+      case SomeFailure.unsupported:
+        return context.l10n.unsupportedError;
     }
   }
 }

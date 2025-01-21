@@ -14,21 +14,16 @@ class InvestorsRepository implements IInvestorsRepository {
       //   List<String>? reportIdItems,
       // }
       ) async {
-    try {
-      final fundItems = await _firestoreService.getFunds(
-          //reportIdItems
-          );
-      return Right(fundItems);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Investors(getFunds)',
-          tagKey: ErrorText.repositoryKey,
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final fundItems = await _firestoreService.getFunds(
+            //reportIdItems
+            );
+        return Right(fundItems);
+      },
+      methodName: 'Investors(getFunds)',
+      className: ErrorText.repositoryKey,
+    );
   }
 
   @override

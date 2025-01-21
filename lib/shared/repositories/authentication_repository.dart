@@ -55,9 +55,7 @@ class AuthenticationRepository {
   Future<Either<SomeFailure, bool>> deleteUser() async {
     final result = await _appAuthenticationRepository.deleteUser();
     return result.fold(
-      (l) {
-        return Left(l);
-      },
+      Left.new,
       (r) {
         _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
         log('User deleted');

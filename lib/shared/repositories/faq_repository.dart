@@ -11,18 +11,13 @@ class FaqRepository implements IFaqRepository {
 
   @override
   Future<Either<SomeFailure, List<QuestionModel>>> getQuestions() async {
-    try {
-      final questionItems = await _firestoreService.getQuestions();
-      return Right(questionItems);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'FAQ(getQuestions)',
-          tagKey: ErrorText.repositoryKey,
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final questionItems = await _firestoreService.getQuestions();
+        return Right(questionItems);
+      },
+      methodName: 'FAQ(getQuestions)',
+      className: ErrorText.repositoryKey,
+    );
   }
 }

@@ -444,6 +444,9 @@ abstract class KTestVariables {
                 : i == 2
                     ? SubLocation.online
                     : null,
+        eligibility: i == 0
+            ? const [EligibilityEnum.all]
+            : KMockText.discountModel.eligibility,
       ),
   ];
 

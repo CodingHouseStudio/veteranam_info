@@ -31,7 +31,7 @@ abstract class KMockText {
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
   static const email = 'example@gmail.com';
-  static const tag = ['Пільги'];
+  static const tag = ['Пільги', 'Гарячі лінії'];
   static const tags = <List<String>?>[
     ['Пільги'],
     ['Гарячі лінії'],
@@ -133,6 +133,11 @@ abstract class KMockText {
     en: 'Medical',
   );
 
+  static const location = TranslateModel(
+    uk: 'Київ',
+    en: 'Kyiv',
+  );
+
   static const filterItem = FilterItem(KMockText.category, number: 10);
 
   static final discountModel = DiscountModel(
@@ -164,12 +169,7 @@ abstract class KMockText {
     //   uk: 'Всі відділення лабораторії.',
     //   en: 'All branches of the laboratory.',
     // ),
-    location: const [
-      TranslateModel(
-        uk: 'Київ',
-        en: 'Kyiv',
-      ),
-    ],
+    location: const [location],
     expiration: const TranslateModel(
       uk: 'До 24 жовтня 2026 р.',
       en: 'Up to October 24, 2026',

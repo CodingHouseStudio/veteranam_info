@@ -37,43 +37,33 @@ class InformationRepository implements IInformationRepository {
     required InformationModel informationModel,
     required bool isLiked,
   }) async {
-    try {
-      await _firestoreService.updateInformationModel(
-        informationModel.copyWith(
-          likes: informationModel.getLike(isLiked: isLiked),
-        ),
-      );
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Information(updateLikeCount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Information Model: $informationModel, Is Liked: $isLiked',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.updateInformationModel(
+          informationModel.copyWith(
+            likes: informationModel.getLike(isLiked: isLiked),
+          ),
+        );
+        return const Right(true);
+      },
+      methodName: 'Information(updateLikeCount)',
+      className: ErrorText.repositoryKey,
+      data: 'Information Model: $informationModel, Is Liked: $isLiked',
+    );
   }
 
   @override
   Future<Either<SomeFailure, InformationModel>> getInformation(
     String id,
   ) async {
-    try {
-      final informationModel = await _firestoreService.getInformation(id);
-      return Right(informationModel);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Information(getInformation)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Information ID: $id',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final informationModel = await _firestoreService.getInformation(id);
+        return Right(informationModel);
+      },
+      methodName: 'Information(getInformation)',
+      className: ErrorText.repositoryKey,
+      data: 'Information ID: $id',
+    );
   }
 }

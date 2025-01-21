@@ -31,7 +31,7 @@ abstract class IDiscountFilterRepository {
   /// Toggles an existing category filter.
   /// Updates the Activity categories filter
   /// and available filter lists accordingly.
-  Either<SomeFailure, bool> addCategory({
+  Either<SomeFailure, bool> addRemoveCategory({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
   });
@@ -39,7 +39,7 @@ abstract class IDiscountFilterRepository {
   /// Toggles an existing location filter.
   /// Updates the activity location filter
   /// and available filter lists accordingly.
-  Either<SomeFailure, bool> addLocation({
+  Either<SomeFailure, bool> addRemoveLocation({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
   });
@@ -47,7 +47,7 @@ abstract class IDiscountFilterRepository {
   /// Toggles an existing eligibilities filter.
   /// Updates the Activity eligibilities
   /// filter and available filter lists accordingly.
-  Either<SomeFailure, bool> addEligibility({
+  Either<SomeFailure, bool> addRemoveEligibility({
     required String valueUK,
     required List<DiscountModel> unmodifiedDiscountModelItems,
   });

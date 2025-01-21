@@ -38,35 +38,30 @@ class WorkRepository implements IWorkRepository {
     required EmployeeRespondModel respond,
     required FilePickerItem? file,
   }) async {
-    try {
-      late var methodRespond = respond;
-      if (file != null) {
-        final downloadURL = await _storageService.saveFile(
-          filePickerItem: file,
-          id: respond.id,
-          collecltionName: FirebaseCollectionName.respond,
-          file: StoragePath.resume,
-          standartFileExtension: StoragePath.standartFileExtension,
-        );
-        if (downloadURL != null && downloadURL.isNotEmpty) {
-          methodRespond = methodRespond.copyWith(
-            resume: file.resume(downloadURL),
+    return eitherFutureHelper(
+      () async {
+        late var methodRespond = respond;
+        if (file != null) {
+          final downloadURL = await _storageService.saveFile(
+            filePickerItem: file,
+            id: respond.id,
+            collecltionName: FirebaseCollectionName.respond,
+            file: StoragePath.resume,
+            standartFileExtension: StoragePath.standartFileExtension,
           );
+          if (downloadURL != null && downloadURL.isNotEmpty) {
+            methodRespond = methodRespond.copyWith(
+              resume: file.resume(downloadURL),
+            );
+          }
         }
-      }
-      await _firestoreService.sendRespond(methodRespond);
+        await _firestoreService.sendRespond(methodRespond);
 
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Work(sendRespond)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Employee Respond Model: $respond| ${file.getErrorData}',
-        ),
-      );
-    }
+        return const Right(true);
+      },
+      methodName: 'Work(sendRespond)',
+      className: ErrorText.repositoryKey,
+      data: 'Employee Respond Model: $respond| ${file.getErrorData}',
+    );
   }
 }

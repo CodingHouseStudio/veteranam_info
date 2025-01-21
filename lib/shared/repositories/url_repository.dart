@@ -62,59 +62,49 @@ class UrlRepository extends IUrlRepository {
     bool? openInCurrentWindow,
     // url_launcher.LaunchMode? mode,
   }) async {
-    try {
-      late Uri link;
-      if (scheme != null) {
-        link = Uri(
-          scheme: scheme,
-          path: url,
-        );
-      } else {
-        link = Uri.parse(url);
-      }
-      final linkParse = await url_launcher.canLaunchUrl(link);
-      if (linkParse) {
-        await url_launcher.launchUrl(
-          link,
-          mode: mode ?? url_launcher.LaunchMode.platformDefault,
-          webOnlyWindowName: openInCurrentWindow ?? false ? '_self' : null,
+    return eitherFutureHelper(
+      () async {
+        late Uri link;
+        if (scheme != null) {
+          link = Uri(
+            scheme: scheme,
+            path: url,
+          );
+        } else {
+          link = Uri.parse(url);
+        }
+        final linkParse = await url_launcher.canLaunchUrl(link);
+        if (linkParse) {
+          await url_launcher.launchUrl(
+            link,
+            mode: mode ?? url_launcher.LaunchMode.platformDefault,
+            webOnlyWindowName: openInCurrentWindow ?? false ? '_self' : null,
 
-          // mode: mode ?? url_launcher.LaunchMode.platformDefault,
-        );
-        return const Right(true);
-      }
-      return const Right(false);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Url(launchUrl)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Url: $url, Schema $scheme',
-        ),
-      );
-    }
+            // mode: mode ?? url_launcher.LaunchMode.platformDefault,
+          );
+          return const Right(true);
+        }
+        return const Right(false);
+      },
+      methodName: 'Url(launchUrl)',
+      className: ErrorText.repositoryKey,
+      data: 'Url: $url, Schema $scheme',
+    );
   }
 
   // TODO(flutter): this repository use flutter import, import should be remove
   @override
   Future<Either<SomeFailure, bool>> copy(String text) async {
-    try {
-      await Clipboard.setData(
-        ClipboardData(text: text),
-      );
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Url(copy)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Text $text',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await Clipboard.setData(
+          ClipboardData(text: text),
+        );
+        return const Right(true);
+      },
+      methodName: 'Url(copy)',
+      className: ErrorText.repositoryKey,
+      data: 'Text $text',
+    );
   }
 }

@@ -9,24 +9,19 @@ class CitiesRepository implements ICitiesRepository {
   final FirestoreService _firestoreService;
   @override
   Future<Either<SomeFailure, List<CityModel>>> getCities() async {
-    try {
-      final cities = await _firestoreService.getCities();
+    return eitherFutureHelper(
+      () async {
+        final cities = await _firestoreService.getCities();
 
-      final srotedCities = cities
-        ..sort(
-          (a, b) => a.name.uk.compareUkrain(b.name.uk),
-        );
+        final srotedCities = cities
+          ..sort(
+            (a, b) => a.name.uk.compareUkrain(b.name.uk),
+          );
 
-      return Right(srotedCities);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Cities(getCities)',
-          tagKey: ErrorText.repositoryKey,
-        ),
-      );
-    }
+        return Right(srotedCities);
+      },
+      methodName: 'Cities(getCities)',
+      className: ErrorText.repositoryKey,
+    );
   }
 }

@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
 
 void main() {
   setUp(configureFailureDependenciesTest);

@@ -17,20 +17,15 @@ class FeedbackRepository implements IFeedbackRepository {
 
   @override
   Future<Either<SomeFailure, bool>> sendFeedback(FeedbackModel feedback) async {
-    try {
-      await _firestoreService.addFeedback(feedback);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(sendFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Feedback: $feedback',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.addFeedback(feedback);
+        return const Right(true);
+      },
+      methodName: 'Feedback(sendFeedback)',
+      className: ErrorText.repositoryKey,
+      data: 'Feedback: $feedback',
+    );
   }
 
   @override
@@ -38,53 +33,43 @@ class FeedbackRepository implements IFeedbackRepository {
     required FeedbackModel feedback,
     required Uint8List image,
   }) async {
-    try {
-      final feedbackModel = await _addImage(
-        feedback: feedback,
-        image: image,
-      );
-      await _firestoreService.addMobFeedback(feedbackModel);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(sendMobFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Feedback: $feedback| ${image.getErrorData}',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final feedbackModel = await _addImage(
+          feedback: feedback,
+          image: image,
+        );
+        await _firestoreService.addMobFeedback(feedbackModel);
+        return const Right(true);
+      },
+      methodName: 'Feedback(sendMobFeedback)',
+      className: ErrorText.repositoryKey,
+      data: 'Feedback: $feedback| ${image.getErrorData}',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> checkUserNeedShowFeedback(
     String userId,
   ) async {
-    try {
-      final feedback = await _firestoreService.getUserFeedback(userId);
-      final date = DateTime.now()
-          .subtract(const Duration(days: KDimensions.daysBetweenFeedback));
-      final lastFeedback =
-          feedback.reduce((a, b) => a.timestamp.isAfter(b.timestamp) ? a : b);
-      if (lastFeedback.timestamp.isAfter(date)) {
-        return const Right(false);
-      } else {
-        return const Right(true);
-      }
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Feedback(checkUserNeedShowFeedback)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(id: userId),
-          data: 'User ID: $userId',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final feedback = await _firestoreService.getUserFeedback(userId);
+        final date = DateTime.now()
+            .subtract(const Duration(days: KDimensions.daysBetweenFeedback));
+        final lastFeedback =
+            feedback.reduce((a, b) => a.timestamp.isAfter(b.timestamp) ? a : b);
+        if (lastFeedback.timestamp.isAfter(date)) {
+          return const Right(false);
+        } else {
+          return const Right(true);
+        }
+      },
+      methodName: 'Feedback(checkUserNeedShowFeedback)',
+      className: ErrorText.repositoryKey,
+      user: User(id: userId),
+      data: 'User ID: $userId',
+    );
   }
 
   Future<FeedbackModel> _addImage({

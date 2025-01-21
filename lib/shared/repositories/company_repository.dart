@@ -120,85 +120,77 @@ class CompanyRepository implements ICompanyRepository {
     required CompanyModel company,
     required FilePickerItem? imageItem,
   }) async {
-    try {
-      late var methodCompanyModel = company;
-      if (!company.userEmails
-          .contains(_appAuthenticationRepository.currentUser.email)) {
-        methodCompanyModel = methodCompanyModel.copyWith(
-          userEmails: List.from(methodCompanyModel.userEmails)
-            ..add(_appAuthenticationRepository.currentUser.email!),
-        );
-      }
-      if (imageItem != null) {
-        final downloadURL = await _storageService.saveFile(
-          filePickerItem: imageItem,
-          id: company.id,
-          collecltionName: FirebaseCollectionName.companies,
-        );
-        if (downloadURL != null && downloadURL.isNotEmpty) {
-          // We will now have a problem if we delete the company's photo
-          // because we don't change it at the same time on discounts.
-          // unawaited(_storageService.removeFile(company.image?.downloadURL));
+    return eitherFutureHelper(
+      () async {
+        late var methodCompanyModel = company;
+        if (!company.userEmails
+            .contains(_appAuthenticationRepository.currentUser.email)) {
           methodCompanyModel = methodCompanyModel.copyWith(
-            image: imageItem.image(downloadURL),
+            userEmails: List.from(methodCompanyModel.userEmails)
+              ..add(_appAuthenticationRepository.currentUser.email!),
           );
         }
-      }
-      await _firestoreService.updateCompany(methodCompanyModel);
-      _userCompanyController.add(methodCompanyModel);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Company(updateCompany)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(
-            id: currentUserCompany.id,
-            name: currentUserCompany.companyName,
-            email: _appAuthenticationRepository.currentUser.email,
-          ),
-          userSetting: _appAuthenticationRepository.currentUserSetting,
-          data: 'Compnay: $company| ${imageItem.getErrorData}',
-        ),
-      );
-    }
+        if (imageItem != null) {
+          final downloadURL = await _storageService.saveFile(
+            filePickerItem: imageItem,
+            id: company.id,
+            collecltionName: FirebaseCollectionName.companies,
+          );
+          if (downloadURL != null && downloadURL.isNotEmpty) {
+            // We will now have a problem if we delete the company's photo
+            // because we don't change it at the same time on discounts.
+            // unawaited(_storageService.removeFile(company.image?.
+            // downloadURL));
+            methodCompanyModel = methodCompanyModel.copyWith(
+              image: imageItem.image(downloadURL),
+            );
+          }
+        }
+        await _firestoreService.updateCompany(methodCompanyModel);
+        _userCompanyController.add(methodCompanyModel);
+        return const Right(true);
+      },
+      methodName: 'Company(updateCompany)',
+      className: ErrorText.repositoryKey,
+      user: User(
+        id: currentUserCompany.id,
+        name: currentUserCompany.companyName,
+        email: _appAuthenticationRepository.currentUser.email,
+      ),
+      userSetting: _appAuthenticationRepository.currentUserSetting,
+      data: 'Compnay: $company| ${imageItem.getErrorData}',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> deleteCompany() async {
-    try {
-      if (currentUserCompany.id.isNotEmpty) {
-        /// every thirty days, all documents where KAppText.deletedFieldId
-        /// older than 30 days will be deleted automatically (firebase function)
-        await _firestoreService.updateCompany(
-          currentUserCompany.copyWith(deletedOn: ExtendedDateTime.current),
-        );
-        _userCompanyController.add(CompanyModel.empty);
-        await _appAuthenticationRepository.logOut();
-      }
-      // if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
-      //   await iAppAuthenticationRepository.deleteUser();
-      // }
+    return eitherFutureHelper(
+      () async {
+        if (currentUserCompany.id.isNotEmpty) {
+          /// every thirty days, all documents where KAppText.deletedFieldId
+          /// older than 30 days will be deleted automatically
+          /// (firebase function)
+          await _firestoreService.updateCompany(
+            currentUserCompany.copyWith(deletedOn: ExtendedDateTime.current),
+          );
+          _userCompanyController.add(CompanyModel.empty);
+          await _appAuthenticationRepository.logOut();
+        }
+        // if (iAppAuthenticationRepository.currentUser.isNotEmpty) {
+        //   await iAppAuthenticationRepository.deleteUser();
+        // }
 
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Company(deleteCompany)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(
-            id: currentUserCompany.id,
-            name: currentUserCompany.companyName,
-            email: _appAuthenticationRepository.currentUser.email,
-          ),
-          userSetting: _appAuthenticationRepository.currentUserSetting,
-        ),
-      );
-    }
+        return const Right(true);
+      },
+      methodName: 'Company(deleteCompany)',
+      className: ErrorText.repositoryKey,
+      user: User(
+        id: currentUserCompany.id,
+        name: currentUserCompany.companyName,
+        email: _appAuthenticationRepository.currentUser.email,
+      ),
+      userSetting: _appAuthenticationRepository.currentUserSetting,
+    );
   }
 
   // @disposeMethod

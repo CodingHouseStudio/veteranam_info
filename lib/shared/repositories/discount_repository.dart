@@ -53,20 +53,15 @@ class DiscountRepository implements IDiscountRepository {
   Future<Either<SomeFailure, bool>> deleteDiscountsById(
     String discountId,
   ) async {
-    try {
-      await _firestoreService.deleteDiscountById(discountId);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(deleteDiscountsById)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount Id: $discountId',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.deleteDiscountById(discountId);
+        return const Right(true);
+      },
+      methodName: 'Discount(deleteDiscountsById)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount Id: $discountId',
+    );
   }
 
   @override
@@ -74,169 +69,135 @@ class DiscountRepository implements IDiscountRepository {
     required String id,
     required bool showOnlyBusinessDiscounts,
   }) async {
-    try {
-      final discountModel = await _firestoreService.getDiscount(
-        id: id,
-        showOnlyBusinessDiscounts: showOnlyBusinessDiscounts,
-      );
-      return Right(discountModel);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(getDiscount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount ID: $id',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final discountModel = await _firestoreService.getDiscount(
+          id: id,
+          showOnlyBusinessDiscounts: showOnlyBusinessDiscounts,
+        );
+        return Right(discountModel);
+      },
+      methodName: 'Discount(getDiscount)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount Id: $id',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> sendLink(
     LinkModel discountLink,
   ) async {
-    try {
-      await _firestoreService.sendLink(discountLink);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(sendLink)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount Link: $discountLink',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.sendLink(discountLink);
+        return const Right(true);
+      },
+      methodName: 'Discount(sendLink)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount Link: $discountLink',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> userCanSendLink(
     String userId,
   ) async {
-    try {
-      final userLink = await _firestoreService.getUserDiscountsLink(userId);
-      final oneDayAgo =
-          ExtendedDateTime.current.subtract(const Duration(days: 1));
-      final oneDayUserLink = userLink
-          .where(
-            (element) => element.date.isAfter(oneDayAgo),
-          )
-          .toList();
-      return Right(oneDayUserLink.length < KDimensions.maxLinkPerDay);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(userCanSendLink)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(id: userId),
-          data: 'User ID: $userId',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final userLink = await _firestoreService.getUserDiscountsLink(userId);
+        final oneDayAgo =
+            ExtendedDateTime.current.subtract(const Duration(days: 1));
+        final oneDayUserLink = userLink
+            .where(
+              (element) => element.date.isAfter(oneDayAgo),
+            )
+            .toList();
+        return Right(oneDayUserLink.length < KDimensions.maxLinkPerDay);
+      },
+      methodName: 'Discount(userCanSendLink)',
+      className: ErrorText.repositoryKey,
+      user: User(id: userId),
+      data: 'User ID: $userId',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> sendEmail(
     EmailModel userEmail,
   ) async {
-    try {
-      await _firestoreService.sendEmail(userEmail);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(sendEmail)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'User Email: $userEmail',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.sendEmail(userEmail);
+        return const Right(true);
+      },
+      methodName: 'Discount(sendEmail)',
+      className: ErrorText.repositoryKey,
+      data: 'User Email: $userEmail',
+    );
   }
 
   @override
   Future<Either<SomeFailure, int>> userCanSendUserEmail(
     String userId,
   ) async {
-    try {
-      final userEmails = await _firestoreService.getUserDiscountsEmail(userId);
-      // if (userEmails.isEmpty) {
-      //   return const Right(true);
-      // }
-      final oneDaysAgo =
-          ExtendedDateTime.current.subtract(const Duration(days: 1));
+    return eitherFutureHelper(
+      () async {
+        final userEmails =
+            await _firestoreService.getUserDiscountsEmail(userId);
+        // if (userEmails.isEmpty) {
+        //   return const Right(true);
+        // }
+        final oneDaysAgo =
+            ExtendedDateTime.current.subtract(const Duration(days: 1));
 
-      final userSentEmail =
-          userEmails.any((record) => record.date.isAfter(oneDaysAgo));
-      if (userEmails.any((element) => element.isValid) || userSentEmail) {
-        return const Right(-1);
-      }
+        final userSentEmail =
+            userEmails.any((record) => record.date.isAfter(oneDaysAgo));
+        if (userEmails.any((element) => element.isValid) || userSentEmail) {
+          return const Right(-1);
+        }
 
-      return Right(userEmails.length);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(userCanSendUserEmail)',
-          tagKey: ErrorText.repositoryKey,
-          user: User(id: userId),
-          data: 'User ID: $userId',
-        ),
-      );
-    }
+        return Right(userEmails.length);
+      },
+      methodName: 'Discount(userCanSendUserEmail)',
+      className: ErrorText.repositoryKey,
+      user: User(id: userId),
+      data: 'User ID: $userId',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> addDiscount(DiscountModel discount) async {
-    try {
-      await _firestoreService.addDiscount(discount);
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.addDiscount(discount);
 
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(addDiscount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount: $discount',
-        ),
-      );
-    }
+        return const Right(true);
+      },
+      methodName: 'Discount(addDiscount)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount: $discount',
+    );
   }
 
   @override
   Future<Either<SomeFailure, bool>> deactivateDiscount({
     required DiscountModel discountModel,
   }) async {
-    try {
-      await _firestoreService.updateDiscountModel(
-        discountModel.copyWith(
-          status: discountModel.status == DiscountState.deactivated
-              ? DiscountState.published
-              : DiscountState.deactivated,
-        ),
-      );
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Discount(deactivateDiscount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount: $discountModel',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        await _firestoreService.updateDiscountModel(
+          discountModel.copyWith(
+            status: discountModel.status == DiscountState.deactivated
+                ? DiscountState.published
+                : DiscountState.deactivated,
+          ),
+        );
+        return const Right(true);
+      },
+      methodName: 'Discount(deactivateDiscount)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount: $discountModel',
+    );
   }
 
   @override
@@ -244,25 +205,20 @@ class DiscountRepository implements IDiscountRepository {
     required String id,
     required String companyId,
   }) async {
-    try {
-      final discountModel = await _firestoreService.getDiscount(
-        id: id,
-        companyId: companyId,
-        showOnlyBusinessDiscounts: false,
-      );
-      return Right(discountModel);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          user: User(id: companyId),
-          tag: 'Discount(getCompanyDiscount)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Discount ID: $id, Company ID: $companyId',
-        ),
-      );
-    }
+    return eitherFutureHelper(
+      () async {
+        final discountModel = await _firestoreService.getDiscount(
+          id: id,
+          companyId: companyId,
+          showOnlyBusinessDiscounts: false,
+        );
+        return Right(discountModel);
+      },
+      methodName: 'Discount(getCompanyDiscount)',
+      className: ErrorText.repositoryKey,
+      data: 'Discount ID: $id, Company ID: $companyId',
+      user: User(id: companyId),
+    );
   }
 
   @override
