@@ -12,6 +12,12 @@ class KTest {
   @visibleForTesting
   static set isTest(bool value) => _isTest = value;
 
+  static bool _discountSortingTestValue = false;
+  static bool get discountSortingTestValue => _discountSortingTestValue;
+  @visibleForTesting
+  static set discountSortingTestValue(bool value) =>
+      _discountSortingTestValue = value;
+
   static int getTimer(int value) => isTest ? 0 : value;
 
   // static double? _animatioRepeat;
