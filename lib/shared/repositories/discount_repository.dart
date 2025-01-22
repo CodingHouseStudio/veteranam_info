@@ -152,7 +152,7 @@ class DiscountRepository implements IDiscountRepository {
 
         final userSentEmail =
             userEmails.any((record) => record.date.isAfter(oneDaysAgo));
-        if (userEmails.any((element) => element.isValid) || userSentEmail) {
+        if (userSentEmail || userEmails.any((element) => element.isValid)) {
           return const Right(-1);
         }
 

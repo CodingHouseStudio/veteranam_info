@@ -11,6 +11,7 @@ class SharedIconListWidget extends StatelessWidget {
     required this.complaintKey,
     required this.share,
     required this.webSiteKey,
+    required this.dropMenuKey,
     super.key,
     this.link,
     this.useSiteUrl,
@@ -40,6 +41,7 @@ class SharedIconListWidget extends StatelessWidget {
   final bool isSeparatePage;
   final BoxBorder? iconBorder;
   final bool? dialogIsDesk;
+  final Key? dropMenuKey;
 
   @override
   Widget build(BuildContext context) {
@@ -90,26 +92,11 @@ class SharedIconListWidget extends StatelessWidget {
                     : null),
           ),
         if (isSeparatePage) ...[
-          if (link != null && link!.isUrlValid)
-            _CardIconWidget(
-              key: webSiteKey,
-              background: iconBackground,
-              icon: KIcon.captivePortal,
-              onPressed: () => context.openLinkWithAgreeDialog(
-                isDesk: dialogIsDesk ?? isDesk,
-                link: link!,
-              ),
-              label: context.l10n.webSite,
-              border: iconBorder ??
-                  (isSeparatePage
-                      ? Border.all(
-                          color: AppColors.materialThemeKeyColorsNeutral,
-                        )
-                      : null),
-            ),
+          if (link != null && link!.isUrlValid) websiteIcon(context),
           if (Config.isUser) complaintButton(context),
-        ] else if (link != null && link!.isUrlValid)
+        ] else if (link != null && link!.isUrlValid && Config.isUser)
           PopupMenuButtonWidget<int>(
+            key: dropMenuKey,
             buttonText: context.l10n.login,
             borderRadius: KBorderRadius.kBorderRadius16,
             buttonChild: Column(
@@ -157,6 +144,7 @@ class SharedIconListWidget extends StatelessWidget {
                   value: 2,
                   text: context.l10n.complaint,
                   icon: IconWidget(
+                    key: ReportDialogKeys.button,
                     background: iconBackground,
                     icon: KIcon.brightnessAlert,
                     padding: KPadding.kPaddingSize12,
@@ -176,7 +164,9 @@ class SharedIconListWidget extends StatelessWidget {
             position: PopupMenuButtonPosition.bottomRight,
           )
         else if (Config.isUser)
-          complaintButton(context),
+          complaintButton(context)
+        else
+          websiteIcon(context),
         // if (widget.showComplaint) ...[
         //   if (widget.isDesk)
         //     KSizedBox.kWidthSizedBox16
@@ -192,6 +182,25 @@ class SharedIconListWidget extends StatelessWidget {
         //   ),
         //],
       ],
+    );
+  }
+
+  Widget websiteIcon(BuildContext context) {
+    return _CardIconWidget(
+      key: webSiteKey,
+      background: iconBackground,
+      icon: KIcon.captivePortal,
+      onPressed: () => context.openLinkWithAgreeDialog(
+        isDesk: dialogIsDesk ?? isDesk,
+        link: link!,
+      ),
+      label: context.l10n.webSite,
+      border: iconBorder ??
+          (isSeparatePage
+              ? Border.all(
+                  color: AppColors.materialThemeKeyColorsNeutral,
+                )
+              : null),
     );
   }
 

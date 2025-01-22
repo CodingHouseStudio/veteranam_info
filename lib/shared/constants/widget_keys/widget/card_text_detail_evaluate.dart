@@ -2,6 +2,8 @@ part of '../widget_keys.dart';
 
 abstract class CardTextDetailEvaluateKeys {
   static const widget = Key('card_text_detail_evaluate');
+  static const popupMenuButton =
+      Key('card_text_detail_evaluate_popup_menu_button');
   static const iconLike = Key('card_text_detail_evaluate_icon_like');
   static const iconSmile = Key('card_text_detail_evaluate_icon_smile');
   static const iconDislike = Key('card_text_detail_evaluate_icon_dislike');

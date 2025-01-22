@@ -42,6 +42,10 @@ void main() {
       mockMobileRatingRepository = MockMobileRatingRepository();
       mockUserRepository = MockUserRepository();
 
+      when(mockFirebaseRemoteConfigProvider.waitActivated()).thenAnswer(
+        (invocation) async => true,
+      );
+
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
       );
@@ -160,6 +164,13 @@ void main() {
       group('Open Update dialog', () {
         setUp(() {
           PlatformEnumFlutter.isWebDesktop = false;
+
+          when(mockFirebaseRemoteConfigProvider.waitActivated()).thenAnswer(
+            (invocation) async {
+              await KTestConstants.delay;
+              return true;
+            },
+          );
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
@@ -167,7 +178,7 @@ void main() {
             (_) => KTestVariables.build,
           );
         });
-        testWidgets('${KGroupText.initial} ', (tester) async {
+        testWidgets('Close', (tester) async {
           await discountsPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
@@ -182,7 +193,27 @@ void main() {
             mockBuildRepository: mockBuildRepository,
           );
 
-          await mobUpdateDialogButtonsHelper(
+          await mobUpdateDialogCloseButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Apply', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockUserRepository: mockUserRepository,
+            mockMobileRatingRepository: mockMobileRatingRepository,
+            mockBuildRepository: mockBuildRepository,
+          );
+
+          await mobUpdateDialogApplyButtonsHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

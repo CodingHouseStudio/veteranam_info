@@ -54,7 +54,7 @@ class AdvancedFilterMobButton extends StatelessWidget {
   }
 
   Widget mobButton(BuildContext context) => TextButton.icon(
-        key: DiscountsKeys.advancedFilterButton,
+        key: DiscountsFilterKeys.mobButton,
         style: KButtonStyles.advancedButtonStyle,
         label: Text(
           context.l10n.filter,
@@ -148,7 +148,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      key: DiscountsKeys.advancedFilterDialog,
+      key: DiscountsFilterKeys.dialog,
       heightFactor: KDimensions.bottomDialogHeightFactor,
       child: Column(
         children: [
@@ -195,7 +195,7 @@ class _AdvancedFilterMobDialog extends StatelessWidget {
                     hasAlign: false,
                     isDesk: false,
                     onPressed: () => context.popDialog(value: true),
-                    widgetKey: DiscountsKeys.advancedFilterMobAppliedButton,
+                    widgetKey: DiscountsFilterKeys.mobAppliedButton,
                     darkMode: true,
                   ),
                 ],

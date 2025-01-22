@@ -27,29 +27,26 @@ class AppVersionCubit extends Cubit<AppVersionState> {
   }
   final AppInfoRepository _buildRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
-  Timer? _delay;
 
   @visibleForTesting
   static const mobAppVersionKey = '__mob_app_version_key__';
 
   Future<void> _started() async {
     final buildInfo = await _buildRepository.getBuildInfo();
-    var mobAppVersion =
+
+    emit(
+      AppVersionState(
+        build: buildInfo,
+        mobHasNewBuild: false,
+      ),
+    );
+
+    // Wait for initialize remote config if it didn't happen yet
+    await _firebaseRemoteConfigProvider.waitActivated();
+
+    final mobAppVersion =
         _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
-    if (mobAppVersion.isEmpty) {
-      var count = 0;
-      _delay = Timer.periodic(Duration(seconds: KTest.getTimer(1)), (t) {
-        mobAppVersion =
-            _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
-        if (mobAppVersion.isNotEmpty || count > 5) {
-          _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
-          _delay?.cancel();
-        }
-        count++;
-      });
-    } else {
-      _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
-    }
+    _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
   }
 
   void _setData({
@@ -77,11 +74,4 @@ class AppVersionCubit extends Cubit<AppVersionState> {
   /// Parse version for example if we have 0.2.0 this method parse it to 20
   int _parseVersionToInt(String version) =>
       int.parse(version.replaceAll('.', ''));
-
-  @override
-  Future<void> close() {
-    _delay?.cancel();
-    // _delay = null;
-    return super.close();
-  }
 }

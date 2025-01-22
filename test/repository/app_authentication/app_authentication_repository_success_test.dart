@@ -181,7 +181,8 @@ void main() {
         (_) => Stream.value(KTestVariables.userSettingModel),
       );
       // when(
-      //   mockFirestoreService.updateUserSetting(KTestVariables.userSettingModel),
+      //   mockFirestoreService.updateUserSetting(KTestVariables.
+      // userSettingModel),
       // ).thenAnswer(
       //   (_) async {},
       // );

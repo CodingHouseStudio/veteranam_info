@@ -16,22 +16,29 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} Config ${KGroupText.cubit}', () {
-    late DiscountConfigCubit discountConfigCubit;
+    // late DiscountConfigCubit discountConfigCubit;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     const number = 1;
 
     setUp(() {
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
-      discountConfigCubit = DiscountConfigCubit(
-        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      // discountConfigCubit = DiscountConfigCubit(
+      //   firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+      // );
+      when(
+        mockFirebaseRemoteConfigProvider.waitActivated(),
+      ).thenAnswer(
+        (realInvocation) async {
+          await KTestConstants.delay;
+          return true;
+        },
       );
     });
 
-    blocTest<DiscountConfigCubit, DiscountConfigState>(
-      'emits [AdvancedFilterMobState()] when '
-      'location filer and sorting',
-      build: () => discountConfigCubit,
-      act: (bloc) {
+    group(
+        'emits [DiscountConfigState] when '
+        'started with default values', () {
+      setUp(() {
         when(
           mockFirebaseRemoteConfigProvider
               .getInt(DiscountConfigCubit.loadingItemsKey),
@@ -56,25 +63,30 @@ void main() {
         ).thenAnswer(
           (realInvocation) => 0,
         );
-        bloc.started();
-      },
-      expect: () => [
-        const DiscountConfigState(
-          emailScrollCount: KDimensions.emailScrollCount,
-          loadingItems: KDimensions.loadItems,
-          linkScrollCount: KDimensions.linkScrollCount,
-          emailCloseDelay: KDimensions.emailCloseDelay,
-          mobFilterEnhancedMobile: false,
-          enableVerticalDiscount: false,
-        ),
-      ],
-    );
 
-    blocTest<DiscountConfigCubit, DiscountConfigState>(
-      'emits [AdvancedFilterMobState()] when '
-      'location filer and sorting',
-      build: () => discountConfigCubit,
-      act: (bloc) {
+        blocTest<DiscountConfigCubit, DiscountConfigState>(
+          'Bloc Test',
+          build: () => DiscountConfigCubit(
+            firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          ),
+          expect: () => <DiscountConfigState>[
+            const DiscountConfigState(
+              emailScrollCount: KDimensions.emailScrollCount,
+              loadingItems: KDimensions.loadItems,
+              linkScrollCount: KDimensions.linkScrollCount,
+              emailCloseDelay: KDimensions.emailCloseDelay,
+              mobFilterEnhancedMobile: false,
+              enableVerticalDiscount: false,
+            ),
+          ],
+        );
+      });
+    });
+
+    group(
+        'emits [DiscountConfigState()] when '
+        'started with custom values', () {
+      setUp(() {
         when(
           mockFirebaseRemoteConfigProvider
               .getInt(DiscountConfigCubit.loadingItemsKey),
@@ -99,18 +111,23 @@ void main() {
         ).thenAnswer(
           (realInvocation) => number,
         );
-        bloc.started();
-      },
-      expect: () => [
-        const DiscountConfigState(
-          emailScrollCount: number,
-          loadingItems: number,
-          linkScrollCount: number,
-          emailCloseDelay: number,
-          mobFilterEnhancedMobile: false,
-          enableVerticalDiscount: false,
+      });
+      blocTest<DiscountConfigCubit, DiscountConfigState>(
+        'Bloc Test',
+        build: () => DiscountConfigCubit(
+          firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         ),
-      ],
-    );
+        expect: () => [
+          const DiscountConfigState(
+            emailScrollCount: number,
+            loadingItems: number,
+            linkScrollCount: number,
+            emailCloseDelay: number,
+            mobFilterEnhancedMobile: false,
+            enableVerticalDiscount: false,
+          ),
+        ],
+      );
+    });
   });
 }

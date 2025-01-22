@@ -335,7 +335,8 @@ void main() {
       });
       // test('Get discount use User Id', () async {
       //   expect(
-      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user.id),
+      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user
+      // .id),
       //     isA<Left<SomeFailure, List<DiscountModel>>>(),
       //     // .having(
       //     //   (e) => e.value,
@@ -346,7 +347,8 @@ void main() {
       // });
       // test('Get discount use User Id', () async {
       //   expect(
-      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user.id),
+      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user
+      // .id),
       //     isA<Left<SomeFailure, List<DiscountModel>>>(),
       //     // .having(
       //     //   (e) => e.value,

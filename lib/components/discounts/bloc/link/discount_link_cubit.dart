@@ -9,7 +9,9 @@ class DiscountLinkCubit extends Cubit<bool> {
     required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _discountRepository = discountRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
-        super(true);
+        super(true) {
+    started();
+  }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
   Future<void> started() async {

@@ -52,6 +52,10 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(loadingStatus: LoadingStatus.loading),
     );
+
+    // Wait for initialize remote config if it didn't happen yet
+    await _firebaseRemoteConfigProvider.waitActivated();
+
     final result = await _discountRepository.getDiscount(
       id: event.discountId!,
       showOnlyBusinessDiscounts: _firebaseRemoteConfigProvider

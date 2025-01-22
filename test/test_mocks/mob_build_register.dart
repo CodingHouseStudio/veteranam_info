@@ -14,6 +14,11 @@ void mobBuild() {
   ).thenAnswer((realInvocation) async => AppInfoRepository.defaultValue);
 
   when(
+    mockFirebaseRemoteConfigProvider.waitActivated(),
+  ).thenAnswer(
+    (_) async => true,
+  );
+  when(
     mockFirebaseRemoteConfigProvider
         .getString(AppVersionCubit.mobAppVersionKey),
   ).thenAnswer(

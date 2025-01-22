@@ -100,7 +100,8 @@ void main() {
       //   (invocation) async => const Right(true),
       // );
       // when(
-      //   mockFeedbackRepository.checkUserNeedShowFeedback(KTestVariables.user.id),
+      //   mockFeedbackRepository.checkUserNeedShowFeedback(KTestVariables.user.
+      // id),
       // ).thenAnswer(
       //   (invocation) async => const Right(true),
       // );

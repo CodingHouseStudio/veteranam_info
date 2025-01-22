@@ -79,6 +79,8 @@ class DiscountsWatcherBloc
     );
 
     // final reportItems = await _getReport();
+    // Wait for initialize remote config if it didn't happen yet
+    await _firebaseRemoteConfigProvider.waitActivated();
 
     await _discountItemsSubscription?.cancel();
     _discountItemsSubscription = _discountRepository

@@ -16,7 +16,8 @@ void main() {
 //     final fullJson = {
 //       FundModelJsonField.id: KTestVariables.fundItems.last.id,
 //       FundModelJsonField.title: KTestVariables.fundItems.last.title,
-//       FundModelJsonField.description: KTestVariables.fundItems.last.description,
+//       FundModelJsonField.description: KTestVariables.fundItems.last.
+// description,
 //       FundModelJsonField.titleEN: KTestVariables.fundItems.last.titleEN,
 //       FundModelJsonField.descriptionEN: KTestVariables.fundItems.last.
 // descriptionEN,
@@ -26,7 +27,8 @@ void main() {
 //       // FundModelJsonField.domain: KTestVariables.fundItems.last.domain,
 //       // FundModelJsonField.email: KTestVariables.fundItems.last.email,
 //       // FundModelJsonField.phoneNumber: KTestVariables.fundItems.last.phoneNumber,
-//       FundModelJsonField.projectsLink: KTestVariables.fundItems.last.projectsLink,
+//       FundModelJsonField.projectsLink: KTestVariables.fundItems.last.
+// projectsLink,
 //       // FundModelJsonField.registered: KTestVariables.fundItems.last.registered,
 //       // FundModelJsonField.size: KTestVariables.fundItems.last.size,
 //       // FundModelJsonField.teamPartnersLink:
@@ -35,7 +37,8 @@ void main() {
 //     final nullableJson = {
 //       FundModelJsonField.id: KTestVariables.fundItems.last.id,
 //       FundModelJsonField.title: KTestVariables.fundItems.last.title,
-//       FundModelJsonField.description: KTestVariables.fundItems.last.description,
+//       FundModelJsonField.description: KTestVariables.fundItems.last.
+// description,
 //       FundModelJsonField.link: KTestVariables.fundItems.last.link,
 //       FundModelJsonField.titleEN: KTestVariables.fundItems.last.titleEN,
 //       FundModelJsonField.descriptionEN: KTestVariables.fundItems.last

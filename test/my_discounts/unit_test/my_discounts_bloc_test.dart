@@ -63,7 +63,8 @@ void main() {
           act: (bloc) async {
             // when(
             //   mockDiscountRepository
-            //       .getDiscountsByCompanyId(KTestVariables.pureCompanyModel.id),
+            //       .getDiscountsByCompanyId(KTestVariables.
+            // pureCompanyModel.id),
             // ).thenAnswer(
             //   (_) => Stream.value([KTestVariables.discountModelItems.first]),
             // );

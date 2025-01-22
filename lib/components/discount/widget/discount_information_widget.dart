@@ -284,6 +284,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                       shareKey: DiscountKeys.shareButton,
                       complaintKey: DiscountKeys.complaintButton,
                       webSiteKey: DiscountKeys.websiteButton,
+                      dropMenuKey: null,
                       showShare: !Config.isBusiness ||
                           state.discountModel.status == DiscountState.published,
                       share:

@@ -47,7 +47,8 @@ void main() {
           KTestVariables.discountModelItems.last.exclusions!.toJson(),
       DiscountModelJsonField.expiration:
           KTestVariables.discountModelItems.last.expiration!.toJson(),
-      // DiscountModelJsonField.html: KTestVariables.discountModelItems.last.html,
+      // DiscountModelJsonField.html: KTestVariables.discountModelItems.
+      // last.html,
       DiscountModelJsonField.link: KTestVariables.discountModelItems.last.link,
       DiscountModelJsonField.location:
           KTestVariables.discountModelItems.last.location!
