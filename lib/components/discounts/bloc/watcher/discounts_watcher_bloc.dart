@@ -62,6 +62,8 @@ class DiscountsWatcherBloc
 
   @visibleForTesting
   static const loadingItemsKey = DiscountConfigCubit.loadingItemsKey;
+  @visibleForTesting
+  static IDiscountFilterRepository? testDiscountFilterRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -71,7 +73,8 @@ class DiscountsWatcherBloc
       state.copyWith(
         loadingStatus: LoadingStatus.loading,
         filterStatus: FilterStatus.loading,
-        discountFilterRepository: DiscountFilterRepository.init(),
+        discountFilterRepository:
+            testDiscountFilterRepository ?? DiscountFilterRepository.init(),
       ),
     );
 
@@ -124,15 +127,12 @@ class DiscountsWatcherBloc
       sortingDiscountModelItems: discountSortingList,
     );
 
-    var filterList = state.filterDiscountModelList;
+    var filterList = event.discountItemsModel;
 
     state.discountFilterRepository.getFilterList(discountSortingList).fold(
-      (l) {
-        failure = l;
-        filterList = event.discountItemsModel;
-      },
-      (r) => filterList = r,
-    );
+          (l) => failure = l,
+          (r) => filterList = r,
+        );
 
     emit(
       _Initial(
@@ -154,6 +154,7 @@ class DiscountsWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.isListLoadedFull) return;
     state.discountFilterRepository
         .getFilterList(
       state.sortingDiscountModelList,
@@ -168,12 +169,10 @@ class DiscountsWatcherBloc
       (r) {
         final itemsNumber = getCurrentLoadNumber();
 
-        if (itemsNumber == r.length) {
-          if (!state.isListLoadedFull) {
-            emit(state.copyWith(isListLoadedFull: true));
-          }
-          return;
-        }
+        // if (itemsNumber == r.length) {
+        //   emit(state.copyWith(isListLoadedFull: true));
+        //   return;
+        // }
 
         final currentLoadingItems = itemsNumber + getItemsLoading;
 
@@ -195,6 +194,7 @@ class DiscountsWatcherBloc
     _FilterReset event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -229,6 +229,7 @@ class DiscountsWatcherBloc
     _FilterEligibilities event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -255,6 +256,7 @@ class DiscountsWatcherBloc
     _FilterCategory event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -281,6 +283,7 @@ class DiscountsWatcherBloc
     _FilterLocation event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -307,6 +310,7 @@ class DiscountsWatcherBloc
     _SearchLocation event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -362,6 +366,7 @@ class DiscountsWatcherBloc
     _MobRevertFilter event,
     Emitter<DiscountsWatcherState> emit,
   ) {
+    if (state.filterStatus.processing) return;
     emit(
       state.copyWith(
         filterStatus: FilterStatus.filtering,
@@ -474,7 +479,9 @@ class DiscountsWatcherBloc
     List<DiscountModel>? discountsList,
     DiscountEnum? sortingBy,
   }) {
-    return List.from(discountsList ?? state.unmodifiedDiscountModelItems)
+    final list = discountsList ?? state.unmodifiedDiscountModelItems;
+    if (KTest.discountSortingTestValue) return list;
+    return List.from(list)
       ..sort(
         (a, b) {
           switch (sortingBy ?? state.sortingBy) {

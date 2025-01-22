@@ -37,6 +37,8 @@ void configureDependenciesTest() {
   Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
   UriExtension.testUrl = null;
+  KTest.discountSortingTestValue = false;
+  DiscountsWatcherBloc.testDiscountFilterRepository = null;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
@@ -292,6 +294,8 @@ void configureFailureDependenciesTest() {
   KTest.isTest = true;
   Config.isReleaseMode = true;
   UriExtension.testUrl = null;
+  KTest.discountSortingTestValue = false;
+  DiscountsWatcherBloc.testDiscountFilterRepository = null;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
