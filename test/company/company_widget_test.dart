@@ -33,7 +33,7 @@ void main() {
       mockDiscountRepository = MockIDiscountRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
-      // image = XFile(KTestText.imageModels.downloadURL);
+      // image = XFile(KTestVariables.imageModels.downloadURL);
       // mockAuthenticationRepository = MockAuthenticationRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(

@@ -65,7 +65,7 @@ void main() {
           const Duration(milliseconds: 3),
           () async {
             // userSettingStreamController = StreamController<UserSetting>()
-            //   ..add(const UserSetting(id: KTestText.field));
+            //   ..add(const UserSetting(id: KTestVariables.field));
             userStreamController.add(KTestVariables.user);
             await Future.delayed(
               const Duration(milliseconds: 3),
@@ -106,7 +106,7 @@ void main() {
           const Duration(milliseconds: 3),
           () async {
             // userSettingStreamController = StreamController<UserSetting>()
-            //   ..add(const UserSetting(id: KTestText.field));
+            //   ..add(const UserSetting(id: KTestVariables.field));
             userStreamController.add(KTestVariables.user);
           },
         );

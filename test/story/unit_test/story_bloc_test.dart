@@ -139,7 +139,7 @@ void main() {
           const StoryWatcherEvent.loadNextItems(),
         );
         // ..add(
-        //   StoryWatcherEvent.updated([KTestText.storyModelItems.first]),
+        //   StoryWatcherEvent.updated([KTestVariables.storyModelItems.first]),
         // );
       },
       expect: () => [

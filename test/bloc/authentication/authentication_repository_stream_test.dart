@@ -65,7 +65,7 @@ void main() {
           const Duration(milliseconds: 3),
           () {
             // userSettingStreamController = StreamController<UserSetting>()
-            //   ..add(const UserSetting(id: KTestText.field));
+            //   ..add(const UserSetting(id: KTestVariables.field));
             userStreamController.add(KTestVariables.user);
           },
         );
@@ -94,7 +94,7 @@ void main() {
           const Duration(milliseconds: 3),
           () {
             // userSettingStreamController = StreamController<UserSetting>()
-            //   ..add(const UserSetting(id: KTestText.field));
+            //   ..add(const UserSetting(id: KTestVariables.field));
             userStreamController.add(KTestVariables.user);
           },
         );
@@ -142,7 +142,7 @@ void main() {
     //       (_) async {
     //         userSettingStreamController = StreamController<UserSetting>()
     //           ..add(UserSetting.empty);
-    //         userStreamController.add(KTestText.user.copyWith(email: null));
+    //         userStreamController.add(KTestVariables.user.copyWith(email: null));
     //         return const Right(User.empty);
     //       },
     //     );
@@ -152,9 +152,9 @@ void main() {
     //     await expectLater(
     //       authenticationRepository.user,
     //       emitsInOrder([
-    //         KTestText.userAnonymous,
+    //         KTestVariables.userAnonymous,
     //         User.empty,
-    //         KTestText.user.copyWith(email: null),
+    //         KTestVariables.user.copyWith(email: null),
     //       ]),
     //     );
     //   });
@@ -170,7 +170,7 @@ void main() {
     //     await expectLater(
     //       authenticationRepository.user,
     //       emitsInOrder([
-    //         KTestText.userAnonymous,
+    //         KTestVariables.userAnonymous,
     //       ]),
     //     );
     //   });
@@ -192,7 +192,7 @@ void main() {
     //     await expectLater(
     //       authenticationRepository.userSetting,
     //       emitsInOrder([
-    //         const UserSetting(id: KTestText.field),
+    //         const UserSetting(id: KTestVariables.field),
     //       ]),
     //     );
     //   });
@@ -214,7 +214,7 @@ void main() {
       //   await expectLater(
       //     authenticationRepository.userSetting,
       //     emitsInOrder(
-      //       [const UserSetting(id: KTestText.field)],
+      //       [const UserSetting(id: KTestVariables.field)],
       //     ),
       //   );
       // });

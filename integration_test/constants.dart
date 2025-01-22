@@ -60,7 +60,7 @@ abstract class KTestConstants {
   static const ukrainIndex = 0;
 }
 
-abstract class KTestText {
+abstract class KTestVariables {
   static const String useremail = 'example@gmail.com';
 
   static const filter = 'filter_test';

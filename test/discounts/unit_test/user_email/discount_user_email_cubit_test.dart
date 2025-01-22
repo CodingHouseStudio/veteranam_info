@@ -27,12 +27,12 @@ void main() {
   //     mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
   //     // mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
-  //     // when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //     // when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //     //     .thenAnswer(
   //     //   (_) async => const Right(0),
   //     // );
   //     when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-  //       (invocation) => KTestText.user,
+  //       (invocation) => KTestVariables.user,
   //     );
   //     discountUserEmailCubit = DiscountUserEmailCubit(
   //       discountRepository: mockdiscountRepository,
@@ -46,7 +46,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Right(0),
   //       );
@@ -65,7 +65,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Right(1),
   //       );
@@ -83,7 +83,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Right(2),
   //       );
@@ -101,7 +101,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Right(5),
   //       );
@@ -119,7 +119,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Right(-1),
   //       );
@@ -137,7 +137,7 @@ void main() {
   //     'check need to show first time',
   //     build: () => discountUserEmailCubit,
   //     act: (bloc) async {
-  //       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+  //       when(mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id))
   //           .thenAnswer(
   //         (_) async => const Left(SomeFailure.serverError),
   //       );

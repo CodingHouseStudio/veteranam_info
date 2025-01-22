@@ -180,7 +180,7 @@ void main() {
 
       // expect(
       //   firestoreService.getDiscounts(null),
-      //   emits([KTestText.discountModelItems.last]),
+      //   emits([KTestVariables.discountModelItems.last]),
       // );
     });
     test('add discount', () async {

@@ -63,9 +63,9 @@ void main() {
           act: (bloc) async {
             // when(
             //   mockDiscountRepository
-            //       .getDiscountsByCompanyId(KTestText.pureCompanyModel.id),
+            //       .getDiscountsByCompanyId(KTestVariables.pureCompanyModel.id),
             // ).thenAnswer(
-            //   (_) => Stream.value([KTestText.discountModelItems.first]),
+            //   (_) => Stream.value([KTestVariables.discountModelItems.first]),
             // );
             // bloc.add(const MyDiscountsWatcherEvent.started());
             await expectLater(

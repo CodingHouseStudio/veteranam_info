@@ -81,7 +81,7 @@ void main() {
         when(
           mockDiscountRepository.getDiscountItems(
             showOnlyBusinessDiscounts: false,
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
           ),
         ).thenAnswer(
           (invocation) => failureStream.stream,
@@ -118,7 +118,7 @@ void main() {
     //   setUp(() {
     //     when(
     //       mockDiscountRepository.getDiscountItems(
-    //           // reportIdItems: KTestText.reportItems.getIdCard,
+    //           // reportIdItems: KTestVariables.reportItems.getIdCard,
     //           ),
     //     ).thenAnswer(
     //       (invocation) => Stream.value([]),
@@ -158,7 +158,7 @@ void main() {
         when(
           mockDiscountRepository.getDiscountItems(
             showOnlyBusinessDiscounts: false,
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
           ),
         ).thenAnswer(
           (invocation) => Stream.value(KTestVariables.discountModelItemsModify),
@@ -261,7 +261,7 @@ void main() {
       //     setUp(
       //       () =>
       //           when(mockDiscountRepository.
-      // userCanSendLink(KTestText.user.id))
+      // userCanSendLink(KTestVariables.user.id))
       //               .thenAnswer(
       //         (invocation) async => const Right(false),
       //       ),
@@ -464,7 +464,7 @@ void main() {
         //     () {
         //       when(
         //         mockDiscountRepository.userCanSendUserEmail
-        // (KTestText.user.id),
+        // (KTestVariables.user.id),
         //       ).thenAnswer(
         //         (invocation) async => const Right(0),
         //       );
@@ -576,7 +576,7 @@ void main() {
         //     setUp(
         //       () {
         //         when(
-        //           mockDiscountRepository.sendEmail(KTestText.emailModel),
+        //           mockDiscountRepository.sendEmail(KTestVariables.emailModel),
         //         ).thenAnswer(
         //           (invocation) async => Left(
         //             SomeFailure.serverError(
@@ -619,7 +619,7 @@ void main() {
         //     () {
         //       when(
         //         mockDiscountRepository.userCanSendUserEmail
-        // (KTestText.user.id),
+        // (KTestVariables.user.id),
         //       ).thenAnswer(
         //         (invocation) async => const Right(4),
         //       );

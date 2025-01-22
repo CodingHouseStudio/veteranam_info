@@ -53,7 +53,7 @@ void main() {
       //   (realInvocation) => UserSetting.empty,
       // );
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-      //   (realInvocation) => KTestText.user,
+      //   (realInvocation) => KTestVariables.user,
       // );
       when(mockUserRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
@@ -95,12 +95,12 @@ void main() {
         (_) => KTestVariables.build,
       );
       // mockFeedbackRepository = MockIFeedbackRepository();
-      // when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+      // when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
       //     .thenAnswer(
       //   (invocation) async => const Right(true),
       // );
       // when(
-      //   mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id),
+      //   mockFeedbackRepository.checkUserNeedShowFeedback(KTestVariables.user.id),
       // ).thenAnswer(
       //   (invocation) async => const Right(true),
       // );
@@ -361,7 +361,7 @@ void main() {
             });
             // testWidgets('${KRoute.profile.name} user photo', (tester) async {
             //   when(mockAuthenticationRepository.currentUser).thenAnswer(
-            //     (realInvocation) => KTestText.user,
+            //     (realInvocation) => KTestVariables.user,
             //   );
             //   await provideMockedNetworkImages(() async {
             //     await homePumpAppHelper(

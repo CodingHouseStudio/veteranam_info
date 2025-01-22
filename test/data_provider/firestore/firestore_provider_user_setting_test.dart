@@ -163,8 +163,8 @@ void main() {
       ).called(1);
 
       // expect(
-      //   firestoreService.getUserSetting(KTestText.user.id),
-      //   emits(KTestText.userSetting),
+      //   firestoreService.getUserSetting(KTestVariables.user.id),
+      //   emits(KTestVariables.userSetting),
       // );
     });
     test('get empty user setting', () async {
@@ -201,7 +201,7 @@ void main() {
       );
 
       // expect(
-      //   firestoreService.getUserSetting(KTestText.fieldEmpty),
+      //   firestoreService.getUserSetting(KTestVariables.fieldEmpty),
       //   emits(UserSetting.empty),
       // );
     });
@@ -227,7 +227,7 @@ void main() {
     });
     // test('update user setting', () async {
     //   await firestoreService.updateUserSetting(
-    //     KTestText.userSetting,
+    //     KTestVariables.userSetting,
     //   );
 
     //   verify(
@@ -235,16 +235,16 @@ void main() {
     // userSettings),
     //   ).called(1);
     //   verify(
-    //     mockCollectionReference.doc(KTestText.user.id),
+    //     mockCollectionReference.doc(KTestVariables.user.id),
     //   ).called(1);
     //   verify(
-    //     mockDocumentReference.update(KTestText.userSetting.toJson()),
+    //     mockDocumentReference.update(KTestVariables.userSetting.toJson()),
     //   ).called(1);
     // });
 
     // test('delete user setting', () async {
     //   await firestoreService.deleteUserSetting(
-    //     KTestText.userSetting,
+    //     KTestVariables.userSetting,
     //   );
 
     //   verify(
@@ -252,12 +252,12 @@ void main() {
     // userSettings),
     //   ).called(1);
     //   verify(
-    //     mockCollectionReference.doc(KTestText.user.id),
+    //     mockCollectionReference.doc(KTestVariables.user.id),
     //   ).called(1);
     //   verify(
     //     mockDocumentReference.update(
-    //       KTestText.userSetting
-    //           .copyWith(deletedOn: KTestText.dateTime)
+    //       KTestVariables.userSetting
+    //           .copyWith(deletedOn: KTestVariables.dateTime)
     //           .toJson(),
     //     ),
     //   ).called(1);

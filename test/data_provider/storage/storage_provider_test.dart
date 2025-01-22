@@ -99,7 +99,7 @@ void main() {
           modelId: KTestVariables.storyModelItems.last.id,
           fileExtension: null, file: StoragePath.image,
           standartFileExtension: StoragePath.standartImageFileExtension,
-          // imageName: KTestText.storyModelItems.last.image!.name,
+          // imageName: KTestVariables.storyModelItems.last.image!.name,
         ),
       );
     });
@@ -116,24 +116,24 @@ void main() {
           modelId: KTestVariables.storyModelItems.last.id,
           fileExtension: null, file: StoragePath.image,
           standartFileExtension: StoragePath.standartImageFileExtension,
-          // imageName: KTestText.storyModelItems.last.image!.name,
+          // imageName: KTestVariables.storyModelItems.last.image!.name,
         ),
       );
     });
     // test('save resume', () async {
     //   await storageService.saveFile(
-    //     respondId: KTestText.employeeRespondModel.id,
+    //     respondId: KTestVariables.employeeRespondModel.id,
 
-    //     resumeItem: KTestText.imagePickerItem,
+    //     resumeItem: KTestVariables.imagePickerItem,
     //     // collecltionName: FirebaseCollectionName.stroies,
     //   );
 
     //   // verifyMethod(
     //   StoragePath.getImagePath(
     //     collection: FirebaseCollectionName.stroies,
-    //     modelId: KTestText.storyModelItems.last.id,
+    //     modelId: KTestVariables.storyModelItems.last.id,
     //     imageExtension: null,
-    //     // imageName: KTestText.storyModelItems.last.image!.name,
+    //     // imageName: KTestVariables.storyModelItems.last.image!.name,
     //   );
     //   // );
     // });

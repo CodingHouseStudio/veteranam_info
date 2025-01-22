@@ -21,7 +21,7 @@ void main() {
   //     advancedFilterMobCubit = AdvancedFilterMobCubit()
   //       ..started(
   //         initialLocationFilter: [
-  //           ...KTestText.discountModelItems.last.location!.map(
+  //           ...KTestVariables.discountModelItems.last.location!.map(
   //             FilterItem.new,
   //           ),
   //           FilterItem(KAppText.allStoresOfChain),
@@ -49,7 +49,7 @@ void main() {
   //         SubLocation.all,
   //       )
   //       ..changeLocationsList(
-  //         KTestText.discountModelItemsModify.first.location!.first,
+  //         KTestVariables.discountModelItemsModify.first.location!.first,
   //       )
   //       ..changeLocationsList(
   //         SubLocation.all,

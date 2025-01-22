@@ -12,7 +12,7 @@ Future<void> reportDialogIncorrectSendHelper({
 
   await reportDialogEnterTextHelper(
     tester: tester,
-    // email: fieldNull ? null : KTestText.userEmailIncorrect,
+    // email: fieldNull ? null : KTestVariables.userEmailIncorrect,
     message: fieldNull ? null : KTestVariables.fieldEmpty,
   );
 

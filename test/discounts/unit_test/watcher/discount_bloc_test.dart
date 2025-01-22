@@ -34,21 +34,21 @@ void main() {
       when(
         mockdiscountRepository.getDiscountItems(
           showOnlyBusinessDiscounts: false,
-          // reportIdItems: KTestText.reportItems.getIdCard,
+          // reportIdItems: KTestVariables.reportItems.getIdCard,
         ),
       ).thenAnswer(
         (_) => Stream.value(KTestVariables.discountModelItemsModify),
       );
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-      //   (invocation) => KTestText.user,
+      //   (invocation) => KTestVariables.user,
       // );
       // when(
       //   mockReportRepository.getCardReportById(
       //     cardEnum: CardEnum.discount,
-      //     userId: KTestText.user.id,
+      //     userId: KTestVariables.user.id,
       //   ),
       // ).thenAnswer(
-      //   (invocation) async => Right(KTestText.reportItems),
+      //   (invocation) async => Right(KTestVariables.reportItems),
       // );
       when(
         mockFirebaseRemoteConfigProvider
@@ -103,7 +103,7 @@ void main() {
         () => when(
           mockdiscountRepository.getDiscountItems(
             showOnlyBusinessDiscounts: false,
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
           ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),

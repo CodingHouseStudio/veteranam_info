@@ -5,7 +5,7 @@
 // Future<void> notificationLinkWrongHelper(
 //   WidgetTester tester,
 // ) async {
-//   await notificationLinkSaveHelper(tester: tester, link: KTestText.field);
+//   await notificationLinkSaveHelper(tester: tester, link: KTestVariables.field);
 
-//   expect(find.text(KTestText.field), findsOneWidget);
+//   expect(find.text(KTestVariables.field), findsOneWidget);
 // }

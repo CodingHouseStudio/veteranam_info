@@ -20,13 +20,13 @@ void main() {
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       // when(mockAuthenticationRepository.currentUser).thenAnswer(
-      //   (realInvocation) => KTestText.user,
+      //   (realInvocation) => KTestVariables.user,
       // );
       // when(mockAuthenticationRepository.user).thenAnswer(
-      //   (realInvocation) => Stream.value(KTestText.user),
+      //   (realInvocation) => Stream.value(KTestVariables.user),
       // );
       // when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-      //   (realInvocation) => KTestText.userSetting,
+      //   (realInvocation) => KTestVariables.userSetting,
       // );
       // when(
       //   mockAuthenticationRepository.updateUserSetting(
@@ -231,13 +231,13 @@ void main() {
     //   //   },
     //   //   expect: () async => [
     //   //     const AuthenticationState.authenticated(
-    //   //       currentUser: KTestText.user,
-    //   //       currentUserSetting: KTestText.userSetting,
+    //   //       currentUser: KTestVariables.user,
+    //   //       currentUserSetting: KTestVariables.userSetting,
     //   //     ),
     //   //     AuthenticationState.authenticated(
-    //   //       currentUser: KTestText.user,
+    //   //       currentUser: KTestVariables.user,
     //   //       currentUserSetting:
-    //   //           KTestText.userSetting.copyWith(locale: Language.english),
+    //   //           KTestVariables.userSetting.copyWith(locale: Language.english),
     //   //     ),
     //   //   ],
     //   // );
@@ -255,13 +255,13 @@ void main() {
     //   //   },
     //   //   expect: () => [
     //   //     const AuthenticationState.authenticated(
-    //   //       currentUser: KTestText.user,
-    //   //       currentUserSetting: KTestText.userSetting,
+    //   //       currentUser: KTestVariables.user,
+    //   //       currentUserSetting: KTestVariables.userSetting,
     //   //     ),
     //   //     AuthenticationState.authenticated(
-    //   //       currentUser: KTestText.user,
+    //   //       currentUser: KTestVariables.user,
     //   //       currentUserSetting:
-    //   //           KTestText.userSetting.copyWith(userRole: UserRole.veteran),
+    //   //           KTestVariables.userSetting.copyWith(userRole: UserRole.veteran),
     //   //     ),
     //   //   ],
     //   // );

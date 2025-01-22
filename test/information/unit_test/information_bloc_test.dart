@@ -28,7 +28,7 @@ void main() {
       // mockReportRepository = MockIReportRepository();
       when(
         mockInformationRepository.getInformationItems(
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
             ),
       ).thenAnswer(
         (_) => Stream.value(KTestVariables.informationModelItemsModify),
@@ -42,15 +42,15 @@ void main() {
         (_) async => const Right(true),
       );
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-      //   (invocation) => KTestText.user,
+      //   (invocation) => KTestVariables.user,
       // );
       // when(
       //   mockReportRepository.getCardReportById(
       //     cardEnum: CardEnum.information,
-      //     userId: KTestText.user.id,
+      //     userId: KTestVariables.user.id,
       //   ),
       // ).thenAnswer(
-      //   (invocation) async => Right(KTestText.reportItems),
+      //   (invocation) async => Right(KTestVariables.reportItems),
       // );
       informationWatcherBloc = InformationWatcherBloc(
         informationRepository: mockInformationRepository,
@@ -79,7 +79,7 @@ void main() {
       act: (bloc) async {
         when(
           mockInformationRepository.getInformationItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
+              // reportIdItems: KTestVariables.reportItems.getIdCard,
               ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
@@ -169,10 +169,10 @@ void main() {
         // when(
         //   mockReportRepository.getCardReportById(
         //     cardEnum: CardEnum.information,
-        //     userId: KTestText.user.id,
+        //     userId: KTestVariables.user.id,
         //   ),
         // ).thenAnswer(
-        //   (invocation) async => Right([KTestText.reportItems.first]),
+        //   (invocation) async => Right([KTestVariables.reportItems.first]),
         // );
         // bloc.add(
         //   const InformationWatcherEvent.getReport(),
@@ -389,7 +389,7 @@ void main() {
     //     );
     //     bloc.add(
     //       InformationWatcherEvent.like(
-    //         informationModel: KTestText.informationModelItems.first,
+    //         informationModel: KTestVariables.informationModelItems.first,
     //         isLiked: true,
     //       ),
     //     );
@@ -544,7 +544,7 @@ void main() {
         // when(
         //   mockReportRepository.getCardReportById(
         //     cardEnum: CardEnum.information,
-        //     userId: KTestText.user.id,
+        //     userId: KTestVariables.user.id,
         //   ),
         // ).thenAnswer(
         //   (invocation) async => Left(

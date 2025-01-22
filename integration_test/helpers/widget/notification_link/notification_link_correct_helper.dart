@@ -7,8 +7,8 @@ Future<void> notificationLinkCorrectHelper(
 ) async {
   await notificationLinkSaveHelper(
     tester: tester,
-    link: KTestText.link,
+    link: KTestVariables.link,
   );
 
-  expect(find.text(KTestText.link), findsNothing);
+  expect(find.text(KTestVariables.link), findsNothing);
 }

@@ -40,12 +40,12 @@ void main() {
       // when(
       //   mockFeedbackRepository.sendMobFeedback(
       //     feedback: FeedbackModel(
-      //       id: KTestText.id,
-      //       message: KTestText.field,
-      //       guestId: KTestText.user.id,
+      //       id: KTestVariables.id,
+      //       message: KTestVariables.field,
+      //       guestId: KTestVariables.user.id,
       //       guestName: null,
       //       email: null,
-      //       timestamp: KTestText.dateTime,
+      //       timestamp: KTestVariables.dateTime,
       //     ),
       //     image: Uint8List(1),
       //   ),

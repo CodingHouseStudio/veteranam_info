@@ -14,35 +14,35 @@ void main() {
   tearDown(GetIt.I.reset);
 //   group('${KScreenBlocName.investors} ${KGroupText.model} ', () {
 //     final fullJson = {
-//       FundModelJsonField.id: KTestText.fundItems.last.id,
-//       FundModelJsonField.title: KTestText.fundItems.last.title,
-//       FundModelJsonField.description: KTestText.fundItems.last.description,
-//       FundModelJsonField.titleEN: KTestText.fundItems.last.titleEN,
-//       FundModelJsonField.descriptionEN: KTestText.fundItems.last.
+//       FundModelJsonField.id: KTestVariables.fundItems.last.id,
+//       FundModelJsonField.title: KTestVariables.fundItems.last.title,
+//       FundModelJsonField.description: KTestVariables.fundItems.last.description,
+//       FundModelJsonField.titleEN: KTestVariables.fundItems.last.titleEN,
+//       FundModelJsonField.descriptionEN: KTestVariables.fundItems.last.
 // descriptionEN,
-//       FundModelJsonField.link: KTestText.fundItems.last.link,
-//       FundModelJsonField.image: KTestText.fundItems.last.image,
-//       // FundModelJsonField.comments: KTestText.fundItems.last.comments,
-//       // FundModelJsonField.domain: KTestText.fundItems.last.domain,
-//       // FundModelJsonField.email: KTestText.fundItems.last.email,
-//       // FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
-//       FundModelJsonField.projectsLink: KTestText.fundItems.last.projectsLink,
-//       // FundModelJsonField.registered: KTestText.fundItems.last.registered,
-//       // FundModelJsonField.size: KTestText.fundItems.last.size,
+//       FundModelJsonField.link: KTestVariables.fundItems.last.link,
+//       FundModelJsonField.image: KTestVariables.fundItems.last.image,
+//       // FundModelJsonField.comments: KTestVariables.fundItems.last.comments,
+//       // FundModelJsonField.domain: KTestVariables.fundItems.last.domain,
+//       // FundModelJsonField.email: KTestVariables.fundItems.last.email,
+//       // FundModelJsonField.phoneNumber: KTestVariables.fundItems.last.phoneNumber,
+//       FundModelJsonField.projectsLink: KTestVariables.fundItems.last.projectsLink,
+//       // FundModelJsonField.registered: KTestVariables.fundItems.last.registered,
+//       // FundModelJsonField.size: KTestVariables.fundItems.last.size,
 //       // FundModelJsonField.teamPartnersLink:
-//       //     KTestText.fundItems.last.teamPartnersLink,
+//       //     KTestVariables.fundItems.last.teamPartnersLink,
 //     };
 //     final nullableJson = {
-//       FundModelJsonField.id: KTestText.fundItems.last.id,
-//       FundModelJsonField.title: KTestText.fundItems.last.title,
-//       FundModelJsonField.description: KTestText.fundItems.last.description,
-//       FundModelJsonField.link: KTestText.fundItems.last.link,
-//       FundModelJsonField.titleEN: KTestText.fundItems.last.titleEN,
-//       FundModelJsonField.descriptionEN: KTestText.fundItems.last
+//       FundModelJsonField.id: KTestVariables.fundItems.last.id,
+//       FundModelJsonField.title: KTestVariables.fundItems.last.title,
+//       FundModelJsonField.description: KTestVariables.fundItems.last.description,
+//       FundModelJsonField.link: KTestVariables.fundItems.last.link,
+//       FundModelJsonField.titleEN: KTestVariables.fundItems.last.titleEN,
+//       FundModelJsonField.descriptionEN: KTestVariables.fundItems.last
 // .descriptionEN,
 //       FundModelJsonField.image: null,
 //       // FundModelJsonField.comments: null,
-//       // FundModelJsonField.domain: KTestText.fundItems.last.domain,
+//       // FundModelJsonField.domain: KTestVariables.fundItems.last.domain,
 //       // FundModelJsonField.email: null,
 //       // FundModelJsonField.phoneNumber: null,
 //       FundModelJsonField.projectsLink: null,
@@ -54,88 +54,88 @@ void main() {
 //       test('${KGroupText.full} ', () {
 //         final fundModel = FundModel.fromJson(fullJson);
 
-//         expect(fundModel.id, KTestText.fundItems.last.id);
+//         expect(fundModel.id, KTestVariables.fundItems.last.id);
 //         expect(
 //           fundModel.title,
-//           KTestText.fundItems.last.title,
+//           KTestVariables.fundItems.last.title,
 //         );
 //         expect(
 //           fundModel.description,
-//           KTestText.fundItems.last.description,
+//           KTestVariables.fundItems.last.description,
 //         );
 //         expect(
 //           fundModel.link,
-//           KTestText.fundItems.last.link,
+//           KTestVariables.fundItems.last.link,
 //         );
 //         expect(
 //           fundModel.image,
-//           KTestText.fundItems.last.image,
+//           KTestVariables.fundItems.last.image,
 //         );
 //         expect(
 //           fundModel.titleEN,
-//           KTestText.fundItems.last.titleEN,
+//           KTestVariables.fundItems.last.titleEN,
 //         );
 //         expect(
 //           fundModel.descriptionEN,
-//           KTestText.fundItems.last.descriptionEN,
+//           KTestVariables.fundItems.last.descriptionEN,
 //         );
 //         // expect(
 //         //   fundModel.comments,
-//         //   KTestText.fundItems.last.comments,
+//         //   KTestVariables.fundItems.last.comments,
 //         // );
 //         // expect(
 //         //   fundModel.domain,
-//         //   KTestText.fundItems.last.domain,
+//         //   KTestVariables.fundItems.last.domain,
 //         // );
 //         // expect(
 //         //   fundModel.email,
-//         //   KTestText.fundItems.last.email,
+//         //   KTestVariables.fundItems.last.email,
 //         // );
 //         // expect(
 //         //   fundModel.phoneNumber,
-//         //   KTestText.fundItems.last.phoneNumber,
+//         //   KTestVariables.fundItems.last.phoneNumber,
 //         // );
 //         expect(
 //           fundModel.projectsLink,
-//           KTestText.fundItems.last.projectsLink,
+//           KTestVariables.fundItems.last.projectsLink,
 //         );
 //         // expect(
 //         //   fundModel.registered,
-//         //   KTestText.fundItems.last.registered,
+//         //   KTestVariables.fundItems.last.registered,
 //         // );
 //         // expect(
 //         //   fundModel.size,
-//         //   KTestText.fundItems.last.size,
+//         //   KTestVariables.fundItems.last.size,
 //         // );
 //         // expect(
 //         //   fundModel.teamPartnersLink,
-//         //   KTestText.fundItems.last.teamPartnersLink,
+//         //   KTestVariables.fundItems.last.teamPartnersLink,
 //         // );
 //       });
 
 //       test('${KGroupText.nullable} ', () {
 //         final fundModel = FundModel.fromJson(nullableJson);
 
-//         expect(fundModel.id, KTestText.fundItems.last.id);
+//         expect(fundModel.id, KTestVariables.fundItems.last.id);
 //         expect(
 //           fundModel.title,
-//           KTestText.fundItems.last.title,
+//           KTestVariables.fundItems.last.title,
 //         );
 //         expect(
 //           fundModel.description,
-//           KTestText.fundItems.last.description,
+//           KTestVariables.fundItems.last.description,
 //         );
 //         expect(
 //           fundModel.titleEN,
-//           KTestText.fundItems.last.titleEN,
+//           KTestVariables.fundItems.last.titleEN,
 //         );
 //         expect(
 //           fundModel.descriptionEN,
-//           KTestText.fundItems.last.descriptionEN,
+//           KTestVariables.fundItems.last.descriptionEN,
 //         );
 //         expect(
 //           fundModel.link,
-//           KTestText.fundItems.last.link,
+//           KTestVariables.fundItems.last.link,
 //         );
 //         expect(
 //           fundModel.image,
@@ -147,7 +147,7 @@ void main() {
 //         // );
 //         // expect(
 //         //   fundModel.domain,
-//         //   KTestText.fundItems.last.domain,
+//         //   KTestVariables.fundItems.last.domain,
 //         // );
 //         // expect(
 //         //   fundModel.email,
@@ -177,26 +177,26 @@ void main() {
 
 //       test('${KGroupText.failure} ', () {
 //         final json = {
-//           FundModelJsonField.id: KTestText.fundItems.last.id,
+//           FundModelJsonField.id: KTestVariables.fundItems.last.id,
 //           // title is missing
-//           FundModelJsonField.description: KTestText.fundItems
+//           FundModelJsonField.description: KTestVariables.fundItems
 // .last.description,
-//           FundModelJsonField.link: KTestText.fundItems.last.link,
-//           FundModelJsonField.image: KTestText.fundItems.last.image,
-//           FundModelJsonField.titleEN: KTestText.fundItems.last.titleEN,
+//           FundModelJsonField.link: KTestVariables.fundItems.last.link,
+//           FundModelJsonField.image: KTestVariables.fundItems.last.image,
+//           FundModelJsonField.titleEN: KTestVariables.fundItems.last.titleEN,
 //           FundModelJsonField.descriptionEN:
-//               KTestText.fundItems.last.descriptionEN,
-//           // FundModelJsonField.comments: KTestText.fundItems.last.comments,
-//           // FundModelJsonField.domain: KTestText.fundItems.last.domain,
-//           // FundModelJsonField.email: KTestText.fundItems.last.email,
-//           // FundModelJsonField.phoneNumber: KTestText.fundItems.last.
+//               KTestVariables.fundItems.last.descriptionEN,
+//           // FundModelJsonField.comments: KTestVariables.fundItems.last.comments,
+//           // FundModelJsonField.domain: KTestVariables.fundItems.last.domain,
+//           // FundModelJsonField.email: KTestVariables.fundItems.last.email,
+//           // FundModelJsonField.phoneNumber: KTestVariables.fundItems.last.
 //           // phoneNumber,
 //           FundModelJsonField.projectsLink:
-//               KTestText.fundItems.last.projectsLink,
-//           // FundModelJsonField.registered: KTestText.fundItems.last.registered,
-//           // FundModelJsonField.size: KTestText.fundItems.last.size,
+//               KTestVariables.fundItems.last.projectsLink,
+//           // FundModelJsonField.registered: KTestVariables.fundItems.last.registered,
+//           // FundModelJsonField.size: KTestVariables.fundItems.last.size,
 //           // FundModelJsonField.teamPartnersLink:
-//           //     KTestText.fundItems.last.teamPartnersLink,
+//           //     KTestVariables.fundItems.last.teamPartnersLink,
 //         };
 
 //         expect(
@@ -207,13 +207,13 @@ void main() {
 //     });
 //     group('${KGroupText.jsonModel} ', () {
 //       test('${KGroupText.full} ', () {
-//         final fundModelJson = KTestText.fundItems.last.toJson();
+//         final fundModelJson = KTestVariables.fundItems.last.toJson();
 
 //         expect(fundModelJson, fullJson);
 //       });
 
 //       test('${KGroupText.nullable} ', () {
-//         final fundModelJson = KTestText.fundItems.last
+//         final fundModelJson = KTestVariables.fundItems.last
 //             .copyWith(
 //               projectsLink: null,
 //               image: null,

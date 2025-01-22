@@ -24,7 +24,7 @@ void main() {
       QuestionModelJsonField.subtitleEN:
           KTestVariables.questionModelItems.first.subtitleEN,
       // QuestionModelJsonField.navigationLink:
-      //     KTestText.questionModelItems.first.navigationLink,
+      //     KTestVariables.questionModelItems.first.navigationLink,
     };
     final nullableJson = {
       QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
@@ -49,7 +49,7 @@ void main() {
         );
         // expect(
         //   questionModel.titleEN,
-        //   KTestText.questionModelItems.first.titleEN,
+        //   KTestVariables.questionModelItems.first.titleEN,
         // );
         expect(
           questionModel.subtitle,
@@ -57,11 +57,11 @@ void main() {
         );
         // expect(
         //   questionModel.subtitleEN,
-        //   KTestText.questionModelItems.first.subtitleEN,
+        //   KTestVariables.questionModelItems.first.subtitleEN,
         // );
         // expect(
         //   questionModel.navigationLink,
-        //   KTestText.questionModelItems.first.navigationLink,
+        //   KTestVariables.questionModelItems.first.navigationLink,
         // );
       });
 
@@ -75,7 +75,7 @@ void main() {
         );
         // expect(
         //   questionModel.titleEN,
-        //   KTestText.questionModelItems.first.titleEN,
+        //   KTestVariables.questionModelItems.first.titleEN,
         // );
         expect(
           questionModel.subtitle,
@@ -83,7 +83,7 @@ void main() {
         );
         // expect(
         //   questionModel.subtitleEN,
-        //   KTestText.questionModelItems.first.subtitleEN,
+        //   KTestVariables.questionModelItems.first.subtitleEN,
         // );
         // expect(questionModel.navigationLink, null);
       });
@@ -93,13 +93,13 @@ void main() {
           QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
           // title is missing
           // QuestionModelJsonField.titleEN:
-          //     KTestText.questionModelItems.first.titleEN,
+          //     KTestVariables.questionModelItems.first.titleEN,
           QuestionModelJsonField.subtitle:
               KTestVariables.questionModelItems.first.subtitle,
           // QuestionModelJsonField.subtitleEN:
-          //     KTestText.questionModelItems.first.subtitleEN,
+          //     KTestVariables.questionModelItems.first.subtitleEN,
           // QuestionModelJsonField.navigationLink:
-          //     KTestText.questionModelItems.first.navigationLink,
+          //     KTestVariables.questionModelItems.first.navigationLink,
         };
 
         expect(
@@ -110,34 +110,34 @@ void main() {
 
       //   test('${KGroupText.convertor} ', () {
       //     final convertorJson = {
-      //       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+      //       QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
       //       QuestionModelJsonField.title: List.generate(
       //         KMinMaxSize.titleMaxLength,
-      //         (_) => KTestText.questionModelItems.first.title
-      //             .split(KTestText.questionModelItems.first.title),
+      //         (_) => KTestVariables.questionModelItems.first.title
+      //             .split(KTestVariables.questionModelItems.first.title),
       //       ).join(),
       //       QuestionModelJsonField.titleEN: List.generate(
       //         KMinMaxSize.titleMaxLength,
-      //         (_) => KTestText.questionModelItems.first.titleEN
-      //             .split(KTestText.questionModelItems.first.titleEN),
+      //         (_) => KTestVariables.questionModelItems.first.titleEN
+      //             .split(KTestVariables.questionModelItems.first.titleEN),
       //       ).join(),
       //       QuestionModelJsonField.subtitle: List.generate(
       //         KMinMaxSize.subtitleMaxLength,
-      //         (_) => KTestText.questionModelItems.first.subtitle
-      //             .split(KTestText.questionModelItems.first.subtitle),
+      //         (_) => KTestVariables.questionModelItems.first.subtitle
+      //             .split(KTestVariables.questionModelItems.first.subtitle),
       //       ).join(),
       //       QuestionModelJsonField.subtitleEN: List.generate(
       //         KMinMaxSize.subtitleMaxLength,
-      //         (_) => KTestText.questionModelItems.first.subtitleEN
-      //             .split(KTestText.questionModelItems.first.subtitleEN),
+      //         (_) => KTestVariables.questionModelItems.first.subtitleEN
+      //             .split(KTestVariables.questionModelItems.first.subtitleEN),
       //       ).join(),
       //       // QuestionModelJsonField.navigationLink:
-      //       //     KTestText.questionModelItems.first.navigationLink,
+      //       //     KTestVariables.questionModelItems.first.navigationLink,
       //     };
 
       //     final questionModel = QuestionModel.fromJson(convertorJson);
 
-      //     expect(questionModel.id, KTestText.questionModelItems.first.id);
+      //     expect(questionModel.id, KTestVariables.questionModelItems.first.id);
       //     expect(
       //       questionModel.title.length,
       //       KMinMaxSize.titleMaxLength,
@@ -156,7 +156,7 @@ void main() {
       //     );
       //     // expect(
       //     //   questionModel.navigationLink,
-      //     //   KTestText.questionModelItems.first.navigationLink,
+      //     //   KTestVariables.questionModelItems.first.navigationLink,
       //     // );
       //   });
       // });
@@ -178,53 +178,53 @@ void main() {
 
         // test('${KGroupText.convertor} ', () {
         //   final convertorJson = {
-        //     QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+        //     QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
         //     QuestionModelJsonField.title: List.generate(
         //       KMinMaxSize.titleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.title
-        //           .split(KTestText.questionModelItems.first.title),
+        //       (_) => KTestVariables.questionModelItems.first.title
+        //           .split(KTestVariables.questionModelItems.first.title),
         //     ).join().substring(0, KMinMaxSize.titleMaxLength),
         //     QuestionModelJsonField.titleEN: List.generate(
         //       KMinMaxSize.titleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.titleEN
-        //           .split(KTestText.questionModelItems.first.titleEN),
+        //       (_) => KTestVariables.questionModelItems.first.titleEN
+        //           .split(KTestVariables.questionModelItems.first.titleEN),
         //     ).join().substring(0, KMinMaxSize.titleMaxLength),
         //     QuestionModelJsonField.subtitle: List.generate(
         //       KMinMaxSize.subtitleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.subtitle
-        //           .split(KTestText.questionModelItems.first.subtitle),
+        //       (_) => KTestVariables.questionModelItems.first.subtitle
+        //           .split(KTestVariables.questionModelItems.first.subtitle),
         //     ).join().substring(0, KMinMaxSize.subtitleMaxLength),
         //     QuestionModelJsonField.subtitleEN: List.generate(
         //       KMinMaxSize.subtitleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.subtitleEN
-        //           .split(KTestText.questionModelItems.first.subtitleEN),
+        //       (_) => KTestVariables.questionModelItems.first.subtitleEN
+        //           .split(KTestVariables.questionModelItems.first.subtitleEN),
         //     ).join().substring(0, KMinMaxSize.subtitleMaxLength),
         //     // QuestionModelJsonField.navigationLink:
-        //     //     KTestText.questionModelItems.first.navigationLink,
+        //     //     KTestVariables.questionModelItems.first.navigationLink,
         //   };
         //   final questionModelJson = QuestionModel(
-        //     id: KTestText.questionModelItems.first.id,
+        //     id: KTestVariables.questionModelItems.first.id,
         //     title: List.generate(
         //       KMinMaxSize.titleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.title
-        //           .split(KTestText.questionModelItems.first.title),
+        //       (_) => KTestVariables.questionModelItems.first.title
+        //           .split(KTestVariables.questionModelItems.first.title),
         //     ).join(),
         //     titleEN: List.generate(
         //       KMinMaxSize.titleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.titleEN
-        //           .split(KTestText.questionModelItems.first.titleEN),
+        //       (_) => KTestVariables.questionModelItems.first.titleEN
+        //           .split(KTestVariables.questionModelItems.first.titleEN),
         //     ).join(),
         //     subtitle: List.generate(
         //       KMinMaxSize.subtitleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.subtitle
-        //           .split(KTestText.questionModelItems.first.subtitle),
+        //       (_) => KTestVariables.questionModelItems.first.subtitle
+        //           .split(KTestVariables.questionModelItems.first.subtitle),
         //     ).join(),
         //     subtitleEN: List.generate(
         //       KMinMaxSize.subtitleMaxLength,
-        //       (_) => KTestText.questionModelItems.first.subtitleEN
-        //           .split(KTestText.questionModelItems.first.subtitleEN),
+        //       (_) => KTestVariables.questionModelItems.first.subtitleEN
+        //           .split(KTestVariables.questionModelItems.first.subtitleEN),
         //     ).join(),
-        //     // navigationLink: KTestText.questionModelItems.first.navigationLink,
+        //     // navigationLink: KTestVariables.questionModelItems.first.navigationLink,
         //   ).toJson();
 
         //   expect(questionModelJson, convertorJson);

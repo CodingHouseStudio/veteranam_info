@@ -32,7 +32,7 @@ Future<void> reportDialogCorrectSaveHelper({
 
       await reportDialogEnterTextHelper(
         tester: tester,
-        // email: KTestText.userEmail,
+        // email: KTestVariables.userEmail,
         message: KTestVariables.reportItems.first.message,
       );
 

@@ -17,7 +17,7 @@ Future<void> discountsAddCorectHelper({
     linkText: KTestVariables.sendDiscountModel.directLink!,
     discountsText: KTestVariables.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true, isEdit: isEdit,
-    // periodText: KTestText.sendDiscountModel.expiration!,
+    // periodText: KTestVariables.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);

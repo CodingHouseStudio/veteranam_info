@@ -8,7 +8,7 @@ Future<void> informationInitialHelper(
 ) async {
   // await nawbarHelper(
   //   tester: tester,
-  //   searchText: KTestText.field,
+  //   searchText: KTestVariables.field,
   // );
   await changeWindowSizeHelper(
     tester: tester,

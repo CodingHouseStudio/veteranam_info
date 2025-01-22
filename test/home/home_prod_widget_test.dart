@@ -143,7 +143,7 @@ void main() {
         //         (realInvocation) => AuthenticationStatus.authenticated,
         //       );
         //       when(mockUserRepository.user).thenAnswer(
-        //         (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+        //         (realInvocation) => Stream.value(KTestVariables.userWithoutPhoto),
         //       );
         //       Config.roleValue = Config.business;
         //     },

@@ -52,7 +52,7 @@ void main() {
       //   faqRepository.addMockQuestions();
       //   verify(
       //     mockFirestoreService.addQuestion(
-      //       KTestText.questionModelItems.first,
+      //       KTestVariables.questionModelItems.first,
       //     ),
       //   ).called(1);
       // });

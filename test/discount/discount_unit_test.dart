@@ -61,7 +61,7 @@ void main() {
         //   ..add(const DiscountWatcherEvent.started(''))
         //   ..add(
         //     DiscountWatcherEvent.started(
-        //       KTestText.fullDiscount.id,
+        //       KTestVariables.fullDiscount.id,
         //     ),
         //   );
       },
