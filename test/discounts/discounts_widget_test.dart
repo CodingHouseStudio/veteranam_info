@@ -205,22 +205,25 @@ void main() {
         // lastCard: DiscountsKeys.cardLast,
       );
 
-      // testWidgets('Report Dialog Check Point Failure', (tester) async {
-      //   await discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //     mockReportRepository: mockReportRepository,
-      //     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-      //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-      //     mockBuildRepository: mockBuildRepository,
-      //     mockUserRepository: mockUserRepository,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     mockMobileRatingRepository: null,
-      //   );
+      testWidgets('Report Dialog Check Point Failure', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
+          mockUserRepository: mockUserRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockMobileRatingRepository: null,
+        );
 
-      //   await reportDialogCheckFailureHelper(tester);
-      // });
+        await reportDialogCheckFailureHelper(
+          tester: tester,
+          popupMenuKey: DiscountCardKeys.popupMenuButton,
+        );
+      });
       testWidgets('Notification Link Correct Send', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
@@ -314,98 +317,96 @@ void main() {
 
           await discountsInitialHelper(tester);
         });
-        // testWidgets('Advanced filter reset mobile', (tester) async {
-        //   await discountsPumpAppHelper(
-        //     tester: tester,
-        //     mockDiscountRepository: mockDiscountRepository,
-        //     mockGoRouter: mockGoRouter,
-        //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        //     mockFirebaseRemoteConfigProvider:
-        // mockFirebaseRemoteConfigProvider,
-        //     mockReportRepository: mockReportRepository,
-        //     mockBuildRepository: mockBuildRepository,
-        //     mockUserRepository: mockUserRepository,
-        //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-        //     mockAuthenticationRepository: mockAuthenticationRepository,
-        //     mockMobileRatingRepository: null,
-        //   );
+        testWidgets('Advanced filter reset mobile', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockReportRepository: mockReportRepository,
+            mockBuildRepository: mockBuildRepository,
+            mockUserRepository: mockUserRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockMobileRatingRepository: null,
+          );
 
-        //   await advancedFilterResetMobHelper(
-        //     tester: tester,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
-        // testWidgets('Report Dialog Incorect Send', (tester) async {
-        //   await discountsPumpAppHelper(
-        //     tester: tester,
-        //     mockDiscountRepository: mockDiscountRepository,
-        //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        //     mockReportRepository: mockReportRepository,
-        //     mockFirebaseRemoteConfigProvider:
-        // mockFirebaseRemoteConfigProvider,
-        //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-        //     mockBuildRepository: mockBuildRepository,
-        //     mockUserRepository: mockUserRepository,
-        //     mockAuthenticationRepository: mockAuthenticationRepository,
-        //     mockGoRouter: mockGoRouter,
-        //     mockMobileRatingRepository: null,
-        //   );
+          await advancedFilterResetMobHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
+          );
 
-        //   await reportDialogIncorrectSendHelper(
-        //     tester: tester,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
-        // testWidgets('Report Dialog Incorect Send(field null and user)',
-        //     (tester) async {
-        //   // when(mockUserRepository.isAnonymously).thenAnswer(
-        //   //   (realInvocation) => false,
-        //   // );
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            popupMenuKey: DiscountCardKeys.popupMenuButton,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null and user)',
+            (tester) async {
+          // when(mockUserRepository.isAnonymously).thenAnswer(
+          //   (realInvocation) => false,
+          // );
 
-        //   await discountsPumpAppHelper(
-        //     tester: tester,
-        //     mockDiscountRepository: mockDiscountRepository,
-        //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        //     mockReportRepository: mockReportRepository,
-        //     mockFirebaseRemoteConfigProvider:
-        // mockFirebaseRemoteConfigProvider,
-        //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-        //     mockBuildRepository: mockBuildRepository,
-        //     mockUserRepository: mockUserRepository,
-        //     mockAuthenticationRepository: mockAuthenticationRepository,
-        //     mockGoRouter: mockGoRouter,
-        //     mockMobileRatingRepository: null,
-        //   );
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
+          );
 
-        //   await reportDialogIncorrectSendHelper(
-        //     tester: tester,
-        //     fieldNull: true,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
-        // testWidgets('Report Dialog Incorect Send(field null)',
-        // (tester) async {
-        //   await discountsPumpAppHelper(
-        //     tester: tester,
-        //     mockDiscountRepository: mockDiscountRepository,
-        //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        //     mockReportRepository: mockReportRepository,
-        //     mockFirebaseRemoteConfigProvider:
-        // mockFirebaseRemoteConfigProvider,
-        //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-        //     mockBuildRepository: mockBuildRepository,
-        //     mockUserRepository: mockUserRepository,
-        //     mockAuthenticationRepository: mockAuthenticationRepository,
-        //     mockGoRouter: mockGoRouter,
-        //     mockMobileRatingRepository: null,
-        //   );
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
+            mockGoRouter: mockGoRouter,
+            popupMenuKey: DiscountCardKeys.popupMenuButton,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockUserRepository: mockUserRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+            mockMobileRatingRepository: null,
+          );
 
-        //   await reportDialogIncorrectSendHelper(
-        //     tester: tester,
-        //     fieldNull: true,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
+            mockGoRouter: mockGoRouter,
+            popupMenuKey: DiscountCardKeys.popupMenuButton,
+          );
+        });
         group('${KGroupText.goTo} ', () {
           group('${Config.business} ', () {
             setUp(
@@ -576,7 +577,8 @@ void main() {
         //     setUp(
         //       () {
         //         when(
-        //           mockDiscountRepository.sendEmail(KTestVariables.emailModel),
+        //           mockDiscountRepository.
+        // sendEmail(KTestVariables.emailModel),
         //         ).thenAnswer(
         //           (invocation) async => Left(
         //             SomeFailure.serverError(

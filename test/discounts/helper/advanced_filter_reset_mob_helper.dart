@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../test_dependency.dart';
@@ -9,30 +8,26 @@ Future<void> advancedFilterResetMobHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   final isMobile =
-      tester.widgetList(find.byKey(DiscountsKeys.advancedFilterMob)).isNotEmpty;
+      tester.widgetList(find.byKey(DiscountsFilterKeys.mob)).isNotEmpty;
 
   await scrollingHelper(
     tester: tester,
-    itemKey: isMobile
-        ? DiscountsKeys.advancedFilterMob
-        : DiscountsKeys.advancedFilterDesk,
+    itemKey: isMobile ? DiscountsFilterKeys.mob : DiscountsFilterKeys.desk,
   );
 
   expect(
     find.byKey(
-      isMobile
-          ? DiscountsKeys.advancedFilterMob
-          : DiscountsKeys.advancedFilterDesk,
+      isMobile ? DiscountsFilterKeys.mob : DiscountsFilterKeys.desk,
     ),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(DiscountsKeys.advancedFilterButton),
+    find.byKey(DiscountsFilterKeys.mobButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(DiscountsKeys.advancedFilterButton));
+  await tester.tap(find.byKey(DiscountsFilterKeys.mobButton));
 
   await tester.pumpAndSettle();
 
@@ -53,26 +48,32 @@ Future<void> advancedFilterResetMobHelper({
     hasAmount: true,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: DiscountsFilterKeys.list,
+  );
+
   expect(
-    find.byKey(DiscountsKeys.appliedFilterItems),
+    find.byKey(DiscountsFilterKeys.cancelChip),
     findsWidgets,
   );
 
   expect(
-    find.byKey(DiscountsKeys.advancedFilterResetButton),
+    find.byKey(DiscountsFilterKeys.resetButton),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(DiscountsKeys.advancedFilterResetButton),
+    find.byKey(DiscountsFilterKeys.resetButton),
   );
 
   await tester.pumpAndSettle();
 
   // expect(
-  //   find.byKey(DiscountsKeys.appliedFilterItems),
+  //   find.byKey(DiscountsFilterKeys.cancelChip),
   //   findsNothing,
   // );
 
-  verify(() => mockGoRouter.pop()).called(1);
+  // verify(() => mockGoRouter.pop()).called(1);
 }

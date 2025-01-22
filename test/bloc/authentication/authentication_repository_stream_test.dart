@@ -142,7 +142,8 @@ void main() {
     //       (_) async {
     //         userSettingStreamController = StreamController<UserSetting>()
     //           ..add(UserSetting.empty);
-    //         userStreamController.add(KTestVariables.user.copyWith(email: null));
+    //         userStreamController.add(KTestVariables.user.copyWith(email:
+    // null));
     //         return const Right(User.empty);
     //       },
     //     );

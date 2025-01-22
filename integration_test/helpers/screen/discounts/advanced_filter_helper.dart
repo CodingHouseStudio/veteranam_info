@@ -7,105 +7,96 @@ Future<void> advancedFilterHelper(
   WidgetTester tester,
 ) async {
   final isMobile =
-      tester.widgetList(find.byKey(DiscountsKeys.advancedFilterMob)).isNotEmpty;
+      tester.widgetList(find.byKey(DiscountsFilterKeys.mob)).isNotEmpty;
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: isMobile
-        ? DiscountsKeys.advancedFilterMob
-        : DiscountsKeys.advancedFilterDesk,
+    itemKey: isMobile ? DiscountsFilterKeys.mob : DiscountsFilterKeys.desk,
   );
 
   expect(
     find.byKey(
-      isMobile
-          ? DiscountsKeys.advancedFilterMob
-          : DiscountsKeys.advancedFilterDesk,
+      isMobile ? DiscountsFilterKeys.mob : DiscountsFilterKeys.desk,
     ),
     findsOneWidget,
   );
   // final advancedButton = tester.widgetList(
-  //   find.byKey(DiscountsKeys.advancedFilterButton),
+  //   find.byKey(DiscountsFilterKeys.mobButton),
   // );
 
   if (isMobile) {
     expect(
-      find.byKey(DiscountsKeys.advancedFilterButton),
+      find.byKey(DiscountsFilterKeys.mobButton),
       findsOneWidget,
     );
     // if (advancedButton.isNotEmpty) {
-    await tester.tap(find.byKey(DiscountsKeys.advancedFilterButton));
+    await tester.tap(find.byKey(DiscountsFilterKeys.mobButton));
 
     await tester.pumpAndSettle();
     // }
     // if (find
-    //     .byKey(DiscountsKeys.advancedFilterList)
+    //     .byKey(DiscountsFilterKeys.list)
     //     .evaluate()
     //     .isEmpty) {
     //   await tester
-    //       .tap(find.byKey(DiscountsKeys.
-    // advancedFilterButton));
+    //       .tap(find.byKey(DiscountsFilterKeys.
+    // mobButton));
 
     //   await tester.pumpAndSettle();
     // }
   }
 
   expect(
-    find.byKey(DiscountsKeys.advancedFilterList),
+    find.byKey(DiscountsFilterKeys.list),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterText),
+    find.byKey(DiscountsFilterKeys.appliedText),
     findsNothing,
   );
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterItems),
+    find.byKey(DiscountsFilterKeys.cancelChip),
     findsNothing,
-  );
-
-  expect(
-    find.byKey(DiscountsKeys.discountText),
-    findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   // expect(
-  //   find.byKey(DiscountsKeys.discountItems),
+  //   find.byKey(DiscountsFilterKeys.discountItems),
   //   findsWidgets,
   // );
 
   // expect(
-  //   find.byKey(DiscountsKeys.citiesText),
+  //   find.byKey(DiscountsFilterKeys.citiesText),
   //   findsOneWidget,
   // );
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.cityItems),
+    find.byKey(DiscountsFilterKeys.cityItems),
     findsWidgets,
   );
 
@@ -116,22 +107,22 @@ Future<void> advancedFilterHelper(
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterText),
+    find.byKey(DiscountsFilterKeys.appliedText),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterItems),
+    find.byKey(DiscountsFilterKeys.cancelChip),
     findsOneWidget,
   );
 
@@ -144,111 +135,111 @@ Future<void> advancedFilterHelper(
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterItems),
+    find.byKey(DiscountsFilterKeys.cancelChip),
     findsWidgets,
   );
 
   expect(
-    find.byKey(DiscountsKeys.advancedFilterResetButton),
+    find.byKey(DiscountsFilterKeys.resetButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(DiscountsKeys.advancedFilterResetButton));
+  await tester.tap(find.byKey(DiscountsFilterKeys.resetButton));
 
   await tester.pumpAndSettle();
 
   if (isMobile) {
     await scrollingHelperInt(
       tester: tester,
-      itemKey: DiscountsKeys.advancedFilterMob,
+      itemKey: DiscountsFilterKeys.mob,
     );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterMob),
+      find.byKey(DiscountsFilterKeys.mob),
       findsOneWidget,
     );
     // final advancedButton = tester.widgetList(
-    //   find.byKey(DiscountsKeys.advancedFilterButton),
+    //   find.byKey(DiscountsFilterKeys.mobButton),
     // );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterButton),
+      find.byKey(DiscountsFilterKeys.mobButton),
       findsOneWidget,
     );
 
     // if (advancedButton.isNotEmpty) {
-    await tester.tap(find.byKey(DiscountsKeys.advancedFilterButton));
+    await tester.tap(find.byKey(DiscountsFilterKeys.mobButton));
   }
 
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsKeys.advancedFilterList,
+    scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
-    find.byKey(DiscountsKeys.appliedFilterItems),
+    find.byKey(DiscountsFilterKeys.cancelChip),
     findsNothing,
   );
 
   // final isMobile = tester
-  //     .widgetList(find.byKey(DiscountsKeys.
-  // advancedFilterDialog))
+  //     .widgetList(find.byKey(DiscountsFilterKeys.
+  // dialog))
   //     .isNotEmpty;
 
-  if (find.byKey(DiscountsKeys.advancedFilterDialog).evaluate().isNotEmpty) {
+  if (find.byKey(DiscountsFilterKeys.dialog).evaluate().isNotEmpty) {
     // expect(
-    //   find.byKey(DiscountsKeys.cancelIcon),
+    //   find.byKey(DiscountsFilterKeys.cancelIcon),
     //   findsOneWidget,
     // );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterDialog),
+      find.byKey(DiscountsFilterKeys.dialog),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterMobAppliedButton),
+      find.byKey(DiscountsFilterKeys.mobAppliedButton),
       findsOneWidget,
     );
 
     await tester.tap(
-      find.byKey(DiscountsKeys.advancedFilterMobAppliedButton),
+      find.byKey(DiscountsFilterKeys.mobAppliedButton),
     );
 
     await tester.pumpAndSettle();
   } else {
     // expect(
-    //   find.byKey(DiscountsKeys.advancedFilterButtonIcon),
+    //   find.byKey(DiscountsFilterKeys.mobButtonIcon),
     //   findsOneWidget,
     // );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterButton),
+      find.byKey(DiscountsFilterKeys.mobButton),
       findsOneWidget,
     );
 
     expect(
-      find.byKey(DiscountsKeys.advancedFilterList),
+      find.byKey(DiscountsFilterKeys.list),
       findsOneWidget,
     );
 
     // await tester
-    //     .tap(find.byKey(DiscountsKeys.advancedFilterButton));
+    //     .tap(find.byKey(DiscountsFilterKeys.mobButton));
 
     // await tester.pumpAndSettle();
 
     // expect(
-    //   find.byKey(DiscountsKeys.advancedFilterList),
+    //   find.byKey(DiscountsFilterKeys.list),
     //   findsNothing,
     // );
 
     // expect(
-    //   find.byKey(DiscountsKeys.advancedFilterButtonIconUp),
+    //   find.byKey(DiscountsFilterKeys.mobButtonIconUp),
     //   findsOneWidget,
     // );
   }

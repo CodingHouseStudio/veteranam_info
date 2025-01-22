@@ -236,7 +236,10 @@ void main() {
           tester: tester,
         );
 
-        await reportDialogCheckFailureHelper(tester);
+        await reportDialogCheckFailureHelper(
+          tester: tester,
+          popupMenuKey: null,
+        );
       });
       // testWidgets('Report Dialog Incorect Send', (tester) async {
       //   await investorsPumpAppHelper(
@@ -333,6 +336,7 @@ void main() {
           await reportDialogCorrectSaveHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
+            popupMenuKey: null,
           );
         });
         group('${KGroupText.goTo} ', () {

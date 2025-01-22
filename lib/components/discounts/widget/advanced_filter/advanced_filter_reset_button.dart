@@ -13,7 +13,7 @@ class AdvancedFilterResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      key: DiscountsKeys.advancedFilterResetButton,
+      key: DiscountsFilterKeys.resetButton,
       style: isDesk
           ? KButtonStyles.borderBlackButtonStyle
           : KButtonStyles.borderBlackButtonAdvancedFilterStyle,

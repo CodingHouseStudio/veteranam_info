@@ -68,7 +68,7 @@ class DiscountTitleWidget extends StatelessWidget {
           preDividerWidget: isDesk
               ? null
               : const DiscountsFilterMob(
-                  key: DiscountsKeys.advancedFilterMob,
+                  key: DiscountsFilterKeys.mob,
                 ),
         ),
       ),

@@ -265,6 +265,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               showComplaint: !isBusiness,
               showShare:
                   !isBusiness || discountItem.status == DiscountState.published,
+              dropMenuKey: DiscountCardKeys.popupMenuButton,
             ),
           ),
           KSizedBox.kHeightSizedBox16,

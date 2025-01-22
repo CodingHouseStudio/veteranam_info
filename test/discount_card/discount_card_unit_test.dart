@@ -101,7 +101,8 @@ void main() {
           id: '',
         ),
         // act: (bloc) async {
-        //   await bloc.onStarted(id: KTestVariables.discountModelItems.first.id);
+        //   await bloc.onStarted(id: KTestVariables.discountModelItems.
+        // first.id);
         //   // bloc.add(
         //   //   DiscountCardWatcherEvent.started(
         //   //     KTestVariables.discountModelItems.first.id,

@@ -132,7 +132,7 @@ class _AdvancedFilterDesk extends StatelessWidget {
             const SizedBox(
           height: double.infinity,
           child: AdvancedFilterContent(
-            key: DiscountsKeys.advancedFilterDesk,
+            key: DiscountsFilterKeys.desk,
             isDesk: true,
           ),
         ),

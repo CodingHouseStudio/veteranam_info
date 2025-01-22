@@ -8,7 +8,7 @@ Future<void> popupMenuButtonHelper({
 }) async {
   expect(
     find.byKey(buttonKey),
-    findsOneWidget,
+    findsWidgets,
   );
 
   for (final key in buttonListKeys) {
@@ -19,7 +19,7 @@ Future<void> popupMenuButtonHelper({
   }
 
   await tester.tap(
-    find.byKey(buttonKey),
+    find.byKey(buttonKey).first,
     warnIfMissed: false,
   );
 
@@ -33,7 +33,7 @@ Future<void> popupMenuButtonHelper({
   }
 
   await tester.tap(
-    find.byKey(buttonKey),
+    find.byKey(buttonKey).first,
     warnIfMissed: false,
   );
 

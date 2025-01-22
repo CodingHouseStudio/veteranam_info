@@ -164,10 +164,10 @@ void main() {
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
-            (_) => KTestVariables.build,
+            (_) => KTestVariables.fieldEmpty,
           );
         });
-        testWidgets('${KGroupText.initial} ', (tester) async {
+        testWidgets('Close', (tester) async {
           await discountsPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
@@ -182,7 +182,41 @@ void main() {
             mockBuildRepository: mockBuildRepository,
           );
 
-          await mobUpdateDialogButtonsHelper(
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestVariables.build,
+          );
+
+          await mobUpdateDialogCloseButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Apply', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockUserRepository: mockUserRepository,
+            mockMobileRatingRepository: mockMobileRatingRepository,
+            mockBuildRepository: mockBuildRepository,
+          );
+
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestVariables.build,
+          );
+
+          await mobUpdateDialogApplyButtonsHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
