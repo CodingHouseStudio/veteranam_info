@@ -56,9 +56,8 @@ void main() {
         ).thenAnswer(
           (realInvocation) => 0,
         );
-        bloc.started();
       },
-      expect: () => [
+      expect: () => <DiscountConfigState>[
         const DiscountConfigState(
           emailScrollCount: KDimensions.emailScrollCount,
           loadingItems: KDimensions.loadItems,
@@ -99,7 +98,6 @@ void main() {
         ).thenAnswer(
           (realInvocation) => number,
         );
-        bloc.started();
       },
       expect: () => [
         const DiscountConfigState(

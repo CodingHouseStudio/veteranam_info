@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
@@ -21,7 +23,9 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
             mobFilterEnhancedMobile: true,
             enableVerticalDiscount: true,
           ),
-        );
+        ) {
+    _started();
+  }
 
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
 
@@ -38,7 +42,11 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
       '__discount_enable_vertical_list_key__';
 
   static const loadingItemsKey = '__discount_loading_items_count_key__';
-  void started() {
+
+  Future<void> _started() async {
+    // Wait for initialize remote config if it didn't happen yet
+    await _firebaseRemoteConfigProvider.waitActivated();
+
     final emailScrollCount =
         _firebaseRemoteConfigProvider.getInt(emailScrollKey);
     final linkScrollCount = _firebaseRemoteConfigProvider.getInt(linkScrollKey);

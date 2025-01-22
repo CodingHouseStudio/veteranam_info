@@ -16,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} UserEmail From ${KGroupText.bloc}', () {
-    late UserEmailFormBloc userEmailFormBloc;
+    // late UserEmailFormBloc userEmailFormBloc;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
@@ -54,29 +54,34 @@ void main() {
         (invocation) => KTestVariables.user,
       );
 
-      userEmailFormBloc = UserEmailFormBloc(
-        discountRepository: mockdiscountRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-        firebaseAnalyticsService: mockFirebaseAnalyticsService,
-      );
+      // userEmailFormBloc = UserEmailFormBloc(
+      //   discountRepository: mockdiscountRepository,
+      //   appAuthenticationRepository: mockAppAuthenticationRepository,
+      //   firebaseAnalyticsService: mockFirebaseAnalyticsService,
+      // );
     });
 
-    group(
-      'User email enum',
-      () {
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+    group('User email enum', () {
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Right(0),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
+          'check need to show first time', () {
+        setUp(
+          () => when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Right(0),
+          ),
+        );
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
           expect: () async => [
             const UserEmailFormState(
               email: EmailFieldModel.pure(),
@@ -85,20 +90,28 @@ void main() {
             ),
           ],
         );
+      });
 
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Right(1),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
+          'check need to show first time', () {
+        setUp(
+          () => when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Right(1),
+          ),
+        );
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
           expect: () async => [
             const UserEmailFormState(
               email: EmailFieldModel.pure(),
@@ -107,19 +120,27 @@ void main() {
             ),
           ],
         );
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+      });
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Right(2),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
+          'check need to show first time', () {
+        setUp(
+          () => when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Right(2),
+          ),
+        );
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
           expect: () async => [
             const UserEmailFormState(
               email: EmailFieldModel.pure(),
@@ -128,19 +149,27 @@ void main() {
             ),
           ],
         );
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+      });
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Right(5),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
+          'check need to show first time', () {
+        setUp(
+          () => when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Right(5),
+          ),
+        );
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
           expect: () async => [
             const UserEmailFormState(
               email: EmailFieldModel.pure(),
@@ -149,19 +178,27 @@ void main() {
             ),
           ],
         );
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+      });
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Right(-1),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
+          'check need to show first time', () {
+        setUp(
+          () => when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Right(-1),
+          ),
+        );
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
           expect: () async => [
             const UserEmailFormState(
               email: EmailFieldModel.pure(),
@@ -170,29 +207,37 @@ void main() {
             ),
           ],
         );
-        blocTest<UserEmailFormBloc, UserEmailFormState>(
+      });
+      group(
           'emits [UserEmailFormState()] when '
-          'check need to show first time',
-          build: () => userEmailFormBloc,
-          act: (bloc) async {
-            when(
-              mockdiscountRepository
-                  .userCanSendUserEmail(KTestVariables.user.id),
-            ).thenAnswer(
-              (_) async => const Left(SomeFailure.serverError),
-            );
-            bloc.add(const UserEmailFormEvent.started());
-          },
-          expect: () async => [
-            const UserEmailFormState(
-              email: EmailFieldModel.pure(),
-              formState: EmailEnum.initial,
-              emailEnum: UserEmailEnum.discountEmailNotShow,
+          'started failure', () {
+        setUp(() {
+          when(
+            mockdiscountRepository.userCanSendUserEmail(KTestVariables.user.id),
+          ).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError),
+          );
+          blocTest<UserEmailFormBloc, UserEmailFormState>(
+            'Bloc Test',
+            build: () => UserEmailFormBloc(
+              discountRepository: mockdiscountRepository,
+              appAuthenticationRepository: mockAppAuthenticationRepository,
+              firebaseAnalyticsService: mockFirebaseAnalyticsService,
             ),
-          ],
-        );
-      },
-    );
+            // act: (bloc) async {
+            // bloc.add(const UserEmailFormEvent.started());
+            // },
+            expect: () async => [
+              const UserEmailFormState(
+                email: EmailFieldModel.pure(),
+                formState: EmailEnum.initial,
+                emailEnum: UserEmailEnum.discountEmailNotShow,
+              ),
+            ],
+          );
+        });
+      });
+    });
 
     group('Field', () {
       setUp(() {
@@ -201,12 +246,16 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(0),
         );
-        userEmailFormBloc.add(const UserEmailFormEvent.started());
+        // userEmailFormBloc.add(const UserEmailFormEvent.started());
       });
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
-        ' when load discountModel list',
-        build: () => userEmailFormBloc,
+        ' when update email and send',
+        build: () => UserEmailFormBloc(
+          discountRepository: mockdiscountRepository,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          firebaseAnalyticsService: mockFirebaseAnalyticsService,
+        ),
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
@@ -215,6 +264,11 @@ void main() {
           )
           ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
+          const UserEmailFormState(
+            email: EmailFieldModel.pure(),
+            formState: EmailEnum.initial,
+            emailEnum: UserEmailEnum.discountEmailAbandon,
+          ),
           UserEmailFormState(
             email: EmailFieldModel.dirty(KTestVariables.emailModel.email),
             formState: EmailEnum.inProgress,
@@ -230,8 +284,12 @@ void main() {
 
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
-        ' when load discountModel list',
-        build: () => userEmailFormBloc,
+        ' when update email and send after close',
+        build: () => UserEmailFormBloc(
+          discountRepository: mockdiscountRepository,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          firebaseAnalyticsService: mockFirebaseAnalyticsService,
+        ),
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
@@ -245,6 +303,11 @@ void main() {
                 ),
           ),
         expect: () async => [
+          const UserEmailFormState(
+            email: EmailFieldModel.pure(),
+            formState: EmailEnum.initial,
+            emailEnum: UserEmailEnum.discountEmailAbandon,
+          ),
           UserEmailFormState(
             email: EmailFieldModel.dirty(KTestVariables.emailModel.email),
             formState: EmailEnum.inProgress,
@@ -260,8 +323,12 @@ void main() {
 
       blocTest<UserEmailFormBloc, UserEmailFormState>(
         'emits [discountWatcherState()]'
-        ' when load discountModel email',
-        build: () => userEmailFormBloc,
+        ' when update email send email two time',
+        build: () => UserEmailFormBloc(
+          discountRepository: mockdiscountRepository,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          firebaseAnalyticsService: mockFirebaseAnalyticsService,
+        ),
         act: (bloc) async => bloc
           ..add(
             UserEmailFormEvent.updatedEmail(
@@ -276,6 +343,11 @@ void main() {
           )
           ..add(const UserEmailFormEvent.sendEmail()),
         expect: () async => [
+          const UserEmailFormState(
+            email: EmailFieldModel.pure(),
+            formState: EmailEnum.initial,
+            emailEnum: UserEmailEnum.discountEmailAbandon,
+          ),
           UserEmailFormState(
             email: EmailFieldModel.dirty(KTestVariables.emailModelWrong.email),
             formState: EmailEnum.inProgress,
