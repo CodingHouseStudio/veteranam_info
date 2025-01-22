@@ -37,10 +37,15 @@ class AppVersionCubit extends Cubit<AppVersionState> {
     var mobAppVersion =
         _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
     if (mobAppVersion.isEmpty) {
-      _delay = Timer(Duration(seconds: KTest.getTimer(5)), () {
+      var count = 0;
+      _delay = Timer.periodic(Duration(seconds: KTest.getTimer(1)), (t) {
         mobAppVersion =
             _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
-        _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
+        if (mobAppVersion.isNotEmpty || count > 5) {
+          _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
+          _delay?.cancel();
+        }
+        count++;
       });
     } else {
       _setData(mobAppVersion: mobAppVersion, buildInfo: buildInfo);
