@@ -33,6 +33,14 @@ class AppVersionCubit extends Cubit<AppVersionState> {
 
   Future<void> _started() async {
     final buildInfo = await _buildRepository.getBuildInfo();
+
+    emit(
+      AppVersionState(
+        build: buildInfo,
+        mobHasNewBuild: false,
+      ),
+    );
+
     // Wait for initialize remote config if it didn't happen yet
     await _firebaseRemoteConfigProvider.waitActivated();
 

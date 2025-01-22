@@ -42,6 +42,10 @@ void main() {
       mockMobileRatingRepository = MockMobileRatingRepository();
       mockUserRepository = MockUserRepository();
 
+      when(mockFirebaseRemoteConfigProvider.waitActivated()).thenAnswer(
+        (invocation) async => true,
+      );
+
       when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
         (realInvocation) async => const Right(true),
       );
@@ -160,11 +164,18 @@ void main() {
       group('Open Update dialog', () {
         setUp(() {
           PlatformEnumFlutter.isWebDesktop = false;
+
+          when(mockFirebaseRemoteConfigProvider.waitActivated()).thenAnswer(
+            (invocation) async {
+              await KTestConstants.delay;
+              return true;
+            },
+          );
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
-            (_) => KTestVariables.fieldEmpty,
+            (_) => KTestVariables.build,
           );
         });
         testWidgets('Close', (tester) async {
@@ -180,13 +191,6 @@ void main() {
             mockUserRepository: mockUserRepository,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
-          );
-
-          when(
-            mockFirebaseRemoteConfigProvider
-                .getString(AppVersionCubit.mobAppVersionKey),
-          ).thenAnswer(
-            (_) => KTestVariables.build,
           );
 
           await mobUpdateDialogCloseButtonsHelper(
@@ -207,13 +211,6 @@ void main() {
             mockUserRepository: mockUserRepository,
             mockMobileRatingRepository: mockMobileRatingRepository,
             mockBuildRepository: mockBuildRepository,
-          );
-
-          when(
-            mockFirebaseRemoteConfigProvider
-                .getString(AppVersionCubit.mobAppVersionKey),
-          ).thenAnswer(
-            (_) => KTestVariables.build,
           );
 
           await mobUpdateDialogApplyButtonsHelper(

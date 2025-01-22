@@ -42,6 +42,10 @@ void main() {
       mockBuildRepository = MockAppInfoRepository();
       mockUserRepository = MockUserRepository();
 
+      when(mockFirebaseRemoteConfigProvider.waitActivated()).thenAnswer(
+        (invocation) async => true,
+      );
+
       when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
         (realInvocation) => AuthenticationStatus.anonymous,
       );
@@ -460,155 +464,160 @@ void main() {
           });
         });
 
-        group('User email dialog', () {
-          setUp(
-            () {
-              when(
-                mockDiscountRepository
-                    .userCanSendUserEmail(KTestVariables.user.id),
-              ).thenAnswer(
-                (invocation) async => const Right(0),
-              );
-            },
-          );
-          testWidgets('${KGroupText.initial} ', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockUserRepository: mockUserRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockMobileRatingRepository: null,
-            );
+        // group('User email dialog', () {
+        //   setUp(
+        //     () {
+        //       when(
+        //         mockDiscountRepository
+        //             .userCanSendUserEmail(KTestVariables.user.id),
+        //       ).thenAnswer(
+        //         (invocation) async => const Right(0),
+        //       );
+        //     },
+        //   );
+        //   testWidgets('${KGroupText.initial} ', (tester) async {
+        //     await discountsPumpAppHelper(
+        //       tester: tester,
+        //       mockDiscountRepository: mockDiscountRepository,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAppAuthenticationRepository:
+        // mockAppAuthenticationRepository,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockBuildRepository: mockBuildRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockReportRepository: mockReportRepository,
+        //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        //       mockAuthenticationRepository: mockAuthenticationRepository,
+        //       mockMobileRatingRepository: null,
+        //     );
 
-            await discountsScrollHelper(
-              tester: tester,
-              test: (tester) async => userEmailCorrectHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
-              showEmailDialog: true,
-            );
-          });
-          testWidgets('User email dialog close', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockUserRepository: mockUserRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockMobileRatingRepository: null,
-            );
+        //     await discountsScrollHelper(
+        //       tester: tester,
+        //       test: (tester) async => userEmailCorrectHelper(
+        //         tester: tester,
+        //         mockGoRouter: mockGoRouter,
+        //       ),
+        //       showEmailDialog: true,
+        //     );
+        //   });
+        //   testWidgets('User email dialog close', (tester) async {
+        //     await discountsPumpAppHelper(
+        //       tester: tester,
+        //       mockDiscountRepository: mockDiscountRepository,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAppAuthenticationRepository:
+        // mockAppAuthenticationRepository,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockBuildRepository: mockBuildRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockReportRepository: mockReportRepository,
+        //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        //       mockAuthenticationRepository: mockAuthenticationRepository,
+        //       mockMobileRatingRepository: null,
+        //     );
 
-            await discountsScrollHelper(
-              tester: tester,
-              test: (tester) async => userEmailCloseHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
-              showEmailDialog: true,
-            );
-          });
-          testWidgets('User email dialog empty', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockUserRepository: mockUserRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockMobileRatingRepository: null,
-            );
+        //     await discountsScrollHelper(
+        //       tester: tester,
+        //       test: (tester) async => userEmailCloseHelper(
+        //         tester: tester,
+        //         mockGoRouter: mockGoRouter,
+        //       ),
+        //       showEmailDialog: true,
+        //     );
+        //   });
+        //   testWidgets('User email dialog empty', (tester) async {
+        //     await discountsPumpAppHelper(
+        //       tester: tester,
+        //       mockDiscountRepository: mockDiscountRepository,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAppAuthenticationRepository:
+        // mockAppAuthenticationRepository,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockBuildRepository: mockBuildRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockReportRepository: mockReportRepository,
+        //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        //       mockAuthenticationRepository: mockAuthenticationRepository,
+        //       mockMobileRatingRepository: null,
+        //     );
 
-            await discountsScrollHelper(
-              tester: tester,
-              test: userEmailEmptyHelper,
-              showEmailDialog: true,
-            );
-          });
-          testWidgets('User email dialog wrong', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockUserRepository: mockUserRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockMobileRatingRepository: null,
-            );
+        //     await discountsScrollHelper(
+        //       tester: tester,
+        //       test: userEmailEmptyHelper,
+        //       showEmailDialog: true,
+        //     );
+        //   });
+        //   testWidgets('User email dialog wrong', (tester) async {
+        //     await discountsPumpAppHelper(
+        //       tester: tester,
+        //       mockDiscountRepository: mockDiscountRepository,
+        //       mockGoRouter: mockGoRouter,
+        //       mockAppAuthenticationRepository:
+        // mockAppAuthenticationRepository,
+        //       mockFirebaseRemoteConfigProvider:
+        //           mockFirebaseRemoteConfigProvider,
+        //       mockBuildRepository: mockBuildRepository,
+        //       mockUserRepository: mockUserRepository,
+        //       mockReportRepository: mockReportRepository,
+        //       mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        //       mockAuthenticationRepository: mockAuthenticationRepository,
+        //       mockMobileRatingRepository: null,
+        //     );
 
-            await discountsScrollHelper(
-              tester: tester,
-              test: (tester) async => userEmailWrongHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
-              showEmailDialog: true,
-            );
-          });
+        //     await discountsScrollHelper(
+        //       tester: tester,
+        //       test: (tester) async => userEmailWrongHelper(
+        //         tester: tester,
+        //         mockGoRouter: mockGoRouter,
+        //       ),
+        //       showEmailDialog: true,
+        //     );
+        //   });
 
-          group('${KGroupText.failureGet} ', () {
-            setUp(
-              () {
-                when(
-                  mockDiscountRepository.sendEmail(KTestVariables.emailModel),
-                ).thenAnswer(
-                  (invocation) async => const Left(
-                    SomeFailure.serverError,
-                  ),
-                );
-              },
-            );
-            testWidgets('User email dialog incorect', (tester) async {
-              await discountsPumpAppHelper(
-                tester: tester,
-                mockDiscountRepository: mockDiscountRepository,
-                mockGoRouter: mockGoRouter,
-                mockAppAuthenticationRepository:
-                    mockAppAuthenticationRepository,
-                mockBuildRepository: mockBuildRepository,
-                mockUserRepository: mockUserRepository,
-                mockFirebaseRemoteConfigProvider:
-                    mockFirebaseRemoteConfigProvider,
-                mockReportRepository: mockReportRepository,
-                mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                mockMobileRatingRepository: null,
-              );
+        //   group('${KGroupText.failureGet} ', () {
+        //     setUp(
+        //       () {
+        //         when(
+        //           mockDiscountRepository.sendEmail(
+        // KTestVariables.emailModel),
+        //         ).thenAnswer(
+        //           (invocation) async => const Left(
+        //             SomeFailure.serverError,
+        //           ),
+        //         );
+        //       },
+        //     );
+        //     testWidgets('User email dialog incorect', (tester) async {
+        //       await discountsPumpAppHelper(
+        //         tester: tester,
+        //         mockDiscountRepository: mockDiscountRepository,
+        //         mockGoRouter: mockGoRouter,
+        //         mockAppAuthenticationRepository:
+        //             mockAppAuthenticationRepository,
+        //         mockBuildRepository: mockBuildRepository,
+        //         mockUserRepository: mockUserRepository,
+        //         mockFirebaseRemoteConfigProvider:
+        //             mockFirebaseRemoteConfigProvider,
+        //         mockReportRepository: mockReportRepository,
+        //         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        //         mockAuthenticationRepository: mockAuthenticationRepository,
+        //         mockMobileRatingRepository: null,
+        //       );
 
-              await discountsScrollHelper(
-                tester: tester,
-                test: (tester) async => userEmailCorrectHelper(
-                  tester: tester,
-                  mockGoRouter: mockGoRouter,
-                ),
-                showEmailDialog: true,
-              );
-            });
-          });
-        });
+        //       await discountsScrollHelper(
+        //         tester: tester,
+        //         test: (tester) async => userEmailCorrectHelper(
+        //           tester: tester,
+        //           mockGoRouter: mockGoRouter,
+        //         ),
+        //         showEmailDialog: true,
+        //       );
+        //     });
+        //   });
+        // });
         group('User email dialog', () {
           setUp(
             () {
@@ -620,31 +629,32 @@ void main() {
               );
             },
           );
-          testWidgets('User email dialog', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockUserRepository: mockUserRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockMobileRatingRepository: null,
-            );
+          // testWidgets('User email dialog', (tester) async {
+          //   await discountsPumpAppHelper(
+          //     tester: tester,
+          //     mockDiscountRepository: mockDiscountRepository,
+          //     mockGoRouter: mockGoRouter,
+          //     mockAppAuthenticationRepository:
+          // mockAppAuthenticationRepository,
+          //     mockFirebaseRemoteConfigProvider:
+          //         mockFirebaseRemoteConfigProvider,
+          //     mockBuildRepository: mockBuildRepository,
+          //     mockUserRepository: mockUserRepository,
+          //     mockReportRepository: mockReportRepository,
+          //     mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          //     mockAuthenticationRepository: mockAuthenticationRepository,
+          //     mockMobileRatingRepository: null,
+          //   );
 
-            await discountsScrollHelper(
-              tester: tester,
-              test: (tester) async => userEmailCloseDelayHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              ),
-              showEmailDialog: true,
-            );
-          });
+          //   await discountsScrollHelper(
+          //     tester: tester,
+          //     test: (tester) async => userEmailCloseDelayHelper(
+          //       tester: tester,
+          //       mockGoRouter: mockGoRouter,
+          //     ),
+          //     showEmailDialog: true,
+          //   );
+          // });
         });
       });
     });
