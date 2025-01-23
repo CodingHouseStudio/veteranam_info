@@ -17,12 +17,12 @@ class CitySearchFieldWidget extends StatefulWidget {
 class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
   late FocusNode _focusNode;
   late TextEditingController _controller;
-  late Widget icon;
+  late bool hasFocus;
   @override
   void initState() {
     _focusNode = FocusNode();
     _controller = TextEditingController();
-    icon = _icon;
+    hasFocus = false;
     _focusNode.addListener(
       iconListener,
     );
@@ -30,13 +30,16 @@ class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
   }
 
   void iconListener() {
-    setState(() {
-      icon = _icon;
-    });
+    if (hasFocus != _focusNode.hasFocus) {
+      setState(() {
+        hasFocus = _focusNode.hasFocus;
+      });
+    }
   }
 
-  Widget get _icon => _focusNode.hasFocus
+  Widget get _icon => hasFocus
       ? IconButtonWidget(
+          key: DiscountsFilterKeys.citySearchFieldCloseIcon,
           icon: KIcon.close,
           padding: KPadding.kPaddingSize4,
           onPressed: () {
@@ -52,7 +55,7 @@ class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
-      widgetKey: const Key('value1'),
+      widgetKey: DiscountsFilterKeys.citySearchField,
       onChanged: (value) => context
           .read<DiscountsWatcherBloc>()
           .add(DiscountsWatcherEvent.searchLocation(value)),

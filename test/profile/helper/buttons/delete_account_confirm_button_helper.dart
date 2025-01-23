@@ -18,8 +18,7 @@ Future<void> deleteAccountConfirmButtonlHelper({
   await profileDeleteButtonHelper(tester);
 
   await confirmDialogHelper(
-    tester: tester,
-    mockGoRouter: mockGoRouter,
+    tester,
     isPop: false,
   );
 }

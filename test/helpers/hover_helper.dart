@@ -3,6 +3,8 @@ import 'dart:ui' show PointerDeviceKind;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_dependency.dart';
+
 Future<void> hoverHelper({
   required WidgetTester tester,
   required Key key,
@@ -10,6 +12,8 @@ Future<void> hoverHelper({
   int index = 0,
   bool usePump = false,
 }) async {
+  await scrollingHelper(tester: tester, itemKey: key, itemIndex: index);
+
   final widgetLocation = tester.getCenter(
     find.byKey(key).at(index),
   );

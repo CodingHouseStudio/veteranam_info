@@ -14,6 +14,7 @@ class DiscountSortingWidget extends StatelessWidget {
       selector: (state) => state.sortingBy,
       builder: (context, sortingBy) {
         return PopupMenuButtonWidget<DiscountEnum>(
+          key: DiscountsKeys.sortingButton,
           buttonStyle: KButtonStyles.neutralButtonStyle,
           borderRadius: KBorderRadius.kBorderRadius16,
           buttonText: null,
@@ -24,6 +25,7 @@ class DiscountSortingWidget extends StatelessWidget {
               discountEnum: DiscountEnum.values.elementAt(index),
               currectDiscountEnum: sortingBy ?? DiscountEnum.featured,
               context: context,
+              key: DiscountsKeys.sortingList.elementAt(index),
             ),
             growable: false,
           ),
@@ -62,6 +64,7 @@ class DiscountSortingWidget extends StatelessWidget {
     required DiscountEnum discountEnum,
     required DiscountEnum currectDiscountEnum,
     required BuildContext context,
+    required Key key,
   }) =>
       PopupMenuCustomItem<DiscountEnum>(
         value: discountEnum,
@@ -71,6 +74,6 @@ class DiscountSortingWidget extends StatelessWidget {
                 discountEnum,
               ),
             ),
-        key: null,
+        key: key,
       );
 }

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -105,6 +106,13 @@ void main() {
       when(mockBuildRepository.getBuildInfo()).thenAnswer(
         (invocation) async => AppInfoRepository.defaultValue,
       );
+
+      when(
+        mockFirebaseRemoteConfigProvider
+            .getBool(DiscountConfigCubit.mobFilterEnhancedMobileKey),
+      ).thenAnswer(
+        (invocation) => false,
+      );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await discountsPumpAppHelper(
@@ -139,6 +147,33 @@ void main() {
           mockUserRepository: mockUserRepository,
         ),
       );
+    });
+
+    group('Adnvanced Filter Enhanced for mob', () {
+      setUp(() {
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.mobFilterEnhancedMobileKey),
+        ).thenAnswer(
+          (invocation) => true,
+        );
+      });
+      testWidgets('${KGroupText.initial} ', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockUserRepository: mockUserRepository,
+          mockBuildRepository: mockBuildRepository,
+          mockMobileRatingRepository: mockMobileRatingRepository,
+        );
+
+        await advancedFilterEnchancedMobileHelper(tester);
+      });
     });
 
     group('${KGroupText.goRouter} ', () {

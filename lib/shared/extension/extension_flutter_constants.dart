@@ -674,3 +674,17 @@ extension PopupMenuButtonPositionExtension on PopupMenuButtonPosition {
     }
   }
 }
+
+extension UrlCubitExtension on UrlCubit {
+  static void listener(BuildContext context, UrlEnum? state) {
+    if (state != null) {
+      context.dialog.showSnackBardTextDialog(
+        state.value(
+          context,
+        ),
+        duration: const Duration(milliseconds: 4000),
+      );
+      context.read<UrlCubit>().reset();
+    }
+  }
+}

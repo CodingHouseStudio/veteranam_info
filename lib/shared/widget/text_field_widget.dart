@@ -141,7 +141,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         textAlign: widget.textAlign ?? TextAlign.start,
         style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
-        onChanged: widget.onChanged, mouseCursor: widget.cursor,
+        onChanged: widget.onChanged,
+        mouseCursor: widget.cursor,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??

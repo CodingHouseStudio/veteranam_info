@@ -19,7 +19,7 @@ class DiscountTitleWidget extends StatelessWidget {
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize24),
         child: LineTitleIconWidget(
           title: context.l10n.discounts,
-          rightWidget: isDesk && Config.isWeb
+          rightWidget: isDesk //&& Config.isWeb
               ? BlocSelector<DiscountConfigCubit, DiscountConfigState, bool>(
                   selector: (state) => state.enableVerticalDiscount,
                   builder: (context, enableVerticalDiscount) {
@@ -27,10 +27,12 @@ class DiscountTitleWidget extends StatelessWidget {
                       return BlocBuilder<ViewModeCubit, ViewMode>(
                         builder: (context, state) {
                           return Row(
+                            key: DiscountsKeys.viewMode,
                             spacing: KPadding.kPaddingSize16,
                             children: [
                               const DiscountSortingWidget(isDesk: true),
                               IconButtonWidget(
+                                key: DiscountsKeys.horizontalViewModeIcon,
                                 icon: KIcon.gridView,
                                 onPressed: () =>
                                     context.read<ViewModeCubit>().setGridView(),
@@ -43,6 +45,7 @@ class DiscountTitleWidget extends StatelessWidget {
                               ),
                               KSizedBox.kWidthSizedBox16,
                               IconButtonWidget(
+                                key: DiscountsKeys.verticalViewModeIcon,
                                 icon: KIcon.viewAgenda,
                                 onPressed: () =>
                                     context.read<ViewModeCubit>().setListView(),

@@ -19,6 +19,26 @@ abstract class DiscountsKeys {
   static const userEmailDialog = Key('discounts_screen_user_email_dialog');
   // static const cancelIcon = Key('discounts_screen_cancel_icon');
   // static const cancelText = Key('discounts_screen_cancel_text');
+  static const sortingButton = Key('discounts_screen_sorting_button');
+  static const sortingFeaturedButtno =
+      Key('discounts_screen_sorting_featured_button');
+  static const sortingByDateButton =
+      Key('discounts_screen_sorting_by_date_button');
+  static const sortingLargestSmallestButton =
+      Key('discounts_screen_sorting_largest_smallest_button');
+  static const viewMode = Key('discounts_screen_view_mode');
+  static const horizontalViewModeIcon =
+      Key('discounts_screen_horizontal_view_mode_icon');
+  static const verticalViewModeIcon =
+      Key('discounts_screen_vertical_view_mode_icon');
+  static const horizontalList = Key('discounts_screen_horizontal_list');
+  static const verticalList = Key('discounts_screen_vertical_list');
+
+  static const sortingList = [
+    sortingFeaturedButtno,
+    sortingByDateButton,
+    sortingLargestSmallestButton,
+  ];
 }
 
 abstract class DiscountsFilterKeys {
@@ -37,4 +57,13 @@ abstract class DiscountsFilterKeys {
   static const cityItems = Key('discounts_filter_city_items');
   static const categoriesItems = Key('discounts_screen_categories_items');
   static const eligibilitiesItems = Key('discounts_filter_eligibilities_items');
+  static const eligibilitiesCancelChip =
+      Key('discounts_filter_eligibilities_cancel_chip');
+  static const categoriesCancelChip =
+      Key('discounts_filter_categories_cancel_chip');
+  static const cityCancelChip = Key('discounts_filter_city_cancel_chip');
+  static const loadingItems = Key('discounts_filter_loading_items');
+  static const citySearchField = Key('discounts_filter_city_search_field');
+  static const citySearchFieldCloseIcon =
+      Key('discounts_filter_city_search_field_close_icon');
 }

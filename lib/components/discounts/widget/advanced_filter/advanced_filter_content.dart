@@ -131,6 +131,7 @@ class AdvancedFilterContent extends StatelessWidget {
                 itemKey: DiscountsFilterKeys.eligibilitiesItems,
                 isLoading: state.isLoading,
               ),
+              cancelChipKey: DiscountsFilterKeys.eligibilitiesCancelChip,
               textKey: DiscountsFilterKeys.eligibilitiesText,
               title: context.l10n.eligibility,
               value: state.firstActiveItem,
@@ -184,6 +185,7 @@ class AdvancedFilterContent extends StatelessWidget {
                 itemKey: DiscountsFilterKeys.categoriesItems,
                 isLoading: state.isLoading,
               ),
+              cancelChipKey: DiscountsFilterKeys.categoriesCancelChip,
               textKey: DiscountsFilterKeys.categoriesText,
               title: context.l10n.category,
               value: state.firstActiveItem,
@@ -254,6 +256,7 @@ class AdvancedFilterContent extends StatelessWidget {
                   ),
                 ],
               ),
+              cancelChipKey: DiscountsFilterKeys.cityCancelChip,
               textKey: DiscountsFilterKeys.citiesText,
               title: context.l10n.city,
               value: state.firstActiveItem,
@@ -307,8 +310,12 @@ class _AdvancedListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return _AdvancedLoadingListWidget(isDesk: isDesk, itemKey: itemKey);
+    if (isLoading || KTest.testLoading) {
+      return _AdvancedLoadingListWidget(
+        key: DiscountsFilterKeys.loadingItems,
+        isDesk: isDesk,
+        itemKey: itemKey,
+      );
     }
     return SliverPrototypeExtentList.builder(
       prototypeItem: Padding(
@@ -497,6 +504,7 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
   const _AdvancedLoadingListWidget({
     required this.isDesk,
     required this.itemKey,
+    super.key,
   });
   final bool isDesk;
   final Key itemKey;
