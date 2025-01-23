@@ -475,7 +475,6 @@ class DiscountsDeskWidgetList extends StatelessWidget {
 
 // class _DiscountGridWidgetList extends StatelessWidget {
 //   const _DiscountGridWidgetList({required this.isDesk});
-
 //   final bool isDesk;
 
 //   @override
