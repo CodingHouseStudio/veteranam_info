@@ -3,8 +3,8 @@ lib/firebase_options_development.dart
 lib/l10n/l10n.dart
 lib/bootstrap.dart
 lib/shared/helper/get_it_service_locator.dart
-lib/shared/constants/**/*.dart
-lib/shared/extension/**/*.dart
+lib/shared/constants/*.dart
+lib/shared/extension/*.dart
 *.g.dart
 *.freezed.dart
 lib/shared/navigation/*.dart
