@@ -120,7 +120,7 @@ Future<void> advancedFilterEnchancedMobileHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
-    scrollKey: DiscountsFilterKeys.list,
+    // scrollKey: DiscountsFilterKeys.list,
   );
 
   expect(
