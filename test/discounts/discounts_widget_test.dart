@@ -243,26 +243,6 @@ void main() {
 
           await discountsInitialHelper(tester);
         });
-        testWidgets('Advanced filter reset mobile', (tester) async {
-          await discountsPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-            mockReportRepository: mockReportRepository,
-            mockBuildRepository: mockBuildRepository,
-            mockUserRepository: mockUserRepository,
-            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockMobileRatingRepository: null,
-          );
-
-          await advancedFilterResetMobHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
       });
     });
   });

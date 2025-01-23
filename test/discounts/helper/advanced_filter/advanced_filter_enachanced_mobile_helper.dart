@@ -8,7 +8,8 @@ Future<void> advancedFilterEnchancedMobileHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: DiscountsFilterKeys.mob,
+    offset: KTestConstants.scrollingUp,
+    itemKey: DiscountsKeys.title,
   );
 
   expect(
@@ -63,6 +64,11 @@ Future<void> advancedFilterEnchancedMobileHelper(
     findsWidgets,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+  );
+
   await chekPointSignleTapHelper(hasAmount: true, tester: tester);
 
   expect(
@@ -92,7 +98,7 @@ Future<void> advancedFilterEnchancedMobileHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: DiscountsFilterKeys.categoriesItems,
+    offset: KTestConstants.scrollingUp,
   );
 
   await chekPointSignleTapHelper(hasAmount: true, tester: tester);
@@ -115,6 +121,11 @@ Future<void> advancedFilterEnchancedMobileHelper(
   expect(
     find.byKey(DiscountsFilterKeys.citiesText),
     findsOneWidget,
+  );
+
+  expect(
+    find.byKey(DiscountsFilterKeys.cityCancelChip),
+    findsNothing,
   );
 
   await scrollingHelper(

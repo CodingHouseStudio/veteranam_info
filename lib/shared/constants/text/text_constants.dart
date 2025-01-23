@@ -192,6 +192,7 @@ abstract class KMockText {
     dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
     status: DiscountState.published,
+    likes: 10,
   );
   static final informationModel = InformationModel(
     id: '',

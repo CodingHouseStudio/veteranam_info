@@ -133,16 +133,17 @@ extension ReportFieldModelValidationErrorEmpl
   }
 }
 
-extension MultiFieldModelValidationErrorEmpl on ListFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case ListFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case null:
-        return null;
-    }
-  }
-}
+// extension MultiFieldModelValidationErrorEmpl on
+//ListFieldModelValidationError? {
+//   String? value(BuildContext context) {
+//     switch (this) {
+//       case ListFieldModelValidationError.empty:
+//         return context.l10n.fieldCannotBeEmpty;
+//       case null:
+//         return null;
+//     }
+//   }
+// }
 
 extension DiscountsFieldModelValidationErrorEmpl
     on DiscountsFieldModelValidationError? {

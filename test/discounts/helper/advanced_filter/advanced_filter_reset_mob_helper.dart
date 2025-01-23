@@ -3,10 +3,9 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> advancedFilterResetMobHelper({
-  required WidgetTester tester,
-  required MockGoRouter mockGoRouter,
-}) async {
+Future<void> advancedFilterResetMobHelper(
+  WidgetTester tester,
+) async {
   final isMobile =
       tester.widgetList(find.byKey(DiscountsFilterKeys.mob)).isNotEmpty;
 

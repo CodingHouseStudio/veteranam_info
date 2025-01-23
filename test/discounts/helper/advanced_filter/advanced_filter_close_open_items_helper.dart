@@ -12,6 +12,11 @@ Future<void> advancedFilterCloseOpenItemsHelper(
     hasAmount: true,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: DiscountsFilterKeys.eligibilitiesText,
+  );
+
   await tester.tap(find.byKey(DiscountsFilterKeys.eligibilitiesText));
 
   await tester.pumpAndSettle();
@@ -22,6 +27,7 @@ Future<void> advancedFilterCloseOpenItemsHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.categoriesText,
   );
 
   await chekPointSignleTapHelper(
@@ -45,6 +51,13 @@ Future<void> advancedFilterCloseOpenItemsHelper(
   await chekPointSignleTapHelper(
     tester: tester,
     hasAmount: true,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citiesText,
   );
 
   await tester.tap(find.byKey(DiscountsFilterKeys.citiesText));
