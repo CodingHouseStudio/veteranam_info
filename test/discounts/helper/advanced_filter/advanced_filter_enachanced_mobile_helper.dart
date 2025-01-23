@@ -117,11 +117,13 @@ Future<void> advancedFilterEnchancedMobileHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingDown,
-    // scrollKey: DiscountsFilterKeys.list,
-  );
+  while (find.byKey(DiscountsFilterKeys.cityItems).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingDown,
+      scrollKey: DiscountsFilterKeys.list,
+    );
+  }
 
   expect(
     find.byKey(DiscountsFilterKeys.cityItems),
