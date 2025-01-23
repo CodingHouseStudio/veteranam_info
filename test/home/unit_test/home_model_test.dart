@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/models/models.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
 
@@ -13,20 +13,24 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KGroupText.model} ', () {
-    final fullJson = {
+    final shortJson = {
       QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
-      QuestionModelJsonField.title:
-          KTestVariables.questionModelItems.first.title,
-      QuestionModelJsonField.titleEN:
-          KTestVariables.questionModelItems.first.titleEN,
-      QuestionModelJsonField.subtitle:
-          KTestVariables.questionModelItems.first.subtitle,
-      QuestionModelJsonField.subtitleEN:
-          KTestVariables.questionModelItems.first.subtitleEN,
+      QuestionModelJsonField.title: KTestVariables
+          .questionModelItems.first.title
+          .setStringLength(KMinMaxSize.titleMaxLength),
+      QuestionModelJsonField.titleEN: KTestVariables
+          .questionModelItems.first.titleEN
+          .setStringLength(KMinMaxSize.titleMaxLength),
+      QuestionModelJsonField.subtitle: KTestVariables
+          .questionModelItems.first.subtitle
+          .setStringLength(KMinMaxSize.subtitleMaxLength),
+      QuestionModelJsonField.subtitleEN: KTestVariables
+          .questionModelItems.first.subtitleEN
+          .setStringLength(KMinMaxSize.subtitleMaxLength),
       // QuestionModelJsonField.navigationLink:
       //     KTestVariables.questionModelItems.first.navigationLink,
     };
-    final nullableJson = {
+    final fullJson = {
       QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
       QuestionModelJsonField.title:
           KTestVariables.questionModelItems.first.title,
@@ -45,59 +49,63 @@ void main() {
         expect(questionModel.id, KTestVariables.questionModelItems.first.id);
         expect(
           questionModel.title,
-          KTestVariables.questionModelItems.first.title,
+          KTestVariables.questionModelItems.first.title
+              .setStringLength(KMinMaxSize.titleMaxLength),
         );
-        // expect(
-        //   questionModel.titleEN,
-        //   KTestVariables.questionModelItems.first.titleEN,
-        // );
+        expect(
+          questionModel.titleEN,
+          KTestVariables.questionModelItems.first.titleEN
+              .setStringLength(KMinMaxSize.titleMaxLength),
+        );
         expect(
           questionModel.subtitle,
-          KTestVariables.questionModelItems.first.subtitle,
+          KTestVariables.questionModelItems.first.subtitle
+              .setStringLength(KMinMaxSize.subtitleMaxLength),
         );
-        // expect(
-        //   questionModel.subtitleEN,
-        //   KTestVariables.questionModelItems.first.subtitleEN,
-        // );
+        expect(
+          questionModel.subtitleEN,
+          KTestVariables.questionModelItems.first.subtitleEN
+              .setStringLength(KMinMaxSize.subtitleMaxLength),
+        );
         // expect(
         //   questionModel.navigationLink,
         //   KTestVariables.questionModelItems.first.navigationLink,
         // );
       });
 
-      test('${KGroupText.nullable} ', () {
-        final questionModel = QuestionModel.fromJson(nullableJson);
+      // test('${KGroupText.nullable} ', () {
+      //   final questionModel = QuestionModel.fromJson(nullableJson);
 
-        expect(questionModel.id, KTestVariables.questionModelItems.first.id);
-        expect(
-          questionModel.title,
-          KTestVariables.questionModelItems.first.title,
-        );
-        // expect(
-        //   questionModel.titleEN,
-        //   KTestVariables.questionModelItems.first.titleEN,
-        // );
-        expect(
-          questionModel.subtitle,
-          KTestVariables.questionModelItems.first.subtitle,
-        );
-        // expect(
-        //   questionModel.subtitleEN,
-        //   KTestVariables.questionModelItems.first.subtitleEN,
-        // );
-        // expect(questionModel.navigationLink, null);
-      });
+      //   expect(questionModel.id, KTestVariables.questionModelItems.first.id);
+      //   expect(
+      //     questionModel.title,
+      //     KTestVariables.questionModelItems.first.title,
+      //   );
+      //   expect(
+      //     questionModel.titleEN,
+      //     KTestVariables.questionModelItems.first.titleEN,
+      //   );
+      //   expect(
+      //     questionModel.subtitle,
+      //     KTestVariables.questionModelItems.first.subtitle,
+      //   );
+      //   expect(
+      //     questionModel.subtitleEN,
+      //     KTestVariables.questionModelItems.first.subtitleEN,
+      //   );
+      //   // expect(questionModel.navigationLink, null);
+      // });
 
       test('${KGroupText.failure} ', () {
         final json = {
           QuestionModelJsonField.id: KTestVariables.questionModelItems.first.id,
           // title is missing
-          // QuestionModelJsonField.titleEN:
-          //     KTestVariables.questionModelItems.first.titleEN,
+          QuestionModelJsonField.titleEN:
+              KTestVariables.questionModelItems.first.titleEN,
           QuestionModelJsonField.subtitle:
               KTestVariables.questionModelItems.first.subtitle,
-          // QuestionModelJsonField.subtitleEN:
-          //     KTestVariables.questionModelItems.first.subtitleEN,
+          QuestionModelJsonField.subtitleEN:
+              KTestVariables.questionModelItems.first.subtitleEN,
           // QuestionModelJsonField.navigationLink:
           //     KTestVariables.questionModelItems.first.navigationLink,
         };
@@ -167,16 +175,16 @@ void main() {
           final questionModel =
               KTestVariables.questionModelItems.first.toJson();
 
-          expect(questionModel, fullJson);
+          expect(questionModel, shortJson);
         });
 
-        test('${KGroupText.nullable} ', () {
-          final questionModelJson = KTestVariables.questionModelItems.first
-              // .copyWith(navigationLink: null)
-              .toJson();
+        // test('${KGroupText.nullable} ', () {
+        //   final questionModelJson = KTestVariables.questionModelItems.first
+        //       // .copyWith(navigationLink: null)
+        //       .toJson();
 
-          expect(questionModelJson, nullableJson);
-        });
+        //   expect(questionModelJson, nullableJson);
+        // });
 
         // test('${KGroupText.convertor} ', () {
         //   final convertorJson = {

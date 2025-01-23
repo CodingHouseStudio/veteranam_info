@@ -12,6 +12,7 @@ import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
 import 'package:veteranam/shared/constants/constants_dart.dart';
+import 'package:veteranam/shared/extension/extension_dart_constants.dart';
 import 'package:veteranam/shared/models/models.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -115,6 +116,18 @@ abstract class KTestVariables {
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
   ];
+
+  static final questionModelSHort = QuestionModel(
+    id: KMockText.questionModel.id,
+    title: KMockText.questionModel.title
+        .setStringLength(KMinMaxSize.titleMaxLength),
+    titleEN: KMockText.questionModel.titleEN
+        .setStringLength(KMinMaxSize.titleMaxLength),
+    subtitle: KMockText.questionModel.subtitle
+        .setStringLength(KMinMaxSize.subtitleMaxLength),
+    subtitleEN: KMockText.questionModel.subtitleEN
+        .setStringLength(KMinMaxSize.subtitleMaxLength),
+  );
 
   static final workModelItems = <WorkModel>[
     for (var i = 0; i < _items; i++)
@@ -287,6 +300,15 @@ abstract class KTestVariables {
     ref: image,
     type: 'test_type',
   );
+  static const imagesList = [
+    ImageModel(
+      downloadURL: image,
+      lastModifiedTS: 1,
+      name: 'test_name',
+      ref: image,
+      type: 'test_type',
+    ),
+  ];
   static const imageModels = ImageModel(
     downloadURL: image,
     name: image,
@@ -390,6 +412,7 @@ abstract class KTestVariables {
     // requirements: null,
     status: DiscountState.isNew,
     exclusions: null,
+    likes: null,
     // subcategory: null,
     dateVerified: dateTime,
   );

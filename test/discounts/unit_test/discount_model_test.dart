@@ -103,9 +103,9 @@ void main() {
           .discountModelItems.last.eligibility
           .map((e) => _$EligibilityEnumEnumMap[e]!)
           .toList(),
-      // TODO(test): change
-      DiscountModelJsonField.images: null,
-      DiscountModelJsonField.likes: null,
+      DiscountModelJsonField.images: [KTestVariables.imageModel.toJson()],
+      DiscountModelJsonField.likes:
+          KTestVariables.discountModelItems.last.likes,
       // DiscountModelJsonField.eligibilityEN: KTestVariables
       //     .discountModelItems.last.eligibility
       //     ?.getTrsnslation(isEnglish: false),
@@ -331,6 +331,18 @@ void main() {
         //   discountModel.date,
         //   KTestVariables.discountModelItems.last.date,
         // );
+        expect(
+          discountModel.images,
+          isNotNull,
+        );
+        expect(
+          discountModel.images!.first,
+          KTestVariables.imageModel,
+        );
+        expect(
+          discountModel.likes,
+          KTestVariables.discountModelItems.last.likes,
+        );
       });
 
       test('${KGroupText.nullable} ', () {
@@ -488,6 +500,14 @@ void main() {
         //   discountModel.date,
         //   KTestVariables.discountModelItems.last.date,
         // );
+        expect(
+          discountModel.images,
+          null,
+        );
+        expect(
+          discountModel.likes,
+          null,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -565,6 +585,9 @@ void main() {
           //     KTestVariables.discountModelItems.last.company?.uk,
           // DiscountModelJsonField.date:
           //     KTestVariables.discountModelItems.last.date.toIso8601String(),
+          DiscountModelJsonField.images: KTestVariables.imagesList,
+          DiscountModelJsonField.likes:
+              KTestVariables.discountModelItems.last.likes,
         };
 
         expect(
@@ -575,32 +598,37 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final discountModelJson =
-            KTestVariables.discountModelItems.last.toJson();
+        final discountModelJson = KTestVariables.discountModelItems.last
+            .copyWith(
+              images: KTestVariables.imagesList,
+            )
+            .toJson();
 
         expect(discountModelJson, fullJson);
       });
 
       test('${KGroupText.nullable} ', () {
-        final discountModelJson =
-            KTestVariables.discountModelItems.last.copyWith(
-          directLink: null,
-          // additionalDetails: null,
-          // html: null,
-          userId: null,
-          userName: null,
-          company: null,
-          location: null,
-          subLocation: null,
-          userPhoto: null,
-          phoneNumber: null,
-          expiration: null,
-          requirements: null,
-          status: DiscountState.isNew,
-          // subcategory: null,
-          exclusions: null,
-          eligibility: const [EligibilityEnum.all],
-        ).toJson();
+        final discountModelJson = KTestVariables.discountModelItems.last
+            .copyWith(
+              directLink: null,
+              // additionalDetails: null,
+              // html: null,
+              userId: null,
+              userName: null,
+              company: null,
+              location: null,
+              subLocation: null,
+              userPhoto: null,
+              phoneNumber: null,
+              expiration: null,
+              requirements: null,
+              status: DiscountState.isNew,
+              // subcategory: null,
+              exclusions: null,
+              eligibility: const [EligibilityEnum.all],
+              likes: null,
+            )
+            .toJson();
 
         expect(
           discountModelJson,

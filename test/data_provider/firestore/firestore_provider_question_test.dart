@@ -90,7 +90,7 @@ void main() {
     test('get questions', () async {
       expect(
         await firestoreService.getQuestions(),
-        [KTestVariables.questionModelItems.first],
+        [KTestVariables.questionModelSHort],
       );
 
       verify(

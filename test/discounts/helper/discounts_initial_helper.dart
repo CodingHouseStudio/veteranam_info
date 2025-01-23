@@ -67,8 +67,6 @@ Future<void> discountsInitialHelper(
         itemKey: DiscountsKeys.title,
       );
 
-      await advancedFilterHelper(tester);
-
       expect(
         find.byKey(DiscountsKeys.card),
         findsWidgets,

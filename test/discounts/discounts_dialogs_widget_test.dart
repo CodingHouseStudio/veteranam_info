@@ -135,6 +135,43 @@ void main() {
       );
     });
 
+    testWidgets('Advanced filter ${KGroupText.initial}', (tester) async {
+      await discountsPumpAppHelper(
+        tester: tester,
+        mockDiscountRepository: mockDiscountRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        mockReportRepository: mockReportRepository,
+        mockBuildRepository: mockBuildRepository,
+        mockUserRepository: mockUserRepository,
+        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockMobileRatingRepository: null,
+      );
+
+      await advancedFilterHelper(
+        tester,
+      );
+    });
+
+    testWidgets('Advanced filter reset mobile', (tester) async {
+      await discountsPumpAppHelper(
+        tester: tester,
+        mockDiscountRepository: mockDiscountRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        mockReportRepository: mockReportRepository,
+        mockBuildRepository: mockBuildRepository,
+        mockUserRepository: mockUserRepository,
+        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockMobileRatingRepository: null,
+      );
+
+      await advancedFilterResetMobHelper(
+        tester,
+      );
+    });
     testWidgets('Advanced Filter Applied', (tester) async {
       await discountsPumpAppHelper(
         tester: tester,
