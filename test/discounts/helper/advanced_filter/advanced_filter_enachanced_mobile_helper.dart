@@ -121,6 +121,7 @@ Future<void> advancedFilterEnchancedMobileHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
     scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citySearchField,
   );
 
   expect(

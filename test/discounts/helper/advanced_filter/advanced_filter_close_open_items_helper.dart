@@ -35,6 +35,13 @@ Future<void> advancedFilterCloseOpenItemsHelper(
 
   expect(find.byKey(DiscountsFilterKeys.categoriesItems), findsNothing);
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+    scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citySearchField,
+  );
+
   await chekPointSignleTapHelper(
     tester: tester,
     hasAmount: true,
