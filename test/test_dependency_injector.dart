@@ -39,6 +39,7 @@ void configureDependenciesTest() {
   UriExtension.testUrl = null;
   KTest.discountSortingTestValue = false;
   DiscountsWatcherBloc.testDiscountFilterRepository = null;
+  KTest.testLoading = false;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
@@ -296,6 +297,7 @@ void configureFailureDependenciesTest() {
   UriExtension.testUrl = null;
   KTest.discountSortingTestValue = false;
   DiscountsWatcherBloc.testDiscountFilterRepository = null;
+  KTest.testLoading = false;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;

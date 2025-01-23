@@ -25,13 +25,11 @@ Future<void> logOutUnconfirmButtonlHelper({
       await companyLogOutHelper(tester);
       if (icon) {
         await confirmDialogCancelIconHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
+          tester,
         );
       } else {
         await confirmDialogUnconfirmHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
+          tester,
         );
       }
     },

@@ -39,16 +39,8 @@ class HomeBodyWidget extends StatelessWidget {
                 }
               },
             ),
-            BlocListener<UrlCubit, UrlEnum?>(
-              listener: (context, state) async {
-                if (state != null) {
-                  context.dialog.showSnackBardTextDialog(
-                    state.value(context),
-                    duration: const Duration(milliseconds: 4000),
-                  );
-                  context.read<UrlCubit>().reset();
-                }
-              },
+            const BlocListener<UrlCubit, UrlEnum?>(
+              listener: UrlCubitExtension.listener,
             ),
             BlocListener<HomeWatcherBloc, HomeWatcherState>(
               listener: (context, state) => context.dialog.showGetErrorDialog(

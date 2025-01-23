@@ -29,14 +29,17 @@ class FirebaseRemoteConfigProvider {
   Future<bool> waitActivated() async {
     try {
       var count = 0;
-      while ((_firebaseRemoteConfig.lastFetchStatus ==
-                  RemoteConfigFetchStatus.noFetchYet ||
-              _firebaseRemoteConfig.getAll().isEmpty) &&
-          count < 100) {
+      var checkValue = _firebaseRemoteConfig.lastFetchStatus ==
+          RemoteConfigFetchStatus.noFetchYet;
+      while (checkValue) {
         await Future.delayed(
           const Duration(milliseconds: 100),
           () => count++,
         );
+        checkValue = (_firebaseRemoteConfig.lastFetchStatus ==
+                    RemoteConfigFetchStatus.noFetchYet ||
+                _firebaseRemoteConfig.getAll().isEmpty) &&
+            count < 100;
       }
       return _firebaseRemoteConfig.lastFetchStatus !=
           RemoteConfigFetchStatus.noFetchYet;

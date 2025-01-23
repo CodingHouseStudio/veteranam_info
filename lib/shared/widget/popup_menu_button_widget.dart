@@ -364,35 +364,37 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return OverlayPortal.targetsRootOverlay(
-      controller: _controller,
-      overlayChildBuilder: _getMenuWidget,
-      child: CompositedTransformTarget(
-        link: _optionsLayerLink,
-        child: TextButton.icon(
-          key: _anchorKey,
-          onPressed: _showMenu ? null : showHideButtonMenu,
-          style: _showMenu
-              ? widget.buttonStyle.copyWith(
-                  mouseCursor: const WidgetStatePropertyAll(
-                    SystemMouseCursors.click,
-                  ),
-                  iconColor: const WidgetStatePropertyAll(
-                    AppColors.materialThemeBlack,
-                  ),
-                )
-              : widget.buttonStyle,
-          icon: widget.showIndicatorIcon
-              ? (_showMenu
-                  ? widget.closeIcon ?? KIcon.trailingUp
-                  : widget.showIcon ?? KIcon.keyboardArrowDown)
-              : null,
-          iconAlignment: widget.iconAlignment,
-          label: widget.buttonChild ??
-              Text(
-                widget.buttonText!,
-                style: AppTextStyle.materialThemeTitleMedium,
-              ),
+    return RepaintBoundary(
+      child: OverlayPortal.targetsRootOverlay(
+        controller: _controller,
+        overlayChildBuilder: _getMenuWidget,
+        child: CompositedTransformTarget(
+          link: _optionsLayerLink,
+          child: TextButton.icon(
+            key: _anchorKey,
+            onPressed: _showMenu ? null : showHideButtonMenu,
+            style: _showMenu
+                ? widget.buttonStyle.copyWith(
+                    mouseCursor: const WidgetStatePropertyAll(
+                      SystemMouseCursors.click,
+                    ),
+                    iconColor: const WidgetStatePropertyAll(
+                      AppColors.materialThemeBlack,
+                    ),
+                  )
+                : widget.buttonStyle,
+            icon: widget.showIndicatorIcon
+                ? (_showMenu
+                    ? widget.closeIcon ?? KIcon.trailingUp
+                    : widget.showIcon ?? KIcon.keyboardArrowDown)
+                : null,
+            iconAlignment: widget.iconAlignment,
+            label: widget.buttonChild ??
+                Text(
+                  widget.buttonText!,
+                  style: AppTextStyle.materialThemeTitleMedium,
+                ),
+          ),
         ),
       ),
     );

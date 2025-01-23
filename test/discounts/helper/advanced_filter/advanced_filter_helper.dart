@@ -1,14 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
+import '../helper.dart';
 
 Future<void> advancedFilterHelper(
   WidgetTester tester, {
-  bool isOpened = true,
+  bool reset = true,
 }) async {
-  final matcher = isOpened ? findsOneWidget : findsNothing;
-  final matchers = isOpened ? findsWidgets : findsNothing;
   final isMobile =
       tester.widgetList(find.byKey(DiscountsFilterKeys.mob)).isNotEmpty;
 
@@ -21,13 +20,13 @@ Future<void> advancedFilterHelper(
     find.byKey(
       isMobile ? DiscountsFilterKeys.mob : DiscountsFilterKeys.desk,
     ),
-    matcher,
+    findsOneWidget,
   );
 
   if (isMobile) {
     expect(
       find.byKey(DiscountsFilterKeys.mobButton),
-      matcher,
+      findsOneWidget,
     );
 
     await tester.tap(find.byKey(DiscountsFilterKeys.mobButton));
@@ -37,7 +36,7 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(DiscountsFilterKeys.list),
-    matcher,
+    findsOneWidget,
   );
 
   await scrollingHelper(
@@ -58,12 +57,12 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(DiscountsFilterKeys.eligibilitiesText),
-    matcher,
+    findsOneWidget,
   );
 
   expect(
     find.byKey(DiscountsFilterKeys.eligibilitiesItems),
-    matchers,
+    findsWidgets,
   );
 
   await scrollingHelper(
@@ -74,7 +73,7 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(DiscountsFilterKeys.categoriesText),
-    matcher,
+    findsOneWidget,
   );
 
   await scrollingHelper(
@@ -85,81 +84,51 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(DiscountsFilterKeys.categoriesItems),
-    matchers,
+    findsWidgets,
   );
 
   expect(
     find.byKey(DiscountsFilterKeys.citiesText),
-    matcher,
+    findsOneWidget,
   );
 
   expect(
     find.byKey(DiscountsFilterKeys.cityItems),
-    matchers,
+    findsWidgets,
   );
 
   await chekPointHelper(hasAmount: true, tester: tester);
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: DiscountsFilterKeys.list,
+  );
+
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 
+  expect(
+    find.byKey(DiscountsFilterKeys.cancelChip),
+    findsOneWidget,
+  );
+
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: DiscountsFilterKeys.list,
+  );
+
+  await chekPointSignleTapHelper(
+    tester: tester,
+    hasAmount: true,
   );
 
   expect(
     find.byKey(DiscountsFilterKeys.cancelChip),
-    matcher,
+    findsNothing,
   );
 
-  await chekPointSignleTapHelper(
-    tester: tester,
-    hasAmount: true,
-  );
-
-  await chekPointSignleTapHelper(
-    tester: tester,
-    index: 3,
-    hasAmount: true,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsFilterKeys.list,
-  );
-
-  await chekPointSignleTapHelper(
-    tester: tester,
-    index: 2,
-    hasAmount: true,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsFilterKeys.list,
-  );
-
-  await chekPointSignleTapHelper(
-    tester: tester,
-    index: 1,
-    hasAmount: true,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-    scrollKey: DiscountsFilterKeys.list,
-  );
-
-  await tester.tap(
-    find.byKey(DiscountsFilterKeys.cancelChip).first,
-    warnIfMissed: false,
-  );
-
-  await tester.pumpAndSettle();
+  await advancedFilterCloseOpenItemsHelper(tester);
 
   await chekPointSignleTapHelper(
     tester: tester,
@@ -180,7 +149,7 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(DiscountsFilterKeys.cancelChip),
-    matchers,
+    findsWidgets,
   );
 
   await scrollingHelper(
@@ -192,24 +161,26 @@ Future<void> advancedFilterHelper(
   if (isMobile) {
     // expect(
     //   find.byKey(DiscountsFilterKeys.cancelIcon),
-    //  matcher,
+    //  findsOneWidget,
     // );
 
     expect(
       find.byKey(DiscountsFilterKeys.dialog),
-      matcher,
+      findsOneWidget,
     );
 
     expect(
       find.byKey(DiscountsFilterKeys.mobAppliedButton),
-      matcher,
+      findsOneWidget,
     );
   }
 
-  await tester.tap(
-    find.byKey(DiscountsFilterKeys.resetButton),
-    warnIfMissed: false,
-  );
+  if (reset) {
+    await tester.tap(
+      find.byKey(DiscountsFilterKeys.resetButton),
+      warnIfMissed: false,
+    );
 
-  await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
+  }
 }

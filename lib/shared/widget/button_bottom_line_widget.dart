@@ -45,7 +45,7 @@ class ButtonBottomLineWidget extends StatefulWidget {
     required this.text,
     required this.onPressed,
     required this.widgetKey,
-    // required this.width,
+    required this.locale, // required this.width,
     super.key,
     this.icon,
   });
@@ -54,6 +54,7 @@ class ButtonBottomLineWidget extends StatefulWidget {
   final Widget? icon;
   final void Function() onPressed;
   final Key widgetKey;
+  final Language locale;
   // final double width;
 
   @override
@@ -71,6 +72,16 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
       // width: widget.width,
     );
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ButtonBottomLineWidget oldWidget) {
+    if (widget.locale != oldWidget.locale) {
+      textWidth = widget.text.getTextWidth(
+        textStyle: AppTextStyle.materialThemeTitleMedium,
+      );
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

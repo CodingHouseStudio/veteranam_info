@@ -71,14 +71,16 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
   }
 
   void _handleHover(bool isHovered) {
-    setState(() {
-      isHovering = isHovered;
-      if (isHovered) {
-        _controller.repeat(); // Start infinite rotation on hover
-      } else {
-        _controller.stop(); // Stop rotation when not hovered
-      }
-    });
+    if (isHovered != isHovering) {
+      setState(() {
+        isHovering = isHovered;
+        if (isHovered) {
+          _controller.repeat(); // Start infinite rotation on hover
+        } else {
+          _controller.stop(); // Stop rotation when not hovered
+        }
+      });
+    }
   }
 
   @override

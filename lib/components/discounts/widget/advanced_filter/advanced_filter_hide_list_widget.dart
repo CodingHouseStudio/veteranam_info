@@ -12,6 +12,7 @@ class AdvancedFilterListWidget extends StatefulWidget {
     required this.value,
     required this.onCancelWidgetPressed,
     required this.isLoading,
+    required this.cancelChipKey,
     super.key,
   });
   final bool isDesk;
@@ -21,6 +22,7 @@ class AdvancedFilterListWidget extends StatefulWidget {
   final FilterItem? value;
   final void Function(String activeItem) onCancelWidgetPressed;
   final bool isLoading;
+  final Key cancelChipKey;
 
   @override
   State<AdvancedFilterListWidget> createState() =>
@@ -67,7 +69,7 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                           ),
                           Flexible(
                             child: CancelChipWidget(
-                              widgetKey: DiscountsFilterKeys.cancelChip,
+                              widgetKey: widget.cancelChipKey,
                               isDesk: false,
                               maxLines: 1,
                               labelText:

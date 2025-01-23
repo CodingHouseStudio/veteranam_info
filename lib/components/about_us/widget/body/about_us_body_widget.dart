@@ -41,6 +41,7 @@ class _AboutUsBodyWidgetState extends State<AboutUsBodyWidget> {
           onChanged: () =>
               setState(() => switcherIsSelected = !switcherIsSelected),
         ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }
