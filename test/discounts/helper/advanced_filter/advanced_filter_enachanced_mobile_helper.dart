@@ -162,6 +162,17 @@ Future<void> advancedFilterEnchancedMobileHelper(
     itemKey: DiscountsFilterKeys.citySearchField,
   );
 
+  while (find.byKey(DiscountsFilterKeys.cityItems).evaluate().isEmpty) {
+    await KTestConstants.delay;
+
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingDown,
+      scrollKey: DiscountsFilterKeys.list,
+      itemKey: DiscountsFilterKeys.citySearchField,
+    );
+  }
+
   expect(
     find.byKey(DiscountsFilterKeys.cityItems),
     findsWidgets,
