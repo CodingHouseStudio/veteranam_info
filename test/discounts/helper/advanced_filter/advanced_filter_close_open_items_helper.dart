@@ -48,6 +48,11 @@ Future<void> advancedFilterCloseOpenItemsHelper(
     itemKey: DiscountsFilterKeys.citySearchField,
   );
 
+  expect(
+    find.byKey(DiscountsFilterKeys.cityItems),
+    findsWidgets,
+  );
+
   await chekPointSignleTapHelper(
     tester: tester,
     hasAmount: true,
