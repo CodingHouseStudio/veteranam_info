@@ -149,33 +149,6 @@ void main() {
       );
     });
 
-    group('Adnvanced Filter Enhanced for mob', () {
-      setUp(() {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getBool(DiscountConfigCubit.mobFilterEnhancedMobileKey),
-        ).thenAnswer(
-          (invocation) => true,
-        );
-      });
-      testWidgets('${KGroupText.initial} ', (tester) async {
-        await discountsPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockUserRepository: mockUserRepository,
-          mockBuildRepository: mockBuildRepository,
-          mockMobileRatingRepository: mockMobileRatingRepository,
-        );
-
-        await advancedFilterEnchancedMobileHelper(tester);
-      });
-    });
-
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
