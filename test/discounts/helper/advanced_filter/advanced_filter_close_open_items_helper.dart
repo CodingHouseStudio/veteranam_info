@@ -45,7 +45,39 @@ Future<void> advancedFilterCloseOpenItemsHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
     scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citiesText,
+  );
+
+  for (var i = 0; i < 2; i++) {
+    if (find.byKey(DiscountsFilterKeys.cityItems).evaluate().isEmpty) {
+      await tester.tap(find.byKey(DiscountsFilterKeys.citiesText));
+    }
+  }
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+    scrollKey: DiscountsFilterKeys.list,
     itemKey: DiscountsFilterKeys.citySearchField,
+  );
+
+  await tester.enterText(
+    find.byKey(DiscountsFilterKeys.citySearchField),
+    KTestVariables.fieldEmpty,
+  );
+
+  await tester.pumpAndSettle();
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+    scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citySearchField,
+  );
+
+  expect(
+    find.byKey(DiscountsFilterKeys.cityItems),
+    findsWidgets,
   );
 
   await chekPointSignleTapHelper(
