@@ -26,10 +26,10 @@ class UserEmailFormBloc extends Bloc<UserEmailFormEvent, UserEmailFormState> {
             emailEnum: UserEmailEnum.initial,
           ),
         ) {
-    on<_Started>(_onStarted);
     on<_UpdateEmail>(_onUpdatEmail);
     on<_SendEmail>(_onSendEmail);
     on<_SendEmailAfterClose>(_onSendEmailAfterClose);
+    _onStarted();
   }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
@@ -38,10 +38,7 @@ class UserEmailFormBloc extends Bloc<UserEmailFormEvent, UserEmailFormState> {
   // @visibleForTesting
   // static const emailScrollKey = '__email_scroll_count_key__';
 
-  Future<void> _onStarted(
-    _Started event,
-    Emitter<UserEmailFormState> emit,
-  ) async {
+  Future<void> _onStarted() async {
     final result = await _discountRepository
         .userCanSendUserEmail(_appAuthenticationRepository.currentUser.id);
     late UserEmailEnum userEmailEnum;
@@ -50,6 +47,7 @@ class UserEmailFormBloc extends Bloc<UserEmailFormEvent, UserEmailFormState> {
       (r) => userEmailEnum = UserEmailEnum.get(r),
     );
 
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(
       _Initial(
         email: const EmailFieldModel.pure(),

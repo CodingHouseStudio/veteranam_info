@@ -349,6 +349,10 @@ extension CompanyModelExtension on CompanyModel {
 }
 
 extension UriExtension on Uri {
-  static String get baseUrl =>
-      Config.isWeb && !KTest.isTest ? Uri.base.origin : KAppText.site;
+  static String get baseUrl => Config.isWeb && !KTest.isTest
+      ? Uri.base.origin
+      : testUrl ?? KAppText.site;
+
+  @visibleForTesting
+  static String? testUrl;
 }

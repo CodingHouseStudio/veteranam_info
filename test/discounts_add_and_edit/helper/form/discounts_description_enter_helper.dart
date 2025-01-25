@@ -7,7 +7,7 @@ import '../helper.dart';
 Future<void> discountsAddDescriptionEnterHelper({
   required WidgetTester tester,
   required String descriptionText,
-  required String exclusionsText,
+  required String requirmentsText,
 }) async {
   expect(
     find.byKey(DiscountsAddKeys.descriptionField),
@@ -38,7 +38,7 @@ Future<void> discountsAddDescriptionEnterHelper({
 
   await tester.enterText(
     find.byKey(DiscountsAddKeys.exclusionField),
-    exclusionsText,
+    requirmentsText,
   );
 
   await tester.pumpAndSettle();

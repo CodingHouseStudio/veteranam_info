@@ -12,6 +12,7 @@ import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
 import 'package:veteranam/shared/constants/constants_dart.dart';
+import 'package:veteranam/shared/extension/extension_dart_constants.dart';
 import 'package:veteranam/shared/models/models.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -115,6 +116,18 @@ abstract class KTestVariables {
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
   ];
+
+  static final questionModelSHort = QuestionModel(
+    id: KMockText.questionModel.id,
+    title: KMockText.questionModel.title
+        .setStringLength(KMinMaxSize.titleMaxLength),
+    titleEN: KMockText.questionModel.titleEN
+        .setStringLength(KMinMaxSize.titleMaxLength),
+    subtitle: KMockText.questionModel.subtitle
+        .setStringLength(KMinMaxSize.subtitleMaxLength),
+    subtitleEN: KMockText.questionModel.subtitleEN
+        .setStringLength(KMinMaxSize.subtitleMaxLength),
+  );
 
   static final workModelItems = <WorkModel>[
     for (var i = 0; i < _items; i++)
@@ -287,6 +300,15 @@ abstract class KTestVariables {
     ref: image,
     type: 'test_type',
   );
+  static const imagesList = [
+    ImageModel(
+      downloadURL: image,
+      lastModifiedTS: 1,
+      name: 'test_name',
+      ref: image,
+      type: 'test_type',
+    ),
+  ];
   static const imageModels = ImageModel(
     downloadURL: image,
     name: image,
@@ -364,9 +386,7 @@ abstract class KTestVariables {
     eligibility: [EligibilityEnum.all],
   );
 
-  static final blocSendDiscountModel = sendDiscountModel.copyWith(
-    eligibility: const [EligibilityEnum.all],
-  );
+  static final blocSendDiscountModel = sendDiscountModel;
 
   static final fullDiscount = KMockText.discountModel.copyWith(
     id: id,
@@ -384,8 +404,15 @@ abstract class KTestVariables {
     subLocation: null,
     userPhoto: null,
     phoneNumber: null,
-    requirements: null,
+    category: [TranslateModel(uk: KMockText.category.uk)],
+    location: [TranslateModel(uk: KMockText.location.uk)],
+    description: TranslateModel(uk: KMockText.discountDescription.uk),
+    requirements: TranslateModel(uk: KMockText.requirements.uk),
+    title: TranslateModel(uk: KMockText.discountTitle.uk),
+    // requirements: null,
     status: DiscountState.isNew,
+    exclusions: null,
+    likes: null,
     // subcategory: null,
     dateVerified: dateTime,
   );
@@ -444,6 +471,9 @@ abstract class KTestVariables {
                 : i == 2
                     ? SubLocation.online
                     : null,
+        eligibility: i == 0
+            ? const [EligibilityEnum.all]
+            : KMockText.discountModel.eligibility,
       ),
   ];
 
@@ -607,6 +637,7 @@ abstract class KTestVariables {
         timeSensitive: AppleNotificationSetting.disabled,
         criticalAlert: AppleNotificationSetting.disabled,
         sound: AppleNotificationSetting.disabled,
+        providesAppNotificationSettings: AppleNotificationSetting.disabled,
       );
   static final linkModel = LinkModel(
     id: id,
@@ -700,6 +731,7 @@ abstract class KScreenBlocName {
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';
   static const authentication = ' Authentication';
+  static const user = ' User';
   static const network = ' Network';
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';

@@ -172,7 +172,7 @@ void main() {
       //   when(
       //     mockFirebaseMessaging.getNotificationSettings(),
       //   ).thenAnswer(
-      //     (_) async => KTestText.notificationSettingsnotDetermined,
+      //     (_) async => KTestVariables.notificationSettingsnotDetermined,
       //   );
 
       //   expect(
@@ -180,7 +180,7 @@ void main() {
       //     isA<Right<SomeFailure, DeviceInfoModel?>>().having(
       //       (e) => e.value,
       //       'value',
-      //       KTestText.deviceInfoModel.copyWith(
+      //       KTestVariables.deviceInfoModel.copyWith(
       //         deviceId: webInfo.toString(),
       //         platform: PlatformEnum.unknown,
       //         build: AppInfoRepository.defaultValue.buildNumber,
@@ -196,14 +196,14 @@ void main() {
       //   when(
       //     mockFirebaseMessaging.getNotificationSettings(),
       //   ).thenAnswer(
-      //     (_) async => KTestText.notificationSettingsDenied,
+      //     (_) async => KTestVariables.notificationSettingsDenied,
       //   );
       //   expect(
       //     await deviceRepository.getDevice(),
       //     isA<Right<SomeFailure, DeviceInfoModel?>>().having(
       //       (e) => e.value,
       //       'value',
-      //       KTestText.deviceInfoModel.copyWith(
+      //       KTestVariables.deviceInfoModel.copyWith(
       //         deviceId: androidInfo.id,
       //         platform: PlatformEnum.android,
       //         build: AppInfoRepository.defaultValue.buildNumber,
@@ -294,7 +294,7 @@ void main() {
       // });
       // test('Get FCM ios when getAPNSToken is not null', () async {
       //   when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
-      //     (_) async => KTestText.field,
+      //     (_) async => KTestVariables.field,
       //   );
       //   expect(
       //     await deviceRepository.getFcm(
@@ -303,7 +303,7 @@ void main() {
       //     isA<Right<SomeFailure, String?>>().having(
       //       (e) => e.value,
       //       'value',
-      //       KTestText.fcmToken,
+      //       KTestVariables.fcmToken,
       //     ),
       //   );
       // });

@@ -61,6 +61,21 @@ void main() {
       ).thenAnswer(
         (_) => KTestVariables.build,
       );
+
+      when(
+        mockUserRepository.updateUserSetting(
+          userSetting: UserSetting.empty.copyWith(locale: Language.english),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockUserRepository.updateUserSetting(
+          userSetting: UserSetting.empty.copyWith(locale: Language.ukrain),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     testWidgets('${KGroupText.initial} ', (tester) async {
@@ -128,7 +143,8 @@ void main() {
         //         (realInvocation) => AuthenticationStatus.authenticated,
         //       );
         //       when(mockUserRepository.user).thenAnswer(
-        //         (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+        //         (realInvocation) => Stream.value(KTestVariables
+        // .userWithoutPhoto),
         //       );
         //       Config.roleValue = Config.business;
         //     },

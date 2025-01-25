@@ -10,7 +10,6 @@ Future<void> myDiscountConfirmButtonlHelper({
   await myDiscountDialogHelper(tester);
 
   await confirmDialogHelper(
-    tester: tester,
-    mockGoRouter: mockGoRouter,
+    tester,
   );
 }

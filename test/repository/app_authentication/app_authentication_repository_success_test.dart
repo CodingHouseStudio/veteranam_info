@@ -82,6 +82,16 @@ void main() {
       when(
         mockFirebaseAuth.sendPasswordResetEmail(
           email: KTestVariables.userEmail,
+          actionCodeSettings: firebase_auth.ActionCodeSettings(
+            url: '/${KRoute.login.path}',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockFirebaseAuth.sendPasswordResetEmail(
+          email: KTestVariables.userEmail,
         ),
       ).thenAnswer(
         (_) async {},
@@ -171,7 +181,8 @@ void main() {
         (_) => Stream.value(KTestVariables.userSettingModel),
       );
       // when(
-      //   mockFirestoreService.updateUserSetting(KTestText.userSettingModel),
+      //   mockFirestoreService.updateUserSetting(KTestVariables.
+      // userSettingModel),
       // ).thenAnswer(
       //   (_) async {},
       // );
@@ -254,14 +265,14 @@ void main() {
 
       // when(
       //   mockFirebaseAuth.currentUser?.updateDisplayName(
-      //     KTestText.profileUser.name,
+      //     KTestVariables.profileUser.name,
       //   ),
       // ).thenAnswer(
       //   (_) async {},
       // );
 
       // when(
-      //   mockUser.updatePhotoURL(KTestText.downloadURL),
+      //   mockUser.updatePhotoURL(KTestVariables.downloadURL),
       // ).thenAnswer(
       //   (_) async {},
       // );
@@ -344,6 +355,16 @@ void main() {
       );
     });
     test('Send verification code', () async {
+      UriExtension.testUrl = null;
+      expect(
+        await appAuthenticationRepository.sendVerificationCode(
+          email: KTestVariables.userEmail,
+        ),
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Send verification code(from not base url)', () async {
+      UriExtension.testUrl = KTestVariables.fieldEmpty;
       expect(
         await appAuthenticationRepository.sendVerificationCode(
           email: KTestVariables.userEmail,
@@ -379,7 +400,7 @@ void main() {
       ).called(1);
       // expect(
       //   appAuthenticationRepository.userSetting,
-      //   emits(KTestText.userSettingModel),
+      //   emits(KTestVariables.userSettingModel),
       // );
     });
     test('Get User', () async {
@@ -404,7 +425,7 @@ void main() {
       ).called(1);
       // expect(
       //   appAuthenticationRepository.user,
-      //   emits(KTestText.user),
+      //   emits(KTestVariables.user),
       // );
     });
     test('Current User', () async {
@@ -438,7 +459,7 @@ void main() {
       );
       // verifyNever(
       //   mockFirestoreService.setUserSetting(
-      //     userSetting: KTestText.userSettingModel,
+      //     userSetting: KTestVariables.userSettingModel,
       //     userId: User.empty.id,
       //   ),
       // );
@@ -518,7 +539,7 @@ void main() {
       expect(
         result,
         isA<Right<SomeFailure, User>>(),
-        // .having((e) => e.value, 'value', KTestText.profileUser),
+        // .having((e) => e.value, 'value', KTestVariables.profileUser),
       );
     });
 

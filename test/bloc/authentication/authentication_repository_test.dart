@@ -91,7 +91,7 @@ void main() {
           (_) async => const Right(true),
         );
         // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        //   (_) => KTestText.userSettingModel,
+        //   (_) => KTestVariables.userSettingModel,
         // );
         when(
           mockAppAuthenticationRepository.updateUserData(
@@ -166,7 +166,7 @@ void main() {
       // test('get user setting', () async {
       //   expect(
       //     authenticationRepository.currentUserSetting,
-      //     const UserSetting(id: KTestText.field),
+      //     const UserSetting(id: KTestVariables.field),
       //   );
       // });
       test('Log Out', () async {
@@ -179,7 +179,7 @@ void main() {
       // test('Send Verification Code To Email', () async {
       //   expect(
       //     await authenticationRepository.sendVerificationCodeToEmail(
-      //       email: KTestText.userEmail,
+      //       email: KTestVariables.userEmail,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -188,7 +188,7 @@ void main() {
       // test('Update User Setting', () async {
       //   expect(
       //     await authenticationRepository.updateUserSetting(
-      //       userSetting: KTestText.userSetting,
+      //       userSetting: KTestVariables.userSetting,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -216,18 +216,18 @@ void main() {
       // test('Update user data', () async {
       //   when(
       //     mockAppAuthenticationRepository.updateUserSetting(
-      //       KTestText.repositoryUserSetting,
+      //       KTestVariables.repositoryUserSetting,
       //     ),
       //   ).thenAnswer(
       //     (_) async => const Right(
-      //       KTestText.repositoryUserSetting,
+      //       KTestVariables.repositoryUserSetting,
       //     ),
       //   );
       //   expect(
       //     await authenticationRepository.updateUserData(
-      //       user: KTestText.profileUser,
-      //       image: KTestText.filePickerItem,
-      //       nickname: KTestText.nicknameCorrect,
+      //       user: KTestVariables.profileUser,
+      //       image: KTestVariables.filePickerItem,
+      //       nickname: KTestVariables.nicknameCorrect,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -238,18 +238,18 @@ void main() {
       //   when(
       //     mockAppAuthenticationRepository.updateUserSetting(
       //       const UserSetting(
-      //         id: KTestText.field,
-      //         nickname: KTestText.nicknameCorrect,
+      //         id: KTestVariables.field,
+      //         nickname: KTestVariables.nicknameCorrect,
       //       ),
       //     ),
       //   ).thenAnswer(
-      //     (_) async => const Right(KTestText.repositoryUserSetting),
+      //     (_) async => const Right(KTestVariables.repositoryUserSetting),
       //   );
       //   expect(
       //     await authenticationRepository.updateUserData(
-      //       user: KTestText.profileUser,
+      //       user: KTestVariables.profileUser,
       //       image: null,
-      //       nickname: KTestText.nicknameCorrect,
+      //       nickname: KTestVariables.nicknameCorrect,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -268,12 +268,12 @@ void main() {
       // });
       // test('Update user settings', () async {
       //   when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-      //     (_) => KTestText.userSettingModel,
+      //     (_) => KTestVariables.userSettingModel,
       //   );
 
       //   expect(
       //     await authenticationRepository.updateUserSetting(
-      //       userSetting: KTestText.userSetting,
+      //       userSetting: KTestVariables.userSetting,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -283,7 +283,7 @@ void main() {
       // test('Check verification code', () async {
       //   expect(
       //     await authenticationRepository.checkVerificationCode(
-      //       KTestText.code,
+      //       KTestVariables.code,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -293,8 +293,8 @@ void main() {
       // test('Reset password use code', () async {
       //   expect(
       //     await authenticationRepository.resetPasswordUseCode(
-      //       code: KTestText.code,
-      //       newPassword: KTestText.passwordCorrect,
+      //       code: KTestVariables.code,
+      //       newPassword: KTestVariables.passwordCorrect,
       //     ),
       //     isA<Right<SomeFailure, bool>>()
       //         .having((e) => e.value, 'value', isTrue),
@@ -436,7 +436,7 @@ void main() {
       // test('Send Verification Code To Email', () async {
       //   expect(
       //     await authenticationRepository.sendVerificationCodeToEmail(
-      //       email: KTestText.userEmailIncorrect,
+      //       email: KTestVariables.userEmailIncorrect,
       //     ),
       //     isA<Left<SomeFailure, bool>>(),
       //     // .having(
@@ -449,7 +449,7 @@ void main() {
       // test('Update User Setting', () async {
       //   expect(
       //     await authenticationRepository.updateUserSetting(
-      //       userSetting: KTestText.userSettingModel,
+      //       userSetting: KTestVariables.userSettingModel,
       //     ),
       //     isA<Left<SomeFailure, bool>>(),
       //     // .having(
@@ -474,8 +474,8 @@ void main() {
       //   when(
       //     mockAppAuthenticationRepository.updateUserSetting(
       //       const UserSetting(
-      //         id: KTestText.field,
-      //         nickname: KTestText.nicknameCorrect,
+      //         id: KTestVariables.field,
+      //         nickname: KTestVariables.nicknameCorrect,
       //       ),
       //     ),
       //   ).thenAnswer(
@@ -483,9 +483,9 @@ void main() {
       //   );
       //   expect(
       //     await authenticationRepository.updateUserData(
-      //       user: KTestText.profileUser,
-      //       image: KTestText.filePickerItem,
-      //       nickname: KTestText.nicknameCorrect,
+      //       user: KTestVariables.profileUser,
+      //       image: KTestVariables.filePickerItem,
+      //       nickname: KTestVariables.nicknameCorrect,
       //     ),
       //     isA<Left<SomeFailure, bool>>(),
       //   );
@@ -494,7 +494,7 @@ void main() {
       // test('Check verification code', () async {
       //   expect(
       //     await authenticationRepository.checkVerificationCode(
-      //       KTestText.code,
+      //       KTestVariables.code,
       //     ),
       //     isA<Left<SomeFailure, bool>>(),
       //   );
@@ -503,8 +503,8 @@ void main() {
       // test('Reset password use code', () async {
       //   expect(
       //     await authenticationRepository.resetPasswordUseCode(
-      //       code: KTestText.code,
-      //       newPassword: KTestText.passwordCorrect,
+      //       code: KTestVariables.code,
+      //       newPassword: KTestVariables.passwordCorrect,
       //     ),
       //     isA<Left<SomeFailure, bool>>(),
       //   );

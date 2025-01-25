@@ -20,17 +20,15 @@ class FeedbackBlocListener extends StatelessWidget {
             );
           },
         ),
-        BlocListener<UrlCubit, UrlEnum?>(
-          listener: (context, state) async {
-            if (state != null) {
-              context.dialog.showSnackBardTextDialog(
-                state.value(context),
-                duration: const Duration(milliseconds: 4000),
-              );
-              context.read<UrlCubit>().reset();
-            }
-          },
+        const BlocListener<UrlCubit, UrlEnum?>(
+          listener: UrlCubitExtension.listener,
         ),
+        if (!Config.isWeb)
+          BlocListener<AppVersionCubit, AppVersionState>(
+            listener: (context, state) => context.dialog.showMobUpdateAppDialog(
+              hasNewVersion: state.mobHasNewBuild,
+            ),
+          ),
       ],
       child: childWidget,
     );

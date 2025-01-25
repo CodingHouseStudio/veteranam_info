@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -17,6 +18,7 @@ void main() {
   group('${KScreenBlocName.mobSettings} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late UserRepository mockUserRepository;
     // late BuildRepository mockBuildRepository;
     setUp(() {
       Config.testIsWeb = false;
@@ -25,6 +27,7 @@ void main() {
 
       mockFeedbackRepository = MockIFeedbackRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockUserRepository = MockUserRepository();
       // mockBuildRepository = MockBuildRepository();
 
       when(
@@ -37,18 +40,39 @@ void main() {
       // when(
       //   mockFeedbackRepository.sendMobFeedback(
       //     feedback: FeedbackModel(
-      //       id: KTestText.id,
-      //       message: KTestText.field,
-      //       guestId: KTestText.user.id,
+      //       id: KTestVariables.id,
+      //       message: KTestVariables.field,
+      //       guestId: KTestVariables.user.id,
       //       guestName: null,
       //       email: null,
-      //       timestamp: KTestText.dateTime,
+      //       timestamp: KTestVariables.dateTime,
       //     ),
       //     image: Uint8List(1),
       //   ),
       // ).thenAnswer(
       //   (realInvocation) async => const Right(true),
       // );
+
+      when(mockUserRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockUserRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(
+        mockUserRepository.updateUserSetting(
+          userSetting: UserSetting.empty.copyWith(locale: Language.english),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockUserRepository.updateUserSetting(
+          userSetting: UserSetting.empty.copyWith(locale: Language.ukrain),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await mobSettingsPumpAppHelper(
@@ -56,6 +80,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
 
       await mobSettingsInitialHelper(tester);
@@ -66,6 +91,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUserRepository: mockUserRepository,
       );
 
       await mobFeedbackOpenHelper(
@@ -83,6 +109,7 @@ void main() {
           mockFeedbackRepository: mockFeedbackRepository,
           //mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockUserRepository: mockUserRepository,
           tester: tester,
         ),
       );
@@ -97,6 +124,7 @@ void main() {
           // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
+          mockUserRepository: mockUserRepository,
         );
 
         await mobSettingsInitialHelper(tester);
@@ -108,6 +136,7 @@ void main() {
           // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
+          mockUserRepository: mockUserRepository,
         );
 
         await mobFeedbackOpenHelper(
@@ -123,6 +152,7 @@ void main() {
             // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockUserRepository: mockUserRepository,
           );
 
           await mobSettingsFeedbackHelper(
@@ -138,6 +168,7 @@ void main() {
             // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockUserRepository: mockUserRepository,
           );
 
           await mobFaqNavigationHelper(
@@ -153,6 +184,7 @@ void main() {
             // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
+            mockUserRepository: mockUserRepository,
           );
 
           await privacyPolicyNavigationHelper(

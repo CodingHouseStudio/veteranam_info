@@ -17,7 +17,7 @@ Future<void> discountsAddCorectHelper({
     linkText: KTestVariables.sendDiscountModel.directLink!,
     discountsText: KTestVariables.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true, isEdit: isEdit,
-    // periodText: KTestText.sendDiscountModel.expiration!,
+    // periodText: KTestVariables.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);
@@ -34,13 +34,14 @@ Future<void> discountsAddCorectHelper({
   await discountsAddDescriptionEnterHelper(
     tester: tester,
     descriptionText: KTestVariables.sendDiscountModel.description.uk,
-    exclusionsText: KTestVariables.sendDiscountModel.exclusions!.uk,
+    requirmentsText: KTestVariables.sendDiscountModel.requirements!.uk,
   );
 
   if (!isEdit) {
     await confirmPublishDiscountDialogNavHelper(
       tester: tester,
       mockGoRouter: mockGoRouter,
+      openEvent: () async => discountsAddSendHelper(tester),
     );
   }
   expect(

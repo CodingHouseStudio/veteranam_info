@@ -8,6 +8,7 @@ import '../../../test_dependency.dart';
 Future<void> confirmPublishDiscountDialogNavHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  required Future<void> Function() openEvent,
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
@@ -15,15 +16,7 @@ Future<void> confirmPublishDiscountDialogNavHelper({
     windowsTest: true,
     size: KTestConstants.windowSmallSize,
     test: () async {
-      expect(
-        find.byKey(ConfirmPublishDiscountKeys.title),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(ConfirmPublishDiscountKeys.closeIcon),
-        findsOneWidget,
-      );
+      await confirmPublishDiscountDialogHelper(tester);
 
       await scrollingHelper(
         tester: tester,
@@ -37,35 +30,12 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
       await tester.pumpAndSettle();
 
-      verify(
-        () => mockGoRouter.pop(),
-      ).called(1);
-
-      expect(
-        find.byKey(ConfirmPublishDiscountKeys.description),
-        findsOneWidget,
+      await confirmPublishDiscountDialogHelper(
+        tester,
+        isDialogOpened: false,
       );
 
-      expect(
-        find.byKey(
-          ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
-        ),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(
-          ConfirmPublishDiscountKeys.termsAndConditionsText,
-        ),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(
-          ConfirmPublishDiscountKeys.termsAndConditionsButton,
-        ),
-        findsOneWidget,
-      );
+      await openEvent();
     },
   );
 
@@ -102,9 +72,12 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
   await tester.pumpAndSettle();
 
-  verify(
-    () => mockGoRouter.pop(),
-  ).called(1);
+  await confirmPublishDiscountDialogHelper(
+    tester,
+    isDialogOpened: false,
+  );
+
+  await openEvent();
 
   expect(
     find.byKey(
@@ -156,4 +129,9 @@ Future<void> confirmPublishDiscountDialogNavHelper({
   );
 
   await tester.pumpAndSettle();
+
+  await confirmPublishDiscountDialogHelper(
+    tester,
+    isDialogOpened: false,
+  );
 }

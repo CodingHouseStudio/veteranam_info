@@ -24,6 +24,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.deskTextWidth,
     this.icon,
     this.angle,
+    this.mobPadding,
   });
   final String text;
   final Color? color;
@@ -40,6 +41,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final Alignment? align;
   final bool? darkMode;
   final EdgeInsets? deskPadding;
+  final EdgeInsets? mobPadding;
   final double? deskIconPadding;
   final Icon? icon;
   final double? angle;
@@ -102,6 +104,7 @@ class DoubleButtonWidget extends StatelessWidget {
         textStyle: textStyleValue,
         icon: iconWidget,
         background: background,
+        padding: mobPadding,
       );
     }
   }
@@ -157,13 +160,17 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
     super.initState();
   }
 
+  void _hover(bool isHovered) {
+    if (isHovered != isHovering) setState(() => isHovering = isHovered);
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
       key: widget.widgetKey,
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
-      onHover: (value) => setState(() => isHovering = value),
+      onHover: _hover,
       child: RepaintBoundary(
         child: Stack(
           key: DoubleButtonKeys.desk,
@@ -236,6 +243,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     required this.background,
     required this.verticalTextPadding,
     required this.horizontalTextPadding,
+    required this.padding,
   });
   final String text;
   final void Function()? onPressed;
@@ -248,6 +256,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
   final Color? background;
   final double? verticalTextPadding;
   final double? horizontalTextPadding;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -268,10 +277,11 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
                   KSize.kPixel8,
             ),
             decoration: containerStyle,
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalTextPadding ?? KPadding.kPaddingSize30,
-              vertical: verticalTextPadding ?? KPadding.kPaddingSize8,
-            ),
+            padding: padding ??
+                EdgeInsets.symmetric(
+                  horizontal: horizontalTextPadding ?? KPadding.kPaddingSize30,
+                  vertical: verticalTextPadding ?? KPadding.kPaddingSize8,
+                ),
             child: Text(
               text,
               key: DoubleButtonKeys.text,

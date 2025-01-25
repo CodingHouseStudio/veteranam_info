@@ -149,6 +149,7 @@ class _CardTextDetailEvaluateWidgetState
                     ],
                   ),
                   SharedIconListWidget(
+                    dropMenuKey: CardTextDetailEvaluateKeys.popupMenuButton,
                     isDesk: widget.isDesk,
                     link: widget.link,
                     cardEnum: widget.cardEnum,

@@ -27,21 +27,21 @@ void main() {
       // mockReportRepository = MockIReportRepository();
       when(
         mockInvestorsRepository.getFunds(
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
             ),
       ).thenAnswer(
         (_) async => Right(KTestVariables.fundItems),
       );
       // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-      //   (invocation) => KTestText.user,
+      //   (invocation) => KTestVariables.user,
       // );
       // when(
       //   mockReportRepository.getCardReportById(
       //     cardEnum: CardEnum.funds,
-      //     userId: KTestText.user.id,
+      //     userId: KTestVariables.user.id,
       //   ),
       // ).thenAnswer(
-      //   (invocation) async => Right(KTestText.reportItems),
+      //   (invocation) async => Right(KTestVariables.reportItems),
       // );
       investorsWatcherBloc = InvestorsWatcherBloc(
         investorsRepository: mockInvestorsRepository,
@@ -72,7 +72,7 @@ void main() {
       act: (bloc) async {
         when(
           mockInvestorsRepository.getFunds(
-              // reportIdItems: KTestText.reportItems.getIdCard,
+              // reportIdItems: KTestVariables.reportItems.getIdCard,
               ),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError),
@@ -114,10 +114,10 @@ void main() {
     //     // when(
     //     //   mockReportRepository.getCardReportById(
     //     //     cardEnum: CardEnum.funds,
-    //     //     userId: KTestText.user.id,
+    //     //     userId: KTestVariables.user.id,
     //     //   ),
     //     // ).thenAnswer(
-    //     //   (invocation) async => Right([KTestText.reportItems.first]),
+    //     //   (invocation) async => Right([KTestVariables.reportItems.first]),
     //     // );
     //     // bloc.add(
     //     //   const InvestorsWatcherEvent.getReport(),
@@ -170,7 +170,7 @@ void main() {
     //     // when(
     //     //   mockReportRepository.getCardReportById(
     //     //     cardEnum: CardEnum.funds,
-    //     //     userId: KTestText.user.id,
+    //     //     userId: KTestVariables.user.id,
     //     //   ),
     //     // ).thenAnswer(
     //     //   (invocation) async => Left(
@@ -182,7 +182,7 @@ void main() {
     //     when(
     //       mockInvestorsRepository.getFunds(),
     //     ).thenAnswer(
-    //       (_) async => Right([KTestText.fundItems.first]),
+    //       (_) async => Right([KTestVariables.fundItems.first]),
     //     );
     //     bloc.add(const InvestorsWatcherEvent.started());
     //     await expectLater(

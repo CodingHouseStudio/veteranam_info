@@ -10,7 +10,7 @@ Future<void> informationInitialHelper(
 
   // await nawbarHelper(
   //   tester: tester,
-  //   searchText: KTestText.field,
+  //   searchText: KTestVariables.field,
   // );
   expect(
     find.byKey(InformationKeys.title),

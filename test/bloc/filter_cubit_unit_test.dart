@@ -10,20 +10,20 @@ void main() {
   //     'emits [List<dynamic>] when filter change first index',
   //     build: () => filterCubit,
   //     act: (cubit) async {
-  //       cubit.change(index: 0, filterValue: KTestText.filter);
+  //       cubit.change(index: 0, filterValue: KTestVariables.filter);
   //     },
   //     expect: () async => [
-  //       [KTestText.filter],
+  //       [KTestVariables.filter],
   //     ],
   //   );
   //   blocTest<FilterCubit, List<dynamic>>(
   //     'emits [List<dynamic>] when filter change change second index',
   //     build: () => filterCubit,
   //     act: (cubit) async {
-  //       cubit.change(index: 1, filterValue: KTestText.filter);
+  //       cubit.change(index: 1, filterValue: KTestVariables.filter);
   //     },
   //     expect: () async => [
-  //       ['', KTestText.filter],
+  //       ['', KTestVariables.filter],
   //     ],
   //   );
   //   blocTest<FilterCubit, List<dynamic>>(
@@ -32,12 +32,12 @@ void main() {
   //     build: () => filterCubit,
   //     act: (cubit) async {
   //       cubit
-  //         ..change(index: 0, filterValue: KTestText.filter)
-  //         ..change(index: 1, filterValue: KTestText.filter);
+  //         ..change(index: 0, filterValue: KTestVariables.filter)
+  //         ..change(index: 1, filterValue: KTestVariables.filter);
   //     },
   //     expect: () async => [
-  //       [KTestText.filter],
-  //       [KTestText.filter, KTestText.filter],
+  //       [KTestVariables.filter],
+  //       [KTestVariables.filter, KTestVariables.filter],
   //     ],
   //   );
   //   blocTest<FilterCubit, List<dynamic>>(
@@ -46,12 +46,12 @@ void main() {
   //     build: () => filterCubit,
   //     act: (cubit) async {
   //       cubit
-  //         ..change(index: 1, filterValue: KTestText.filter)
-  //         ..change(index: 0, filterValue: KTestText.filter);
+  //         ..change(index: 1, filterValue: KTestVariables.filter)
+  //         ..change(index: 0, filterValue: KTestVariables.filter);
   //     },
   //     expect: () async => [
-  //       ['', KTestText.filter],
-  //       [KTestText.filter, KTestText.filter],
+  //       ['', KTestVariables.filter],
+  //       [KTestVariables.filter, KTestVariables.filter],
   //     ],
   //   );
   //   blocTest<FilterCubit, List<dynamic>>(
@@ -60,11 +60,11 @@ void main() {
   //     build: () => filterCubit,
   //     act: (cubit) async {
   //       cubit
-  //         ..change(index: 1, filterValue: KTestText.filter)
+  //         ..change(index: 1, filterValue: KTestVariables.filter)
   //         ..resetAllValues();
   //     },
   //     expect: () async => [
-  //       ['', KTestText.filter],
+  //       ['', KTestVariables.filter],
   //       <dynamic>[],
   //     ],
   //   );

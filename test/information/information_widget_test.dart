@@ -73,7 +73,7 @@ void main() {
       setUp(() {
         when(
           mockInformationRepository.getInformationItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
+              // reportIdItems: KTestVariables.reportItems.getIdCard,
               ),
         ).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
@@ -99,7 +99,7 @@ void main() {
       setUp(() {
         when(
           mockInformationRepository.getInformationItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
+              // reportIdItems: KTestVariables.reportItems.getIdCard,
               ),
         ).thenAnswer(
           (invocation) => Stream.value([]),
@@ -135,7 +135,7 @@ void main() {
       setUp(() {
         when(
           mockInformationRepository.getInformationItems(
-              // reportIdItems: KTestText.reportItems.getIdCard,
+              // reportIdItems: KTestVariables.reportItems.getIdCard,
               ),
         ).thenAnswer(
           (invocation) => Stream.value(KTestVariables.informationModelItems),

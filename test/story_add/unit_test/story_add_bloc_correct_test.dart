@@ -59,8 +59,8 @@ void main() {
       // when(
       //   mockStoryRepository.addStory(
       //     imageItem: null,
-      //     storyModel: KTestText.storyModelItems.first.copyWith(
-      //       userPhoto: KTestText.userPhotoModel,
+      //     storyModel: KTestVariables.storyModelItems.first.copyWith(
+      //       userPhoto: KTestVariables.userPhotoModel,
       //     ),
       //   ),
       // ).thenAnswer(
@@ -154,7 +154,7 @@ void main() {
     //   act: (bloc) async {
     //     bloc
     //       ..add(
-    //         StoryAddEvent.storyUpdated(KTestText.storyModelItems.first
+    //         StoryAddEvent.storyUpdated(KTestVariables.storyModelItems.first
     // .story),
     //       )
     //       ..add(const StoryAddEvent.save());
@@ -164,7 +164,7 @@ void main() {
     //       (state) =>
     //           state.story ==
     //               MessageFieldModel.dirty(
-    //                 KTestText.storyModelItems.first.story,
+    //                 KTestVariables.storyModelItems.first.story,
     //               ) &&
     //           state.formStatus == FormzSubmissionStatus.inProgress,
     //     ),

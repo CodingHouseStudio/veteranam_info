@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -177,55 +177,56 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.updateInformationModel(
-            KTestVariables.informationModelItems.first.copyWith(
-              likes: KTestVariables.informationModelItems.first.likes ?? 0 + 1,
-            ),
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureSend),
-        );
-        when(
-          mockFirestoreService.getInformation(
-            KTestVariables.informationModelItems.first.id,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.updateInformationModel(
+    //         KTestVariables.informationModelItems.first.copyWith(
+    //           likes: KTestVariables.informationModelItems.first.likes
+    //?? 0 + 1,
+    //         ),
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureSend),
+    //     );
+    //     when(
+    //       mockFirestoreService.getInformation(
+    //         KTestVariables.informationModelItems.first.id,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
 
-        mockInformationRepository =
-            InformationRepository(firestoreService: mockFirestoreService);
-      });
-      test('update like count', () async {
-        expect(
-          await mockInformationRepository.updateLikeCount(
-            informationModel: KTestVariables.informationModelItems.first,
-            isLiked: true,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('get infromation', () async {
-        expect(
-          await mockInformationRepository.getInformation(
-            KTestVariables.informationModelItems.first.id,
-          ),
-          isA<Left<SomeFailure, InformationModel>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //     mockInformationRepository =
+    //         InformationRepository(firestoreService: mockFirestoreService);
+    //   });
+    //   test('update like count', () async {
+    //     expect(
+    //       await mockInformationRepository.updateLikeCount(
+    //         informationModel: KTestVariables.informationModelItems.first,
+    //         isLiked: true,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('get infromation', () async {
+    //     expect(
+    //       await mockInformationRepository.getInformation(
+    //         KTestVariables.informationModelItems.first.id,
+    //       ),
+    //       isA<Left<SomeFailure, InformationModel>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }

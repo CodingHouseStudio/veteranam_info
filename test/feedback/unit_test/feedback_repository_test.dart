@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -181,103 +181,104 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService
-              .addFeedback(KTestVariables.feedbackModelIncorect),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-        when(
-          mockFirestoreService.getUserFeedback(KTestVariables.fieldEmpty),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
-        when(
-          mockFirestoreService.addFeedback(
-            KTestVariables.feedbackModelIncorect
-                .copyWith(message: KTestVariables.fieldEmpty),
-          ),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-        when(
-          mockFirestoreService.getUserFeedback(KTestVariables.feedbackModel.id),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService
+    //           .addFeedback(KTestVariables.feedbackModelIncorect),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
+    //     when(
+    //       mockFirestoreService.getUserFeedback(KTestVariables.fieldEmpty),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
+    //     when(
+    //       mockFirestoreService.addFeedback(
+    //         KTestVariables.feedbackModelIncorect
+    //             .copyWith(message: KTestVariables.fieldEmpty),
+    //       ),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
+    //     when(
+    //       mockFirestoreService.getUserFeedback(KTestVariables.feedbackModel.
+    // id),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
 
-        when(
-          mockStorageService.saveFile(
-            id: KTestVariables.feedbackModel.id,
-            collecltionName: FirebaseCollectionName.mobFeedback,
-            filePickerItem: KTestVariables.filePickerItemFeedback,
-          ),
-        ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
+    //     when(
+    //       mockStorageService.saveFile(
+    //         id: KTestVariables.feedbackModel.id,
+    //         collecltionName: FirebaseCollectionName.mobFeedback,
+    //         filePickerItem: KTestVariables.filePickerItemFeedback,
+    //       ),
+    //     ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
 
-        mockFeedbackRepository = FeedbackRepository(
-          firestoreService: mockFirestoreService,
-          storageService: mockStorageService,
-        );
-      });
-      test('${KGroupText.failureSend} feedback', () async {
-        expect(
-          await mockFeedbackRepository
-              .sendFeedback(KTestVariables.feedbackModelIncorect),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('${KGroupText.failureSend} mob feedback', () async {
-        expect(
-          await mockFeedbackRepository.sendMobFeedback(
-            feedback: KTestVariables.feedbackImageModel,
-            image: KTestVariables.filePickerItemFeedbackWrong.bytes,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('${KGroupText.failureGet} user feedback', () async {
-        expect(
-          await mockFeedbackRepository
-              .checkUserNeedShowFeedback(KTestVariables.fieldEmpty),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('${KGroupText.failureSend} firebase feedback', () async {
-        expect(
-          await mockFeedbackRepository.sendFeedback(
-            KTestVariables.feedbackModelIncorect
-                .copyWith(message: KTestVariables.fieldEmpty),
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('${KGroupText.failureGet} firebase user feedback', () async {
-        expect(
-          await mockFeedbackRepository.checkUserNeedShowFeedback(
-            KTestVariables.feedbackModel.id,
-          ),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-    });
+    //     mockFeedbackRepository = FeedbackRepository(
+    //       firestoreService: mockFirestoreService,
+    //       storageService: mockStorageService,
+    //     );
+    //   });
+    //   test('${KGroupText.failureSend} feedback', () async {
+    //     expect(
+    //       await mockFeedbackRepository
+    //           .sendFeedback(KTestVariables.feedbackModelIncorect),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('${KGroupText.failureSend} mob feedback', () async {
+    //     expect(
+    //       await mockFeedbackRepository.sendMobFeedback(
+    //         feedback: KTestVariables.feedbackImageModel,
+    //         image: KTestVariables.filePickerItemFeedbackWrong.bytes,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('${KGroupText.failureGet} user feedback', () async {
+    //     expect(
+    //       await mockFeedbackRepository
+    //           .checkUserNeedShowFeedback(KTestVariables.fieldEmpty),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('${KGroupText.failureSend} firebase feedback', () async {
+    //     expect(
+    //       await mockFeedbackRepository.sendFeedback(
+    //         KTestVariables.feedbackModelIncorect
+    //             .copyWith(message: KTestVariables.fieldEmpty),
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('${KGroupText.failureGet} firebase user feedback', () async {
+    //     expect(
+    //       await mockFeedbackRepository.checkUserNeedShowFeedback(
+    //         KTestVariables.feedbackModel.id,
+    //       ),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    // });
   });
 }

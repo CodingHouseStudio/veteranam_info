@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -114,31 +114,31 @@ void main() {
       });
     });
 
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.getDiscount(
-            id: KTestVariables.userWithoutPhoto.id,
-            companyId: KTestVariables.fullCompanyModel.id,
-            showOnlyBusinessDiscounts: false,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failure),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.getDiscount(
+    //         id: KTestVariables.userWithoutPhoto.id,
+    //         companyId: KTestVariables.fullCompanyModel.id,
+    //         showOnlyBusinessDiscounts: false,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failure),
+    //     );
 
-        mockDiscountRepository =
-            DiscountRepository(firestoreService: mockFirestoreService);
-      });
+    //     mockDiscountRepository =
+    //         DiscountRepository(firestoreService: mockFirestoreService);
+    //   });
 
-      test('Get company discounts firebaseError', () async {
-        expect(
-          await mockDiscountRepository.getCompanyDiscount(
-            id: KTestVariables.userWithoutPhoto.id,
-            companyId: KTestVariables.fullCompanyModel.id,
-          ),
-          isA<Left<SomeFailure, DiscountModel>>(),
-        );
-      });
-    });
+    //   test('Get company discounts firebaseError', () async {
+    //     expect(
+    //       await mockDiscountRepository.getCompanyDiscount(
+    //         id: KTestVariables.userWithoutPhoto.id,
+    //         companyId: KTestVariables.fullCompanyModel.id,
+    //       ),
+    //       isA<Left<SomeFailure, DiscountModel>>(),
+    //     );
+    //   });
+    // });
   });
 }

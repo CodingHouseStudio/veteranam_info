@@ -361,37 +361,37 @@ void main() {
     //   build: () => feedbackBloc,
     //   act: (bloc) {
     //     when(
-    //       mockFeedbackRepository.sendFeedback(KTestText.feedbackModel),
+    //       mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel),
     //     ).thenAnswer(
     //       (_) async => const Left(SomeFailure.serverError),
     //     );
     //     bloc
-    //       ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-    //       ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
-    //       ..add(const FeedbackEvent.messageUpdated(KTestText.field))
+    //       ..add(const FeedbackEvent.nameUpdated(KTestVariables.field))
+    //       ..add(const FeedbackEvent.emailUpdated(KTestVariables.userEmail))
+    //       ..add(const FeedbackEvent.messageUpdated(KTestVariables.field))
     //       ..add(const FeedbackEvent.clear())
     //       ..add(const FeedbackEvent.save());
     //   },
     //   expect: () => [
     //     const FeedbackState(
     //       formState: FeedbackEnum.inProgress,
-    //       name: NameFieldModel.dirty(KTestText.nameCorrect),
+    //       name: NameFieldModel.dirty(KTestVariables.nameCorrect),
     //       email: EmailFieldModel.pure(),
     //       message: MessageFieldModel.pure(),
     //       failure: null,
     //     ),
     //     const FeedbackState(
     //       formState: FeedbackEnum.inProgress,
-    //       name: NameFieldModel.dirty(KTestText.nameCorrect),
-    //       email: EmailFieldModel.dirty(KTestText.userEmail),
+    //       name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+    //       email: EmailFieldModel.dirty(KTestVariables.userEmail),
     //       message: MessageFieldModel.pure(),
     //       failure: null,
     //     ),
     //     const FeedbackState(
     //       formState: FeedbackEnum.inProgress,
-    //       name: NameFieldModel.dirty(KTestText.nameCorrect),
-    //       email: EmailFieldModel.dirty(KTestText.userEmail),
-    //       message: MessageFieldModel.dirty(KTestText.field),
+    //       name: NameFieldModel.dirty(KTestVariables.nameCorrect),
+    //       email: EmailFieldModel.dirty(KTestVariables.userEmail),
+    //       message: MessageFieldModel.dirty(KTestVariables.field),
     //       failure: null,
     //     ),
     //     const FeedbackState(

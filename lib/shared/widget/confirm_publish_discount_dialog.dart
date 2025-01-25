@@ -39,7 +39,7 @@ class _ConfirmPublishDiscountDialogState
             child: IconButton(
               key: ConfirmPublishDiscountKeys.closeIcon,
               style: KButtonStyles.circularButtonStyle,
-              onPressed: context.pop,
+              onPressed: context.popDialog,
               icon: KIcon.close,
             ),
           ),
@@ -221,7 +221,12 @@ class _ConfirmPublishDiscountDialogState
       textColor: termsAndConditionsAgree
           ? null
           : AppColors.materialThemeRefSecondarySecondary50,
-      onPressed: termsAndConditionsAgree ? widget.onPressed : null,
+      onPressed: termsAndConditionsAgree
+          ? () {
+              widget.onPressed!();
+              context.popDialog();
+            }
+          : null,
       hasAlign: !widget.isDesk,
     );
   }

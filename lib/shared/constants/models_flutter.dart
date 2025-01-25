@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart' show Key, VoidCallback, Widget;
 
-class DropDownItem<T> {
-  DropDownItem({
+class PopupMenuCustomItem<T> {
+  PopupMenuCustomItem({
     required this.value,
     required this.text,
     required this.event,

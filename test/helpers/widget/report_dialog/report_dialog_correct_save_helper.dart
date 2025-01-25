@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
@@ -7,11 +8,15 @@ import '../../../test_dependency.dart';
 Future<void> reportDialogCorrectSaveHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  required Key? popupMenuKey,
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
-      await reportDialogOpenHelper(tester);
+      await reportDialogOpenHelper(
+        tester: tester,
+        popupMenuKey: popupMenuKey,
+      );
 
       expect(
         find.byKey(ReportDialogKeys.cancel),
@@ -32,7 +37,7 @@ Future<void> reportDialogCorrectSaveHelper({
 
       await reportDialogEnterTextHelper(
         tester: tester,
-        // email: KTestText.userEmail,
+        // email: KTestVariables.userEmail,
         message: KTestVariables.reportItems.first.message,
       );
 

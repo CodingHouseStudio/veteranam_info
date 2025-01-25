@@ -77,116 +77,103 @@ class DeviceRepository implements IDeviceRepository {
   Future<Either<SomeFailure, String>> getDeviceId({
     PlatformEnum? platformValue,
   }) async {
-    try {
-      final platform = platformValue ?? PlatformEnum.getPlatform;
-      String deviceId;
-      switch (platform) {
-        case PlatformEnum.android:
-          final dev = await _deviceInfoPlugin.androidInfo;
-          deviceId = dev.id;
-        case PlatformEnum.ios:
-          final dev = await _deviceInfoPlugin.iosInfo;
+    return eitherFutureHelper(
+      () async {
+        final platform = platformValue ?? PlatformEnum.getPlatform;
+        String deviceId;
+        switch (platform) {
+          case PlatformEnum.android:
+            final dev = await _deviceInfoPlugin.androidInfo;
+            deviceId = dev.id;
+          case PlatformEnum.ios:
+            final dev = await _deviceInfoPlugin.iosInfo;
 
-          deviceId = dev.identifierForVendor ?? 'unknown';
-        case PlatformEnum.web:
-          final dev = await _deviceInfoPlugin.webBrowserInfo;
+            deviceId = dev.identifierForVendor ?? 'unknown';
+          case PlatformEnum.web:
+            final dev = await _deviceInfoPlugin.webBrowserInfo;
 
-          // Get the user's browser name and platform
-          // (I think it will be enough unique for one user)
-          deviceId = '${dev.browserName} Platform: '
-              '${dev.platform ?? dev.userAgent?.getUserPlatform ?? 'unkown'}';
-        case PlatformEnum.unknown:
-          final dev = await _deviceInfoPlugin.deviceInfo;
-          deviceId = dev.toString();
-      }
-      return Right(deviceId);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Device(getDeviceId)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Platform: $platformValue',
-        ),
-      );
-    }
+            // Get the user's browser name and platform
+            // (I think it will be enough unique for one user)
+            deviceId = '${dev.browserName} Platform: '
+                '${dev.platform ?? dev.userAgent?.getUserPlatform ?? 'unkown'}';
+          case PlatformEnum.unknown:
+            final dev = await _deviceInfoPlugin.deviceInfo;
+            deviceId = dev.toString();
+        }
+        return Right(deviceId);
+      },
+      methodName: 'Device(getDeviceId)',
+      className: ErrorText.repositoryKey,
+      data: 'Platform: $platformValue',
+    );
   }
 
   @override
   Future<Either<SomeFailure, String?>> getFcm({
     PlatformEnum? platformValue,
   }) async {
-    try {
-      if (!await _firebaseMessaging.isSupported()) return const Right(null);
-      final platform = platformValue ?? PlatformEnum.getPlatform;
-      String? fcmToken;
+    return eitherFutureHelper(
+      () async {
+        if (!await _firebaseMessaging.isSupported()) return const Right(null);
+        final platform = platformValue ?? PlatformEnum.getPlatform;
+        String? fcmToken;
 
-      var notificationSettings =
-          await _firebaseMessaging.getNotificationSettings();
-      switch (notificationSettings.authorizationStatus) {
-        case AuthorizationStatus.denied:
-          if (platform.isAndroid) {
+        var notificationSettings =
+            await _firebaseMessaging.getNotificationSettings();
+        switch (notificationSettings.authorizationStatus) {
+          case AuthorizationStatus.denied:
+            if (platform.isAndroid) {
+              notificationSettings = await handleRequestPermission(platform);
+            }
+          case AuthorizationStatus.notDetermined:
+            notificationSettings = await handleRequestPermission(
+              platform,
+              provisional: true,
+            );
+          case AuthorizationStatus.provisional:
             notificationSettings = await handleRequestPermission(platform);
+          case AuthorizationStatus.authorized:
+            break;
+        }
+
+        if (notificationSettings.authorizationStatus ==
+                AuthorizationStatus.authorized ||
+            (platform.isIOS &&
+                notificationSettings.authorizationStatus ==
+                    AuthorizationStatus.provisional)) {
+          String? apnsToken;
+          // For iOS, retrieve the apnsToken, which is required for FCM to send
+          // messages via APNs.
+          // If the apnsToken is not available (e.g., user hasn't granted
+          // permissions),
+          // FCM won't be able to deliver push notifications to this iOS device.
+          if (platform.isIOS) {
+            /// Message from firebase website - https://firebase.google.com/docs/cloud-messaging/flutter/client#access_the_registration_token
+            // Warning: In iOS SDK 10.4.0 and higher, it is a requirement that
+            // the APNs token is available before making API requests.
+            // The APNs token is not guaranteed to have been received
+            // before making FCM plugin API requests.
+            apnsToken = await _firebaseMessaging.getAPNSToken();
           }
-        case AuthorizationStatus.notDetermined:
-          notificationSettings = await handleRequestPermission(
-            platform,
-            provisional: true,
-          );
-        case AuthorizationStatus.provisional:
-          notificationSettings = await handleRequestPermission(platform);
-        case AuthorizationStatus.authorized:
-          break;
-      }
-
-      if (notificationSettings.authorizationStatus ==
-              AuthorizationStatus.authorized ||
-          (platform.isIOS &&
-              notificationSettings.authorizationStatus ==
-                  AuthorizationStatus.provisional)) {
-        String? apnsToken;
-        // For iOS, retrieve the apnsToken, which is required for FCM to send
-        // messages via APNs.
-        // If the apnsToken is not available (e.g., user hasn't granted
-        // permissions),
-        // FCM won't be able to deliver push notifications to this iOS device.
-        if (platform.isIOS) {
-          /// Message from firebase website - https://firebase.google.com/docs/cloud-messaging/flutter/client#access_the_registration_token
-          // Warning: In iOS SDK 10.4.0 and higher, it is a requirement that
-          // the APNs token is available before making API requests.
-          // The APNs token is not guaranteed to have been received
-          // before making FCM plugin API requests.
-          apnsToken = await _firebaseMessaging.getAPNSToken();
+          // Proceed with generating the fcmToken only if:
+          // - The platform is not iOS (no apnsToken is needed),
+          // - or the platform is iOS and apnsToken is successfully retrieved.
+          // The fcmToken, combined with apnsToken on iOS, enables proper
+          // delivery
+          // of notifications.
+          if (!platform.isIOS || apnsToken != null) {
+            fcmToken = await _firebaseMessaging.getToken(
+              vapidKey: KSecurityKeys.firebaseVapidKey,
+            );
+          }
         }
-        // Proceed with generating the fcmToken only if:
-        // - The platform is not iOS (no apnsToken is needed),
-        // - or the platform is iOS and apnsToken is successfully retrieved.
-        // The fcmToken, combined with apnsToken on iOS, enables proper delivery
-        // of notifications.
-        if (!platform.isIOS || apnsToken != null) {
-          fcmToken = await _firebaseMessaging.getToken(
-            vapidKey: KSecurityKeys.firebaseVapidKey,
-          );
-        }
-      }
 
-      return Right(fcmToken);
-    } catch (e, stack) {
-      final failure = SomeFailure.value(
-        error: e,
-        stack: stack,
-        tag: 'Device(getFcm)',
-        tagKey: ErrorText.repositoryKey,
-        data: 'Platform: $platformValue',
-      );
-      // if (failure != null) {
-      return Left(
-        failure,
-      );
-      // }
-      // return const Right(null);
-    }
+        return Right(fcmToken);
+      },
+      methodName: 'Device(getFcm)',
+      className: ErrorText.repositoryKey,
+      data: 'Platform: $platformValue',
+    );
   }
 
   /// This method should return a value because, on the first run,

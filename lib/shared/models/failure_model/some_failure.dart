@@ -19,6 +19,7 @@ enum SomeFailure with _Exception {
   maxRetries,
   loadFileCancel,
   cancelled,
+  filter,
   fcm,
   unauthorized,
   userNotFound,
@@ -45,6 +46,7 @@ enum SomeFailure with _Exception {
   shareInProgress,
   providerAlreadyLinked,
   serviceWorkerRegistration,
+  unsupported,
   // notFound,
   setExistData;
 
@@ -126,8 +128,8 @@ enum SomeFailure with _Exception {
         return ErrorText.copyError;
       case SomeFailure.wrongVerifyCode:
         return ErrorText.wrongVerifyCodeError;
-      // case SomeFailure.filter:
-      //   return ErrorText.filterError;
+      case SomeFailure.filter:
+        return ErrorText.filterError;
       case SomeFailure.browserNotSupportPopupDialog:
         return ErrorText.browserNotSupportPopupDialogError;
       case SomeFailure.emailInvalidFormat:
@@ -166,6 +168,8 @@ enum SomeFailure with _Exception {
         return ErrorText.providerAlreadyLinked;
       case SomeFailure.serviceWorkerRegistration:
         return ErrorText.serviceWorkerRegistration;
+      case SomeFailure.unsupported:
+        return ErrorText.unsupportedError;
     }
   }
 

@@ -38,6 +38,15 @@ Future<void> userRoleInitialHelper(
         find.byKey(UserRoleKeys.loginButton),
         findsOneWidget,
       );
+
+      await popupMenuButtonHelper(
+        tester: tester,
+        buttonListKeys: const [
+          UserRoleKeys.loginBusinessButton,
+          UserRoleKeys.loginUserButton,
+        ],
+        buttonKey: UserRoleKeys.loginButton,
+      );
     },
   );
 }

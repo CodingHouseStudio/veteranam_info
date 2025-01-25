@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
-import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -24,67 +23,78 @@ class AdvancedFilterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = [
-      if (isDesk)
-        BlocSelector<
-            DiscountsWatcherBloc,
-            DiscountsWatcherState,
-            ({
-              Map<String, FilterItem> chosenItems,
-              int categoriesLength,
-              int eligibilitiesLength,
-            })>(
-          selector: (state) => (
-            chosenItems: state.discountFilterRepository.getActivityList,
-            categoriesLength:
-                state.discountFilterRepository.activeCategoryMap.length,
-            eligibilitiesLength:
-                state.discountFilterRepository.activeEligibilityMap.length,
-          ),
-          // buildWhen: (previous, current) =>
-          //     previous.discountFilterRepository.getActivityList !=
-          //         current.discountFilterRepository.getActivityList ||
-          //     previous.filterStatus != current.filterStatus,
-          builder: (context, state) {
-            if (state.chosenItems.isNotEmpty) {
-              return SliverMainAxisGroup(
-                slivers: [
-                  if (isDesk)
-                    SliverToBoxAdapter(
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: AdvancedFilterResetButton(
-                          isDesk: true,
-                          resetEvent: () => context
-                              .read<DiscountsWatcherBloc>()
-                              .add(const DiscountsWatcherEvent.filterReset()),
+      BlocSelector<DiscountConfigCubit, DiscountConfigState, bool>(
+        selector: (state) => state.mobFilterEnhancedMobile,
+        builder: (context, mobFilterEnhancedMobile) {
+          if (isDesk || !mobFilterEnhancedMobile) {
+            return BlocSelector<
+                DiscountsWatcherBloc,
+                DiscountsWatcherState,
+                ({
+                  Map<String, FilterItem> chosenItems,
+                  int categoriesLength,
+                  int eligibilitiesLength,
+                })>(
+              selector: (state) => (
+                chosenItems: state.discountFilterRepository.getActivityList,
+                categoriesLength:
+                    state.discountFilterRepository.activeCategoryMap.length,
+                eligibilitiesLength:
+                    state.discountFilterRepository.activeEligibilityMap.length,
+              ),
+              // buildWhen: (previous, current) =>
+              //     previous.discountFilterRepository.getActivityList !=
+              //         current.discountFilterRepository.getActivityList ||
+              //     previous.filterStatus != current.filterStatus,
+              builder: (context, state) {
+                if (state.chosenItems.isNotEmpty) {
+                  return SliverMainAxisGroup(
+                    slivers: [
+                      if (isDesk)
+                        SliverToBoxAdapter(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: AdvancedFilterResetButton(
+                              isDesk: true,
+                              resetEvent: () => context
+                                  .read<DiscountsWatcherBloc>()
+                                  .add(
+                                    const DiscountsWatcherEvent.filterReset(),
+                                  ),
+                            ),
+                          ),
+                        )
+                      else
+                        SliverToBoxAdapter(
+                          child: Text(
+                            context.l10n.filterApplied,
+                            key: DiscountsFilterKeys.appliedText,
+                            style: AppTextStyle.materialThemeTitleMedium,
+                          ),
+                        ),
+                      SliverPadding(
+                        padding: const EdgeInsets.only(
+                          right: KPadding.kPaddingSize8,
+                        ),
+                        sliver: _ChooseItems(
+                          isDesk: isDesk,
+                          chosenItems: state.chosenItems,
+                          categoriesLength: state.categoriesLength,
+                          eligibilitiesLength: state.eligibilitiesLength,
                         ),
                       ),
-                    )
-                  else
-                    SliverToBoxAdapter(
-                      child: Text(
-                        context.l10n.filterApplied,
-                        key: DiscountsKeys.appliedFilterText,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                      ),
-                    ),
-                  SliverPadding(
-                    padding:
-                        const EdgeInsets.only(right: KPadding.kPaddingSize8),
-                    sliver: _ChooseItems(
-                      isDesk: isDesk,
-                      chosenItems: state.chosenItems,
-                      categoriesLength: state.categoriesLength,
-                      eligibilitiesLength: state.eligibilitiesLength,
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return const SliverToBoxAdapter();
-            }
-          },
-        ),
+                    ],
+                  );
+                } else {
+                  return const SliverToBoxAdapter();
+                }
+              },
+            );
+          } else {
+            return const SliverToBoxAdapter();
+          }
+        },
+      ),
       BlocSelector<
           DiscountsWatcherBloc,
           DiscountsWatcherState,
@@ -118,10 +128,11 @@ class AdvancedFilterContent extends StatelessWidget {
                       ),
                     ),
                 isDesk: isDesk,
-                itemKey: DiscountsKeys.eligibilitiesItems,
+                itemKey: DiscountsFilterKeys.eligibilitiesItems,
                 isLoading: state.isLoading,
               ),
-              textKey: DiscountsKeys.eligibilitiesText,
+              cancelChipKey: DiscountsFilterKeys.eligibilitiesCancelChip,
+              textKey: DiscountsFilterKeys.eligibilitiesText,
               title: context.l10n.eligibility,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -171,10 +182,11 @@ class AdvancedFilterContent extends StatelessWidget {
                       ),
                     ),
                 isDesk: isDesk,
-                itemKey: DiscountsKeys.categoriesItems,
+                itemKey: DiscountsFilterKeys.categoriesItems,
                 isLoading: state.isLoading,
               ),
-              textKey: DiscountsKeys.categoriesText,
+              cancelChipKey: DiscountsFilterKeys.categoriesCancelChip,
+              textKey: DiscountsFilterKeys.categoriesText,
               title: context.l10n.category,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -239,12 +251,13 @@ class AdvancedFilterContent extends StatelessWidget {
                               ),
                             ),
                     isDesk: isDesk,
-                    itemKey: DiscountsKeys.cityItems,
+                    itemKey: DiscountsFilterKeys.cityItems,
                     isLoading: state.isLoading,
                   ),
                 ],
               ),
-              textKey: DiscountsKeys.citiesText,
+              cancelChipKey: DiscountsFilterKeys.cityCancelChip,
+              textKey: DiscountsFilterKeys.citiesText,
               title: context.l10n.city,
               value: state.firstActiveItem,
               onCancelWidgetPressed: (value) =>
@@ -272,7 +285,7 @@ class AdvancedFilterContent extends StatelessWidget {
               horizontal: KPadding.kPaddingSize16,
             ),
       child: CustomScrollView(
-        key: DiscountsKeys.advancedFilterList,
+        key: DiscountsFilterKeys.list,
         primary: true,
         slivers: body,
         shrinkWrap: isDesk,
@@ -297,8 +310,12 @@ class _AdvancedListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return _AdvancedLoadingListWidget(isDesk: isDesk, itemKey: itemKey);
+    if (isLoading || KTest.testLoading) {
+      return _AdvancedLoadingListWidget(
+        key: DiscountsFilterKeys.loadingItems,
+        isDesk: isDesk,
+        itemKey: itemKey,
+      );
     }
     return SliverPrototypeExtentList.builder(
       prototypeItem: Padding(
@@ -389,7 +406,7 @@ class _ChooseItems extends StatelessWidget {
               final chooseItem =
                   chosenItems[chosenItems.keys.elementAt(index)]!;
               return CancelChipWidget(
-                widgetKey: DiscountsKeys.appliedFilterItems,
+                widgetKey: DiscountsFilterKeys.cancelChip,
                 isDesk: isDesk,
                 labelText: chooseItem.value.getTrsnslation(context),
                 onPressed: () {
@@ -487,6 +504,7 @@ class _AdvancedLoadingListWidget extends StatelessWidget {
   const _AdvancedLoadingListWidget({
     required this.isDesk,
     required this.itemKey,
+    super.key,
   });
   final bool isDesk;
   final Key itemKey;

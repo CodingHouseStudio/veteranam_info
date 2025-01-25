@@ -78,37 +78,37 @@ void main() {
 
         await discountsAddInitialHelper(tester: tester);
       });
-      // testWidgets('Discount enter correct(Mobile)', (tester) async {
-      //   await discountsAddPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockCompanyRepository: mockCompanyRepository,
-      //     mockCitiesRepository: mockCitiesRepository,
-      //     mockGoRouter: mockGoRouter,
-      //   );
+      testWidgets('Discount enter correct(Mobile)', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockCompanyRepository: mockCompanyRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
 
-      //   await discountsAddCorectHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //   );
-      // });
-      // testWidgets('Discount enter correct(Desk)', (tester) async {
-      //   await discountsAddPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockCompanyRepository: mockCompanyRepository,
-      //     mockCitiesRepository: mockCitiesRepository,
-      //     mockGoRouter: mockGoRouter,
-      //   );
+        await discountsAddCorectHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
+      });
+      testWidgets('Discount enter correct(Desk)', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockCompanyRepository: mockCompanyRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
 
-      //   await changeWindowSizeHelper(
-      //     tester: tester,
-      //     test: () async => discountsAddCorectHelper(
-      //       tester: tester,
-      //       mockGoRouter: mockGoRouter,
-      //     ),
-      //   );
-      // });
+        await changeWindowSizeHelper(
+          tester: tester,
+          test: () async => discountsAddCorectHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          ),
+        );
+      });
       testWidgets('Discount enter uncorrect', (tester) async {
         await discountsAddPumpAppHelper(
           tester: tester,
@@ -124,21 +124,21 @@ void main() {
         );
       });
 
-      // testWidgets('Cancel dialog unconfirm button pop', (tester) async {
-      //   await discountsAddPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockCompanyRepository: mockCompanyRepository,
-      //     mockCitiesRepository: mockCitiesRepository,
-      //     mockGoRouter: mockGoRouter,
-      //   );
+      testWidgets('Cancel dialog unconfirm button pop', (tester) async {
+        await discountsAddPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockCompanyRepository: mockCompanyRepository,
+          mockCitiesRepository: mockCitiesRepository,
+          mockGoRouter: mockGoRouter,
+        );
 
-      //   await discountsAddUnconfirmButtonlHelper(
-      //     tester: tester,
-      //     mockGoRouter: mockGoRouter,
-      //     icon: false,
-      //   );
-      // });
+        await discountsAddUnconfirmButtonlHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+          icon: false,
+        );
+      });
       testWidgets('Cancel dialog cancel icon pop', (tester) async {
         await discountsAddPumpAppHelper(
           tester: tester,

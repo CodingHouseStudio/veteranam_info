@@ -20,18 +20,8 @@ class DiscountsBlocListener extends StatelessWidget {
             }
           },
         ),
-        BlocListener<UrlCubit, UrlEnum?>(
-          listener: (context, state) {
-            if (state != null) {
-              context.dialog.showSnackBardTextDialog(
-                state.value(
-                  context,
-                ),
-                duration: const Duration(milliseconds: 4000),
-              );
-              context.read<UrlCubit>().reset();
-            }
-          },
+        const BlocListener<UrlCubit, UrlEnum?>(
+          listener: UrlCubitExtension.listener,
         ),
         BlocListener<DiscountsWatcherBloc, DiscountsWatcherState>(
           listener: (context, state) {
@@ -50,15 +40,15 @@ class DiscountsBlocListener extends StatelessWidget {
               );
             }
 
-            if (state.filterDiscountModelList.length ==
-                (context.read<DiscountConfigCubit>().state.loadingItems *
-                    (context
-                            .read<DiscountConfigCubit>()
-                            .state
-                            .emailScrollCount +
-                        1))) {
-              // if (Config.isWeb) {
-              if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
+            if (context.read<UserEmailFormBloc>().state.emailEnum.show) {
+              if (state.filterDiscountModelList.length ==
+                  (context.read<DiscountConfigCubit>().state.loadingItems *
+                      (context
+                              .read<DiscountConfigCubit>()
+                              .state
+                              .emailScrollCount +
+                          1))) {
+                // if (Config.isWeb) {
                 if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
                     true) {
                   context.dialog.showUserEmailDialog(
@@ -76,6 +66,12 @@ class DiscountsBlocListener extends StatelessWidget {
               previous.filterDiscountModelList.length !=
                   current.filterDiscountModelList.length,
         ),
+        if (!Config.isWeb)
+          BlocListener<AppVersionCubit, AppVersionState>(
+            listener: (context, state) => context.dialog.showMobUpdateAppDialog(
+              hasNewVersion: state.mobHasNewBuild,
+            ),
+          ),
       ],
       child: childWidget,
     );

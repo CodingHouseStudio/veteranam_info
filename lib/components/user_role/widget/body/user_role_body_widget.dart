@@ -94,7 +94,7 @@ class UserRoleBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox32,
         Row(
-          key: UserRoleKeys.loginButton,
+          // key: UserRoleKeys.loginButton,
           mainAxisAlignment:
               isDesk ? MainAxisAlignment.center : MainAxisAlignment.start,
           spacing: KPadding.kPaddingSize16,
@@ -105,9 +105,10 @@ class UserRoleBodyWidget extends StatelessWidget {
               style: AppTextStyle.materialThemeTitleMedium,
             ),
             PopupMenuButtonWidget<int>(
+              key: UserRoleKeys.loginButton,
               buttonText: context.l10n.login,
               items: [
-                DropDownItem(
+                PopupMenuCustomItem(
                   text: context.l10n.asBusiness,
                   event: () => context.read<UrlCubit>().launchUrl(
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
@@ -115,7 +116,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   key: UserRoleKeys.loginBusinessButton,
                   value: 1,
                 ),
-                DropDownItem(
+                PopupMenuCustomItem(
                   text: context.l10n.asUser,
                   event: () => context.goNamed(KRoute.login.name),
                   key: UserRoleKeys.loginUserButton,

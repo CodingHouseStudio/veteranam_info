@@ -35,10 +35,23 @@ Future<void> discountsInitialHelper(
       );
       // }
 
-      // expect(
-      //   find.byKey(DiscountsKeys.filter),
-      //   findsOneWidget,
-      // );
+      expect(
+        find.byKey(DiscountsKeys.sortingButton),
+        findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: DiscountsKeys.sortingButton,
+      );
+
+      await popupMenyButtonTapHelper(
+        tester: tester,
+        buttonListKeys: DiscountsKeys.sortingList,
+        buttonKey: DiscountsKeys.sortingButton,
+      );
+
+      await discountsViewModeHelper(tester);
 
       // await filterChipHelper(tester);
 
@@ -53,8 +66,6 @@ Future<void> discountsInitialHelper(
         tester: tester,
         itemKey: DiscountsKeys.title,
       );
-
-      // await advancedFilterHelper(tester);
 
       expect(
         find.byKey(DiscountsKeys.card),

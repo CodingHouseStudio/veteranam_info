@@ -50,7 +50,7 @@ void main() {
         //   ..add(const DiscountCardWatcherEvent.started(''))
         //   ..add(
         //     DiscountCardWatcherEvent.started(
-        //       KTestText.discountModelItems.first.id,
+        //       KTestVariables.discountModelItems.first.id,
         //     ),
         //   );
       },
@@ -101,10 +101,11 @@ void main() {
           id: '',
         ),
         // act: (bloc) async {
-        //   await bloc.onStarted(id: KTestText.discountModelItems.first.id);
+        //   await bloc.onStarted(id: KTestVariables.discountModelItems.
+        // first.id);
         //   // bloc.add(
         //   //   DiscountCardWatcherEvent.started(
-        //   //     KTestText.discountModelItems.first.id,
+        //   //     KTestVariables.discountModelItems.first.id,
         //   //   ),
         //   // );
         // },

@@ -38,16 +38,16 @@ void main() {
       mockUserRepository = MockUserRepository();
 
       // when(mockAuthenticationRepository.userSetting).thenAnswer(
-      //   (realInvocation) => Stream.value(KTestText.userSetting),
+      //   (realInvocation) => Stream.value(KTestVariables.userSetting),
       // );
       // when(mockAuthenticationRepository.user).thenAnswer(
-      //   (realInvocation) => Stream.value(KTestText.userAnonymous),
+      //   (realInvocation) => Stream.value(KTestVariables.userAnonymous),
       // );
       // when(mockAuthenticationRepository.currentUser).thenAnswer(
       //   (realInvocation) => User.empty,
       // );
       // when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-      //   (realInvocation) => KTestText.userSetting,
+      //   (realInvocation) => KTestVariables.userSetting,
       // );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestVariables.questionModelItems),
@@ -63,10 +63,10 @@ void main() {
       // when(
       //   mockReportRepository.getCardReportById(
       //     cardEnum: CardEnum.discount,
-      //     userId: KTestText.user.id,
+      //     userId: KTestVariables.user.id,
       //   ),
       // ).thenAnswer(
-      //   (invocation) async => Right(KTestText.reportItems),
+      //   (invocation) async => Right(KTestVariables.reportItems),
       // );
 
       when(mockDiscountRepository.userCanSendLink(KTestVariables.user.id))
@@ -80,7 +80,7 @@ void main() {
       when(
         mockDiscountRepository.getDiscountItems(
           showOnlyBusinessDiscounts: false,
-          // reportIdItems: KTestText.reportItems.getIdCard,
+          // reportIdItems: KTestVariables.reportItems.getIdCard,
         ),
       ).thenAnswer(
         (invocation) => Stream.value(KTestVariables.discountModelItemsModify),
@@ -88,7 +88,7 @@ void main() {
 
       when(
         mockInvestorsReportisory.getFunds(
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
             ),
       ).thenAnswer(
         (invocation) async => Right(KTestVariables.fundItems),

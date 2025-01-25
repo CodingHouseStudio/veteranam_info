@@ -7,7 +7,7 @@ import '../../test_dependency.dart';
 Future<void> homeInitialHelper(
   WidgetTester tester,
 ) async {
-  await nawbarHelper(tester: tester, searchText: KTestText.field);
+  await nawbarHelper(tester: tester, searchText: KTestVariables.field);
 
   expect(
     find.byKey(HomeKeys.box),

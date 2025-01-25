@@ -194,7 +194,7 @@ void main() {
 
     blocTest<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
       'emits [WorkEmployeeWatcherState()]'
-      ' when load workModel list and loadPage KTestText.workModelItems.'
+      ' when load workModel list and loadPage KTestVariables.workModelItems.'
       ' length',
       build: () => workEmployeeWatcherBloc,
       act: (bloc) async {

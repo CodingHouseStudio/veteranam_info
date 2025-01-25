@@ -15,7 +15,7 @@ extension PumpApp on WidgetTester {
     if (routeName != null) {
       await footerButtonHelper(
         tester: tester,
-        buttonKey: KTestText.getFooterKey(routeName),
+        buttonKey: KTestVariables.getFooterKey(routeName),
       );
     }
   }

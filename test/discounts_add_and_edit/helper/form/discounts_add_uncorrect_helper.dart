@@ -28,7 +28,7 @@ Future<void> discountsAddUncorectHelper({
     linkText: KTestVariables.sendDiscountModel.directLink!,
     discountsText: KTestVariables.sendDiscountModel.discount.first.toString(),
     eligibilityTap: true,
-    // periodText: KTestText.sendDiscountModel.expiration!,
+    // periodText: KTestVariables.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);
@@ -39,7 +39,7 @@ Future<void> discountsAddUncorectHelper({
     tester: tester,
     categoryText: KTestVariables.fieldEmpty,
     cityText: KTestVariables.fieldEmpty,
-    // periodText: KTestText.fieldEmpty,
+    // periodText: KTestVariables.fieldEmpty,
     tapOnperiod: false,
     tapIndefinitely: true,
   );
@@ -68,7 +68,7 @@ Future<void> discountsAddUncorectHelper({
   await discountsAddDescriptionEnterHelper(
     tester: tester,
     descriptionText: KTestVariables.fieldEmpty,
-    exclusionsText: KTestVariables.fieldEmpty,
+    requirmentsText: KTestVariables.fieldEmpty,
   );
 
   verifyNever(

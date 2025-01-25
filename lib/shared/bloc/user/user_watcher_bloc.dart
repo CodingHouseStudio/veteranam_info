@@ -1,25 +1,29 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'user_watcher_event.dart';
 part 'user_watcher_state.dart';
-part 'user_watcher_bloc.freezed.dart';
 
 @injectable
-class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
+class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
   UserWatcherBloc({required UserRepository userRepository})
       : _userRepository = userRepository,
         super(
-          const _Initial(user: User.empty, userSetting: UserSetting.empty),
+          UserWatcherState(
+            user: userRepository.currentUser,
+            userSetting: userRepository.currentUserSetting,
+          ),
         ) {
-    on<_UserChanged>(_onUserChanged);
-    on<_UserSettingChanged>(_onUserSettingChanged);
-    on<_UserFailure>(_onUserFailure);
-    on<_UserSettingFailure>(_onUserSettingFailure);
+    on<_UserChangedEvent>(_onUserChanged);
+    on<_UserSettingChangedEvent>(_onUserSettingChanged);
+    on<_UserFailureEvent>(_onUserFailure);
+    on<_UserSettingFailureEvent>(_onUserSettingFailure);
+    on<LanguageChangedEvent>(_onLanguageChanged);
     _onStarted();
   }
   late StreamSubscription<UserSetting> userSettingSubscription;
@@ -27,37 +31,65 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   final UserRepository _userRepository;
   void _onStarted() {
     userSettingSubscription = _userRepository.userSetting.listen(
-      (userSetting) => add(UserWatcherEvent.userSettingChanged(userSetting)),
+      (userSetting) => add(_UserSettingChangedEvent(userSetting)),
       onError: (Object error, StackTrace stack) =>
-          add(UserWatcherEvent.userSettingFailure(stack: stack, error: error)),
+          add(_UserSettingFailureEvent(stack: stack, error: error)),
     );
     userSubscription = _userRepository.user.listen(
-      (user) => add(UserWatcherEvent.userChanged(user)),
+      (user) => add(_UserChangedEvent(user)),
       onError: (Object error, StackTrace stack) =>
-          add(UserWatcherEvent.userFailure(stack: stack, error: error)),
+          add(_UserFailureEvent(stack: stack, error: error)),
     );
   }
 
   void _onUserChanged(
-    _UserChanged event,
+    _UserChangedEvent event,
     Emitter<UserWatcherState> emit,
   ) {
     emit(state.copyWith(user: event.user));
   }
 
   void _onUserSettingChanged(
-    _UserSettingChanged event,
+    _UserSettingChangedEvent event,
     Emitter<UserWatcherState> emit,
   ) {
     emit(state.copyWith(userSetting: event.userSetting));
   }
 
+  Future<void> _onLanguageChanged(
+    LanguageChangedEvent event,
+    Emitter<UserWatcherState> emit,
+  ) async {
+    final language =
+        state.userSetting.locale.isEnglish ? Language.ukrain : Language.english;
+    final userSetting = state.userSetting.copyWith(locale: language);
+    emit(state.copyWith(userSetting: userSetting));
+
+    final result = await _userRepository.updateUserSetting(
+      userSetting: userSetting,
+    );
+
+    result.leftMap(
+      (l) => emit(
+        UserWatcherState(
+          user: state.user,
+          userSetting: state.userSetting,
+          failure: l,
+        ),
+      ),
+    );
+
+    log('Language changed: $language');
+  }
+
   void _onUserFailure(
-    _UserFailure event,
+    _UserFailureEvent event,
     Emitter<UserWatcherState> emit,
   ) {
     emit(
-      state.copyWith(
+      UserWatcherState(
+        user: state.user,
+        userSetting: state.userSetting,
         failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,
@@ -69,11 +101,13 @@ class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   }
 
   void _onUserSettingFailure(
-    _UserSettingFailure event,
+    _UserSettingFailureEvent event,
     Emitter<UserWatcherState> emit,
   ) {
     emit(
-      state.copyWith(
+      UserWatcherState(
+        user: state.user,
+        userSetting: state.userSetting,
         failure: SomeFailure.value(
           error: event.error,
           stack: event.stack,

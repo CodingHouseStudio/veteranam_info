@@ -24,6 +24,7 @@ Future<void> discountsPumpAppHelper({
     mockReportRepository: mockReportRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
+  _registerViewMode();
   _registerDiscountBloc(
     mockDiscountRepository: mockDiscountRepository,
     // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -239,4 +240,12 @@ void _registerBuildCubit({
     GetIt.I.unregister<AppVersionCubit>();
   }
   GetIt.I.registerSingleton<AppVersionCubit>(buildCubit);
+}
+
+void _registerViewMode() {
+  final viewModeCubit = ViewModeCubit();
+  if (GetIt.I.isRegistered<ViewModeCubit>()) {
+    GetIt.I.unregister<ViewModeCubit>();
+  }
+  GetIt.I.registerSingleton<ViewModeCubit>(viewModeCubit);
 }

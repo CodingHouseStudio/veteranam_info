@@ -7,12 +7,10 @@ very_good test --concurrency=$(sysctl -n hw.logicalcpu) --recursive --optimizati
 genhtml coverage/lcov.info -o coverage/html
 
 # Define the exclusion file
-EXCLUDE_FILE='coverage_excludes.txt'
+# EXCLUDE_FILE='coverage_excludes.txt'
 
 # Exclude specific files and directories from the coverage report
-lcov --remove coverage/lcov.info \
-     -f "@$EXCLUDE_FILE" \
-    --output-file coverage/lcov.info
+lcov --remove coverage/lcov.info $(cat coverage_excludes.txt) --output-file coverage/lcov.info
 
 # Generate the final HTML coverage report after exclusions
 genhtml coverage/lcov.info -o coverage/html

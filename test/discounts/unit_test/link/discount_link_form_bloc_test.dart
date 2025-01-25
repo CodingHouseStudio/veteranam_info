@@ -93,7 +93,7 @@ void main() {
           formState: LinkEnum.inProgress,
         ),
         // const DiscountLinkFormState(
-        //   link: DiscountLinkFieldModel.dirty(KTestText.field),
+        //   link: DiscountLinkFieldModel.dirty(KTestVariables.field),
         //   formState: LinkEnum.invalidData,
         // ),
         const DiscountLinkFormState(

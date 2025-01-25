@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-const value = NawbarKeys.widget;
-
 class DiscountsScreen extends StatelessWidget {
   const DiscountsScreen({super.key});
 

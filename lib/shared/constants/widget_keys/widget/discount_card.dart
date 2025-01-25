@@ -17,5 +17,6 @@ abstract class DiscountCardKeys {
   static const iconComplaint = Key('discount_card_icon_complaint');
   static const iconShare = Key('discount_card_icon_share');
   static const iconWebsite = Key('discount_card_icon_website');
+  static const popupMenuButton = Key('discount_card_popup_menu_button');
   static const iconLike = Key('discount_card_icon_like');
 }

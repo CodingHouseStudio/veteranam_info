@@ -36,7 +36,7 @@ class PopupMenuButtonWidget<T> extends StatefulWidget {
         );
 
   /// Called when the button is pressed to create the items to show in the menu.
-  final List<DropDownItem<T>> items;
+  final List<PopupMenuCustomItem<T>> items;
 
   final PopupMenuItemSelected<T>? onSelected;
 
@@ -132,7 +132,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   //       widget.items.length,
   //       (index) {
   //         final item = widget.items.elementAt(index);
-  //         return _PopupMenuItemWidget<T>(
+  //         return _PopupMenuCustomItemWidget<T>(
   //           width: width,
   //           key: item.key,
   //           padding: widget.menuItemsPadding,
@@ -187,63 +187,36 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
     return 0;
   }
 
-  PopupMenuButtonPosition get positionCalculate {
-    if (menuHeight == null) {
-      return widget.position;
-    }
-    if (context.findRenderObject() == null) {
-      return widget.position;
+  PopupMenuButtonPosition get _positionCalculate {
+    final renderObject = context.findRenderObject();
+
+    bool? hasBottomPlace;
+
+    if (menuHeight != null && renderObject != null) {
+      final renderBox = renderObject as RenderBox;
+      final screenHeight = MediaQuery.sizeOf(context).height;
+      final availableHeight =
+          screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
+      // +
+      //     (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
+      hasBottomPlace = availableHeight > menuHeight!;
     }
 
-    final renderBox = context.findRenderObject()! as RenderBox;
-    final screenHeight = MediaQuery.sizeOf(context).height;
-    final availableHeight =
-        screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
-    // +
-    //     (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
-    final hasBottomPlace = availableHeight > menuHeight!;
-
-    if (hasBottomPlace) {
-      switch (widget.position) {
-        case PopupMenuButtonPosition.bottomCenter:
-        case PopupMenuButtonPosition.bottomLeft:
-        case PopupMenuButtonPosition.bottomRight:
-          return widget.position;
-        case PopupMenuButtonPosition.topCenter:
-          return PopupMenuButtonPosition.bottomCenter;
-        case PopupMenuButtonPosition.topLeft:
-          return PopupMenuButtonPosition.bottomLeft;
-        case PopupMenuButtonPosition.topRight:
-          return PopupMenuButtonPosition.bottomRight;
-      }
-    } else {
-      switch (widget.position) {
-        case PopupMenuButtonPosition.topCenter:
-        case PopupMenuButtonPosition.topLeft:
-        case PopupMenuButtonPosition.topRight:
-          return widget.position;
-        case PopupMenuButtonPosition.bottomCenter:
-          return PopupMenuButtonPosition.topCenter;
-        case PopupMenuButtonPosition.bottomLeft:
-          return PopupMenuButtonPosition.topLeft;
-        case PopupMenuButtonPosition.bottomRight:
-          return PopupMenuButtonPosition.topRight;
-      }
-    }
+    return widget.position.positionCalculate(hasBottomPlace: hasBottomPlace);
     // ? OptionsViewOpenDirection.down
     // : OptionsViewOpenDirection.up;
   }
 
   Widget _getMenuWidget(BuildContext context) {
-    final positionValue = positionCalculate;
+    final positionValue = _positionCalculate;
     if (menuHeight == null) setMenuHeight();
     return CompositedTransformFollower(
       link: _optionsLayerLink,
       showWhenUnlinked: false,
-      targetAnchor: getMenuPosition(positionValue),
-      followerAnchor: getContentPosition(positionValue),
+      targetAnchor: positionValue.getMenuPosition,
+      followerAnchor: positionValue.getContentPosition,
       child: Align(
-        alignment: getContentPosition(positionValue),
+        alignment: positionValue.getContentPosition,
         child: Padding(
           padding: EdgeInsets.only(top: widget.menuTopSpace),
           child: TapRegion(
@@ -266,6 +239,7 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
                       final isSelected = widget.currentValue != null &&
                           widget.currentValue == item.value;
                       return TextButton(
+                        key: item.key,
                         style: widget.buttonItemStyle,
                         onPressed: item.event == null || isSelected
                             ? null
@@ -388,71 +362,39 @@ class PopupMenuButtonWidgetState<T> extends State<PopupMenuButtonWidget<T>> {
   //   });
   // }
 
-  Alignment getContentPosition(PopupMenuButtonPosition position) {
-    switch (position) {
-      case PopupMenuButtonPosition.bottomCenter:
-        return Alignment.topCenter;
-      case PopupMenuButtonPosition.bottomLeft:
-        return Alignment.topLeft;
-      case PopupMenuButtonPosition.bottomRight:
-        return Alignment.topRight;
-      case PopupMenuButtonPosition.topCenter:
-        return Alignment.bottomCenter;
-      case PopupMenuButtonPosition.topLeft:
-        return Alignment.bottomLeft;
-      case PopupMenuButtonPosition.topRight:
-        return Alignment.bottomRight;
-    }
-  }
-
-  Alignment getMenuPosition(PopupMenuButtonPosition position) {
-    switch (position) {
-      case PopupMenuButtonPosition.bottomCenter:
-        return Alignment.bottomCenter;
-      case PopupMenuButtonPosition.bottomLeft:
-        return Alignment.bottomLeft;
-      case PopupMenuButtonPosition.bottomRight:
-        return Alignment.bottomRight;
-      case PopupMenuButtonPosition.topCenter:
-        return Alignment.topCenter;
-      case PopupMenuButtonPosition.topLeft:
-        return Alignment.topLeft;
-      case PopupMenuButtonPosition.topRight:
-        return Alignment.topRight;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return OverlayPortal.targetsRootOverlay(
-      controller: _controller,
-      overlayChildBuilder: _getMenuWidget,
-      child: CompositedTransformTarget(
-        link: _optionsLayerLink,
-        child: TextButton.icon(
-          key: _anchorKey,
-          onPressed: _showMenu ? null : showHideButtonMenu,
-          style: _showMenu
-              ? widget.buttonStyle.copyWith(
-                  mouseCursor: const WidgetStatePropertyAll(
-                    SystemMouseCursors.click,
-                  ),
-                  iconColor: const WidgetStatePropertyAll(
-                    AppColors.materialThemeBlack,
-                  ),
-                )
-              : widget.buttonStyle,
-          icon: widget.showIndicatorIcon
-              ? (_showMenu
-                  ? widget.closeIcon ?? KIcon.trailingUp
-                  : widget.showIcon ?? KIcon.keyboardArrowDown)
-              : null,
-          iconAlignment: widget.iconAlignment,
-          label: widget.buttonChild ??
-              Text(
-                widget.buttonText!,
-                style: AppTextStyle.materialThemeTitleMedium,
-              ),
+    return RepaintBoundary(
+      child: OverlayPortal.targetsRootOverlay(
+        controller: _controller,
+        overlayChildBuilder: _getMenuWidget,
+        child: CompositedTransformTarget(
+          link: _optionsLayerLink,
+          child: TextButton.icon(
+            key: _anchorKey,
+            onPressed: _showMenu ? null : showHideButtonMenu,
+            style: _showMenu
+                ? widget.buttonStyle.copyWith(
+                    mouseCursor: const WidgetStatePropertyAll(
+                      SystemMouseCursors.click,
+                    ),
+                    iconColor: const WidgetStatePropertyAll(
+                      AppColors.materialThemeBlack,
+                    ),
+                  )
+                : widget.buttonStyle,
+            icon: widget.showIndicatorIcon
+                ? (_showMenu
+                    ? widget.closeIcon ?? KIcon.trailingUp
+                    : widget.showIcon ?? KIcon.keyboardArrowDown)
+                : null,
+            iconAlignment: widget.iconAlignment,
+            label: widget.buttonChild ??
+                Text(
+                  widget.buttonText!,
+                  style: AppTextStyle.materialThemeTitleMedium,
+                ),
+          ),
         ),
       ),
     );
@@ -468,8 +410,8 @@ enum PopupMenuButtonPosition {
   topLeft,
 }
 
-// class _PopupMenuItemWidget<T> extends PopupMenuEntry<T> {
-//   const _PopupMenuItemWidget({
+// class _PopupMenuCustomItemWidget<T> extends PopupMenuEntry<T> {
+//   const _PopupMenuCustomItemWidget({
 //     required this.text,
 //     required this.textStyle,
 //     required this.alignment,
@@ -503,11 +445,12 @@ enum PopupMenuButtonPosition {
 //   bool represents(T? value) => value == this.value;
 
 //   @override
-//   _PopupMenuItemState<T, _PopupMenuItemWidget<T>> createState() =>
-//       _PopupMenuItemState<T, _PopupMenuItemWidget<T>>();
+//   _PopupMenuCustomItemState<T, _PopupMenuCustomItemWidget<T>> createState()
+// =>
+//       _PopupMenuCustomItemState<T, _PopupMenuCustomItemWidget<T>>();
 // }
 
-// class _PopupMenuItemState<T, W extends _PopupMenuItemWidget<T>>
+// class _PopupMenuCustomItemState<T, W extends _PopupMenuCustomItemWidget<T>>
 //     extends State<W> {
 //   @protected
 //   void handleTap() {

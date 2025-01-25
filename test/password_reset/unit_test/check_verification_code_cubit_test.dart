@@ -34,7 +34,7 @@ void main() {
           code: KTestVariables.code,
         ),
         // act: (bloc) async {
-        //   // await bloc.started(KTestText.code);
+        //   // await bloc.started(KTestVariables.code);
         // },
         expect: () => [true],
       );
@@ -57,7 +57,7 @@ void main() {
           code: KTestVariables.code,
         ),
         // act: (bloc) async {
-        //   // await bloc.started(KTestText.code);
+        //   // await bloc.started(KTestVariables.code);
         // },
         expect: () => [false],
       );

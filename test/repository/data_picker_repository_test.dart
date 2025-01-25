@@ -82,12 +82,12 @@ void main() {
         // when(
         //   mockPlatformFile.bytes,
         // ).thenAnswer(
-        //   (_) => KTestText.filePickerItem.bytes,
+        //   (_) => KTestVariables.filePickerItem.bytes,
         // );
         // when(
         //   mockPlatformFile.path,
         // ).thenAnswer(
-        //   (_) => KTestText.filePickerItem.ref,
+        //   (_) => KTestVariables.filePickerItem.ref,
         // );
         when(
           mockXFile.readAsBytes(),
@@ -139,7 +139,7 @@ void main() {
       //   when(
       //     mockPlatformFile.name,
       //   ).thenAnswer(
-      //     (_) => KTestText.filePickerItem.name!,
+      //     (_) => KTestVariables.filePickerItem.name!,
       //   );
       //   final file = await dataPickerRepository.getFile;
       //   expect(
@@ -149,19 +149,19 @@ void main() {
       //   if (file == null) return;
       //   expect(
       //     file.bytes,
-      //     KTestText.filePickerItem.bytes,
+      //     KTestVariables.filePickerItem.bytes,
       //   );
       //   expect(
       //     file.name,
-      //     KTestText.filePickerItem.name,
+      //     KTestVariables.filePickerItem.name,
       //   );
       //   expect(
       //     file.ref,
-      //     KTestText.filePickerItem.ref,
+      //     KTestVariables.filePickerItem.ref,
       //   );
       //   expect(
       //     file.extension,
-      //     KTestText.filePickerItem.extension,
+      //     KTestVariables.filePickerItem.extension,
       //   );
       // });
 
@@ -199,7 +199,7 @@ void main() {
       //   when(
       //     mockPlatformFile.name,
       //   ).thenAnswer(
-      //     (_) => KTestText.filePickerPathItem.name!,
+      //     (_) => KTestVariables.filePickerPathItem.name!,
       //   );
       //   final file = await dataPickerRepository.getFile;
       //   expect(
@@ -209,19 +209,19 @@ void main() {
       //   if (file == null) return;
       //   expect(
       //     file.bytes,
-      //     KTestText.filePickerItem.bytes,
+      //     KTestVariables.filePickerItem.bytes,
       //   );
       //   expect(
       //     file.name,
-      //     KTestText.filePickerPathItem.name,
+      //     KTestVariables.filePickerPathItem.name,
       //   );
       //   expect(
       //     file.ref,
-      //     KTestText.filePickerPathItem.ref,
+      //     KTestVariables.filePickerPathItem.ref,
       //   );
       //   expect(
       //     file.extension,
-      //     KTestText.filePickerPathItem.extension,
+      //     KTestVariables.filePickerPathItem.extension,
       //   );
       // });
 
@@ -229,7 +229,7 @@ void main() {
       //   when(
       //     mockPlatformFile.name,
       //   ).thenAnswer(
-      //     (_) => KTestText.filePickerPathItem.name!,
+      //     (_) => KTestVariables.filePickerPathItem.name!,
       //   );
       //   when(
       //     mockPlatformFile.bytes,

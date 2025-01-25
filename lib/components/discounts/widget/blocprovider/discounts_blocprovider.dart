@@ -14,25 +14,24 @@ class DiscountsBlocprovider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<DiscountLinkCubit>()..started(),
+          create: (context) => GetIt.I.get<DiscountLinkCubit>(),
         ),
         // BlocProvider(
         //   create: (context) => GetIt.I.get<DiscountUserEmailCubit>()..
         // started(),
         // ),
         BlocProvider(
-          create: (context) => GetIt.I.get<DiscountConfigCubit>()..started(),
+          create: (context) => GetIt.I.get<DiscountConfigCubit>(),
         ),
         BlocProvider(
-          create: (context) => GetIt.I.get<UserEmailFormBloc>()
-            ..add(const UserEmailFormEvent.started()),
+          create: (context) => GetIt.I.get<UserEmailFormBloc>(),
         ),
         if (!Config.isWeb)
           BlocProvider(
             create: (context) => GetIt.I.get<MobileRatingCubit>(),
           ),
-        if (Config.isWeb)
-          BlocProvider(create: (context) => GetIt.I.get<ViewModeCubit>()),
+        // if (Config.isWeb)
+        BlocProvider(create: (context) => GetIt.I.get<ViewModeCubit>()),
       ],
       child: childWidget,
     );

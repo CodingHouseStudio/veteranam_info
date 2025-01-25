@@ -23,55 +23,45 @@ class StoryRepository implements IStoryRepository {
     required StoryModel storyModel,
     required FilePickerItem? imageItem,
   }) async {
-    try {
-      late var methodStoryModel = storyModel;
-      if (imageItem != null) {
-        final downloadURL = await _storageService.saveFile(
-          filePickerItem: imageItem,
-          id: storyModel.id,
-          collecltionName: FirebaseCollectionName.stroies,
-        );
-        if (downloadURL != null && downloadURL.isNotEmpty) {
-          methodStoryModel = methodStoryModel.copyWith(
-            image: imageItem.image(downloadURL),
+    return eitherFutureHelper(
+      () async {
+        late var methodStoryModel = storyModel;
+        if (imageItem != null) {
+          final downloadURL = await _storageService.saveFile(
+            filePickerItem: imageItem,
+            id: storyModel.id,
+            collecltionName: FirebaseCollectionName.stroies,
           );
+          if (downloadURL != null && downloadURL.isNotEmpty) {
+            methodStoryModel = methodStoryModel.copyWith(
+              image: imageItem.image(downloadURL),
+            );
+          }
         }
-      }
-      await _firestoreService.addStory(methodStoryModel);
-      return const Right(true);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Story(addStory)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'Story Model: $storyModel| ${imageItem.getErrorData}',
-        ),
-      );
-    }
+        await _firestoreService.addStory(methodStoryModel);
+        return const Right(true);
+      },
+      methodName: 'Story(addStory)',
+      className: ErrorText.repositoryKey,
+      data: 'Story Model: $storyModel| ${imageItem.getErrorData}',
+    );
   }
 
   @override
   Future<Either<SomeFailure, List<StoryModel>>> getStoriesByUserId(
     String userId,
   ) async {
-    try {
-      final userStoriesItems =
-          await _firestoreService.getStoriesByUserId(userId);
+    return eitherFutureHelper(
+      () async {
+        final userStoriesItems =
+            await _firestoreService.getStoriesByUserId(userId);
 
-      return Right(userStoriesItems);
-    } catch (e, stack) {
-      return Left(
-        SomeFailure.value(
-          error: e,
-          stack: stack,
-          tag: 'Story(getStoriesByUserId)',
-          tagKey: ErrorText.repositoryKey,
-          data: 'User ID: $userId',
-          user: User(id: userId),
-        ),
-      );
-    }
+        return Right(userStoriesItems);
+      },
+      methodName: 'Story(getStoriesByUserId)',
+      className: ErrorText.repositoryKey,
+      data: 'User ID: $userId',
+      user: User(id: userId),
+    );
   }
 }

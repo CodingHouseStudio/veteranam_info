@@ -23,6 +23,11 @@ void main() {
       mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       when(
+        mockFirebaseRemoteConfigProvider.waitActivated(),
+      ).thenAnswer(
+        (_) async => true,
+      );
+      when(
         mockBuildRepository.getBuildInfo(),
       ).thenAnswer(
         (_) async => AppInfoRepository.defaultValue,
@@ -47,6 +52,10 @@ void main() {
         ),
         // act: (bloc) async {},
         expect: () async => [
+          AppVersionState(
+            build: AppInfoRepository.defaultValue,
+            mobHasNewBuild: false,
+          ),
           AppVersionState(
             build: AppInfoRepository.defaultValue,
             mobHasNewBuild: true,
@@ -143,10 +152,23 @@ void main() {
           buildRepository: mockBuildRepository,
           firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         ),
-        // act: (bloc) async {
-        //   // await bloc.started();
-        // },
+        act: (bloc) async {
+          // await bloc.started();
+          await expectLater(
+            bloc.stream,
+            emitsInOrder([
+              predicate<AppVersionState>(
+                (state) => state.build == AppInfoRepository.defaultValue,
+              ),
+            ]),
+            reason: 'Wait loading data',
+          );
+        },
         expect: () async => [
+          AppVersionState(
+            build: AppInfoRepository.defaultValue,
+            mobHasNewBuild: false,
+          ),
           AppVersionState(
             build: AppInfoRepository.defaultValue,
             mobHasNewBuild: true,

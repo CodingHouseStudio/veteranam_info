@@ -36,6 +36,10 @@ void configureDependenciesTest() {
   KTest.isTest = true;
   Config.isReleaseMode = true;
   MockGoRouter.canPopValue = true;
+  UriExtension.testUrl = null;
+  KTest.discountSortingTestValue = false;
+  DiscountsWatcherBloc.testDiscountFilterRepository = null;
+  KTest.testLoading = false;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
@@ -193,11 +197,11 @@ void configureDependenciesTest() {
       userRepository: GetIt.I.get<UserRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<LanguageCubit>(
-    LanguageCubit(
-      userRepository: GetIt.I.get<UserRepository>(),
-    ),
-  );
+  // GetIt.I.registerSingleton<LanguageBloc>(
+  //   LanguageBloc(
+  //     userRepository: GetIt.I.get<UserRepository>(),
+  //   ),
+  // );
   GetIt.I.registerSingleton<MobOfflineModeCubit>(
     MobOfflineModeCubit(
       firestoreService: GetIt.I.get<FirestoreService>(),
@@ -290,6 +294,10 @@ void configureFailureDependenciesTest() {
   Config.falvourValue = Config.development;
   KTest.isTest = true;
   Config.isReleaseMode = true;
+  UriExtension.testUrl = null;
+  KTest.discountSortingTestValue = false;
+  DiscountsWatcherBloc.testDiscountFilterRepository = null;
+  KTest.testLoading = false;
 
   ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;

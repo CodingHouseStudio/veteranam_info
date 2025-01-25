@@ -338,12 +338,24 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityAddItem event,
     Emitter<DiscountsAddState> emit,
   ) {
+    if (state.eligibility.value.contains(EligibilityEnum.all)) return;
     final eligibilityEnum = event.eligibility.toEligibility;
-    final eligibilityFieldModel = eligibilityEnum == EligibilityEnum.all
-        ? const EligibilityFieldModel.dirty([EligibilityEnum.all])
-        : EligibilityFieldModel.dirty(
-            List.from(state.eligibility.value)..add(eligibilityEnum),
-          );
+    final EligibilityFieldModel eligibilityFieldModel;
+    if (eligibilityEnum == EligibilityEnum.all) {
+      eligibilityFieldModel =
+          const EligibilityFieldModel.dirty([EligibilityEnum.all]);
+    } else {
+      final List<EligibilityEnum> eligiblityList;
+      if (state.eligibility.value.contains(eligibilityEnum)) {
+        eligiblityList = [eligibilityEnum];
+      } else {
+        eligiblityList = List.from(state.eligibility.value)
+          ..add(eligibilityEnum);
+      }
+      eligibilityFieldModel = EligibilityFieldModel.dirty(
+        eligiblityList,
+      );
+    }
 
     emit(
       state.copyWith(
@@ -358,8 +370,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityRemoveItem event,
     Emitter<DiscountsAddState> emit,
   ) {
+    final eliglibilityValue = event.eligibility.toEligibility;
+    if (!state.eligibility.value.contains(eliglibilityValue)) return;
     final eligibilityList = (List<EligibilityEnum>.from(state.eligibility.value)
-      ..remove(event.eligibility.toEligibility));
+      ..remove(eliglibilityValue));
     final eligibilityFieldModel = eligibilityList.isEmpty
         ? const EligibilityFieldModel.pure()
         : EligibilityFieldModel.dirty(eligibilityList);
@@ -530,6 +544,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         );
         return;
       }
+
       final result = await _discountRepository.addDiscount(
         discount.copyWith(dateVerified: ExtendedDateTime.current),
       );

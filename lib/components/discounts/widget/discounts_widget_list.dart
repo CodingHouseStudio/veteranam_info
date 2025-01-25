@@ -131,7 +131,7 @@ class _AdvancedFilterDesk extends StatelessWidget {
             const SizedBox(
           height: double.infinity,
           child: AdvancedFilterContent(
-            key: DiscountsKeys.advancedFilterDesk,
+            key: DiscountsFilterKeys.desk,
             isDesk: true,
           ),
         ),
@@ -150,154 +150,238 @@ class DiscountWidgetList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocSelector<
-            DiscountsWatcherBloc,
-            DiscountsWatcherState,
-            ({
-              // LoadingStatus loadingStatus,
-              List<DiscountModel> filterDiscountModelList,
-              bool isListLoadedFull,
-              bool unmodifiedIsEmpty,
-            })>(
-          // buildWhen: (previous, current) =>
-          //     previous.loadingStatus != current.loadingStatus ||
-          //     previous.filterDiscountModelList !=
-          //         current.filterDiscountModelList,
-          selector: (state) => (
-            // loadingStatus: state.loadingStatus,
-            filterDiscountModelList: state.filterDiscountModelList,
-            isListLoadedFull: state.isListLoadedFull &&
-                state.unmodifiedDiscountModelItems.isNotEmpty,
-            unmodifiedIsEmpty: state.unmodifiedDiscountModelItems.isEmpty,
-          ),
-          builder: (context, state) {
-            return SliverMainAxisGroup(
-              slivers: [
-                SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  findChildIndexCallback: (key) => _findChildIndexCallback(
-                    key: key,
-                    filterDiscountModelList: state.filterDiscountModelList,
-                    config: config,
-                  ),
-                  itemCount: (_itemCount(
-                            filterDiscountModelList:
-                                state.filterDiscountModelList,
+        return SliverMainAxisGroup(
+          slivers: [
+            BlocSelector<DiscountsWatcherBloc, DiscountsWatcherState,
+                List<DiscountModel>>(
+              selector: (state) {
+                return state.filterDiscountModelList;
+              },
+              builder: (context, filterDiscountModelList) {
+                if (Config.isWeb && isDesk) {
+                  return BlocBuilder<ViewModeCubit, ViewMode>(
+                    builder: (context, _) {
+                      switch (_) {
+                        case ViewMode.grid:
+                          return SliverMasonryGrid(
+                            key: DiscountsKeys.horizontalList,
+                            crossAxisSpacing: KPadding.kPaddingSize24,
+                            mainAxisSpacing: KPadding.kPaddingSize24,
+                            gridDelegate:
+                                // ignore: lines_longer_than_80_chars
+                                const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: KSize.kPixel500,
+                            ),
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                final discount =
+                                    filterDiscountModelList.elementAt(index);
+                                return DiscountCardWidget(
+                                  key: ValueKey(discount.id),
+                                  discountItem: discount,
+                                  isDesk: false,
+                                  share:
+                                      '${KRoute.home.path}${KRoute.discounts.path}/${discount.id}',
+                                  dialogIsDesk: true,
+                                );
+                              },
+                              childCount: filterDiscountModelList.length,
+                              // findChildIndexCallback: (key) =>
+                              //     _findChildIndexCallback(
+                              //   key: key,
+                              //   filterDiscountModelList:
+                              //       filterDiscountModelList,
+                              //   config: config,
+                              // ),
+                            ),
+                          );
+                        case ViewMode.list:
+                          return DiscountsSliverList(
+                            key: DiscountsKeys.verticalList,
+                            isDesk: isDesk,
+                            filterDiscountModelList: filterDiscountModelList,
                             config: config,
-                          ) *
-                          2) -
-                      1,
-                  itemBuilder: (context, index) {
-                    if (index.isEven) {
-                      final indexValue = (index / 2).toInt();
-                      return _DiscountsWidgetItem(
-                        isDesk: isDesk,
-                        key: _key(
-                          filterDiscountModelList:
-                              state.filterDiscountModelList,
-                          index: indexValue,
-                          config: config,
-                        ),
-                        filterDiscountModelList: state.filterDiscountModelList,
-                        index: indexValue,
-                        config: config,
-                      );
-                    } else {
-                      return KSizedBox.kHeightSizedBox48;
-                    }
-                  },
-                ),
-                if (!(PlatformEnumFlutter.isWebDesktop ||
-                        state.isListLoadedFull) ||
-                    state.unmodifiedIsEmpty)
-                  if (state.filterDiscountModelList.isEmpty)
-                    SliverList.builder(
-                      itemCount:
-                          //  (state.filterDiscountModelList.isEmpty
-                          //         ?
-                          config.loadingItems
-                              // : KDimensions.shimmerDiscountsItems)
-                              *
-                              2,
-                      // prototypeItem: SkeletonizerWidget(
-                      //   isLoading: false,
-                      //   child: DiscountCardWidget(
-                      //     key: DiscountsKeys.card,
-                      //     discountItem: KMockText.discountModel,
-                      //     isDesk: isDesk,
-                      //     share: '',
-                      //   ),
-                      // ),
-                      itemBuilder: (context, index) {
-                        if (index.isEven) {
-                          return SkeletonizerWidget(
-                            key: const ValueKey('discount_mock_card'),
-                            isLoading: true,
+                          );
+                      }
+                    },
+                  );
+                } else {
+                  return DiscountsSliverList(
+                    isDesk: isDesk,
+                    filterDiscountModelList: filterDiscountModelList,
+                    config: config,
+                  );
+                }
+              },
+            ),
+            BlocSelector<
+                DiscountsWatcherBloc,
+                DiscountsWatcherState,
+                ({
+                  // LoadingStatus loadingStatus,
+                  // List<DiscountModel> filterDiscountModelList,
+                  bool isListLoadedFull,
+                  bool unmodifiedIsEmpty,
+                  bool isFilterListEmpty,
+                })>(
+              // buildWhen: (previous, current) =>
+              //     previous.loadingStatus != current.loadingStatus ||
+              //     previous.filterDiscountModelList !=
+              //         current.filterDiscountModelList,
+              selector: (state) => (
+                // loadingStatus: state.loadingStatus,
+                // filterDiscountModelList: state.filterDiscountModelList,
+                isListLoadedFull: state.isListLoadedFull &&
+                    state.unmodifiedDiscountModelItems.isNotEmpty,
+                unmodifiedIsEmpty: state.unmodifiedDiscountModelItems.isEmpty,
+                isFilterListEmpty: state.filterDiscountModelList.isEmpty,
+              ),
+              builder: (context, state) {
+                return SliverMainAxisGroup(
+                  slivers: [
+                    if (!(PlatformEnumFlutter.isWebDesktop ||
+                            state.isListLoadedFull) ||
+                        state.unmodifiedIsEmpty)
+                      if (state.isFilterListEmpty)
+                        SliverList.builder(
+                          itemCount:
+                              //  (state.filterDiscountModelList.isEmpty
+                              //         ?
+                              config.loadingItems
+                                  // : KDimensions.shimmerDiscountsItems)
+                                  *
+                                  2,
+                          // prototypeItem: SkeletonizerWidget(
+                          //   isLoading: false,
+                          //   child: DiscountCardWidget(
+                          //     key: DiscountsKeys.card,
+                          //     discountItem: KMockText.discountModel,
+                          //     isDesk: isDesk,
+                          //     share: '',
+                          //   ),
+                          // ),
+                          itemBuilder: (context, index) {
+                            if (index.isEven) {
+                              return SkeletonizerWidget(
+                                key: const ValueKey('discount_mock_card'),
+                                isLoading: true,
+                                child: DiscountCardWidget(
+                                  key: DiscountsKeys.card,
+                                  discountItem: KMockText.discountModel,
+                                  isDesk: isDesk,
+                                  share: '',
+                                ),
+                              );
+                            } else {
+                              return KSizedBox.kHeightSizedBox48;
+                            }
+                          },
+                        )
+                      else ...[
+                        KSizedBox.kHeightSizedBox48.toSliver,
+                        SkeletonizerWidget(
+                          isLoading: true,
+                          isSliver: true,
+                          child: SliverToBoxAdapter(
                             child: DiscountCardWidget(
                               key: DiscountsKeys.card,
                               discountItem: KMockText.discountModel,
                               isDesk: isDesk,
                               share: '',
                             ),
-                          );
-                        } else {
-                          return KSizedBox.kHeightSizedBox48;
-                        }
-                      },
-                    )
-                  else ...[
-                    KSizedBox.kHeightSizedBox48.toSliver,
-                    SkeletonizerWidget(
-                      isLoading: true,
-                      isSliver: true,
-                      child: SliverToBoxAdapter(
-                        child: DiscountCardWidget(
-                          key: DiscountsKeys.card,
-                          discountItem: KMockText.discountModel,
-                          isDesk: isDesk,
-                          share: '',
+                          ),
                         ),
-                      ),
-                    ),
-                  ]
-                else if (state.isListLoadedFull)
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize48,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(
-                          context.l10n.thatEndOfList,
-                          key: DiscountsKeys.endListText,
-                          style: AppTextStyle
-                              .materialThemeTitleMediumNeutralVariant70,
+                      ]
+                    else if (state.isListLoadedFull)
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize48,
                         ),
-                      ),
-                    ),
-                  )
-                else
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize48,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: LoadingButtonWidget(
-                        widgetKey: ScaffoldKeys.loadingButton,
-                        text: context.l10n.moreDiscounts,
-                        onPressed: () =>
-                            context.read<DiscountsWatcherBloc>().add(
+                        sliver: SliverToBoxAdapter(
+                          child: Center(
+                            child: Text(
+                              context.l10n.thatEndOfList,
+                              key: DiscountsKeys.endListText,
+                              style: AppTextStyle
+                                  .materialThemeTitleMediumNeutralVariant70,
+                            ),
+                          ),
+                        ),
+                      )
+                    else
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize48,
+                        ),
+                        sliver: SliverToBoxAdapter(
+                          child: LoadingButtonWidget(
+                            widgetKey: ScaffoldKeys.loadingButton,
+                            text: context.l10n.moreDiscounts,
+                            onPressed: () => context
+                                .read<DiscountsWatcherBloc>()
+                                .add(
                                   const DiscountsWatcherEvent.loadNextItems(),
                                 ),
-                        isDesk: isDesk,
+                            isDesk: isDesk,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-              ],
-            );
-          },
+                  ],
+                );
+              },
+            ),
+          ],
         );
+      },
+    );
+  }
+}
+
+class DiscountsSliverList extends StatelessWidget {
+  const DiscountsSliverList({
+    required this.isDesk,
+    required this.filterDiscountModelList,
+    required this.config,
+    super.key,
+  });
+
+  final bool isDesk;
+  final List<DiscountModel> filterDiscountModelList;
+  final DiscountConfigState config;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList.builder(
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      findChildIndexCallback: (key) => _findChildIndexCallback(
+        key: key,
+        filterDiscountModelList: filterDiscountModelList,
+        config: config,
+      ),
+      itemCount: (_itemCount(
+                filterDiscountModelList: filterDiscountModelList,
+                config: config,
+              ) *
+              2) -
+          1,
+      itemBuilder: (context, index) {
+        if (index.isEven) {
+          final indexValue = (index / 2).toInt();
+          return _DiscountsWidgetItem(
+            isDesk: isDesk,
+            key: _key(
+              filterDiscountModelList: filterDiscountModelList,
+              index: indexValue,
+              config: config,
+            ),
+            filterDiscountModelList: filterDiscountModelList,
+            index: indexValue,
+            config: config,
+          );
+        } else {
+          return KSizedBox.kHeightSizedBox48;
+        }
       },
     );
   }
@@ -351,21 +435,10 @@ class DiscountsDeskWidgetList extends StatelessWidget {
               ),
         ),
         if (Config.isWeb)
-          SliverCrossAxisExpanded(
+          const SliverCrossAxisExpanded(
             flex: 2,
-            sliver: BlocBuilder<ViewModeCubit, ViewMode>(
-              builder: (context, state) {
-                switch (state) {
-                  case ViewMode.grid:
-                    return const _DiscountGridWidgetList(
-                      isDesk: true,
-                    );
-                  case ViewMode.list:
-                    return const DiscountWidgetList(
-                      isDesk: true,
-                    );
-                }
-              },
+            sliver: DiscountWidgetList(
+              isDesk: true,
             ),
           )
         else
@@ -377,126 +450,128 @@ class DiscountsDeskWidgetList extends StatelessWidget {
   }
 }
 
-class _DiscountGridWidgetList extends StatelessWidget {
-  const _DiscountGridWidgetList({required this.isDesk});
+// class _DiscountGridWidgetList extends StatelessWidget {
+//   const _DiscountGridWidgetList({required this.isDesk});
+//   final bool isDesk;
 
-  final bool isDesk;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
-      builder: (context, config) {
-        return BlocSelector<
-            DiscountsWatcherBloc,
-            DiscountsWatcherState,
-            ({
-              // LoadingStatus loadingStatus,
-              List<DiscountModel> filterDiscountModelList,
-              bool isListLoadedFull,
-            })>(
-          // buildWhen: (previous, current) =>
-          //     previous.loadingStatus != current.loadingStatus ||
-          //     previous.filterDiscountModelList !=
-          //         current.filterDiscountModelList,
-          selector: (state) => (
-            // loadingStatus: state.loadingStatus,
-            filterDiscountModelList: state.filterDiscountModelList,
-            isListLoadedFull: state.isListLoadedFull,
-          ),
-          builder: (context, state) {
-            final hasItems = state.filterDiscountModelList.isNotEmpty;
-            return SliverMainAxisGroup(
-              slivers: [
-                if (hasItems)
-                  SliverPadding(
-                    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
-                    sliver: SliverMasonryGrid(
-                      crossAxisSpacing: KPadding.kPaddingSize24,
-                      mainAxisSpacing: KPadding.kPaddingSize24,
-                      gridDelegate:
-                          const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: KSize.kPixel500,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return DiscountCardWidget(
-                            discountItem:
-                                state.filterDiscountModelList.elementAt(index),
-                            isDesk: false,
-                            share:
-                                '${KRoute.home.path}${KRoute.discounts.path}/${state.filterDiscountModelList.elementAt(index).id}',
-                            dialogIsDesk: true,
-                          );
-                        },
-                        childCount: state.filterDiscountModelList.length,
-                        findChildIndexCallback: (key) =>
-                            _findChildIndexCallback(
-                          key: key,
-                          filterDiscountModelList:
-                              state.filterDiscountModelList,
-                          config: config,
-                        ),
-                      ),
-                    ),
-                  )
-                else
-                  SliverList.builder(
-                    itemCount: config.loadingItems * 2,
-                    itemBuilder: (context, index) {
-                      if (index.isEven) {
-                        return SkeletonizerWidget(
-                          key: const ValueKey('discount_mock_card'),
-                          isLoading: true,
-                          child: DiscountCardWidget(
-                            key: DiscountsKeys.card,
-                            discountItem: KMockText.discountModel,
-                            isDesk: isDesk,
-                            share: '',
-                          ),
-                        );
-                      } else {
-                        return KSizedBox.kHeightSizedBox48;
-                      }
-                    },
-                  ),
-                if (hasItems && state.isListLoadedFull)
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize48,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(
-                          context.l10n.thatEndOfList,
-                          key: InvestorsKeys.endListText,
-                          style: AppTextStyle
-                              .materialThemeTitleMediumNeutralVariant70,
-                        ),
-                      ),
-                    ),
-                  )
-                else if (hasItems && !state.isListLoadedFull)
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize48,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: LoadingButtonWidget(
-                        widgetKey: ScaffoldKeys.loadingButton,
-                        text: context.l10n.moreDiscounts,
-                        onPressed: () =>
-                            context.read<DiscountsWatcherBloc>().add(
-                                  const DiscountsWatcherEvent.loadNextItems(),
-                                ),
-                        isDesk: isDesk,
-                      ),
-                    ),
-                  ),
-              ],
-            );
-          },
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
+//       builder: (context, config) {
+//         return BlocSelector<
+//             DiscountsWatcherBloc,
+//             DiscountsWatcherState,
+//             ({
+//               // LoadingStatus loadingStatus,
+//               List<DiscountModel> filterDiscountModelList,
+//               bool isListLoadedFull,
+//             })>(
+//           // buildWhen: (previous, current) =>
+//           //     previous.loadingStatus != current.loadingStatus ||
+//           //     previous.filterDiscountModelList !=
+//           //         current.filterDiscountModelList,
+//           selector: (state) => (
+//             // loadingStatus: state.loadingStatus,
+//             filterDiscountModelList: state.filterDiscountModelList,
+//             isListLoadedFull: state.isListLoadedFull,
+//           ),
+//           builder: (context, state) {
+//             final hasItems = state.filterDiscountModelList.isNotEmpty;
+//             return SliverMainAxisGroup(
+//               slivers: [
+//                 if (hasItems)
+//                   SliverPadding(
+//                     padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+//                     sliver: SliverMasonryGrid(
+//                       crossAxisSpacing: KPadding.kPaddingSize24,
+//                       mainAxisSpacing: KPadding.kPaddingSize24,
+//                       gridDelegate:
+//                           const
+// SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+//                         maxCrossAxisExtent: KSize.kPixel500,
+//                       ),
+//                       delegate: SliverChildBuilderDelegate(
+//                         (context, index) {
+//                           return DiscountCardWidget(
+//                             discountItem:
+//                                 state.filterDiscountModelList.elementAt
+// (index),
+//                             isDesk: false,
+//                             share:
+//                                 '${KRoute.home.path}${KRoute.discounts.path}/${state.filterDiscountModelList.elementAt(index).id}',
+//                             dialogIsDesk: true,
+//                           );
+//                         },
+//                         childCount: state.filterDiscountModelList.length,
+//                         findChildIndexCallback: (key) =>
+//                             _findChildIndexCallback(
+//                           key: key,
+//                           filterDiscountModelList:
+//                               state.filterDiscountModelList,
+//                           config: config,
+//                         ),
+//                       ),
+//                     ),
+//                   )
+//                 else
+//                   SliverList.builder(
+//                     itemCount: config.loadingItems * 2,
+//                     itemBuilder: (context, index) {
+//                       if (index.isEven) {
+//                         return SkeletonizerWidget(
+//                           key: const ValueKey('discount_mock_card'),
+//                           isLoading: true,
+//                           child: DiscountCardWidget(
+//                             key: DiscountsKeys.card,
+//                             discountItem: KMockText.discountModel,
+//                             isDesk: isDesk,
+//                             share: '',
+//                           ),
+//                         );
+//                       } else {
+//                         return KSizedBox.kHeightSizedBox48;
+//                       }
+//                     },
+//                   ),
+//                 if (hasItems && state.isListLoadedFull)
+//                   SliverPadding(
+//                     padding: const EdgeInsets.symmetric(
+//                       vertical: KPadding.kPaddingSize48,
+//                     ),
+//                     sliver: SliverToBoxAdapter(
+//                       child: Center(
+//                         child: Text(
+//                           context.l10n.thatEndOfList,
+//                           key: InvestorsKeys.endListText,
+//                           style: AppTextStyle
+//                               .materialThemeTitleMediumNeutralVariant70,
+//                         ),
+//                       ),
+//                     ),
+//                   )
+//                 else if (hasItems && !state.isListLoadedFull)
+//                   SliverPadding(
+//                     padding: const EdgeInsets.symmetric(
+//                       vertical: KPadding.kPaddingSize48,
+//                     ),
+//                     sliver: SliverToBoxAdapter(
+//                       child: LoadingButtonWidget(
+//                         widgetKey: ScaffoldKeys.loadingButton,
+//                         text: context.l10n.moreDiscounts,
+//                         onPressed: () =>
+//                             context.read<DiscountsWatcherBloc>().add(
+//                                   const DiscountsWatcherEvent.
+// loadNextItems(),
+//                                 ),
+//                         isDesk: isDesk,
+//                       ),
+//                     ),
+//                   ),
+//               ],
+//             );
+//           },
+//         );
+//       },
+//     );
+//   }
+// }

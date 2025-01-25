@@ -73,8 +73,9 @@ class DiscountInformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language>(
-      builder: (context, state) {
+    return BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+      selector: (state) => state.userSetting.locale,
+      builder: (context, language) {
         return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
           builder: (context, state) {
             final children = [
@@ -186,8 +187,9 @@ class _DiscountContactInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language>(
-      builder: (context, state) {
+    return BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+      selector: (state) => state.userSetting.locale,
+      builder: (context, language) {
         return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
           builder: (context, state) {
             return SkeletonizerWidget(
@@ -282,6 +284,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                       shareKey: DiscountKeys.shareButton,
                       complaintKey: DiscountKeys.complaintButton,
                       webSiteKey: DiscountKeys.websiteButton,
+                      dropMenuKey: null,
                       showShare: !Config.isBusiness ||
                           state.discountModel.status == DiscountState.published,
                       share:

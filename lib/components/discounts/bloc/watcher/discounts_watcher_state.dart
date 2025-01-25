@@ -16,6 +16,8 @@ enum FilterStatus {
 
   bool get isLoading =>
       this == FilterStatus.loading || this == FilterStatus.initial;
+
+  bool get processing => this == FilterStatus.filtering || isLoading;
 }
 
 @freezed

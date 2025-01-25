@@ -38,18 +38,16 @@ void main() {
     });
 
     blocTest<DiscountLinkCubit, bool>(
-      'emits [discountWatcherState()]'
-      ' when load discountModel list',
+      'emits [bool]'
+      ' when user can send link',
       build: () => discountLinkCubit,
       act: (bloc) async => bloc.started(),
-      expect: () async => [
-        true,
-      ],
+      expect: () async => <bool>[],
     );
 
     blocTest<DiscountLinkCubit, bool>(
-      'emits [discountWatcherState()]'
-      ' when load discountModel list',
+      'emits [bool]'
+      " when user can't send link",
       build: () => discountLinkCubit,
       act: (bloc) async {
         when(mockdiscountRepository.userCanSendLink(KTestVariables.user.id))

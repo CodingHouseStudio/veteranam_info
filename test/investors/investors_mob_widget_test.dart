@@ -68,7 +68,7 @@ void main() {
       );
       when(
         mockInvestorsRepository.getFunds(
-            // reportIdItems: KTestText.reportItems.getIdCard,
+            // reportIdItems: KTestVariables.reportItems.getIdCard,
             ),
       ).thenAnswer(
         (invocation) async => Right(KTestVariables.fundItems),

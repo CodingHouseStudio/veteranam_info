@@ -295,94 +295,103 @@ class _NavigationCenterWebWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (appVersionEnum.isTablet) {
       return Expanded(
-        child: Wrap(
-          // mainAxisSize: MainAxisSize.min,
-          // mainAxisAlignment: MainAxisAlignment.center,
-          alignment: WrapAlignment.center,
-          runSpacing: KPadding.kPaddingSize8,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            if (Config.isUser)
-              _button(
-                key: NawbarKeys.discountsButton,
-                ruoteName: KRoute.discounts.name,
-                text: context.l10n.discounts,
-                icon: const IconWidget(
-                  icon: KIcon.tag,
-                  background: AppColors.materialThemeSourceSeed,
-                  padding: KPadding.kPaddingSize8,
-                ),
-                context: context,
-                // width: context.isEnglish
-                //     ? KSize.kPixel72
-                //     : KSize.kPixel56,
-              ),
-            if (Config.isBusiness &&
-                context.read<AuthenticationBloc>().state.status ==
-                    AuthenticationStatus.authenticated)
-              _button(
-                key: NawbarKeys.myDiscountsButton,
-                ruoteName: KRoute.myDiscounts.name,
-                text: context.l10n.myDiscounts,
-                icon: const IconWidget(
-                  icon: KIcon.tag,
-                  background: AppColors.materialThemeSourceSeed,
-                  padding: KPadding.kPaddingSize8,
-                ),
-                context: context,
-                // width: context.isEnglish
-                //     ? KSize.kPixel72
-                //     : KSize.kPixel56,
-              ),
-            if (Config.isUser ||
-                (Config.isBusiness &&
+        child: BlocSelector<UserWatcherBloc, UserWatcherState, Language>(
+          selector: (state) => state.userSetting.locale,
+          builder: (context, language) {
+            return Wrap(
+              // mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              alignment: WrapAlignment.center,
+              runSpacing: KPadding.kPaddingSize8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                if (Config.isUser)
+                  _button(
+                    key: NawbarKeys.discountsButton,
+                    ruoteName: KRoute.discounts.name,
+                    text: context.l10n.discounts,
+                    icon: const IconWidget(
+                      icon: KIcon.tag,
+                      background: AppColors.materialThemeSourceSeed,
+                      padding: KPadding.kPaddingSize8,
+                    ),
+                    locale: language,
+                    context: context,
+                    // width: context.isEnglish
+                    //     ? KSize.kPixel72
+                    //     : KSize.kPixel56,
+                  ),
+                if (Config.isBusiness &&
                     context.read<AuthenticationBloc>().state.status ==
-                        AuthenticationStatus.authenticated)) ...[
-              if (appVersionEnum.isDesk)
-                KSizedBox.kWidthSizedBox32
-              else
-                KSizedBox.kWidthSizedBox16,
-              const CircleAvatar(
-                radius: KPadding.kPaddingSize2,
-              ),
-              if (appVersionEnum.isDesk)
-                KSizedBox.kWidthSizedBox32
-              else
-                KSizedBox.kWidthSizedBox16,
-              _button(
-                key: NawbarKeys.investorsButton,
-                ruoteName: KRoute.support.name,
-                text: context.l10n.investors,
-                context: context,
-                // width: context.isEnglish
-                //     ? KSize.kPixel60
-                //     : KSize.kPixel80,
-              ),
-            ],
-            if (appVersionEnum.isDesk)
-              KSizedBox.kWidthSizedBox32
-            else
-              KSizedBox.kWidthSizedBox16,
-            if (Config.isUser ||
-                (Config.isBusiness &&
-                    context.read<AuthenticationBloc>().state.status ==
-                        AuthenticationStatus.authenticated))
-              const CircleAvatar(
-                radius: KPadding.kPaddingSize2,
-              ),
-            if (appVersionEnum.isDesk)
-              KSizedBox.kWidthSizedBox32
-            else
-              KSizedBox.kWidthSizedBox16,
-            if (Config.isUser || Config.isBusiness)
-              _button(
-                key: NawbarKeys.feedbackButton,
-                ruoteName: KRoute.feedback.name,
-                text: context.l10n.contacts,
-                context: context,
-                // width: KSize.kPixel70,
-              ),
-          ],
+                        AuthenticationStatus.authenticated)
+                  _button(
+                    key: NawbarKeys.myDiscountsButton,
+                    ruoteName: KRoute.myDiscounts.name,
+                    text: context.l10n.myDiscounts,
+                    icon: const IconWidget(
+                      icon: KIcon.tag,
+                      background: AppColors.materialThemeSourceSeed,
+                      padding: KPadding.kPaddingSize8,
+                    ),
+                    locale: language,
+                    context: context,
+                    // width: context.isEnglish
+                    //     ? KSize.kPixel72
+                    //     : KSize.kPixel56,
+                  ),
+                if (Config.isUser ||
+                    (Config.isBusiness &&
+                        context.read<AuthenticationBloc>().state.status ==
+                            AuthenticationStatus.authenticated)) ...[
+                  if (appVersionEnum.isDesk)
+                    KSizedBox.kWidthSizedBox32
+                  else
+                    KSizedBox.kWidthSizedBox16,
+                  const CircleAvatar(
+                    radius: KPadding.kPaddingSize2,
+                  ),
+                  if (appVersionEnum.isDesk)
+                    KSizedBox.kWidthSizedBox32
+                  else
+                    KSizedBox.kWidthSizedBox16,
+                  _button(
+                    key: NawbarKeys.investorsButton,
+                    ruoteName: KRoute.support.name,
+                    text: context.l10n.investors,
+                    context: context,
+                    locale: language,
+                    // width: context.isEnglish
+                    //     ? KSize.kPixel60
+                    //     : KSize.kPixel80,
+                  ),
+                ],
+                if (appVersionEnum.isDesk)
+                  KSizedBox.kWidthSizedBox32
+                else
+                  KSizedBox.kWidthSizedBox16,
+                if (Config.isUser ||
+                    (Config.isBusiness &&
+                        context.read<AuthenticationBloc>().state.status ==
+                            AuthenticationStatus.authenticated))
+                  const CircleAvatar(
+                    radius: KPadding.kPaddingSize2,
+                  ),
+                if (appVersionEnum.isDesk)
+                  KSizedBox.kWidthSizedBox32
+                else
+                  KSizedBox.kWidthSizedBox16,
+                if (Config.isUser || Config.isBusiness)
+                  _button(
+                    key: NawbarKeys.feedbackButton,
+                    ruoteName: KRoute.feedback.name,
+                    text: context.l10n.contacts,
+                    context: context,
+                    locale: language,
+                    // width: KSize.kPixel70,
+                  ),
+              ],
+            );
+          },
         ),
       );
     } else {
@@ -396,11 +405,12 @@ class _NavigationCenterWebWidget extends StatelessWidget {
     // required double width,
     required Key key,
     required BuildContext context,
+    required Language locale,
     Widget? icon,
   }) =>
       ButtonBottomLineWidget(
         widgetKey: key,
-        text: text,
+        text: text, locale: locale,
         onPressed: () => context.goNamed(ruoteName),
         // width: width,
         // isDesk: widget.isTablet,

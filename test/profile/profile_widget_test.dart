@@ -27,7 +27,7 @@ void main() {
       mockDataPickerRepository = MockIDataPickerRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       profileStream = StreamController()..add(KTestVariables.pureUser);
-      // image = XFile(KTestText.imageModels.downloadURL);
+      // image = XFile(KTestVariables.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockUserRepository.currentUser).thenAnswer(
@@ -86,7 +86,7 @@ void main() {
     // group('Nickname empty', () {
     //   setUp(() {
     //     when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-    //       (realInvocation) => KTestText.userSetting,
+    //       (realInvocation) => KTestVariables.userSetting,
     //     );
     //   });
     //   testWidgets('${KGroupText.initial} ', (tester) async {
@@ -252,7 +252,8 @@ void main() {
           profileStream.add(
             KTestVariables.profileUserWithoutPhoto.copyWith(
               id: 'none',
-              email: null,
+              email: KTestVariables.userEmail,
+              name: null,
             ),
           );
 

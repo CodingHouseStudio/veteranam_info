@@ -24,15 +24,7 @@ class KeyboardScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<UrlCubit, UrlEnum?>(
-      listener: (context, state) async {
-        if (state != null) {
-          context.dialog.showSnackBardTextDialog(
-            state.value(context),
-            duration: const Duration(milliseconds: 4000),
-          );
-          context.read<UrlCubit>().reset();
-        }
-      },
+      listener: UrlCubitExtension.listener,
       child: PlatformEnumFlutter.isWebDesktop
           ? _KeyboardScrollViewWebDesk(
               scrollWidget: _body,

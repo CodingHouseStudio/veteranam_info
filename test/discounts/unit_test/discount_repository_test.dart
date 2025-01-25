@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+// import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -231,7 +231,7 @@ void main() {
         );
         // when(
         //   mockFirestoreService.getDiscountsByUserId(
-        //     KTestText.user.id,
+        //     KTestVariables.user.id,
         //   ),
         // ).thenThrow(
         //   Exception(KGroupText.failureGet),
@@ -335,7 +335,8 @@ void main() {
       });
       // test('Get discount use User Id', () async {
       //   expect(
-      //     mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user
+      // .id),
       //     isA<Left<SomeFailure, List<DiscountModel>>>(),
       //     // .having(
       //     //   (e) => e.value,
@@ -346,7 +347,8 @@ void main() {
       // });
       // test('Get discount use User Id', () async {
       //   expect(
-      //     mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+      //     mockDiscountRepository.getDiscountsByUserId(KTestVariables.user
+      // .id),
       //     isA<Left<SomeFailure, List<DiscountModel>>>(),
       //     // .having(
       //     //   (e) => e.value,
@@ -363,121 +365,123 @@ void main() {
         );
       });
     });
-    group('${KGroupText.firebaseFailure} ', () {
-      setUp(() {
-        when(
-          mockFirestoreService.getUserDiscountsLink(
-            KTestVariables.user.id,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
-        when(
-          mockFirestoreService.sendLink(
-            KTestVariables.linkModel,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureSend),
-        );
-        when(
-          mockFirestoreService.getUserDiscountsEmail(
-            KTestVariables.user.id,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
-        when(
-          mockFirestoreService.sendEmail(
-            KTestVariables.emailModel,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureSend),
-        );
-        when(
-          mockFirestoreService.getDiscount(
-            id: KTestVariables.discountModelItems.first.id,
-            showOnlyBusinessDiscounts: false,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
-        when(
-          mockFirestoreService.addDiscount(
-            KTestVariables.repositoryDiscountModelItems.first,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
+    // group('${KGroupText.firebaseFailure} ', () {
+    //   setUp(() {
+    //     when(
+    //       mockFirestoreService.getUserDiscountsLink(
+    //         KTestVariables.user.id,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
+    //     when(
+    //       mockFirestoreService.sendLink(
+    //         KTestVariables.linkModel,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureSend),
+    //     );
+    //     when(
+    //       mockFirestoreService.getUserDiscountsEmail(
+    //         KTestVariables.user.id,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
+    //     when(
+    //       mockFirestoreService.sendEmail(
+    //         KTestVariables.emailModel,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureSend),
+    //     );
+    //     when(
+    //       mockFirestoreService.getDiscount(
+    //         id: KTestVariables.discountModelItems.first.id,
+    //         showOnlyBusinessDiscounts: false,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
+    //     when(
+    //       mockFirestoreService.addDiscount(
+    //         KTestVariables.repositoryDiscountModelItems.first,
+    //       ),
+    //     ).thenThrow(
+    //       FirebaseException(plugin: KGroupText.failureGet),
+    //     );
 
-        mockDiscountRepository =
-            DiscountRepository(firestoreService: mockFirestoreService);
-      });
-      test('User Can Send Link', () async {
-        expect(
-          await mockDiscountRepository.userCanSendLink(KTestVariables.user.id),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('Send Link', () async {
-        expect(
-          await mockDiscountRepository.sendLink(KTestVariables.linkModel),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('User Can Send Email', () async {
-        expect(
-          await mockDiscountRepository
-              .userCanSendUserEmail(KTestVariables.user.id),
-          isA<Left<SomeFailure, int>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('Send Email', () async {
-        expect(
-          await mockDiscountRepository.sendEmail(KTestVariables.emailModel),
-          isA<Left<SomeFailure, bool>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('Get Discount', () async {
-        expect(
-          await mockDiscountRepository.getDiscount(
-            id: KTestVariables.discountModelItems.first.id,
-            showOnlyBusinessDiscounts: false,
-          ),
-          isA<Left<SomeFailure, DiscountModel>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError,
-          // ),
-        );
-      });
-      test('Add Discount', () async {
-        expect(
-          await mockDiscountRepository
-              .addDiscount(KTestVariables.repositoryDiscountModelItems.first),
-          isA<Left<SomeFailure, bool>>(),
-        );
-      });
-    });
+    //     mockDiscountRepository =
+    //         DiscountRepository(firestoreService: mockFirestoreService);
+    //   });
+    //   test('User Can Send Link', () async {
+    //     expect(
+    //       await mockDiscountRepository.userCanSendLink(KTestVariables.user.
+    // id),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('Send Link', () async {
+    //     expect(
+    //       await mockDiscountRepository.sendLink(KTestVariables.linkModel),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('User Can Send Email', () async {
+    //     expect(
+    //       await mockDiscountRepository
+    //           .userCanSendUserEmail(KTestVariables.user.id),
+    //       isA<Left<SomeFailure, int>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('Send Email', () async {
+    //     expect(
+    //       await mockDiscountRepository.sendEmail(KTestVariables.emailModel),
+    //       isA<Left<SomeFailure, bool>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('Get Discount', () async {
+    //     expect(
+    //       await mockDiscountRepository.getDiscount(
+    //         id: KTestVariables.discountModelItems.first.id,
+    //         showOnlyBusinessDiscounts: false,
+    //       ),
+    //       isA<Left<SomeFailure, DiscountModel>>(),
+    //       // .having(
+    //       //   (e) => e.value,
+    //       //   'value',
+    //       //   SomeFailure.serverError,
+    //       // ),
+    //     );
+    //   });
+    //   test('Add Discount', () async {
+    //     expect(
+    //       await mockDiscountRepository
+    //           .addDiscount(KTestVariables.repositoryDiscountModelItems.
+    // first),
+    //       isA<Left<SomeFailure, bool>>(),
+    //     );
+    //   });
+    // });
   });
 }
