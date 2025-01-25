@@ -1,5 +1,6 @@
 export 'app_authentication_repository.dart';
 export 'app_info_repository.dart';
+export 'app_layout_repository.dart';
 export 'app_nerwork_repository.dart';
 export 'auth_provider_module.dart';
 export 'authentication_repository.dart';
@@ -15,6 +16,7 @@ export 'faq_repository.dart';
 export 'feedback_repository.dart';
 export 'firebase_module.dart';
 export 'i_app_authentication_repository.dart';
+export 'i_app_layout_repository.dart';
 export 'i_app_network_repository.dart';
 export 'i_cities_repository.dart';
 export 'i_company_respository.dart';
