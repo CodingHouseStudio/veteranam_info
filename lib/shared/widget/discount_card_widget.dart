@@ -232,7 +232,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
               extra: discountItem,
             ),
             button: TextButton(
-              key: CompanyKeys.boxMyDiscounts,
+              // key: CompanyKeys.boxMyDiscounts,
               onPressed: () => context.goNamed(
                 KRoute.discount.name,
                 pathParameters: {

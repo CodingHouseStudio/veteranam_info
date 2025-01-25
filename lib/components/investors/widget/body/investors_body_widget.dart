@@ -11,39 +11,39 @@ class InvestorsBodyWidget extends StatelessWidget {
     return InvestorsBlocListener(
       childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
         buildWhen: (previous, current) => previous.isDesk != current.isDesk,
-        builder: (context, state) {
-          final padding = EdgeInsets.symmetric(
-            horizontal: state.isDesk
-                ? AppVersionEnum.desk.horizontalPadding
-                : AppVersionEnum.mobile.horizontalPadding,
-          );
-
-          return CustomScrollView(
-            key: ScaffoldKeys.scroll,
-            cacheExtent: KDimensions.listCacheExtent,
-            slivers: [
-              const NetworkBanner(),
-              if (Config.isWeb) const NavigationBarWidget(),
-              SliverPadding(
-                padding: padding,
-                sliver: InvestorsTitleWidget(isDesk: state.isDesk),
+        builder: (context, appVersionEnum) => CustomScrollView(
+          key: ScaffoldKeys.scroll,
+          cacheExtent: KDimensions.listCacheExtent,
+          slivers: [
+            const NetworkBanner(),
+            if (Config.isWeb) const NavigationBarWidget(),
+            SliverCenter(
+              appVersionEnum: appVersionEnum,
+              sliver: SliverPadding(
+                padding: appVersionEnum.paddingWithTablet,
+                sliver: SliverConstrainedCrossAxis(
+                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      InvestorsTitleWidget(isDesk: appVersionEnum.isDesk),
+                      if (appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox32.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox24.toSliver,
+                      FundsWidgetList(
+                        isDesk: appVersionEnum.isDesk,
+                      ),
+                      if (appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox50.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox24.toSliver,
+                    ],
+                  ),
+                ),
               ),
-              if (state.isDesk)
-                KSizedBox.kHeightSizedBox32.toSliver
-              else
-                KSizedBox.kHeightSizedBox24.toSliver,
-              FundsWidgetList(
-                isDesk: state.isDesk,
-                padding: padding,
-              ),
-              SliverToBoxAdapter(
-                child: state.isDesk
-                    ? KSizedBox.kHeightSizedBox50
-                    : KSizedBox.kHeightSizedBox24,
-              ),
-            ],
-          );
-        },
+            ),
+          ],
+        ),
       ),
     );
   }

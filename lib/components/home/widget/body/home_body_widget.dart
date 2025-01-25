@@ -12,47 +12,45 @@ class HomeBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomeBlocListener(
       childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
-        builder: (context, state) {
-          final padding = EdgeInsets.symmetric(
-            horizontal: state.horizontalPadding,
-          );
-          return CustomScrollView(
-            key: ScaffoldKeys.scroll,
-            cacheExtent: KDimensions.listCacheExtent,
-            slivers: [
-              const NetworkBanner(),
-              const NavigationBarWidget(),
-              SliverPadding(
-                padding: padding,
-                sliver: HomeSectionsWidget(
-                  isDesk: state.isDesk,
-                  isTablet: state.isTablet,
+        builder: (context, appVersionEnum) => CustomScrollView(
+          key: ScaffoldKeys.scroll,
+          cacheExtent: KDimensions.listCacheExtent,
+          slivers: [
+            const NetworkBanner(),
+            const NavigationBarWidget(),
+            SliverCenter(
+              appVersionEnum: appVersionEnum,
+              sliver: SliverPadding(
+                padding: appVersionEnum.paddingWithTablet,
+                sliver: SliverConstrainedCrossAxis(
+                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      HomeSectionsWidget(
+                        isDesk: appVersionEnum.isDesk,
+                        isTablet: appVersionEnum.isTablet,
+                      ),
+                      if (appVersionEnum.isDesk)
+                        const FAQSectionDeskWidget()
+                      else
+                        const FaqSectionMobWidget(),
+                      if (appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox160.toSliver
+                      else if (appVersionEnum.isTablet)
+                        KSizedBox.kHeightSizedBox64.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox48.toSliver,
+                      FooterWidget(
+                        appVersionEnum: appVersionEnum,
+                      ),
+                      KSizedBox.kHeightSizedBox30.toSliver,
+                    ],
+                  ),
                 ),
               ),
-              SliverPadding(
-                padding: padding,
-                sliver: state.isDesk
-                    ? const FAQSectionDeskWidget()
-                    : const FaqSectionMobWidget(),
-              ),
-              SliverToBoxAdapter(
-                child: state.isDesk
-                    ? KSizedBox.kHeightSizedBox160
-                    : state.isTablet
-                        ? KSizedBox.kHeightSizedBox64
-                        : KSizedBox.kHeightSizedBox48,
-              ),
-              SliverPadding(
-                padding: padding,
-                sliver: FooterWidget(
-                  isTablet: state.isTablet,
-                  isDesk: state.isDesk,
-                ),
-              ),
-              KSizedBox.kHeightSizedBox30.toSliver,
-            ],
-          );
-        },
+            ),
+          ],
+        ),
       ),
     );
   }

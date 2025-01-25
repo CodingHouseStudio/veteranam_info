@@ -28,46 +28,42 @@ class _DiscountsBodyWidget extends StatelessWidget {
     return DiscountsBlocListener(
       childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
         buildWhen: (previous, current) => previous.isDesk != current.isDesk,
-        builder: (context, state) {
-          final padding = EdgeInsets.symmetric(
-            horizontal: state.isDesk
-                ? AppVersionEnum.desk.horizontalPadding
-                : AppVersionEnum.mobile.horizontalPadding,
-          );
-          return CustomScrollView(
-            key: ScaffoldKeys.scroll,
-            cacheExtent: KDimensions.listCacheExtent,
-            slivers: [
-              const NetworkBanner(),
-              if (Config.isWeb) const NavigationBarWidget(),
-              SliverPadding(
-                padding: padding,
+        builder: (context, appVersionEnum) => CustomScrollView(
+          key: ScaffoldKeys.scroll,
+          cacheExtent: KDimensions.listCacheExtent,
+          slivers: [
+            const NetworkBanner(),
+            if (Config.isWeb) const NavigationBarWidget(),
+            SliverCenter(
+              appVersionEnum: appVersionEnum,
+              sliver: SliverPadding(
+                padding: appVersionEnum.padding,
                 sliver: SliverConstrainedCrossAxis(
                   maxExtent: KPlatformConstants.maxWidthThresholdDesk,
                   sliver: SliverMainAxisGroup(
                     slivers: [
                       DiscountTitleWidget(
-                        isDesk: state.isDesk,
+                        isDesk: appVersionEnum.isDesk,
                       ),
-                      if (state.isDesk)
+                      if (appVersionEnum.isDesk)
                         KSizedBox.kHeightSizedBox40.toSliver
                       else
                         KSizedBox.kHeightSizedBox24.toSliver,
-                      if (state.isDesk)
+                      if (appVersionEnum.isDesk)
                         const DiscountsDeskWidgetList()
                       else
                         DiscountWidgetList(
-                          isDesk: state.isTablet,
+                          isDesk: appVersionEnum.isTablet,
                         ),
                     ],
                   ),
                 ),
               ),
-            ],
-            controller: scrollController,
-            // semanticChildCount: null,
-          );
-        },
+            ),
+          ],
+          controller: scrollController,
+          // semanticChildCount: null,
+        ),
       ),
     );
   }

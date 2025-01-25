@@ -688,3 +688,15 @@ extension UrlCubitExtension on UrlCubit {
     }
   }
 }
+
+extension AppVersionEnumExtension on AppVersionEnum {
+  EdgeInsets get padding => EdgeInsets.symmetric(
+        horizontal: isDesk
+            ? AppVersionEnum.desk.horizontalPadding
+            : AppVersionEnum.mobile.horizontalPadding,
+      );
+
+  EdgeInsets get paddingWithTablet => EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+      );
+}

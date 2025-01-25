@@ -1,35 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/investors/investors.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class FundsWidgetList extends SingleChildRenderObjectWidget {
-  FundsWidgetList({
+class FundsWidgetList extends StatelessWidget {
+  const FundsWidgetList({
     required this.isDesk,
-    required this.padding,
     super.key,
-  }) : super(
-          child: _FundsWidgetList(
-            isDesk: isDesk,
-          ),
-        );
-  final bool isDesk;
-  final EdgeInsets padding;
-
-  @override
-  RenderSliverPadding createRenderObject(BuildContext context) {
-    return RenderSliverPadding(
-      padding: padding,
-      textDirection: Directionality.of(context),
-    );
-  }
-}
-
-class _FundsWidgetList extends StatelessWidget {
-  const _FundsWidgetList({
-    required this.isDesk,
   });
   final bool isDesk;
 
