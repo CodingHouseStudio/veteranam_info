@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/markdown_file_dialog/markdown_file_dialog.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -15,9 +16,8 @@ class MarkdownFileDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isTablet = constraints.maxWidth > KMinMaxSize.maxWidth640;
+    return BlocBuilder<AppLayoutCubit, AppLayoutState>(
+      builder: (context, state) {
         return AlertDialog(
           key: PrivacyPolicyDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
@@ -26,7 +26,7 @@ class MarkdownFileDialog extends StatelessWidget {
           // scrollable: true,
           icon: MarkdownDialogTitleWidget(
             title: startText,
-            isTablet: isTablet,
+            isTablet: state.appVersionEnum.isTablet,
           ),
           iconPadding: const EdgeInsets.only(
             top: KPadding.kPaddingSize24,
@@ -37,7 +37,7 @@ class MarkdownFileDialog extends StatelessWidget {
           content: MarkdownFileBlocprovider(
             widgetChild: MarkdownFileBody(
               startText: startText,
-              isTablet: isTablet,
+              isTablet: state.appVersionEnum.isTablet,
             ),
             ukFilePath: ukFilePath,
             enFilePath: enFilePath,

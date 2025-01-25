@@ -64,16 +64,16 @@ class _NavbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppLayoutCubit, AppVersionEnum>(
-      builder: (context, appVersionEnum) => Container(
+    return BlocBuilder<AppLayoutCubit, AppLayoutState>(
+      builder: (context, state) => Container(
         key: NawbarKeys.widget,
         decoration: KWidgetTheme.boxDecorationNawbar,
         margin: EdgeInsets.only(
           top: KPadding.kPaddingSize24,
-          left: appVersionEnum.horizontalPadding,
-          right: appVersionEnum.horizontalPadding,
+          left: state.appVersionEnum.horizontalPadding,
+          right: state.appVersionEnum.horizontalPadding,
         ),
-        padding: appVersionEnum.isTablet
+        padding: state.appVersionEnum.isTablet
             ? const EdgeInsets.only(
                 left: KPadding.kPaddingSize32,
                 right: KPadding.kPaddingSize16,
@@ -146,7 +146,7 @@ class _NavbarWidget extends StatelessWidget {
                   //   )
                   // else
                   _NavigationCenterWebWidget(
-                    appVersionEnum: appVersionEnum,
+                    appVersionEnum: state.appVersionEnum,
                   ),
                   // if (widget.isDesk && widget.hasMicrophone)
                   //   Padding(
@@ -158,7 +158,7 @@ class _NavbarWidget extends StatelessWidget {
                   //     ),
                   //   ),
                   if (!Config.isBusiness)
-                    if (appVersionEnum.isTablet)
+                    if (state.appVersionEnum.isTablet)
                       const LanguagesSwitcherWidget(
                         key: NawbarKeys.language,
                       )
@@ -171,41 +171,39 @@ class _NavbarWidget extends StatelessWidget {
                             context.dialog.showMobileMenuDialog(),
                       ),
                   BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                    builder: (context, state) {
+                    builder: (context, _) {
                       return Row(
-                        children:
-                            context.read<AuthenticationBloc>().state.status !=
-                                    AuthenticationStatus.authenticated
-                                //      &&
-                                // (Config.isDevelopment || Config.isBusiness)
-                                ? appVersionEnum.isDesk
-                                    ? [
-                                        KSizedBox.kWidthSizedBox16,
-                                        DoubleButtonWidget(
-                                          widgetKey: NawbarKeys.loginButton,
-                                          onPressed: () =>
-                                              context.goNamed(loginPath),
-                                          text: context.l10n.login,
-                                          isDesk: true,
-                                          darkMode: true,
-                                        ),
-                                      ]
-                                    : [
-                                        KSizedBox.kWidthSizedBox4,
-                                        IconButtonWidget(
-                                          key: NawbarKeys.loginIcon,
-                                          onPressed: () =>
-                                              context.goNamed(loginPath),
-                                          icon: KIcon.personWhite,
-                                          background: AppColors
-                                              // ignore: lines_longer_than_80_chars
-                                              .materialThemeKeyColorsSecondary,
-                                        ),
-                                      ]
+                        children: _.status != AuthenticationStatus.authenticated
+                            //      &&
+                            // (Config.isDevelopment || Config.isBusiness)
+                            ? state.appVersionEnum.isDesk
+                                ? [
+                                    KSizedBox.kWidthSizedBox16,
+                                    DoubleButtonWidget(
+                                      widgetKey: NawbarKeys.loginButton,
+                                      onPressed: () =>
+                                          context.goNamed(loginPath),
+                                      text: context.l10n.login,
+                                      isDesk: true,
+                                      darkMode: true,
+                                    ),
+                                  ]
                                 : [
-                                    KSizedBox.kWidthSizedBox8,
-                                    getImageWidget,
-                                  ],
+                                    KSizedBox.kWidthSizedBox4,
+                                    IconButtonWidget(
+                                      key: NawbarKeys.loginIcon,
+                                      onPressed: () =>
+                                          context.goNamed(loginPath),
+                                      icon: KIcon.personWhite,
+                                      background: AppColors
+                                          // ignore: lines_longer_than_80_chars
+                                          .materialThemeKeyColorsSecondary,
+                                    ),
+                                  ]
+                            : [
+                                KSizedBox.kWidthSizedBox8,
+                                getImageWidget,
+                              ],
                       );
                     },
                   ),

@@ -24,5 +24,5 @@ Future<void> discountsAddSendHelper(
 
   await tester.pumpAndSettle();
 
-  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+  // await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 }

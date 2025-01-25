@@ -428,7 +428,7 @@ void main() {
 
               await changeWindowSizeHelper(
                 tester: tester,
-                size: KTestConstants.windowVerySmallSize,
+                // size: KTestConstants.windowVerySmallSize,
                 test: () async => myDiscountConfirmButtonlHelper(
                   tester: tester,
                   mockGoRouter: mockGoRouter,

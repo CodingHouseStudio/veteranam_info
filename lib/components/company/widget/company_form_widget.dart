@@ -354,9 +354,11 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           confirmText: context.l10n.logOut,
           confirmButtonBackground: AppColors.materialThemeKeyColorsSecondary,
           onAppliedPressed: () {
-            context.read<AuthenticationBloc>().add(
-                  AuthenticationLogoutRequested(),
-                );
+            if (context.mounted) {
+              context.read<AuthenticationBloc>().add(
+                    AuthenticationLogoutRequested(),
+                  );
+            }
             // context.goNamed(KRoute.myDiscounts.name);
           },
         ),

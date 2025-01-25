@@ -8,7 +8,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeBlocprovider(
-      key: HomeKeys.screen,
       childWidget: Scaffold(
         key: HomeKeys.screen,
         resizeToAvoidBottomInset: true,

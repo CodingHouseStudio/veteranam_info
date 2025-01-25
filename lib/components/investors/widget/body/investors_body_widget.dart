@@ -9,41 +9,46 @@ class InvestorsBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InvestorsBlocListener(
-      childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
-        buildWhen: (previous, current) => previous.isDesk != current.isDesk,
-        builder: (context, appVersionEnum) => CustomScrollView(
-          key: ScaffoldKeys.scroll,
-          cacheExtent: KDimensions.listCacheExtent,
-          slivers: [
-            const NetworkBanner(),
-            if (Config.isWeb) const NavigationBarWidget(),
-            SliverCenter(
-              appVersionEnum: appVersionEnum,
-              sliver: SliverPadding(
-                padding: appVersionEnum.paddingWithTablet,
-                sliver: SliverConstrainedCrossAxis(
-                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                  sliver: SliverMainAxisGroup(
-                    slivers: [
-                      InvestorsTitleWidget(isDesk: appVersionEnum.isDesk),
-                      if (appVersionEnum.isDesk)
-                        KSizedBox.kHeightSizedBox32.toSliver
-                      else
-                        KSizedBox.kHeightSizedBox24.toSliver,
-                      FundsWidgetList(
-                        isDesk: appVersionEnum.isDesk,
-                      ),
-                      if (appVersionEnum.isDesk)
-                        KSizedBox.kHeightSizedBox50.toSliver
-                      else
-                        KSizedBox.kHeightSizedBox24.toSliver,
-                    ],
+      childWidget: CustomScrollView(
+        key: ScaffoldKeys.scroll,
+        cacheExtent: KDimensions.listCacheExtent,
+        slivers: [
+          const NetworkBanner(),
+          if (Config.isWeb) const NavigationBarWidget(),
+          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+            buildWhen: (previous, current) =>
+                previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
+            builder: (context, state) {
+              return SliverCenter(
+                appVersionEnum: state.appVersionEnum,
+                sliver: SliverPadding(
+                  padding: state.appVersionEnum.paddingWithTablet,
+                  sliver: SliverConstrainedCrossAxis(
+                    maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                    sliver: SliverMainAxisGroup(
+                      slivers: [
+                        InvestorsTitleWidget(
+                          isDesk: state.appVersionEnum.isDesk,
+                        ),
+                        if (state.appVersionEnum.isDesk)
+                          KSizedBox.kHeightSizedBox32.toSliver
+                        else
+                          KSizedBox.kHeightSizedBox24.toSliver,
+                        FundsWidgetList(
+                          isDesk: state.appVersionEnum.isDesk,
+                        ),
+                        if (state.appVersionEnum.isDesk)
+                          KSizedBox.kHeightSizedBox50.toSliver
+                        else
+                          KSizedBox.kHeightSizedBox24.toSliver,
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ],
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

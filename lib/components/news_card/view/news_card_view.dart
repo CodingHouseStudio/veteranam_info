@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/news_card/news_card.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -8,10 +9,8 @@ class NewsCardDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+    return BlocBuilder<AppLayoutCubit, AppLayoutState>(
+      builder: (context, state) {
         return AlertDialog(
           key: NewsCardDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
@@ -22,7 +21,7 @@ class NewsCardDialog extends StatelessWidget {
           scrollable: true,
           content: NewsCardBlocprovider(
             childWidget: NewsCardBody(
-              isDesk: isDesk,
+              isDesk: state.appVersionEnum.isDesk,
             ),
             id: id,
           ),

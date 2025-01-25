@@ -11,37 +11,37 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeBlocListener(
-      childWidget: BlocBuilder<AppLayoutCubit, AppVersionEnum>(
-        builder: (context, appVersionEnum) => CustomScrollView(
-          key: ScaffoldKeys.scroll,
-          cacheExtent: KDimensions.listCacheExtent,
-          slivers: [
-            const NetworkBanner(),
-            const NavigationBarWidget(),
-            SliverCenter(
-              appVersionEnum: appVersionEnum,
+      childWidget: CustomScrollView(
+        key: ScaffoldKeys.scroll,
+        cacheExtent: KDimensions.listCacheExtent,
+        slivers: [
+          const NetworkBanner(),
+          const NavigationBarWidget(),
+          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+            builder: (context, state) => SliverCenter(
+              appVersionEnum: state.appVersionEnum,
               sliver: SliverPadding(
-                padding: appVersionEnum.paddingWithTablet,
+                padding: state.appVersionEnum.paddingWithTablet,
                 sliver: SliverConstrainedCrossAxis(
                   maxExtent: KPlatformConstants.maxWidthThresholdDesk,
                   sliver: SliverMainAxisGroup(
                     slivers: [
                       HomeSectionsWidget(
-                        isDesk: appVersionEnum.isDesk,
-                        isTablet: appVersionEnum.isTablet,
+                        isDesk: state.appVersionEnum.isDesk,
+                        isTablet: state.appVersionEnum.isTablet,
                       ),
-                      if (appVersionEnum.isDesk)
+                      if (state.appVersionEnum.isDesk)
                         const FAQSectionDeskWidget()
                       else
                         const FaqSectionMobWidget(),
-                      if (appVersionEnum.isDesk)
+                      if (state.appVersionEnum.isDesk)
                         KSizedBox.kHeightSizedBox160.toSliver
-                      else if (appVersionEnum.isTablet)
+                      else if (state.appVersionEnum.isTablet)
                         KSizedBox.kHeightSizedBox64.toSliver
                       else
                         KSizedBox.kHeightSizedBox48.toSliver,
                       FooterWidget(
-                        appVersionEnum: appVersionEnum,
+                        appVersionEnum: state.appVersionEnum,
                       ),
                       KSizedBox.kHeightSizedBox30.toSliver,
                     ],
@@ -49,8 +49,8 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

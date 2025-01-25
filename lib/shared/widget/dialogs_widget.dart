@@ -57,14 +57,29 @@ class _DialogsWidget {
     void Function()? onCancelPressed,
     void Function()? onClosePressed,
   }) {
+    final layoutBloc = context.read<AppLayoutCubit>();
     if (isDesk) {
       showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
-          return BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: preLayoutWidget?.call(
-                  layoutBuilder: _deskDoubleDialogWidget(
+          return BlocProvider.value(
+            value: layoutBloc,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+              child: preLayoutWidget?.call(
+                    layoutBuilder: _deskDoubleDialogWidget(
+                      childWidget: childWidget,
+                      isScollable: isScollable,
+                      backgroundColor: backgroundColor,
+                      insetPadding: deskInsetPadding,
+                      icon: deskIcon,
+                      iconPadding: deskIconPadding,
+                      actionsOverflowAlignment: deskActionsOverflowAlignment,
+                      contentPadding: deskContentPadding,
+                      maxWidth: deskMaxWidth,
+                    ),
+                  ) ??
+                  _deskDoubleDialogWidget(
                     childWidget: childWidget,
                     isScollable: isScollable,
                     backgroundColor: backgroundColor,
@@ -75,18 +90,7 @@ class _DialogsWidget {
                     contentPadding: deskContentPadding,
                     maxWidth: deskMaxWidth,
                   ),
-                ) ??
-                _deskDoubleDialogWidget(
-                  childWidget: childWidget,
-                  isScollable: isScollable,
-                  backgroundColor: backgroundColor,
-                  insetPadding: deskInsetPadding,
-                  icon: deskIcon,
-                  iconPadding: deskIconPadding,
-                  actionsOverflowAlignment: deskActionsOverflowAlignment,
-                  contentPadding: deskContentPadding,
-                  maxWidth: deskMaxWidth,
-                ),
+            ),
           );
         },
       ).then(
@@ -155,10 +159,10 @@ class _DialogsWidget {
     required double? maxWidth,
     required EdgeInsets Function({required bool isDeskValue})? contentPadding,
   }) =>
-      LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDeskValue = constraints.maxWidth >
-              (maxWidth ?? KPlatformConstants.minWidthThresholdTablet);
+      BlocBuilder<AppLayoutCubit, AppLayoutState>(
+        buildWhen: (previous, current) =>
+            current.appVersionEnum.isDesk != previous.appVersionEnum.isDesk,
+        builder: (context, state) {
           return AlertDialog(
             key: DialogsKeys.scroll,
             shape: RoundedRectangleBorder(
@@ -170,11 +174,12 @@ class _DialogsWidget {
                 backgroundColor ?? AppColors.materialThemeKeyColorsNeutral,
             iconPadding: iconPadding,
             actionsOverflowAlignment: actionsOverflowAlignment,
-            contentPadding: contentPadding?.call(isDeskValue: isDeskValue),
+            contentPadding:
+                contentPadding?.call(isDeskValue: state.appVersionEnum.isDesk),
             scrollable: isScollable,
             clipBehavior: Clip.hardEdge,
             content: childWidget(
-              isDeskValue: isDeskValue,
+              isDeskValue: state.appVersionEnum.isDesk,
               context: context,
             ),
           );
@@ -192,11 +197,11 @@ class _DialogsWidget {
     required double? maxWidth,
     required bool isScollable,
   }) =>
-      LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDeskValue =
-              constraints.maxWidth > (maxWidth ?? KMinMaxSize.maxWidth600);
-          final paddingWidget =
+      BlocBuilder<AppLayoutCubit, AppLayoutState>(
+        buildWhen: (previous, current) =>
+            current.appVersionEnum.isDesk != previous.appVersionEnum.isDesk,
+        builder: (context, state) {
+          final child =
               //  padding != null
               //     ? Padding(
               //         padding: padding(isDeskValue: isDeskValue),
@@ -207,16 +212,16 @@ class _DialogsWidget {
               //       )
               //     :
               childWidget(
-            isDeskValue: isDeskValue,
+            isDeskValue: state.appVersionEnum.isDesk,
             context: context,
           );
           if (isScollable) {
             return SingleChildScrollView(
               key: DialogsKeys.scroll,
-              child: paddingWidget,
+              child: child,
             );
           } else {
-            return paddingWidget;
+            return child;
           }
         },
       );
@@ -490,15 +495,21 @@ class _DialogsWidget {
     int emailCloseDelay,
   ) {
     final bloc = context.read<UserEmailFormBloc>();
+    final layoutBloc = context.read<AppLayoutCubit>();
     showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
-        return BlocProvider.value(
-          value: bloc,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isTablet = constraints.maxWidth >
-                  KPlatformConstants.minWidthThresholdTablet;
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: bloc,
+            ),
+            BlocProvider.value(
+              value: layoutBloc,
+            ),
+          ],
+          child: BlocBuilder<AppLayoutCubit, AppLayoutState>(
+            builder: (context, state) {
               return AlertDialog(
                 key: DiscountCardDialogKeys.dialog,
                 insetPadding: const EdgeInsets.symmetric(
@@ -513,7 +524,7 @@ class _DialogsWidget {
                 clipBehavior: Clip.hardEdge,
                 content: UserEmailDialog(
                   key: DiscountsKeys.userEmailDialog,
-                  isDesk: isTablet,
+                  isDesk: state.appVersionEnum.isTablet,
                   sendOnPressed: () => context.read<UserEmailFormBloc>().add(
                         const UserEmailFormEvent.sendEmail(),
                       ),

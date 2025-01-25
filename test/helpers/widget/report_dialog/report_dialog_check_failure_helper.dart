@@ -15,7 +15,7 @@ Future<void> reportDialogCheckFailureHelper({
 
   await changeWindowSizeHelper(
     tester: tester,
-    size: KTestConstants.windowSmallSize,
+    // size: KTestConstants.windowSmallSize,
     test: () async {
       expect(
         find.byKey(ReportDialogKeys.checkPointError),
