@@ -689,6 +689,14 @@ extension UrlCubitExtension on UrlCubit {
   }
 }
 
+extension AppVersionCubitExtension on AppVersionCubit {
+  static void listener(BuildContext context, AppVersionState state) {
+    context.dialog.showMobUpdateAppDialog(
+      hasNewVersion: state.mobHasNewBuild,
+    );
+  }
+}
+
 extension AppVersionEnumExtension on AppVersionEnum {
   EdgeInsets get padding => EdgeInsets.symmetric(
         horizontal: isDesk

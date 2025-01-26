@@ -24,10 +24,8 @@ class FeedbackBlocListener extends StatelessWidget {
           listener: UrlCubitExtension.listener,
         ),
         if (!Config.isWeb)
-          BlocListener<AppVersionCubit, AppVersionState>(
-            listener: (context, state) => context.dialog.showMobUpdateAppDialog(
-              hasNewVersion: state.mobHasNewBuild,
-            ),
+          const BlocListener<AppVersionCubit, AppVersionState>(
+            listener: AppVersionCubitExtension.listener,
           ),
       ],
       child: childWidget,
