@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -57,31 +56,12 @@ void informatonWidgetTestRegister() {
     (invocation) async => Right(KTestVariables.reportItems),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // ReportBloc
-  registerFactoryParam<ReportBloc, String, CardEnum>(
-    (cardId, card) => ReportBloc(
-      reportRepository: mockReportRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-      cardId: KTestVariables.id,
-      card: CardEnum.funds,
-    ),
-  );
-
-  // InformationWatcherBloc
-  registerFactory<InformationWatcherBloc>(
-    () => InformationWatcherBloc(
-      informationRepository: mockInformationRepository,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockInformationRepository);
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockReportRepository);
 }

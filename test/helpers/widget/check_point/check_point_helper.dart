@@ -49,7 +49,10 @@ Future<void> chekPointHelper({
   );
 
   if (twiceTap) {
-    await tester.tap(find.byKey(CheckPointKeys.widget).first);
+    await tester.tap(
+      find.byKey(CheckPointKeys.widget).first,
+      warnIfMissed: false,
+    );
 
     await tester.pumpAndSettle();
 

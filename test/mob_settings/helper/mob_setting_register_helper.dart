@@ -62,22 +62,11 @@ void mobSettingWidgetTestRegister() {
     (invocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // MobFeedbackBloc
-  registerFactory<MobFeedbackBloc>(
-    () => MobFeedbackBloc(
-      feedbackRepository: mockFeedbackRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockFeedbackRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockUserRepository);
 }

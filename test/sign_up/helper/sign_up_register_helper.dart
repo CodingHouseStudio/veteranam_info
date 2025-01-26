@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -29,21 +28,9 @@ void signUpWidgetTestRegister() {
     (invocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // SignUpBloc
-  registerFactory<SignUpBloc>(
-    () => SignUpBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
-
-  // AuthenticationServicesCubit
-  registerFactory<AuthenticationServicesCubit>(
-    () => AuthenticationServicesCubit(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockAuthenticationRepository);
 }

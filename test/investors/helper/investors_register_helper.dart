@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -63,38 +62,13 @@ void investorsWidgetTestRegister() {
     (invocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // InvestorsWatcherBloc
-  registerFactory<InvestorsWatcherBloc>(
-    () => InvestorsWatcherBloc(
-      investorsRepository: mockInvestorsRepository,
-    ),
-  );
-
-  // ReportBloc
-  registerFactoryParam<ReportBloc, String, CardEnum>(
-    (cardId, card) => ReportBloc(
-      reportRepository: mockReportRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-      cardId: KTestVariables.id,
-      card: CardEnum.funds,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // UrlCubit
-  registerFactory<UrlCubit>(
-    () => UrlCubit(
-      urlRepository: mockUrlRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockInvestorsRepository);
+  registerSingleton(mockReportRepository);
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockUrlRepository);
 }

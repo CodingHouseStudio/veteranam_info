@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -90,37 +89,13 @@ void companyWidgetTestRegister() {
   //   (realInvocation) => false,
   // );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // CompanyWatcherBloc
-  registerFactory<CompanyWatcherBloc>(
-    () => CompanyWatcherBloc(
-      companyRepository: mockCompanyRepository,
-    ),
-  );
-
-  // CompanyFormBloc
-  registerFactory<CompanyFormBloc>(
-    () => CompanyFormBloc(
-      companyRepository: mockCompanyRepository,
-      dataPickerRepository: mockDataPickerRepository,
-      discountRepository: mockDiscountRepository,
-    ),
-  );
-
-  // AuthenticationBloc
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockDataPickerRepository);
+  registerSingleton(mockCompanyRepository);
+  registerSingleton(mockDiscountRepository);
+  registerSingleton(mockAuthenticationRepository);
 }

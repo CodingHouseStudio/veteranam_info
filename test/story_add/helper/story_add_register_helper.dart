@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/story_add/bloc/story_add_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -33,11 +32,11 @@ void storyAddWidgetTestRegister() {
     (invocation) => KTestVariables.userWithoutPhoto,
   );
 
-  registerFactory(
-    () => StoryAddBloc(
-      storyRepository: mockStoryRepository,
-      iAppAuthenticationRepository: mockAppAuthenticationRepository,
-      dataPickerRepository: mockDataPickerRepository,
-    ),
-  );
+  _registerRepository();
+}
+
+void _registerRepository() {
+  registerSingleton(mockStoryRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockDataPickerRepository);
 }

@@ -1,5 +1,4 @@
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/markdown_file_dialog/bloc/markdown_file_cubit.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -15,9 +14,7 @@ void mardownFileWidgetTestRegister() {
     (realInvocation) => KTestVariables.userSetting,
   );
 
-  registerFactory(
-    () => MarkdownFileCubit(
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-    ),
+  registerSingleton(
+    mockAppAuthenticationRepository,
   );
 }

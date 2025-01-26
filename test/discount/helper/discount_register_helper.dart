@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/discount/bloc/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -47,34 +46,13 @@ void discountWidgetTestRegister() {
     (realInvocation) => KTestVariables.userWithoutPhoto,
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // DiscountWatcherBloc
-  registerFactoryParam<DiscountWatcherBloc, DiscountModel?, String?>(
-    (discount, discountId) => DiscountWatcherBloc(
-      discountRepository: mockDiscountRepository,
-      discount: discount,
-      discountId: discountId,
-      firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    ),
-  );
-
-  // UrlCubit
-  registerFactory<UrlCubit>(
-    () => UrlCubit(
-      urlRepository: mockUrlRepository,
-    ),
-  );
-
-  // ReportBloc
-  registerFactoryParam<ReportBloc, String, CardEnum>(
-    (cardId, card) => ReportBloc(
-      reportRepository: mockReportRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-      cardId: cardId,
-      card: card,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockDiscountRepository);
+  registerSingleton(mockFirebaseRemoteConfigProvider);
+  registerSingleton(mockUrlRepository);
+  registerSingleton(mockReportRepository);
+  registerSingleton(mockAppAuthenticationRepository);
 }

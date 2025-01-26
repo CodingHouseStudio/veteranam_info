@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -46,36 +45,12 @@ void myDiscountsWidgetTestRegister() {
     (realInvocation) => AuthenticationStatus.authenticated,
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // MyDiscountsWatcherBloc
-  registerFactory<MyDiscountsWatcherBloc>(
-    () => MyDiscountsWatcherBloc(
-      discountRepository: mockDiscountRepository,
-      companyRepository: mockCompanyRepository,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // CompanyWatcherBloc
-  registerFactory<CompanyWatcherBloc>(
-    () => CompanyWatcherBloc(
-      companyRepository: mockCompanyRepository,
-    ),
-  );
-
-  // AuthenticationBloc
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockDiscountRepository);
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockCompanyRepository);
+  registerSingleton(mockAuthenticationRepository);
 }

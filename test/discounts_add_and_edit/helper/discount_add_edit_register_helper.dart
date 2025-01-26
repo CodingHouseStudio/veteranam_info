@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -43,25 +42,11 @@ void discountAddEditRegister() {
     (_) => KTestVariables.fullCompanyModel,
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // DiscountsAddBloc
-  registerFactoryParam<DiscountsAddBloc, DiscountModel?, String?>(
-    (discount, discountId) => DiscountsAddBloc(
-      discountRepository: mockDiscountRepository,
-      companyRepository: mockCompanyRepository,
-      citiesRepository: mockCitiesRepository,
-      discount: discount,
-      discountId: discountId,
-    ),
-  );
-
-  // CompanyWatcherBloc
-  registerFactory<CompanyWatcherBloc>(
-    () => CompanyWatcherBloc(
-      companyRepository: mockCompanyRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockDiscountRepository);
+  registerSingleton(mockCompanyRepository);
+  registerSingleton(mockCitiesRepository);
 }

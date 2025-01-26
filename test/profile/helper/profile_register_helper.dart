@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/profile/bloc/profile_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -62,29 +61,11 @@ void profileWidgetTestRegister() {
     (realInvocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // ProfileBloc
-  registerFactory<ProfileBloc>(
-    () => ProfileBloc(
-      userRepository: mockUserRepository,
-      dataPickerRepository: mockDataPickerRepository,
-    ),
-  );
-
-  // AuthenticationBloc
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockDataPickerRepository);
+  registerSingleton(mockAuthenticationRepository);
 }

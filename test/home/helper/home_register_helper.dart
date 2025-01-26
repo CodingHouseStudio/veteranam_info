@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -95,43 +94,14 @@ void homeWidgetTestRegister() {
   //   (invocation) async => const Right(true),
   // );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // HomeWatcherBloc
-  registerFactory<HomeWatcherBloc>(
-    () => HomeWatcherBloc(
-      faqRepository: mockFaqRepository,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // AuthenticationBloc
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthencticationRepository,
-    ),
-  );
-
-  // UrlCubit
-  registerFactory<UrlCubit>(
-    () => UrlCubit(
-      urlRepository: mockUrlRepository,
-    ),
-  );
-
-  // AppVersionCubit
-  registerFactory<AppVersionCubit>(
-    () => AppVersionCubit(
-      buildRepository: mockBuildRepository,
-      firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockUserRepository);
+  registerSingleton(mockAuthencticationRepository);
+  registerSingleton(mockFaqRepository);
+  registerSingleton(mockUrlRepository);
+  registerSingleton(mockBuildRepository);
+  registerSingleton(mockFirebaseRemoteConfigProvider);
 }

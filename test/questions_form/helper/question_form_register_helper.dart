@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/questions_form/bloc/user_role_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -24,21 +23,9 @@ void questionFormWidgetTestRegister() {
     (realInvocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // UserRoleBloc
-  registerFactory<UserRoleBloc>(
-    () => UserRoleBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
-
-  // UserWatcherBloc
-  registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(
-      userRepository: mockUserRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockUserRepository);
 }

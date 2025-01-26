@@ -1,4 +1,3 @@
-import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -12,5 +11,5 @@ void mobFaqWidgetTestRegister() {
   PlatformEnumFlutter.isWebDesktop = true;
   mockFaqRepository = MockIFaqRepository();
 
-  registerFactory(() => MobFaqWatcherBloc(faqRepository: mockFaqRepository));
+  registerSingleton(mockFaqRepository);
 }

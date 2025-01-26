@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -34,22 +33,11 @@ void feedbackWidgetTestRegister() {
     (invocation) async => const Right(true),
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // FeedbackBloc
-  registerFactory<FeedbackBloc>(
-    () => FeedbackBloc(
-      feedbackRepository: mockFeedbackRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-    ),
-  );
-
-  // UrlCubit
-  registerFactory<UrlCubit>(
-    () => UrlCubit(
-      urlRepository: mockUrlRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockFeedbackRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockUrlRepository);
 }

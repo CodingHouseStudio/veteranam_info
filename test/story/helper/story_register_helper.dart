@@ -1,5 +1,4 @@
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/story/bloc/story_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -15,21 +14,10 @@ void storyWidgetTestRegister() {
     (realInvocation) => AuthenticationStatus.authenticated,
   );
 
-  _registerBloc();
+  _registerRepository();
 }
 
-void _registerBloc() {
-  // StoryWatcherBloc
-  registerFactory<StoryWatcherBloc>(
-    () => StoryWatcherBloc(
-      storyRepository: mockStoryRepository,
-    ),
-  );
-
-  // AuthenticationBloc
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
+void _registerRepository() {
+  registerSingleton(mockStoryRepository);
+  registerSingleton(mockAuthenticationRepository);
 }

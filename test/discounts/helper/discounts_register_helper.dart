@@ -12,7 +12,6 @@ late AuthenticationRepository mockAuthenticationRepository;
 late FirebaseAnalyticsService mockFirebaseAnalyticsService;
 late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 late AppInfoRepository mockBuildRepository;
-late UserRepository mockUserRepository;
 late MobileRatingRepository mockMobileRatingRepository;
 void discountsWidgetTestRegister() {
   // KTest.animatioRepeat=1;
@@ -25,7 +24,6 @@ void discountsWidgetTestRegister() {
   mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
   mockReportRepository = MockIReportRepository();
   mockBuildRepository = MockAppInfoRepository();
-  mockUserRepository = MockUserRepository();
   mockMobileRatingRepository = MockMobileRatingRepository();
 
   when(mockMobileRatingRepository.showRatingDialog()).thenAnswer(
@@ -79,66 +77,74 @@ void discountsWidgetTestRegister() {
     (invocation) async => const Right(true),
   );
 
-  registerSingleton(mockUserRepository);
-  _regsiterBloc();
+  _regsiterRepository();
 }
 
-void _regsiterBloc() {
-  registerFactoryParam<ReportBloc, String, CardEnum>(
-    (cardId, card) => ReportBloc(
-      reportRepository: mockReportRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-      cardId: KTestVariables.id,
-      card: CardEnum.funds,
-    ),
-  );
-  registerFactory<DiscountsWatcherBloc>(
-    () => DiscountsWatcherBloc(
-      discountRepository: mockDiscountRepository,
-      // reportRepository: mockReportRepository,
-      // appAuthenticationRepository: mockAppAuthenticationRepository,
-      firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    ),
-  );
-  registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(
-      authenticationRepository: mockAuthenticationRepository,
-    ),
-  );
-  registerFactory<DiscountLinkFormBloc>(
-    () => DiscountLinkFormBloc(
-      discountRepository: mockDiscountRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-    ),
-  );
-  registerFactory<DiscountLinkCubit>(
-    () => DiscountLinkCubit(
-      discountRepository: mockDiscountRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-    ),
-  );
-  registerFactory<UserEmailFormBloc>(
-    () => UserEmailFormBloc(
-      discountRepository: mockDiscountRepository,
-      appAuthenticationRepository: mockAppAuthenticationRepository,
-      firebaseAnalyticsService: mockFirebaseAnalyticsService,
-    ),
-  );
-  registerFactory<MobileRatingCubit>(
-    () => MobileRatingCubit(
-      mobileRatingRepository: mockMobileRatingRepository,
-    ),
-  );
-  registerFactory<DiscountConfigCubit>(
-    () => DiscountConfigCubit(
-      firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    ),
-  );
-  registerFactory<AppVersionCubit>(
-    () => AppVersionCubit(
-      buildRepository: mockBuildRepository,
-      firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-    ),
-  );
-  registerFactory<ViewModeCubit>(ViewModeCubit.new);
+void _regsiterRepository() {
+  registerSingleton(mockDiscountRepository);
+  registerSingleton(mockAppAuthenticationRepository);
+  registerSingleton(mockReportRepository);
+  registerSingleton(mockAuthenticationRepository);
+  registerSingleton(mockFirebaseAnalyticsService);
+  registerSingleton(mockFirebaseRemoteConfigProvider);
+  registerSingleton(mockBuildRepository);
+  registerSingleton(mockMobileRatingRepository);
+
+  // registerFactoryParam<ReportBloc, String, CardEnum>(
+  //   (cardId, card) => ReportBloc(
+  //     reportRepository: mockReportRepository,
+  //     appAuthenticationRepository: mockAppAuthenticationRepository,
+  //     cardId: KTestVariables.id,
+  //     card: CardEnum.funds,
+  //   ),
+  // );
+  // registerFactory<DiscountsWatcherBloc>(
+  //   () => DiscountsWatcherBloc(
+  //     discountRepository: mockDiscountRepository,
+  //     // reportRepository: mockReportRepository,
+  //     // appAuthenticationRepository: mockAppAuthenticationRepository,
+  //     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  //   ),
+  // );
+  // registerFactory<AuthenticationBloc>(
+  //   () => AuthenticationBloc(
+  //     authenticationRepository: mockAuthenticationRepository,
+  //   ),
+  // );
+  // registerFactory<DiscountLinkFormBloc>(
+  //   () => DiscountLinkFormBloc(
+  //     discountRepository: mockDiscountRepository,
+  //     appAuthenticationRepository: mockAppAuthenticationRepository,
+  //   ),
+  // );
+  // registerFactory<DiscountLinkCubit>(
+  //   () => DiscountLinkCubit(
+  //     discountRepository: mockDiscountRepository,
+  //     appAuthenticationRepository: mockAppAuthenticationRepository,
+  //   ),
+  // );
+  // registerFactory<UserEmailFormBloc>(
+  //   () => UserEmailFormBloc(
+  //     discountRepository: mockDiscountRepository,
+  //     appAuthenticationRepository: mockAppAuthenticationRepository,
+  //     firebaseAnalyticsService: mockFirebaseAnalyticsService,
+  //   ),
+  // );
+  // registerFactory<MobileRatingCubit>(
+  //   () => MobileRatingCubit(
+  //     mobileRatingRepository: mockMobileRatingRepository,
+  //   ),
+  // );
+  // registerFactory<DiscountConfigCubit>(
+  //   () => DiscountConfigCubit(
+  //     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  //   ),
+  // );
+  // registerFactory<AppVersionCubit>(
+  //   () => AppVersionCubit(
+  //     buildRepository: mockBuildRepository,
+  //     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  //   ),
+  // );
+  // registerFactory<ViewModeCubit>(ViewModeCubit.new);
 }
