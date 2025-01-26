@@ -10,5 +10,6 @@ export 'my_discounts_empty_page_helper.dart';
 export 'my_discounts_end_list_helper.dart';
 export 'my_discounts_initial_helper.dart';
 export 'my_discounts_pump_app_helper.dart';
+export 'my_discounts_register_helper.dart';
 export 'my_discounts_unconfirm_button_helper.dart';
 export 'profile_button_discount_navigation_helper.dart';

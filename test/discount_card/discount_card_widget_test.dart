@@ -16,10 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discountCard} ', () {
-    late IDiscountRepository mockDiscountRepository;
-    setUp(() {
-      mockDiscountRepository = MockIDiscountRepository();
-    });
+    setUp(discountCardTestWIdgetRegister);
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(

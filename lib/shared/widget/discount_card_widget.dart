@@ -621,16 +621,18 @@ class ExpirationWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           KIcon.date,
-          Padding(
-            padding: const EdgeInsets.only(
-              right: KPadding.kPaddingSize4,
-            ),
-            child: Text(
-              ((expiration == null || expiration!.isEmpty)
-                  ? context.l10n.itIsValidAllTime
-                  : expiration!),
-              key: DiscountCardKeys.expiration,
-              style: AppTextStyle.materialThemeLabelLarge,
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: KPadding.kPaddingSize4,
+              ),
+              child: Text(
+                ((expiration == null || expiration!.isEmpty)
+                    ? context.l10n.itIsValidAllTime
+                    : expiration!),
+                key: DiscountCardKeys.expiration,
+                style: AppTextStyle.materialThemeLabelLarge,
+              ),
             ),
           ),
         ],

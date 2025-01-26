@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -18,45 +17,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.myDiscounts} ', () {
-    late IDiscountRepository mockDiscountRepository;
-    late UserRepository mockUserRepository;
-    late ICompanyRepository mockCompanyRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
-    late StreamController<CompanyModel> companyStream;
-    setUp(() {
-      Config.roleValue = Config.business;
-      mockDiscountRepository = MockIDiscountRepository();
-      mockCompanyRepository = MockICompanyRepository();
-      mockUserRepository = MockUserRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-
-      companyStream = StreamController();
-
-      when(mockUserRepository.currentUserSetting)
-          .thenAnswer((invocation) => KTestVariables.userSetting);
-      for (var i = 0; i < 3; i++) {
-        when(
-          mockDiscountRepository.deleteDiscountsById(
-            KTestVariables.userDiscountModelItems.elementAt(i).id,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-        when(
-          mockDiscountRepository.deactivateDiscount(
-            discountModel: KTestVariables.userDiscountModelItems.elementAt(i),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-      }
-      when(mockCompanyRepository.company).thenAnswer(
-        (realInvocation) => companyStream.stream,
-      );
-      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
-        (realInvocation) => AuthenticationStatus.authenticated,
-      );
-    });
+    setUp(myDiscountsWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       late StreamController<List<DiscountModel>> failureStream;
       setUp(
@@ -82,11 +43,7 @@ void main() {
 
       testWidgets('${KGroupText.error} ', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         failureStream.addError(KGroupText.failureGet);
@@ -123,11 +80,7 @@ void main() {
       );
       testWidgets('End List', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myDiscountsEndListHelper(tester);
@@ -161,11 +114,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
         await myDiscountsEmptyProfilePageHelper(tester);
       });
@@ -175,11 +124,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await myDiscountsPumpAppHelper(
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockUserRepository: mockUserRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
           await myDiscountsEmptyProfilePageHelper(tester);
@@ -187,11 +132,7 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.profile.name} ', (tester) async {
             await myDiscountsPumpAppHelper(
-              mockDiscountRepository: mockDiscountRepository,
-              mockUserRepository: mockUserRepository,
-              mockCompanyRepository: mockCompanyRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 
@@ -203,11 +144,7 @@ void main() {
 
           testWidgets('${KRoute.company.name} ', (tester) async {
             await myDiscountsPumpAppHelper(
-              mockDiscountRepository: mockDiscountRepository,
-              mockUserRepository: mockUserRepository,
-              mockCompanyRepository: mockCompanyRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 
@@ -248,11 +185,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myDiscountsEmptyPageHelper(tester);
@@ -263,11 +196,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await myDiscountsPumpAppHelper(
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockUserRepository: mockUserRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
           await myDiscountsEmptyPageHelper(tester);
@@ -277,11 +206,7 @@ void main() {
           () {
             testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
 
@@ -315,11 +240,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myDiscountsInitialHelper(tester);
@@ -327,11 +248,7 @@ void main() {
 
       testWidgets('Delete discount', (tester) async {
         await myDiscountsPumpAppHelper(
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await deleteDiscountHelper(tester);
@@ -341,11 +258,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await myDiscountsPumpAppHelper(
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockUserRepository: mockUserRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -354,11 +267,7 @@ void main() {
 
         loadingList(
           (tester) async => myDiscountsPumpAppHelper(
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockUserRepository: mockUserRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
+            tester,
           ),
           // lastCard: DiscountsKeys.cardLast,
         );
@@ -367,11 +276,7 @@ void main() {
           () {
             testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
 
@@ -387,11 +292,7 @@ void main() {
             });
             testWidgets('Edit discount ', (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
 
@@ -418,11 +319,7 @@ void main() {
             testWidgets('Delete discount dialog confirm button pop(Mob)',
                 (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
 
@@ -438,11 +335,7 @@ void main() {
             testWidgets('Delete discount desk dialog unconfirm button pop',
                 (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
               await myDiscountUnconfirmButtonlHelper(
@@ -455,11 +348,7 @@ void main() {
             testWidgets('Delete discount mob dialog cancel icon pop',
                 (tester) async {
               await myDiscountsPumpAppHelper(
-                mockDiscountRepository: mockDiscountRepository,
-                mockUserRepository: mockUserRepository,
-                mockCompanyRepository: mockCompanyRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
               );
 

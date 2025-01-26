@@ -22,8 +22,8 @@ extension PumpApp on WidgetTester {
     Widget widget, {
     MockGoRouter? mockGoRouter,
     bool addFeedback = false,
-  }) {
-    return pumpWidget(
+  }) async {
+    await pumpWidget(
       MultiBlocProvider(
         providers: [
           BlocProvider(

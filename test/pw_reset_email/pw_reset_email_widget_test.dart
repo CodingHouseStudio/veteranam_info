@@ -17,10 +17,7 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.pwResetEmail} ', () {
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    setUp(() {
-      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-    });
+    setUp(pwResetEmailTestWidgetRegister);
 
     group('${KGroupText.failureSend} ', () {
       setUp(() {
@@ -34,8 +31,7 @@ void main() {
       });
       testWidgets('Enter correct email', (tester) async {
         await pwResetEmailPumpAppHelper(
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
         );
 
         await emailFailureHelper(tester);
@@ -54,8 +50,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await pwResetEmailPumpAppHelper(
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
         );
 
         await pwResetEmailInitialHelper(tester);
@@ -63,8 +58,7 @@ void main() {
 
       testWidgets('Enter wrong email', (tester) async {
         await pwResetEmailPumpAppHelper(
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
         );
 
         await emailWrongHelper(tester);
@@ -72,8 +66,7 @@ void main() {
 
       testWidgets('Enter correct email', (tester) async {
         await pwResetEmailPumpAppHelper(
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
         );
 
         await emailCorrectHelper(tester);
@@ -85,18 +78,16 @@ void main() {
 
         testWidgets('${KGroupText.initial} ', (tester) async {
           await pwResetEmailPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await pwResetEmailInitialHelper(tester);
         });
         testWidgets('Back button ', (tester) async {
           await pwResetEmailPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await backButtonResetEmailNavigationHelper(

@@ -1,10 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
-import 'helper/cancel_cant_pop_helper.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -16,23 +14,10 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.privacyPolicy} ', () {
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    setUp(
-      () {
-        KTest.cashe = false;
-        mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-
-        when(
-          mockAppAuthenticationRepository.currentUserSetting,
-        ).thenAnswer(
-          (realInvocation) => KTestVariables.userSetting,
-        );
-      },
-    );
+    setUp(mardownFileWidgetTestRegister);
     testWidgets('${KGroupText.initial} ', (tester) async {
       await markdownFileDialogPumpAppHelper(
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        tester,
       );
 
       await markdownFileDialogInitialHelper(tester);
@@ -43,8 +28,7 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
         await markdownFileDialogPumpAppHelper(
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
           mockGoRouter: mockGoRouter,
         );
 
@@ -53,8 +37,7 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('${KRoute.home.name} ', (tester) async {
           await markdownFileDialogPumpAppHelper(
-            tester: tester,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -69,8 +52,7 @@ void main() {
           );
           testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
             await markdownFileDialogPumpAppHelper(
-              tester: tester,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 
@@ -87,8 +69,7 @@ void main() {
           );
           testWidgets('${KRoute.home.name} ', (tester) async {
             await markdownFileDialogPumpAppHelper(
-              tester: tester,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 

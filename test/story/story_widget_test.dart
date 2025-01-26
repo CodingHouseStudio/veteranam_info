@@ -15,17 +15,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.story} ', () {
-    late IStoryRepository mockStoryRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
-    setUp(() {
-      ExtendedDateTime.current = KTestVariables.dateTime;
-      ExtendedDateTime.id = '';
-      mockStoryRepository = MockIStoryRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
-        (realInvocation) => AuthenticationStatus.authenticated,
-      );
-    });
+    setUp(storyWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(mockStoryRepository.getStoryItems()).thenAnswer(
@@ -34,9 +24,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await storyPumpAppHelper(
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockStoryRepository: mockStoryRepository,
-          tester: tester,
+          tester,
         );
 
         await storyFailureHelper(tester);
@@ -50,9 +38,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await storyPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         );
 
         await storyInitialHelper(tester);
@@ -60,18 +46,14 @@ void main() {
 
       loadingList(
         (tester) async => storyPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         ),
         // lastCard: StoryKeys.cardLast,
       );
 
       testWidgets('Stories list load ', (tester) async {
         await storyPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
-          tester: tester,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         );
 
         await listLoadHelper(tester);
@@ -81,10 +63,8 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await storyPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockStoryRepository: mockStoryRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await storyInitialHelper(tester);
@@ -92,10 +72,8 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.storyAdd.name} ', (tester) async {
             await storyPumpAppHelper(
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
-              mockStoryRepository: mockStoryRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
             );
 
             await storyAddNavigationHelper(

@@ -70,6 +70,9 @@ class DiscountsBlocListener extends StatelessWidget {
           const BlocListener<AppVersionCubit, AppVersionState>(
             listener: AppVersionCubitExtension.listener,
           ),
+        BlocListener<DiscountLinkCubit, bool>(
+          listener: (context, state) {},
+        ),
       ],
       child: childWidget,
     );

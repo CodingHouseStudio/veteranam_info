@@ -5,8 +5,8 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../test_dependency.dart';
-import 'helper/helper.dart';
+import '../../test_dependency.dart';
+import '../helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -17,48 +17,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discountCard} ', () {
-    late IDiscountRepository mockDiscountRepository;
-    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
-    late IUrlRepository mockUrlRepository;
-    late IReportRepository mockReportRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    setUp(() {
-      mockDiscountRepository = MockIDiscountRepository();
-      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
-      mockUrlRepository = MockIUrlRepository();
-      mockReportRepository = MockIReportRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-
-      when(
-        mockUrlRepository.copy(
-          KTestVariables.fullDiscount.phoneNumber!,
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-
-      when(
-        mockUrlRepository.launchUrl(
-          url: KTestVariables.fullDiscount.phoneNumber!,
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-
-      when(
-        mockUrlRepository.share(
-          '/discounts/${KTestVariables.id}',
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-
-      when(
-        mockAppAuthenticationRepository.currentUser,
-      ).thenAnswer(
-        (realInvocation) => KTestVariables.userWithoutPhoto,
-      );
-    });
+    setUp(discountWidgetTestRegister);
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(
@@ -79,12 +38,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          tester,
         );
 
         await discountInitialHelper(tester: tester, cardIsEmpty: true);
@@ -94,12 +48,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await discountPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockReportRepository: mockReportRepository,
-            mockUrlRepository: mockUrlRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -108,14 +57,8 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.discounts.name} ', (tester) async {
             await discountPumpAppHelper(
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
-              mockReportRepository: mockReportRepository,
-              mockUrlRepository: mockUrlRepository,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockDiscountRepository: mockDiscountRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
             );
 
             await discountBackButtonHelper(
@@ -148,12 +91,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          tester,
         );
 
         await discountInitialHelper(tester: tester);
@@ -163,12 +101,7 @@ void main() {
         await networkHelper(
           tester: tester,
           pumpApp: () async => discountPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockReportRepository: mockReportRepository,
-            mockUrlRepository: mockUrlRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            tester,
           ),
         );
 
@@ -183,12 +116,7 @@ void main() {
       testWidgets('Copy Phone Number', (tester) async {
         PlatformEnumFlutter.isWebDesktop = true;
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          tester,
         );
 
         await discountShowPhoneNumberHelper(tester);
@@ -198,12 +126,7 @@ void main() {
         PlatformEnumFlutter.isWebDesktop = false;
 
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          tester,
         );
 
         await discountShowPhoneNumberHelper(tester);
@@ -211,13 +134,8 @@ void main() {
 
       testWidgets('Share', (tester) async {
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
           discount: KTestVariables.fullDiscount,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
         await discountShareHelper(
@@ -228,13 +146,8 @@ void main() {
 
       testWidgets('Complaint', (tester) async {
         await discountPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockUrlRepository: mockUrlRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester,
           discount: KTestVariables.fullDiscount,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
 
         await discountComplaintHelper(tester);
@@ -263,13 +176,8 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await discountPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockReportRepository: mockReportRepository,
-            mockUrlRepository: mockUrlRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockDiscountRepository: mockDiscountRepository,
-            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           );
 
           await discountInitialHelper(tester: tester);
@@ -277,14 +185,8 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.discounts.name} ', (tester) async {
             await discountPumpAppHelper(
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
-              mockReportRepository: mockReportRepository,
-              mockUrlRepository: mockUrlRepository,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockDiscountRepository: mockDiscountRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
             );
 
             await discountBackButtonHelper(

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
@@ -17,14 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.mobFaq} ', () {
-    late IFaqRepository mockFaqRepository;
-    setUp(() {
-      Config.testIsWeb = false;
-      ExtendedDateTime.current = KTestVariables.dateTime;
-      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
-      PlatformEnumFlutter.isWebDesktop = true;
-      mockFaqRepository = MockIFaqRepository();
-    });
+    setUp(mobFaqWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer((invocation) async {
@@ -32,8 +24,7 @@ void main() {
           return const Left(SomeFailure.serverError);
         });
         await mobFaqPumpAppHelper(
-          mockFaqRepository: mockFaqRepository,
-          tester: tester,
+          tester,
         );
 
         await mobFaqFailureHelper(tester);
@@ -44,8 +35,7 @@ void main() {
           return const Left(SomeFailure.network);
         });
         await mobFaqPumpAppHelper(
-          mockFaqRepository: mockFaqRepository,
-          tester: tester,
+          tester,
         );
 
         await mobFaqFailureHelper(tester);
@@ -56,8 +46,7 @@ void main() {
           return const Left(SomeFailure.get);
         });
         await mobFaqPumpAppHelper(
-          mockFaqRepository: mockFaqRepository,
-          tester: tester,
+          tester,
         );
 
         await mobFaqFailureHelper(tester);
@@ -94,8 +83,7 @@ void main() {
 
       testWidgets('${KGroupText.initial} ', (tester) async {
         await mobFaqPumpAppHelper(
-          mockFaqRepository: mockFaqRepository,
-          tester: tester,
+          tester,
         );
 
         await mobFaqInitialHelper(tester);
@@ -106,8 +94,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await mobFaqPumpAppHelper(
-            mockFaqRepository: mockFaqRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -117,8 +104,7 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('nawbar back button pop() navigation', (tester) async {
             await mobFaqPumpAppHelper(
-              mockFaqRepository: mockFaqRepository,
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 

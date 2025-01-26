@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -18,97 +15,10 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.company} ', () {
-    late UserRepository mockUserRepository;
-    late IDataPickerRepository mockDataPickerRepository;
-    late ICompanyRepository mockCompanyRepository;
-    late IDiscountRepository mockDiscountRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
-    late StreamController<CompanyModel> companyStream;
-    // late XFile image;
-    setUp(() {
-      Config.roleValue = Config.business;
-      mockUserRepository = MockUserRepository();
-      mockDataPickerRepository = MockIDataPickerRepository();
-      mockCompanyRepository = MockICompanyRepository();
-      mockDiscountRepository = MockIDiscountRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
-      // image = XFile(KTestVariables.imageModels.downloadURL);
-      // mockAuthenticationRepository = MockAuthenticationRepository();
-
-      when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestVariables.userWithoutPhoto,
-      );
-      when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestVariables.userSettingModel,
-      );
-
-      when(mockCompanyRepository.currentUserCompany).thenAnswer(
-        (realInvocation) => KTestVariables.pureCompanyModel,
-      );
-      when(mockCompanyRepository.company).thenAnswer(
-        (realInvocation) => companyStream.stream,
-      );
-      when(
-        mockCompanyRepository.updateCompany(
-          company: KTestVariables.fullCompanyModel,
-          imageItem: KTestVariables.filePickerItem,
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(
-        mockCompanyRepository.deleteCompany(),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(
-        mockDiscountRepository
-            .companyHasDiscount(KTestVariables.pureCompanyModel.id),
-      ).thenAnswer(
-        (realInvocation) async => false,
-      );
-
-      // when(imagePickerValue.pickImage(source: ImageSource.gallery)).
-      // thenAnswer(
-      //   (realInvocation) async => image,
-      // );
-
-      when(
-        mockDataPickerRepository.getImage,
-      ).thenAnswer(
-        (realInvocation) async => KTestVariables.filePickerItem,
-      );
-
-      when(mockAuthenticationRepository.status).thenAnswer(
-        (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
-      );
-      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
-        (realInvocation) => AuthenticationStatus.authenticated,
-      );
-      when(mockAuthenticationRepository.logOut()).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(mockAuthenticationRepository.deleteUser()).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-
-      // when(mockAuthenticationRepository.isAuthenticated).thenAnswer(
-      //   (realInvocation) => true,
-      // );
-
-      // when(mockUserRepository.isAnonymously).thenAnswer(
-      //   (realInvocation) => false,
-      // );
-    });
+    setUp(companyWidgetTestRegister);
     testWidgets('${KGroupText.initial} ', (tester) async {
       await companyPumpAppHelper(
-        tester: tester,
-        mockCompanyRepository: mockCompanyRepository,
-        mockDiscountRepository: mockDiscountRepository,
-        mockUserRepository: mockUserRepository,
-        mockDataPickerRepository: mockDataPickerRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        tester,
       );
 
       await companyInitialHelper(tester);
@@ -116,12 +26,7 @@ void main() {
 
     testWidgets('Show log out dialog', (tester) async {
       await companyPumpAppHelper(
-        tester: tester,
-        mockCompanyRepository: mockCompanyRepository,
-        mockDiscountRepository: mockDiscountRepository,
-        mockUserRepository: mockUserRepository,
-        mockDataPickerRepository: mockDataPickerRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        tester,
       );
 
       await companyLogOutHelper(tester);
@@ -140,12 +45,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         );
 
         await companyInitialHelper(tester);
@@ -157,13 +57,8 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await companyInitialHelper(tester);
@@ -171,13 +66,8 @@ void main() {
 
       testWidgets('Log out desk dialog unconfirm button pop', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
         await logOutUnconfirmButtonlHelper(
           tester: tester,
@@ -187,13 +77,8 @@ void main() {
       });
       testWidgets('Log out mob dialog cancel icon pop', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutUnconfirmButtonlHelper(
@@ -205,13 +90,8 @@ void main() {
 
       testWidgets('Log out dialog confirm button pop', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutConfirmButtonlHelper(
@@ -222,12 +102,7 @@ void main() {
 
       testWidgets('Send correct company data', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         );
 
         await companyFormsCorrectSaveHelper(tester);
@@ -235,12 +110,7 @@ void main() {
 
       testWidgets('Send incorrect company data', (tester) async {
         await companyPumpAppHelper(
-          tester: tester,
-          mockCompanyRepository: mockCompanyRepository,
-          mockDiscountRepository: mockDiscountRepository,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
         );
 
         companyStream.add(KTestVariables.pureCompanyModel.copyWith(id: 'none'));
@@ -254,13 +124,8 @@ void main() {
         testWidgets('Delete account desk dialog unconfirm button pop',
             (tester) async {
           await companyPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockUserRepository: mockUserRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockDiscountRepository: mockDiscountRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountUnconfirmButtonlHelper(
@@ -273,13 +138,8 @@ void main() {
 
         testWidgets('Delete account dialog cancel icon pop', (tester) async {
           await companyPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockUserRepository: mockUserRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockDiscountRepository: mockDiscountRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountUnconfirmButtonlHelper(
@@ -291,13 +151,8 @@ void main() {
 
         testWidgets('Delete account dialog confirm button pop', (tester) async {
           await companyPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockUserRepository: mockUserRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockDiscountRepository: mockDiscountRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await deleteAccountConfirmButtonlHelper(
@@ -310,13 +165,8 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
           await companyPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockUserRepository: mockUserRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockDiscountRepository: mockDiscountRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await companyMyDiscountsHelper(
