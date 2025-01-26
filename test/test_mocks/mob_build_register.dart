@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -25,12 +24,6 @@ void mobBuild() {
     (_) => AppInfoRepository.defaultValue.buildNumber,
   );
 
-  final buildCubit = AppVersionCubit(
-    buildRepository: mockBuildRepository,
-    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-  );
-  if (GetIt.I.isRegistered<AppVersionCubit>()) {
-    GetIt.I.unregister<AppVersionCubit>();
-  }
-  GetIt.I.registerSingleton<AppVersionCubit>(buildCubit);
+  registerSingleton(mockFirebaseRemoteConfigProvider);
+  registerSingleton(mockBuildRepository);
 }

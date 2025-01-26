@@ -8,18 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.newsCard} ', () {
-    late IInformationRepository mockInformationRepository;
-    setUp(() {
-      mockInformationRepository = MockIInformationRepository();
-    });
+    setUp(newsCardTestWidgetRegister);
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(
@@ -31,8 +30,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await newsCardPumpAppHelper(
-          tester: tester,
-          mockNewsRepository: mockInformationRepository,
+          tester,
         );
 
         await newsCardInitialHelper(tester: tester, cardIsEmpty: true);
@@ -50,8 +48,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await newsCardPumpAppHelper(
-          tester: tester,
-          mockNewsRepository: mockInformationRepository,
+          tester,
         );
 
         await newsCardInitialHelper(tester: tester);
@@ -62,9 +59,8 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await newsCardPumpAppHelper(
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockNewsRepository: mockInformationRepository,
           );
 
           await newsCardInitialHelper(tester: tester);
@@ -82,9 +78,8 @@ void main() {
             });
             testWidgets('Empty Card close', (tester) async {
               await newsCardPumpAppHelper(
-                tester: tester,
+                tester,
                 mockGoRouter: mockGoRouter,
-                mockNewsRepository: mockInformationRepository,
               );
 
               await cardEmptyCloseHelper(
@@ -96,9 +91,8 @@ void main() {
           });
           testWidgets('${KRoute.information.name} ', (tester) async {
             await newsCardPumpAppHelper(
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
-              mockNewsRepository: mockInformationRepository,
             );
 
             await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);

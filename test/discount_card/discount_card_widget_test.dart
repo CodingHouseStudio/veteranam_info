@@ -8,18 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.discountCard} ', () {
-    late IDiscountRepository mockDiscountRepository;
-    setUp(() {
-      mockDiscountRepository = MockIDiscountRepository();
-    });
+    setUp(discountCardTestWIdgetRegister);
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(

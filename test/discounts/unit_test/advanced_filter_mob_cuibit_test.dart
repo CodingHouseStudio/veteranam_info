@@ -7,13 +7,13 @@
 // import '../../test_dependency.dart';
 
 void main() {
-  // setUp(configureFailureDependenciesTest);
+  // setUpAll(configureFailureDependenciesTest);
 
   // setupFirebaseAuthMocks();
 
   // setUpAll(setUpGlobal);
 
-  // tearDown(GetIt.I.reset);
+  // tearDownAll(GetIt.I.reset);
   // group('Advanced Filter Mob ${KGroupText.cubit}', () {
   //   late AdvancedFilterMobCubit advancedFilterMobCubit;
 

@@ -10,9 +10,9 @@
 // import '../../test_dependency.dart';
 
 void main() {
-  // setUp(configureFailureDependenciesTest);
+  // setUpAll(configureFailureDependenciesTest);
 
-  // tearDown(GetIt.I.reset);
+  // tearDownAll(GetIt.I.reset);
 
   // group(
   //     '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'

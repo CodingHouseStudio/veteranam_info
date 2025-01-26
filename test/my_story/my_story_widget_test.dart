@@ -8,24 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.profileMyStory} ', () {
-    late IStoryRepository mockStoryRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    setUp(() {
-      mockStoryRepository = MockIStoryRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-
-      when(mockAppAuthenticationRepository.currentUser)
-          .thenAnswer((invocation) => KTestVariables.userWithoutPhoto);
-    });
-
+    setUp(myStoryWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
@@ -35,9 +28,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.serverError),
         );
         await myStoryPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myStoryFailureHelper(tester);
@@ -50,9 +41,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.network),
         );
         await myStoryPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myStoryFailureHelper(tester);
@@ -65,9 +54,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.get),
         );
         await myStoryPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myStoryFailureHelper(tester);
@@ -87,9 +74,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await myStoryPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          tester: tester,
+          tester,
         );
 
         await myStoryInitialHelper(tester);
@@ -99,9 +84,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await myStoryPumpAppHelper(
-            mockStoryRepository: mockStoryRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 

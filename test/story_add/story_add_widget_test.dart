@@ -8,42 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.storyAdd} ', () {
-    late IStoryRepository mockStoryRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IDataPickerRepository mockDataPickerRepository;
-    setUp(() {
-      ExtendedDateTime.current = KTestVariables.storyModelItems.first.date;
-      ExtendedDateTime.id = KTestVariables.storyModelItems.first.id;
-      mockStoryRepository = MockIStoryRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockDataPickerRepository = MockIDataPickerRepository();
-
-      when(
-        mockDataPickerRepository.getImage,
-      ).thenAnswer(
-        (realInvocation) async => KTestVariables.filePickerItem,
-      );
-
-      when(
-        mockStoryRepository.addStory(
-          imageItem: KTestVariables.filePickerItem,
-          storyModel: KTestVariables.storyModelItems.first,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestVariables.userWithoutPhoto,
-      );
-    });
+    setUp(storyAddWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
@@ -55,10 +30,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.serverError),
         );
         await storyAddPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+          tester,
         );
 
         await storyAddFailureHelper(tester);
@@ -73,10 +45,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.network),
         );
         await storyAddPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+          tester,
         );
 
         await storyAddFailureHelper(tester);
@@ -91,10 +60,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.send),
         );
         await storyAddPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+          tester,
         );
 
         await storyAddFailureHelper(tester);
@@ -102,10 +68,7 @@ void main() {
     });
     testWidgets('${KGroupText.initial} ', (tester) async {
       await storyAddPumpAppHelper(
-        tester: tester,
-        mockStoryRepository: mockStoryRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockDataPickerRepository: mockDataPickerRepository,
+        tester,
       );
 
       await storyAddInitialHelper(tester);
@@ -115,21 +78,15 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
         await storyAddPumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
         );
 
         await storyAddInitialHelper(tester);
       });
       testWidgets('Story field enter uncorrect data and send', (tester) async {
         await storyAddPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+          tester,
           mockGoRouter: mockGoRouter,
         );
 
@@ -140,10 +97,7 @@ void main() {
       });
       testWidgets('Story field enter correct data and send', (tester) async {
         await storyAddPumpAppHelper(
-          tester: tester,
-          mockStoryRepository: mockStoryRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
+          tester,
           mockGoRouter: mockGoRouter,
         );
 

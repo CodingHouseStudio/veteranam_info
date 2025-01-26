@@ -8,18 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.workEmployee} ', () {
-    late IWorkRepository mockWorkRepository;
-    setUp(() {
-      mockWorkRepository = MockIWorkRepository();
-    });
+    setUp(workEmployeeWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       setUp(() {
         when(mockWorkRepository.getWorks()).thenAnswer(
@@ -28,8 +27,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await workEmployeePumpAppHelper(
-          mockWorkRepository: mockWorkRepository,
-          tester: tester,
+          tester,
         );
 
         await workEmployeeFailureHelper(tester);
@@ -56,8 +54,7 @@ void main() {
       });
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await workEmployeePumpAppHelper(
-          mockWorkRepository: mockWorkRepository,
-          tester: tester,
+          tester,
         );
 
         await workEmployeeMockButtonHelper(tester);
@@ -72,8 +69,7 @@ void main() {
 
       testWidgets('${KGroupText.initial} ', (tester) async {
         await workEmployeePumpAppHelper(
-          mockWorkRepository: mockWorkRepository,
-          tester: tester,
+          tester,
         );
 
         await workEmployeeInitialHelper(tester);
@@ -83,8 +79,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await workEmployeePumpAppHelper(
-            mockWorkRepository: mockWorkRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -93,8 +88,7 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.employeeRespond.name} ', (tester) async {
             await workEmployeePumpAppHelper(
-              mockWorkRepository: mockWorkRepository,
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 
@@ -114,8 +108,7 @@ void main() {
         });
         testWidgets('Only one card', (tester) async {
           await workEmployeePumpAppHelper(
-            mockWorkRepository: mockWorkRepository,
-            tester: tester,
+            tester,
           );
 
           expect(

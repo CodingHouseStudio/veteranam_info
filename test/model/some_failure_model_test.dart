@@ -6,13 +6,15 @@ import 'package:veteranam/shared/models/models.dart';
 import '../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('Some Failure ${KGroupText.model} ', () {
     test('${KGroupText.initial} ', () {
       final filterModel = SomeFailure.value(

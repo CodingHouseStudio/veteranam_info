@@ -5,13 +5,15 @@ import 'package:get_it/get_it.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
 //   group('${KScreenBlocName.investors} ${KGroupText.model} ', () {
 //     final fullJson = {
 //       FundModelJsonField.id: KTestVariables.fundItems.last.id,

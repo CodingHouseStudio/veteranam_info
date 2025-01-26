@@ -9,13 +9,15 @@ import '../test_dependency.dart';
 
 /// COMMENT: exmaple for either repository
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
 
   group('FAQ ${KGroupText.repository} ', () {
     late IFaqRepository faqRepository;

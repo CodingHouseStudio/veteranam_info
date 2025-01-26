@@ -4,48 +4,21 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../test_dependency.dart';
-import 'helper/helper.dart';
+import '../../test_dependency.dart';
+import '../helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.feedback} ', () {
-    late IFeedbackRepository mockFeedbackRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IUrlRepository mockUrlRepository;
-    setUp(() {
-      ExtendedDateTime.current = KTestVariables.dateTime;
-      ExtendedDateTime.id = KTestVariables.feedbackModel.id;
-
-      mockUrlRepository = MockIUrlRepository();
-      mockFeedbackRepository = MockIFeedbackRepository();
-      when(mockFeedbackRepository.sendFeedback(KTestVariables.feedbackModel))
-          .thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockFeedbackRepository
-            .checkUserNeedShowFeedback(KTestVariables.user.id),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestVariables.user,
-      );
-      when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-    });
+    setUp(feedbackWidgetTestRegister);
 
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
@@ -56,10 +29,7 @@ void main() {
           ),
         );
         await feedbackPumpAppHelper(
-          mockFeedbackRepository: mockFeedbackRepository,
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
+          tester,
         );
 
         await feedbackFailureHelper(tester);
@@ -70,10 +40,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.network),
         );
         await feedbackPumpAppHelper(
-          mockFeedbackRepository: mockFeedbackRepository,
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
+          tester,
         );
 
         await feedbackFailureHelper(tester);
@@ -84,10 +51,7 @@ void main() {
           (invocation) async => const Left(SomeFailure.send),
         );
         await feedbackPumpAppHelper(
-          mockFeedbackRepository: mockFeedbackRepository,
-          tester: tester,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
+          tester,
         );
 
         await feedbackFailureHelper(tester);
@@ -96,10 +60,7 @@ void main() {
 
     testWidgets('${KGroupText.initial} ', (tester) async {
       await feedbackPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockUrlRepository: mockUrlRepository,
+        tester,
       );
 
       await feedbackInitialHelper(tester);
@@ -107,10 +68,7 @@ void main() {
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
       await feedbackPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockUrlRepository: mockUrlRepository,
+        tester,
       );
 
       await correctSaveHelper(tester);
@@ -118,10 +76,7 @@ void main() {
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
       await feedbackPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockUrlRepository: mockUrlRepository,
+        tester,
       );
 
       await incorrectSaveHelper(tester);
@@ -129,10 +84,7 @@ void main() {
 
     testWidgets('Email tap', (tester) async {
       await feedbackPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockUrlRepository: mockUrlRepository,
+        tester,
       );
 
       await feedbackEmailTapHelper(tester);
@@ -163,11 +115,8 @@ void main() {
           (invocation) async => const Left(SomeFailure.copy),
         );
         await feedbackPumpAppHelper(
-          mockFeedbackRepository: mockFeedbackRepository,
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockUrlRepository: mockUrlRepository,
         );
 
         await feedbackInitialHelper(tester);
@@ -175,11 +124,8 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('Feedback box widget navigation', (tester) async {
           await feedbackPumpAppHelper(
-            mockFeedbackRepository: mockFeedbackRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockUrlRepository: mockUrlRepository,
           );
 
           await feedbackNavigationHelper(

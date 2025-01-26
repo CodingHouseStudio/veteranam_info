@@ -6,13 +6,15 @@ import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('Advanced Filter Mob ${KGroupText.cubit}', () {
     late ViewModeCubit viewModeCubit;
 

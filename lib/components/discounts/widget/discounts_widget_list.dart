@@ -158,7 +158,7 @@ class DiscountWidgetList extends StatelessWidget {
                 return state.filterDiscountModelList;
               },
               builder: (context, filterDiscountModelList) {
-                if (Config.isWeb && isDesk) {
+                if (isDesk) {
                   return BlocBuilder<ViewModeCubit, ViewMode>(
                     builder: (context, _) {
                       switch (_) {

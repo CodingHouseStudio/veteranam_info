@@ -8,9 +8,11 @@ import 'package:veteranam/shared/shared_dart.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
 
-  tearDown(GetIt.I.reset);
+  setUp(resetTestVariables);
+
+  tearDownAll(GetIt.I.reset);
 
   group('${KScreenBlocName.feedback} ${KGroupText.repository} ', () {
     late IFeedbackRepository mockFeedbackRepository;

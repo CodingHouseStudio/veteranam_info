@@ -4,76 +4,21 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../test_dependency.dart';
-import 'helper/helper.dart';
+import '../../test_dependency.dart';
+import '../helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.investors} ', () {
-    late IInvestorsRepository mockInvestorsRepository;
-    late IReportRepository mockReportRepository;
-    late UserRepository mockUserRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IUrlRepository mockUrlRepository;
-    setUp(() {
-      ExtendedDateTime.current = KTestVariables.dateTime;
-      ExtendedDateTime.id = '';
-      Config.testIsWeb = true;
-
-      mockInvestorsRepository = MockIInvestorsRepository();
-      mockReportRepository = MockIReportRepository();
-      mockUserRepository = MockUserRepository();
-      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      mockUrlRepository = MockIUrlRepository();
-
-      when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
-      when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-      // when(mockUserRepository.isAnonymously).thenAnswer(
-      //   (realInvocation) => true,
-      // );
-      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestVariables.user,
-      );
-      when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
-        (realInvocation) => true,
-      );
-      when(
-        mockReportRepository.sendReport(
-          KTestVariables.reportModel
-              .copyWith(reasonComplaint: ReasonComplaint.other),
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.funds,
-          userId: KTestVariables.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestVariables.reportItems),
-      );
-      when(
-        mockUrlRepository.launchUrl(
-          url: KTestVariables.fundItems.first.projectsLink!,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-    });
+    setUp(investorsWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
@@ -85,12 +30,7 @@ void main() {
           return const Left(SomeFailure.serverError);
         });
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await investorsFailureHelper(tester);
@@ -107,12 +47,7 @@ void main() {
           },
         );
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await investorsFailureHelper(tester);
@@ -127,12 +62,7 @@ void main() {
           return const Left(SomeFailure.get);
         });
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await investorsFailureHelper(tester);
@@ -184,12 +114,7 @@ void main() {
 
       testWidgets('${KGroupText.initial} ', (tester) async {
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await investorsInitialHelper(tester);
@@ -199,12 +124,7 @@ void main() {
         await networkHelper(
           tester: tester,
           pumpApp: () async => investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockUserRepository: mockUserRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
+            tester,
           ),
         );
 
@@ -228,12 +148,7 @@ void main() {
       // );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await reportDialogCheckFailureHelper(
@@ -290,12 +205,7 @@ void main() {
 
       testWidgets('Donate button', (tester) async {
         await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockUserRepository: mockUserRepository,
-          mockUrlRepository: mockUrlRepository,
-          tester: tester,
+          tester,
         );
 
         await donateButtonHelper(
@@ -311,12 +221,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockUserRepository: mockUserRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -324,12 +229,7 @@ void main() {
         });
         testWidgets('Report Dialog Correct Send', (tester) async {
           await investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockUserRepository: mockUserRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
+            tester,
             mockGoRouter: mockGoRouter,
           );
 
@@ -342,12 +242,7 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('nawbar widget navigation', (tester) async {
             await investorsPumpAppHelper(
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockInvestorsRepository: mockInvestorsRepository,
-              mockReportRepository: mockReportRepository,
-              mockUserRepository: mockUserRepository,
-              mockUrlRepository: mockUrlRepository,
-              tester: tester,
+              tester,
               mockGoRouter: mockGoRouter,
             );
 
@@ -370,12 +265,7 @@ void main() {
         });
         testWidgets('End list', (tester) async {
           await investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockUserRepository: mockUserRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
+            tester,
           );
 
           await investorsEndListHelper(tester);

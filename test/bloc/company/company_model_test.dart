@@ -5,9 +5,11 @@ import 'package:veteranam/shared/models/models.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
 
-  tearDown(GetIt.I.reset);
+  setUp(resetTestVariables);
+
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.company} ${KGroupText.model}', () {
     test('check is Empty ', () {
       expect(

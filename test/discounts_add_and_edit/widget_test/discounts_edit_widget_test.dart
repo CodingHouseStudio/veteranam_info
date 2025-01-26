@@ -4,58 +4,23 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../test_dependency.dart';
-import 'helper/helper.dart';
+import '../../test_dependency.dart';
+import '../helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.discountsEdit} ', () {
-    late IDiscountRepository mockDiscountRepository;
-    late ICompanyRepository mockCompanyRepository;
-    late ICitiesRepository mockCitiesRepository;
-    setUp(() {
-      Config.roleValue = Config.business;
-      ExtendedDateTime.id = KTestVariables.discountModelItems.first.id;
-      ExtendedDateTime.current = KTestVariables.sendDiscountModel.dateVerified;
-      ContextExtensions.pickerDate = KTestVariables.nextDateTime;
-      mockDiscountRepository = MockIDiscountRepository();
-      mockCompanyRepository = MockICompanyRepository();
-      mockCitiesRepository = MockICitiesRepository();
-
-      when(
-        mockDiscountRepository.addDiscount(
-          KTestVariables.widgetSendDiscountModel,
-        ),
-      ).thenAnswer((invocation) async => const Right(true));
-
-      when(
-        mockDiscountRepository.getDiscountItems(
-          showOnlyBusinessDiscounts: false,
-        ),
-      ).thenAnswer(
-        (invocation) => Stream.value(KTestVariables.discountModelItems),
-      );
-      when(
-        mockCitiesRepository.getCities(),
-      ).thenAnswer(
-        (_) async => Right(KTestVariables.cityModelItems),
-      );
-
-      when(
-        mockCompanyRepository.currentUserCompany,
-      ).thenAnswer(
-        (_) => KTestVariables.fullCompanyModel,
-      );
-    });
+    setUp(discountAddEditRegister);
     group('Discount id wrong', () {
       late StreamController<CompanyModel> companyStreamController;
       setUp(() {
@@ -85,10 +50,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockCitiesRepository: mockCitiesRepository,
+          tester,
           discountId: KTestVariables.sendDiscountModel.id,
         );
 
@@ -103,10 +65,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discountId: KTestVariables.sendDiscountModel.id,
           );
@@ -116,10 +75,7 @@ void main() {
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
             await discountsAddPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockCompanyRepository: mockCompanyRepository,
-              mockCitiesRepository: mockCitiesRepository,
+              tester,
               mockGoRouter: mockGoRouter,
               discountId: KTestVariables.sendDiscountModel.id,
             );
@@ -145,10 +101,7 @@ void main() {
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockCitiesRepository: mockCitiesRepository,
+          tester,
           discountId: KTestVariables.sendDiscountModel.id,
         );
 
@@ -159,10 +112,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discountId: KTestVariables.sendDiscountModel.id,
           );
@@ -172,10 +122,7 @@ void main() {
         testWidgets('Discount not enter anything and tap on send button',
             (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discountId: KTestVariables.sendDiscountModel.id,
           );
@@ -187,10 +134,7 @@ void main() {
         });
         testWidgets('Discount enter correct', (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discountId: KTestVariables.sendDiscountModel.id,
           );
@@ -206,10 +150,7 @@ void main() {
     group('discount extra not empty', () {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockCompanyRepository: mockCompanyRepository,
-          mockCitiesRepository: mockCitiesRepository,
+          tester,
           discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
           discountId: KTestVariables.sendDiscountModel.id,
         );
@@ -221,10 +162,7 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
             discountId: KTestVariables.sendDiscountModel.id,
@@ -235,10 +173,7 @@ void main() {
         testWidgets('Discount not enter anything and tap on send button',
             (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discount: KTestVariables.widgetSendDiscountModel,
             discountId: KTestVariables.sendDiscountModel.id,
@@ -251,10 +186,7 @@ void main() {
         });
         testWidgets('Discount enter correct', (tester) async {
           await discountsAddPumpAppHelper(
-            tester: tester,
-            mockDiscountRepository: mockDiscountRepository,
-            mockCompanyRepository: mockCompanyRepository,
-            mockCitiesRepository: mockCitiesRepository,
+            tester,
             mockGoRouter: mockGoRouter,
             discount: KTestVariables.sendDiscountModel
                 .copyWith(subLocation: SubLocation.online),

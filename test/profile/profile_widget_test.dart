@@ -1,84 +1,25 @@
-import 'dart:async';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.profile} ', () {
-    late UserRepository mockUserRepository;
-    late IDataPickerRepository mockDataPickerRepository;
-    late AuthenticationRepository mockAuthenticationRepository;
-    late StreamController<User> profileStream;
-    // late XFile image;
-    setUp(() {
-      mockUserRepository = MockUserRepository();
-      mockDataPickerRepository = MockIDataPickerRepository();
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      profileStream = StreamController()..add(KTestVariables.pureUser);
-      // image = XFile(KTestVariables.imageModels.downloadURL);
-      // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-
-      when(mockUserRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestVariables.userWithoutPhoto,
-      );
-      when(mockUserRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => KTestVariables.userSettingModel,
-      );
-      when(mockUserRepository.user).thenAnswer(
-        (realInvocation) => profileStream.stream,
-      );
-      when(
-        mockUserRepository.updateUserData(
-          nickname: KTestVariables.nicknameCorrect,
-          image: KTestVariables.filePickerItem,
-          user: KTestVariables.profileUserWithoutPhoto,
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-
-      // when(imagePickerValue.pickImage(source: ImageSource.gallery)).
-      // thenAnswer(
-      //   (realInvocation) async => image,
-      // );
-
-      when(
-        mockDataPickerRepository.getImage,
-      ).thenAnswer(
-        (realInvocation) async => KTestVariables.filePickerItem,
-      );
-
-      when(mockAuthenticationRepository.status).thenAnswer(
-        (realInvocation) => Stream.value(AuthenticationStatus.authenticated),
-      );
-      when(mockAuthenticationRepository.currectAuthenticationStatus).thenAnswer(
-        (realInvocation) => AuthenticationStatus.authenticated,
-      );
-      when(mockAuthenticationRepository.logOut()).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(mockAuthenticationRepository.deleteUser()).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-    });
+    setUp(profileWidgetTestRegister);
     testWidgets('${KGroupText.initial} ', (tester) async {
       await profilePumpAppHelper(
-        tester: tester,
-        mockUserRepository: mockUserRepository,
-        mockDataPickerRepository: mockDataPickerRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        tester,
       );
 
       await profileInitialHelper(tester);
@@ -102,10 +43,7 @@ void main() {
 
     testWidgets('Show log out dialog', (tester) async {
       await profilePumpAppHelper(
-        tester: tester,
-        mockUserRepository: mockUserRepository,
-        mockDataPickerRepository: mockDataPickerRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
+        tester,
       );
 
       await profileLogOutHelper(tester);
@@ -116,11 +54,8 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.initial} ', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await profileInitialHelper(tester);
@@ -128,11 +63,8 @@ void main() {
 
       testWidgets('Log out desk dialog unconfirm button pop', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
         await logOutUnconfirmButtonlHelper(
           tester: tester,
@@ -143,11 +75,8 @@ void main() {
       });
       testWidgets('Log out mob dialog cancel icon pop', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutUnconfirmButtonlHelper(
@@ -159,11 +88,8 @@ void main() {
 
       testWidgets('Log out dialog confirm button pop', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockUserRepository: mockUserRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await logOutConfirmButtonlHelper(
@@ -175,11 +101,8 @@ void main() {
       testWidgets('Delete account desk dialog unconfirm button pop',
           (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -192,11 +115,8 @@ void main() {
 
       testWidgets('Delete account dialog cancel icon pop', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountUnconfirmButtonlHelper(
@@ -208,11 +128,8 @@ void main() {
 
       testWidgets('Delete account dialog confirm button pop', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
+          tester,
           mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await deleteAccountConfirmButtonlHelper(
@@ -223,11 +140,8 @@ void main() {
 
       testWidgets('Send correct profile data', (tester) async {
         await profilePumpAppHelper(
-          tester: tester,
-          //mockGoRouter: mockGoRouter,
-          mockUserRepository: mockUserRepository,
-          mockDataPickerRepository: mockDataPickerRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester,
+          mockGoRouter: mockGoRouter,
         );
 
         await profileFormsCorrectSaveHelper(
@@ -243,11 +157,8 @@ void main() {
         );
         testWidgets('Send incorrect profile data', (tester) async {
           await profilePumpAppHelper(
-            tester: tester,
-            //mockGoRouter: mockGoRouter,
-            mockUserRepository: mockUserRepository,
-            mockDataPickerRepository: mockDataPickerRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester,
+            mockGoRouter: mockGoRouter,
           );
           profileStream.add(
             KTestVariables.profileUserWithoutPhoto.copyWith(

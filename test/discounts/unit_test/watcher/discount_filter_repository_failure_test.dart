@@ -7,13 +7,15 @@ import '../../../test_dependency.dart';
 import 'discount_filter_repository_test.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
 
   group(
       '${KScreenBlocName.discount} ${KScreenBlocName.filter}'
