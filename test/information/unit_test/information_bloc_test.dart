@@ -9,13 +9,15 @@ import 'package:veteranam/shared/shared_dart.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.information} ${KGroupText.bloc}', () {
     late InformationWatcherBloc informationWatcherBloc;
     late IInformationRepository mockInformationRepository;

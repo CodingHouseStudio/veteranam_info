@@ -9,13 +9,15 @@ import '../../test_dependency.dart';
 
 /// COMMENT: exmaple for stream repository
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.workEmployee}  ${KGroupText.repository} ', () {
     late IWorkRepository mockWorkRepository;
     late FirestoreService mockFirestoreService;

@@ -7,13 +7,15 @@ import 'package:veteranam/shared/models/models.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.discount} ${KGroupText.model} ', () {
     final fullJson = {
       DiscountModelJsonField.id: KTestVariables.discountModelItems.last.id,

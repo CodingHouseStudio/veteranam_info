@@ -5,11 +5,13 @@ import 'package:veteranam/shared/models/field_models/field_models.dart';
 import '../../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
 
   group('Message ${KGroupText.fiedlModel} ${KGroupText.validationError}', () {
     test('${KGroupText.shouldBe} ${KGroupText.empty}', () {

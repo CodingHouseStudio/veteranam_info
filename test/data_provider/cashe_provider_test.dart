@@ -5,9 +5,11 @@ import 'package:veteranam/shared/data_provider/cache_provider.dart';
 import '../test_dependency.dart';
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
 
-  tearDown(GetIt.I.reset);
+  setUp(resetTestVariables);
+
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.casheClient} ', () {
     group(' ${KGroupText.provider} ', () {
       late CacheClient cashe;

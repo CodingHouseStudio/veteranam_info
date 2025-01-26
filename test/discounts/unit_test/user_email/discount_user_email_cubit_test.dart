@@ -9,13 +9,13 @@
 // import '../../../test_dependency.dart';
 
 void main() {
-  // setUp(configureFailureDependenciesTest);
+  // setUpAll(configureFailureDependenciesTest);
 
   // setupFirebaseAuthMocks();
 
   // setUpAll(setUpGlobal);
 
-  // tearDown(GetIt.I.reset);
+  // tearDownAll(GetIt.I.reset);
   // group('${KScreenBlocName.discount} Email ${KGroupText.cubit}', () {
   //   late DiscountUserEmailCubit discountUserEmailCubit;
   //   late IDiscountRepository mockdiscountRepository;

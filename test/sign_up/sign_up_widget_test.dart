@@ -8,15 +8,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.signUp} ', () {
-    setUp(signUpWidgetTestRegister);
+    setUpAll(signUpWidgetTestRegister);
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(

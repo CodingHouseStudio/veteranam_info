@@ -10,11 +10,13 @@ import '../test_dependency.dart';
 /// FOLDER FILES COMMENT: Tests blocks that are used on several pages
 
 void main() {
-  setUp(configureFailureDependenciesTest);
+  setUpAll(configureFailureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
 
   group('${KScreenBlocName.authenticationServices} ${KGroupText.cubit}', () {
     late AuthenticationRepository mockAuthenticationRepository;

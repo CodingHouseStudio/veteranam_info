@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -39,16 +41,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 
 import 'test_dependency.dart';
 
-/// COMMENT: Method register Services, Repositories and Blocs in tests
-void configureDependenciesTest() {
-  final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
-  // register logic if user id empty user setting is also empty
-  initializeDateFormatting(Language.english.value.languageCode);
-  initializeDateFormatting(Language.ukrain.value.languageCode);
-  userSetting(mockFirebaseFirestore);
-  discountInit(mockFirebaseFirestore);
-  mobBuild();
-  appLayoutCubitInit();
+final getItTest = GetIt.I;
+
+void resetTestVariables() {
   Config.testIsWeb = true;
   Config.falvourValue = Config.development;
   Config.roleValue = Config.user;
@@ -60,316 +55,348 @@ void configureDependenciesTest() {
   DiscountsWatcherBloc.testDiscountFilterRepository = null;
   KTest.testLoading = false;
   ExtendedDateTime.current = KTestVariables.dateTime;
+}
+
+/// COMMENT: Method register Services, Repositories and Blocs in tests
+void configureDependenciesTest() {
+  final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
+  // register logic if user id empty user setting is also empty
+  initializeDateFormatting(Language.english.value.languageCode);
+  initializeDateFormatting(Language.ukrain.value.languageCode);
+  userSetting(mockFirebaseFirestore);
+  discountInit(mockFirebaseFirestore);
+  mobBuild();
+  appLayoutCubitInit();
 
   // Service
-  GetIt.I.registerSingleton<FirebaseFirestore>(
+  getItTest.registerSingleton<FirebaseFirestore>(
     mockFirebaseFirestore,
   );
-  GetIt.I.registerSingleton<firebase_auth.FirebaseAuth>(MockFirebaseAuth());
-  GetIt.I.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
-  GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
-  GetIt.I.registerSingleton<firebase_auth.GoogleAuthProvider>(
+  getItTest.registerSingleton<firebase_auth.FirebaseAuth>(MockFirebaseAuth());
+  getItTest.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
+  getItTest.registerSingleton<GoogleSignIn>(GoogleSignIn());
+  getItTest.registerSingleton<firebase_auth.GoogleAuthProvider>(
     MockGoogleAuthProvider(),
   );
-  GetIt.I.registerSingleton<firebase_auth.FacebookAuthProvider>(
+  getItTest.registerSingleton<firebase_auth.FacebookAuthProvider>(
     MockFacebookAuthProvider(),
   );
-  GetIt.I.registerSingleton<FacebookAuth>(MockFacebookAuth());
-  GetIt.I.registerSingleton<StorageService>(MockStorageService());
-  GetIt.I.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
-  GetIt.I.registerSingleton<FirebaseMessaging>(MockFirebaseMessaging());
-  GetIt.I.registerSingleton<Connectivity>(Connectivity());
-  GetIt.I.registerSingleton<FirestoreService>(
+  getItTest.registerSingleton<FacebookAuth>(MockFacebookAuth());
+  getItTest.registerSingleton<StorageService>(MockStorageService());
+  getItTest.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
+  getItTest.registerSingleton<FirebaseMessaging>(MockFirebaseMessaging());
+  getItTest.registerSingleton<Connectivity>(Connectivity());
+  getItTest.registerSingleton<FirestoreService>(
     FirestoreService(
-      firebaseFirestore: GetIt.I.get<FirebaseFirestore>(),
+      firebaseFirestore: getItTest.get<FirebaseFirestore>(),
       cache: CacheClient(),
     ),
   );
-  GetIt.I.registerSingleton<IStorage>(
+  getItTest.registerSingleton<IStorage>(
     SecureStorageRepository(
-      secureStorage: GetIt.I.get<FlutterSecureStorage>(),
+      secureStorage: getItTest.get<FlutterSecureStorage>(),
     ),
   );
 
   // Repository
-  GetIt.I.registerSingleton<IUrlRepository>(UrlRepository());
-  GetIt.I.registerSingleton<IDeviceRepository>(
+  getItTest.registerSingleton<IUrlRepository>(UrlRepository());
+  getItTest.registerSingleton<IDeviceRepository>(
     DeviceRepository(
-      firebaseMessaging: GetIt.I.get<FirebaseMessaging>(),
-      deviceInfoPlugin: GetIt.I.get<DeviceInfoPlugin>(),
-      buildRepository: GetIt.I.get<AppInfoRepository>(),
+      firebaseMessaging: getItTest.get<FirebaseMessaging>(),
+      deviceInfoPlugin: getItTest.get<DeviceInfoPlugin>(),
+      buildRepository: getItTest.get<AppInfoRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<IAppAuthenticationRepository>(
+  getItTest.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
-      secureStorageRepository: GetIt.I.get<IStorage>(),
-      firebaseAuth: GetIt.I.get<firebase_auth.FirebaseAuth>(),
-      googleSignIn: GetIt.I.get<GoogleSignIn>(),
+      secureStorageRepository: getItTest.get<IStorage>(),
+      firebaseAuth: getItTest.get<firebase_auth.FirebaseAuth>(),
+      googleSignIn: getItTest.get<GoogleSignIn>(),
       cache: CacheClient(),
-      facebookSignIn: GetIt.I.get<FacebookAuth>(),
-      deviceRepository: GetIt.I.get<IDeviceRepository>(),
-      facebookAuthProvider: GetIt.I.get<firebase_auth.FacebookAuthProvider>(),
-      firestoreService: GetIt.I.get<FirestoreService>(),
-      googleAuthProvider: GetIt.I.get<firebase_auth.GoogleAuthProvider>(),
-      storageService: GetIt.I.get<StorageService>(),
+      facebookSignIn: getItTest.get<FacebookAuth>(),
+      deviceRepository: getItTest.get<IDeviceRepository>(),
+      facebookAuthProvider: getItTest.get<firebase_auth.FacebookAuthProvider>(),
+      firestoreService: getItTest.get<FirestoreService>(),
+      googleAuthProvider: getItTest.get<firebase_auth.GoogleAuthProvider>(),
+      storageService: getItTest.get<StorageService>(),
     ),
   );
-  GetIt.I.registerSingleton<AuthenticationRepository>(
+  getItTest.registerSingleton<AuthenticationRepository>(
     AuthenticationRepository(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<UserRepository>(
+  getItTest.registerSingleton<UserRepository>(
     UserRepository(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<IAppNetworkRepository>(
+  getItTest.registerSingleton<IAppNetworkRepository>(
     AppNetworkRepository(
-      connectivity: GetIt.I.get<Connectivity>(),
+      connectivity: getItTest.get<Connectivity>(),
       cache: CacheClient(),
     ),
   );
-  GetIt.I.registerSingleton<NetworkRepository>(
+  getItTest.registerSingleton<NetworkRepository>(
     NetworkRepository(
-      appNetworkRepository: GetIt.I.get<IAppNetworkRepository>(),
+      appNetworkRepository: getItTest.get<IAppNetworkRepository>(),
     ),
   );
 
   //Bloc
-  GetIt.I.registerFactory<DiscountsWatcherBloc>(
+  getItTest.registerFactory<DiscountsWatcherBloc>(
     () => DiscountsWatcherBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      firebaseRemoteConfigProvider:
+          getItTest.get<FirebaseRemoteConfigProvider>(),
     ),
   );
-  GetIt.I.registerFactory<FeedbackBloc>(
+  getItTest.registerFactory<FeedbackBloc>(
     () => FeedbackBloc(
-      feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      feedbackRepository: getItTest.get<IFeedbackRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<StoryWatcherBloc>(
-    () => StoryWatcherBloc(storyRepository: GetIt.I.get<IStoryRepository>()),
+  getItTest.registerFactory<StoryWatcherBloc>(
+    () => StoryWatcherBloc(storyRepository: getItTest.get<IStoryRepository>()),
   );
-  GetIt.I.registerFactory<NetworkCubit>(
-    () => NetworkCubit(networkRepository: GetIt.I.get<NetworkRepository>()),
+  getItTest.registerFactory<NetworkCubit>(
+    () => NetworkCubit(networkRepository: getItTest.get<NetworkRepository>()),
   );
-  GetIt.I.registerFactory<ProfileBloc>(
+  getItTest.registerFactory<ProfileBloc>(
     () => ProfileBloc(
-      userRepository: GetIt.I.get<UserRepository>(),
-      dataPickerRepository: GetIt.I.get<IDataPickerRepository>(),
+      userRepository: getItTest.get<UserRepository>(),
+      dataPickerRepository: getItTest.get<IDataPickerRepository>(),
     ),
   );
-  GetIt.I.registerFactory<StoryAddBloc>(
+  getItTest.registerFactory<StoryAddBloc>(
     () => StoryAddBloc(
-      storyRepository: GetIt.I.get<IStoryRepository>(),
-      iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-      dataPickerRepository: GetIt.I.get<IDataPickerRepository>(),
+      storyRepository: getItTest.get<IStoryRepository>(),
+      iAppAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
+      dataPickerRepository: getItTest.get<IDataPickerRepository>(),
     ),
   );
-  GetIt.I.registerFactory<DiscountLinkCubit>(
+  getItTest.registerFactory<DiscountLinkCubit>(
     () => DiscountLinkCubit(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<PwResetEmailBloc>(
+  getItTest.registerFactory<PwResetEmailBloc>(
     () => PwResetEmailBloc(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<MarkdownFileCubit>(
+  getItTest.registerFactory<MarkdownFileCubit>(
     () => MarkdownFileCubit(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<PasswordResetBloc>(
+  getItTest.registerFactory<PasswordResetBloc>(
     () => PasswordResetBloc(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<UserRoleBloc>(
-    () => UserRoleBloc(userRepository: GetIt.I.get<UserRepository>()),
+  getItTest.registerFactory<UserRoleBloc>(
+    () => UserRoleBloc(userRepository: getItTest.get<UserRepository>()),
   );
-  GetIt.I.registerFactory<DiscountConfigCubit>(
+  getItTest.registerFactory<DiscountConfigCubit>(
     () => DiscountConfigCubit(
-      firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
+      firebaseRemoteConfigProvider:
+          getItTest.get<FirebaseRemoteConfigProvider>(),
     ),
   );
-  GetIt.I.registerFactory<MobFeedbackBloc>(
+  getItTest.registerFactory<MobFeedbackBloc>(
     () => MobFeedbackBloc(
-      feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      feedbackRepository: getItTest.get<IFeedbackRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<MobOfflineModeCubit>(
-    () =>
-        MobOfflineModeCubit(firestoreService: GetIt.I.get<FirestoreService>()),
+  getItTest.registerFactory<MobOfflineModeCubit>(
+    () => MobOfflineModeCubit(
+      firestoreService: getItTest.get<FirestoreService>(),
+    ),
   );
-  GetIt.I.registerFactory<HomeWatcherBloc>(
-    () => HomeWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
+  getItTest.registerFactory<HomeWatcherBloc>(
+    () => HomeWatcherBloc(faqRepository: getItTest.get<IFaqRepository>()),
   );
-  GetIt.I.registerFactory<WorkEmployeeWatcherBloc>(
-    () =>
-        WorkEmployeeWatcherBloc(workRepository: GetIt.I.get<IWorkRepository>()),
+  getItTest.registerFactory<WorkEmployeeWatcherBloc>(
+    () => WorkEmployeeWatcherBloc(
+      workRepository: getItTest.get<IWorkRepository>(),
+    ),
   );
-  GetIt.I.registerFactoryParam<CheckVerificationCodeCubit, String?, void>(
+  getItTest.registerFactoryParam<CheckVerificationCodeCubit, String?, void>(
     (
       code,
       voidValue,
     ) =>
         CheckVerificationCodeCubit(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
       code: code,
     ),
   );
-  GetIt.I.registerFactory<CompanyWatcherBloc>(
+  getItTest.registerFactory<CompanyWatcherBloc>(
     () => CompanyWatcherBloc(
-      companyRepository: GetIt.I.get<ICompanyRepository>(),
+      companyRepository: getItTest.get<ICompanyRepository>(),
     ),
   );
-  GetIt.I.registerFactoryParam<DiscountCardWatcherCubit, String?, void>(
+  getItTest.registerFactoryParam<DiscountCardWatcherCubit, String?, void>(
     (
       id,
       voidValue,
     ) =>
         DiscountCardWatcherCubit(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
       id: id,
     ),
   );
-  GetIt.I.registerFactory<InformationWatcherBloc>(
+  getItTest.registerFactory<InformationWatcherBloc>(
     () => InformationWatcherBloc(
-      informationRepository: GetIt.I.get<IInformationRepository>(),
+      informationRepository: getItTest.get<IInformationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<NewsCardWatcherBloc>(
+  getItTest.registerFactory<NewsCardWatcherBloc>(
     () => NewsCardWatcherBloc(
-      informationRepository: GetIt.I.get<IInformationRepository>(),
+      informationRepository: getItTest.get<IInformationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<MyDiscountsWatcherBloc>(
+  getItTest.registerFactory<MyDiscountsWatcherBloc>(
     () => MyDiscountsWatcherBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      companyRepository: GetIt.I.get<ICompanyRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      companyRepository: getItTest.get<ICompanyRepository>(),
     ),
   );
-  GetIt.I.registerFactory<UrlCubit>(
-    () => UrlCubit(urlRepository: GetIt.I.get<IUrlRepository>()),
+  getItTest.registerFactory<UrlCubit>(
+    () => UrlCubit(urlRepository: getItTest.get<IUrlRepository>()),
   );
-  GetIt.I.registerFactory<EmployeeRespondBloc>(
+  getItTest.registerFactory<EmployeeRespondBloc>(
     () => EmployeeRespondBloc(
-      employeeRespondRepository: GetIt.I.get<IWorkRepository>(),
-      dataPickerRepository: GetIt.I.get<IDataPickerRepository>(),
+      employeeRespondRepository: getItTest.get<IWorkRepository>(),
+      dataPickerRepository: getItTest.get<IDataPickerRepository>(),
     ),
   );
-  GetIt.I.registerFactoryParam<ReportBloc, String, CardEnum>(
+  getItTest.registerFactoryParam<ReportBloc, String, CardEnum>(
     (
       cardId,
       card,
     ) =>
         ReportBloc(
-      reportRepository: GetIt.I.get<IReportRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      reportRepository: getItTest.get<IReportRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
       cardId: cardId,
       card: card,
     ),
   );
-  GetIt.I.registerFactory<MobFaqWatcherBloc>(
-    () => MobFaqWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
+  getItTest.registerFactory<MobFaqWatcherBloc>(
+    () => MobFaqWatcherBloc(faqRepository: getItTest.get<IFaqRepository>()),
   );
-  GetIt.I.registerFactoryParam<DiscountWatcherBloc, DiscountModel?, String?>(
+  getItTest.registerFactoryParam<DiscountWatcherBloc, DiscountModel?, String?>(
     (
       discount,
       discountId,
     ) =>
         DiscountWatcherBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      firebaseRemoteConfigProvider:
+          getItTest.get<FirebaseRemoteConfigProvider>(),
       discount: discount,
       discountId: discountId,
     ),
   );
-  GetIt.I.registerFactory<ViewModeCubit>(
+  getItTest.registerFactory<ViewModeCubit>(
     ViewModeCubit.new,
   );
-  GetIt.I.registerFactory<MobileRatingCubit>(
+  getItTest.registerFactory<MobileRatingCubit>(
     () => MobileRatingCubit(
-      mobileRatingRepository: GetIt.I.get<MobileRatingRepository>(),
+      mobileRatingRepository: getItTest.get<MobileRatingRepository>(),
     ),
   );
-  GetIt.I.registerFactory<UserWatcherBloc>(
-    () => UserWatcherBloc(userRepository: GetIt.I.get<UserRepository>()),
+  getItTest.registerFactory<UserWatcherBloc>(
+    () => UserWatcherBloc(userRepository: getItTest.get<UserRepository>()),
   );
-  GetIt.I.registerFactory<MyStoryWatcherBloc>(
+  getItTest.registerFactory<MyStoryWatcherBloc>(
     () => MyStoryWatcherBloc(
-      storyRepository: GetIt.I.get<IStoryRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      storyRepository: getItTest.get<IStoryRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<UserEmailFormBloc>(
+  getItTest.registerFactory<UserEmailFormBloc>(
     () => UserEmailFormBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-      firebaseAnalyticsService: GetIt.I.get<FirebaseAnalyticsService>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
+      firebaseAnalyticsService: getItTest.get<FirebaseAnalyticsService>(),
     ),
   );
-  GetIt.I.registerFactory<InvestorsWatcherBloc>(
+  getItTest.registerFactory<InvestorsWatcherBloc>(
     () => InvestorsWatcherBloc(
-      investorsRepository: GetIt.I.get<IInvestorsRepository>(),
+      investorsRepository: getItTest.get<IInvestorsRepository>(),
     ),
   );
-  GetIt.I.registerFactory<AuthenticationBloc>(
+  getItTest.registerFactory<AuthenticationBloc>(
     () => AuthenticationBloc(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      authenticationRepository: getItTest.get<AuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<AuthenticationServicesCubit>(
+  getItTest.registerFactory<AuthenticationServicesCubit>(
     () => AuthenticationServicesCubit(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      authenticationRepository: getItTest.get<AuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<SignUpBloc>(
+  getItTest.registerFactory<SignUpBloc>(
     () => SignUpBloc(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      authenticationRepository: getItTest.get<AuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<LoginBloc>(
+  getItTest.registerFactory<LoginBloc>(
     () => LoginBloc(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      authenticationRepository: getItTest.get<AuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactory<DiscountLinkFormBloc>(
+  getItTest.registerFactory<DiscountLinkFormBloc>(
     () => DiscountLinkFormBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerFactoryParam<DiscountsAddBloc, DiscountModel?, String?>(
+  getItTest.registerFactoryParam<DiscountsAddBloc, DiscountModel?, String?>(
     (
       discount,
       discountId,
     ) =>
         DiscountsAddBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-      companyRepository: GetIt.I.get<ICompanyRepository>(),
-      citiesRepository: GetIt.I.get<ICitiesRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
+      companyRepository: getItTest.get<ICompanyRepository>(),
+      citiesRepository: getItTest.get<ICitiesRepository>(),
       discount: discount,
       discountId: discountId,
     ),
   );
-  GetIt.I.registerFactory<CompanyFormBloc>(
+  getItTest.registerFactory<CompanyFormBloc>(
     () => CompanyFormBloc(
-      companyRepository: GetIt.I.get<ICompanyRepository>(),
-      dataPickerRepository: GetIt.I.get<IDataPickerRepository>(),
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
+      companyRepository: getItTest.get<ICompanyRepository>(),
+      dataPickerRepository: getItTest.get<IDataPickerRepository>(),
+      discountRepository: getItTest.get<IDiscountRepository>(),
     ),
   );
-  GetIt.I.registerFactory<AppVersionCubit>(
+  getItTest.registerFactory<AppVersionCubit>(
     () => AppVersionCubit(
-      buildRepository: GetIt.I.get<AppInfoRepository>(),
-      firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
+      buildRepository: getItTest.get<AppInfoRepository>(),
+      firebaseRemoteConfigProvider:
+          getItTest.get<FirebaseRemoteConfigProvider>(),
     ),
   );
 }
@@ -380,29 +407,20 @@ void configureFailureDependenciesTest() {
   userSetting(mockFirebaseFirestore);
   initializeDateFormatting(Language.english.value.languageCode);
   initializeDateFormatting(Language.ukrain.value.languageCode);
-  Config.testIsWeb = true;
-  Config.falvourValue = Config.development;
-  KTest.isTest = true;
-  Config.isReleaseMode = true;
-  UriExtension.testUrl = null;
-  KTest.discountSortingTestValue = false;
-  DiscountsWatcherBloc.testDiscountFilterRepository = null;
-  KTest.testLoading = false;
 
-  ExtendedDateTime.current = KTestVariables.dateTime;
   // KTest.scroll = null;
   // Services
-  GetIt.I.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);
-  GetIt.I.registerSingleton<Dio>(Dio());
-  // GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
-  GetIt.I.registerSingleton<ArtifactDownloadHelper>(
+  getItTest.registerSingleton<FirebaseFirestore>(mockFirebaseFirestore);
+  getItTest.registerSingleton<Dio>(Dio());
+  // getIt.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  getItTest.registerSingleton<ArtifactDownloadHelper>(
     ArtifactDownloadHelper(
-      dio: GetIt.I.get<Dio>(),
+      dio: getItTest.get<Dio>(),
     ),
   );
 
   // Repositories
-  GetIt.I.registerLazySingleton<FailureRepository>(
-    FailureRepository.new, //GetIt.I.get<FirebaseCrashlytics>()
+  getItTest.registerLazySingleton<FailureRepository>(
+    FailureRepository.new, //getIt.get<FirebaseCrashlytics>()
   );
 }

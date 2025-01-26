@@ -15,7 +15,15 @@ Future<void> cancelCanNotPopHelper({
     findsWidgets,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: PrivacyPolicyDialogKeys.closeIcon,
+  );
+
   await tester.tap(find.byKey(PrivacyPolicyDialogKeys.closeIcon));
+
+  await tester.pumpAndSettle();
+
   if (business) {
     verify(
       () => mockGoRouter.goNamed(KRoute.discountsAdd.name),

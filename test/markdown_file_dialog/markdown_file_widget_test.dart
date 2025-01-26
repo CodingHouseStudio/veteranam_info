@@ -6,15 +6,17 @@ import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
-  setUp(configureDependenciesTest);
+  setUpAll(configureDependenciesTest);
+
+  setUp(resetTestVariables);
 
   setUpAll(setUpGlobal);
 
   setupFirebaseAuthMocks();
 
-  tearDown(GetIt.I.reset);
+  tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.privacyPolicy} ', () {
-    setUp(mardownFileWidgetTestRegister);
+    setUpAll(mardownFileWidgetTestRegister);
     testWidgets('${KGroupText.initial} ', (tester) async {
       await markdownFileDialogPumpAppHelper(
         tester,
@@ -64,9 +66,10 @@ void main() {
           });
         });
         group('${KRoute.home.name} ', () {
-          setUp(
-            () => MockGoRouter.canPopValue = false,
-          );
+          setUp(() {
+            MockGoRouter.canPopValue = false;
+            Config.roleValue = Config.user;
+          });
           testWidgets('${KRoute.home.name} ', (tester) async {
             await markdownFileDialogPumpAppHelper(
               tester,
