@@ -42,7 +42,6 @@ import 'package:veteranam/shared/shared_dart.dart';
 import 'test_dependency.dart';
 
 final getItTest = GetIt.I;
-
 void resetTestVariables() {
   Config.testIsWeb = true;
   Config.falvourValue = Config.development;
