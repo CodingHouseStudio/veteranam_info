@@ -3,6 +3,17 @@
 # Run the tests with coverage and concurrency
 very_good test --concurrency=$(sysctl -n hw.logicalcpu) --recursive --optimization --coverage --test-randomize-ordering-seed=random
 
+# Capture the exit code of the 'very_good test' command
+TEST_EXIT_CODE=$?
+
+echo "Test exit code: $TEST_EXIT_CODE"
+
+# Check if the tests were successful
+if [ $TEST_EXIT_CODE -ne 0 ]; then
+  echo "Tests failed. Exiting..."
+  exit 1
+fi
+
 # Generate the initial HTML coverage report
 genhtml coverage/lcov.info -o coverage/html
 

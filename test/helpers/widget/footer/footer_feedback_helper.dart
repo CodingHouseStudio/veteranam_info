@@ -14,6 +14,21 @@ Future<void> footerFeedbackHelper({
     offset: KTestConstants.scrollingDown,
   );
 
+  if (find.byKey(FooterKeys.button).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingDown,
+    );
+  }
+
+  if (find.byKey(FooterKeys.button).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingUp500,
+      itemKey: FooterKeys.title,
+    );
+  }
+
   expect(
     find.byKey(FooterKeys.button),
     findsOneWidget,

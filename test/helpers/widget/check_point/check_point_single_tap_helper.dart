@@ -7,11 +7,14 @@ Future<void> chekPointSignleTapHelper({
   required WidgetTester tester,
   bool hasAmount = false,
   bool customText = false,
+  bool last = false,
   int index = 0,
 }) async {
   await scrollingHelper(
     tester: tester,
     itemKey: CheckPointKeys.widget,
+    itemIndex: last ? null : index,
+    first: !last,
   );
 
   expect(
@@ -34,10 +37,15 @@ Future<void> chekPointSignleTapHelper({
   await scrollingHelper(
     tester: tester,
     itemKey: CheckPointKeys.widget,
-    itemIndex: index,
+    itemIndex: last ? null : index,
+    first: !last,
   );
 
-  await tester.tap(find.byKey(CheckPointKeys.widget).at(index));
+  await tester.tap(
+    last
+        ? find.byKey(CheckPointKeys.widget).last
+        : find.byKey(CheckPointKeys.widget).at(index),
+  );
 
   await tester.pumpAndSettle();
 }

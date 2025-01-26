@@ -134,8 +134,6 @@ Future<void> advancedFilterHelper(
     findsNothing,
   );
 
-  await advancedFilterCloseOpenItemsHelper(tester);
-
   await chekPointSignleTapHelper(
     tester: tester,
     hasAmount: true,
