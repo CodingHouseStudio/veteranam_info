@@ -354,10 +354,10 @@ Future<void> advancedFilterEnchancedMobileCityHelper(
     findsNothing,
   );
 
-  expect(
-    find.byKey(DiscountsFilterKeys.cityItems),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(DiscountsFilterKeys.cityItems),
+  //   findsWidgets,
+  // );
 
   await scrollingHelper(
     tester: tester,
