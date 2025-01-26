@@ -119,6 +119,8 @@ class AdvancedFilterContent extends StatelessWidget {
           if (state.eligibilityMap.isNotEmpty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
+              closeIconKey: DiscountsFilterKeys.eligibilitiesCloseIcon,
+              openIconKey: DiscountsFilterKeys.eligibilitiesOpenIcon,
               list: _AdvancedListWidget(
                 filter: state.eligibilityMap,
                 onChange: (value) => context.read<DiscountsWatcherBloc>().add(
@@ -173,6 +175,8 @@ class AdvancedFilterContent extends StatelessWidget {
           if (state.categoryMap.isNotEmpty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
+              closeIconKey: DiscountsFilterKeys.categoriesCloseIcon,
+              openIconKey: DiscountsFilterKeys.categoriesOpenIcon,
               list: _AdvancedListWidget(
                 filter: state.categoryMap,
                 onChange: (value) => context.read<DiscountsWatcherBloc>().add(
@@ -229,6 +233,8 @@ class AdvancedFilterContent extends StatelessWidget {
           if (state.locationIsNotEpmty || state.isLoading) {
             return AdvancedFilterListWidget(
               isDesk: isDesk,
+              closeIconKey: DiscountsFilterKeys.cityCloseIcon,
+              openIconKey: DiscountsFilterKeys.cityOpenIcon,
               list: SliverMainAxisGroup(
                 slivers: [
                   if (!state.isLoading)

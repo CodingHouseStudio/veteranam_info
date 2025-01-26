@@ -204,7 +204,7 @@ void main() {
           mockMobileRatingRepository: null,
         );
 
-        await advancedFilterCloseOpenCitiesItemsHelper(tester);
+        await advancedFilterCloseOpenItemsHelper(tester);
       });
     });
   });

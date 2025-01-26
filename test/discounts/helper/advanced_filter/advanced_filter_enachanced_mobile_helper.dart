@@ -345,6 +345,16 @@ Future<void> advancedFilterEnchancedMobileCityHelper(
   );
 
   expect(
+    find.byKey(DiscountsFilterKeys.cityOpenIcon),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(DiscountsFilterKeys.cityCloseIcon),
+    findsNothing,
+  );
+
+  expect(
     find.byKey(DiscountsFilterKeys.cityItems),
     findsWidgets,
   );
