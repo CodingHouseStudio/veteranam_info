@@ -45,7 +45,8 @@ class AppLayoutRepository
       }
 
       return null;
-    } catch (e) {
+    } catch (e, stack) {
+      _appVersionController.addError(e, stack);
       return null;
     }
   }
