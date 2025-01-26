@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart';
 import 'package:veteranam/components/home/home.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -11,87 +10,48 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final padding = EdgeInsets.symmetric(
-          horizontal: (isDesk
-              ? KPadding.kPaddingSize90 +
-                  ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
-                      ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
-                          2
-                      : 0)
-              : KPadding.kPaddingSize16),
-        );
-        return MultiBlocListener(
-          listeners: [
-            BlocListener<NetworkCubit, NetworkStatus>(
-              listener: (context, state) {
-                if (state == NetworkStatus.network) {
-                  context.read<HomeWatcherBloc>().add(
-                        const HomeWatcherEvent.started(),
-                      );
-                }
-              },
-            ),
-            const BlocListener<UrlCubit, UrlEnum?>(
-              listener: UrlCubitExtension.listener,
-            ),
-            BlocListener<HomeWatcherBloc, HomeWatcherState>(
-              listener: (context, state) => context.dialog.showGetErrorDialog(
-                error: state.failure?.value(context),
-                onPressed: () => context
-                    .read<HomeWatcherBloc>()
-                    .add(const HomeWatcherEvent.started()),
-              ),
-            ),
-          ],
-          child: CustomScrollView(
-            key: ScaffoldKeys.scroll,
-            cacheExtent: KDimensions.listCacheExtent,
-            slivers: [
-              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-              NavigationBarWidget(
-                isDesk: isDesk,
-                isTablet: isTablet,
-              ),
-              SliverPadding(
-                padding: padding,
-                sliver: HomeSectionsWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
+    return HomeBlocListener(
+      childWidget: CustomScrollView(
+        key: ScaffoldKeys.scroll,
+        cacheExtent: KDimensions.listCacheExtent,
+        slivers: [
+          const NetworkBanner(),
+          const NavigationBarWidget(),
+          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+            builder: (context, state) => SliverCenter(
+              appVersionEnum: state.appVersionEnum,
+              sliver: SliverPadding(
+                padding: state.appVersionEnum.paddingWithTablet,
+                sliver: SliverConstrainedCrossAxis(
+                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      HomeSectionsWidget(
+                        isDesk: state.appVersionEnum.isDesk,
+                        isTablet: state.appVersionEnum.isTablet,
+                      ),
+                      if (state.appVersionEnum.isDesk)
+                        const FAQSectionDeskWidget()
+                      else
+                        const FaqSectionMobWidget(),
+                      if (state.appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox160.toSliver
+                      else if (state.appVersionEnum.isTablet)
+                        KSizedBox.kHeightSizedBox64.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox48.toSliver,
+                      FooterWidget(
+                        appVersionEnum: state.appVersionEnum,
+                      ),
+                      KSizedBox.kHeightSizedBox30.toSliver,
+                    ],
+                  ),
                 ),
               ),
-              SliverPadding(
-                padding: padding,
-                sliver: isDesk
-                    ? const FAQSectionDeskWidget()
-                    : const FaqSectionMobWidget(),
-              ),
-              SliverToBoxAdapter(
-                child: isDesk
-                    ? KSizedBox.kHeightSizedBox160
-                    : isTablet
-                        ? KSizedBox.kHeightSizedBox64
-                        : KSizedBox.kHeightSizedBox48,
-              ),
-              SliverPadding(
-                padding: padding,
-                sliver: FooterWidget(
-                  isTablet: isTablet,
-                  isDesk: isDesk,
-                ),
-              ),
-              KSizedBox.kHeightSizedBox30.toSliver,
-            ],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

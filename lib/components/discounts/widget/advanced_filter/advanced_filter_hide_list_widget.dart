@@ -13,6 +13,8 @@ class AdvancedFilterListWidget extends StatefulWidget {
     required this.onCancelWidgetPressed,
     required this.isLoading,
     required this.cancelChipKey,
+    required this.openIconKey,
+    required this.closeIconKey,
     super.key,
   });
   final bool isDesk;
@@ -23,6 +25,8 @@ class AdvancedFilterListWidget extends StatefulWidget {
   final void Function(String activeItem) onCancelWidgetPressed;
   final bool isLoading;
   final Key cancelChipKey;
+  final Key openIconKey;
+  final Key closeIconKey;
 
   @override
   State<AdvancedFilterListWidget> createState() =>
@@ -66,6 +70,8 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                             onPressed: null,
                             listShow: false,
                             showIcon: false,
+                            closeIconKey: widget.closeIconKey,
+                            openIconKey: widget.openIconKey,
                           ),
                           Flexible(
                             child: CancelChipWidget(
@@ -94,6 +100,8 @@ class _AdvancedFilterListWidgetState extends State<AdvancedFilterListWidget> {
                             () => listShow = !listShow,
                           ),
                           listShow: listShow,
+                          closeIconKey: widget.closeIconKey,
+                          openIconKey: widget.openIconKey,
                         ),
                       ),
               ),
@@ -113,6 +121,8 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.listShow,
+    required this.openIconKey,
+    required this.closeIconKey,
     this.showIcon = true,
   });
   final bool isDesk;
@@ -121,10 +131,13 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final bool listShow;
   final bool showIcon;
+  final Key openIconKey;
+  final Key closeIconKey;
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
+      key: showIcon ? null : closeIconKey,
       label: Padding(
         padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
         child: Text(
@@ -148,6 +161,7 @@ class _AdvancedFilterHideButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       icon: showIcon
           ? IconWidget(
+              key: listShow ? openIconKey : closeIconKey,
               icon: listShow ? KIcon.minus : KIcon.plus,
               padding: KPadding.kPaddingSize8,
               background: isDesk

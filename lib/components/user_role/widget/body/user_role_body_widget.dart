@@ -10,7 +10,7 @@ class UserRoleBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-        horizontal: maxWidth < KPlatformConstants.maxWidthThresholdTablet
+        horizontal: maxWidth < KPlatformConstants.maxWidthThresholdDesk
             ? maxWidth * KDimensions.twentyPercent
             : maxWidth * KDimensions.thirtyPercent,
         vertical: KPadding.kPaddingSize120,

@@ -395,7 +395,7 @@ extension DoubleExtensions on double {
     double? horizontalPadding,
     bool notUseHorizontal = true,
   }) {
-    const threshold = KPlatformConstants.maxWidthThresholdTablet;
+    const threshold = KPlatformConstants.maxWidthThresholdDesk;
     final horizontalPaddingValue = this <= threshold
         ? this * precent
         : threshold * precent + ((this - threshold) / 2);
@@ -687,4 +687,24 @@ extension UrlCubitExtension on UrlCubit {
       context.read<UrlCubit>().reset();
     }
   }
+}
+
+extension AppVersionCubitExtension on AppVersionCubit {
+  static void listener(BuildContext context, AppVersionState state) {
+    context.dialog.showMobUpdateAppDialog(
+      hasNewVersion: state.mobHasNewBuild,
+    );
+  }
+}
+
+extension AppVersionEnumExtension on AppVersionEnum {
+  EdgeInsets get padding => EdgeInsets.symmetric(
+        horizontal: isDesk
+            ? AppVersionEnum.desk.horizontalPadding
+            : AppVersionEnum.mobile.horizontalPadding,
+      );
+
+  EdgeInsets get paddingWithTablet => EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+      );
 }

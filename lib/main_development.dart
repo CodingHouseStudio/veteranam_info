@@ -78,7 +78,7 @@ void main() async {
 
     // Log the error details to FailureRepository with specified level and tags
     FailureRepository.onError(
-      error: details,
+      error: details.exception,
       stack: details.stack,
       information: details.informationCollector?.call(),
       reason:

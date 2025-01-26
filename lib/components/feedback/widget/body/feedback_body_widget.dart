@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart';
 import 'package:veteranam/components/feedback/feedback.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -9,90 +8,53 @@ class FeedbackBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final padding = EdgeInsets.symmetric(
-          horizontal: isDesk
-              ? KPadding.kPaddingSize90 +
-                  ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
-                      ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
-                          2
-                      : 0)
-              : KPadding.kPaddingSize16,
-        );
-        return MultiBlocListener(
-          listeners: [
-            BlocListener<FeedbackBloc, FeedbackState>(
-              listenWhen: (previous, current) =>
-                  current.failure != null ||
-                  current.failure != previous.failure,
-              listener: (context, state) {
-                context.dialog.showSnackBardTextDialog(
-                  state.failure?.value(context),
-                );
-              },
-            ),
-            const BlocListener<UrlCubit, UrlEnum?>(
-              listener: UrlCubitExtension.listener,
-            ),
-            if (!Config.isWeb)
-              BlocListener<AppVersionCubit, AppVersionState>(
-                listener: (context, state) =>
-                    context.dialog.showMobUpdateAppDialog(
-                  hasNewVersion: state.mobHasNewBuild,
-                ),
-              ),
-          ],
-          child: FocusTraversalGroup(
-            child: Semantics(
-              child: CustomScrollView(
-                key: ScaffoldKeys.scroll,
-                cacheExtent: KDimensions.listCacheExtent,
-                slivers: [
-                  NetworkBanner(
-                    isDesk: isDesk,
-                    isTablet: isTablet,
-                  ),
-                  if (Config.isWeb)
-                    NavigationBarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                    ),
-                  if (!Config.isWeb) ...[
-                    KSizedBox.kHeightSizedBox8.toSliver,
-                    SliverPadding(
-                      padding: padding,
-                      sliver: SliverToBoxAdapter(
-                        child: BackButtonWidget(
-                          backPageName: null,
-                          pathName: KRoute.settings.name,
-                        ),
+    return FeedbackBlocListener(
+      childWidget: FocusTraversalGroup(
+        child: Semantics(
+          child: CustomScrollView(
+            key: ScaffoldKeys.scroll,
+            cacheExtent: KDimensions.listCacheExtent,
+            slivers: [
+              const NetworkBanner(),
+              if (Config.isWeb) const NavigationBarWidget(),
+              BlocBuilder<AppLayoutCubit, AppLayoutState>(
+                buildWhen: (previous, current) =>
+                    previous.appVersionEnum.isDesk !=
+                    current.appVersionEnum.isDesk,
+                builder: (context, state) => SliverCenter(
+                  appVersionEnum: state.appVersionEnum,
+                  sliver: SliverPadding(
+                    padding: state.appVersionEnum.paddingWithTablet,
+                    sliver: SliverConstrainedCrossAxis(
+                      maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                      sliver: SliverMainAxisGroup(
+                        slivers: [
+                          if (!Config.isWeb) ...[
+                            KSizedBox.kHeightSizedBox8.toSliver,
+                            SliverToBoxAdapter(
+                              child: BackButtonWidget(
+                                backPageName: null,
+                                pathName: KRoute.settings.name,
+                              ),
+                            ),
+                          ],
+                          FeedbackFormStateWidget(
+                            isDesk: state.appVersionEnum.isDesk,
+                          ),
+                          if (state.appVersionEnum.isDesk)
+                            KSizedBox.kHeightSizedBox100.toSliver
+                          else
+                            KSizedBox.kHeightSizedBox32.toSliver,
+                        ],
                       ),
                     ),
-                  ],
-                  SliverPadding(
-                    padding: padding,
-                    sliver: FeedbackFormStateWidget(
-                      isDesk: isDesk,
-                    ),
                   ),
-                  SliverToBoxAdapter(
-                    child: isDesk
-                        ? KSizedBox.kHeightSizedBox100
-                        : KSizedBox.kHeightSizedBox32,
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

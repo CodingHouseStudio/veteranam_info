@@ -1,3 +1,4 @@
+export 'app_layout_cubit_register.dart';
 export 'discount_init_register.dart';
 export 'fake_provider.dart';
 export 'go_router_provider_mocks.dart';

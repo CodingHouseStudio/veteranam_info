@@ -25,5 +25,6 @@ Future<void> investorsFailureHelper(
     tester: tester,
     card: InformationKeys.card,
     buttonMock: null,
+    containTapButton: true,
   );
 }

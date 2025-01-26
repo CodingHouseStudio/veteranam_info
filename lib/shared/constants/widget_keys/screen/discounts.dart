@@ -66,4 +66,15 @@ abstract class DiscountsFilterKeys {
   static const citySearchField = Key('discounts_filter_city_search_field');
   static const citySearchFieldCloseIcon =
       Key('discounts_filter_city_search_field_close_icon');
+
+  static const cityOpenIcon = Key('discounts_filter_city_open_icon');
+  static const cityCloseIcon = Key('discounts_filter_city_close_icon');
+  static const categoriesOpenIcon =
+      Key('discounts_filter_categories_open_icon');
+  static const categoriesCloseIcon =
+      Key('discounts_filter_categories_close_icon');
+  static const eligibilitiesOpenIcon =
+      Key('discounts_filter_eligiblities_open_icon');
+  static const eligibilitiesCloseIcon =
+      Key('discounts_filter_eligiblities_close_icon');
 }

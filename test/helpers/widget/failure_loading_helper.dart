@@ -8,6 +8,7 @@ Future<void> loadingFailureHelper({
   required Key card,
   required Key? buttonMock,
   bool hasShimmer = false,
+  bool containTapButton = false,
 }) async {
   if (!hasShimmer) {
     expect(
@@ -23,5 +24,9 @@ Future<void> loadingFailureHelper({
     );
   }
 
-  await dialogFailureGetHelper(tester: tester);
+  if (containTapButton) {
+    await dialogFailureGetTapHelper(tester: tester);
+  } else {
+    await dialogFailureGetHelper(tester: tester);
+  }
 }

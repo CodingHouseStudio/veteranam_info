@@ -30,6 +30,7 @@ void configureDependenciesTest() {
   userSetting(mockFirebaseFirestore);
   discountInit(mockFirebaseFirestore);
   mobBuild();
+  appLayoutCubitInit();
   Config.testIsWeb = true;
   Config.falvourValue = Config.development;
   Config.roleValue = Config.user;

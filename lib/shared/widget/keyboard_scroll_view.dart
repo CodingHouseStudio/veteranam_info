@@ -34,10 +34,7 @@ class KeyboardScrollView extends StatelessWidget {
           : Config.isWeb
               ? _body(scrollController)
               : BlocListener<AppVersionCubit, AppVersionState>(
-                  listener: (context, state) =>
-                      context.dialog.showMobUpdateAppDialog(
-                    hasNewVersion: state.mobHasNewBuild,
-                  ),
+                  listener: AppVersionCubitExtension.listener,
                   child: _body(scrollController),
                 ),
     );

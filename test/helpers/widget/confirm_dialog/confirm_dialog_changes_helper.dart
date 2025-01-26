@@ -24,7 +24,7 @@ Future<void> confirmDialogChangesHelper({
     tester: tester,
     scrollUp: false,
     windowsTest: true,
-    size: KTestConstants.windowVerySmallSize,
+    // size: KTestConstants.windowVerySmallSize,
     test: () async {
       expect(
         find.byKey(ConfirmDialogKeys.cancelIcon),

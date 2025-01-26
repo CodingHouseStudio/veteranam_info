@@ -11,7 +11,7 @@ Future<void> userEmailCloseDelayHelper({
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
-    size: KTestConstants.windowMobileSize,
+    // size: KTestConstants.windowMobileSize,
     test: () async {
       await userEmailHelper(tester: tester, hover: false);
 

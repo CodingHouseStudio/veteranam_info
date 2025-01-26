@@ -39,8 +39,9 @@ class ScaffoldDecorationWidget extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+        // final isTablet =
+        //     constraints.maxWidth >
+        // KPlatformConstants.minWidthThresholdTablet;
         final mainChildWidget = mainChildWidgetsFunction(
           isDesk: isDesk,
         );
@@ -48,9 +49,9 @@ class ScaffoldDecorationWidget extends StatelessWidget {
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
                   ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
+                          KPlatformConstants.maxWidthThresholdDesk)
                       ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
+                              KPlatformConstants.maxWidthThresholdDesk) /
                           2
                       : 0)
               : KPadding.kPaddingSize16),
@@ -68,8 +69,6 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                 widgetKey: ScaffoldKeys.scroll,
                 slivers: [
                   NavigationBarWidget(
-                    isDesk: isDesk,
-                    isTablet: isTablet,
                     backButtonPathName: backButtonPathName,
                   ),
 

@@ -34,11 +34,25 @@ Future<void> advancedFilterSearchFieldHelper(
 
   await tester.pumpAndSettle();
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+    scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citySearchField,
+  );
+
   expect(find.byKey(DiscountsFilterKeys.cityItems), findsNothing);
 
   await tester.tap(find.byKey(DiscountsFilterKeys.citySearchFieldCloseIcon));
 
   await tester.pumpAndSettle();
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+    scrollKey: DiscountsFilterKeys.list,
+    itemKey: DiscountsFilterKeys.citySearchField,
+  );
 
   expect(
     find.byKey(DiscountsFilterKeys.citySearchFieldCloseIcon),

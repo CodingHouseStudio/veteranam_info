@@ -18,6 +18,12 @@ Future<void> footerProfileHelper({
     tester: tester,
     // windowsTest: true,
     test: () async {
+      if (find.byKey(FooterKeys.profileButton).evaluate().isEmpty) {
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown,
+        );
+      }
       expect(
         find.byKey(FooterKeys.profileButton),
         findsOneWidget,

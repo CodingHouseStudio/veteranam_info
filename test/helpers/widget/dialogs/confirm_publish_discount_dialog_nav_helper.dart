@@ -14,7 +14,7 @@ Future<void> confirmPublishDiscountDialogNavHelper({
     tester: tester,
     scrollUp: false,
     windowsTest: true,
-    size: KTestConstants.windowSmallSize,
+    // size: KTestConstants.windowSmallSize,
     test: () async {
       await confirmPublishDiscountDialogHelper(tester);
 
@@ -37,6 +37,15 @@ Future<void> confirmPublishDiscountDialogNavHelper({
 
       await openEvent();
     },
+  );
+
+  await openEvent();
+
+  expect(
+    find.byKey(
+      ConfirmPublishDiscountKeys.title,
+    ),
+    findsOneWidget,
   );
 
   await scrollingHelper(

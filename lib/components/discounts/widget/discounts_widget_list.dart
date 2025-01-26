@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
@@ -115,10 +114,10 @@ ValueKey<String> _key({
 // }
 
 class _AdvancedFilterDesk extends StatelessWidget {
-  const _AdvancedFilterDesk({
-    required this.maxHeight,
-  });
-  final double maxHeight;
+  const _AdvancedFilterDesk(
+      // required this.maxHeight,
+      );
+  // final double maxHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -136,35 +135,14 @@ class _AdvancedFilterDesk extends StatelessWidget {
             isDesk: true,
           ),
         ),
-        maxMinHeight: maxHeight,
+        maxMinHeight: MediaQuery.sizeOf(context).height,
       ),
     );
   }
 }
 
-class DiscountsMobWidgetList extends SingleChildRenderObjectWidget {
-  DiscountsMobWidgetList({
-    required this.padding,
-    required this.isDesk,
-    super.key,
-  }) : super(
-          child: _DiscountWidgetList(
-            isDesk: isDesk,
-          ),
-        );
-  final EdgeInsets padding;
-  final bool isDesk;
-  @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderSliverPadding(
-      padding: padding,
-      textDirection: Directionality.of(context),
-    );
-  }
-}
-
-class _DiscountWidgetList extends StatelessWidget {
-  const _DiscountWidgetList({required this.isDesk});
+class DiscountWidgetList extends StatelessWidget {
+  const DiscountWidgetList({required this.isDesk, super.key});
 
   final bool isDesk;
 
@@ -445,27 +423,26 @@ class _DiscountsWidgetItem extends StatelessWidget {
 }
 
 class DiscountsDeskWidgetList extends StatelessWidget {
-  const DiscountsDeskWidgetList({required this.maxHeight, super.key});
-  final double maxHeight;
+  const DiscountsDeskWidgetList({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverCrossAxisGroup(
       slivers: [
-        SliverCrossAxisExpanded(
+        const SliverCrossAxisExpanded(
           flex: 1,
           sliver: _AdvancedFilterDesk(
-            maxHeight: maxHeight,
-          ),
+              // maxHeight: maxHeight,
+              ),
         ),
         if (Config.isWeb)
           const SliverCrossAxisExpanded(
             flex: 2,
-            sliver: _DiscountWidgetList(
+            sliver: DiscountWidgetList(
               isDesk: true,
             ),
           )
         else
-          const _DiscountWidgetList(
+          const DiscountWidgetList(
             isDesk: true,
           ),
       ],

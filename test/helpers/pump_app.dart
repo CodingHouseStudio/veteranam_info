@@ -27,6 +27,9 @@ extension PumpApp on WidgetTester {
       MultiBlocProvider(
         providers: [
           BlocProvider(
+            create: (context) => GetIt.I.get<AppLayoutCubit>(),
+          ),
+          BlocProvider(
             create: (context) => GetIt.I.get<DiscountsWatcherBloc>(),
             // ..add(const DiscountsWatcherEvent.started()),
           ),

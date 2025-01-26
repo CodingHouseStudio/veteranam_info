@@ -17,6 +17,11 @@ Future<void> footerButtonsHelper({
     tester: tester,
     // windowsTest: true,
     test: () async {
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
+
       for (var i = 0; i < FooterKeys.buttonsKey.length; i++) {
         final buttonKey = FooterKeys.buttonsKey.elementAt(i);
 

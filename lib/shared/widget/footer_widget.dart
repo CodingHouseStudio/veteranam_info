@@ -1,77 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class FooterWidget extends SingleChildRenderObjectWidget {
-  FooterWidget({
-    required this.isDesk,
-    required this.isTablet,
+// class FooterWidget extends SingleChildRenderObjectWidget {
+//   FooterWidget({
+//     required this.isDesk,
+//     required this.isTablet,
+//     super.key,
+//   }) : super(
+//           child: SliverPadding(
+//             padding: isDesk
+//                 ? const EdgeInsets.only(
+//                     bottom: KPadding.kPaddingSize32,
+//                     top: KPadding.kPaddingSize32,
+//                     right: KPadding.kPaddingSize32,
+//                     left: KPadding.kPaddingSize46,
+//                   )
+//                 : isTablet
+//                     ? const EdgeInsets.all(
+//                         KPadding.kPaddingSize46,
+//                       )
+//                     : const EdgeInsets.symmetric(
+//                         vertical: KPadding.kPaddingSize32,
+//                         horizontal: KPadding.kPaddingSize16,
+//                       ),
+//             sliver: _FooterWidgetList(appVersionEnum: isDesk, appVersionEnum.
+//isTablet: appVersionEnum.isTablet),
+//           ),
+//         );
+
+//   final bool isDesk;
+//   final bool isTablet;
+
+//   @override
+//   RenderDecoratedSliver createRenderObject(BuildContext context) {
+//     return RenderDecoratedSliver(
+//       decoration: KWidgetTheme.boxDecorationFooter,
+//     );
+//   }
+// }
+
+class FooterWidget extends StatelessWidget {
+  const FooterWidget({
+    required this.appVersionEnum,
     super.key,
-  }) : super(
-          child: SliverPadding(
-            padding: isDesk
-                ? const EdgeInsets.only(
-                    bottom: KPadding.kPaddingSize32,
-                    top: KPadding.kPaddingSize32,
-                    right: KPadding.kPaddingSize32,
-                    left: KPadding.kPaddingSize46,
-                  )
-                : isTablet
-                    ? const EdgeInsets.all(
-                        KPadding.kPaddingSize46,
-                      )
-                    : const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize32,
-                        horizontal: KPadding.kPaddingSize16,
-                      ),
-            sliver: _FooterWidgetList(isDesk: isDesk, isTablet: isTablet),
-          ),
-        );
-
-  final bool isDesk;
-  final bool isTablet;
-
-  @override
-  RenderDecoratedSliver createRenderObject(BuildContext context) {
-    return RenderDecoratedSliver(
-      decoration: KWidgetTheme.boxDecorationFooter,
-    );
-  }
-}
-
-class _FooterWidgetList extends StatelessWidget {
-  const _FooterWidgetList({
-    required this.isDesk,
-    required this.isTablet,
   });
-  final bool isDesk;
-  final bool isTablet;
+  final AppVersionEnum appVersionEnum;
   @override
   Widget build(BuildContext context) {
-    final body = isTablet
+    final body = appVersionEnum.isTablet
         ? [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: _Support(isTablet: isTablet),
+                  child: _Support(isTablet: appVersionEnum.isTablet),
                 ),
                 Expanded(
-                  child: _Sections(isTablet: isTablet),
+                  child: _Sections(isTablet: appVersionEnum.isTablet),
                 ),
                 if (Config.isDevelopment)
                   Expanded(
-                    child: _Information(isTablet: isTablet),
+                    child: _Information(isTablet: appVersionEnum.isTablet),
                   ),
                 Expanded(
-                  child: _Contact(isTablet: isTablet),
+                  child: _Contact(isTablet: appVersionEnum.isTablet),
                 ),
                 SocialMediaLinks(
-                  isDesk: isTablet,
-                  padding: isTablet
+                  isDesk: appVersionEnum.isTablet,
+                  padding: appVersionEnum.isTablet
                       ? KPadding.kPaddingSize24
                       : KPadding.kPaddingSize16,
                   instagramKey: FooterKeys.instagramIcon,
@@ -100,48 +99,49 @@ class _FooterWidgetList extends StatelessWidget {
                         textAlign: TextAlign.end,
                       ),
                       const _FooterRightsReservedWidget(),
-                      _PrivacyPolice(isDesk: isDesk),
+                      _PrivacyPolice(isDesk: appVersionEnum.isDesk),
                     ],
                   ),
                 ),
                 KSizedBox.kWidthSizedBox4,
                 InfoVersionWidget(
-                  isDesk: isDesk,
+                  isDesk: appVersionEnum.isDesk,
                 ),
               ],
             ),
           ]
         : [
-            _Support(isTablet: isTablet),
+            _Support(isTablet: appVersionEnum.isTablet),
             KSizedBox.kHeightSizedBox40,
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 2,
-                  child: _Sections(isTablet: isTablet),
+                  child: _Sections(isTablet: appVersionEnum.isTablet),
                 ),
                 if (Config.isDevelopment)
                   Expanded(
                     flex: 2,
-                    child: _Information(isTablet: isTablet),
+                    child: _Information(isTablet: appVersionEnum.isTablet),
                   )
                 else
                   Expanded(
                     flex: 3,
-                    child: _Contact(isTablet: isTablet),
+                    child: _Contact(isTablet: appVersionEnum.isTablet),
                   ),
               ],
             ),
             if (Config.isDevelopment) ...[
               KSizedBox.kHeightSizedBox40,
-              _Contact(isTablet: isTablet),
+              _Contact(isTablet: appVersionEnum.isTablet),
             ],
             KSizedBox.kHeightSizedBox40,
             SocialMediaLinks(
-              isDesk: isTablet,
-              padding:
-                  isTablet ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
+              isDesk: appVersionEnum.isTablet,
+              padding: appVersionEnum.isTablet
+                  ? KPadding.kPaddingSize24
+                  : KPadding.kPaddingSize16,
               instagramKey: FooterKeys.instagramIcon,
               linkedInKey: FooterKeys.likedInIcon,
               facebookKey: FooterKeys.facebookIcon,
@@ -166,21 +166,41 @@ class _FooterWidgetList extends StatelessWidget {
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Expanded(
-                  child: _PrivacyPolice(isDesk: isDesk),
+                  child: _PrivacyPolice(isDesk: appVersionEnum.isDesk),
                 ),
                 KSizedBox.kWidthSizedBox3,
                 Align(
                   alignment: Alignment.centerRight,
-                  child: InfoVersionWidget(isDesk: isDesk),
+                  child: InfoVersionWidget(isDesk: appVersionEnum.isDesk),
                 ),
               ],
             ),
           ];
-    return SliverList.builder(
-      itemBuilder: (context, index) => body.elementAt(index),
-      addAutomaticKeepAlives: false,
-      addRepaintBoundaries: false,
-      itemCount: body.length,
+    return DecoratedSliver(
+      decoration: KWidgetTheme.boxDecorationFooter,
+      sliver: SliverPadding(
+        padding: appVersionEnum.isDesk
+            ? const EdgeInsets.only(
+                bottom: KPadding.kPaddingSize32,
+                top: KPadding.kPaddingSize32,
+                right: KPadding.kPaddingSize32,
+                left: KPadding.kPaddingSize46,
+              )
+            : appVersionEnum.isTablet
+                ? const EdgeInsets.all(
+                    KPadding.kPaddingSize46,
+                  )
+                : const EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize32,
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+        sliver: SliverList.builder(
+          itemBuilder: (context, index) => body.elementAt(index),
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
+          itemCount: body.length,
+        ),
+      ),
     );
   }
 }

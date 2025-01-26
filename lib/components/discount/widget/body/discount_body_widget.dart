@@ -15,95 +15,64 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        const BlocListener<UrlCubit, UrlEnum?>(
-          listener: UrlCubitExtension.listener,
-        ),
-        BlocListener<NetworkCubit, NetworkStatus>(
-          listener: (context, state) {
-            if (state == NetworkStatus.network) {
-              context.read<DiscountWatcherBloc>().add(
-                    DiscountWatcherEvent.started(
-                      discountId,
-                    ),
-                  );
-            }
-          },
-        ),
-      ],
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isDesk =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-          final isTablet =
-              constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-
-          final padding = EdgeInsets.symmetric(
-            horizontal: (isDesk
-                ? KPadding.kPaddingSize90 +
-                    ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
-                        ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
-                            2
-                        : 0)
-                : KPadding.kPaddingSize16),
-          );
-          return CustomScrollView(
-            cacheExtent: KDimensions.listCacheExtent,
-            slivers: [
-              NetworkBanner(isDesk: isDesk, isTablet: isTablet),
-              if (Config.isWeb)
-                NavigationBarWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
-                ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox32.toSliver
-              else
-                KSizedBox.kHeightSizedBox8.toSliver,
-              SliverPadding(
-                padding: padding,
-                sliver: BlocSelector<DiscountWatcherBloc, DiscountWatcherState,
-                    bool>(
-                  selector: (state) => state.failure.linkIsWrong,
-                  // buildWhen: (previous, current) =>
-                  //     current.failure == DiscountFailure.linkWrong &&
-                  //     previous.failure != DiscountFailure.linkWrong,
-                  builder: (context, linkIsWrong) {
-                    if (linkIsWrong) {
-                      return DiscountWrongLinkWidget(
-                        isDesk: isDesk,
+    return DiscountBlocListener(
+      discountId: discountId,
+      child: CustomScrollView(
+        cacheExtent: KDimensions.listCacheExtent,
+        slivers: [
+          const NetworkBanner(),
+          if (Config.isWeb) const NavigationBarWidget(),
+          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+            buildWhen: (previous, current) =>
+                previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
+            builder: (context, state) => SliverCenter(
+              appVersionEnum: state.appVersionEnum,
+              sliver: SliverPadding(
+                padding: state.appVersionEnum.padding,
+                sliver: SliverConstrainedCrossAxis(
+                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+                  sliver: BlocSelector<DiscountWatcherBloc,
+                      DiscountWatcherState, bool>(
+                    selector: (state) => state.failure.linkIsWrong,
+                    builder: (context, linkIsWrong) {
+                      return SliverMainAxisGroup(
+                        slivers: [
+                          if (state.appVersionEnum.isDesk)
+                            KSizedBox.kHeightSizedBox32.toSliver
+                          else
+                            KSizedBox.kHeightSizedBox8.toSliver,
+                          if (linkIsWrong)
+                            DiscountWrongLinkWidget(
+                              isDesk: state.appVersionEnum.isDesk,
+                            )
+                          else ...[
+                            SliverToBoxAdapter(
+                              child: BackButtonWidget(
+                                backPageName: context.l10n.toDiscounts,
+                                pathName: KRoute.discounts.name,
+                                buttonKey: DiscountKeys.backButton,
+                                textKey: DiscountKeys.backText,
+                              ),
+                            ),
+                            if (state.appVersionEnum.isDesk)
+                              KSizedBox.kHeightSizedBox32.toSliver
+                            else
+                              KSizedBox.kHeightSizedBox8.toSliver,
+                            DiscountInformationWidget(
+                              isDesk: state.appVersionEnum.isDesk,
+                            ),
+                          ],
+                          KSizedBox.kHeightSizedBox40.toSliver,
+                        ],
                       );
-                    }
-                    return SliverMainAxisGroup(
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: BackButtonWidget(
-                            backPageName: context.l10n.toDiscounts,
-                            pathName: KRoute.discounts.name,
-                            buttonKey: DiscountKeys.backButton,
-                            textKey: DiscountKeys.backText,
-                          ),
-                        ),
-                        if (isDesk)
-                          KSizedBox.kHeightSizedBox32.toSliver
-                        else
-                          KSizedBox.kHeightSizedBox8.toSliver,
-                        DiscountInformationWidget(
-                          isDesk: isDesk,
-                        ),
-                      ],
-                    );
-                  },
+                    },
+                  ),
                 ),
               ),
-              KSizedBox.kHeightSizedBox40.toSliver,
-            ],
-            // semanticChildCount: null,
-          );
-        },
+            ),
+          ),
+        ],
+        // semanticChildCount: null,
       ),
     );
   }

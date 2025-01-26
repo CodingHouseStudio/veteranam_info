@@ -670,6 +670,7 @@ abstract class KTestVariables {
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
   static const scrollingDown100 = Offset(0, -100);
+  static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
   static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp150 = Offset(0, 150);
@@ -678,10 +679,11 @@ abstract class KTestConstants {
   static const scrollingUp1000 = Offset(0, 1000);
   static const scrollingUp1500 = Offset(0, 1500);
 
+  static const windowDefaultSize = Size(800, 800);
   static const windowDeskSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
-  static const windowSmallSize = Size(500, 500);
-  static const windowVerySmallSize = Size(460, 460);
+  // static const windowSmallSize = Size(500, 500);
+  // static const windowVerySmallSize = Size(460, 460);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;

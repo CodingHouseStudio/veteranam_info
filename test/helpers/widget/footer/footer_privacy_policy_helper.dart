@@ -18,6 +18,13 @@ Future<void> footerPrivacyPolicyHelper({
         offset: KTestConstants.scrollingDown,
       );
 
+      if (find.byKey(FooterKeys.privacyPolicy).evaluate().isEmpty) {
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown,
+        );
+      }
+
       expect(
         find.byKey(FooterKeys.privacyPolicy),
         findsOneWidget,

@@ -63,9 +63,9 @@ class ScaffoldWidget extends StatelessWidget {
             horizontal: (isDesk
                 ? KPadding.kPaddingSize90 +
                     ((constraints.maxWidth >
-                            KPlatformConstants.maxWidthThresholdTablet)
+                            KPlatformConstants.maxWidthThresholdDesk)
                         ? (constraints.maxWidth -
-                                KPlatformConstants.maxWidthThresholdTablet) /
+                                KPlatformConstants.maxWidthThresholdDesk) /
                             2
                         : 0)
                 : isTablet
@@ -99,11 +99,9 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: ScaffoldKeys.scroll,
                   //physics: KTest.scroll,
                   slivers: [
-                    NetworkBanner(isDesk: isDesk, isTablet: isTablet),
+                    const NetworkBanner(),
                     if (showAppBar)
                       NavigationBarWidget(
-                        isDesk: isDesk,
-                        isTablet: isTablet,
                         pageName: pageName,
                         showMobBackButton: showMobNawbarBackButton,
                         backButtonPathName: backButtonPathName,

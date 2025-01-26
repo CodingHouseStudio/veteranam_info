@@ -14,7 +14,6 @@ class HomeSectionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final main = [
-      KSizedBox.kHeightSizedBox24,
       BoxWidgetList(
         isDesk: isDesk,
         isTablet: isTablet,

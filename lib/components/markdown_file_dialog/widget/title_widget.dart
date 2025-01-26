@@ -8,6 +8,7 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
     required this.isTablet,
     super.key,
   });
+
   final String title;
   final bool isTablet;
 
@@ -35,11 +36,14 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
         spacing: KPadding.kPaddingSize8,
         children: [
           _cancelButton(context),
-          Text(
-            title,
-            style: isTablet
-                ? AppTextStyle.materialThemeHeadlineMediumBold
-                : AppTextStyle.materialThemeTitleLargeBold,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: isTablet
+                  ? AppTextStyle.materialThemeHeadlineMediumBold
+                  : AppTextStyle.materialThemeTitleLargeBold,
+            ),
           ),
         ],
       );

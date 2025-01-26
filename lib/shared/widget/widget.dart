@@ -81,6 +81,7 @@ export 'sending_text_widget.dart';
 export 'shared_icon_list_widget.dart';
 export 'sign_up_login_bottom_buttons_widget.dart';
 export 'skeletonizer_widget.dart';
+export 'sliver_center_widget.dart';
 export 'sliver_header_widget.dart';
 export 'statistic_box_widget.dart';
 export 'story_card_widget.dart';

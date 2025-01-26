@@ -722,6 +722,9 @@ abstract class KButtonStyles {
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
+    overlayColor: WidgetStatePropertyAll(
+      AppColors.materialThemeRefSecondarySecondary20,
+    ),
   );
 
   static const borderWhiteButtonStyle = ButtonStyle(

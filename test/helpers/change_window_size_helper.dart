@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 import '../test_dependency.dart';
 
@@ -12,15 +11,25 @@ import '../test_dependency.dart';
 Future<void> changeWindowSizeHelper({
   required WidgetTester tester,
   required Future<void> Function() test,
-  Size? size,
+  // Size? size,
   bool windowsTest = false,
   bool scrollUp = true,
 }) async {
-  await tester.binding.setSurfaceSize(size ?? KTestConstants.windowDeskSize);
+  tester.view.devicePixelRatio = 1.0;
+  tester.view.physicalSize = KTestConstants.windowDeskSize;
+
+  await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
+
+  appVersionController.add(AppVersionEnum.desk);
 
   await tester.pumpAndSettle();
 
   await test();
+
+  appVersionController.add(AppVersionEnum.mobile);
+
+  tester.view.devicePixelRatio = 1.0;
+  tester.view.physicalSize = KTestConstants.windowDefaultSize;
 
   await tester.binding.setSurfaceSize(null);
 
