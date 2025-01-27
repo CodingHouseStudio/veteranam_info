@@ -1,0 +1,47 @@
+name: Push Test Coverage
+
+concurrency:
+  group: CU-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: 
+      - main
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+jobs:
+
+  get_coverage_excludes:
+    needs:
+    runs-on: ubuntu-latest
+    outputs:
+      coverage_excludes: ${{ steps.read_excludes.outputs.coverage_excludes }}
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: Read coverage excludes from file
+        id: read_excludes
+        run: |
+          COVERAGE_EXCLUDES=$(cat coverage_excludes.txt | tr '\n' ' ')
+          echo "coverage_excludes=$COVERAGE_EXCLUDES" >> $GITHUB_ENV
+          echo "coverage_excludes=$COVERAGE_EXCLUDES" >> $GITHUB_OUTPUT
+
+  build:
+    needs:
+      - get_coverage_excludes
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/coverage_push.yml@main
+    secrets: inherit
+    with:
+      flutter_channel: stable
+      flutter_version: 3.27.1
+      min_coverage: 90
+      format_directories: "lib test"
+      coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}
+      pull_request: ${{ github.event.pull_request.title }}
+
