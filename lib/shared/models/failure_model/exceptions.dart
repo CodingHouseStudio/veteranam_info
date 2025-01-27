@@ -195,7 +195,7 @@ mixin _Exception {
     ErrorLevelEnum? errorLevelValue;
     final SomeFailure failure;
     switch (error.runtimeType) {
-      case firebase.FirebaseException:
+      case firebase.FirebaseException || firebase.FirebaseAuthException:
         return _Exception._getFromFirebasException(
           error: error as firebase.FirebaseException,
           stack: stack,
@@ -217,117 +217,113 @@ mixin _Exception {
           default:
             failure = SomeFailure.serverError;
         }
+      case PlatformException:
+        tagKeyValue = ErrorText.platformExceptionKey;
+        final platformError = error as PlatformException;
+        switch (platformError.code) {
+          case 'copy_fail':
+            failure = SomeFailure.copyNotSupport;
+            errorLevelValue = ErrorLevelEnum.info;
 
-      case Exception:
-        switch (error.runtimeType) {
-          case PlatformException:
-            tagKeyValue = ErrorText.platformExceptionKey;
-            final platformError = error as PlatformException;
-            switch (platformError.code) {
-              case 'copy_fail':
-                failure = SomeFailure.copyNotSupport;
-                errorLevelValue = ErrorLevelEnum.info;
+          case 'network_error':
+            failure = SomeFailure.network;
+            errorLevelValue = ErrorLevelEnum.info;
 
-              case 'network_error':
-                failure = SomeFailure.network;
-                errorLevelValue = ErrorLevelEnum.info;
+          case 'permission_denied':
+            failure = SomeFailure.permission;
+            errorLevelValue = ErrorLevelEnum.info;
 
-              case 'permission_denied':
-                failure = SomeFailure.permission;
-                errorLevelValue = ErrorLevelEnum.info;
-
-              case 'file_not_found':
-                failure = SomeFailure.dataNotFound;
-                errorLevelValue = ErrorLevelEnum.error;
-
-              case 'timeout':
-                failure = SomeFailure.timeout;
-                errorLevelValue = ErrorLevelEnum.warning;
-
-              case 'invalid_input':
-                failure = SomeFailure.invalidInput;
-                errorLevelValue = ErrorLevelEnum.error;
-
-              case 'unknown':
-              default:
-                failure = SomeFailure.serverError;
-                errorLevelValue = ErrorLevelEnum.fatal;
-            }
-          default:
-            final errorMessage = error.toString().toLowerCase();
-            tagKeyValue = ErrorText.exceptionKey;
-            switch (errorMessage) {
-              case final m
-                  when m.contains('navigator.share()') ||
-                      m.contains('navigator.canshare()'):
-                switch (errorMessage) {
-                  case final m
-                      when m.contains('failed: share() is already in progress'):
-                  case final m
-                      when m.contains("failed: failed to execute 'share' on "
-                          "'navigator': an earlier share"
-                          ' has not yet completed.'):
-                    failure = SomeFailure.shareInProgress;
-                    errorLevelValue = ErrorLevelEnum.info;
-                  case final m
-                      when m.contains('is unavailable') ||
-                          m.contains('is false'):
-                    failure = SomeFailure.shareUnavailable;
-                    errorLevelValue = ErrorLevelEnum.info;
-                  case final m when m.contains('failed: share()'):
-                  default:
-                    failure = SomeFailure.share;
-                }
-              case final m when m.contains('timeoutexception'):
-                failure = SomeFailure.timeout;
-                errorLevelValue = ErrorLevelEnum.warning;
-              case final m when m.contains('socketexception'):
-                failure = SomeFailure.network;
-                errorLevelValue = ErrorLevelEnum.warning;
-              case final m when m.contains('formatexception'):
-                failure = SomeFailure.format;
-                errorLevelValue = ErrorLevelEnum.warning;
-              case final m when m.contains('unimplementederror'):
-                failure = SomeFailure.unimplementedFeature;
-                errorLevelValue = ErrorLevelEnum.error;
-              case final m
-                  when m.contains('connection refused') ||
-                      m.contains('no internet') ||
-                      m.contains('network-request') ||
-                      m.contains('resource limit exceeded') ||
-                      m.contains('offline') ||
-                      m.contains('failed-precondition'):
-                failure = SomeFailure.network;
-                errorLevelValue = ErrorLevelEnum.info;
-              case final m when m.contains('permission-denied'):
-                failure = SomeFailure.permission;
-                errorLevelValue = ErrorLevelEnum.info;
-              case final m when m.contains('outofmemoryerror'):
-                failure = SomeFailure.assertion;
-                errorLevelValue = ErrorLevelEnum.fatal;
-              default:
-                failure = SomeFailure.serverError;
-            }
-        }
-      case Error:
-        tagKeyValue = ErrorText.failure;
-        switch (error.runtimeType) {
-          case AssertionError:
-            failure = SomeFailure.assertion;
-            errorLevelValue = ErrorLevelEnum.fatal;
-          case TypeError:
-            failure = SomeFailure.type;
+          case 'file_not_found':
+            failure = SomeFailure.dataNotFound;
             errorLevelValue = ErrorLevelEnum.error;
-          case NoSuchMethodError:
-            failure = SomeFailure.noSuchMethodError;
+
+          case 'timeout':
+            failure = SomeFailure.timeout;
+            errorLevelValue = ErrorLevelEnum.warning;
+
+          case 'invalid_input':
+            failure = SomeFailure.invalidInput;
             errorLevelValue = ErrorLevelEnum.error;
-          case UnsupportedError:
-            failure = SomeFailure.unsupported;
-            errorLevelValue = ErrorLevelEnum.error;
+
+          case 'unknown':
           default:
             failure = SomeFailure.serverError;
             errorLevelValue = ErrorLevelEnum.fatal;
         }
+      case Exception:
+        final errorMessage = error.toString().toLowerCase();
+        tagKeyValue = ErrorText.exceptionKey;
+        switch (errorMessage) {
+          case final m
+              when m.contains('navigator.share()') ||
+                  m.contains('navigator.canshare()'):
+            switch (errorMessage) {
+              case final m
+                  when m.contains('failed: share() is already in progress'):
+              case final m
+                  when m.contains("failed: failed to execute 'share' on "
+                      "'navigator': an earlier share"
+                      ' has not yet completed.'):
+                failure = SomeFailure.shareInProgress;
+                errorLevelValue = ErrorLevelEnum.info;
+              case final m
+                  when m.contains('is unavailable') || m.contains('is false'):
+                failure = SomeFailure.shareUnavailable;
+                errorLevelValue = ErrorLevelEnum.info;
+              case final m when m.contains('failed: share()'):
+              default:
+                failure = SomeFailure.share;
+            }
+          case final m when m.contains('timeoutexception'):
+            failure = SomeFailure.timeout;
+            errorLevelValue = ErrorLevelEnum.warning;
+          case final m when m.contains('socketexception'):
+            failure = SomeFailure.network;
+            errorLevelValue = ErrorLevelEnum.warning;
+          case final m when m.contains('formatexception'):
+            failure = SomeFailure.format;
+            errorLevelValue = ErrorLevelEnum.warning;
+          case final m when m.contains('unimplementederror'):
+            failure = SomeFailure.unimplementedFeature;
+            errorLevelValue = ErrorLevelEnum.error;
+          case final m
+              when m.contains('connection refused') ||
+                  m.contains('no internet') ||
+                  m.contains('network-request') ||
+                  m.contains('resource limit exceeded') ||
+                  m.contains('offline') ||
+                  m.contains('failed-precondition'):
+            failure = SomeFailure.network;
+            errorLevelValue = ErrorLevelEnum.info;
+          case final m when m.contains('permission-denied'):
+            failure = SomeFailure.permission;
+            errorLevelValue = ErrorLevelEnum.info;
+          case final m when m.contains('outofmemoryerror'):
+            failure = SomeFailure.assertion;
+            errorLevelValue = ErrorLevelEnum.fatal;
+          default:
+            failure = SomeFailure.serverError;
+        }
+      case AssertionError:
+        tagKeyValue = ErrorText.failure;
+        failure = SomeFailure.assertion;
+        errorLevelValue = ErrorLevelEnum.fatal;
+      case TypeError:
+        tagKeyValue = ErrorText.failure;
+        failure = SomeFailure.type;
+        errorLevelValue = ErrorLevelEnum.error;
+      case NoSuchMethodError:
+        tagKeyValue = ErrorText.failure;
+        failure = SomeFailure.noSuchMethodError;
+        errorLevelValue = ErrorLevelEnum.error;
+      case UnsupportedError:
+        tagKeyValue = ErrorText.failure;
+        failure = SomeFailure.unsupported;
+        errorLevelValue = ErrorLevelEnum.error;
+      case Error:
+        tagKeyValue = ErrorText.failure;
+        failure = SomeFailure.serverError;
+        errorLevelValue = ErrorLevelEnum.fatal;
       default:
         tagKeyValue = ErrorText.unknownKey;
         failure = SomeFailure.serverError;
