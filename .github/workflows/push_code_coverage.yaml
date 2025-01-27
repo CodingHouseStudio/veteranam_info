@@ -10,6 +10,10 @@ on:
     branches: 
       - main
 
+concurrency:
+  group: push-code-coverage
+  cancel-in-progress: true
+
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
