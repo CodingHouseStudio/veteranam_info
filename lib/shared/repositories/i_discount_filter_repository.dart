@@ -29,9 +29,7 @@ abstract class IDiscountFilterRepository {
   Map<String, FilterItem> get activeLocationMap;
 
   /// Toggles an existing category filter.
-  ///
   /// Updates the Activity categories filter
-  ///
   /// and available filter lists accordingly.
   Either<SomeFailure, bool> addRemoveCategory({
     required String valueUK,
