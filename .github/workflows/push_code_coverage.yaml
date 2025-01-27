@@ -34,8 +34,6 @@ jobs:
           echo "coverage_excludes=$COVERAGE_EXCLUDES" >> $GITHUB_OUTPUT
 
   build:
-    group: tests-${{ github.ref }}
-    cancel-in-progress: false
     needs:
       - get_coverage_excludes
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/coverage_push.yml@main
