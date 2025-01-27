@@ -20,7 +20,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<AppLayoutCubit>(),
+          create: (context) => GetIt.I.get<AppLayoutBloc>(),
         ),
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountsWatcherBloc>(),

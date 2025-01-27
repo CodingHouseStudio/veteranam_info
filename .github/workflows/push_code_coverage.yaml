@@ -11,6 +11,7 @@ on:
 
 concurrency:
   group: push-code-coverage
+  group: CU-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -19,6 +20,9 @@ env:
 jobs:
 
   get_coverage_excludes:
+    concurrency:
+    group: CU-${{ github.ref }}
+    cancel-in-progress: false
     runs-on: ubuntu-latest
     outputs:
       coverage_excludes: ${{ steps.read_excludes.outputs.coverage_excludes }}

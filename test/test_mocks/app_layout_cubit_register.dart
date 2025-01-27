@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/bloc/app_layout/app_layout_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../test_dependency.dart';
@@ -13,7 +14,7 @@ void appLayoutCubitInit() {
       MockIAppLayoutRepository();
   appVersionController = StreamController<AppVersionEnum>.broadcast()
     ..add(AppVersionEnum.mobile);
-  when(mockAppLayoutRepository.sizeStream).thenAnswer(
+  when(mockAppLayoutRepository.appVersionStream).thenAnswer(
     (realInvocation) => appVersionController.stream,
   );
   when(mockAppLayoutRepository.getCurrentAppVersion).thenAnswer(
@@ -24,10 +25,10 @@ void appLayoutCubitInit() {
   }
   GetIt.I.registerSingleton<IAppLayoutRepository>(mockAppLayoutRepository);
 
-  if (GetIt.I.isRegistered<AppLayoutCubit>()) {
-    GetIt.I.unregister<AppLayoutCubit>();
+  if (GetIt.I.isRegistered<AppLayoutBloc>()) {
+    GetIt.I.unregister<AppLayoutBloc>();
   }
-  GetIt.I.registerFactory<AppLayoutCubit>(
-    () => AppLayoutCubit(appLayoutRepository: mockAppLayoutRepository),
+  GetIt.I.registerFactory<AppLayoutBloc>(
+    () => AppLayoutBloc(appLayoutRepository: mockAppLayoutRepository),
   );
 }

@@ -15,7 +15,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         slivers: [
           const NetworkBanner(),
           if (Config.isWeb) const NavigationBarWidget(),
-          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+          BlocBuilder<AppLayoutBloc, AppLayoutState>(
             buildWhen: (previous, current) =>
                 previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
             builder: (context, state) {

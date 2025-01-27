@@ -57,7 +57,7 @@ class _DialogsWidget {
     void Function()? onCancelPressed,
     void Function()? onClosePressed,
   }) {
-    final layoutBloc = context.read<AppLayoutCubit>();
+    final layoutBloc = context.read<AppLayoutBloc>();
     if (isDesk) {
       showDialog<bool>(
         context: context,
@@ -159,7 +159,7 @@ class _DialogsWidget {
     required double? maxWidth,
     required EdgeInsets Function({required bool isDeskValue})? contentPadding,
   }) =>
-      BlocBuilder<AppLayoutCubit, AppLayoutState>(
+      BlocBuilder<AppLayoutBloc, AppLayoutState>(
         buildWhen: (previous, current) =>
             current.appVersionEnum.isDesk != previous.appVersionEnum.isDesk,
         builder: (context, state) {
@@ -197,7 +197,7 @@ class _DialogsWidget {
     required double? maxWidth,
     required bool isScollable,
   }) =>
-      BlocBuilder<AppLayoutCubit, AppLayoutState>(
+      BlocBuilder<AppLayoutBloc, AppLayoutState>(
         buildWhen: (previous, current) =>
             current.appVersionEnum.isDesk != previous.appVersionEnum.isDesk,
         builder: (context, state) {
@@ -495,7 +495,7 @@ class _DialogsWidget {
     int emailCloseDelay,
   ) {
     final bloc = context.read<UserEmailFormBloc>();
-    final layoutBloc = context.read<AppLayoutCubit>();
+    final layoutBloc = context.read<AppLayoutBloc>();
     showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -508,7 +508,7 @@ class _DialogsWidget {
               value: layoutBloc,
             ),
           ],
-          child: BlocBuilder<AppLayoutCubit, AppLayoutState>(
+          child: BlocBuilder<AppLayoutBloc, AppLayoutState>(
             builder: (context, state) {
               return AlertDialog(
                 key: DiscountCardDialogKeys.dialog,

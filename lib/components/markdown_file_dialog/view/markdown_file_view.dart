@@ -16,7 +16,7 @@ class MarkdownFileDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppLayoutCubit, AppLayoutState>(
+    return BlocBuilder<AppLayoutBloc, AppLayoutState>(
       builder: (context, state) {
         return AlertDialog(
           key: PrivacyPolicyDialogKeys.dialog,

@@ -1,6 +1,5 @@
 export 'app_authentication_repository.dart';
 export 'app_info_repository.dart';
-export 'app_layout_repository.dart';
 export 'app_nerwork_repository.dart';
 export 'auth_provider_module.dart';
 export 'authentication_repository.dart';

@@ -17,7 +17,7 @@ class HomeBodyWidget extends StatelessWidget {
         slivers: [
           const NetworkBanner(),
           const NavigationBarWidget(),
-          BlocBuilder<AppLayoutCubit, AppLayoutState>(
+          BlocBuilder<AppLayoutBloc, AppLayoutState>(
             builder: (context, state) => SliverCenter(
               appVersionEnum: state.appVersionEnum,
               sliver: SliverPadding(
