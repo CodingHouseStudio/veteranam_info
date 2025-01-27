@@ -85,6 +85,8 @@ extension SomeFailureValue on SomeFailure {
         return context.l10n.discountFilterFailureMessage;
       case SomeFailure.unsupported:
         return context.l10n.unsupportedError;
+      case SomeFailure.copyNotSupport:
+        return context.l10n.copyNotSupportError;
     }
   }
 }

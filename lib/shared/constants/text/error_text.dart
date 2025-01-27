@@ -28,6 +28,7 @@ abstract class ErrorText {
   static const invalidInput = 'Invalid Input';
   static const serviceWorkerRegistration = 'Service Worker Registration';
   static const unsupportedError = 'Unsupported Error';
+  static const copyNotSupport = 'Copy not support for user';
   static const providerAlreadyLinked = 'Provider Already Linked';
   static const format = 'Format Error';
   static const unimplementedFeature = 'Unimplemented Feature';
@@ -66,6 +67,7 @@ abstract class ErrorText {
   static const firebaseAuthFailure = 'Firebase Authentication Failure';
   static const exceptionsFolderKey = 'Standart $failure';
   static const exceptionKey = 'Exception';
+  static const platformExceptionKey = 'Platform Exception';
   static const sendFailure = 'Send $failure';
   static const getFailure = 'Get $failure';
   static const signUpWithEmailAndPasswordFailure =

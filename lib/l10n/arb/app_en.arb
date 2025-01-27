@@ -1851,5 +1851,9 @@
   "unsupportedError": "An error occurred while performing your action. Please try again or contact support if the issue persists.",
   "@unsupportedError": {
     "examples": "Error message displayed when a problem occurs during a specific operation, such as modifying a constant list."
+  },
+  "copyNotSupportError": "It seems copying is not supported on your device, or an error occurred.",
+  "@copyNotSupportError": {
+    "examples": "Error message when an issue occurs during copying."
   }
 }

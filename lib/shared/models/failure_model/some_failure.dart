@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
+import 'package:flutter/services.dart';
 // import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -47,6 +48,7 @@ enum SomeFailure with _Exception {
   providerAlreadyLinked,
   serviceWorkerRegistration,
   unsupported,
+  copyNotSupport,
   // notFound,
   setExistData;
 
@@ -60,18 +62,6 @@ enum SomeFailure with _Exception {
     String? tagKey,
     ErrorLevelEnum? errorLevel,
   }) {
-    if (error is firebase.FirebaseException) {
-      return _Exception.getFromFirebasException(
-        error: error,
-        stack: stack,
-        data: data,
-        tag: tag,
-        tagKey: tagKey,
-        user: user,
-        userSetting: userSetting,
-        errorLevel: errorLevel,
-      );
-    }
     return _Exception.getException(
       error: error,
       stack: stack,
@@ -170,6 +160,8 @@ enum SomeFailure with _Exception {
         return ErrorText.serviceWorkerRegistration;
       case SomeFailure.unsupported:
         return ErrorText.unsupportedError;
+      case SomeFailure.copyNotSupport:
+        return ErrorText.copyNotSupport;
     }
   }
 
