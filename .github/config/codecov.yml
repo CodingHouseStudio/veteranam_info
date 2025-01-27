@@ -1,7 +1,8 @@
 # Ignore test files themselves in the Codecov report
 # see: https://about.codecov.io/blog/should-i-include-test-files-in-code-coverage-calculations/
-ignore:
-  - "**/*.dart"
+coverage:
+  ignore:
+    - "lib/app.dart"
   # - "lib/firebase_options_development.dart"
   # - "lib/l10n/l10n.dart"
   # - "lib/bootstrap.dart"
