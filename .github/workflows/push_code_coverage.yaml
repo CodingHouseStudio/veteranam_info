@@ -10,7 +10,7 @@ on:
       - main
 
 concurrency:
-  group: CU-${{ github.ref }}
+  group: push-code-coverage
   cancel-in-progress: true
 
 env:
