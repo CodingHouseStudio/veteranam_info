@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:async' show FutureOr;
 import 'dart:developer' show log;
 
