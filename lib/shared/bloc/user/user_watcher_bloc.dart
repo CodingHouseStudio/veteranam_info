@@ -9,7 +9,7 @@ import 'package:veteranam/shared/shared_dart.dart';
 part 'user_watcher_event.dart';
 part 'user_watcher_state.dart';
 
-@injectable
+@singleton
 class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
   UserWatcherBloc({required UserRepository userRepository})
       : _userRepository = userRepository,

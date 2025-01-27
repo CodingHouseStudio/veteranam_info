@@ -7,6 +7,7 @@ import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bl
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
 import 'package:veteranam/l10n/l10n.dart';
+import 'package:veteranam/shared/bloc/app_layout/app_layout_bloc.dart';
 import 'package:veteranam/shared/bloc/bloc.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/models/user_setting_model.dart';
@@ -27,7 +28,7 @@ extension PumpApp on WidgetTester {
       MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => GetIt.I.get<AppLayoutCubit>(),
+            create: (context) => GetIt.I.get<AppLayoutBloc>(),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<DiscountsWatcherBloc>(),

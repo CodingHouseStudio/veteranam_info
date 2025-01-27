@@ -9,7 +9,7 @@ part 'company_watcher_event.dart';
 part 'company_watcher_state.dart';
 part 'company_watcher_bloc.freezed.dart';
 
-@Injectable(
+@Singleton(
   env: [Config.business],
 )
 class CompanyWatcherBloc

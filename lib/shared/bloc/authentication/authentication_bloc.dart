@@ -9,7 +9,7 @@ import 'package:veteranam/shared/shared_dart.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-@Singleton()
+@singleton
 class AuthenticationBloc
     extends Bloc<_AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({

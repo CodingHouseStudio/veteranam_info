@@ -15,7 +15,7 @@ if [ $TEST_EXIT_CODE -ne 0 ]; then
 fi
 
 # Generate the initial HTML coverage report
-genhtml coverage/lcov.info -o coverage/html
+# genhtml coverage/lcov.info -o coverage/html
 
 # Define the exclusion file
 # EXCLUDE_FILE='coverage_excludes.txt'

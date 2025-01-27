@@ -8,9 +8,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 part 'app_layout_event.dart';
 part 'app_layout_state.dart';
 
-@injectable
-class AppLayoutCubit extends Bloc<_AppLayoutEvent, AppLayoutState> {
-  AppLayoutCubit({
+@singleton
+class AppLayoutBloc extends Bloc<_AppLayoutEvent, AppLayoutState> {
+  AppLayoutBloc({
     required IAppLayoutRepository appLayoutRepository,
   })  : _appLayoutRepository = appLayoutRepository,
         super(
@@ -26,7 +26,7 @@ class AppLayoutCubit extends Bloc<_AppLayoutEvent, AppLayoutState> {
   StreamSubscription<AppVersionEnum>? _subscription;
 
   void _init() {
-    _subscription = _appLayoutRepository.sizeStream.listen(
+    _subscription = _appLayoutRepository.appVersionStream.listen(
       (appVersionEnum) => add(_AppVersionChanged(appVersionEnum)),
       onError: (Object error, StackTrace stack) =>
           add(_AppVersionFailureEvent(stack: stack, error: error)),

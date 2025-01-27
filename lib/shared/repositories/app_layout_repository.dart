@@ -18,7 +18,7 @@ class AppLayoutRepository
   final StreamController<AppVersionEnum> _appVersionController;
 
   @override
-  Stream<AppVersionEnum> get sizeStream => _appVersionController.stream;
+  Stream<AppVersionEnum> get appVersionStream => _appVersionController.stream;
 
   @override
   void didChangeMetrics() {
