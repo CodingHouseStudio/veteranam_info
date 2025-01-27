@@ -37,6 +37,7 @@
     "formating",
     "Skeletonizer",
     "gifs",
-    "accessiblity"
+    "accessiblity",
+    "codecov"
   ]
 }
