@@ -16,7 +16,6 @@ env:
 jobs:
 
   get_coverage_excludes:
-    needs:
     runs-on: ubuntu-latest
     outputs:
       coverage_excludes: ${{ steps.read_excludes.outputs.coverage_excludes }}
