@@ -40,8 +40,6 @@ jobs:
       - get_coverage_excludes
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
     secrets: inherit
-    group: tests-${{ github.ref }}
-    cancel-in-progress: false
     with:
       flutter_channel: stable
       flutter_version: 3.27.1
