@@ -3,6 +3,9 @@ name: Push Code Coverage
 on:
   workflow_dispatch:
   push:
+    paths:
+      - "lib/**"
+      - "test/**"
     branches: 
       - main
 
