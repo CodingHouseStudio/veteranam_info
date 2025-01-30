@@ -87,6 +87,11 @@ class MyDiscountsWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
+    if (CompanyRepository.companySharedPreferencesId ==
+        _companyRepository.currentUserCompany.id) {
+      return;
+    }
+
     if (_companyRepository.currentUserCompany.id.isNotEmpty) {
       await _discountItemsSubscription?.cancel();
       _discountItemsSubscription = _discountRepository

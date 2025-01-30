@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -9,7 +10,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 class UserRepository {
   UserRepository({
     required IAppAuthenticationRepository appAuthenticationRepository,
-  }) : _appAuthenticationRepository = appAuthenticationRepository {
+    required ISharedPrefencesRepository sharedPrefencesRepository,
+  })  : _appAuthenticationRepository = appAuthenticationRepository,
+        _sharedPrefencesRepository = sharedPrefencesRepository {
     _userSettingController = StreamController<UserSetting>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
@@ -20,12 +23,18 @@ class UserRepository {
     );
   }
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  final ISharedPrefencesRepository _sharedPrefencesRepository;
+
+  @visibleForTesting
+  static const userLanguageKey = '__user_language_key__';
+
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onUserStreamListen() {
+    getUserLanguageFromCash();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
@@ -40,13 +49,13 @@ class UserRepository {
         var userSettingIsNew = _userSettingSubscription == null;
         _userSettingSubscription ??=
             _appAuthenticationRepository.userSetting.listen(
-          (currentUserSetting) {
+          (currentUserSettingValue) {
             if (userSettingIsNew) {
               _createFcmUserSettingAndRemoveDeleteParameter();
               userSettingIsNew = false;
             }
             _userSettingController.add(
-              currentUserSetting,
+              currentUserSettingValue,
             );
           },
         );
@@ -55,6 +64,18 @@ class UserRepository {
         _userSettingSubscription = null;
       }
     });
+  }
+
+  Future<void> getUserLanguageFromCash() async {
+    await _sharedPrefencesRepository.initWait();
+    final languageCode = _sharedPrefencesRepository.getString(userLanguageKey);
+    if (languageCode != null && !currentUserSetting.locale.isEnglish) {
+      final language = Language.getFromLanguageCode(languageCode);
+      if (language != Language.ukrain) {
+        _userSettingController
+            .add(currentUserSetting.copyWith(locale: language));
+      }
+    }
   }
 
   void _onUserStreamCancel() {
@@ -89,6 +110,14 @@ class UserRepository {
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,
   }) async {
+    if (userSetting.locale != currentUserSetting.locale) {
+      unawaited(
+        _sharedPrefencesRepository.setString(
+          key: userLanguageKey,
+          value: userSetting.locale.value.languageCode,
+        ),
+      );
+    }
     final result =
         await _appAuthenticationRepository.updateUserSetting(userSetting);
     return result.fold(

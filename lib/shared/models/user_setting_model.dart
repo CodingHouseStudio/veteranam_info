@@ -76,6 +76,17 @@ enum Language {
   // final AssetGenImage
   //     image; // Optional: this properties used for ListTile details
   final String text; // Optional: this properties used for ListTile details
+
+  static Language getFromLanguageCode(String code) {
+    switch (code) {
+      case 'en':
+        return Language.english;
+      case 'uk':
+        return Language.ukrain;
+      default:
+        return Language.ukrain;
+    }
+  }
 }
 
 // extension LanguageExtension on Language {
