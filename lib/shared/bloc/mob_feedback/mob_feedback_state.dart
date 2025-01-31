@@ -23,6 +23,7 @@ part of 'mob_feedback_bloc.dart';
 class MobFeedbackState with _$MobFeedbackState {
   const factory MobFeedbackState({
     required MessageFieldModel message,
+    required EmailFieldModel email,
     required SomeFailure? failure,
     required MobFeedbackEnum formState,
   }) = _Initial;
