@@ -5,7 +5,8 @@ import '../../../test_dependency.dart';
 
 Future<void> mobFeedbackEnterTextHelper({
   required WidgetTester tester,
-  required String text,
+  required String message,
+  required String email,
 }) async {
   expect(
     find.byKey(MobFeedbackKeys.title),
@@ -26,8 +27,24 @@ Future<void> mobFeedbackEnterTextHelper({
 
   await tester.enterText(
     find.byKey(MobFeedbackKeys.messageField),
-    text,
+    message,
   );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(MobFeedbackKeys.emailField),
+    findsOneWidget,
+  );
+
+  await tester.enterText(
+    find.byKey(MobFeedbackKeys.emailField),
+    email,
+  );
+
+  await tester.pumpAndSettle();
+
+  await scrollingHelper(tester: tester, itemKey: MobFeedbackKeys.emailField);
 
   expect(
     find.byKey(MobFeedbackKeys.button),

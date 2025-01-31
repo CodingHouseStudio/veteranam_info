@@ -29,7 +29,7 @@ void main() {
       FeedbackModelJsonField.id: KTestVariables.feedbackModel.id,
       FeedbackModelJsonField.guestId: KTestVariables.feedbackModel.guestId,
       FeedbackModelJsonField.guestName: null,
-      FeedbackModelJsonField.email: null,
+      FeedbackModelJsonField.email: KTestVariables.feedbackModel.email,
       FeedbackModelJsonField.timestamp:
           KTestVariables.feedbackModel.timestamp.toIso8601String(),
       FeedbackModelJsonField.message: KTestVariables.feedbackModel.message,
@@ -63,7 +63,7 @@ void main() {
         final feedbackModel = FeedbackModel.fromJson(nullableJson);
 
         expect(feedbackModel.id, KTestVariables.feedbackModel.id);
-        expect(feedbackModel.email, null);
+        expect(feedbackModel.email, KTestVariables.feedbackModel.email);
         expect(feedbackModel.guestId, KTestVariables.feedbackModel.guestId);
         expect(feedbackModel.guestName, null);
         expect(feedbackModel.message, KTestVariables.feedbackModel.message);
@@ -114,8 +114,12 @@ void main() {
         expect(feedbackModelJson, fullJson);
       });
       test('${KGroupText.nullable} ', () {
-        final feedbackModelJson =
-            KTestVariables.feedbackImageModel.copyWith(image: null).toJson();
+        final feedbackModelJson = KTestVariables.feedbackImageModel
+            .copyWith(
+              image: null,
+              guestName: null,
+            )
+            .toJson();
 
         expect(feedbackModelJson, nullableJson);
       });

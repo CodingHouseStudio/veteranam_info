@@ -69,8 +69,10 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
       final feedbackModel = FeedbackModel(
         id: ExtendedDateTime.id,
         guestId: _appAuthenticationRepository.currentUser.id,
-        guestName: null,
-        email: state.email.value,
+        guestName: _appAuthenticationRepository.currentUser.name,
+        email: state.email.isNotValid
+            ? _appAuthenticationRepository.currentUser.email ?? ''
+            : state.email.value,
         timestamp: ExtendedDateTime.current,
         message: state.message.value,
       );
