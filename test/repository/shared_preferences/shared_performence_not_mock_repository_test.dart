@@ -15,6 +15,8 @@ void main() {
       setUp(() {
         TestWidgetsFlutterBinding.ensureInitialized();
 
+        SharedPrefencesRepository.sharedPreferences = null;
+
         sharedPrefencesRepository = SharedPrefencesRepository();
       });
       test('Init Wait', () async {
