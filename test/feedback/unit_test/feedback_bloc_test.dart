@@ -33,7 +33,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => KTestVariables.user,
+        (realInvocation) => KTestVariables.userAnonymous,
       );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestVariables.userSetting,
@@ -299,6 +299,48 @@ void main() {
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           message: MessageFieldModel.dirty(),
+          failure: null,
+        ),
+      ],
+    );
+    blocTest<FeedbackBloc, FeedbackState>(
+      'emits [FeedbackState] when valid data is submitted '
+      'with incorrect name',
+      build: () => feedbackBloc,
+      act: (bloc) => bloc
+        ..add(const FeedbackEvent.nameUpdated(KTestVariables.fieldEmpty))
+        ..add(
+          const FeedbackEvent.emailUpdated(KTestVariables.userEmail),
+        )
+        ..add(const FeedbackEvent.messageUpdated(KTestVariables.field))
+        ..add(const FeedbackEvent.save()),
+      expect: () => [
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
+          name: NameFieldModel.dirty(),
+          email: EmailFieldModel.pure(),
+          message: MessageFieldModel.pure(),
+          failure: null,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
+          name: NameFieldModel.dirty(),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          message: MessageFieldModel.pure(),
+          failure: null,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
+          name: NameFieldModel.dirty(),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          message: MessageFieldModel.dirty(KTestVariables.field),
+          failure: null,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.invalidData,
+          name: NameFieldModel.dirty(),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          message: MessageFieldModel.dirty(KTestVariables.field),
           failure: null,
         ),
       ],

@@ -41,37 +41,40 @@ class _DeskField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          spacing: KPadding.kPaddingSize24,
-          children: [
-            Expanded(
-              child: TextFieldWidget(
-                widgetKey: FeedbackKeys.nameField,
-                errorText: state.name.error.value(context),
-                isRequired: true,
-                showErrorText: state.formState == FeedbackEnum.invalidData,
-                onChanged: (value) => context.read<FeedbackBloc>().add(
-                      FeedbackEvent.nameUpdated(value),
-                    ),
-                labelText: context.l10n.name,
-                isDesk: true,
+        if (context.read<UserWatcherBloc>().state.user.name?.isEmpty ?? true)
+          Row(
+            spacing: KPadding.kPaddingSize24,
+            children: [
+              Expanded(
+                child: TextFieldWidget(
+                  widgetKey: FeedbackKeys.nameField,
+                  errorText: state.name.error.value(context),
+                  isRequired: true,
+                  showErrorText: state.formState == FeedbackEnum.invalidData,
+                  onChanged: (value) => context.read<FeedbackBloc>().add(
+                        FeedbackEvent.nameUpdated(value),
+                      ),
+                  labelText: context.l10n.name,
+                  isDesk: true,
+                ),
               ),
-            ),
-            Expanded(
-              child: TextFieldWidget(
-                widgetKey: FeedbackKeys.emailField,
-                showErrorText: state.formState == FeedbackEnum.invalidData,
-                isRequired: true,
-                errorText: state.email.error.value(context),
-                onChanged: (value) => context.read<FeedbackBloc>().add(
-                      FeedbackEvent.emailUpdated(value),
-                    ),
-                labelText: context.l10n.email,
-                isDesk: true,
-              ),
-            ),
-          ],
-        ),
+              if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
+                  true)
+                Expanded(
+                  child: TextFieldWidget(
+                    widgetKey: FeedbackKeys.emailField,
+                    showErrorText: state.formState == FeedbackEnum.invalidData,
+                    isRequired: true,
+                    errorText: state.email.error.value(context),
+                    onChanged: (value) => context.read<FeedbackBloc>().add(
+                          FeedbackEvent.emailUpdated(value),
+                        ),
+                    labelText: context.l10n.email,
+                    isDesk: true,
+                  ),
+                ),
+            ],
+          ),
         _MessagePart(
           isDesk: true,
           state: state,
@@ -89,29 +92,33 @@ class _MobField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFieldWidget(
-          widgetKey: FeedbackKeys.nameField,
-          showErrorText: state.formState == FeedbackEnum.invalidData,
-          errorText: state.name.error.value(context),
-          isRequired: true,
-          onChanged: (value) => context.read<FeedbackBloc>().add(
-                FeedbackEvent.nameUpdated(value),
-              ),
-          labelText: context.l10n.name,
-          isDesk: false,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        TextFieldWidget(
-          widgetKey: FeedbackKeys.emailField,
-          showErrorText: state.formState == FeedbackEnum.invalidData,
-          errorText: state.email.error.value(context),
-          isRequired: true,
-          onChanged: (value) => context.read<FeedbackBloc>().add(
-                FeedbackEvent.emailUpdated(value),
-              ),
-          labelText: context.l10n.email,
-          isDesk: false,
-        ),
+        if (context.read<UserWatcherBloc>().state.user.name?.isEmpty ?? true)
+          TextFieldWidget(
+            widgetKey: FeedbackKeys.nameField,
+            showErrorText: state.formState == FeedbackEnum.invalidData,
+            errorText: state.name.error.value(context),
+            isRequired: true,
+            onChanged: (value) => context.read<FeedbackBloc>().add(
+                  FeedbackEvent.nameUpdated(value),
+                ),
+            labelText: context.l10n.name,
+            isDesk: false,
+          ),
+        if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
+            true) ...[
+          KSizedBox.kHeightSizedBox16,
+          TextFieldWidget(
+            widgetKey: FeedbackKeys.emailField,
+            showErrorText: state.formState == FeedbackEnum.invalidData,
+            errorText: state.email.error.value(context),
+            isRequired: true,
+            onChanged: (value) => context.read<FeedbackBloc>().add(
+                  FeedbackEvent.emailUpdated(value),
+                ),
+            labelText: context.l10n.email,
+            isDesk: false,
+          ),
+        ],
         _MessagePart(
           isDesk: false,
           state: state,
