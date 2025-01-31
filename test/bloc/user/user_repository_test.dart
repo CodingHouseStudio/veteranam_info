@@ -18,8 +18,10 @@ void main() {
   group('${KScreenBlocName.user} ${KGroupText.repository} ', () {
     late UserRepository userRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late ISharedPrefencesRepository mockSharedPrefencesRepository;
     setUp(() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockSharedPrefencesRepository = MockISharedPrefencesRepository();
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -129,6 +131,7 @@ void main() {
 
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
+          sharedPrefencesRepository: mockSharedPrefencesRepository,
         );
       });
 
@@ -232,6 +235,7 @@ void main() {
         );
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
+          sharedPrefencesRepository: mockSharedPrefencesRepository,
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(

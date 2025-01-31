@@ -23,10 +23,12 @@ void main() {
     late UserRepository userRepository;
     late IAppAuthenticationRepository mockAppuserRepository;
     late StreamController<User> userStreamController;
+    late ISharedPrefencesRepository mockSharedPrefencesRepository;
 
     setUp(() {
       userStreamController = StreamController<User>()..add(User.empty);
       mockAppuserRepository = MockIAppAuthenticationRepository();
+      mockSharedPrefencesRepository = MockISharedPrefencesRepository();
 
       when(mockAppuserRepository.user).thenAnswer(
         (_) => userStreamController.stream,
@@ -48,6 +50,7 @@ void main() {
 
       userRepository = UserRepository(
         appAuthenticationRepository: mockAppuserRepository,
+        sharedPrefencesRepository: mockSharedPrefencesRepository,
       );
     });
 

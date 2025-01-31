@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -9,12 +12,26 @@ class SharedPrefencesRepository implements ISharedPrefencesRepository {
   }
   SharedPreferences? _sharedPreferences;
 
+  @visibleForTesting
+  static SharedPreferences? sharedPreferences;
+
   Future<void> _init() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      _sharedPreferences =
+          sharedPreferences ?? await SharedPreferences.getInstance();
+    } catch (e, stack) {
+      SomeFailure.value(
+        error: e,
+        stack: stack,
+        tagKey: 'Shared Prefences ${ErrorText.repositoryKey}',
+        tag: '_init',
+      );
+      _sharedPreferences = null;
+    }
   }
 
   @override
-  Future<void> initWait() async {
+  Future<bool> initWait() async {
     var count = 0;
     while (_sharedPreferences == null && count < 100) {
       await Future.delayed(
@@ -22,56 +39,44 @@ class SharedPrefencesRepository implements ISharedPrefencesRepository {
         () => count++,
       );
     }
+    unawaited(_init());
+    return _sharedPreferences != null;
   }
 
   @override
   String? getString(String key) {
-    try {
-      return _sharedPreferences?.getString(key);
-    } catch (e, stack) {
-      SomeFailure.value(
-        error: e,
-        stack: stack,
-        tag: 'getString',
-        tagKey: 'SharedPrefencesRepository',
-        data: 'Key: $key',
-      );
-      return null;
-    }
+    return valueErrorHelper(
+      () => _sharedPreferences?.getString(key),
+      failureValue: null,
+      methodName: 'getString',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
   }
 
   @override
   Future<bool> setString({required String key, required String value}) async {
-    try {
-      await initWait();
-      final value2 = await _sharedPreferences?.setString(key, value) ?? false;
-      return value2;
-    } catch (e, stack) {
-      SomeFailure.value(
-        error: e,
-        stack: stack,
-        tag: 'setString',
-        tagKey: 'SharedPrefencesRepository',
-        data: 'Key: $key, Value: $value',
-      );
-      return false;
-    }
+    return valueFutureErrorHelper(
+      () async {
+        await initWait();
+        return _sharedPreferences?.setString(key, value) ?? false;
+      },
+      failureValue: false,
+      methodName: 'setString',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
   }
 
   @override
   List<String>? getStringList(String key) {
-    try {
-      return _sharedPreferences?.getStringList(key);
-    } catch (e, stack) {
-      SomeFailure.value(
-        error: e,
-        stack: stack,
-        tag: 'getStringList',
-        tagKey: 'SharedPrefencesRepository',
-        data: 'Key: $key',
-      );
-      return null;
-    }
+    return valueErrorHelper(
+      () => _sharedPreferences?.getStringList(key),
+      failureValue: null,
+      methodName: 'getStringList',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
   }
 
   @override
@@ -79,20 +84,15 @@ class SharedPrefencesRepository implements ISharedPrefencesRepository {
     required String key,
     required List<String> value,
   }) async {
-    try {
-      await initWait();
-      final value2 =
-          await _sharedPreferences?.setStringList(key, value) ?? false;
-      return value2;
-    } catch (e, stack) {
-      SomeFailure.value(
-        error: e,
-        stack: stack,
-        tag: 'setStringList',
-        tagKey: 'SharedPrefencesRepository',
-        data: 'Key: $key, Value: $value',
-      );
-      return false;
-    }
+    return valueFutureErrorHelper(
+      () async {
+        await initWait();
+        return _sharedPreferences?.setStringList(key, value) ?? false;
+      },
+      failureValue: false,
+      methodName: 'setStringList',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
   }
 }

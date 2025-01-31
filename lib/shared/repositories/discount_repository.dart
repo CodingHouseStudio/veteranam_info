@@ -225,20 +225,15 @@ class DiscountRepository implements IDiscountRepository {
   Future<bool> companyHasDiscount(
     String companyId,
   ) async {
-    try {
-      return await _firestoreService.companyHasDiscounts(
+    return valueFutureErrorHelper(
+      () async => _firestoreService.companyHasDiscounts(
         companyId,
-      );
-    } catch (e, stack) {
-      SomeFailure.value(
-        error: e,
-        stack: stack,
-        user: User(id: companyId),
-        tag: 'Discount(companyHasDiscount)',
-        tagKey: ErrorText.repositoryKey,
-        data: 'Company ID: $companyId',
-      );
-      return true;
-    }
+      ),
+      failureValue: true,
+      methodName: 'companyHasDiscount',
+      className: 'Discount ${ErrorText.repositoryKey}',
+      data: 'Company ID: $companyId',
+      user: User(id: companyId),
+    );
   }
 }

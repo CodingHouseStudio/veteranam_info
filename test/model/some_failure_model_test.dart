@@ -62,18 +62,35 @@ void main() {
       );
     });
 
-    test('Bool Error Helper', () async {
-      final result = boolErrorHelper(
+    test('Value Error Helper', () async {
+      final result = valueErrorHelper(
         () {
           throw Exception(KGroupText.failure);
         },
+        failureValue: KGroupText.failure,
         methodName: KTestVariables.field,
         className: KTestVariables.field,
       );
 
       expect(
         result,
-        false,
+        KGroupText.failure,
+      );
+    });
+
+    test('Value Future Error Helper', () async {
+      final result = await valueFutureErrorHelper(
+        () async {
+          throw Exception(KGroupText.failure);
+        },
+        failureValue: KGroupText.failure,
+        methodName: KTestVariables.field,
+        className: KTestVariables.field,
+      );
+
+      expect(
+        result,
+        KGroupText.failure,
       );
     });
   });

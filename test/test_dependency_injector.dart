@@ -99,6 +99,9 @@ void configureDependenciesTest() {
 
   // Repository
   getItTest.registerSingleton<IUrlRepository>(UrlRepository());
+  getItTest.registerSingleton<ISharedPrefencesRepository>(
+    MockISharedPrefencesRepository(),
+  );
   getItTest.registerSingleton<IDeviceRepository>(
     DeviceRepository(
       firebaseMessaging: getItTest.get<FirebaseMessaging>(),
@@ -130,6 +133,7 @@ void configureDependenciesTest() {
     UserRepository(
       appAuthenticationRepository:
           getItTest.get<IAppAuthenticationRepository>(),
+      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
     ),
   );
   getItTest.registerSingleton<IAppNetworkRepository>(

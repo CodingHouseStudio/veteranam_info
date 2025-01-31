@@ -64,6 +64,7 @@ class CompanyRepository implements ICompanyRepository {
   static const userCompanyLinkCacheKey = '__user_company_link_cache_key__';
 
   void _onUserStreamListen() {
+    getCompanyFromCash();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty &&
@@ -93,7 +94,7 @@ class CompanyRepository implements ICompanyRepository {
     });
   }
 
-  Future<void> getUserLanguageFromCash() async {
+  Future<void> getCompanyFromCash() async {
     await _sharedPrefencesRepository.initWait();
     final userEmails =
         _sharedPrefencesRepository.getStringList(userCompanyUserEmailsCacheKey);
@@ -103,19 +104,26 @@ class CompanyRepository implements ICompanyRepository {
         _sharedPrefencesRepository.getString(userCompanyPublicNameCacheKey);
     final code = _sharedPrefencesRepository.getString(userCompanyCodeCacheKey);
     final link = _sharedPrefencesRepository.getString(userCompanyLinkCacheKey);
-
-    _userCompanyController.add(
-      currentUserCompany.copyWith(
-        id: currentUserCompany.id.isEmpty
-            ? companySharedPreferencesId
-            : currentUserCompany.id,
-        userEmails: userEmails ?? currentUserCompany.userEmails,
-        companyName: companyName ?? currentUserCompany.companyName,
-        publicName: publicName ?? currentUserCompany.publicName,
-        code: code ?? currentUserCompany.code,
-        link: link ?? currentUserCompany.link,
-      ),
+    final sharedCompany = currentUserCompany.copyWith(
+      id: currentUserCompany.id.isEmpty
+          ? companySharedPreferencesId
+          : currentUserCompany.id,
+      userEmails: currentUserCompany.userEmails.isEmpty && userEmails != null
+          ? userEmails
+          : currentUserCompany.userEmails,
+      companyName: currentUserCompany.companyName ?? companyName,
+      publicName: currentUserCompany.publicName ?? publicName,
+      code: currentUserCompany.code ?? code,
+      link: currentUserCompany.link ?? link,
     );
+
+    if (currentUserCompany != sharedCompany) {
+      _cache.write(key: userCompanyCacheKey, value: sharedCompany);
+
+      _userCompanyController.add(
+        sharedCompany,
+      );
+    }
   }
 
   void _onUserStreamCancel() {

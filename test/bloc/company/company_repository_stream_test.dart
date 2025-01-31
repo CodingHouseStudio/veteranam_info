@@ -25,23 +25,14 @@ void main() {
     late CacheClient mockCache;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
-    late StreamController<CompanyModel> companyStreamController;
-    late StreamController<User> userStreamController;
+    late ISharedPrefencesRepository mockSharedPrefencesRepository;
 
     setUp(() {
-      companyStreamController = StreamController<CompanyModel>()
-        ..add(KTestVariables.pureCompanyModel);
-      userStreamController = StreamController<User>()..add(KTestVariables.user);
-
       mockFirestoreService = MockFirestoreService();
-      mockCache = MockCacheClient();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockStorageService = MockStorageService();
-      when(
-        mockFirestoreService.getUserCompany(KTestVariables.user.email!),
-      ).thenAnswer(
-        (_) => companyStreamController.stream,
-      );
+      mockSharedPrefencesRepository = MockISharedPrefencesRepository();
+
       when(
         mockFirestoreService.updateCompany(
           KTestVariables.pureCompanyModel.copyWith(userEmails: []),
@@ -54,18 +45,8 @@ void main() {
       ).thenAnswer(
         (_) => KTestVariables.user,
       );
-      when(
-        mockCache.read<CompanyModel>(
-          key: CompanyRepository.userCompanyCacheKey,
-        ),
-      ).thenAnswer(
-        (_) => KTestVariables.pureCompanyModel,
-      );
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
-      when(mockAppAuthenticationRepository.user).thenAnswer(
-        (_) => userStreamController.stream,
-      );
       when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
         (_) => false,
       );
@@ -76,63 +57,172 @@ void main() {
       ).thenAnswer(
         (_) async => const Right(true),
       );
-
-      companyRepository = CompanyRepository(
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-        cache: mockCache,
-        firestoreService: mockFirestoreService,
-        storageService: mockStorageService,
-      );
     });
+    group('Stream', () {
+      late StreamController<CompanyModel> companyStreamController;
+      late StreamController<User> userStreamController;
+      setUp(() {
+        mockCache = MockCacheClient();
 
-    group('User Changed', () {
-      setUp(() async {
+        companyStreamController = StreamController<CompanyModel>()
+          ..add(KTestVariables.pureCompanyModel);
+        userStreamController = StreamController<User>()
+          ..add(KTestVariables.user);
+
+        when(mockAppAuthenticationRepository.user).thenAnswer(
+          (_) => userStreamController.stream,
+        );
+
+        when(
+          mockFirestoreService.getUserCompany(KTestVariables.user.email!),
+        ).thenAnswer(
+          (_) => companyStreamController.stream,
+        );
+
         when(
           mockCache.read<CompanyModel>(
             key: CompanyRepository.userCompanyCacheKey,
           ),
         ).thenAnswer(
-          (_) => KTestVariables.pureCompanyModel
-              .copyWith(userEmails: [], deletedOn: KTestVariables.dateTime),
+          (_) => KTestVariables.pureCompanyModel,
         );
-        Timer(const Duration(milliseconds: 30), () async {
-          await companyStreamController.close();
-          companyStreamController = StreamController<CompanyModel>()
-            ..add(KTestVariables.fullCompanyModel);
-          userStreamController.add(
-            KTestVariables.profileUserWithoutPhoto,
+
+        when(
+          mockSharedPrefencesRepository.initWait(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+
+        companyRepository = CompanyRepository(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cache: mockCache,
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+          sharedPrefencesRepository: mockSharedPrefencesRepository,
+        );
+      });
+      group('Company Changed', () {
+        late Timer timer;
+        setUp(() async {
+          when(
+            mockCache.read<CompanyModel>(
+              key: CompanyRepository.userCompanyCacheKey,
+            ),
+          ).thenAnswer(
+            (_) => KTestVariables.pureCompanyModel
+                .copyWith(userEmails: [], deletedOn: KTestVariables.dateTime),
+          );
+          timer = Timer(const Duration(milliseconds: 30), () async {
+            await companyStreamController.close();
+            companyStreamController = StreamController<CompanyModel>()
+              ..add(KTestVariables.fullCompanyModel);
+            userStreamController.add(
+              KTestVariables.profileUserWithoutPhoto,
+            );
+          });
+        });
+        test('Company ${KGroupText.stream}', () async {
+          final stream = companyRepository.company.asBroadcastStream();
+          await expectLater(
+            stream,
+            emitsInOrder([
+              KTestVariables.pureCompanyModel,
+              KTestVariables.fullCompanyModel,
+            ]),
+          );
+        });
+        tearDown(
+          () => timer.cancel(),
+        );
+      });
+
+      group('Company empty', () {
+        setUp(() => userStreamController.add(User.empty));
+        test('company ${KGroupText.stream}', () async {
+          await expectLater(
+            companyRepository.company,
+            emitsInOrder(
+              [KTestVariables.pureCompanyModel],
+            ),
           );
         });
       });
-      test('user ${KGroupText.stream}', () async {
-        final stream = companyRepository.company.asBroadcastStream();
-        await expectLater(
-          stream,
-          emitsInOrder(
-            [KTestVariables.pureCompanyModel],
-          ),
-        );
 
-        await stream.first;
+      tearDown(() async {
+        await userStreamController.close();
+        await companyStreamController.close();
+        companyRepository.dispose();
       });
     });
 
-    group('User empty', () {
-      setUp(() => userStreamController.add(User.empty));
-      test('company ${KGroupText.stream}', () async {
+    group('Shared Preferences Cache', () {
+      setUp(() {
+        mockCache = CacheClient();
+
+        when(
+          mockSharedPrefencesRepository.initWait(),
+        ).thenAnswer(
+          (_) async {
+            await KTestConstants.delay;
+            return true;
+          },
+        );
+
+        when(
+          mockSharedPrefencesRepository
+              .getString(CompanyRepository.userCompanyCodeCacheKey),
+        ).thenAnswer(
+          (_) => KTestVariables.fullCompanyModel.code,
+        );
+
+        when(
+          mockSharedPrefencesRepository
+              .getString(CompanyRepository.userCompanyLinkCacheKey),
+        ).thenAnswer(
+          (_) => KTestVariables.fullCompanyModel.link,
+        );
+
+        when(
+          mockSharedPrefencesRepository
+              .getString(CompanyRepository.userCompanyNameCacheKey),
+        ).thenAnswer(
+          (_) => KTestVariables.fullCompanyModel.companyName,
+        );
+
+        when(
+          mockSharedPrefencesRepository
+              .getString(CompanyRepository.userCompanyPublicNameCacheKey),
+        ).thenAnswer(
+          (_) => KTestVariables.fullCompanyModel.publicName,
+        );
+
+        when(
+          mockSharedPrefencesRepository
+              .getStringList(CompanyRepository.userCompanyUserEmailsCacheKey),
+        ).thenAnswer(
+          (_) => KTestVariables.fullCompanyModel.userEmails,
+        );
+
+        companyRepository = CompanyRepository(
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cache: mockCache,
+          firestoreService: mockFirestoreService,
+          storageService: mockStorageService,
+          sharedPrefencesRepository: mockSharedPrefencesRepository,
+        );
+      });
+      test('Get Company From shared Preferences', () async {
         await expectLater(
           companyRepository.company,
           emitsInOrder(
-            [KTestVariables.pureCompanyModel],
+            [
+              KTestVariables.fullCompanyModel.copyWith(
+                id: CompanyRepository.companySharedPreferencesId,
+              ),
+            ],
           ),
         );
       });
-    });
-
-    tearDown(() async {
-      await userStreamController.close();
-      await companyStreamController.close();
-      companyRepository.dispose();
     });
   });
 }

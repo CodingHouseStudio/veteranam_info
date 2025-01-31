@@ -103,6 +103,7 @@ abstract class KTestVariables {
   static const footer = 'Контакти\n';
 
   static const field = 'field_test';
+  static const fieldList = ['field_test'];
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
@@ -737,6 +738,7 @@ abstract class KScreenBlocName {
   static const network = ' Network';
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
+  static const sharedPreferences = 'Shared Preferences';
   static const filter = 'Filter';
   static const scroll = 'scroll';
   static const image = 'image';

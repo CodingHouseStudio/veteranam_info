@@ -17,6 +17,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:mockito/annotations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @GenerateNiceMocks(
@@ -91,6 +92,8 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<UserRepository>(),
     MockSpec<IDiscountFilterRepository>(),
     MockSpec<IAppLayoutRepository>(),
+    MockSpec<ISharedPrefencesRepository>(),
+    MockSpec<SharedPreferences>(),
   ],
 )
 void load() => log('loaded', name: 'Test', sequenceNumber: -2);
