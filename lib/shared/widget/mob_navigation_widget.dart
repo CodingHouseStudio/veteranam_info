@@ -32,21 +32,17 @@ class MobNavigationWidget extends StatelessWidget {
                 items: List.generate(KIcon.pagesIcons.length, (index) {
                   return BottomNavigationBarItem(
                     key: MobNavigationKeys.navButtonsKey[index],
-                    icon: Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: KPadding.kPaddingSize8,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: KPadding.kPaddingSize8,
-                        ),
-                        child: showProfile(state: state.status, index: index)
-                            ? userPhoto
-                            : KIcon.pagesIcons[index],
-                      ),
-                    ),
+                    icon: showProfile(state: state.status, index: index)
+                        ? userPhoto(isActive: false)
+                        : Padding(
+                            padding: const EdgeInsets.only(
+                              top: KPadding.kPaddingSize8,
+                              bottom: KPadding.kPaddingSize8,
+                            ),
+                            child: KIcon.pagesIcons[index],
+                          ),
                     activeIcon: showProfile(state: state.status, index: index)
-                        ? userPhoto
+                        ? userPhoto(isActive: true)
                         : IconWidget(
                             icon: KIcon.pagesIcons[index],
                             background: AppColors.materialThemeKeyColorsPrimary,
@@ -77,7 +73,7 @@ class MobNavigationWidget extends StatelessWidget {
     );
   }
 
-  Widget get userPhoto =>
+  Widget userPhoto({required bool isActive}) =>
       BlocSelector<UserWatcherBloc, UserWatcherState, String?>(
         selector: (state) => state.user.photo,
         builder: (context, userPhoto) {
@@ -85,6 +81,7 @@ class MobNavigationWidget extends StatelessWidget {
             onPressed: null,
             imageUrl: userPhoto,
             imageSize: KSize.kbottomNavigationUserPhoto,
+            background: isActive ? null : Colors.transparent,
           );
         },
       );

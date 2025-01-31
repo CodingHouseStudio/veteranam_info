@@ -67,7 +67,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Emits [User.empty] if the user is not authenticated.
   @override
-  Stream<User> get user => _firebaseAuth.authStateChanges().map(
+  Stream<User> get user => _firebaseAuth.userChanges().map(
         (userCredentional) {
           log('================================================');
           if (userCredentional != null) {
