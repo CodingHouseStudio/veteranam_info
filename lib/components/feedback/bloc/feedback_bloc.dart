@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
@@ -118,20 +117,22 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     if (_appAuthenticationRepository.currentUser.isEmpty) {
       return;
     }
-    if (Formz.validate(
-      [
-        state.message,
-        state.email,
-        state.name,
-      ],
-    )) {
+    if (state.message.isValid &&
+        (state.email.isValid ||
+            (_appAuthenticationRepository.currentUser.email?.isNotEmpty ??
+                false)) &&
+        (state.name.isValid ||
+            (_appAuthenticationRepository.currentUser.name?.isNotEmpty ??
+                false))) {
       emit(state.copyWith(formState: FeedbackEnum.sendingMessage));
       final result = await _feedbackRepository.sendFeedback(
         FeedbackModel(
           id: ExtendedDateTime.id,
           guestId: _appAuthenticationRepository.currentUser.id,
-          guestName: state.name.value,
-          email: state.email.value,
+          guestName:
+              _appAuthenticationRepository.currentUser.name ?? state.name.value,
+          email: _appAuthenticationRepository.currentUser.email ??
+              state.email.value,
           timestamp: ExtendedDateTime.current,
           message: state.message.value,
         ),
