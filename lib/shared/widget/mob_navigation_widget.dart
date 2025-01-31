@@ -33,7 +33,7 @@ class MobNavigationWidget extends StatelessWidget {
                   return BottomNavigationBarItem(
                     key: MobNavigationKeys.navButtonsKey[index],
                     icon: showProfile(state: state.status, index: index)
-                        ? userPhoto(isActive: false)
+                        ? const _UserPhoto(isActive: false)
                         : Padding(
                             padding: const EdgeInsets.only(
                               top: KPadding.kPaddingSize8,
@@ -42,7 +42,7 @@ class MobNavigationWidget extends StatelessWidget {
                             child: KIcon.pagesIcons[index],
                           ),
                     activeIcon: showProfile(state: state.status, index: index)
-                        ? userPhoto(isActive: true)
+                        ? const _UserPhoto(isActive: true)
                         : IconWidget(
                             icon: KIcon.pagesIcons[index],
                             background: AppColors.materialThemeKeyColorsPrimary,
@@ -73,7 +73,22 @@ class MobNavigationWidget extends StatelessWidget {
     );
   }
 
-  Widget userPhoto({required bool isActive}) =>
+  bool showProfile({
+    required AuthenticationStatus state,
+    required int index,
+  }) =>
+      state.isAuthenticated && index == 3;
+}
+
+class _UserPhoto extends StatelessWidget {
+  const _UserPhoto({
+    required this.isActive,
+  });
+
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) =>
       BlocSelector<UserWatcherBloc, UserWatcherState, String?>(
         selector: (state) => state.user.photo,
         builder: (context, userPhoto) {
@@ -85,10 +100,4 @@ class MobNavigationWidget extends StatelessWidget {
           );
         },
       );
-
-  bool showProfile({
-    required AuthenticationStatus state,
-    required int index,
-  }) =>
-      state.isAuthenticated && index == 3;
 }
