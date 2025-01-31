@@ -17,7 +17,7 @@ class FeedbackModel with _$FeedbackModel {
     required String id,
     required String guestId,
     required String? guestName,
-    required String? email,
+    required String email,
     required DateTime timestamp,
     required String message,
     @ImageConverter() ImageModel? image,

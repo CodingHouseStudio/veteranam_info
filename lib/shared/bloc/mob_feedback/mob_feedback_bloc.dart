@@ -19,11 +19,13 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
         super(
           const _Initial(
             message: MessageFieldModel.pure(),
+            email: EmailFieldModel.pure(),
             failure: null,
             formState: MobFeedbackEnum.initial,
           ),
         ) {
     on<_MessageUpdated>(_onMessageUpdated);
+    on<_EmailUpdated>(_onEmailUpdated);
     on<_Send>(_onSend);
   }
   final IFeedbackRepository _feedbackRepository;
@@ -42,16 +44,33 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
     );
   }
 
+  Future<void> _onEmailUpdated(
+    _EmailUpdated event,
+    Emitter<MobFeedbackState> emit,
+  ) async {
+    final emailFieldModel = EmailFieldModel.dirty(event.email);
+    emit(
+      state.copyWith(
+        email: emailFieldModel,
+        formState: MobFeedbackEnum.inProgress,
+      ),
+    );
+  }
+
   Future<void> _onSend(
     _Send event,
     Emitter<MobFeedbackState> emit,
   ) async {
-    if (state.message.isValid && event.image != null) {
+    if (state.message.isValid &&
+        (state.email.isValid ||
+            (_appAuthenticationRepository.currentUser.email?.isNotEmpty ??
+                false)) &&
+        event.image != null) {
       final feedbackModel = FeedbackModel(
         id: ExtendedDateTime.id,
         guestId: _appAuthenticationRepository.currentUser.id,
         guestName: null,
-        email: null,
+        email: state.email.value,
         timestamp: ExtendedDateTime.current,
         message: state.message.value,
       );
@@ -62,8 +81,9 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
       result.fold(
         (l) => emit(state.copyWith(failure: l)),
         (r) => emit(
-          const MobFeedbackState(
+          const _Initial(
             message: MessageFieldModel.pure(),
+            email: EmailFieldModel.pure(),
             failure: null,
             formState: MobFeedbackEnum.success,
           ),

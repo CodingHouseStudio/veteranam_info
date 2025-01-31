@@ -20,12 +20,12 @@ Future<void> mobFeedbackEnterTextHelper({
   await tester.pumpAndSettle(const Duration(seconds: 15));
 
   expect(
-    find.byKey(MobFeedbackKeys.field),
+    find.byKey(MobFeedbackKeys.messageField),
     findsOneWidget,
   );
 
   await tester.enterText(
-    find.byKey(MobFeedbackKeys.field),
+    find.byKey(MobFeedbackKeys.messageField),
     text,
   );
 

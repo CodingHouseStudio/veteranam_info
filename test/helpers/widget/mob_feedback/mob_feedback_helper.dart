@@ -15,7 +15,7 @@ Future<void> mobFeedbackHelper(
   );
 
   expect(
-    find.byKey(MobFeedbackKeys.field),
+    find.byKey(MobFeedbackKeys.messageField),
     findsOneWidget,
   );
 
