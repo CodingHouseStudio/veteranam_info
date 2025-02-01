@@ -49,7 +49,7 @@ void main() {
         (_) => null,
       );
       when(
-        mockFirebaseAuth.authStateChanges(),
+        mockFirebaseAuth.userChanges(),
       ).thenAnswer(
         (_) => Stream.value(null),
       );

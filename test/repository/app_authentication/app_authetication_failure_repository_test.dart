@@ -88,7 +88,7 @@ void main() {
         ),
       ).thenThrow(Exception(KGroupText.failure));
       when(
-        mockFirebaseAuth.authStateChanges(),
+        mockFirebaseAuth.userChanges(),
       ).thenAnswer(
         (_) => Stream.error(KGroupText.failure),
       );
