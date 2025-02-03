@@ -25,13 +25,14 @@ void main() {
     late CacheClient mockCache;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
-    late ISharedPrefencesRepository mockSharedPrefencesRepository;
+    late ICompanyCacheRepository mockCompanyCacheRepository;
 
     setUp(() {
       mockFirestoreService = MockFirestoreService();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockStorageService = MockStorageService();
-      mockSharedPrefencesRepository = MockISharedPrefencesRepository();
+      mockCompanyCacheRepository = MockICompanyCacheRepository();
+      mockCache = MockCacheClient();
 
       when(
         mockFirestoreService.updateCompany(
@@ -62,8 +63,6 @@ void main() {
       late StreamController<CompanyModel> companyStreamController;
       late StreamController<User> userStreamController;
       setUp(() {
-        mockCache = MockCacheClient();
-
         companyStreamController = StreamController<CompanyModel>()
           ..add(KTestVariables.pureCompanyModel);
         userStreamController = StreamController<User>()
@@ -86,11 +85,10 @@ void main() {
         ).thenAnswer(
           (_) => KTestVariables.pureCompanyModel,
         );
-
         when(
-          mockSharedPrefencesRepository.initWait(),
+          mockCompanyCacheRepository.getFromCache,
         ).thenAnswer(
-          (_) async => true,
+          (_) => KTestVariables.pureCompanyModel,
         );
 
         companyRepository = CompanyRepository(
@@ -98,7 +96,7 @@ void main() {
           cache: mockCache,
           firestoreService: mockFirestoreService,
           storageService: mockStorageService,
-          sharedPrefencesRepository: mockSharedPrefencesRepository,
+          companyCacheRepository: mockCompanyCacheRepository,
         );
       });
       group('Company Changed', () {
@@ -127,6 +125,7 @@ void main() {
             stream,
             emitsInOrder([
               KTestVariables.pureCompanyModel,
+              KTestVariables.pureCompanyModel,
               KTestVariables.fullCompanyModel,
             ]),
           );
@@ -141,9 +140,10 @@ void main() {
         test('company ${KGroupText.stream}', () async {
           await expectLater(
             companyRepository.company,
-            emitsInOrder(
-              [KTestVariables.pureCompanyModel],
-            ),
+            emitsInOrder([
+              KTestVariables.pureCompanyModel,
+              KTestVariables.pureCompanyModel,
+            ]),
           );
         });
       });
@@ -157,50 +157,10 @@ void main() {
 
     group('Shared Preferences Cache', () {
       setUp(() {
-        mockCache = CacheClient();
-
         when(
-          mockSharedPrefencesRepository.initWait(),
+          mockCompanyCacheRepository.getFromCache,
         ).thenAnswer(
-          (_) async {
-            await KTestConstants.delay;
-            return true;
-          },
-        );
-
-        when(
-          mockSharedPrefencesRepository
-              .getString(CompanyRepository.userCompanyCodeCacheKey),
-        ).thenAnswer(
-          (_) => KTestVariables.fullCompanyModel.code,
-        );
-
-        when(
-          mockSharedPrefencesRepository
-              .getString(CompanyRepository.userCompanyLinkCacheKey),
-        ).thenAnswer(
-          (_) => KTestVariables.fullCompanyModel.link,
-        );
-
-        when(
-          mockSharedPrefencesRepository
-              .getString(CompanyRepository.userCompanyNameCacheKey),
-        ).thenAnswer(
-          (_) => KTestVariables.fullCompanyModel.companyName,
-        );
-
-        when(
-          mockSharedPrefencesRepository
-              .getString(CompanyRepository.userCompanyPublicNameCacheKey),
-        ).thenAnswer(
-          (_) => KTestVariables.fullCompanyModel.publicName,
-        );
-
-        when(
-          mockSharedPrefencesRepository
-              .getStringList(CompanyRepository.userCompanyUserEmailsCacheKey),
-        ).thenAnswer(
-          (_) => KTestVariables.fullCompanyModel.userEmails,
+          (_) => KTestVariables.cacheCompany,
         );
 
         companyRepository = CompanyRepository(
@@ -208,19 +168,13 @@ void main() {
           cache: mockCache,
           firestoreService: mockFirestoreService,
           storageService: mockStorageService,
-          sharedPrefencesRepository: mockSharedPrefencesRepository,
+          companyCacheRepository: mockCompanyCacheRepository,
         );
       });
-      test('Get Company From shared Preferences', () async {
+      test('Get Company From shared Cache', () async {
         await expectLater(
           companyRepository.company,
-          emitsInOrder(
-            [
-              KTestVariables.fullCompanyModel.copyWith(
-                id: CompanyRepository.companySharedPreferencesId,
-              ),
-            ],
-          ),
+          emitsInOrder([KTestVariables.cacheCompany]),
         );
       });
     });

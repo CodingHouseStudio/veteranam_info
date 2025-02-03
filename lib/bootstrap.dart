@@ -70,7 +70,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     }
   }
 
-  configureDependencies();
+  await configureDependencies();
 
   await initializeDateFormatting();
 

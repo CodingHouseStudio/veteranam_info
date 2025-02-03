@@ -60,8 +60,9 @@ class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
     LanguageChangedEvent event,
     Emitter<UserWatcherState> emit,
   ) async {
-    final language =
-        state.userSetting.locale.isEnglish ? Language.ukrain : Language.english;
+    final language = state.userSetting.locale.isEnglish
+        ? Language.ukraine
+        : Language.english;
     final userSetting = state.userSetting.copyWith(locale: language);
     emit(state.copyWith(userSetting: userSetting));
 

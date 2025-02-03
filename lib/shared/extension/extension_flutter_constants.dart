@@ -50,10 +50,10 @@ extension LocalizedDateTime on DateTime {
             .locale
             .value
             .languageCode ??
-        Language.ukrain.value.languageCode;
+        Language.ukraine.value.languageCode;
     // initializeDateFormatting(locale);
     if (ukDateString != null && enDateString != null) {
-      if (locale == Language.ukrain.value.languageCode) {
+      if (locale == Language.ukraine.value.languageCode) {
         return ukDateString!;
       }
       return enDateString!;

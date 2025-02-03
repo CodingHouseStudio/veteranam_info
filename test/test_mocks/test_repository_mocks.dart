@@ -94,6 +94,8 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<IAppLayoutRepository>(),
     MockSpec<ISharedPrefencesRepository>(),
     MockSpec<SharedPreferences>(),
+    MockSpec<ICompanyCacheRepository>(),
+    MockSpec<ILanguageCacheRepository>(),
   ],
 )
 void load() => log('loaded', name: 'Test', sequenceNumber: -2);

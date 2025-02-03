@@ -28,10 +28,10 @@ extension LocalizedDateTime on DateTime {
     String? localeValue,
     bool showDay = false,
   }) {
-    final locale = localeValue ?? Language.ukrain.value.languageCode;
+    final locale = localeValue ?? Language.ukraine.value.languageCode;
     // initializeDateFormatting(locale);
     if (ukDateString != null && enDateString != null) {
-      if (locale == Language.ukrain.value.languageCode) {
+      if (locale == Language.ukraine.value.languageCode) {
         return ukDateString!;
       }
       return enDateString!;
@@ -208,7 +208,7 @@ extension DiscountStateExtention on DiscountState {
 extension DateFieldModelDart on DateFieldModel {
   TranslateModel get getString => TranslateModel(
         uk: 'До ${value?.toLocalDateString(
-          localeValue: Language.ukrain.value.languageCode,
+          localeValue: Language.ukraine.value.languageCode,
           showDay: true,
         )}',
         en: 'Up to ${value?.toLocalDateString(

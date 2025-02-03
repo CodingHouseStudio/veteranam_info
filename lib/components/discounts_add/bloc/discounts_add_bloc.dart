@@ -138,7 +138,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
               ? const DateFieldModel.pure()
               : DateFieldModel.dirty(
                   discount!.expiration?.uk.getDateDiscountString(
-                    Language.ukrain.value.languageCode,
+                    Language.ukraine.value.languageCode,
                   ),
                 ),
           title: MessageFieldModel.dirty(discount!.title.uk),

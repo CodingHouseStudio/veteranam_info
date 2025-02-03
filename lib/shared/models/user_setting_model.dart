@@ -11,7 +11,7 @@ class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
     @DeviceConverter() List<DeviceInfoModel>? devicesInfo,
-    @Default(Language.ukrain) Language locale,
+    @Default(Language.ukraine) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
     String? nickname,
@@ -56,7 +56,7 @@ enum UserRole {
 }
 
 enum Language {
-  ukrain(
+  ukraine(
     Locale('uk', 'UK'),
     // Assets.indonesia,
     'UA',
@@ -82,9 +82,9 @@ enum Language {
       case 'en':
         return Language.english;
       case 'uk':
-        return Language.ukrain;
+        return Language.ukraine;
       default:
-        return Language.ukrain;
+        return Language.ukraine;
     }
   }
 }

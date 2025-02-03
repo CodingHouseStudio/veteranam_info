@@ -61,7 +61,7 @@ void configureDependenciesTest() {
   final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
   // register logic if user id empty user setting is also empty
   initializeDateFormatting(Language.english.value.languageCode);
-  initializeDateFormatting(Language.ukrain.value.languageCode);
+  initializeDateFormatting(Language.ukraine.value.languageCode);
   userSetting(mockFirebaseFirestore);
   discountInit(mockFirebaseFirestore);
   mobBuild();
@@ -102,6 +102,16 @@ void configureDependenciesTest() {
   getItTest.registerSingleton<ISharedPrefencesRepository>(
     MockISharedPrefencesRepository(),
   );
+  getItTest.registerSingleton<ICompanyCacheRepository>(
+    CompanyCacheRepository(
+      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
+    ),
+  );
+  getItTest.registerSingleton<ILanguageCacheRepository>(
+    LanguageCacheRepository(
+      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
+    ),
+  );
   getItTest.registerSingleton<IDeviceRepository>(
     DeviceRepository(
       firebaseMessaging: getItTest.get<FirebaseMessaging>(),
@@ -133,7 +143,7 @@ void configureDependenciesTest() {
     UserRepository(
       appAuthenticationRepository:
           getItTest.get<IAppAuthenticationRepository>(),
-      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
+      languageCacheRepository: getItTest.get<ILanguageCacheRepository>(),
     ),
   );
   getItTest.registerSingleton<IAppNetworkRepository>(
@@ -409,7 +419,7 @@ void configureFailureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting(mockFirebaseFirestore);
   initializeDateFormatting(Language.english.value.languageCode);
-  initializeDateFormatting(Language.ukrain.value.languageCode);
+  initializeDateFormatting(Language.ukraine.value.languageCode);
 
   // KTest.scroll = null;
   // Services

@@ -18,12 +18,12 @@ class CompanyRepository implements ICompanyRepository {
     required CacheClient cache,
     required FirestoreService firestoreService,
     required StorageService storageService,
-    required ISharedPrefencesRepository sharedPrefencesRepository,
+    required ICompanyCacheRepository companyCacheRepository,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
         _cache = cache,
         _firestoreService = firestoreService,
         _storageService = storageService,
-        _sharedPrefencesRepository = sharedPrefencesRepository {
+        _companyCacheRepository = companyCacheRepository {
     // Listen to currentUser changes and emit auth status
     // _authenticationStatuscontroller =
     //     StreamController<AuthenticationStatus>.broadcast(
@@ -40,31 +40,17 @@ class CompanyRepository implements ICompanyRepository {
   final CacheClient _cache;
   final FirestoreService _firestoreService;
   final StorageService _storageService;
-  final ISharedPrefencesRepository _sharedPrefencesRepository;
+  final ICompanyCacheRepository _companyCacheRepository;
 
   late StreamController<CompanyModel> _userCompanyController;
   StreamSubscription<CompanyModel>? _userCompanySubscription;
   StreamSubscription<User>? _userSubscription;
 
-  static const companySharedPreferencesId = 'compnay_shared_preferences_id';
-
   @visibleForTesting
   static const userCompanyCacheKey = '__user_company_cache_key__';
-  @visibleForTesting
-  static const userCompanyUserEmailsCacheKey =
-      '__user_company_user_emails_cache_key__';
-  @visibleForTesting
-  static const userCompanyNameCacheKey = '__user_company_name_cache_key__';
-  @visibleForTesting
-  static const userCompanyPublicNameCacheKey =
-      '__user_company_public_name_cache_key__';
-  @visibleForTesting
-  static const userCompanyCodeCacheKey = '__user_company_code_cache_key__';
-  @visibleForTesting
-  static const userCompanyLinkCacheKey = '__user_company_link_cache_key__';
 
   void _onUserStreamListen() {
-    getCompanyFromCash();
+    tryGetCompanyFromCache();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty &&
@@ -94,36 +80,14 @@ class CompanyRepository implements ICompanyRepository {
     });
   }
 
-  Future<void> getCompanyFromCash() async {
-    await _sharedPrefencesRepository.initWait();
-    final userEmails =
-        _sharedPrefencesRepository.getStringList(userCompanyUserEmailsCacheKey);
-    final companyName =
-        _sharedPrefencesRepository.getString(userCompanyNameCacheKey);
-    final publicName =
-        _sharedPrefencesRepository.getString(userCompanyPublicNameCacheKey);
-    final code = _sharedPrefencesRepository.getString(userCompanyCodeCacheKey);
-    final link = _sharedPrefencesRepository.getString(userCompanyLinkCacheKey);
-    final sharedCompany = currentUserCompany.copyWith(
-      id: currentUserCompany.id.isEmpty
-          ? companySharedPreferencesId
-          : currentUserCompany.id,
-      userEmails: currentUserCompany.userEmails.isEmpty && userEmails != null
-          ? userEmails
-          : currentUserCompany.userEmails,
-      companyName: currentUserCompany.companyName ?? companyName,
-      publicName: currentUserCompany.publicName ?? publicName,
-      code: currentUserCompany.code ?? code,
-      link: currentUserCompany.link ?? link,
+  void tryGetCompanyFromCache() {
+    final cacheCompany = _companyCacheRepository.getFromCache;
+
+    _cache.write(key: userCompanyCacheKey, value: cacheCompany);
+
+    _userCompanyController.add(
+      cacheCompany,
     );
-
-    if (currentUserCompany != sharedCompany) {
-      _cache.write(key: userCompanyCacheKey, value: sharedCompany);
-
-      _userCompanyController.add(
-        sharedCompany,
-      );
-    }
   }
 
   void _onUserStreamCancel() {
@@ -165,47 +129,15 @@ class CompanyRepository implements ICompanyRepository {
     }
   }
 
-  void _saveCompanyDataToCache(CompanyModel company) {
-    if (company.userEmails != currentUserCompany.userEmails) {
-      _sharedPrefencesRepository.setStringList(
-        key: userCompanyUserEmailsCacheKey,
-        value: company.userEmails,
-      );
-    }
-    if (company.companyName != null &&
-        company.companyName != currentUserCompany.companyName) {
-      _sharedPrefencesRepository.setString(
-        key: userCompanyNameCacheKey,
-        value: company.companyName!,
-      );
-    }
-    if (company.code != null && company.code != currentUserCompany.code) {
-      _sharedPrefencesRepository.setString(
-        key: userCompanyCodeCacheKey,
-        value: company.code!,
-      );
-    }
-    if (company.publicName != null &&
-        company.publicName != currentUserCompany.publicName) {
-      _sharedPrefencesRepository.setString(
-        key: userCompanyPublicNameCacheKey,
-        value: company.publicName!,
-      );
-    }
-    if (company.link != null && company.link != currentUserCompany.link) {
-      _sharedPrefencesRepository.setString(
-        key: userCompanyLinkCacheKey,
-        value: company.link!,
-      );
-    }
-  }
-
   @override
   Future<Either<SomeFailure, bool>> updateCompany({
     required CompanyModel company,
     required FilePickerItem? imageItem,
   }) async {
-    _saveCompanyDataToCache(company);
+    _companyCacheRepository.saveToCache(
+      company: company,
+      previousCompany: currentUserCompany,
+    );
     return eitherFutureHelper(
       () async {
         late var methodCompanyModel = company;

@@ -18,10 +18,10 @@ void main() {
   group('${KScreenBlocName.user} ${KGroupText.repository} ', () {
     late UserRepository userRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late ISharedPrefencesRepository mockSharedPrefencesRepository;
+    late ILanguageCacheRepository mockLanguageCacheRepository;
     setUp(() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockSharedPrefencesRepository = MockISharedPrefencesRepository();
+      mockLanguageCacheRepository = MockILanguageCacheRepository();
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -131,7 +131,7 @@ void main() {
 
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
-          sharedPrefencesRepository: mockSharedPrefencesRepository,
+          languageCacheRepository: mockLanguageCacheRepository,
         );
       });
 
@@ -235,7 +235,7 @@ void main() {
         );
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
-          sharedPrefencesRepository: mockSharedPrefencesRepository,
+          languageCacheRepository: mockLanguageCacheRepository,
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(

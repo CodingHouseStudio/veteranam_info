@@ -87,7 +87,7 @@ class MyDiscountsWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    if (CompanyRepository.companySharedPreferencesId ==
+    if (CompanyCacheRepository.companyCacheId ==
         _companyRepository.currentUserCompany.id) {
       return;
     }

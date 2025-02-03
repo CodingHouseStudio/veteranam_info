@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -10,23 +9,20 @@ import 'package:veteranam/shared/shared_dart.dart';
 class UserRepository {
   UserRepository({
     required IAppAuthenticationRepository appAuthenticationRepository,
-    required ISharedPrefencesRepository sharedPrefencesRepository,
+    required ILanguageCacheRepository languageCacheRepository,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
-        _sharedPrefencesRepository = sharedPrefencesRepository {
-    _userSettingController = StreamController<UserSetting>.broadcast(
-      onListen: _onUserStreamListen,
-      onCancel: _onUserStreamCancel,
-    );
+        _languageCacheRepository = languageCacheRepository {
     _userController = StreamController<User>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
     );
+    _userSettingController = StreamController<UserSetting>.broadcast(
+      onListen: _onUserStreamListen,
+      onCancel: _onUserSettingStreamCancel,
+    );
   }
   final IAppAuthenticationRepository _appAuthenticationRepository;
-  final ISharedPrefencesRepository _sharedPrefencesRepository;
-
-  @visibleForTesting
-  static const userLanguageKey = '__user_language_key__';
+  final ILanguageCacheRepository _languageCacheRepository;
 
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
@@ -34,7 +30,7 @@ class UserRepository {
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onUserStreamListen() {
-    getUserLanguageFromCash();
+    tryGetUserLanguageFromCache();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
@@ -66,23 +62,25 @@ class UserRepository {
     });
   }
 
-  Future<void> getUserLanguageFromCash() async {
-    await _sharedPrefencesRepository.initWait();
-    final languageCode = _sharedPrefencesRepository.getString(userLanguageKey);
-    if (languageCode != null && !currentUserSetting.locale.isEnglish) {
-      final language = Language.getFromLanguageCode(languageCode);
-      if (language != Language.ukrain) {
-        _userSettingController
-            .add(currentUserSetting.copyWith(locale: language));
-      }
+  void tryGetUserLanguageFromCache() {
+    final cacheLanguage = _languageCacheRepository.getFromCache;
+    if (cacheLanguage != null) {
+      _userSettingController.add(
+        currentUserSetting.copyWith(
+          locale: cacheLanguage,
+        ),
+      );
     }
   }
 
   void _onUserStreamCancel() {
-    _userSettingSubscription?.cancel();
     _userSubscription?.cancel();
-    _userSettingSubscription = null;
     _userSubscription = null;
+  }
+
+  void _onUserSettingStreamCancel() {
+    _userSettingSubscription?.cancel();
+    _userSettingSubscription = null;
   }
 
   Stream<UserSetting> get userSetting => _userSettingController.stream;
@@ -110,14 +108,10 @@ class UserRepository {
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,
   }) async {
-    if (userSetting.locale != currentUserSetting.locale) {
-      unawaited(
-        _sharedPrefencesRepository.setString(
-          key: userLanguageKey,
-          value: userSetting.locale.value.languageCode,
-        ),
-      );
-    }
+    _languageCacheRepository.saveToCache(
+      language: userSetting.locale,
+      previousLanguage: currentUserSetting.locale,
+    );
     final result =
         await _appAuthenticationRepository.updateUserSetting(userSetting);
     return result.fold(

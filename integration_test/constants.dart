@@ -33,7 +33,7 @@ Future<void> setUpGlobalIntegration() async {
   //
   // Bloc.observer = const AppBlocObserver();
 
-  configureDependencies();
+  await configureDependencies();
 }
 
 // String generateRandomUsername() {
