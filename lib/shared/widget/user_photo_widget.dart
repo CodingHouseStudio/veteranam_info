@@ -11,7 +11,7 @@ class UserPhotoWidget extends StatelessWidget {
     this.imageName,
     this.icon,
     // this.perimeter,
-    // this.background,
+    this.background,
     // this.iconColor,
     this.imageBytes,
     this.imageSize,
@@ -21,7 +21,7 @@ class UserPhotoWidget extends StatelessWidget {
   final String? imageName;
   final Icon? icon;
   // final double? perimeter;
-  // final Color? background;
+  final Color? background;
   // final Color? iconColor;
   final Uint8List? imageBytes;
   final double? imageSize;
@@ -34,7 +34,7 @@ class UserPhotoWidget extends StatelessWidget {
         //     .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
         // padding: EdgeInsets.all(_padding),
         radius: (imageSize ?? KSize.kUserPhoto) / 2,
-        backgroundColor: AppColors.materialThemeKeyColorsPrimary,
+        backgroundColor: background ?? AppColors.materialThemeKeyColorsPrimary,
         child: _body,
       );
     } else {
@@ -42,7 +42,8 @@ class UserPhotoWidget extends StatelessWidget {
         onTap: onPressed,
         child: CircleAvatar(
           radius: (imageSize ?? KSize.kUserPhoto) / 2,
-          backgroundColor: AppColors.materialThemeKeyColorsPrimary,
+          backgroundColor:
+              background ?? AppColors.materialThemeKeyColorsPrimary,
           child: _body,
         ),
       );

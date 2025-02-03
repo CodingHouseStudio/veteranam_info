@@ -126,7 +126,7 @@ void main() {
         (_) => KTestVariables.user.phoneNumber,
       );
       when(
-        mockFirebaseAuth.authStateChanges(),
+        mockFirebaseAuth.userChanges(),
       ).thenAnswer(
         (_) => Stream.value(mockUser),
       );

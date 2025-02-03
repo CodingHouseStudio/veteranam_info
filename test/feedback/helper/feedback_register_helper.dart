@@ -27,7 +27,7 @@ void feedbackWidgetTestRegister() {
     (realInvocation) => UserSetting.empty,
   );
   when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-    (realInvocation) => KTestVariables.user,
+    (realInvocation) => KTestVariables.userAnonymous,
   );
   when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
     (invocation) async => const Right(true),

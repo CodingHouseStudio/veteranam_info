@@ -28,9 +28,35 @@ class MobFeedbackWidget extends StatelessWidget {
                 KPadding.kPaddingSize12,
               ),
             ),
+            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+                if (!state.status.isAuthenticated) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: KPadding.kPaddingSize16),
+                    child: TextFieldWidget(
+                      widgetKey: MobFeedbackKeys.emailField,
+                      // controller: controller,
+                      labelText: KMockText.email,
+                      isRequired: true,
+                      // textInputAction: TextInputAction.done,
+                      onChanged: (text) => context.read<MobFeedbackBloc>().add(
+                            MobFeedbackEvent.emailUpdated(text),
+                          ),
+                      showErrorText: _.formState == MobFeedbackEnum.invalidData,
+                      errorText: _.email.error.value(context),
+                      isDesk: false,
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
+
             KSizedBox.kHeightSizedBox8,
             TextFieldWidget(
-              widgetKey: MobFeedbackKeys.field,
+              widgetKey: MobFeedbackKeys.messageField,
               // controller: controller,
               labelText: context.l10n.writeMessage, isRequired: true,
               // textInputAction: TextInputAction.done,

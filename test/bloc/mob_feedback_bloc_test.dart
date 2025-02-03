@@ -59,61 +59,125 @@ void main() {
     });
 
     blocTest<MobFeedbackBloc, MobFeedbackState>(
-      'emits [FeedbackState] when valid message'
+      'emits [FeedbackState] when valid message, email'
       ' are changed and send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
         ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.field))
+        ..add(const MobFeedbackEvent.emailUpdated(KTestVariables.userEmail))
         ..add(MobFeedbackEvent.send(image)),
       expect: () => [
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
           message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.pure(),
+          failure: null,
+        ),
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.inProgress,
+          message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: null,
         ),
         const MobFeedbackState(
           formState: MobFeedbackEnum.success,
           message: MessageFieldModel.pure(),
+          email: EmailFieldModel.pure(),
           failure: null,
         ),
       ],
     );
     blocTest<MobFeedbackBloc, MobFeedbackState>(
-      'emits [FeedbackState] when invalid message'
+      'emits [FeedbackState] when invalid message, email'
       ' are changed and send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
         ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.fieldEmpty))
+        ..add(
+          const MobFeedbackEvent.emailUpdated(
+            KTestVariables.userEmailIncorrect,
+          ),
+        )
         ..add(MobFeedbackEvent.send(image)),
       expect: () => [
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
           message: MessageFieldModel.dirty(),
+          email: EmailFieldModel.pure(),
+          failure: null,
+        ),
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.inProgress,
+          message: MessageFieldModel.dirty(),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           failure: null,
         ),
         const MobFeedbackState(
           formState: MobFeedbackEnum.invalidData,
           message: MessageFieldModel.dirty(),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
           failure: null,
         ),
       ],
     );
     blocTest<MobFeedbackBloc, MobFeedbackState>(
-      'emits [FeedbackState] when valid message'
-      ' are changed and failure send it',
+      'emits [FeedbackState] when message, invalid email'
+      ' are changed and send it',
       build: () => mobFeedbackBloc,
       act: (bloc) => bloc
         ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.field))
-        ..add(MobFeedbackEvent.send(wrongImage)),
+        ..add(
+          const MobFeedbackEvent.emailUpdated(
+            KTestVariables.userEmailIncorrect,
+          ),
+        )
+        ..add(MobFeedbackEvent.send(image)),
       expect: () => [
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
           message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.pure(),
           failure: null,
         ),
         const MobFeedbackState(
           formState: MobFeedbackEnum.inProgress,
           message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.dirty(KTestVariables.userEmailIncorrect),
+          failure: null,
+        ),
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.success,
+          message: MessageFieldModel.pure(),
+          email: EmailFieldModel.pure(),
+          failure: null,
+        ),
+      ],
+    );
+    blocTest<MobFeedbackBloc, MobFeedbackState>(
+      'emits [FeedbackState] when valid message, email'
+      ' are changed and failure send it',
+      build: () => mobFeedbackBloc,
+      act: (bloc) => bloc
+        ..add(const MobFeedbackEvent.messageUpdated(KTestVariables.field))
+        ..add(const MobFeedbackEvent.emailUpdated(KTestVariables.userEmail))
+        ..add(MobFeedbackEvent.send(wrongImage)),
+      expect: () => [
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.inProgress,
+          message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.pure(),
+          failure: null,
+        ),
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.inProgress,
+          message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
+          failure: null,
+        ),
+        const MobFeedbackState(
+          formState: MobFeedbackEnum.inProgress,
+          message: MessageFieldModel.dirty(KTestVariables.field),
+          email: EmailFieldModel.dirty(KTestVariables.userEmail),
           failure: SomeFailure.serverError,
         ),
       ],

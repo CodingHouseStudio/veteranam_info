@@ -26,16 +26,16 @@ class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
     on<LanguageChangedEvent>(_onLanguageChanged);
     _onStarted();
   }
-  late StreamSubscription<UserSetting> userSettingSubscription;
-  late StreamSubscription<User> userSubscription;
+  late StreamSubscription<UserSetting> _userSettingSubscription;
+  late StreamSubscription<User> _userSubscription;
   final UserRepository _userRepository;
   void _onStarted() {
-    userSettingSubscription = _userRepository.userSetting.listen(
+    _userSettingSubscription = _userRepository.userSetting.listen(
       (userSetting) => add(_UserSettingChangedEvent(userSetting)),
       onError: (Object error, StackTrace stack) =>
           add(_UserSettingFailureEvent(stack: stack, error: error)),
     );
-    userSubscription = _userRepository.user.listen(
+    _userSubscription = _userRepository.user.listen(
       (user) => add(_UserChangedEvent(user)),
       onError: (Object error, StackTrace stack) =>
           add(_UserFailureEvent(stack: stack, error: error)),
@@ -120,8 +120,8 @@ class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
 
   @override
   Future<void> close() {
-    userSettingSubscription.cancel();
-    userSubscription.cancel();
+    _userSettingSubscription.cancel();
+    _userSubscription.cancel();
     _userRepository.dispose();
     return super.close();
   }

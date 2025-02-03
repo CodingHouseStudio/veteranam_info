@@ -185,7 +185,7 @@ abstract class KTestVariables {
   );
 
   static const user = User(
-    id: '1',
+    id: id,
     email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
@@ -343,8 +343,8 @@ abstract class KTestVariables {
   static final feedbackImageModel = FeedbackModel(
     id: '',
     guestId: user.id,
-    guestName: null,
-    email: null,
+    guestName: usernameCorrect,
+    email: userEmail,
     timestamp: dateTime,
     message: field,
     image: const ImageModel(downloadURL: image),
@@ -655,7 +655,7 @@ abstract class KTestVariables {
   static const link = 'https://veteranam.info/';
   static final emailModel = EmailModel(
     id: id,
-    userId: user.id,
+    userId: id,
     email: 'test.email@gmail.com',
     date: dateTime,
     isValid: true,
