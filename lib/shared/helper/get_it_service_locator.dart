@@ -7,7 +7,7 @@ final getIt = GetIt.instance;
 
 /// COMMENT: Method registers all classes that use Injectable
 @InjectableInit()
-Future<void> configureDependencies() async => getIt.init(
+void configureDependencies() => getIt.init(
       // environment: Config.flavour,
       environmentFilter: const NoEnvOrContainsAny(
         {Config.flavour, Config.role, Config.platform},
