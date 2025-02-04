@@ -15,8 +15,8 @@ Future<void> changeWindowSizeHelper({
   bool windowsTest = false,
   bool scrollUp = true,
 }) async {
-  tester.view.devicePixelRatio = 1.0;
-  tester.view.physicalSize = KTestConstants.windowDeskSize;
+  tester.view.devicePixelRatio = 3.0;
+  tester.view.physicalSize = KTestConstants.windowDeskSize * 3;
 
   await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
 
