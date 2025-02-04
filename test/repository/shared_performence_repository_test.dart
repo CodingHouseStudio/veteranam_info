@@ -13,7 +13,7 @@ void main() {
 
   tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.sharedPreferences} ${KGroupText.repository} ', () {
-    late ISharedPrefencesRepository sharedPrefencesRepository;
+    late SharedPrefencesRepository sharedPrefencesRepository;
     late SharedPreferences mockSharedPreferences;
     setUp(() {
       mockSharedPreferences = MockSharedPreferences();

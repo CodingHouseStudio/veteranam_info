@@ -8,9 +8,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 )
 class CompanyCacheRepository implements ICompanyCacheRepository {
   CompanyCacheRepository({
-    required ISharedPrefencesRepository sharedPrefencesRepository,
+    required SharedPrefencesRepository sharedPrefencesRepository,
   }) : _sharedPrefencesRepository = sharedPrefencesRepository;
-  final ISharedPrefencesRepository _sharedPrefencesRepository;
+  final SharedPrefencesRepository _sharedPrefencesRepository;
 
   static const companyCacheId = '__compnay_cache_id__';
 
@@ -80,5 +80,15 @@ class CompanyCacheRepository implements ICompanyCacheRepository {
         value: company.link!,
       );
     }
+  }
+
+  @override
+  void cleanCache() {
+    _sharedPrefencesRepository
+      ..remove(userEmailsCacheKey)
+      ..remove(nameCacheKey)
+      ..remove(codeCacheKey)
+      ..remove(publicNameCacheKey)
+      ..remove(linkCacheKey);
   }
 }

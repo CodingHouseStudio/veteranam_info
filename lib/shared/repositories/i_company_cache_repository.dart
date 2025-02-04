@@ -6,4 +6,5 @@ abstract class ICompanyCacheRepository {
     required CompanyModel company,
     required CompanyModel previousCompany,
   });
+  void cleanCache();
 }

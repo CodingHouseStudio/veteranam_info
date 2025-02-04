@@ -5,9 +5,9 @@ import 'package:veteranam/shared/shared_dart.dart';
 @Singleton(as: ILanguageCacheRepository)
 class LanguageCacheRepository implements ILanguageCacheRepository {
   LanguageCacheRepository({
-    required ISharedPrefencesRepository sharedPrefencesRepository,
+    required SharedPrefencesRepository sharedPrefencesRepository,
   }) : _sharedPrefencesRepository = sharedPrefencesRepository;
-  final ISharedPrefencesRepository _sharedPrefencesRepository;
+  final SharedPrefencesRepository _sharedPrefencesRepository;
 
   @visibleForTesting
   static const userLanguageKey = '__user_language_key__';

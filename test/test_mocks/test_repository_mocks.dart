@@ -92,7 +92,7 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<UserRepository>(),
     MockSpec<IDiscountFilterRepository>(),
     MockSpec<IAppLayoutRepository>(),
-    MockSpec<ISharedPrefencesRepository>(),
+    MockSpec<SharedPrefencesRepository>(),
     MockSpec<SharedPreferences>(),
     MockSpec<ICompanyCacheRepository>(),
     MockSpec<ILanguageCacheRepository>(),

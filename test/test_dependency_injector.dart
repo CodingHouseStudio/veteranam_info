@@ -99,17 +99,17 @@ void configureDependenciesTest() {
 
   // Repository
   getItTest.registerSingleton<IUrlRepository>(UrlRepository());
-  getItTest.registerSingleton<ISharedPrefencesRepository>(
-    MockISharedPrefencesRepository(),
+  getItTest.registerSingleton<SharedPrefencesRepository>(
+    MockSharedPrefencesRepository(),
   );
   getItTest.registerSingleton<ICompanyCacheRepository>(
     CompanyCacheRepository(
-      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
+      sharedPrefencesRepository: getItTest.get<SharedPrefencesRepository>(),
     ),
   );
   getItTest.registerSingleton<ILanguageCacheRepository>(
     LanguageCacheRepository(
-      sharedPrefencesRepository: getItTest.get<ISharedPrefencesRepository>(),
+      sharedPrefencesRepository: getItTest.get<SharedPrefencesRepository>(),
     ),
   );
   getItTest.registerSingleton<IDeviceRepository>(

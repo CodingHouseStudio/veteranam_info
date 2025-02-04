@@ -62,10 +62,17 @@ class CompanyRepository implements ICompanyRepository {
         }
         _userCompanySubscription ??=
             _firestoreService.getUserCompany(currentUser.email!).listen(
-          (currentUserCompany) {
-            _cache.write(key: userCompanyCacheKey, value: currentUserCompany);
+          (currentUserCompanyValue) {
+            _companyCacheRepository.saveToCache(
+              company: currentUserCompanyValue,
+              previousCompany: currentUserCompany,
+            );
+            _cache.write(
+              key: userCompanyCacheKey,
+              value: currentUserCompanyValue,
+            );
             _userCompanyController.add(
-              currentUserCompany,
+              currentUserCompanyValue,
             );
             _removeDeleteParameter();
           },
@@ -134,10 +141,6 @@ class CompanyRepository implements ICompanyRepository {
     required CompanyModel company,
     required FilePickerItem? imageItem,
   }) async {
-    _companyCacheRepository.saveToCache(
-      company: company,
-      previousCompany: currentUserCompany,
-    );
     return eitherFutureHelper(
       () async {
         late var methodCompanyModel = company;
@@ -185,6 +188,8 @@ class CompanyRepository implements ICompanyRepository {
     return eitherFutureHelper(
       () async {
         if (currentUserCompany.id.isNotEmpty) {
+          _companyCacheRepository.cleanCache();
+
           /// every thirty days, all documents where KAppText.deletedFieldId
           /// older than 30 days will be deleted automatically
           /// (firebase function)
