@@ -16,7 +16,7 @@ dependencies:
   connectivity_plus: ^6.1.1
   dartz: ^0.10.1
   device_info_plus: ^11.2.1
-  dio: ^5.7.0
+  dio: ^5.8.0+1
   easy_debounce: ^2.0.3
   email_validator: ^3.0.0
   equatable: ^2.0.7
@@ -29,7 +29,7 @@ dependencies:
   firebase_crashlytics: ^4.3.1
   firebase_messaging: ^15.2.0
   firebase_performance: ^0.10.1
-  firebase_remote_config: ^5.2.0
+  firebase_remote_config: ^5.3.1
   firebase_storage: ^12.4.0
   flutter:
     sdk: flutter
@@ -37,7 +37,7 @@ dependencies:
   flutter_facebook_auth: ^7.1.1
   flutter_localizations:
     sdk: flutter
-  flutter_markdown: ^0.7.5
+  flutter_markdown: ^0.7.6
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.2.4
   flutter_staggered_grid_view: ^0.7.0
@@ -53,7 +53,7 @@ dependencies:
   intl: ^0.19.0
   json_serializable: ^6.9.0
   material_symbols_icons: ^4.2801.1
-  package_info_plus: ^8.1.2
+  package_info_plus: ^8.2.0
   # path_drawing: ^1.0.1
   # pdf: ^3.11.0
   # printing: ^5.13.1
@@ -80,7 +80,7 @@ dev_dependencies:
   bloc_test: ^10.0.0
 
   build_runner: ^2.4.14 # Used for class generation
-  flutter_launcher_icons: ^0.14.2
+  flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
   flutter_test:
     sdk: flutter
