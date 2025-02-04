@@ -42,7 +42,7 @@ void main() {
           .platformDispatcher.views.first.devicePixelRatio = 3.00;
 
       testWidgetsFlutterBinding.platformDispatcher.views.first.physicalSize =
-          KTestConstants.windowDefaultSize;
+          KTestConstants.windowDefaultSize * 3;
 
       expect(
         appLayoutRepository.getCurrentAppVersion,
