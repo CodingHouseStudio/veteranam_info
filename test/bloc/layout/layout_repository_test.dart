@@ -38,6 +38,12 @@ void main() {
     }
 
     test('Init App Version And Change Size in Stream', () async {
+      testWidgetsFlutterBinding
+          .platformDispatcher.views.first.devicePixelRatio = 3.00;
+
+      testWidgetsFlutterBinding.platformDispatcher.views.first.physicalSize =
+          KTestConstants.windowDefaultSize;
+
       expect(
         appLayoutRepository.getCurrentAppVersion,
         AppVersionEnum.tablet,
