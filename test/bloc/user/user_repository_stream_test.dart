@@ -48,6 +48,12 @@ void main() {
         (_) async => const Left(SomeFailure.serverError),
       );
 
+      when(
+        mockLanguageCacheRepository.getFromCache,
+      ).thenAnswer(
+        (_) => Language.ukraine,
+      );
+
       userRepository = UserRepository(
         appAuthenticationRepository: mockAppuserRepository,
         languageCacheRepository: mockLanguageCacheRepository,

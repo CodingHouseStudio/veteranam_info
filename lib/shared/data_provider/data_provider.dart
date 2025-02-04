@@ -7,7 +7,6 @@ export 'firestore_provider.dart';
 export 'image_load_helper.dart';
 export 'image_load_module.dart';
 export 'remote_config_module.dart';
-export 'shared_preferences_module.dart';
 export 'shared_preferences_provider.dart';
 export 'storage_module.dart';
 export 'storage_provider.dart';

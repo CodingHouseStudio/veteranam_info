@@ -13,9 +13,9 @@ void main() {
   tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.companyCache} ${KGroupText.repository} ', () {
     late ICompanyCacheRepository companyCacheRepository;
-    late SharedPrefencesRepository mockSharedPreferencesRepository;
+    late SharedPrefencesProvider mockSharedPreferencesRepository;
     setUp(() {
-      mockSharedPreferencesRepository = MockSharedPrefencesRepository();
+      mockSharedPreferencesRepository = MockSharedPrefencesProvider();
 
       companyCacheRepository = CompanyCacheRepository(
         sharedPrefencesRepository: mockSharedPreferencesRepository,
@@ -96,6 +96,42 @@ void main() {
       ).thenAnswer(
         (_) async => true,
       );
+
+      when(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.codeCacheKey,
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
+      when(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.linkCacheKey,
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
+      when(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.nameCacheKey,
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
+      when(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.publicNameCacheKey,
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
+      when(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.userEmailsCacheKey,
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
     });
     test('Get Company', () async {
       expect(
@@ -137,6 +173,36 @@ void main() {
         mockSharedPreferencesRepository.setStringList(
           key: CompanyCacheRepository.userEmailsCacheKey,
           value: KTestVariables.fullCompanyModel.userEmails,
+        ),
+      ).called(1);
+    });
+
+    test('Save To Cache Comapany', () async {
+      companyCacheRepository.cleanCache();
+
+      verify(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.codeCacheKey,
+        ),
+      ).called(1);
+      verify(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.nameCacheKey,
+        ),
+      ).called(1);
+      verify(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.publicNameCacheKey,
+        ),
+      ).called(1);
+      verify(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.linkCacheKey,
+        ),
+      ).called(1);
+      verify(
+        mockSharedPreferencesRepository.remove(
+          CompanyCacheRepository.userEmailsCacheKey,
         ),
       ).called(1);
     });

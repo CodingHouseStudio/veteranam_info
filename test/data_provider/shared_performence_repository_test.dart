@@ -12,15 +12,15 @@ void main() {
   setUp(resetTestVariables);
 
   tearDownAll(GetIt.I.reset);
-  group('${KScreenBlocName.sharedPreferences} ${KGroupText.repository} ', () {
-    late SharedPrefencesRepository sharedPrefencesRepository;
+  group('${KScreenBlocName.sharedPreferences} ${KGroupText.provider} ', () {
+    late SharedPrefencesProvider sharedPrefencesRepository;
     late SharedPreferences mockSharedPreferences;
     setUp(() {
       mockSharedPreferences = MockSharedPreferences();
 
-      sharedPrefencesRepository = SharedPrefencesRepository(
-        sharedPreferences: mockSharedPreferences,
-      );
+      registerSingleton(mockSharedPreferences);
+
+      sharedPrefencesRepository = SharedPrefencesProvider();
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -43,6 +43,13 @@ void main() {
           mockSharedPreferences.setStringList(
             KTestVariables.key,
             KTestVariables.fieldList,
+          ),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          mockSharedPreferences.remove(
+            KTestVariables.key,
           ),
         ).thenAnswer(
           (_) async => true,
@@ -78,6 +85,14 @@ void main() {
           true,
         );
       });
+      test('Remove', () async {
+        expect(
+          await sharedPrefencesRepository.remove(
+            KTestVariables.key,
+          ),
+          true,
+        );
+      });
     });
 
     group('${KGroupText.failure} ', () {
@@ -101,6 +116,13 @@ void main() {
           mockSharedPreferences.setStringList(
             KTestVariables.key,
             KTestVariables.fieldList,
+          ),
+        ).thenThrow(
+          (_) async => Exception(KGroupText.failure),
+        );
+        when(
+          mockSharedPreferences.remove(
+            KTestVariables.key,
           ),
         ).thenThrow(
           (_) async => Exception(KGroupText.failure),
@@ -132,6 +154,14 @@ void main() {
           await sharedPrefencesRepository.setStringList(
             key: KTestVariables.key,
             value: KTestVariables.fieldList,
+          ),
+          false,
+        );
+      });
+      test('Remove', () async {
+        expect(
+          await sharedPrefencesRepository.remove(
+            KTestVariables.key,
           ),
           false,
         );

@@ -57,8 +57,8 @@ Future<Either<SomeFailure, T>> eitherFutureHelper<T>(
 T valueErrorHelper<T>(
   T Function() right, {
   required T failureValue,
-  required String methodName,
-  required String className,
+  required String? methodName,
+  required String? className,
   String? data,
   ErrorLevelEnum? errorLevel,
   User? user,
@@ -67,14 +67,16 @@ T valueErrorHelper<T>(
   try {
     return right();
   } catch (e, stack) {
-    SomeFailure.value(
-      error: e,
-      stack: stack,
-      user: user,
-      userSetting: userSetting,
-      tag: methodName,
-      tagKey: className,
-    );
+    if (className != null) {
+      SomeFailure.value(
+        error: e,
+        stack: stack,
+        user: user,
+        userSetting: userSetting,
+        tag: methodName,
+        tagKey: className,
+      );
+    }
     return failureValue;
   }
 }

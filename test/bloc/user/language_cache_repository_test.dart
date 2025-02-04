@@ -13,9 +13,9 @@ void main() {
   tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.companyCache} ${KGroupText.repository} ', () {
     late ILanguageCacheRepository languageCacheRepository;
-    late SharedPrefencesRepository mockSharedPreferencesRepository;
+    late SharedPrefencesProvider mockSharedPreferencesRepository;
     setUp(() {
-      mockSharedPreferencesRepository = MockSharedPrefencesRepository();
+      mockSharedPreferencesRepository = MockSharedPrefencesProvider();
 
       languageCacheRepository = LanguageCacheRepository(
         sharedPrefencesRepository: mockSharedPreferencesRepository,

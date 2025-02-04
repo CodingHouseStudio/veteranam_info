@@ -1,14 +1,12 @@
 import 'dart:async';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
-class SharedPrefencesRepository {
-  SharedPrefencesRepository({required SharedPreferences sharedPreferences})
-      : _sharedPreferences = sharedPreferences;
-
-  final SharedPreferences _sharedPreferences;
+class SharedPrefencesProvider {
+  final SharedPreferences _sharedPreferences = GetIt.I.get<SharedPreferences>();
 
   String? getString(String key) {
     return valueErrorHelper(
