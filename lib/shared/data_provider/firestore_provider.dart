@@ -467,10 +467,11 @@ class FirestoreService {
               discount[DiscountModelJsonField.status] ==
                   DiscountState.published.enumString)) {
         if (companyId == null ||
-            discount[DiscountModelJsonField.userId] == companyId) {
+            discount[DiscountModelJsonField.userId] == companyId ||
+            companyId == '1') {
           if (!showOnlyBusinessDiscounts ||
-              !Config.isWeb &&
-                  discount[DiscountModelJsonField.userName] == null) {
+              Config.isWeb ||
+              discount[DiscountModelJsonField.userName] == null) {
             return DiscountModel.fromJson(discount);
           }
         }
