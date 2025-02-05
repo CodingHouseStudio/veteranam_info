@@ -37,6 +37,7 @@ enum SomeFailure with _Exception {
   wrongVerifyCode,
   invalidInput,
   browserNotSupportPopupDialog,
+  popupCancelled,
   emailInvalidFormat,
   passwordWrong,
   passwordWeak,
@@ -162,6 +163,8 @@ enum SomeFailure with _Exception {
         return ErrorText.unsupportedError;
       case SomeFailure.copyNotSupport:
         return ErrorText.copyNotSupport;
+      case SomeFailure.popupCancelled:
+        return ErrorText.popupCancelled;
     }
   }
 

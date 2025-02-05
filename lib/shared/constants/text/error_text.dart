@@ -29,6 +29,7 @@ abstract class ErrorText {
   static const serviceWorkerRegistration = 'Service Worker Registration';
   static const unsupportedError = 'Unsupported Error';
   static const copyNotSupport = 'Copy not support for user';
+  static const popupCancelled = 'Popup Cancelled';
   static const providerAlreadyLinked = 'Provider Already Linked';
   static const format = 'Format Error';
   static const unimplementedFeature = 'Unimplemented Feature';

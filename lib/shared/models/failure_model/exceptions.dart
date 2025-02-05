@@ -96,6 +96,9 @@ mixin _Exception {
         case 'popup-closed-by-user':
           errorLevelValue = ErrorLevelEnum.info;
           failure = SomeFailure.providerAlreadyLinked;
+        case 'cancelled-popup-request':
+          errorLevelValue = ErrorLevelEnum.info;
+          failure = SomeFailure.popupCancelled;
         case 'internal-error':
         case 'permission-denied':
         default:

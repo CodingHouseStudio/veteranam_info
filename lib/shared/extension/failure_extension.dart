@@ -87,6 +87,8 @@ extension SomeFailureValue on SomeFailure {
         return context.l10n.unsupportedError;
       case SomeFailure.copyNotSupport:
         return context.l10n.copyNotSupportError;
+      case SomeFailure.popupCancelled:
+        return null;
     }
   }
 }
