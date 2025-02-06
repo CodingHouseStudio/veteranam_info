@@ -102,7 +102,7 @@ void main() {
         );
         when(
           mockUserRepository.updateUserSetting(
-            userSetting: UserSetting.empty.copyWith(locale: Language.ukrain),
+            userSetting: UserSetting.empty.copyWith(locale: Language.ukraine),
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),

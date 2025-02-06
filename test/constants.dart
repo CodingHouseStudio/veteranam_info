@@ -14,6 +14,7 @@ import 'package:veteranam/firebase_options_development.dart' as prod;
 import 'package:veteranam/shared/constants/constants_dart.dart';
 import 'package:veteranam/shared/extension/extension_dart_constants.dart';
 import 'package:veteranam/shared/models/models.dart';
+import 'package:veteranam/shared/repositories/company_cache_repository.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
   FlutterError.onError = (details) {
@@ -103,6 +104,7 @@ abstract class KTestVariables {
   static const footer = 'Контакти\n';
 
   static const field = 'field_test';
+  static const fieldList = ['field_test'];
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
@@ -155,6 +157,14 @@ abstract class KTestVariables {
     userEmails: userEmailList,
   );
 
+  static const cacheCompany = CompanyModel(
+    id: CompanyCacheRepository.companyCacheId,
+    userEmails: userEmailList,
+    code: companyCode,
+    companyName: companyName,
+    publicName: companyName,
+    link: link,
+  );
   static const fullCompanyModel = CompanyModel(
     id: id,
     userEmails: userEmailList,
@@ -737,6 +747,8 @@ abstract class KScreenBlocName {
   static const network = ' Network';
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
+  static const sharedPreferences = 'Shared Preferences';
+  static const companyCache = 'Company Cache';
   static const filter = 'Filter';
   static const scroll = 'scroll';
   static const image = 'image';

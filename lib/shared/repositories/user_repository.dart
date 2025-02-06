@@ -9,23 +9,28 @@ import 'package:veteranam/shared/shared_dart.dart';
 class UserRepository {
   UserRepository({
     required IAppAuthenticationRepository appAuthenticationRepository,
-  }) : _appAuthenticationRepository = appAuthenticationRepository {
-    _userSettingController = StreamController<UserSetting>.broadcast(
-      onListen: _onUserStreamListen,
-      onCancel: _onUserStreamCancel,
-    );
+    required ILanguageCacheRepository languageCacheRepository,
+  })  : _appAuthenticationRepository = appAuthenticationRepository,
+        _languageCacheRepository = languageCacheRepository {
     _userController = StreamController<User>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
     );
+    _userSettingController = StreamController<UserSetting>.broadcast(
+      onListen: _onUserStreamListen,
+      onCancel: _onUserSettingStreamCancel,
+    );
   }
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  final ILanguageCacheRepository _languageCacheRepository;
+
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onUserStreamListen() {
+    tryGetUserLanguageFromCache();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
@@ -40,13 +45,13 @@ class UserRepository {
         var userSettingIsNew = _userSettingSubscription == null;
         _userSettingSubscription ??=
             _appAuthenticationRepository.userSetting.listen(
-          (currentUserSetting) {
+          (currentUserSettingValue) {
             if (userSettingIsNew) {
               _createFcmUserSettingAndRemoveDeleteParameter();
               userSettingIsNew = false;
             }
             _userSettingController.add(
-              currentUserSetting,
+              currentUserSettingValue,
             );
           },
         );
@@ -57,11 +62,25 @@ class UserRepository {
     });
   }
 
+  void tryGetUserLanguageFromCache() {
+    final cacheLanguage = _languageCacheRepository.getFromCache;
+    if (cacheLanguage != null) {
+      _userSettingController.add(
+        currentUserSetting.copyWith(
+          locale: cacheLanguage,
+        ),
+      );
+    }
+  }
+
   void _onUserStreamCancel() {
-    _userSettingSubscription?.cancel();
     _userSubscription?.cancel();
-    _userSettingSubscription = null;
     _userSubscription = null;
+  }
+
+  void _onUserSettingStreamCancel() {
+    _userSettingSubscription?.cancel();
+    _userSettingSubscription = null;
   }
 
   Stream<UserSetting> get userSetting => _userSettingController.stream;
@@ -89,6 +108,10 @@ class UserRepository {
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,
   }) async {
+    _languageCacheRepository.saveToCache(
+      language: userSetting.locale,
+      previousLanguage: currentUserSetting.locale,
+    );
     final result =
         await _appAuthenticationRepository.updateUserSetting(userSetting);
     return result.fold(

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart' show Colors, Widget, runApp;
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
+import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/shared/helper/helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -70,6 +72,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     }
   }
 
+  await asyncGetItRegister();
+
   configureDependencies();
 
   await initializeDateFormatting();
@@ -82,4 +86,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // Add cross-flavor configuration here
 
   runApp(await builder());
+}
+
+Future<void> asyncGetItRegister() async {
+  final sharedPrefences = await SharedPreferences.getInstance();
+
+  GetIt.I.registerSingleton(sharedPrefences);
 }

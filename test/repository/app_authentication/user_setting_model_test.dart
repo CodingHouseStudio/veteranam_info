@@ -171,7 +171,7 @@ void main() {
 }
 
 const _$LanguageEnumMap = {
-  Language.ukrain: 'ukrain',
+  Language.ukraine: 'ukrain',
   Language.english: 'english',
 };
 

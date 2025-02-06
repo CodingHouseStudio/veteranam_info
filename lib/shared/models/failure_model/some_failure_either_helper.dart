@@ -54,10 +54,11 @@ Future<Either<SomeFailure, T>> eitherFutureHelper<T>(
   }
 }
 
-bool boolErrorHelper(
-  bool Function() right, {
-  required String methodName,
-  required String className,
+T valueErrorHelper<T>(
+  T Function() right, {
+  required T failureValue,
+  required String? methodName,
+  required String? className,
   String? data,
   ErrorLevelEnum? errorLevel,
   User? user,
@@ -65,6 +66,33 @@ bool boolErrorHelper(
 }) {
   try {
     return right();
+  } catch (e, stack) {
+    if (className != null) {
+      SomeFailure.value(
+        error: e,
+        stack: stack,
+        user: user,
+        userSetting: userSetting,
+        tag: methodName,
+        tagKey: className,
+      );
+    }
+    return failureValue;
+  }
+}
+
+Future<T> valueFutureErrorHelper<T>(
+  Future<T> Function() right, {
+  required T failureValue,
+  required String methodName,
+  required String className,
+  String? data,
+  ErrorLevelEnum? errorLevel,
+  User? user,
+  UserSetting? userSetting,
+}) async {
+  try {
+    return await right();
   } catch (e, stack) {
     SomeFailure.value(
       error: e,
@@ -74,6 +102,6 @@ bool boolErrorHelper(
       tag: methodName,
       tagKey: className,
     );
-    return false;
+    return failureValue;
   }
 }

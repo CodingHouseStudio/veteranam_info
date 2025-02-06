@@ -301,7 +301,7 @@ class _DiscountFilterRepository {
     required Map<String, FilterItem> activityFilter,
     // required String callMethodName,
   }) {
-    return boolErrorHelper(
+    return valueErrorHelper(
       () {
         if (activityFilter.isEmpty) {
           return true;
@@ -315,6 +315,7 @@ class _DiscountFilterRepository {
           );
         }
       },
+      failureValue: false,
       methodName: 'Discount Filter ${ErrorText.repositoryKey}',
       className: '_activityListContainAnyValues',
       data: 'activityFilter: $activityFilter',

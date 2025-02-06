@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/models/models.dart';
+import 'package:veteranam/shared/models/convertors/image_convertor.dart';
+import 'package:veteranam/shared/models/helper_models/image_model.dart';
 
 part 'company_model.freezed.dart';
 part 'company_model.g.dart';

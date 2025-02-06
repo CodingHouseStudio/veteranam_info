@@ -18,10 +18,12 @@ class CompanyRepository implements ICompanyRepository {
     required CacheClient cache,
     required FirestoreService firestoreService,
     required StorageService storageService,
+    required ICompanyCacheRepository companyCacheRepository,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
         _cache = cache,
         _firestoreService = firestoreService,
-        _storageService = storageService {
+        _storageService = storageService,
+        _companyCacheRepository = companyCacheRepository {
     // Listen to currentUser changes and emit auth status
     // _authenticationStatuscontroller =
     //     StreamController<AuthenticationStatus>.broadcast(
@@ -38,6 +40,7 @@ class CompanyRepository implements ICompanyRepository {
   final CacheClient _cache;
   final FirestoreService _firestoreService;
   final StorageService _storageService;
+  final ICompanyCacheRepository _companyCacheRepository;
 
   late StreamController<CompanyModel> _userCompanyController;
   StreamSubscription<CompanyModel>? _userCompanySubscription;
@@ -47,6 +50,7 @@ class CompanyRepository implements ICompanyRepository {
   static const userCompanyCacheKey = '__user_company_cache_key__';
 
   void _onUserStreamListen() {
+    tryGetCompanyFromCache();
     _userSubscription ??=
         _appAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty &&
@@ -58,10 +62,17 @@ class CompanyRepository implements ICompanyRepository {
         }
         _userCompanySubscription ??=
             _firestoreService.getUserCompany(currentUser.email!).listen(
-          (currentUserCompany) {
-            _cache.write(key: userCompanyCacheKey, value: currentUserCompany);
+          (currentUserCompanyValue) {
+            _companyCacheRepository.saveToCache(
+              company: currentUserCompanyValue,
+              previousCompany: currentUserCompany,
+            );
+            _cache.write(
+              key: userCompanyCacheKey,
+              value: currentUserCompanyValue,
+            );
             _userCompanyController.add(
-              currentUserCompany,
+              currentUserCompanyValue,
             );
             _removeDeleteParameter();
           },
@@ -74,6 +85,16 @@ class CompanyRepository implements ICompanyRepository {
         _userCompanySubscription = null;
       }
     });
+  }
+
+  void tryGetCompanyFromCache() {
+    final cacheCompany = _companyCacheRepository.getFromCache;
+
+    _cache.write(key: userCompanyCacheKey, value: cacheCompany);
+
+    _userCompanyController.add(
+      cacheCompany,
+    );
   }
 
   void _onUserStreamCancel() {
@@ -167,6 +188,8 @@ class CompanyRepository implements ICompanyRepository {
     return eitherFutureHelper(
       () async {
         if (currentUserCompany.id.isNotEmpty) {
+          _companyCacheRepository.cleanCache();
+
           /// every thirty days, all documents where KAppText.deletedFieldId
           /// older than 30 days will be deleted automatically
           /// (firebase function)

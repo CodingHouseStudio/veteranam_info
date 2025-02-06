@@ -20,11 +20,13 @@ void main() {
     late CacheClient mockCache;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
+    late ICompanyCacheRepository mockCompanyCacheRepository;
     setUp(() {
       mockFirestoreService = MockFirestoreService();
       mockCache = MockCacheClient();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockStorageService = MockStorageService();
+      mockCompanyCacheRepository = MockICompanyCacheRepository();
       when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer(
@@ -87,6 +89,7 @@ void main() {
           cache: mockCache,
           firestoreService: mockFirestoreService,
           storageService: mockStorageService,
+          companyCacheRepository: mockCompanyCacheRepository,
         );
       });
       test('Update company with image', () async {
@@ -151,6 +154,7 @@ void main() {
           cache: mockCache,
           firestoreService: mockFirestoreService,
           storageService: mockStorageService,
+          companyCacheRepository: mockCompanyCacheRepository,
         );
       });
       test('Update company with image', () async {

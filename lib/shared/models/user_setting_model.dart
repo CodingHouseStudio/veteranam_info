@@ -11,7 +11,7 @@ class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
     @DeviceConverter() List<DeviceInfoModel>? devicesInfo,
-    @Default(Language.ukrain) Language locale,
+    @Default(Language.ukraine) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
     String? nickname,
@@ -56,7 +56,7 @@ enum UserRole {
 }
 
 enum Language {
-  ukrain(
+  ukraine(
     Locale('uk', 'UK'),
     // Assets.indonesia,
     'UA',
@@ -76,6 +76,17 @@ enum Language {
   // final AssetGenImage
   //     image; // Optional: this properties used for ListTile details
   final String text; // Optional: this properties used for ListTile details
+
+  static Language getFromLanguageCode(String code) {
+    switch (code) {
+      case 'en':
+        return Language.english;
+      case 'uk':
+        return Language.ukraine;
+      default:
+        return Language.ukraine;
+    }
+  }
 }
 
 // extension LanguageExtension on Language {

@@ -23,10 +23,12 @@ void main() {
     late UserRepository userRepository;
     late IAppAuthenticationRepository mockAppuserRepository;
     late StreamController<User> userStreamController;
+    late ILanguageCacheRepository mockLanguageCacheRepository;
 
     setUp(() {
       userStreamController = StreamController<User>()..add(User.empty);
       mockAppuserRepository = MockIAppAuthenticationRepository();
+      mockLanguageCacheRepository = MockILanguageCacheRepository();
 
       when(mockAppuserRepository.user).thenAnswer(
         (_) => userStreamController.stream,
@@ -46,8 +48,15 @@ void main() {
         (_) async => const Left(SomeFailure.serverError),
       );
 
+      when(
+        mockLanguageCacheRepository.getFromCache,
+      ).thenAnswer(
+        (_) => Language.ukraine,
+      );
+
       userRepository = UserRepository(
         appAuthenticationRepository: mockAppuserRepository,
+        languageCacheRepository: mockLanguageCacheRepository,
       );
     });
 
