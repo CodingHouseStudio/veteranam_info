@@ -104,6 +104,7 @@ enum DiscountState {
       this == DiscountState.published || this == DiscountState.deactivated;
 
   bool get isPublished => this == DiscountState.published;
+  bool get isRejected => this == DiscountState.rejected;
 }
 
 abstract class DiscountModelJsonField {
