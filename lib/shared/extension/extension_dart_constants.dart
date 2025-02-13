@@ -205,6 +205,16 @@ extension DiscountStateExtention on DiscountState {
   }
 }
 
+extension DiscountStateNullableExtention on DiscountModel {
+  DiscountModel get getForAdd {
+    if (status.isRejected) {
+      return copyWith(status: DiscountState.isNew);
+    } else {
+      return this;
+    }
+  }
+}
+
 extension DateFieldModelDart on DateFieldModel {
   TranslateModel get getString => TranslateModel(
         uk: 'До ${value?.toLocalDateString(

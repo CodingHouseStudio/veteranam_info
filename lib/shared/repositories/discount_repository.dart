@@ -169,7 +169,7 @@ class DiscountRepository implements IDiscountRepository {
   Future<Either<SomeFailure, bool>> addDiscount(DiscountModel discount) async {
     return eitherFutureHelper(
       () async {
-        await _firestoreService.addDiscount(discount);
+        await _firestoreService.addDiscount(discount.getForAdd);
 
         return const Right(true);
       },
