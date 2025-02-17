@@ -137,7 +137,7 @@ class CompanyRepository implements ICompanyRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> updateCompany({
+  Future<Either<SomeFailure, bool>> createUpdateCompany({
     required CompanyModel company,
     required FilePickerItem? imageItem,
   }) async {

@@ -33,7 +33,7 @@ void main() {
         );
         when(
           mockDiscountRepository.getCompanyDiscount(
-            id: KTestVariables.sendDiscountModel.id,
+            id: KTestVariables.sendDiscountAdminModel.id,
             companyId: KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer(
@@ -51,11 +51,17 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
           tester,
-          discountId: KTestVariables.sendDiscountModel.id,
+          discountId: KTestVariables.sendDiscountAdminModel.id,
         );
 
         companyStreamController.add(
           KTestVariables.fullCompanyModel.copyWith(id: KTestVariables.secondId),
+        );
+
+        await tester.pumpAndSettle();
+
+        companyStreamController.add(
+          KTestVariables.fullCompanyModel.copyWith(id: KTestVariables.id),
         );
 
         await discountsEditIdWrongInitialHelper(tester);
@@ -67,7 +73,7 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discountId: KTestVariables.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsEditIdWrongInitialHelper(tester);
@@ -77,7 +83,7 @@ void main() {
             await discountsAddPumpAppHelper(
               tester,
               mockGoRouter: mockGoRouter,
-              discountId: KTestVariables.sendDiscountModel.id,
+              discountId: KTestVariables.sendDiscountAdminModel.id,
             );
 
             await discountsEditIdWrongNavHelper(
@@ -92,17 +98,17 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getCompanyDiscount(
-            id: KTestVariables.sendDiscountModel.id,
+            id: KTestVariables.sendDiscountAdminModel.id,
             companyId: KTestVariables.fullCompanyModel.id,
           ),
         ).thenAnswer(
-          (invocation) async => Right(KTestVariables.sendDiscountModel),
+          (invocation) async => Right(KTestVariables.sendDiscountAdminModel),
         );
       });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
           tester,
-          discountId: KTestVariables.sendDiscountModel.id,
+          discountId: KTestVariables.sendDiscountAdminModel.id,
         );
 
         await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -114,7 +120,7 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discountId: KTestVariables.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -124,7 +130,7 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discountId: KTestVariables.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsEditFormHelper(
@@ -136,7 +142,7 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discountId: KTestVariables.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsAddCorectHelper(
@@ -151,8 +157,8 @@ void main() {
       testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsAddPumpAppHelper(
           tester,
-          discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
-          discountId: KTestVariables.sendDiscountModel.id,
+          discount: KTestVariables.sendDiscountAdminModel.copyWith(link: ''),
+          discountId: KTestVariables.sendDiscountAdminModel.id,
         );
 
         await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -164,8 +170,8 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discount: KTestVariables.sendDiscountModel.copyWith(link: ''),
-            discountId: KTestVariables.sendDiscountModel.id,
+            discount: KTestVariables.sendDiscountAdminModel.copyWith(link: ''),
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsAddInitialHelper(tester: tester, isEdit: true);
@@ -175,8 +181,8 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discount: KTestVariables.widgetSendDiscountModel,
-            discountId: KTestVariables.sendDiscountModel.id,
+            discount: KTestVariables.widgetSendDiscountAdminModel,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsEditFormHelper(
@@ -188,9 +194,9 @@ void main() {
           await discountsAddPumpAppHelper(
             tester,
             mockGoRouter: mockGoRouter,
-            discount: KTestVariables.sendDiscountModel
+            discount: KTestVariables.sendDiscountAdminModel
                 .copyWith(subLocation: SubLocation.online),
-            discountId: KTestVariables.sendDiscountModel.id,
+            discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 
           await discountsAddCorectHelper(

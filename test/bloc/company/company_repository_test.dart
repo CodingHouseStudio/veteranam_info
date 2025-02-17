@@ -94,7 +94,7 @@ void main() {
       });
       test('Update company with image', () async {
         expect(
-          await companyRepository.updateCompany(
+          await companyRepository.createUpdateCompany(
             company:
                 KTestVariables.fullCompanyModel.copyWith(userEmails: const []),
             imageItem: KTestVariables.filePickerItem,
@@ -159,7 +159,7 @@ void main() {
       });
       test('Update company with image', () async {
         expect(
-          await companyRepository.updateCompany(
+          await companyRepository.createUpdateCompany(
             company:
                 KTestVariables.fullCompanyModel.copyWith(userEmails: const []),
             imageItem: KTestVariables.filePickerItem,

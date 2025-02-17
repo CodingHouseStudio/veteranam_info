@@ -1129,8 +1129,13 @@
     "examples": "Text for the button in the app update dialog on a mobile phone",
     "description": "The button is used to postpone the app update for one session."
   },
-  "update": "Update Now",
+  "update": "Update",
   "@update": {
+    "examples": "Text for the button in the Discount Add/Edit Screen",
+    "description": "The button is used to update exist discount."
+  },
+  "updateNow": "Update Now",
+  "@updateNow": {
     "examples": "Text for the button in the app update dialog on a mobile phone",
     "description": "The button is used to direct the user to the app where they can update it."
   },
@@ -1851,6 +1856,15 @@
   "unsupportedError": "An error occurred while performing your action. Please try again or contact support if the issue persists.",
   "@unsupportedError": {
     "examples": "Error message displayed when a problem occurs during a specific operation, such as modifying a constant list."
+  },
+  "companyEmail": "Company email",
+  "@companyEmail": {
+    "examples": "Text filed label for Discount Add/Edit Screen",
+    "description": "Text Field for enter company email. Show only for admin account"
+  },
+  "showOnlyForAdminAccount": "Show only for admin account",
+  "@showOnlyForAdminAccount": {
+    "examples": "Descrption for company email field in the Discount Add/Edit Screen"
   },
   "copyNotSupportError": "It seems copying is not supported on your device, or an error occurred.",
   "@copyNotSupportError": {

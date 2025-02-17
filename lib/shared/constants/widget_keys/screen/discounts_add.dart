@@ -21,6 +21,7 @@ abstract class DiscountsAddKeys {
   static const discountsField = Key('discounts_add_screen_discounts_field');
   static const eligibilityField = Key('discounts_add_screen_eligibility_field');
   static const linkField = Key('discounts_add_screen_link_field');
+  static const emailField = Key('discounts_add_screen_email_field');
   static const descriptionField = Key('discounts_add_screen_description_field');
   static const exclusionField = Key('discounts_add_screen_exclusion_field');
   static const submitingText = Key('discounts_add_screen_submiting_text');

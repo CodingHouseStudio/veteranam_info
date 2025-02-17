@@ -33,6 +33,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required LinkFieldModel link,
     required MessageFieldModel description,
     required MessageFieldModel requirements,
+    required EmailFieldModel email,
     required DiscountsAddEnum formState,
     required bool isIndefinitely,
     SomeFailure? failure,
@@ -51,10 +52,12 @@ enum DiscountsAddEnum {
   detailInvalidData,
   description,
   descriptionInProgress,
-  descriptionInvalidData;
+  descriptionInvalidData,
+  showDialog;
 
   bool get isLoading {
     switch (this) {
+      case DiscountsAddEnum.showDialog:
       case DiscountsAddEnum.success:
       case DiscountsAddEnum.sendInProgress:
         return true;
@@ -95,6 +98,7 @@ enum DiscountsAddEnum {
       case DiscountsAddEnum.descriptionInvalidData:
       case DiscountsAddEnum.success:
       case DiscountsAddEnum.sendInProgress:
+      case DiscountsAddEnum.showDialog:
         return true;
       // ignore: no_default_cases
       default:

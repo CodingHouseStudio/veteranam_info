@@ -5,7 +5,7 @@ abstract class ICompanyRepository {
   Stream<CompanyModel> get company;
   CompanyModel get currentUserCompany;
 
-  Future<Either<SomeFailure, bool>> updateCompany({
+  Future<Either<SomeFailure, bool>> createUpdateCompany({
     required CompanyModel company,
     required FilePickerItem? imageItem,
   });

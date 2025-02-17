@@ -53,6 +53,7 @@ class DiscountModel with _$DiscountModel {
     SubLocation? subLocation,
     @ImagesConverter() List<ImageModel>? images,
     int? likes,
+    @Default(true) bool isVerified,
     // @Default(false) bool hasMarkdown,
   }) = _DiscountModel;
 
@@ -147,4 +148,5 @@ abstract class DiscountModelJsonField {
   static const status = 'status';
   static const images = 'images';
   static const likes = 'likes';
+  static const isVerified = 'isVerified';
 }

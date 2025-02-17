@@ -98,23 +98,24 @@ extension StringDartExtension on String {
 
   EligibilityEnum get toEligibility {
     switch (toLowerCase()) {
-      case 'ветерани':
+      case 'ветерани' || 'veterans':
         return EligibilityEnum.veterans;
-      case 'військовослужбовці':
+      case 'військовослужбовці' || 'military personnel':
         return EligibilityEnum.militaryPersonnel;
-      case 'учасники бойових дій':
+      case 'учасники бойових дій' || 'combatants':
         return EligibilityEnum.combatants;
-      case 'особи з інвалідністю внаслідок війни':
+      case 'особи з інвалідністю внаслідок війни' ||
+            'persons with disabilities due to war':
         return EligibilityEnum.personsWithDisabilitiesDueToWar;
-      case 'поліція':
+      case 'поліція' || 'police':
         return EligibilityEnum.policeOfficers;
-      case 'співробітники дснс':
+      case 'співробітники дснс' || 'emergency service employees':
         return EligibilityEnum.emergencyServiceEmployees;
-      case 'члени сімей загиблих':
+      case 'члени сімей загиблих' || 'family members of the deceased':
         return EligibilityEnum.familyMembersOfTheDeceased;
       // case 'внутрішньо переміщені особи':
       //   return EligibilityEnum.internallyDisplacedPersons;
-      case 'всі перелічені':
+      case 'всі перелічені' || 'all of the listed':
         return EligibilityEnum.all;
     }
     return EligibilityEnum.all;
@@ -205,13 +206,27 @@ extension DiscountStateExtention on DiscountState {
   }
 }
 
-extension DiscountStateNullableExtention on DiscountModel {
+extension DiscountModelExtention on DiscountModel {
   DiscountModel get getForAdd {
     if (status.isRejected) {
       return copyWith(status: DiscountState.isNew);
     } else {
       return this;
     }
+  }
+}
+
+extension DiscountModelNullableExtention on DiscountModel? {
+  bool createCompanyIfAdd({
+    required String emailFieldValue,
+    required String? companyEmail,
+  }) {
+    if (this == null) {
+      return true;
+    } else {
+      if (emailFieldValue != companyEmail) return true;
+    }
+    return false;
   }
 }
 
@@ -352,10 +367,6 @@ extension EligiblityEnumExtension on EligibilityEnum {
         return KAppText.eligibilityAll;
     }
   }
-}
-
-extension CompanyModelExtension on CompanyModel {
-  bool get isAdmin => id == KAppText.adminCompanyID;
 }
 
 extension UriExtension on Uri {

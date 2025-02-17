@@ -165,6 +165,14 @@ abstract class KTestVariables {
     publicName: companyName,
     link: link,
   );
+  static const fullCompanyUserModel = CompanyModel(
+    id: secondId,
+    userEmails: userEmailList,
+    code: companyCode,
+    companyName: companyName,
+    publicName: companyName,
+    link: link,
+  );
   static const fullCompanyModel = CompanyModel(
     id: id,
     userEmails: userEmailList,
@@ -396,7 +404,9 @@ abstract class KTestVariables {
     eligibility: [EligibilityEnum.all],
   );
 
-  static final blocSendDiscountModel = sendDiscountModel;
+  static final widgetSendDiscountAdminModel = sendDiscountAdminModel.copyWith(
+    eligibility: [EligibilityEnum.all],
+  );
 
   static final fullDiscount = KMockText.discountModel.copyWith(
     id: id,
@@ -408,9 +418,9 @@ abstract class KTestVariables {
     // additionalDetails: null,
     // html: null,
     // territory: null,
-    userId: fullCompanyModel.id,
-    userName: fullCompanyModel.companyName,
-    company: TranslateModel(uk: fullCompanyModel.publicName!),
+    userId: fullCompanyUserModel.id,
+    userName: fullCompanyUserModel.companyName,
+    company: TranslateModel(uk: fullCompanyUserModel.publicName!),
     subLocation: null,
     userPhoto: null,
     phoneNumber: null,
@@ -425,6 +435,15 @@ abstract class KTestVariables {
     likes: null,
     // subcategory: null,
     dateVerified: dateTime,
+  );
+
+  static final sendDiscountAdminModel = sendDiscountModel.copyWith(
+    userId: '0',
+    userName: null,
+    company: null,
+    isVerified: false,
+    userPhoto: null,
+    link: null,
   );
 
   static final userDiscountModelItems = <DiscountModel>[

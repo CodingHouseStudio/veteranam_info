@@ -38,7 +38,7 @@ void companyWidgetTestRegister() {
     (realInvocation) => companyStream.stream,
   );
   when(
-    mockCompanyRepository.updateCompany(
+    mockCompanyRepository.createUpdateCompany(
       company: KTestVariables.fullCompanyModel,
       imageItem: KTestVariables.filePickerItem,
     ),

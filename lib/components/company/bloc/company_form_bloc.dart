@@ -205,7 +205,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
 
       if (company != _companyRepository.currentUserCompany ||
           state.image.value != null) {
-        final result = await _companyRepository.updateCompany(
+        final result = await _companyRepository.createUpdateCompany(
           company: company,
           imageItem: state.image.value,
         );

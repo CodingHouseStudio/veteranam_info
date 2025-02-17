@@ -34,7 +34,7 @@ void main() {
       );
 
       when(
-        mockCompanyRepository.updateCompany(
+        mockCompanyRepository.createUpdateCompany(
           company: KTestVariables.fullCompanyModel,
           imageItem: KTestVariables.filePickerItem,
         ),
@@ -43,7 +43,7 @@ void main() {
       );
 
       when(
-        mockCompanyRepository.updateCompany(
+        mockCompanyRepository.createUpdateCompany(
           company: KTestVariables.fullCompanyModel.copyWith(link: null),
           imageItem: null,
         ),
@@ -423,7 +423,7 @@ void main() {
         build: () => companyFormBloc,
         act: (bloc) async {
           when(
-            mockCompanyRepository.updateCompany(
+            mockCompanyRepository.createUpdateCompany(
               company: KTestVariables.fullCompanyModel,
               imageItem: KTestVariables.filePickerItem,
             ),

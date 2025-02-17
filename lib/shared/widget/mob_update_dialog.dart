@@ -45,7 +45,7 @@ class MobUpdateDialog extends StatelessWidget {
               },
               style: KButtonStyles.whiteButtonStyle,
               child: Text(
-                context.l10n.update,
+                context.l10n.updateNow,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
             ),

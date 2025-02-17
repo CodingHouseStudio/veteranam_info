@@ -11,7 +11,7 @@ late ICitiesRepository mockCitiesRepository;
 void discountAddEditRegister() {
   Config.roleValue = Config.business;
   ExtendedDateTime.id = KTestVariables.discountModelItems.first.id;
-  ExtendedDateTime.current = KTestVariables.sendDiscountModel.dateVerified;
+  ExtendedDateTime.current = KTestVariables.sendDiscountAdminModel.dateVerified;
   ContextExtensions.pickerDate = KTestVariables.nextDateTime;
   mockDiscountRepository = MockIDiscountRepository();
   mockCompanyRepository = MockICompanyRepository();
@@ -19,7 +19,7 @@ void discountAddEditRegister() {
 
   when(
     mockDiscountRepository.addDiscount(
-      KTestVariables.widgetSendDiscountModel,
+      KTestVariables.widgetSendDiscountAdminModel,
     ),
   ).thenAnswer((invocation) async => const Right(true));
 

@@ -69,6 +69,7 @@ Future<void> discountsAddUncorectHelper({
     tester: tester,
     descriptionText: KTestVariables.fieldEmpty,
     requirmentsText: KTestVariables.fieldEmpty,
+    emailText: KTestVariables.userEmail,
   );
 
   verifyNever(
