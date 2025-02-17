@@ -33,6 +33,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
             requirements: MessageFieldModel.pure(),
+            email: EmailFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
             citiesList: [],
             isIndefinitely: true,
@@ -58,8 +59,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_LinkUpdate>(_onLinkUpdated);
     on<_DescriptionUpdate>(_onDescriptionUpdated);
     on<_RequirementsUpdate>(_onRequirementsUpdated);
+    on<_EmailUpdate>(_onEmailUpdated);
     on<_Send>(_onSend);
     on<_Back>(_onBack);
+    on<_CloseDialog>(_onCloseDialog);
 
     add(
       DiscountsAddEvent.loadedDiscount(
@@ -102,7 +105,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     if (event.discount != null) {
       discount = event.discount;
     } else if (event.discountId != null) {
-      if (_companyRepository.currentUserCompany.isNotEmpty) {
+      if (_companyRepository.currentUserCompany.isNotEmpty &&
+          _companyRepository.currentUserCompany.id !=
+              CompanyCacheRepository.companyCacheId) {
         final result = await _discountRepository.getCompanyDiscount(
           companyId: _companyRepository.currentUserCompany.id,
           id: event.discountId!,
@@ -159,6 +164,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           formState: DiscountsAddEnum.initial,
           isIndefinitely: periodIsNull,
           isOnline: discount!.subLocation?.isOnline ?? false,
+          email: EmailFieldModel.dirty(
+            _companyRepository.currentUserCompany.userEmails
+                    .elementAtOrNull(0) ??
+                '',
+          ),
         ),
       );
     }
@@ -437,6 +447,21 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
+  void _onEmailUpdated(
+    _EmailUpdate event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final emailFieldModel = EmailFieldModel.dirty(event.email);
+
+    emit(
+      state.copyWith(
+        email: emailFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.descriptionInProgress,
+      ),
+    );
+  }
+
   void _onBack(
     _Back event,
     Emitter<DiscountsAddState> emit,
@@ -449,6 +474,18 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         failure: null,
         formState: discountsAddEnum,
+      ),
+    );
+  }
+
+  void _onCloseDialog(
+    _CloseDialog event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        failure: null,
+        formState: DiscountsAddEnum.descriptionInProgress,
       ),
     );
   }
@@ -480,12 +517,33 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       }
       return;
     }
-    if (Formz.validate([state.description])) {
+    if (state.description.isValid &&
+        (!_companyRepository.currentUserCompany.isAdmin ||
+            state.email.isValid)) {
+      if (state.discount == null &&
+          state.formState != DiscountsAddEnum.showDialog) {
+        emit(
+          state.copyWith(
+            formState: DiscountsAddEnum.showDialog,
+          ),
+        );
+        return;
+      }
       emit(
         state.copyWith(
           formState: DiscountsAddEnum.sendInProgress,
         ),
       );
+      final String? companyId;
+
+      if (_companyRepository.currentUserCompany.isAdmin &&
+          state.discount == null) {
+        companyId = ExtendedDateTime.id;
+      } else {
+        companyId = _companyRepository.currentUserCompany.isAdmin
+            ? state.discount?.userId
+            : _companyRepository.currentUserCompany.id;
+      }
       //state.requirements
       final discount = (state.discount ?? discountModel).copyWith(
         discount: state.discounts.getValue
@@ -504,13 +562,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           (index) => TranslateModel(uk: state.city.value.elementAt(index)),
         ),
         description: TranslateModel(uk: state.description.value),
-        link: _companyRepository.currentUserCompany.isAdmin &&
-                state.discount != null
+        link: _companyRepository.currentUserCompany.isAdmin
             ? state.discount?.link
             : _companyRepository.currentUserCompany.link,
         company: _companyRepository.currentUserCompany.publicName == null ||
-                (_companyRepository.currentUserCompany.isAdmin &&
-                    state.discount != null)
+                (_companyRepository.currentUserCompany.isAdmin)
             ? state.discount?.company
             : TranslateModel(
                 uk: _companyRepository.currentUserCompany.publicName!,
@@ -522,19 +578,15 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         expiration: _getExpiration,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
-        userId: _companyRepository.currentUserCompany.isAdmin &&
-                state.discount != null
-            ? state.discount?.userId
-            : _companyRepository.currentUserCompany.id,
-        userPhoto: _companyRepository.currentUserCompany.isAdmin &&
-                state.discount != null
+        userId: companyId,
+        userPhoto: _companyRepository.currentUserCompany.isAdmin
             ? state.discount?.userPhoto
             : _companyRepository.currentUserCompany.image,
-        userName: _companyRepository.currentUserCompany.isAdmin &&
-                state.discount != null
+        userName: _companyRepository.currentUserCompany.isAdmin
             ? state.discount?.userName
             : _companyRepository.currentUserCompany.companyName,
         subLocation: state.isOnline ? SubLocation.online : null,
+        isVerified: !_companyRepository.currentUserCompany.isAdmin,
       );
       if (state.discount == discount) {
         emit(
@@ -548,6 +600,20 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       final result = await _discountRepository.addDiscount(
         discount.copyWith(dateVerified: ExtendedDateTime.current),
       );
+      if (_companyRepository.currentUserCompany.isAdmin &&
+          state.discount.createCompanyIfAdd(
+            emailFieldValue: state.email.value,
+            companyEmail: _companyRepository.currentUserCompany.userEmails
+                .elementAtOrNull(0),
+          )) {
+        await _companyRepository.createUpdateCompany(
+          company: CompanyModel(
+            id: ExtendedDateTime.idIfExistNull(companyId),
+            userEmails: [state.email.value],
+          ),
+          imageItem: null,
+        );
+      }
       result.fold(
         (l) => emit(state.copyWith(failure: l)),
         (r) => emit(

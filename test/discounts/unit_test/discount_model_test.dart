@@ -108,6 +108,7 @@ void main() {
       DiscountModelJsonField.images: [KTestVariables.imageModel.toJson()],
       DiscountModelJsonField.likes:
           KTestVariables.discountModelItems.last.likes,
+      DiscountModelJsonField.isVerified: false,
       // DiscountModelJsonField.eligibilityEN: KTestVariables
       //     .discountModelItems.last.eligibility
       //     ?.getTrsnslation(isEnglish: false),
@@ -175,6 +176,7 @@ void main() {
       ],
       DiscountModelJsonField.images: null,
       DiscountModelJsonField.likes: null,
+      DiscountModelJsonField.isVerified: true,
       // DiscountModelJsonField.eligibilityEN: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -345,6 +347,10 @@ void main() {
           discountModel.likes,
           KTestVariables.discountModelItems.last.likes,
         );
+        expect(
+          discountModel.isVerified,
+          false,
+        );
       });
 
       test('${KGroupText.nullable} ', () {
@@ -393,6 +399,10 @@ void main() {
         expect(
           discountModel.discount,
           KTestVariables.discountModelItems.last.discount,
+        );
+        expect(
+          discountModel.isVerified,
+          true,
         );
         // expect(
         //   discountModel.eligibility,
@@ -590,6 +600,7 @@ void main() {
           DiscountModelJsonField.images: KTestVariables.imagesList,
           DiscountModelJsonField.likes:
               KTestVariables.discountModelItems.last.likes,
+          DiscountModelJsonField.isVerified: true,
         };
 
         expect(
@@ -603,6 +614,7 @@ void main() {
         final discountModelJson = KTestVariables.discountModelItems.last
             .copyWith(
               images: KTestVariables.imagesList,
+              isVerified: false,
             )
             .toJson();
 
@@ -629,6 +641,7 @@ void main() {
               exclusions: null,
               eligibility: const [EligibilityEnum.all],
               likes: null,
+              isVerified: true,
             )
             .toJson();
 

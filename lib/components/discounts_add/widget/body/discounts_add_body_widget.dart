@@ -21,6 +21,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   late TextEditingController periodController;
   late TextEditingController requirmentsController;
   late TextEditingController descriptionController;
+  late TextEditingController emailController;
   // late TextEditingController eligibilityController;
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     periodController = TextEditingController(text: '');
     requirmentsController = TextEditingController(text: '');
     descriptionController = TextEditingController(text: '');
+    emailController = TextEditingController(text: '');
     // eligibilityController = TextEditingController();
     super.initState();
   }
@@ -49,6 +51,10 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       discountId: widget.discountId,
                     ),
                   );
+            }
+            if (state.company.isAdmin && emailController.text.isEmpty) {
+              emailController.text =
+                  state.company.userEmails.elementAtOrNull(0) ?? '';
             }
           },
           listenWhen: (previous, current) =>
@@ -395,6 +401,24 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       onChanged: (text) => context
                           .read<DiscountsAddBloc>()
                           .add(DiscountsAddEvent.linkUpdate(text)),
+                    )
+                  else if (context
+                      .read<CompanyWatcherBloc>()
+                      .state
+                      .company
+                      .isAdmin)
+                    TextFieldWidget(
+                      widgetKey: DiscountsAddKeys.emailField,
+                      controller: emailController,
+                      isDesk: isDesk,
+                      labelText: context.l10n.companyEmail,
+                      description: context.l10n.showOnlyForAdminAccount,
+                      showErrorText: _.formState.hasError,
+                      errorText: _.email.error.value(context),
+                      onChanged: (text) => context
+                          .read<DiscountsAddBloc>()
+                          .add(DiscountsAddEvent.emailUpdate(text)),
+                      isRequired: true,
                     ),
                   SendingTextWidget(
                     textKey: DiscountsAddKeys.submitingText,
@@ -405,14 +429,18 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     showSendingText:
                         _.formState == DiscountsAddEnum.sendInProgress,
                   ),
-                  if (!_.formState.isDescription) KSizedBox.kHeightSizedBox40,
+                  if (!_.formState.isDescription ||
+                      context.read<CompanyWatcherBloc>().state.company.isAdmin)
+                    KSizedBox.kHeightSizedBox40,
                   if (isDesk)
                     Row(
                       spacing: KPadding.kPaddingSize40,
-                      children: _buttons(context: context, isDesk: true),
+                      children:
+                          _buttons(context: context, isDesk: true, state: _),
                     )
                   else
-                    ..._buttons(context: context, isDesk: false).reversed,
+                    ..._buttons(context: context, isDesk: false, state: _)
+                        .reversed,
                   KSizedBox.kHeightSizedBox32,
                 ],
         ),
@@ -423,30 +451,35 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   List<Widget> _buttons({
     required BuildContext context,
     required bool isDesk,
+    required DiscountsAddState state,
   }) =>
       [
         if (isDesk)
-          Expanded(child: _cancelButton(context: context, isDesk: isDesk))
+          Expanded(
+            child:
+                _cancelButton(context: context, isDesk: isDesk, state: state),
+          )
         else
-          _cancelButton(context: context, isDesk: isDesk),
+          _cancelButton(context: context, isDesk: isDesk, state: state),
         if (!isDesk) KSizedBox.kHeightSizedBox24,
         if (isDesk)
           Expanded(
-            child: _sendButton(context: context, isDesk: isDesk),
+            child: _sendButton(context: context, isDesk: isDesk, state: state),
           )
         else
-          _sendButton(context: context, isDesk: isDesk),
+          _sendButton(context: context, isDesk: isDesk, state: state),
       ];
   Widget _cancelButton({
     required BuildContext context,
     required bool isDesk,
+    required DiscountsAddState state,
   }) =>
       SecondaryButtonWidget(
         widgetKey: DiscountsAddKeys.cancelButton,
         align: Alignment.center,
-        onPressed: context.read<DiscountsAddBloc>().state.formState.isLoading
+        onPressed: state.formState.isLoading
             ? null
-            : context.read<DiscountsAddBloc>().state.formState.isMain
+            : state.formState.isMain
                 ? () => context.dialog.showConfirmationDialog(
                       isDesk: isDesk,
                       title: context.l10n.cancelChanges,
@@ -462,50 +495,45 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 : () => context.read<DiscountsAddBloc>().add(
                       const DiscountsAddEvent.back(),
                     ),
-        text: context.read<DiscountsAddBloc>().state.formState.isMain
-            ? context.l10n.cancel
-            : context.l10n.back,
+        text: state.formState.isMain ? context.l10n.cancel : context.l10n.back,
         isDesk: isDesk,
       );
   Widget _sendButton({
     required BuildContext context,
     required bool isDesk,
+    required DiscountsAddState state,
   }) =>
-      DoubleButtonWidget(
-        key: DiscountsAddKeys.sendButton,
-        align: Alignment.center,
-        text: context.read<DiscountsAddBloc>().state.formState.isDescription
-            ? context.l10n.publish
-            : context.l10n.next,
-        isDesk: isDesk,
-        onPressed: context.read<DiscountsAddBloc>().state.formState.isLoading
-            ? null
-            : () {
-                if (context.read<DiscountsAddBloc>().state.discount == null &&
-                    context
-                        .read<DiscountsAddBloc>()
-                        .state
-                        .formState
-                        .isDescription &&
-                    context
-                        .read<DiscountsAddBloc>()
-                        .state
-                        .description
-                        .isValid) {
-                  context.dialog.showConfirmationPublishDiscountDialog(
-                    isDesk: isDesk,
-                    onPressed: () => _sendEvent(context),
-                  );
-                } else {
-                  _sendEvent(context);
-                }
-              },
-        mobTextWidth: double.infinity,
-        widgetKey: const Key(''),
-        deskTextWidth: double.infinity,
-        darkMode: true,
-        mobVerticalTextPadding: KPadding.kPaddingSize16,
-        mobIconPadding: KPadding.kPaddingSize16,
+      BlocListener<DiscountsAddBloc, DiscountsAddState>(
+        listenWhen: (previous, current) =>
+            previous.formState != current.formState &&
+            current.formState == DiscountsAddEnum.showDialog,
+        listener: (contextValue, state) {
+          context.dialog.showConfirmationPublishDiscountDialog(
+            isDesk: isDesk,
+            onPressed: () => _sendEvent(context),
+            onClose: () => context.read<DiscountsAddBloc>().add(
+                  const DiscountsAddEvent.closeDialog(),
+                ),
+          );
+        },
+        child: DoubleButtonWidget(
+          key: DiscountsAddKeys.sendButton,
+          align: Alignment.center,
+          text: state.formState.isDescription
+              ? state.discount == null
+                  ? context.l10n.publish
+                  : context.l10n.update
+              : context.l10n.next,
+          isDesk: isDesk,
+          onPressed:
+              state.formState.isLoading ? null : () => _sendEvent(context),
+          mobTextWidth: double.infinity,
+          widgetKey: const Key(''),
+          deskTextWidth: double.infinity,
+          darkMode: true,
+          mobVerticalTextPadding: KPadding.kPaddingSize16,
+          mobIconPadding: KPadding.kPaddingSize16,
+        ),
       );
 
   void _sendEvent(BuildContext context) => context.read<DiscountsAddBloc>().add(
@@ -523,6 +551,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     periodController.dispose();
     requirmentsController.dispose();
     descriptionController.dispose();
+    emailController.dispose();
     // eligibilityController.dispose();
   }
 }

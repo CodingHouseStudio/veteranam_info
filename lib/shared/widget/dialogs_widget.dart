@@ -263,6 +263,7 @@ class _DialogsWidget {
   void showConfirmationPublishDiscountDialog({
     required bool isDesk,
     required void Function()? onPressed,
+    required void Function()? onClose,
   }) =>
       _doubleDialog(
         childWidget: ({required isDeskValue, required context}) =>
@@ -270,6 +271,8 @@ class _DialogsWidget {
           isDesk: isDeskValue,
           onPressed: onPressed,
         ),
+        onCancelPressed: onClose,
+        onClosePressed: onClose,
         isDesk: isDesk,
         deskContentPadding: ({required isDeskValue}) => EdgeInsets.zero,
         deskMaxWidth: KSize.kPixel680,

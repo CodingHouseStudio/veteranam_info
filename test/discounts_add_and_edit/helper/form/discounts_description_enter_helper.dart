@@ -8,6 +8,7 @@ Future<void> discountsAddDescriptionEnterHelper({
   required WidgetTester tester,
   required String descriptionText,
   required String requirmentsText,
+  required String emailText,
 }) async {
   expect(
     find.byKey(DiscountsAddKeys.descriptionField),
@@ -39,6 +40,23 @@ Future<void> discountsAddDescriptionEnterHelper({
   await tester.enterText(
     find.byKey(DiscountsAddKeys.exclusionField),
     requirmentsText,
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(DiscountsAddKeys.emailField),
+    findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: DiscountsAddKeys.emailField,
+  );
+
+  await tester.enterText(
+    find.byKey(DiscountsAddKeys.emailField),
+    emailText,
   );
 
   await tester.pumpAndSettle();

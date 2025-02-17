@@ -8,7 +8,7 @@ import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart'
 import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
-import '../test_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setUpAll(configureFailureDependenciesTest);
@@ -30,13 +30,12 @@ void main() {
 
     setUp(() {
       LocalizedDateTime.enDateString = KTestVariables
-          .blocSendDiscountModel.expiration!.en!
+          .sendDiscountModel.expiration!.en!
           .replaceAll('Up to ', '');
-      LocalizedDateTime.ukDateString = KTestVariables
-          .blocSendDiscountModel.expiration!.uk
-          .replaceAll('До ', '');
+      LocalizedDateTime.ukDateString =
+          KTestVariables.sendDiscountModel.expiration!.uk.replaceAll('До ', '');
       StringDartExtension.date = KTestVariables.nextDateTime;
-      ExtendedDateTime.id = KTestVariables.blocSendDiscountModel.id;
+      ExtendedDateTime.id = KTestVariables.sendDiscountModel.id;
       ExtendedDateTime.current = KTestVariables.dateTime;
       mockDiscountsRepository = MockIDiscountRepository();
       mockCompanyRepository = MockICompanyRepository();
@@ -47,7 +46,7 @@ void main() {
           showOnlyBusinessDiscounts: false,
         ),
       ).thenAnswer(
-        (_) => Stream.value([KTestVariables.blocSendDiscountModel]),
+        (_) => Stream.value([KTestVariables.sendDiscountModel]),
       );
 
       when(
@@ -59,11 +58,10 @@ void main() {
       when(
         mockCompanyRepository.currentUserCompany,
       ).thenAnswer(
-        (_) => KTestVariables.fullCompanyModel,
+        (_) => KTestVariables.fullCompanyUserModel,
       );
       when(
-        mockDiscountsRepository
-            .addDiscount(KTestVariables.blocSendDiscountModel),
+        mockDiscountsRepository.addDiscount(KTestVariables.sendDiscountModel),
       ).thenAnswer(
         (_) async => const Right(true),
       );
@@ -127,17 +125,17 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestVariables.blocSendDiscountModel.title.uk,
+              KTestVariables.sendDiscountModel.title.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestVariables.blocSendDiscountModel.discount.first.toString(),
+              KTestVariables.sendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestVariables.blocSendDiscountModel.discount.first.toString(),
+              KTestVariables.sendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
@@ -152,12 +150,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.discountRemoveItem(
-              KTestVariables.blocSendDiscountModel.discount.first.toString(),
+              KTestVariables.sendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestVariables.blocSendDiscountModel.discount.first.toString(),
+              KTestVariables.sendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
@@ -192,7 +190,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestVariables.blocSendDiscountModel.directLink!,
+              KTestVariables.sendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -223,17 +221,17 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.categoryAdd(
-              KTestVariables.blocSendDiscountModel.category.first.uk,
+              KTestVariables.sendDiscountModel.category.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestVariables.blocSendDiscountModel.location!.first.uk,
+              KTestVariables.sendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestVariables.blocSendDiscountModel.location!.first.uk,
+              KTestVariables.sendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
@@ -248,12 +246,12 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityRemove(
-              KTestVariables.blocSendDiscountModel.location!.first.uk,
+              KTestVariables.sendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestVariables.blocSendDiscountModel.location!.first.uk,
+              KTestVariables.sendDiscountModel.location!.first.uk,
             ),
           )
           ..add(
@@ -265,14 +263,15 @@ void main() {
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestVariables.blocSendDiscountModel.description.uk,
+              KTestVariables.sendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.requirementsUpdate(
-              KTestVariables.blocSendDiscountModel.requirements!.uk,
+              KTestVariables.sendDiscountModel.requirements!.uk,
             ),
           )
+          ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send());
       },
       expect: () async => [
@@ -285,6 +284,7 @@ void main() {
         //   category: CategoriesFieldModel.pure(),
         //   city: CitiesFieldModel.pure(),
         //   period: DateFieldModel.pure(),
+        //   email: const EmailFieldModel.pure(),
         //   title: MessageFieldModel.pure(),
         //   discounts: DiscountsFieldModel.pure(),
         //   link: LinkFieldModel.pure(),
@@ -302,6 +302,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -319,6 +320,7 @@ void main() {
           isIndefinitely: false,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -336,6 +338,7 @@ void main() {
           isIndefinitely: false,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
           link: const LinkFieldModel.pure(),
@@ -508,6 +511,11 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
+              state.formState == DiscountsAddEnum.showDialog &&
+              state.failure == null,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
               state.formState == DiscountsAddEnum.sendInProgress &&
               state.failure == null,
         ),
@@ -568,12 +576,12 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.titleUpdate(
-              KTestVariables.blocSendDiscountModel.title.uk,
+              KTestVariables.sendDiscountModel.title.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.discountAddItem(
-              KTestVariables.blocSendDiscountModel.discount.first.toString(),
+              KTestVariables.sendDiscountModel.discount.first.toString(),
             ),
           )
           ..add(
@@ -583,7 +591,7 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.linkUpdate(
-              KTestVariables.blocSendDiscountModel.directLink!,
+              KTestVariables.sendDiscountModel.directLink!,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -595,21 +603,23 @@ void main() {
           )
           ..add(
             DiscountsAddEvent.cityAdd(
-              KTestVariables.blocSendDiscountModel.location!.first.uk,
+              KTestVariables.sendDiscountModel.location!.first.uk,
             ),
           )
           ..add(const DiscountsAddEvent.send())
           ..add(const DiscountsAddEvent.send())
           ..add(
             DiscountsAddEvent.descriptionUpdate(
-              KTestVariables.blocSendDiscountModel.description.uk,
+              KTestVariables.sendDiscountModel.description.uk,
             ),
           )
           ..add(
             DiscountsAddEvent.requirementsUpdate(
-              KTestVariables.blocSendDiscountModel.requirements!.uk,
+              KTestVariables.sendDiscountModel.requirements!.uk,
             ),
           )
+          ..add(const DiscountsAddEvent.send())
+          ..add(const DiscountsAddEvent.closeDialog())
           ..add(const DiscountsAddEvent.back())
           ..add(const DiscountsAddEvent.back());
       },
@@ -623,6 +633,7 @@ void main() {
         //   isIndefinitely: true,
         //   category: CategoriesFieldModel.pure(),
         //   city: CitiesFieldModel.pure(),
+        //   email: const EmailFieldModel.pure(),
         //   period: DateFieldModel.pure(),
         //   title: MessageFieldModel.pure(),
         //   discounts: DiscountsFieldModel.pure(),
@@ -640,6 +651,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -657,6 +669,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -674,6 +687,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: DateFieldModel.dirty(KTestVariables.nextDateTime),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -735,6 +749,12 @@ void main() {
               state.formState == DiscountsAddEnum.descriptionInProgress,
         ),
         predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.showDialog,
+        ),
+        predicate<DiscountsAddState>(
+          (state) => state.formState == DiscountsAddEnum.descriptionInProgress,
+        ),
+        predicate<DiscountsAddState>(
           (state) => state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -749,11 +769,11 @@ void main() {
       setUp(
         () => when(
           mockDiscountsRepository.getCompanyDiscount(
-            id: KTestVariables.blocSendDiscountModel.id,
-            companyId: KTestVariables.fullCompanyModel.id,
+            id: KTestVariables.sendDiscountModel.id,
+            companyId: KTestVariables.fullCompanyUserModel.id,
           ),
         ).thenAnswer(
-          (_) async => Right(KTestVariables.blocSendDiscountModel),
+          (_) async => Right(KTestVariables.sendDiscountModel),
         ),
       );
       blocTest<DiscountsAddBloc, DiscountsAddState>(
@@ -786,7 +806,7 @@ void main() {
           bloc.add(
             DiscountsAddEvent.loadedDiscount(
               discount: null,
-              discountId: KTestVariables.blocSendDiscountModel.id,
+              discountId: KTestVariables.sendDiscountModel.id,
             ),
           );
           await expectLater(
@@ -801,24 +821,24 @@ void main() {
           bloc
             ..add(
               DiscountsAddEvent.titleUpdate(
-                KTestVariables.blocSendDiscountModel.title.uk,
+                KTestVariables.sendDiscountModel.title.uk,
               ),
             )
             ..add(
               DiscountsAddEvent.linkUpdate(
-                KTestVariables.blocSendDiscountModel.directLink!,
+                KTestVariables.sendDiscountModel.directLink!,
               ),
             )
             ..add(const DiscountsAddEvent.send())
             ..add(const DiscountsAddEvent.send())
             ..add(
               DiscountsAddEvent.descriptionUpdate(
-                KTestVariables.blocSendDiscountModel.description.uk,
+                KTestVariables.sendDiscountModel.description.uk,
               ),
             )
             ..add(
               DiscountsAddEvent.requirementsUpdate(
-                KTestVariables.blocSendDiscountModel.requirements!.uk,
+                KTestVariables.sendDiscountModel.requirements!.uk,
               ),
             )
             ..add(const DiscountsAddEvent.send());
@@ -833,6 +853,7 @@ void main() {
           //   isIndefinitely: true,
           //   category: CategoriesFieldModel.pure(),
           //   city: CitiesFieldModel.pure(),
+          //   email: const EmailFieldModel.pure(),
           //   period: DateFieldModel.pure(),
           //   title: MessageFieldModel.pure(),
           //   discounts: DiscountsFieldModel.pure(),
@@ -850,6 +871,7 @@ void main() {
             isIndefinitely: true,
             category: const CategoriesFieldModel.pure(),
             city: const CitiesFieldModel.pure(),
+            email: const EmailFieldModel.pure(),
             period: const DateFieldModel.pure(),
             title: const MessageFieldModel.pure(),
             discounts: const DiscountsFieldModel.pure(),
@@ -918,8 +940,8 @@ void main() {
         bloc
           ..add(
             DiscountsAddEvent.loadedDiscount(
-              discount: KTestVariables.blocSendDiscountModel,
-              discountId: KTestVariables.blocSendDiscountModel.id,
+              discount: KTestVariables.sendDiscountModel,
+              discountId: KTestVariables.sendDiscountModel.id,
             ),
           )
           ..add(const DiscountsAddEvent.send())
@@ -936,6 +958,7 @@ void main() {
         //   isIndefinitely: true,
         //   category: CategoriesFieldModel.pure(),
         //   city: CitiesFieldModel.pure(),
+        //   email: const EmailFieldModel.pure(),
         //   period: DateFieldModel.pure(),
         //   title: MessageFieldModel.pure(),
         //   discounts: DiscountsFieldModel.pure(),
@@ -953,6 +976,7 @@ void main() {
           isIndefinitely: true,
           category: const CategoriesFieldModel.pure(),
           city: const CitiesFieldModel.pure(),
+          email: const EmailFieldModel.pure(),
           period: const DateFieldModel.pure(),
           title: const MessageFieldModel.pure(),
           discounts: const DiscountsFieldModel.pure(),
@@ -987,8 +1011,8 @@ void main() {
       setUp(
         () => when(
           mockDiscountsRepository.getCompanyDiscount(
-            id: KTestVariables.blocSendDiscountModel.id,
-            companyId: KTestVariables.fullCompanyModel.id,
+            id: KTestVariables.sendDiscountModel.id,
+            companyId: KTestVariables.fullCompanyUserModel.id,
           ),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError),
@@ -1024,7 +1048,7 @@ void main() {
           bloc.add(
             DiscountsAddEvent.loadedDiscount(
               discount: null,
-              discountId: KTestVariables.blocSendDiscountModel.id,
+              discountId: KTestVariables.sendDiscountModel.id,
             ),
           );
           await expectLater(
@@ -1048,6 +1072,7 @@ void main() {
           //   isIndefinitely: true,
           //   category: CategoriesFieldModel.pure(),
           //   city: CitiesFieldModel.pure(),
+          //   email: const EmailFieldModel.pure(),
           //   period: DateFieldModel.pure(),
           //   title: MessageFieldModel.pure(),
           //   discounts: DiscountsFieldModel.pure(),
@@ -1065,6 +1090,7 @@ void main() {
             isIndefinitely: true,
             category: const CategoriesFieldModel.pure(),
             city: const CitiesFieldModel.pure(),
+            email: const EmailFieldModel.pure(),
             period: const DateFieldModel.pure(),
             title: const MessageFieldModel.pure(),
             discounts: const DiscountsFieldModel.pure(),
@@ -1090,8 +1116,7 @@ void main() {
         ' when started failure, update fields correct and save failure', () {
       setUp(() {
         when(
-          mockDiscountsRepository
-              .addDiscount(KTestVariables.blocSendDiscountModel),
+          mockDiscountsRepository.addDiscount(KTestVariables.sendDiscountModel),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError),
         );
@@ -1155,12 +1180,12 @@ void main() {
           bloc
             ..add(
               DiscountsAddEvent.titleUpdate(
-                KTestVariables.blocSendDiscountModel.title.uk,
+                KTestVariables.sendDiscountModel.title.uk,
               ),
             )
             ..add(
               DiscountsAddEvent.discountAddItem(
-                KTestVariables.blocSendDiscountModel.discount.first.toString(),
+                KTestVariables.sendDiscountModel.discount.first.toString(),
               ),
             )
             ..add(
@@ -1210,31 +1235,32 @@ void main() {
             )
             ..add(
               DiscountsAddEvent.linkUpdate(
-                KTestVariables.blocSendDiscountModel.directLink!,
+                KTestVariables.sendDiscountModel.directLink!,
               ),
             )
             ..add(const DiscountsAddEvent.send())
             ..add(
               DiscountsAddEvent.categoryAdd(
-                KTestVariables.blocSendDiscountModel.category.first.uk,
+                KTestVariables.sendDiscountModel.category.first.uk,
               ),
             )
             ..add(
               DiscountsAddEvent.cityAdd(
-                KTestVariables.blocSendDiscountModel.location!.first.uk,
+                KTestVariables.sendDiscountModel.location!.first.uk,
               ),
             )
             ..add(const DiscountsAddEvent.send())
             ..add(
               DiscountsAddEvent.descriptionUpdate(
-                KTestVariables.blocSendDiscountModel.description.uk,
+                KTestVariables.sendDiscountModel.description.uk,
               ),
             )
             ..add(
               DiscountsAddEvent.requirementsUpdate(
-                KTestVariables.blocSendDiscountModel.requirements!.uk,
+                KTestVariables.sendDiscountModel.requirements!.uk,
               ),
             )
+            ..add(const DiscountsAddEvent.send())
             ..add(const DiscountsAddEvent.send());
         },
         expect: () async => [
@@ -1247,6 +1273,7 @@ void main() {
           //   isIndefinitely: true,
           //   category: CategoriesFieldModel.pure(),
           //   city: CitiesFieldModel.pure(),
+          //   email: const EmailFieldModel.pure(),
           //   period: DateFieldModel.pure(),
           //   title: MessageFieldModel.pure(),
           //   discounts: DiscountsFieldModel.pure(),
@@ -1264,6 +1291,7 @@ void main() {
             isIndefinitely: true,
             category: CategoriesFieldModel.pure(),
             city: CitiesFieldModel.pure(),
+            email: EmailFieldModel.pure(),
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
@@ -1282,6 +1310,7 @@ void main() {
             isIndefinitely: false,
             category: CategoriesFieldModel.pure(),
             city: CitiesFieldModel.pure(),
+            email: EmailFieldModel.pure(),
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
@@ -1299,6 +1328,7 @@ void main() {
             isIndefinitely: false,
             category: const CategoriesFieldModel.pure(),
             city: const CitiesFieldModel.pure(),
+            email: const EmailFieldModel.pure(),
             period: DateFieldModel.dirty(KTestVariables.nextDateTime),
             title: const MessageFieldModel.pure(),
             discounts: const DiscountsFieldModel.pure(),
@@ -1387,6 +1417,9 @@ void main() {
             (state) =>
                 state.requirements.isValid &&
                 state.formState == DiscountsAddEnum.descriptionInProgress,
+          ),
+          predicate<DiscountsAddState>(
+            (state) => state.formState == DiscountsAddEnum.showDialog,
           ),
           predicate<DiscountsAddState>(
             (state) => state.formState == DiscountsAddEnum.sendInProgress,

@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/text/text_constants.dart';
+import 'package:veteranam/shared/models/company_model.dart';
 import 'package:veteranam/shared/models/user_model.dart';
 
 extension StringExtension on String {
@@ -70,6 +71,8 @@ extension ExtendedDateTime on DateTime {
   static String get id =>
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
 
+  static String idIfExistNull(String? valueId) => valueId ?? id;
+
   @visibleForTesting
   static set current(DateTime? customTime) => _customTime = customTime;
 
@@ -77,4 +80,8 @@ extension ExtendedDateTime on DateTime {
   static set id(String? customId) => _id = customId;
 
   String get localeTime => toLocal().toString().split(' ')[0];
+}
+
+extension CompanyModelExtension on CompanyModel {
+  bool get isAdmin => id == KAppText.adminCompanyID;
 }

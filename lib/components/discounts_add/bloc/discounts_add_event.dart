@@ -32,6 +32,8 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
       _DescriptionUpdate;
   const factory DiscountsAddEvent.requirementsUpdate(String requirements) =
       _RequirementsUpdate;
+  const factory DiscountsAddEvent.emailUpdate(String email) = _EmailUpdate;
+  const factory DiscountsAddEvent.closeDialog() = _CloseDialog;
   const factory DiscountsAddEvent.back() = _Back;
   const factory DiscountsAddEvent.send() = _Send;
 }
