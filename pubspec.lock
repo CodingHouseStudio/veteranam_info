@@ -533,26 +533,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: "1c2e81c4d4b56f63cb6cefea0560aa5a504457c7a5a601018e6c6d7c07795640"
+      sha256: "2886a01a895565722add556510263231390a9f1d1d51eee34c22f9b94a73dd54"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.0"
+    version: "5.4.2"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
-      sha256: "973899f5be76d37312a07e366033b7f3f262dc51ec70ceae2a3592993289717a"
+      sha256: "2e8fe7e6b5869c981f62c0de1a0abef6f626a1daffe92e1e6881448a9d3da778"
       url: "https://pub.dev"
     source: hosted
-    version: "7.5.0"
+    version: "7.5.2"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: "960f7cc50ecb977a721165166aae90e86302f1370549457f78cbcea5be7f2cb2"
+      sha256: c9600115b6f74365a51c735d4c43d4632ad44bfde505fe7c13c838701cd01ff2
       url: "https://pub.dev"
     source: hosted
-    version: "5.13.6"
+    version: "5.13.8"
   firebase_core:
     dependency: "direct main"
     description:
