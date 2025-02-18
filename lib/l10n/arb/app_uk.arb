@@ -182,21 +182,27 @@
   "tooshort": "занадто коротке, воно повинно містити не менше {number} символів",
   "@tooshort": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Текст помилки для поля, якщо його значення занадто коротке."
   },
   "tooShortEmail": "занадто коротка, вона повинен містити не менше {number} символів",
   "@tooShortEmail": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Текст помилки для полів електронної адреси та паролю, якщо їх значення занадто коротке."
   },
   "tooShortPassword": "занадто короткий, він повинен містити не менше {number} символів",
   "@tooShortPassword": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Текст помилки для полів електронної адреси та паролю, якщо їх значення занадто коротке."
   },
@@ -1046,7 +1052,9 @@
   "moreCities": "Ще {count} міст..",
   "@moreCities": {
     "placeholders": {
-      "count": {}
+      "count": {
+        "type": "int"
+      }
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
   },
@@ -1420,7 +1428,9 @@
   "resendWait": "Ви зможете надіслати лист ще раз через {remainingSeconds} секунд.",
   "@resendWait": {
     "placeholders": {
-      "remainingSeconds": {}
+      "remainingSeconds": {
+        "type": "int"
+      }
     },
     "examples": "Текст на сторінці Password Reset Email, зявляється коли користувач натиснув надіслати, і очікує хвилину перед наступною відправкою"
   },
@@ -1678,7 +1688,9 @@
   "moreWhomGranted": "та ще {count} ...",
   "@moreWhomGranted": {
     "placeholders": {
-      "count": {}
+      "count": {
+        "type": "int"
+      }
     },
     "examples": "Текст на сторінці Discount, опис в каточці"
   },

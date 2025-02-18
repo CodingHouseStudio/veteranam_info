@@ -149,7 +149,7 @@ doc/api/
 **/test_repository_mocks.mocks.dart
 **/get_it_service_locator.config.dart
 # Ignore generated folder
-# **/generated/
+**/generated/
 # Ignore test generated folder
 test/.test_optimizer.dart
 test/.test_optimizer_test.dart
