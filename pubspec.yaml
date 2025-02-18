@@ -24,10 +24,10 @@ dependencies:
   file_picker: ^8.1.7
   firebase_analytics: ^11.4.2
   firebase_app_check: ^0.3.2
-  firebase_auth: ^5.4.0
+  firebase_auth: ^5.4.2
   firebase_core: ^3.11.0
   firebase_crashlytics: ^4.3.1
-  firebase_messaging: ^15.2.0
+  firebase_messaging: ^15.2.2
   firebase_performance: ^0.10.1
   firebase_remote_config: ^5.3.1
   firebase_storage: ^12.4.0
@@ -45,13 +45,13 @@ dependencies:
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3 # Used for dependency injection
-  go_router: ^14.6.3 # Decoupled routing  package which is a must for any app
+  go_router: ^14.8.0 # Decoupled routing  package which is a must for any app
   google_sign_in: ^6.2.2
   image_picker: ^1.1.2
   in_app_review: ^2.0.10
   injectable: ^2.5.0 # Used for dependency injection
   intl: ^0.19.0
-  json_serializable: ^6.9.0
+  json_serializable: ^6.9.4
   material_symbols_icons: ^4.2801.1
   package_info_plus: ^8.2.0
   # path_drawing: ^1.0.1
@@ -81,7 +81,7 @@ dev_dependencies:
 
   build_runner: ^2.4.14 # Used for class generation
   flutter_launcher_icons: ^0.14.3
-  flutter_native_splash: ^2.4.4
+  flutter_native_splash: ^2.4.5
   flutter_test:
     sdk: flutter
 
