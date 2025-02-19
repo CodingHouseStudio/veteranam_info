@@ -8,6 +8,7 @@ analyzer:
     - lib/**.g.dart
     - lib/**.freezed.dart
     - test/**.mocks.dart
+    - lib/**/generated/**.dart
 linter:
   rules:
     public_member_api_docs: false
