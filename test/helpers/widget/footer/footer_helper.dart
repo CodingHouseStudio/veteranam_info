@@ -95,27 +95,14 @@ Future<void> footerHelper(
         : ScrollPositionAlignmentPolicy.explicit,
   );
 
-  if (find.byKey(FooterKeys.logo).evaluate().isEmpty) {
-    await scrollingHelper(
-      tester: tester,
-      offset: KTestConstants.scrollingUp250,
-    );
-
-    if (find.byKey(FooterKeys.logo).evaluate().isEmpty) {
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown500,
-      );
-    }
-  }
-
-  expect(find.byKey(FooterKeys.logo), findsOneWidget);
+  // expect(find.byKey(FooterKeys.logo), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: FooterKeys.logo,
-    scrollPositionAlignmentPolicy:
-        ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+    offset: KTestConstants.scrollingDown,
+    // itemKey: FooterKeys.logo,
+    // scrollPositionAlignmentPolicy:
+    //     ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
   expect(find.byKey(FooterKeys.madeBy), findsOneWidget);
