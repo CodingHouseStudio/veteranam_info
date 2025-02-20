@@ -95,6 +95,13 @@ Future<void> footerHelper(
         : ScrollPositionAlignmentPolicy.explicit,
   );
 
+  if (find.byKey(FooterKeys.logo).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingDown100,
+    );
+  }
+
   expect(find.byKey(FooterKeys.logo), findsOneWidget);
 
   await scrollingHelper(
