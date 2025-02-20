@@ -26,9 +26,7 @@ Future<void> reportDialogOpenHelper({
   } else {
     await scrollingHelper(
       tester: tester,
-      itemKey: ReportDialogKeys.button,
       offset: KTestConstants.scrollingDown,
-      first: false,
       // scrollPositionAlignmentPolicy:
       //     ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
