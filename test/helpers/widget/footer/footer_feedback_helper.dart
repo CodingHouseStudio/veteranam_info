@@ -42,6 +42,11 @@ Future<void> footerFeedbackHelper({
         ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp150,
+  );
+
   await tester.tap(find.byKey(FooterKeys.button));
 
   await tester.pumpAndSettle();
