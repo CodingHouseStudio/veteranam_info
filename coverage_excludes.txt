@@ -26,4 +26,4 @@ lib/shared/repositories/failure_repository.dart
 lib/shared/repositories/data_picker_repository.dart
 lib/**/*_state.dart
 lib/**/*_event.dart
-**/generated/
+**/*.g.dart
