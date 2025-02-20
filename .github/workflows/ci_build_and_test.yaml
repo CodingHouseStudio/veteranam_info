@@ -7,7 +7,11 @@ concurrency:
 on:
   workflow_dispatch:
   pull_request:
-    branches: [main]
+    paths:
+      - "lib/**"
+      - "test/**"
+    branches: 
+      - main
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
