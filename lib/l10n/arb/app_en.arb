@@ -187,21 +187,27 @@
   "tooshort": "too short, it must contain {number} characters",
   "@tooshort": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Error text for a field when its value at least is too short."
   },
   "tooShortEmail": "Too short, it must contain at least {number} characters",
   "@tooShortEmail": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Error text for email and password fields when their value is too short."
   },
   "tooShortPassword": "Too short, it must contain at least {number} characters",
   "@tooShortPassword": {
     "placeholders": {
-      "number": {}
+      "number": {
+        "type": "int"
+      }
     },
     "examples": "Error text for email and password fields when their value is too short."
   },
@@ -1055,7 +1061,9 @@
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {
-      "count": {}
+      "count": {
+        "type": "int"
+      }
     },
     "examples": "Text on the Discount page, description in the skating rink"
   },
@@ -1408,7 +1416,9 @@
   "resendWait": "You can resend the email in {remainingSeconds} seconds.",
   "@resendWait": {
     "placeholders": {
-      "remainingSeconds": {}
+      "remainingSeconds": {
+        "type": "int"
+      }
     },
     "examples": "Text on the Password Reset Email page, appears when the user has clicked send and is waiting for a minute before the next send."
   },
@@ -1670,7 +1680,9 @@
   "moreWhomGranted": "{count} more..",
   "@moreWhomGranted": {
     "placeholders": {
-      "count": {}
+      "count": {
+        "type": "int"
+      }
     },
     "examples": "Text on the Discount page, description in the skating rink"
   },

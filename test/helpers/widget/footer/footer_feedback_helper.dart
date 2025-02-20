@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/constants/route_constants.dart';
@@ -37,6 +38,8 @@ Future<void> footerFeedbackHelper({
   await scrollingHelper(
     tester: tester,
     itemKey: FooterKeys.button,
+    scrollPositionAlignmentPolicy:
+        ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
   await tester.tap(find.byKey(FooterKeys.button));

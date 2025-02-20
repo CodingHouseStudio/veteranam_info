@@ -1,6 +1,7 @@
 import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_dependency.dart';
@@ -12,7 +13,13 @@ Future<void> hoverHelper({
   int index = 0,
   bool usePump = false,
 }) async {
-  await scrollingHelper(tester: tester, itemKey: key, itemIndex: index);
+  await scrollingHelper(
+    tester: tester,
+    itemKey: key,
+    itemIndex: index,
+    scrollPositionAlignmentPolicy:
+        ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+  );
 
   final widgetLocation = tester.getCenter(
     find.byKey(key).at(index),

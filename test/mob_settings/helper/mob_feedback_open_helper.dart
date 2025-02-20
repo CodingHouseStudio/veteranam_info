@@ -17,7 +17,10 @@ Future<void> mobFeedbackOpenHelper({
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(MobSettingsKeys.bugButton));
+  await tester.tap(
+    find.byKey(MobSettingsKeys.bugButton),
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 

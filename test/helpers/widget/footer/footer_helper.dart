@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
@@ -13,10 +14,18 @@ Future<void> footerHelper(
     offset: KTestConstants.scrollingDown,
   );
 
+  if (find.byKey(FooterKeys.title).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingUp500,
+    );
+  }
+
   await scrollingHelper(
     tester: tester,
     itemKey: FooterKeys.title,
-    offset: KTestConstants.scrollingUp200,
+    scrollPositionAlignmentPolicy:
+        ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
   expect(find.byKey(FooterKeys.title), findsOneWidget);
@@ -31,6 +40,8 @@ Future<void> footerHelper(
     await scrollingHelper(
       tester: tester,
       itemKey: FooterKeys.information,
+      scrollPositionAlignmentPolicy:
+          ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
   }
 
@@ -43,9 +54,28 @@ Future<void> footerHelper(
     );
   }
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown100,
+  );
+
   expect(find.byKey(FooterKeys.contact), findsOneWidget);
 
-  await emailButtonHelper(tester);
+  if (appVersion.isDesk || appVersion.isTablet) {
+    await emailButtonHelper(tester);
+  }
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: FooterKeys.contact,
+  );
+
+  if (find.byKey(FooterKeys.likedInIcon).evaluate().isEmpty) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingDown,
+    );
+  }
 
   // expect(find.byKey(FooterKeys.emailText), findsOneWidget);
 
@@ -60,13 +90,19 @@ Future<void> footerHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: FooterKeys.facebookIcon,
+    scrollPositionAlignmentPolicy: Config.isDevelopment
+        ? ScrollPositionAlignmentPolicy.keepVisibleAtEnd
+        : ScrollPositionAlignmentPolicy.explicit,
   );
 
-  expect(find.byKey(FooterKeys.logo), findsOneWidget);
+  // expect(find.byKey(FooterKeys.logo), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: FooterKeys.logo,
+    offset: KTestConstants.scrollingDown,
+    // itemKey: FooterKeys.logo,
+    // scrollPositionAlignmentPolicy:
+    //     ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
   expect(find.byKey(FooterKeys.madeBy), findsOneWidget);

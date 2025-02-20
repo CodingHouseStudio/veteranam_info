@@ -7,6 +7,9 @@ concurrency:
 on:
   workflow_dispatch:
   pull_request:
+    paths:
+      - "lib/**"
+      - "test/**"
     branches: [main]
 
 env:
@@ -42,7 +45,6 @@ jobs:
     secrets: inherit
     with:
       flutter_channel: stable
-      flutter_version: 3.27.1
       min_coverage: 90
       format_directories: "lib test"
       coverage_excludes: ${{ needs.get_coverage_excludes.outputs.coverage_excludes }}

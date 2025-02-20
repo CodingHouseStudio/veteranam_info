@@ -10,7 +10,6 @@ class InvestorsTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final title = [
       if (Config.isWeb) ...[
-        KSizedBox.kHeightSizedBox24,
         TitlePointWidget(
           title: context.l10n.provideSuggestionsFromBusinesses,
           titleKey: InvestorsKeys.title,

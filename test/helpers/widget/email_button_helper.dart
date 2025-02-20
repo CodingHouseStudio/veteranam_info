@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
-import '../helpers.dart';
+import '../../test_dependency.dart';
 
 Future<void> emailButtonHelper(
   WidgetTester tester,
@@ -15,7 +15,7 @@ Future<void> emailButtonHelper(
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(EmailButtonKeys.text));
+  await tester.tap(find.byKey(EmailButtonKeys.widget));
 
   await tester.pumpAndSettle();
 

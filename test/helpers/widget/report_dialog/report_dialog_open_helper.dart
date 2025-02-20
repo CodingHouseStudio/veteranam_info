@@ -26,13 +26,14 @@ Future<void> reportDialogOpenHelper({
   } else {
     await scrollingHelper(
       tester: tester,
-      itemKey: ReportDialogKeys.button,
       offset: KTestConstants.scrollingDown,
+      // scrollPositionAlignmentPolicy:
+      //     ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
   }
 
   await tester.tap(
-    find.byKey(ReportDialogKeys.button).first,
+    find.byKey(ReportDialogKeys.button).last,
     warnIfMissed: false,
   );
 

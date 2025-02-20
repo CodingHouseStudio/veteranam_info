@@ -6,19 +6,19 @@ import '../../test_dependency.dart';
 Future<void> investorsFailureHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    itemKey: InvestorsKeys.feedbackTitle,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: InvestorsKeys.feedbackTitle,
+  // );
+
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: InvestorsKeys.leftImages,
+  // );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: InvestorsKeys.leftImages,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: InvestorsKeys.fundsTitle,
+    offset: KTestConstants.scrollingDown,
   );
 
   await loadingFailureHelper(

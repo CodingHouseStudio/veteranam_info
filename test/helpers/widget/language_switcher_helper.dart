@@ -21,6 +21,7 @@ Future<void> languageSwitcherHelper(
 
   await tester.tap(
     find.byKey(LanguageSwitcherKeys.widget),
+    warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 

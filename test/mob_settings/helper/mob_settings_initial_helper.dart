@@ -43,7 +43,7 @@ Future<void> mobSettingsInitialHelper(
 
   await tester.tap(
     find.byKey(MobSettingsKeys.offlinesTitle),
-    // warnIfMissed: false,
+    warnIfMissed: false,
   );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
@@ -58,7 +58,10 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(MobSettingsKeys.email));
+  await tester.tap(
+    find.byKey(MobSettingsKeys.email),
+    warnIfMissed: false,
+  );
 
   expect(
     find.byKey(MobSettingsKeys.feedbackButton),

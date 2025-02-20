@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
+
+import '../test_dependency.dart';
 
 /// COMMENT: Helpers for scroll screen in tests
 ///
@@ -16,12 +20,17 @@ Future<void> scrollingHelper({
   Offset? offset,
   bool first = true,
   int? itemIndex,
+  double elementScrollAligment = KTestConstants.scrollElemntVisialbeDefault,
+  ScrollPositionAlignmentPolicy scrollPositionAlignmentPolicy =
+      ScrollPositionAlignmentPolicy.explicit,
+  PointerDeviceKind pointerDeviceKind = PointerDeviceKind.touch,
 }) async {
   if (offset != null) {
     await tester.drag(
       find.byKey(scrollKey ?? ScaffoldKeys.scroll),
       offset,
       warnIfMissed: false,
+      kind: pointerDeviceKind,
     );
     await tester.pumpAndSettle();
   }
@@ -33,9 +42,19 @@ Future<void> scrollingHelper({
             ? finder.first
             : finder.last;
     expect(item, findsOneWidget);
-    await tester.ensureVisible(
-      item,
+    await Scrollable.ensureVisible(
+      _element(item),
+      alignment: elementScrollAligment,
+      alignmentPolicy: scrollPositionAlignmentPolicy,
     );
+    // await tester.ensureVisible(
+    //   item,
+    // );
     await tester.pumpAndSettle();
   }
+}
+
+T _element<T extends Element>(FinderBase<Element> finder) {
+  TestAsyncUtils.guardSync();
+  return finder.evaluate().single as T;
 }

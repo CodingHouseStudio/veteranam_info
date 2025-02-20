@@ -71,6 +71,12 @@ Future<void> advancedFilterEnchancedMobileHelper(
 
   await chekPointSignleTapHelper(hasAmount: true, tester: tester);
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: DiscountsFilterKeys.list,
+  );
+
   expect(
     find.byKey(DiscountsFilterKeys.eligibilitiesCancelChip),
     findsOneWidget,
