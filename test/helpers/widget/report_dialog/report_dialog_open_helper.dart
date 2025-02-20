@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
@@ -29,15 +28,14 @@ Future<void> reportDialogOpenHelper({
       tester: tester,
       itemKey: ReportDialogKeys.button,
       offset: KTestConstants.scrollingDown,
-      scrollPositionAlignmentPolicy:
-          ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+      first: false,
+      // scrollPositionAlignmentPolicy:
+      //     ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
   }
 
   await tester.tap(
-    find.byKey(ReportDialogKeys.button).at(
-          (find.byKey(ReportDialogKeys.button).evaluate().length / 2).toInt(),
-        ),
+    find.byKey(ReportDialogKeys.button).last,
     warnIfMissed: false,
   );
 
