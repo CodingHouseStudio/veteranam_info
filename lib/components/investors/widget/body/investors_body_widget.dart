@@ -27,6 +27,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                     maxExtent: KPlatformConstants.maxWidthThresholdDesk,
                     sliver: SliverMainAxisGroup(
                       slivers: [
+                        KSizedBox.kHeightSizedBox24.toSliver,
                         InvestorsTitleWidget(
                           isDesk: state.appVersionEnum.isDesk,
                         ),

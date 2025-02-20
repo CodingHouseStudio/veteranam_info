@@ -19,7 +19,6 @@ class InvestorsTitleWidget extends StatelessWidget {
           titleAlignment: WrapAlignment.end,
           textAlign: TextAlign.end,
         ),
-        KSizedBox.kHeightSizedBox24,
         if (isDesk)
           KSizedBox.kHeightSizedBox40
         else

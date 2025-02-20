@@ -45,7 +45,7 @@ void main() async {
       appleProvider: Config.isReleaseMode
           ? AppleProvider.deviceCheck
           : AppleProvider.debug,
-    ); //test
+    );
   } catch (e, stack) {
     log(
       'Firebase AppCheck Error',
