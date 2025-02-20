@@ -98,8 +98,15 @@ Future<void> footerHelper(
   if (find.byKey(FooterKeys.logo).evaluate().isEmpty) {
     await scrollingHelper(
       tester: tester,
-      offset: KTestConstants.scrollingDown100,
+      offset: KTestConstants.scrollingUp250,
     );
+
+    if (find.byKey(FooterKeys.logo).evaluate().isEmpty) {
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown500,
+      );
+    }
   }
 
   expect(find.byKey(FooterKeys.logo), findsOneWidget);

@@ -43,7 +43,7 @@ Future<void> mobSettingsInitialHelper(
 
   await tester.tap(
     find.byKey(MobSettingsKeys.offlinesTitle),
-    // warnIfMissed: false,
+    warnIfMissed: false,
   );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
