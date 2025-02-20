@@ -58,7 +58,10 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(MobSettingsKeys.email));
+  await tester.tap(
+    find.byKey(MobSettingsKeys.email),
+    warnIfMissed: false,
+  );
 
   expect(
     find.byKey(MobSettingsKeys.feedbackButton),
