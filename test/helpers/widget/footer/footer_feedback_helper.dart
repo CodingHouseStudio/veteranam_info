@@ -44,6 +44,8 @@ Future<void> footerFeedbackHelper({
 
   await tester.tap(find.byKey(FooterKeys.button));
 
+  await tester.pumpAndSettle();
+
   verify(
     () => mockGoRouter.goNamed(
       KRoute.feedback.name,
