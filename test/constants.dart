@@ -720,6 +720,8 @@ abstract class KTestConstants {
   static Future<void> get delay async =>
       // ignore: inference_failure_on_instance_creation
       Future.delayed(const Duration(microseconds: 1));
+
+  static const scrollElemntVisialbeDefault = 0.0;
 }
 
 abstract class KScreenBlocName {

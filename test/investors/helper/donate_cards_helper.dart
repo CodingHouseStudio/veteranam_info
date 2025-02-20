@@ -17,7 +17,7 @@ Future<void> donatesCardHelper(
 
   await hoverHelper(
     tester: tester,
-    key: DonateCardKeys.widget,
+    key: DonateCardKeys.title,
     hoverElement: DonateCardKeys.subtitle,
   );
 }

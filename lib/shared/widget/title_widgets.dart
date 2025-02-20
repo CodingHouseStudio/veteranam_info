@@ -250,11 +250,11 @@ class TitlePointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: titleKey,
       spacing: KPadding.kPaddingSize32,
       children: [
         if (isDesk)
           Column(
-            key: titleKey,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               /// Displays the main title in the column layout,
@@ -293,7 +293,6 @@ class TitlePointWidget extends StatelessWidget {
           )
         else
           Row(
-            key: titleKey,
             crossAxisAlignment: iconCrossAxisAlignment,
             children: [
               Expanded(

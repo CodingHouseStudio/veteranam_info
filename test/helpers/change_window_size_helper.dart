@@ -15,23 +15,25 @@ Future<void> changeWindowSizeHelper({
   bool windowsTest = false,
   bool scrollUp = true,
 }) async {
-  tester.view.devicePixelRatio = 3.0;
-  tester.view.physicalSize = KTestConstants.windowDeskSize * 3;
-
   await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
 
+  tester.view.physicalSize =
+      KTestConstants.windowDeskSize * tester.view.devicePixelRatio;
+
   appVersionController.add(AppVersionEnum.desk);
+  appVersion = AppVersionEnum.desk;
 
   await tester.pumpAndSettle();
 
   await test();
 
   appVersionController.add(AppVersionEnum.mobile);
+  appVersion = AppVersionEnum.mobile;
 
-  tester.view.devicePixelRatio = 1.0;
-  tester.view.physicalSize = KTestConstants.windowDefaultSize;
+  tester.view.physicalSize =
+      KTestConstants.windowDefaultSize * tester.view.devicePixelRatio;
 
-  await tester.binding.setSurfaceSize(null);
+  await tester.binding.setSurfaceSize(KTestConstants.windowDefaultSize);
 
   await tester.pumpAndSettle();
 

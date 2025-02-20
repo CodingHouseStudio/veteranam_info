@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -18,6 +19,8 @@ Future<void> homeFailureHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp500,
     itemKey: HomeKeys.faqTitle,
+    scrollPositionAlignmentPolicy:
+        ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
   );
 
   await scrollingHelper(

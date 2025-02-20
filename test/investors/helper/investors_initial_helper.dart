@@ -11,7 +11,21 @@ Future<void> investorsInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: NawbarKeys.widget,
+      );
+      if (find.byKey(InvestorsKeys.title).evaluate().isEmpty) {
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown100,
+        );
+      }
 
       final matcher = Config.isWeb ? findsOneWidget : findsNothing;
 

@@ -8,6 +8,7 @@ import 'package:veteranam/shared/shared_dart.dart';
 import '../test_dependency.dart';
 
 late StreamController<AppVersionEnum> appVersionController;
+AppVersionEnum appVersion = AppVersionEnum.mobile;
 
 void appLayoutCubitInit() {
   final IAppLayoutRepository mockAppLayoutRepository =

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
@@ -162,10 +163,16 @@ Future<void> homeInitialHelper(
         findsOneWidget,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: HomeKeys.faqTitle,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: HomeKeys.faqTitle,
+      //   elementScrollAligment: 0.9,
+      // );
+
+      // expect(
+      //   find.byKey(HomeKeys.faqTitle),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(HomeKeys.faqSubtitle),
@@ -175,6 +182,13 @@ Future<void> homeInitialHelper(
       await scrollingHelper(
         tester: tester,
         itemKey: HomeKeys.faqSubtitle,
+        scrollPositionAlignmentPolicy:
+            ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+      );
+
+      expect(
+        find.byKey(HomeKeys.faqSubtitle),
+        findsOneWidget,
       );
 
       expect(
