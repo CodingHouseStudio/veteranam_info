@@ -6,6 +6,7 @@ abstract class ErrorText {
   static const standartKey = 'KEY';
   static const watcherBloc = 'Watcher Bloc';
   static const appAuthenticationKey = 'App Authentication';
+  static const iosAppTrackingRepository = 'Ios App Tracking';
   static const firebaseAnalyticsObserver = 'Firebase Analytics Observer';
   static const mainFileKey = 'MAIN FILE';
   static const async = 'Async exceptions';

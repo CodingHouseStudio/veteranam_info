@@ -3,6 +3,7 @@ export 'authentication/authentication_bloc.dart';
 export 'authentication/listenable.dart';
 export 'authentication_services/authentication_services_cubit.dart';
 export 'company/company_watcher_bloc.dart';
+export 'ios_app_tracking_cubit/ios_app_tracking_cubit_cubit.dart';
 export 'mob_feedback/mob_feedback_bloc.dart';
 export 'mob_offline_mode/mob_offline_mode_cubit.dart';
 export 'mobile_rating/mobile_rating_cubit.dart';

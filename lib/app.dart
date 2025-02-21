@@ -61,6 +61,10 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => GetIt.I.get<CompanyWatcherBloc>(),
           ),
+        if (!Config.isWeb && PlatformEnum.getPlatform.isIOS)
+          BlocProvider(
+            create: (context) => GetIt.I.get<IosAppTrackingCubit>(),
+          ),
       ],
       child: const AppWidget(),
     );

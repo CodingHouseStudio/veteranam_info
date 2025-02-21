@@ -38,6 +38,7 @@ export 'i_url_repository.dart';
 export 'i_work_repository.dart';
 export 'information_repository.dart';
 export 'investors_repository.dart';
+export 'ios_app_tracking_repository.dart';
 export 'language_cache_repository.dart';
 export 'messaging_module.dart';
 export 'mobile_rating_module.dart';
