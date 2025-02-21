@@ -526,7 +526,7 @@ class _DialogsWidget {
                 scrollable: true,
                 clipBehavior: Clip.hardEdge,
                 content: UserEmailDialog(
-                  key: DiscountsKeys.userEmailDialog,
+                  key: UserEmailDialogKeys.dialog,
                   isDesk: state.appVersionEnum.isTablet,
                   sendOnPressed: () => context.read<UserEmailFormBloc>().add(
                         const UserEmailFormEvent.sendEmail(),

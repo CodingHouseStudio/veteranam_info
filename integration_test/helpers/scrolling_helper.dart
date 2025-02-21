@@ -23,6 +23,7 @@ Future<void> scrollingHelperInt({
       offset,
       warnIfMissed: false,
     );
+
     await tester.pumpAndSettle();
   }
   if (itemKey != null) {

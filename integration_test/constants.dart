@@ -1,13 +1,24 @@
+import 'dart:developer' show log;
+import 'dart:math' show Random;
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
+import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
+import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/helper/helper.dart';
+import 'package:veteranam/shared/repositories/authentication_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';
@@ -16,15 +27,95 @@ import 'package:veteranam/shared/shared_flutter.dart';
 // String randomPassword = 'qwerty';
 /// COMMENT: Method sets setting for integration tests
 Future<void> setUpGlobalIntegration() async {
-  await Firebase.initializeApp(
-    options: Config.isDevelopment
-        ? dev.DefaultFirebaseOptions.currentPlatform
-        : prod.DefaultFirebaseOptions.currentPlatform,
-    name: Config.isWeb ? null : 'TEST',
-  );
+  final FirebaseApp app;
+  if (Firebase.apps.isEmpty) {
+    app = await Firebase.initializeApp(
+      options: Config.isDevelopment
+          ? dev.DefaultFirebaseOptions.currentPlatform
+          : prod.DefaultFirebaseOptions.currentPlatform,
+      name: Config.isWeb ? null : 'TEST',
+    );
+  } else {
+    app = Firebase.app();
+  }
 
   if (Config.isWeb) {
     usePathUrlStrategy();
+  }
+
+  try {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheck,
+      ),
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
+    );
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheck,
+      ),
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
+    );
+  } catch (e, stack) {
+    log(
+      'Firebase AppCheck Error',
+      name: 'Firebase AppCheck',
+      error: e,
+      stackTrace: stack,
+    );
+  }
+
+// Async exceptions handling
+  PlatformDispatcher.instance.onError = (error, stack) {
+    // Log the error details to FailureRepository with specified level and tags
+    SomeFailure.value(
+      error: error,
+      stack: stack,
+      tag: ErrorText.async, // Tag to identify async exceptions
+      tagKey:
+          ErrorText.mainFileKey, // Key for identifying error location/source
+    );
+
+    return true; // Return true to indicate the error has been handled
+  };
+
+// Set only Vertical orientation
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  if (!Config.kIsWeb) {
+    if (PlatformEnum.getPlatform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    }
   }
 
   // FlutterError.onError = (details) {
@@ -32,8 +123,32 @@ Future<void> setUpGlobalIntegration() async {
   // };
   //
   // Bloc.observer = const AppBlocObserver();
+  await _asyncGetItRegister();
+
+  await initializeDateFormatting();
 
   configureDependencies();
+}
+
+Future<void> tearDownGlobalItegration() async {
+  try {
+    await GetIt.I.get<AuthenticationRepository>().logOut();
+    await getIt.reset();
+    await FirebaseFirestore.instance.terminate();
+    await FirebaseFirestore.instance.clearPersistence();
+  } catch (e, stack) {
+    log(
+      'Integration Tests Tear down error: ',
+      error: e,
+      stackTrace: stack,
+    );
+  }
+}
+
+Future<void> _asyncGetItRegister() async {
+  final sharedPrefences = await SharedPreferences.getInstance();
+
+  GetIt.I.registerSingleton(sharedPrefences);
 }
 
 // String generateRandomUsername() {
@@ -61,6 +176,19 @@ abstract class KTestConstants {
 }
 
 abstract class KTestVariables {
+  static const String sgignInEmail = 'test@gmail.com';
+  static const String signInUpPassword = 'Veteranam123!';
+
+  static String get signUpEmail => _generateRandomUsername();
+
+  static String _generateRandomUsername() {
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final randomNumber = Random().nextInt(100000);
+    const salt = 'MyApp'; // Replace with your desired salt
+
+    return '$timestamp$randomNumber$salt@test.com';
+  }
+
   static const String useremail = 'example@gmail.com';
 
   static const filter = 'filter_test';

@@ -14,7 +14,11 @@ run_flutter_test() {
             --driver=test_driver/integration_test.dart \
             --target=integration_test/"$test_name"_test.dart \
             -d chrome\
-            --web-port=8080)
+            --web-port=8080\
+            --dart-define=FLAVOUR=development\
+            --dart-define=ROLE=user\
+            --dart-define-from-file=.env_dev.json\
+            --flavor=development)
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then
@@ -37,7 +41,8 @@ run_flutter_test() {
 
 # List of tests to run
 TESTS=(
-    "navigation"
+    "email_dialog"
+    "discount_screen"
 )
 
 run_flutter_test "${TESTS[@]}"

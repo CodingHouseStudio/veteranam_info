@@ -136,7 +136,7 @@ void main() {
 
     tearDown(() async {
       await userStreamController.close();
-      userRepository.dispose();
+      await userRepository.dispose();
     });
   });
 }

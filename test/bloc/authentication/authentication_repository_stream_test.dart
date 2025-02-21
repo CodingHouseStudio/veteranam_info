@@ -226,7 +226,7 @@ void main() {
     tearDown(() async {
       await userStreamController.close();
       // await userSettingStreamController.close();
-      authenticationRepository.dispose();
+      await authenticationRepository.dispose();
     });
   });
 }

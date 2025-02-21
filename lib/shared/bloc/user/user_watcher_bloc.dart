@@ -120,10 +120,10 @@ class UserWatcherBloc extends Bloc<_UserWatcherEvent, UserWatcherState> {
   }
 
   @override
-  Future<void> close() {
-    _userSettingSubscription.cancel();
-    _userSubscription.cancel();
-    _userRepository.dispose();
+  Future<void> close() async {
+    await _userSettingSubscription.cancel();
+    await _userSubscription.cancel();
+    await _userRepository.dispose();
     return super.close();
   }
 }

@@ -72,7 +72,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     }
   }
 
-  await asyncGetItRegister();
+  await _asyncGetItRegister();
 
   configureDependencies();
 
@@ -88,7 +88,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   runApp(await builder());
 }
 
-Future<void> asyncGetItRegister() async {
+Future<void> _asyncGetItRegister() async {
   final sharedPrefences = await SharedPreferences.getInstance();
 
   GetIt.I.registerSingleton(sharedPrefences);
