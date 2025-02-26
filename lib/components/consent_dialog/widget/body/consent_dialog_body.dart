@@ -22,7 +22,15 @@ class ConsentDialogBody extends StatelessWidget {
             if (context.canPop()) {
               context.popDialog();
             } else {
-              context.goNamed(KRoute.home.name);
+              if (Config.isBusiness) {
+                if (context.userHasEmail) {
+                  context.goNamed('/${KRoute.myDiscounts.name}');
+                } else {
+                  context.goNamed('/${KRoute.signUp.name}');
+                }
+              } else {
+                context.goNamed(KRoute.home.name);
+              }
             }
           }
         },
