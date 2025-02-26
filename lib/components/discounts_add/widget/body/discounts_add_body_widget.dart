@@ -52,10 +52,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     ),
                   );
             }
-            if (state.company.isAdmin && emailController.text.isEmpty) {
-              emailController.text =
-                  state.company.userEmails.elementAtOrNull(0) ?? '';
-            }
           },
           listenWhen: (previous, current) =>
               previous.company.id != current.company.id &&

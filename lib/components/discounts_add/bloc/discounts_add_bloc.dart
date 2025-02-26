@@ -164,11 +164,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           formState: DiscountsAddEnum.initial,
           isIndefinitely: periodIsNull,
           isOnline: discount!.subLocation?.isOnline ?? false,
-          email: EmailFieldModel.dirty(
-            _companyRepository.currentUserCompany.userEmails
-                    .elementAtOrNull(0) ??
-                '',
-          ),
+          email: const EmailFieldModel.pure(),
         ),
       );
     }
