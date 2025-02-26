@@ -399,10 +399,11 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .add(DiscountsAddEvent.linkUpdate(text)),
                     )
                   else if (context
-                      .read<CompanyWatcherBloc>()
-                      .state
-                      .company
-                      .isAdmin)
+                          .read<CompanyWatcherBloc>()
+                          .state
+                          .company
+                          .isAdmin &&
+                      _.discount == null)
                     TextFieldWidget(
                       widgetKey: DiscountsAddKeys.emailField,
                       controller: emailController,

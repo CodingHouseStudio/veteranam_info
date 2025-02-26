@@ -514,7 +514,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       return;
     }
     if (state.description.isValid &&
-        (!_companyRepository.currentUserCompany.isAdmin ||
+        (state.discount != null ||
+            !_companyRepository.currentUserCompany.isAdmin ||
             state.email.isValid)) {
       if (state.discount == null &&
           state.formState != DiscountsAddEnum.showDialog) {
@@ -555,7 +556,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         ),
         location: List.generate(
           state.city.value.length,
-          (index) => TranslateModel(uk: state.city.value.elementAt(index)),
+          (index) => TranslateModel(
+            uk: state.city.value.elementAt(index),
+            en: state.discount?.location?.elementAtOrNull(index)?.en,
+          ),
         ),
         description: TranslateModel(uk: state.description.value),
         link: _companyRepository.currentUserCompany.isAdmin

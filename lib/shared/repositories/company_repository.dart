@@ -145,7 +145,9 @@ class CompanyRepository implements ICompanyRepository {
       () async {
         late var methodCompanyModel = company;
         if (!company.userEmails
-            .contains(_appAuthenticationRepository.currentUser.email)) {
+                .contains(_appAuthenticationRepository.currentUser.email) &&
+            (currentUserCompany.isNotAdmin ||
+                currentUserCompany.id == company.id)) {
           methodCompanyModel = methodCompanyModel.copyWith(
             userEmails: List.from(methodCompanyModel.userEmails)
               ..add(_appAuthenticationRepository.currentUser.email!),
@@ -168,7 +170,10 @@ class CompanyRepository implements ICompanyRepository {
           }
         }
         await _firestoreService.updateCompany(methodCompanyModel);
-        _userCompanyController.add(methodCompanyModel);
+        if (currentUserCompany.isNotAdmin ||
+            currentUserCompany.id == company.id) {
+          _userCompanyController.add(methodCompanyModel);
+        }
         return const Right(true);
       },
       methodName: 'Company(updateCompany)',
