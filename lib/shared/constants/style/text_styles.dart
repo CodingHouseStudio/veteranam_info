@@ -276,7 +276,7 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
   );
-  static const TextStyle materialThemeBodyLargeBolcUnderLine = TextStyle(
+  static const TextStyle materialThemeBodyLargeBoldUnderLine = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,

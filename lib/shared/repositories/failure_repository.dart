@@ -3,6 +3,7 @@ import 'dart:developer' show log;
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'
     deferred as firebase_crashlytics;
+import 'package:get_it/get_it.dart';
 // import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
     show
@@ -32,7 +33,10 @@ class FailureRepository {
     UserSetting? userSetting,
   }) async {
     // Define the variable for error level categorization
-    if (Config.isReleaseMode && Config.isProduction) {
+    if (Config.isReleaseMode &&
+        Config.isProduction &&
+        // GDPR: also neccesary user agree
+        GetIt.I.get<FirebaseAnalyticsCacheController>().currentState) {
       try {
         if (Config.isWeb) {
           await sentry.loadLibrary();

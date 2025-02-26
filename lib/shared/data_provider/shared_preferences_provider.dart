@@ -51,6 +51,26 @@ class SharedPrefencesProvider {
     );
   }
 
+  bool? getBool(String key) {
+    return valueErrorHelper(
+      () => _sharedPreferences.getBool(key),
+      failureValue: null,
+      methodName: 'getString',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
+  }
+
+  Future<bool> setBool({required String key, required bool value}) async {
+    return valueFutureErrorHelper(
+      () async => _sharedPreferences.setBool(key, value),
+      failureValue: false,
+      methodName: 'setString',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key, Value: $value',
+    );
+  }
+
   Future<bool> remove(
     String key,
   ) async {
