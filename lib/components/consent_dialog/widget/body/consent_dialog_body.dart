@@ -19,18 +19,14 @@ class ConsentDialogBody extends StatelessWidget {
       child: BlocConsumer<ConsentDialogBloc, ConsentDialogState>(
         listener: (context, state) {
           if (state.sent) {
-            if (context.canPop()) {
-              context.popDialog();
-            } else {
-              if (Config.isBusiness) {
-                if (context.userHasEmail) {
-                  context.goNamed('/${KRoute.myDiscounts.name}');
-                } else {
-                  context.goNamed('/${KRoute.signUp.name}');
-                }
+            if (Config.isBusiness) {
+              if (context.userHasEmail) {
+                context.goNamed(KRoute.myDiscounts.name);
               } else {
-                context.goNamed(KRoute.home.name);
+                context.goNamed(KRoute.signUp.name);
               }
+            } else {
+              context.goNamed(KRoute.home.name);
             }
           }
         },
