@@ -34,11 +34,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg" href="logo.svg" />
 
-  <!-- Assigns blacklist of urls based on localStorage (must be placed before yett script) -->
-  <script src="js/get_consent.js"></script>
-  <!-- Yett is used to block all third-party scripts that are part of the blacklist (must be placed before all other (third-party) scripts) -->
-  <script src="https://unpkg.com/yett"></script>
-
   <title>Veteranam</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -107,12 +102,6 @@
   <!-- The standard consent popup (hidden by default) -->
 
   <script src="js/loading_screen.js"></script>
-  <!-- Updates localStorage with user's cookie settings -->
-  <script src="js/set_consent.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
 
   <script src="flutter_bootstrap.js" async>
     if ('serviceWorker' in navigator) {
@@ -137,52 +126,6 @@
       x.parentNode.insertBefore(e, x);
     })(window, "script");
   </script> -->
-
-
-  <!-- The standard consent popup (hidden by default) -->
-  <div id="consent-popup" class="hidden consent-div" role="dialog" aria-labelledby="consent-popup-title"
-    aria-modal="true">
-    <h2 id="consent-popup-title">Використання cookie</h2>
-    <p class="cookies_text">
-      Ми використовуємо cookie для роботи сайту, збору статистики та персоналізації. Ви можете прийняти або відхилити їх
-      використання. Зміну вибору можна зробити в будь-який час.
-    </p>
-    <div id="cookie_button">
-      <button id="reject-btn" class="btn inline">Відхилити</button>
-      <button id="info-btn" class="btn inline">Детальніше</button>
-      <button id="accept-btn" class="btn inline">Прийняти</button>
-    </div>
-  </div>
-  <!-- Detailed consent popup allows the user to control scripts by their category -->
-  <div id="consent-popup-details" class="hidden consent-div" role="dialog" aria-labelledby="consent-popup-details-title"
-    aria-modal="true">
-    <h2 id="consent-popup-details-title">Налаштування cookie</h2>
-    <div class="cookies_container">
-      <div class="row-div">
-        <h3>Необхідні</h3>
-        <label class="switch">
-          <!-- Essentials must always be checked -->
-          <input id="essential-cb" type="checkbox" checked disabled>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <p class="cookies_setting_text">Ці cookie потрібні для роботи сайту.</p>
-    </div>
-    <div class="cookies_container">
-      <div class="row-div">
-        <h3>Аналітика</h3>
-        <label class="switch">
-          <input id="analytics-cb" type="checkbox" checked>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <p class="cookies_setting_text">Збирає статистику використання сайту без збору особистих даних.</p>
-    </div>
-    <div id="cookie_setting_button">
-      <button id="cancel-btn" class="btn inline">Скасувати</button>
-      <button id="save-btn" class="btn inline">Зберегти</button>
-    </div>
-  </div>
 </body>
 
 </html>

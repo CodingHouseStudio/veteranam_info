@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/view/company_view.dart';
+import 'package:veteranam/components/consent_dialog/view/consent_dialog_view.dart';
 import 'package:veteranam/components/discount/view/discount_view.dart';
 import 'package:veteranam/components/discounts_add/view/discounts_add_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
@@ -17,6 +18,7 @@ import 'package:veteranam/components/my_discounts/view/my_discounts_view.dart';
 import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
+import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -52,14 +54,26 @@ GoRouter businessRouter = GoRouter(
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
-    if (context.read<AuthenticationBloc>().state.status ==
-        AuthenticationStatus.authenticated) {
-      return state.uri.toString().contains(KRoute.login.path) ||
-              state.uri.toString().contains(KRoute.signUp.path)
-          ? '/${KRoute.myDiscounts.path}' //KRoute.businessDashboard.path
-          : null;
+    final fullPath = state.fullPath;
+    if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+      if (fullPath != null) {
+        if (context.read<AuthenticationBloc>().state.status ==
+            AuthenticationStatus.authenticated) {
+          return fullPath.contains(KRoute.login.path) ||
+                  fullPath.contains(KRoute.signUp.path)
+              ? '/${KRoute.myDiscounts.path}' //KRoute.businessDashboard.path
+              : fullPath.contains(KRoute.consentDialog.path)
+                  ? KRoute.myDiscounts.path
+                  : null;
+        }
+      }
+      return null;
+    } else {
+      if (fullPath != null && fullPath.contains(KRoute.privacyPolicy.path)) {
+        return null;
+      }
+      return '/${KRoute.login.path}/${KRoute.consentDialog.path}';
     }
-    return null;
   },
   routes: [
     // if (Config.isDevelopment)
@@ -83,6 +97,45 @@ GoRouter businessRouter = GoRouter(
         child: const LoginScreen(),
       ),
       routes: [
+        GoRoute(
+          name: KRoute.consentDialog.name,
+          path: KRoute.consentDialog.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            barrierDismissible: false,
+            builder: (_) => const ConsentDialog(),
+          ),
+        ),
+        GoRoute(
+          name: KRoute.privacyPolicy.name,
+          path: KRoute.privacyPolicy.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            builder: (_) => MarkdownFileDialog(
+              ukFilePath: KAppText.ukPrivacyPolicyPath,
+              enFilePath: KAppText.enPrivacyPolicyPath,
+              startText: context.l10n.privacyPolicyStart,
+            ),
+          ),
+          onExit: (context, state) {
+            if (!GetIt.I
+                .get<FirebaseAnalyticsCacheController>()
+                .consentDialogShowed) {
+              Future.delayed(const Duration(milliseconds: 200), () {
+                if (context.mounted) {
+                  context.goNamed(
+                    KRoute.consentDialog.name,
+                  );
+                }
+              });
+            }
+            return true;
+          },
+        ),
         GoRoute(
           name: KRoute.resetPassword.name,
           path: KRoute.resetPassword.path,

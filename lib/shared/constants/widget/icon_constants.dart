@@ -67,6 +67,7 @@ abstract class KIcon {
   static const _KIcon button = _KIcon(Symbols.smart_button);
   static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
   static const _KIcon keyboardArrowDown = _KIcon(Symbols.keyboard_arrow_down);
+  static const _KIcon keyboardArrowLeft = _KIcon(Symbols.keyboard_arrow_right);
   static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
   static const _KIcon arrowUpRightNeutral = _KIcon(

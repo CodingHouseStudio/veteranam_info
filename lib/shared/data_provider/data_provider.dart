@@ -1,6 +1,7 @@
 export 'analytics_module.dart';
 export 'cache_provider.dart';
 export 'firebase_analytics_provider.dart';
+export 'firebase_anaytics_cache_controller.dart';
 export 'firebase_remote_config_provider.dart';
 export 'firestore_module.dart';
 export 'firestore_provider.dart';
