@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/about_us/view/about_us_view.dart';
-import 'package:veteranam/components/consent_dialog/consent_dialog.dart';
 import 'package:veteranam/components/consultation/view/consultation_view.dart';
 import 'package:veteranam/components/discount/view/discount_view.dart';
 // import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
@@ -34,7 +33,6 @@ import 'package:veteranam/components/user_role/view/user_role_view.dart';
 import 'package:veteranam/components/work/view/work_view.dart';
 import 'package:veteranam/components/work_employee/view/work_employee_view.dart';
 import 'package:veteranam/components/work_employer/view/employer_view.dart';
-import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -70,34 +68,35 @@ GoRouter router = GoRouter(
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
-    final fullPath = state.fullPath;
-    if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (GetIt.I
+    //.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (fullPath.contains(KRoute.consentDialog.path)) {
+    //   return KRoute.home.path;
+    // } else {
+    if (context.read<AuthenticationBloc>().state.status ==
+        AuthenticationStatus.authenticated) {
+      final fullPath = state.fullPath;
       if (fullPath != null) {
-        if (fullPath.contains(KRoute.consentDialog.path)) {
-          return KRoute.home.path;
-        } else {
-          if (context.read<AuthenticationBloc>().state.status ==
-              AuthenticationStatus.authenticated) {
-            return fullPath.contains(KRoute.login.path) ||
-                    fullPath.contains(KRoute.signUp.path)
-                ?
-                // context.read<AuthenticationBloc>().state.
-                // userSetting.userRole ==
-                //         null
-                //     ? KRoute.questionsForm.path
-                //     :
-                KRoute.home.path
-                : null;
-          }
-        }
+        return fullPath.contains(KRoute.login.path) ||
+                fullPath.contains(KRoute.signUp.path)
+            ?
+            // context.read<AuthenticationBloc>().state.
+            // userSetting.userRole ==
+            //         null
+            //     ? KRoute.questionsForm.path
+            //     :
+            KRoute.home.path
+            : null;
       }
-      return null;
-    } else {
-      if (fullPath != null && fullPath.contains(KRoute.privacyPolicy.path)) {
-        return null;
-      }
-      return '${KRoute.home.path}${KRoute.consentDialog.path}';
     }
+    // }
+    return null;
+    // } else {
+    //   if (fullPath != null && fullPath.contains(KRoute.privacyPolicy.path)) {
+    //     return null;
+    //   }
+    //   return '${KRoute.home.path}${KRoute.consentDialog.path}';
+    // }
   },
   routes: [
     // if (Config.isDevelopment)
@@ -201,17 +200,17 @@ GoRouter router = GoRouter(
         );
       },
       routes: [
-        GoRoute(
-          name: KRoute.consentDialog.name,
-          path: KRoute.consentDialog.path,
-          pageBuilder: (context, state) => DialogPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            barrierDismissible: false,
-            builder: (_) => const ConsentDialog(),
-          ),
-        ),
+        // GoRoute(
+        //   name: KRoute.consentDialog.name,
+        //   path: KRoute.consentDialog.path,
+        //   pageBuilder: (context, state) => DialogPage(
+        //     key: state.pageKey,
+        //     name: state.name,
+        //     restorationId: state.pageKey.value,
+        //     barrierDismissible: false,
+        //     builder: (_) => const ConsentDialog(),
+        //   ),
+        // ),
         GoRoute(
           name: KRoute.privacyPolicy.name,
           path: KRoute.privacyPolicy.path,
@@ -225,20 +224,20 @@ GoRouter router = GoRouter(
               startText: context.l10n.privacyPolicyStart,
             ),
           ),
-          onExit: (context, state) {
-            if (!GetIt.I
-                .get<FirebaseAnalyticsCacheController>()
-                .consentDialogShowed) {
-              Future.delayed(const Duration(milliseconds: 200), () {
-                if (context.mounted) {
-                  context.goNamed(
-                    KRoute.consentDialog.name,
-                  );
-                }
-              });
-            }
-            return true;
-          },
+          // onExit: (context, state) {
+          //   if (!GetIt.I
+          //       .get<FirebaseAnalyticsCacheController>()
+          //       .consentDialogShowed) {
+          //     Future.delayed(const Duration(milliseconds: 200), () {
+          //       if (context.mounted) {
+          //         context.goNamed(
+          //           KRoute.consentDialog.name,
+          //         );
+          //       }
+          //     });
+          //   }
+          //   return true;
+          // },
         ),
         if (Config.isDevelopment)
           GoRoute(

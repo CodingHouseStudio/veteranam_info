@@ -585,6 +585,15 @@ abstract class KButtonStyles {
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
   );
+
+  static const cookiesAcceptButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
+    shape: WidgetStatePropertyAll(
+      KWidgetTheme.outlineBorderZero,
+    ),
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsPrimary),
+  );
   static const discountCityButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
     shape: WidgetStatePropertyAll(
