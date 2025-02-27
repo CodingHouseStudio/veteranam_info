@@ -165,7 +165,7 @@ class SharedIconListWidget extends StatelessWidget {
           )
         else if (Config.isUser)
           complaintButton(context)
-        else
+        else if (link != null && link!.isUrlValid)
           websiteIcon(context),
         // if (widget.showComplaint) ...[
         //   if (widget.isDesk)
