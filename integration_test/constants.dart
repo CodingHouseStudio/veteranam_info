@@ -12,6 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:get_it/get_it.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
@@ -27,6 +28,9 @@ import 'package:veteranam/shared/shared_flutter.dart';
 // String randomPassword = 'qwerty';
 /// COMMENT: Method sets setting for integration tests
 Future<void> setUpGlobalIntegration() async {
+  IntegrationTestWidgetsFlutterBinding.instance.framePolicy =
+      LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
+  KTest.isInterationTest = true;
   final FirebaseApp app;
   if (Firebase.apps.isEmpty) {
     app = await Firebase.initializeApp(

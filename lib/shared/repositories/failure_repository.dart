@@ -32,7 +32,8 @@ class FailureRepository {
     UserSetting? userSetting,
   }) async {
     // Define the variable for error level categorization
-    if (Config.isReleaseMode && Config.isProduction) {
+    if (KTest.isInterationTest ||
+        (Config.isReleaseMode && Config.isProduction)) {
       try {
         if (Config.isWeb) {
           await sentry.loadLibrary();
