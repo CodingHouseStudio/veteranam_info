@@ -1896,7 +1896,7 @@
     "examples": "Текст для кнопки в Consent Dialog",
     "description": "Кнопка використовується для Прийняття усіх кукі та аналітики."
   },
-  "acceptNecessary": "Прийняти небхідні",
+  "acceptNecessary": "Прийняти необхідні",
   "@acceptNecessary": {
     "examples": "Текст для кнопки в Consent Dialog",
     "description": "Кнопка використовується для Прийняття необхідних кукі та аналітики."
