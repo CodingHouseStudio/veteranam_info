@@ -83,6 +83,7 @@ class CookiesDialogWidget extends StatelessWidget {
             );
           } else {
             return Column(
+              spacing: KPadding.kPaddingSize8,
               children: [
                 textWidget,
                 SizedBox(

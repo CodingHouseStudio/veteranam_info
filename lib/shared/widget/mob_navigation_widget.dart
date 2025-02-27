@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobNavigationWidget extends StatelessWidget {
@@ -9,6 +11,11 @@ class MobNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!KTest.isTest &&
+        !GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+      context.dialog.showCookiesDialog();
+    }
+
     final labels = [
       context.l10n.discounts,
       context.l10n.investors,
