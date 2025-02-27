@@ -78,6 +78,14 @@ abstract class KRoute {
     path: 'privacy-policy',
     name: 'Privacy-policy',
   );
+  static const _RouteItem privacyPolicyBusinessCookies = _RouteItem(
+    path: 'privacy-policy',
+    name: 'Privacy-policy-business-cookies',
+  );
+  static const _RouteItem consentDialog = _RouteItem(
+    path: 'consent',
+    name: 'Consent',
+  );
   static const _RouteItem termsAndConditions = _RouteItem(
     path: 'terms-and-conditions',
     name: 'Terms and Conditions',

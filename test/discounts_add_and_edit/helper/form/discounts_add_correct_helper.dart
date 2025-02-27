@@ -36,6 +36,7 @@ Future<void> discountsAddCorectHelper({
     descriptionText: KTestVariables.sendDiscountModel.description.uk,
     requirmentsText: KTestVariables.sendDiscountModel.requirements!.uk,
     emailText: KTestVariables.userEmail,
+    isEdit: isEdit,
   );
 
   if (!isEdit) {

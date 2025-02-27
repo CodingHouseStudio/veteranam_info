@@ -86,21 +86,23 @@ class AppWidget extends StatelessWidget {
           current.userSetting.locale.value.languageCode,
       builder: (context, state) {
         final language = state.userSetting.locale.value;
-        return Config.isWeb
-            ? body(language)
-            : BetterFeedback(
-                localizationsDelegates: locale,
-                localeOverride: language,
-                themeMode: ThemeMode.light,
-                mode: FeedbackMode.navigate,
-                feedbackBuilder: (context, onSubmit, scrollController) =>
-                    MobFeedbackWidget(onSubmit: onSubmit),
-                child: BlocBuilder<MobOfflineModeCubit, MobMode>(
-                  builder: (context, _) {
-                    return body(language);
-                  },
-                ),
-              );
+        if (Config.isWeb) {
+          return body(language);
+        } else {
+          return BetterFeedback(
+            localizationsDelegates: locale,
+            localeOverride: language,
+            themeMode: ThemeMode.light,
+            mode: FeedbackMode.navigate,
+            feedbackBuilder: (context, onSubmit, scrollController) =>
+                MobFeedbackWidget(onSubmit: onSubmit),
+            child: BlocBuilder<MobOfflineModeCubit, MobMode>(
+              builder: (context, _) {
+                return body(language);
+              },
+            ),
+          );
+        }
       },
     );
   }

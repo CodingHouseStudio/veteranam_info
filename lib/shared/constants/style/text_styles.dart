@@ -276,13 +276,23 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
   );
-  static const TextStyle materialThemeBodyLargeBolcUnderLine = TextStyle(
+  static const TextStyle materialThemeBodyLargeBoldUnderLine = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.underline,
     letterSpacing: 0.5,
+  );
+  static const TextStyle materialThemeBodyLargeNeutralBoldUnderLine = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.underline,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    decorationColor: AppColors.materialThemeWhite,
   );
 
   /// materialThemeBodyMedium figma properties
@@ -314,6 +324,17 @@ abstract class AppTextStyle {
     decoration: TextDecoration.underline,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.25,
+  );
+  static const TextStyle materialThemeBodyMediumNeutralBoldUnderLine =
+      TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    decoration: TextDecoration.underline,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    decorationColor: AppColors.materialThemeWhite,
   );
   static const TextStyle materialThemeBodyMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',

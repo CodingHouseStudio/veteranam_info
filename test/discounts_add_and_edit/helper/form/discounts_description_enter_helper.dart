@@ -9,6 +9,7 @@ Future<void> discountsAddDescriptionEnterHelper({
   required String descriptionText,
   required String requirmentsText,
   required String emailText,
+  bool isEdit = false,
 }) async {
   expect(
     find.byKey(DiscountsAddKeys.descriptionField),
@@ -44,22 +45,29 @@ Future<void> discountsAddDescriptionEnterHelper({
 
   await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(DiscountsAddKeys.emailField),
-    findsOneWidget,
-  );
+  if (!isEdit) {
+    expect(
+      find.byKey(DiscountsAddKeys.emailField),
+      findsOneWidget,
+    );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: DiscountsAddKeys.emailField,
-  );
+    await scrollingHelper(
+      tester: tester,
+      itemKey: DiscountsAddKeys.emailField,
+    );
 
-  await tester.enterText(
-    find.byKey(DiscountsAddKeys.emailField),
-    emailText,
-  );
+    await tester.enterText(
+      find.byKey(DiscountsAddKeys.emailField),
+      emailText,
+    );
 
-  await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
+  } else {
+    expect(
+      find.byKey(DiscountsAddKeys.emailField),
+      findsNothing,
+    );
+  }
 
   await discountsAddSendHelper(tester);
 }

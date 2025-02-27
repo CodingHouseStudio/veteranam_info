@@ -16,6 +16,7 @@ extension DiaglogExtention on BuildContext {
     Color backgroundColor = AppColors.materialThemeKeyColorsSecondary,
     Key? key,
     Duration duration = const Duration(minutes: 1),
+    DismissDirection? dismissDirection,
   }) {
     if (ScaffoldMessenger.of(this).mounted) {
       ScaffoldMessenger.of(this).hideCurrentSnackBar();
@@ -26,6 +27,7 @@ extension DiaglogExtention on BuildContext {
         backgroundColor: backgroundColor,
         content: child,
         duration: duration,
+        dismissDirection: dismissDirection,
       ),
     );
   }
@@ -488,6 +490,17 @@ class _DialogsWidget {
         duration: duration,
       );
     }
+  }
+
+  void showCookiesDialog() {
+    context._showSnackBar(
+      // key: DialogsKeys.failure,
+      child: const CookiesDialogWidget(),
+      duration: const Duration(
+        days: 1,
+      ),
+      dismissDirection: DismissDirection.none,
+    );
   }
 
   void showMobFeedback() {

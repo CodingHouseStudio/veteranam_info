@@ -677,6 +677,11 @@
     "examples": "Text for the button that is in the Footer.",
     "description": "Button used to open the PrivacyPolicy dialoge."
   },
+  "privacyPolicy2": "Privacy policy",
+  "@privacyPolicy2": {
+    "examples": "Text for the button that is in the Consent Dialog.",
+    "description": "Button used to open the PrivacyPolicy dialoge."
+  },
   "sections": "Sections",
   "@sections": {
     "examples": "The text that is in the Footer."
@@ -1878,8 +1883,21 @@
   "@showOnlyForAdminAccount": {
     "examples": "Descrption for company email field in the Discount Add/Edit Screen"
   },
+  "accept": "Accept",
+  "@accept": {
+    "examples": "Text for the button in the Consent Dialog",
+    "description": "The button is used to accept all cookies and analytics."
+  },
+  "acceptNecessary": "Accept necessary",
+  "@acceptNecessary": {
+    "examples": "Text for the button in the Consent Dialog",
+    "description": "The button is used to accept only necessary cookies and analytics."
+  },
   "copyNotSupportError": "It seems copying is not supported on your device, or an error occurred.",
   "@copyNotSupportError": {
     "examples": "Error message when an issue occurs during copying."
+  },"cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service. By continuing to use it, you agree to the use of all types of cookies and our ",
+  "@cookies": {
+    "examples": "Message about cookie usage"
   }
 }

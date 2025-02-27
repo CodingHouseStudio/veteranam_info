@@ -49,7 +49,7 @@ class ReportDialogWidget extends StatelessWidget {
                     TextSpan(
                       text: context.l10n.reportWithoutEmailDescriptionPart2,
                       style: isDesk
-                          ? AppTextStyle.materialThemeBodyLargeBolcUnderLine
+                          ? AppTextStyle.materialThemeBodyLargeBoldUnderLine
                           : AppTextStyle.materialThemeBodyMediumBoldUnderLine,
                       mouseCursor: SystemMouseCursors.click,
                       recognizer: TapGestureRecognizer()

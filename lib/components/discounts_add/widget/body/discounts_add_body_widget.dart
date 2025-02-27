@@ -52,10 +52,6 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     ),
                   );
             }
-            if (state.company.isAdmin && emailController.text.isEmpty) {
-              emailController.text =
-                  state.company.userEmails.elementAtOrNull(0) ?? '';
-            }
           },
           listenWhen: (previous, current) =>
               previous.company.id != current.company.id &&
@@ -403,10 +399,11 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                           .add(DiscountsAddEvent.linkUpdate(text)),
                     )
                   else if (context
-                      .read<CompanyWatcherBloc>()
-                      .state
-                      .company
-                      .isAdmin)
+                          .read<CompanyWatcherBloc>()
+                          .state
+                          .company
+                          .isAdmin &&
+                      _.discount == null)
                     TextFieldWidget(
                       widgetKey: DiscountsAddKeys.emailField,
                       controller: emailController,

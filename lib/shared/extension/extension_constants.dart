@@ -84,4 +84,5 @@ extension ExtendedDateTime on DateTime {
 
 extension CompanyModelExtension on CompanyModel {
   bool get isAdmin => id == KAppText.adminCompanyID;
+  bool get isNotAdmin => !isAdmin;
 }
