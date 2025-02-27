@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/view/company_view.dart';
-import 'package:veteranam/components/consent_dialog/view/consent_dialog_view.dart';
 import 'package:veteranam/components/discount/view/discount_view.dart';
 import 'package:veteranam/components/discounts_add/view/discounts_add_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';
@@ -18,7 +17,6 @@ import 'package:veteranam/components/my_discounts/view/my_discounts_view.dart';
 import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
-import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -54,7 +52,8 @@ GoRouter businessRouter = GoRouter(
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
-    // if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (GetIt.I
+    //.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {
       final fullPath = state.fullPath;

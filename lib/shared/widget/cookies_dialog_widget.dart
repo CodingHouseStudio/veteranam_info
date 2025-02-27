@@ -5,7 +5,7 @@ import 'package:veteranam/components/consent_dialog/bloc/consent_dialog_bloc.dar
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CookiesDialogWidget extends StatelessWidget {
-  const CookiesDialogWidget({Key? key}) : super(key: key);
+  const CookiesDialogWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,4 +60,7 @@ class CookiesDialogWidget extends StatelessWidget {
 }
 
 const cookiesSnackbarUK =
-    'Сервіс "veteranam" використовує обов\'язкові кукі для безпеки та стабільної роботи, а також анонімні аналітичні кукі для покращення сервісу. Продовжуючи користуватись, ви погоджуєтесь на використання всіх типів кукі та нашу політику конфіденційності.';
+    'Сервіс "veteranam" використовує обов\'язкові кукі для безпеки та '
+    'стабільної роботи, а також анонімні аналітичні кукі для покращення'
+    ' сервісу. Продовжуючи користуватись, ви погоджуєтесь на використання'
+    ' всіх типів кукі та нашу політику конфіденційності.';

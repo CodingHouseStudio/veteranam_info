@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/about_us/view/about_us_view.dart';
-import 'package:veteranam/components/consent_dialog/consent_dialog.dart';
 import 'package:veteranam/components/consultation/view/consultation_view.dart';
 import 'package:veteranam/components/discount/view/discount_view.dart';
 // import 'package:veteranam/components/discount_card/view/diiscount_card_view.dart';
@@ -34,7 +33,6 @@ import 'package:veteranam/components/user_role/view/user_role_view.dart';
 import 'package:veteranam/components/work/view/work_view.dart';
 import 'package:veteranam/components/work_employee/view/work_employee_view.dart';
 import 'package:veteranam/components/work_employer/view/employer_view.dart';
-import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -70,7 +68,8 @@ GoRouter router = GoRouter(
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
-    // if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (GetIt.I
+    //.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
     // if (fullPath.contains(KRoute.consentDialog.path)) {
     //   return KRoute.home.path;
     // } else {
