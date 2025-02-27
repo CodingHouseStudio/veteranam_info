@@ -110,8 +110,8 @@ GoRouter businessRouter = GoRouter(
         //   ),
         // ),
         GoRoute(
-          name: KRoute.privacyPolicy.name,
-          path: KRoute.privacyPolicy.path,
+          name: KRoute.privacyPolicyBusinessCookies.name,
+          path: KRoute.privacyPolicyBusinessCookies.path,
           pageBuilder: (context, state) => DialogPage(
             key: state.pageKey,
             name: state.name,
