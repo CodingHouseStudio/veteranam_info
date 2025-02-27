@@ -70,34 +70,34 @@ GoRouter router = GoRouter(
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
-    final fullPath = state.fullPath;
-    if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    // if (fullPath.contains(KRoute.consentDialog.path)) {
+    //   return KRoute.home.path;
+    // } else {
+    if (context.read<AuthenticationBloc>().state.status ==
+        AuthenticationStatus.authenticated) {
+      final fullPath = state.fullPath;
       if (fullPath != null) {
-        if (fullPath.contains(KRoute.consentDialog.path)) {
-          return KRoute.home.path;
-        } else {
-          if (context.read<AuthenticationBloc>().state.status ==
-              AuthenticationStatus.authenticated) {
-            return fullPath.contains(KRoute.login.path) ||
-                    fullPath.contains(KRoute.signUp.path)
-                ?
-                // context.read<AuthenticationBloc>().state.
-                // userSetting.userRole ==
-                //         null
-                //     ? KRoute.questionsForm.path
-                //     :
-                KRoute.home.path
-                : null;
-          }
-        }
+        return fullPath.contains(KRoute.login.path) ||
+                fullPath.contains(KRoute.signUp.path)
+            ?
+            // context.read<AuthenticationBloc>().state.
+            // userSetting.userRole ==
+            //         null
+            //     ? KRoute.questionsForm.path
+            //     :
+            KRoute.home.path
+            : null;
       }
-      return null;
-    } else {
-      if (fullPath != null && fullPath.contains(KRoute.privacyPolicy.path)) {
-        return null;
-      }
-      return '${KRoute.home.path}${KRoute.consentDialog.path}';
     }
+    // }
+    return null;
+    // } else {
+    //   if (fullPath != null && fullPath.contains(KRoute.privacyPolicy.path)) {
+    //     return null;
+    //   }
+    //   return '${KRoute.home.path}${KRoute.consentDialog.path}';
+    // }
   },
   routes: [
     // if (Config.isDevelopment)
@@ -201,17 +201,17 @@ GoRouter router = GoRouter(
         );
       },
       routes: [
-        GoRoute(
-          name: KRoute.consentDialog.name,
-          path: KRoute.consentDialog.path,
-          pageBuilder: (context, state) => DialogPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            barrierDismissible: false,
-            builder: (_) => const ConsentDialog(),
-          ),
-        ),
+        // GoRoute(
+        //   name: KRoute.consentDialog.name,
+        //   path: KRoute.consentDialog.path,
+        //   pageBuilder: (context, state) => DialogPage(
+        //     key: state.pageKey,
+        //     name: state.name,
+        //     restorationId: state.pageKey.value,
+        //     barrierDismissible: false,
+        //     builder: (_) => const ConsentDialog(),
+        //   ),
+        // ),
         GoRoute(
           name: KRoute.privacyPolicy.name,
           path: KRoute.privacyPolicy.path,
@@ -225,20 +225,20 @@ GoRouter router = GoRouter(
               startText: context.l10n.privacyPolicyStart,
             ),
           ),
-          onExit: (context, state) {
-            if (!GetIt.I
-                .get<FirebaseAnalyticsCacheController>()
-                .consentDialogShowed) {
-              Future.delayed(const Duration(milliseconds: 200), () {
-                if (context.mounted) {
-                  context.goNamed(
-                    KRoute.consentDialog.name,
-                  );
-                }
-              });
-            }
-            return true;
-          },
+          // onExit: (context, state) {
+          //   if (!GetIt.I
+          //       .get<FirebaseAnalyticsCacheController>()
+          //       .consentDialogShowed) {
+          //     Future.delayed(const Duration(milliseconds: 200), () {
+          //       if (context.mounted) {
+          //         context.goNamed(
+          //           KRoute.consentDialog.name,
+          //         );
+          //       }
+          //     });
+          //   }
+          //   return true;
+          // },
         ),
         if (Config.isDevelopment)
           GoRoute(

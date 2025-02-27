@@ -21,6 +21,7 @@ import 'package:flutter/material.dart'
         WidgetStatePropertyAll;
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 import 'package:veteranam/shared/extension/extension_flutter_constants.dart';
+import 'package:veteranam/shared/widget/web_custom_app_bar.dart';
 
 ThemeData themeData = ThemeData(
   colorScheme: const ColorScheme(
@@ -81,6 +82,7 @@ AppBar? get appBar => Config.isWeb
     ? AppBar(
         backgroundColor: AppColors.materialThemeWhite,
         toolbarHeight: KSize.kAppBarHeight,
+        title: const WebCustomAppBar(),
       )
     : null;
 
