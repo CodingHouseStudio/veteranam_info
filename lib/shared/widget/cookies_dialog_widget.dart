@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/consent_dialog/bloc/consent_dialog_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CookiesDialogWidget extends StatelessWidget {
@@ -12,7 +11,7 @@ class CookiesDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.I.get<ConsentDialogBloc>(),
+      create: (context) => GetIt.I.get<CookiesDialogCubit>(),
       child: BlocBuilder<AppLayoutBloc, AppLayoutState>(
         builder: (context, state) {
           final textWidget = Text.rich(
@@ -45,10 +44,8 @@ class CookiesDialogWidget extends StatelessWidget {
           final buttons = [
             TextButton(
               onPressed: () {
-                context.read<ConsentDialogBloc>().add(
-                      const SubmittedConsentEvent(
-                        onlyNecessary: true,
-                      ),
+                context.read<CookiesDialogCubit>().submitted(
+                      onlyNecessary: true,
                     );
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
               },
@@ -61,10 +58,8 @@ class CookiesDialogWidget extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.read<ConsentDialogBloc>().add(
-                      const SubmittedConsentEvent(
-                        onlyNecessary: false,
-                      ),
+                context.read<CookiesDialogCubit>().submitted(
+                      onlyNecessary: false,
                     );
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
               },
