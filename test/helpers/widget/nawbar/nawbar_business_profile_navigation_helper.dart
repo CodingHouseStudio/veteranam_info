@@ -25,18 +25,18 @@ Future<void> nawbarBusinessProfileNavigationHelper({
   // );
 
   expect(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    itemKey: NawbarKeys.loginIcon,
+    itemKey: NawbarKeys.userIcon,
   );
 
   await tester.tap(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
   );
 
   await tester.pumpAndSettle();

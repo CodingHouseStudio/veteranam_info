@@ -77,7 +77,7 @@ Future<void> nawbarHelper({
     );
 
     expect(
-      find.byKey(NawbarKeys.loginIcon),
+      find.byKey(NawbarKeys.userIcon),
       findsOneWidget,
     );
   } else {
@@ -87,7 +87,7 @@ Future<void> nawbarHelper({
     );
 
     expect(
-      find.byKey(NawbarKeys.loginIcon),
+      find.byKey(NawbarKeys.userIcon),
       findsNothing,
     );
   }

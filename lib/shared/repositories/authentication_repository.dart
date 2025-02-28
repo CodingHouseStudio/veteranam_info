@@ -197,9 +197,8 @@ class AuthenticationRepository {
     }
   }
 
-  // @disposeMethod
-  void dispose() {
-    _authenticationStatuscontroller.close();
-    _userSubscription?.cancel();
+  @disposeMethod
+  Future<void> dispose() async {
+    await _authenticationStatuscontroller.close();
   }
 }

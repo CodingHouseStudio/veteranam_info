@@ -34,9 +34,9 @@ class AuthenticationBloc
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
-  Future<void> close() {
-    _authenticationStatusSubscription.cancel();
-    _authenticationRepository.dispose();
+  Future<void> close() async {
+    await _authenticationStatusSubscription.cancel();
+    await _authenticationRepository.dispose();
     return super.close();
   }
 

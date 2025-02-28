@@ -1,20 +1,26 @@
 #!/bin/bash
 
 run_flutter_test() {
+    local role=$1
+    shift
     local total_tests=${#TESTS[@]}
+    local tests=("$@")
     local current_test_number=1
     local failed_tests=0  # Counter for failed tests
 
-    for test_name in "$@"
-    do
-        echo "Running test: $test_name #$current_test_number out of $total_tests"
+    for test_name in "${tests[@]}"; do
+        echo "Running test: $test_name #$current_test_number out of $total_tests with ROLE=${role}"
         # Run the test and store output in a variable
         output=$(flutter drive \
             --flavor development \
             --driver=test_driver/integration_test.dart \
             --target=integration_test/"$test_name"_test.dart \
             -d web-server\
-            --web-port=8080)
+            --web-port=8080 \
+            --dart-define=FLAVOUR=development \
+            --dart-define=ROLE=${role} \
+            --dart-define-from-file=.env_dev.json \
+            --flavor=development)
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then
@@ -37,8 +43,27 @@ run_flutter_test() {
 
 # List of tests to run
 TESTS=(
-    "navigation"
+    "discounts"
+    "sign_in"
+    "sign_up"
+)
+BUSINESS_TESTS=(
+    "business_sign_up"
+    "business_add_discount"
 )
 
-run_flutter_test "${TESTS[@]}"
-exit $?  # Exit with the status code from run_flutter_test
+
+# Run tests for ROLE=user
+run_flutter_test "user" "${TESTS[@]}"
+status_user=$?
+
+# Run tests for ROLE=business
+run_flutter_test "business" "${BUSINESS_TESTS[@]}"
+status_business=$?
+
+# Exit with 1 if any test failed, otherwise exit with 0
+if [ $status_user -ne 0 ] || [ $status_business -ne 0 ]; then
+    exit 1
+else
+    exit 0
+fi

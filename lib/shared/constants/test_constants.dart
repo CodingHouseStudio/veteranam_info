@@ -12,6 +12,11 @@ class KTest {
   @visibleForTesting
   static set isTest(bool value) => _isTest = value;
 
+  static bool _isInterationTest = false;
+  static bool get isInterationTest => _isInterationTest;
+  @visibleForTesting
+  static set isInterationTest(bool value) => _isInterationTest = value;
+
   static bool _testLoading = false;
   static bool get testLoading => _testLoading;
   @visibleForTesting

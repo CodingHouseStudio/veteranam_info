@@ -9,7 +9,7 @@ abstract class NawbarKeys {
   static const language = Key('nawbar_language');
   // static const iconMic = Key('nawbar_micro_icon');
   static const loginButton = Key('nawbar_login_button');
-  static const loginIcon = Key('nawbar_login_icon');
+  static const userIcon = Key('nawbar_login_icon');
   static const discountsButton = Key('nawbar_discounts_button');
   static const myDiscountsButton = Key('nawbar_my_discounts_button');
   static const investorsButton = Key('nawbar_investors_button');
