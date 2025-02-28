@@ -110,34 +110,6 @@ GoRouter businessRouter = GoRouter(
         //   ),
         // ),
         GoRoute(
-          name: KRoute.privacyPolicyBusinessCookies.name,
-          path: KRoute.privacyPolicyBusinessCookies.path,
-          pageBuilder: (context, state) => DialogPage(
-            key: state.pageKey,
-            name: state.name,
-            restorationId: state.pageKey.value,
-            builder: (_) => MarkdownFileDialog(
-              ukFilePath: KAppText.ukPrivacyPolicyPath,
-              enFilePath: KAppText.enPrivacyPolicyPath,
-              startText: context.l10n.privacyPolicyStart,
-            ),
-          ),
-          // onExit: (context, state) {
-          //   if (!GetIt.I
-          //       .get<FirebaseAnalyticsCacheController>()
-          //       .consentDialogShowed) {
-          //     Future.delayed(const Duration(milliseconds: 200), () {
-          //       if (context.mounted) {
-          //         context.goNamed(
-          //           KRoute.consentDialog.name,
-          //         );
-          //       }
-          //     });
-          //   }
-          //   return true;
-          // },
-        ),
-        GoRoute(
           name: KRoute.resetPassword.name,
           path: KRoute.resetPassword.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -182,6 +154,36 @@ GoRouter businessRouter = GoRouter(
         restorationId: state.pageKey.value,
         child: const FeedbackScreen(),
       ),
+      routes: [
+        GoRoute(
+          name: KRoute.privacyPolicy.name,
+          path: KRoute.privacyPolicy.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            builder: (_) => MarkdownFileDialog(
+              ukFilePath: KAppText.ukPrivacyPolicyPath,
+              enFilePath: KAppText.enPrivacyPolicyPath,
+              startText: context.l10n.privacyPolicyStart,
+            ),
+          ),
+          // onExit: (context, state) {
+          //   if (!GetIt.I
+          //       .get<FirebaseAnalyticsCacheController>()
+          //       .consentDialogShowed) {
+          //     Future.delayed(const Duration(milliseconds: 200), () {
+          //       if (context.mounted) {
+          //         context.goNamed(
+          //           KRoute.consentDialog.name,
+          //         );
+          //       }
+          //     });
+          //   }
+          //   return true;
+          // },
+        ),
+      ],
     ),
     GoRoute(
       name: KRoute.support.name,
