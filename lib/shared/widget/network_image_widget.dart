@@ -80,11 +80,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
     if (bytes == null && widget.imageBytes == null && widget.imageUrl != null) {
-      // Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline
-      // CachedNetworkImage not work with new fluter version
-      // https://github.com/Baseflow/flutter_cached_network_image/issues/995
-      if (!Config.isWeb &&
-          context.read<MobOfflineModeCubit>().state.isOffline) {
+      if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
         return getCachedNetworkImage(
           widget.imageUrl!.getImageUrl,
         );
