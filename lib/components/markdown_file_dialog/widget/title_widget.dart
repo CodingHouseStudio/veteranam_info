@@ -57,15 +57,7 @@ class MarkdownDialogTitleWidget extends StatelessWidget {
             context.pop();
           } else {
             if (Config.isBusiness) {
-              if (GoRouter.of(context)
-                      .state
-                      .fullPath
-                      ?.contains(KRoute.privacyPolicy.path) ??
-                  false) {
-                context.goNamed(KRoute.feedback.name);
-              } else {
-                context.goNamed(KRoute.discountsAdd.name);
-              }
+              context.goNamed(KRoute.feedback.name);
             } else {
               context.goNamed(KRoute.home.name);
             }
