@@ -59,7 +59,7 @@
 //                                 text: textArray.elementAt(index),
 //                                 style: appVersion.isTablet
 //                                     ? AppTextStyle.materialThemeBodyLargeBold
-//                                     : 
+//                                     :
 // AppTextStyle.materialThemeBodyMediumBold,
 //                               );
 //                             } else {
@@ -75,7 +75,7 @@
 //                             ..onTap = () =>
 //                                 context.goNamed(KRoute.privacyPolicy.name),
 //                           style: appVersion.isTablet
-//                               ? 
+//                               ?
 // AppTextStyle.materialThemeBodyLargeBoldUnderLine
 //                               : AppTextStyle
 //                                   .materialThemeBodyMediumBoldUnderLine,
