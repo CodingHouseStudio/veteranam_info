@@ -56,6 +56,11 @@ Future<void> discountCardHelper({
     findsWidgets,
   );
 
+  expect(
+    find.byKey(DiscountCardKeys.eligiblity),
+    findsWidgets,
+  );
+
   // await cardTextDetailHelper(tester: tester, link: KAppText.email);
 
   // expect(

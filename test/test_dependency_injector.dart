@@ -37,6 +37,7 @@ import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart';
 import 'package:veteranam/components/story/bloc/story_watcher_bloc.dart';
 import 'package:veteranam/components/story_add/bloc/story_add_bloc.dart';
 import 'package:veteranam/components/work_employee/bloc/work_employee_watcher_bloc.dart';
+import 'package:veteranam/shared/repositories/app_layout_repository.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import 'test_dependency.dart';
@@ -58,6 +59,7 @@ void resetTestVariables() {
 
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
+  AppLayoutRepository.widgetsBinding = null;
   final FirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
   // register logic if user id empty user setting is also empty
   initializeDateFormatting(Language.english.value.languageCode);

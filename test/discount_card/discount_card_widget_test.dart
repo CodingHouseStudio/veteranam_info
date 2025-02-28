@@ -73,6 +73,33 @@ void main() {
           await discountCardInitialHelper(tester: tester);
         });
         group('${KGroupText.goTo} ', () {
+          group('${KRoute.discount.name} ', () {
+            setUp(() {
+              when(
+                mockDiscountRepository.getDiscount(
+                  id: KTestVariables.discountModelItems.first.id,
+                  showOnlyBusinessDiscounts: false,
+                ),
+              ).thenAnswer(
+                (realInvocation) async => Right(
+                  KTestVariables.moreDiscountModel,
+                ),
+              );
+            });
+
+            testWidgets('discount card navigation ', (tester) async {
+              await discountCardPumpAppHelper(
+                tester: tester,
+                mockDiscountRepository: mockDiscountRepository,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await discountCardNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+          });
           group('${KGroupText.failureGet} ', () {
             setUp(() {
               when(

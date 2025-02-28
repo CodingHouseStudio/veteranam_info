@@ -28,26 +28,6 @@ class DiscountCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final children = [
-      _DiscountCardWithImage(
-        discountItem: discountItem,
-        borderRadious: isDesk
-            ? KBorderRadius.kBorderRadiusOnlyLeft
-            : KBorderRadius.kBorderRadiusOnlyTop,
-      ),
-      Flexible(
-        child: _DiscountCardDesciprtionWidget(
-          isDesk: isDesk,
-          descriptionMethod: descriptionMethod,
-          discountItem: discountItem,
-          closeWidget: closeWidget,
-          isBusiness: isBusiness,
-          share: share,
-          useSiteUrl: useSiteUrl,
-          dialogIsDesk: dialogIsDesk,
-        ),
-      ),
-    ];
     return DecoratedBox(
       key: ValueKey(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
@@ -67,40 +47,16 @@ class DiscountCardWidget extends StatelessWidget {
               category: discountItem.category,
               userPhoto: discountItem.userPhoto,
             ),
-            if (discountItem.hasImages)
-              IntrinsicHeight(
-                child: Container(
-                  decoration:
-                      discountItem.discount.getDiscountString(context) ==
-                              context.l10n.free
-                          ? KWidgetTheme.boxDecorationDiscountBorder
-                          : null,
-                  child: isDesk
-                      ? Row(
-                          children: children,
-                        )
-                      : Column(
-                          children: children,
-                        ),
-                ),
-              )
-            else
-              DecoratedBox(
-                decoration: discountItem.discount.getDiscountString(context) ==
-                        context.l10n.free
-                    ? KWidgetTheme.boxDecorationDiscountBorder
-                    : const BoxDecoration(),
-                child: _DiscountCardDesciprtionWidget(
-                  isDesk: isDesk,
-                  descriptionMethod: descriptionMethod,
-                  discountItem: discountItem,
-                  closeWidget: closeWidget,
-                  isBusiness: isBusiness,
-                  share: share,
-                  useSiteUrl: useSiteUrl,
-                  dialogIsDesk: dialogIsDesk,
-                ),
-              ),
+            DiscountCardAddImageWidget(
+              discountItem: discountItem,
+              isDesk: isDesk,
+              isBusiness: isBusiness,
+              closeWidget: closeWidget,
+              share: share,
+              descriptionMethod: descriptionMethod,
+              useSiteUrl: useSiteUrl,
+              dialogIsDesk: dialogIsDesk,
+            ),
           ],
         ),
       ),
@@ -108,52 +64,8 @@ class DiscountCardWidget extends StatelessWidget {
   }
 }
 
-class _DiscountCardWithImage extends StatelessWidget {
-  const _DiscountCardWithImage({
-    required this.discountItem,
-    required this.borderRadious,
-  });
-
-  final DiscountModel discountItem;
-  final BorderRadiusGeometry borderRadious;
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: borderRadious,
-            child: NetworkImageWidget(
-              imageUrl: discountItem.images![0].downloadURL,
-            ),
-          ),
-          Positioned(
-            top: KPadding.kPaddingSize16,
-            right: KPadding.kPaddingSize16,
-            child: DecoratedBox(
-              decoration: KWidgetTheme.boxDecorationDiscount,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize8,
-                  vertical: KPadding.kPaddingSize4,
-                ),
-                child: TextPointWidget(
-                  discountItem.discount.getDiscountString(context),
-                  key: DiscountCardKeys.discount,
-                  mainAxisSize: MainAxisSize.min,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DiscountCardDesciprtionWidget extends StatelessWidget {
-  const _DiscountCardDesciprtionWidget({
+class DiscountCardDesciprtionWidget extends StatelessWidget {
+  const DiscountCardDesciprtionWidget({
     required this.isDesk,
     required this.closeWidget,
     required this.descriptionMethod,
@@ -162,6 +74,9 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
     required this.isBusiness,
     required this.useSiteUrl,
     required this.dialogIsDesk,
+    super.key,
+    this.decoration,
+    this.titleDeskWidget,
   });
   final bool isDesk;
   final Widget? closeWidget;
@@ -171,15 +86,16 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
   final bool isBusiness;
   final bool? useSiteUrl;
   final bool? dialogIsDesk;
+  final Decoration? decoration;
+  final Widget? titleDeskWidget;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: discountItem.hasImages
-          ? isDesk
+      decoration: decoration ??
+          (isDesk
               ? KWidgetTheme.boxDecorationWidgetDeskWithImage
-              : KWidgetTheme.boxDecorationWidgetMobWithImage
-          : KWidgetTheme.boxDecorationWidget,
+              : KWidgetTheme.boxDecorationWidgetMobWithImage),
       padding: EdgeInsets.symmetric(
         horizontal: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
       ),
@@ -198,7 +114,7 @@ class _DiscountCardDesciprtionWidget extends StatelessWidget {
             category: discountItem.category,
             discount: discountItem.discount,
             title: discountItem.title,
-            notImage: discountItem.images != null,
+            titleDeskWidget: titleDeskWidget,
           ),
           if (!isDesk) ...[
             KSizedBox.kHeightSizedBox8,
@@ -285,54 +201,45 @@ class _DescrptionTitleWidget extends StatelessWidget {
     required this.category,
     required this.discount,
     required this.title,
-    this.notImage = false,
+    this.titleDeskWidget,
   });
   final bool isDesk;
   final List<TranslateModel> category;
   final List<int> discount;
   final TranslateModel title;
-  final bool notImage;
+  final Widget? titleDeskWidget;
 
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
-      if (!notImage) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: KPadding.kPaddingSize30,
-          children: [
-            Expanded(
-              child: Text(
-                title.getTrsnslation(context),
-                key: DiscountCardKeys.discountTitle,
-                style: AppTextStyle.materialThemeHeadlineSmall,
-              ),
-            ),
-            DecoratedBox(
-              decoration: KWidgetTheme.boxDecorationDiscount,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize8,
-                  vertical: KPadding.kPaddingSize4,
-                ),
-                child: TextPointWidget(
-                  discount.getDiscountString(context),
-                  key: DiscountCardKeys.discount,
-                  mainAxisSize: MainAxisSize.min,
+      return titleDeskWidget ??
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: KPadding.kPaddingSize30,
+            children: [
+              Expanded(
+                child: Text(
+                  title.getTrsnslation(context),
+                  key: DiscountCardKeys.discountTitle,
+                  style: AppTextStyle.materialThemeHeadlineSmall,
                 ),
               ),
-            ),
-          ],
-        );
-      } else {
-        return Expanded(
-          child: Text(
-            title.getTrsnslation(context),
-            key: DiscountCardKeys.discountTitle,
-            style: AppTextStyle.materialThemeHeadlineSmall,
-          ),
-        );
-      }
+              DecoratedBox(
+                decoration: KWidgetTheme.boxDecorationDiscount,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize8,
+                    vertical: KPadding.kPaddingSize4,
+                  ),
+                  child: TextPointWidget(
+                    discount.getDiscountString(context),
+                    key: DiscountCardKeys.discount,
+                    mainAxisSize: MainAxisSize.min,
+                  ),
+                ),
+              ),
+            ],
+          );
     } else {
       return Align(
         alignment: Alignment.centerRight,
@@ -549,6 +456,13 @@ class _CitiesExpirationWidget extends StatelessWidget {
   final DiscountModel discountItem;
   @override
   Widget build(BuildContext context) {
+    void moreButtonEvent() => context.goNamed(
+          KRoute.discount.name,
+          pathParameters: {
+            UrlParameters.cardId: discountItem.id,
+          },
+          extra: discountItem,
+        );
     if (isDesk) {
       return Row(
         spacing: KPadding.kPaddingSize16,
@@ -561,15 +475,10 @@ class _CitiesExpirationWidget extends StatelessWidget {
           Expanded(
             child: CityListWidget(
               key: DiscountCardKeys.city,
+              buttonKey: DiscountCardKeys.cityMoreButton,
               location: discountItem.location,
               subLocation: discountItem.subLocation,
-              moreButtonEvent: () => context.goNamed(
-                KRoute.discount.name,
-                pathParameters: {
-                  UrlParameters.cardId: discountItem.id,
-                },
-                extra: discountItem,
-              ),
+              moreButtonEvent: moreButtonEvent,
               isDesk: true,
             ),
           ),
@@ -587,14 +496,9 @@ class _CitiesExpirationWidget extends StatelessWidget {
           ),
           CityListWidget(
             key: DiscountCardKeys.city,
+            buttonKey: DiscountCardKeys.cityMoreButton,
             isDesk: false,
-            moreButtonEvent: () => context.goNamed(
-              KRoute.discount.name,
-              pathParameters: {
-                UrlParameters.cardId: discountItem.id,
-              },
-              extra: discountItem,
-            ),
+            moreButtonEvent: moreButtonEvent,
             location: discountItem.location,
             subLocation: discountItem.subLocation,
           ),

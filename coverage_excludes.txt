@@ -27,3 +27,4 @@ lib/shared/repositories/data_picker_repository.dart
 lib/**/*_state.dart
 lib/**/*_event.dart
 **/*.g.dart
+**/failure_model/*.dart

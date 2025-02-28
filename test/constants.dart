@@ -391,6 +391,17 @@ abstract class KTestVariables {
       ),
   ];
 
+  static final moreDiscountModel = KMockText.discountModel.copyWith(
+    location: [
+      KMockText.location,
+      const TranslateModel(uk: 'test'),
+      const TranslateModel(uk: 'test2'),
+      const TranslateModel(uk: 'test3'),
+    ],
+    subLocation: SubLocation.all,
+    eligibility: [EligibilityEnum.all],
+  );
+
   static final cityModelItems = <CityModel>[
     for (var i = 0; i < 5; i++)
       CityModel(

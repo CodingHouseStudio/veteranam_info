@@ -9,10 +9,15 @@ class AppLayoutRepository
     with WidgetsBindingObserver
     implements IAppLayoutRepository {
   AppLayoutRepository()
-      : _widgetsBinding = WidgetsBinding.instance,
+      : _widgetsBinding = widgetsBinding ?? WidgetsBinding.instance,
         _appVersionController = StreamController<AppVersionEnum>.broadcast() {
-    _widgetsBinding.addObserver(this);
+    if (widgetsBinding == null) {
+      _widgetsBinding.addObserver(this);
+    }
   }
+
+  @visibleForTesting
+  static WidgetsBinding? widgetsBinding;
 
   final WidgetsBinding _widgetsBinding;
   final StreamController<AppVersionEnum> _appVersionController;

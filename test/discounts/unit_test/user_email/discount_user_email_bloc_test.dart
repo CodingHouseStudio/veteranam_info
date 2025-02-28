@@ -219,25 +219,25 @@ void main() {
           ).thenAnswer(
             (_) async => const Left(SomeFailure.serverError),
           );
-          blocTest<UserEmailFormBloc, UserEmailFormState>(
-            'Bloc Test',
-            build: () => UserEmailFormBloc(
-              discountRepository: mockdiscountRepository,
-              appAuthenticationRepository: mockAppAuthenticationRepository,
-              firebaseAnalyticsService: mockFirebaseAnalyticsService,
-            ),
-            // act: (bloc) async {
-            // bloc.add(const UserEmailFormEvent.started());
-            // },
-            expect: () async => [
-              const UserEmailFormState(
-                email: EmailFieldModel.pure(),
-                formState: EmailEnum.initial,
-                emailEnum: UserEmailEnum.discountEmailNotShow,
-              ),
-            ],
-          );
         });
+        blocTest<UserEmailFormBloc, UserEmailFormState>(
+          'Bloc Test',
+          build: () => UserEmailFormBloc(
+            discountRepository: mockdiscountRepository,
+            appAuthenticationRepository: mockAppAuthenticationRepository,
+            firebaseAnalyticsService: mockFirebaseAnalyticsService,
+          ),
+          // act: (bloc) async {
+          // bloc.add(const UserEmailFormEvent.started());
+          // },
+          expect: () async => [
+            const UserEmailFormState(
+              email: EmailFieldModel.pure(),
+              formState: EmailEnum.initial,
+              emailEnum: UserEmailEnum.discountEmailNotShow,
+            ),
+          ],
+        );
       });
     });
 

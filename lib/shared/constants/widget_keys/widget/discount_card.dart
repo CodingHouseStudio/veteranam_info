@@ -11,6 +11,11 @@ abstract class DiscountCardKeys {
   static const discount = Key('discount');
   static const expiration = Key('discount_card_expiration');
   static const city = Key('discount_card_city');
+  static const cityMoreButton = Key('discount_card_city_more_button');
+
+  static const eligiblity = Key('discount_card_eligiblity');
+  static const eligiblityMoreButton =
+      Key('discount_card_eligiblity_more_button');
 
   // static const description = Key('discount_card_description');
   // static const shareButtons = Key('discount_card_share_buttons');

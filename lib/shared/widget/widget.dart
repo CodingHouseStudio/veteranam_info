@@ -28,6 +28,7 @@ export 'confirm_publish_discount_dialog.dart';
 export 'cookies_dialog_widget.dart';
 export 'dialogs_widget.dart';
 export 'dilog_page_widget.dart';
+export 'discount_card_add_image_widget.dart';
 export 'discount_card_widget.dart';
 export 'discount_eligibility_widget.dart';
 export 'discount_image_widget.dart';

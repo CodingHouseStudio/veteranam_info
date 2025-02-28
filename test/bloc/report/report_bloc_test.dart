@@ -145,6 +145,55 @@ void main() {
         ),
       ],
     );
+
+    blocTest<ReportBloc, ReportState>(
+      'emits [ReportState] when reasonComplaint(other) and'
+      ' message are changed without email not valid',
+      build: () {
+        when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+          (realInvocation) => User.empty,
+        );
+        return ReportBloc(
+          reportRepository: mockReportRepository,
+          appAuthenticationRepository: mockAppAuthenticationRepository,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+        );
+      },
+      act: (bloc) => bloc
+        ..add(const ReportEvent.send())
+        ..add(const ReportEvent.reasonComplaintUpdated(ReasonComplaint.other))
+        ..add(const ReportEvent.send()),
+      expect: () => [
+        const ReportState(
+          formState: ReportEnum.invalidData,
+          reasonComplaint: null,
+          email: EmailFieldModel.pure(),
+          message: ReportFieldModel.pure(),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+        ),
+        const ReportState(
+          formState: ReportEnum.inProgress,
+          reasonComplaint: ReasonComplaint.other,
+          email: EmailFieldModel.pure(),
+          message: ReportFieldModel.pure(),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+        ),
+        const ReportState(
+          formState: ReportEnum.next,
+          reasonComplaint: ReasonComplaint.other,
+          email: EmailFieldModel.pure(),
+          message: ReportFieldModel.pure(),
+          failure: null,
+          cardId: KTestVariables.id,
+          card: CardEnum.funds,
+        ),
+      ],
+    );
     blocTest<ReportBloc, ReportState>(
       'emits [ReportState] when reasonComplaint(fraudOrSpam),'
       ' are changed and send',

@@ -5,6 +5,7 @@ class EligibilityWidget extends StatelessWidget {
   const EligibilityWidget({
     required this.eligibility,
     required this.isDesk,
+    required this.buttonKey,
     super.key,
     this.showFullList = false,
     this.moreButtonEvent,
@@ -14,6 +15,7 @@ class EligibilityWidget extends StatelessWidget {
   final bool showFullList;
   final bool isDesk;
   final void Function()? moreButtonEvent;
+  final Key? buttonKey;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,7 @@ class EligibilityWidget extends StatelessWidget {
                   );
                 }
                 return TextButton(
+                  key: buttonKey,
                   onPressed: moreButtonEvent,
                   child: Text(
                     context.l10n.moreWhomGranted(list.length - itemCount),

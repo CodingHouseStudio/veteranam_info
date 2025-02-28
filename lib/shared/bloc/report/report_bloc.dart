@@ -107,19 +107,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Send event,
     Emitter<ReportState> emit,
   ) {
-    if (state.reasonComplaint == null ||
-            (!state.formState.isNext &&
-                (_appAuthenticationRepository.currentUser.email?.isEmpty ??
-                    true))
+    if (state.reasonComplaint == null
         //&&
         //     state.reasonComplaint == ReasonComplaint.other ||
         // state.reasonComplaint == null
         ) {
-      if (state.reasonComplaint != null) {
-        emit(state.copyWith(formState: ReportEnum.next, failure: null));
-      } else {
-        emit(state.copyWith(formState: ReportEnum.invalidData, failure: null));
-      }
+      emit(state.copyWith(formState: ReportEnum.invalidData, failure: null));
+      return;
+    } else if (!state.formState.isNext &&
+        (_appAuthenticationRepository.currentUser.email?.isEmpty ?? true)) {
+      emit(state.copyWith(formState: ReportEnum.next, failure: null));
       return;
     }
     // if (state.cardId != null

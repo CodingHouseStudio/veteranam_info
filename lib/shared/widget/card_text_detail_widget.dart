@@ -6,7 +6,7 @@ class CardTextDetailWidget extends StatefulWidget {
     required this.text,
     required this.isDesk,
     this.maxLines,
-    this.hasMarkdown = false,
+    // this.hasMarkdown = false,
     this.icon,
     super.key,
     this.buttonText,
@@ -19,7 +19,7 @@ class CardTextDetailWidget extends StatefulWidget {
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
   final bool isDesk;
-  final bool hasMarkdown;
+  // final bool hasMarkdown;
 
   @override
   State<CardTextDetailWidget> createState() => _CardTextDetailWidgetState();
@@ -51,21 +51,21 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: KPadding.kPaddingSize16,
       children: [
-        if (widget.hasMarkdown)
-          MarkdownLinkWidget(
-            key: CardTextDetailKeys.text,
-            text: widget.text
-                .markdownCard(isDesk: widget.isDesk, fullText: fullText),
-            isDesk: widget.isDesk,
-          )
-        else
-          Text(
-            widget.text,
-            key: CardTextDetailKeys.text,
-            maxLines: fullText ? null : widget.maxLines ?? 2,
-            style: AppTextStyle.materialThemeBodyLarge,
-            overflow: TextOverflow.clip,
-          ),
+        // if (widget.hasMarkdown)
+        //   MarkdownLinkWidget(
+        //     key: CardTextDetailKeys.text,
+        //     text: widget.text
+        //         .markdownCard(isDesk: widget.isDesk, fullText: fullText),
+        //     isDesk: widget.isDesk,
+        //   )
+        // else
+        Text(
+          widget.text,
+          key: CardTextDetailKeys.text,
+          maxLines: fullText ? null : widget.maxLines ?? 2,
+          style: AppTextStyle.materialThemeBodyLarge,
+          overflow: TextOverflow.clip,
+        ),
         Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,

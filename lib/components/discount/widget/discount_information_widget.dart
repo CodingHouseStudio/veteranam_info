@@ -94,6 +94,7 @@ class DiscountInformationBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
               EligibilityWidget(
                 key: DiscountKeys.eligiblityList,
+                buttonKey: null,
                 isDesk: isDesk,
                 eligibility: state.discountModel.eligibility,
                 showFullList: true,
@@ -241,6 +242,7 @@ class _DiscountContactInformationWidget extends StatelessWidget {
                                   ),
                                   child: CityListWidget(
                                     key: DiscountKeys.city,
+                                    buttonKey: null,
                                     isDesk: false,
                                     location: state.discountModel.location,
                                     subLocation:

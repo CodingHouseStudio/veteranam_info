@@ -50,6 +50,22 @@ void main() {
         isFalse,
       );
     });
+    test('Get frp, ', () {
+      expect(
+        Language.getFromLanguageCode('uk'),
+        Language.ukraine,
+      );
+
+      expect(
+        Language.getFromLanguageCode('en'),
+        Language.english,
+      );
+
+      expect(
+        Language.getFromLanguageCode(KTestVariables.field),
+        Language.ukraine,
+      );
+    });
     final fullJson = {
       UserSettingModelJsonField.id: KTestVariables.userSettingModel.id,
       UserSettingModelJsonField.locale:

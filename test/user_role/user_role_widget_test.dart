@@ -54,7 +54,6 @@ void main() {
       //     tester: tester,
       //   );
       // });
-      // TODO(test): Add unit tests
       group('Show Cookies Dialog', () {
         setUp(() {
           final SharedPrefencesProvider mockSharedPrefencesProvider =
