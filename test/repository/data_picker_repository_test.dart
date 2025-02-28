@@ -64,6 +64,11 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(
+          mockXFile.mimeType,
+        ).thenAnswer(
+          (_) => 'image/png',
+        );
+        when(
           mockImagePicker.pickImage(source: DataPickerRepository.imageSource),
         ).thenAnswer(
           (_) async => mockXFile,
