@@ -29,17 +29,17 @@ Future<void> discountsAddDescriptionEnterHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(DiscountsAddKeys.exclusionField),
+    find.byKey(DiscountsAddKeys.requirementsField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: DiscountsAddKeys.exclusionField,
+    itemKey: DiscountsAddKeys.requirementsField,
   );
 
   await tester.enterText(
-    find.byKey(DiscountsAddKeys.exclusionField),
+    find.byKey(DiscountsAddKeys.requirementsField),
     requirmentsText,
   );
 

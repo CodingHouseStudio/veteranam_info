@@ -16,7 +16,7 @@ abstract class DiscountsKeys {
   //     Key('discounts_filter_button_icon');
   // static const ButtonIconUp =
   //     Key('discounts_filter_button_icon_up');
-  static const userEmailDialog = Key('discounts_screen_user_email_dialog');
+  // static const userEmailDialog = Key('discounts_screen_user_email_dialog');
   // static const cancelIcon = Key('discounts_screen_cancel_icon');
   // static const cancelText = Key('discounts_screen_cancel_text');
   static const sortingButton = Key('discounts_screen_sorting_button');

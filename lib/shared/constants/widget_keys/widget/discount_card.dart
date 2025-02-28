@@ -6,7 +6,7 @@ abstract class DiscountCardKeys {
   static const userName = Key('discount_card_username');
   static const date = Key('discount_card_date');
   static const description = Key('discount_card_description');
-  // static const category = Key('discount_card_category');
+  static const button = Key('discount_card_button');
   static const discountTitle = Key('discount_card_title');
   static const discount = Key('discount');
   static const expiration = Key('discount_card_expiration');

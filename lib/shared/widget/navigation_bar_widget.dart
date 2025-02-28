@@ -191,7 +191,7 @@ class _NavbarWidget extends StatelessWidget {
                                 : [
                                     KSizedBox.kWidthSizedBox4,
                                     IconButtonWidget(
-                                      key: NawbarKeys.loginIcon,
+                                      key: NawbarKeys.userIcon,
                                       onPressed: () =>
                                           context.goNamed(loginPath),
                                       icon: KIcon.personWhite,
@@ -256,7 +256,7 @@ class _NavbarWidget extends StatelessWidget {
           selector: (state) => state.company.imageUrl,
           builder: (context, imageUrl) {
             return UserPhotoWidget(
-              key: NawbarKeys.loginIcon,
+              key: NawbarKeys.userIcon,
               onPressed: () => context.goNamed(KRoute.company.name),
               imageUrl: imageUrl,
             );
@@ -268,7 +268,7 @@ class _NavbarWidget extends StatelessWidget {
           selector: (state) => state.user.photo,
           builder: (context, photo) {
             return UserPhotoWidget(
-              key: NawbarKeys.loginIcon,
+              key: NawbarKeys.userIcon,
               onPressed: () => context.goNamed(KRoute.profile.name),
               imageUrl: photo,
             );

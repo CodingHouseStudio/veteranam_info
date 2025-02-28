@@ -7,16 +7,16 @@ import '../test_dependency.dart';
 /// mockGoRouter sets if you want use go router
 extension PumpApp on WidgetTester {
   Future<void> pumpApp(
-    WidgetTester tester, {
-    required String? routeName,
-  }) async {
+    WidgetTester tester,
+    // required String? routeName,
+  ) async {
     await appHelper(tester);
 
-    if (routeName != null) {
-      await footerButtonHelper(
-        tester: tester,
-        buttonKey: KTestVariables.getFooterKey(routeName),
-      );
-    }
+    // if (routeName != null) {
+    //   await footerButtonHelper(
+    //     tester: tester,
+    //     buttonKey: KTestVariables.getFooterKey(routeName),
+    //   );
+    // }
   }
 }

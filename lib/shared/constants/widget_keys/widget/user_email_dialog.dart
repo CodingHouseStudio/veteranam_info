@@ -1,6 +1,7 @@
 part of '../widget_keys.dart';
 
 abstract class UserEmailDialogKeys {
+  static const dialog = Key('user_email_dialog');
   static const icon = Key('user_email_dialog_icon');
   static const emailDialogTitle = Key('user_email_dialog_title');
   static const emailDialogSubtitle = Key('user_email_dialog_subtitle');

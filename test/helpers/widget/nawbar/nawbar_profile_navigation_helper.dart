@@ -10,11 +10,11 @@ Future<void> nawbarProfileNavigationHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(NawbarKeys.loginIcon));
+  await tester.tap(find.byKey(NawbarKeys.userIcon));
 
   verify(
     () => mockGoRouter.goNamed(KRoute.profile.name),

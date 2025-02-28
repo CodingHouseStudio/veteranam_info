@@ -10,11 +10,14 @@ Future<void> appHelper(WidgetTester tester) async {
 
   log('Loading App...', name: 'Integation Tests');
 
-  while (find.byKey(AppKeys.screen).evaluate().isEmpty) {
-    await tester.pumpAndSettle();
+  while (find.byKey(NawbarKeys.widget).evaluate().isEmpty) {
+    await tester.pumpAndSettle(const Duration(milliseconds: 200));
   }
 
   log('App Loaded', name: 'Integation Tests');
+
+  // ignore: avoid_print
+  print('Integration tests start ${DateTime.now()}');
 
   expect(
     find.byKey(AppKeys.screen),

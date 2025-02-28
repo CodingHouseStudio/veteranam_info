@@ -32,14 +32,14 @@ class UserRepository {
   void _onUserStreamListen() {
     tryGetUserLanguageFromCache();
     _userSubscription ??=
-        _appAuthenticationRepository.user.listen((currentUser) {
+        _appAuthenticationRepository.user.listen((currentUser) async {
       if (currentUser.isNotEmpty) {
         _userController.add(
           currentUser,
         );
         if (currentUserSetting.id != currentUser.id &&
             _userSettingSubscription != null) {
-          _userSettingSubscription?.cancel();
+          await _userSettingSubscription?.cancel();
           _userSettingSubscription = null;
         }
         var userSettingIsNew = _userSettingSubscription == null;
@@ -56,7 +56,7 @@ class UserRepository {
           },
         );
       } else {
-        _userSettingSubscription?.cancel();
+        await _userSettingSubscription?.cancel();
         _userSettingSubscription = null;
       }
     });
@@ -172,11 +172,9 @@ class UserRepository {
   bool get isEnglish => currentUserSetting.locale.isEnglish;
 
   // @disposeMethod
-  void dispose() {
-    _userController.close();
-    _userSubscription?.cancel();
+  Future<void> dispose() async {
+    await _userController.close();
 
-    _userSettingController.close();
-    _userSettingSubscription?.cancel();
+    await _userSettingController.close();
   }
 }
