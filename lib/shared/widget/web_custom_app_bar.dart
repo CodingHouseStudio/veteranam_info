@@ -8,8 +8,7 @@ class WebCustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!KTest.isTest &&
-        !GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
+    if (!GetIt.I.get<FirebaseAnalyticsCacheController>().consentDialogShowed) {
       WidgetsBinding.instance.addPostFrameCallback(
         (timeStamp) => context.dialog.showCookiesDialog(),
       );

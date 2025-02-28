@@ -4,24 +4,33 @@ extension TesterExtension on WidgetTester {
   Future<void> tapOnTextCustom({
     required String text,
     String? englishText,
+    int index = 0,
+    bool last = false,
   }) async {
-    final link = find.textRange.ofSubstring(text).first;
+    final linkItems = find.textRange.ofSubstring(text);
+    final link = last ? linkItems.last : linkItems.at(index);
 
     try {
       if (englishText != null) {
         if (find.textContaining(text).evaluate().isNotEmpty) {
-          await ensureVisible(find.textContaining(text).first);
+          final textItems = find.textContaining(text);
+          await ensureVisible(last ? textItems.last : textItems.at(index));
 
           await tapOnText(link);
         } else {
-          final linkEnglish = find.textRange.ofSubstring(englishText).first;
+          final linkEnglishItems = find.textRange.ofSubstring(englishText);
+          final linkEnglish =
+              last ? linkEnglishItems.last : linkEnglishItems.at(index);
 
-          await ensureVisible(find.textContaining(englishText).first);
+          final textItems = find.textContaining(englishText);
+
+          await ensureVisible(last ? textItems.last : textItems.at(index));
 
           await tapOnText(linkEnglish);
         }
       } else {
-        await ensureVisible(find.textContaining(text).first);
+        final textItems = find.textContaining(text);
+        await ensureVisible(last ? textItems.last : textItems.at(index));
 
         await tapOnText(link);
       }

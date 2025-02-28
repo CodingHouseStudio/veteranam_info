@@ -1,5 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/data_provider/firebase_anaytics_cache_controller.dart';
+import 'package:veteranam/shared/data_provider/shared_preferences_provider.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -15,6 +18,7 @@ void main() {
 
   tearDownAll(GetIt.I.reset);
   group('${KScreenBlocName.userRole} ', () {
+    setUp(_cookiesHideDialog);
     testWidgets('${KGroupText.initial} ', (tester) async {
       await userRolePumpAppHelper(
         tester: tester,
@@ -25,7 +29,10 @@ void main() {
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+      setUp(() {
+        mockGoRouter = MockGoRouter();
+        _cookiesHideDialog();
+      });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await userRolePumpAppHelper(
           tester: tester,
@@ -47,6 +54,61 @@ void main() {
       //     tester: tester,
       //   );
       // });
+      // TODO(test): Add unit tests
+      group('Show Cookies Dialog', () {
+        setUp(() {
+          final SharedPrefencesProvider mockSharedPrefencesProvider =
+              MockSharedPrefencesProvider();
+          final firebaseAnalyticsCacheController =
+              FirebaseAnalyticsCacheController(
+            sharedPrefencesProvider: mockSharedPrefencesProvider,
+          );
+
+          when(
+            firebaseAnalyticsCacheController.consentDialogShowed,
+          ).thenAnswer(
+            (realInvocation) => false,
+          );
+
+          if (GetIt.I.isRegistered<FirebaseAnalyticsCacheController>()) {
+            GetIt.I.unregister<FirebaseAnalyticsCacheController>();
+          }
+          GetIt.I.registerSingleton<FirebaseAnalyticsCacheController>(
+            firebaseAnalyticsCacheController,
+          );
+        });
+        testWidgets('Cookies dialog accept', (tester) async {
+          await userRolePumpAppHelper(
+            tester: tester,
+          );
+
+          await cookiesAcceptDialogHelper(tester);
+        });
+
+        testWidgets('Cookies dialog accept necessary', (tester) async {
+          await userRolePumpAppHelper(
+            tester: tester,
+          );
+
+          await changeWindowSizeHelper(
+            tester: tester,
+            test: () async => cookiesAcceptNecessaryDialogHelper(tester),
+          );
+        });
+
+        testWidgets('Cookies dialog tap privact policy text', (tester) async {
+          await userRolePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await privacyPolicyCookiesDialogHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+      });
+
       group('${KGroupText.goTo} ', () {
         testWidgets('Sign Up business button ', (tester) async {
           await userRolePumpAppHelper(
@@ -84,4 +146,25 @@ void main() {
       });
     });
   });
+}
+
+void _cookiesHideDialog() {
+  final SharedPrefencesProvider mockSharedPrefencesProvider =
+      MockSharedPrefencesProvider();
+  final firebaseAnalyticsCacheController = FirebaseAnalyticsCacheController(
+    sharedPrefencesProvider: mockSharedPrefencesProvider,
+  );
+
+  when(
+    firebaseAnalyticsCacheController.consentDialogShowed,
+  ).thenAnswer(
+    (realInvocation) => true,
+  );
+
+  if (GetIt.I.isRegistered<FirebaseAnalyticsCacheController>()) {
+    GetIt.I.unregister<FirebaseAnalyticsCacheController>();
+  }
+  GetIt.I.registerSingleton<FirebaseAnalyticsCacheController>(
+    firebaseAnalyticsCacheController,
+  );
 }

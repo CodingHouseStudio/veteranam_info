@@ -5,6 +5,7 @@ export 'card/card.dart';
 export 'chat/chat.dart';
 export 'check_point/check_point.dart';
 export 'confirm_dialog/confirm_dialog.dart';
+export 'cookies_dialog/cookies_dialog.dart';
 export 'dialogs/dialogs.dart';
 export 'discount/discount.dart';
 export 'donate/donate.dart';

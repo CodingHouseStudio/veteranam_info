@@ -11,11 +11,12 @@ class CookiesDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      key: CookiesDialogKeys.dialog,
       create: (context) => GetIt.I.get<CookiesDialogCubit>(),
       child: BlocBuilder<AppLayoutBloc, AppLayoutState>(
         builder: (context, state) {
           final textWidget = Text.rich(
-            key: DialogsKeys.snackBarText,
+            key: CookiesDialogKeys.text,
             TextSpan(
               text: context.l10n.cookies,
               style: state.appVersionEnum.isDesk
@@ -39,6 +40,7 @@ class CookiesDialogWidget extends StatelessWidget {
           );
           final buttons = [
             TextButton(
+              key: CookiesDialogKeys.acceptNecessaryButton,
               onPressed: () {
                 context.read<CookiesDialogCubit>().submitted(
                       onlyNecessary: true,
@@ -53,6 +55,7 @@ class CookiesDialogWidget extends StatelessWidget {
               ),
             ),
             TextButton(
+              key: CookiesDialogKeys.acceptButton,
               onPressed: () {
                 context.read<CookiesDialogCubit>().submitted(
                       onlyNecessary: false,

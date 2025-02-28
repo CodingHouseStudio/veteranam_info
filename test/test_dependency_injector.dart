@@ -66,6 +66,7 @@ void configureDependenciesTest() {
   discountInit(mockFirebaseFirestore);
   mobBuild();
   appLayoutCubitInit();
+  firebaseAnalyticsCacheInit();
 
   // Service
   getItTest.registerSingleton<FirebaseFirestore>(
@@ -146,6 +147,16 @@ void configureDependenciesTest() {
       languageCacheRepository: getItTest.get<ILanguageCacheRepository>(),
     ),
   );
+
+  getItTest.registerSingleton<FirebaseAnalyticsService>(
+    FirebaseAnalyticsService(
+      firebaseAnalytics: MockFirebaseAnalytics(),
+      userRepository: getItTest.get<UserRepository>(),
+      firebaseAnalyticsCacheController:
+          getItTest.get<FirebaseAnalyticsCacheController>(),
+    ),
+  );
+
   getItTest.registerSingleton<IAppNetworkRepository>(
     AppNetworkRepository(
       connectivity: getItTest.get<Connectivity>(),
@@ -410,6 +421,11 @@ void configureDependenciesTest() {
       buildRepository: getItTest.get<AppInfoRepository>(),
       firebaseRemoteConfigProvider:
           getItTest.get<FirebaseRemoteConfigProvider>(),
+    ),
+  );
+  getItTest.registerFactory<CookiesDialogCubit>(
+    () => CookiesDialogCubit(
+      firebaseAnalyticsService: getItTest.get<FirebaseAnalyticsService>(),
     ),
   );
 }

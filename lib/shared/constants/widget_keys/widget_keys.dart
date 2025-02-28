@@ -101,6 +101,7 @@ part 'widget/work_card.dart';
 part 'widget/work_request_card.dart';
 part 'widget/confirm_publish_discount.dart';
 part 'widget/confirm_dialog.dart';
+part 'widget/cookies_dialog.dart';
 
 // abstract abstract class KWidgetkeys {
 //   static _ScreenKeys get screen => _ScreenKeys();

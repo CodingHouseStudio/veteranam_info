@@ -1,6 +1,7 @@
 export 'app_layout_cubit_register.dart';
 export 'discount_init_register.dart';
 export 'fake_provider.dart';
+export 'firebase_analytics_cache_init.dart';
 export 'go_router_provider_mocks.dart';
 export 'image_provider.dart';
 export 'mob_build_register.dart';
