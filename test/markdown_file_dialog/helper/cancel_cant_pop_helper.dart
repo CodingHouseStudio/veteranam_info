@@ -26,7 +26,7 @@ Future<void> cancelCanNotPopHelper({
 
   if (business) {
     verify(
-      () => mockGoRouter.goNamed(KRoute.discountsAdd.name),
+      () => mockGoRouter.goNamed(KRoute.feedback.name),
     ).called(1);
   } else {
     verify(

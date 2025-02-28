@@ -29,11 +29,7 @@ class CookiesDialogWidget extends StatelessWidget {
                       : AppTextStyle
                           .materialThemeBodyMediumNeutralBoldUnderLine,
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => context.goNamed(
-                          Config.isBusiness
-                              ? KRoute.privacyPolicyBusinessCookies.name
-                              : KRoute.privacyPolicy.name,
-                        ),
+                    ..onTap = () => context.goNamed(KRoute.privacyPolicy.name),
                 ),
                 const TextSpan(
                   text: '.',

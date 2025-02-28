@@ -262,9 +262,12 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
 
-            await footerFeedbackHelper(
+            await changeWindowSizeHelper(
               tester: tester,
-              mockGoRouter: mockGoRouter,
+              test: () async => footerFeedbackHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
             );
           });
           testWidgets('Privacy policy', (tester) async {
