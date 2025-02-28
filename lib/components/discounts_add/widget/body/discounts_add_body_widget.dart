@@ -277,7 +277,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     )
                   else
                     MessageFieldWidget(
-                      key: DiscountsAddKeys.exclusionField,
+                      key: DiscountsAddKeys.requirementsField,
                       controller: requirmentsController,
                       isDesk: isDesk,
                       labelText: context.l10n.getYouNeed,

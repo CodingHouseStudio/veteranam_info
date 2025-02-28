@@ -21,7 +21,7 @@ Future<void> discountsAddDescriptionHelper({
     matcher,
   );
   expect(
-    find.byKey(DiscountsAddKeys.exclusionField),
+    find.byKey(DiscountsAddKeys.requirementsField),
     matcher,
   );
 }

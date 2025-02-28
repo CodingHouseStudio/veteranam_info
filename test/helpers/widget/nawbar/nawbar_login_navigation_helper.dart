@@ -15,12 +15,12 @@ Future<void> nawbarLoginNavigationHelper({
   );
 
   expect(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
   );
 
   await tester.pumpAndSettle();

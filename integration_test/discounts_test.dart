@@ -36,6 +36,28 @@ void main() {
 
     expect(find.byKey(DiscountsKeys.card), findsWidgets);
 
+    expect(find.byKey(DiscountCardKeys.button), findsWidgets);
+
+    await tester.tap(find.byKey(DiscountCardKeys.button).first);
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(DiscountKeys.screen), findsOneWidget);
+
+    expect(find.byKey(DiscountKeys.shareButton), findsOneWidget);
+
+    await tester.tap(find.byKey(DiscountKeys.shareButton));
+
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(DiscountKeys.backButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
+
+    expect(find.byKey(DiscountKeys.screen), findsNothing);
+
     final firebaseRemoteConfigProvider =
         GetIt.I.get<FirebaseRemoteConfigProvider>();
 

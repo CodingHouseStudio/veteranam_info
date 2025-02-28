@@ -3,11 +3,11 @@ import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 Future<void> nawbarProfileNavigationHelper(WidgetTester tester) async {
   expect(
-    find.byKey(NawbarKeys.loginIcon),
+    find.byKey(NawbarKeys.userIcon),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(NawbarKeys.loginIcon));
+  await tester.tap(find.byKey(NawbarKeys.userIcon));
 
   // verify(
   //   () => mockGoRouter.goNamed(KRoute.profile.name),

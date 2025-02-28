@@ -12,7 +12,6 @@ import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:get_it/get_it.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
@@ -28,8 +27,6 @@ import 'package:veteranam/shared/shared_flutter.dart';
 // String randomPassword = 'qwerty';
 /// COMMENT: Method sets setting for integration tests
 Future<void> setUpGlobalIntegration() async {
-  IntegrationTestWidgetsFlutterBinding.instance.framePolicy =
-      LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
   KTest.isInterationTest = true;
   final FirebaseApp app;
   if (Firebase.apps.isEmpty) {
@@ -132,6 +129,12 @@ Future<void> setUpGlobalIntegration() async {
   await initializeDateFormatting();
 
   configureDependencies();
+
+  final authRep = GetIt.I.get<AuthenticationRepository>();
+  if (authRep.currectAuthenticationStatus ==
+      AuthenticationStatus.authenticated) {
+    await authRep.logOut();
+  }
 }
 
 Future<void> tearDownGlobalItegration() async {
@@ -193,8 +196,6 @@ abstract class KTestVariables {
     return '$timestamp$randomNumber$salt@test.com';
   }
 
-  static const String useremail = 'example@gmail.com';
-
   static const filter = 'filter_test';
   static const key = 'key_test';
 
@@ -221,6 +222,7 @@ abstract class KTestVariables {
 
   static const phoneNumber = '+3809900000';
   static const link = 'https://veteranam.info/';
+  static const companyCode = '12345678';
 
   static Key getFooterKey(String routeName) {
     // Using a Map instead of a switch statement because Dart does not allow
