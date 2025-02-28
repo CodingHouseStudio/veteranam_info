@@ -24,7 +24,7 @@ class FirebaseAnalyticsCacheController {
   bool get currentState {
     final anaylticsAgreed =
         _sharedPrefencesProvider.getBool(analyticsAgreeddKey);
-    return anaylticsAgreed ?? false;
+    return !Config.isWeb || (anaylticsAgreed ?? false);
   }
 
   Future<void> setConsent({required bool state}) async {
