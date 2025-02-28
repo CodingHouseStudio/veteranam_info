@@ -112,7 +112,8 @@ class _ConfirmPublishDiscountDialogState
                 SizedBox(
                   width: double.infinity,
                   child: CheckPointWidget(
-                    key: ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
+                    widgetKey:
+                        ConfirmPublishDiscountKeys.termsAndConditionsSwitcher,
                     onChanged: () => setState(() {
                       termsAndConditionsAgree = !termsAndConditionsAgree;
                     }),

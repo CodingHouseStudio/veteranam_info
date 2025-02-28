@@ -253,6 +253,20 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    expect(
+      find.byKey(ConfirmPublishDiscountKeys.sendButton),
+      findsOneWidget,
+    );
+
+    await tester.tap(
+      find.byKey(ConfirmPublishDiscountKeys.sendButton),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(MyDiscountsKeys.screen),
+      findsOneWidget,
+    );
   });
 }

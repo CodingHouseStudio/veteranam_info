@@ -12,6 +12,7 @@ class CheckPointWidget extends StatelessWidget {
     this.textWidget,
     this.maxLines = 3,
     this.ammountWidget,
+    this.widgetKey,
   });
   final void Function()? onChanged;
   final bool isCheck;
@@ -21,6 +22,7 @@ class CheckPointWidget extends StatelessWidget {
   final Widget? textWidget;
   final int? maxLines;
   final Widget? ammountWidget;
+  final Key? widgetKey;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CheckPointWidget extends StatelessWidget {
             spacing: KPadding.kPaddingSize16,
             children: [
               DecoratedBox(
+                key: widgetKey,
                 decoration: isCheck
                     ? KWidgetTheme.boxDecorCheckPointTrue
                     : KWidgetTheme.boxDecorCheckPointFalse,
