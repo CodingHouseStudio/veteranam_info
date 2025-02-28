@@ -18,6 +18,12 @@ class FilePickerItem {
 
   static Future<FilePickerItem?> getFromImage(XFile? image) async {
     if (image == null) return null;
+    final mimeType = image.mimeType;
+    if (mimeType == null ||
+        !mimeType.contains('image') ||
+        mimeType.contains('gif')) {
+      return null;
+    }
     final hasExtension = image.name.contains('.');
     return FilePickerItem(
       bytes: await image.readAsBytes(),
