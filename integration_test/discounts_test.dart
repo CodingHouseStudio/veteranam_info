@@ -14,18 +14,22 @@ void main() {
   // This is run before all tests
   setUpAll(setUpGlobalIntegration);
 
-  tearDownAll(tearDownGlobalItegration);
+  tearDownAll(tearDownGlobalIntegration);
 
   testWidgets('Discounts Screeen Email Dialog Test', (tester) async {
     await tester.pumpApp(tester);
 
-    expect(find.byKey(HomeKeys.screen), findsOneWidget);
+    if (Config.isWeb) {
+      expect(find.byKey(HomeKeys.screen), findsOneWidget);
 
-    expect(find.byKey(HomeKeys.discountsBox), findsOneWidget);
+      expect(find.byKey(HomeKeys.discountsBox), findsOneWidget);
 
-    await tester.tap(find.byKey(HomeKeys.discountsBox));
+      await scrollingHelperInt(tester: tester, itemKey: HomeKeys.discountsBox);
 
-    await tester.pumpAndSettle();
+      await tester.tap(find.byKey(HomeKeys.discountsBox));
+
+      await tester.pumpAndSettle();
+    }
 
     expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
 

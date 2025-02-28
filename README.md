@@ -493,7 +493,7 @@ All integration tests on the chosen device which is active
 Prod:
 fvm flutter test integration_test --flavor production --dart-define=FLAVOUR=production --verbose
 Dev:
-fvm flutter test integration_test --flavor development --dart-define=FLAVOUR=development --verbose
+fvm flutter test integration_test --flavor development --dart-define=FLAVOUR=development --verbose --dart-define=ROLE=user --dart-define-from-file=.env_dev.json
 (If you want more information from tests add prefix -v)
 ```
 + WEB tests

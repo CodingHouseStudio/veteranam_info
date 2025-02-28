@@ -137,7 +137,7 @@ Future<void> setUpGlobalIntegration() async {
   }
 }
 
-Future<void> tearDownGlobalItegration() async {
+Future<void> tearDownGlobalIntegration() async {
   try {
     await GetIt.I.get<AuthenticationRepository>().logOut();
     await getIt.reset();

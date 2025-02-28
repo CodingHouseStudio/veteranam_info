@@ -11,9 +11,9 @@ void main() {
   // This is run before all tests
   setUpAll(setUpGlobalIntegration);
 
-  tearDownAll(tearDownGlobalItegration);
+  tearDownAll(tearDownGlobalIntegration);
 
-  testWidgets('Business Sign In Integration Test', (tester) async {
+  testWidgets('Sign up', (tester) async {
     await tester.pumpApp(tester);
 
     expect(find.byKey(LoginKeys.screen), findsOneWidget);
@@ -70,20 +70,6 @@ void main() {
 
     expect(find.byKey(CompanyKeys.screen), findsOneWidget);
 
-    expect(find.byKey(CompanyKeys.companyNameField), findsOneWidget);
-
-    await scrollingHelperInt(
-      tester: tester,
-      itemKey: CompanyKeys.companyNameField,
-    );
-
-    await tester.enterText(
-      find.byKey(CompanyKeys.companyNameField),
-      KTestVariables.field,
-    );
-
-    await tester.pumpAndSettle();
-
     expect(find.byKey(CompanyKeys.publicNameField), findsOneWidget);
 
     await scrollingHelperInt(
@@ -93,6 +79,20 @@ void main() {
 
     await tester.enterText(
       find.byKey(CompanyKeys.publicNameField),
+      KTestVariables.field,
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(CompanyKeys.companyNameField), findsOneWidget);
+
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: CompanyKeys.companyNameField,
+    );
+
+    await tester.enterText(
+      find.byKey(CompanyKeys.companyNameField),
       KTestVariables.field,
     );
 

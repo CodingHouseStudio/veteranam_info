@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import 'constants.dart';
@@ -11,26 +12,49 @@ void main() {
   // This is run before all tests
   setUpAll(setUpGlobalIntegration);
 
-  tearDownAll(tearDownGlobalItegration);
+  tearDownAll(tearDownGlobalIntegration);
 
   testWidgets('Sign Up Integration Test', (tester) async {
     await tester.pumpApp(tester);
 
-    expect(find.byKey(HomeKeys.screen), findsOneWidget);
+    if (Config.isWeb) {
+      expect(find.byKey(HomeKeys.screen), findsOneWidget);
 
-    expect(find.byKey(NawbarKeys.loginButton), findsOneWidget);
+      expect(find.byKey(NawbarKeys.loginButton), findsOneWidget);
 
-    await tester.tap(find.byKey(NawbarKeys.loginButton));
+      await tester.tap(find.byKey(NawbarKeys.loginButton));
 
-    await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    expect(find.byKey(UserRoleKeys.screen), findsOneWidget);
+      expect(find.byKey(UserRoleKeys.screen), findsOneWidget);
 
-    expect(find.byKey(UserRoleKeys.signUpUserButton), findsOneWidget);
+      expect(find.byKey(UserRoleKeys.signUpUserButton), findsOneWidget);
 
-    await tester.tap(find.byKey(UserRoleKeys.signUpUserButton));
+      await scrollingHelperInt(
+        tester: tester,
+        itemKey: UserRoleKeys.signUpUserButton,
+      );
 
-    await tester.pumpAndSettle();
+      await tester.tap(find.byKey(UserRoleKeys.signUpUserButton));
+
+      await tester.pumpAndSettle();
+    } else {
+      expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
+
+      expect(find.byKey(MobNavigationKeys.login), findsOneWidget);
+
+      await tester.tap(find.byKey(MobNavigationKeys.login));
+
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(LoginKeys.screen), findsOneWidget);
+
+      expect(find.byKey(LoginKeys.signUpButton), findsOneWidget);
+
+      await tester.tap(find.byKey(LoginKeys.signUpButton));
+
+      await tester.pumpAndSettle();
+    }
 
     expect(find.byKey(SignUpKeys.screen), findsOneWidget);
 

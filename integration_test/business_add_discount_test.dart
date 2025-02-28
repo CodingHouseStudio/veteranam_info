@@ -7,12 +7,13 @@ import './test_dependency.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  // This is run before all tests
   setUpAll(setUpGlobalIntegration);
 
-  tearDownAll(tearDownGlobalItegration);
+  tearDownAll(tearDownGlobalIntegration);
 
-  testWidgets('Business Sign In Integration Test', (tester) async {
+  testWidgets('Discount Add', (tester) async {
+    await tester.pumpAndSettle();
+
     await tester.pumpApp(tester);
 
     expect(find.byKey(LoginKeys.screen), findsOneWidget);
