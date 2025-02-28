@@ -33,8 +33,7 @@ class FailureRepository {
     UserSetting? userSetting,
   }) async {
     // Define the variable for error level categorization
-    if (
-        //KTest.isInterationTest ||
+    if (KTest.isInterationTest ||
         (Config.isReleaseMode &&
             Config.isProduction &&
             // GDPR: also neccesary user agree
