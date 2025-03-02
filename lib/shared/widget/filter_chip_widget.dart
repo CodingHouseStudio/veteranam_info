@@ -36,32 +36,33 @@ class FilterChipBodyWidget extends StatelessWidget {
             itemCount: filtersItems.isEmpty
                 ? KDimensions.shimmerCategoryItems
                 : filtersItems.length + 1,
-            findChildIndexCallback: (key) {
-              if (key is ValueKey) {
-                if (key is ValueKey<String> &&
-                    key.value.contains('mock_category_')) {
-                  final valueKey = key;
-                  final mockValue = int.tryParse(
-                    valueKey.value.replaceAll('mock_category_', ''),
-                  );
-                  return mockValue;
-                }
-                final valueKey = key;
-                if (valueKey is ValueKey<CategoryEnum>) {
-                  return 0;
-                }
-                final index = filtersItems.indexWhere(
-                  (element) => element.value == valueKey.value,
-                );
-                if (index >= 0) {
-                  return filtersItems.indexWhere(
-                        (element) => element.value == valueKey.value,
-                      ) +
-                      1;
-                }
-              }
-              return null;
-            },
+            // We use it only in ifformation page
+            // findChildIndexCallback: (key) {
+            //   if (key is ValueKey) {
+            //     if (key is ValueKey<String> &&
+            //         key.value.contains('mock_category_')) {
+            //       final valueKey = key;
+            //       final mockValue = int.tryParse(
+            //         valueKey.value.replaceAll('mock_category_', ''),
+            //       );
+            //       return mockValue;
+            //     }
+            //     final valueKey = key;
+            //     if (valueKey is ValueKey<CategoryEnum>) {
+            //       return 0;
+            //     }
+            //     final index = filtersItems.indexWhere(
+            //       (element) => element.value == valueKey.value,
+            //     );
+            //     if (index >= 0) {
+            //       return filtersItems.indexWhere(
+            //             (element) => element.value == valueKey.value,
+            //           ) +
+            //           1;
+            //     }
+            //   }
+            //   return null;
+            // },
             restorationId: 'category',
             itemBuilder: (context, index) => _FilterChipItemWidget(
               filtersItems: filtersItems,

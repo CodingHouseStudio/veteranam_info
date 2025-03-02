@@ -80,7 +80,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   Widget build(BuildContext context) {
     // return Text('${bytes == null}');
     if (bytes == null && widget.imageBytes == null && widget.imageUrl != null) {
-      if (Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+      if (!Config.isWeb &&
+          context.read<MobOfflineModeCubit>().state.isOffline) {
         return getCachedNetworkImage(
           widget.imageUrl!.getImageUrl,
         );
