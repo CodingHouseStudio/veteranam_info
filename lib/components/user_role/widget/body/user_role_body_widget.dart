@@ -1,3 +1,4 @@
+import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -108,19 +109,23 @@ class UserRoleBodyWidget extends StatelessWidget {
               key: UserRoleKeys.loginButton,
               buttonText: context.l10n.login,
               items: [
-                PopupMenuCustomItem(
+                CustomDropDownButtonItem(
                   text: context.l10n.asBusiness,
-                  event: () => context.read<UrlCubit>().launchUrl(
+                  onPressed: () => context.read<UrlCubit>().launchUrl(
                         url: '${KAppText.businessSite}/${KRoute.login.path}',
                       ),
                   key: UserRoleKeys.loginBusinessButton,
                   value: 1,
+                  textStyle: AppTextStyle.materialThemeBodyMedium,
+                  buttonStyle: KButtonStyles.transparentPopupMenuButtonStyle,
                 ),
-                PopupMenuCustomItem(
+                CustomDropDownButtonItem(
                   text: context.l10n.asUser,
-                  event: () => context.goNamed(KRoute.login.name),
+                  onPressed: () => context.goNamed(KRoute.login.name),
                   key: UserRoleKeys.loginUserButton,
                   value: 2,
+                  textStyle: AppTextStyle.materialThemeBodyMedium,
+                  buttonStyle: KButtonStyles.transparentPopupMenuButtonStyle,
                 ),
               ],
               menuPadding: const EdgeInsets.only(
@@ -131,8 +136,10 @@ class UserRoleBodyWidget extends StatelessWidget {
               ),
               borderRadius: KBorderRadius.kBorderRadius16,
               buttonStyle: KButtonStyles.borderBlackUserRoleButtonStyle,
-              position: PopupMenuButtonPosition.bottomLeft,
-              buttonItemStyle: KButtonStyles.transparentPopupMenuButtonStyle,
+              position: DropDownButtonPosition.bottomLeft,
+              showIcon: KIcon.keyboardArrowDown,
+              iconSpace: KPadding.kPaddingSize8,
+              closeIcon: KIcon.trailingUp,
             ),
           ],
         ),
