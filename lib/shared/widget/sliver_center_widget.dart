@@ -1,174 +1,200 @@
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:veteranam/shared/constants/enum.dart';
-import 'package:veteranam/shared/constants/platform_constants.dart';
+import 'package:sliver_center/sliver_center.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
-/// This sliver work only if parent is
-/// CustomScrollView without any other widgets
-class SliverCenter extends SingleChildRenderObjectWidget {
-  const SliverCenter({
-    required Widget sliver,
+class SliverCenterWidget extends StatelessWidget {
+  const SliverCenterWidget({
     required this.appVersionEnum,
+    required this.sliver,
     super.key,
-  }) : super(child: sliver);
+    this.getTabletPadding = false,
+  });
   final AppVersionEnum appVersionEnum;
+  final Widget sliver;
+  final bool getTabletPadding;
 
   @override
-  RenderSliver createRenderObject(BuildContext context) {
-    return _RenderSliverCenter(appVersionEnum: appVersionEnum);
-  }
-
-  @override
-  void updateRenderObject(
-    BuildContext context,
-    // ignore: library_private_types_in_public_api
-    _RenderSliverCenter renderObject,
-  ) {
-    renderObject.appVersionEnum = appVersionEnum;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-      DiagnosticsProperty<AppVersionEnum>('appVersionEnum', appVersionEnum),
+  Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: getTabletPadding
+          ? appVersionEnum.paddingWithTablet
+          : appVersionEnum.padding,
+      sliver: appVersionEnum.isDesk
+          ? SliverConstrainedCrossAxis(
+              maxExtent: KPlatformConstants.maxWidthThresholdDesk,
+              sliver: SliverCenter(sliver: sliver),
+            )
+          : sliver,
     );
   }
 }
 
-// RenderObject class for SliverCenter
-class _RenderSliverCenter extends RenderSliver
-    with RenderObjectWithChildMixin<RenderSliver> {
-  _RenderSliverCenter({required AppVersionEnum appVersionEnum})
-      : _appVersionEnum = appVersionEnum;
+// /// This sliver work only if parent is
+// /// CustomScrollView without any other widgets
+// class SliverCenter extends SingleChildRenderObjectWidget {
+//   const SliverCenter({
+//     required Widget sliver,
+//     required this.appVersionEnum,
+//     super.key,
+//   }) : super(child: sliver);
+//   final AppVersionEnum appVersionEnum;
 
-  AppVersionEnum _appVersionEnum;
+//   @override
+//   RenderSliver createRenderObject(BuildContext context) {
+//     return _RenderSliverCenter(appVersionEnum: appVersionEnum);
+//   }
 
-  bool leftPaddingAdded = false;
+//   @override
+//   void updateRenderObject(
+//     BuildContext context,
+//     // ignore: library_private_types_in_public_api
+//     _RenderSliverCenter renderObject,
+//   ) {
+//     renderObject.appVersionEnum = appVersionEnum;
+//   }
 
-  AppVersionEnum get appVersionEnum => _appVersionEnum;
+//   @override
+//   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+//     super.debugFillProperties(properties);
+//     properties.add(
+//       DiagnosticsProperty<AppVersionEnum>('appVersionEnum', appVersionEnum),
+//     );
+//   }
+// }
 
-  set appVersionEnum(AppVersionEnum value) {
-    if (_appVersionEnum != value) {
-      _appVersionEnum = value;
-      markNeedsLayout();
-    }
-  }
+// // RenderObject class for SliverCenter
+// class _RenderSliverCenter extends RenderSliver
+//     with RenderObjectWithChildMixin<RenderSliver> {
+//   _RenderSliverCenter({required AppVersionEnum appVersionEnum})
+//       : _appVersionEnum = appVersionEnum;
 
-  @override
-  void setupParentData(RenderObject child) {
-    if (child.parentData is! SliverPhysicalParentData) {
-      child.parentData = SliverPhysicalParentData();
-    }
-  }
+//   AppVersionEnum _appVersionEnum;
 
-  @override
-  void performLayout() {
-    if (child == null) {
-      geometry = SliverGeometry.zero;
-      return;
-    }
+//   bool leftPaddingAdded = false;
 
-    child!.layout(constraints, parentUsesSize: true);
+//   AppVersionEnum get appVersionEnum => _appVersionEnum;
 
-    final childGeometry = child!.geometry;
-    // Ensure the offset is clamped within the valid range
-    if (childGeometry != null) {
-      geometry = SliverGeometry(
-        scrollExtent: childGeometry.scrollExtent,
-        paintExtent: childGeometry.paintExtent,
-        maxPaintExtent: childGeometry.maxPaintExtent,
-        layoutExtent: childGeometry.layoutExtent,
-      );
-    }
-  }
+//   set appVersionEnum(AppVersionEnum value) {
+//     if (_appVersionEnum != value) {
+//       _appVersionEnum = value;
+//       markNeedsLayout();
+//     }
+//   }
 
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    if (child != null) {
-      center();
-      final parentData = child!.parentData;
-      if (parentData is SliverPhysicalParentData) {
-        context.paintChild(
-          child!,
-          offset + (parentData.paintOffset),
-        );
-      }
-    }
-  }
+//   @override
+//   void setupParentData(RenderObject child) {
+//     if (child.parentData is! SliverPhysicalParentData) {
+//       child.parentData = SliverPhysicalParentData();
+//     }
+//   }
 
-  @override
-  bool hitTestSelf({
-    required double mainAxisPosition,
-    required double crossAxisPosition,
-  }) {
-    return false;
-  }
+//   @override
+//   void performLayout() {
+//     if (child == null) {
+//       geometry = SliverGeometry.zero;
+//       return;
+//     }
 
-  @override
-  bool hitTestChildren(
-    SliverHitTestResult result, {
-    required double mainAxisPosition,
-    required double crossAxisPosition,
-  }) {
-    if (child == null) {
-      return false;
-    }
+//     child!.layout(constraints, parentUsesSize: true);
 
-    final parentData = child!.parentData;
-    if (parentData is SliverPhysicalParentData) {
-      final adjustedCrossAxisPosition =
-          crossAxisPosition - parentData.paintOffset.dx;
+//     final childGeometry = child!.geometry;
+//     // Ensure the offset is clamped within the valid range
+//     if (childGeometry != null) {
+//       geometry = SliverGeometry(
+//         scrollExtent: childGeometry.scrollExtent,
+//         paintExtent: childGeometry.paintExtent,
+//         maxPaintExtent: childGeometry.maxPaintExtent,
+//         layoutExtent: childGeometry.layoutExtent,
+//       );
+//     }
+//   }
 
-      return child!.hitTest(
-        result,
-        mainAxisPosition: mainAxisPosition,
-        crossAxisPosition: adjustedCrossAxisPosition,
-      );
-    }
-    return false;
-  }
+//   @override
+//   void paint(PaintingContext context, Offset offset) {
+//     if (child != null) {
+//       center();
+//       final parentData = child!.parentData;
+//       if (parentData is SliverPhysicalParentData) {
+//         context.paintChild(
+//           child!,
+//           offset + (parentData.paintOffset),
+//         );
+//       }
+//     }
+//   }
 
-  @override
-  void applyPaintTransform(RenderObject child, Matrix4 transform) {
-    final childParentData = child.parentData;
-    if (child.parentData is SliverPhysicalParentData) {
-      (childParentData! as SliverPhysicalParentData)
-          .applyPaintTransform(transform);
-    }
-  }
+//   @override
+//   bool hitTestSelf({
+//     required double mainAxisPosition,
+//     required double crossAxisPosition,
+//   }) {
+//     return false;
+//   }
 
-  void center() {
-    if (child != null) {
-      if (_appVersionEnum.isDesk) {
-        final deskPadding = _appVersionEnum.horizontalPadding * 2;
+//   @override
+//   bool hitTestChildren(
+//     SliverHitTestResult result, {
+//     required double mainAxisPosition,
+//     required double crossAxisPosition,
+//   }) {
+//     if (child == null) {
+//       return false;
+//     }
 
-        if ((constraints.crossAxisExtent - deskPadding) >
-            KPlatformConstants.maxWidthThresholdDesk) {
-          final parentData = child!.parentData;
-          if (parentData is SliverPhysicalParentData) {
-            final parentConstaints = parent?.constraints;
-            if (parentConstaints != null &&
-                parentConstaints is BoxConstraints) {
-              final parentSize = parentConstaints.maxWidth;
+//     final parentData = child!.parentData;
+//     if (parentData is SliverPhysicalParentData) {
+//       final adjustedCrossAxisPosition =
+//           crossAxisPosition - parentData.paintOffset.dx;
 
-              final horizontalPadding = parentSize -
-                  KPlatformConstants.maxWidthThresholdDesk -
-                  deskPadding;
-              parentData.paintOffset = Offset(horizontalPadding / 2, 0);
-              leftPaddingAdded = true;
-              return;
-            }
-          }
-        }
-      }
-      if (leftPaddingAdded) {
-        final parentData = child!.parentData;
-        if (parentData is SliverPhysicalParentData) {
-          parentData.paintOffset = Offset.zero;
-          leftPaddingAdded = false;
-        }
-      }
-    }
-  }
-}
+//       return child!.hitTest(
+//         result,
+//         mainAxisPosition: mainAxisPosition,
+//         crossAxisPosition: adjustedCrossAxisPosition,
+//       );
+//     }
+//     return false;
+//   }
+
+//   @override
+//   void applyPaintTransform(RenderObject child, Matrix4 transform) {
+//     final childParentData = child.parentData;
+//     if (child.parentData is SliverPhysicalParentData) {
+//       (childParentData! as SliverPhysicalParentData)
+//           .applyPaintTransform(transform);
+//     }
+//   }
+
+//   void center() {
+//     if (child != null) {
+//       if (_appVersionEnum.isDesk) {
+//         final deskPadding = _appVersionEnum.horizontalPadding * 2;
+
+//         if ((constraints.crossAxisExtent - deskPadding) >
+//             KPlatformConstants.maxWidthThresholdDesk) {
+//           final parentData = child!.parentData;
+//           if (parentData is SliverPhysicalParentData) {
+//             final parentConstaints = parent?.constraints;
+//             if (parentConstaints != null &&
+//                 parentConstaints is BoxConstraints) {
+//               final parentSize = parentConstaints.maxWidth;
+
+//               final horizontalPadding = parentSize -
+//                   KPlatformConstants.maxWidthThresholdDesk -
+//                   deskPadding;
+//               parentData.paintOffset = Offset(horizontalPadding / 2, 0);
+//               leftPaddingAdded = true;
+//               return;
+//             }
+//           }
+//         }
+//       }
+//       if (leftPaddingAdded) {
+//         final parentData = child!.parentData;
+//         if (parentData is SliverPhysicalParentData) {
+//           parentData.paintOffset = Offset.zero;
+//           leftPaddingAdded = false;
+//         }
+//       }
+//     }
+//   }
+// }

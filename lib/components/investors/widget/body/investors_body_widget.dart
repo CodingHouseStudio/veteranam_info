@@ -19,32 +19,26 @@ class InvestorsBodyWidget extends StatelessWidget {
             buildWhen: (previous, current) =>
                 previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
             builder: (context, state) {
-              return SliverCenter(
+              return SliverCenterWidget(
                 appVersionEnum: state.appVersionEnum,
-                sliver: SliverPadding(
-                  padding: state.appVersionEnum.paddingWithTablet,
-                  sliver: SliverConstrainedCrossAxis(
-                    maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                    sliver: SliverMainAxisGroup(
-                      slivers: [
-                        KSizedBox.kHeightSizedBox24.toSliver,
-                        InvestorsTitleWidget(
-                          isDesk: state.appVersionEnum.isDesk,
-                        ),
-                        if (state.appVersionEnum.isDesk)
-                          KSizedBox.kHeightSizedBox32.toSliver
-                        else
-                          KSizedBox.kHeightSizedBox24.toSliver,
-                        FundsWidgetList(
-                          isDesk: state.appVersionEnum.isDesk,
-                        ),
-                        if (state.appVersionEnum.isDesk)
-                          KSizedBox.kHeightSizedBox50.toSliver
-                        else
-                          KSizedBox.kHeightSizedBox24.toSliver,
-                      ],
+                sliver: SliverMainAxisGroup(
+                  slivers: [
+                    KSizedBox.kHeightSizedBox24.toSliver,
+                    InvestorsTitleWidget(
+                      isDesk: state.appVersionEnum.isDesk,
                     ),
-                  ),
+                    if (state.appVersionEnum.isDesk)
+                      KSizedBox.kHeightSizedBox32.toSliver
+                    else
+                      KSizedBox.kHeightSizedBox24.toSliver,
+                    FundsWidgetList(
+                      isDesk: state.appVersionEnum.isDesk,
+                    ),
+                    if (state.appVersionEnum.isDesk)
+                      KSizedBox.kHeightSizedBox50.toSliver
+                    else
+                      KSizedBox.kHeightSizedBox24.toSliver,
+                  ],
                 ),
               );
             },

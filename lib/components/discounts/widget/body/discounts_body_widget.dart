@@ -35,30 +35,24 @@ class _DiscountsBodyWidget extends StatelessWidget {
           BlocBuilder<AppLayoutBloc, AppLayoutState>(
             buildWhen: (previous, current) =>
                 previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
-            builder: (context, state) => SliverCenter(
+            builder: (context, state) => SliverCenterWidget(
               appVersionEnum: state.appVersionEnum,
-              sliver: SliverPadding(
-                padding: state.appVersionEnum.padding,
-                sliver: SliverConstrainedCrossAxis(
-                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                  sliver: SliverMainAxisGroup(
-                    slivers: [
-                      DiscountTitleWidget(
-                        isDesk: state.appVersionEnum.isDesk,
-                      ),
-                      if (state.appVersionEnum.isDesk)
-                        KSizedBox.kHeightSizedBox40.toSliver
-                      else
-                        KSizedBox.kHeightSizedBox24.toSliver,
-                      if (state.appVersionEnum.isDesk)
-                        const DiscountsDeskWidgetList()
-                      else
-                        DiscountWidgetList(
-                          isDesk: state.appVersionEnum.isTablet,
-                        ),
-                    ],
+              sliver: SliverMainAxisGroup(
+                slivers: [
+                  DiscountTitleWidget(
+                    isDesk: state.appVersionEnum.isDesk,
                   ),
-                ),
+                  if (state.appVersionEnum.isDesk)
+                    KSizedBox.kHeightSizedBox40.toSliver
+                  else
+                    KSizedBox.kHeightSizedBox24.toSliver,
+                  if (state.appVersionEnum.isDesk)
+                    const DiscountsDeskWidgetList()
+                  else
+                    DiscountWidgetList(
+                      isDesk: state.appVersionEnum.isTablet,
+                    ),
+                ],
               ),
             ),
           ),

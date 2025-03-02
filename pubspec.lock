@@ -1638,6 +1638,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  sliver_center:
+    dependency: "direct main"
+    description:
+      name: sliver_center
+      sha256: "2a443e58166fac449d308945b5ea2e7c4ff79f652bef762f450da2c1b07c2ff3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   source_gen:
     dependency: transitive
     description:

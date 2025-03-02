@@ -21,33 +21,27 @@ class FeedbackBodyWidget extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.appVersionEnum.isDesk !=
                     current.appVersionEnum.isDesk,
-                builder: (context, state) => SliverCenter(
+                builder: (context, state) => SliverCenterWidget(
                   appVersionEnum: state.appVersionEnum,
-                  sliver: SliverPadding(
-                    padding: state.appVersionEnum.paddingWithTablet,
-                    sliver: SliverConstrainedCrossAxis(
-                      maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                      sliver: SliverMainAxisGroup(
-                        slivers: [
-                          if (!Config.isWeb) ...[
-                            KSizedBox.kHeightSizedBox8.toSliver,
-                            SliverToBoxAdapter(
-                              child: BackButtonWidget(
-                                backPageName: null,
-                                pathName: KRoute.settings.name,
-                              ),
-                            ),
-                          ],
-                          FeedbackFormStateWidget(
-                            isDesk: state.appVersionEnum.isDesk,
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      if (!Config.isWeb) ...[
+                        KSizedBox.kHeightSizedBox8.toSliver,
+                        SliverToBoxAdapter(
+                          child: BackButtonWidget(
+                            backPageName: null,
+                            pathName: KRoute.settings.name,
                           ),
-                          if (state.appVersionEnum.isDesk)
-                            KSizedBox.kHeightSizedBox100.toSliver
-                          else
-                            KSizedBox.kHeightSizedBox32.toSliver,
-                        ],
+                        ),
+                      ],
+                      FeedbackFormStateWidget(
+                        isDesk: state.appVersionEnum.isDesk,
                       ),
-                    ),
+                      if (state.appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox100.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox32.toSliver,
+                    ],
                   ),
                 ),
               ),
