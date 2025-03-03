@@ -1,3 +1,4 @@
+import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
@@ -21,7 +22,7 @@ class DiscountSortingWidget extends StatelessWidget {
           iconAlignment: IconAlignment.end,
           items: List.generate(
             DiscountEnum.values.length,
-            (index) => getPopupMenuCustomItem(
+            (index) => getCustomDropDownButtonItem(
               discountEnum: DiscountEnum.values.elementAt(index),
               currectDiscountEnum: sortingBy ?? DiscountEnum.featured,
               context: context,
@@ -53,27 +54,28 @@ class DiscountSortingWidget extends StatelessWidget {
           currentValue: sortingBy ?? DiscountEnum.featured,
           showIcon: KIcon.arrowDropDown,
           closeIcon: KIcon.arrowDropUp,
-          buttonItemStyle: KButtonStyles.transparentPopupMenuButtonStyle,
-          iconSpace: KPadding.kPaddingSize4,
+          iconSpace: KPadding.kPaddingSize8,
         );
       },
     );
   }
 
-  PopupMenuCustomItem<DiscountEnum> getPopupMenuCustomItem({
+  CustomDropDownButtonItem<DiscountEnum> getCustomDropDownButtonItem({
     required DiscountEnum discountEnum,
     required DiscountEnum currectDiscountEnum,
     required BuildContext context,
     required Key key,
   }) =>
-      PopupMenuCustomItem<DiscountEnum>(
+      CustomDropDownButtonItem<DiscountEnum>(
         value: discountEnum,
         text: discountEnum.getValue(context),
-        event: () => context.read<DiscountsWatcherBloc>().add(
+        onPressed: () => context.read<DiscountsWatcherBloc>().add(
               DiscountsWatcherEvent.sorting(
                 discountEnum,
               ),
             ),
+        textStyle: AppTextStyle.materialThemeBodyMedium,
+        buttonStyle: KButtonStyles.transparentPopupMenuButtonStyle,
         key: key,
       );
 }

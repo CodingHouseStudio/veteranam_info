@@ -18,35 +18,30 @@ class HomeBodyWidget extends StatelessWidget {
           const NetworkBanner(),
           const NavigationBarWidget(),
           BlocBuilder<AppLayoutBloc, AppLayoutState>(
-            builder: (context, state) => SliverCenter(
+            builder: (context, state) => SliverCenterWidget(
               appVersionEnum: state.appVersionEnum,
-              sliver: SliverPadding(
-                padding: state.appVersionEnum.paddingWithTablet,
-                sliver: SliverConstrainedCrossAxis(
-                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                  sliver: SliverMainAxisGroup(
-                    slivers: [
-                      HomeSectionsWidget(
-                        isDesk: state.appVersionEnum.isDesk,
-                        isTablet: state.appVersionEnum.isTablet,
-                      ),
-                      if (state.appVersionEnum.isDesk)
-                        const FAQSectionDeskWidget()
-                      else
-                        const FaqSectionMobWidget(),
-                      if (state.appVersionEnum.isDesk)
-                        KSizedBox.kHeightSizedBox160.toSliver
-                      else if (state.appVersionEnum.isTablet)
-                        KSizedBox.kHeightSizedBox64.toSliver
-                      else
-                        KSizedBox.kHeightSizedBox48.toSliver,
-                      FooterWidget(
-                        appVersionEnum: state.appVersionEnum,
-                      ),
-                      KSizedBox.kHeightSizedBox30.toSliver,
-                    ],
+              getTabletPadding: true,
+              sliver: SliverMainAxisGroup(
+                slivers: [
+                  HomeSectionsWidget(
+                    isDesk: state.appVersionEnum.isDesk,
+                    isTablet: state.appVersionEnum.isTablet,
                   ),
-                ),
+                  if (state.appVersionEnum.isDesk)
+                    const FAQSectionDeskWidget()
+                  else
+                    const FaqSectionMobWidget(),
+                  if (state.appVersionEnum.isDesk)
+                    KSizedBox.kHeightSizedBox160.toSliver
+                  else if (state.appVersionEnum.isTablet)
+                    KSizedBox.kHeightSizedBox64.toSliver
+                  else
+                    KSizedBox.kHeightSizedBox48.toSliver,
+                  FooterWidget(
+                    appVersionEnum: state.appVersionEnum,
+                  ),
+                  KSizedBox.kHeightSizedBox30.toSliver,
+                ],
               ),
             ),
           ),

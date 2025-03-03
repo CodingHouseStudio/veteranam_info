@@ -185,7 +185,6 @@ abstract class KMockText {
           ' website;',
     ),
     eligibility: const [EligibilityEnum.veterans],
-
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',

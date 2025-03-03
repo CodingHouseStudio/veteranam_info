@@ -8,7 +8,8 @@ Future<void> citiesDropFieldHelper({
   required WidgetTester tester,
   required String text,
   required Key textFieldKey,
-  int fieldIndex = 0,
+  // int fieldIndex = 0,
+  // Key? fieldKey,
 }) async {
   await scrollingHelper(
     tester: tester,
@@ -21,16 +22,16 @@ Future<void> citiesDropFieldHelper({
     tester: tester,
     text: text,
     textFieldKey: textFieldKey,
-    fieldIndex: fieldIndex,
-    itemTextWidget: () => tester
-        .widget<Text>(
-          find.byKey(CitiesDropFieldKeys.city).first,
-        )
-        .data,
+    // fieldKey: fieldKey,
+    // itemTextWidget: () => tester
+    //     .widget<Text>(
+    //       find.byKey(CitiesDropFieldKeys.city).first,
+    //     )
+    //     .data,
   );
 
   await tester.tap(
-    find.byKey(DropListFieldKeys.widget).at(fieldIndex),
+    find.byKey(textFieldKey),
     warnIfMissed: false,
   );
 

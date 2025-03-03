@@ -8,16 +8,17 @@ Future<void> dropListFieldHelper({
   required WidgetTester tester,
   required String text,
   required Key textFieldKey,
-  String? Function()? itemTextWidget,
+  // String? Function()? itemTextWidget,
   bool hasMultiChoice = false,
-  int fieldIndex = 0,
+  // int fieldIndex = 0,
+  // Key? fieldKey,
   bool hasValue = false,
 }) async {
   await dropListFieldItemHelper(
     tester: tester,
     textFieldKey: textFieldKey,
-    itemTextWidget: itemTextWidget,
-    fieldIndex: fieldIndex,
+    // itemTextWidget: itemTextWidget,
+    // fieldKey: fieldKey,
     hasMultiChoice: hasMultiChoice,
     hasValue: hasValue,
   );

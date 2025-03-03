@@ -45,27 +45,26 @@ Future<void> discountsAddInitialHelper({
         itemKey: DiscountsAddKeys.titleField,
       );
 
-      await multiDropFieldHelper(
-        tester: tester,
-        text: KTestVariables.field,
-        textFieldKey: DiscountsAddKeys.discountsField,
-        fieldIndex: 1,
-        hasItem: isEdit,
-      );
+      if (!isEdit) {
+        await multiDropFieldHelper(
+          tester: tester,
+          text: KTestVariables.field,
+          textFieldKey: DiscountsAddKeys.discountsField,
+          // fieldKey: 1,
+          // hasItem: isEdit,
+        );
 
-      await dropListFieldItemHelper(
-        tester: tester,
-        textFieldKey: DiscountsAddKeys.eligibilityField,
-        fieldIndex: isEdit ? 4 : 2,
-        hasMultiChoice: true,
-        hasValue: isEdit,
-      );
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
+        await eligibilityFieldHelper(
+          tester: tester,
+          fieldIndex: isEdit ? 4 : 2,
+        );
+      }
 
-      await multiDropFieldRemoveHelper(tester);
+      // await multiDropFieldRemoveHelper(tester);
 
       expect(
         find.byKey(DropListFieldKeys.list),

@@ -22,10 +22,10 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.discountRemoveItem(String discount) =
       _DiscountRemoveItem;
   const factory DiscountsAddEvent.eligibilityAddItem(
-    String eligibility,
+    EligibilityEnum eligibility,
   ) = _EligibilityAddItem;
   const factory DiscountsAddEvent.eligibilityRemoveItem(
-    String eligibility,
+    EligibilityEnum eligibility,
   ) = _EligibilityRemoveItem;
   const factory DiscountsAddEvent.linkUpdate(String link) = _LinkUpdate;
   const factory DiscountsAddEvent.descriptionUpdate(String description) =

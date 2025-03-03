@@ -25,49 +25,43 @@ class DiscountBodyWidget extends StatelessWidget {
           BlocBuilder<AppLayoutBloc, AppLayoutState>(
             buildWhen: (previous, current) =>
                 previous.appVersionEnum.isDesk != current.appVersionEnum.isDesk,
-            builder: (context, state) => SliverCenter(
+            builder: (context, state) => SliverCenterWidget(
               appVersionEnum: state.appVersionEnum,
-              sliver: SliverPadding(
-                padding: state.appVersionEnum.padding,
-                sliver: SliverConstrainedCrossAxis(
-                  maxExtent: KPlatformConstants.maxWidthThresholdDesk,
-                  sliver: BlocSelector<DiscountWatcherBloc,
-                      DiscountWatcherState, bool>(
-                    selector: (state) => state.failure.linkIsWrong,
-                    builder: (context, linkIsWrong) {
-                      return SliverMainAxisGroup(
-                        slivers: [
-                          if (state.appVersionEnum.isDesk)
-                            KSizedBox.kHeightSizedBox32.toSliver
-                          else
-                            KSizedBox.kHeightSizedBox8.toSliver,
-                          if (linkIsWrong)
-                            DiscountWrongLinkWidget(
-                              isDesk: state.appVersionEnum.isDesk,
-                            )
-                          else ...[
-                            SliverToBoxAdapter(
-                              child: BackButtonWidget(
-                                backPageName: context.l10n.toDiscounts,
-                                pathName: KRoute.discounts.name,
-                                buttonKey: DiscountKeys.backButton,
-                                textKey: DiscountKeys.backText,
-                              ),
-                            ),
-                            if (state.appVersionEnum.isDesk)
-                              KSizedBox.kHeightSizedBox32.toSliver
-                            else
-                              KSizedBox.kHeightSizedBox8.toSliver,
-                            DiscountInformationWidget(
-                              isDesk: state.appVersionEnum.isDesk,
-                            ),
-                          ],
-                          KSizedBox.kHeightSizedBox40.toSliver,
-                        ],
-                      );
-                    },
-                  ),
-                ),
+              sliver:
+                  BlocSelector<DiscountWatcherBloc, DiscountWatcherState, bool>(
+                selector: (state) => state.failure.linkIsWrong,
+                builder: (context, linkIsWrong) {
+                  return SliverMainAxisGroup(
+                    slivers: [
+                      if (state.appVersionEnum.isDesk)
+                        KSizedBox.kHeightSizedBox32.toSliver
+                      else
+                        KSizedBox.kHeightSizedBox8.toSliver,
+                      if (linkIsWrong)
+                        DiscountWrongLinkWidget(
+                          isDesk: state.appVersionEnum.isDesk,
+                        )
+                      else ...[
+                        SliverToBoxAdapter(
+                          child: BackButtonWidget(
+                            backPageName: context.l10n.toDiscounts,
+                            pathName: KRoute.discounts.name,
+                            buttonKey: DiscountKeys.backButton,
+                            textKey: DiscountKeys.backText,
+                          ),
+                        ),
+                        if (state.appVersionEnum.isDesk)
+                          KSizedBox.kHeightSizedBox32.toSliver
+                        else
+                          KSizedBox.kHeightSizedBox8.toSliver,
+                        DiscountInformationWidget(
+                          isDesk: state.appVersionEnum.isDesk,
+                        ),
+                      ],
+                      KSizedBox.kHeightSizedBox40.toSliver,
+                    ],
+                  );
+                },
               ),
             ),
           ),

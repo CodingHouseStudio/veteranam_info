@@ -9,6 +9,7 @@ environment:
 dependencies:
   animated_text_kit: ^4.2.3
   app_tracking_transparency: ^2.0.6
+  basic_dropdown_button: ^1.1.1+1 # this is our own custom package
   bloc: ^9.0.0
   cached_network_image: ^3.4.1
   cloud_firestore: ^5.6.3
@@ -53,6 +54,7 @@ dependencies:
   intl: ^0.19.0
   json_serializable: ^6.9.0
   material_symbols_icons: ^4.2801.1
+  optimized_search_field: ^2.0.2 # this is our own custom package
   package_info_plus: ^8.2.0
   # path_drawing: ^1.0.1
   # pdf: ^3.11.0
@@ -62,8 +64,9 @@ dependencies:
   share_plus: ^10.1.4
   shared_preferences: ^2.5.2
   skeletonizer: ^1.4.3
+  sliver_center: ^1.1.2 # this is our own custom package
   url_launcher: ^6.3.1
-  web: ^1.1.0 # Wait when share plus support version 1.0.0
+  web: ^1.1.0
 
 dependency_overrides:
   flutter_secure_storage_web: ^2.0.0-beta.2

@@ -1,3 +1,4 @@
+import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -113,12 +114,10 @@ class SharedIconListWidget extends StatelessWidget {
                 ),
               ],
             ),
-            showIndicatorIcon: false,
             buttonStyle: KButtonStyles.noBackgroundOnHoverButtonStyle,
-            buttonItemStyle: KButtonStyles.transparentSharedIconButtonStyle,
             menuColor: AppColors.materialThemeKeyColorsTertiary,
             items: [
-              PopupMenuCustomItem(
+              CustomDropDownButtonItem(
                 key: webSiteKey,
                 value: 1,
                 text: context.l10n.webSite,
@@ -127,10 +126,13 @@ class SharedIconListWidget extends StatelessWidget {
                   icon: KIcon.captivePortal,
                   padding: KPadding.kPaddingSize12,
                 ),
-                event: () => context.openLinkWithAgreeDialog(
+                textStyle: AppTextStyle.materialThemeBodyMedium,
+                onPressed: () => context.openLinkWithAgreeDialog(
                   isDesk: dialogIsDesk ?? isDesk,
                   link: link!,
                 ),
+                buttonStyle: KButtonStyles.transparentSharedIconButtonStyle,
+                iconSpacing: KPadding.kPaddingSize16,
                 // padding: const EdgeInsets.only(
                 //   top: KPadding.kPaddingSize16,
                 //   bottom: KPadding.kPaddingSize8,
@@ -139,7 +141,7 @@ class SharedIconListWidget extends StatelessWidget {
                 // ),
               ),
               if (Config.isUser)
-                PopupMenuCustomItem(
+                CustomDropDownButtonItem(
                   key: complaintKey,
                   value: 2,
                   text: context.l10n.complaint,
@@ -149,11 +151,14 @@ class SharedIconListWidget extends StatelessWidget {
                     icon: KIcon.brightnessAlert,
                     padding: KPadding.kPaddingSize12,
                   ),
-                  event: () => context.dialog.showReportDialog(
+                  textStyle: AppTextStyle.materialThemeBodyMedium,
+                  buttonStyle: KButtonStyles.transparentSharedIconButtonStyle,
+                  onPressed: () => context.dialog.showReportDialog(
                     isDesk: dialogIsDesk ?? isDesk,
                     cardEnum: cardEnum,
                     cardId: cardId,
                   ),
+                  iconSpacing: KPadding.kPaddingSize16,
                   // padding: const EdgeInsets.only(
                   //   bottom: KPadding.kPaddingSize16,
                   //   left: KPadding.kPaddingSize16,
@@ -161,7 +166,7 @@ class SharedIconListWidget extends StatelessWidget {
                   // ),
                 ),
             ],
-            position: PopupMenuButtonPosition.bottomRight,
+            position: DropDownButtonPosition.bottomRight,
           )
         else if (Config.isUser)
           complaintButton(context)

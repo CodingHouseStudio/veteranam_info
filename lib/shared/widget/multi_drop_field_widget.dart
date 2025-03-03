@@ -1,7 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MultiDropFieldWidget extends StatelessWidget {
@@ -18,9 +16,9 @@ class MultiDropFieldWidget extends StatelessWidget {
     this.errorText,
     // this.controller,
     this.errorMaxLines,
-    this.isButton,
+    // this.isButton,
     this.description,
-    this.allElemts,
+    // this.allElemts,
     this.isRequired,
   });
 
@@ -35,240 +33,329 @@ class MultiDropFieldWidget extends StatelessWidget {
   final void Function(String value)? removeEvent;
   final Key textFieldKey;
   final int? errorMaxLines;
-  final bool? isButton;
+  // final bool? isButton;
   final String? description;
-  final String? allElemts;
+  // final String? allElemts;
   final bool? isRequired;
 
   @override
   Widget build(BuildContext context) {
-    return MultiDropFieldImplementationWidget<String>(
-      textFieldKey: textFieldKey,
-      onChanged: onChanged,
+    return MultiSearchField(
+      key: DropListFieldKeys.widget,
       labelText: labelText,
+      listKey: DropListFieldKeys.list,
+      listItemKey: DropListFieldKeys.item,
       dropDownList: dropDownList,
-      allElemts: allElemts,
-      isDesk: isDesk,
-      isRequired: isRequired,
-      values: values,
-      // controller: controller,
       removeEvent: removeEvent,
-      showErrorText: showErrorText,
-      errorText: errorText,
-      getItemText: null,
-      isButton: isButton,
-      errorMaxLines: errorMaxLines,
-      optionsBuilder: (TextEditingValue textEditingValue) {
-        if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
-          return dropDownList;
-        }
-
-        return dropDownList
-            .where(
-              (element) => element.toLowerCase().contains(
-                    textEditingValue.text.toLowerCase(),
-                  ),
-            )
-            .toList();
-      },
-      item: (element) => Text(
-        element,
-        key: DropListFieldKeys.itemText,
-        style: AppTextStyle.materialThemeBodyLarge,
+      values: values,
+      onSelected: onChanged,
+      fieldSuffixIcon: KIcon.searchFieldIcon,
+      selectedItemTextStyle: isDesk
+          ? AppTextStyle.materialThemeTitleMedium
+          : AppTextStyle.materialThemeTitleSmall,
+      selectedListItemKey: MultiDropFieldKeys.chips,
+      selectedItemStyle: KButtonStyles.advancedFilterButtonStyle,
+      itemStyle: KButtonStyles.dropListButtonStyle,
+      itemsSpace: KPadding.kPaddingSize8,
+      itemTextStyle: AppTextStyle.materialThemeBodyLarge,
+      menuMaxHeight:
+          isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220,
+      textFieldKey: textFieldKey,
+      customTextField: ({
+        required controller,
+        required focusNode,
+        required key,
+        required onChanged,
+        required onSubmitted,
+        required suffixIcon,
+        required textFieldKey,
+      }) =>
+          TextFieldWidget(
+        isDesk: isDesk,
+        labelText: labelText,
+        key: textFieldKey,
+        widgetKey: key,
+        controller: controller,
+        focusNode: focusNode,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        suffixIcon: suffixIcon,
+        disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+        showErrorText: showErrorText,
+        errorText: errorText,
+        errorMaxLines: errorMaxLines,
+        description: description,
+        isRequired: isRequired,
       ),
-      description: description,
     );
   }
 }
 
-class MultiDropFieldImplementationWidget<T extends Object>
-    extends StatefulWidget {
-  const MultiDropFieldImplementationWidget({
-    required this.onChanged,
-    required this.labelText,
-    required this.dropDownList,
-    required this.isDesk,
-    required this.values,
-    required this.removeEvent,
-    required this.showErrorText,
-    required this.errorText,
-    required this.item,
-    required this.optionsBuilder,
-    required this.getItemText,
-    required this.textFieldKey,
-    this.isRequired,
-    // this.controller,
-    super.key,
-    this.tralingList,
-    this.isButton,
-    this.unfocusSufixIcon,
-    this.textFieldChangeEvent,
-    this.suffixIconPadding,
-    this.focusNode,
-    this.errorMaxLines,
-    this.description,
-    this.allElemts,
-  });
+// class MultiDropFieldWidget extends StatelessWidget {
+//   const MultiDropFieldWidget({
+//     required this.labelText,
+//     required this.dropDownList,
+//     required this.isDesk,
+//     required this.removeEvent,
+//     required this.textFieldKey,
+//     required this.values,
+//     super.key,
+//     this.onChanged,
+//     this.showErrorText,
+//     this.errorText,
+//     // this.controller,
+//     this.errorMaxLines,
+//     this.isButton,
+//     this.description,
+//     this.allElemts,
+//     this.isRequired,
+//   });
 
-  final void Function(String text)? onChanged;
-  final String labelText;
-  final List<T> dropDownList;
-  final bool isDesk;
-  final bool? showErrorText;
-  final String? errorText;
-  final List<String>? values;
-  final void Function(String value)? removeEvent;
-  // final TextEditingController? controller;
-  final FocusNode? focusNode;
-  final List<Widget>? tralingList;
-  final bool? isButton;
-  final Widget Function(T element) item;
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
-  final Icon? unfocusSufixIcon;
-  final String Function(T value)? getItemText;
-  final void Function({
-    required TextEditingController controller,
-    required FocusNode focusNode,
-  })? textFieldChangeEvent;
-  final double? suffixIconPadding;
-  final Key textFieldKey;
-  final int? errorMaxLines;
-  final String? description;
-  final T? allElemts;
-  final bool? isRequired;
+//   final void Function(String text)? onChanged;
+//   final String labelText;
+//   final List<String> dropDownList;
+//   final bool isDesk;
+//   final bool? showErrorText;
+//   final String? errorText;
+//   // final TextEditingController? controller;
+//   final List<String>? values;
+//   final void Function(String value)? removeEvent;
+//   final Key textFieldKey;
+//   final int? errorMaxLines;
+//   final bool? isButton;
+//   final String? description;
+//   final String? allElemts;
+//   final bool? isRequired;
 
-  @override
-  State<MultiDropFieldImplementationWidget<T>> createState() =>
-      _MultiDropFieldImplementationWidgetState<T>();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiDropFieldImplementationWidget<String>(
+//       textFieldKey: textFieldKey,
+//       onChanged: onChanged,
+//       labelText: labelText,
+//       dropDownList: dropDownList,
+//       allElemts: allElemts,
+//       isDesk: isDesk,
+//       isRequired: isRequired,
+//       values: values,
+//       // controller: controller,
+//       removeEvent: removeEvent,
+//       showErrorText: showErrorText,
+//       errorText: errorText,
+//       getItemText: null,
+//       isButton: isButton,
+//       errorMaxLines: errorMaxLines,
+//       optionsBuilder: (TextEditingValue textEditingValue) {
+//         if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
+//           return dropDownList;
+//         }
 
-class _MultiDropFieldImplementationWidgetState<T extends Object>
-    extends State<MultiDropFieldImplementationWidget<T>> {
-  late TextEditingController controller;
-  late FocusNode focusNode;
-  @override
-  void initState() {
-    super.initState();
-    _initializeController();
-  }
+//         return dropDownList
+//             .where(
+//               (element) => element.toLowerCase().contains(
+//                     textEditingValue.text.toLowerCase(),
+//                   ),
+//             )
+//             .toList();
+//       },
+//       item: (element) => Text(
+//         element,
+//         key: DropListFieldKeys.itemText,
+//         style: AppTextStyle.materialThemeBodyLarge,
+//       ),
+//       description: description,
+//     );
+//   }
+// }
 
-  void _initializeController() {
-    controller = TextEditingController();
-    focusNode = (widget.focusNode ?? FocusNode())
-      ..onKeyEvent = _handleKeyEvent
-      ..addListener(_unFocusData);
-  }
+// class MultiDropFieldImplementationWidget<T extends Object>
+//     extends StatefulWidget {
+//   const MultiDropFieldImplementationWidget({
+//     required this.onChanged,
+//     required this.labelText,
+//     required this.dropDownList,
+//     required this.isDesk,
+//     required this.values,
+//     required this.removeEvent,
+//     required this.showErrorText,
+//     required this.errorText,
+//     required this.item,
+//     required this.optionsBuilder,
+//     required this.getItemText,
+//     required this.textFieldKey,
+//     this.isRequired,
+//     // this.controller,
+//     super.key,
+//     this.tralingList,
+//     this.isButton,
+//     this.unfocusSufixIcon,
+//     this.textFieldChangeEvent,
+//     this.suffixIconPadding,
+//     this.focusNode,
+//     this.errorMaxLines,
+//     this.description,
+//     this.allElemts,
+//   });
 
-  void _unFocusData() {
-    if (!focusNode.hasFocus && controller.text.isNotEmpty) {
-      widget.onChanged?.call(controller.text);
-      controller.clear();
-    }
-  }
+//   final void Function(String text)? onChanged;
+//   final String labelText;
+//   final List<T> dropDownList;
+//   final bool isDesk;
+//   final bool? showErrorText;
+//   final String? errorText;
+//   final List<String>? values;
+//   final void Function(String value)? removeEvent;
+//   // final TextEditingController? controller;
+//   final FocusNode? focusNode;
+//   final List<Widget>? tralingList;
+//   final bool? isButton;
+//   final Widget Function(T element) item;
+//   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+//   final Icon? unfocusSufixIcon;
+//   final String Function(T value)? getItemText;
+//   final void Function({
+//     required TextEditingController controller,
+//     required FocusNode focusNode,
+//   })? textFieldChangeEvent;
+//   final double? suffixIconPadding;
+//   final Key textFieldKey;
+//   final int? errorMaxLines;
+//   final String? description;
+//   final T? allElemts;
+//   final bool? isRequired;
 
-  KeyEventResult _handleKeyEvent(
-    FocusNode node,
-    KeyEvent keyEvent,
-  ) {
-    if (controller.text.trim().isNotEmpty &&
-        keyEvent is KeyDownEvent &&
-        keyEvent.logicalKey == LogicalKeyboardKey.enter) {
-      widget.onChanged?.call(controller.text);
-      focusNode.unfocus();
-      controller.clear();
-      // setState(() {
-      //   changeFieldValue = !changeFieldValue;
-      // });
+//   @override
+//   State<MultiDropFieldImplementationWidget<T>> createState() =>
+//       _MultiDropFieldImplementationWidgetState<T>();
+// }
 
-      return KeyEventResult.handled;
-    }
-    return KeyEventResult.ignored;
-  }
+// class _MultiDropFieldImplementationWidgetState<T extends Object>
+//     extends State<MultiDropFieldImplementationWidget<T>> {
+//   late TextEditingController controller;
+//   late FocusNode focusNode;
+//   @override
+//   void initState() {
+//     super.initState();
+//     _initializeController();
+//   }
 
-  bool get selectedValueIsNotEmpty {
-    if (widget.values == null && widget.allElemts != null) return true;
-    if (widget.values != null && widget.values!.isNotEmpty) return true;
-    return false;
-  }
+//   void _initializeController() {
+//     controller = TextEditingController();
+//     focusNode = (widget.focusNode ?? FocusNode())
+//       ..onKeyEvent = _handleKeyEvent
+//       ..addListener(_unFocusData);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: KPadding.kPaddingSize8,
-      children: [
-        DropListFieldImplementationWidget<T>(
-          isRequired: widget.isRequired,
-          textFieldKey: widget.textFieldKey,
-          labelText: widget.labelText,
-          isDesk: widget.isDesk,
-          controller: controller,
-          errorText: widget.errorText,
-          onChanged: null,
-          focusNode: focusNode,
-          showErrorText: widget.showErrorText,
-          optionsBuilder: widget.optionsBuilder,
-          unfocusSufixIcon: widget.unfocusSufixIcon,
-          isButton: widget.isButton,
-          items: widget.item,
-          errorMaxLines: widget.errorMaxLines,
-          description: widget.description,
-          unenabledList: widget.values == null ||
-                  (widget.values?.contains(widget.allElemts) ?? false)
-              ? null
-              : widget.dropDownList
-                  .where(
-                    (element) => widget.values!.any(
-                      (value) => (getItemText(element)) == value,
-                    ),
-                  )
-                  .toList(),
-          onSelected: (value) {
-            widget.onChanged?.call(getItemText(value));
-            controller.clear();
-            focusNode.unfocus();
-          },
-          isLoading: widget.dropDownList.isEmpty,
-        ),
-        if (selectedValueIsNotEmpty)
-          Wrap(
-            spacing: KPadding.kPaddingSize8,
-            runSpacing: KPadding.kPaddingSize8,
-            children: List.generate(
-              widget.values?.length ?? (widget.allElemts != null ? 1 : 0),
-              (index) => CancelChipWidget(
-                widgetKey: MultiDropFieldKeys.chips,
-                isDesk: widget.isDesk,
-                labelText: getValue(index),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize8,
-                  vertical: KPadding.kPaddingSize4,
-                ),
-                textStyle: widget.isDesk
-                    ? AppTextStyle.materialThemeTitleMedium
-                    : AppTextStyle.materialThemeTitleSmall,
-                onPressed: () => widget.removeEvent?.call(
-                  getValue(index),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
+//   void _unFocusData() {
+//     if (!focusNode.hasFocus && controller.text.isNotEmpty) {
+//       widget.onChanged?.call(controller.text);
+//       controller.clear();
+//     }
+//   }
 
-  String getValue(int index) => widget.values!.elementAt(index);
+//   KeyEventResult _handleKeyEvent(
+//     FocusNode node,
+//     KeyEvent keyEvent,
+//   ) {
+//     if (controller.text.trim().isNotEmpty &&
+//         keyEvent is KeyDownEvent &&
+//         keyEvent.logicalKey == LogicalKeyboardKey.enter) {
+//       widget.onChanged?.call(controller.text);
+//       focusNode.unfocus();
+//       controller.clear();
+//       // setState(() {
+//       //   changeFieldValue = !changeFieldValue;
+//       // });
 
-  String getItemText(T value) =>
-      widget.getItemText?.call(value) ?? value.toString();
+//       return KeyEventResult.handled;
+//     }
+//     return KeyEventResult.ignored;
+//   }
 
-  @override
-  void dispose() {
-    focusNode.removeListener(_unFocusData);
-    controller
-        // if (widget.controller == null)
-        .dispose();
-    if (widget.focusNode == null) focusNode.dispose();
-    super.dispose();
-  }
-}
+//   bool get selectedValueIsNotEmpty {
+//     if (widget.values == null && widget.allElemts != null) return true;
+//     if (widget.values != null && widget.values!.isNotEmpty) return true;
+//     return false;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       spacing: KPadding.kPaddingSize8,
+//       children: [
+//         DropListFieldImplementationWidget<T>(
+//           isRequired: widget.isRequired,
+//           textFieldKey: widget.textFieldKey,
+//           labelText: widget.labelText,
+//           isDesk: widget.isDesk,
+//           controller: controller,
+//           errorText: widget.errorText,
+//           onChanged: null,
+//           focusNode: focusNode,
+//           showErrorText: widget.showErrorText,
+//           optionsBuilder: widget.optionsBuilder,
+//           unfocusSufixIcon: widget.unfocusSufixIcon,
+//           isButton: widget.isButton,
+//           items: widget.item,
+//           errorMaxLines: widget.errorMaxLines,
+//           description: widget.description,
+//           unenabledList: widget.values == null ||
+//                   (widget.values?.contains(widget.allElemts) ?? false)
+//               ? null
+//               : widget.dropDownList
+//                   .where(
+//                     (element) => widget.values!.any(
+//                       (value) => (getItemText(element)) == value,
+//                     ),
+//                   )
+//                   .toList(),
+//           onSelected: (value) {
+//             widget.onChanged?.call(getItemText(value));
+//             controller.clear();
+//             focusNode.unfocus();
+//           },
+//           isLoading: widget.dropDownList.isEmpty,
+//         ),
+//         if (selectedValueIsNotEmpty)
+//           Wrap(
+//             spacing: KPadding.kPaddingSize8,
+//             runSpacing: KPadding.kPaddingSize8,
+//             children: List.generate(
+//               widget.values?.length ?? (widget.allElemts != null ? 1 : 0),
+//               (index) => CancelChipWidget(
+//                 widgetKey: MultiDropFieldKeys.chips,
+//                 isDesk: widget.isDesk,
+//                 labelText: getValue(index),
+//                 padding: const EdgeInsets.symmetric(
+//                   horizontal: KPadding.kPaddingSize8,
+//                   vertical: KPadding.kPaddingSize4,
+//                 ),
+//                 textStyle: widget.isDesk
+//                     ? AppTextStyle.materialThemeTitleMedium
+//                     : AppTextStyle.materialThemeTitleSmall,
+//                 onPressed: () => widget.removeEvent?.call(
+//                   getValue(index),
+//                 ),
+//               ),
+//             ),
+//           ),
+//       ],
+//     );
+//   }
+
+//   String getValue(int index) => widget.values!.elementAt(index);
+
+//   String getItemText(T value) =>
+//       widget.getItemText?.call(value) ?? value.toString();
+
+//   @override
+//   void dispose() {
+//     focusNode.removeListener(_unFocusData);
+//     controller
+//         // if (widget.controller == null)
+//         .dispose();
+//     if (widget.focusNode == null) focusNode.dispose();
+//     super.dispose();
+//   }
+// }
