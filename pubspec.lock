@@ -78,6 +78,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  basic_dropdown_button:
+    dependency: "direct main"
+    description:
+      name: basic_dropdown_button
+      sha256: fd11e914d26e00a82905327562acf1068b50d05b518882c9229aa87cc8e13104
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0+4"
   bloc:
     dependency: "direct main"
     description:
