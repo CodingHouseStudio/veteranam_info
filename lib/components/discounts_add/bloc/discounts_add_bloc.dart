@@ -345,7 +345,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     if (state.eligibility.value.contains(EligibilityEnum.all)) return;
-    final eligibilityEnum = event.eligibility.toEligibility;
+    final eligibilityEnum = event.eligibility;
     final EligibilityFieldModel eligibilityFieldModel;
     if (eligibilityEnum == EligibilityEnum.all) {
       eligibilityFieldModel =
@@ -376,7 +376,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityRemoveItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final eliglibilityValue = event.eligibility.toEligibility;
+    final eliglibilityValue = event.eligibility;
     if (!state.eligibility.value.contains(eliglibilityValue)) return;
     final eligibilityList = (List<EligibilityEnum>.from(state.eligibility.value)
       ..remove(eliglibilityValue));

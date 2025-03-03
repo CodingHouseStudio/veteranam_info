@@ -55,12 +55,38 @@ List<Widget> _textFieldWidgetList({
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
-      DropListFieldWidget(
+      OptimizedSearchField(
+        key: DropListFieldKeys.widget,
+        listKey: DropListFieldKeys.list,
+        listItemKey: DropListFieldKeys.item,
         textFieldKey: EmployerKeys.fieldCity,
-        onChanged: null,
-        labelText: context.l10n.selectCity,
+        onChanged: (text) {},
+        labelText: null,
         dropDownList: KMockText.dropDownList,
-        isDesk: isDesk,
+        menuMaxHeight:
+            isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220,
+        customTextField: ({
+          required controller,
+          required focusNode,
+          required key,
+          required onChanged,
+          required onSubmitted,
+          required suffixIcon,
+          required textFieldKey,
+        }) =>
+            TextFieldWidget(
+          isDesk: isDesk,
+          labelText: context.l10n.selectCity,
+          key: textFieldKey,
+          widgetKey: key, //DropListFieldKeys.field,
+          controller: controller,
+          focusNode: focusNode,
+          onChanged: onChanged,
+          onSubmitted: onSubmitted,
+          suffixIcon: suffixIcon,
+          disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+        ),
+        fieldSuffixIcon: KIcon.searchFieldIcon,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       Padding(

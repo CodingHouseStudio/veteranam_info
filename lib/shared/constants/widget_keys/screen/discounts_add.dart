@@ -20,6 +20,9 @@ abstract class DiscountsAddKeys {
   static const titleField = Key('discounts_add_screen_title_field');
   static const discountsField = Key('discounts_add_screen_discounts_field');
   static const eligibilityField = Key('discounts_add_screen_eligibility_field');
+  static const eligibilityItems = Key('discounts_add_screen_eligibility_items');
+  static const eligibilityActiveItems =
+      Key('discounts_add_screen_eligibility_active_items');
   static const linkField = Key('discounts_add_screen_link_field');
   static const emailField = Key('discounts_add_screen_email_field');
   static const descriptionField = Key('discounts_add_screen_description_field');

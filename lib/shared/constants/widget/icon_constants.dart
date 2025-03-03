@@ -1,13 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart'
-    show Color, Icon, IconData, Key, Shadow, TextDirection;
+    show Color, Icon, IconButton, IconData, Key, Shadow, TextDirection, Widget;
 import 'package:material_symbols_icons/symbols.dart' show Symbols;
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 class _KIcon extends Icon {
   const _KIcon(
     super.icon, {
+    super.key,
     super.weight = 200,
     super.fill,
     super.size = KSize.kIconSize,
@@ -66,6 +67,8 @@ abstract class KIcon {
   static const _KIcon edit = _KIcon(Symbols.edit);
   static const _KIcon button = _KIcon(Symbols.smart_button);
   static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
+  static const _KIcon dropListtrailing =
+      _KIcon(Symbols.arrow_drop_down, key: DropListFieldKeys.icon);
   static const _KIcon keyboardArrowDown = _KIcon(Symbols.keyboard_arrow_down);
   static const _KIcon keyboardArrowLeft = _KIcon(Symbols.keyboard_arrow_right);
   static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
@@ -284,4 +287,17 @@ abstract class KIcon {
         KIcon.settings,
         KIcon.person,
       ];
+
+  static Widget searchFieldIcon({
+    required bool menuOpened,
+    required void Function() onCloseIconTap,
+    required void Function() onlyCloseMenu,
+  }) =>
+      menuOpened
+          ? IconButton(
+              key: DropListFieldKeys.activeIcon,
+              icon: KIcon.close,
+              onPressed: onCloseIconTap,
+            )
+          : KIcon.dropListtrailing;
 }

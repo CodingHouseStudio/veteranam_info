@@ -159,33 +159,33 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              EligibilityEnum.veterans.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              EligibilityEnum.veterans.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              EligibilityEnum.all.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.all,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityRemoveItem(
-              EligibilityEnum.all.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityRemoveItem(
+              EligibilityEnum.all,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityRemoveItem(
-              EligibilityEnum.veterans.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityRemoveItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              EligibilityEnum.veterans.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
@@ -585,8 +585,8 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.eligibilityAddItem(
-              EligibilityEnum.veterans.getTranslateModel.uk,
+            const DiscountsAddEvent.eligibilityAddItem(
+              EligibilityEnum.veterans,
             ),
           )
           ..add(
@@ -1189,48 +1189,48 @@ void main() {
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.veterans.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.veterans,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.all.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.all,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.veterans.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.veterans,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityRemoveItem(
-                EligibilityEnum.all.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityRemoveItem(
+                EligibilityEnum.all,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.veterans.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.veterans,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityRemoveItem(
-                EligibilityEnum.veterans.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityRemoveItem(
+                EligibilityEnum.veterans,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.veterans.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.veterans,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityAddItem(
-                EligibilityEnum.combatants.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityAddItem(
+                EligibilityEnum.combatants,
               ),
             )
             ..add(
-              DiscountsAddEvent.eligibilityRemoveItem(
-                EligibilityEnum.combatants.getTranslateModel.uk,
+              const DiscountsAddEvent.eligibilityRemoveItem(
+                EligibilityEnum.combatants,
               ),
             )
             ..add(

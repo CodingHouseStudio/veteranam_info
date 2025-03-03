@@ -114,7 +114,6 @@ class SharedIconListWidget extends StatelessWidget {
                 ),
               ],
             ),
-            showIndicatorIcon: false,
             buttonStyle: KButtonStyles.noBackgroundOnHoverButtonStyle,
             menuColor: AppColors.materialThemeKeyColorsTertiary,
             items: [

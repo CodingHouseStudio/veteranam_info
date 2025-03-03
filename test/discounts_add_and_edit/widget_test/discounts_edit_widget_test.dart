@@ -195,7 +195,7 @@ void main() {
             tester,
             mockGoRouter: mockGoRouter,
             discount: KTestVariables.sendDiscountAdminModel
-                .copyWith(subLocation: SubLocation.online),
+                .copyWith(eligibility: const [EligibilityEnum.combatants]),
             discountId: KTestVariables.sendDiscountAdminModel.id,
           );
 

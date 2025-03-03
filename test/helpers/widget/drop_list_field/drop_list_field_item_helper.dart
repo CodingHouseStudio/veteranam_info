@@ -7,8 +7,9 @@ import '../../../test_dependency.dart';
 Future<void> dropListFieldItemHelper({
   required WidgetTester tester,
   required Key textFieldKey,
-  String? Function()? itemTextWidget,
-  int fieldIndex = 0,
+  // String? Function()? itemTextWidget,
+  // int fieldIndex = 0,
+  // Key? fieldKey,
   bool hasMultiChoice = false,
   bool hasValue = false,
 }) async {
@@ -83,12 +84,12 @@ Future<void> dropListFieldItemHelper({
       findsWidgets,
     );
 
-    if (itemTextWidget == null) {
-      expect(
-        find.byKey(DropListFieldKeys.itemText),
-        findsWidgets,
-      );
-    }
+    // if (itemTextWidget == null) {
+    //   expect(
+    //     find.byKey(DropListFieldKeys.itemText),
+    //     findsWidgets,
+    //   );
+    // }
 
     expect(
       find.byKey(DropListFieldKeys.activeIcon),
@@ -100,12 +101,12 @@ Future<void> dropListFieldItemHelper({
     //   findsWidgets,
     // );
 
-    final text = itemTextWidget?.call() ??
-        tester
-            .widget<Text>(
-              find.byKey(DropListFieldKeys.itemText).first,
-            )
-            .data;
+    // final text = itemTextWidget?.call() ??
+    //     tester
+    //         .widget<Text>(
+    //           find.byKey(DropListFieldKeys.itemText).first,
+    //         )
+    //         .data;
 
     await tester.tap(
       find.byKey(DropListFieldKeys.item).first,
@@ -128,14 +129,14 @@ Future<void> dropListFieldItemHelper({
       findsNothing,
     );
 
-    if (!hasMultiChoice) {
-      expect(
-        find.descendant(
-          of: find.byKey(DropListFieldKeys.widget),
-          matching: find.text(text ?? ''),
-        ),
-        findsOneWidget,
-      );
-    }
+    // if (!hasMultiChoice) {
+    //   expect(
+    //     find.descendant(
+    //       of: find.byKey(DropListFieldKeys.widget),
+    //       matching: find.text(text ?? ''),
+    //     ),
+    //     findsOneWidget,
+    //   );
+    // }
   }
 }

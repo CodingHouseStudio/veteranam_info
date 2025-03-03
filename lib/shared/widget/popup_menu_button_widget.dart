@@ -22,7 +22,7 @@ class PopupMenuButtonWidget<T> extends StatelessWidget {
     this.iconAlignment = IconAlignment.start,
     this.closeIcon,
     this.showIcon,
-    this.showIndicatorIcon = true,
+    // this.showIndicatorIcon = true,
     this.borderRadius,
     this.currentValue,
     this.iconSpace = KPadding.kPaddingSize16,
@@ -68,7 +68,7 @@ class PopupMenuButtonWidget<T> extends StatelessWidget {
   final Widget? showIcon;
 
   // final Icon? iconButton;
-  final bool showIndicatorIcon;
+  // final bool showIndicatorIcon;
 
   final bool getMenuWidthFromButton;
 
@@ -94,11 +94,12 @@ class PopupMenuButtonWidget<T> extends StatelessWidget {
       menuItems: items,
       menuVerticalSpacing: menuTopSpace,
       menuBackgroundColor: menuColor,
-      showIndicatorIcon: showIndicatorIcon,
+      // showIndicatorIcon: showIndicatorIcon,
       position: position,
       menuBorderRadius: borderRadius,
-      buttonCloseMenuIcon: closeIcon,
-      buttonOpenMenuIcon: showIcon,
+      buttonIcon: showIcon != null && closeIcon != null
+          ? ({required showedMenu}) => showedMenu ? showIcon! : closeIcon!
+          : null,
       menuItemsSpacing: itemsSpacing,
       buttonIconSpace: iconSpace,
       menuPadding: menuPadding ?? const EdgeInsets.all(KPadding.kPaddingSize8),

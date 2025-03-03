@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart';
+import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class DiscountsAddBodyWidget extends StatefulWidget {
@@ -290,41 +291,44 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     ),
                   if (_.formState.isMain) ...[
                     KSizedBox.kHeightSizedBox32,
-                    MultiDropFieldWidget(
-                      textFieldKey: DiscountsAddKeys.eligibilityField,
-                      // controller: eligibilityController,
+                    EligibilityFieldWidget(
                       isDesk: isDesk,
-                      labelText: context.l10n.eligibility, isRequired: true,
-                      isButton: true,
-                      dropDownList: List.generate(
-                        EligibilityEnum.values.length,
-                        (index) => EligibilityEnum.values
-                            .elementAt(index)
-                            .getValue(context),
-                      ),
-                      allElemts: context.l10n.allOfListed,
-                      showErrorText: _.formState.hasError,
-                      errorText: _.eligibility.error.value(context),
-                      onChanged: (text) => context.read<DiscountsAddBloc>().add(
-                            DiscountsAddEvent.eligibilityAddItem(
-                              text,
-                            ),
-                          ),
-                      values: List.generate(
-                        _.eligibility.value.length,
-                        (index) => _.eligibility.value
-                            .elementAt(index)
-                            .getValue(context),
-                        growable: false,
-                      ),
-                      removeEvent: (value) =>
-                          context.read<DiscountsAddBloc>().add(
-                                DiscountsAddEvent.eligibilityRemoveItem(
-                                  value,
-                                ),
-                              ),
-                      description: context.l10n.eligibilityDescription,
+                      state: _,
                     ),
+                    // MultiDropFieldWidget(
+                    //   textFieldKey: DiscountsAddKeys.eligibilityField,
+                    //   // controller: eligibilityController,
+                    //   isDesk: isDesk,
+                    //   labelText: context.l10n.eligibility, isRequired: true,
+                    //   dropDownList: List.generate(
+                    //     EligibilityEnum.values.length,
+                    //     (index) => EligibilityEnum.values
+                    //         .elementAt(index)
+                    //         .getValue(context),
+                    //   ),
+                    //   showErrorText: _.formState.hasError,
+                    //   errorText: _.eligibility.error.value(context),
+                    //   onChanged: (text) =>
+                    // context.read<DiscountsAddBloc>().add(
+                    //         DiscountsAddEvent.eligibilityAddItem(
+                    //           text,
+                    //         ),
+                    //       ),
+                    //   values: List.generate(
+                    //     _.eligibility.value.length,
+                    //     (index) => _.eligibility.value
+                    //         .elementAt(index)
+                    //         .getValue(context),
+                    //     growable: false,
+                    //   ),
+                    //   removeEvent: (value) =>
+                    //       context.read<DiscountsAddBloc>().add(
+                    //             DiscountsAddEvent.eligibilityRemoveItem(
+                    //               value,
+                    //             ),
+                    //           ),
+                    //   description: context.l10n.eligibilityDescription,
+                    // ),
                   ],
                   KSizedBox.kHeightSizedBox32,
                   if (_.formState.isDetail) ...[

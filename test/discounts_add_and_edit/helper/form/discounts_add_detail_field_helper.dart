@@ -40,7 +40,7 @@ Future<void> discountsAddDetailHelper({
       tester: tester,
       text: KTestVariables.field,
       textFieldKey: DiscountsAddKeys.cityField,
-      fieldIndex: 1,
+      // fieldIndex: 1,
     );
   }
 

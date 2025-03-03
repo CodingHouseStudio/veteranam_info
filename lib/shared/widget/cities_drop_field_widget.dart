@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CitiesDropFieldWidget extends StatelessWidget {
@@ -28,14 +29,18 @@ class CitiesDropFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiDropFieldImplementationWidget<CityModel>(
+    return BaseMultiSearchField<CityModel>(
       key: CitiesDropFieldKeys.widget,
+      listKey: DropListFieldKeys.list,
+      listItemKey: DropListFieldKeys.item,
+      selectedListItemKey: MultiDropFieldKeys.chips,
       textFieldKey: textFieldKey,
       labelText: context.l10n.city, isRequired: isRequired,
       dropDownList: citiesList,
-      isDesk: isDesk,
       errorText: errorText,
-      onChanged: onChanged,
+      onSelected: (text) {
+        onChanged?.call(text);
+      },
       values: selectedCities,
       showErrorText: showErrorText,
       // controller: controller,
@@ -53,7 +58,10 @@ class CitiesDropFieldWidget extends StatelessWidget {
             )
             .toList();
       },
-      unfocusSufixIcon: KIcon.distance,
+      unfocusSuffixIcon: KIcon.distance,
+      itemsSpace: KPadding.kPaddingSize8,
+      itemStyle: KButtonStyles.dropListButtonStyle,
+      fieldSuffixIcon: KIcon.searchFieldIcon,
       item: (CityModel element) => Column(
         spacing: KPadding.kPaddingSize4,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,9 +79,39 @@ class CitiesDropFieldWidget extends StatelessWidget {
           const SizedBox.shrink(),
         ],
       ),
+      selectedItemTextStyle: isDesk
+          ? AppTextStyle.materialThemeTitleMedium
+          : AppTextStyle.materialThemeTitleSmall,
+      selectedItemStyle: KButtonStyles.advancedFilterButtonStyle,
       getItemText: (CityModel value) =>
           getCityName(cityModel: value, context: context),
       removeEvent: removeCity,
+      menuMaxHeight:
+          isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220,
+      customTextField: ({
+        required controller,
+        required focusNode,
+        required key,
+        required onChanged,
+        required onSubmitted,
+        required suffixIcon,
+        required textFieldKey,
+      }) =>
+          TextFieldWidget(
+        isDesk: isDesk,
+        labelText: context.l10n.selectCity,
+        key: textFieldKey,
+        widgetKey: key,
+        controller: controller,
+        focusNode: focusNode,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        suffixIcon: suffixIcon,
+        disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+        showErrorText: showErrorText,
+        errorText: errorText,
+        isRequired: isRequired,
+      ),
     );
   }
 

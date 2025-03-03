@@ -62,11 +62,10 @@ Future<void> discountsAddMainEnterHelper({
   );
 
   if (eligibilityTap) {
-    await dropListFieldItemHelper(
+    await eligibilityFieldHelper(
       tester: tester,
-      textFieldKey: DiscountsAddKeys.eligibilityField,
-      hasMultiChoice: true,
       hasValue: isEdit,
+      removeAfter: false,
     );
   }
 

@@ -5,4 +5,5 @@ export 'discount_edit_wrong_id_initial_helper.dart';
 export 'discounts_add_initial_helper.dart';
 export 'discounts_add_pump_app_helper.dart';
 export 'discounts_add_unconfirm_button_helper.dart';
+export 'eligibility_field_helper.dart';
 export 'form/form.dart';

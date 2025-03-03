@@ -82,10 +82,10 @@ packages:
     dependency: "direct main"
     description:
       name: basic_dropdown_button
-      sha256: fd11e914d26e00a82905327562acf1068b50d05b518882c9229aa87cc8e13104
+      sha256: "1da09ff6adbc5fa3799710301ab91506e179ea3b31b982d666008fb3ee09f8da"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0+4"
+    version: "1.1.1+1"
   bloc:
     dependency: "direct main"
     description:
@@ -1329,6 +1329,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  optimized_search_field:
+    dependency: "direct main"
+    description:
+      name: optimized_search_field
+      sha256: "7dd81ecbd065ee930e306e250bbafa72909d307c6f5b71024dd593ebe92f81d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   package_config:
     dependency: transitive
     description:
