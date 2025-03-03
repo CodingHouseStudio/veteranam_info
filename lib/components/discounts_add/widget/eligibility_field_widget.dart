@@ -31,7 +31,7 @@ class EligibilityFieldWidget extends StatelessWidget {
             required showMenu,
           }) =>
               InkWell(
-            onTap: () => showHideMenuEvent?.call(),
+            onTap: showHideMenuEvent,
             borderRadius: KBorderRadius.kBorderRadius32,
             mouseCursor: SystemMouseCursors.click,
             hoverColor: Colors.transparent,
