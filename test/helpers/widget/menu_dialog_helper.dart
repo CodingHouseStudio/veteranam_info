@@ -76,7 +76,10 @@ Future<void> menuDialogHelper({
     findsOneWidget,
   );
 
-  await languageSwitcherHelper(tester);
+  await languageSwitcherHelper(
+    tester,
+    isMob: true,
+  );
 
   expect(
     find.byKey(MenuDialogKeys.linkedIn),

@@ -98,6 +98,7 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<ICompanyCacheRepository>(),
     MockSpec<ILanguageCacheRepository>(),
     MockSpec<WidgetsBinding>(),
+    MockSpec<firebase_auth.AppleAuthProvider>(),
   ],
 )
 void load() => log('loaded', name: 'Test', sequenceNumber: -2);

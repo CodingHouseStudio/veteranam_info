@@ -31,6 +31,7 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FacebookAuth mockFacebookAuth;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
+    late firebase_auth.AppleAuthProvider mockAppleAuthProvider;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -43,6 +44,7 @@ void main() {
       mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
+      mockAppleAuthProvider = MockAppleAuthProvider();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -100,6 +102,7 @@ void main() {
         googleSignIn: mockGoogleSignIn,
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
+        appleAuthProvider: mockAppleAuthProvider,
       );
       AppAuthenticationRepository.authCredential =
           KTestVariables.authCredential;

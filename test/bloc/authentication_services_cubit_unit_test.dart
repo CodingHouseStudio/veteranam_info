@@ -27,8 +27,8 @@ void main() {
         authenticationRepository: mockAuthenticationRepository,
       );
     });
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
-      'emits [AuthenticationServicesFailure?] when google sign up',
+    blocTest<AuthenticationServicesCubit, SomeFailure?>(
+      'emits [SomeFailure?] when google sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
@@ -42,8 +42,8 @@ void main() {
         null,
       ],
     );
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
-      'emits [AuthenticationServicesFailure?] when facebook sign up',
+    blocTest<AuthenticationServicesCubit, SomeFailure?>(
+      'emits [SomeFailure?] when facebook sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
@@ -57,8 +57,8 @@ void main() {
         null,
       ],
     );
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
-      'emits [AuthenticationServicesFailure?] when google sign up'
+    blocTest<AuthenticationServicesCubit, SomeFailure?>(
+      'emits [SomeFailure?] when google sign up'
       ' failure serverError',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
@@ -70,11 +70,11 @@ void main() {
         await cubit.authenticationUseGoogle();
       },
       expect: () async => [
-        AuthenticationServicesFailure.error,
+        SomeFailure.serverError,
       ],
     );
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
-      'emits [AuthenticationServicesFailure?] when google sign up'
+    blocTest<AuthenticationServicesCubit, SomeFailure?>(
+      'emits [SomeFailure?] when google sign up'
       ' failure serverError',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
@@ -86,7 +86,7 @@ void main() {
         await cubit.authenticationUseFacebook();
       },
       expect: () async => [
-        AuthenticationServicesFailure.error,
+        SomeFailure.serverError,
       ],
     );
   });

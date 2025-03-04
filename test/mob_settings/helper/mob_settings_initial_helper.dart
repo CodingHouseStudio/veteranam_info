@@ -27,7 +27,10 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await languageSwitcherHelper(tester);
+  await languageSwitcherHelper(
+    tester,
+    isMob: true,
+  );
 
   expect(
     find.byKey(MobSettingsKeys.offlinesSwitcher),

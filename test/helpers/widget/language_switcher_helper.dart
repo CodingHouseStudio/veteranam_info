@@ -1,9 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
+import '../../test_dependency.dart';
+
 Future<void> languageSwitcherHelper(
-  WidgetTester tester,
-) async {
+  WidgetTester tester, {
+  bool isMob = false,
+}) async {
   expect(
     find.byKey(LanguageSwitcherKeys.widget),
     findsOneWidget,
@@ -53,6 +56,13 @@ Future<void> languageSwitcherHelper(
         .data,
     isNot(textWidget.data),
   );*/
+
+  if (!isMob) {
+    await scrollingHelper(
+      tester: tester,
+      offset: KTestConstants.scrollingUp,
+    );
+  }
 
   await tester.tap(
     find.byKey(LanguageSwitcherKeys.widget),
