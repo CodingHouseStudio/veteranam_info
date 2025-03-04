@@ -54,6 +54,15 @@ void main() {
 
     expect(find.byKey(MyDiscountsKeys.screen), findsOneWidget);
 
+    count = 0;
+    do {
+      count++;
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    } while (find.byKey(MyDiscountsKeys.iconAdd).evaluate().isNotEmpty ||
+        count > 20);
+
+    await tester.pumpAndSettle();
+
     expect(find.byKey(MyDiscountsKeys.iconAdd), findsOneWidget);
 
     await tester.tap(find.byKey(MyDiscountsKeys.iconAdd));
