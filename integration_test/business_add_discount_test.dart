@@ -119,19 +119,22 @@ void main() {
 
     await tester.tap(
       find.byKey(DiscountsAddKeys.eligibilityField),
+      warnIfMissed: false,
     );
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(DropListFieldKeys.item), findsWidgets);
+    expect(find.byKey(DiscountsAddKeys.eligibilityItems), findsWidgets);
 
     await tester.tap(
-      find.byKey(DropListFieldKeys.item).first,
+      find.byKey(DiscountsAddKeys.eligibilityItems).first,
     );
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(DropListFieldKeys.item), findsNothing);
+    expect(find.byKey(DiscountsAddKeys.eligibilityItems), findsNothing);
+
+    expect(find.byKey(DiscountsAddKeys.eligibilityActiveItems), findsOneWidget);
 
     expect(find.byKey(DiscountsAddKeys.linkField), findsOneWidget);
 
