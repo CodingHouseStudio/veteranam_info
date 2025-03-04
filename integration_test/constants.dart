@@ -94,8 +94,7 @@ Future<void> setUpGlobalIntegration() async {
   configureDependencies();
 
   final authRep = GetIt.I.get<AuthenticationRepository>();
-  if (authRep.currectAuthenticationStatus ==
-      AuthenticationStatus.authenticated) {
+  if (authRep.currectAuthenticationStatus != AuthenticationStatus.unknown) {
     await authRep.logOut();
   }
 }
