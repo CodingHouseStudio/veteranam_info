@@ -33,11 +33,10 @@ class FailureRepository {
     UserSetting? userSetting,
   }) async {
     // Define the variable for error level categorization
-    if (KTest.isInterationTest ||
-        (Config.isReleaseMode &&
-            Config.isProduction &&
-            // GDPR: also neccesary user agree
-            GetIt.I.get<FirebaseAnalyticsCacheController>().currentState)) {
+    if (Config.isReleaseMode &&
+        Config.isProduction &&
+        // GDPR: also neccesary user agree
+        GetIt.I.get<FirebaseAnalyticsCacheController>().currentState) {
       try {
         if (Config.isWeb) {
           await sentry.loadLibrary();

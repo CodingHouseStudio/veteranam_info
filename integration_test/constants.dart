@@ -3,7 +3,6 @@ import 'dart:math' show Random;
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/helper/helper.dart';
 import 'package:veteranam/shared/repositories/authentication_repository.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
@@ -28,52 +26,17 @@ import 'package:veteranam/shared/shared_flutter.dart';
 /// COMMENT: Method sets setting for integration tests
 Future<void> setUpGlobalIntegration() async {
   KTest.isInterationTest = true;
-  final FirebaseApp app;
   if (Firebase.apps.isEmpty) {
-    app = await Firebase.initializeApp(
+    await Firebase.initializeApp(
       options: Config.isDevelopment
           ? dev.DefaultFirebaseOptions.currentPlatform
           : prod.DefaultFirebaseOptions.currentPlatform,
       name: Config.isWeb ? null : 'TEST',
     );
-  } else {
-    app = Firebase.app();
   }
 
   if (Config.isWeb) {
     usePathUrlStrategy();
-  }
-
-  try {
-    await FirebaseAppCheck.instanceFor(app: app).activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
-      androidProvider: Config.isReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
-      appleProvider: Config.isReleaseMode
-          ? AppleProvider.deviceCheck
-          : AppleProvider.debug,
-    );
-    await FirebaseAppCheck.instance.activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
-      androidProvider: Config.isReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
-      appleProvider: Config.isReleaseMode
-          ? AppleProvider.deviceCheck
-          : AppleProvider.debug,
-    );
-  } catch (e, stack) {
-    log(
-      'Firebase AppCheck Error',
-      name: 'Firebase AppCheck',
-      error: e,
-      stackTrace: stack,
-    );
   }
 
 // Async exceptions handling

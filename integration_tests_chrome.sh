@@ -19,7 +19,6 @@ run_flutter_test() {
             --web-port=8080 \
             --dart-define=FLAVOUR=development \
             --dart-define=ROLE=${role} \
-            --dart-define-from-file=.env_dev.json \
             --flavor=development)
 
         # Check if the test passed or failed and print the relevant message
