@@ -81,10 +81,10 @@ void main() {
     await tester.tap(find.byKey(LoginKeys.button));
 
     var count = 0;
-    do {
+    while (find.byKey(LoginKeys.screen).evaluate().isNotEmpty && count < 20) {
       count++;
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-    } while (find.byKey(LoginKeys.screen).evaluate().isNotEmpty || count > 20);
+    }
 
     await tester.pumpAndSettle();
 
