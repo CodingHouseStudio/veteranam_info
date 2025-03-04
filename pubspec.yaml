@@ -55,7 +55,7 @@ dependencies:
   json_serializable: ^6.9.0
   material_symbols_icons: ^4.2805.1
   optimized_search_field: ^2.0.2 # this is our own custom package
-  package_info_plus: ^8.2.0
+  package_info_plus: ^8.3.0
   # path_drawing: ^1.0.1
   # pdf: ^3.11.0
   # printing: ^5.13.1
