@@ -88,7 +88,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  injectable_generator: ^2.6.2 # Used for dependency injection for get_it
+  injectable_generator: ^2.7.0 # Used for dependency injection for get_it
   integration_test:
     sdk: flutter
   intl_utils: ^2.8.8
