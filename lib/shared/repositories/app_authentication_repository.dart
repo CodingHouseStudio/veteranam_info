@@ -9,6 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IAppAuthenticationRepository)
@@ -25,6 +26,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required StorageService storageService,
     required firebase_auth.GoogleAuthProvider googleAuthProvider,
     required firebase_auth.FacebookAuthProvider facebookAuthProvider,
+    required firebase_auth.AppleAuthProvider appleAuthProvider,
   })  : _secureStorageRepository = secureStorageRepository,
         _firebaseAuth = firebaseAuth,
         _googleSignIn = googleSignIn,
@@ -34,7 +36,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _deviceRepository = deviceRepository,
         _storageService = storageService,
         _googleAuthProvider = googleAuthProvider,
-        _facebookAuthProvider = facebookAuthProvider {
+        _facebookAuthProvider = facebookAuthProvider,
+        _appleAuthProvider = appleAuthProvider {
     _updateUserBasedOnCache();
     _updateUserSettingBasedOnCache();
   }
@@ -49,6 +52,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final StorageService _storageService;
   final firebase_auth.GoogleAuthProvider _googleAuthProvider;
   final firebase_auth.FacebookAuthProvider _facebookAuthProvider;
+  final firebase_auth.AppleAuthProvider _appleAuthProvider;
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -170,7 +174,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     final googleUser = await _googleSignIn.signIn();
     // If user cancelled dialog
     if (googleUser == null) return null;
-    log('fdsfdssfddfsdfsdfssdfdfssdffsdfsd $googleUser');
     final googleAuth = await googleUser.authentication;
     return firebase_auth.GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -233,6 +236,77 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return firebase_auth.FacebookAuthProvider.credential(
       loginResult.accessToken!.tokenString,
     );
+  }
+
+  /// Starts the Sign In with Apple Flow.
+  ///
+  /// Throws a [signUpWithApple] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, User?>> signUpWithApple() async {
+    return eitherFutureHelper(
+      () async {
+        final credential = await _getAppleAuthCredential();
+        if (credential != null) {
+          final userCredentional = await _firebaseAuth
+              .signInWithCredential(authCredential ?? credential);
+
+          return Right(userCredentional.user?.toUser);
+        }
+        return const Right(null);
+      },
+      methodName: 'signUpWithApple',
+      className: ErrorText.appAuthenticationKey,
+      user: currentUser,
+      userSetting: currentUserSetting,
+      finallyFunction: () {
+        _updateUserBasedOnCache();
+        _updateUserSettingBasedOnCache();
+      },
+    );
+  }
+
+  Future<firebase_auth.AuthCredential?> _getAppleAuthCredential() async {
+    if (Config.isWeb) {
+      return _getAppleAuthCredentialWeb();
+    } else {
+      return _getAppleAuthCredentialMobile();
+    }
+  }
+
+  Future<firebase_auth.AuthCredential?> _getAppleAuthCredentialWeb() async {
+    final userCredential = await _firebaseAuth.signInWithPopup(
+      _appleAuthProvider,
+    );
+    return userCredential.credential;
+  }
+
+  Future<firebase_auth.AuthCredential?> _getAppleAuthCredentialMobile() async {
+    AuthorizationCredentialAppleID? appleCredential;
+    // Trigger the Apple Sign-In flow using the 'sign_in_with_apple' plugin
+    try {
+      appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.failed) rethrow;
+    }
+
+    if (appleCredential == null) {
+      return null;
+    }
+
+    // Create a credential from the Apple Sign-In result
+    final firebaseCredential = firebase_auth.OAuthCredential(
+      providerId: 'apple.com',
+      signInMethod: 'apple.com',
+      accessToken: appleCredential.authorizationCode,
+      idToken: appleCredential.identityToken,
+    );
+
+    return firebaseCredential;
   }
 
   /// Signs in with the provided [email] and [password].

@@ -19,6 +19,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
     this.rightWidget,
     super.key,
     this.align,
+    this.hasAlign = true,
   });
 
   final void Function()? onPressed;
@@ -33,70 +34,76 @@ class ButtonAdditionalWidget extends StatelessWidget {
   final Alignment? align;
   final Color? borderColor;
   final Widget? rightWidget;
+  final bool hasAlign;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: align ?? Alignment.centerLeft,
-      child: TextButton(
-        key: ButtonAdditionalKeys.desk,
-        style: KButtonStyles.additionalButtonStyle.copyWith(
-          maximumSize: isDesk
-              ? null
-              : const WidgetStatePropertyAll(
-                  Size(
-                    KMinMaxSize.maxWidth328,
-                    double.infinity,
-                  ),
-                ),
-          backgroundColor: WidgetStatePropertyAll(backgroundColor),
-          side: WidgetStateProperty.resolveWith(
-            (states) => states.contains(WidgetState.hovered)
-                ? const BorderSide()
-                : BorderSide(
-                    color: borderColor ??
-                        AppColors.materialThemeRefSecondarySecondary70,
-                  ),
-          ),
-        ),
-        onPressed: onPressed,
-        child: Row(
-          mainAxisSize: isDesk ? MainAxisSize.min : MainAxisSize.max,
-          children: [
-            IconWidget(
-              key: ButtonAdditionalKeys.icon,
-              icon: picture,
-              padding: iconPadding ?? KPadding.kPaddingSize12,
-              background: AppColors.materialThemeKeyColorsSecondary,
-            ),
-            if (isDesk)
-              if (expanded)
-                Expanded(
-                  child: Center(child: textWidget),
-                )
-              else
-                Padding(
-                  padding: deskPadding ??
-                      const EdgeInsets.only(
-                        top: KPadding.kPaddingSize12,
-                        bottom: KPadding.kPaddingSize12,
-                        left: KPadding.kPaddingSize5,
-                        right: KPadding.kPaddingSize16,
-                      ),
-                  child: textWidget,
-                )
-            else
-              Expanded(
-                child: Padding(
-                  padding: mobPadding ?? EdgeInsets.zero,
-                  child: Center(child: textWidget),
+    final button = TextButton(
+      key: ButtonAdditionalKeys.desk,
+      style: KButtonStyles.additionalButtonStyle.copyWith(
+        maximumSize: isDesk
+            ? null
+            : const WidgetStatePropertyAll(
+                Size(
+                  KMinMaxSize.maxWidth328,
+                  double.infinity,
                 ),
               ),
-            if (rightWidget != null) rightWidget!,
-          ],
+        backgroundColor: WidgetStatePropertyAll(backgroundColor),
+        side: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.hovered)
+              ? const BorderSide()
+              : BorderSide(
+                  color: borderColor ??
+                      AppColors.materialThemeRefSecondarySecondary70,
+                ),
         ),
       ),
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: isDesk ? MainAxisSize.min : MainAxisSize.max,
+        children: [
+          IconWidget(
+            key: ButtonAdditionalKeys.icon,
+            icon: picture,
+            padding: iconPadding ?? KPadding.kPaddingSize12,
+            background: AppColors.materialThemeKeyColorsSecondary,
+          ),
+          if (isDesk)
+            if (expanded)
+              Expanded(
+                child: Center(child: textWidget),
+              )
+            else
+              Padding(
+                padding: deskPadding ??
+                    const EdgeInsets.only(
+                      top: KPadding.kPaddingSize12,
+                      bottom: KPadding.kPaddingSize12,
+                      left: KPadding.kPaddingSize5,
+                      right: KPadding.kPaddingSize16,
+                    ),
+                child: textWidget,
+              )
+          else
+            Expanded(
+              child: Padding(
+                padding: mobPadding ?? EdgeInsets.zero,
+                child: Center(child: textWidget),
+              ),
+            ),
+          if (rightWidget != null) rightWidget!,
+        ],
+      ),
     );
+    if (hasAlign) {
+      return Align(
+        alignment: align ?? Alignment.centerLeft,
+        child: button,
+      );
+    } else {
+      return button;
+    }
   }
 
   Text get textWidget {

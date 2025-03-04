@@ -141,38 +141,37 @@ class SignUpBodyWidget extends StatelessWidget {
                 ],
               ),
             ),
-            if (Config.isWeb) ...[
-              KSizedBox.kHeightSizedBox40,
-              const Divider(
-                color: AppColors.materialThemeRefNeutralNeutral90,
-                height: KSize.kPixel1,
-                thickness: KSize.kPixel1,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox40
-              else
-                KSizedBox.kHeightSizedBox24,
-              TextPointWidget(
-                //key: ,
-                context.l10n.signUpInWith,
-                pointColor: AppColors.materialThemeKeyColorsPrimary,
-                textStyle: AppTextStyle.materialThemeTitleMedium,
-                mainAxisAlignment: MainAxisAlignment.start,
-              ),
-              KSizedBox.kHeightSizedBox16,
-              // Align(
-              //   alignment: Alignment.centerLeft,
-              //   child:
-              SignUpLoginServiceWidget(
-                // key: SignUpBottomButtonsKeys.google,
-                // text: context.l10n.google,
-                // picture: KImage.google(),
-                // onPressed: () => context
-                //     .read<AuthenticationServicesCubit>()
-                //     .authenticationUseGoogle(),
-                isDesk: isDesk,
-              ),
-            ],
+            KSizedBox.kHeightSizedBox40,
+            const Divider(
+              color: AppColors.materialThemeRefNeutralNeutral90,
+              height: KSize.kPixel1,
+              thickness: KSize.kPixel1,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+            TextPointWidget(
+              //key: ,
+              context.l10n.signUpInWith,
+              pointColor: AppColors.materialThemeKeyColorsPrimary,
+              textStyle: AppTextStyle.materialThemeTitleMedium,
+              mainAxisAlignment: MainAxisAlignment.start,
+            ),
+            KSizedBox.kHeightSizedBox16,
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child:
+            SignUpLoginServiceWidget(
+              // key: SignUpBottomButtonsKeys.google,
+              // text: context.l10n.google,
+              // picture: KImage.google(),
+              // onPressed: () => context
+              //     .read<AuthenticationServicesCubit>()
+              //     .authenticationUseGoogle(),
+              isDesk: isDesk,
+            ),
+
             // ),
             if (!isDesk) KSizedBox.kHeightSizedBox24,
           ],

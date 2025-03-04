@@ -12,6 +12,8 @@ abstract class IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, User?>> signUpWithFacebook();
 
+  Future<Either<SomeFailure, User?>> signUpWithApple();
+
   Future<Either<SomeFailure, User?>> logInWithEmailAndPassword({
     required String email,
     required String password,

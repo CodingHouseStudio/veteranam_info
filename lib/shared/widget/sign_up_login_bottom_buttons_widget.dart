@@ -48,10 +48,28 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
     // ),
     // KSizedBox.kHeightSizedBox16,
-    return
-        // Row(
-        //   children: [
-        googleButton(context: context, isDesk: isDesk);
+    if (PlatformEnum.getPlatform.isAndroid) {
+      return googleButton(context: context, isDesk: isDesk);
+    } else {
+      return Wrap(
+        spacing: KPadding.kPaddingSize16,
+        runSpacing: KPadding.kPaddingSize8,
+        children: [
+          googleButton(context: context, isDesk: isDesk),
+          _button(
+            key: SignUpBottomButtonsKeys.apple,
+            context: context,
+            isDesk: isDesk,
+            text: context.l10n.apple,
+            icon: KIcon.apple,
+            onPressed: () => context
+                .read<AuthenticationServicesCubit>()
+                .authenticationUseApple(),
+          ),
+        ],
+      );
+    }
+
     // KSizedBox.kWidthSizedBox16,
     // facebookButton(
     //   context: context,
@@ -150,6 +168,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
         onPressed: onPressed,
         isDesk: isDesk,
         expanded: false,
+        hasAlign: !isDesk,
       );
 
   // Widget buildBottomButton({
