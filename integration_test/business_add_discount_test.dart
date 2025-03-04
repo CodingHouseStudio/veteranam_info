@@ -43,10 +43,10 @@ void main() {
     await tester.tap(find.byKey(LoginKeys.button));
 
     var count = 0;
-    do {
+    while (find.byKey(LoginKeys.screen).evaluate().isNotEmpty && count < 20) {
       count++;
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-    } while (find.byKey(LoginKeys.screen).evaluate().isNotEmpty || count > 20);
+    }
 
     await tester.pumpAndSettle();
 
@@ -55,11 +55,11 @@ void main() {
     expect(find.byKey(MyDiscountsKeys.screen), findsOneWidget);
 
     count = 0;
-    do {
+    while (
+        find.byKey(MyDiscountsKeys.iconAdd).evaluate().isEmpty && count < 20) {
       count++;
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-    } while (find.byKey(MyDiscountsKeys.iconAdd).evaluate().isNotEmpty ||
-        count > 20);
+    }
 
     await tester.pumpAndSettle();
 
@@ -276,11 +276,11 @@ void main() {
     );
 
     count = 0;
-    do {
+    while (find.byKey(DiscountsAddKeys.screen).evaluate().isNotEmpty &&
+        count < 20) {
       count++;
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-    } while (find.byKey(DiscountsAddKeys.screen).evaluate().isNotEmpty ||
-        count > 20);
+    }
 
     await tester.pumpAndSettle();
 
