@@ -2,9 +2,9 @@
 
 # List of tests to run
 TESTS=(
-    "discounts"
     "sign_in"
     "sign_up"
+    "discounts"
 )
 BUSINESS_TESTS=(
     "business_sign_up"
