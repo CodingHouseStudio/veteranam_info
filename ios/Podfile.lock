@@ -1269,7 +1269,7 @@ PODS:
     - Firebase/Performance (= 11.8.0)
     - firebase_core
     - Flutter
-  - firebase_remote_config (5.3.1):
+  - firebase_remote_config (5.4.2):
     - Firebase/RemoteConfig (= 11.8.0)
     - firebase_core
     - Flutter
@@ -1773,7 +1773,7 @@ SPEC CHECKSUMS:
   firebase_crashlytics: eb5eb0ef5e6910395adfe177b9ca4a62e8a2f1aa
   firebase_messaging: f1d05960bc9b9139184e3b1cd4e3cf73caf7be36
   firebase_performance: cb8d97977a35d1423d987ce5adddc287caae4290
-  firebase_remote_config: bdb8c398b12c26c2bcda3b38c875114bfae6e3ad
+  firebase_remote_config: ca499f96ddbcc63db863b941bf9f5e6e9a81ceba
   firebase_storage: 91111c924f41858402db680e7404933519d7336c
   FirebaseABTesting: 7d6eee42b9137541eac2610e5fea3568d956707a
   FirebaseAnalytics: 4fd42def128146e24e480e89f310e3d8534ea42b

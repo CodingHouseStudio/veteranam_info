@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/app.dart';
+import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 /// COMMENT: Helpers intial app in integration tests
@@ -10,8 +11,17 @@ Future<void> appHelper(WidgetTester tester) async {
 
   log('Loading App...', name: 'Integation Tests');
 
-  while (find.byKey(NawbarKeys.widget).evaluate().isEmpty) {
-    await tester.pumpAndSettle(const Duration(milliseconds: 200));
+  var count = 0;
+  if (Config.isWeb) {
+    while (find.byKey(NawbarKeys.widget).evaluate().isEmpty && count < 20) {
+      count++;
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    }
+  } else {
+    while (find.byKey(DiscountsKeys.screen).evaluate().isEmpty && count < 20) {
+      count++;
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    }
   }
 
   log('App Loaded', name: 'Integation Tests');
