@@ -4,12 +4,10 @@ run_flutter_test() {
     local role=$1
     shift
     local tests=("$@")
-    local total_tests=${#tests[@]}
-    local current_test_number=1
     local failed_tests=0  # Counter for failed tests
 
     for test_name in "${tests[@]}"; do
-        echo "Running test: $test_name #$current_test_number out of $total_tests with ROLE=${role}"
+        echo "Running test: $test_name #$CURRENT_TEST_NUMBER out of $TOTAL_TESTS with ROLE=${role}"
         # Run the test and store output in a variable
         output=$(flutter drive \
             --flavor development \
@@ -23,13 +21,13 @@ run_flutter_test() {
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then
-            echo "Test #$current_test_number: $test_name PASSED"
+            echo "Test #$CURRENT_TEST_NUMBER: $test_name PASSED"
         else
-            echo "Test #$current_test_number: $test_name FAILED"
+            echo "Test #$CURRENT_TEST_NUMBER: $test_name FAILED"
             echo "$output" | grep -A 5 -B 5 "EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK" # Adjust as needed
-            ((failed_tests++))  # Increment the failed tests counter
+            ((failed_tests++))
         fi
-        ((current_test_number++))
+        ((CURRENT_TEST_NUMBER++))
     done
 
     # Return 1 if any test failed, otherwise return 0
@@ -50,6 +48,10 @@ BUSINESS_TESTS=(
     "business_sign_up"
     "business_add_discount"
 )
+
+# Compute the total number of tests and initialize the global counter.
+TOTAL_TESTS=$((${#TESTS[@]} + ${#BUSINESS_TESTS[@]}))
+CURRENT_TEST_NUMBER=1
 
 # Run tests for ROLE=user
 run_flutter_test "user" "${TESTS[@]}"

@@ -266,7 +266,19 @@ void main() {
       find.byKey(ConfirmPublishDiscountKeys.sendButton),
     );
 
+    count = 0;
+    do {
+      count++;
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    } while (find.byKey(DiscountsAddKeys.screen).evaluate().isNotEmpty ||
+        count > 20);
+
     await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(DiscountsAddKeys.screen),
+      findsNothing,
+    );
 
     expect(
       find.byKey(MyDiscountsKeys.screen),
