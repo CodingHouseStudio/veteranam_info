@@ -33,6 +33,7 @@ void main() {
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
+    late firebase_auth.AppleAuthProvider mockAppleAuthProvider;
     setUp(() {
       ExtendedDateTime.current = KTestVariables.dateTime;
       mockSecureStorageRepository = MockIStorage();
@@ -48,6 +49,7 @@ void main() {
       mockFacebookAuthProvider = MockFacebookAuthProvider();
       mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
+      mockAppleAuthProvider = MockAppleAuthProvider();
 
       when(
         mockCache.read<User>(
@@ -204,6 +206,7 @@ void main() {
         googleSignIn: mockGoogleSignIn,
         secureStorageRepository: mockSecureStorageRepository,
         storageService: mockStorageService,
+        appleAuthProvider: mockAppleAuthProvider,
       );
       AppAuthenticationRepository.authCredential =
           KTestVariables.authCredential;

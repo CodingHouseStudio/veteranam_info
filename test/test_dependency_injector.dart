@@ -83,6 +83,9 @@ void configureDependenciesTest() {
   getItTest.registerSingleton<firebase_auth.FacebookAuthProvider>(
     MockFacebookAuthProvider(),
   );
+  getItTest.registerSingleton<firebase_auth.AppleAuthProvider>(
+    MockAppleAuthProvider(),
+  );
   getItTest.registerSingleton<FacebookAuth>(MockFacebookAuth());
   getItTest.registerSingleton<StorageService>(MockStorageService());
   getItTest.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
@@ -134,6 +137,7 @@ void configureDependenciesTest() {
       firestoreService: getItTest.get<FirestoreService>(),
       googleAuthProvider: getItTest.get<firebase_auth.GoogleAuthProvider>(),
       storageService: getItTest.get<StorageService>(),
+      appleAuthProvider: getItTest.get<firebase_auth.AppleAuthProvider>(),
     ),
   );
   getItTest.registerSingleton<AuthenticationRepository>(

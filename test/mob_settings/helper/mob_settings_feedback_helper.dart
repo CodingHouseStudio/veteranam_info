@@ -9,9 +9,19 @@ Future<void> mobSettingsFeedbackHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: MobSettingsKeys.offlinesSwitcher,
+  );
+
   expect(
     find.byKey(MobSettingsKeys.feedbackButton),
     findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: MobSettingsKeys.feedbackButton,
   );
 
   await tester.tap(find.byKey(MobSettingsKeys.feedbackButton));

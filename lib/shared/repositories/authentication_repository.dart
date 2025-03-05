@@ -156,6 +156,26 @@ class AuthenticationRepository {
     );
   }
 
+  Future<Either<SomeFailure, bool>> signUpWithApple() async {
+    final result = await _appAuthenticationRepository.signUpWithApple();
+    return result.fold(
+      (l) {
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.unknown,
+        );
+        return Left(l);
+      },
+      (r) {
+        log('authenticated');
+        if (r != null) {
+          _authenticationStatuscontroller
+              .add(AuthenticationStatus.authenticated);
+        }
+        return const Right(true);
+      },
+    );
+  }
+
   Future<Either<SomeFailure, bool>> logOut() async {
     final result = await _appAuthenticationRepository.logOut();
     return result.fold(
