@@ -291,6 +291,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         ],
       );
     } on SignInWithAppleAuthorizationException catch (e) {
+      log('apple authentication error: $e');
       if (e.code == AuthorizationErrorCode.failed) rethrow;
     }
 
@@ -299,11 +300,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
 
     // Create a credential from the Apple Sign-In result
-    final firebaseCredential = firebase_auth.OAuthCredential(
-      providerId: 'apple.com',
-      signInMethod: 'apple.com',
-      accessToken: appleCredential.authorizationCode,
+    final firebaseCredential =
+        firebase_auth.OAuthProvider('apple.com').credential(
       idToken: appleCredential.identityToken,
+      accessToken: appleCredential.authorizationCode,
     );
 
     return firebaseCredential;
