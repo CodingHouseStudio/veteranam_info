@@ -131,7 +131,7 @@ class AuthenticationRepository {
           _authenticationStatuscontroller
               .add(AuthenticationStatus.authenticated);
         }
-        return const Right(true);
+        return Right(r != null);
       },
     );
   }

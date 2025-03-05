@@ -82,12 +82,17 @@ class LoginBodyWidget extends StatelessWidget {
               mobIconPadding: KPadding.kPaddingSize12,
               darkMode: true,
             ),
-            SendingTextWidget(
-              textKey: LoginKeys.submitingText,
-              failureText: _.failure?.value(context),
-              sendingText: context.l10n.loggingInWait,
-              successText: null,
-              showSendingText: _.formState == LoginEnum.success,
+            BlocBuilder<AuthenticationServicesCubit,
+                AuthenticationServicesState>(
+              builder: (context, state) => SendingTextWidget(
+                textKey: LoginKeys.submitingText,
+                failureText:
+                    _.failure?.value(context) ?? state.failure?.value(context),
+                sendingText: context.l10n.loggingInWait,
+                successText: null,
+                showSendingText: _.formState == LoginEnum.success ||
+                    state.status == AuthenticationServicesStatus.procesing,
+              ),
             ),
             // if (_.formState == LoginEnum.success) ...[
             //   KSizedBox.kHeightSizedBox16,
