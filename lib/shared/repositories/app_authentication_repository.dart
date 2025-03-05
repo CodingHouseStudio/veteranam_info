@@ -164,10 +164,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialWeb() async {
-    final userCredential = await _firebaseAuth.signInWithPopup(
-      _googleAuthProvider,
-    );
-    return userCredential.credential;
+    firebase_auth.UserCredential? userCredential;
+    try {
+      userCredential = await _firebaseAuth.signInWithPopup(
+        _googleAuthProvider,
+      );
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      if (!e.code.contains('popup-closed-by-user')) rethrow;
+      userCredential = null;
+    }
+    return userCredential?.credential;
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialMobile() async {
@@ -274,10 +280,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getAppleAuthCredentialWeb() async {
-    final userCredential = await _firebaseAuth.signInWithPopup(
-      _appleAuthProvider,
-    );
-    return userCredential.credential;
+    firebase_auth.UserCredential? userCredential;
+    try {
+      userCredential = await _firebaseAuth.signInWithPopup(
+        _appleAuthProvider,
+      );
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      if (!e.code.contains('popup-closed-by-user')) rethrow;
+      userCredential = null;
+    }
+    return userCredential?.credential;
   }
 
   Future<firebase_auth.AuthCredential?> _getAppleAuthCredentialMobile() async {

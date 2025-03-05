@@ -85,12 +85,16 @@ class SignUpBodyWidget extends StatelessWidget {
               mobIconPadding: KPadding.kPaddingSize12,
               darkMode: true,
             ),
-            SendingTextWidget(
-              textKey: SignUpKeys.submitingText,
-              failureText: _.failure?.value(context),
-              sendingText: context.l10n.signingUpWait,
-              successText: null,
-              showSendingText: _.formState == SignUpEnum.success,
+            BlocBuilder<AuthenticationServicesCubit,
+                AuthenticationServicesState>(
+              builder: (context, state) => SendingTextWidget(
+                textKey: SignUpKeys.submitingText,
+                failureText: _.failure?.value(context),
+                sendingText: context.l10n.signingUpWait,
+                successText: null,
+                showSendingText: _.formState == SignUpEnum.success ||
+                    state.status == AuthenticationServicesStatus.procesing,
+              ),
             ),
             // if (_.formState == SignUpEnum.success) ...[
             //   KSizedBox.kHeightSizedBox16,
