@@ -23,37 +23,37 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // try {
-  //   await FirebaseAppCheck.instanceFor(app: app).activate(
-  //     webProvider: ReCaptchaV3Provider(
-  //       KSecurityKeys.firebaseAppCheck,
-  //     ),
-  //     androidProvider: Config.isReleaseMode
-  //         ? AndroidProvider.playIntegrity
-  //         : AndroidProvider.debug,
-  //     appleProvider: Config.isReleaseMode
-  //         ? AppleProvider.deviceCheck
-  //         : AppleProvider.debug,
-  //   );
-  //   await FirebaseAppCheck.instance.activate(
-  //     webProvider: ReCaptchaV3Provider(
-  //       KSecurityKeys.firebaseAppCheck,
-  //     ),
-  //     androidProvider: Config.isReleaseMode
-  //         ? AndroidProvider.playIntegrity
-  //         : AndroidProvider.debug,
-  //     appleProvider: Config.isReleaseMode
-  //         ? AppleProvider.deviceCheck
-  //         : AppleProvider.debug,
-  //   );
-  // } catch (e, stack) {
-  //   log(
-  //     'Firebase AppCheck Error',
-  //     name: 'Firebase AppCheck',
-  //     error: e,
-  //     stackTrace: stack,
-  //   );
-  // }
+  try {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheck,
+      ),
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
+    );
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheck,
+      ),
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
+    );
+  } catch (e, stack) {
+    log(
+      'Firebase AppCheck Error',
+      name: 'Firebase AppCheck',
+      error: e,
+      stackTrace: stack,
+    );
+  }
 
   // Non-async exceptions handling
   FlutterError.onError = (details) {

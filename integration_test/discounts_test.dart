@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
@@ -56,6 +55,14 @@ void main() {
 
     while (find.byKey(DiscountKeys.screen).evaluate().isEmpty && count < 20) {
       count++;
+
+      await scrollingHelperInt(
+        tester: tester,
+        itemKey: DiscountCardKeys.button,
+      );
+
+      await tester.tap(find.byKey(DiscountCardKeys.button).first);
+
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
     }
 
@@ -108,7 +115,12 @@ void main() {
 
     expect(find.byKey(UserEmailDialogKeys.dialog), findsNothing);
 
-    await tester.tap(find.byKey(DiscountKeys.shareButton));
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: DiscountCardKeys.iconShare,
+    );
+
+    await tester.tap(find.byKey(DiscountCardKeys.iconShare).first);
 
     await tester.pumpAndSettle();
   });
