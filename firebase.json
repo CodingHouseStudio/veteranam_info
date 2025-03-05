@@ -1,1 +1,113 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"veteran-development","appId":"1:32851885972:android:d920f90e0bb70673ecd981","fileOutput":"android/app/google-services.json"},"buildConfigurations":{"flavors/dev":{"projectId":"veteran-development","appId":"1:32851885972:android:d920f90e0bb70673ecd981","fileOutput":"android/app/flavors/dev/google-services.json"},"flavors/production":{"projectId":"veteran-production","appId":"1:326120302123:android:bc4862ae5990f5c0edac6e","fileOutput":"android/app/flavors/production/google-services.json"}}},"dart":{"lib/firebase_options.dart":{"projectId":"veteran-production","configurations":{"ios":"1:326120302123:ios:f7fe329bb88f4091edac6e"}},"lib/firebase_options_dev.dart":{"projectId":"veteran-development","configurations":{"android":"1:32851885972:android:d920f90e0bb70673ecd981","ios":"1:32851885972:ios:1f70471fce23766fecd981","macos":"1:32851885972:ios:1f70471fce23766fecd981","web":"1:32851885972:web:c0230fc5a9606103ecd981"}},"lib/firebase_options_production.dart":{"projectId":"veteran-production","configurations":{"android":"1:326120302123:android:bc4862ae5990f5c0edac6e","ios":"1:326120302123:ios:f7fe329bb88f4091edac6e","web":"1:326120302123:web:286bf85d6c4789dcedac6e"}},"lib/firebase_options_development.dart":{"projectId":"veteran-development","configurations":{"android":"1:32851885972:android:d920f90e0bb70673ecd981","ios":"1:32851885972:ios:1f70471fce23766fecd981","macos":"1:32851885972:ios:658759515917d638ecd981","web":"1:32851885972:web:c0230fc5a9606103ecd981"}}},"ios":{"default":{"projectId":"veteran-production","appId":"1:326120302123:ios:f7fe329bb88f4091edac6e","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"},"buildConfigurations":{"Debug-development":{"projectId":"veteran-development","appId":"1:32851885972:ios:1f70471fce23766fecd981","uploadDebugSymbols":false,"fileOutput":"ios/flavors/dev/GoogleService-Info.plist"},"Release-development":{"projectId":"veteran-development","appId":"1:32851885972:ios:1f70471fce23766fecd981","uploadDebugSymbols":false,"fileOutput":"ios/flavors/dev/GoogleService-Info.plist"},"Profile-development":{"projectId":"veteran-development","appId":"1:32851885972:ios:1f70471fce23766fecd981","uploadDebugSymbols":false,"fileOutput":"ios/flavors/dev/GoogleService-Info.plist"},"Debug-production":{"projectId":"veteran-production","appId":"1:326120302123:ios:f7fe329bb88f4091edac6e","uploadDebugSymbols":false,"fileOutput":"ios/flavors/production/GoogleService-Info.plist"},"Release-production":{"projectId":"veteran-production","appId":"1:326120302123:ios:f7fe329bb88f4091edac6e","uploadDebugSymbols":false,"fileOutput":"ios/flavors/production/GoogleService-Info.plist"},"Profile-production":{"projectId":"veteran-production","appId":"1:326120302123:ios:f7fe329bb88f4091edac6e","uploadDebugSymbols":false,"fileOutput":"ios/flavors/production/GoogleService-Info.plist"}}},"macos":{"default":{"projectId":"veteran-development","appId":"1:32851885972:ios:658759515917d638ecd981","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}}}}}
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "veteran-development",
+                    "appId": "1:32851885972:android:d920f90e0bb70673ecd981",
+                    "fileOutput": "android/app/google-services.json"
+                },
+                "buildConfigurations": {
+                    "flavors/dev": {
+                        "projectId": "veteran-development",
+                        "appId": "1:32851885972:android:d920f90e0bb70673ecd981",
+                        "fileOutput": "android/app/flavors/dev/google-services.json"
+                    },
+                    "flavors/production": {
+                        "projectId": "veteran-production",
+                        "appId": "1:326120302123:android:bc4862ae5990f5c0edac6e",
+                        "fileOutput": "android/app/flavors/production/google-services.json"
+                    }
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "veteran-production",
+                    "configurations": {
+                        "ios": "1:326120302123:ios:f7fe329bb88f4091edac6e"
+                    }
+                },
+                "lib/firebase_options_dev.dart": {
+                    "projectId": "veteran-development",
+                    "configurations": {
+                        "android": "1:32851885972:android:d920f90e0bb70673ecd981",
+                        "ios": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "macos": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "web": "1:32851885972:web:c0230fc5a9606103ecd981"
+                    }
+                },
+                "lib/firebase_options_production.dart": {
+                    "projectId": "veteran-production",
+                    "configurations": {
+                        "android": "1:326120302123:android:bc4862ae5990f5c0edac6e",
+                        "ios": "1:326120302123:ios:f7fe329bb88f4091edac6e",
+                        "web": "1:326120302123:web:286bf85d6c4789dcedac6e"
+                    }
+                },
+                "lib/firebase_options_development.dart": {
+                    "projectId": "veteran-development",
+                    "configurations": {
+                        "android": "1:32851885972:android:d920f90e0bb70673ecd981",
+                        "ios": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "macos": "1:32851885972:ios:658759515917d638ecd981",
+                        "web": "1:32851885972:web:c0230fc5a9606103ecd981"
+                    }
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "veteran-production",
+                    "appId": "1:326120302123:ios:f7fe329bb88f4091edac6e",
+                    "uploadDebugSymbols": true,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                },
+                "buildConfigurations": {
+                    "Debug-development": {
+                        "projectId": "veteran-development",
+                        "appId": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "uploadDebugSymbols": false,
+                        "fileOutput": "ios/flavors/dev/GoogleService-Info.plist"
+                    },
+                    "Release-development": {
+                        "projectId": "veteran-development",
+                        "appId": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "uploadDebugSymbols": false,
+                        "fileOutput": "ios/flavors/dev/GoogleService-Info.plist"
+                    },
+                    "Profile-development": {
+                        "projectId": "veteran-development",
+                        "appId": "1:32851885972:ios:1f70471fce23766fecd981",
+                        "uploadDebugSymbols": false,
+                        "fileOutput": "ios/flavors/dev/GoogleService-Info.plist"
+                    },
+                    "Debug-production": {
+                        "projectId": "veteran-production",
+                        "appId": "1:326120302123:ios:f7fe329bb88f4091edac6e",
+                        "uploadDebugSymbols": true,
+                        "fileOutput": "ios/flavors/production/GoogleService-Info.plist"
+                    },
+                    "Release-production": {
+                        "projectId": "veteran-production",
+                        "appId": "1:326120302123:ios:f7fe329bb88f4091edac6e",
+                        "uploadDebugSymbols": true,
+                        "fileOutput": "ios/flavors/production/GoogleService-Info.plist"
+                    },
+                    "Profile-production": {
+                        "projectId": "veteran-production",
+                        "appId": "1:326120302123:ios:f7fe329bb88f4091edac6e",
+                        "uploadDebugSymbols": true,
+                        "fileOutput": "ios/flavors/production/GoogleService-Info.plist"
+                    }
+                }
+            },
+            "macos": {
+                "default": {
+                    "projectId": "veteran-development",
+                    "appId": "1:32851885972:ios:658759515917d638ecd981",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "macos/Runner/GoogleService-Info.plist"
+                }
+            }
+        }
+    }
+}
