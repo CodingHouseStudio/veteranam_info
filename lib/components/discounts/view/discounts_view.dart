@@ -16,11 +16,8 @@ class DiscountsScreen extends StatelessWidget {
                 index: 0,
               ),
         appBar: appBar,
-        body: const ColoredBox(
-          color: AppColors.materialThemeWhite,
-          child: DiscountsBodyWidget(
-            key: DiscountsKeys.screen,
-          ),
+        body: const DiscountsBodyWidget(
+          key: DiscountsKeys.screen,
         ),
       ),
     );

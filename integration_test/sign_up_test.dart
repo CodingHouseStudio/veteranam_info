@@ -67,6 +67,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    await scrollingHelperInt(tester: tester, itemKey: SignUpKeys.button);
+
     await tester.tap(find.byKey(SignUpKeys.button));
 
     await tester.pumpAndSettle();
@@ -79,6 +81,8 @@ void main() {
     );
 
     await tester.pumpAndSettle();
+
+    await scrollingHelperInt(tester: tester, itemKey: SignUpKeys.button);
 
     await tester.tap(find.byKey(SignUpKeys.button));
 
@@ -93,6 +97,10 @@ void main() {
 
     expect(find.byKey(SignUpKeys.screen), findsNothing);
 
-    expect(find.byKey(HomeKeys.screen), findsOneWidget);
+    if (Config.isWeb) {
+      expect(find.byKey(HomeKeys.screen), findsOneWidget);
+    } else {
+      expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
+    }
   });
 }

@@ -17,9 +17,11 @@ class DiscountLinkCubit extends Cubit<bool> {
   Future<void> started() async {
     final result = await _discountRepository
         .userCanSendLink(_appAuthenticationRepository.currentUser.id);
-    result.fold(
-      (l) => emit(false),
-      emit,
-    );
+    if (!isClosed) {
+      result.fold(
+        (l) => emit(false),
+        emit,
+      );
+    }
   }
 }

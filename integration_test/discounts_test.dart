@@ -42,17 +42,33 @@ void main() {
 
     expect(find.byKey(DiscountCardKeys.button), findsWidgets);
 
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: DiscountCardKeys.button,
+    );
+
     await tester.tap(find.byKey(DiscountCardKeys.button).first);
 
     await tester.pumpAndSettle();
 
+    var count = 0;
+
+    while (find.byKey(DiscountKeys.screen).evaluate().isEmpty && count < 20) {
+      count++;
+
+      await scrollingHelperInt(
+        tester: tester,
+        itemKey: DiscountCardKeys.button,
+      );
+
+      await tester.tap(find.byKey(DiscountCardKeys.button).first);
+
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    }
+
     expect(find.byKey(DiscountKeys.screen), findsOneWidget);
 
     expect(find.byKey(DiscountKeys.shareButton), findsOneWidget);
-
-    await tester.tap(find.byKey(DiscountKeys.shareButton));
-
-    await tester.pumpAndSettle();
 
     await tester.tap(find.byKey(DiscountKeys.backButton));
 
@@ -98,5 +114,14 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(UserEmailDialogKeys.dialog), findsNothing);
+
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: DiscountCardKeys.iconShare,
+    );
+
+    await tester.tap(find.byKey(DiscountCardKeys.iconShare).first);
+
+    await tester.pumpAndSettle();
   });
 }

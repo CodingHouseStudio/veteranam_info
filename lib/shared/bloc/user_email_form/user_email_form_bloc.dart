@@ -47,14 +47,16 @@ class UserEmailFormBloc extends Bloc<UserEmailFormEvent, UserEmailFormState> {
       (r) => userEmailEnum = UserEmailEnum.get(r),
     );
 
-    // ignore: invalid_use_of_visible_for_testing_member
-    emit(
-      _Initial(
-        email: const EmailFieldModel.pure(),
-        formState: EmailEnum.initial,
-        emailEnum: userEmailEnum,
-      ),
-    );
+    if (!isClosed) {
+      // ignore: invalid_use_of_visible_for_testing_member
+      emit(
+        _Initial(
+          email: const EmailFieldModel.pure(),
+          formState: EmailEnum.initial,
+          emailEnum: userEmailEnum,
+        ),
+      );
+    }
   }
 
   void _onUpdatEmail(
