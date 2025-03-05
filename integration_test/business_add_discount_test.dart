@@ -145,7 +145,9 @@ void main() {
       expect(find.byKey(DiscountsAddKeys.eligibilityItems), findsNothing);
 
       expect(
-          find.byKey(DiscountsAddKeys.eligibilityActiveItems), findsOneWidget);
+        find.byKey(DiscountsAddKeys.eligibilityActiveItems),
+        findsOneWidget,
+      );
 
       expect(find.byKey(DiscountsAddKeys.linkField), findsOneWidget);
 
