@@ -57,20 +57,24 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
         _firebaseRemoteConfigProvider.getBool(mobFilterEnhancedMobileKey);
     final enableVerticalDiscount =
         _firebaseRemoteConfigProvider.getBool(enableVerticalDiscountKey);
-    emit(
-      DiscountConfigState(
-        emailScrollCount: emailScrollCount > 0
-            ? emailScrollCount
-            : KDimensions.emailScrollCount,
-        loadingItems: loadingItems > 0 ? loadingItems : KDimensions.loadItems,
-        linkScrollCount:
-            linkScrollCount > 0 ? linkScrollCount : KDimensions.linkScrollCount,
-        emailCloseDelay:
-            emailCloseDelay > 0 ? emailCloseDelay : KDimensions.emailCloseDelay,
-        mobFilterEnhancedMobile: mobFilterEnhancedMobile,
-        enableVerticalDiscount: enableVerticalDiscount,
-      ),
-    );
+    if (!isClosed) {
+      emit(
+        DiscountConfigState(
+          emailScrollCount: emailScrollCount > 0
+              ? emailScrollCount
+              : KDimensions.emailScrollCount,
+          loadingItems: loadingItems > 0 ? loadingItems : KDimensions.loadItems,
+          linkScrollCount: linkScrollCount > 0
+              ? linkScrollCount
+              : KDimensions.linkScrollCount,
+          emailCloseDelay: emailCloseDelay > 0
+              ? emailCloseDelay
+              : KDimensions.emailCloseDelay,
+          mobFilterEnhancedMobile: mobFilterEnhancedMobile,
+          enableVerticalDiscount: enableVerticalDiscount,
+        ),
+      );
+    }
   }
 }
 
