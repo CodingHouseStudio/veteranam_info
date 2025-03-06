@@ -26,7 +26,7 @@ class SkeletonizerWidget extends StatelessWidget {
           highlightColor:
               highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
         ),
-        enabled: !KTest.isTest && isLoading,
+        enabled: !KTest.isInterationTest && !KTest.isTest && isLoading,
         child: child,
       );
     } else {
@@ -36,7 +36,7 @@ class SkeletonizerWidget extends StatelessWidget {
           highlightColor:
               highlightColor ?? AppColors.materialThemeKeyColorsNeutral,
         ),
-        enabled: !KTest.isTest && isLoading,
+        enabled: !KTest.isInterationTest && !KTest.isTest && isLoading,
         child: child,
       );
     }
