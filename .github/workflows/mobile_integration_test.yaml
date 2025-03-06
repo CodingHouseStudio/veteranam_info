@@ -1,10 +1,10 @@
-name: Web Integration Tests
+name: Mobile Integration Tests
 # Controls when the workflow will run
 on:
   workflow_dispatch:
     branches: [main]
 concurrency:
-  group: int-web-test-$
+  group: int-android-test-$
   cancel-in-progress: true
 
 permissions:
@@ -13,8 +13,5 @@ permissions:
 
 jobs:
   build:
-    uses: CodingHouseStudio/flutter_workflows/.github/workflows/integration_test.yml@main
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/android_integration_test.yml@main
     secrets: inherit
-    with:
-      flutter_channel: stable
-      # format_directories: "lib test"
