@@ -27,8 +27,8 @@ void main() {
         authenticationRepository: mockAuthenticationRepository,
       );
     });
-    blocTest<AuthenticationServicesCubit, SomeFailure?>(
-      'emits [SomeFailure?] when google sign up',
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesState>(
+      'emits [AuthenticationServicesState] when google sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
@@ -39,11 +39,16 @@ void main() {
         await cubit.authenticationUseGoogle();
       },
       expect: () async => [
-        null,
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.procesing,
+        ),
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.authentication,
+        ),
       ],
     );
-    blocTest<AuthenticationServicesCubit, SomeFailure?>(
-      'emits [SomeFailure?] when facebook sign up',
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesState>(
+      'emits [AuthenticationServicesState] when facebook sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
@@ -54,11 +59,16 @@ void main() {
         await cubit.authenticationUseFacebook();
       },
       expect: () async => [
-        null,
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.procesing,
+        ),
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.authentication,
+        ),
       ],
     );
-    blocTest<AuthenticationServicesCubit, SomeFailure?>(
-      'emits [SomeFailure?] when google sign up'
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesState>(
+      'emits [AuthenticationServicesState] when google sign up'
       ' failure serverError',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
@@ -70,11 +80,17 @@ void main() {
         await cubit.authenticationUseGoogle();
       },
       expect: () async => [
-        SomeFailure.serverError,
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.procesing,
+        ),
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.error,
+          failure: SomeFailure.serverError,
+        ),
       ],
     );
-    blocTest<AuthenticationServicesCubit, SomeFailure?>(
-      'emits [SomeFailure?] when google sign up'
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesState>(
+      'emits [AuthenticationServicesState] when google sign up'
       ' failure serverError',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
@@ -86,7 +102,13 @@ void main() {
         await cubit.authenticationUseFacebook();
       },
       expect: () async => [
-        SomeFailure.serverError,
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.procesing,
+        ),
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.error,
+          failure: SomeFailure.serverError,
+        ),
       ],
     );
   });
