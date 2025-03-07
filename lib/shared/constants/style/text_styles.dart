@@ -275,6 +275,7 @@ abstract class AppTextStyle {
     height: 1.5,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
   static const TextStyle materialThemeBodyLargeBoldUnderLine = TextStyle(
     fontFamily: 'Gilroy',

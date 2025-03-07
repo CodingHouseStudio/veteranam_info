@@ -679,7 +679,7 @@ extension SizedBoxExtension on SizedBox {
 extension UrlCubitExtension on UrlCubit {
   static void listener(BuildContext context, UrlEnum? state) {
     if (state != null) {
-      context.dialog.showSnackBardTextDialog(
+      context.dialog.showSnackBarTextDialog(
         state.value(
           context,
         ),
