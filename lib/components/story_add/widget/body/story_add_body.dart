@@ -22,7 +22,7 @@ class StoryAddBody extends StatelessWidget {
         if (state.formStatus == FormzSubmissionStatus.success) {
           context.goNamed(KRoute.stories.name);
         }
-        context.dialog.showSnackBardTextDialog(
+        context.dialog.showSnackBarTextDialog(
           state.failure?.value(context),
         );
       },

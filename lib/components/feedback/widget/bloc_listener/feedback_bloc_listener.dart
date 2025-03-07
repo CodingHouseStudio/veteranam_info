@@ -15,7 +15,7 @@ class FeedbackBlocListener extends StatelessWidget {
           listenWhen: (previous, current) =>
               current.failure != null || current.failure != previous.failure,
           listener: (context, state) {
-            context.dialog.showSnackBardTextDialog(
+            context.dialog.showSnackBarTextDialog(
               state.failure?.value(context),
             );
           },
