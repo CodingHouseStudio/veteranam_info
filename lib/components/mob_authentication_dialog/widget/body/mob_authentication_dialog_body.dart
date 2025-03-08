@@ -28,15 +28,13 @@ class AuthenticationDialogBody extends StatelessWidget {
           left: KPadding.kPaddingSize24,
         ),
         child: Column(
-          spacing: KPadding.kPaddingSize16,
+          spacing: KPadding.kPaddingSize24,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               getText(context),
               textAlign: TextAlign.center,
-              style: appVersion.isTablet
-                  ? AppTextStyle.materialThemeBodyLargeBold
-                  : AppTextStyle.materialThemeBodyMediumBold,
+              style: AppTextStyle.materialThemeBodyLargeBold,
             ),
             confirmButton(context),
           ],
