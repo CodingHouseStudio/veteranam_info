@@ -12,6 +12,7 @@ import 'package:veteranam/components/feedback/view/feedback_view.dart';
 import 'package:veteranam/components/investors/view/investors_view.dart';
 import 'package:veteranam/components/login/view/login_view.dart';
 import 'package:veteranam/components/markdown_file_dialog/view/markdown_file_view.dart';
+import 'package:veteranam/components/mob_authentication_dialog/mob_authentication_dialog.dart';
 import 'package:veteranam/components/mob_faq/view/mob_faq_view.dart';
 import 'package:veteranam/components/mob_settings/view/mob_settings_view.dart';
 import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
@@ -55,10 +56,14 @@ GoRouter router = GoRouter(
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {
-      return state.uri.toString().contains(KRoute.login.path) ||
-              state.uri.toString().contains(KRoute.signUp.path)
-          ? '${KRoute.settings.path}${KRoute.discounts.path}'
-          : null;
+      final fullPath = state.fullPath;
+      if (fullPath != null) {
+        if (fullPath.contains(KRoute.login.path)) {
+          return '${KRoute.userRole.path}/${KRoute.login.path}/${KRoute.mobLoginAuthenticationDialog.path}';
+        } else if (fullPath.contains(KRoute.signUp.path)) {
+          return '${KRoute.userRole.path}/${KRoute.signUp.path}/${KRoute.mobSignUpAuthenticationDialog.path}';
+        }
+      }
     }
     return null;
   },
@@ -73,6 +78,19 @@ GoRouter router = GoRouter(
         child: const LoginScreen(),
       ),
       routes: [
+        GoRoute(
+          name: KRoute.mobLoginAuthenticationDialog.name,
+          path: KRoute.mobLoginAuthenticationDialog.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            restorationId: state.pageKey.value,
+            barrierDismissible: false,
+            builder: (_) => const MobAuthenticationDialog(
+              state: MobAuthenticationDialogState.login,
+            ),
+          ),
+        ),
         GoRoute(
           name: KRoute.resetPassword.name,
           path: KRoute.resetPassword.path,
@@ -109,6 +127,21 @@ GoRouter router = GoRouter(
         restorationId: state.pageKey.value,
         child: const SignUpScreen(),
       ),
+      routes: [
+        GoRoute(
+          name: KRoute.mobSignUpAuthenticationDialog.name,
+          path: KRoute.mobSignUpAuthenticationDialog.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            barrierDismissible: false,
+            restorationId: state.pageKey.value,
+            builder: (_) => const MobAuthenticationDialog(
+              state: MobAuthenticationDialogState.signUp,
+            ),
+          ),
+        ),
+      ],
     ),
     GoRoute(
       name: KRoute.settings.name,

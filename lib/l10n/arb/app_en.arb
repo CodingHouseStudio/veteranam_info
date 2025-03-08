@@ -1896,7 +1896,23 @@
   "copyNotSupportError": "It seems copying is not supported on your device, or an error occurred.",
   "@copyNotSupportError": {
     "examples": "Error message when an issue occurs during copying."
-  },"cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service. By continuing to use it, you agree to the use of all types of cookies and our ",
+  },
+  "continueText": "Continue",
+  "@continue": {
+    "examples": "Text for the button in Mob Authentication Dialog",
+    "description": "Button is used to navigate to the Discounts page."
+  },
+  "loginGreeting": "Nice to see you again in the Veteranam app.😊",
+  "@loginGreeting": {
+    "description": "Greeting message displayed in the Mob Authentication Dialog when the user is logging in.",
+    "examples": "Раді бачити вас знову в додатку Veteranam.😊"
+  },
+  "signUpSuccess": "You have successfully registered in the Veteranam app.🎉",
+  "@signUpSuccess": {
+    "description": "Success message displayed in the Mob Authentication Dialog after successful sign up.",
+    "examples": "Ви успішно зареєструвалися в додатку Veteranam.🎉"
+  },
+  "cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service. By continuing to use it, you agree to the use of all types of cookies and our ",
   "@cookies": {
     "examples": "Message about cookie usage"
   }
