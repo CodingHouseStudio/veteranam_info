@@ -414,8 +414,8 @@ class FirestoreService {
 
     if (!Config.isWeb && showOnlyBusinessDiscounts) {
       query = query.where(
-        DiscountModelJsonField.userName,
-        isNull: false,
+        DiscountModelJsonField.isVerified,
+        isEqualTo: true,
       );
     }
     // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet
@@ -471,7 +471,7 @@ class FirestoreService {
             companyId == '1') {
           if (!showOnlyBusinessDiscounts ||
               Config.isWeb ||
-              discount[DiscountModelJsonField.userName] == null) {
+              discount[DiscountModelJsonField.isVerified] == true) {
             return DiscountModel.fromJson(discount);
           }
         }

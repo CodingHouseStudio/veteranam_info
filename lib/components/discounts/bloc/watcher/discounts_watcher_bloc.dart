@@ -489,12 +489,11 @@ class DiscountsWatcherBloc
           switch (sortingBy ?? state.sortingBy) {
             case null:
             case DiscountEnum.featured:
-              if ((b.userName != null && a.userName != null) ||
-                  (b.userName == null && a.userName == null)) {
+              if (a.isVerified == b.isVerified) {
                 return b.dateVerified
                     .compareTo(a.dateVerified); // Descending order
               }
-              return b.userName != null ? 1 : -1;
+              return b.isVerified ? -1 : 1;
             case DiscountEnum.largestSmallest:
               final maxDiscountA =
                   a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
