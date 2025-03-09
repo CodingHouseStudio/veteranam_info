@@ -78,6 +78,14 @@ abstract class KRoute {
     path: 'privacy-policy',
     name: 'Privacy-policy',
   );
+  static const _RouteItem mobLoginAuthenticationDialog = _RouteItem(
+    path: 'authentication-success',
+    name: 'Login-authentication-success',
+  );
+  static const _RouteItem mobSignUpAuthenticationDialog = _RouteItem(
+    path: 'authentication-success',
+    name: 'Sign-up-authentication-success',
+  );
   static const _RouteItem consentDialog = _RouteItem(
     path: 'consent',
     name: 'Consent',
