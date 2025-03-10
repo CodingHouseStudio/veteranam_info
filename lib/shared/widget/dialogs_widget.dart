@@ -465,7 +465,7 @@ class _DialogsWidget {
   }) {
     if (error != null) {
       if (onPressed == null) {
-        showSnackBardTextDialog(error);
+        showSnackBarTextDialog(error);
       } else {
         context._showSnackBar(
           key: DialogsKeys.failure,
@@ -475,7 +475,7 @@ class _DialogsWidget {
     }
   }
 
-  void showSnackBardTextDialog(
+  void showSnackBarTextDialog(
     String? text, {
     Duration duration = const Duration(minutes: 1),
   }) {
@@ -602,6 +602,32 @@ class _DialogsWidget {
           );
         },
       );
+    }
+  }
+
+  void showAuthenticationServiceDialog(
+    AuthenticationServicesStatus status, {
+    SomeFailure? failure,
+  }) {
+    if (!Config.isWeb) {
+      switch (status) {
+        case AuthenticationServicesStatus.error:
+          showSnackBarTextDialog(failure?.value(context));
+        case AuthenticationServicesStatus.procesing:
+          context._showSnackBar(
+            child: Text(
+              context.l10n.loggingInWait,
+              style: AppTextStyle.materialThemeBodyLargeBold,
+            ),
+            duration: const Duration(
+              minutes: 5,
+            ),
+            backgroundColor: AppColors.materialThemeKeyColorsPrimary,
+          );
+        case AuthenticationServicesStatus.init:
+        case AuthenticationServicesStatus.authentication:
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      }
     }
   }
 }
