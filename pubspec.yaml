@@ -43,7 +43,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   flutter_staggered_grid_view: ^0.7.0
   formz: ^0.8.0
-  freezed: ^2.5.7
+  freezed: ^2.5.8
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3 # Used for dependency injection
   go_router: ^14.8.0 # Decoupled routing  package which is a must for any app
