@@ -88,11 +88,11 @@ android {
             applicationIdSuffix ""
             manifestPlaceholders = [appName: "VETERANam"]
         }
-        staging {
-            dimension "default"
-            applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] VETERANam"]
-        }
+        // staging {
+        //     dimension "default"
+        //     applicationIdSuffix ".stg"
+        //     manifestPlaceholders = [appName: "[STG] VETERANam"]
+        // }
         development {
             dimension "default"
             applicationIdSuffix ".dev"

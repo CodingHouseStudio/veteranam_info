@@ -1,4 +1,4 @@
-package com.example.myapp;
+package info.veteranam;
 
 import androidx.test.rule.ActivityTestRule;
 import dev.flutter.plugins.integration_test.FlutterTestRunner;
