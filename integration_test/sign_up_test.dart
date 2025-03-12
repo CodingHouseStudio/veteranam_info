@@ -88,18 +88,31 @@ void main() {
 
     var count = 0;
 
-    while (find.byKey(SignUpKeys.screen).evaluate().isNotEmpty && count < 20) {
+    while (Config.isWeb
+        ? find.byKey(SignUpKeys.screen).evaluate().isNotEmpty
+        : find.byKey(MobAuthenticationDialogKeys.dialog).evaluate().isEmpty &&
+            count < 20) {
       count++;
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
     }
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(SignUpKeys.screen), findsNothing);
-
     if (Config.isWeb) {
+      expect(find.byKey(SignUpKeys.screen), findsNothing);
+
       expect(find.byKey(HomeKeys.screen), findsOneWidget);
     } else {
+      expect(find.byKey(MobAuthenticationDialogKeys.dialog), findsOneWidget);
+
+      expect(find.byKey(MobAuthenticationDialogKeys.button), findsOneWidget);
+
+      await tester.tap(find.byKey(MobAuthenticationDialogKeys.button));
+
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(MobAuthenticationDialogKeys.dialog), findsNothing);
+
       expect(find.byKey(DiscountsKeys.screen), findsOneWidget);
     }
   });

@@ -20,7 +20,7 @@ class MobAuthenticationDialog extends StatelessWidget {
     return BlocBuilder<AppLayoutBloc, AppLayoutState>(
       builder: (context, _) {
         return AlertDialog(
-          key: PrivacyPolicyDialogKeys.dialog,
+          key: MobAuthenticationDialogKeys.dialog,
           shape: KWidgetTheme.outlineBorder,
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           clipBehavior: Clip.hardEdge,

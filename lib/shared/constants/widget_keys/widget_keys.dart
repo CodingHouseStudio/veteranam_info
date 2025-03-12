@@ -42,6 +42,7 @@ part 'screen/user_role.dart';
 part 'screen/work.dart';
 part 'screen/work_employee.dart';
 part 'screen/discount.dart';
+part 'screen/mob_authenticaiton_dialog_key.dart';
 
 //WIDGET
 part 'widget/box.dart';

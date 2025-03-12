@@ -33,6 +33,7 @@ class AuthenticationDialogBody extends StatelessWidget {
           children: [
             Text(
               getText(context),
+              key: MobAuthenticationDialogKeys.text,
               textAlign: TextAlign.center,
               style: AppTextStyle.materialThemeBodyLargeBold,
             ),
@@ -54,7 +55,7 @@ class AuthenticationDialogBody extends StatelessWidget {
 
   Widget confirmButton(BuildContext context) {
     return DoubleButtonWidget(
-      widgetKey: const Key('test'),
+      widgetKey: MobAuthenticationDialogKeys.button,
       text: context.l10n.continueText,
       color: AppColors.materialThemeKeyColorsPrimary,
       isDesk: appVersion.isTablet,
