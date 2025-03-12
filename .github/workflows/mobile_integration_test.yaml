@@ -16,4 +16,4 @@ jobs:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/android_integration_test.yml@main
     secrets: inherit
     with:
-      FLAVOUR: "production"
+      FLAVOUR: "development"
