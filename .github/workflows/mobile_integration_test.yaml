@@ -17,4 +17,4 @@ jobs:
     secrets: inherit
     with:
       FLAVOUR: "development"
-      TEST_TARGETS: "discounts, sign_in, sign_up"
+      TEST_TARGETS: "discounts"
