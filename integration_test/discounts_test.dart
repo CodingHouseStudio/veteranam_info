@@ -68,6 +68,8 @@ void main() {
 
     expect(find.byKey(DiscountKeys.screen), findsOneWidget);
 
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
     expect(find.byKey(DiscountKeys.shareButton), findsOneWidget);
 
     await tester.tap(find.byKey(DiscountKeys.backButton));
