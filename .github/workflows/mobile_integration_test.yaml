@@ -12,8 +12,14 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  build:
+  android:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/android_integration_test.yml@main
+    secrets: inherit
+    with:
+      FLAVOUR: "development"
+      TEST_TARGETS: "discounts"
+  ios:
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/ios_integration_test.yml@main
     secrets: inherit
     with:
       FLAVOUR: "development"
