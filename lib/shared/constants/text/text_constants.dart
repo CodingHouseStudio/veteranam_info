@@ -248,7 +248,7 @@ abstract class KAppText {
   static const String coffee = 'Buy me a Coffee';
   static const String cache = 'local cache';
   static const String server = 'server';
-  static const String site = 'https://app.veteranam.info';
+  static const String site = 'https://veteranam.info';
   static const String businessSite = 'https://business.veteranam.info';
   static const String appStoreId = '6584519009';
   static const String unknown = 'Unknown';
