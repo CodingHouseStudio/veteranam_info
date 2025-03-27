@@ -10,10 +10,10 @@
 Знижка буде доступна на сайті протягом перших трьох місяців на безкоштовній основі. Після цього періоду підписка буде автоматично продовжена кожні три місяці. Ми можемо звернутися до вас для підтвердження актуальності знижки з метою відновлення підписки.
 
 ## 4. Надання прав на взаємодію з користувачами
-Ви надаєте право Veteranam Info та Coding House Studio LLC відповідати на питання від користувачів сайту та додатків app.veteranam.info та "Veteranam Info" в Apple AppStore та Google Play Console.
+Ви надаєте право Veteranam Info та Coding House Studio LLC відповідати на питання від користувачів сайту та додатків veteranam.info та "Veteranam Info" в Apple AppStore та Google Play Console.
 
 ## 5. Публікація та надання прав
-Ви надаєте право Veteranam Info та Coding House Studio LLC публікувати вашу знижку та надавати всі необхідні права для сайту та додатків app.veteranam.info та "Veteranam Info" в Apple AppStore та Google Play Console, які можуть бути необхідними для реалізації цієї послуги.
+Ви надаєте право Veteranam Info та Coding House Studio LLC публікувати вашу знижку та надавати всі необхідні права для сайту та додатків veteranam.info та "Veteranam Info" в Apple AppStore та Google Play Console, які можуть бути необхідними для реалізації цієї послуги.
 
 ## 6. Відмова від відповідальності
 Ви погоджуєтеся, що Veteranam Info та Coding House Studio LLC не несуть відповідальності за зміст вашої знижки, а також не надають жодних гарантій щодо її точності або ефективності.

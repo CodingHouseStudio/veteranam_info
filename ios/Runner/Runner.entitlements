@@ -10,7 +10,7 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:app.veteranam.info</string>
+		<string>applinks:veteranam.info</string>
 	</array>
 </dict>
 </plist>

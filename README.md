@@ -17,12 +17,12 @@
 </p>
 
 <p align="center">
-  <a href="https://app.veteranam.info">Web</a> •
+  <a href="https://veteranam.info">Web</a> •
   <a href="https://www.figma.com/design/W9Xbu0ajz9LTH1hxXpQFgy/Veteran?node-id=10-102&t=tmTCARhVUFUOLwCh-1">Design</a> •
   <a href="https://apps.apple.com/us/app/veteranam-info/id6584519009">IOS</a> •
   <a href="https://play.google.com/store/apps/details?id=info.veteranam&hl=uk_UA">Android</a> •
   <a href="https://business.veteranam.info">Web-site for business</a> •
-  <a href="https://dev-app.veteranam.info">Dev Web-site</a>
+  <a href="https://dev-veteranam.info">Dev Web-site</a>
 </p>
 
 # Veteranam Info
