@@ -8,6 +8,7 @@ class DiscountConfigState extends Equatable {
     required this.emailCloseDelay,
     required this.mobFilterEnhancedMobile,
     required this.enableVerticalDiscount,
+    required this.mobileShowCount,
   });
 
   final int emailScrollCount;
@@ -16,6 +17,7 @@ class DiscountConfigState extends Equatable {
   final int emailCloseDelay;
   final bool mobFilterEnhancedMobile;
   final bool enableVerticalDiscount;
+  final bool mobileShowCount;
 
   @override
   List<Object?> get props => [
@@ -25,5 +27,6 @@ class DiscountConfigState extends Equatable {
         emailCloseDelay,
         mobFilterEnhancedMobile,
         enableVerticalDiscount,
+        mobileShowCount,
       ];
 }
