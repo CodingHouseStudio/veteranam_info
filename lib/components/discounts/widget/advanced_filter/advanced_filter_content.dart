@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -349,7 +348,7 @@ class _AdvancedListWidget extends StatelessWidget {
           isDesk: isDesk,
           onChanged: null,
           maxLines: 1,
-          showAmount: kIsWeb || showCount,
+          showAmount: Config.isWeb || showCount,
         ),
       ),
       addAutomaticKeepAlives: false,
@@ -381,7 +380,7 @@ class _AdvancedListWidget extends StatelessWidget {
           filterItem: value,
           isDesk: isDesk,
           amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
-          showAmount: kIsWeb || showCount,
+          showAmount: Config.isWeb || showCount,
         );
       },
     );
