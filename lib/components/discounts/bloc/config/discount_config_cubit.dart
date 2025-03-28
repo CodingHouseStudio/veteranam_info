@@ -22,6 +22,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
             emailCloseDelay: KDimensions.emailCloseDelay,
             mobFilterEnhancedMobile: true,
             enableVerticalDiscount: true,
+            mobileShowCount: true,
           ),
         ) {
     _started();
@@ -40,6 +41,8 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
   @visibleForTesting
   static const enableVerticalDiscountKey =
       '__discount_enable_vertical_list_key__';
+  @visibleForTesting
+  static const filterShowCountKey = '__discount_mobile_filter_show_count_key__';
 
   static const loadingItemsKey = '__discount_loading_items_count_key__';
 
@@ -57,6 +60,8 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
         _firebaseRemoteConfigProvider.getBool(mobFilterEnhancedMobileKey);
     final enableVerticalDiscount =
         _firebaseRemoteConfigProvider.getBool(enableVerticalDiscountKey);
+    final mobileFilterShowCount =
+        _firebaseRemoteConfigProvider.getBool(filterShowCountKey);
     if (!isClosed) {
       emit(
         DiscountConfigState(
@@ -72,6 +77,7 @@ class DiscountConfigCubit extends Cubit<DiscountConfigState> {
               : KDimensions.emailCloseDelay,
           mobFilterEnhancedMobile: mobFilterEnhancedMobile,
           enableVerticalDiscount: enableVerticalDiscount,
+          mobileShowCount: mobileFilterShowCount,
         ),
       );
     }

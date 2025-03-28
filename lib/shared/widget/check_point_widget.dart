@@ -98,6 +98,7 @@ class CheckPointAmountWidget extends StatelessWidget {
     this.maxLines = 3,
     this.textStyle,
     this.widgetKey,
+    this.showAmount = true,
   });
   final bool isDesk;
   final void Function()? onChanged;
@@ -108,6 +109,7 @@ class CheckPointAmountWidget extends StatelessWidget {
   final int? maxLines;
   final TextStyle? textStyle;
   final Key? widgetKey;
+  final bool showAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -117,20 +119,23 @@ class CheckPointAmountWidget extends StatelessWidget {
       isCheck: isCheck,
       text: filterItem.value.getTrsnslation(context),
       isDesk: isDesk,
-      ammountWidget: AmountWidget(
-        key: CheckPointKeys.ammount,
-        background: isCheck
-            ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
-            : amoutInactiveClor ?? AppColors.materialThemeKeyColorsNeutral,
-        textColor: isCheck
-            ? AppColors.materialThemeKeyColorsNeutral
-            : AppColors.materialThemeKeyColorsSecondary,
-        number: filterItem.number,
-        padding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize8,
-          vertical: KPadding.kPaddingSize4,
-        ),
-      ),
+      ammountWidget: showAmount
+          ? AmountWidget(
+              key: CheckPointKeys.ammount,
+              background: isCheck
+                  ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
+                  : amoutInactiveClor ??
+                      AppColors.materialThemeKeyColorsNeutral,
+              textColor: isCheck
+                  ? AppColors.materialThemeKeyColorsNeutral
+                  : AppColors.materialThemeKeyColorsSecondary,
+              number: filterItem.number,
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize8,
+                vertical: KPadding.kPaddingSize4,
+              ),
+            )
+          : null,
       maxLines: maxLines,
       textStyle: textStyle,
     );

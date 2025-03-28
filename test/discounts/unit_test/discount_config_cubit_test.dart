@@ -65,6 +65,24 @@ void main() {
         ).thenAnswer(
           (realInvocation) => 0,
         );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.mobFilterEnhancedMobileKey),
+        ).thenAnswer(
+          (realInvocation) => false,
+        );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.enableVerticalDiscountKey),
+        ).thenAnswer(
+          (realInvocation) => false,
+        );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.filterShowCountKey),
+        ).thenAnswer(
+          (realInvocation) => false,
+        );
 
         blocTest<DiscountConfigCubit, DiscountConfigState>(
           'Bloc Test',
@@ -79,6 +97,7 @@ void main() {
               emailCloseDelay: KDimensions.emailCloseDelay,
               mobFilterEnhancedMobile: false,
               enableVerticalDiscount: false,
+              mobileShowCount: false,
             ),
           ],
         );
@@ -113,6 +132,24 @@ void main() {
         ).thenAnswer(
           (realInvocation) => number,
         );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.mobFilterEnhancedMobileKey),
+        ).thenAnswer(
+          (realInvocation) => true,
+        );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.enableVerticalDiscountKey),
+        ).thenAnswer(
+          (realInvocation) => true,
+        );
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getBool(DiscountConfigCubit.filterShowCountKey),
+        ).thenAnswer(
+          (realInvocation) => true,
+        );
       });
       blocTest<DiscountConfigCubit, DiscountConfigState>(
         'Bloc Test',
@@ -125,8 +162,9 @@ void main() {
             loadingItems: number,
             linkScrollCount: number,
             emailCloseDelay: number,
-            mobFilterEnhancedMobile: false,
-            enableVerticalDiscount: false,
+            mobFilterEnhancedMobile: true,
+            enableVerticalDiscount: true,
+            mobileShowCount: true,
           ),
         ],
       );
