@@ -6,4 +6,4 @@
   
 */
 "NSPhotoLibraryUsageDescription"="Photo library is used to pick a picture for the profile photo in the app";
-"NSUserTrackingUsageDescription"="This identifier will be used to use for analytics purposes.";
+"NSUserTrackingUsageDescription"="This app uses anonymous analytics to improve the service and fix any errors that may occur.";

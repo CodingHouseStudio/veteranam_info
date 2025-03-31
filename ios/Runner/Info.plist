@@ -34,7 +34,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library is used to pick a picture for the profile photo in the app</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to use for analytics purposes.</string>
+	<string>This app uses anonymous analytics to improve the service and fix any errors that may occur.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
