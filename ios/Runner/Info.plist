@@ -34,7 +34,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library is used to pick a picture for the profile photo in the app</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to use for analytics purposes.</string>
+	<string>This app uses anonymous analytics to improve the service and fix any errors that may occur.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -68,23 +68,18 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>GIDClientID</key>
-    <!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-    <string>326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com</string>
-    <!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
-    <!-- Google Sign-in Section -->
-    <key>CFBundleURLTypes</key>
-    <array>
-    	<dict>
-    		<key>CFBundleTypeRole</key>
-    		<string>Editor</string>
-    		<key>CFBundleURLSchemes</key>
-    		<array>
-    			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-    			<string>com.googleusercontent.apps.326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u</string>
-    		</array>
-    	</dict>
-    </array>
-    <!-- End of the Google Sign-in Section -->
+	<string>326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u</string>
+			</array>
+		</dict>
+	</array>
 	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
