@@ -6,6 +6,7 @@ import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart'
     show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
@@ -22,6 +23,9 @@ Future<void> main() async {
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  if (!Config.isWeb) {
+    await MobileAds.instance.initialize();
+  }
 
   if (Config.isReleaseMode) {
     if (Config.isWeb) {

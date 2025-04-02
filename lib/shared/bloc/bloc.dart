@@ -6,6 +6,7 @@ export 'company/company_watcher_bloc.dart';
 export 'cookies_dialog/cookies_dialog_cubit.dart';
 export 'mob_feedback/mob_feedback_bloc.dart';
 export 'mob_offline_mode/mob_offline_mode_cubit.dart';
+export 'mobile_ads/mobile_ads_cubit.dart';
 export 'mobile_rating/mobile_rating_cubit.dart';
 export 'network/network_cubit.dart';
 export 'report/report_bloc.dart';

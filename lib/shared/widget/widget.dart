@@ -60,6 +60,7 @@ export 'message_field_widget.dart';
 export 'mob_feedback_widget.dart';
 export 'mob_navigation_widget.dart';
 export 'mob_update_dialog.dart';
+export 'mobile_ads_banner.dart';
 export 'mock_button_widget.dart';
 export 'multi_drop_field_widget.dart';
 export 'navigation_bar_widget.dart';
