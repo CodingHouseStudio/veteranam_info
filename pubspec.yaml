@@ -87,7 +87,7 @@ dependency_overrides:
 dev_dependencies:
   bloc_test: ^10.0.0
 
-  build_runner: ^2.4.14 # Used for class generation
+  build_runner: ^2.4.15 # Used for class generation
   flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
   flutter_test:
