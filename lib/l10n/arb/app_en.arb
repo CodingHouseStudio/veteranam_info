@@ -1912,7 +1912,7 @@
     "description": "Success message displayed in the Mob Authentication Dialog after successful sign up.",
     "examples": "Ви успішно зареєструвалися в додатку Veteranam.🎉"
   },
-  "cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service. By continuing to use it, you agree to the use of all types of cookies and our ",
+  "cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service and personalized ads from Google Ads. By continuing to use it, you agree to the use of all types of cookies and our ",
   "@cookies": {
     "examples": "Message about cookie usage"
   }

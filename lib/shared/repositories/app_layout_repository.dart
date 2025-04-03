@@ -27,7 +27,7 @@ class AppLayoutRepository
 
   @override
   void didChangeMetrics() {
-    final size = _getScreenSize;
+    final size = getScreenSize;
 
     if (size != null) {
       final appVersionEnum = size.appVersionEnum;
@@ -38,9 +38,10 @@ class AppLayoutRepository
 
   @override
   AppVersionEnum get getCurrentAppVersion =>
-      _getScreenSize?.appVersionEnum ?? AppVersionEnum.mobile;
+      getScreenSize?.appVersionEnum ?? AppVersionEnum.mobile;
 
-  Size? get _getScreenSize {
+  @override
+  Size? get getScreenSize {
     try {
       final views = _widgetsBinding.platformDispatcher.views;
       final view = views.elementAtOrNull(0);

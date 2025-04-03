@@ -56,6 +56,9 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => GetIt.I.get<AppVersionCubit>(),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<MobileAdsCubit>(),
+          ),
         ],
         if (Config.isBusiness)
           BlocProvider(
