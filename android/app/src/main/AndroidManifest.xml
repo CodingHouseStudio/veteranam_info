@@ -75,6 +75,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3911943522761394~7002486067"/>
     </application>
     <queries>
         <!-- If your app opens https URLs -->

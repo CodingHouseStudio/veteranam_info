@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:veteranam/shared/bloc/mobile_ads/mobile_ads_cubit.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 class MobileAdsBanner extends StatelessWidget {
   const MobileAdsBanner({super.key});
@@ -13,11 +13,21 @@ class MobileAdsBanner extends StatelessWidget {
         if (state == null) {
           return const SliverToBoxAdapter();
         } else {
-          return SliverToBoxAdapter(
-            child: SizedBox(
-              width: state.size.width.toDouble(),
-              height: state.size.height.toDouble(),
-              child: AdWidget(ad: state),
+          final width = state.size.width.toDouble();
+          final height = state.size.height.toDouble();
+          return SliverPersistentHeader(
+            pinned: true,
+            delegate: SliverHeaderWidget(
+              childWidget: ({
+                required overlapsContent,
+                required shrinkOffset,
+              }) =>
+                  SizedBox(
+                width: width,
+                height: height,
+                child: AdWidget(ad: state),
+              ),
+              maxMinHeight: height,
             ),
           );
         }
