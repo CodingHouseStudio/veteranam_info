@@ -25,7 +25,9 @@ dependencies:
   file_picker: ^9.0.1
   firebase_analytics: ^11.4.4
   firebase_app_check: ^0.3.2
-  firebase_auth: ^5.5.1
+  firebase_auth: ^5.5.2
+  firebase_core: ^3.11.
+  firebase_auth: ^5.5.2
   firebase_core: ^3.13.0
   firebase_crashlytics: ^4.3.3
   firebase_core: ^3.13.0
