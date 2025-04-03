@@ -9,7 +9,7 @@ class MobileAdsBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO(test): change in future
-    if (KTest.isTest) {
+    if (KTest.isTest || Config.isWeb) {
       return const SliverToBoxAdapter();
     }
     return BlocBuilder<MobileAdsCubit, BannerAd?>(
