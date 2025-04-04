@@ -38,6 +38,16 @@ class MobileAdsRepository extends IMobileAdsRepository {
     try {
       await MobileAds.instance.initialize();
 
+      await MobileAds.instance.updateRequestConfiguration(
+        RequestConfiguration(
+          tagForChildDirectedTreatment: TagForChildDirectedTreatment.yes,
+          // Treat ad requests as child-directed
+          tagForUnderAgeOfConsent: TagForUnderAgeOfConsent.yes,
+          maxAdContentRating:
+              MaxAdContentRating.g, // Limit ads to General audience content
+        ),
+      );
+
       if (PlatformEnum.getPlatform.isIOS) {
         final trackingStatus =
             await AppTrackingTransparency.trackingAuthorizationStatus;
