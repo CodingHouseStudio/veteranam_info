@@ -29,6 +29,10 @@ We implement various security measures to protect your information, including re
 
 You may choose to have your computer warn you each time a cookie is being sent or turn off all cookies through your browser settings. However, disabling cookies may affect some features of our site.
 
+## Advertising
+
+The service uses Google Ads to display advertisements. With your consent, we may show personalized ads. Learn more in the [Google Privacy Policy](https://policies.google.com/privacy).
+
 ## Information Sharing
 
 We do not sell, trade, or transfer your personally identifiable information to outside parties unless we provide advance notice. Non-personally identifiable visitor information may be provided to other parties for marketing, advertising, or other uses.
