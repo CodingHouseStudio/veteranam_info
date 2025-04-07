@@ -54,7 +54,7 @@ dependencies:
   injectable: ^2.5.0 # Used for dependency injection
   intl: ^0.19.0
   json_serializable: ^6.9.0
-  material_symbols_icons: ^4.2805.1
+  material_symbols_icons: ^4.2811.0
   optimized_search_field: ^2.0.2 # this is our own custom package
   package_info_plus: ^8.3.0
   # path_drawing: ^1.0.1
