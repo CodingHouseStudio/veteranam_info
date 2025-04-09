@@ -42,6 +42,7 @@ class FirebaseAnalyticsService {
         // If not determined, request authorization
         if (trackingStatus == TrackingStatus.authorized) {
           _userConsentGranted = true;
+          await setConsent(state: true, isIOS: true);
         }
       } else {
         // For platforms other than iOS, assume
@@ -84,6 +85,7 @@ class FirebaseAnalyticsService {
 
   Future<Either<SomeFailure, bool>> setConsent({
     required bool state,
+    bool isIOS = false,
   }) async =>
       eitherFutureHelper(
         () async {
@@ -96,10 +98,12 @@ class FirebaseAnalyticsService {
             adUserDataConsentGranted: state,
             personalizationStorageConsentGranted: state,
           );
-          await _firebaseAnalyticsCacheController.setConsent(state: state);
-          unawaited(
-            initUserId(),
-          );
+          if (!isIOS) {
+            await _firebaseAnalyticsCacheController.setConsent(state: state);
+            unawaited(
+              initUserId(),
+            );
+          }
           return const Right(true);
         },
         methodName: 'setConsent',
