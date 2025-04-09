@@ -91,6 +91,10 @@ class FirebaseAnalyticsService {
             analyticsStorageConsentGranted: state,
             functionalityStorageConsentGranted: state,
             securityStorageConsentGranted: state,
+            adPersonalizationSignalsConsentGranted: state,
+            adStorageConsentGranted: state,
+            adUserDataConsentGranted: state,
+            personalizationStorageConsentGranted: state,
           );
           await _firebaseAnalyticsCacheController.setConsent(state: state);
           unawaited(
