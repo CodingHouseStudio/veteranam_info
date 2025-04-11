@@ -30,7 +30,6 @@ class _DiscountsBodyWidget extends StatelessWidget {
         key: ScaffoldKeys.scroll,
         cacheExtent: KDimensions.listCacheExtent,
         slivers: [
-          const MobileAdsBanner(),
           const NetworkBanner(),
           if (Config.isWeb) const NavigationBarWidget(),
           BlocBuilder<AppLayoutBloc, AppLayoutState>(

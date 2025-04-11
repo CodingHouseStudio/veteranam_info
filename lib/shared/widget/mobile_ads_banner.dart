@@ -19,6 +19,16 @@ class MobileAdsBanner extends StatelessWidget {
         } else {
           final width = state.size.width.toDouble();
           final height = state.size.height.toDouble();
+
+          if (width <= 0 ||
+              height <= 0 ||
+              width.isNaN ||
+              height.isNaN ||
+              height > 200 ||
+              width > 1000) {
+            return const SliverToBoxAdapter();
+          }
+
           return SliverPersistentHeader(
             pinned: true,
             delegate: SliverHeaderWidget(
@@ -28,7 +38,6 @@ class MobileAdsBanner extends StatelessWidget {
               }) =>
                   SizedBox(
                 width: width,
-                height: height,
                 child: AdWidget(ad: state),
               ),
               maxMinHeight: height,
