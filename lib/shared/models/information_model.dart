@@ -5,7 +5,7 @@ part 'information_model.freezed.dart';
 part 'information_model.g.dart';
 
 @freezed
-sealed class InformationModel with _$InformationModel {
+abstract class InformationModel with _$InformationModel {
   const factory InformationModel({
     required String id,
     required String title,

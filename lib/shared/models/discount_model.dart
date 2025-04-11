@@ -7,7 +7,7 @@ part 'discount_model.freezed.dart';
 part 'discount_model.g.dart';
 
 @freezed
-sealed class DiscountModel with _$DiscountModel {
+abstract class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
     // required DateTime date,

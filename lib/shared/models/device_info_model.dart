@@ -5,7 +5,7 @@ part 'device_info_model.freezed.dart';
 part 'device_info_model.g.dart';
 
 @freezed
-sealed class DeviceInfoModel with _$DeviceInfoModel {
+abstract class DeviceInfoModel with _$DeviceInfoModel {
   const factory DeviceInfoModel({
     required String deviceId,
     required DateTime date,

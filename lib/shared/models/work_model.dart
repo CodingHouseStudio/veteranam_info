@@ -4,7 +4,7 @@ part 'work_model.freezed.dart';
 part 'work_model.g.dart';
 
 @freezed
-sealed class WorkModel with _$WorkModel {
+abstract class WorkModel with _$WorkModel {
   const factory WorkModel({
     required String id,
     required String title,

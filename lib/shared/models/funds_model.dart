@@ -7,7 +7,7 @@ part 'funds_model.freezed.dart';
 part 'funds_model.g.dart';
 
 @freezed
-sealed class FundModel with _$FundModel {
+abstract class FundModel with _$FundModel {
   const factory FundModel({
     required String id,
     @JsonKey(name: FundModelJsonField.title)

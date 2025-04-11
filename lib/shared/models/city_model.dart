@@ -5,7 +5,7 @@ part 'city_model.freezed.dart';
 part 'city_model.g.dart';
 
 @freezed
-sealed class CityModel with _$CityModel {
+abstract class CityModel with _$CityModel {
   const factory CityModel({
     required String id,
     @TranslateConverter() required TranslateModel name,
