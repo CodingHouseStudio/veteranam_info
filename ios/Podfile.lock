@@ -1206,7 +1206,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.37):
     - BoringSSL-GRPC/Interface (= 0.0.37)
   - BoringSSL-GRPC/Interface (0.0.37)
-  - cloud_firestore (5.6.3):
+  - cloud_firestore (5.6.6):
     - Firebase/Firestore (= 11.10.0)
     - firebase_core
     - Flutter
@@ -1284,7 +1284,7 @@ PODS:
   - Firebase/Storage (11.10.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.10.0)
-  - firebase_analytics (11.4.4):
+  - firebase_analytics (11.4.5):
     - Firebase/Analytics (= 11.10.0)
     - firebase_core
     - Flutter
@@ -1304,7 +1304,7 @@ PODS:
     - Firebase/Crashlytics (= 11.10.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (15.2.4):
+  - firebase_messaging (15.2.5):
     - Firebase/Messaging (= 11.10.0)
     - firebase_core
     - Flutter
@@ -1312,11 +1312,11 @@ PODS:
     - Firebase/Performance (= 11.10.0)
     - firebase_core
     - Flutter
-  - firebase_remote_config (5.4.2):
+  - firebase_remote_config (5.4.3):
     - Firebase/RemoteConfig (= 11.10.0)
     - firebase_core
     - Flutter
-  - firebase_storage (12.4.0):
+  - firebase_storage (12.4.5):
     - Firebase/Storage (= 11.10.0)
     - firebase_core
     - Flutter
@@ -1452,11 +1452,11 @@ PODS:
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
-  - Google-Mobile-Ads-SDK (11.13.0):
+  - Google-Mobile-Ads-SDK (12.2.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - google_mobile_ads (5.3.1):
+  - google_mobile_ads (6.0.0):
     - Flutter
-    - Google-Mobile-Ads-SDK (~> 11.13.0)
+    - Google-Mobile-Ads-SDK (~> 12.2.0)
     - webview_flutter_wkwebview
   - google_sign_in_ios (0.0.1):
     - AppAuth (>= 1.7.4)
@@ -1823,7 +1823,7 @@ SPEC CHECKSUMS:
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
-  cloud_firestore: 54077963ba48164695da221f4a5c12ebac76a6f1
+  cloud_firestore: 07742f115155e19201e77b4cafb155011892d7b7
   connectivity_plus: cb623214f4e1f6ef8fe7403d580fdad517d2f7dd
   device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
@@ -1834,15 +1834,15 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 69eb59b2f839aba635616df6e422acd0ca88030a
   file_picker: a0560bc09d61de87f12d246fc47d2119e6ef37be
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
-  firebase_analytics: 2ebda275dad58922bfe1c6e19a7176b453b84cc0
+  firebase_analytics: 1998960b8fa16fd0cd9e77a6f9fd35a2009ad65e
   firebase_app_check: 04d7e90fe596467e1787202d8e4bf302e31900c5
   firebase_auth: 34c515a8fa76a4ef678ac5ad5cfa3bb3120f5ab5
   firebase_core: 2d4534e7b489907dcede540c835b48981d890943
   firebase_crashlytics: 961a0812ba79ed8f89a8d5d1e3763daa6267a87a
-  firebase_messaging: d9f639706c7799f4ffdff0b14e4cb0f722a8635f
+  firebase_messaging: 75bc93a4df25faccad67f6662ae872ac9ae69b64
   firebase_performance: 75d84217ea1f9b8321b547c8f8bef8200e65e8bf
-  firebase_remote_config: 79f7499830b0527d72fc4a34ff9a97e6905af08a
-  firebase_storage: 95d097b25ef16fa517ea32f08d70329feb7a2f5c
+  firebase_remote_config: c20b15c34b138104c1a971d83ea36bc3dd626ab8
+  firebase_storage: ce9dee18f1cc73129457d861ae3322656ec41a99
   FirebaseABTesting: dfc10eb6cc08fe3b391ac9e5aa40396d43ea6675
   FirebaseAnalytics: 4e42333f02cf78ed93703a5c36f36dd518aebdef
   FirebaseAppCheck: 9687ebd909702469bc09d2d58008697b83f4ac27
@@ -1867,9 +1867,9 @@ SPEC CHECKSUMS:
   flutter_facebook_auth: 8a9ad5fbfc25b77e7a53ea8986866950b27edcae
   flutter_native_splash: 6cad9122ea0fad137d23137dd14b937f3e90b145
   flutter_secure_storage: 1ed9476fba7e7a782b22888f956cce43e2c62f13
-  Google-Mobile-Ads-SDK: 14f57f2dc33532a24db288897e26494640810407
-  google_mobile_ads: 16ad301354fa6a7ea55770c6254bd4339bf8558b
-  google_sign_in_ios: 0ab078e60da6dfe23cbc55c83502b52bba1aad63
+  Google-Mobile-Ads-SDK: 1dfb0c3cb46c7e2b00b0f4de74a1e06d9ea25d67
+  google_mobile_ads: 535223588a6791b7a3cc3513a1bc7b89d12f3e62
+  google_sign_in_ios: 19297361f2c51d7d8ac0201b866ef1fa5d1f94a8
   GoogleAppMeasurement: 36684bfb3ee034e2b42b4321eb19da3a1b81e65d
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
