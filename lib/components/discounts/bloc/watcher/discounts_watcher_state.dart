@@ -21,7 +21,7 @@ enum FilterStatus {
 }
 
 @freezed
-class DiscountsWatcherState with _$DiscountsWatcherState {
+sealed class DiscountsWatcherState with _$DiscountsWatcherState {
   const factory DiscountsWatcherState({
     required List<DiscountModel> unmodifiedDiscountModelItems,
     // required List<dynamic> chooseFilterItems,

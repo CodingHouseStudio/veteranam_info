@@ -9,7 +9,7 @@ part of 'employee_respond_bloc.dart';
 // }
 
 @freezed
-class EmployeeRespondState with _$EmployeeRespondState {
+sealed class EmployeeRespondState with _$EmployeeRespondState {
   const factory EmployeeRespondState({
     required EmailFieldModel email,
     required PhoneNumberFieldModel phoneNumber,

@@ -1,7 +1,7 @@
 part of 'pw_reset_email_bloc.dart';
 
 @freezed
-class PwResetEmailEvent with _$PwResetEmailEvent {
+sealed class PwResetEmailEvent with _$PwResetEmailEvent {
   const factory PwResetEmailEvent.started(String? email) = _Started;
 
   const factory PwResetEmailEvent.emailUpdated(String email) = _EmailUpdated;

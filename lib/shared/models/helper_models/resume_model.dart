@@ -4,7 +4,7 @@ part 'resume_model.freezed.dart';
 part 'resume_model.g.dart';
 
 @freezed
-class ResumeModel with _$ResumeModel {
+abstract class ResumeModel with _$ResumeModel {
   const factory ResumeModel({
     required String downloadURL,
     int? lastModifiedTS,

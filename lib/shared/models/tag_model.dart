@@ -5,7 +5,7 @@
 
 // part 'tag_model.g.dart';
 
-// @freezed
+// @freezed sealed
 // class TagModel with _$TagModel {
 //   const factory TagModel({
 //     required String id,

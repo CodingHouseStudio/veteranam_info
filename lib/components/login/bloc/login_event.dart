@@ -1,7 +1,7 @@
 part of 'login_bloc.dart';
 
 @freezed
-class LoginEvent with _$LoginEvent {
+sealed class LoginEvent with _$LoginEvent {
   const factory LoginEvent.emailUpdated(
     String email,
   ) = _EmailUpdated;

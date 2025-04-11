@@ -18,7 +18,7 @@ part of 'sign_up_bloc.dart';
 // }
 
 @freezed
-class SignUpState with _$SignUpState {
+sealed class SignUpState with _$SignUpState {
   const factory SignUpState({
     required EmailFieldModel email,
     required PasswordFieldModel password,

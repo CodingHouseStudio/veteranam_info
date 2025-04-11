@@ -24,7 +24,7 @@ part of 'discount_card_watcher_cubit.dart';
 // }
 
 @freezed
-class DiscountCardWatcherState with _$DiscountCardWatcherState {
+sealed class DiscountCardWatcherState with _$DiscountCardWatcherState {
   const factory DiscountCardWatcherState({
     required DiscountModel? discountModel,
     required LoadingStatus loadingStatus,

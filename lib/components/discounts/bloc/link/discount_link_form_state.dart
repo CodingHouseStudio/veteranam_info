@@ -20,7 +20,7 @@ part of 'discount_link_form_bloc.dart';
 // }
 
 @freezed
-class DiscountLinkFormState with _$DiscountLinkFormState {
+sealed class DiscountLinkFormState with _$DiscountLinkFormState {
   const factory DiscountLinkFormState({
     required DiscountLinkFieldModel link,
     required LinkEnum formState,

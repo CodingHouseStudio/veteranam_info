@@ -5,7 +5,7 @@ part of 'company_form_bloc.dart';
 // }
 
 @freezed
-class CompanyFormState with _$CompanyFormState {
+sealed class CompanyFormState with _$CompanyFormState {
   const factory CompanyFormState({
     required CompanyNameFieldModel companyName,
     required PublicNameFieldModel publicName,

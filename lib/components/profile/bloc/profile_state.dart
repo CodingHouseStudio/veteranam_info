@@ -14,7 +14,7 @@ part of 'profile_bloc.dart';
 // }
 
 @freezed
-class ProfileState with _$ProfileState {
+sealed class ProfileState with _$ProfileState {
   const factory ProfileState({
     required NameFieldModel name,
     required SurnameFieldModel surname,

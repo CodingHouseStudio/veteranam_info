@@ -20,7 +20,7 @@ part of 'user_email_form_bloc.dart';
 // }
 
 @freezed
-class UserEmailFormState with _$UserEmailFormState {
+sealed class UserEmailFormState with _$UserEmailFormState {
   const factory UserEmailFormState({
     required EmailFieldModel email,
     required EmailEnum formState,

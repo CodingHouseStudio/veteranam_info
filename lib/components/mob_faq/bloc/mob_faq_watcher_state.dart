@@ -14,7 +14,7 @@ part of 'mob_faq_watcher_bloc.dart';
 // }
 
 @freezed
-class MobFaqWatcherState with _$MobFaqWatcherState {
+sealed class MobFaqWatcherState with _$MobFaqWatcherState {
   const factory MobFaqWatcherState({
     required List<QuestionModel> questionModelItems,
     required LoadingStatus loadingStatus,

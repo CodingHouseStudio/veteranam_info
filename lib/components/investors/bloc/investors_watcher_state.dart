@@ -14,7 +14,7 @@ part of 'investors_watcher_bloc.dart';
 // }
 
 @freezed
-class InvestorsWatcherState with _$InvestorsWatcherState {
+sealed class InvestorsWatcherState with _$InvestorsWatcherState {
   const factory InvestorsWatcherState({
     required List<FundModel> mobFundItems,
     required List<List<FundModel>> deskFundItems,

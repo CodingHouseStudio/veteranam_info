@@ -18,7 +18,7 @@ part of 'login_bloc.dart';
 // }
 
 @freezed
-class LoginState with _$LoginState {
+sealed class LoginState with _$LoginState {
   const factory LoginState({
     required EmailFieldModel email,
     required PasswordFieldModel password,

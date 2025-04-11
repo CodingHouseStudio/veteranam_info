@@ -1,7 +1,7 @@
 part of 'work_employee_watcher_bloc.dart';
 
 @freezed
-class WorkEmployeeWatcherEvent with _$WorkEmployeeWatcherEvent {
+sealed class WorkEmployeeWatcherEvent with _$WorkEmployeeWatcherEvent {
   const factory WorkEmployeeWatcherEvent.started() = _Started;
 
   const factory WorkEmployeeWatcherEvent.updated(

@@ -5,7 +5,7 @@ part 'employee_respond_model.freezed.dart';
 part 'employee_respond_model.g.dart';
 
 @freezed
-class EmployeeRespondModel with _$EmployeeRespondModel {
+abstract class EmployeeRespondModel with _$EmployeeRespondModel {
   const factory EmployeeRespondModel({
     required String id,
     required String email,

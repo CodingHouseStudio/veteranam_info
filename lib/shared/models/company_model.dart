@@ -6,7 +6,7 @@ part 'company_model.freezed.dart';
 part 'company_model.g.dart';
 
 @freezed
-class CompanyModel with _$CompanyModel {
+abstract class CompanyModel with _$CompanyModel {
   const factory CompanyModel({
     required String id,
     required List<String> userEmails,

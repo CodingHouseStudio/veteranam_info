@@ -7,7 +7,7 @@ part of 'work_employee_watcher_bloc.dart';
 // }
 
 @freezed
-class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
+sealed class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
   const factory WorkEmployeeWatcherState({
     required List<WorkModel> workModelItems,
     required List<WorkModel> filteredWorkModelItems,

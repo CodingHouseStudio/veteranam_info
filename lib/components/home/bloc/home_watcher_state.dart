@@ -14,7 +14,7 @@ part of 'home_watcher_bloc.dart';
 // }
 
 @freezed
-class HomeWatcherState with _$HomeWatcherState {
+sealed class HomeWatcherState with _$HomeWatcherState {
   const factory HomeWatcherState({
     required List<QuestionModel> questionModelItems,
     required LoadingStatus loadingStatus,

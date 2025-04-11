@@ -11,7 +11,7 @@ enum DiscountLinkStatus {
 }
 
 @freezed
-class LinkModel with _$LinkModel {
+abstract class LinkModel with _$LinkModel {
   const factory LinkModel({
     required String id,
     required String userId,

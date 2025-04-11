@@ -14,7 +14,7 @@ part of 'story_add_bloc.dart';
 // }
 
 @freezed
-class StoryAddState with _$StoryAddState {
+sealed class StoryAddState with _$StoryAddState {
   const factory StoryAddState({
     required MessageFieldModel story,
     required ImageFieldModel image,
