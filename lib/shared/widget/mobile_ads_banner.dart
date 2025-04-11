@@ -20,12 +20,7 @@ class MobileAdsBanner extends StatelessWidget {
           final width = state.size.width.toDouble();
           final height = state.size.height.toDouble();
 
-          if (width <= 0 ||
-              height <= 0 ||
-              width.isNaN ||
-              height.isNaN ||
-              height > 200 ||
-              width > 1000) {
+          if (width <= 0 || height <= 0 || width.isNaN || height.isNaN) {
             return const SliverToBoxAdapter();
           }
 
