@@ -20,7 +20,7 @@ part of 'mob_feedback_bloc.dart';
 // }
 
 @freezed
-class MobFeedbackState with _$MobFeedbackState {
+sealed class MobFeedbackState with _$MobFeedbackState {
   const factory MobFeedbackState({
     required MessageFieldModel message,
     required EmailFieldModel email,

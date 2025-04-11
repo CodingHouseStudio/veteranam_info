@@ -14,7 +14,7 @@ part of 'my_story_watcher_bloc.dart';
 // }
 
 @freezed
-class MyStoryWatcherState with _$MyStoryWatcherState {
+sealed class MyStoryWatcherState with _$MyStoryWatcherState {
   const factory MyStoryWatcherState({
     required List<StoryModel> storyModelItems,
     required LoadingStatus loadingStatus,

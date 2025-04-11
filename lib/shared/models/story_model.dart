@@ -5,7 +5,7 @@ part 'story_model.freezed.dart';
 part 'story_model.g.dart';
 
 @freezed
-class StoryModel with _$StoryModel {
+sealed class StoryModel with _$StoryModel {
   const factory StoryModel({
     required String id,
     required DateTime date,

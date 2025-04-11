@@ -7,7 +7,7 @@ part 'user_setting_model.freezed.dart';
 part 'user_setting_model.g.dart';
 
 @freezed
-class UserSetting with _$UserSetting {
+sealed class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
     @DeviceConverter() List<DeviceInfoModel>? devicesInfo,

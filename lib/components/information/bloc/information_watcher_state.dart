@@ -7,7 +7,7 @@ part of 'information_watcher_bloc.dart';
 // }
 
 @freezed
-class InformationWatcherState with _$InformationWatcherState {
+sealed class InformationWatcherState with _$InformationWatcherState {
   const factory InformationWatcherState({
     required List<InformationModel> informationModelItems,
     required List<InformationModel> filteredInformationModelItems,

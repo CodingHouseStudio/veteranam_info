@@ -1,7 +1,7 @@
 part of 'story_watcher_bloc.dart';
 
 @freezed
-class StoryWatcherEvent with _$StoryWatcherEvent {
+sealed class StoryWatcherEvent with _$StoryWatcherEvent {
   const factory StoryWatcherEvent.started() = _Started;
 
   const factory StoryWatcherEvent.updated(

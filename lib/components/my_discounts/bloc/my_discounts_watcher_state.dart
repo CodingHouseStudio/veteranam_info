@@ -14,7 +14,7 @@ part of 'my_discounts_watcher_bloc.dart';
 // }
 
 @freezed
-class MyDiscountsWatcherState with _$MyDiscountsWatcherState {
+sealed class MyDiscountsWatcherState with _$MyDiscountsWatcherState {
   const factory MyDiscountsWatcherState({
     required List<DiscountModel> discountsModelItems,
     required List<DiscountModel> loadedDiscountsModelItems,

@@ -1,7 +1,7 @@
 part of 'sign_up_bloc.dart';
 
 @freezed
-class SignUpEvent with _$SignUpEvent {
+sealed class SignUpEvent with _$SignUpEvent {
   const factory SignUpEvent.emailUpdated(
     String email,
   ) = _EmailUpdated;

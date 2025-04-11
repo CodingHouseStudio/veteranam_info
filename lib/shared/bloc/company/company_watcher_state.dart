@@ -20,7 +20,7 @@ part of 'company_watcher_bloc.dart';
 // }
 
 @freezed
-class CompanyWatcherState with _$CompanyWatcherState {
+sealed class CompanyWatcherState with _$CompanyWatcherState {
   const factory CompanyWatcherState({
     required CompanyModel company,
     required SomeFailure? failure,

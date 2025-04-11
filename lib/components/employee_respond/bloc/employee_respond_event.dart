@@ -1,7 +1,7 @@
 part of 'employee_respond_bloc.dart';
 
 @freezed
-class EmployeeRespondEvent with _$EmployeeRespondEvent {
+sealed class EmployeeRespondEvent with _$EmployeeRespondEvent {
   const factory EmployeeRespondEvent.emailUpdated(String email) = _EmailUpdated;
   const factory EmployeeRespondEvent.phoneUpdated(String phone) = _PhoneUpdated;
   const factory EmployeeRespondEvent.save() = _Save;

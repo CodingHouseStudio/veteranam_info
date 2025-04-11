@@ -4,7 +4,7 @@ part 'user_model.freezed.dart';
 part 'user_model.g.dart'; // Generated file for JSON serialization
 
 @freezed
-class User with _$User {
+sealed class User with _$User {
   const factory User({
     required String id,
     String? email,

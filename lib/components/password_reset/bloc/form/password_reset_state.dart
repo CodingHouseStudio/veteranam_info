@@ -14,7 +14,7 @@ part of 'password_reset_bloc.dart';
 // }
 
 @freezed
-class PasswordResetState with _$PasswordResetState {
+sealed class PasswordResetState with _$PasswordResetState {
   const factory PasswordResetState({
     required PasswordFieldModel password,
     required PasswordFieldModel confirmPassword,

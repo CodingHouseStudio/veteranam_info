@@ -1,7 +1,7 @@
 part of 'user_role_bloc.dart';
 
 @freezed
-class UserRoleState with _$UserRoleState {
+sealed class UserRoleState with _$UserRoleState {
   const factory UserRoleState({
     required UserRole userRole,
     required UserRoleEnum formState,

@@ -4,7 +4,7 @@ part 'email_model.freezed.dart';
 part 'email_model.g.dart';
 
 @freezed
-class EmailModel with _$EmailModel {
+sealed class EmailModel with _$EmailModel {
   const factory EmailModel({
     required String id,
     required String userId,

@@ -27,7 +27,7 @@ enum CardEnum {
 }
 
 @freezed
-class ReportModel with _$ReportModel {
+sealed class ReportModel with _$ReportModel {
   const factory ReportModel({
     required String id,
     required ReasonComplaint reasonComplaint,

@@ -14,7 +14,7 @@ part of 'feedback_bloc.dart';
 // }
 
 @freezed
-class FeedbackState with _$FeedbackState {
+sealed class FeedbackState with _$FeedbackState {
   const factory FeedbackState({
     required NameFieldModel name,
     required EmailFieldModel email,

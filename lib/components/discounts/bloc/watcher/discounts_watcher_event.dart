@@ -1,7 +1,7 @@
 part of 'discounts_watcher_bloc.dart';
 
 @freezed
-class DiscountsWatcherEvent with _$DiscountsWatcherEvent {
+sealed class DiscountsWatcherEvent with _$DiscountsWatcherEvent {
   const factory DiscountsWatcherEvent.started() = _Started;
 
   const factory DiscountsWatcherEvent.updated(

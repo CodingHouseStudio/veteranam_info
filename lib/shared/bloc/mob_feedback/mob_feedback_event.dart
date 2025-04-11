@@ -1,7 +1,7 @@
 part of 'mob_feedback_bloc.dart';
 
 @freezed
-class MobFeedbackEvent with _$MobFeedbackEvent {
+sealed class MobFeedbackEvent with _$MobFeedbackEvent {
   const factory MobFeedbackEvent.messageUpdated(String message) =
       _MessageUpdated;
   const factory MobFeedbackEvent.emailUpdated(String email) = _EmailUpdated;

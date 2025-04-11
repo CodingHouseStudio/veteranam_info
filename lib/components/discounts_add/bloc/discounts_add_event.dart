@@ -1,7 +1,7 @@
 part of 'discounts_add_bloc.dart';
 
 @freezed
-class DiscountsAddEvent with _$DiscountsAddEvent {
+sealed class DiscountsAddEvent with _$DiscountsAddEvent {
   // const factory DiscountsAddEvent.started() = _Started;
   const factory DiscountsAddEvent.loadedDiscount({
     required DiscountModel? discount,

@@ -24,7 +24,7 @@ part of 'news_card_watcher_bloc.dart';
 // }
 
 @freezed
-class NewsCardWatcherState with _$NewsCardWatcherState {
+sealed class NewsCardWatcherState with _$NewsCardWatcherState {
   const factory NewsCardWatcherState({
     required InformationModel? informationModel,
     required LoadingStatus loadingStatus,

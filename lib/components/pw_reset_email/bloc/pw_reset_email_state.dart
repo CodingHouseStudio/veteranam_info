@@ -16,7 +16,7 @@ part of 'pw_reset_email_bloc.dart';
 // }
 
 @freezed
-class PwResetEmailState with _$PwResetEmailState {
+sealed class PwResetEmailState with _$PwResetEmailState {
   const factory PwResetEmailState({
     required EmailFieldModel email,
     required PwResetEmailEnum formState,
