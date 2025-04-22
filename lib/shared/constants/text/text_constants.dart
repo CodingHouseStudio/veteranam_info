@@ -139,7 +139,7 @@ abstract class KMockText {
   );
 
   static const discountDescription = TranslateModel(
-    uk: 'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test)'
+    uk: 'Пропозиція діє у всіх відділеннях [${KAppText.email}](test)'
         ' лабораторії.',
     en: 'The offer is valid in all branches of the laboratory.',
   );
