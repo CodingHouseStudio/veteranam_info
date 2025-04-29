@@ -924,7 +924,7 @@
   "@cardListEmptyText": {
     "examples": "Text on pages with cards and filters when there are no results when filtering"
   },
-  "ofUpTo": "of up to",
+  "ofUpTo": "up to",
   "@ofUpTo": {
     "examples": "Text on the Discount page"
   },
