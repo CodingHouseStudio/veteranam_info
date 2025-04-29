@@ -17,71 +17,84 @@ class AuthenticationServicesCubit extends Cubit<AuthenticationServicesState> {
         );
   final AuthenticationRepository _authenticationRepository;
   Future<void> authenticationUseGoogle() async {
-    emit(
-      const AuthenticationServicesState(
-        status: AuthenticationServicesStatus.procesing,
-      ),
-    );
+    if (!isClosed) {
+      emit(
+        const AuthenticationServicesState(
+          status: AuthenticationServicesStatus.procesing,
+        ),
+      );
+    }
     final result = await _authenticationRepository.signUpWithGoogle();
-    result.fold(
-      (l) => emit(
-        AuthenticationServicesState(
-          status: AuthenticationServicesStatus.error,
-          failure: l,
+    if (!isClosed) {
+      result.fold(
+        (l) => emit(
+          AuthenticationServicesState(
+            status: AuthenticationServicesStatus.error,
+            failure: l,
+          ),
         ),
-      ),
-      (r) => emit(
-        AuthenticationServicesState(
-          status: r
-              ? AuthenticationServicesStatus.authentication
-              : AuthenticationServicesStatus.init,
+        (r) => emit(
+          AuthenticationServicesState(
+            status: r
+                ? AuthenticationServicesStatus.authentication
+                : AuthenticationServicesStatus.init,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Future<void> authenticationUseApple() async {
-    emit(
-      const AuthenticationServicesState(
-        status: AuthenticationServicesStatus.procesing,
-      ),
-    );
-    final result = await _authenticationRepository.signUpWithApple();
-    result.fold(
-      (l) => emit(
-        AuthenticationServicesState(
-          status: AuthenticationServicesStatus.error,
-          failure: l,
-        ),
-      ),
-      (r) => emit(
+    if (!isClosed) {
+      emit(
         const AuthenticationServicesState(
-          status: AuthenticationServicesStatus.authentication,
+          status: AuthenticationServicesStatus.procesing,
         ),
-      ),
-    );
+      );
+    }
+
+    final result = await _authenticationRepository.signUpWithApple();
+    if (!isClosed) {
+      result.fold(
+        (l) => emit(
+          AuthenticationServicesState(
+            status: AuthenticationServicesStatus.error,
+            failure: l,
+          ),
+        ),
+        (r) => emit(
+          const AuthenticationServicesState(
+            status: AuthenticationServicesStatus.authentication,
+          ),
+        ),
+      );
+    }
   }
 
   Future<void> authenticationUseFacebook() async {
-    emit(
-      const AuthenticationServicesState(
-        status: AuthenticationServicesStatus.procesing,
-      ),
-    );
-    final result = await _authenticationRepository.signUpWithFacebook();
-    result.fold(
-      (l) => emit(
-        AuthenticationServicesState(
-          status: AuthenticationServicesStatus.error,
-          failure: l,
-        ),
-      ),
-      (r) => emit(
+    if (!isClosed) {
+      emit(
         const AuthenticationServicesState(
-          status: AuthenticationServicesStatus.authentication,
+          status: AuthenticationServicesStatus.procesing,
         ),
-      ),
-    );
+      );
+    }
+    final result = await _authenticationRepository.signUpWithFacebook();
+    if (!isClosed) {
+      result.fold(
+        (l) => emit(
+          AuthenticationServicesState(
+            status: AuthenticationServicesStatus.error,
+            failure: l,
+          ),
+        ),
+        (r) => emit(
+          const AuthenticationServicesState(
+            status: AuthenticationServicesStatus.authentication,
+          ),
+        ),
+      );
+    }
   }
 }
 
