@@ -11,7 +11,10 @@ abstract class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
     @DeviceConverter() List<DeviceInfoModel>? devicesInfo,
-    @Default(Language.ukraine) Language locale,
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: Language.ukraine)
+    @Default(Language.ukraine)
+    Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
     String? nickname,
