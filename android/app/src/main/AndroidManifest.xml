@@ -44,8 +44,14 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="veteranam.info" />
-                <data android:scheme="https" />
+                
+                 <data android:scheme="http"
+                      android:host="veteranam.info"
+                      android:pathPattern="/.+" />
+                      
+                <data android:scheme="https"
+                      android:host="veteranam.info"
+                      android:pathPattern="/.+" />
             </intent-filter>
             
             <meta-data
