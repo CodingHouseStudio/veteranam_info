@@ -18,6 +18,10 @@ abstract class KRoute {
     path: 'discounts',
     name: 'Discounts',
   );
+  static const _RouteItem mobile = _RouteItem(
+    path: 'mobile',
+    name: '',
+  );
   static const _RouteItem businessDashboard = _RouteItem(
     path: '/',
     name: 'Business Dashboard',
