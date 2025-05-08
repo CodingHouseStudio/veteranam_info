@@ -199,13 +199,6 @@ GoRouter router = GoRouter(
           ],
         ),
         GoRoute(
-          path: KRoute.mobile.path,
-          redirect: (context, state) {
-            log('Redirecting from /mobile to /discounts');
-            return '/discounts';
-          },
-        ),
-        GoRoute(
           name: KRoute.support.name,
           path: KRoute.support.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -251,6 +244,13 @@ GoRouter router = GoRouter(
                   : null,
         ),
       ],
+    ),
+    // Redirect from all path to Discounts page
+    GoRoute(
+      path: '/:rest',
+      redirect: (context, state) {
+        return '${KRoute.settings.path}${KRoute.discounts.path}';
+      },
     ),
   ],
 );
