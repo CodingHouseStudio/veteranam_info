@@ -16,15 +16,21 @@ class UrlRepository extends IUrlRepository {
         (useSiteUrl ?? false) ? KAppText.site : UriExtension.baseUrl;
     try {
       // if (Config.isWeb) {
-      await Share.shareUri(
-        Uri.parse(baseUrl + url),
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          uri: Uri.parse(baseUrl + url),
+        ),
       );
       // } else {
       //   await Share.share(
       //     url,
       //   );
       // }
-      return const Right(true);
+      if (result.status == ShareResultStatus.success) {
+        return const Right(true);
+      } else {
+        return const Right(false);
+      }
     } catch (e, stack) {
       // Error if user closes the sharing dialog in Safari
       if (e.toString().contains('cancellation') ||
