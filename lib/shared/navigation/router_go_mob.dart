@@ -249,6 +249,12 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/:rest',
       redirect: (context, state) {
+        SomeFailure.value(
+          error: 'User opened unkown path - ${state.path}',
+          tag: 'Unkown path',
+          tagKey: 'Mobil Router',
+          errorLevel: ErrorLevelEnum.info,
+        );
         return '${KRoute.settings.path}${KRoute.discounts.path}';
       },
     ),
