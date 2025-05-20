@@ -50,7 +50,8 @@ extension StringExtension on String {
     // ?
     const quality = '100'; // highQuality ?? false ? '100' : '85';
     const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
+    const width = 320;
+    return '/cdn-cgi/image/quality=$quality,format=$format,width=$width/';
   }
   // : '/cdn-cgi/image/${Config.isWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
