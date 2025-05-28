@@ -576,6 +576,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           uk: state.requirements.value,
         ),
         expiration: _getExpiration,
+        expirationDate: state.period.value,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
         directLink: state.link.value,
         userId: companyId,

@@ -37,6 +37,7 @@ abstract class DiscountModel with _$DiscountModel {
     @JsonKey(name: DiscountModelJsonField.expiration)
     @TranslateOrNullConverter()
     TranslateModel? expiration,
+    DateTime? expirationDate,
     @JsonKey(name: DiscountModelJsonField.location)
     @TranslateItemsOrNullConverter()
     List<TranslateModel>? location,
