@@ -432,6 +432,7 @@ abstract class KTestVariables {
     userId: fullCompanyUserModel.id,
     userName: fullCompanyUserModel.companyName,
     company: TranslateModel(uk: fullCompanyUserModel.publicName!),
+    expirationDate: DateTime(2026, 10, 24),
     subLocation: null,
     userPhoto: null,
     phoneNumber: null,

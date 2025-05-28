@@ -150,4 +150,5 @@ abstract class DiscountModelJsonField {
   static const images = 'images';
   static const likes = 'likes';
   static const isVerified = 'isVerified';
+  static const expirationDate = 'expirationDate';
 }
