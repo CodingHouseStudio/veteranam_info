@@ -37,6 +37,7 @@ abstract class DiscountModel with _$DiscountModel {
     @JsonKey(name: DiscountModelJsonField.expiration)
     @TranslateOrNullConverter()
     TranslateModel? expiration,
+    DateTime? expirationDate,
     @JsonKey(name: DiscountModelJsonField.location)
     @TranslateItemsOrNullConverter()
     List<TranslateModel>? location,
@@ -149,4 +150,5 @@ abstract class DiscountModelJsonField {
   static const images = 'images';
   static const likes = 'likes';
   static const isVerified = 'isVerified';
+  static const expirationDate = 'expirationDate';
 }

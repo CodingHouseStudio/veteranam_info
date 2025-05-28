@@ -109,6 +109,8 @@ void main() {
       DiscountModelJsonField.likes:
           KTestVariables.discountModelItems.last.likes,
       DiscountModelJsonField.isVerified: false,
+      DiscountModelJsonField.expirationDate:
+          KTestVariables.dateTime.toIso8601String(),
       // DiscountModelJsonField.eligibilityEN: KTestVariables
       //     .discountModelItems.last.eligibility
       //     ?.getTrsnslation(isEnglish: false),
@@ -177,6 +179,7 @@ void main() {
       DiscountModelJsonField.images: null,
       DiscountModelJsonField.likes: null,
       DiscountModelJsonField.isVerified: true,
+      DiscountModelJsonField.expirationDate: null,
       // DiscountModelJsonField.eligibilityEN: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -351,6 +354,10 @@ void main() {
           discountModel.isVerified,
           false,
         );
+        expect(
+          discountModel.expirationDate,
+          KTestVariables.dateTime,
+        );
       });
 
       test('${KGroupText.nullable} ', () {
@@ -520,6 +527,10 @@ void main() {
           discountModel.likes,
           null,
         );
+        expect(
+          discountModel.expirationDate,
+          null,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -601,6 +612,7 @@ void main() {
           DiscountModelJsonField.likes:
               KTestVariables.discountModelItems.last.likes,
           DiscountModelJsonField.isVerified: true,
+          DiscountModelJsonField.expirationDate: KTestVariables.dateTime,
         };
 
         expect(
@@ -615,6 +627,7 @@ void main() {
             .copyWith(
               images: KTestVariables.imagesList,
               isVerified: false,
+              expirationDate: KTestVariables.dateTime,
             )
             .toJson();
 
