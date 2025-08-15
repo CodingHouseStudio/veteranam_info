@@ -52,7 +52,7 @@ dependencies:
   image_picker: ^1.1.2
   in_app_review: ^2.0.10
   injectable: ^2.5.0 # Used for dependency injection
-  intl: ^0.19.0
+  intl: ^0.20.2
   json_serializable: ^6.9.5
   material_symbols_icons: ^4.2815.0
   optimized_search_field: ^2.0.2 # this is our own custom package
