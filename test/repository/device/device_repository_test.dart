@@ -74,6 +74,10 @@ void main() {
         'supported32BitAbis': fakeSupported32BitAbis,
         'serialNumber': 'SERIAL',
         'isLowRamDevice': false,
+        'freeDiskSize': 1000,
+        'totalDiskSize': 10000,
+        'physicalRamSize': 10000,
+        'availableRamSize': 1000,
       },
     );
     late IDeviceRepository deviceRepository;

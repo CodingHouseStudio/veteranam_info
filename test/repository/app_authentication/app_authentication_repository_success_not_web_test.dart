@@ -56,11 +56,11 @@ void main() {
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
         (_) => KTestVariables.token,
       );
-      when(mockGoogleSignInAuthentication.accessToken).thenAnswer(
+      when(mockGoogleSignInAuthentication.idToken).thenAnswer(
         (_) => KTestVariables.token,
       );
       when(mockGoogleSignInAccount.authentication).thenAnswer(
-        (_) async => mockGoogleSignInAuthentication,
+        (_) => mockGoogleSignInAuthentication,
       );
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestVariables.authCredential,
@@ -69,8 +69,11 @@ void main() {
       when(mockUserCredential.user).thenAnswer(
         (_) => null,
       );
-      when(mockGoogleSignIn.signIn()).thenAnswer(
+      when(mockGoogleSignIn.authenticate()).thenAnswer(
         (_) async => mockGoogleSignInAccount,
+      );
+      when(mockGoogleSignIn.initialize()).thenAnswer(
+        (_) async {},
       );
       when(mockFacebookAuth.login()).thenAnswer(
         (_) async => mockLoginResult,

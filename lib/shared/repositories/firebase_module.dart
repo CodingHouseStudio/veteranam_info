@@ -10,7 +10,7 @@ abstract class FirebaseModule {
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
 
   @singleton
-  GoogleSignIn get googleSignIn => GoogleSignIn.standard();
+  GoogleSignIn get googleSignIn => GoogleSignIn.instance;
 
   @singleton
   FacebookAuth get firebaseSignIn => FacebookAuth.instance;

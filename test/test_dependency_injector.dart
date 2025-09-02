@@ -76,7 +76,7 @@ void configureDependenciesTest() {
   );
   getItTest.registerSingleton<firebase_auth.FirebaseAuth>(MockFirebaseAuth());
   getItTest.registerSingleton<FlutterSecureStorage>(MockFlutterSecureStorage());
-  getItTest.registerSingleton<GoogleSignIn>(GoogleSignIn());
+  getItTest.registerSingleton<GoogleSignIn>(GoogleSignIn.instance);
   getItTest.registerSingleton<firebase_auth.GoogleAuthProvider>(
     MockGoogleAuthProvider(),
   );
