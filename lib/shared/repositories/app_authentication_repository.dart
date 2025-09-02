@@ -65,6 +65,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   static const userCacheKey = '__user_cache_key__';
   @visibleForTesting
   static const userSettingCacheKey = '__user_setting_cache_key__';
+  static Future<void>? googleSignInit;
+  Future<void> _initGoogleSignIn() async {
+    await _googleSignIn.initialize();
+  }
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -177,12 +181,14 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialMobile() async {
-    final googleUser = await _googleSignIn.signIn();
+    googleSignInit ??= _initGoogleSignIn();
+    await googleSignInit;
+    final googleUser = await _googleSignIn.authenticate();
     // If user cancelled dialog
-    if (googleUser == null) return null;
-    final googleAuth = await googleUser.authentication;
+    // if (googleUser == null) return null;
+    final googleAuth = googleUser.authentication;
     return firebase_auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
+      accessToken: googleAuth.idToken,
       idToken: googleAuth.idToken,
     );
   }
