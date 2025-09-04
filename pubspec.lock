@@ -841,13 +841,13 @@ packages:
     source: hosted
     version: "1.1.2"
   flutter_secure_storage_web:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: flutter_secure_storage_web
-      sha256: f4ebff989b4f07b2656fb16b47852c0aab9fed9b4ec1c70103368337bc1886a9
+      sha256: "58cf99fe971f4481edd2ed887587b1220e80d212b6d097074492447adf58ba9a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "2.0.0-beta.2"
   flutter_secure_storage_windows:
     dependency: transitive
     description:
