@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_remote_config/firebase_remote_config.dart'
     show FirebaseRemoteConfig, RemoteConfigFetchStatus, RemoteConfigSettings;
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/models/failure_model/failure_model.dart';
 
 @singleton
 class FirebaseRemoteConfigProvider {
@@ -10,42 +11,33 @@ class FirebaseRemoteConfigProvider {
     required FirebaseRemoteConfig firebaseRemoteConfig,
   }) : _firebaseRemoteConfig = firebaseRemoteConfig {
     // Initialization logic can't use await directly in constructor
-    _initRemoteConfigSettings();
+    _initCallback = _initRemoteConfigSettings();
   }
 
   final FirebaseRemoteConfig _firebaseRemoteConfig;
+  late Future<bool> _initCallback;
   Timer? _timer;
 
-  Future<void> _initRemoteConfigSettings() async {
-    await _firebaseRemoteConfig.setConfigSettings(
-      RemoteConfigSettings(
-        fetchTimeout: const Duration(seconds: 2),
-        minimumFetchInterval: const Duration(minutes: 1),
-      ),
+  Future<bool> _initRemoteConfigSettings() async {
+    return valueFutureErrorHelper(
+      () async {
+        await _firebaseRemoteConfig.setConfigSettings(
+          RemoteConfigSettings(
+            fetchTimeout: const Duration(seconds: 2),
+            minimumFetchInterval: const Duration(minutes: 1),
+          ),
+        );
+        await _firebaseRemoteConfig.fetchAndActivate();
+        return true;
+      },
+      failureValue: false,
+      methodName: '_initRemoteConfigSettings',
+      className: 'FirebaseRemoteConfigProvider',
     );
-    await _firebaseRemoteConfig.fetchAndActivate();
   }
 
   Future<bool> waitActivated() async {
-    try {
-      var count = 0;
-      var checkValue = _firebaseRemoteConfig.lastFetchStatus ==
-          RemoteConfigFetchStatus.noFetchYet;
-      while (checkValue) {
-        await Future.delayed(
-          const Duration(milliseconds: 100),
-          () => count++,
-        );
-        checkValue = (_firebaseRemoteConfig.lastFetchStatus ==
-                    RemoteConfigFetchStatus.noFetchYet ||
-                _firebaseRemoteConfig.getAll().isEmpty) &&
-            count < 100;
-      }
-      return _firebaseRemoteConfig.lastFetchStatus !=
-          RemoteConfigFetchStatus.noFetchYet;
-    } catch (e) {
-      return false;
-    }
+    return _initCallback;
   }
 
   int getInt(String key) {

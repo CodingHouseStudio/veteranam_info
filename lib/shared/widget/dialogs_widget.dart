@@ -19,7 +19,7 @@ extension DiaglogExtention on BuildContext {
     DismissDirection? dismissDirection,
   }) {
     if (ScaffoldMessenger.of(this).mounted) {
-      ScaffoldMessenger.of(this).hideCurrentSnackBar();
+      ScaffoldMessenger.of(this).removeCurrentSnackBar();
     }
     return ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
