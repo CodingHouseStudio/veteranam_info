@@ -1,8 +1,7 @@
 import 'dart:async' show unawaited;
 import 'dart:developer';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart'
-    show AppTrackingTransparency, TrackingStatus;
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_analytics/firebase_analytics.dart'
     show AnalyticsCallOptions, FirebaseAnalytics;
@@ -18,7 +17,7 @@ class FirebaseAnalyticsService {
   })  : _userRepository = userRepository,
         _firebaseAnalytics = firebaseAnalytics,
         _firebaseAnalyticsCacheController = firebaseAnalyticsCacheController {
-    initUserId();
+    init();
   }
 
   final FirebaseAnalytics _firebaseAnalytics;
@@ -26,7 +25,7 @@ class FirebaseAnalyticsService {
   final FirebaseAnalyticsCacheController _firebaseAnalyticsCacheController;
   bool _userConsentGranted = false;
 
-  Future<void> initUserId() async {
+  Future<void> init() async {
     // Add user properties when we'll add login and sign up page
     if (Config.isReleaseMode &&
         Config.isProduction &&
@@ -35,12 +34,22 @@ class FirebaseAnalyticsService {
       // app tracking transparency permission
       // if (!Config.isWeb) {
       if (PlatformEnum.getPlatform.isIOS) {
-        // Check if user has granted consent
-        final trackingStatus =
+        var trackingAuthorizationStatus =
             await AppTrackingTransparency.trackingAuthorizationStatus;
+        // see if app tracking transparency is enabled
+        if (trackingAuthorizationStatus == TrackingStatus.notDetermined ||
+            KTest.isTest) {
+          // Request system's tracking authorization dialog
+          try {
+            trackingAuthorizationStatus =
+                await AppTrackingTransparency.requestTrackingAuthorization();
+          } catch (e) {
+            // Handle error
+          }
+        }
 
         // If not determined, request authorization
-        if (trackingStatus == TrackingStatus.authorized) {
+        if (trackingAuthorizationStatus == TrackingStatus.authorized) {
           _userConsentGranted = true;
           await setConsent(state: true, isIOS: true);
         }
@@ -101,7 +110,7 @@ class FirebaseAnalyticsService {
           if (!isIOS) {
             await _firebaseAnalyticsCacheController.setConsent(state: state);
             unawaited(
-              initUserId(),
+              init(),
             );
           }
           return const Right(true);

@@ -52,9 +52,6 @@ abstract class IAppAuthenticationRepository {
     UserSetting userSetting,
   );
 
-  Future<Either<SomeFailure, bool>>
-      createFcmUserSettingAndRemoveDeletePameter();
-
   Future<Either<SomeFailure, User>> updateUserData({
     required User user,
     required FilePickerItem? image,

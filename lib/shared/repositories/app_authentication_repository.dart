@@ -22,7 +22,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required CacheClient cache,
     required FacebookAuth facebookSignIn,
     required FirestoreService firestoreService,
-    required IDeviceRepository deviceRepository,
     required StorageService storageService,
     required firebase_auth.GoogleAuthProvider googleAuthProvider,
     required firebase_auth.FacebookAuthProvider facebookAuthProvider,
@@ -33,7 +32,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _facebookSignIn = facebookSignIn,
         _cache = cache,
         _firestoreService = firestoreService,
-        _deviceRepository = deviceRepository,
         _storageService = storageService,
         _googleAuthProvider = googleAuthProvider,
         _facebookAuthProvider = facebookAuthProvider,
@@ -48,7 +46,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final FacebookAuth _facebookSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService;
-  final IDeviceRepository _deviceRepository;
   final StorageService _storageService;
   final firebase_auth.GoogleAuthProvider _googleAuthProvider;
   final firebase_auth.FacebookAuthProvider _facebookAuthProvider;
@@ -597,44 +594,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       user: currentUser,
       userSetting: currentUserSetting,
       finallyFunction: _updateUserSettingBasedOnCache,
-    );
-  }
-
-  @override
-  Future<Either<SomeFailure, bool>>
-      createFcmUserSettingAndRemoveDeletePameter() async {
-    final result = await _deviceRepository.getDevice(
-      initialList: currentUserSetting.devicesInfo,
-    );
-
-    return result.fold(
-      Left.new,
-      (r) async {
-        var userSetting = currentUserSetting;
-        if (currentUserSetting.deletedOn != null) {
-          userSetting = userSetting.copyWith(deletedOn: null);
-        }
-        if (r != null) {
-          final devicesInfo =
-              List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
-                ..removeWhere(
-                  (deviceInfo) => deviceInfo.deviceId == r.deviceId,
-                )
-                ..add(r);
-          userSetting = userSetting.copyWith(
-            id: currentUser.id,
-            devicesInfo: devicesInfo,
-          );
-        }
-        if (userSetting == currentUserSetting) {
-          return const Right(false);
-        }
-        final result = await updateUserSetting(userSetting);
-        return result.fold(
-          Left.new,
-          (r) => const Right(true),
-        );
-      },
     );
   }
 

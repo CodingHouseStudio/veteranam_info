@@ -86,12 +86,12 @@ void main() {
         ).thenAnswer(
           (_) => false,
         );
-        when(
-          mockAppAuthenticationRepository
-              .createFcmUserSettingAndRemoveDeletePameter(),
-        ).thenAnswer(
-          (_) async => const Right(true),
-        );
+        // when(
+        //   mockAppAuthenticationRepository
+        //       .createFcmUserSettingAndRemoveDeletePameter(),
+        // ).thenAnswer(
+        //   (_) async => const Right(true),
+        // );
         // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         //   (_) => KTestVariables.userSettingModel,
         // );

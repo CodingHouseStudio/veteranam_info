@@ -24,11 +24,13 @@ void main() {
     late IAppAuthenticationRepository mockAppuserRepository;
     late StreamController<User> userStreamController;
     late ILanguageCacheRepository mockLanguageCacheRepository;
+    late IDeviceRepository mockDeviceRepository;
 
     setUp(() {
       userStreamController = StreamController<User>()..add(User.empty);
       mockAppuserRepository = MockIAppAuthenticationRepository();
       mockLanguageCacheRepository = MockILanguageCacheRepository();
+      mockDeviceRepository = MockIDeviceRepository();
 
       when(mockAppuserRepository.user).thenAnswer(
         (_) => userStreamController.stream,
@@ -54,9 +56,16 @@ void main() {
         (_) => Language.ukraine,
       );
 
+      when(
+        mockDeviceRepository.getDevice(),
+      ).thenAnswer(
+        (_) async => const Right(null),
+      );
+
       userRepository = UserRepository(
         appAuthenticationRepository: mockAppuserRepository,
         languageCacheRepository: mockLanguageCacheRepository,
+        deviceRepository: mockDeviceRepository,
       );
     });
 
@@ -64,10 +73,15 @@ void main() {
       late Timer timer;
       setUp(() {
         when(
-          mockAppuserRepository.createFcmUserSettingAndRemoveDeletePameter(),
+          mockDeviceRepository.getDevice(),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(null),
         );
+        // when(
+        //   mockAppuserRepository.createFcmUserSettingAndRemoveDeletePameter(),
+        // ).thenAnswer(
+        //   (_) async => const Right(true),
+        // );
         when(mockAppuserRepository.isAnonymously).thenAnswer(
           (_) => true,
         );
@@ -105,10 +119,15 @@ void main() {
       late Timer timer;
       setUp(() {
         when(
-          mockAppuserRepository.createFcmUserSettingAndRemoveDeletePameter(),
+          mockDeviceRepository.getDevice(),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError),
         );
+        // when(
+        //   mockAppuserRepository.createFcmUserSettingAndRemoveDeletePameter(),
+        // ).thenAnswer(
+        //   (_) async => const Left(SomeFailure.serverError),
+        // );
         when(mockAppuserRepository.isAnonymously).thenAnswer(
           (_) => true,
         );

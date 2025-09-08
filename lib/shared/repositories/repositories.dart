@@ -44,6 +44,7 @@ export 'mobile_rating_module.dart';
 export 'mobile_rating_repository.dart';
 export 'network_module.dart';
 export 'network_repository.dart';
+export 'notification_repository.dart';
 export 'report_repository.dart';
 export 'secure_storage_module.dart';
 export 'secure_storage_repository.dart';

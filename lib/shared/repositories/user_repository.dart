@@ -10,8 +10,10 @@ class UserRepository {
   UserRepository({
     required IAppAuthenticationRepository appAuthenticationRepository,
     required ILanguageCacheRepository languageCacheRepository,
+    required IDeviceRepository deviceRepository,
   })  : _appAuthenticationRepository = appAuthenticationRepository,
-        _languageCacheRepository = languageCacheRepository {
+        _languageCacheRepository = languageCacheRepository,
+        _deviceRepository = deviceRepository {
     _userController = StreamController<User>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
@@ -23,6 +25,7 @@ class UserRepository {
   }
   final IAppAuthenticationRepository _appAuthenticationRepository;
   final ILanguageCacheRepository _languageCacheRepository;
+  final IDeviceRepository _deviceRepository;
 
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
@@ -95,12 +98,33 @@ class UserRepository {
   }
 
   Future<void> _createFcmUserSettingAndRemoveDeleteParameter() async {
-    final result = await _appAuthenticationRepository
-        .createFcmUserSettingAndRemoveDeletePameter();
-    result.fold(
-      (l) {},
-      (r) {
-        log('created FCM TOKEN', name: 'FCM Token', level: 1);
+    final result = await _deviceRepository.getDevice();
+
+    return result.fold(
+      Left.new,
+      (r) async {
+        var userSetting = currentUserSetting;
+        if (currentUserSetting.deletedOn != null) {
+          userSetting = userSetting.copyWith(deletedOn: null);
+        }
+        if (r != null) {
+          final devicesInfo =
+              List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? []);
+          if (r.fcmToken != null) {
+            devicesInfo
+              ..removeWhere(
+                (deviceInfo) => deviceInfo.deviceId == r.deviceId,
+              )
+              ..add(r);
+          }
+          userSetting = userSetting.copyWith(
+            id: currentUser.id,
+            devicesInfo: devicesInfo,
+          );
+        }
+        if (userSetting != currentUserSetting) {
+          await updateUserSetting(userSetting: userSetting);
+        }
       },
     );
   }
