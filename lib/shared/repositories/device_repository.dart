@@ -1,5 +1,5 @@
-import 'package:app_tracking_transparency/app_tracking_transparency.dart'
-    deferred as tracking_status;
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,18 +13,34 @@ class DeviceRepository implements IDeviceRepository {
     required FirebaseMessaging firebaseMessaging,
     required DeviceInfoPlugin deviceInfoPlugin,
     required AppInfoRepository buildRepository,
+    required LocalNotificationRepository notificationRepository,
   })  : _firebaseMessaging = firebaseMessaging,
         _deviceInfoPlugin = deviceInfoPlugin,
-        _buildRepository = buildRepository;
+        _buildRepository = buildRepository,
+        _notificationRepository = notificationRepository {
+    init();
+  }
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
   final AppInfoRepository _buildRepository;
+  final LocalNotificationRepository _notificationRepository;
+  StreamSubscription<RemoteMessage>? _messageSubscription;
+
+  void init() {
+    _messageSubscription = FirebaseMessaging.onMessage.listen(
+      _notificationRepository.showAndroidFeregroundNotification,
+      onError: (Object error, StackTrace stack) => SomeFailure.value(
+        error: error,
+        stack: stack,
+        tag: 'DeviceRepository',
+        tagKey: ErrorText.streamBlocKey,
+      ),
+    );
+  }
 
   @override
-  Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
-    List<DeviceInfoModel>? initialList,
-  }) async {
+  Future<Either<SomeFailure, DeviceInfoModel?>> getDevice() async {
     if (Config.isReleaseMode) {
       var id = '';
       SomeFailure? failure;
@@ -37,15 +53,6 @@ class DeviceRepository implements IDeviceRepository {
         (r) => id = r,
       );
       if (failure != null) return Left(failure!);
-
-      final deviceInfoExist = initialList?.any(
-        (deviceInfo) =>
-            deviceInfo.deviceId == id && deviceInfo.fcmToken != null,
-      );
-
-      if (deviceInfoExist ?? false) {
-        return const Right(null);
-      }
 
       final fcmResult = await getFcm(platformValue: platform);
       fcmResult.fold(
@@ -133,7 +140,14 @@ class DeviceRepository implements IDeviceRepository {
           case AuthorizationStatus.provisional:
             notificationSettings = await handleRequestPermission(platform);
           case AuthorizationStatus.authorized:
-            break;
+            if (platform.isIOS) {
+              await _firebaseMessaging
+                  .setForegroundNotificationPresentationOptions(
+                alert: true, // Required to display a heads up notification
+                badge: true,
+                sound: true,
+              );
+            }
         }
 
         if (notificationSettings.authorizationStatus ==
@@ -184,25 +198,36 @@ class DeviceRepository implements IDeviceRepository {
     bool provisional = false,
   }) async {
     if (platformValue.isIOS) {
-      await tracking_status.loadLibrary();
-      final trackingAuthorizationStatus = await tracking_status
-          .AppTrackingTransparency.trackingAuthorizationStatus;
-      // see if app tracking transparency is enabled
-      if (trackingAuthorizationStatus ==
-              tracking_status.TrackingStatus.notDetermined ||
-          KTest.isTest) {
-        // Request system's tracking authorization dialog
-        try {
-          await tracking_status.AppTrackingTransparency
-              .requestTrackingAuthorization();
-        } catch (e) {
-          // Handle error
-        }
-      }
+      // await tracking_status.loadLibrary();
+      // final trackingAuthorizationStatus = await tracking_status
+      //     .AppTrackingTransparency.trackingAuthorizationStatus;
+      // // see if app tracking transparency is enabled
+      // if (trackingAuthorizationStatus ==
+      //         tracking_status.TrackingStatus.notDetermined ||
+      //     KTest.isTest) {
+      //   // Request system's tracking authorization dialog
+      //   try {
+      //     await tracking_status.AppTrackingTransparency
+      //         .requestTrackingAuthorization();
+      //   } catch (e) {
+      //     // Handle error
+      //   }
+      // }
 
-      return _firebaseMessaging.requestPermission(
+      final permission = await _firebaseMessaging.requestPermission(
         provisional: provisional,
       );
+
+      if (permission.authorizationStatus == AuthorizationStatus.authorized &&
+          !provisional) {
+        await _firebaseMessaging.setForegroundNotificationPresentationOptions(
+          alert: true, // Required to display a heads up notification
+          badge: true,
+          sound: true,
+        );
+      }
+
+      return permission;
     } else {
       return _firebaseMessaging.requestPermission(
         // All This parameters only for iOS/macOS
@@ -211,5 +236,11 @@ class DeviceRepository implements IDeviceRepository {
         sound: false,
       );
     }
+  }
+
+  @override
+  @disposeMethod
+  void dispose() {
+    _messageSubscription?.cancel();
   }
 }

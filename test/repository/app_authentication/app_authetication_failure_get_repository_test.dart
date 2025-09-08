@@ -27,7 +27,7 @@ void main() {
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
-    late IDeviceRepository mockDeviceRepository;
+    // late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     late FacebookAuth mockFacebookAuth;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
@@ -42,7 +42,7 @@ void main() {
       mockUserCredential = MockUserCredential();
       mockFacebookAuth = MockFacebookAuth();
       mockStorageService = MockStorageService();
-      mockDeviceRepository = MockIDeviceRepository();
+      // mockDeviceRepository = MockIDeviceRepository();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
       mockAppleAuthProvider = MockAppleAuthProvider();
       when(
@@ -83,17 +83,17 @@ void main() {
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
-      when(
-        mockDeviceRepository.getDevice(
-          initialList: KTestVariables.userSetting.devicesInfo,
-        ),
-      ).thenAnswer(
-        (_) async => const Right(null),
-      );
+      // when(
+      //   mockDeviceRepository.getDevice(
+      //     initialList: KTestVariables.userSetting.devicesInfo,
+      //   ),
+      // ).thenAnswer(
+      //   (_) async => const Right(null),
+      // );
 
       appAuthenticationRepository = AppAuthenticationRepository(
         cache: mockCache,
-        deviceRepository: mockDeviceRepository,
+        // deviceRepository: mockDeviceRepository,
         facebookAuthProvider: mockFacebookAuthProvider,
         facebookSignIn: mockFacebookAuth,
         firebaseAuth: mockFirebaseAuth,
@@ -195,23 +195,23 @@ void main() {
             .having((e) => e.value, 'value', isNull),
       );
     });
-    test('Create FCM Token for user setting when get null', () async {
-      final result = await appAuthenticationRepository
-          .createFcmUserSettingAndRemoveDeletePameter();
-      verify(
-        mockDeviceRepository.getDevice(
-          initialList: KTestVariables.userSetting.devicesInfo,
-        ),
-      ).called(1);
-      expect(
-        result,
-        isA<Right<SomeFailure, bool>>().having(
-          (e) => e.value,
-          'value',
-          isFalse,
-        ),
-      );
-    });
+    // test('Create FCM Token for user setting when get null', () async {
+    //   final result = await appAuthenticationRepository
+    //       .createFcmUserSettingAndRemoveDeletePameter();
+    //   verify(
+    //     mockDeviceRepository.getDevice(
+    //       initialList: KTestVariables.userSetting.devicesInfo,
+    //     ),
+    //   ).called(1);
+    //   expect(
+    //     result,
+    //     isA<Right<SomeFailure, bool>>().having(
+    //       (e) => e.value,
+    //       'value',
+    //       isFalse,
+    //     ),
+    //   );
+    // });
     test('Sign up', () async {
       expect(
         await appAuthenticationRepository.checkVerificationCode(

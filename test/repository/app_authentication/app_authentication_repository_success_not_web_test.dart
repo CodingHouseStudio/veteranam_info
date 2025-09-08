@@ -33,7 +33,7 @@ void main() {
     late LoginResult mockLoginResult;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
     late StorageService mockStorageService;
-    late IDeviceRepository mockDeviceRepository;
+    // late IDeviceRepository mockDeviceRepository;
     late firebase_auth.AppleAuthProvider mockAppleAuthProvider;
     setUp(() {
       Config.testIsWeb = false;
@@ -50,7 +50,7 @@ void main() {
       mockLoginResult = MockLoginResult();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
       mockStorageService = MockStorageService();
-      mockDeviceRepository = MockIDeviceRepository();
+      // mockDeviceRepository = MockIDeviceRepository();
       mockAppleAuthProvider = MockAppleAuthProvider();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
@@ -103,7 +103,7 @@ void main() {
 
       appAuthenticationRepository = AppAuthenticationRepository(
         cache: mockCache,
-        deviceRepository: mockDeviceRepository,
+        // deviceRepository: mockDeviceRepository,
         facebookAuthProvider: mockFacebookAuthProvider,
         facebookSignIn: mockFacebookAuth,
         firebaseAuth: mockFirebaseAuth,

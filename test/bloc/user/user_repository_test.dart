@@ -19,9 +19,11 @@ void main() {
     late UserRepository userRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late ILanguageCacheRepository mockLanguageCacheRepository;
+    late IDeviceRepository mockDeviceRepository;
     setUp(() {
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockLanguageCacheRepository = MockILanguageCacheRepository();
+      mockDeviceRepository = MockIDeviceRepository();
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -88,12 +90,12 @@ void main() {
         ).thenAnswer(
           (_) => false,
         );
-        when(
-          mockAppAuthenticationRepository
-              .createFcmUserSettingAndRemoveDeletePameter(),
-        ).thenAnswer(
-          (_) async => const Right(true),
-        );
+        // when(
+        //   mockAppAuthenticationRepository
+        //       .createFcmUserSettingAndRemoveDeletePameter(),
+        // ).thenAnswer(
+        //   (_) async => const Right(true),
+        // );
         // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         //   (_) => KTestVariables.userSettingModel,
         // );
@@ -129,9 +131,16 @@ void main() {
           (_) async => const Right(true),
         );
 
+        when(
+          mockDeviceRepository.getDevice(),
+        ).thenAnswer(
+          (_) async => const Right(null),
+        );
+
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
           languageCacheRepository: mockLanguageCacheRepository,
+          deviceRepository: mockDeviceRepository,
         );
       });
 
@@ -236,6 +245,7 @@ void main() {
         userRepository = UserRepository(
           appAuthenticationRepository: mockAppAuthenticationRepository,
           languageCacheRepository: mockLanguageCacheRepository,
+          deviceRepository: mockDeviceRepository,
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(

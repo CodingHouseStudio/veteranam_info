@@ -30,7 +30,7 @@ void main() {
     late GoogleSignInAccount mockGoogleSignInAccount;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
     late StorageService mockStorageService;
-    late IDeviceRepository mockDeviceRepository;
+    // late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
     late firebase_auth.AppleAuthProvider mockAppleAuthProvider;
@@ -48,7 +48,7 @@ void main() {
       mockFacebookAuth = MockFacebookAuth();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
       mockStorageService = MockStorageService();
-      mockDeviceRepository = MockIDeviceRepository();
+      // mockDeviceRepository = MockIDeviceRepository();
       mockAppleAuthProvider = MockAppleAuthProvider();
 
       when(
@@ -159,20 +159,20 @@ void main() {
       ).thenThrow(
         Exception(KGroupText.failure),
       );
-      when(
-        mockDeviceRepository.getDevice(
-          initialList: KTestVariables.userSetting.devicesInfo,
-        ),
-      ).thenAnswer(
-        (_) async => const Right(null),
-      );
-      when(
-        mockDeviceRepository.getDevice(
-          initialList: KTestVariables.userSetting.devicesInfo,
-        ),
-      ).thenAnswer(
-        (_) async => const Left(SomeFailure.serverError),
-      );
+      // when(
+      //   mockDeviceRepository.getDevice(
+      //     initialList: KTestVariables.userSetting.devicesInfo,
+      //   ),
+      // ).thenAnswer(
+      //   (_) async => const Right(null),
+      // );
+      // when(
+      //   mockDeviceRepository.getDevice(
+      //     initialList: KTestVariables.userSetting.devicesInfo,
+      //   ),
+      // ).thenAnswer(
+      //   (_) async => const Left(SomeFailure.serverError),
+      // );
 
       when(
         mockFirebaseAuth.verifyPasswordResetCode(KTestVariables.code),
@@ -197,7 +197,7 @@ void main() {
 
       appAuthenticationRepository = AppAuthenticationRepository(
         cache: mockCache,
-        deviceRepository: mockDeviceRepository,
+        // deviceRepository: mockDeviceRepository,
         facebookAuthProvider: mockFacebookAuthProvider,
         facebookSignIn: mockFacebookAuth,
         firebaseAuth: mockFirebaseAuth,
@@ -347,23 +347,24 @@ void main() {
         // ),
       );
     });
-    test('Create FCM Token for user setting when get device error', () async {
-      final result = await appAuthenticationRepository
-          .createFcmUserSettingAndRemoveDeletePameter();
-      verify(
-        mockDeviceRepository.getDevice(
-          initialList: KTestVariables.userSetting.devicesInfo,
-        ),
-      ).called(1);
-      expect(
-        result, isA<Left<SomeFailure, bool>>(),
-        // .having(
-        //   (e) => e.value,
-        //   'value',
-        //   SomeFailure.serverError,
-        // ),
-      );
-    });
+    // test('Create FCM Token for user setting when get device error', ()
+    // async {
+    //   final result = await appAuthenticationRepository
+    //       .createFcmUserSettingAndRemoveDeletePameter();
+    //   verify(
+    //     mockDeviceRepository.getDevice(
+    //       initialList: KTestVariables.userSetting.devicesInfo,
+    //     ),
+    //   ).called(1);
+    //   expect(
+    //     result, isA<Left<SomeFailure, bool>>(),
+    //     // .having(
+    //     //   (e) => e.value,
+    //     //   'value',
+    //     //   SomeFailure.serverError,
+    //     // ),
+    //   );
+    // });
     test('Update user data', () async {
       when(
         mockUser.updateDisplayName(KTestVariables.profileUser.name),

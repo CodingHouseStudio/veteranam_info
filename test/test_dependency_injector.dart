@@ -104,6 +104,9 @@ void configureDependenciesTest() {
   );
 
   // Repository
+  getItTest.registerSingleton<LocalNotificationRepository>(
+    MockLocalNotificationRepository(),
+  );
   getItTest.registerSingleton<IUrlRepository>(UrlRepository());
   getItTest.registerSingleton<SharedPrefencesProvider>(
     MockSharedPrefencesProvider(),
@@ -123,6 +126,7 @@ void configureDependenciesTest() {
       firebaseMessaging: getItTest.get<FirebaseMessaging>(),
       deviceInfoPlugin: getItTest.get<DeviceInfoPlugin>(),
       buildRepository: getItTest.get<AppInfoRepository>(),
+      notificationRepository: getItTest.get<LocalNotificationRepository>(),
     ),
   );
   getItTest.registerSingleton<IAppAuthenticationRepository>(
@@ -132,7 +136,6 @@ void configureDependenciesTest() {
       googleSignIn: getItTest.get<GoogleSignIn>(),
       cache: CacheClient(),
       facebookSignIn: getItTest.get<FacebookAuth>(),
-      deviceRepository: getItTest.get<IDeviceRepository>(),
       facebookAuthProvider: getItTest.get<firebase_auth.FacebookAuthProvider>(),
       firestoreService: getItTest.get<FirestoreService>(),
       googleAuthProvider: getItTest.get<firebase_auth.GoogleAuthProvider>(),
@@ -151,6 +154,7 @@ void configureDependenciesTest() {
       appAuthenticationRepository:
           getItTest.get<IAppAuthenticationRepository>(),
       languageCacheRepository: getItTest.get<ILanguageCacheRepository>(),
+      deviceRepository: getItTest.get<IDeviceRepository>(),
     ),
   );
 

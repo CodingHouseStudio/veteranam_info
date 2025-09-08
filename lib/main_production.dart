@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart'
     show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
@@ -15,6 +16,11 @@ import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/models/failure_model/some_failure.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  log('Handling a background message: ${message.messageId}');
+}
 
 /// COMMENT: PROD main file
 Future<void> main() async {
@@ -123,6 +129,8 @@ Future<void> main() async {
   //   version: 'v15.0',
   // );
   // }
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await bootstrap(App.new);
 }

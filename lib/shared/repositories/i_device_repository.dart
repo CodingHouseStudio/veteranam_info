@@ -3,9 +3,7 @@ import 'package:veteranam/shared/shared_dart.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 abstract class IDeviceRepository {
-  Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
-    List<DeviceInfoModel>? initialList,
-  });
+  Future<Either<SomeFailure, DeviceInfoModel?>> getDevice();
   Future<Either<SomeFailure, String>> getDeviceId({
     PlatformEnum? platformValue,
   });
@@ -13,4 +11,6 @@ abstract class IDeviceRepository {
   Future<Either<SomeFailure, String?>> getFcm({
     PlatformEnum? platformValue,
   });
+
+  void dispose();
 }
