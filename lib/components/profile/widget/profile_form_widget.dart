@@ -139,6 +139,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               KSizedBox.kHeightSizedBox32,
               _textField(
                 fieldKey: ProfileKeys.nameField,
+                keyboardType: TextInputType.name,
                 controller: nameController,
                 hint: context.l10n.writeYouName,
                 onChanged: (text) => context
@@ -150,6 +151,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               KSizedBox.kHeightSizedBox32,
               _textField(
                 fieldKey: ProfileKeys.lastNameField,
+                keyboardType: TextInputType.name,
                 controller: surnameController,
                 hint: context.l10n.writeYouLastName,
                 onChanged: (text) => context
@@ -161,6 +163,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               KSizedBox.kHeightSizedBox32,
               _textField(
                 fieldKey: ProfileKeys.emailFied,
+                keyboardType: TextInputType.emailAddress,
                 controller: emailController,
                 hint: KMockText.email,
                 enabled: false,
@@ -226,12 +229,14 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     void Function(String text)? onChanged,
     bool enabled = true,
     bool? showErrorText,
+    TextInputType? keyboardType,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
       enabled: enabled,
       isRequired: true,
       controller: controller,
+      keyboardType: keyboardType,
       labelText: hint,
       hintStyle: isDesk
           ? AppTextStyle.materialThemeTitleMedium

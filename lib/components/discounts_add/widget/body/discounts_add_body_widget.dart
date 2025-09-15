@@ -187,6 +187,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   else if (_.formState.isMain)
                     TextFieldWidget(
                       widgetKey: DiscountsAddKeys.titleField,
+                      keyboardType: TextInputType.text,
                       controller: titleController,
                       isRequired: true,
                       isDesk: isDesk,
@@ -392,6 +393,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   ] else if (_.formState.isMain)
                     TextFieldWidget(
                       widgetKey: DiscountsAddKeys.linkField,
+                      keyboardType: TextInputType.url,
                       controller: linkController,
                       isDesk: isDesk,
                       labelText: context.l10n.link,
@@ -410,6 +412,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       _.discount == null)
                     TextFieldWidget(
                       widgetKey: DiscountsAddKeys.emailField,
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       isDesk: isDesk,
                       labelText: context.l10n.companyEmail,

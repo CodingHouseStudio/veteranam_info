@@ -48,6 +48,7 @@ class _DeskField extends StatelessWidget {
               Expanded(
                 child: TextFieldWidget(
                   widgetKey: FeedbackKeys.nameField,
+                  keyboardType: TextInputType.name,
                   errorText: state.name.error.value(context),
                   isRequired: true,
                   showErrorText: state.formState == FeedbackEnum.invalidData,
@@ -63,6 +64,7 @@ class _DeskField extends StatelessWidget {
                 Expanded(
                   child: TextFieldWidget(
                     widgetKey: FeedbackKeys.emailField,
+                    keyboardType: TextInputType.emailAddress,
                     showErrorText: state.formState == FeedbackEnum.invalidData,
                     isRequired: true,
                     errorText: state.email.error.value(context),
@@ -95,6 +97,7 @@ class _MobField extends StatelessWidget {
         if (context.read<UserWatcherBloc>().state.user.name?.isEmpty ?? true)
           TextFieldWidget(
             widgetKey: FeedbackKeys.nameField,
+            keyboardType: TextInputType.name,
             showErrorText: state.formState == FeedbackEnum.invalidData,
             errorText: state.name.error.value(context),
             isRequired: true,
@@ -109,6 +112,7 @@ class _MobField extends StatelessWidget {
           KSizedBox.kHeightSizedBox16,
           TextFieldWidget(
             widgetKey: FeedbackKeys.emailField,
+            keyboardType: TextInputType.emailAddress,
             showErrorText: state.formState == FeedbackEnum.invalidData,
             errorText: state.email.error.value(context),
             isRequired: true,

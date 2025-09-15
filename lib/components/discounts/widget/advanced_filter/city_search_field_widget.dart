@@ -56,6 +56,7 @@ class _CitySearchFieldWidgetState extends State<CitySearchFieldWidget> {
   Widget build(BuildContext context) {
     return TextFieldWidget(
       widgetKey: DiscountsFilterKeys.citySearchField,
+      keyboardType: TextInputType.text,
       onChanged: (value) => context
           .read<DiscountsWatcherBloc>()
           .add(DiscountsWatcherEvent.searchLocation(value)),

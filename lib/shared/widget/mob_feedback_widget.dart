@@ -36,6 +36,7 @@ class MobFeedbackWidget extends StatelessWidget {
                         const EdgeInsets.only(top: KPadding.kPaddingSize16),
                     child: TextFieldWidget(
                       widgetKey: MobFeedbackKeys.emailField,
+                      keyboardType: TextInputType.emailAddress,
                       // controller: controller,
                       labelText: KMockText.email,
                       isRequired: true,
@@ -57,6 +58,7 @@ class MobFeedbackWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox8,
             TextFieldWidget(
               widgetKey: MobFeedbackKeys.messageField,
+              keyboardType: TextInputType.multiline,
               // controller: controller,
               labelText: context.l10n.writeMessage, isRequired: true,
               // textInputAction: TextInputAction.done,

@@ -144,6 +144,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
         ] else
           TextFieldWidget(
             widgetKey: EmailPasswordFieldsKeys.fieldEmail,
+            keyboardType: TextInputType.emailAddress,
             onChanged: widget.onChangedEmail,
             isRequired: true,
             errorText: widget.errorTextEmail,

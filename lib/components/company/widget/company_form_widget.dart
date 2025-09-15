@@ -148,6 +148,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: CompanyKeys.publicNameField,
+                        keyboardType: TextInputType.name,
                         controller: publicNameController,
                         labelText: context.l10n.brandName,
                         isRequired: true,
@@ -161,6 +162,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: CompanyKeys.companyNameField,
+                        keyboardType: TextInputType.name,
                         controller: companyNameController,
                         isRequired: true,
                         description: context.l10n.companyNameDescription,
@@ -174,6 +176,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: CompanyKeys.companyCodeField,
+                        keyboardType: TextInputType.number,
                         controller: codeController,
                         isRequired: true,
                         labelText: context.l10n.companyCode,
@@ -187,6 +190,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: CompanyKeys.userEmailField,
+                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         isRequired: true,
                         labelText: KMockText.email,
@@ -198,6 +202,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
                       KSizedBox.kHeightSizedBox32,
                       _textField(
                         fieldKey: CompanyKeys.linkField,
+                        keyboardType: TextInputType.url,
                         controller: linkController,
                         labelText: context.l10n.linkOnWebsite,
                         onChanged: (text) => context
@@ -313,11 +318,13 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     String? description,
     void Function(String text)? onChanged,
     bool enabled = true,
+    TextInputType? keyboardType,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
       isRequired: isRequired,
       enabled: enabled,
+      keyboardType: keyboardType,
       controller: controller,
       labelText: labelText,
       description: description,

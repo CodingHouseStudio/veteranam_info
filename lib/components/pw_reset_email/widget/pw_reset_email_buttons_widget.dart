@@ -43,6 +43,7 @@ class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
                 : EdgeInsets.zero,
             child: TextFieldWidget(
               widgetKey: PwResetEmailKeys.emailField,
+              keyboardType: TextInputType.emailAddress,
               onChanged: (text) => context
                   .read<PwResetEmailBloc>()
                   .add(PwResetEmailEvent.emailUpdated(text)),

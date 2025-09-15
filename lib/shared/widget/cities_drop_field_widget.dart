@@ -100,6 +100,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
           TextFieldWidget(
         isDesk: isDesk,
         labelText: context.l10n.selectCity,
+        keyboardType: TextInputType.text,
         key: textFieldKey,
         widgetKey: key,
         controller: controller,

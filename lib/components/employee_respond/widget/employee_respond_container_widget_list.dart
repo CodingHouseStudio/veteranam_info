@@ -22,6 +22,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: EmployeeRespondKeys.emailField,
+      keyboardType: TextInputType.emailAddress,
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.emailUpdated(value),
           ),
@@ -45,6 +46,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: EmployeeRespondKeys.phoneNumberField,
+      keyboardType: TextInputType.phone,
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.phoneUpdated(value),
           ),

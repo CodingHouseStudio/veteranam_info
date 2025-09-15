@@ -98,6 +98,7 @@ class NotificationLinkWidget extends StatelessWidget {
   ) =>
       TextFieldWidget(
         widgetKey: NotificationLinkKeys.field,
+        keyboardType: TextInputType.url,
         onChanged: onChanged,
         isDesk: isDesk,
         suffixIcon: KIcon.link,

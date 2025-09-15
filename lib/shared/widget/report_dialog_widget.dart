@@ -136,6 +136,7 @@ class ReportDialogWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox16,
                 TextFieldWidget(
                   widgetKey: ReportDialogKeys.emailField,
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (text) => context
                       .read<ReportBloc>()
                       .add(ReportEvent.emailUpdated(text)),

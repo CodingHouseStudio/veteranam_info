@@ -183,6 +183,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
   ) =>
       TextFieldWidget(
         widgetKey: UserEmailDialogKeys.field,
+        keyboardType: TextInputType.emailAddress,
         onChanged: widget.onChanged,
         isRequired: true,
         isDesk: widget.isDesk,
