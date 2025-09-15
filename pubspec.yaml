@@ -16,7 +16,7 @@ dependencies:
   collection: ^1.19.1
   connectivity_plus: ^6.1.5
   dartz: ^0.10.1
-  device_info_plus: ^11.5.0
+  device_info_plus: ^12.1.0
   dio: ^5.9.0
   easy_debounce: ^2.0.3
   email_validator: ^3.0.0
