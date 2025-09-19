@@ -45,7 +45,9 @@ class DiscountBodyWidget extends StatelessWidget {
                         SliverToBoxAdapter(
                           child: BackButtonWidget(
                             backPageName: context.l10n.toDiscounts,
-                            pathName: KRoute.discounts.name,
+                            pathName: Config.isBusiness
+                                ? KRoute.myDiscounts.name
+                                : KRoute.discounts.name,
                             buttonKey: DiscountKeys.backButton,
                             textKey: DiscountKeys.backText,
                           ),
