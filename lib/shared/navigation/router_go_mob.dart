@@ -247,7 +247,7 @@ GoRouter router = GoRouter(
     ),
     // Redirect from all path to Discounts page
     GoRoute(
-      path: '/:rest',
+      path: '/:rest*',
       redirect: (context, state) {
         SomeFailure.value(
           error: 'User opened unkown path - ${state.path}',
