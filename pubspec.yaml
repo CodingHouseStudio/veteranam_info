@@ -34,6 +34,10 @@ dependencies:
   firebase_storage: ^13.0.1
   flutter:
     sdk: flutter
+  flutter_app_badger:
+    git:
+      url: https://github.com/g123k/flutter_app_badger.git
+      ref: 33cbee6
   flutter_bloc: ^9.1.1
   flutter_facebook_auth: ^7.1.2
   flutter_local_notifications: ^19.4.1

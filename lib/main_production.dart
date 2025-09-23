@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -7,9 +8,12 @@ import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart'
     show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
+import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
+import 'package:veteranam/shared/bloc/badger/badger_cubit.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
@@ -20,6 +24,20 @@ import 'package:veteranam/shared/repositories/failure_repository.dart';
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Handling a background message: ${message.messageId}');
+
+  if (await FlutterAppBadger.isAppBadgeSupported()) {
+    final sharedPrefences = await SharedPreferences.getInstance();
+
+    final currentValue = sharedPrefences.getInt(BadgerCubit.badgeCacheKey);
+
+    final newValue = (currentValue ?? 0) + 1;
+
+    final checkValue = newValue > 0 ? newValue : 1;
+
+    await FlutterAppBadger.updateBadgeCount(checkValue);
+
+    await sharedPrefences.setInt(BadgerCubit.badgeCacheKey, checkValue);
+  }
 }
 
 /// COMMENT: PROD main file
@@ -28,6 +46,8 @@ Future<void> main() async {
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   if (Config.isReleaseMode) {
     if (Config.isWeb) {
@@ -129,8 +149,6 @@ Future<void> main() async {
   //   version: 'v15.0',
   // );
   // }
-
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await bootstrap(App.new);
 }

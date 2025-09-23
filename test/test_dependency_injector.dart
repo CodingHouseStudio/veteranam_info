@@ -438,6 +438,11 @@ void configureDependenciesTest() {
       firebaseAnalyticsService: getItTest.get<FirebaseAnalyticsService>(),
     ),
   );
+  getItTest.registerFactory<BadgerCubit>(
+    () => BadgerCubit(
+      sharedPrefencesProvider: getItTest.get<SharedPrefencesProvider>(),
+    ),
+  );
 }
 
 void configureFailureDependenciesTest() {

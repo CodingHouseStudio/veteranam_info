@@ -718,6 +718,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_app_badger:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "33cbee6"
+      resolved-ref: "33cbee625e279b77ad80c6486f93fc154f1bb04a"
+      url: "https://github.com/g123k/flutter_app_badger.git"
+    source: git
+    version: "1.5.0"
   flutter_bloc:
     dependency: "direct main"
     description:
