@@ -111,6 +111,7 @@ void main() {
       DiscountModelJsonField.isVerified: false,
       DiscountModelJsonField.expirationDate:
           KTestVariables.dateTime.toIso8601String(),
+      DiscountModelJsonField.expirationFilterValue: 100,
       // DiscountModelJsonField.eligibilityEN: KTestVariables
       //     .discountModelItems.last.eligibility
       //     ?.getTrsnslation(isEnglish: false),
@@ -181,6 +182,7 @@ void main() {
       DiscountModelJsonField.isVerified: true,
       DiscountModelJsonField.expirationDate: null,
       // DiscountModelJsonField.eligibilityEN: null,
+      DiscountModelJsonField.expirationFilterValue: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -229,6 +231,10 @@ void main() {
         expect(
           discountModel.discount,
           KTestVariables.discountModelItems.last.discount,
+        );
+        expect(
+          discountModel.expirationFilterValue,
+          100,
         );
         // expect(
         //   discountModel.eligibility,
@@ -531,6 +537,10 @@ void main() {
           discountModel.expirationDate,
           null,
         );
+        expect(
+          discountModel.expirationFilterValue,
+          null,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -613,6 +623,7 @@ void main() {
               KTestVariables.discountModelItems.last.likes,
           DiscountModelJsonField.isVerified: true,
           DiscountModelJsonField.expirationDate: KTestVariables.dateTime,
+          DiscountModelJsonField.expirationFilterValue: 10,
         };
 
         expect(
@@ -628,6 +639,7 @@ void main() {
               images: KTestVariables.imagesList,
               isVerified: false,
               expirationDate: KTestVariables.dateTime,
+              expirationFilterValue: 100,
             )
             .toJson();
 
@@ -655,6 +667,7 @@ void main() {
               eligibility: const [EligibilityEnum.all],
               likes: null,
               isVerified: true,
+              expirationFilterValue: null,
             )
             .toJson();
 
