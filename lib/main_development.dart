@@ -6,9 +6,13 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart'
     show DiagnosticLevel, PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
+import 'package:flutter_app_badger/flutter_app_badger.dart'
+    deferred as app_badger;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
+import 'package:veteranam/shared/bloc/badger/badger_cubit.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/constants/security_keys.dart';
@@ -19,6 +23,19 @@ import 'package:veteranam/shared/repositories/failure_repository.dart';
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Handling a background message: ${message.messageId}');
+  await app_badger.loadLibrary();
+  // Update Badge count for background
+  if (await app_badger.FlutterAppBadger.isAppBadgeSupported()) {
+    final sharedPrefences = await SharedPreferences.getInstance();
+
+    final currentValue = sharedPrefences.getInt(BadgerCubit.badgeCacheKey);
+
+    final newValue = (currentValue ?? 0) + 1;
+
+    await app_badger.FlutterAppBadger.updateBadgeCount(newValue);
+
+    await sharedPrefences.setInt(BadgerCubit.badgeCacheKey, newValue);
+  }
 }
 
 /// COMMENT: DEV main file

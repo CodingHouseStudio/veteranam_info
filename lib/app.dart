@@ -59,6 +59,10 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => GetIt.I.get<MobileAdsCubit>(),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<BadgerCubit>(),
+            lazy: false,
+          ),
         ],
         if (Config.isBusiness)
           BlocProvider(

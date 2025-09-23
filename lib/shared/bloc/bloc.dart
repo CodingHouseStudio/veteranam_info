@@ -2,6 +2,7 @@ export 'app_version/app_version_cubit.dart';
 export 'authentication/authentication_bloc.dart';
 export 'authentication/listenable.dart';
 export 'authentication_services/authentication_services_cubit.dart';
+export 'badger/badger_cubit.dart';
 export 'company/company_watcher_bloc.dart';
 export 'cookies_dialog/cookies_dialog_cubit.dart';
 export 'mob_feedback/mob_feedback_bloc.dart';
