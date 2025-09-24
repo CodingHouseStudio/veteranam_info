@@ -20,7 +20,8 @@ class BadgerCubit extends Cubit<bool> {
   Future<void> removeBadge() async {
     final result = await valueFutureErrorHelper(
       () async {
-        if (await FlutterAppBadger.isAppBadgeSupported()) {
+        if (_sharedPrefencesProvider.getInt(badgeCacheKey) != null &&
+            await FlutterAppBadger.isAppBadgeSupported()) {
           await FlutterAppBadger.removeBadge();
           await _sharedPrefencesProvider.remove(badgeCacheKey);
           return true;

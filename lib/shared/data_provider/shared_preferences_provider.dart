@@ -71,6 +71,16 @@ class SharedPrefencesProvider {
     );
   }
 
+  int? getInt(String key) {
+    return valueErrorHelper(
+      () => _sharedPreferences.getInt(key),
+      failureValue: null,
+      methodName: 'getString',
+      className: 'Shared Prefences ${ErrorText.repositoryKey}',
+      data: 'Key: $key',
+    );
+  }
+
   Future<bool> remove(
     String key,
   ) async {
