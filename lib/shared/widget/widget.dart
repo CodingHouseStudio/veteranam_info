@@ -1,5 +1,6 @@
 export 'amount_widget.dart';
 export 'asset_image_widget.dart';
+export 'authentication_button.dart';
 export 'back_button_widget.dart';
 export 'badger_controller_widget.dart';
 export 'box_widget.dart';

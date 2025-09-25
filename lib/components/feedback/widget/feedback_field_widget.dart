@@ -162,15 +162,48 @@ class _MessagePart extends StatelessWidget {
           style: AppTextStyle.materialThemeBodySmall,
         ),
         KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: FeedbackKeys.button,
-          text: context.l10n.sendMessage,
-          isDesk: isDesk,
-          onPressed: () =>
-              context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
-          mobVerticalTextPadding: KPadding.kPaddingSize16,
-          mobIconPadding: KPadding.kPaddingSize16,
-          darkMode: true,
+        BlocBuilder<NetworkCubit, NetworkStatus>(
+          builder: (context, state) {
+            final button = DoubleButtonWidget(
+              widgetKey: FeedbackKeys.button,
+              text: context.l10n.sendMessage,
+              isDesk: isDesk,
+              onPressed: state.isOffline
+                  ? null
+                  : () => context
+                      .read<FeedbackBloc>()
+                      .add(const FeedbackEvent.save()),
+              mobVerticalTextPadding: KPadding.kPaddingSize16,
+              mobIconPadding: KPadding.kPaddingSize16,
+              darkMode: true,
+              color: state.isOffline
+                  ? AppColors.materialThemeRefNeutralVariantNeutralVariant40
+                  : null,
+              textColor: state.isOffline
+                  ? AppColors.materialThemeRefNeutralNeutral90
+                  : null,
+            );
+            if (state.isOffline) {
+              return Column(
+                children: [
+                  button,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: KPadding.kPaddingSize8,
+                      left: KPadding.kPaddingSize8,
+                      right: KPadding.kPaddingSize8,
+                    ),
+                    child: Text(
+                      context.l10n.networkFailure,
+                      style: AppTextStyle.materialThemeBodyMediumError,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return button;
+            }
+          },
         ),
       ],
     );

@@ -203,29 +203,61 @@ class ReportDialogWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox32,
-            DoubleButtonWidget(
-              widgetKey: ReportDialogKeys.sendButton,
-              text: _.formState == ReportEnum.sumbittedWithoutEmail
-                  ? context.l10n.cancel
-                  : _.formState.isNext
-                      ? context.l10n.send
-                      : context.l10n.next,
-              isDesk: isDesk,
-              onPressed: _.formState == ReportEnum.success
-                  ? null
-                  : () => _.formState == ReportEnum.sumbittedWithoutEmail
-                      ? context
-                          .read<ReportBloc>()
-                          .add(const ReportEvent.cancel())
-                      : context
-                          .read<ReportBloc>()
-                          .add(const ReportEvent.send()),
-              darkMode: true,
-              hasAlign: !isDesk,
-              mobTextWidth: double.infinity,
-              mobVerticalTextPadding: KPadding.kPaddingSize16,
-              mobIconPadding: KPadding.kPaddingSize16,
-              align: Alignment.center,
+            BlocBuilder<NetworkCubit, NetworkStatus>(
+              builder: (context, state) {
+                final button = DoubleButtonWidget(
+                  widgetKey: ReportDialogKeys.sendButton,
+                  text: _.formState == ReportEnum.sumbittedWithoutEmail
+                      ? context.l10n.cancel
+                      : _.formState.isNext
+                          ? context.l10n.send
+                          : context.l10n.next,
+                  isDesk: isDesk,
+                  onPressed: _.formState == ReportEnum.success ||
+                          (state.isOffline && _.formState.isNext)
+                      ? null
+                      : () => _.formState == ReportEnum.sumbittedWithoutEmail
+                          ? context
+                              .read<ReportBloc>()
+                              .add(const ReportEvent.cancel())
+                          : context
+                              .read<ReportBloc>()
+                              .add(const ReportEvent.send()),
+                  darkMode: true,
+                  hasAlign: !isDesk,
+                  mobTextWidth: double.infinity,
+                  mobVerticalTextPadding: KPadding.kPaddingSize16,
+                  mobIconPadding: KPadding.kPaddingSize16,
+                  align: Alignment.center,
+                  color: state.isOffline && _.formState.isNext
+                      ? AppColors.materialThemeRefNeutralVariantNeutralVariant40
+                      : null,
+                  textColor: state.isOffline && _.formState.isNext
+                      ? AppColors.materialThemeRefNeutralNeutral90
+                      : null,
+                );
+                if (state.isOffline) {
+                  return Column(
+                    children: [
+                      button,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: KPadding.kPaddingSize8,
+                          left: KPadding.kPaddingSize8,
+                          right: KPadding.kPaddingSize8,
+                          bottom: KPadding.kPaddingSize16,
+                        ),
+                        child: Text(
+                          context.l10n.networkFailure,
+                          style: AppTextStyle.materialThemeBodyMediumError,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return button;
+                }
+              },
             ),
           ],
         ),

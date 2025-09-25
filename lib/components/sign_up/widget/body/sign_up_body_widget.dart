@@ -50,7 +50,7 @@ class SignUpBodyWidget extends StatelessWidget {
                     EmailPasswordFieldsWidget(
                       key: SignUpKeys.fields,
                       isDesk: isDesk,
-                      showPassword: showPassword(_.formState),
+                      showPassword: _.formState.isPassword,
                       onChangedEmail: (value) => context
                           .read<SignUpBloc>()
                           .add(SignUpEvent.emailUpdated(value)),
@@ -73,26 +73,13 @@ class SignUpBodyWidget extends StatelessWidget {
                       KSizedBox.kHeightSizedBox24
                     else
                       KSizedBox.kHeightSizedBox16,
-                    DoubleButtonWidget(
-                      widgetKey: SignUpKeys.button,
-                      text: showPassword(_.formState)
-                          ? context.l10n.register
-                          : context.l10n.next,
-                      onPressed: () => context.read<SignUpBloc>().add(
+                    AuthenticationButton(
+                      buttonKey: SignUpKeys.button,
+                      isDesk: isDesk,
+                      isPassword: _.formState.isPassword,
+                      action: () => context.read<SignUpBloc>().add(
                             const SignUpEvent.signUpSubmitted(),
                           ),
-                      isDesk: isDesk,
-                      // color: AppColors.materialThemeKeyColorsSecondary,
-                      // textColor: AppColors.materialThemeWhite,
-                      deskPadding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize64,
-                        vertical: KPadding.kPaddingSize12,
-                      ),
-                      mobTextWidth: double.infinity,
-                      mobHorizontalTextPadding: KPadding.kPaddingSize60,
-                      mobVerticalTextPadding: KPadding.kPaddingSize12,
-                      mobIconPadding: KPadding.kPaddingSize12,
-                      darkMode: true,
                     ),
                     SendingTextWidget(
                       textKey: SignUpKeys.submitingText,
@@ -193,9 +180,4 @@ class SignUpBodyWidget extends StatelessWidget {
       ],
     );
   }
-
-  bool showPassword(SignUpEnum current) =>
-      current == SignUpEnum.passwordInProgress ||
-      current == SignUpEnum.showPassword ||
-      current == SignUpEnum.passwordInvalidData;
 }

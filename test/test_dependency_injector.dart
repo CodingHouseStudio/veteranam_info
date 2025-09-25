@@ -69,6 +69,7 @@ void configureDependenciesTest() {
   mobBuild();
   appLayoutCubitInit();
   firebaseAnalyticsCacheInit();
+  networkRepositoryInit();
 
   // Service
   getItTest.registerSingleton<FirebaseFirestore>(
@@ -167,12 +168,6 @@ void configureDependenciesTest() {
     ),
   );
 
-  getItTest.registerSingleton<IAppNetworkRepository>(
-    AppNetworkRepository(
-      connectivity: getItTest.get<Connectivity>(),
-      cache: CacheClient(),
-    ),
-  );
   getItTest.registerSingleton<NetworkRepository>(
     NetworkRepository(
       appNetworkRepository: getItTest.get<IAppNetworkRepository>(),
