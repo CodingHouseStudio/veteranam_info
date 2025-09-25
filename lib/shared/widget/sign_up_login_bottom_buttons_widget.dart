@@ -61,7 +61,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
             context: context,
             isDesk: isDesk,
             text: context.l10n.apple,
-            icon: KIcon.apple,
+            icon: (iconColor) => KIcon.apple.copyWith(color: iconColor),
             onPressed: () => context
                 .read<AuthenticationServicesCubit>()
                 .authenticationUseApple(),
@@ -132,7 +132,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
         context: context,
         isDesk: isDesk,
         text: context.l10n.google,
-        icon: KIcon.google,
+        icon: (iconColor) => KIcon.google.copyWith(color: iconColor),
         onPressed: () => context
             .read<AuthenticationServicesCubit>()
             .authenticationUseGoogle(),
@@ -158,17 +158,28 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     required bool isDesk,
     required Key key,
     required String text,
-    required Widget icon,
+    required Widget Function(Color iconColor) icon,
     required void Function() onPressed,
   }) =>
-      ButtonAdditionalWidget(
-        key: key,
-        text: text,
-        picture: icon,
-        onPressed: onPressed,
-        isDesk: isDesk,
-        expanded: false,
-        hasAlign: !isDesk,
+      BlocBuilder<NetworkCubit, NetworkStatus>(
+        builder: (context, state) => ButtonAdditionalWidget(
+          key: key,
+          text: text,
+          picture: icon(
+            state.isOffline
+                ? AppColors.materialThemeKeyColorsNeutralVariant
+                : AppColors.materialThemeWhite,
+          ),
+          onPressed: state.isOffline ? null : onPressed,
+          isDesk: isDesk,
+          expanded: false,
+          hasAlign: !isDesk,
+          backgroundColor:
+              state.isOffline ? AppColors.materialThemeKeyColorsNeutral : null,
+          textStyle: state.isOffline
+              ? AppTextStyle.materialThemeTitleMediumNeutralVariant50
+              : null,
+        ),
       );
 
   // Widget buildBottomButton({

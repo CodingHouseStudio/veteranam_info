@@ -71,26 +71,14 @@ class LoginBodyWidget extends StatelessWidget {
                       KSizedBox.kHeightSizedBox24
                     else
                       KSizedBox.kHeightSizedBox16,
-                    DoubleButtonWidget(
-                      widgetKey: LoginKeys.button,
-                      text: showPassword(_.formState)
-                          ? context.l10n.login
-                          : context.l10n.next,
-                      onPressed: () => context.read<LoginBloc>().add(
+
+                    AuthenticationButton(
+                      buttonKey: LoginKeys.button,
+                      isDesk: isDesk,
+                      isPassword: _.formState.isPassword,
+                      action: () => context.read<LoginBloc>().add(
                             const LoginEvent.loginSubmitted(),
                           ),
-                      isDesk: isDesk,
-                      // color: AppColors.materialThemeKeyColorsSecondary,
-                      // textColor: AppColors.materialThemeWhite,
-                      deskPadding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize64,
-                        vertical: KPadding.kPaddingSize12,
-                      ),
-                      mobTextWidth: double.infinity,
-                      mobHorizontalTextPadding: KPadding.kPaddingSize60,
-                      mobVerticalTextPadding: KPadding.kPaddingSize12,
-                      mobIconPadding: KPadding.kPaddingSize12,
-                      darkMode: true,
                     ),
                     SendingTextWidget(
                       textKey: LoginKeys.submitingText,

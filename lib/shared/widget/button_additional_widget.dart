@@ -20,6 +20,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
     super.key,
     this.align,
     this.hasAlign = true,
+    this.textStyle,
   });
 
   final void Function()? onPressed;
@@ -35,6 +36,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
   final Color? borderColor;
   final Widget? rightWidget;
   final bool hasAlign;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +112,7 @@ class ButtonAdditionalWidget extends StatelessWidget {
     return Text(
       text,
       key: ButtonAdditionalKeys.text,
-      style: AppTextStyle.materialThemeTitleMedium,
+      style: textStyle ?? AppTextStyle.materialThemeTitleMedium,
       //textAlign: TextAlign.center,
     );
   }

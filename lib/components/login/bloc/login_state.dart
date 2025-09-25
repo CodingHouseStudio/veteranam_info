@@ -35,5 +35,10 @@ enum LoginEnum {
   passwordInProgress,
   passwordInvalidData,
   // loginLoading,
-  success
+  success;
+
+  bool get isPassword =>
+      this == LoginEnum.showPassword ||
+      this == LoginEnum.passwordInProgress ||
+      this == LoginEnum.passwordInvalidData;
 }

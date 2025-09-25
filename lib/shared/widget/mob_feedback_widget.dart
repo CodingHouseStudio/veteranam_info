@@ -72,20 +72,53 @@ class MobFeedbackWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox16,
             // if (widget.scrollController != null)
             //   const FeedbackSheetDragHandle(),
-            DoubleButtonWidget(
-              widgetKey: MobFeedbackKeys.button,
-              text: context.l10n.send, darkMode: true,
-              isDesk: false, mobVerticalTextPadding: KPadding.kPaddingSize12,
-              mobIconPadding: KPadding.kPaddingSize12,
-              mobHorizontalTextPadding: KPadding.kPaddingSize64,
-
-              onPressed: () => _.message.isValid
-                  ? onSubmit(
-                      _.message.value,
-                    )
-                  : context.read<MobFeedbackBloc>().add(
-                        const MobFeedbackEvent.send(null),
-                      ), //() => widget.onSubmit(controller.text),
+            BlocBuilder<NetworkCubit, NetworkStatus>(
+              builder: (context, state) {
+                final button = DoubleButtonWidget(
+                  widgetKey: MobFeedbackKeys.button,
+                  text: context.l10n.send, darkMode: true,
+                  isDesk: false,
+                  mobVerticalTextPadding: KPadding.kPaddingSize12,
+                  mobIconPadding: KPadding.kPaddingSize12,
+                  mobHorizontalTextPadding: KPadding.kPaddingSize64,
+                  color: state.isOffline
+                      ? AppColors.materialThemeRefNeutralVariantNeutralVariant40
+                      : null,
+                  textColor: state.isOffline
+                      ? AppColors.materialThemeRefNeutralNeutral90
+                      : null,
+                  onPressed: state.isOffline
+                      ? null
+                      : () => _.message.isValid
+                          ? onSubmit(
+                              _.message.value,
+                            )
+                          : context.read<MobFeedbackBloc>().add(
+                                const MobFeedbackEvent.send(null),
+                              ), //() => widget.onSubmit(controller.text),
+                );
+                if (state.isOffline) {
+                  return Column(
+                    children: [
+                      button,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: KPadding.kPaddingSize4,
+                          left: KPadding.kPaddingSize8,
+                          right: KPadding.kPaddingSize8,
+                          bottom: KPadding.kPaddingSize16,
+                        ),
+                        child: Text(
+                          context.l10n.networkFailure,
+                          style: AppTextStyle.materialThemeBodyMediumError,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return button;
+                }
+              },
             ),
           ],
         );
