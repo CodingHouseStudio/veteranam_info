@@ -51,9 +51,11 @@ class DiscountsBlocListener extends StatelessWidget {
                 // if (Config.isWeb) {
                 if (context.read<UserWatcherBloc>().state.user.email?.isEmpty ??
                     true) {
-                  context.dialog.showUserEmailDialog(
-                    context.read<DiscountConfigCubit>().state.emailCloseDelay,
-                  );
+                  if (!context.read<NetworkCubit>().state.isOffline) {
+                    context.dialog.showUserEmailDialog(
+                      context.read<DiscountConfigCubit>().state.emailCloseDelay,
+                    );
+                  }
                 }
               }
               // } else {
