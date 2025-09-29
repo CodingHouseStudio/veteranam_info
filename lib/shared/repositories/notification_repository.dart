@@ -24,7 +24,7 @@ class LocalNotificationRepository {
         // Android initialization
         final initializationSettingsAndroid =
             local_notifications.AndroidInitializationSettings(
-          '@mipmap/ic_launcher',
+          '@drawable/ic_notification',
         );
 
         // iOS initialization
@@ -32,7 +32,7 @@ class LocalNotificationRepository {
             local_notifications.DarwinInitializationSettings(
           notificationCategories: [
             local_notifications.DarwinNotificationCategory(
-              'ice_cream_category',
+              'veteranam_category',
               options: {
                 local_notifications
                     .DarwinNotificationCategoryOption.hiddenPreviewShowTitle,
