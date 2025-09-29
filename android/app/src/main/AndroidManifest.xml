@@ -12,6 +12,13 @@
         android:icon="@mipmap/ic_launcher"
        android:roundIcon="@mipmap/ic_launcher_round">
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white" />
 
         <!--TODO: Needs value-->
         <!-- <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
