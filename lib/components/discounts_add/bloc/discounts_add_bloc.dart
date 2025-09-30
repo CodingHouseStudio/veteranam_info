@@ -572,9 +572,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
                 uk: _companyRepository.currentUserCompany.publicName!,
               ),
         eligibility: state.eligibility.value,
-        requirements: TranslateModel(
-          uk: state.requirements.value,
-        ),
+        requirements: state.requirements.value.isNotEmpty
+            ? TranslateModel(
+                uk: state.requirements.value,
+              )
+            : null,
         expiration: _getExpiration,
         expirationDate: state.isIndefinitely ? null : state.period.value,
         dateVerified: state.discount?.dateVerified ?? ExtendedDateTime.current,
