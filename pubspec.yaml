@@ -67,7 +67,7 @@ dependencies:
   # printing: ^5.13.1
   path_provider: ^2.1.5
   sentry_flutter: ^9.6.0
-  share_plus: ^11.1.0
+  share_plus: ^12.0.1
   shared_preferences: ^2.5.3
   sign_in_with_apple: ^7.0.1
   skeletonizer: ^2.1.0
