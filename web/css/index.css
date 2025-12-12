@@ -373,7 +373,6 @@ body {
     vertical-align: middle;
     position: absolute;
     display: flex;
-    margin-top: var(--loader-margin-top);
     justify-content: center;
     top: 70%;
     left: 50%;
