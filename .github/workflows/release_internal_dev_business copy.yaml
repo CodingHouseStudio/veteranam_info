@@ -24,7 +24,7 @@ jobs:
     with:
       FLAVOUR: "development"
       run_sentry_plugin: true
-      project_name: "veteran-business"
+      project_name: "dev-veteran-business"
       ROLE: "business"
   #  ios-build:
   #    name: Deploy beta build to TestFlight
