@@ -22,7 +22,7 @@ jobs:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_build.yml@main
     secrets: inherit
     with:
-      FLAVOUR: "production"
+      FLAVOUR: "development"
       run_sentry_plugin: true
       project_name: "veteran-business"
       ROLE: "business"
