@@ -1,6 +1,7 @@
 import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/shared/helper/utm_url_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class SharedIconListWidget extends StatelessWidget {
@@ -129,7 +130,7 @@ class SharedIconListWidget extends StatelessWidget {
                 textStyle: AppTextStyle.materialThemeBodyMedium,
                 onPressed: () => context.openLinkWithAgreeDialog(
                   isDesk: dialogIsDesk ?? isDesk,
-                  link: link!,
+                  link: _websiteLink(),
                 ),
                 buttonStyle: KButtonStyles.transparentSharedIconButtonStyle,
                 iconSpacing: KPadding.kPaddingSize16,
@@ -197,7 +198,7 @@ class SharedIconListWidget extends StatelessWidget {
       icon: KIcon.captivePortal,
       onPressed: () => context.openLinkWithAgreeDialog(
         isDesk: dialogIsDesk ?? isDesk,
-        link: link!,
+        link: _websiteLink(),
       ),
       label: context.l10n.webSite,
       border: iconBorder ??
@@ -206,6 +207,13 @@ class SharedIconListWidget extends StatelessWidget {
                   color: AppColors.materialThemeKeyColorsNeutral,
                 )
               : null),
+    );
+  }
+
+  String _websiteLink() {
+    return UtmUrlHelper.withUtm(
+      rawUrl: link ?? '',
+      campaign: 'discount',
     );
   }
 
