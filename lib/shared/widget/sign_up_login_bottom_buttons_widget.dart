@@ -61,7 +61,9 @@ class SignUpLoginServiceWidget extends StatelessWidget {
             context: context,
             isDesk: isDesk,
             text: context.l10n.apple,
-            icon: (iconColor) => KIcon.apple.copyWith(color: iconColor),
+            icon: (iconColor) => _AppleIcon(
+              color: iconColor,
+            ),
             onPressed: () => context
                 .read<AuthenticationServicesCubit>()
                 .authenticationUseApple(),
@@ -211,4 +213,20 @@ class SignUpLoginServiceWidget extends StatelessWidget {
   //     isDesk: isDesk,
   //   );
   // }
+}
+
+class _AppleIcon extends StatelessWidget {
+  const _AppleIcon({
+    required this.color,
+  });
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: const Offset(0, -1),
+      child: KIcon.apple.copyWith(color: color),
+    );
+  }
 }
