@@ -1,5 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/models/models.dart';
 
 /// Service for managing Stripe subscriptions via Cloud Functions
 @injectable

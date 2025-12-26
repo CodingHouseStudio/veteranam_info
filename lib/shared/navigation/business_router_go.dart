@@ -197,6 +197,26 @@ GoRouter businessRouter = GoRouter(
         child: const InvestorsScreen(),
       ),
     ),
+    GoRoute(
+      name: KRoute.subscriptionSuccess.name,
+      path: '/${KRoute.subscriptionSuccess.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const SubscriptionSuccessScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.subscriptionCanceled.name,
+      path: '/${KRoute.subscriptionCanceled.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const SubscriptionCanceledScreen(),
+      ),
+    ),
     //   ],
     // ),
     // if (Config.isDevelopment)
