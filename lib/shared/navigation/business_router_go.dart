@@ -17,6 +17,8 @@ import 'package:veteranam/components/my_discounts/view/my_discounts_view.dart';
 import 'package:veteranam/components/password_reset/view/password_reset_view.dart';
 import 'package:veteranam/components/pw_reset_email/view/pw_reset_email_view.dart';
 import 'package:veteranam/components/sign_up/view/sign_up_view.dart';
+import 'package:veteranam/components/subscription/view/subscription_canceled_view.dart';
+import 'package:veteranam/components/subscription/view/subscription_success_view.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -193,6 +195,26 @@ GoRouter businessRouter = GoRouter(
         name: state.name,
         restorationId: state.pageKey.value,
         child: const InvestorsScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.subscriptionSuccess.name,
+      path: '/${KRoute.subscriptionSuccess.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const SubscriptionSuccessScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.subscriptionCanceled.name,
+      path: '/${KRoute.subscriptionCanceled.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        restorationId: state.pageKey.value,
+        child: const SubscriptionCanceledScreen(),
       ),
     ),
     //   ],

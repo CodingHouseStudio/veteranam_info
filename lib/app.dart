@@ -121,7 +121,7 @@ class AppWidget extends StatelessWidget {
         restorationScopeId: KAppText.logo,
         // scrollBehavior: CustomScrollBehavior(),
         localizationsDelegates: locale,
-        locale: localeValue,
+        locale: const Locale('en'), // Force English for testing
         supportedLocales: supportedLocales,
         routerConfig: Config.isUser ? router : businessRouter,
       );

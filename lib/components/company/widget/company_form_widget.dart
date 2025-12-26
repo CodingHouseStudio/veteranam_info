@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
+import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CompanyFormWidget extends StatefulWidget {
@@ -32,6 +33,8 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   late TextEditingController codeController;
   late TextEditingController emailController;
   late TextEditingController linkController;
+  late StripeCheckoutHelper _stripeCheckoutHelper;
+  String? _previousCompanyId;
 
   @override
   void initState() {
@@ -42,24 +45,64 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     codeController = TextEditingController(text: widget.initialCode);
     emailController = TextEditingController(text: widget.initialEmail);
     linkController = TextEditingController(text: widget.initialLink);
+    _stripeCheckoutHelper = StripeCheckoutHelper();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompanyFormBloc, CompanyFormState>(
-      // listener: (context, _) {
-      //   if (_.formState == CompanyFormEnum.delete) {
-      //     context.goNamed(KRoute.myDiscounts.name);
-      //   }
-      // },
-      buildWhen: (previous, current) =>
-          previous.formState != current.formState ||
-          previous.image != current.image ||
-          previous.deleteIsPossible != current.deleteIsPossible,
-      builder: (context, _) {
-        return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
+    return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
+      listener: (context, watcherState) async {
+        final currentCompanyId = watcherState.company.id;
+
+        debugPrint('CompanyWatcher: previousId=$_previousCompanyId, '
+            'currentId=$currentCompanyId, '
+            'stripeCustomerId=${watcherState.company.stripeCustomerId}');
+
+        // Check if company was just created (ID changed from empty)
+        if ((_previousCompanyId == null || _previousCompanyId!.isEmpty) &&
+            currentCompanyId.isNotEmpty) {
+          debugPrint('Company was just created! Checking subscription...');
+
+          // Trigger subscription flow if no Stripe customer exists
+          if (watcherState.company.stripeCustomerId == null ||
+              watcherState.company.stripeCustomerId!.isEmpty) {
+            debugPrint(
+              'Opening Stripe Checkout for company: $currentCompanyId',
+            );
+            try {
+              // Check authentication before opening checkout
+              final authStatus =
+                  context.read<AuthenticationBloc>().state.status;
+              debugPrint('Auth status: $authStatus');
+
+              await _stripeCheckoutHelper.openCheckout(
+                companyId: currentCompanyId,
+              );
+            } catch (e) {
+              // Handle error silently - user can set up subscription later
+              debugPrint('Stripe checkout error: $e');
+              debugPrint('Error stack trace: ${StackTrace.current}');
+            }
+          } else {
+            debugPrint('Company already has Stripe customer, skipping');
+          }
+        }
+        _previousCompanyId = currentCompanyId;
+      },
+      child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
+        // listener: (context, _) {
+        //   if (_.formState == CompanyFormEnum.delete) {
+        //     context.goNamed(KRoute.myDiscounts.name);
+        //   }
+        // },
+        buildWhen: (previous, current) =>
+            previous.formState != current.formState ||
+            previous.image != current.image ||
+            previous.deleteIsPossible != current.deleteIsPossible,
+        builder: (context, _) {
+          return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
           listener: (context, state) {
             context
                 .read<CompanyFormBloc>()
@@ -304,6 +347,7 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           ),
         );
       },
+      ),
     );
   }
 
