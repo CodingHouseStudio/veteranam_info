@@ -47,31 +47,33 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   void didChangeDependencies() {
-    if ((Config.isWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
-        (bytes?.isEmpty ?? true && (widget.imageBytes?.isEmpty ?? true))) {
-      precacheImage(
-        bytes == null
-            ? CachedNetworkImageProvider(
-                widget.imageUrl!.getImageUrl, // widget.imageUrl,
-                headers: const {
-                  'Cache-Control': 'max-age=3600',
-                },
-              )
-            : MemoryImage(
-                bytes!,
-              ),
-        context,
-        onError: (exception, stackTrace) {
-          SomeFailure.value(
-            error: exception,
-            stack: stackTrace,
-            tag: 'PrecacheImage',
-            tagKey: ErrorText.imageKey,
-            errorLevel: ErrorLevelEnum.info,
-            data: 'URL: ${widget.imageUrl!.getImageUrl}',
-          );
-        },
-      );
+    if (Config.isWeb) {
+      if ((context.read<MobOfflineModeCubit>().state.isOffline) &&
+          (bytes?.isEmpty ?? true && (widget.imageBytes?.isEmpty ?? true))) {
+        precacheImage(
+          bytes == null
+              ? CachedNetworkImageProvider(
+                  widget.imageUrl!.getImageUrl, // widget.imageUrl,
+                  headers: const {
+                    'Cache-Control': 'max-age=3600',
+                  },
+                )
+              : MemoryImage(
+                  bytes!,
+                ),
+          context,
+          onError: (exception, stackTrace) {
+            SomeFailure.value(
+              error: exception,
+              stack: stackTrace,
+              tag: 'PrecacheImage',
+              tagKey: ErrorText.imageKey,
+              errorLevel: ErrorLevelEnum.info,
+              data: 'URL: ${widget.imageUrl!.getImageUrl}',
+            );
+          },
+        );
+      }
     }
     super.didChangeDependencies();
   }
