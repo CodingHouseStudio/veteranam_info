@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
 
 class CompanyBodyWidget extends StatelessWidget {
   const CompanyBodyWidget({super.key});
@@ -69,17 +70,29 @@ class CompanyBodyWidget extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: BoxWidget(
-                  key: CompanyKeys.boxMyDiscounts,
-                  text: context.l10n.myDiscounts,
-                  onTap: () => myDiscountTap(context),
-                  isDesk: isDesk,
+                child: Column(
+                  spacing: KPadding.kPaddingSize16,
+                  children: [
+                    BoxWidget(
+                      key: CompanyKeys.boxMyDiscounts,
+                      text: context.l10n.myDiscounts,
+                      onTap: () => myDiscountTap(context),
+                      isDesk: isDesk,
+                    ),
+                    _buildManageSubscriptionBox(context, isDesk),
+                  ],
                 ),
               ),
             ],
           )
         else
-          _form(isDesk: isDesk, context: context),
+          Column(
+            children: [
+              _form(isDesk: isDesk, context: context),
+              KSizedBox.kHeightSizedBox16,
+              _buildManageSubscriptionBox(context, isDesk),
+            ],
+          ),
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else
@@ -107,4 +120,41 @@ class CompanyBodyWidget extends StatelessWidget {
     BuildContext context,
   ) =>
       context.goNamed(KRoute.myDiscounts.name);
+
+  Widget _buildManageSubscriptionBox(BuildContext context, bool isDesk) {
+    return BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+      builder: (context, companyState) {
+        final companyId = companyState.company.id;
+        final customerId = companyState.company.stripeCustomerId;
+
+        // Debug logging
+        print('=== MANAGE SUBSCRIPTION DEBUG ===');
+        print('Company ID: $companyId');
+        print('Stripe Customer ID: $customerId');
+        print('Company isEmpty: ${companyState.company.isEmpty}');
+        print('================================');
+
+        // Don't show button if company ID is empty or a cache placeholder
+        if (companyId.isEmpty ||
+            companyId == '__company_cache_id__' ||
+            companyId == '__compnay_cache_id__') {
+          print('Hiding button: invalid company ID');
+          return const SizedBox.shrink();
+        }
+
+        // Check if company has a valid Stripe customer ID
+        final hasSubscription = customerId != null && customerId.isNotEmpty;
+
+        if (!hasSubscription) {
+          print('Hiding button: no subscription (customerId is null or empty)');
+          return const SizedBox.shrink();
+        }
+
+        print('Showing button with companyId: $companyId');
+        return ManageSubscriptionButton(
+          companyId: companyId,
+        );
+      },
+    );
+  }
 }

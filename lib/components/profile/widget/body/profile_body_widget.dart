@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
   const ProfileBodyWidget({super.key});
@@ -71,6 +72,28 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox48,
+        // Show Manage Subscription button for business users with a company
+        BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+          builder: (context, companyState) {
+            final hasCompany = companyState.company.id.isNotEmpty &&
+                companyState.company.stripeCustomerId != null &&
+                companyState.company.stripeCustomerId!.isNotEmpty;
+
+            if (!hasCompany) return const SizedBox.shrink();
+
+            return Column(
+              children: [
+                ManageSubscriptionButton(
+                  companyId: companyState.company.id,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox32
+                else
+                  KSizedBox.kHeightSizedBox16,
+              ],
+            );
+          },
+        ),
         if (isDesk)
           Row(
             spacing: KPadding.kPaddingSize40,

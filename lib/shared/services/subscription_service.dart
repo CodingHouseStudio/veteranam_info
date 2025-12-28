@@ -31,7 +31,7 @@ class SubscriptionService {
       return data['sessionUrl'] as String?;
     } catch (e) {
       throw SubscriptionException(
-        'Failed to create checkout session: ${e.toString()}',
+        'Failed to create checkout session: ${e}',
       );
     }
   }
@@ -56,7 +56,7 @@ class SubscriptionService {
       return SubscriptionStatus.fromJson(data);
     } catch (e) {
       throw SubscriptionException(
-        'Failed to get subscription status: ${e.toString()}',
+        'Failed to get subscription status: ${e}',
       );
     }
   }
@@ -80,7 +80,7 @@ class SubscriptionService {
       return data?['success'] == true;
     } catch (e) {
       throw SubscriptionException(
-        'Failed to cancel subscription: ${e.toString()}',
+        'Failed to cancel subscription: ${e}',
       );
     }
   }
@@ -106,7 +106,33 @@ class SubscriptionService {
       return ExtendTrialResult.fromJson(data);
     } catch (e) {
       throw SubscriptionException(
-        'Failed to extend trial: ${e.toString()}',
+        'Failed to extend trial: ${e}',
+      );
+    }
+  }
+
+  /// Creates a Stripe Customer Portal session
+  /// Returns the portal URL to redirect the user to
+  /// The portal allows users to manage their subscription, payment methods, and invoices
+  Future<String?> createPortalSession({
+    required String companyId,
+    required String returnUrl,
+  }) async {
+    try {
+      final result = await _functions
+          .httpsCallable('createCustomerPortalSession')
+          .call<dynamic>({
+        'companyId': companyId,
+        'returnUrl': returnUrl,
+      });
+
+      final data = result.data as Map<String, dynamic>?;
+      if (data == null) return null;
+
+      return data['sessionUrl'] as String?;
+    } catch (e) {
+      throw SubscriptionException(
+        'Failed to create portal session: ${e}',
       );
     }
   }
