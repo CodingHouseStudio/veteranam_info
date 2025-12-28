@@ -14,10 +14,10 @@ class StripeCheckoutHelper {
     required String companyId,
   }) async {
     try {
-      debugPrint('=== STRIPE CHECKOUT HELPER ===');
-      debugPrint('Company ID: $companyId');
-      debugPrint('Success URL: ${_getSuccessUrl()}');
-      debugPrint('Cancel URL: ${_getCancelUrl()}');
+      print('=== STRIPE CHECKOUT HELPER ===');
+      print('Company ID: $companyId');
+      print('Success URL: ${_getSuccessUrl()}');
+      print('Cancel URL: ${_getCancelUrl()}');
 
       final checkoutUrl = await _subscriptionService.createCheckoutSession(
         companyId: companyId,
@@ -25,10 +25,10 @@ class StripeCheckoutHelper {
         cancelUrl: _getCancelUrl(),
       );
 
-      debugPrint('Checkout URL received: $checkoutUrl');
+      print('Checkout URL received: $checkoutUrl');
 
       if (checkoutUrl == null) {
-        debugPrint('ERROR: Checkout URL is null');
+        print('ERROR: Checkout URL is null');
         throw StripeCheckoutException('Failed to create checkout session');
       }
 
@@ -42,21 +42,21 @@ class StripeCheckoutHelper {
         webOnlyWindowName: '_blank',
       );
 
-      debugPrint('URL launched successfully: $launched');
+      print('URL launched successfully: $launched');
 
       if (!launched) {
-        debugPrint('ERROR: Failed to launch URL');
+        print('ERROR: Failed to launch URL');
         throw StripeCheckoutException(
           'Failed to open Stripe Checkout. Please check your browser settings.',
         );
       }
 
-      debugPrint('=== CHECKOUT HELPER SUCCESS ===');
+      print('=== CHECKOUT HELPER SUCCESS ===');
       return true;
     } catch (e) {
-      debugPrint('=== CHECKOUT HELPER ERROR ===');
-      debugPrint('Error: $e');
-      debugPrint('Error type: ${e.runtimeType}');
+      print('=== CHECKOUT HELPER ERROR ===');
+      print('Error: $e');
+      print('Error type: ${e.runtimeType}');
       if (e is StripeCheckoutException) {
         rethrow;
       }

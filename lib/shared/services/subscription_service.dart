@@ -19,10 +19,10 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      debugPrint('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
-      debugPrint('Company ID: $companyId');
-      debugPrint('Success URL: $successUrl');
-      debugPrint('Cancel URL: $cancelUrl');
+      print('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
+      print('Company ID: $companyId');
+      print('Success URL: $successUrl');
+      print('Cancel URL: $cancelUrl');
 
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
@@ -32,7 +32,7 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      debugPrint('Cloud Function result received');
+      print('Cloud Function result received');
       final data = result.data as Map<String, dynamic>?;
 
       if (data == null) {
@@ -40,14 +40,14 @@ class SubscriptionService {
       }
 
       final sessionUrl = data['sessionUrl'] as String?;
-      debugPrint('Session URL: $sessionUrl');
-      debugPrint('=== END createCheckoutSession ===');
+      print('Session URL: $sessionUrl');
+      print('=== END createCheckoutSession ===');
 
       return sessionUrl;
     } catch (e) {
-      debugPrint('=== ERROR in createCheckoutSession ===');
-      debugPrint('Error: $e');
-      debugPrint('Error type: ${e.runtimeType}');
+      print('=== ERROR in createCheckoutSession ===');
+      print('Error: $e');
+      print('Error type: ${e.runtimeType}');
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );
