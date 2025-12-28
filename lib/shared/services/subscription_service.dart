@@ -1,8 +1,9 @@
-import 'dart:developer' as developer;
+import 'dart:js_interop';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:veteranam/shared/models/models.dart';
+import 'package:web/web.dart' as web;
 
 /// Service for managing Stripe subscriptions via Cloud Functions
 class SubscriptionService {
@@ -20,13 +21,14 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      developer.log(
-        '=== SUBSCRIPTION SERVICE: createCheckoutSession ===',
-        name: 'SubscriptionService',
-      );
-      developer.log('Company ID: $companyId', name: 'SubscriptionService');
-      developer.log('Success URL: $successUrl', name: 'SubscriptionService');
-      developer.log('Cancel URL: $cancelUrl', name: 'SubscriptionService');
+      if (kIsWeb) {
+        web.console.log(
+          '[SubscriptionService] === createCheckoutSession ==='.toJS,
+        );
+        web.console.log('[SubscriptionService] Company ID: $companyId'.toJS);
+        web.console.log('[SubscriptionService] Success URL: $successUrl'.toJS);
+        web.console.log('[SubscriptionService] Cancel URL: $cancelUrl'.toJS);
+      }
 
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
@@ -36,24 +38,46 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      developer.log('Cloud Function result received', name: 'SubscriptionService');
+      if (kIsWeb) {
+        web.console.log(
+          '[SubscriptionService] Cloud Function result received'.toJS,
+        );
+      }
       final data = result.data as Map<String, dynamic>?;
-      developer.log('Result data: $data', name: 'SubscriptionService');
+      if (kIsWeb) {
+        web.console.log('[SubscriptionService] Result data: $data'.toJS);
+      }
 
       if (data == null) {
-        developer.log('ERROR: Result data is null', name: 'SubscriptionService');
+        if (kIsWeb) {
+          web.console.log(
+            '[SubscriptionService] ERROR: Result data is null'.toJS,
+          );
+        }
         return null;
       }
 
       final sessionUrl = data['sessionUrl'] as String?;
-      developer.log('Session URL: $sessionUrl', name: 'SubscriptionService');
-      developer.log('=== END createCheckoutSession ===', name: 'SubscriptionService');
+      if (kIsWeb) {
+        web.console.log(
+          '[SubscriptionService] Session URL: $sessionUrl'.toJS,
+        );
+        web.console.log(
+          '[SubscriptionService] === END createCheckoutSession ==='.toJS,
+        );
+      }
 
       return sessionUrl;
     } catch (e) {
-      developer.log('=== ERROR in createCheckoutSession ===', name: 'SubscriptionService');
-      developer.log('Error: $e', name: 'SubscriptionService');
-      developer.log('Error type: ${e.runtimeType}', name: 'SubscriptionService');
+      if (kIsWeb) {
+        web.console.log(
+          '[SubscriptionService] === ERROR in createCheckoutSession ==='.toJS,
+        );
+        web.console.log('[SubscriptionService] Error: $e'.toJS);
+        web.console.log(
+          '[SubscriptionService] Error type: ${e.runtimeType}'.toJS,
+        );
+      }
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );

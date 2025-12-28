@@ -1,8 +1,9 @@
-import 'dart:developer' as developer;
+import 'dart:js_interop';
 
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
+import 'package:web/web.dart' as web;
 
 /// Helper for opening Stripe Checkout in a popup/new tab
 class StripeCheckoutHelper {
@@ -15,10 +16,14 @@ class StripeCheckoutHelper {
     required String companyId,
   }) async {
     try {
-      developer.log('=== STRIPE CHECKOUT HELPER ===', name: 'StripeCheckout');
-      developer.log('Company ID: $companyId', name: 'StripeCheckout');
-      developer.log('Success URL: ${_getSuccessUrl()}', name: 'StripeCheckout');
-      developer.log('Cancel URL: ${_getCancelUrl()}', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log('[StripeCheckout] === STRIPE CHECKOUT HELPER ==='.toJS);
+        web.console.log('[StripeCheckout] Company ID: $companyId'.toJS);
+        web.console.log(
+          '[StripeCheckout] Success URL: ${_getSuccessUrl()}'.toJS,
+        );
+        web.console.log('[StripeCheckout] Cancel URL: ${_getCancelUrl()}'.toJS);
+      }
 
       final checkoutUrl = await _subscriptionService.createCheckoutSession(
         companyId: companyId,
@@ -26,15 +31,23 @@ class StripeCheckoutHelper {
         cancelUrl: _getCancelUrl(),
       );
 
-      developer.log('Checkout URL received: $checkoutUrl', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log(
+          '[StripeCheckout] Checkout URL received: $checkoutUrl'.toJS,
+        );
+      }
 
       if (checkoutUrl == null) {
-        developer.log('ERROR: Checkout URL is null', name: 'StripeCheckout');
+        if (kIsWeb) {
+          web.console.log('[StripeCheckout] ERROR: Checkout URL is null'.toJS);
+        }
         throw StripeCheckoutException('Failed to create checkout session');
       }
 
       final uri = Uri.parse(checkoutUrl);
-      developer.log('Launching URL: $uri', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log('[StripeCheckout] Launching URL: $uri'.toJS);
+      }
 
       final launched = await launchUrl(
         uri,
@@ -44,21 +57,33 @@ class StripeCheckoutHelper {
         webOnlyWindowName: '_blank',
       );
 
-      developer.log('URL launched successfully: $launched', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log(
+          '[StripeCheckout] URL launched successfully: $launched'.toJS,
+        );
+      }
 
       if (!launched) {
-        developer.log('ERROR: Failed to launch URL', name: 'StripeCheckout');
+        if (kIsWeb) {
+          web.console.log('[StripeCheckout] ERROR: Failed to launch URL'.toJS);
+        }
         throw StripeCheckoutException(
           'Failed to open Stripe Checkout. Please check your browser settings.',
         );
       }
 
-      developer.log('=== CHECKOUT HELPER SUCCESS ===', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log(
+          '[StripeCheckout] === CHECKOUT HELPER SUCCESS ==='.toJS,
+        );
+      }
       return true;
     } catch (e) {
-      developer.log('=== CHECKOUT HELPER ERROR ===', name: 'StripeCheckout');
-      developer.log('Error: $e', name: 'StripeCheckout');
-      developer.log('Error type: ${e.runtimeType}', name: 'StripeCheckout');
+      if (kIsWeb) {
+        web.console.log('[StripeCheckout] === CHECKOUT HELPER ERROR ==='.toJS);
+        web.console.log('[StripeCheckout] Error: $e'.toJS);
+        web.console.log('[StripeCheckout] Error type: ${e.runtimeType}'.toJS);
+      }
       if (e is StripeCheckoutException) {
         rethrow;
       }
