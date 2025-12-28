@@ -1,4 +1,4 @@
-import 'dart:developer' as developer;
+import 'dart:js_interop';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:web/web.dart' as web;
 
 // Web-compatible logging that works in release builds
 void _log(String message) {
-  // dart:developer log() works in both debug and release mode
-  developer.log(message, name: 'CompanyForm');
+  if (kIsWeb) {
+    // Use JavaScript console.log directly - works in release builds
+    web.console.log('[CompanyForm] $message'.toJS);
+  }
   // ignore: avoid_print
   print(message);
-  if (kDebugMode) {
-    debugPrint(message);
-  }
 }
 
 class CompanyFormWidget extends StatefulWidget {
