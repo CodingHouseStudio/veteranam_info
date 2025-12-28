@@ -166,4 +166,12 @@ abstract class KRoute {
     path: 'edit',
     name: 'Discounts Edit',
   );
+  static const _RouteItem subscriptionSuccess = _RouteItem(
+    path: 'subscription/success',
+    name: 'Subscription Success',
+  );
+  static const _RouteItem subscriptionCanceled = _RouteItem(
+    path: 'subscription/canceled',
+    name: 'Subscription Canceled',
+  );
 }

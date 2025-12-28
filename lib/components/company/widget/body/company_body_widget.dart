@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
 
 class CompanyBodyWidget extends StatelessWidget {
   const CompanyBodyWidget({super.key});
@@ -69,17 +70,29 @@ class CompanyBodyWidget extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: BoxWidget(
-                  key: CompanyKeys.boxMyDiscounts,
-                  text: context.l10n.myDiscounts,
-                  onTap: () => myDiscountTap(context),
-                  isDesk: isDesk,
+                child: Column(
+                  spacing: KPadding.kPaddingSize16,
+                  children: [
+                    BoxWidget(
+                      key: CompanyKeys.boxMyDiscounts,
+                      text: context.l10n.myDiscounts,
+                      onTap: () => myDiscountTap(context),
+                      isDesk: isDesk,
+                    ),
+                    _buildManageSubscriptionBox(context, isDesk),
+                  ],
                 ),
               ),
             ],
           )
         else
-          _form(isDesk: isDesk, context: context),
+          Column(
+            children: [
+              _form(isDesk: isDesk, context: context),
+              KSizedBox.kHeightSizedBox16,
+              _buildManageSubscriptionBox(context, isDesk),
+            ],
+          ),
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else
@@ -107,4 +120,29 @@ class CompanyBodyWidget extends StatelessWidget {
     BuildContext context,
   ) =>
       context.goNamed(KRoute.myDiscounts.name);
+
+  Widget _buildManageSubscriptionBox(BuildContext context, bool isDesk) {
+    return BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+      builder: (context, companyState) {
+        final companyId = companyState.company.id;
+        final customerId = companyState.company.stripeCustomerId;
+
+        if (companyId.isEmpty ||
+            companyId == '__company_cache_id__' ||
+            companyId == '__compnay_cache_id__') {
+          return const SizedBox.shrink();
+        }
+
+        final hasSubscription = customerId != null && customerId.isNotEmpty;
+
+        if (!hasSubscription) {
+          return const SizedBox.shrink();
+        }
+
+        return ManageSubscriptionButton(
+          companyId: companyId,
+        );
+      },
+    );
+  }
 }

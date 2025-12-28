@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/models/convertors/image_convertor.dart';
+import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 import 'package:veteranam/shared/models/helper_models/image_model.dart';
 
 part 'company_model.freezed.dart';
@@ -16,6 +17,19 @@ abstract class CompanyModel with _$CompanyModel {
     String? link,
     @ImageConverter() ImageModel? image,
     DateTime? deletedOn,
+    String? stripeCustomerId,
+    String? stripeSubscriptionId,
+    SubscriptionStatus? subscriptionStatus,
+    SubscriptionPlan? subscriptionPlan,
+    DateTime? trialStartedAt,
+    DateTime? trialExpiresAt,
+    DateTime? subscriptionStartedAt,
+    DateTime? subscriptionExpiresAt,
+    bool? termsAccepted,
+    DateTime? termsAcceptedAt,
+    int? trialExtensionDays,
+    String? canceledBy,
+    DateTime? canceledAt,
   }) = _CompanyModel;
 
   // Add this private constructor
@@ -43,6 +57,31 @@ abstract class CompanyModel with _$CompanyModel {
       // image!.downloadURL.isEmpty
       ;
   bool get isNotEmpty => !isEmpty;
+
+  bool get isSubscriptionActive =>
+      subscriptionStatus == SubscriptionStatus.active ||
+      subscriptionStatus == SubscriptionStatus.trialing;
+
+  bool get canCreateDiscounts =>
+      termsAccepted == true && isSubscriptionActive && !isTrialExpired;
+
+  bool get isTrialExpired =>
+      trialExpiresAt != null &&
+      DateTime.now().isAfter(trialExpiresAt!);
+
+  bool get isInTrial =>
+      subscriptionStatus == SubscriptionStatus.trialing && !isTrialExpired;
+
+  int get trialDaysRemaining {
+    if (trialExpiresAt == null || isTrialExpired) return 0;
+    return trialExpiresAt!.difference(DateTime.now()).inDays;
+  }
+
+  bool get needsPaymentAction =>
+      subscriptionStatus == SubscriptionStatus.incomplete ||
+      subscriptionStatus == SubscriptionStatus.incompleteExpired ||
+      subscriptionStatus == SubscriptionStatus.pastDue ||
+      subscriptionStatus == SubscriptionStatus.unpaid;
 }
 
 abstract class CompanyModelJsonField {
@@ -54,4 +93,17 @@ abstract class CompanyModelJsonField {
   static const code = 'code';
   static const image = 'image';
   static const deletedOn = 'deletedOn';
+  static const stripeCustomerId = 'stripeCustomerId';
+  static const stripeSubscriptionId = 'stripeSubscriptionId';
+  static const subscriptionStatus = 'subscriptionStatus';
+  static const subscriptionPlan = 'subscriptionPlan';
+  static const trialStartedAt = 'trialStartedAt';
+  static const trialExpiresAt = 'trialExpiresAt';
+  static const subscriptionStartedAt = 'subscriptionStartedAt';
+  static const subscriptionExpiresAt = 'subscriptionExpiresAt';
+  static const termsAccepted = 'termsAccepted';
+  static const termsAcceptedAt = 'termsAcceptedAt';
+  static const trialExtensionDays = 'trialExtensionDays';
+  static const canceledBy = 'canceledBy';
+  static const canceledAt = 'canceledAt';
 }

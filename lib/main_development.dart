@@ -15,7 +15,6 @@ import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/bloc/badger/badger_cubit.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/models/failure_model/some_failure.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
@@ -47,28 +46,35 @@ void main() async {
   );
 
   try {
-    await FirebaseAppCheck.instanceFor(app: app).activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
-      androidProvider: Config.isReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
-      appleProvider: Config.isReleaseMode
-          ? AppleProvider.deviceCheck
-          : AppleProvider.debug,
-    );
-    await FirebaseAppCheck.instance.activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
-      androidProvider: Config.isReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
-      appleProvider: Config.isReleaseMode
-          ? AppleProvider.deviceCheck
-          : AppleProvider.debug,
-    );
+    // Skip Firebase App Check on web for development
+    // Only enable on mobile platforms
+    if (!Config.isWeb) {
+      await FirebaseAppCheck.instanceFor(app: app).activate(
+        androidProvider: Config.isReleaseMode
+            ? AndroidProvider.playIntegrity
+            : AndroidProvider.debug,
+        appleProvider: Config.isReleaseMode
+            ? AppleProvider.deviceCheck
+            : AppleProvider.debug,
+      );
+      await FirebaseAppCheck.instance.activate(
+        androidProvider: Config.isReleaseMode
+            ? AndroidProvider.playIntegrity
+            : AndroidProvider.debug,
+        appleProvider: Config.isReleaseMode
+            ? AppleProvider.deviceCheck
+            : AppleProvider.debug,
+      );
+      log(
+        'Firebase AppCheck enabled for mobile',
+        name: 'Firebase AppCheck',
+      );
+    } else {
+      log(
+        'Skipping Firebase AppCheck on web for development',
+        name: 'Firebase AppCheck',
+      );
+    }
   } catch (e, stack) {
     log(
       'Firebase AppCheck Error',
