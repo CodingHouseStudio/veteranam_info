@@ -290,9 +290,7 @@ class FirestoreService {
         (snapshot) {
           if (snapshot.docs.isNotEmpty) {
             final source = snapshot.metadata.isFromCache._source;
-            log('Data fetched from $source');
             final data = snapshot.docs.first.data();
-            log('Company data from Firestore: stripeCustomerId = ${data['stripeCustomerId']}');
 
             // Convert Firestore Timestamps to ISO8601 strings for DateTime fields
             final convertedData = _convertTimestampsToStrings(data);
@@ -304,7 +302,6 @@ class FirestoreService {
         },
       );
 
-  /// Converts Firestore Timestamp objects to ISO8601 strings
   Map<String, dynamic> _convertTimestampsToStrings(Map<String, dynamic> data) {
     final converted = Map<String, dynamic>.from(data);
 
@@ -322,7 +319,6 @@ class FirestoreService {
     for (final field in dateTimeFields) {
       final value = converted[field];
       if (value != null && value is! String) {
-        // It's a Firestore Timestamp, convert to ISO8601 string
         try {
           final timestamp = value as dynamic;
           converted[field] = (timestamp.toDate() as DateTime).toIso8601String();

@@ -72,7 +72,6 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox48,
-        // Show Manage Subscription button for business users with a company
         BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
           builder: (context, companyState) {
             final hasCompany = companyState.company.id.isNotEmpty &&

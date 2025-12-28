@@ -127,30 +127,18 @@ class CompanyBodyWidget extends StatelessWidget {
         final companyId = companyState.company.id;
         final customerId = companyState.company.stripeCustomerId;
 
-        // Debug logging
-        print('=== MANAGE SUBSCRIPTION DEBUG ===');
-        print('Company ID: $companyId');
-        print('Stripe Customer ID: $customerId');
-        print('Company isEmpty: ${companyState.company.isEmpty}');
-        print('================================');
-
-        // Don't show button if company ID is empty or a cache placeholder
         if (companyId.isEmpty ||
             companyId == '__company_cache_id__' ||
             companyId == '__compnay_cache_id__') {
-          print('Hiding button: invalid company ID');
           return const SizedBox.shrink();
         }
 
-        // Check if company has a valid Stripe customer ID
         final hasSubscription = customerId != null && customerId.isNotEmpty;
 
         if (!hasSubscription) {
-          print('Hiding button: no subscription (customerId is null or empty)');
           return const SizedBox.shrink();
         }
 
-        print('Showing button with companyId: $companyId');
         return ManageSubscriptionButton(
           companyId: companyId,
         );
