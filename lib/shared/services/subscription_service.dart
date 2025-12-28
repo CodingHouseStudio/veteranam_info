@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:veteranam/shared/models/models.dart';
@@ -18,10 +20,10 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      print('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
-      print('Company ID: $companyId');
-      print('Success URL: $successUrl');
-      print('Cancel URL: $cancelUrl');
+      log('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
+      log('Company ID: $companyId');
+      log('Success URL: $successUrl');
+      log('Cancel URL: $cancelUrl');
 
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
@@ -31,24 +33,24 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      print('Cloud Function result received');
+      log('Cloud Function result received');
       final data = result.data as Map<String, dynamic>?;
-      print('Result data: $data');
+      log('Result data: $data');
 
       if (data == null) {
-        print('ERROR: Result data is null');
+        log('ERROR: Result data is null');
         return null;
       }
 
       final sessionUrl = data['sessionUrl'] as String?;
-      print('Session URL: $sessionUrl');
-      print('=== END createCheckoutSession ===');
+      log('Session URL: $sessionUrl');
+      log('=== END createCheckoutSession ===');
 
       return sessionUrl;
     } catch (e) {
-      print('=== ERROR in createCheckoutSession ===');
-      print('Error: $e');
-      print('Error type: ${e.runtimeType}');
+      log('=== ERROR in createCheckoutSession ===');
+      log('Error: $e');
+      log('Error type: ${e.runtimeType}');
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,53 +58,53 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
       listener: (context, watcherState) async {
         final currentCompanyId = watcherState.company.id;
 
-        print('=== COMPANY WATCHER LISTENER TRIGGERED ===');
-        print('Previous Company ID: $_previousCompanyId');
-        print('Current Company ID: $currentCompanyId');
-        print('Stripe Customer ID: ${watcherState.company.stripeCustomerId}');
-        print('Company isEmpty: ${watcherState.company.isEmpty}');
+        log('=== COMPANY WATCHER LISTENER TRIGGERED ===');
+        log('Previous Company ID: $_previousCompanyId');
+        log('Current Company ID: $currentCompanyId');
+        log('Stripe Customer ID: ${watcherState.company.stripeCustomerId}');
+        log('Company isEmpty: ${watcherState.company.isEmpty}');
 
         // Check if company was just created (ID changed from empty)
         final wasJustCreated = (_previousCompanyId == null || _previousCompanyId!.isEmpty) &&
             currentCompanyId.isNotEmpty;
 
-        print('Was just created? $wasJustCreated');
+        log('Was just created? $wasJustCreated');
 
         if (wasJustCreated) {
-          print('Company was just created! Checking subscription...');
+          log('Company was just created! Checking subscription...');
 
           // Trigger subscription flow if no Stripe customer exists
           final hasStripeCustomer = watcherState.company.stripeCustomerId != null &&
               watcherState.company.stripeCustomerId!.isNotEmpty;
 
-          print('Has Stripe customer? $hasStripeCustomer');
+          log('Has Stripe customer? $hasStripeCustomer');
 
           if (!hasStripeCustomer) {
-            print(
+            log(
               'Opening Stripe Checkout for company: $currentCompanyId',
             );
             try {
               final authStatus =
                   context.read<AuthenticationBloc>().state.status;
-              print('Auth status: $authStatus');
+              log('Auth status: $authStatus');
 
               await _stripeCheckoutHelper.openCheckout(
                 companyId: currentCompanyId,
               );
-              print('Checkout opened successfully!');
+              log('Checkout opened successfully!');
             } catch (e) {
-              print('Stripe checkout error: $e');
-              print('Error stack trace: ${StackTrace.current}');
+              log('Stripe checkout error: $e');
+              log('Error stack trace: ${StackTrace.current}');
             }
           } else {
-            print('Company already has Stripe customer, skipping checkout');
+            log('Company already has Stripe customer, skipping checkout');
           }
         } else {
-          print('Not a new company creation, skipping checkout trigger');
+          log('Not a new company creation, skipping checkout trigger');
         }
 
         _previousCompanyId = currentCompanyId;
-        print('=== END COMPANY WATCHER LISTENER ===');
+        log('=== END COMPANY WATCHER LISTENER ===');
       },
       child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
         // listener: (context, _) {
