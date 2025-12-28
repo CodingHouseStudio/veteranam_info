@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
@@ -20,14 +20,13 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      // ignore: avoid_print
-      print('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
-      // ignore: avoid_print
-      print('Company ID: $companyId');
-      // ignore: avoid_print
-      print('Success URL: $successUrl');
-      // ignore: avoid_print
-      print('Cancel URL: $cancelUrl');
+      developer.log(
+        '=== SUBSCRIPTION SERVICE: createCheckoutSession ===',
+        name: 'SubscriptionService',
+      );
+      developer.log('Company ID: $companyId', name: 'SubscriptionService');
+      developer.log('Success URL: $successUrl', name: 'SubscriptionService');
+      developer.log('Cancel URL: $cancelUrl', name: 'SubscriptionService');
 
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
@@ -37,32 +36,24 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      // ignore: avoid_print
-      print('Cloud Function result received');
+      developer.log('Cloud Function result received', name: 'SubscriptionService');
       final data = result.data as Map<String, dynamic>?;
-      // ignore: avoid_print
-      print('Result data: $data');
+      developer.log('Result data: $data', name: 'SubscriptionService');
 
       if (data == null) {
-        // ignore: avoid_print
-        print('ERROR: Result data is null');
+        developer.log('ERROR: Result data is null', name: 'SubscriptionService');
         return null;
       }
 
       final sessionUrl = data['sessionUrl'] as String?;
-      // ignore: avoid_print
-      print('Session URL: $sessionUrl');
-      // ignore: avoid_print
-      print('=== END createCheckoutSession ===');
+      developer.log('Session URL: $sessionUrl', name: 'SubscriptionService');
+      developer.log('=== END createCheckoutSession ===', name: 'SubscriptionService');
 
       return sessionUrl;
     } catch (e) {
-      // ignore: avoid_print
-      print('=== ERROR in createCheckoutSession ===');
-      // ignore: avoid_print
-      print('Error: $e');
-      // ignore: avoid_print
-      print('Error type: ${e.runtimeType}');
+      developer.log('=== ERROR in createCheckoutSession ===', name: 'SubscriptionService');
+      developer.log('Error: $e', name: 'SubscriptionService');
+      developer.log('Error type: ${e.runtimeType}', name: 'SubscriptionService');
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );

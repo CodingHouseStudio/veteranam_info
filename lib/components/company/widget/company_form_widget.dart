@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,8 +8,10 @@ import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-// Web-compatible logging
+// Web-compatible logging that works in release builds
 void _log(String message) {
+  // dart:developer log() works in both debug and release mode
+  developer.log(message, name: 'CompanyForm');
   // ignore: avoid_print
   print(message);
   if (kDebugMode) {
