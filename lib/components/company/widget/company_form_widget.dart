@@ -66,53 +66,53 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
       listener: (context, watcherState) async {
         final currentCompanyId = watcherState.company.id;
 
-        log('=== COMPANY WATCHER LISTENER TRIGGERED ===');
-        log('Previous Company ID: $_previousCompanyId');
-        log('Current Company ID: $currentCompanyId');
-        log('Stripe Customer ID: ${watcherState.company.stripeCustomerId}');
-        log('Company isEmpty: ${watcherState.company.isEmpty}');
+        _log('=== COMPANY WATCHER LISTENER TRIGGERED ===');
+        _log('Previous Company ID: $_previousCompanyId');
+        _log('Current Company ID: $currentCompanyId');
+        _log('Stripe Customer ID: ${watcherState.company.stripeCustomerId}');
+        _log('Company isEmpty: ${watcherState.company.isEmpty}');
 
         // Check if company was just created (ID changed from empty)
         final wasJustCreated = (_previousCompanyId == null || _previousCompanyId!.isEmpty) &&
             currentCompanyId.isNotEmpty;
 
-        log('Was just created? $wasJustCreated');
+        _log('Was just created? $wasJustCreated');
 
         if (wasJustCreated) {
-          log('Company was just created! Checking subscription...');
+          _log('Company was just created! Checking subscription...');
 
           // Trigger subscription flow if no Stripe customer exists
           final hasStripeCustomer = watcherState.company.stripeCustomerId != null &&
               watcherState.company.stripeCustomerId!.isNotEmpty;
 
-          log('Has Stripe customer? $hasStripeCustomer');
+          _log('Has Stripe customer? $hasStripeCustomer');
 
           if (!hasStripeCustomer) {
-            log(
+            _log(
               'Opening Stripe Checkout for company: $currentCompanyId',
             );
             try {
               final authStatus =
                   context.read<AuthenticationBloc>().state.status;
-              log('Auth status: $authStatus');
+              _log('Auth status: $authStatus');
 
               await _stripeCheckoutHelper.openCheckout(
                 companyId: currentCompanyId,
               );
-              log('Checkout opened successfully!');
+              _log('Checkout opened successfully!');
             } catch (e) {
-              log('Stripe checkout error: $e');
-              log('Error stack trace: ${StackTrace.current}');
+              _log('Stripe checkout error: $e');
+              _log('Error stack trace: ${StackTrace.current}');
             }
           } else {
-            log('Company already has Stripe customer, skipping checkout');
+            _log('Company already has Stripe customer, skipping checkout');
           }
         } else {
-          log('Not a new company creation, skipping checkout trigger');
+          _log('Not a new company creation, skipping checkout trigger');
         }
 
         _previousCompanyId = currentCompanyId;
-        log('=== END COMPANY WATCHER LISTENER ===');
+        _log('=== END COMPANY WATCHER LISTENER ===');
       },
       child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
         // listener: (context, _) {

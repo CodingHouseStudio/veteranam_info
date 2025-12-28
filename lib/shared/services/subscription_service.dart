@@ -20,10 +20,14 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      log('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
-      log('Company ID: $companyId');
-      log('Success URL: $successUrl');
-      log('Cancel URL: $cancelUrl');
+      // ignore: avoid_print
+      print('=== SUBSCRIPTION SERVICE: createCheckoutSession ===');
+      // ignore: avoid_print
+      print('Company ID: $companyId');
+      // ignore: avoid_print
+      print('Success URL: $successUrl');
+      // ignore: avoid_print
+      print('Cancel URL: $cancelUrl');
 
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
@@ -33,24 +37,32 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      log('Cloud Function result received');
+      // ignore: avoid_print
+      print('Cloud Function result received');
       final data = result.data as Map<String, dynamic>?;
-      log('Result data: $data');
+      // ignore: avoid_print
+      print('Result data: $data');
 
       if (data == null) {
-        log('ERROR: Result data is null');
+        // ignore: avoid_print
+        print('ERROR: Result data is null');
         return null;
       }
 
       final sessionUrl = data['sessionUrl'] as String?;
-      log('Session URL: $sessionUrl');
-      log('=== END createCheckoutSession ===');
+      // ignore: avoid_print
+      print('Session URL: $sessionUrl');
+      // ignore: avoid_print
+      print('=== END createCheckoutSession ===');
 
       return sessionUrl;
     } catch (e) {
-      log('=== ERROR in createCheckoutSession ===');
-      log('Error: $e');
-      log('Error type: ${e.runtimeType}');
+      // ignore: avoid_print
+      print('=== ERROR in createCheckoutSession ===');
+      // ignore: avoid_print
+      print('Error: $e');
+      // ignore: avoid_print
+      print('Error type: ${e.runtimeType}');
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );
