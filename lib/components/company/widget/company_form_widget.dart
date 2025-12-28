@@ -1,11 +1,19 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+
+// Web-compatible logging
+void _log(String message) {
+  // ignore: avoid_print
+  print(message);
+  if (kDebugMode) {
+    debugPrint(message);
+  }
+}
 
 class CompanyFormWidget extends StatefulWidget {
   const CompanyFormWidget({
