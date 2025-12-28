@@ -10,10 +10,19 @@ import 'package:veteranam/shared/shared_flutter.dart';
 import 'package:web/web.dart' as web;
 
 // Web-compatible logging that works in release builds
+@pragma('vm:entry-point')
+@pragma('dart2js:noInline')
 void _log(String message) {
   if (kIsWeb) {
     // Use JavaScript console.log directly - works in release builds
-    web.console.log('[CompanyForm] $message'.toJS);
+    // Force it to not be tree-shaken by using it in a way
+    // the compiler can't optimize away
+    final logMessage = '[CompanyForm] $message';
+    web.console.log(logMessage.toJS);
+    // Also use alert for critical errors (can be removed after debugging)
+    if (message.contains('ERROR')) {
+      web.window.alert('CompanyForm Error: $message');
+    }
   }
   // ignore: avoid_print
   print(message);
