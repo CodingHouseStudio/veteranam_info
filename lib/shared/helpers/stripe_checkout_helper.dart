@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
@@ -13,14 +15,10 @@ class StripeCheckoutHelper {
     required String companyId,
   }) async {
     try {
-      // ignore: avoid_print
-      print('=== STRIPE CHECKOUT HELPER ===');
-      // ignore: avoid_print
-      print('Company ID: $companyId');
-      // ignore: avoid_print
-      print('Success URL: ${_getSuccessUrl()}');
-      // ignore: avoid_print
-      print('Cancel URL: ${_getCancelUrl()}');
+      developer.log('=== STRIPE CHECKOUT HELPER ===', name: 'StripeCheckout');
+      developer.log('Company ID: $companyId', name: 'StripeCheckout');
+      developer.log('Success URL: ${_getSuccessUrl()}', name: 'StripeCheckout');
+      developer.log('Cancel URL: ${_getCancelUrl()}', name: 'StripeCheckout');
 
       final checkoutUrl = await _subscriptionService.createCheckoutSession(
         companyId: companyId,
@@ -28,18 +26,15 @@ class StripeCheckoutHelper {
         cancelUrl: _getCancelUrl(),
       );
 
-      // ignore: avoid_print
-      print('Checkout URL received: $checkoutUrl');
+      developer.log('Checkout URL received: $checkoutUrl', name: 'StripeCheckout');
 
       if (checkoutUrl == null) {
-        // ignore: avoid_print
-        print('ERROR: Checkout URL is null');
+        developer.log('ERROR: Checkout URL is null', name: 'StripeCheckout');
         throw StripeCheckoutException('Failed to create checkout session');
       }
 
       final uri = Uri.parse(checkoutUrl);
-      // ignore: avoid_print
-      print('Launching URL: $uri');
+      developer.log('Launching URL: $uri', name: 'StripeCheckout');
 
       final launched = await launchUrl(
         uri,
@@ -49,27 +44,21 @@ class StripeCheckoutHelper {
         webOnlyWindowName: '_blank',
       );
 
-      // ignore: avoid_print
-      print('URL launched successfully: $launched');
+      developer.log('URL launched successfully: $launched', name: 'StripeCheckout');
 
       if (!launched) {
-        // ignore: avoid_print
-        print('ERROR: Failed to launch URL');
+        developer.log('ERROR: Failed to launch URL', name: 'StripeCheckout');
         throw StripeCheckoutException(
           'Failed to open Stripe Checkout. Please check your browser settings.',
         );
       }
 
-      // ignore: avoid_print
-      print('=== CHECKOUT HELPER SUCCESS ===');
+      developer.log('=== CHECKOUT HELPER SUCCESS ===', name: 'StripeCheckout');
       return true;
     } catch (e) {
-      // ignore: avoid_print
-      print('=== CHECKOUT HELPER ERROR ===');
-      // ignore: avoid_print
-      print('Error: $e');
-      // ignore: avoid_print
-      print('Error type: ${e.runtimeType}');
+      developer.log('=== CHECKOUT HELPER ERROR ===', name: 'StripeCheckout');
+      developer.log('Error: $e', name: 'StripeCheckout');
+      developer.log('Error type: ${e.runtimeType}', name: 'StripeCheckout');
       if (e is StripeCheckoutException) {
         rethrow;
       }
