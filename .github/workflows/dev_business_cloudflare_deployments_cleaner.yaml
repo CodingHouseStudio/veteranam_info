@@ -1,0 +1,17 @@
+name: DEV BUSINESS Cloudflare Cleaner
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    branches: [main]
+concurrency:
+  group: business-сloudflare-cleaner-$
+  cancel-in-progress: true
+
+jobs:
+  cloudflare_deployments_cleaner:
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/cloudflare_deployments_cleaner.yml@main
+    secrets: inherit
+    with:
+      project_name: "veteran-business"
+      environment: "development"
