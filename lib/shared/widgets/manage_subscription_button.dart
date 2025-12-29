@@ -2,17 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
+import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Button that opens the Stripe Customer Portal
 /// Allows users to manage their subscription, payment methods, and invoices
+/// Styled to match BoxWidget
 class ManageSubscriptionButton extends StatefulWidget {
   const ManageSubscriptionButton({
     required this.companyId,
+    required this.isDesk,
     this.onError,
     super.key,
   });
 
   final String companyId;
+  final bool isDesk;
   final void Function(String error)? onError;
 
   @override
@@ -31,9 +35,10 @@ class _ManageSubscriptionButtonState extends State<ManageSubscriptionButton> {
 
     try {
       // Get the current URL to return to after portal visit
+      // Return to the discounts manage page
       final returnUrl = kIsWeb
-          ? '${Uri.base.origin}/business/profile'
-          : 'veteranam://business/profile';
+          ? '${Uri.base.origin}/discounts/manage'
+          : 'veteranam://discounts/manage';
 
       // Create portal session
       final portalUrl = await _subscriptionService.createPortalSession(
@@ -67,7 +72,7 @@ class _ManageSubscriptionButtonState extends State<ManageSubscriptionButton> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Error: $errorMessage'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.materialThemeRefErrorError40,
           ),
         );
       }
@@ -82,18 +87,42 @@ class _ManageSubscriptionButtonState extends State<ManageSubscriptionButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: _isLoading ? null : _openCustomerPortal,
-      icon: _isLoading
-          ? const SizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
+    // Use BoxWidget styling with custom icon widget overlay for loading
+    return Stack(
+      children: [
+        BoxWidget(
+          text: 'Manage Subscription',
+          onTap: _isLoading ? null : _openCustomerPortal,
+          isDesk: widget.isDesk,
+          icon: const Icon(
+            Icons.settings,
+            color: AppColors.materialThemeRefPrimaryPrimary40,
+          ),
+        ),
+        // Overlay loading indicator when loading
+        if (_isLoading)
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.materialThemeKeyColorsNeutral
+                    .withOpacity(0.9),
+                borderRadius: BorderRadius.circular(KSize.kPixel12),
               ),
-            )
-          : const Icon(Icons.settings),
-      label: const Text('Manage Subscription'),
+              child: const Center(
+                child: SizedBox(
+                  width: KSize.kPixel24,
+                  height: KSize.kPixel24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColors.materialThemeRefPrimaryPrimary40,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
