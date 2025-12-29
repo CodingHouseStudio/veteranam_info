@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
+import 'package:veteranam/shared/widgets/start_free_trial_button.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
   const ProfileBodyWidget({super.key});
@@ -74,18 +75,29 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox48,
         BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
           builder: (context, companyState) {
-            final hasCompany = companyState.company.id.isNotEmpty &&
+            final companyId = companyState.company.id;
+            final hasSubscription =
                 companyState.company.stripeCustomerId != null &&
                 companyState.company.stripeCustomerId!.isNotEmpty;
 
-            if (!hasCompany) return const SizedBox.shrink();
+            if (companyId.isEmpty ||
+                companyId == '__company_cache_id__' ||
+                companyId == '__compnay_cache_id__') {
+              return const SizedBox.shrink();
+            }
 
             return Column(
               children: [
-                ManageSubscriptionButton(
-                  companyId: companyState.company.id,
-                  isDesk: isDesk,
-                ),
+                if (hasSubscription)
+                  ManageSubscriptionButton(
+                    companyId: companyId,
+                    isDesk: isDesk,
+                  )
+                else
+                  StartFreeTrialButton(
+                    companyId: companyId,
+                    isDesk: isDesk,
+                  ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox32
                 else
