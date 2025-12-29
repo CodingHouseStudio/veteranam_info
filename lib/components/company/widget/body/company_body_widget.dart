@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
+import 'package:veteranam/shared/widgets/start_free_trial_button.dart';
 import 'package:veteranam/shared/widgets/subscription_info_widget.dart';
 
 class CompanyBodyWidget extends StatelessWidget {
@@ -138,7 +139,9 @@ class CompanyBodyWidget extends StatelessWidget {
         final hasSubscription = customerId != null && customerId.isNotEmpty;
 
         if (!hasSubscription) {
-          return const SizedBox.shrink();
+          // Show "Start Free Trial" button for existing users
+          // without subscription
+          return _buildStartTrialBox(context, companyId, isDesk);
         }
 
         return Column(
@@ -157,6 +160,17 @@ class CompanyBodyWidget extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildStartTrialBox(
+    BuildContext context,
+    String companyId,
+    bool isDesk,
+  ) {
+    return StartFreeTrialButton(
+      companyId: companyId,
+      isDesk: isDesk,
     );
   }
 }
