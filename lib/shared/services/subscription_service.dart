@@ -1,9 +1,5 @@
-import 'dart:js_interop';
-
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flutter/foundation.dart';
 import 'package:veteranam/shared/models/models.dart';
-import 'package:web/web.dart' as web;
 
 /// Service for managing Stripe subscriptions via Cloud Functions
 class SubscriptionService {
@@ -21,15 +17,6 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-      if (kIsWeb) {
-        web.console.log(
-          '[SubscriptionService] === createCheckoutSession ==='.toJS,
-        );
-        web.console.log('[SubscriptionService] Company ID: $companyId'.toJS);
-        web.console.log('[SubscriptionService] Success URL: $successUrl'.toJS);
-        web.console.log('[SubscriptionService] Cancel URL: $cancelUrl'.toJS);
-      }
-
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
           .call<dynamic>({
@@ -38,46 +25,14 @@ class SubscriptionService {
         if (cancelUrl != null) 'cancelUrl': cancelUrl,
       });
 
-      if (kIsWeb) {
-        web.console.log(
-          '[SubscriptionService] Cloud Function result received'.toJS,
-        );
-      }
       final data = result.data as Map<String, dynamic>?;
-      if (kIsWeb) {
-        web.console.log('[SubscriptionService] Result data: $data'.toJS);
-      }
 
       if (data == null) {
-        if (kIsWeb) {
-          web.console.log(
-            '[SubscriptionService] ERROR: Result data is null'.toJS,
-          );
-        }
         return null;
       }
 
-      final sessionUrl = data['sessionUrl'] as String?;
-      if (kIsWeb) {
-        web.console.log(
-          '[SubscriptionService] Session URL: $sessionUrl'.toJS,
-        );
-        web.console.log(
-          '[SubscriptionService] === END createCheckoutSession ==='.toJS,
-        );
-      }
-
-      return sessionUrl;
+      return data['sessionUrl'] as String?;
     } catch (e) {
-      if (kIsWeb) {
-        web.console.log(
-          '[SubscriptionService] === ERROR in createCheckoutSession ==='.toJS,
-        );
-        web.console.log('[SubscriptionService] Error: $e'.toJS);
-        web.console.log(
-          '[SubscriptionService] Error type: ${e.runtimeType}'.toJS,
-        );
-      }
       throw SubscriptionException(
         'Failed to create checkout session: $e',
       );

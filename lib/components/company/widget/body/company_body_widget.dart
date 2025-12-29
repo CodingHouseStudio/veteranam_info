@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
+import 'package:veteranam/shared/widgets/subscription_info_widget.dart';
 
 class CompanyBodyWidget extends StatelessWidget {
   const CompanyBodyWidget({super.key});
@@ -124,8 +125,9 @@ class CompanyBodyWidget extends StatelessWidget {
   Widget _buildManageSubscriptionBox(BuildContext context, bool isDesk) {
     return BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
       builder: (context, companyState) {
-        final companyId = companyState.company.id;
-        final customerId = companyState.company.stripeCustomerId;
+        final company = companyState.company;
+        final companyId = company.id;
+        final customerId = company.stripeCustomerId;
 
         if (companyId.isEmpty ||
             companyId == '__company_cache_id__' ||
@@ -139,8 +141,20 @@ class CompanyBodyWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        return ManageSubscriptionButton(
-          companyId: companyId,
+        return Column(
+          spacing: KPadding.kPaddingSize16,
+          children: [
+            // Subscription Information Card
+            SubscriptionInfoWidget(
+              company: company,
+              isDesk: isDesk,
+            ),
+            // Manage Subscription Button styled as BoxWidget
+            ManageSubscriptionButton(
+              companyId: companyId,
+              isDesk: isDesk,
+            ),
+          ],
         );
       },
     );

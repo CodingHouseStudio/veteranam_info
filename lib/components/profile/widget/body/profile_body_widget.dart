@@ -84,6 +84,7 @@ class ProfileBodyWidget extends StatelessWidget {
               children: [
                 ManageSubscriptionButton(
                   companyId: companyState.company.id,
+                  isDesk: isDesk,
                 ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox32

@@ -1,32 +1,9 @@
-import 'dart:js_interop';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
-import 'package:web/web.dart' as web;
-
-// Web-compatible logging that works in release builds
-@pragma('vm:entry-point')
-@pragma('dart2js:noInline')
-void _log(String message) {
-  if (kIsWeb) {
-    // Use JavaScript console.log directly - works in release builds
-    // Force it to not be tree-shaken by using it in a way
-    // the compiler can't optimize away
-    final logMessage = '[CompanyForm] $message';
-    web.console.log(logMessage.toJS);
-    // Also use alert for critical errors (can be removed after debugging)
-    if (message.contains('ERROR')) {
-      web.window.alert('CompanyForm Error: $message');
-    }
-  }
-  // ignore: avoid_print
-  print(message);
-}
 
 class CompanyFormWidget extends StatefulWidget {
   const CompanyFormWidget({
@@ -79,53 +56,28 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
       listener: (context, watcherState) async {
         final currentCompanyId = watcherState.company.id;
 
-        _log('=== COMPANY WATCHER LISTENER TRIGGERED ===');
-        _log('Previous Company ID: $_previousCompanyId');
-        _log('Current Company ID: $currentCompanyId');
-        _log('Stripe Customer ID: ${watcherState.company.stripeCustomerId}');
-        _log('Company isEmpty: ${watcherState.company.isEmpty}');
-
         // Check if company was just created (ID changed from empty)
-        final wasJustCreated = (_previousCompanyId == null || _previousCompanyId!.isEmpty) &&
+        final wasJustCreated = (_previousCompanyId == null ||
+            _previousCompanyId!.isEmpty) &&
             currentCompanyId.isNotEmpty;
 
-        _log('Was just created? $wasJustCreated');
-
         if (wasJustCreated) {
-          _log('Company was just created! Checking subscription...');
-
           // Trigger subscription flow if no Stripe customer exists
-          final hasStripeCustomer = watcherState.company.stripeCustomerId != null &&
-              watcherState.company.stripeCustomerId!.isNotEmpty;
-
-          _log('Has Stripe customer? $hasStripeCustomer');
+          final hasStripeCustomer = watcherState.company.stripeCustomerId !=
+              null && watcherState.company.stripeCustomerId!.isNotEmpty;
 
           if (!hasStripeCustomer) {
-            _log(
-              'Opening Stripe Checkout for company: $currentCompanyId',
-            );
             try {
-              final authStatus =
-                  context.read<AuthenticationBloc>().state.status;
-              _log('Auth status: $authStatus');
-
               await _stripeCheckoutHelper.openCheckout(
                 companyId: currentCompanyId,
               );
-              _log('Checkout opened successfully!');
             } catch (e) {
-              _log('Stripe checkout error: $e');
-              _log('Error stack trace: ${StackTrace.current}');
+              // Silently handle error - user can retry from company page
             }
-          } else {
-            _log('Company already has Stripe customer, skipping checkout');
           }
-        } else {
-          _log('Not a new company creation, skipping checkout trigger');
         }
 
         _previousCompanyId = currentCompanyId;
-        _log('=== END COMPANY WATCHER LISTENER ===');
       },
       child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
         // listener: (context, _) {
