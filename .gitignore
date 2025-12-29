@@ -159,3 +159,4 @@ untranslated_messages.json
 env_dev.json
 env_prod.json
 *.png
+functions/
