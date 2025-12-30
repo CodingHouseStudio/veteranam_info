@@ -28,22 +28,21 @@ class SubscriptionCanceledScreen extends StatelessWidget {
                 ),
                 KSizedBox.kHeightSizedBox24,
                 Text(
-                  'Subscription Canceled',
+                  context.l10n.subscriptionCanceled,
                   style: isDesk
                       ? AppTextStyle.materialThemeHeadlineLarge
                       : AppTextStyle.materialThemeHeadlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 KSizedBox.kHeightSizedBox16,
-                const Text(
-                  'You have canceled the subscription setup. You can '
-                  'complete this step later from your company profile.',
+                Text(
+                  context.l10n.subscriptionCanceledMessage,
                   style: AppTextStyle.materialThemeBodyLarge,
                   textAlign: TextAlign.center,
                 ),
                 KSizedBox.kHeightSizedBox32,
                 DoubleButtonWidget(
-                  text: 'Go to Company Profile',
+                  text: context.l10n.goToCompanyProfile,
                   isDesk: isDesk,
                   widgetKey: const Key('subscription_canceled_button'),
                   onPressed: () => context.goNamed(KRoute.company.name),

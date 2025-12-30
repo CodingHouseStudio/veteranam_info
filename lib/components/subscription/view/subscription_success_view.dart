@@ -25,22 +25,21 @@ class SubscriptionSuccessScreen extends StatelessWidget {
                 ),
                 KSizedBox.kHeightSizedBox24,
                 Text(
-                  'Subscription Activated!',
+                  context.l10n.subscriptionActivated,
                   style: isDesk
                       ? AppTextStyle.materialThemeHeadlineLarge
                       : AppTextStyle.materialThemeHeadlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 KSizedBox.kHeightSizedBox16,
-                const Text(
-                  'Your 30-day trial has started. You can now create '
-                  'discounts for your company.',
+                Text(
+                  context.l10n.subscriptionTrialStarted,
                   style: AppTextStyle.materialThemeBodyLarge,
                   textAlign: TextAlign.center,
                 ),
                 KSizedBox.kHeightSizedBox32,
                 DoubleButtonWidget(
-                  text: 'Go to Company Profile',
+                  text: context.l10n.goToCompanyProfile,
                   isDesk: isDesk,
                   widgetKey: const Key('subscription_success_button'),
                   onPressed: () => context.goNamed(KRoute.company.name),
