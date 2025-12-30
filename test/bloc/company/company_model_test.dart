@@ -46,6 +46,16 @@ void main() {
           KTestVariables.fullCompanyModel.userEmails,
       CompanyModelJsonField.deletedOn:
           KTestVariables.dateTime.toIso8601String(),
+      CompanyModelJsonField.stripeCustomerId: null,
+      CompanyModelJsonField.stripeSubscriptionId: null,
+      CompanyModelJsonField.subscriptionStatus: null,
+      CompanyModelJsonField.subscriptionPlan: null,
+      CompanyModelJsonField.trialStartedAt: null,
+      CompanyModelJsonField.trialExpiresAt: null,
+      CompanyModelJsonField.subscriptionStartedAt: null,
+      CompanyModelJsonField.subscriptionExpiresAt: null,
+      CompanyModelJsonField.canceledBy: null,
+      CompanyModelJsonField.canceledAt: null,
     };
     final nullableJson = {
       CompanyModelJsonField.id: KTestVariables.fullCompanyModel.id,
@@ -57,6 +67,16 @@ void main() {
       CompanyModelJsonField.userEmails:
           KTestVariables.fullCompanyModel.userEmails,
       CompanyModelJsonField.deletedOn: null,
+      CompanyModelJsonField.stripeCustomerId: null,
+      CompanyModelJsonField.stripeSubscriptionId: null,
+      CompanyModelJsonField.subscriptionStatus: null,
+      CompanyModelJsonField.subscriptionPlan: null,
+      CompanyModelJsonField.trialStartedAt: null,
+      CompanyModelJsonField.trialExpiresAt: null,
+      CompanyModelJsonField.subscriptionStartedAt: null,
+      CompanyModelJsonField.subscriptionExpiresAt: null,
+      CompanyModelJsonField.canceledBy: null,
+      CompanyModelJsonField.canceledAt: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
