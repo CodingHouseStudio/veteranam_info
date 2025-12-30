@@ -1,0 +1,8 @@
+# Import Sorter Configuration
+# https://pub.dev/packages/import_sorter
+
+# Disable comments for import groups
+comments: false
+
+# Don't exit with error code if changes are made
+no_exit_code: true

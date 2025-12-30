@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
+
 import 'package:injectable/injectable.dart';
+
 import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton

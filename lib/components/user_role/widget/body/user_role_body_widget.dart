@@ -1,7 +1,9 @@
-import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter/material.dart';
+
+import 'package:basic_dropdown_button/basic_dropdown_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class UserRoleBodyWidget extends StatelessWidget {
@@ -51,7 +53,8 @@ class UserRoleBodyWidget extends StatelessWidget {
                   onPressed: () => Config.isDevelopment
                       ? context.goNamed(KRoute.signUp.name)
                       : context.read<UrlCubit>().launchUrl(
-                            url: '${KAppText.businessSiteUrl}/${KRoute.signUp.path}',
+                            url:
+                                '${KAppText.businessSiteUrl}/${KRoute.signUp.path}',
                           ),
                   color: AppColors.materialThemeKeyColorsPrimary,
                   // textColor: AppColors.materialThemeKeyColorsSecondary,
@@ -116,7 +119,8 @@ class UserRoleBodyWidget extends StatelessWidget {
                   onPressed: () => Config.isDevelopment
                       ? context.goNamed(KRoute.login.name)
                       : context.read<UrlCubit>().launchUrl(
-                            url: '${KAppText.businessSiteUrl}/${KRoute.login.path}',
+                            url:
+                                '${KAppText.businessSiteUrl}/${KRoute.login.path}',
                           ),
                   key: UserRoleKeys.loginBusinessButton,
                   value: 1,

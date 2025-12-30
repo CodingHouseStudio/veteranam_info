@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
+
 import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -84,7 +86,8 @@ class SubscriptionInfoWidget extends StatelessWidget {
                   isDesk,
                 ),
               ),
-          ] else if (company.subscriptionStatus == SubscriptionStatus.active) ...[
+          ] else if (company.subscriptionStatus ==
+              SubscriptionStatus.active) ...[
             if (company.subscriptionExpiresAt != null)
               Builder(
                 builder: (context) => _buildInfoRow(
@@ -93,7 +96,8 @@ class SubscriptionInfoWidget extends StatelessWidget {
                   isDesk,
                 ),
               ),
-          ] else if (company.subscriptionStatus == SubscriptionStatus.canceled ||
+          ] else if (company.subscriptionStatus ==
+                  SubscriptionStatus.canceled ||
               company.subscriptionStatus == SubscriptionStatus.expired) ...[
             if (company.subscriptionExpiresAt != null)
               Builder(

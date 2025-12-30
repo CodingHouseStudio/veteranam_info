@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
+import 'package:veteranam/shared/shared_dart.dart';
 import '../test_dependency.dart';
 
 void userSetting(FirebaseFirestore mockFirebaseFirestore) {

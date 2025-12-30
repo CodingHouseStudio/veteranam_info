@@ -2,6 +2,7 @@ import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' show ScrollPositionAlignmentPolicy;
+
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_dependency.dart';

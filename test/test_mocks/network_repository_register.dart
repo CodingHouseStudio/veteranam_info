@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
+import 'package:veteranam/shared/shared_dart.dart';
 import '../test_dependency.dart';
 
 late StreamController<List<ConnectivityResult>> networkController;

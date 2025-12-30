@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_cubit.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 

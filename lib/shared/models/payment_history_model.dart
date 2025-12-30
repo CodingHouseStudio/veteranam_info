@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 
 part 'payment_history_model.freezed.dart';
@@ -9,7 +10,11 @@ abstract class PaymentHistoryModel with _$PaymentHistoryModel {
   const factory PaymentHistoryModel({
     required String id,
     required String companyId,
-    required double amount, required PaymentStatus status, required PaymentType type, required DateTime createdAt, String? subscriptionId,
+    required double amount,
+    required PaymentStatus status,
+    required PaymentType type,
+    required DateTime createdAt,
+    String? subscriptionId,
     String? stripePaymentIntentId,
     String? stripeInvoiceId,
     @Default('usd') String currency,

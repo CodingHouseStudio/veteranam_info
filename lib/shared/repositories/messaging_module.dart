@@ -1,7 +1,8 @@
 import 'package:device_info_plus/device_info_plus.dart' show DeviceInfoPlugin;
+import 'package:injectable/injectable.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart'
     show FirebaseMessaging;
-import 'package:injectable/injectable.dart';
 
 @module
 abstract class MessagingModule {
