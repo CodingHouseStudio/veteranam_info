@@ -24,11 +24,6 @@ Future<void> signUpButtonsNavigationHelper({
 
   await tester.pumpAndSettle();
 
-  // Uncomment the following lines if you want to verify the route change
-  // verify(
-  //   () => mockGoRouter.goNamed(KRoute.signUp.name),
-  // ).called(1);
-
   expect(
     find.byKey(UserRoleKeys.signUpUserButton),
     findsOneWidget,
@@ -36,7 +31,8 @@ Future<void> signUpButtonsNavigationHelper({
 
   await tester.tap(find.byKey(UserRoleKeys.signUpUserButton));
 
+  // Both buttons trigger navigation, so expect 2 total calls
   verify(
     () => mockGoRouter.goNamed(KRoute.signUp.name),
-  ).called(1);
+  ).called(2);
 }

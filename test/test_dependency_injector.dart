@@ -160,6 +160,17 @@ void configureDependenciesTest() {
     ),
   );
 
+  getItTest.registerSingleton<ICompanyRepository>(
+    CompanyRepository(
+      appAuthenticationRepository:
+          getItTest.get<IAppAuthenticationRepository>(),
+      cache: CacheClient(),
+      firestoreService: getItTest.get<FirestoreService>(),
+      storageService: getItTest.get<StorageService>(),
+      companyCacheRepository: getItTest.get<ICompanyCacheRepository>(),
+    ),
+  );
+
   getItTest.registerSingleton<FirebaseAnalyticsService>(
     FirebaseAnalyticsService(
       firebaseAnalytics: MockFirebaseAnalytics(),
