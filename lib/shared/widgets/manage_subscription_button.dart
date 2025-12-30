@@ -87,42 +87,17 @@ class _ManageSubscriptionButtonState extends State<ManageSubscriptionButton> {
 
   @override
   Widget build(BuildContext context) {
-    // Use BoxWidget styling with custom icon widget overlay for loading
-    return Stack(
-      children: [
-        BoxWidget(
-          text: 'Manage Subscription',
-          onTap: _isLoading ? null : _openCustomerPortal,
-          isDesk: widget.isDesk,
-          icon: const Icon(
-            Icons.settings,
-            color: AppColors.materialThemeRefPrimaryPrimary40,
-          ),
+    return SkeletonizerWidget(
+      isLoading: _isLoading,
+      child: BoxWidget(
+        text: context.l10n.manageSubscription,
+        onTap: _isLoading ? null : _openCustomerPortal,
+        isDesk: widget.isDesk,
+        icon: const Icon(
+          Icons.settings,
+          color: AppColors.materialThemeRefPrimaryPrimary40,
         ),
-        // Overlay loading indicator when loading
-        if (_isLoading)
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.materialThemeKeyColorsNeutral
-                    .withOpacity(0.9),
-                borderRadius: BorderRadius.circular(KSize.kPixel12),
-              ),
-              child: const Center(
-                child: SizedBox(
-                  width: KSize.kPixel24,
-                  height: KSize.kPixel24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.materialThemeRefPrimaryPrimary40,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }

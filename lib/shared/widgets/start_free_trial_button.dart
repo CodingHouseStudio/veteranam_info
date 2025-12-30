@@ -52,42 +52,18 @@ class _StartFreeTrialButtonState extends State<StartFreeTrialButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BoxWidget(
-          text: 'Start 30-Day Free Trial',
-          iconText: 'Unlock discount creation and management features',
-          onTap: _isLoading ? null : _startFreeTrial,
-          isDesk: widget.isDesk,
-          icon: const Icon(
-            Icons.rocket_launch,
-            color: AppColors.materialThemeRefPrimaryPrimary40,
-          ),
+    return SkeletonizerWidget(
+      isLoading: _isLoading,
+      child: BoxWidget(
+        text: context.l10n.startFreeTrial,
+        iconText: context.l10n.unlockDiscountFeatures,
+        onTap: _isLoading ? null : _startFreeTrial,
+        isDesk: widget.isDesk,
+        icon: const Icon(
+          Icons.rocket_launch,
+          color: AppColors.materialThemeRefPrimaryPrimary40,
         ),
-        // Overlay loading indicator when loading
-        if (_isLoading)
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.materialThemeKeyColorsNeutral
-                    .withValues(alpha: 0.9),
-                borderRadius: BorderRadius.circular(KSize.kPixel12),
-              ),
-              child: const Center(
-                child: SizedBox(
-                  width: KSize.kPixel24,
-                  height: KSize.kPixel24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.materialThemeRefPrimaryPrimary40,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }

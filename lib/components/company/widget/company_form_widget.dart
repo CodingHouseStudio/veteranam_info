@@ -34,7 +34,6 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
   late TextEditingController emailController;
   late TextEditingController linkController;
   late StripeCheckoutHelper _stripeCheckoutHelper;
-  String? _previousCompanyId;
 
   @override
   void initState() {
@@ -52,32 +51,32 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CompanyWatcherBloc, CompanyWatcherState>(
-      listener: (context, watcherState) async {
-        final currentCompanyId = watcherState.company.id;
+    return BlocListener<CompanyFormBloc, CompanyFormState>(
+      listener: (context, formState) async {
+        // Check if form was just saved successfully
+        if (formState.formState == CompanyFormEnum.success) {
+          final companyState = context.read<CompanyWatcherBloc>().state;
+          final currentCompanyId = companyState.company.id;
 
-        // Check if company was just created (ID changed from empty)
-        final wasJustCreated = (_previousCompanyId == null ||
-            _previousCompanyId!.isEmpty) &&
-            currentCompanyId.isNotEmpty;
+          // Trigger subscription flow if company exists but no Stripe customer
+          if (currentCompanyId.isNotEmpty &&
+              currentCompanyId != '__company_cache_id__' &&
+              currentCompanyId != '__compnay_cache_id__') {
+            final hasStripeCustomer =
+                companyState.company.stripeCustomerId != null &&
+                    companyState.company.stripeCustomerId!.isNotEmpty;
 
-        if (wasJustCreated) {
-          // Trigger subscription flow if no Stripe customer exists
-          final hasStripeCustomer = watcherState.company.stripeCustomerId !=
-              null && watcherState.company.stripeCustomerId!.isNotEmpty;
-
-          if (!hasStripeCustomer) {
-            try {
-              await _stripeCheckoutHelper.openCheckout(
-                companyId: currentCompanyId,
-              );
-            } catch (e) {
-              // Silently handle error - user can retry from company page
+            if (!hasStripeCustomer) {
+              try {
+                await _stripeCheckoutHelper.openCheckout(
+                  companyId: currentCompanyId,
+                );
+              } catch (e) {
+                // Silently handle error - user can retry from company page
+              }
             }
           }
         }
-
-        _previousCompanyId = currentCompanyId;
       },
       child: BlocBuilder<CompanyFormBloc, CompanyFormState>(
         // listener: (context, _) {

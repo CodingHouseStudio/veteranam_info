@@ -59,52 +59,50 @@ class SubscriptionInfoWidget extends StatelessWidget {
 
           // Plan info
           if (company.subscriptionPlan != null)
-            _buildInfoRow(
-              'Plan',
-              company.subscriptionPlan!.displayName,
-              isDesk,
+            Builder(
+              builder: (context) => _buildInfoRow(
+                context.l10n.subscriptionPlan,
+                company.subscriptionPlan!.displayName,
+                isDesk,
+              ),
             ),
 
           // Status-specific information
           if (company.isInTrial) ...[
-            _buildInfoRow(
-              'Trial Status',
-              'Active (${company.trialDaysRemaining} days left)',
-              isDesk,
+            Builder(
+              builder: (context) => _buildInfoRow(
+                context.l10n.trialDaysRemaining,
+                '${company.trialDaysRemaining}',
+                isDesk,
+              ),
             ),
             if (company.trialExpiresAt != null)
-              _buildInfoRow(
-                'Trial Expires',
-                _formatDate(company.trialExpiresAt!),
-                isDesk,
+              Builder(
+                builder: (context) => _buildInfoRow(
+                  context.l10n.trialEndsOn,
+                  _formatDate(company.trialExpiresAt!),
+                  isDesk,
+                ),
               ),
           ] else if (company.subscriptionStatus == SubscriptionStatus.active) ...[
             if (company.subscriptionExpiresAt != null)
-              _buildInfoRow(
-                'Renews On',
-                _formatDate(company.subscriptionExpiresAt!),
-                isDesk,
+              Builder(
+                builder: (context) => _buildInfoRow(
+                  context.l10n.renewsOn,
+                  _formatDate(company.subscriptionExpiresAt!),
+                  isDesk,
+                ),
               ),
           ] else if (company.subscriptionStatus == SubscriptionStatus.canceled ||
               company.subscriptionStatus == SubscriptionStatus.expired) ...[
-            if (company.canceledAt != null)
-              _buildInfoRow(
-                'Canceled On',
-                _formatDate(company.canceledAt!),
-                isDesk,
-              ),
             if (company.subscriptionExpiresAt != null)
-              _buildInfoRow(
-                'Access Until',
-                _formatDate(company.subscriptionExpiresAt!),
-                isDesk,
+              Builder(
+                builder: (context) => _buildInfoRow(
+                  context.l10n.endsOn,
+                  _formatDate(company.subscriptionExpiresAt!),
+                  isDesk,
+                ),
               ),
-          ] else if (company.needsPaymentAction) ...[
-            _buildWarningRow(
-              'Action Required',
-              'Please update your payment method',
-              isDesk,
-            ),
           ],
         ],
       ),
@@ -115,51 +113,55 @@ class SubscriptionInfoWidget extends StatelessWidget {
     final status = company.subscriptionStatus!;
     Color backgroundColor;
     Color textColor;
-    String label;
+    String Function(BuildContext) labelGetter;
 
     switch (status) {
       case SubscriptionStatus.active:
         backgroundColor = AppColors.materialThemeRefPrimaryPrimary60;
         textColor = AppColors.materialThemeWhite;
-        label = 'Active';
+        labelGetter = (context) => context.l10n.subscriptionActive;
       case SubscriptionStatus.trialing:
         backgroundColor = AppColors.materialThemeRefPrimaryPrimary80;
         textColor = AppColors.materialThemeWhite;
-        label = 'Trial';
+        labelGetter = (context) => context.l10n.subscriptionTrial;
       case SubscriptionStatus.canceled:
       case SubscriptionStatus.expired:
         backgroundColor = AppColors.materialThemeRefNeutralNeutral60;
         textColor = AppColors.materialThemeWhite;
-        label = status == SubscriptionStatus.canceled
-            ? 'Canceled'
-            : 'Expired';
+        labelGetter = status == SubscriptionStatus.canceled
+            ? (context) => context.l10n.subscriptionCanceled
+            : (context) => context.l10n.subscriptionExpired;
       case SubscriptionStatus.pastDue:
       case SubscriptionStatus.unpaid:
         backgroundColor = AppColors.materialThemeRefErrorError40;
         textColor = AppColors.materialThemeWhite;
-        label = 'Payment Due';
+        labelGetter = (context) => context.l10n.subscriptionPaymentDue;
       case SubscriptionStatus.incomplete:
       case SubscriptionStatus.incompleteExpired:
         backgroundColor = AppColors.materialThemeRefNeutralNeutral60;
         textColor = AppColors.materialThemeWhite;
-        label = 'Incomplete';
+        labelGetter = (context) => context.l10n.subscriptionIncomplete;
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSize12,
-        vertical: KPadding.kPaddingSize4,
-      ),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(KSize.kPixel16),
-      ),
-      child: Text(
-        label,
-        style: AppTextStyle.materialThemeLabelMedium.copyWith(
-          color: textColor,
-        ),
-      ),
+    return Builder(
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize12,
+            vertical: KPadding.kPaddingSize4,
+          ),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(KSize.kPixel16),
+          ),
+          child: Text(
+            labelGetter(context),
+            style: AppTextStyle.materialThemeLabelMedium.copyWith(
+              color: textColor,
+            ),
+          ),
+        );
+      },
     );
   }
 
