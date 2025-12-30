@@ -1,10 +1,8 @@
 import 'package:firebase_storage/firebase_storage.dart' show FirebaseStorage;
-import 'package:injectable/injectable.dart';
-
-import 'package:veteranam/shared/shared_dart.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
+import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 /// COMMENT: Class to get, update, delete or set values in storage
 @Singleton(order: -1)

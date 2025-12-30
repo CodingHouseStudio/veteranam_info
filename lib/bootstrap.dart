@@ -1,15 +1,13 @@
 import 'dart:async' show FutureOr;
 import 'dart:developer' show log;
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart' show Colors, Widget, runApp;
 import 'package:flutter/services.dart';
-
-import 'package:bloc/bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:veteranam/shared/helper/helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
