@@ -289,7 +289,7 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.docs.isNotEmpty) {
-            final source = snapshot.metadata.isFromCache._source;
+            // final source = snapshot.metadata.isFromCache._source;
             final data = snapshot.docs.first.data();
 
             // Convert Firestore Timestamps to ISO8601 strings for DateTime fields
