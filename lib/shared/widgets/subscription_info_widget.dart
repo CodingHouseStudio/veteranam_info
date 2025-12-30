@@ -200,52 +200,6 @@ class SubscriptionInfoWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildWarningRow(String label, String value, bool isDesk) {
-    return Container(
-      padding: const EdgeInsets.all(KPadding.kPaddingSize12),
-      decoration: BoxDecoration(
-        color: AppColors.materialThemeRefErrorError90,
-        borderRadius: BorderRadius.circular(KSize.kPixel8),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.warning,
-            color: AppColors.materialThemeRefErrorError40,
-            size: KSize.kPixel20,
-          ),
-          KSizedBox.kWidthSizedBox8,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: KPadding.kPaddingSize4,
-              children: [
-                Text(
-                  label,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeBodySmall.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.materialThemeRefErrorError40,
-                        )
-                      : AppTextStyle.materialThemeLabelMedium.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.materialThemeRefErrorError40,
-                        ),
-                ),
-                Text(
-                  value,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeBodySmall
-                      : AppTextStyle.materialThemeLabelSmall,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   String _formatDate(DateTime date) {
     return DateFormat('MMM dd, yyyy').format(date);
   }
