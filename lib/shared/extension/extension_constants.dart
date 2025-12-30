@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
+
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/text/text_constants.dart';
 import 'package:veteranam/shared/models/company_model.dart';

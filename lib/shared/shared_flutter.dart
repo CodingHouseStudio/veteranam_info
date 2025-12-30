@@ -1,5 +1,4 @@
 export '../l10n/l10n.dart';
-// Use Flutter Imports(repository)
 export 'bloc/app_layout/app_layout_bloc.dart';
 export 'bloc/bloc.dart';
 export 'constants/constants_flutter.dart';

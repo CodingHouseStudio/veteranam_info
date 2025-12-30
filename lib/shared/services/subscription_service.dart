@@ -1,11 +1,11 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:veteranam/shared/models/models.dart';
+
 
 /// Service for managing Stripe subscriptions via Cloud Functions
 class SubscriptionService {
   SubscriptionService({FirebaseFunctions? functions})
-      : _functions = functions ??
-            FirebaseFunctions.instanceFor(region: 'us-central1');
+      : _functions =
+            functions ?? FirebaseFunctions.instanceFor(region: 'us-central1');
 
   final FirebaseFunctions _functions;
 
@@ -59,7 +59,7 @@ class SubscriptionService {
       return SubscriptionStatus.fromJson(data);
     } catch (e) {
       throw SubscriptionException(
-        'Failed to get subscription status: ${e}',
+        'Failed to get subscription status: $e',
       );
     }
   }
@@ -83,7 +83,7 @@ class SubscriptionService {
       return data?['success'] == true;
     } catch (e) {
       throw SubscriptionException(
-        'Failed to cancel subscription: ${e}',
+        'Failed to cancel subscription: $e',
       );
     }
   }
@@ -95,9 +95,8 @@ class SubscriptionService {
     String? reason,
   }) async {
     try {
-      final result = await _functions
-          .httpsCallable('extendCompanyTrial')
-          .call<dynamic>({
+      final result =
+          await _functions.httpsCallable('extendCompanyTrial').call<dynamic>({
         'companyId': companyId,
         'extensionDays': extensionDays,
         if (reason != null) 'reason': reason,
@@ -109,7 +108,7 @@ class SubscriptionService {
       return ExtendTrialResult.fromJson(data);
     } catch (e) {
       throw SubscriptionException(
-        'Failed to extend trial: ${e}',
+        'Failed to extend trial: $e',
       );
     }
   }
@@ -135,7 +134,7 @@ class SubscriptionService {
       return data['sessionUrl'] as String?;
     } catch (e) {
       throw SubscriptionException(
-        'Failed to create portal session: ${e}',
+        'Failed to create portal session: $e',
       );
     }
   }

@@ -1,5 +1,6 @@
-// ignore: depend_on_referenced_packages
 import 'package:firebase_core_platform_interface/test.dart';
+// ignore: depend_on_referenced_packages
+
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 

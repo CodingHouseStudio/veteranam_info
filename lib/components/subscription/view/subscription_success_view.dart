@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class SubscriptionSuccessScreen extends StatelessWidget {
@@ -9,7 +11,10 @@ class SubscriptionSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-        if (isDesk) KSizedBox.kHeightSizedBox80 else KSizedBox.kHeightSizedBox40,
+        if (isDesk)
+          KSizedBox.kHeightSizedBox80
+        else
+          KSizedBox.kHeightSizedBox40,
         Center(
           child: Container(
             constraints: const BoxConstraints(maxWidth: 600),

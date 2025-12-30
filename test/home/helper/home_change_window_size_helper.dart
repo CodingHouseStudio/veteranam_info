@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/constants/enum.dart';
 
+import 'package:veteranam/shared/constants/enum.dart';
 import '../../test_dependency.dart';
 
 Future<void> homeChangeWindowSizeHelper({

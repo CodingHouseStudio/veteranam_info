@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart'
-    show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
+    show DiagnosticLevel, PlatformDispatcher;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
+
 import 'package:veteranam/shared/bloc/app_layout/app_layout_bloc.dart';
 import 'package:veteranam/shared/shared_dart.dart';
-
 import '../test_dependency.dart';
 
 late StreamController<AppVersionEnum> appVersionController;

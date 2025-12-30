@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+
 import 'package:veteranam/shared/constants/models.dart';
 
 enum ResumeFieldModelValidationError {

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: ICitiesRepository)

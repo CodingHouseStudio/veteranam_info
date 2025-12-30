@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart';
 import 'package:veteranam/shared/extension/list_extension_dart.dart';
 import 'package:veteranam/shared/repositories/i_information_repository.dart';

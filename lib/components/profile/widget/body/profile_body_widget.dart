@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
@@ -78,7 +80,7 @@ class ProfileBodyWidget extends StatelessWidget {
             final companyId = companyState.company.id;
             final hasSubscription =
                 companyState.company.stripeCustomerId != null &&
-                companyState.company.stripeCustomerId!.isNotEmpty;
+                    companyState.company.stripeCustomerId!.isNotEmpty;
 
             if (companyId.isEmpty ||
                 companyId == '__company_cache_id__' ||

@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_cubit.dart';
 
 class DiscountCardBlocprovider extends StatelessWidget {
