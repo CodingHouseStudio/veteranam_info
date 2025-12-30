@@ -1,11 +1,12 @@
 import 'package:cloud_functions/cloud_functions.dart';
+
 import 'package:veteranam/shared/models/models.dart';
 
 /// Service for managing Stripe subscriptions via Cloud Functions
 class SubscriptionService {
   SubscriptionService({FirebaseFunctions? functions})
-      : _functions = functions ??
-            FirebaseFunctions.instanceFor(region: 'us-central1');
+      : _functions =
+            functions ?? FirebaseFunctions.instanceFor(region: 'us-central1');
 
   final FirebaseFunctions _functions;
 
@@ -95,9 +96,8 @@ class SubscriptionService {
     String? reason,
   }) async {
     try {
-      final result = await _functions
-          .httpsCallable('extendCompanyTrial')
-          .call<dynamic>({
+      final result =
+          await _functions.httpsCallable('extendCompanyTrial').call<dynamic>({
         'companyId': companyId,
         'extensionDays': extensionDays,
         if (reason != null) 'reason': reason,

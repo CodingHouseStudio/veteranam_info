@@ -3,10 +3,12 @@ import 'dart:developer';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:veteranam/shared/shared_dart.dart';
+
 import 'package:firebase_analytics/firebase_analytics.dart'
     show AnalyticsCallOptions, FirebaseAnalytics;
-import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
 @singleton
 class FirebaseAnalyticsService {

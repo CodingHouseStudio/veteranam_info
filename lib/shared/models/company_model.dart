@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:veteranam/shared/models/convertors/image_convertor.dart';
 import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 import 'package:veteranam/shared/models/helper_models/image_model.dart';
@@ -66,8 +67,7 @@ abstract class CompanyModel with _$CompanyModel {
       termsAccepted == true && isSubscriptionActive && !isTrialExpired;
 
   bool get isTrialExpired =>
-      trialExpiresAt != null &&
-      DateTime.now().isAfter(trialExpiresAt!);
+      trialExpiresAt != null && DateTime.now().isAfter(trialExpiresAt!);
 
   bool get isInTrial =>
       subscriptionStatus == SubscriptionStatus.trialing && !isTrialExpired;

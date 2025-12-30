@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'
-    show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
 import 'package:veteranam/shared/shared_dart.dart';
+
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show visibleForTesting;
 
 part 'app_version_state.dart';
 

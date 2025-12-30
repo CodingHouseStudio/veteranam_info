@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' show BuildContext;
-// import 'package:veteranam/shared/constants/failure_enum.dart';
+
 import 'package:veteranam/shared/shared_flutter.dart';
+
+// import 'package:veteranam/shared/constants/failure_enum.dart';
 
 extension SomeFailureValue on SomeFailure {
   String? value(BuildContext context) {

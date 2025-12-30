@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    deferred as local_notifications;
 import 'package:injectable/injectable.dart';
+
 import 'package:veteranam/shared/constants/enum.dart';
 import 'package:veteranam/shared/models/failure_model/failure_model.dart';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    deferred as local_notifications;
 
 @Singleton(order: -2)
 class LocalNotificationRepository {

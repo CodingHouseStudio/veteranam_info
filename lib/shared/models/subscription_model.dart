@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 
 part 'subscription_model.freezed.dart';
@@ -15,7 +16,9 @@ abstract class SubscriptionModel with _$SubscriptionModel {
     required SubscriptionPlan plan,
     required String priceId,
     required double amount,
-    required DateTime createdAt, required DateTime updatedAt, @Default('usd') String currency,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    @Default('usd') String currency,
     DateTime? trialStartedAt,
     DateTime? trialExpiresAt,
     DateTime? currentPeriodStart,
