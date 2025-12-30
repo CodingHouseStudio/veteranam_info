@@ -1,10 +1,12 @@
 import 'dart:developer' show log;
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/components/discount/view/discount_view.dart';
 import 'package:veteranam/components/discounts/view/discounts_view.dart';
 import 'package:veteranam/components/error/view/error_view.dart';

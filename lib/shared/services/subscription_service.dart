@@ -1,6 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
 
-
 /// Service for managing Stripe subscriptions via Cloud Functions
 class SubscriptionService {
   SubscriptionService({FirebaseFunctions? functions})

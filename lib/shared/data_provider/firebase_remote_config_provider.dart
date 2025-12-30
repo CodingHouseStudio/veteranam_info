@@ -1,9 +1,11 @@
 import 'dart:async';
 
-import 'package:firebase_remote_config/firebase_remote_config.dart'
-    show FirebaseRemoteConfig, RemoteConfigSettings;
 import 'package:injectable/injectable.dart';
+
 import 'package:veteranam/shared/models/failure_model/failure_model.dart';
+
+import 'package:firebase_remote_config/firebase_remote_config.dart'
+    show FirebaseRemoteConfig, RemoteConfigFetchStatus, RemoteConfigSettings;
 
 @singleton
 class FirebaseRemoteConfigProvider {

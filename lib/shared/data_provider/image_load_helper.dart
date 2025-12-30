@@ -1,12 +1,15 @@
 import 'dart:io' as io; // Use io for platform-agnostic file operations
+
 import 'dart:typed_data' show Uint8List;
 
 import 'package:dio/dio.dart' show Dio, Options, ResponseType;
 import 'package:injectable/injectable.dart';
+
+import 'package:veteranam/shared/shared_dart.dart';
+
 // import 'package:dio/browser.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory; // For mobile file handling
-import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(order: -1)
 class ArtifactDownloadHelper {
