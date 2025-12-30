@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:veteranam/shared/data_provider/image_load_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -49,7 +49,9 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void didChangeDependencies() {
     if (Config.isWeb) {
-      if ((context.read<MobOfflineModeCubit>().state.isOffline) &&
+      final offlineModeCubit =
+          Provider.of<MobOfflineModeCubit?>(context, listen: false);
+      if ((offlineModeCubit?.state.isOffline ?? false) &&
           (bytes?.isEmpty ?? true && (widget.imageBytes?.isEmpty ?? true))) {
         precacheImage(
           bytes == null
