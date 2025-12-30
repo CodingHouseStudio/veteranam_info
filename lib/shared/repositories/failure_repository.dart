@@ -1,13 +1,9 @@
 import 'dart:async';
 import 'dart:developer' show log;
 
-import 'package:get_it/get_it.dart';
-
-import 'package:veteranam/shared/constants/security_keys.dart';
-import 'package:veteranam/shared/shared_dart.dart';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'
     deferred as firebase_crashlytics;
+import 'package:get_it/get_it.dart';
 // import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
     show
@@ -17,6 +13,8 @@ import 'package:sentry_flutter/sentry_flutter.dart' deferred as sentry
         SentryScreenshotQuality,
         SentryUser,
         Spotlight;
+import 'package:veteranam/shared/constants/security_keys.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 
 // @LazySingleton(order: -2)
 class FailureRepository {

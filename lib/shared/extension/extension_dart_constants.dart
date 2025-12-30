@@ -1,12 +1,10 @@
 import 'dart:math' show max, min;
 import 'dart:typed_data' show Uint8List;
 
-import 'package:intl/intl.dart' show DateFormat;
-
-import 'package:veteranam/shared/shared_dart.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
+import 'package:intl/intl.dart' show DateFormat;
+import 'package:veteranam/shared/shared_dart.dart';
 
 // Extension for handling item loading logic on int
 extension ItemLoadedExtensions on int {

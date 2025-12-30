@@ -1,17 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
-
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
+import 'package:flutter/foundation.dart'
+    show DiagnosticLevel, PlatformDispatcher;
+import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:flutter/foundation.dart'
-    show DiagnosticLevel, FlutterErrorDetails, PlatformDispatcher;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';

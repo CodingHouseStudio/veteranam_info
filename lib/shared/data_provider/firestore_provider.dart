@@ -1,9 +1,5 @@
 import 'dart:developer' show log;
 
-import 'package:injectable/injectable.dart';
-
-import 'package:veteranam/shared/shared_dart.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart'
     show
         DocumentChangeType,
@@ -16,6 +12,8 @@ import 'package:cloud_firestore/cloud_firestore.dart'
         Source;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
+import 'package:injectable/injectable.dart';
+import 'package:veteranam/shared/shared_dart.dart';
 // import 'package:flutter/widgets.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase

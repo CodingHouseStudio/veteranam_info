@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
 import 'package:feedback/feedback.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:veteranam/components/discounts/bloc/watcher/discounts_watcher_bloc.dart';
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart';
@@ -14,6 +12,7 @@ import 'package:veteranam/shared/bloc/bloc.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/models/user_setting_model.dart';
 import 'package:veteranam/shared/widget/mob_feedback_widget.dart';
+
 import '../test_mocks/test_mocks.dart';
 
 /// COMMENT: Helpers adds common elements to all screens in tests

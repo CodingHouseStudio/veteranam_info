@@ -1,12 +1,6 @@
-import 'package:flutter/foundation.dart' show Key, defaultTargetPlatform;
-
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:feedback/feedback.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart' show DateFormat;
-
-import 'package:veteranam/shared/shared_flutter.dart';
-
+import 'package:flutter/foundation.dart' show Key, defaultTargetPlatform;
 import 'package:flutter/material.dart'
     show
         Alignment,
@@ -35,6 +29,9 @@ import 'package:flutter/material.dart'
         WidgetStateProperty,
         showDatePicker,
         visibleForTesting;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart' show DateFormat;
+import 'package:veteranam/shared/shared_flutter.dart';
 
 extension LocalizedDateTime on DateTime {
   @visibleForTesting
