@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart';
 import 'package:veteranam/components/sign_up/sign_up.dart';
 import 'package:veteranam/shared/shared_flutter.dart';

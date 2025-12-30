@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:veteranam/shared/constants/enum.dart';
 
 part 'device_info_model.freezed.dart';

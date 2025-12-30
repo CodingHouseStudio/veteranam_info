@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:veteranam/shared/shared_dart.dart';
+
 // import 'package:firebase_storage/firebase_storage.dart' show FirebaseException;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
-import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(
   as: ICompanyRepository,

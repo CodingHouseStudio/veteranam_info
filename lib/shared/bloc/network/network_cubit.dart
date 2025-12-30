@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:veteranam/shared/shared_dart.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
-import 'package:injectable/injectable.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
 @injectable
 class NetworkCubit extends Cubit<NetworkStatus> {

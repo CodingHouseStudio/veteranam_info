@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 import '../test_dependency.dart';
 
 /// COMMENT: Helpers for scroll screen in tests

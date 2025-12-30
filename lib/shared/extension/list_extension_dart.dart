@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart' show IterableExtension, groupBy;
+
+import 'package:veteranam/shared/shared_dart.dart';
+
 import 'package:connectivity_plus/connectivity_plus.dart'
     show ConnectivityResult;
-import 'package:veteranam/shared/shared_dart.dart';
 
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {

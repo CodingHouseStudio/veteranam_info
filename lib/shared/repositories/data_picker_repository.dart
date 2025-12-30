@@ -4,7 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:image_picker/image_picker.dart'
     show ImagePicker, ImageSource, XFile;
+
 import 'package:injectable/injectable.dart';
+
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IDataPickerRepository)

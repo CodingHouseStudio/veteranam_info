@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:veteranam/shared/models/models.dart';
 
 part 'information_model.freezed.dart';

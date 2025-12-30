@@ -2,12 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:mockito/mockito.dart';
+
 import 'package:veteranam/components/discounts_add/bloc/discounts_add_bloc.dart';
 import 'package:veteranam/components/discounts_add/field_models/field_models.dart';
 import 'package:veteranam/shared/shared_dart.dart';
-
 import '../../test_dependency.dart';
 
 void main() {

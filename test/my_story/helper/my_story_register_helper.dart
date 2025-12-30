@@ -1,6 +1,6 @@
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/shared/shared_dart.dart';
 
+import 'package:veteranam/shared/shared_dart.dart';
 import '../../test_dependency.dart';
 
 late IStoryRepository mockStoryRepository;
