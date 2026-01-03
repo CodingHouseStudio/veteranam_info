@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MarkdownLinkWidget extends StatelessWidget {

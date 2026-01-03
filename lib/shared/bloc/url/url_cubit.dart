@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 @injectable

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' show BuildContext;
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 /// Extension for filtering FilterItem list items.

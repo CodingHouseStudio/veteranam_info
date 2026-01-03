@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(as: IAppLayoutRepository)

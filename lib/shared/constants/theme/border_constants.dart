@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' show OutlineInputBorder;
-
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 abstract class KBorder {

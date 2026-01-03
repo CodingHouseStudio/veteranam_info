@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:skeletonizer/skeletonizer.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class SkeletonizerWidget extends StatelessWidget {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:veteranam/components/mob_authentication_dialog/widget/body/mob_authentication_dialog_body.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 

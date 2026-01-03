@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:veteranam/components/discount/bloc/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/models/discount_model.dart';
 

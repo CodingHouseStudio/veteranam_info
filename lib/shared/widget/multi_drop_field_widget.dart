@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:optimized_search_field/optimized_search_field.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class MultiDropFieldWidget extends StatelessWidget {

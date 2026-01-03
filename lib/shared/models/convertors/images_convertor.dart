@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/data_provider/image_load_helper.dart';
 import 'package:veteranam/shared/models/models.dart';

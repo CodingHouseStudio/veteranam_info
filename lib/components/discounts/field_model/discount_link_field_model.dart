@@ -1,5 +1,4 @@
 import 'package:formz/formz.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 enum DiscountLinkFieldModelValidationError {
