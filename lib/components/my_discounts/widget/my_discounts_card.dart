@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart';
 import 'package:veteranam/components/my_discounts/my_discounts.dart';
 import 'package:veteranam/shared/shared_flutter.dart';

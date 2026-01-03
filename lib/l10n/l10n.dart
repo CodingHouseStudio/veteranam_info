@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:veteranam/l10n/generated/app_localizations.g.dart';
 
 /// COMMENT: Adds localization in App

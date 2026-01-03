@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 

@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-
 import 'package:veteranam/components/discounts/bloc/bloc.dart';
 import 'package:veteranam/components/discounts/field_model/field_model.dart';
 import 'package:veteranam/shared/shared_dart.dart';
+
 import '../../../test_dependency.dart';
 
 void main() {

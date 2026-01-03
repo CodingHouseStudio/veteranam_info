@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class SwitchOfflineWidget extends StatelessWidget {

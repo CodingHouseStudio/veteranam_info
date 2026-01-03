@@ -16,7 +16,6 @@ import 'package:flutter/material.dart'
         RoundedRectangleBorder,
         VisualDensity,
         WidgetStatePropertyAll;
-
 import 'package:veteranam/shared/constants/constants_flutter.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group

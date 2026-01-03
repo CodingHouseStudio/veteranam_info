@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 part 'story_watcher_bloc.freezed.dart';

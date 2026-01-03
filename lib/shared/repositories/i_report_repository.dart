@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 abstract class IReportRepository {

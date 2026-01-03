@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 @Singleton(order: -2)

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart';
 
 class MyStoryBlocprovider extends StatelessWidget {

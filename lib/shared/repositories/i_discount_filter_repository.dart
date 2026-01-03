@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:veteranam/shared/models/discount_model.dart';
 import 'package:veteranam/shared/models/failure_model/some_failure.dart';
 import 'package:veteranam/shared/models/filter_model.dart';

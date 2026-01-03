@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import 'package:veteranam/shared/shared_dart.dart';
 
 abstract class IUrlRepository {

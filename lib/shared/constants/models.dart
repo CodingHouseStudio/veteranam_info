@@ -1,7 +1,6 @@
 import 'dart:typed_data' show Uint8List;
 
 import 'package:image_picker/image_picker.dart' show XFile;
-
 import 'package:veteranam/shared/models/models.dart';
 
 class FilePickerItem {

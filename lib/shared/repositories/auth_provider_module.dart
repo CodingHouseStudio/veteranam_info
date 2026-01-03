@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart'
         AuthCredential,
         FacebookAuthProvider,
         GoogleAuthProvider;
-
 import 'package:injectable/injectable.dart';
 
 @module

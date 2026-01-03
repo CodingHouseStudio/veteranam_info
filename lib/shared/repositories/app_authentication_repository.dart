@@ -3,8 +3,8 @@ import 'dart:developer' show log;
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 // import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
 import 'package:google_sign_in/google_sign_in.dart';

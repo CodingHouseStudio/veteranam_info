@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/helper/get_it_service_locator.config.dart';
 

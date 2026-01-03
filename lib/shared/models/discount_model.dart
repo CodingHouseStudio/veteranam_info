@@ -1,7 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:veteranam/shared/models/models.dart';
 
 part 'discount_model.freezed.dart';

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/repositories/i_mobile_ads_repository.dart';
 
 @injectable

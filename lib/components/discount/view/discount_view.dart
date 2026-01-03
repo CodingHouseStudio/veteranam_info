@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:veteranam/components/discount/widget/blocprovider/discount_blocprovider.dart';
 import 'package:veteranam/components/discount/widget/body/discount_body_widget.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
