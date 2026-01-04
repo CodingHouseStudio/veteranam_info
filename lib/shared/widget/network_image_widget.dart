@@ -47,7 +47,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   void didChangeDependencies() {
-    if (!Config.isWeb) {
+    if (!Config.isWeb && !KTest.isTest) {
       final offlineModeCubit = context.read<MobOfflineModeCubit>();
 
       if (offlineModeCubit.state.isOffline &&
