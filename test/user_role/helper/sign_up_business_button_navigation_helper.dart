@@ -31,8 +31,9 @@ Future<void> signUpButtonsNavigationHelper({
 
   await tester.tap(find.byKey(UserRoleKeys.signUpUserButton));
 
-  // Both buttons trigger navigation, so expect 2 total calls
+  // Only the user button triggers router navigation
+  // Business button uses UrlCubit.launchUrl
   verify(
     () => mockGoRouter.goNamed(KRoute.signUp.name),
-  ).called(2);
+  ).called(1);
 }

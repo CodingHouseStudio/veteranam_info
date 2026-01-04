@@ -19,6 +19,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:mockito/annotations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
+import 'package:veteranam/shared/services/subscription_service.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 @GenerateNiceMocks(
@@ -100,6 +102,8 @@ import 'package:veteranam/shared/shared_dart.dart';
     MockSpec<WidgetsBinding>(),
     MockSpec<firebase_auth.AppleAuthProvider>(),
     MockSpec<LocalNotificationRepository>(),
+    MockSpec<SubscriptionService>(),
+    MockSpec<SubscriptionCheckoutCubit>(),
   ],
 )
 void load() => log('loaded', name: 'Test', sequenceNumber: -2);
