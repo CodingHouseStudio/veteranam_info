@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:veteranam/shared/constants/config.dart';
+import 'package:veteranam/shared/constants/test_constants.dart';
 import 'package:veteranam/shared/data_provider/image_load_helper.dart';
 import 'package:veteranam/shared/models/models.dart';
 
@@ -23,9 +25,11 @@ class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
     if (list?.isEmpty ?? true) {
       return null;
     } else {
-      unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
+      if (KTest.isTest || Config.isWeb) {
+        unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
+      }
 
-      return list.first;
+      return list!.first;
     }
   }
 
