@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/data_provider/image_load_helper.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -11,7 +11,6 @@ import 'package:veteranam/shared/shared_flutter.dart';
 class NetworkImageWidget extends StatefulWidget {
   const NetworkImageWidget({
     required this.imageUrl,
-    // this.useCloudflare,
     super.key,
     this.fit,
     this.size,
@@ -49,14 +48,14 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void didChangeDependencies() {
     if (Config.isWeb) {
-      final offlineModeCubit =
-          Provider.of<MobOfflineModeCubit?>(context, listen: false);
-      if ((offlineModeCubit?.state.isOffline ?? false) &&
+      final offlineModeCubit = context.read<MobOfflineModeCubit>();
+
+      if (offlineModeCubit.state.isOffline &&
           (bytes?.isEmpty ?? true && (widget.imageBytes?.isEmpty ?? true))) {
         precacheImage(
           bytes == null
               ? CachedNetworkImageProvider(
-                  widget.imageUrl!.getImageUrl, // widget.imageUrl,
+                  widget.imageUrl!.getImageUrl,
                   headers: const {
                     'Cache-Control': 'max-age=3600',
                   },
@@ -178,7 +177,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   Widget getCachedNetworkImage(String? imageUrl) => CachedNetworkImage(
         key: ValueKey(imageUrl),
-        imageUrl: imageUrl!, // widget.imageUrl,
+        imageUrl: imageUrl!,
         fit: widget.fit,
         height: widget.size,
         width: widget.size,

@@ -197,26 +197,6 @@ GoRouter businessRouter = GoRouter(
         child: const InvestorsScreen(),
       ),
     ),
-    GoRoute(
-      name: KRoute.subscriptionSuccess.name,
-      path: '/${KRoute.subscriptionSuccess.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const SubscriptionSuccessScreen(),
-      ),
-    ),
-    GoRoute(
-      name: KRoute.subscriptionCanceled.name,
-      path: '/${KRoute.subscriptionCanceled.path}',
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        restorationId: state.pageKey.value,
-        child: const SubscriptionCanceledScreen(),
-      ),
-    ),
     //   ],
     // ),
     // if (Config.isDevelopment)
@@ -258,18 +238,28 @@ GoRouter businessRouter = GoRouter(
             restorationId: state.pageKey.value,
             child: const CompanyScreen(),
           ),
-          // routes: [
-          //   GoRoute(
-          //     name: KRoute.profileMyStory.name,
-          //     path: KRoute.profileMyStory.path,
-          //     pageBuilder: (context, state) => NoTransitionPage(
-          //       key: state.pageKey,
-          //       name: state.name,
-          // restorationId: state.pageKey.value,
-          //       child: const ProfileMyStoryScreen(),
-          //     ),
-          //   ),
-          // ],
+          routes: [
+            GoRoute(
+              name: KRoute.subscriptionSuccess.name,
+              path: KRoute.subscriptionSuccess.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                child: const SubscriptionSuccessScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.subscriptionCanceled.name,
+              path: KRoute.subscriptionCanceled.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                restorationId: state.pageKey.value,
+                child: const SubscriptionCanceledScreen(),
+              ),
+            ),
+          ],
           redirect: (context, state) =>
               context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated

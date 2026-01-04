@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
-class StartFreeTrialButton extends StatefulWidget {
+class StartFreeTrialButton extends StatelessWidget {
   const StartFreeTrialButton({
     required this.companyId,
     required this.isDesk,
@@ -14,56 +15,48 @@ class StartFreeTrialButton extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<StartFreeTrialButton> createState() => _StartFreeTrialButtonState();
-}
-
-class _StartFreeTrialButtonState extends State<StartFreeTrialButton> {
-  bool _isLoading = false;
-  final _stripeCheckoutHelper = StripeCheckoutHelper();
-
-  Future<void> _startFreeTrial() async {
-    if (_isLoading) return;
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      await _stripeCheckoutHelper.openCheckout(
-        companyId: widget.companyId,
-      );
-    } catch (e) {
-      // Show error to user
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to start trial: $e'),
-            backgroundColor: AppColors.materialThemeRefErrorError40,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return SkeletonizerWidget(
-      isLoading: _isLoading,
-      child: BoxWidget(
-        text: context.l10n.startFreeTrial,
-        iconText: context.l10n.unlockDiscountFeatures,
-        onTap: _isLoading ? null : _startFreeTrial,
-        isDesk: widget.isDesk,
-        icon: const Icon(
-          Icons.rocket_launch,
-          color: AppColors.materialThemeRefPrimaryPrimary40,
-        ),
+    return BlocProvider(
+      create: (context) => GetIt.I.get<SubscriptionCheckoutCubit>(),
+      child: BlocConsumer<SubscriptionCheckoutCubit, SubscriptionCheckoutState>(
+        listener: (context, state) {
+          if (state.status == SubscriptionCheckoutStatus.failure) {
+            final errorMessage = state.errorMessage ?? 'Unknown error';
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Failed to start trial: $errorMessage'),
+                backgroundColor: AppColors.materialThemeRefErrorError40,
+              ),
+            );
+
+            // Reset state after showing error
+            context.read<SubscriptionCheckoutCubit>().reset();
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state.status == SubscriptionCheckoutStatus.loading;
+
+          return SkeletonizerWidget(
+            isLoading: isLoading,
+            child: BoxWidget(
+              text: context.l10n.startFreeTrial,
+              iconText: context.l10n.unlockDiscountFeatures,
+              onTap: isLoading
+                  ? null
+                  : () {
+                      context.read<SubscriptionCheckoutCubit>().openCheckout(
+                            companyId: companyId,
+                          );
+                    },
+              isDesk: isDesk,
+              icon: const Icon(
+                Icons.rocket_launch,
+                color: AppColors.materialThemeRefPrimaryPrimary40,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
