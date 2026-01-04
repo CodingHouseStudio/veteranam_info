@@ -2015,5 +2015,35 @@
   "@subscriptionCanceledMessage": {
     "examples": "Canceled page description",
     "description": "Message shown when user cancels subscription setup"
+  },
+  "subscriptionCheckoutErrorCreateSessionFailed": "Failed to create checkout session",
+  "@subscriptionCheckoutErrorCreateSessionFailed": {
+    "examples": "Error message",
+    "description": "Error shown when creating Stripe checkout session fails"
+  },
+  "subscriptionCheckoutErrorLaunchUrlFailed": "Failed to open Stripe Checkout. Please check your browser settings.",
+  "@subscriptionCheckoutErrorLaunchUrlFailed": {
+    "examples": "Error message",
+    "description": "Error shown when launching checkout URL fails"
+  },
+  "subscriptionCheckoutErrorUnknown": "An unknown error occurred during checkout",
+  "@subscriptionCheckoutErrorUnknown": {
+    "examples": "Error message",
+    "description": "Error shown for unexpected checkout errors"
+  },
+  "subscriptionPortalErrorCreateSessionFailed": "Failed to create portal session",
+  "@subscriptionPortalErrorCreateSessionFailed": {
+    "examples": "Error message",
+    "description": "Error shown when creating Stripe portal session fails"
+  },
+  "subscriptionPortalErrorLaunchUrlFailed": "Failed to open portal. Please check your browser settings.",
+  "@subscriptionPortalErrorLaunchUrlFailed": {
+    "examples": "Error message",
+    "description": "Error shown when launching portal URL fails"
+  },
+  "subscriptionPortalErrorUnknown": "An unknown error occurred while opening the portal",
+  "@subscriptionPortalErrorUnknown": {
+    "examples": "Error message",
+    "description": "Error shown for unexpected portal errors"
   }
 }

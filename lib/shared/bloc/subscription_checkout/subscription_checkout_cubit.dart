@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
 
 part 'subscription_checkout_state.dart';
@@ -43,7 +44,7 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
           emit(
             const SubscriptionCheckoutState(
               status: SubscriptionCheckoutStatus.failure,
-              errorMessage: 'Failed to create checkout session',
+              error: SubscriptionCheckoutError.createSessionFailed,
             ),
           );
         }
@@ -64,8 +65,7 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
           emit(
             const SubscriptionCheckoutState(
               status: SubscriptionCheckoutStatus.failure,
-              errorMessage: 'Failed to open Stripe Checkout. '
-                  'Please check your browser settings.',
+              error: SubscriptionCheckoutError.launchUrlFailed,
             ),
           );
         }
@@ -82,9 +82,9 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
     } catch (e) {
       if (!isClosed) {
         emit(
-          SubscriptionCheckoutState(
+          const SubscriptionCheckoutState(
             status: SubscriptionCheckoutStatus.failure,
-            errorMessage: e.toString(),
+            error: SubscriptionCheckoutError.unknown,
           ),
         );
       }
@@ -92,17 +92,11 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
   }
 
   String _getSuccessUrl() {
-    if (kIsWeb) {
-      return '${Uri.base.origin}/discounts/manage/subscription-success';
-    }
-    return 'veteranam://discounts/manage/subscription-success';
+    return '${Uri.base.origin}/discounts/manage/subscription-success';
   }
 
   String _getCancelUrl() {
-    if (kIsWeb) {
-      return '${Uri.base.origin}/discounts/manage/subscription-canceled';
-    }
-    return 'veteranam://discounts/manage/subscription-canceled';
+    return '${Uri.base.origin}/discounts/manage/subscription-canceled';
   }
 
   void reset() {

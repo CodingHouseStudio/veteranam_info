@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class StartFreeTrialButton extends StatelessWidget {
@@ -14,6 +15,24 @@ class StartFreeTrialButton extends StatelessWidget {
   final String companyId;
   final bool isDesk;
 
+  String _getErrorMessage(
+    BuildContext context,
+    SubscriptionCheckoutError? error,
+  ) {
+    if (error == null) {
+      return context.l10n.subscriptionCheckoutErrorUnknown;
+    }
+
+    switch (error) {
+      case SubscriptionCheckoutError.createSessionFailed:
+        return context.l10n.subscriptionCheckoutErrorCreateSessionFailed;
+      case SubscriptionCheckoutError.launchUrlFailed:
+        return context.l10n.subscriptionCheckoutErrorLaunchUrlFailed;
+      case SubscriptionCheckoutError.unknown:
+        return context.l10n.subscriptionCheckoutErrorUnknown;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -21,11 +40,11 @@ class StartFreeTrialButton extends StatelessWidget {
       child: BlocConsumer<SubscriptionCheckoutCubit, SubscriptionCheckoutState>(
         listener: (context, state) {
           if (state.status == SubscriptionCheckoutStatus.failure) {
-            final errorMessage = state.errorMessage ?? 'Unknown error';
+            final errorMessage = _getErrorMessage(context, state.error);
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Failed to start trial: $errorMessage'),
+                content: Text(errorMessage),
                 backgroundColor: AppColors.materialThemeRefErrorError40,
               ),
             );
