@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:veteranam/components/company/company.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
+import 'package:veteranam/shared/widgets/start_free_trial_button.dart';
+import 'package:veteranam/shared/widgets/subscription_info_widget.dart';
 
 class CompanyBodyWidget extends StatelessWidget {
   const CompanyBodyWidget({super.key});
@@ -69,17 +74,29 @@ class CompanyBodyWidget extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: BoxWidget(
-                  key: CompanyKeys.boxMyDiscounts,
-                  text: context.l10n.myDiscounts,
-                  onTap: () => myDiscountTap(context),
-                  isDesk: isDesk,
+                child: Column(
+                  spacing: KPadding.kPaddingSize16,
+                  children: [
+                    BoxWidget(
+                      key: CompanyKeys.boxMyDiscounts,
+                      text: context.l10n.myDiscounts,
+                      onTap: () => myDiscountTap(context),
+                      isDesk: isDesk,
+                    ),
+                    _buildManageSubscriptionBox(context, isDesk),
+                  ],
                 ),
               ),
             ],
           )
         else
-          _form(isDesk: isDesk, context: context),
+          Column(
+            children: [
+              _form(isDesk: isDesk, context: context),
+              KSizedBox.kHeightSizedBox16,
+              _buildManageSubscriptionBox(context, isDesk),
+            ],
+          ),
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else
@@ -107,4 +124,55 @@ class CompanyBodyWidget extends StatelessWidget {
     BuildContext context,
   ) =>
       context.goNamed(KRoute.myDiscounts.name);
+
+  Widget _buildManageSubscriptionBox(BuildContext context, bool isDesk) {
+    return BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+      builder: (context, companyState) {
+        final company = companyState.company;
+        final companyId = company.id;
+        final customerId = company.stripeCustomerId;
+
+        if (companyId.isEmpty ||
+            companyId == '__company_cache_id__' ||
+            companyId == '__compnay_cache_id__') {
+          return const SizedBox.shrink();
+        }
+
+        final hasSubscription = customerId != null && customerId.isNotEmpty;
+
+        if (!hasSubscription) {
+          // Show "Start Free Trial" button for existing users
+          // without subscription
+          return _buildStartTrialBox(context, companyId, isDesk);
+        }
+
+        return Column(
+          spacing: KPadding.kPaddingSize16,
+          children: [
+            // Subscription Information Card
+            SubscriptionInfoWidget(
+              company: company,
+              isDesk: isDesk,
+            ),
+            // Manage Subscription Button styled as BoxWidget
+            ManageSubscriptionButton(
+              companyId: companyId,
+              isDesk: isDesk,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildStartTrialBox(
+    BuildContext context,
+    String companyId,
+    bool isDesk,
+  ) {
+    return StartFreeTrialButton(
+      companyId: companyId,
+      isDesk: isDesk,
+    );
+  }
 }

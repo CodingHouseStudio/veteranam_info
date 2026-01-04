@@ -1915,5 +1915,135 @@
   "cookies": "The \"veteranam\" service uses essential cookies for security and stability, as well as anonymous analytical cookies to improve the service and personalized ads from Google Ads. By continuing to use it, you agree to the use of all types of cookies and our ",
   "@cookies": {
     "examples": "Message about cookie usage"
+  },
+  "startFreeTrial": "Start 30-Day Free Trial",
+  "@startFreeTrial": {
+    "examples": "Button text to start free trial subscription",
+    "description": "Button used to initiate the 30-day free trial for subscription"
+  },
+  "unlockDiscountFeatures": "Unlock discount creation and management features",
+  "@unlockDiscountFeatures": {
+    "examples": "Description text for free trial button",
+    "description": "Subtitle explaining what the free trial unlocks"
+  },
+  "manageSubscription": "Manage Subscription",
+  "@manageSubscription": {
+    "examples": "Button text to manage subscription",
+    "description": "Button used to open Stripe customer portal for subscription management"
+  },
+  "subscriptionStatus": "Status",
+  "@subscriptionStatus": {
+    "examples": "Label for subscription status",
+    "description": "Label displayed before subscription status badge"
+  },
+  "subscriptionPlan": "Plan",
+  "@subscriptionPlan": {
+    "examples": "Label for subscription plan",
+    "description": "Label displayed before subscription plan name"
+  },
+  "subscriptionActive": "Active",
+  "@subscriptionActive": {
+    "examples": "Subscription status label",
+    "description": "Label indicating subscription is active"
+  },
+  "subscriptionTrial": "Trial",
+  "@subscriptionTrial": {
+    "examples": "Subscription status label",
+    "description": "Label indicating subscription is in trial period"
+  },
+  "subscriptionCanceled": "Canceled",
+  "@subscriptionCanceled": {
+    "examples": "Subscription status label",
+    "description": "Label indicating subscription is canceled"
+  },
+  "subscriptionExpired": "Expired",
+  "@subscriptionExpired": {
+    "examples": "Subscription status label",
+    "description": "Label indicating subscription has expired"
+  },
+  "subscriptionPaymentDue": "Payment Due",
+  "@subscriptionPaymentDue": {
+    "examples": "Subscription status label",
+    "description": "Label indicating payment is due"
+  },
+  "subscriptionIncomplete": "Incomplete",
+  "@subscriptionIncomplete": {
+    "examples": "Subscription status label",
+    "description": "Label indicating subscription setup is incomplete"
+  },
+  "trialDaysRemaining": "Trial Days Remaining",
+  "@trialDaysRemaining": {
+    "examples": "Label for trial days count",
+    "description": "Label displayed before number of trial days remaining"
+  },
+  "trialEndsOn": "Trial Ends",
+  "@trialEndsOn": {
+    "examples": "Label for trial end date",
+    "description": "Label displayed before trial expiration date"
+  },
+  "renewsOn": "Renews",
+  "@renewsOn": {
+    "examples": "Label for renewal date",
+    "description": "Label displayed before subscription renewal date"
+  },
+  "endsOn": "Ends",
+  "@endsOn": {
+    "examples": "Label for subscription end date",
+    "description": "Label displayed before subscription end date"
+  },
+  "subscriptionActivated": "Subscription Activated!",
+  "@subscriptionActivated": {
+    "examples": "Success page title",
+    "description": "Title shown when subscription is successfully activated"
+  },
+  "subscriptionTrialStarted": "Your 30-day trial has started. You can now create discounts for your company.",
+  "@subscriptionTrialStarted": {
+    "examples": "Success page description",
+    "description": "Message shown when trial subscription starts"
+  },
+  "goToCompanyProfile": "Go to Company Profile",
+  "@goToCompanyProfile": {
+    "examples": "Button text",
+    "description": "Button to navigate to company profile page"
+  },
+  "subscriptionCanceled": "Subscription Canceled",
+  "@subscriptionCanceled": {
+    "examples": "Canceled page title",
+    "description": "Title shown when subscription setup is canceled"
+  },
+  "subscriptionCanceledMessage": "You have canceled the subscription setup. You can complete this step later from your company profile.",
+  "@subscriptionCanceledMessage": {
+    "examples": "Canceled page description",
+    "description": "Message shown when user cancels subscription setup"
+  },
+  "subscriptionCheckoutErrorCreateSessionFailed": "Failed to create checkout session",
+  "@subscriptionCheckoutErrorCreateSessionFailed": {
+    "examples": "Error message",
+    "description": "Error shown when creating Stripe checkout session fails"
+  },
+  "subscriptionCheckoutErrorLaunchUrlFailed": "Failed to open Stripe Checkout. Please check your browser settings.",
+  "@subscriptionCheckoutErrorLaunchUrlFailed": {
+    "examples": "Error message",
+    "description": "Error shown when launching checkout URL fails"
+  },
+  "subscriptionCheckoutErrorUnknown": "An unknown error occurred during checkout",
+  "@subscriptionCheckoutErrorUnknown": {
+    "examples": "Error message",
+    "description": "Error shown for unexpected checkout errors"
+  },
+  "subscriptionPortalErrorCreateSessionFailed": "Failed to create portal session",
+  "@subscriptionPortalErrorCreateSessionFailed": {
+    "examples": "Error message",
+    "description": "Error shown when creating Stripe portal session fails"
+  },
+  "subscriptionPortalErrorLaunchUrlFailed": "Failed to open portal. Please check your browser settings.",
+  "@subscriptionPortalErrorLaunchUrlFailed": {
+    "examples": "Error message",
+    "description": "Error shown when launching portal URL fails"
+  },
+  "subscriptionPortalErrorUnknown": "An unknown error occurred while opening the portal",
+  "@subscriptionPortalErrorUnknown": {
+    "examples": "Error message",
+    "description": "Error shown for unexpected portal errors"
   }
 }

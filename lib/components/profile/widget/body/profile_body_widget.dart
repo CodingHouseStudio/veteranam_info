@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
+import 'package:veteranam/shared/widgets/manage_subscription_button.dart';
+import 'package:veteranam/shared/widgets/start_free_trial_button.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
   const ProfileBodyWidget({super.key});
@@ -71,6 +75,40 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox48,
+        if (Config.isBusiness)
+          BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+            builder: (context, companyState) {
+              final companyId = companyState.company.id;
+              final hasSubscription =
+                  companyState.company.stripeCustomerId != null &&
+                      companyState.company.stripeCustomerId!.isNotEmpty;
+
+              if (companyId.isEmpty ||
+                  companyId == '__company_cache_id__' ||
+                  companyId == '__compnay_cache_id__') {
+                return const SizedBox.shrink();
+              }
+
+              return Column(
+                children: [
+                  if (hasSubscription)
+                    ManageSubscriptionButton(
+                      companyId: companyId,
+                      isDesk: isDesk,
+                    )
+                  else
+                    StartFreeTrialButton(
+                      companyId: companyId,
+                      isDesk: isDesk,
+                    ),
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox32
+                  else
+                    KSizedBox.kHeightSizedBox16,
+                ],
+              );
+            },
+          ),
         if (isDesk)
           Row(
             spacing: KPadding.kPaddingSize40,

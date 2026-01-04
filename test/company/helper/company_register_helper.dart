@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -11,6 +12,7 @@ late IDataPickerRepository mockDataPickerRepository;
 late ICompanyRepository mockCompanyRepository;
 late IDiscountRepository mockDiscountRepository;
 late AuthenticationRepository mockAuthenticationRepository;
+late SubscriptionCheckoutCubit mockSubscriptionCheckoutCubit;
 late StreamController<CompanyModel> companyStream;
 // late XFile image;
 void companyWidgetTestRegister() {
@@ -20,6 +22,7 @@ void companyWidgetTestRegister() {
   mockCompanyRepository = MockICompanyRepository();
   mockDiscountRepository = MockIDiscountRepository();
   mockAuthenticationRepository = MockAuthenticationRepository();
+  mockSubscriptionCheckoutCubit = MockSubscriptionCheckoutCubit();
   companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
   // image = XFile(KTestVariables.imageModels.downloadURL);
   // mockAuthenticationRepository = MockAuthenticationRepository();
@@ -81,6 +84,12 @@ void companyWidgetTestRegister() {
     (realInvocation) async => const Right(true),
   );
 
+  when(mockSubscriptionCheckoutCubit.state).thenAnswer(
+    (realInvocation) => const SubscriptionCheckoutState(
+      status: SubscriptionCheckoutStatus.initial,
+    ),
+  );
+
   // when(mockAuthenticationRepository.isAuthenticated).thenAnswer(
   //   (realInvocation) => true,
   // );
@@ -98,4 +107,5 @@ void _registerRepository() {
   registerSingleton(mockCompanyRepository);
   registerSingleton(mockDiscountRepository);
   registerSingleton(mockAuthenticationRepository);
+  registerSingleton(mockSubscriptionCheckoutCubit);
 }

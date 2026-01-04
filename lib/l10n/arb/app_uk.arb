@@ -1923,5 +1923,135 @@
   "cookies": "Сервіс \"veteranam\" використовує обов'язкові кукі для безпеки та стабільної роботи, а також анонімні аналітичні кукі для покращення сервісу та персоналізовану рекламу від Google Ads. Продовжуючи користуватись, ви погоджуєтесь на використання всіх типів кукі та нашу ",
   "@cookies": {
     "examples": "Повідомлення про використання файлів cookie"
+  },
+  "startFreeTrial": "Розпочати 30-денний безкоштовний період",
+  "@startFreeTrial": {
+    "examples": "Текст кнопки для початку безкоштовного пробного періоду підписки",
+    "description": "Кнопка для ініціації 30-денного безкоштовного пробного періоду"
+  },
+  "unlockDiscountFeatures": "Розблокуйте можливості створення та керування знижками",
+  "@unlockDiscountFeatures": {
+    "examples": "Опис тексту для кнопки безкоштовного періоду",
+    "description": "Підзаголовок, що пояснює, що розблоковує безкоштовний період"
+  },
+  "manageSubscription": "Керувати підпискою",
+  "@manageSubscription": {
+    "examples": "Текст кнопки для керування підпискою",
+    "description": "Кнопка для відкриття порталу клієнта Stripe для керування підпискою"
+  },
+  "subscriptionStatus": "Статус",
+  "@subscriptionStatus": {
+    "examples": "Назва для статусу підписки",
+    "description": "Мітка, що відображається перед значком статусу підписки"
+  },
+  "subscriptionPlan": "Тариф",
+  "@subscriptionPlan": {
+    "examples": "Назва для тарифу підписки",
+    "description": "Мітка, що відображається перед назвою тарифного плану"
+  },
+  "subscriptionActive": "Активна",
+  "@subscriptionActive": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на активну підписку"
+  },
+  "subscriptionTrial": "Пробний період",
+  "@subscriptionTrial": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на пробний період підписки"
+  },
+  "subscriptionCanceled": "Скасована",
+  "@subscriptionCanceled": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на скасовану підписку"
+  },
+  "subscriptionExpired": "Закінчилася",
+  "@subscriptionExpired": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на закінчену підписку"
+  },
+  "subscriptionPaymentDue": "Очікується оплата",
+  "@subscriptionPaymentDue": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на необхідність оплати"
+  },
+  "subscriptionIncomplete": "Незавершена",
+  "@subscriptionIncomplete": {
+    "examples": "Мітка статусу підписки",
+    "description": "Мітка, що вказує на незавершене налаштування підписки"
+  },
+  "trialDaysRemaining": "Залишилось днів пробного періоду",
+  "@trialDaysRemaining": {
+    "examples": "Мітка для кількості днів пробного періоду",
+    "description": "Мітка, що відображається перед кількістю днів, що залишились"
+  },
+  "trialEndsOn": "Пробний період закінчується",
+  "@trialEndsOn": {
+    "examples": "Мітка для дати закінчення пробного періоду",
+    "description": "Мітка, що відображається перед датою закінчення пробного періоду"
+  },
+  "renewsOn": "Поновлення",
+  "@renewsOn": {
+    "examples": "Мітка для дати поновлення",
+    "description": "Мітка, що відображається перед датою поновлення підписки"
+  },
+  "endsOn": "Закінчується",
+  "@endsOn": {
+    "examples": "Мітка для дати закінчення підписки",
+    "description": "Мітка, що відображається перед датою закінчення підписки"
+  },
+  "subscriptionActivated": "Підписку активовано!",
+  "@subscriptionActivated": {
+    "examples": "Заголовок сторінки успіху",
+    "description": "Заголовок, що відображається при успішній активації підписки"
+  },
+  "subscriptionTrialStarted": "Ваш 30-денний пробний період розпочато. Тепер ви можете створювати знижки для вашої компанії.",
+  "@subscriptionTrialStarted": {
+    "examples": "Опис сторінки успіху",
+    "description": "Повідомлення, що відображається при старті пробної підписки"
+  },
+  "goToCompanyProfile": "Перейти до профілю компанії",
+  "@goToCompanyProfile": {
+    "examples": "Текст кнопки",
+    "description": "Кнопка для переходу на сторінку профілю компанії"
+  },
+  "subscriptionCanceled": "Підписку скасовано",
+  "@subscriptionCanceled": {
+    "examples": "Заголовок сторінки скасування",
+    "description": "Заголовок, що відображається при скасуванні налаштування підписки"
+  },
+  "subscriptionCanceledMessage": "Ви скасували налаштування підписки. Ви можете завершити цей крок пізніше зі свого профілю компанії.",
+  "@subscriptionCanceledMessage": {
+    "examples": "Опис сторінки скасування",
+    "description": "Повідомлення, що відображається при скасуванні налаштування підписки користувачем"
+  },
+  "subscriptionCheckoutErrorCreateSessionFailed": "Не вдалося створити сесію оплати",
+  "@subscriptionCheckoutErrorCreateSessionFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому створенні сесії оплати Stripe"
+  },
+  "subscriptionCheckoutErrorLaunchUrlFailed": "Не вдалося відкрити сторінку оплати Stripe. Будь ласка, перевірте налаштування вашого браузера.",
+  "@subscriptionCheckoutErrorLaunchUrlFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому відкритті URL оплати"
+  },
+  "subscriptionCheckoutErrorUnknown": "Виникла невідома помилка під час оплати",
+  "@subscriptionCheckoutErrorUnknown": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при неочікуваних помилках оплати"
+  },
+  "subscriptionPortalErrorCreateSessionFailed": "Не вдалося створити сесію порталу",
+  "@subscriptionPortalErrorCreateSessionFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому створенні сесії порталу Stripe"
+  },
+  "subscriptionPortalErrorLaunchUrlFailed": "Не вдалося відкрити портал. Будь ласка, перевірте налаштування вашого браузера.",
+  "@subscriptionPortalErrorLaunchUrlFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому відкритті URL порталу"
+  },
+  "subscriptionPortalErrorUnknown": "Виникла невідома помилка під час відкриття порталу",
+  "@subscriptionPortalErrorUnknown": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при неочікуваних помилках порталу"
   }
 }
