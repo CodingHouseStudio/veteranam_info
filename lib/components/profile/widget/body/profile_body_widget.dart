@@ -75,39 +75,40 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox48,
-        BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
-          builder: (context, companyState) {
-            final companyId = companyState.company.id;
-            final hasSubscription =
-                companyState.company.stripeCustomerId != null &&
-                    companyState.company.stripeCustomerId!.isNotEmpty;
+        if (Config.isBusiness)
+          BlocBuilder<CompanyWatcherBloc, CompanyWatcherState>(
+            builder: (context, companyState) {
+              final companyId = companyState.company.id;
+              final hasSubscription =
+                  companyState.company.stripeCustomerId != null &&
+                      companyState.company.stripeCustomerId!.isNotEmpty;
 
-            if (companyId.isEmpty ||
-                companyId == '__company_cache_id__' ||
-                companyId == '__compnay_cache_id__') {
-              return const SizedBox.shrink();
-            }
+              if (companyId.isEmpty ||
+                  companyId == '__company_cache_id__' ||
+                  companyId == '__compnay_cache_id__') {
+                return const SizedBox.shrink();
+              }
 
-            return Column(
-              children: [
-                if (hasSubscription)
-                  ManageSubscriptionButton(
-                    companyId: companyId,
-                    isDesk: isDesk,
-                  )
-                else
-                  StartFreeTrialButton(
-                    companyId: companyId,
-                    isDesk: isDesk,
-                  ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox32
-                else
-                  KSizedBox.kHeightSizedBox16,
-              ],
-            );
-          },
-        ),
+              return Column(
+                children: [
+                  if (hasSubscription)
+                    ManageSubscriptionButton(
+                      companyId: companyId,
+                      isDesk: isDesk,
+                    )
+                  else
+                    StartFreeTrialButton(
+                      companyId: companyId,
+                      isDesk: isDesk,
+                    ),
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox32
+                  else
+                    KSizedBox.kHeightSizedBox16,
+                ],
+              );
+            },
+          ),
         if (isDesk)
           Row(
             spacing: KPadding.kPaddingSize40,
