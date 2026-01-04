@@ -113,3 +113,15 @@
 // enum AuthenticationFailure {
 //   error,
 // }
+
+enum SubscriptionCheckoutError {
+  createSessionFailed,
+  launchUrlFailed,
+  unknown,
+}
+
+enum SubscriptionPortalError {
+  createSessionFailed,
+  launchUrlFailed,
+  unknown,
+}

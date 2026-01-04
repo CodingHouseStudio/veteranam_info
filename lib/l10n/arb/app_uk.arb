@@ -2023,5 +2023,35 @@
   "@subscriptionCanceledMessage": {
     "examples": "Опис сторінки скасування",
     "description": "Повідомлення, що відображається при скасуванні налаштування підписки користувачем"
+  },
+  "subscriptionCheckoutErrorCreateSessionFailed": "Не вдалося створити сесію оплати",
+  "@subscriptionCheckoutErrorCreateSessionFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому створенні сесії оплати Stripe"
+  },
+  "subscriptionCheckoutErrorLaunchUrlFailed": "Не вдалося відкрити сторінку оплати Stripe. Будь ласка, перевірте налаштування вашого браузера.",
+  "@subscriptionCheckoutErrorLaunchUrlFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому відкритті URL оплати"
+  },
+  "subscriptionCheckoutErrorUnknown": "Виникла невідома помилка під час оплати",
+  "@subscriptionCheckoutErrorUnknown": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при неочікуваних помилках оплати"
+  },
+  "subscriptionPortalErrorCreateSessionFailed": "Не вдалося створити сесію порталу",
+  "@subscriptionPortalErrorCreateSessionFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому створенні сесії порталу Stripe"
+  },
+  "subscriptionPortalErrorLaunchUrlFailed": "Не вдалося відкрити портал. Будь ласка, перевірте налаштування вашого браузера.",
+  "@subscriptionPortalErrorLaunchUrlFailed": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при невдалому відкритті URL порталу"
+  },
+  "subscriptionPortalErrorUnknown": "Виникла невідома помилка під час відкриття порталу",
+  "@subscriptionPortalErrorUnknown": {
+    "examples": "Повідомлення про помилку",
+    "description": "Помилка, що відображається при неочікуваних помилках порталу"
   }
 }

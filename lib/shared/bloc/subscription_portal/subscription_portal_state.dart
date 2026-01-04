@@ -3,14 +3,14 @@ part of 'subscription_portal_cubit.dart';
 class SubscriptionPortalState extends Equatable {
   const SubscriptionPortalState({
     required this.status,
-    this.errorMessage,
+    this.error,
   });
 
   final SubscriptionPortalStatus status;
-  final String? errorMessage;
+  final SubscriptionPortalError? error;
 
   @override
-  List<Object?> get props => [status, errorMessage];
+  List<Object?> get props => [status, error];
 }
 
 enum SubscriptionPortalStatus {

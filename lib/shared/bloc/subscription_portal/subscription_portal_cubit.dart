@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/shared/constants/failure_enum.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
 
 part 'subscription_portal_state.dart';
@@ -43,7 +44,7 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
           emit(
             const SubscriptionPortalState(
               status: SubscriptionPortalStatus.failure,
-              errorMessage: 'Failed to create portal session',
+              error: SubscriptionPortalError.createSessionFailed,
             ),
           );
         }
@@ -64,7 +65,7 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
           emit(
             const SubscriptionPortalState(
               status: SubscriptionPortalStatus.failure,
-              errorMessage: 'Failed to open portal. Check browser settings.',
+              error: SubscriptionPortalError.launchUrlFailed,
             ),
           );
         }
@@ -81,9 +82,9 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
     } catch (e) {
       if (!isClosed) {
         emit(
-          SubscriptionPortalState(
+          const SubscriptionPortalState(
             status: SubscriptionPortalStatus.failure,
-            errorMessage: e.toString(),
+            error: SubscriptionPortalError.unknown,
           ),
         );
       }
