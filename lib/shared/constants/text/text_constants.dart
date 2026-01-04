@@ -250,6 +250,12 @@ abstract class KAppText {
   static const String server = 'server';
   static const String site = 'https://veteranam.info';
   static const String businessSite = 'https://business.veteranam.info';
+  static const String businessSiteDev = 'http://localhost:5000';
+
+  /// Returns the appropriate business site URL based on the current environment
+  static String get businessSiteUrl =>
+      Config.isDevelopment ? businessSiteDev : businessSite;
+
   static const String appStoreId = '6584519009';
   static const String unknown = 'Unknown';
   static const String veteranamFontName = 'Veteranam';

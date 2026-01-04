@@ -12,9 +12,9 @@ import 'package:cloud_firestore/cloud_firestore.dart'
         Source;
 import 'package:freezed_annotation/freezed_annotation.dart'
     show visibleForTesting;
-// import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared_dart.dart';
+// import 'package:flutter/widgets.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
 @Singleton(order: -1)
@@ -289,14 +289,49 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.docs.isNotEmpty) {
-            final source = snapshot.metadata.isFromCache._source;
-            log('Data fetched from $source');
-            return CompanyModel.fromJson(snapshot.docs.first.data());
+            // final source = snapshot.metadata.isFromCache._source;
+            final data = snapshot.docs.first.data();
+
+            // Convert Firestore Timestamps to ISO8601 strings for
+            // DateTime fields
+            final convertedData = _convertTimestampsToStrings(data);
+
+            return CompanyModel.fromJson(convertedData);
           } else {
             return CompanyModel.empty;
           }
         },
       );
+
+  Map<String, dynamic> _convertTimestampsToStrings(Map<String, dynamic> data) {
+    final converted = Map<String, dynamic>.from(data);
+
+    // List of DateTime fields in CompanyModel
+    const dateTimeFields = [
+      'deletedOn',
+      'trialStartedAt',
+      'trialExpiresAt',
+      'subscriptionStartedAt',
+      'subscriptionExpiresAt',
+      'termsAcceptedAt',
+      'canceledAt',
+    ];
+
+    for (final field in dateTimeFields) {
+      final value = converted[field];
+      if (value != null && value is! String) {
+        try {
+          final timestamp = value as dynamic;
+          // ignore: avoid_dynamic_calls
+          converted[field] = (timestamp.toDate() as DateTime).toIso8601String();
+        } catch (e) {
+          log('Error converting timestamp field $field: $e');
+        }
+      }
+    }
+
+    return converted;
+  }
 
   Future<void> updateCompany(CompanyModel company) {
     return _db.collection(FirebaseCollectionName.companies).doc(company.id).set(

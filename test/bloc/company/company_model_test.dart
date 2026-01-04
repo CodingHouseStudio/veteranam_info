@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/shared/models/models.dart';
 
+import 'package:veteranam/shared/models/models.dart';
 import '../../test_dependency.dart';
 
 void main() {
@@ -46,17 +46,45 @@ void main() {
           KTestVariables.fullCompanyModel.userEmails,
       CompanyModelJsonField.deletedOn:
           KTestVariables.dateTime.toIso8601String(),
+      // Subscription fields are null and included in JSON
+      CompanyModelJsonField.stripeCustomerId: null,
+      CompanyModelJsonField.stripeSubscriptionId: null,
+      CompanyModelJsonField.subscriptionStatus: null,
+      CompanyModelJsonField.subscriptionPlan: null,
+      CompanyModelJsonField.trialStartedAt: null,
+      CompanyModelJsonField.trialExpiresAt: null,
+      CompanyModelJsonField.subscriptionStartedAt: null,
+      CompanyModelJsonField.subscriptionExpiresAt: null,
+      CompanyModelJsonField.termsAccepted: null,
+      CompanyModelJsonField.termsAcceptedAt: null,
+      CompanyModelJsonField.trialExtensionDays: null,
+      CompanyModelJsonField.canceledBy: null,
+      CompanyModelJsonField.canceledAt: null,
     };
     final nullableJson = {
       CompanyModelJsonField.id: KTestVariables.fullCompanyModel.id,
+      CompanyModelJsonField.userEmails:
+          KTestVariables.fullCompanyModel.userEmails,
+      // All other fields are null and included in JSON
       CompanyModelJsonField.companyName: null,
       CompanyModelJsonField.publicName: null,
       CompanyModelJsonField.link: null,
-      CompanyModelJsonField.image: null,
       CompanyModelJsonField.code: null,
-      CompanyModelJsonField.userEmails:
-          KTestVariables.fullCompanyModel.userEmails,
+      CompanyModelJsonField.image: null,
       CompanyModelJsonField.deletedOn: null,
+      CompanyModelJsonField.stripeCustomerId: null,
+      CompanyModelJsonField.stripeSubscriptionId: null,
+      CompanyModelJsonField.subscriptionStatus: null,
+      CompanyModelJsonField.subscriptionPlan: null,
+      CompanyModelJsonField.trialStartedAt: null,
+      CompanyModelJsonField.trialExpiresAt: null,
+      CompanyModelJsonField.subscriptionStartedAt: null,
+      CompanyModelJsonField.subscriptionExpiresAt: null,
+      CompanyModelJsonField.termsAccepted: null,
+      CompanyModelJsonField.termsAcceptedAt: null,
+      CompanyModelJsonField.trialExtensionDays: null,
+      CompanyModelJsonField.canceledBy: null,
+      CompanyModelJsonField.canceledAt: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {

@@ -15,7 +15,6 @@ import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/bloc/badger/badger_cubit.dart';
 import 'package:veteranam/shared/constants/config.dart';
 import 'package:veteranam/shared/constants/enum.dart';
-import 'package:veteranam/shared/constants/security_keys.dart';
 import 'package:veteranam/shared/constants/text/error_text.dart';
 import 'package:veteranam/shared/models/failure_model/some_failure.dart';
 import 'package:veteranam/shared/repositories/failure_repository.dart';
@@ -46,35 +45,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  try {
+  if (!Config.isWeb) {
     await FirebaseAppCheck.instanceFor(app: app).activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
       androidProvider: Config.isReleaseMode
           ? AndroidProvider.playIntegrity
           : AndroidProvider.debug,
       appleProvider: Config.isReleaseMode
           ? AppleProvider.deviceCheck
           : AppleProvider.debug,
-    );
-    await FirebaseAppCheck.instance.activate(
-      webProvider: ReCaptchaV3Provider(
-        KSecurityKeys.firebaseAppCheck,
-      ),
-      androidProvider: Config.isReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
-      appleProvider: Config.isReleaseMode
-          ? AppleProvider.deviceCheck
-          : AppleProvider.debug,
-    );
-  } catch (e, stack) {
-    log(
-      'Firebase AppCheck Error',
-      name: 'Firebase AppCheck',
-      error: e,
-      stackTrace: stack,
     );
   }
 
