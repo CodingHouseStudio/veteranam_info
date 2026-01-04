@@ -29,7 +29,7 @@ class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
         unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
       }
 
-      return list.first;
+      return list!.first;
     }
   }
 
