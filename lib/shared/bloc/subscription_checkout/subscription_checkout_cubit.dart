@@ -64,8 +64,8 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
           emit(
             const SubscriptionCheckoutState(
               status: SubscriptionCheckoutStatus.failure,
-              errorMessage:
-                  'Failed to open Stripe Checkout. Please check your browser settings.',
+              errorMessage: 'Failed to open Stripe Checkout. '
+                  'Please check your browser settings.',
             ),
           );
         }

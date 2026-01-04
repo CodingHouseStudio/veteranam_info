@@ -114,7 +114,8 @@ class SubscriptionService {
 
   /// Creates a Stripe Customer Portal session
   /// Returns the portal URL to redirect the user to
-  /// The portal allows users to manage their subscription, payment methods, and invoices
+  /// The portal allows users to manage their subscription, payment methods,
+  /// and invoices
   Future<String?> createPortalSession({
     required String companyId,
     required String returnUrl,

@@ -292,7 +292,8 @@ class FirestoreService {
             // final source = snapshot.metadata.isFromCache._source;
             final data = snapshot.docs.first.data();
 
-            // Convert Firestore Timestamps to ISO8601 strings for DateTime fields
+            // Convert Firestore Timestamps to ISO8601 strings for
+            // DateTime fields
             final convertedData = _convertTimestampsToStrings(data);
 
             return CompanyModel.fromJson(convertedData);
@@ -321,6 +322,7 @@ class FirestoreService {
       if (value != null && value is! String) {
         try {
           final timestamp = value as dynamic;
+          // ignore: avoid_dynamic_calls
           converted[field] = (timestamp.toDate() as DateTime).toIso8601String();
         } catch (e) {
           log('Error converting timestamp field $field: $e');

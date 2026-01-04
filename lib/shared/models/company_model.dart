@@ -64,7 +64,7 @@ abstract class CompanyModel with _$CompanyModel {
       subscriptionStatus == SubscriptionStatus.trialing;
 
   bool get canCreateDiscounts =>
-      termsAccepted == true && isSubscriptionActive && !isTrialExpired;
+      (termsAccepted ?? false) && isSubscriptionActive && !isTrialExpired;
 
   bool get isTrialExpired =>
       trialExpiresAt != null && DateTime.now().isAfter(trialExpiresAt!);
