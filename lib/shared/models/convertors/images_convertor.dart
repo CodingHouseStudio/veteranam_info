@@ -26,7 +26,7 @@ class ImagesConverter
     if (list?.isEmpty ?? true) {
       return null;
     } else {
-      if (Config.isWeb) {
+      if (KTest.isTest || Config.isWeb) {
         for (final item in list!) {
           unawaited(_artifactDownloadHelper.downloadArtifacts(item));
         }
