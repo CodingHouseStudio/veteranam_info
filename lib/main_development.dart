@@ -45,42 +45,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  try {
-    // Skip Firebase App Check on web for development
-    // Only enable on mobile platforms
-    if (!Config.isWeb) {
-      await FirebaseAppCheck.instanceFor(app: app).activate(
-        androidProvider: Config.isReleaseMode
-            ? AndroidProvider.playIntegrity
-            : AndroidProvider.debug,
-        appleProvider: Config.isReleaseMode
-            ? AppleProvider.deviceCheck
-            : AppleProvider.debug,
-      );
-      await FirebaseAppCheck.instance.activate(
-        androidProvider: Config.isReleaseMode
-            ? AndroidProvider.playIntegrity
-            : AndroidProvider.debug,
-        appleProvider: Config.isReleaseMode
-            ? AppleProvider.deviceCheck
-            : AppleProvider.debug,
-      );
-      log(
-        'Firebase AppCheck enabled for mobile',
-        name: 'Firebase AppCheck',
-      );
-    } else {
-      log(
-        'Skipping Firebase AppCheck on web for development',
-        name: 'Firebase AppCheck',
-      );
-    }
-  } catch (e, stack) {
-    log(
-      'Firebase AppCheck Error',
-      name: 'Firebase AppCheck',
-      error: e,
-      stackTrace: stack,
+  if (!Config.isWeb) {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      androidProvider: Config.isReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      appleProvider: Config.isReleaseMode
+          ? AppleProvider.deviceCheck
+          : AppleProvider.debug,
     );
   }
 
