@@ -101,7 +101,7 @@ dev_dependencies:
     sdk: flutter
   intl_utils: ^2.8.11
   json_annotation: ^4.9.0 # Defines the annotations used by json_serializable
-  mockito: ^5.5.0 # Used for mocking classes
+  mockito: ^5.6.1 # Used for mocking classes
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
   sentry_dart_plugin: ^3.1.1
