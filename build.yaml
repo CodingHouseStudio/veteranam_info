@@ -25,3 +25,4 @@ targets:
           - lib/shared/data_provider/**.dart
           - lib/shared/helpers/get_it_service_locator.dart
           - lib/shared/repositories/**.dart
+          - lib/shared/services/**.dart

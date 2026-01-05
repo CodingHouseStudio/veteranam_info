@@ -1,10 +1,14 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 
 /// Service for managing Stripe subscriptions via Cloud Functions
+@injectable
 class SubscriptionService {
-  SubscriptionService({FirebaseFunctions? functions})
-      : _functions =
-            functions ?? FirebaseFunctions.instanceFor(region: 'us-central1');
+  SubscriptionService({
+    required FirebaseFunctions functions,
+    required FirebaseAuth firebaseAuth,
+  }) : _functions = functions;
 
   final FirebaseFunctions _functions;
 
