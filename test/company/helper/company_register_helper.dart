@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
+import 'package:veteranam/shared/services/subscription_service.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
 import '../../test_dependency.dart';
@@ -13,6 +14,7 @@ late ICompanyRepository mockCompanyRepository;
 late IDiscountRepository mockDiscountRepository;
 late AuthenticationRepository mockAuthenticationRepository;
 late SubscriptionCheckoutCubit mockSubscriptionCheckoutCubit;
+late SubscriptionService mockSubscriptionService;
 late StreamController<CompanyModel> companyStream;
 // late XFile image;
 void companyWidgetTestRegister() {
@@ -23,6 +25,7 @@ void companyWidgetTestRegister() {
   mockDiscountRepository = MockIDiscountRepository();
   mockAuthenticationRepository = MockAuthenticationRepository();
   mockSubscriptionCheckoutCubit = MockSubscriptionCheckoutCubit();
+  mockSubscriptionService = MockSubscriptionService();
   companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
   // image = XFile(KTestVariables.imageModels.downloadURL);
   // mockAuthenticationRepository = MockAuthenticationRepository();
@@ -108,4 +111,5 @@ void _registerRepository() {
   registerSingleton(mockDiscountRepository);
   registerSingleton(mockAuthenticationRepository);
   registerSingleton(mockSubscriptionCheckoutCubit);
+  registerSingleton(mockSubscriptionService);
 }

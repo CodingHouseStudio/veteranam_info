@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:veteranam/components/company/bloc/company_form_bloc.dart';
 import 'package:veteranam/shared/helpers/stripe_checkout_helper.dart';
+import 'package:veteranam/shared/services/subscription_service.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
 class CompanyFormWidget extends StatefulWidget {
@@ -46,7 +48,9 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
     codeController = TextEditingController(text: widget.initialCode);
     emailController = TextEditingController(text: widget.initialEmail);
     linkController = TextEditingController(text: widget.initialLink);
-    _stripeCheckoutHelper = StripeCheckoutHelper();
+    _stripeCheckoutHelper = StripeCheckoutHelper(
+      subscriptionService: GetIt.I.get<SubscriptionService>(),
+    );
 
     super.initState();
   }

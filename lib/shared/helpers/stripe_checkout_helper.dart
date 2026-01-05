@@ -6,8 +6,8 @@ import 'package:veteranam/shared/services/subscription_service.dart';
 
 /// Helper for opening Stripe Checkout in a popup/new tab
 class StripeCheckoutHelper {
-  StripeCheckoutHelper({SubscriptionService? subscriptionService})
-      : _subscriptionService = subscriptionService ?? SubscriptionService();
+  StripeCheckoutHelper({required SubscriptionService subscriptionService})
+      : _subscriptionService = subscriptionService;
 
   final SubscriptionService _subscriptionService;
 
