@@ -131,9 +131,20 @@ class SubscriptionService {
       });
 
       final data = result.data as Map<String, dynamic>?;
-      if (data == null) return null;
+      if (data == null) {
+        throw SubscriptionException(
+          'Failed to create portal session: Received null response from server',
+        );
+      }
 
-      return data['sessionUrl'] as String?;
+      final sessionUrl = data['sessionUrl'] as String?;
+      if (sessionUrl == null || sessionUrl.isEmpty) {
+        throw SubscriptionException(
+          'Failed to create portal session: No session URL returned',
+        );
+      }
+
+      return sessionUrl;
     } catch (e) {
       throw SubscriptionException(
         'Failed to create portal session: $e',

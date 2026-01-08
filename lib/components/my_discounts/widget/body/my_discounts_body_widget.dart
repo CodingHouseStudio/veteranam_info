@@ -35,18 +35,21 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             ),
             loadingButtonText: context.l10n.moreDiscounts,
             loadingStatus: _.loadingStatus,
-            showLoadingWidget: companyState.company.isNotEmpty,
+            showLoadingWidget: companyState.company.isNotEmpty &&
+                companyState.company.canCreateDiscounts,
             cardListIsEmpty: _.loadedDiscountsModelItems.isEmpty,
             loadFunction: () => context
                 .read<MyDiscountsWatcherBloc>()
                 .add(const MyDiscountsWatcherEvent.loadNextItems()),
-            emptyWidget: companyState.company.isEmpty
+            emptyWidget: companyState.company.isEmpty ||
+                    !companyState.company.canCreateDiscounts
                 ? null
                 : ({required isDesk}) {
                     return MyDiscountEmptyWidget(isDesk: isDesk);
                   },
             mainChildWidgetsFunction: ({required isDesk}) => [
-              if (companyState.company.isEmpty)
+              if (companyState.company.isEmpty ||
+                  !companyState.company.canCreateDiscounts)
                 Text(
                   key: MyDiscountsKeys.title,
                   context.l10n.myPublications,
@@ -62,10 +65,13 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                   icon: KIcon.plus,
                   iconButtonKey: MyDiscountsKeys.iconAdd,
                   isDesk: isDesk,
-                  onPressed: () => context.goNamed(KRoute.discountsAdd.name),
+                  onPressed: companyState.company.canCreateDiscounts
+                      ? () => context.goNamed(KRoute.discountsAdd.name)
+                      : null,
                 ),
               KSizedBox.kHeightSizedBox40,
-              if (companyState.company.isEmpty)
+              if (companyState.company.isEmpty ||
+                  !companyState.company.canCreateDiscounts)
                 MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk)
               else
                 ..._myDiscountsCardWidgetList(
