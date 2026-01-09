@@ -19,7 +19,6 @@ class SubscriptionService {
     String? cancelUrl,
   }) async {
     try {
-
       final result = await _functions
           .httpsCallable('createStripeCheckoutSession')
           .call<dynamic>({

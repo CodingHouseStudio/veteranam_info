@@ -20,8 +20,6 @@ class StripeCheckoutHelper {
         cancelUrl: _getCancelUrl(),
       );
 
-
-
       if (checkoutUrl == null) {
         throw StripeCheckoutException('Failed to create checkout session');
       }
@@ -35,8 +33,6 @@ class StripeCheckoutHelper {
             : LaunchMode.externalApplication,
         webOnlyWindowName: '_blank',
       );
-
-
 
       if (!launched) {
         throw StripeCheckoutException(
