@@ -13,6 +13,7 @@ import 'package:veteranam/firebase_options_development.dart' as dev;
 import 'package:veteranam/firebase_options_development.dart' as prod;
 import 'package:veteranam/shared/constants/constants_dart.dart';
 import 'package:veteranam/shared/extension/extension_dart_constants.dart';
+import 'package:veteranam/shared/models/enums/subscription_enums.dart';
 import 'package:veteranam/shared/models/models.dart';
 import 'package:veteranam/shared/repositories/company_cache_repository.dart';
 
@@ -180,6 +181,8 @@ abstract class KTestVariables {
     companyName: companyName,
     publicName: companyName,
     link: link,
+    termsAccepted: true,
+    subscriptionStatus: SubscriptionStatus.active,
   );
   static const idCompanyModel = CompanyModel(
     id: id,

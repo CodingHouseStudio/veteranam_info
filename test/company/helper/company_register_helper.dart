@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/bloc/subscription_checkout/subscription_checkout_cubit.dart';
+import 'package:veteranam/shared/bloc/subscription_portal/subscription_portal_cubit.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
 import 'package:veteranam/shared/shared_dart.dart';
 
@@ -14,6 +15,7 @@ late ICompanyRepository mockCompanyRepository;
 late IDiscountRepository mockDiscountRepository;
 late AuthenticationRepository mockAuthenticationRepository;
 late SubscriptionCheckoutCubit mockSubscriptionCheckoutCubit;
+late SubscriptionPortalCubit mockSubscriptionPortalCubit;
 late SubscriptionService mockSubscriptionService;
 late StreamController<CompanyModel> companyStream;
 // late XFile image;
@@ -25,6 +27,7 @@ void companyWidgetTestRegister() {
   mockDiscountRepository = MockIDiscountRepository();
   mockAuthenticationRepository = MockAuthenticationRepository();
   mockSubscriptionCheckoutCubit = MockSubscriptionCheckoutCubit();
+  mockSubscriptionPortalCubit = MockSubscriptionPortalCubit();
   mockSubscriptionService = MockSubscriptionService();
   companyStream = StreamController()..add(KTestVariables.pureCompanyModel);
   // image = XFile(KTestVariables.imageModels.downloadURL);
@@ -43,9 +46,22 @@ void companyWidgetTestRegister() {
   when(mockCompanyRepository.company).thenAnswer(
     (realInvocation) => companyStream.stream,
   );
+
   when(
     mockCompanyRepository.createUpdateCompany(
-      company: KTestVariables.fullCompanyModel,
+      company: KTestVariables.pureCompanyModel,
+      imageItem: KTestVariables.filePickerItem,
+    ),
+  ).thenAnswer(
+    (realInvocation) async => const Right(true),
+  );
+
+  when(
+    mockCompanyRepository.createUpdateCompany(
+      company: KTestVariables.fullCompanyModel.copyWith(
+        subscriptionStatus: null,
+        termsAccepted: null,
+      ),
       imageItem: KTestVariables.filePickerItem,
     ),
   ).thenAnswer(
@@ -93,6 +109,12 @@ void companyWidgetTestRegister() {
     ),
   );
 
+  when(mockSubscriptionPortalCubit.state).thenAnswer(
+    (realInvocation) => const SubscriptionPortalState(
+      status: SubscriptionPortalStatus.initial,
+    ),
+  );
+
   // when(mockAuthenticationRepository.isAuthenticated).thenAnswer(
   //   (realInvocation) => true,
   // );
@@ -111,5 +133,6 @@ void _registerRepository() {
   registerSingleton(mockDiscountRepository);
   registerSingleton(mockAuthenticationRepository);
   registerSingleton(mockSubscriptionCheckoutCubit);
+  registerSingleton(mockSubscriptionPortalCubit);
   registerSingleton(mockSubscriptionService);
 }
