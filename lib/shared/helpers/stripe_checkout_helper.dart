@@ -26,13 +26,8 @@ class StripeCheckoutHelper {
 
       final uri = Uri.parse(checkoutUrl);
 
-      final launched = await launchUrl(
-        uri,
-        mode: kIsWeb
-            ? LaunchMode.platformDefault
-            : LaunchMode.externalApplication,
-        webOnlyWindowName: '_blank',
-      );
+      // Redirect in the same tab to avoid popup blockers on mobile web
+      final launched = await launchUrl(uri);
 
       if (!launched) {
         throw StripeCheckoutException(
