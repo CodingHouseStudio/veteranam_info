@@ -343,7 +343,6 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
           );
         },
       ),
->>>>>>> eb5fe1b7 (feat: update dependencies and improve subscription management features; refactor UI components and remove debug logs)
     );
   }
 
