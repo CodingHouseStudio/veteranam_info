@@ -50,6 +50,31 @@ void main() {
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
+
+      when(
+        mockCompanyRepository.createUpdateCompany(
+          company: KTestVariables.fullCompanyModel.copyWith(
+            subscriptionStatus: null,
+            termsAccepted: null,
+          ),
+          imageItem: KTestVariables.filePickerItem,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+
+      when(
+        mockCompanyRepository.createUpdateCompany(
+          company: KTestVariables.fullCompanyModel.copyWith(
+            link: null,
+            subscriptionStatus: null,
+            termsAccepted: null,
+          ),
+          imageItem: null,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
     });
 
     group('Start company full', () {
@@ -425,6 +450,17 @@ void main() {
           when(
             mockCompanyRepository.createUpdateCompany(
               company: KTestVariables.fullCompanyModel,
+              imageItem: KTestVariables.filePickerItem,
+            ),
+          ).thenAnswer(
+            (realInvocation) async => const Left(SomeFailure.serverError),
+          );
+          when(
+            mockCompanyRepository.createUpdateCompany(
+              company: KTestVariables.fullCompanyModel.copyWith(
+                subscriptionStatus: null,
+                termsAccepted: null,
+              ),
               imageItem: KTestVariables.filePickerItem,
             ),
           ).thenAnswer(

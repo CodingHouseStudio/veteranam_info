@@ -130,7 +130,6 @@ class CompanyBodyWidget extends StatelessWidget {
       builder: (context, companyState) {
         final company = companyState.company;
         final companyId = company.id;
-        final customerId = company.stripeCustomerId;
 
         if (companyId.isEmpty ||
             companyId == '__company_cache_id__' ||
@@ -138,11 +137,13 @@ class CompanyBodyWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final hasSubscription = customerId != null && customerId.isNotEmpty;
-
-        if (!hasSubscription) {
-          // Show "Start Free Trial" button for existing users
-          // without subscription
+        // Show "Start Free Trial" button if company cannot create discounts
+        // This covers cases where:
+        // 1. No subscription at all
+        // 2. Abandoned checkout (has customerId but no active subscription)
+        // 3. Expired trial
+        // 4. Terms not accepted
+        if (!company.canCreateDiscounts) {
           return _buildStartTrialBox(context, companyId, isDesk);
         }
 

@@ -46,16 +46,18 @@ void main() {
           KTestVariables.fullCompanyModel.userEmails,
       CompanyModelJsonField.deletedOn:
           KTestVariables.dateTime.toIso8601String(),
-      // Subscription fields are null and included in JSON
+      // Subscription fields to match fullCompanyModel
       CompanyModelJsonField.stripeCustomerId: null,
       CompanyModelJsonField.stripeSubscriptionId: null,
-      CompanyModelJsonField.subscriptionStatus: null,
+      CompanyModelJsonField.subscriptionStatus:
+          KTestVariables.fullCompanyModel.subscriptionStatus?.name,
       CompanyModelJsonField.subscriptionPlan: null,
       CompanyModelJsonField.trialStartedAt: null,
       CompanyModelJsonField.trialExpiresAt: null,
       CompanyModelJsonField.subscriptionStartedAt: null,
       CompanyModelJsonField.subscriptionExpiresAt: null,
-      CompanyModelJsonField.termsAccepted: null,
+      CompanyModelJsonField.termsAccepted:
+          KTestVariables.fullCompanyModel.termsAccepted,
       CompanyModelJsonField.termsAcceptedAt: null,
       CompanyModelJsonField.trialExtensionDays: null,
       CompanyModelJsonField.canceledBy: null,
@@ -161,7 +163,11 @@ void main() {
             )
             .toJson();
 
-        expect(fullCompanyModelModelJson, fullJson);
+        final expectedToJson = Map<String, dynamic>.from(fullJson);
+        expectedToJson[CompanyModelJsonField.subscriptionStatus] =
+            KTestVariables.fullCompanyModel.subscriptionStatus;
+
+        expect(fullCompanyModelModelJson, expectedToJson);
       });
 
       test('${KGroupText.nullable} ', () {

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:veteranam/shared/services/subscription_service.dart';
@@ -52,16 +51,16 @@ class StripeCheckoutHelper {
 
   String _getSuccessUrl() {
     if (kIsWeb) {
-      return '${Uri.base.origin}/subscription/success';
+      return '${Uri.base.origin}/discounts/manage/company';
     }
-    return 'veteranam://subscription/success';
+    return 'veteranam://discounts/manage/company';
   }
 
   String _getCancelUrl() {
     if (kIsWeb) {
-      return '${Uri.base.origin}/subscription/canceled';
+      return '${Uri.base.origin}/discounts/manage/company';
     }
-    return 'veteranam://subscription/canceled';
+    return 'veteranam://discounts/manage/company';
   }
 }
 

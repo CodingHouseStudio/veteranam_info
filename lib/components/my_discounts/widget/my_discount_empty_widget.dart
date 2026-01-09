@@ -1,6 +1,7 @@
 import 'dart:math' show pi;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared_flutter.dart';
 
@@ -13,6 +14,8 @@ class MyDiscountEmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final company = context.watch<CompanyWatcherBloc>().state.company;
+
     return Column(
       children: [
         KIcon.myDiscountEmpty.copyWith(
@@ -29,7 +32,9 @@ class MyDiscountEmptyWidget extends StatelessWidget {
         DoubleButtonWidget(
           text: context.l10n.addDiscount,
           isDesk: isDesk,
-          onPressed: () => context.goNamed(KRoute.discountsAdd.name),
+          onPressed: company.canCreateDiscounts
+              ? () => context.goNamed(KRoute.discountsAdd.name)
+              : null,
           icon: KIcon.plus,
           widgetKey: MyDiscountsKeys.buttonAdd,
           deskPadding: const EdgeInsets.symmetric(
