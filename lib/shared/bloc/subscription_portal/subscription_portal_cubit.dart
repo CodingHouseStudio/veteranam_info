@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/constants/failure_enum.dart';
@@ -54,14 +53,9 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
         return;
       }
 
+      final uri = Uri.parse(portalUrl);
       // Redirect in the same tab to avoid popup blockers on mobile web
-
-      if (kIsWeb) {
-        openUrl(portalUrl, '_self');
-      } else {
-        final uri = Uri.parse(portalUrl);
-
-        final launched = await launchUrl(uri, webOnlyWindowName: '_self');
+      final launched = await launchUrl(uri);
 
         if (!launched) {
           if (!isClosed) {
