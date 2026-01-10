@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:web/web.dart' as web;
-
 import 'package:veteranam/shared/services/subscription_service.dart';
 
 /// Helper for opening Stripe Checkout in a popup/new tab
