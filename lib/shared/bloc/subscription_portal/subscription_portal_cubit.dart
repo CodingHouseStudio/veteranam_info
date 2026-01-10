@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/constants/failure_enum.dart';
+import 'package:veteranam/shared/helper/web_helper.dart'
+    if (dart.library.html) 'package:veteranam/shared/helper/web_helper_web.dart'
+    if (dart.library.io) 'package:veteranam/shared/helper/web_helper_io.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
-import 'package:web/web.dart' as web;
 
 part 'subscription_portal_state.dart';
 
@@ -55,7 +57,7 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
       // Redirect in the same tab to avoid popup blockers on mobile web
 
       if (kIsWeb) {
-        web.window.open(portalUrl, '_self');
+        openUrl(portalUrl, '_self');
       } else {
         final uri = Uri.parse(portalUrl);
 
