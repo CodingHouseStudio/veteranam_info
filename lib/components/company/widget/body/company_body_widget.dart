@@ -34,25 +34,33 @@ class CompanyBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else ...[
           KSizedBox.kHeightSizedBox24,
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton(
-              key: CompanyKeys.boxMyDiscounts,
-              onPressed: () => myDiscountTap(context),
-              child: Column(
-                spacing: KPadding.kPaddingSize4,
-                children: [
-                  const IconWidget(
-                    icon: KIcon.tag,
-                    background: AppColors.materialThemeKeyColorsNeutral,
+          Row(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  key: CompanyKeys.boxMyDiscounts,
+                  onPressed: () => myDiscountTap(context),
+                  child: Column(
+                    spacing: KPadding.kPaddingSize4,
+                    children: [
+                      const IconWidget(
+                        icon: KIcon.tag,
+                        background: AppColors.materialThemeKeyColorsNeutral,
+                      ),
+                      Text(
+                        context.l10n.myDiscounts,
+                        style: AppTextStyle.materialThemeLabelSmall,
+                      ),
+                    ],
                   ),
-                  Text(
-                    context.l10n.myDiscounts,
-                    style: AppTextStyle.materialThemeLabelSmall,
-                  ),
-                ],
+                ),
               ),
-            ),
+              KSizedBox.kWidthSizedBox16,
+              Expanded(
+                child: _buildManageSubscriptionBox(context, isDesk),
+              ),
+            ],
           ),
           KSizedBox.kHeightSizedBox24,
         ],
@@ -90,13 +98,7 @@ class CompanyBodyWidget extends StatelessWidget {
             ],
           )
         else
-          Column(
-            children: [
-              _form(isDesk: isDesk, context: context),
-              KSizedBox.kHeightSizedBox16,
-              _buildManageSubscriptionBox(context, isDesk),
-            ],
-          ),
+          _form(isDesk: isDesk, context: context),
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else

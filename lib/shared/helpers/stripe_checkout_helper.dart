@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web/web.dart' as web;
 
 import 'package:veteranam/shared/services/subscription_service.dart';
 
@@ -26,12 +27,15 @@ class StripeCheckoutHelper {
 
       final uri = Uri.parse(checkoutUrl);
 
-      // Redirect in the same tab to avoid popup blockers on mobile web
-      final launched = await launchUrl(uri);
+      final launched = await launchUrl(
+        uri,
+        webOnlyWindowName: '_self',
+      );
 
       if (!launched) {
         throw StripeCheckoutException(
-          'Failed to open Stripe Checkout. Please check your browser settings.',
+          'Failed to open Stripe Checkout. '
+          'Please check your browser settings.',
         );
       }
 

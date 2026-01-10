@@ -54,10 +54,7 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
       final uri = Uri.parse(checkoutUrl);
       final launched = await launchUrl(
         uri,
-        mode: kIsWeb
-            ? LaunchMode.platformDefault
-            : LaunchMode.externalApplication,
-        webOnlyWindowName: '_blank',
+        webOnlyWindowName: '_self',
       );
 
       if (!launched) {
@@ -92,11 +89,11 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
   }
 
   String _getSuccessUrl() {
-    return '${Uri.base.origin}/discounts/manage/subscription-success';
+    return '${Uri.base.origin}/discounts/manage/company/subscription/success';
   }
 
   String _getCancelUrl() {
-    return '${Uri.base.origin}/discounts/manage/subscription-canceled';
+    return '${Uri.base.origin}/discounts/manage/company/subscription/canceled';
   }
 
   void reset() {
