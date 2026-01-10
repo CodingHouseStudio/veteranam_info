@@ -1,8 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/constants/failure_enum.dart';
+import 'package:veteranam/shared/helper/web_helper.dart'
+    if (dart.library.html) 'package:veteranam/shared/helper/web_helper_web.dart'
+    if (dart.library.io) 'package:veteranam/shared/helper/web_helper_io.dart';
 import 'package:veteranam/shared/services/subscription_service.dart';
 
 part 'subscription_portal_state.dart';
@@ -50,20 +54,26 @@ class SubscriptionPortalCubit extends Cubit<SubscriptionPortalState> {
         return;
       }
 
-      final uri = Uri.parse(portalUrl);
       // Redirect in the same tab to avoid popup blockers on mobile web
-      final launched = await launchUrl(uri);
 
-      if (!launched) {
-        if (!isClosed) {
-          emit(
-            const SubscriptionPortalState(
-              status: SubscriptionPortalStatus.failure,
-              error: SubscriptionPortalError.launchUrlFailed,
-            ),
-          );
+      if (kIsWeb) {
+        openUrl(portalUrl, '_self');
+      } else {
+        final uri = Uri.parse(portalUrl);
+
+        final launched = await launchUrl(uri, webOnlyWindowName: '_self');
+
+        if (!launched) {
+          if (!isClosed) {
+            emit(
+              const SubscriptionPortalState(
+                status: SubscriptionPortalStatus.failure,
+                error: SubscriptionPortalError.launchUrlFailed,
+              ),
+            );
+          }
+          return;
         }
-        return;
       }
 
       if (!isClosed) {

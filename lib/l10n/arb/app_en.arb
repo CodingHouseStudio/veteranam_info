@@ -1916,10 +1916,10 @@
   "@cookies": {
     "examples": "Message about cookie usage"
   },
-  "startFreeTrial": "Start 30-Day Free Trial",
+  "startFreeTrial": "Start 90-Day Free Trial",
   "@startFreeTrial": {
     "examples": "Button text to start free trial subscription",
-    "description": "Button used to initiate the 30-day free trial for subscription"
+    "description": "Button used to initiate the 90-day free trial for subscription"
   },
   "unlockDiscountFeatures": "Unlock discount creation and management features",
   "@unlockDiscountFeatures": {
@@ -1996,7 +1996,7 @@
     "examples": "Success page title",
     "description": "Title shown when subscription is successfully activated"
   },
-  "subscriptionTrialStarted": "Your 30-day trial has started. You can now create discounts for your company.",
+  "subscriptionTrialStarted": "Your 90-day trial has started. You can now create discounts for your company.",
   "@subscriptionTrialStarted": {
     "examples": "Success page description",
     "description": "Message shown when trial subscription starts"
