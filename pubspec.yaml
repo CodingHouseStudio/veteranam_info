@@ -106,7 +106,7 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.8
   sentry_dart_plugin: ^3.1.1
   url_launcher_platform_interface: ^2.3.2
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true
