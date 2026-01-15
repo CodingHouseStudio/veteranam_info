@@ -11,7 +11,7 @@ abstract class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
     // required DateTime date,
-    required List<int> discount,
+    @IntListConverter() required List<int> discount,
     @JsonKey(name: DiscountModelJsonField.title)
     @TranslateConverter()
     required TranslateModel title,
