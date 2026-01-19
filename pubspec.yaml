@@ -12,7 +12,7 @@ dependencies:
   basic_dropdown_button: ^1.1.1+1 # this is our own custom package
   bloc: ^9.0.0
   cached_network_image: ^3.4.1
-  cloud_firestore: ^6.0.1
+  cloud_firestore: ^6.1.2
   collection: ^1.19.1
   connectivity_plus: ^6.1.5
   dartz: ^0.10.1
